@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050816;
+  color: #f8fbff;
+}
+
+::selection {
+  background: rgba(98, 212, 255, 0.28);
+  color: #ffffff;
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8 lg:px-10;
+  }
+
+  .section-block {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.32em] text-cyan/70;
+  }
+
+  .section-title {
+    @apply max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-white sm:text-4xl lg:text-5xl;
+  }
+
+  .section-copy {
+    @apply max-w-2xl text-base leading-7 text-slate-300 sm:text-lg;
+  }
+
+  .panel {
+    @apply rounded-3xl border border-white/10 bg-white/[0.03] shadow-panel backdrop-blur;
+  }
+
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.28em] text-slate-400;
+  }
+
+  .nav-link {
+    @apply text-sm text-slate-300 hover:text-white;
+  }
+}
