@@ -12,13 +12,13 @@ const navItems = [
 function BrandMark() {
   return (
     <div className="flex items-center gap-2">
-      <div className="relative h-11 w-11 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+      <div className="relative h-24 w-40 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
         <Image
-          src="/logo.png"
+          src="/logo2.png"
           alt="Asymmetri Labs logo"
           fill
-          sizes="44px"
-          className="object-cover"
+          sizes="160px"
+          className="object-contain p-1.5"
           priority
         />
       </div>
@@ -32,7 +32,7 @@ function BrandMark() {
 export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/75 backdrop-blur-2xl">
-      <div className="section-shell flex h-[58px] items-center justify-between gap-6">
+      <div className="section-shell flex h-[112px] items-center justify-between gap-6">
         <a href="#home" aria-label="Asymmetri Labs home">
           <BrandMark />
         </a>
