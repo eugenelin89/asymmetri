@@ -24,9 +24,6 @@ function BrandMark() {
       </div>
       <div>
         <div className="text-sm font-medium tracking-[0.2em] text-white">ASYMMETRI LABS</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
-          asymmetri.co
-        </div>
       </div>
     </div>
   );
