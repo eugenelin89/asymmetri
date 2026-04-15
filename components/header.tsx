@@ -32,23 +32,17 @@ function BrandMark() {
 export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/75 backdrop-blur-2xl">
-      <div className="section-shell flex h-[112px] items-center justify-between gap-6">
+      <div className="section-shell flex h-[112px] items-center gap-10">
         <a href="#home" aria-label="Asymmetri Labs home">
           <BrandMark />
         </a>
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="ml-8 hidden items-center gap-7 md:flex lg:ml-12">
           {navItems.map((item) => (
             <a key={item.href} href={item.href} className="nav-link">
               {item.label}
             </a>
           ))}
         </nav>
-        <a
-          href="mailto:info@asymmetri.co"
-          className="button-secondary px-3.5 py-2 text-[13px]"
-        >
-          Get in Touch
-        </a>
       </div>
     </header>
   );
