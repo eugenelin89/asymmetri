@@ -22,6 +22,7 @@ export function Footer() {
           <div className="grid gap-2 text-sm lg:text-right">
             <div className="text-white">asymmetri.co</div>
             <div>info@asymmetri.co</div>
+            <div>778-863-2004</div>
             <div>525 W 8th Ave #800, Vancouver, BC V5Z 1C6, Canada</div>
           </div>
         </div>
