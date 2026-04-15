@@ -1,41 +1,30 @@
-const problemPoints = [
-  "Simulation is scalable, inexpensive, and safe for training.",
-  "Reality introduces noise, hardware variability, latency, and partial observability.",
-  "Policies that perform well in simulation often degrade at the moment of deployment.",
-];
-
 export function ProblemSection() {
   return (
-    <section id="problem" className="section-block">
+    <section id="problem" className="section-block pt-8 sm:pt-10 lg:pt-12">
       <div className="section-shell">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <div>
-            <div className="eyebrow mb-5">The Problem</div>
-            <h2 className="section-title">The sim-to-real gap is where most physical AI systems break.</h2>
+        <div className="grid gap-7 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10">
+          <div className="pt-0.5">
+            <div className="eyebrow mb-2">The Problem</div>
+            <h2 className="max-w-2xl text-[2.65rem] font-semibold leading-[0.98] tracking-[-0.055em] text-white sm:text-[3.35rem] lg:text-[3.8rem]">
+              The sim-to-real gap
+              <br />
+              is where systems fail.
+            </h2>
+            <div className="mt-3 accent-rule" />
           </div>
-          <div className="space-y-8">
-            <p className="section-copy">
-              Training in simulation can produce capable agents quickly. Deployment in the physical
-              world is different: sensors drift, environments shift, actuators misbehave, and
-              assumptions fail under real-world uncertainty.
+          <div className="space-y-4 pt-1 lg:pl-5">
+            <p className="max-w-md text-[17px] leading-8 text-white/68">
+              Training in simulation is efficient. Deployment is not. Sensors drift, environments
+              shift, and assumptions collapse under real-world uncertainty.
             </p>
-            <div className="grid gap-4">
-              {problemPoints.map((point, index) => (
-                <div key={point} className="panel flex gap-4 p-5 sm:p-6">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-cyan/20 bg-cyan/10 font-mono text-xs text-cyan">
-                    0{index + 1}
-                  </div>
-                  <p className="text-sm leading-7 text-slate-300 sm:text-base">{point}</p>
-                </div>
-              ))}
-            </div>
-            <div className="rounded-3xl border border-cyan/20 bg-cyan/10 p-6">
-              <div className="label mb-3 text-cyan/80">Definition</div>
-              <p className="text-lg leading-8 text-white">
-                The sim-to-real gap is the difference between what an agent learns in synthetic
-                environments and what it can sustain under physical constraints.
-              </p>
-            </div>
+            <p className="max-w-md text-[17px] leading-8 text-white/68">
+              Simulation is scalable, cheap, and safe for training. Reality adds hardware
+              variability, latency, and partial observability. Policies that perform well in
+              simulation often fail at transfer.
+            </p>
+            <p className="max-w-md text-[17px] font-medium leading-8 text-white/88">
+              This is why most AI systems never leave simulation.
+            </p>
           </div>
         </div>
       </div>

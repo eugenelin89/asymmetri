@@ -10,8 +10,8 @@ import { VisionSection } from "@/components/vision-section";
 export default function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-ink">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,151,255,0.18),transparent_30%),radial-gradient(circle_at_80%_20%,rgba(98,212,255,0.10),transparent_24%),linear-gradient(180deg,#050816_0%,#040611_100%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-hero-grid bg-[size:72px_72px] opacity-[0.06]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#050816_0%,#040611_52%,#03050d_100%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-hero-grid bg-[size:120px_120px] opacity-[0.028]" />
       <Header />
       <div className="relative z-10">
         <HeroSection />

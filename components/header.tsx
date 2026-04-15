@@ -9,15 +9,15 @@ const navItems = [
 
 function BrandMark() {
   return (
-    <div className="flex items-center gap-3">
-      <div className="relative h-9 w-9 overflow-hidden rounded-xl border border-cyan/30 bg-white/[0.04] shadow-glow">
-        <div className="absolute inset-y-1 left-1 w-2 rounded-full bg-gradient-to-b from-cyan to-cyan/10" />
-        <div className="absolute left-[14px] top-[8px] h-[18px] w-[18px] rotate-45 rounded-sm border border-cyan/50 bg-cyan/10" />
-        <div className="absolute bottom-1 right-1 h-2.5 w-2.5 rounded-full bg-cyan" />
+    <div className="flex items-center gap-2">
+      <div className="relative h-8.5 w-8.5 overflow-hidden rounded-xl border border-white/12 bg-white/[0.03]">
+        <div className="absolute inset-y-1.5 left-1.5 w-2 rounded-full bg-gradient-to-b from-cyan to-cyan/10" />
+        <div className="absolute left-[14px] top-[8px] h-[14px] w-[14px] rotate-45 rounded-[4px] border border-cyan/45 bg-cyan/10" />
+        <div className="absolute bottom-1.5 right-1.5 h-2 w-2 rounded-full bg-cyan" />
       </div>
       <div>
-        <div className="text-sm font-medium tracking-[0.38em] text-white">ASYMMETRI</div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <div className="text-sm font-medium tracking-[0.28em] text-white">ASYMMETRI</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
           asymmetri.co
         </div>
       </div>
@@ -27,8 +27,8 @@ function BrandMark() {
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/70 backdrop-blur-xl">
-      <div className="section-shell flex h-20 items-center justify-between gap-8">
+    <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/75 backdrop-blur-2xl">
+      <div className="section-shell flex h-[58px] items-center justify-between gap-6">
         <a href="#home" aria-label="Asymmetri home">
           <BrandMark />
         </a>
@@ -41,7 +41,7 @@ export function Header() {
         </nav>
         <a
           href="mailto:info@asymmetri.co"
-          className="rounded-full border border-cyan/30 bg-cyan/10 px-4 py-2 text-sm text-cyan transition hover:border-cyan/60 hover:bg-cyan/14 hover:text-white"
+          className="button-secondary px-3.5 py-2 text-[13px]"
         >
           Get in Touch
         </a>

@@ -24,20 +24,24 @@ const links = [
 
 export function HeroSignalVisual() {
   return (
-    <div className="panel relative overflow-hidden p-6 sm:p-8">
-      <div className="mb-6 flex items-center justify-between">
+    <div className="panel relative overflow-hidden p-6 sm:p-7">
+      <div className="mb-5 flex items-center justify-between">
         <div>
           <div className="label">Distributed Signal Field</div>
           <div className="mt-2 text-lg font-medium text-white">Abstract multi-agent topology</div>
         </div>
-        <div className="rounded-full border border-cyan/20 bg-cyan/10 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.28em] text-cyan">
-          Live Model
+        <div className="rounded-full border border-cyan/20 bg-cyan/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-cyan">
+          Signal Map
         </div>
       </div>
 
-      <div className="relative aspect-[1.2/1] overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_center,rgba(56,151,255,0.16),transparent_52%),linear-gradient(180deg,rgba(15,23,42,0.9),rgba(2,6,23,0.96))]">
-        <div className="absolute inset-0 bg-hero-grid bg-[size:40px_40px] opacity-20" />
+      <div className="relative aspect-[1.24/1] overflow-hidden rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_50%_45%,rgba(56,151,255,0.22),transparent_38%),linear-gradient(180deg,rgba(7,11,25,0.88),rgba(2,6,18,0.98))]">
+        <div className="absolute inset-0 bg-hero-grid bg-[size:48px_48px] opacity-[0.14]" />
+        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-white/[0.04] to-transparent" />
         <div className="absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan/10 animate-orbit" />
+        <div className="absolute left-[14%] top-[22%] h-28 w-28 rounded-full border border-white/8" />
+        <div className="absolute right-[16%] top-[18%] h-16 w-16 rounded-full border border-cyan/10" />
+        <div className="absolute bottom-[15%] left-[32%] h-24 w-24 rounded-full border border-white/8" />
         <svg viewBox="0 0 400 260" className="absolute inset-0 h-full w-full">
           <defs>
             <linearGradient id="flow" x1="0%" x2="100%">
@@ -86,6 +90,16 @@ export function HeroSignalVisual() {
             </g>
           ))}
         </svg>
+        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-2xl border border-white/8 bg-slate-950/50 px-4 py-3 backdrop-blur">
+          <div>
+            <div className="label">Environment signal</div>
+            <div className="mt-1 text-sm text-slate-300">Stigmergic routing under transfer noise</div>
+          </div>
+          <div className="text-right">
+            <div className="label">Integrity</div>
+            <div className="mt-1 text-sm text-cyan">0.94 stable</div>
+          </div>
+        </div>
       </div>
     </div>
   );
