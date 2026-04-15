@@ -20,7 +20,7 @@ export function ProofSection() {
         <div className="grid gap-10">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
             <div>
-              <div className="eyebrow mb-4">Why Asymmetri Is Different</div>
+              <div className="eyebrow mb-4">Why Asymmetri Labs Is Different</div>
               <h2 className="section-title">
                 Designed as foundational infrastructure for real-world autonomous systems.
               </h2>
@@ -43,7 +43,7 @@ export function ProofSection() {
                 A harder test case for infrastructure robustness.
               </h3>
               <p className="mt-4 text-base leading-7 text-slate-300">
-                Asymmetri&apos;s early systems include decentralized multi-agent deployments, where
+                Asymmetri Labs&apos; early systems include decentralized multi-agent deployments, where
                 policies trained in simulation are transferred into real-world robotic agents.
                 These environments are intentionally demanding.
               </p>

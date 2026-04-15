@@ -16,7 +16,7 @@ export function HeroSection() {
             Bringing AI from simulation into the real world.
           </p>
           <p className="mt-2 max-w-xl text-base leading-7 text-white/65 sm:text-[17px]">
-            Asymmetri builds infrastructure that enables AI systems trained in simulation to
+            Asymmetri Labs builds infrastructure that enables AI systems trained in simulation to
             operate reliably in noisy, constrained physical systems.
           </p>
           <div className="mt-5 flex flex-col gap-2.5 sm:flex-row">

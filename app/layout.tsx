@@ -3,9 +3,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://asymmetri.co"),
-  title: "Asymmetri | Infrastructure for Physical AI",
+  title: "Asymmetri Labs | Infrastructure for Physical AI",
   description:
-    "Asymmetri builds infrastructure that enables AI systems trained in simulation to operate reliably in the real world.",
+    "Asymmetri Labs builds infrastructure that enables AI systems trained in simulation to operate reliably in the real world.",
 };
 
 export default function RootLayout({

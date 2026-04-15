@@ -18,7 +18,7 @@ export function VisionSection() {
                 systems that can perceive, adapt, coordinate, and act under real-world conditions.
               </p>
               <p className="text-base leading-8 text-slate-400 sm:text-lg">
-                Asymmetri aims to build the infrastructure that makes that transition possible:
+                Asymmetri Labs aims to build the infrastructure that makes that transition possible:
                 rigorous enough for deployment and extensible enough for future classes of
                 autonomous systems.
               </p>

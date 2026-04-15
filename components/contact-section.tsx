@@ -11,7 +11,7 @@ export function ContactSection() {
               </h2>
               <div className="mt-5 accent-rule" />
               <p className="mt-4 max-w-xl text-base leading-7 text-slate-300 sm:text-[17px]">
-                Asymmetri is an early research company building infrastructure for sim-to-real AI.
+                Asymmetri Labs is an early research company building infrastructure for sim-to-real AI.
                 If you are working on real-world autonomous systems and the transfer problem matters
                 to you, we should talk.
               </p>

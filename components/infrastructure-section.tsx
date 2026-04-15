@@ -91,7 +91,7 @@ export function InfrastructureSection() {
 
           <div className="panel flex flex-col justify-between p-5 sm:p-6">
             <div>
-              <div className="label">What Asymmetri does</div>
+              <div className="label">What Asymmetri Labs does</div>
               <div className="mt-4 text-lg font-medium tracking-[-0.03em] text-white">
                 From training to real-world operation.
               </div>

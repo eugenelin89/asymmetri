@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "Problem", href: "#problem" },
@@ -10,13 +12,18 @@ const navItems = [
 function BrandMark() {
   return (
     <div className="flex items-center gap-2">
-      <div className="relative h-8.5 w-8.5 overflow-hidden rounded-xl border border-white/12 bg-white/[0.03]">
-        <div className="absolute inset-y-1.5 left-1.5 w-2 rounded-full bg-gradient-to-b from-cyan to-cyan/10" />
-        <div className="absolute left-[14px] top-[8px] h-[14px] w-[14px] rotate-45 rounded-[4px] border border-cyan/45 bg-cyan/10" />
-        <div className="absolute bottom-1.5 right-1.5 h-2 w-2 rounded-full bg-cyan" />
+      <div className="relative h-11 w-11 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+        <Image
+          src="/logo.png"
+          alt="Asymmetri Labs logo"
+          fill
+          sizes="44px"
+          className="object-cover"
+          priority
+        />
       </div>
       <div>
-        <div className="text-sm font-medium tracking-[0.28em] text-white">ASYMMETRI</div>
+        <div className="text-sm font-medium tracking-[0.2em] text-white">ASYMMETRI LABS</div>
         <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
           asymmetri.co
         </div>
@@ -29,7 +36,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/75 backdrop-blur-2xl">
       <div className="section-shell flex h-[58px] items-center justify-between gap-6">
-        <a href="#home" aria-label="Asymmetri home">
+        <a href="#home" aria-label="Asymmetri Labs home">
           <BrandMark />
         </a>
         <nav className="hidden items-center gap-7 md:flex">
