@@ -11,6 +11,29 @@ export const metadata: Metadata = {
     shortcut: "/logo2.png",
     apple: "/logo2.png",
   },
+  openGraph: {
+    title: "Asymmetri Labs | Infrastructure for Physical AI",
+    description:
+      "Sim-to-real infrastructure for deploying Physical AI systems from simulation into the real world.",
+    url: "https://asymmetri.co",
+    siteName: "Asymmetri Labs",
+    images: [
+      {
+        url: "/logo_w2.png",
+        width: 1536,
+        height: 1024,
+        alt: "Asymmetri Labs",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Asymmetri Labs | Infrastructure for Physical AI",
+    description:
+      "Sim-to-real infrastructure for deploying Physical AI systems from simulation into the real world.",
+    images: ["/logo_w2.png"],
+  },
 };
 
 export default function RootLayout({
