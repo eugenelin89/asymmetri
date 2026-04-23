@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { InfrastructureSection } from "@/components/infrastructure-section";
+import { OriginSection } from "@/components/origin-section";
 import { ProblemSection } from "@/components/problem-section";
 import { ProofSection } from "@/components/proof-section";
 import { VisionSection } from "@/components/vision-section";
@@ -18,6 +19,7 @@ export default function HomePage() {
         <ProblemSection />
         <InfrastructureSection />
         <ProofSection />
+        <OriginSection />
         <VisionSection />
         <ContactSection />
         <Footer />
