@@ -1,6 +1,6 @@
 export function OriginSection() {
   return (
-    <section className="section-supporting">
+    <section id="research" className="section-supporting">
       <div className="section-shell">
         <div className="grid gap-8 border-y border-white/8 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
           <div>
