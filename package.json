@@ -1,25 +1,42 @@
 {
-  "name": "asymmetri-website",
+  "name": "asymmetrico-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
+    "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
+    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
+    "dev:next": "next dev",
+    "build:next": "next build",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "next": "16.2.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "next": "16.2.12",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "1.37.1",
+    "@vitejs/plugin-react": "6.0.2",
+    "@vitejs/plugin-rsc": "0.5.26",
     "@types/node": "22.13.10",
-    "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
     "autoprefixer": "10.4.20",
-    "postcss": "8.5.3",
+    "eslint": "9.32.0",
+    "eslint-config-next": "16.2.12",
+    "postcss": "8.5.25",
+    "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "3.4.17",
-    "typescript": "5.8.2"
-  }
+    "typescript": "5.9.3",
+    "vinext": "0.0.50",
+    "vite": "8.0.13",
+    "wrangler": "4.92.0"
+  },
+  "overrides": {
+    "postcss": "8.5.25",
+    "sharp": "0.35.3"
+  },
+  "type": "module"
 }

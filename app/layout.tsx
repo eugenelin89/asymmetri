@@ -1,39 +1,67 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { site } from "@/content/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://asymmetri.co"),
-  title: "Asymmetri Labs | Infrastructure for Physical AI",
-  description:
-    "Asymmetri Labs builds infrastructure that enables AI systems trained in simulation to operate reliably in the real world.",
+  metadataBase: new URL(site.company.siteUrl),
+  title: site.metadata.title,
+  description: site.metadata.description,
+  applicationName: site.company.name,
+  alternates: {
+    canonical: "/",
+  },
   icons: {
-    icon: "/logo2.png",
-    shortcut: "/logo2.png",
-    apple: "/logo2.png",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/brand/asymmetrico-app-icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/brand/asymmetrico-app-icon.png",
   },
   openGraph: {
-    title: "Asymmetri Labs | Infrastructure for Physical AI",
-    description:
-      "Sim-to-real infrastructure for deploying Physical AI systems from simulation into the real world.",
-    url: "https://asymmetri.co",
-    siteName: "Asymmetri Labs",
+    title: site.metadata.title,
+    description: site.metadata.description,
+    url: "/",
+    siteName: site.company.name,
+    type: "website",
+    locale: "en_CA",
     images: [
       {
-        url: "/logo_w2.png",
-        width: 1536,
-        height: 1024,
-        alt: "Asymmetri Labs",
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Asymmetrico — Talent is everywhere. The tools aren’t. Accessible sports technology for an uneven playing field.",
       },
     ],
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Asymmetri Labs | Infrastructure for Physical AI",
-    description:
-      "Sim-to-real infrastructure for deploying Physical AI systems from simulation into the real world.",
-    images: ["/logo_w2.png"],
+    title: site.metadata.title,
+    description: site.metadata.description,
+    images: ["/og.png"],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0B1020",
+  colorScheme: "light dark",
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.company.name,
+  url: site.company.siteUrl,
+  logo: `${site.company.siteUrl}/brand/asymmetrico-horizontal.svg`,
+  description: site.metadata.description,
+  email: site.company.contactEmail,
+  knowsAbout: [
+    "Athlete development",
+    "Sports technology",
+    "Sports analytics",
+    "Biomechanics",
+    "Wearable sensors",
+  ],
 };
 
 export default function RootLayout({
@@ -43,7 +71,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-ink font-sans text-white antialiased">{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+      </body>
     </html>
   );
 }

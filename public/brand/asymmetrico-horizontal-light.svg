@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 120" role="img" aria-labelledby="title">
+  <title id="title">Asymmetrico horizontal logo in light</title>
+  <g transform="translate(4 8) scale(1.08)">
+    <path d="M10 80 39 17h14L26 68h31l8 12H10Z" fill="#FAF8F3"/>
+    <path d="m48 39 10-12 29 53H72L52 45l-4-6Z" fill="#C86D45"/>
+  </g>
+  <text x="120" y="81" fill="#FAF8F3" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700" letter-spacing="-4">Asymmetri</text>
+  <text x="640" y="81" fill="#C86D45" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="700" letter-spacing="-4">co</text>
+</svg>
