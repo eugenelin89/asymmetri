@@ -39,6 +39,10 @@ When routes or shared layout code change, verify:
 Confirm successful responses, correct page titles and canonical values, and no
 broken public assets.
 
+When changing Worker or Vite binding configuration, request at least one
+`/_vinext/image` URL from the local Vinext server and confirm that it returns an
+image response without a Worker exception.
+
 ## Visual and interaction checks
 
 For visual, layout, or navigation changes, verify the affected routes at:

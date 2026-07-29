@@ -110,3 +110,10 @@ development server. Do not scan unrelated ports.
 
 Wrangler writes local logs under `.wrangler/`, which is ignored. Do not commit
 those logs or copy credentials from them into documentation.
+
+### `Cannot read properties of undefined (reading 'fetch')`
+
+If the stack points to `worker/index.ts` and `/_vinext/image`, stop and restart
+`npm run dev`. The Cloudflare Vite configuration declares the local `ASSETS`
+and `IMAGES` bindings required by Vinext image optimization. A server that was
+already running before a configuration update may need a full restart.

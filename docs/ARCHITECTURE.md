@@ -22,7 +22,7 @@ state.
 | `public/images/` | Approved sports and research imagery |
 | `docs/` | Strategy, identity, provenance, development, testing, deployment, and engineering journals |
 | `build/sites-vite-plugin.ts` | Sites deployment-manifest generation |
-| `vite.config.ts` | Vinext and Cloudflare Vite configuration |
+| `vite.config.ts` | Vinext, Cloudflare Vite, and local `ASSETS`/`IMAGES` binding configuration |
 | `worker/index.ts` | Cloudflare Worker entry point |
 | `.openai/hosting.json` | Opaque Sites project identity and supported logical bindings |
 
@@ -63,6 +63,11 @@ OpenAI Sites / Cloudflare
 Local public assets are referenced through Next.js image handling where
 responsive optimization is useful. SVG logo variants and favicon files keep
 stable public paths.
+
+Vinext routes optimized image requests through `/_vinext/image`.
+`vite.config.ts` declares the Cloudflare `ASSETS` and `IMAGES` bindings so the
+same Worker handler can fetch local source files and transform them during
+development. OpenAI Sites supplies the corresponding production bindings.
 
 ## Metadata
 
