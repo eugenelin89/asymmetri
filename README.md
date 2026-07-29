@@ -47,21 +47,27 @@ Next.js also generates `/robots.txt` and `/sitemap.xml`.
 
 ## Local development
 
-Prerequisite: Node.js 20 or newer.
+Prerequisite: the Node.js version declared in `.nvmrc`. nvm is recommended but
+not required.
 
 ```bash
+nvm install
+nvm use
 npm install
 npm run dev
 ```
+
+If nvm is unavailable, use another version manager and confirm that
+`node --version` matches `.nvmrc`.
 
 Open the local URL reported by Vinext.
 
 ## Verification
 
 ```bash
-npm run lint
-npm run typecheck
+npm run check
 npm run build
+npm audit --omit=dev
 ```
 
 No environment variables are required for the public site.
@@ -96,7 +102,12 @@ branding, or unverified product claims. Record every added or replaced asset in
 - [Site strategy](docs/SITE_STRATEGY.md)
 - [Visual identity](docs/VISUAL_IDENTITY.md)
 - [Asset manifest](docs/ASSET_MANIFEST.md)
-- [Deployment assumptions](docs/DEPLOYMENT.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Content guide](docs/CONTENT_GUIDE.md)
+- [Local development](docs/LOCAL_DEVELOPMENT.md)
+- [Testing](docs/TESTING.md)
+- [Deployment](docs/DEPLOYMENT.md)
+- [Engineering journal](docs/prompts/README.md)
 
 ## Deployment assumptions
 

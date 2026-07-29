@@ -6,7 +6,7 @@ uploads, environment variables, or third-party runtime services.
 
 ## Required runtime
 
-- Node.js 20 or newer
+- the Node.js version declared in `.nvmrc`; nvm is recommended but not required
 - OpenAI Sites for the production deployment
 - a Next.js-compatible runtime if using the optional compatibility build
 
@@ -14,9 +14,9 @@ uploads, environment variables, or third-party runtime services.
 
 ```bash
 npm ci
-npm run lint
-npm run typecheck
+npm run check
 npm run build
+npm audit --omit=dev
 ```
 
 `npm run build` creates the deployable Worker bundle in `dist/`. The optional

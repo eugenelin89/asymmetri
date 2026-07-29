@@ -8,6 +8,7 @@
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "dev:next": "next dev",
     "build:next": "next build",
+    "check": "npm run typecheck && npm run lint",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
