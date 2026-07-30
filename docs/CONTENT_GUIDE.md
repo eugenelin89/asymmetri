@@ -7,10 +7,9 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - company name and positioning;
 - canonical URL and public contact mailbox;
 - navigation and footer links;
-- page titles and descriptions;
-- company mission and exploration themes;
+- page title and description;
+- founder story, pitching focus, and exploration thesis;
 - approved image paths and alt text;
-- research disclosures;
 - closing calls to action.
 
 Page files under `app/` own narrative sequence and route-specific connective
@@ -25,13 +24,13 @@ Every product or research statement must fit one of these categories:
 
 Work that has credible technical evidence but is not presented as a mature
 commercial product. This includes affordable sensing, pitching biomechanics,
-movement-signal analysis, and physical-system prototyping.
+movement-signal analysis, smartphone-video comparison, and AI-assisted pattern
+identification.
 
 ### Future direction
 
 Ideas or intended areas that are not presented as shipped capabilities, such as
-broader video-derived information, cross-source profiles, intelligent
-development support, and additional sports.
+more automated pitch comparison and clearer longitudinal development support.
 
 Do not blur the labels or turn future direction into present-tense product
 claims.
@@ -68,11 +67,11 @@ pitching-velocity personal bests only as part of the combined work of coaching,
 training, evidence, experimentation, and measurement—not as an outcome caused by a
 device or a single mechanical change.
 
-Cameras and sensors capture evidence. AI may identify patterns and surface relevant
-information. Coaches supply judgment, context, experience, and human understanding.
-Athletes gain insight into their work. Parents receive appropriate context so they
-can support development, never override or substitute for coaches. Baseball remains
-the first proving ground, while future directions remain exploratory.
+Cameras and sensors capture evidence. AI may identify patterns and surface
+relevant information. Coaches supply judgment, context, experience, and human
+understanding. Pitchers gain insight into their work. Parents receive appropriate
+context so they can support development, never override or substitute for
+coaches. Baseball and pitching development are the current public focus.
 
 ## Privacy and anonymity
 
@@ -95,12 +94,14 @@ Synthetic product visuals must remain clearly described as reconstructions.
 
 ## Routes and navigation
 
-When adding or removing a public route:
+The public narrative is one page with `#story`, `#approach`, and `#contact`
+anchors. Former secondary routes redirect permanently. When adding or removing a
+public route:
 
 1. update the route under `app/`;
 2. update navigation in `content/site.ts` if appropriate;
-3. update `app/sitemap.ts`;
-4. add route-specific metadata;
+3. update redirects and `app/sitemap.ts`;
+4. update metadata when appropriate;
 5. update `README.md`, `docs/ARCHITECTURE.md`, and `docs/SITE_STRATEGY.md`;
 6. verify the route at relevant responsive widths.
 
@@ -115,9 +116,10 @@ the user explicitly requests it.
 
 ## Images and alt text
 
-Use approved local assets and record provenance in
-`docs/ASSET_MANIFEST.md`. Alt text should describe the relevant visible content
-and purpose without adding identity, affiliation, or performance claims.
+Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
+The current site renders one privacy-reviewed pitching photograph. Alt text
+should describe the visible action and purpose without adding identity,
+affiliation, or performance claims.
 
 Decorative images should use empty alt text. Interface reconstructions need an
 adjacent explanation and should not rely only on embedded image text.

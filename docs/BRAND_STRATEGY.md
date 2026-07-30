@@ -2,23 +2,24 @@
 
 ## Positioning
 
-**Asymmetri Labs is a sports technology startup exploring how accessible tools
-can help athletes, coaches, and parents understand development more clearly.**
-It begins with baseball and has broader potential across sport.
+**Asymmetri Labs is a baseball technology startup exploring how smartphone
+video, affordable sensors, and AI can help pitchers, coaches, and parents
+understand development more clearly.** Pitching mechanics and pitching
+development are the present focus.
 
 ## Mission
 
-Help athletes and the people around them make better development decisions
-through clearer evidence and more accessible technology. Better development
-tools should not be limited to athletes with elite resources.
+Make useful pitching evidence easier to capture, compare, and understand so
+players and the people supporting them can make better-informed development
+decisions.
 
 ## Point of view
 
-Talent and effort are widely distributed; sophisticated feedback is not.
-Smartphone cameras, watches, affordable sensors, software, data, and AI may make
-useful evidence more accessible. Cameras and sensors capture evidence; AI helps
-surface patterns; coaches and athletes decide what to do. Great coaching remains
-human. Parents gain context that helps them support—not override—the process.
+Smartphone cameras can capture movement, affordable sensors can add evidence that
+video cannot show as clearly, and AI may help compare pitches and surface
+patterns. Coaches provide judgment, context, experience, and human
+understanding. Pitchers gain clearer insight into their work, while parents gain
+appropriate context that helps them support—not override—the process.
 
 ## Founder origin
 
@@ -37,15 +38,16 @@ still too manual and technically difficult.
 
 ## Messaging hierarchy
 
-1. Category: **Sports technology**
-2. Hero: **Talent is everywhere. The tools aren’t.**
-3. Starting point: **Baseball is where we begin.**
-4. Mission: make better development decisions possible for more people.
-5. Closing: **The playing field may be uneven. The opportunity to improve should not be.**
+1. Category: **Baseball technology**
+2. Hero: **Better evidence for better pitching.**
+3. Present focus: pitching mechanics and pitching development.
+4. Method: smartphone video, affordable sensors, and AI.
+5. Principle: **AI can help identify patterns. Coaches provide the judgment that turns evidence into progress.**
+6. Closing: **Great coaching stays human. Better evidence makes it stronger.**
 
-The company story leads. Refer to athlete-development tools, experiments, or
-systems being built; never introduce a named flagship product or imply a settled
-roadmap.
+The company story leads. Refer to pitching-analysis ideas and experiments being
+built and tested; never introduce a named flagship product, imply a finished
+commercial platform, or speculate publicly about other sports.
 
 ## Voice and truth
 

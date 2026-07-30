@@ -1,30 +1,24 @@
 # Asymmetri Labs
 
-Asymmetri Labs explores how everyday cameras and sensors can give athletes,
-coaches, and parents clearer evidence for better development. It grew from a
-founder’s experience as a baseball coach, division coordinator, and parent using
-slow-motion smartphone video, then affordable sensors, to support an iterative
-pitching-development process. Baseball is where we begin.
+Asymmetri Labs is a baseball technology startup exploring how smartphone video,
+affordable sensors, and AI can help pitchers, coaches, and parents understand
+development more clearly. It begins with pitching mechanics and the belief that
+better evidence can strengthen good coaching without replacing it.
 
 ## Website purpose
 
-This repository contains the official company website. Its compact, story-first
-experience explains the access gap, the mission, and an exploratory technical
-direction without presenting a settled product roadmap or named flagship product.
-Evidence helps guide changes and measure whether they work. AI may make that
-evidence easier to use, but technology supports human coaching; it does not
-replace it.
+This repository contains the official one-page company website. The landing page
+combines one central pitch, the founder’s personal origin story, a concise
+Capture / Understand / Improve thesis, and direct contact. It presents the
+company as early-stage and does not imply that a finished commercial platform
+exists.
 
 ## Routes
 
-| Route      | Purpose                                                                                                            |
-| ---------- | ------------------------------------------------------------------------------------------------------------------ |
-| `/`        | Six-section company story                                                                                          |
-| `/story`   | Personal origin, baseball starting point, and exploration stage                                                    |
-| `/contact` | Direct, privacy-conscious invitation for athletes, coaches, parents, organizations, researchers, and collaborators |
-
-Former `/work`, `/about`, `/why-asymmetrico`, and named-product URLs permanently
-redirect to `/story`. Next.js also generates `/robots.txt` and `/sitemap.xml`.
+`/` is the only primary indexed content page. The former `/story`, `/contact`,
+`/about`, `/work`, `/why-asymmetrico`, and named-product routes permanently
+redirect to the relevant homepage section or the homepage itself. Next.js also
+generates `/robots.txt` and `/sitemap.xml`.
 
 ## Technology
 
@@ -52,6 +46,6 @@ npm audit --omit=dev
 git diff --check
 ```
 
-Primary public copy, metadata, contact details, and three selected image
-descriptions live in `content/site.ts`. See `docs/ASSET_MANIFEST.md` before
+Primary public copy, metadata, contact details, and the selected hero-image
+description live in `content/site.ts`. See `docs/ASSET_MANIFEST.md` before
 changing public assets.

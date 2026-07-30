@@ -26,10 +26,9 @@ npm run build:next
 When routes or shared layout code change, verify:
 
 - `/`
-- `/story`
-- `/work` and `/about` (permanent redirects)
-- legacy name and named-product URLs (permanent redirects)
-- `/contact`
+- `/story`, `/contact`, and `/about` (permanent redirects to homepage anchors)
+- `/work`, the legacy name route, and the named-product URL (permanent redirects
+  to the homepage or Story anchor)
 - `/robots.txt`
 - `/sitemap.xml`
 - `/favicon.svg`
@@ -55,7 +54,7 @@ Check:
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
 - image loading, crops, and alt text;
-- mobile navigation;
+- compact mobile navigation;
 - keyboard navigation and visible focus;
 - skip-link behavior;
 - touch target usability;

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Asymmetri Labs — Talent is everywhere. The tools aren’t. Accessible sports technology, starting with baseball.",
+        alt: "Asymmetri Labs — Better evidence for better pitching. Smartphone video, sensors, and AI built to support coaches.",
       },
     ],
   },
@@ -43,8 +43,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B1020",
-  colorScheme: "light dark",
+  themeColor: "#0E1110",
+  colorScheme: "light",
 };
 
 const organizationSchema = {
@@ -56,11 +56,12 @@ const organizationSchema = {
   description: site.metadata.description,
   email: site.company.contactEmail,
   knowsAbout: [
-    "Athlete development",
-    "Sports technology",
-    "Sports analytics",
-    "Biomechanics",
+    "Baseball technology",
+    "Pitching development",
+    "Pitching mechanics",
+    "Smartphone video",
     "Wearable sensors",
+    "Artificial intelligence",
   ],
 };
 

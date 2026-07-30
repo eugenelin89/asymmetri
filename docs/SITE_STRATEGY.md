@@ -2,28 +2,28 @@
 
 ## Story
 
-The site makes one compact argument: talent is everywhere, access to development
-tools is not, and accessible technology can help close that gap while keeping
-coaching human. Its specific origin is the founder’s experience as a coach,
-division coordinator, and parent, beginning with slow-motion pitching video and
-later affordable sensors. Baseball is where the problem became personal and where
-learning begins.
+The site makes one compact argument: better evidence can help pitchers and the
+people supporting them understand development more clearly while keeping
+coaching human. Its specific origin is the founder’s experience as a baseball
+coach, division coordinator, and parent, beginning with slow-motion smartphone
+video and later affordable sensors.
 
-The homepage has six sections: hero, access gap, mission, the iterative
-pitching-development origin, accessible cameras/sensors/AI, and closing.
-It uses two large images rather than cards, feature grids, metrics, diagrams, or a
-product demo.
+The homepage has four major sections: hero, founder story, Capture / Understand /
+Improve approach, and closing contact. It uses one pitching-delivery photograph
+and avoids cards, feature grids, fake metrics, diagrams, product demos, and
+competing slogans.
 
 ## Architecture
 
-The public navigation contains only Home, Story, and Contact. `/work` and `/about`
-were consolidated into `/story`; those routes and both older legacy routes
-permanently redirect there. The Story page gives the personal context, explains
-why everyday devices matter, and states honestly that the startup is building,
-testing, and learning.
+The public navigation contains only Story, Approach, and Get in touch anchor
+links. The homepage is the only indexed content page. Former secondary and legacy
+routes permanently redirect to the relevant homepage section or `/`.
 
 ## Privacy and evidence
 
-No customer, source organization, athlete, team, deployment, repository, or
-private application is identified. Emerging sensing, video, data, and AI work is
-presented as exploration rather than deployed capability.
+No customer, source organization, player name, team, deployment, repository, or
+private application is identified. The selected photograph contains one pitcher;
+incidental identifying uniform marks are softly obscured in the public
+derivative. Emerging sensing, video, and AI work is presented as exploration
+rather than deployed capability. Parents are informed supporters, not substitute
+coaches.

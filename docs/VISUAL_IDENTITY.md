@@ -2,43 +2,49 @@
 
 ## Identity
 
-The existing asymmetric mark remains unchanged. The rendered lockup pairs it with the new public name, Asymmetri Labs. The open,
-interrupted “A” uses unequal forms to express asymmetry, leverage, motion, and
-balance without literal sports or technology symbols. It works in one colour, on
-Ink and Canvas, in navigation, and at favicon scale.
+The existing asymmetric mark remains unchanged. The rendered lockup pairs it
+with the public name, Asymmetri Labs. The open, interrupted “A” uses unequal
+forms to express asymmetry, leverage, motion, and balance without a literal
+baseball symbol.
 
 ## Palette
 
 | Token | Value | Role |
 | --- | --- | --- |
-| Asymmetri Labs Ink | `#0B1020` | Dominant dark surface and text |
-| Canvas | `#F3EFE6` | Dominant editorial surface |
-| Soft White | `#FAF8F3` | Quiet light distinction |
-| Clay | `#C86D45` | Primary action and emphasis |
-| Signal Green | `#3F8068` | Reserved for meaningful progress states |
-| Data Blue | `#68B7D6` | Focus indicators and meaningful data states |
+| Ink | `#0E1110` | Dominant dark surface and text |
+| Ink Soft | `#171D1A` | Secondary dark surface |
+| Paper | `#F5F6F2` | Primary light surface |
+| White | `#FFFFFF` | High-contrast type and closing surface |
+| Accent Orange | `#F47743` | Primary action and limited emphasis |
+| Accent Dark | `#A43C1A` | Accessible accent text on light surfaces |
+| Focus Blue | `#5EB8DD` | Visible keyboard focus |
 
-Ink and Canvas dominate. Clay is the only recurring accent. Green and Blue are not
-decorative section colours.
+Near-black and white dominate. Orange is the single recurring brand accent; blue
+is reserved for keyboard focus.
 
 ## Typography and layout
 
-Display type uses Iowan Old Style/Palatino/Georgia; body text uses Avenir Next/Segoe
-UI/Helvetica/Arial; short technical labels use the system monospace stack. Large
-headlines, authentic images, generous spacing, and thin dividers provide hierarchy.
+Display and body type both use a bold modern system sans-serif stack led by
+Avenir Next. Large concise headlines, tight hierarchy, thin dividers, generous
+space, and a restrained technical grid create the startup-oriented presentation.
 
-The simplified system avoids decorative grids, floating statistics, excessive
-badges, pills, diagrams, and alternating campaign-like treatments. Motion is limited
-to a small hover response and removed when reduced motion is requested.
+The system avoids serif editorial styling, floating statistics, badges, pill
+collections, fake interfaces, decorative research graphics, and visual clutter.
+Motion is limited to small hover responses and removed when reduced motion is
+requested.
 
 ## Photography and interface imagery
 
-Use a small selection of authentic baseball, athlete-training, sensing, and
-research images. Preserve natural colour and do not imply partnerships. No interface visual is currently rendered. Use only the three approved story images; any future reconstruction must use synthetic data and be clearly labelled.
+The public site renders one authentic pitching-delivery photograph in the hero.
+It uses a restrained, slightly desaturated grade and localized privacy softening.
+No research imagery, interface visual, fake metric, or second photo is rendered.
+Future additions must earn a distinct narrative role and remain within the
+privacy and evidence rules in `docs/ASSET_MANIFEST.md`.
 
 ## Accessibility
 
-Ink/Canvas and Soft White/Ink are the primary contrast pairs. Clay Dark carries
-small text on light backgrounds; Data Blue supplies a visible focus ring. Controls
-remain touch-friendly, content does not depend on colour or hover, mobile ordering
-matches reading order, and animation respects `prefers-reduced-motion`.
+Ink/Paper and White/Ink are the primary contrast pairs. Accent Dark carries small
+text on light backgrounds, and Focus Blue supplies a visible focus ring.
+Controls remain touch-friendly, content does not depend on colour or hover,
+mobile ordering matches reading order, and animation respects
+`prefers-reduced-motion`.
