@@ -58,6 +58,22 @@ Avoid:
 - invented customers, partnerships, measurements, adoption, or outcomes;
 - militaristic framing.
 
+## Founder story and role clarity
+
+Tell the public origin in first person where appropriate: coach, baseball division
+coordinator, and parent; a son’s pitching injury without medical detail; slow-motion
+smartphone video as the first experiment; frame-by-frame comparison, small changes,
+and repeated recording; and later affordable-sensor experiments. Describe repeated
+pitching-velocity personal bests only as part of the combined work of coaching,
+training, evidence, experimentation, and measurement—not as an outcome caused by a
+device or a single mechanical change.
+
+Cameras and sensors capture evidence. AI may identify patterns and surface relevant
+information. Coaches supply judgment, context, experience, and human understanding.
+Athletes gain insight into their work. Parents receive appropriate context so they
+can support development, never override or substitute for coaches. Baseball remains
+the first proving ground, while future directions remain exploratory.
+
 ## Privacy and anonymity
 
 Never name the private source sports organization in public content, metadata,
@@ -71,6 +87,9 @@ Do not publish:
 - direct private-application screenshots;
 - source repository names or application domains;
 - unapproved photographs of identifiable groups or minors.
+
+The founder’s son must never be named publicly, and the injury must remain context
+rather than a medical story.
 
 Synthetic product visuals must remain clearly described as reconstructions.
 

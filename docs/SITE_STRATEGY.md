@@ -4,10 +4,13 @@
 
 The site makes one compact argument: talent is everywhere, access to development
 tools is not, and accessible technology can help close that gap while keeping
-coaching human. Baseball is where the problem became real and where learning begins.
+coaching human. Its specific origin is the founder’s experience as a coach,
+division coordinator, and parent, beginning with slow-motion pitching video and
+later affordable sensors. Baseball is where the problem became personal and where
+learning begins.
 
-The homepage has six sections and approximately 550 words: hero, access gap,
-mission, baseball starting point, accessible cameras/sensors/AI, and closing.
+The homepage has six sections: hero, access gap, mission, the iterative
+pitching-development origin, accessible cameras/sensors/AI, and closing.
 It uses two large images rather than cards, feature grids, metrics, diagrams, or a
 product demo.
 

@@ -1,22 +1,26 @@
 # Asymmetri Labs
 
-Asymmetri Labs is a sports technology startup exploring how smartphone cameras,
-everyday sensors, software, data, and AI can help athletes, coaches, and parents
-understand development more clearly. Baseball is where we begin.
+Asymmetri Labs explores how everyday cameras and sensors can give athletes,
+coaches, and parents clearer evidence for better development. It grew from a
+founder’s experience as a baseball coach, division coordinator, and parent using
+slow-motion smartphone video, then affordable sensors, to support an iterative
+pitching-development process. Baseball is where we begin.
 
 ## Website purpose
 
 This repository contains the official company website. Its compact, story-first
 experience explains the access gap, the mission, and an exploratory technical
 direction without presenting a settled product roadmap or named flagship product.
-Technology supports human coaching; it does not replace it.
+Evidence helps guide changes and measure whether they work. AI may make that
+evidence easier to use, but technology supports human coaching; it does not
+replace it.
 
 ## Routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Six-section company story |
-| `/story` | Personal origin, baseball starting point, and exploration stage |
+| Route      | Purpose                                                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------------------------------ |
+| `/`        | Six-section company story                                                                                          |
+| `/story`   | Personal origin, baseball starting point, and exploration stage                                                    |
 | `/contact` | Direct, privacy-conscious invitation for athletes, coaches, parents, organizations, researchers, and collaborators |
 
 Former `/work`, `/about`, `/why-asymmetrico`, and named-product URLs permanently
