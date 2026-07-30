@@ -28,6 +28,14 @@ Display and body type both use a bold modern system sans-serif stack led by
 Avenir Next. Large concise headlines, tight hierarchy, thin dividers, generous
 space, and a restrained technical grid create the startup-oriented presentation.
 
+Supporting typography uses a fluid scale rather than fixed small labels. On wide
+screens, navigation and button labels settle near 15 to 16 pixels, eyebrow labels
+near 13 to 14 pixels, primary supporting copy near 20 to 21 pixels, and footer
+text near 14 to 15 pixels. Mobile copy remains compact but does not fall below a
+practical reading size. The closing section gives its supporting column more
+width and uses a slightly smaller display maximum so the headline and action read
+as one composition.
+
 The system avoids serif editorial styling, floating statistics, badges, pill
 collections, fake interfaces, decorative research graphics, and visual clutter.
 Motion is limited to small hover responses and removed when reduced motion is
