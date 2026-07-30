@@ -27,8 +27,8 @@ When routes or shared layout code change, verify:
 
 - `/`
 - `/work`
-- `/work/asymmetrico-platform`
-- `/why-asymmetrico`
+- `/work/asymmetrico-platform` (permanent redirect)
+- `/why-asymmetrico` (permanent redirect)
 - `/about`
 - `/contact`
 - `/robots.txt`
