@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Asymmetri Labs — Better evidence for better pitching. Smartphone video, sensors, and AI built to support coaches.",
+        alt: "Asymmetri Labs: Better evidence for better pitching. Smartphone video, sensors, and AI that support better coaching.",
       },
     ],
   },

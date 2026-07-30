@@ -19,7 +19,7 @@ Smartphone cameras can capture movement, affordable sensors can add evidence tha
 video cannot show as clearly, and AI may help compare pitches and surface
 patterns. Coaches provide judgment, context, experience, and human
 understanding. Pitchers gain clearer insight into their work, while parents gain
-appropriate context that helps them support—not override—the process.
+appropriate context that helps them support the process without overriding it.
 
 ## Founder origin
 

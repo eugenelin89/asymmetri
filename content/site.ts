@@ -19,7 +19,8 @@ export const site = {
     description:
       "Asymmetri Labs is exploring how smartphone video, affordable sensors, and AI can help pitchers, coaches, and parents understand mechanics and development more clearly.",
     socialHeadline: "Better evidence for better pitching.",
-    socialSupport: "Smartphone video, sensors, and AI—built to support coaches.",
+    socialSupport:
+      "Smartphone video, sensors, and AI that support better coaching.",
   },
   navigation: [
     { label: "Story", href: "#story" },
@@ -38,8 +39,8 @@ export const site = {
     paragraphs: [
       "As a baseball coach and division coordinator, I wanted a clearer way to understand how pitchers were moving. I began recording pitching deliveries in slow motion on a smartphone, comparing pitches frame by frame, and studying differences in movement and timing.",
       "Working with players, we identified possible areas for improvement, made small adjustments, recorded again, and compared new deliveries with earlier ones. Later, I experimented with affordable wearable sensors to capture evidence that video alone could not show as clearly.",
-      "The goal was not to automate coaching. It was to make useful evidence easier to see—so coaches could apply their judgment, players could better understand what they were working on, and changes could be tracked over time.",
-      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could smartphones, affordable sensors, and AI make pitching analysis clearer and easier to use—while keeping coaches at the centre of development?",
+      "The goal was not to automate coaching. It was to make useful evidence easier to see. Coaches could then apply their judgment, players could better understand what they were working on, and changes could be tracked over time.",
+      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could smartphones, affordable sensors, and AI make pitching analysis clearer and easier to use while keeping coaches at the centre of development?",
     ],
   },
   approach: {

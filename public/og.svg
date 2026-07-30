@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-<title id="title">Asymmetri Labs — Baseball Technology</title>
-<desc id="desc">Better evidence for better pitching. Smartphone video, sensors, and AI built to support coaches.</desc>
+<title id="title">Asymmetri Labs: Baseball Technology</title>
+<desc id="desc">Better evidence for better pitching. Smartphone video, sensors, and AI that support better coaching.</desc>
 <defs>
   <linearGradient id="field" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#171d1a"/>
@@ -19,5 +19,5 @@
 <text x="70" y="276" fill="#f47743" font-family="Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="3">BASEBALL TECHNOLOGY</text>
 <text x="70" y="372" fill="#f7f7f2" font-family="Arial,sans-serif" font-size="72" font-weight="700" letter-spacing="-2">Better evidence for</text>
 <text x="70" y="455" fill="#f7f7f2" font-family="Arial,sans-serif" font-size="72" font-weight="700" letter-spacing="-2">better pitching.</text>
-<text x="70" y="551" fill="#b9c2bd" font-family="Arial,sans-serif" font-size="24">Smartphone video, sensors, and AI—built to support coaches.</text>
+<text x="70" y="551" fill="#b9c2bd" font-family="Arial,sans-serif" font-size="24">Smartphone video, sensors, and AI that support better coaching.</text>
 </svg>

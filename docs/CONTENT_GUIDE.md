@@ -55,7 +55,10 @@ Avoid:
 - inflated startup or enterprise language;
 - claims that software replaces coaches;
 - invented customers, partnerships, measurements, adoption, or outcomes;
-- militaristic framing.
+- militaristic framing;
+- em dashes and en dashes in public-facing copy. Prefer shorter sentences,
+  commas with conjunctions, or colons where appropriate. Preserve normal
+  hyphens in established compound words.
 
 ## Founder story and role clarity
 

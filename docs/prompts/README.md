@@ -17,15 +17,15 @@ Use the next unused zero-padded integer and one scope suffix:
 
 Scope suffixes:
 
-- `platform` — repository-wide tooling, architecture, or setup;
-- `content` — copy, metadata, links, or product information;
-- `design` — identity, assets, layout, styles, or components;
-- `deployment` — hosting, access, automation, or release work.
+- `platform`: repository-wide tooling, architecture, or setup;
+- `content`: copy, metadata, links, or product information;
+- `design`: identity, assets, layout, styles, or components;
+- `deployment`: hosting, access, automation, or release work.
 
 ## Required format
 
 ```markdown
-# Prompt NNN — Short title
+# Prompt NNN: Short title
 
 - Date: YYYY-MM-DD
 - Scope: platform | content | design | deployment
