@@ -26,7 +26,7 @@ export function createPageMetadata(
           url: "/og.svg",
           width: 1200,
           height: 630,
-          alt: "Asymmetrico — Better tools for an uneven playing field. Accessible sports technology, starting with baseball.",
+          alt: "Asymmetri Labs — Talent is everywhere. The tools aren’t. Accessible sports technology, starting with baseball.",
         },
       ],
     },

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Asymmetrico — Better tools for an uneven playing field. Accessible sports technology, starting with baseball.",
+        alt: "Asymmetri Labs — Talent is everywhere. The tools aren’t. Accessible sports technology, starting with baseball.",
       },
     ],
   },
@@ -52,7 +52,7 @@ const organizationSchema = {
   "@type": "Organization",
   name: site.company.name,
   url: site.company.siteUrl,
-  logo: `${site.company.siteUrl}/brand/asymmetrico-horizontal.svg`,
+  logo: `${site.company.siteUrl}/favicon.svg`,
   description: site.metadata.description,
   email: site.company.contactEmail,
   knowsAbout: [

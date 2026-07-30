@@ -8,7 +8,7 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - canonical URL and public contact mailbox;
 - navigation and footer links;
 - page titles and descriptions;
-- company mission and work themes;
+- company mission and exploration themes;
 - approved image paths and alt text;
 - research disclosures;
 - closing calls to action.
@@ -20,10 +20,6 @@ new product claims.
 ## Product truth states
 
 Every product or research statement must fit one of these categories:
-
-### Built
-
-Capabilities verified in the private source implementation. Describe them naturally as athlete-development or coaching tools. Do not assign a formal public product name.
 
 ### Emerging or experimental
 

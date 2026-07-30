@@ -1,46 +1,39 @@
-# Asymmetrico asset manifest
+# Asymmetri Labs asset manifest
 
-Date: 2026-07-29
+Date: 2026-07-30
 
-This internal provenance record covers all current public assets. The rendered site
-does not identify the private athlete-development source organization. No asset is
-hotlinked.
+This internal provenance record covers public assets. Nothing is hotlinked, and
+the rendered site does not identify a private source organization. No raster, font,
+PDF, or other binary asset was added or modified for the Asymmetri Labs update;
+retained binary assets remain byte-for-byte identical to the base branch.
 
-## Current assets
+## Three retained storytelling images
 
 | Final path | Source | Dimensions | Processing and public role | Alt text | Rights assessment |
 | --- | --- | --- | --- | --- | --- |
-| `public/images/sports/baseball-running-action.webp` | Owner-supplied first-party portfolio | 1400×933 | Retained; responsive hero image and the strongest statement of baseball, effort, and motion. | A baseball player accelerating out of the batter’s box as clay lifts from the ground. | Previously intentionally public; broader company reuse remains subject to owner confirmation. |
-| `public/images/sports/baseball-pitching-mound.webp` | Owner-supplied first-party portfolio | 1400×933 | Retained; homepage mission image. | A pitcher pauses on the mound and looks toward home plate before the next delivery. | Previously intentionally public; no partnership is claimed. |
-| `public/images/research/wearable-sensor-prototype.webp` | Owner-supplied first-party research | 946×1842 | Retained; Work-page experimental sensing evidence. | A baseball player testing wired motion sensors during an early prototype session. | Previously public research image; no performance or commercial claim is attached. |
-| `public/images/research/motion-signal-plot.webp` | Owner-supplied first-party research | 1486×734 | Retained; Work-page movement-data evidence. | Line plots showing acceleration and angular velocity across a recorded pitching motion. | Technical artifact with no private athlete identity. |
-| `public/images/research/systems-workbench.webp` | Owner-supplied first-party portfolio | 1080×1440 | Retained; About-page technical-origin image only. | A workbench with small tracked robots, electronics, and prototyping tools. | Previously public; presented as origin, not a current sports product. |
-| `public/brand/asymmetrico-*.svg` | Original Asymmetrico identity | Vector | Retained mark, lockups, and one-colour variants. | Variant-specific embedded SVG titles. | Original work created for Asymmetrico. |
-| `public/brand/asymmetrico-app-icon.png` | Original Asymmetrico identity | 512×512 | Retained application and Apple icon. | Decorative/icon context. | Original work created for Asymmetrico. |
-| `public/brand/asymmetrico-favicon-{16,32,48}.png`, `public/favicon.svg` | Original Asymmetrico identity | Named sizes / vector | Retained browser icons. | Decorative/icon context. | Original work created for Asymmetrico. |
-| `public/og.svg` | Original Asymmetrico composition | 1200×630 | Added as UTF-8 SVG markup using Ink, Canvas, Clay, the Asymmetrico identity, and the new company positioning. | Asymmetrico — Better tools for an uneven playing field. Sports technology. Starting with baseball. | Original vector composition; contains no embedded raster data or remote references. |
+| `public/images/sports/baseball-running-action.webp` | Owner-supplied first-party portfolio | 1400×933 | Unchanged; homepage hero. Retained as the single strongest expression of baseball, effort, and motion. | A baseball player accelerating out of the batter’s box as clay lifts from the ground. | Previously intentionally public; broader company reuse remains subject to owner confirmation. |
+| `public/images/research/wearable-sensor-prototype.webp` | Owner-supplied first-party research | 946×1842 | Unchanged; homepage approach section. Retained because it connects real baseball activity with accessible sensing and experimentation. | A baseball player testing motion sensors during an early prototype session. | Previously public research image; no performance or commercial claim is attached. |
+| `public/images/research/systems-workbench.webp` | Owner-supplied first-party portfolio | 1080×1440 | Unchanged; Story-page technical origin. Retained as a quiet signal of experimental, physical-system DNA rather than a product claim. | A workbench with small tracked robots, electronics, and prototyping tools. | Previously public; presented as origin, not a current sports product. |
 
-Next.js produces responsive image renditions from the unchanged local photography. Existing repository raster photography remains byte-for-byte unchanged in this change, and no new or modified raster asset is included. The pre-existing `public/og.png` is restored to its base-revision bytes and retained unused; metadata points only to the text-based SVG.
+## Brand and social assets
+
+The existing raster favicon and app icon remain available and unchanged. The
+rendered React vector lockup and updated plain UTF-8 `public/og.svg` use the public
+name **Asymmetri Labs**. The social SVG is 1200×630, contains only local vector
+markup, and uses the new hero and baseball starting point. `public/og.png` remains
+unused; metadata points to the SVG.
 
 ## Removed or no longer rendered
 
-- `public/images/research/temporal-attention-map.webp` was removed because the
-  simplified story does not need a third research artifact.
-- Direct source-application screenshots remain excluded. The Work page instead uses
-  a semantic HTML/CSS reconstruction with the synthetic athlete name “Avery R.” and
-  an explicit reconstruction disclosure.
-- Team photographs, organization logos, branded application imagery, evaluations,
-  and account context remain excluded for anonymity, privacy, and rights reasons.
-- The social preview now uses `public/og.svg`. SVG was selected so the new positioning remains attractive and legible while keeping the PR text-only and compatible with Cloud Codex. The SVG contains only local vector markup, shapes, text, and safe font fallbacks.
+- `baseball-pitching-mound.webp` was removed: a second baseball photograph repeated
+  the hero’s role rather than advancing the simplified story.
+- `motion-signal-plot.webp` was removed: its technical detail made the site feel
+  more like a research archive.
+- A previously removed attention-map artifact remains excluded.
+- Product reconstructions, screenshots, collages, team photographs, organization
+  logos, evaluations, accounts, and private context remain excluded.
 
-## Selection and privacy assessment
-
-The final selection uses two authentic baseball photographs, two research artifacts,
-and one technical-origin photograph. It deliberately avoids a collage or exhaustive
-asset inventory. No team, division, coach, account, deployment, domain, repository,
-or real athlete identifier appears in public imagery or synthetic interface content.
-
-The source images were already published as first-party evidence in owner-supplied
-repositories. This record describes provenance but is not a legal rights opinion. If
-the owner cannot confirm broader company use, replace the affected image before
-public launch.
+The selection is three major images across the complete public site: two on Home
+and one on Story. Every image has a distinct narrative job. Other existing raster
+assets are no longer rendered; image reduction is achieved through page composition,
+not binary editing. The two deletions above are intentional removals of unused files.

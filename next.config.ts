@@ -3,8 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      { source: "/why-asymmetrico", destination: "/about#why-asymmetrico", permanent: true },
-      { source: "/work/asymmetrico-platform", destination: "/work", permanent: true },
+      { source: "/about", destination: "/story", permanent: true },
+      { source: "/work", destination: "/story", permanent: true },
+      { source: "/why-asymmetrico", destination: "/story", permanent: true },
+      { source: "/work/asymmetrico-platform", destination: "/story", permanent: true },
     ];
   },
 };

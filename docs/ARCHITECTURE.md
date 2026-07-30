@@ -2,105 +2,44 @@
 
 ## Overview
 
-The Asymmetrico website is a typed Next.js App Router application. React server
-components render the public routes, local assets provide the site imagery, and
-Vinext packages the application as a Cloudflare Worker for OpenAI Sites.
+The Asymmetri Labs website is a typed Next.js App Router application. React server
+components render three compact public routes, local assets provide three
+storytelling images, and Vinext packages the application as a Cloudflare Worker
+for OpenAI Sites. It has no database, authentication, API routes, analytics,
+third-party scripts, form backend, uploads, or client-owned state.
 
-The application has no database, authentication, API routes, analytics,
-third-party runtime scripts, form backend, uploads, or client-owned application
-state.
-
-## Directory responsibilities
+## Responsibilities
 
 | Path | Responsibility |
 | --- | --- |
-| `app/` | Routes, route composition, global styles, layout metadata, JSON-LD, sitemap, and robots rules |
-| `components/` | Shared header, footer, logo, page framing, calls to action, product reconstructions, and diagrams |
-| `content/site.ts` | Typed public copy, navigation, contact values, image descriptions, and truth-state disclosures |
-| `lib/site-metadata.ts` | Reusable per-route canonical, Open Graph, and X metadata |
-| `public/brand/` | Logo sources, lockups, app icon, and favicon fallbacks |
-| `public/images/` | Approved sports and research imagery |
-| `docs/` | Strategy, identity, provenance, development, testing, deployment, and engineering journals |
-| `build/sites-vite-plugin.ts` | Sites deployment-manifest generation |
-| `vite.config.ts` | Vinext, Cloudflare Vite, and local `ASSETS`/`IMAGES` binding configuration |
-| `worker/index.ts` | Cloudflare Worker entry point |
-| `.openai/hosting.json` | Opaque Sites project identity and supported logical bindings |
+| `app/` | Routes, composition, styles, metadata, JSON-LD, sitemap, and robots |
+| `components/` | Shared header, footer, logo, and page framing |
+| `content/site.ts` | Typed shared copy, navigation, contact values, and image descriptions |
+| `lib/site-metadata.ts` | Per-route canonical, Open Graph, and X metadata |
+| `public/` | Approved local brand, social, and storytelling assets |
+| `docs/` | Strategy, identity, provenance, development, testing, and journals |
+| `build/`, `vite.config.ts`, `worker/` | Sites and Cloudflare packaging |
 
-## Routes
+## Routes and data flow
 
-The application currently exposes:
+Public content is `/`, `/story`, and `/contact`, plus generated robots and sitemap
+routes. Former Work, About, name-story, and named-product URLs permanently redirect
+to Story through `next.config.ts`.
 
-- `/`
-- `/work`
-- `/about`
-- `/contact`
-- `/robots.txt`
-- `/sitemap.xml`
+`content/site.ts` feeds server-rendered route composition and shared components.
+`app/layout.tsx` owns global metadata, icons, social image, and Organization JSON-LD;
+`lib/site-metadata.ts` owns route metadata. The canonical URL and mailbox remain
+centralized.
 
-Page files own route sequence and route-specific explanation. Shared navigation,
-contact values, image descriptions, and verified product facts come from
-`content/site.ts`.
+## Design and privacy
 
-## Rendering and data flow
+`app/globals.css` provides the editorial token system, responsive layouts, focus
+styles, and reduced-motion behavior. The new architecture removes product visuals,
+feature grids, and research-page structures. No private application data or source
+organization information enters the public application.
 
-Most components are server components. There is no client-side data fetching or
-runtime content service.
+## Deployment
 
-```text
-content/site.ts
-      ↓
-app route composition ──→ shared components
-      ↓
-Next.js metadata and rendered HTML
-      ↓
-Vinext/Vite Worker bundle
-      ↓
-OpenAI Sites / Cloudflare
-```
-
-Local public assets are referenced through Next.js image handling where
-responsive optimization is useful. SVG logo variants and favicon files keep
-stable public paths.
-
-Vinext routes optimized image requests through `/_vinext/image`.
-`vite.config.ts` declares the Cloudflare `ASSETS` and `IMAGES` bindings so the
-same Worker handler can fetch local source files and transform them during
-development. OpenAI Sites supplies the corresponding production bindings.
-
-## Metadata
-
-`app/layout.tsx` owns site-wide metadata, icons, the default social image, and
-Organization JSON-LD. `lib/site-metadata.ts` creates route-specific title,
-description, canonical, Open Graph, and X values. Legacy company-story and named-product URLs are handled by permanent redirects in `next.config.ts`.
-
-The canonical URL and public mailbox are centralized in `content/site.ts` and
-must be confirmed before a public domain migration.
-
-## Styling
-
-`app/globals.css` contains the token layer, editorial layouts, component styles,
-responsive rules, visible focus treatment, and reduced-motion behavior.
-`tailwind.config.ts` mirrors the brand palette and type families for utility use.
-
-The design is intentionally editorial rather than a generic dashboard. The sparse interface reconstruction uses the same tokens and explicitly synthetic content.
-
-## Privacy boundary
-
-The public application contains only synthetic product-interface data. It does
-not import private application screenshots or source-system content. Public
-claims are limited to capabilities verified during the source audit and are
-classified as built, research/experimental, or direction.
-
-The asset provenance and privacy decisions live in
-`docs/ASSET_MANIFEST.md`. That record is internal repository documentation and
-does not surface source-organization identity on the rendered site.
-
-## Deployment boundary
-
-`npm run build` invokes Vinext and produces a Worker-compatible bundle under
-`dist/`. The Sites packaging helper stages that output with the generated
-hosting manifest. OpenAI Sites manages production versions, access policy, and
-the Cloudflare deployment.
-
-The optional `npm run build:next` command verifies compatibility with the
-standard Next.js compiler; it is not the Sites deployment artifact.
+`npm run build` produces the Worker-compatible `dist/` bundle. OpenAI Sites manages
+production versions and Cloudflare deployment. `npm run build:next` remains the
+optional standard Next.js compatibility check.

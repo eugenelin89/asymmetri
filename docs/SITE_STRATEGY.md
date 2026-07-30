@@ -1,42 +1,26 @@
-# Asymmetrico site strategy
+# Asymmetri Labs site strategy
 
 ## Story
 
-The site makes one compact argument: Asymmetrico is a sports technology company;
-advanced development tools are unevenly distributed; practical technology can
-create leverage; baseball is the first proving ground; and the ambition extends
-across sport.
+The site makes one compact argument: talent is everywhere, access to development
+tools is not, and accessible technology can help close that gap while keeping
+coaching human. Baseball is where the problem became real and where learning begins.
 
-The homepage contains approximately 330 words of visible editorial copy and six
-substantial sections:
-
-1. Hero — category, headline, support, baseball, and two actions.
-2. Access gap — the problem in two short statements.
-3. Mission — the strategic and emotional centre, paired with baseball imagery.
-4. Baseball and work — three compact truth-state blocks.
-5. Why Asymmetrico — one concise explanation of asymmetric advantage.
-6. Closing — vision and contact invitation.
+The homepage has six sections and approximately 550 words: hero, access gap,
+mission, baseball starting point, accessible cameras/sensors/AI, and closing.
+It uses two large images rather than cards, feature grids, metrics, diagrams, or a
+product demo.
 
 ## Architecture
 
-The public site has four pages: `/`, `/work`, `/about`, and `/contact`. The former
-standalone name-explanation page is absorbed into About and the former named-product
-case study is absorbed into Work. Permanent redirects preserve both old URLs.
-
-The Work page separates built software, research/experimental work, and future
-direction without naming a product. The About page keeps sports technology current
-and describes physical-system experience only as technical origin.
+The public navigation contains only Home, Story, and Contact. `/work` and `/about`
+were consolidated into `/story`; those routes and both older legacy routes
+permanently redirect there. The Story page gives the personal context, explains
+why everyday devices matter, and states honestly that the startup is building,
+testing, and learning.
 
 ## Privacy and evidence
 
-Public work is described as built in a real community baseball environment without
-identifying the organization. Synthetic interface content is labelled as a
-reconstruction. No real athlete, evaluation, account, team, customer, deployment,
-or repository information is published.
-
-## Content rules
-
-Central shared copy lives in `content/site.ts`. Prefer one image, headline, and
-short paragraph to grids of cards. Do not restore a named-product hierarchy,
-standalone speculative products, repeated mission statements, or a long feature
-case study.
+No customer, source organization, athlete, team, deployment, repository, or
+private application is identified. Emerging sensing, video, data, and AI work is
+presented as exploration rather than deployed capability.

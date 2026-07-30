@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div>
           <Logo tone="canvas" />
           <p className="site-footer__thesis">
-            Accessible sports technology for an uneven playing field.
+            Accessible sports technology. Starting with baseball.
           </p>
         </div>
         <nav aria-label="Footer navigation" className="site-footer__nav">
@@ -23,7 +23,7 @@ export function SiteFooter() {
           <a href={`mailto:${site.company.contactEmail}`}>
             {site.company.contactEmail}
           </a>
-          <span>© {new Date().getFullYear()} Asymmetrico</span>
+          <span>© {new Date().getFullYear()} {site.company.name}</span>
         </div>
       </div>
     </footer>
