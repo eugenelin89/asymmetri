@@ -66,9 +66,12 @@ Do not run both servers on the same port.
 | `npm run typecheck` | Run strict TypeScript checking |
 | `npm run lint` | Run ESLint |
 | `npm run build` | Create the deployable Vinext Worker bundle in `dist/` |
-| `npm run build:next` | Run the standard Next.js compatibility build |
-| `npm run start` | Serve an existing Vinext production build locally |
+| `npm run build:next` | Create the standard Next.js build used by DigitalOcean production |
+| `npm run start` | Serve an existing Vinext build locally; this is not the DigitalOcean production command |
 | `npm audit --omit=dev` | Check production dependencies for known issues |
+
+DigitalOcean production uses `npm run build:next`, then systemd starts
+`node_modules/.bin/next start` directly. See `docs/DEPLOYMENT.md`.
 
 ## Environment
 

@@ -7,19 +7,16 @@ For meaningful implementation changes, confirm that `node --version` matches
 
 ```bash
 npm run check
+npm run build:next
 npm run build
 npm audit --omit=dev
 git diff --check
 ```
 
 `npm run check` runs strict TypeScript validation followed by ESLint.
-
-Run the optional standard framework build when changing Next.js integration,
-metadata behavior, routing, or dependencies:
-
-```bash
-npm run build:next
-```
+`npm run build:next` validates the standard Next.js build used by DigitalOcean
+production. `npm run build` validates the retained Vinext and Cloudflare Worker
+path.
 
 ## Route checks
 
@@ -96,9 +93,21 @@ compatibility and the affected dependency path.
 
 ## Deployment verification
 
-A successful local build is required before saving a Sites version. The saved
-version must reference the exact pushed commit and the archive built from that
-source. Poll deployment status to a terminal success or failure state.
+A DigitalOcean deployment requires a successful local `npm run build:next`
+before the commit is pushed. On production, the standard Next.js build must
+complete before `asymmetri.service` is restarted. Verify the loopback
+application at `127.0.0.1:3001`, the public HTTPS endpoint, important static and
+metadata routes, permanent redirects, service status, and recent logs. Follow
+`docs/DEPLOYMENT.md`.
+
+The standard Next.js production executable is
+`node_modules/.bin/next start`. Do not use `npm run start` for DigitalOcean
+because that script starts Vinext.
+
+When an OpenAI Sites deployment is explicitly requested, a successful Vinext
+`npm run build` is required before saving a Sites version. The saved version
+must reference the exact pushed commit and the archive built from that source.
+Poll deployment status to a terminal success or failure state.
 
 Private Sites deployments may require ChatGPT sign-in before route-level browser
 inspection. A successful provider deployment does not replace local route,
