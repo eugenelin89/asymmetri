@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
+  async redirects() {
+    return [
+      { source: "/why-asymmetrico", destination: "/about#why-asymmetrico", permanent: true },
+      { source: "/work/asymmetrico-platform", destination: "/work", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;

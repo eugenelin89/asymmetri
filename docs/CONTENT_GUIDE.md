@@ -8,8 +8,7 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - canonical URL and public contact mailbox;
 - navigation and footer links;
 - page titles and descriptions;
-- product capabilities;
-- principles and perspective labels;
+- company mission and work themes;
 - approved image paths and alt text;
 - research disclosures;
 - closing calls to action.
@@ -22,19 +21,15 @@ new product claims.
 
 Every product or research statement must fit one of these categories:
 
-### Deployed
+### Built
 
-Capabilities verified in the private source implementation. The current
-Asymmetrico Platform account may describe structured evaluations, multiple
-perspectives, profiles, timelines, comparison, review, completion tracking,
-reporting, role-aware access, and seasonal context.
+Capabilities verified in the private source implementation. Describe them naturally as athlete-development or coaching tools. Do not assign a formal public product name.
 
 ### Emerging or experimental
 
 Work that has credible technical evidence but is not presented as a mature
 commercial product. This includes affordable sensing, pitching biomechanics,
-movement-signal analysis, temporal attention research, and physical-system
-prototyping.
+movement-signal analysis, and physical-system prototyping.
 
 ### Future direction
 

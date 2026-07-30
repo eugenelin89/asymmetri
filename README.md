@@ -1,54 +1,39 @@
 # Asymmetrico
 
-Asymmetrico builds accessible sports technology that helps athletes, coaches, and
-sports organizations see development more clearly and compete beyond their
-resources.
-
-The company name expresses asymmetric advantage: when resources are unequal,
-smaller organizations need leverage rather than an imitation of professional-scale
-spending. Asymmetrico creates that leverage through more accessible technology,
-more useful information, and systems designed around real sports workflows.
+Asymmetrico is a sports technology company building accessible tools for athletes
+and coaches who want to compete beyond the limits of their resources. Baseball is
+the first proving ground.
 
 ## Website purpose
 
-This repository contains the official Asymmetrico website. It:
-
-- explains the company’s asymmetric-advantage thesis;
-- presents the deployed Asymmetrico Platform;
-- separates deployed work from emerging research and future direction;
-- documents the company’s visual identity and asset provenance;
-- provides a privacy-conscious public account of work originating in community
-  baseball.
-
-## Technology
-
-- Next.js App Router
-- React
-- TypeScript
-- Tailwind CSS with a custom CSS token layer
-- Next.js image optimization and metadata APIs
-- Vinext and Cloudflare Workers packaging for OpenAI Sites
-
-The site uses server components by default and contains no analytics, third-party
-scripts, form backend, database, authentication, or public athlete data.
+This repository contains the official company website. The site leads with the
+company mission rather than a named software product, presents deployed work and
+experimental research with distinct truth states, and explains asymmetric
+advantage without hostile or militaristic framing.
 
 ## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Editorial company story |
-| `/work` | Deployed and emerging work |
-| `/work/asymmetrico-platform` | Principal product case study |
-| `/why-asymmetrico` | Meaning of the company name |
-| `/about` | Technical origin and current focus |
-| `/contact` | Direct company contact |
+| `/` | Six-section company story |
+| `/work` | Built technology, experimental research, and direction |
+| `/about` | Mission, technical origin, and baseball starting point |
+| `/contact` | Direct, privacy-conscious contact invitation |
 
-Next.js also generates `/robots.txt` and `/sitemap.xml`.
+Legacy URLs `/why-asymmetrico` and `/work/asymmetrico-platform` permanently
+redirect to `/about#why-asymmetrico` and `/work`, respectively. Next.js also
+generates `/robots.txt` and `/sitemap.xml`.
+
+## Technology
+
+Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
+APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. Server components
+are the default. There is no analytics, form backend, database, authentication, or
+public athlete data.
 
 ## Local development
 
-Prerequisite: the Node.js version declared in `.nvmrc`. nvm is recommended but
-not required.
+Use the Node version in `.nvmrc`.
 
 ```bash
 nvm install
@@ -57,61 +42,19 @@ npm install
 npm run dev
 ```
 
-If nvm is unavailable, use another version manager and confirm that
-`node --version` matches `.nvmrc`.
-
-Open the local URL reported by Vinext.
-
 ## Verification
 
 ```bash
 npm run check
 npm run build
 npm audit --omit=dev
+git diff --check
 ```
 
-No environment variables are required for the public site.
+Primary public copy, contact details, metadata, and image descriptions live in
+`content/site.ts`. Routes are composed in `app/`, shared structure in
+`components/`, and the visual system in `app/globals.css`.
 
-## Editing content
-
-Primary public copy, product facts, navigation, metadata, contact details, research
-disclosures, and image descriptions live in:
-
-```text
-content/site.ts
-```
-
-Page composition lives under `app/`. Reusable editorial and product visuals live
-under `components/`. Design tokens and responsive behavior live in
-`app/globals.css`.
-
-## Assets
-
-- Brand assets: `public/brand/`
-- Sports photography: `public/images/sports/`
-- Research visuals: `public/images/research/`
-- Social preview: `public/og.png`
-
-Do not publish real athlete data, private evaluation content, source-organization
-branding, or unverified product claims. Record every added or replaced asset in
-`docs/ASSET_MANIFEST.md`.
-
-## Documentation
-
-- [Brand strategy](docs/BRAND_STRATEGY.md)
-- [Site strategy](docs/SITE_STRATEGY.md)
-- [Visual identity](docs/VISUAL_IDENTITY.md)
-- [Asset manifest](docs/ASSET_MANIFEST.md)
-- [Architecture](docs/ARCHITECTURE.md)
-- [Content guide](docs/CONTENT_GUIDE.md)
-- [Local development](docs/LOCAL_DEVELOPMENT.md)
-- [Testing](docs/TESTING.md)
-- [Deployment](docs/DEPLOYMENT.md)
-- [Engineering journal](docs/prompts/README.md)
-
-## Deployment assumptions
-
-The production build is packaged as a Cloudflare Worker for OpenAI Sites. A standard
-Next.js build remains available as `npm run build:next` for compatibility checks.
-The canonical site URL and public contact mailbox are centralized in
-`content/site.ts`.
+Brand assets are in `public/brand/`, selected sports and research imagery in
+`public/images/`, and the social preview at `public/og.svg`. See
+`docs/ASSET_MANIFEST.md` before changing public assets.

@@ -23,10 +23,10 @@ export function createPageMetadata(
       locale: "en_CA",
       images: [
         {
-          url: "/og.png",
+          url: "/og.svg",
           width: 1200,
           height: 630,
-          alt: "Asymmetrico — Talent is everywhere. The tools aren’t. Accessible sports technology for an uneven playing field.",
+          alt: "Asymmetrico — Better tools for an uneven playing field. Accessible sports technology, starting with baseball.",
         },
       ],
     },
@@ -34,7 +34,7 @@ export function createPageMetadata(
       card: "summary_large_image",
       title: page.title,
       description: page.description,
-      images: ["/og.png"],
+      images: ["/og.svg"],
     },
   };
 }

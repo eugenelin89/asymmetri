@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Asymmetrico — Better tools for an uneven playing field.</title>
+  <desc id="description">Sports technology. Starting with baseball.</desc>
+  <rect width="1200" height="630" fill="#0B1020"/>
+  <path d="M865 0h335v630h-184L765 232Z" fill="#C86D45"/>
+  <path d="M963 0h237v630h-73L872 210Z" fill="#F3EFE6"/>
+  <g transform="translate(72 58)">
+    <g aria-hidden="true" transform="translate(0 1) scale(.43)">
+      <path d="M10 80 39 17h14L26 68h31l8 12H10Z" fill="#F3EFE6"/>
+      <path d="m48 39 10-12 29 53H72L52 45l-4-6Z" fill="#C86D45"/>
+    </g>
+    <text x="52" y="31" fill="#F3EFE6" font-family="Avenir Next, Segoe UI, Helvetica, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="-1">Asymmetri<tspan fill="#C86D45">co</tspan></text>
+  </g>
+  <text x="72" y="229" fill="#F3EFE6" font-family="Iowan Old Style, Palatino Linotype, Georgia, serif" font-size="66" font-weight="400">
+    <tspan x="72" dy="0">Better tools for an</tspan>
+    <tspan x="72" dy="82">uneven playing field.</tspan>
+  </text>
+  <rect x="72" y="382" width="538" height="5" fill="#C86D45"/>
+  <text x="72" y="457" fill="#F3EFE6" font-family="Avenir Next, Segoe UI, Helvetica, Arial, sans-serif" font-size="27">Sports technology.</text>
+  <text x="72" y="502" fill="#C86D45" font-family="Avenir Next, Segoe UI, Helvetica, Arial, sans-serif" font-size="27">Starting with baseball.</text>
+</svg>
