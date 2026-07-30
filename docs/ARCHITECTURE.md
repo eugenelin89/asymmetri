@@ -16,7 +16,7 @@ state.
 | --- | --- |
 | `app/` | Routes, route composition, global styles, layout metadata, JSON-LD, sitemap, and robots rules |
 | `components/` | Shared header, footer, logo, page framing, calls to action, product reconstructions, and diagrams |
-| `content/site.ts` | Typed public copy, navigation, product facts, contact values, image descriptions, and truth-state disclosures |
+| `content/site.ts` | Typed public copy, navigation, contact values, image descriptions, and truth-state disclosures |
 | `lib/site-metadata.ts` | Reusable per-route canonical, Open Graph, and X metadata |
 | `public/brand/` | Logo sources, lockups, app icon, and favicon fallbacks |
 | `public/images/` | Approved sports and research imagery |
@@ -32,8 +32,6 @@ The application currently exposes:
 
 - `/`
 - `/work`
-- `/work/asymmetrico-platform`
-- `/why-asymmetrico`
 - `/about`
 - `/contact`
 - `/robots.txt`
@@ -73,8 +71,7 @@ development. OpenAI Sites supplies the corresponding production bindings.
 
 `app/layout.tsx` owns site-wide metadata, icons, the default social image, and
 Organization JSON-LD. `lib/site-metadata.ts` creates route-specific title,
-description, canonical, Open Graph, and X values. The Platform case study adds
-SoftwareApplication JSON-LD.
+description, canonical, Open Graph, and X values. Legacy company-story and named-product URLs are handled by permanent redirects in `next.config.ts`.
 
 The canonical URL and public mailbox are centralized in `content/site.ts` and
 must be confirmed before a public domain migration.
@@ -85,15 +82,14 @@ must be confirmed before a public domain migration.
 responsive rules, visible focus treatment, and reduced-motion behavior.
 `tailwind.config.ts` mirrors the brand palette and type families for utility use.
 
-The design is intentionally editorial rather than a generic dashboard. Product
-reconstructions use a quieter interface language while sharing the same tokens.
+The design is intentionally editorial rather than a generic dashboard. The sparse interface reconstruction uses the same tokens and explicitly synthetic content.
 
 ## Privacy boundary
 
 The public application contains only synthetic product-interface data. It does
 not import private application screenshots or source-system content. Public
 claims are limited to capabilities verified during the source audit and are
-classified as deployed, emerging, or future.
+classified as built, research/experimental, or direction.
 
 The asset provenance and privacy decisions live in
 `docs/ASSET_MANIFEST.md`. That record is internal repository documentation and

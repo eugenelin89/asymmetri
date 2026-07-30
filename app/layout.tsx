@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     locale: "en_CA",
     images: [
       {
-        url: "/og.png",
+        url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Asymmetrico — Talent is everywhere. The tools aren’t. Accessible sports technology for an uneven playing field.",
+        alt: "Asymmetrico — Better tools for an uneven playing field. Accessible sports technology, starting with baseball.",
       },
     ],
   },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.metadata.title,
     description: site.metadata.description,
-    images: ["/og.png"],
+    images: ["/og.svg"],
   },
 };
 
