@@ -5,25 +5,12 @@ import { SiteHeader } from "@/components/site-header";
 import { site } from "@/content/site";
 
 export default function HomePage() {
-  return <div className="site">
-    <SiteHeader tone="dark" />
-    <main id="main-content">
-      <section className="hero"><div className="shell hero__grid">
-        <div className="hero__copy"><p className="eyebrow eyebrow--light">{site.hero.eyebrow}</p><h1>{site.hero.headline}</h1><p className="hero__support">{site.hero.support}</p>
-          <div className="button-row"><Link className="button button--clay" href="/work">See what we’re building</Link><a className="text-link text-link--light" href="#why">Why Asymmetrico</a></div>
-        </div>
-        <figure className="hero__figure"><Image src={site.images.running.src} alt={site.images.running.alt} fill sizes="(max-width: 760px) 100vw, 52vw" priority /></figure>
-      </div></section>
-
-      <section className="section problem"><div className="shell split"><p className="eyebrow">The access gap</p><div><h2>Most athletes do not lack effort. They lack access.</h2><p className="lede">The most sophisticated training tools are often concentrated in professional organizations, private academies, and expensive facilities. Talent is not.</p><p className="lede">Better training should not require a professional budget.</p></div></div></section>
-
-      <section className="section section--soft mission"><div className="shell mission__grid"><div><p className="eyebrow">Our mission</p><h2>{site.mission.headline}</h2><p className="lede">{site.mission.body}</p></div><figure><Image src={site.images.pitcher.src} alt={site.images.pitcher.alt} fill sizes="(max-width: 760px) 100vw, 46vw" /></figure></div></section>
-
-      <section className="section baseball"><div className="shell"><div className="section-heading"><p className="eyebrow">Baseball is where we begin</p><h2>A first proving ground for accessible sports technology.</h2><p className="lede">Baseball inspired the company and gives us a demanding place to build and test: a sport shaped by observation, repetition, measurement, and conversation.</p></div><div className="work-grid">{site.work.map((item) => <article key={item.title}><p className="eyebrow">{item.status}</p><h3>{item.title}</h3><p>{item.body}</p></article>)}</div><Link className="text-link" href="/work">Explore our work</Link></div></section>
-
-      <section className="section section--ink name" id="why"><div className="shell split"><p className="eyebrow eyebrow--light">Why Asymmetrico</p><div><h2>{site.nameStory.headline}</h2><p className="lede lede--light">{site.nameStory.body}</p></div></div></section>
-
-      <section className="section closing"><div className="shell closing__inner"><p className="eyebrow">Get in touch</p><h2>{site.closing.headline}</h2><p className="lede">{site.closing.body}</p><Link className="button button--ink" href="/contact">Start a conversation</Link></div></section>
-    </main><SiteFooter />
-  </div>;
+  return <div className="site"><SiteHeader tone="dark" /><main id="main-content">
+    <section className="hero"><div className="shell hero__grid"><div className="hero__copy"><p className="eyebrow eyebrow--light">{site.hero.eyebrow}</p><h1>{site.hero.headline}</h1><p className="hero__support">{site.hero.support}</p><div className="button-row"><Link className="button button--clay" href="/story">Our story</Link><Link className="text-link text-link--light" href="/contact">Get in touch</Link></div></div><figure className="hero__figure"><Image src={site.images.running.src} alt={site.images.running.alt} fill sizes="(max-width: 760px) 100vw, 52vw" priority /></figure></div></section>
+    <section className="section problem"><div className="shell split"><p className="eyebrow">The access gap</p><div><h2>Most athletes do not lack effort. They lack access.</h2><p className="lede">Advanced feedback, biomechanics, and long-term development tools remain concentrated in expensive facilities and elite programs. Talent and ambition are not. Better tools should be within reach of more athletes and the people helping them grow.</p></div></div></section>
+    <section className="section section--soft"><div className="shell split"><p className="eyebrow">Our mission</p><div><h2>{site.mission.headline}</h2><p className="lede">{site.mission.body}</p></div></div></section>
+    <section className="section baseball"><div className="shell story-pair"><div><p className="eyebrow">Baseball is where we begin</p><h2>Where the problem became personal.</h2></div><div><p className="lede">Baseball is shaped by repeated movement, careful observation, patient coaching, and evidence gathered over time. It is where we saw valuable information disappear between practices and seasons—and where unequal access can change an athlete’s path.</p><p className="lede">That makes it a natural place to explore better development tracking, affordable measurement, and clearer feedback. It is our starting point, not our boundary.</p></div></div></section>
+    <section className="section section--ink"><div className="shell approach"><div><p className="eyebrow eyebrow--light">The tools may already be in your pocket</p><h2>Capture evidence. Find patterns. Keep coaching human.</h2><p className="lede lede--light">Smartphone cameras, watches, wearable sensors, and other everyday devices may make performance easier to observe and understand. We are exploring how software and AI can identify strengths, weaknesses, movement patterns, and opportunities for improvement from that evidence.</p><p className="lede lede--light"><strong>AI should not replace good coaching.</strong> Coaches bring judgment, context, and human understanding. Athletes gain clearer insight into progress. Parents gain more objective context about priorities—so everyone can support development more effectively.</p></div><figure><Image src={site.images.sensor.src} alt={site.images.sensor.alt} fill sizes="(max-width: 760px) 100vw, 38vw" /></figure></div></section>
+    <section className="section closing"><div className="shell closing__inner"><p className="eyebrow">The beginning</p><h2>{site.closing.headline}</h2><p className="lede">{site.closing.body}</p><Link className="button button--ink" href="/contact">Start a conversation</Link></div></section>
+  </main><SiteFooter /></div>;
 }

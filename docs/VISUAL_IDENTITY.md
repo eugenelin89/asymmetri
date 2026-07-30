@@ -1,8 +1,8 @@
-# Asymmetrico visual identity
+# Asymmetri Labs visual identity
 
 ## Identity
 
-The existing Asymmetrico mark and wordmark remain unchanged. The open,
+The existing asymmetric mark remains unchanged. The rendered lockup pairs it with the new public name, Asymmetri Labs. The open,
 interrupted “A” uses unequal forms to express asymmetry, leverage, motion, and
 balance without literal sports or technology symbols. It works in one colour, on
 Ink and Canvas, in navigation, and at favicon scale.
@@ -11,7 +11,7 @@ Ink and Canvas, in navigation, and at favicon scale.
 
 | Token | Value | Role |
 | --- | --- | --- |
-| Asymmetrico Ink | `#0B1020` | Dominant dark surface and text |
+| Asymmetri Labs Ink | `#0B1020` | Dominant dark surface and text |
 | Canvas | `#F3EFE6` | Dominant editorial surface |
 | Soft White | `#FAF8F3` | Quiet light distinction |
 | Clay | `#C86D45` | Primary action and emphasis |
@@ -34,10 +34,7 @@ to a small hover response and removed when reduced motion is requested.
 ## Photography and interface imagery
 
 Use a small selection of authentic baseball, athlete-training, sensing, and
-research images. Preserve natural colour and do not imply partnerships. Interface
-visuals are sparse, use synthetic data, and must say when they are reconstructions.
-They illustrate development history and multiple perspectives rather than selling a
-dashboard product.
+research images. Preserve natural colour and do not imply partnerships. No interface visual is currently rendered. Use only the three approved story images; any future reconstruction must use synthetic data and be clearly labelled.
 
 ## Accessibility
 

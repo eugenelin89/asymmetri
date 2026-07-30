@@ -26,10 +26,9 @@ npm run build:next
 When routes or shared layout code change, verify:
 
 - `/`
-- `/work`
-- `/work/asymmetrico-platform` (permanent redirect)
-- `/why-asymmetrico` (permanent redirect)
-- `/about`
+- `/story`
+- `/work` and `/about` (permanent redirects)
+- legacy name and named-product URLs (permanent redirects)
 - `/contact`
 - `/robots.txt`
 - `/sitemap.xml`

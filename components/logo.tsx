@@ -14,7 +14,7 @@ export function Logo({
   return (
     <span
       className={`brand-logo ${compact ? "brand-logo--compact" : ""} ${className}`}
-      aria-label="Asymmetrico"
+      aria-label="Asymmetri Labs"
     >
       <svg
         className="brand-logo__mark"
@@ -32,7 +32,7 @@ export function Logo({
       </svg>
       {!compact ? (
         <span className="brand-logo__word" style={{ color }}>
-          Asymmetri<span>co</span>
+          Asymmetri <span>Labs</span>
         </span>
       ) : null}
     </span>
