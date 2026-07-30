@@ -6,22 +6,19 @@
 
 ## Original user request
 
-> # Files mentioned by the user:
->
-> ## Redesign and radically simplify the Asymmetri Labs website as a focused basebal…: /Users/eugenelin/.codex/attachments/9aecbb0a-f4f7-4e18-9aa1-4e4d1c12ebf2/pasted-text.txt
->
-> The attached pasted text file(s) contain the user's request. Read and act on that content.
->
-> ## My request for Codex:
+> Redesign and radically simplify the Asymmetri Labs website as a focused
+> baseball technology startup. Review the owner-supplied baseball photographs,
+> select the strongest one or two images for the story, and prepare the selected
+> images for public use.
 
-The attached brief requested a complete implementation, validation, and Git
-workflow for a one-page Asymmetri Labs website focused on baseball technology
-and pitching development. It specified the headline “Better evidence for better
-pitching.”; four sections covering the hero, founder story, Capture / Understand
-/ Improve approach, and contact close; first-person origin copy grounded in
-smartphone slow-motion video, sensors, coaching, training, repetition,
-measurement, and repeated personal-best velocity; an explicit early-stage truth
-state; coaches as the source of judgment; and parents as informed supporters.
+The user supplied a detailed local implementation brief covering the one-page
+baseball-pitching story, photo review, privacy, design, validation, and Git
+workflow. It specified the headline “Better evidence for better pitching.”; four
+sections covering the hero, founder story, Capture / Understand / Improve
+approach, and contact close; first-person origin copy grounded in smartphone
+slow-motion video, sensors, coaching, training, repetition, measurement, and
+repeated personal-best velocity; an explicit early-stage truth state; coaches as
+the source of judgment; and parents as informed supporters.
 
 The brief also required an audit of every supplied baseball image, one strong
 privacy-safe pitching photograph by default, no screenshots or fabricated

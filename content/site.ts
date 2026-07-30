@@ -36,10 +36,10 @@ export const site = {
     eyebrow: "Where it began",
     headline: "It started with a phone camera.",
     paragraphs: [
-      "As a baseball coach, division coordinator, and parent, I began looking more closely at my son’s pitching mechanics after he experienced a pitching injury. The first experiment was simple: record his delivery in slow motion on a smartphone, compare each pitch frame by frame, and study differences in movement and timing.",
-      "We identified possible areas for improvement, made a small adjustment, recorded another set of pitches, and compared the new deliveries with earlier ones. Later, we experimented with affordable wearable sensors to capture evidence that video alone could not show as clearly.",
-      "Combined with coaching, training, repetition, and measurement, that evidence helped guide changes, improve his mechanics, and determine whether the changes appeared to be working. Over time, he repeatedly reached new personal bests in pitching velocity. No single tool caused those gains.",
-      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could smartphones, affordable sensors, and AI make this kind of pitching analysis clearer, faster, and accessible to more pitchers—while keeping coaches at the centre of development?",
+      "As a baseball coach and division coordinator, I wanted a clearer way to understand how pitchers were moving. I began recording pitching deliveries in slow motion on a smartphone, comparing pitches frame by frame, and studying differences in movement and timing.",
+      "Working with players, we identified possible areas for improvement, made small adjustments, recorded again, and compared new deliveries with earlier ones. Later, I experimented with affordable wearable sensors to capture evidence that video alone could not show as clearly.",
+      "The goal was not to automate coaching. It was to make useful evidence easier to see—so coaches could apply their judgment, players could better understand what they were working on, and changes could be tracked over time.",
+      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could smartphones, affordable sensors, and AI make pitching analysis clearer and easier to use—while keeping coaches at the centre of development?",
     ],
   },
   approach: {

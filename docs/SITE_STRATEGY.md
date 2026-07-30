@@ -5,8 +5,9 @@
 The site makes one compact argument: better evidence can help pitchers and the
 people supporting them understand development more clearly while keeping
 coaching human. Its specific origin is the founder’s experience as a baseball
-coach, division coordinator, and parent, beginning with slow-motion smartphone
-video and later affordable sensors.
+coach and division coordinator working with players, beginning with slow-motion
+smartphone review, frame-by-frame comparison, iterative adjustments, and later
+affordable-sensor experiments.
 
 The homepage has four major sections: hero, founder story, Capture / Understand /
 Improve approach, and closing contact. It uses one pitching-delivery photograph

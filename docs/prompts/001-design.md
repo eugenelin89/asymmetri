@@ -7,14 +7,8 @@
 
 ## Original user request
 
-> # Files mentioned by the user:
->
-> ## # Build the new Asymmetrico website You are working in the primary
-> repository: …:
-> `/Users/eugenelin/.codex/attachments/789c908a-7ea0-48de-9812-7dc81eaf8da8/pasted-text.txt`
->
-> The attached pasted text file(s) contain the user's request. Read and act on
-> that content.
+> Build the new Asymmetrico website in the primary repository using the supplied
+> implementation brief.
 
 The attached brief required a complete redesign and repositioning of the
 primary Asymmetrico repository. It asked for source-backed product discovery

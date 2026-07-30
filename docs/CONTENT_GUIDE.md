@@ -59,13 +59,13 @@ Avoid:
 
 ## Founder story and role clarity
 
-Tell the public origin in first person where appropriate: coach, baseball division
-coordinator, and parent; a son’s pitching injury without medical detail; slow-motion
-smartphone video as the first experiment; frame-by-frame comparison, small changes,
-and repeated recording; and later affordable-sensor experiments. Describe repeated
-pitching-velocity personal bests only as part of the combined work of coaching,
-training, evidence, experimentation, and measurement—not as an outcome caused by a
-device or a single mechanical change.
+Tell the public origin in first person where appropriate: a baseball coach and
+division coordinator working with developing pitchers; slow-motion smartphone
+video as the first experiment; frame-by-frame comparison of movement and timing;
+small adjustments followed by repeated recording; and later affordable-sensor
+experiments. Focus on evidence supporting coaching conversations and tracking
+change over time. Do not turn an individual outcome into a broader performance
+claim.
 
 Cameras and sensors capture evidence. AI may identify patterns and surface
 relevant information. Coaches supply judgment, context, experience, and human
@@ -87,8 +87,9 @@ Do not publish:
 - source repository names or application domains;
 - unapproved photographs of identifiable groups or minors.
 
-The founder’s son must never be named publicly, and the injury must remain context
-rather than a medical story.
+Do not publish family relationships or private circumstances as part of the
+public founder story. Describe the work with players and pitchers without
+identifying any individual.
 
 Synthetic product visuals must remain clearly described as reconstructions.
 

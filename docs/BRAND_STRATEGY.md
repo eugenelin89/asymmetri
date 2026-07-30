@@ -23,18 +23,18 @@ appropriate context that helps them support—not override—the process.
 
 ## Founder origin
 
-The company began with the founder’s overlapping experience as a baseball coach,
-division coordinator, and parent. After his son experienced a pitching injury, he
-used slow-motion smartphone video to compare movement and timing frame by frame,
-made small adjustments, and recorded again. Affordable wearable sensors later
-added evidence that video alone could not show as clearly.
+The company began with the founder’s experience as a baseball coach and division
+coordinator working with developing pitchers. He recorded pitching deliveries in
+smartphone slow motion, compared movement and timing frame by frame, worked with
+players to identify possible areas for improvement, made small adjustments,
+recorded again, and compared new deliveries with earlier ones. Affordable
+wearable sensors later added evidence that video alone could not show as clearly.
 
-That evidence was one part of a broader process of coaching, training, repeated
-experimentation, and measurement that improved the athlete’s mechanics and helped
-him repeatedly reach new personal bests in pitching velocity. Never attribute
-those gains to technology alone. The central lesson is that evidence can guide
-changes and show whether they are working, but obtaining and interpreting it is
-still too manual and technically difficult.
+The goal was not to automate coaching or claim a result for a device. It was to
+make useful evidence easier to see so coaches could apply their judgment, players
+could understand their work, and changes could be tracked over time. The central
+lesson is that the evidence can be valuable, but obtaining and interpreting it
+manually is slow and technically demanding.
 
 ## Messaging hierarchy
 

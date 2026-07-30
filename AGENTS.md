@@ -180,6 +180,31 @@ Documentation is part of implementation.
 - Never store passwords, credentials, private keys, API tokens, or secrets in
   documentation.
 
+## Default Git and Release Workflow
+
+This is a personal repository. Unless the user explicitly requests another
+workflow:
+
+1. Work directly on the currently checked-out `main` branch.
+2. Before editing, confirm that the current branch is `main`, the working tree
+   is clean, and `git pull --ff-only origin main` succeeds.
+3. Do not create a feature branch.
+4. Do not create a Git worktree.
+5. Do not create a pull request.
+6. Do not merge branches.
+7. Do not deploy, release, publish, or create a hosted preview. Deployment or
+   publication requires an explicit user request.
+8. Build and test locally as required for the change.
+9. Continue to use the two-commit prompt-journal workflow: first commit the
+   implementation and affected documentation, then commit the prompt archive
+   record separately.
+10. Push `main` after both commits unless the user explicitly asks to keep the
+    work local or the push fails.
+11. Never force-push unless explicitly requested.
+12. When a large prompt is passed through a Codex attachment, never archive the
+    private attachment path or generated attachment filename. Preserve a safe
+    user-visible request and a complete decision-oriented summary instead.
+
 ## Prompt Archive and Commit Policy
 
 Whenever a user prompt causes files to be created, modified, moved, or deleted,
@@ -192,10 +217,11 @@ zero-padded to three digits. Use one of these suffixes:
 - `deployment` for hosting, access, automation, or release work.
 
 Each prompt record is an Engineering Journal. Follow
-`docs/prompts/README.md`. Include the verbatim user message. When a prompt
-arrives as a very large attachment, preserve the user-visible message and a
-complete decision-oriented summary of the attachment instead of copying
-thousands of lines into the repository.
+`docs/prompts/README.md`. Include the user-visible request. When a prompt arrives
+as a very large attachment, never record its private attachment path or generated
+filename; preserve a safe user-visible request and a complete decision-oriented
+summary of the attachment instead of copying thousands of lines into the
+repository.
 
 Use two commits when a prompt archive is required:
 
@@ -214,6 +240,6 @@ state, and lessons learned. Exclude generated and dependency directories such
 as `.git/`, `node_modules/`, `dist/`, `.next/`, `.wrangler/`, and `coverage/`.
 
 Do not include unrelated user changes in either commit. Routine Git commands
-needed by this workflow are authorized. Push both commits to the configured
-GitHub remote before finishing unless the user asks to keep the work local or
-the push fails. Never force-push unless explicitly requested.
+needed by this workflow are authorized. Push `main` after both commits unless the
+user asks to keep the work local or the push fails. Never force-push unless
+explicitly requested.
