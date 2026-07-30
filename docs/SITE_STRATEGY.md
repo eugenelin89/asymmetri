@@ -22,9 +22,9 @@ routes permanently redirect to the relevant homepage section or `/`.
 
 ## Privacy and evidence
 
-No customer, source organization, player name, team, deployment, repository, or
-private application is identified. The selected photograph contains one pitcher;
-incidental identifying uniform marks are softly obscured in the public
-derivative. Emerging sensing, video, and AI work is presented as exploration
-rather than deployed capability. Parents are informed supporters, not substitute
-coaches.
+No customer, source application, deployment, repository, or private application
+is identified. The selected photograph contains one pitcher with no bystanders
+or venue signage. Its cap logo and uniform lettering remain visible with
+explicit owner approval. Emerging sensing, video, and AI work is presented as
+exploration rather than deployed capability. Parents are informed supporters,
+not substitute coaches.

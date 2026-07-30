@@ -44,10 +44,11 @@ requested.
 ## Photography and interface imagery
 
 The public site renders one authentic pitching-delivery photograph in the hero.
-It uses a restrained, slightly desaturated grade and localized privacy softening.
-No research imagery, interface visual, fake metric, or second photo is rendered.
-Future additions must earn a distinct narrative role and remain within the
-privacy and evidence rules in `docs/ASSET_MANIFEST.md`.
+It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
+and uniform lettering remain visible without localized softening. No research
+imagery, interface visual, fake metric, or second photo is rendered. Future
+additions must earn a distinct narrative role and remain within the privacy and
+evidence rules in `docs/ASSET_MANIFEST.md`.
 
 ## Accessibility
 

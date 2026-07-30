@@ -2,9 +2,9 @@
 
 Date: 2026-07-30
 
-This internal provenance record covers public assets. Nothing is hotlinked, and
-the rendered site does not identify a private source organization, team, or
-player by name.
+This internal provenance record covers public assets. Nothing is hotlinked. The
+owner has explicitly approved public visibility of the cap logo and uniform
+lettering in the selected hero photograph.
 
 ## Owner-supplied baseball photo review
 
@@ -43,11 +43,11 @@ action.
 | Original source filename | `55403627994_46ea9658a7_o.jpg` |
 | Source dimensions | 4608×3072 |
 | Output dimensions | 2400×1600 |
-| Output format and size | WebP, quality 86, 1,194,344 bytes |
-| Processing | EXIF orientation applied; restrained desaturation; slight contrast increase; slight exposure reduction; high-quality Lanczos resize; localized feathered Gaussian blur over the cap mark and remaining uniform word fragment; EXIF and ICC metadata omitted |
+| Output format and size | WebP, quality 86, 1,176,976 bytes |
+| Processing | Existing restrained desaturation, slight contrast increase, and slight exposure reduction preserved; high-quality Lanczos source resize used to restore the real cap logo and uniform lettering through two localized feathered regions; no privacy blur remains; EXIF and ICC metadata omitted |
 | Public role | The only rendered photograph; homepage hero |
 | Alt text | A pitcher follows through on the mound as the baseball travels toward the plate. |
-| Privacy assessment | One pitcher, no bystanders, no signage, no readable name, and no readable team identity after localized softening; no private screen or document is visible |
+| Privacy assessment | One pitcher, no bystanders, no signage, and no private screen or document; cap and uniform marks are visible with explicit owner approval |
 | Reason selected | The image communicates pitching mechanics, effort, and development immediately while providing a focused, premium composition that works in a wide desktop panel and a full-width mobile crop |
 
 The source file remained untouched. Temporary thumbnails, contact sheets,
