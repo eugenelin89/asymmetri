@@ -140,3 +140,20 @@ ads, cookie banner, form, database, account, helpdesk or new dependency is neede
 Reaudit before introducing any such behavior or changing hosting/mail processing.
 Update the effective date when the policy changes; do not claim future publication
 or silently configure the iOS app's release links from a website task.
+
+## Product marketing extension, September 16, 2026
+
+The homepage and new `/motion` page add static product copy, the original approved
+Motion icon, a semantic HTML/CSS evidence chain and SoftwareApplication JSON-LD.
+No visitor input, third-party resource, network service, tracking/storage code,
+form, account or dependency is introduced. The schema.org identifier remains
+inline metadata, not an external request. The app privacy summary follows the
+bounded existing audit and explicitly separates Photos/iCloud/backups/sharing.
+
+The `motionPages` content export, utility route files and shared article renderer
+are byte-identical to the preceding commit. The existing policy effective date
+and substantive disclosures remain unchanged. The original approved photograph
+is byte-identical; the only added public artwork is the approved generic icon.
+No private app screenshot or athlete record is published. Current source/claims
+and asset provenance are recorded in `MOTION_PRODUCT_REVIEW.md` and
+`ASSET_MANIFEST.md`; internal documentation is not served as a website route.

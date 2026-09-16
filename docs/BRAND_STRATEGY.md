@@ -2,58 +2,56 @@
 
 ## Positioning
 
-**Asymmetri Labs is a baseball technology startup exploring how smartphone
-video, affordable sensors, and AI can help pitchers, coaches, and parents
-understand development more clearly.** Pitching mechanics and pitching
-development are the present focus.
+**Asymmetri Labs builds baseball technology that helps pitchers, coaches and
+parents see pitching development more clearly.** Its first product is Asymmetri
+Motion, an iPhone pitching-video and projected 2D motion-analysis app built around
+evidence people can inspect. It is preparing for release, not advertised as
+publicly available. The company retains room for future research without making
+that research part of current product promises.
 
-## Mission
+## Mission and point of view
 
-Make useful pitching evidence easier to capture, compare, and understand so
-players and the people supporting them can make better-informed development
-decisions.
+Make useful pitching evidence easier to capture, compare and understand. Everyday
+video can become a lasting record when selected frames, human-confirmed moments,
+measurements and annotated evidence stay connected. The value is the relationship
+between an observation and its source, not the number of metrics or an AI label.
 
-## Point of view
-
-Smartphone cameras can capture movement, affordable sensors can add evidence that
-video cannot show as clearly, and AI may help compare pitches and surface
-patterns. Coaches provide judgment, context, experience, and human
-understanding. Pitchers gain clearer insight into their work, while parents gain
-appropriate context that helps them support the process without overriding it.
+Coaches provide judgment, context, experience and human understanding. Pitchers
+gain clearer insight into their work. Parents gain context to support development
+alongside a coach. A comparison is descriptive, not a mechanics grade, a causal
+training result or an automatic recommendation.
 
 ## Founder origin
 
-The company began with the founder’s experience as a baseball coach and division
-coordinator working with developing pitchers. He recorded pitching deliveries in
-smartphone slow motion, compared movement and timing frame by frame, worked with
-players to identify possible areas for improvement, made small adjustments,
-recorded again, and compared new deliveries with earlier ones. Affordable
-wearable sensors later added evidence that video alone could not show as clearly.
+The company began with the founder's experience as a baseball coach and division
+coordinator. He recorded pitching deliveries in smartphone slow motion, compared
+movement and timing frame by frame, worked with players on small adjustments,
+recorded again and compared deliveries. Later affordable-sensor experiments
+added evidence that video alone could not show as clearly.
 
-The goal was not to automate coaching or claim a result for a device. It was to
-make useful evidence easier to see so coaches could apply their judgment, players
-could understand their work, and changes could be tracked over time. The central
-lesson is that the evidence can be valuable, but obtaining and interpreting it
-manually is slow and technically demanding.
+The evidence was valuable; extracting and interpreting it manually was slow and
+technically demanding. That question became Motion. Preserve the human story
+without identifying athletes, family relationships or private organizations.
+Sensors remain part of that history, not a requirement or feature of Motion V1.
 
 ## Messaging hierarchy
 
-1. Category: **Baseball technology**
-2. Hero: **Better evidence for better pitching.**
-3. Present focus: pitching mechanics and pitching development.
-4. Method: smartphone video, affordable sensors, and AI.
-5. Principle: **AI can help identify patterns. Coaches provide the judgment that turns evidence into progress.**
-6. Closing: **Great coaching stays human. Better evidence makes it stronger.**
+1. Company category: **Baseball technology**.
+2. Company hero: **Better evidence for better pitching.**
+3. First product: **Asymmetri Motion**.
+4. Product line: **See your pitch more clearly.**
+5. Descriptor: **Pitching video and projected 2D analysis for iPhone.**
+6. Evidence idea: **From the number back to the pitch.**
+7. Closing: **Great coaching stays human. Better evidence makes it stronger.**
 
-The company story leads on the marketing homepage. Refer there to pitching-analysis
-ideas and experiments being built and tested; do not imply a finished commercial
-platform or speculate publicly about other sports. The separately authorized Motion
-Privacy Policy and Support pages name the app and describe its audited V1 behavior
-for utility purposes. They do not change the homepage launch positioning.
+The homepage is the company narrative; `/motion` explains the real product.
+Verified V1 capabilities, experimental scientific interpretation and future
+direction remain distinct. Read `MOTION_PRODUCT_REVIEW.md` before changing claims.
 
-## Voice and truth
+## Voice
 
-Be clear, inspiring, intelligent, human, ambitious, and grounded. Say “exploring,”
-“testing,” and “learning” when discussing emerging work. Avoid generic startup
-superlatives, resentment, vague AI claims, feature inventories, and claims that
-technology replaces coaches.
+Be concise, observant, technically credible, human and grounded. Use literal
+pitching language and explain meaningful limits near the benefit they qualify.
+Avoid generic startup superlatives, AI-powered claims, invented outcomes and
+public feature inventories that confuse stored research with normal V1 use.
+Do not use em dashes or en dashes in public copy.

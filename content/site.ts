@@ -17,12 +17,13 @@ export const site = {
   metadata: {
     title: "Asymmetri Labs | Baseball Technology",
     description:
-      "Asymmetri Labs is exploring how smartphone video, affordable sensors, and AI can help pitchers, coaches, and parents understand mechanics and development more clearly.",
+      "Asymmetri Labs builds baseball technology for clearer pitching development. Meet Asymmetri Motion, our iPhone pitching video and projected 2D analysis app.",
     socialHeadline: "Better evidence for better pitching.",
     socialSupport:
-      "Smartphone video, sensors, and AI that support better coaching.",
+      "Introducing Asymmetri Motion. Pitching evidence that supports coaching.",
   },
   navigation: [
+    { label: "Motion", href: "/motion" },
     { label: "Story", href: "/#story" },
     { label: "Approach", href: "/#approach" },
     { label: "Get in touch", href: "/#contact" },
@@ -35,7 +36,7 @@ export const site = {
     eyebrow: "Baseball technology",
     headline: "Better evidence for better pitching.",
     support:
-      "Asymmetri Labs is exploring how smartphone video, affordable sensors, and AI can help pitchers, coaches, and parents understand mechanics, track progress, and make better-informed development decisions.",
+      "Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents see pitching development more clearly. Our first product, Asymmetri Motion for iPhone, is preparing for release.",
   },
   story: {
     eyebrow: "Where it began",
@@ -44,35 +45,35 @@ export const site = {
       "As a baseball coach and division coordinator, I wanted a clearer way to understand how pitchers were moving. I began recording pitching deliveries in slow motion on a smartphone, comparing pitches frame by frame, and studying differences in movement and timing.",
       "Working with players, we identified possible areas for improvement, made small adjustments, recorded again, and compared new deliveries with earlier ones. Later, I experimented with affordable wearable sensors to capture evidence that video alone could not show as clearly.",
       "The goal was not to automate coaching. It was to make useful evidence easier to see. Coaches could then apply their judgment, players could better understand what they were working on, and changes could be tracked over time.",
-      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could smartphones, affordable sensors, and AI make pitching analysis clearer and easier to use while keeping coaches at the centre of development?",
+      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could everyday technology make pitching analysis clearer and easier to use while keeping coaches at the centre of development? That question became Asymmetri Motion.",
     ],
   },
   approach: {
-    eyebrow: "How the idea works",
+    eyebrow: "From video to a clearer conversation",
     headline: "Capture. Understand. Improve.",
     introduction:
-      "We are building and testing a simpler way to turn everyday devices into useful pitching evidence. This is a direction we are exploring, not a finished commercial platform.",
+      "Motion brings this approach into one iPhone workflow, from recording a pitch to revisiting the evidence with a coach.",
     steps: [
       {
         title: "Capture",
-        body: "Smartphone slow-motion video and affordable sensors collect evidence about a pitching delivery.",
+        body: "Record high-frame-rate video on a supported iPhone or import from Photos. Back and Side framing guides and optional Recording Setups help prepare the next recording.",
       },
       {
         title: "Understand",
-        body: "Software and AI help compare pitches, identify patterns, and surface changes that deserve attention.",
+        body: "Confirm the exact pitching moments. On-device pose analysis connects available projected 2D measurements to annotated evidence, with camera view and throwing arm kept in context.",
       },
       {
         title: "Improve",
-        body: "Coaches interpret the evidence, pitchers train with greater purpose, and parents gain clearer context so they can support development without replacing a coach.",
+        body: "Revisit pitches, compare observations and notice patterns worth discussing. Coaches interpret the evidence and guide training; parents gain context to support the process.",
       },
     ],
     principle:
-      "AI can help identify patterns. Coaches provide the judgment that turns evidence into progress.",
+      "A recorded difference starts a conversation. Coaches bring the judgment and context.",
   },
   closing: {
-    eyebrow: "Building in the open",
+    eyebrow: "Built around people",
     headline: "Great coaching stays human. Better evidence makes it stronger.",
-    body: "Asymmetri Labs is still building, testing, and learning. The mission is to make useful pitching evidence easier for players, coaches, and parents to understand.",
+    body: "We are preparing Asymmetri Motion for release and continuing to learn from the work of pitching development. If this approach speaks to your experience, we would like to hear from you.",
   },
   images: {
     pitchingDelivery: {
@@ -81,6 +82,137 @@ export const site = {
       width: 2400,
       height: 1600,
     } satisfies SiteImage,
+  },
+} as const;
+
+export type ProductStep = { title: string; body: string; note?: string };
+
+export const motion = {
+  name: "Asymmetri Motion",
+  path: "/motion",
+  headline: "See your pitch more clearly.",
+  descriptor: "Pitching video and projected 2D analysis for iPhone.",
+  platform: "iPhone · iOS 17 or later",
+  device: "iPhone",
+  operatingSystem: "iOS 17 or later",
+  releaseStatus: "Preparing for release",
+  releaseStatement: "Asymmetri Motion for iPhone is preparing for release.",
+  metadata: {
+    title: "Asymmetri Motion | Pitching Video & 2D Analysis",
+    description:
+      "Record or import pitching video, confirm key frames, inspect projected 2D measurements and annotated evidence, and revisit your history. For iPhone, iOS 17 or later.",
+  },
+  icon: {
+    src: "/brand/motion-release.svg",
+    alt: "Asymmetri Motion icon: an overhand pitcher and released ball on deep teal.",
+    width: 1024,
+    height: 1024,
+  } satisfies SiteImage,
+  socialImage: "/brand/motion-release.png",
+  introduction: {
+    eyebrow: "Our first product",
+    paragraphs: [
+      "Record a pitch or import video from Photos. Choose the camera view and throwing arm, mark the important moments, and inspect the available projected 2D measurements.",
+      "Open annotated evidence to see what contributed to a result. Save pitches, revisit your history and compare supported observations over time. The goal is evidence you can trace back to the pitch.",
+    ],
+    link: { label: "Explore Asymmetri Motion", href: "/motion" },
+  },
+  hero: {
+    eyebrow: "The first product from Asymmetri Labs",
+    support:
+      "Pitching video, human-confirmed frame marking, projected 2D measurements, annotated evidence and pitching history. One iPhone workflow, built around evidence you can inspect.",
+    link: { label: "How Motion works", href: "#how-it-works" },
+  },
+  gap: {
+    eyebrow: "Everyday video, lasting evidence",
+    headline: "Keep more than the clip.",
+    paragraphs: [
+      "Slow-motion video is easy to record. Turning it into something you can return to is harder. A pitch gets watched, scrubbed and discussed, then disappears into a camera roll.",
+      "Laboratory motion capture can measure much more, but it is rarely part of everyday training. Motion makes phone video more structured, inspectable and useful over time, without treating it as a motion-capture laboratory.",
+    ],
+  },
+  workflow: {
+    eyebrow: "How it works",
+    headline: "A pitch worth returning to.",
+    steps: [
+      {
+        title: "Record or import",
+        body: "Choose Record Pitch or Import Video from Photos. Back and Side View framing guides help you keep the pitcher in view. Optional Recording Setups reuse your view and guide choices.",
+        note: "Direct recording uses supported 240 or 120 fps camera modes. Availability depends on the iPhone. A Recording Setup is guidance, not camera calibration.",
+      },
+      {
+        title: "Mark the moments",
+        body: "Choose the Camera View and Throwing Arm. Scrub and fine-adjust to the exact frame for Front Foot Contact and Ball Release. Side View also uses a Setup Reference. You choose and confirm each frame.",
+      },
+      {
+        title: "Analyze the pitch",
+        body: "Analyze Pitch calculates the available projected 2D measurements using on-device pose analysis. Results depend on the view, your inputs and visible landmarks. If several people appear, Pitcher Selection lets you identify the pitcher to analyze.",
+      },
+      {
+        title: "Inspect the evidence",
+        body: "Open the saved annotated images to inspect the selected frames, estimated landmarks and reference lines behind a result. Save an evidence image to Photos or share it through the iPhone share sheet.",
+      },
+      {
+        title: "Revisit and compare",
+        body: "Return to My Pitches for saved videos, marks and results. Explore your pitching history, compare exact marked frames or supported measurements, and save a view to revisit later.",
+      },
+    ] satisfies ProductStep[],
+  },
+  evidence: {
+    eyebrow: "Evidence first",
+    headline: "From the number back to the pitch.",
+    support:
+      "The goal is not just more numbers. It is keeping the result connected to the observation that produced it.",
+    chain: [
+      { title: "Source video", body: "The pitch you recorded or imported." },
+      { title: "Exact selected frame", body: "A specific image you can return to." },
+      { title: "Human-confirmed moment", body: "The pitching moment you marked." },
+      { title: "Projected 2D measurement", body: "Geometry from the video image." },
+      { title: "Annotated evidence", body: "The landmarks and lines behind the result." },
+      { title: "Pitch history", body: "Saved observations to revisit and compare." },
+    ] satisfies ProductStep[],
+    closing:
+      "You confirm the key frames. Motion connects measurements to those observations and keeps the annotated evidence available for later review.",
+  },
+  history: {
+    eyebrow: "Built for the long view",
+    headline: "See what changed. Inspect the pitches behind it.",
+    support:
+      "One pitch is a starting point. My Pitches and Explore let you return to the work over time without losing the detail behind a comparison.",
+    items: [
+      { title: "Return to the moment", body: "Review the exact frames you marked, alongside saved results and annotated evidence." },
+      { title: "Put two pitches in view", body: "Use A/B comparison for marked frames or supported measurements. Inspect both pitches behind a difference." },
+      { title: "Follow your history", body: "Browse supported measurement history and save an investigation as a Saved View." },
+    ] satisfies ProductStep[],
+    note:
+      "Comparisons are descriptive. A difference does not establish improvement, and a trend does not prove a training change worked. Camera setup and marking choices still matter.",
+  },
+  limits: {
+    eyebrow: "Designed to be honest about what it sees",
+    headline: "Clarity includes the limits.",
+    items: [
+      { title: "The image is the reference", body: "Measurements describe projected 2D geometry in the video image. Camera position and perspective affect what you see. Motion does not produce anatomical 3D biomechanics or laboratory-calibrated measurements." },
+      { title: "An estimate stays an estimate", body: "Pose landmarks are estimates, and you confirm the pitching moments. Missing landmarks or unresolved ambiguity can leave a measurement unavailable. Motion does not fill the gap with an invented result." },
+      { title: "Interpretation stays human", body: "Motion does not score mechanics, predict injury or provide medical advice. It does not automatically coach an athlete or recommend a change to their delivery." },
+    ] satisfies ProductStep[],
+  },
+  privacy: {
+    eyebrow: "Local-first",
+    headline: "Your pitching record, on your iPhone.",
+    paragraphs: [
+      "No account is required. Pitch videos, optional Athlete Profile details and analysis records are stored locally. Apple Vision performs pose analysis on the device.",
+      "There is no app-owned advertising, tracking or analytics SDK, and no Asymmetri-operated upload or cloud-sync system for your local pitch records.",
+      "Photos copies, iCloud, device backups and sharing follow the services and settings you use. You choose when to save or share annotated evidence; those separate copies have their own handling.",
+    ],
+    link: { label: "Read the Privacy Policy", href: "/privacy" },
+  },
+  coaching: {
+    eyebrow: "Built for coaching conversations",
+    audiences: [
+      { title: "Pitchers", body: "See your work more clearly." },
+      { title: "Coaches", body: "Inspect the evidence. Bring your judgment." },
+      { title: "Parents", body: "Find context to support development alongside a coach." },
+    ] satisfies ProductStep[],
   },
 } as const;
 

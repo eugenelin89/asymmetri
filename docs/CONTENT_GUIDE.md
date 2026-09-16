@@ -8,7 +8,9 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - canonical URL and public contact mailbox;
 - navigation and footer links;
 - page title and description;
-- founder story, pitching focus, and exploration thesis;
+- founder story, pitching focus, and current product positioning;
+- the `motion` product structure, release state, platform, workflow, limitations,
+  privacy summary, icon and social image;
 - approved image paths and alt text;
 - closing calls to action;
 - Motion Privacy Policy and Support content in `motionPages`, including the
@@ -22,26 +24,40 @@ new product claims.
 
 Every product or research statement must fit one of these categories:
 
-### Emerging or experimental
+### Current verified product capability
 
-Work that has credible technical evidence but is not presented as a mature
-commercial product. This includes affordable sensing, pitching biomechanics,
-movement-signal analysis, smartphone-video comparison, and AI-assisted pattern
-identification.
+Motion V1 behavior verified in current implementation and accepted decisions:
+iPhone/iOS 17, conditional HFR capture, Photos import, Back/Side guides, optional
+Recording Setups, human-confirmed exact-frame marking, supported projected 2D
+results, saved evidence, local history and descriptive comparison. Capability
+being implemented does not establish App Store availability or scientific
+validation. Current release wording is “Preparing for release.”
+
+### Research and experimental interpretation
+
+Camera geometry, landmark estimation, event marking and measurement uncertainty
+limit interpretation. Projected 2D measurements are not anatomical 3D biomechanics.
+A recorded difference is not proof of improvement or a causal training effect.
+Sensor experiments belong to the founder/company history, not current Motion V1.
 
 ### Future direction
 
-Ideas or intended areas that are not presented as shipped capabilities, such as
-more automated pitch comparison and clearer longitudinal development support.
+Unimplemented concepts such as Cloud/accounts, multi-athlete/team workflows,
+companion capture, whole-delivery replay, velocity/outcomes and automated coaching
+must not become present-tense claims. No future feature inventory is needed on
+the product page.
 
-Do not blur the labels or turn future direction into present-tense product
-claims.
+Current code/tests take precedence, followed by accepted decisions, current
+product/release documentation, roadmaps and dated white papers. Decision 50 hides
+five stored measurement families from normal V1; use “available projected 2D
+measurements” rather than the white paper's older all-eleven claim. Read
+`MOTION_PRODUCT_REVIEW.md` for the dated audit and maintenance rules.
 
 ## Motion utility-page facts
 
 `/privacy` and `/support` follow the source-audited Motion V1 drafts, with the
-website/support audit recorded in `docs/WEBSITE_PRIVACY_AUDIT.md`. These specific
-app facts do not change the homepage emerging-research positioning. Preserve
+website/support audit recorded in `docs/WEBSITE_PRIVACY_AUDIT.md`. The marketing pages now describe the same current V1 product, with release
+availability stated separately. Preserve these audited articles substantively. Preserve
 the distinction between local app records, Apple/Photos/iCloud/backups/sharing,
 website technical requests and support email. Never strengthen bounded app
 claims into "data never leaves the device," secure erasure, or remote deletion.
@@ -86,9 +102,9 @@ experiments. Focus on evidence supporting coaching conversations and tracking
 change over time. Do not turn an individual outcome into a broader performance
 claim.
 
-Cameras and sensors capture evidence. AI may identify patterns and surface
-relevant information. Coaches supply judgment, context, experience, and human
-understanding. Pitchers gain insight into their work. Parents receive appropriate
+Motion uses phone video and on-device pose analysis to create inspectable
+observations. Sensor experiments remain historical research. Coaches supply
+judgment, context, experience and human understanding. Pitchers gain insight into their work. Parents receive appropriate
 context so they can support development, never override or substitute for
 coaches. Baseball and pitching development are the current public focus.
 
@@ -114,9 +130,10 @@ Synthetic product visuals must remain clearly described as reconstructions.
 
 ## Routes and navigation
 
-The public narrative is one page with `#story`, `#approach`, and `#contact`
-anchors. Privacy and Support are separate indexed utility pages linked only in
-the footer, plus mutual links within their articles. Former secondary routes
+The homepage is the company narrative with `#story`, `#approach`, and `#contact`
+anchors. `/motion` is the detailed product page, linked from primary navigation
+and the homepage introduction. Privacy and Support are separate indexed utility
+pages with quiet footer links, mutual article links and contextual product links. Former secondary routes
 redirect permanently. When adding or removing a
 public route:
 
@@ -139,7 +156,8 @@ the user explicitly requests it.
 ## Images and alt text
 
 Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
-The current site renders one privacy-reviewed pitching photograph. Alt text
+The current site renders one privacy-reviewed pitching photograph and the
+owner-approved Motion A Release icon. No app-interface capture is published. Alt text
 should describe the visible action and purpose without adding identity,
 affiliation, or performance claims.
 

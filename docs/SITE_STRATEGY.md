@@ -1,33 +1,44 @@
 # Asymmetri Labs site strategy
 
-## Story
+## Story and product
 
-The site makes one compact argument: better evidence can help pitchers and the
-people supporting them understand development more clearly while keeping
-coaching human. Its specific origin is the founder’s experience as a baseball
-coach and division coordinator working with players, beginning with slow-motion
-smartphone review, frame-by-frame comparison, iterative adjustments, and later
-affordable-sensor experiments.
+The site makes one argument: better evidence helps pitchers and the people
+supporting them see development more clearly while keeping coaching human.
+Asymmetri Motion is the first concrete product, preparing for release on iPhone.
+It connects everyday video to human-confirmed frames, projected 2D measurements,
+annotated evidence and saved history. A phone is not a motion-capture laboratory.
 
-The homepage has four major sections: hero, founder story, Capture / Understand /
-Improve approach, and closing contact. It uses one pitching-delivery photograph
-and avoids cards, feature grids, fake metrics, diagrams, product demos, and
-competing slogans.
+The homepage preserves the company headline, authentic photograph and founder's
+origin as a coach and division coordinator. Its sequence is hero, substantial
+Motion introduction, founder story, Capture / Understand / Improve, and the
+human-coaching closing/contact. Sensor experiments remain historical context;
+they are not Motion V1 features. The company is broader than one app, while
+Motion is its clear present focus.
 
-## Architecture
+## Product page and navigation
 
-The public navigation contains only Story, Approach, and Get in touch anchor
-links. The homepage remains the marketing narrative. `/privacy` and `/support`
-are readable Asymmetri Motion utility pages, indexed alongside `/` and linked
-quietly in the footer. They do not introduce a product-launch section or alter
-the homepage claims. Former secondary and legacy routes permanently redirect
-to the relevant homepage section or `/`.
+`/motion` owns the detailed product story: product identity/platform/release state;
+the gap between disposable video and laboratory systems; five workflow steps;
+an accessible six-stage evidence chain; history and descriptive comparison;
+scientific limits; bounded local-first privacy; and coaching/release contact.
+It uses editorial sections and dividers rather than a feature-card inventory.
 
-## Privacy and evidence
+Primary navigation is Motion, Story, Approach and Get in touch. The last three
+remain root-relative homepage anchors. Privacy and Support remain indexed utility
+articles with quiet footer links, mutual links and contextual product-page links.
+All four pages appear in the sitemap. Legacy redirects remain intact.
 
-No customer, source application, deployment, repository, or private application
-is identified. The selected photograph contains one pitcher with no bystanders
-or venue signage. Its cap logo and uniform lettering remain visible with
-explicit owner approval. Emerging sensing, video, and AI work is presented as
-exploration rather than deployed capability. Parents are informed supporters,
-not substitute coaches.
+## Evidence and privacy
+
+Current implementation and accepted decisions override the dated September 10
+white paper. The source review in `MOTION_PRODUCT_REVIEW.md` records the changes
+in capture, normal measurement visibility, iPhone scope and release preparation.
+No future roadmap, App Store listing, price or scientific validation is inferred.
+Comparisons describe recorded differences, not improvement or causation.
+
+The approved A Release icon nests Motion's teal/mineral palette within the Labs
+identity. No app screenshot, private footage, fixture measurement or public white
+paper is published. The existing photograph and its owner-approved marks remain
+unchanged. No customer, private organization or source repository appears in the
+rendered site. There is no new data collection. Parents support development
+alongside coaches; the app does not prescribe training.

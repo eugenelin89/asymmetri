@@ -23,6 +23,7 @@ path.
 When routes or shared layout code change, verify:
 
 - `/`
+- `/motion` (real product page, truthful release status)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/story`, `/contact`, and `/about` (permanent redirects to homepage anchors)
 - `/work`, the legacy name route, and the named-product URL (permanent redirects
@@ -33,10 +34,10 @@ When routes or shared layout code change, verify:
 - `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets. Verify footer links on all three pages, mutual
+broken public assets. Verify footer links on all four pages, mutual
 Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
-The sitemap must include all three canonical routes; robots must allow them.
+The sitemap must include all four canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
 against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
 network resources for accidental tracking, forms or external scripts/fonts.
@@ -50,7 +51,9 @@ image response without a Worker exception.
 For visual, layout, or navigation changes, verify the affected routes at:
 
 - 320 CSS pixels;
+- 390 CSS pixels;
 - 768 CSS pixels;
+- 1024 CSS pixels;
 - 1440 CSS pixels.
 
 Check:
@@ -84,7 +87,8 @@ After content, asset, metadata, or product-visual changes:
 - scan for former company-name/product combinations;
 - scan for credentials, private keys, tokens, and athlete information;
 - confirm public product data is synthetic;
-- confirm deployed, emerging, and future claims remain distinct;
+- confirm verified V1 capabilities, scientific interpretation limits and future
+  direction remain distinct;
 - confirm the asset manifest reflects all public asset changes.
 
 Never paste sensitive scan matches into prompt records.
@@ -119,3 +123,14 @@ Poll deployment status to a terminal success or failure state.
 Private Sites deployments may require ChatGPT sign-in before route-level browser
 inspection. A successful provider deployment does not replace local route,
 accessibility, and privacy verification.
+
+## Motion marketing regression
+
+Verify the five-step workflow and six-stage evidence list remain readable at every
+width. Confirm conditional HFR wording, exact human confirmation, projected 2D
+qualifiers, descriptive comparison and the release state against the current
+source review. Do not expose Developer-only metrics, future features, an unverified
+Store link or price. Check the icon and product Open Graph/Twitter image, factual
+SoftwareApplication schema and absence of offer/rating fields. Compare the utility
+content export with its prior committed version; shared navigation must not alter
+the audited Privacy/Support bodies. New assets require provenance and rights review.

@@ -3,8 +3,8 @@
 ## Overview
 
 The Asymmetri Labs website is the company’s public marketing site. It explains
-the baseball pitching focus, the founder’s origin story, the
-Capture / Understand / Improve approach, and how to contact the company.
+the baseball pitching focus, first product Asymmetri Motion, founder story,
+Capture / Understand / Improve approach and how to contact the company.
 
 The application uses Next.js 16 App Router, React 19, strict TypeScript, Tailwind
 CSS, PostCSS, and a shared global stylesheet. The current DigitalOcean production
@@ -13,8 +13,8 @@ a separate Vinext and Cloudflare Worker build path for OpenAI Sites.
 
 The repository proves that the current site has:
 
-- three indexed public content pages at `/`, `/privacy`, and `/support`;
-- four homepage sections: hero, Story, Approach, and Contact;
+- four indexed public content pages at `/`, `/motion`, `/privacy`, and `/support`;
+- five homepage sections: hero, Motion introduction, Story, Approach and Contact;
 - local brand, favicon, social-preview, and photography assets;
 - configuration-driven permanent redirects from former routes;
 - generated `/robots.txt` and `/sitemap.xml` responses;
@@ -27,30 +27,32 @@ The repository proves that the current site has:
 
 ### Public page and sections
 
-`app/page.tsx` composes the public homepage from four semantic sections:
+`app/page.tsx` composes the public homepage from five semantic sections:
 
 1. The hero presents the company’s baseball technology position and the pitching
    photograph.
-2. `#story` explains how smartphone video and later sensor experiments led to
+2. The Motion introduction presents the first product and links to `/motion`.
+3. `#story` explains how smartphone video and later sensor experiments led to
    the company idea.
-3. `#approach` presents Capture, Understand, and Improve.
-4. `#contact` closes with the company’s public email action.
+4. `#approach` presents Capture, Understand, and Improve.
+5. `#contact` closes with the company’s public email action.
 
 `components/site-header.tsx` provides the skip link, homepage brand link, and
-anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
+product and anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
 email link, Privacy and Support links, and copyright notice. Primary navigation
-still contains only homepage anchors, with root-relative paths so it works from
-the utility pages.
+contains Motion and root-relative Story/Approach/Contact homepage anchors, so it
+works from every route.
 
 ### Public routes
 
 | URL | Source | Result |
 | --- | --- | --- |
 | `/` | `app/page.tsx` | Main public marketing page |
+| `/motion` | `app/motion/page.tsx` | Detailed Motion product marketing page |
 | `/privacy` | `app/privacy/page.tsx` | Asymmetri Motion Privacy Policy |
 | `/support` | `app/support/page.tsx` | Asymmetri Motion Support |
 | `/robots.txt` | `app/robots.ts` | Generated crawler rules and sitemap reference |
-| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all three canonical content routes |
+| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all four canonical content routes |
 | `/favicon.svg` | `public/favicon.svg` | Static SVG favicon |
 | `/og.svg` | `public/og.svg` | Static 1200 by 630 social-preview image |
 | `/story` | `next.config.ts` | Permanent redirect to `/#story` |
@@ -60,7 +62,7 @@ the utility pages.
 | `/why-asymmetrico` | `next.config.ts` | Permanent redirect to `/#story` |
 | `/work/asymmetrico-platform` | `next.config.ts` | Permanent redirect to `/` |
 
-Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/privacy`, and
+Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/motion`, `/privacy`, and
 `/support` are listed in the generated sitemap. The existing apex canonical origin remains
 `https://asymmetri.co`; the requested `www` URLs must also serve the actual pages.
 
@@ -71,7 +73,8 @@ Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/privacy`, an
 - the company name, canonical URL, email address, and footer descriptor;
 - navigation labels and destinations;
 - page title, description, and social-preview text;
-- all main homepage copy and typed Motion privacy/support sections;
+- all main homepage copy, the structured `motion` product content and typed
+  Motion privacy/support sections;
 - the public hero image path, dimensions, and alternative text.
 
 `app/layout.tsx` consumes those values to configure:
@@ -88,14 +91,21 @@ and social metadata. `components/utility-page.tsx` renders the shared readable
 article, section links, headings, lists, contact and related-page link. These are
 server components and add no custom browser JavaScript.
 
+`app/motion/page.tsx` supplies product title/description, canonical, Open Graph
+and Twitter metadata plus factual SoftwareApplication JSON-LD. The schema includes
+no price, offer, review, rating, download count or Store URL. Product social metadata
+uses the approved raster Motion icon.
+
 This keeps contact information and public facts out of presentation components.
 
 ### Assets
 
 `public/brand/` stores the approved logo variants and raster icon fallbacks.
 `public/images/` stores approved sports and research imagery at stable public
-URLs. The homepage currently renders only
-`public/images/baseball/pitching-delivery.webp`.
+URLs. The homepage retains
+`public/images/baseball/pitching-delivery.webp` and adds the approved Motion icon.
+`public/brand/motion-release.svg` is the exact editable master used on the pages;
+`motion-release.png` is the exact 1024-square packaged export used for social metadata.
 
 `public/favicon.svg` is served directly at `/favicon.svg`.
 `public/og.svg` is the social-preview asset referenced by both Open Graph and X
@@ -107,7 +117,7 @@ are recorded in `docs/ASSET_MANIFEST.md`.
 
 ### Static and server responsibilities
 
-The homepage, utility pages, robots response, and sitemap are generated from
+The homepage, product page, utility pages, robots response, and sitemap are generated from
 repository content during the standard Next.js build. Static files remain under `public/` in the
 production checkout and are served at their root-relative URLs.
 
@@ -138,7 +148,9 @@ Shared components remain small:
 - `Logo` renders the inline brand mark and optional wordmark.
 - `SiteHeader` renders the skip link, brand link, and primary navigation.
 - `SiteFooter` renders the brand descriptor and contact metadata.
-- `HomePage` owns the four-section homepage composition.
+- `HomePage` owns the five-section homepage composition.
+- `MotionPage` composes the editorial product page.
+- `EvidenceChain` renders a semantic six-stage ordered list from shared content.
 - `UtilityPage` renders the two Motion utility articles.
 
 See `docs/WEBSITE_PRIVACY_AUDIT.md` for source, browser and infrastructure

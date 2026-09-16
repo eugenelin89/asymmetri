@@ -431,7 +431,7 @@ curl -sS -o /dev/null \
 Then check important routes against the local Next.js server:
 
 ```bash
-for p in / /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
+for p in / /motion /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
   curl -sS -o /dev/null \
     -w "$p -> HTTP %{http_code}  %{redirect_url}\n" \
     "http://127.0.0.1:3001$p"
@@ -440,18 +440,22 @@ done
 
 Expected results:
 
-- `/`, `/privacy`, and `/support` return HTTP 200 with their intended content.
+- `/`, `/motion`, `/privacy`, and `/support` return HTTP 200 with their intended content.
 - `/favicon.svg` returns HTTP 200.
 - `/robots.txt` returns HTTP 200.
 - `/sitemap.xml` returns HTTP 200.
 - `/story` returns an HTTP 308 permanent redirect to `/#story`.
 - `/contact` returns an HTTP 308 permanent redirect to `/#contact`.
 
-Verify actual unauthenticated content at `https://www.asymmetri.co/privacy`,
+Verify actual unauthenticated content at `https://www.asymmetri.co/motion`,
+`https://www.asymmetri.co/privacy`,
 `https://www.asymmetri.co/support`, and the homepage. A redirect to the homepage
 is not publication success. Check titles, apex canonicals, mutual links, footer
-links, `mailto:info@asymmetri.co`, mobile readability, all three sitemap routes
-and permissive robots rules. Also verify the apex URLs.
+links, `mailto:info@asymmetri.co`, mobile readability, all four sitemap routes
+and permissive robots rules. Also verify the apex URLs, product metadata and
+SoftwareApplication schema, and the Motion icon/social assets. Product release
+wording must still match the verified source state; website publication does not
+make the iPhone app publicly available.
 
 Finally, open the public pages in a browser. Use a hard refresh if the old
 appearance remains cached.

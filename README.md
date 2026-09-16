@@ -1,23 +1,25 @@
 # Asymmetri Labs
 
-Asymmetri Labs is a baseball technology startup exploring how smartphone video,
-affordable sensors, and AI can help pitchers, coaches, and parents understand
-development more clearly. It begins with pitching mechanics and the belief that
-better evidence can strengthen good coaching without replacing it.
+Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents
+see pitching development more clearly. Its first product, Asymmetri Motion, is an
+iPhone pitching-video and projected 2D analysis app preparing for release. Better
+evidence strengthens coaching without replacing it.
 
 ## Website purpose
 
 This repository contains the official company website. The landing page
-combines one central pitch, the founder’s personal origin story, a concise
-Capture / Understand / Improve thesis, and direct contact. It presents the
-company as early-stage and does not imply that a finished commercial platform
-exists.
+preserves the company hero and authentic pitching photograph, introduces Motion,
+then connects the founder story, Capture / Understand / Improve approach and
+human-coaching principle to direct contact. A detailed product page explains the
+current workflow, inspectable evidence, history, scientific limits and local-first
+architecture. Verified V1 capability is distinct from public release availability.
 
 ## Routes
 
-`/` is the primary marketing page. `/privacy` and `/support` provide the Asymmetri
-Motion Privacy Policy and Support guidance, with quiet footer links and mutual
-links. All three routes are indexable and included in the sitemap. The former `/story`, `/contact`,
+`/` is the company marketing page and `/motion` is the detailed product page.
+`/privacy` and `/support` provide the Asymmetri Motion Privacy Policy and Support guidance, with quiet footer links and mutual
+links. All four routes are indexable and included in the sitemap. The former
+`/story`, `/contact`,
 `/about`, `/work`, `/why-asymmetrico`, and named-product routes permanently
 redirect to the relevant homepage section or the homepage itself. Next.js also
 generates `/robots.txt` and `/sitemap.xml`.
@@ -62,5 +64,6 @@ changing public assets.
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Testing](docs/TESTING.md)
 - [Content guide](docs/CONTENT_GUIDE.md)
+- [Motion product claims and source review](docs/MOTION_PRODUCT_REVIEW.md)
 - [Website privacy audit](docs/WEBSITE_PRIVACY_AUDIT.md)
 - [Asset manifest](docs/ASSET_MANIFEST.md)

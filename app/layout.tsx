@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: "/og.svg",
         width: 1200,
         height: 630,
-        alt: "Asymmetri Labs: Better evidence for better pitching. Smartphone video, sensors, and AI that support better coaching.",
+        alt: `${site.company.name}: ${site.metadata.socialHeadline} ${site.metadata.socialSupport}`,
       },
     ],
   },
@@ -60,8 +60,7 @@ const organizationSchema = {
     "Pitching development",
     "Pitching mechanics",
     "Smartphone video",
-    "Wearable sensors",
-    "Artificial intelligence",
+    "Projected 2D motion analysis",
   ],
 };
 

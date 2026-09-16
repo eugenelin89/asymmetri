@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { site } from "@/content/site";
+import { motion, site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    { url: `${site.company.siteUrl}${motion.path}`, changeFrequency: "monthly", priority: 0.9 },
     ...site.footerNavigation.map((item) => ({
       url: `${site.company.siteUrl}${item.href}`,
       changeFrequency: "monthly" as const,

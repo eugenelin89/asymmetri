@@ -56,7 +56,9 @@ Use factual, plain-language summaries. Do not invent customers, partners,
 awards, measurements, adoption figures, outcomes, affiliations, research
 findings, or product capabilities. Keep these truth states visibly distinct:
 
-- **Deployed:** capabilities verified in the private source implementation.
+- **Current verified product capability:** Asymmetri Motion V1 behavior verified
+  in current implementation and accepted decisions. Implementation does not imply
+  public App Store availability or scientific validation of interpretation.
 - **Emerging or experimental:** biomechanics, sensing, movement-signal,
   machine-learning, and physical-system research.
 - **Future direction:** ideas that are not yet presented as deployed products.

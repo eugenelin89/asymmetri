@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { site } from "@/content/site";
+import { motion, site } from "@/content/site";
 
 export default function HomePage() {
   return (
     <div className="site">
       <SiteHeader />
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <section className="hero">
           <div className="shell hero__grid">
             <div className="hero__copy">
@@ -32,6 +32,30 @@ export default function HomePage() {
                 priority
               />
             </figure>
+          </div>
+        </section>
+        <section className="section motion-intro" aria-labelledby="motion-intro-title">
+          <div className="shell product-split">
+            <div>
+              <div className="motion-identity">
+                <Image src={motion.icon.src} alt={motion.icon.alt} width={80} height={80} />
+                <div>
+                  <p className="eyebrow">{motion.introduction.eyebrow}</p>
+                  <p className="motion-identity__name">{motion.name}</p>
+                </div>
+              </div>
+              <h2 id="motion-intro-title">{motion.headline}</h2>
+              <p className="product-descriptor">{motion.descriptor}</p>
+            </div>
+            <div className="product-prose">
+              {motion.introduction.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <a className="button button--ink" href={motion.introduction.link.href}>
+                {motion.introduction.link.label}
+              </a>
+              <p className="product-status">{motion.releaseStatement}</p>
+            </div>
           </div>
         </section>
         <section className="section story" id="story">
