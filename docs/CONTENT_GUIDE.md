@@ -10,7 +10,9 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - page title and description;
 - founder story, pitching focus, and exploration thesis;
 - approved image paths and alt text;
-- closing calls to action.
+- closing calls to action;
+- Motion Privacy Policy and Support content in `motionPages`, including the
+  effective date, section IDs, metadata, contact labels and mutual links.
 
 Page files under `app/` own narrative sequence and route-specific connective
 copy. Components should focus on presentation and should not quietly introduce
@@ -34,6 +36,20 @@ more automated pitch comparison and clearer longitudinal development support.
 
 Do not blur the labels or turn future direction into present-tense product
 claims.
+
+## Motion utility-page facts
+
+`/privacy` and `/support` follow the source-audited Motion V1 drafts, with the
+website/support audit recorded in `docs/WEBSITE_PRIVACY_AUDIT.md`. These specific
+app facts do not change the homepage emerging-research positioning. Preserve
+the distinction between local app records, Apple/Photos/iCloud/backups/sharing,
+website technical requests and support email. Never strengthen bounded app
+claims into "data never leaves the device," secure erasure, or remote deletion.
+
+Support is email-only through the central mailbox. No SLA, form, analytics,
+tracking, cookie banner, account, or database is needed. Do not invent server-log
+or email-retention periods, mailbox providers or deletion guarantees. Reaudit
+when behavior changes and revise the effective date when the policy changes.
 
 ## Voice
 
@@ -99,7 +115,9 @@ Synthetic product visuals must remain clearly described as reconstructions.
 ## Routes and navigation
 
 The public narrative is one page with `#story`, `#approach`, and `#contact`
-anchors. Former secondary routes redirect permanently. When adding or removing a
+anchors. Privacy and Support are separate indexed utility pages linked only in
+the footer, plus mutual links within their articles. Former secondary routes
+redirect permanently. When adding or removing a
 public route:
 
 1. update the route under `app/`;

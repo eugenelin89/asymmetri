@@ -17,8 +17,11 @@ competing slogans.
 ## Architecture
 
 The public navigation contains only Story, Approach, and Get in touch anchor
-links. The homepage is the only indexed content page. Former secondary and legacy
-routes permanently redirect to the relevant homepage section or `/`.
+links. The homepage remains the marketing narrative. `/privacy` and `/support`
+are readable Asymmetri Motion utility pages, indexed alongside `/` and linked
+quietly in the footer. They do not introduce a product-launch section or alter
+the homepage claims. Former secondary and legacy routes permanently redirect
+to the relevant homepage section or `/`.
 
 ## Privacy and evidence
 

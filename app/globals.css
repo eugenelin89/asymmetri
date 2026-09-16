@@ -517,6 +517,111 @@ p {
   padding: 0.25rem 0;
 }
 
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-end;
+}
+
+.site-footer__links a {
+  align-content: center;
+  min-height: 2.75rem;
+}
+
+.utility-page {
+  padding: clamp(2.5rem, 5vw, 5rem) 0 clamp(4rem, 7vw, 7rem);
+}
+
+.utility-page__body {
+  font-family: var(--sans);
+  font-size: clamp(1rem, calc(0.94rem + 0.2vw), 1.125rem);
+  line-height: 1.7;
+  margin-inline: auto;
+  max-width: 70ch;
+  overflow-wrap: break-word;
+  width: var(--shell);
+}
+
+.utility-page h1 {
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  text-wrap: pretty;
+}
+
+.utility-page h2 {
+  font-size: clamp(1.4rem, 2.1vw, 1.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  scroll-margin-top: 1.5rem;
+  text-wrap: pretty;
+}
+
+.utility-page p,
+.utility-page li {
+  line-height: 1.7;
+}
+
+.utility-page p + p,
+.utility-page h1 + p,
+.utility-page h2 + p,
+.utility-page li + li {
+  margin-top: 1rem;
+}
+
+.utility-page a {
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.utility-page ul,
+.utility-page ol {
+  margin-block: 1rem;
+  padding-left: 1.4rem;
+}
+
+.utility-page ul {
+  list-style: disc;
+}
+
+.utility-page ol {
+  list-style: decimal;
+}
+
+.utility-page__date {
+  color: var(--muted);
+}
+
+.utility-page__contents,
+.utility-page section {
+  border-top: 1px solid var(--line);
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.utility-page__contents p {
+  font-weight: 650;
+}
+
+.utility-page .utility-page__contents ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.utility-page__contents li + li {
+  margin-top: 0;
+}
+
+.utility-page__contents a {
+  align-content: center;
+  display: inline-block;
+  min-height: 2.75rem;
+  padding-block: 0.35rem;
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
@@ -599,6 +704,10 @@ p {
   .site-footer__meta {
     align-items: start;
     text-align: left;
+  }
+
+  .site-footer__links {
+    justify-content: flex-start;
   }
 }
 

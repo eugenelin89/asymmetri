@@ -7,7 +7,7 @@ better evidence can strengthen good coaching without replacing it.
 
 ## Website purpose
 
-This repository contains the official one-page company website. The landing page
+This repository contains the official company website. The landing page
 combines one central pitch, the founder’s personal origin story, a concise
 Capture / Understand / Improve thesis, and direct contact. It presents the
 company as early-stage and does not imply that a finished commercial platform
@@ -15,7 +15,9 @@ exists.
 
 ## Routes
 
-`/` is the only primary indexed content page. The former `/story`, `/contact`,
+`/` is the primary marketing page. `/privacy` and `/support` provide the Asymmetri
+Motion Privacy Policy and Support guidance, with quiet footer links and mutual
+links. All three routes are indexable and included in the sitemap. The former `/story`, `/contact`,
 `/about`, `/work`, `/why-asymmetrico`, and named-product routes permanently
 redirect to the relevant homepage section or the homepage itself. Next.js also
 generates `/robots.txt` and `/sitemap.xml`.
@@ -60,4 +62,5 @@ changing public assets.
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Testing](docs/TESTING.md)
 - [Content guide](docs/CONTENT_GUIDE.md)
+- [Website privacy audit](docs/WEBSITE_PRIVACY_AUDIT.md)
 - [Asset manifest](docs/ASSET_MANIFEST.md)

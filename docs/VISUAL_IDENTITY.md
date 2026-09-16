@@ -41,6 +41,14 @@ collections, fake interfaces, decorative research graphics, and visual clutter.
 Motion is limited to small hover responses and removed when reduced motion is
 requested.
 
+## Utility pages
+
+Privacy and Support reuse the system font, paper/ink palette, header, footer and
+focus rings. Their article measure is capped at 70ch, body text scales from 16 to
+18px, and modest headings replace marketing hero typography. Underlined links
+and a section index support reading and keyboard navigation. Footer links stay
+secondary to the marketing navigation. No new image or visual asset is used.
+
 ## Photography and interface imagery
 
 The public site renders one authentic pitching-delivery photograph in the hero.

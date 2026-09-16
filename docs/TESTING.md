@@ -23,6 +23,7 @@ path.
 When routes or shared layout code change, verify:
 
 - `/`
+- `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/story`, `/contact`, and `/about` (permanent redirects to homepage anchors)
 - `/work`, the legacy name route, and the named-product URL (permanent redirects
   to the homepage or Story anchor)
@@ -32,7 +33,13 @@ When routes or shared layout code change, verify:
 - `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets.
+broken public assets. Verify footer links on all three pages, mutual
+Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
+navigation from utility pages, exactly one H1 per article and ordered H2 sections.
+The sitemap must include all three canonical routes; robots must allow them.
+Check the policy effective date and bounded app/platform/website/email claims
+against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
+network resources for accidental tracking, forms or external scripts/fonts.
 
 When changing Worker or Vite binding configuration, request at least one
 `/_vinext/image` URL from the local Vinext server and confirm that it returns an

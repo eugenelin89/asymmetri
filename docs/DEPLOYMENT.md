@@ -23,7 +23,9 @@ the script invokes Vinext.
 - Perform application Git and npm operations as `django-user`.
 - Use root privileges only for operating-system responsibilities such as
   systemd and Nginx.
-- Check the production working tree before the destructive reset.
+- Inspect branch, exact HEAD, remote, ahead/behind state, all tracked changes and
+  untracked files before synchronization. Stop on unexpected production state;
+  never reset, clean, or discard files to force compliance.
 - Build successfully before restarting the service.
 - Do not combine routine application deployment with operating-system upgrades,
   SSH hardening, dependency remediation, certificate work, or Nginx redesign.
@@ -168,8 +170,9 @@ website. It is safe to reconnect.
 
 ### Step 4: Confirm that the production checkout is clean
 
-**What and why:** Inspect the production repository before the reset. The next
-step intentionally discards production-only tracked changes.
+**What and why:** Inspect the production repository before synchronization.
+Unexpected local changes, meaningful untracked files, a wrong branch or
+unpushed production commits block deployment. Preserve them for owner review.
 
 **Who, when, and where:** The server operator runs Git as `django-user` on the
 Droplet. The command targets `/var/www/asymmetri` directly, so the operator’s
@@ -179,14 +182,17 @@ current directory does not matter.
 
 ```bash
 sudo -u django-user -H git -C /var/www/asymmetri status -sb
+sudo -u django-user -H git -C /var/www/asymmetri status --porcelain=v1 --untracked-files=all
+sudo -u django-user -H git -C /var/www/asymmetri rev-parse HEAD origin/main
+sudo -u django-user -H git -C /var/www/asymmetri rev-list --left-right --count HEAD...origin/main
 ```
 
 **Success:** The output identifies the expected branch and contains no modified,
 deleted, staged, or untracked production-only files that need investigation.
 
 **Common failure:** Git reports local changes, an unexpected branch, a missing
-repository, or a permissions problem. Stop before reset and determine whether
-the files are accidental, operationally important, or evidence of an incomplete
+repository, or a permissions problem. Stop before synchronization and determine
+whether the files are accidental, operationally important, or evidence of an incomplete
 deployment.
 
 **Live effect and rerun safety:** The command is read-only and safe to rerun.
@@ -208,27 +214,29 @@ the reviewed `origin/main` commit exactly.
 
 ```bash
 sudo -u django-user -H git -C /var/www/asymmetri fetch origin
-sudo -u django-user -H git -C /var/www/asymmetri reset --hard origin/main
+sudo -u django-user -H git -C /var/www/asymmetri rev-parse origin/main
+# Verify that this is the exact commit pushed from the Mac before proceeding.
+sudo -u django-user -H git -C /var/www/asymmetri pull --ff-only origin main
 
 sudo -u django-user -H git -C /var/www/asymmetri log -1 --oneline
 ```
 
-**Warning:** `reset --hard origin/main` intentionally overwrites tracked
-production files and destroys uncommitted tracked changes. It is appropriate
-only after the status check and after confirming that `origin/main` contains the
-intended deployment.
+Recheck the branch, worktree and ahead/behind state after fetch. If production
+has diverged or contains unexpected work, stop. Fast-forward synchronization
+must not discard production-only changes. Do not use a destructive reset to
+force a deployment.
 
-**Success:** Fetch completes, reset reports the target commit, and the final log
+**Success:** Fetch completes, the fast-forward succeeds, and the final log
 line matches the commit pushed from the Mac.
 
 **Common failure:** The remote cannot be reached, credentials fail, the expected
-commit is absent, or filesystem permissions prevent the reset. The running
+commit is absent, or filesystem permissions prevent synchronization. The running
 service normally remains on its prior in-memory and `.next/` build until it is
 restarted.
 
 **Live effect and rerun safety:** Fetch is read-only with respect to the worktree.
-Reset changes production source files but does not restart the live service.
-After a successful clean reset, rerunning the same reset is idempotent.
+The fast-forward changes production source files but does not restart the live
+service. Repeating it at the same commit reports that it is already current.
 
 ### Step 6: Check Node.js, disk, and memory
 
@@ -252,7 +260,14 @@ df -h /
 free -h
 ```
 
-The repository targets Node.js 24 in `.nvmrc`. The installed Next.js 16.2.12
+The repository targets Node.js 24 in `.nvmrc`. September 16 console inspection
+found production Node 22.23.1 and npm 10.9.8, with no nvm. Do not silently change
+system packages during a content deployment; resolve the runtime mismatch with
+the owner before installation/build. For the September 16 Motion utility-page
+publication, the owner explicitly authorized the existing Node 22 runtime with
+production checks/build before restart. This is a scoped exception, not a change
+to `.nvmrc`. Local validation still uses Node 24.
+The installed Next.js 16.2.12
 package requires Node.js 20.9.0 or newer. Production should normally match the
 repository target instead of relying only on the framework minimum.
 
@@ -416,7 +431,7 @@ curl -sS -o /dev/null \
 Then check important routes against the local Next.js server:
 
 ```bash
-for p in / /favicon.svg /robots.txt /sitemap.xml /story /contact; do
+for p in / /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
   curl -sS -o /dev/null \
     -w "$p -> HTTP %{http_code}  %{redirect_url}\n" \
     "http://127.0.0.1:3001$p"
@@ -425,14 +440,20 @@ done
 
 Expected results:
 
-- `/` returns HTTP 200.
+- `/`, `/privacy`, and `/support` return HTTP 200 with their intended content.
 - `/favicon.svg` returns HTTP 200.
 - `/robots.txt` returns HTTP 200.
 - `/sitemap.xml` returns HTTP 200.
 - `/story` returns an HTTP 308 permanent redirect to `/#story`.
 - `/contact` returns an HTTP 308 permanent redirect to `/#contact`.
 
-Finally, open `https://asymmetri.co` in a browser. Use a hard refresh if the old
+Verify actual unauthenticated content at `https://www.asymmetri.co/privacy`,
+`https://www.asymmetri.co/support`, and the homepage. A redirect to the homepage
+is not publication success. Check titles, apex canonicals, mutual links, footer
+links, `mailto:info@asymmetri.co`, mobile readability, all three sitemap routes
+and permissive robots rules. Also verify the apex URLs.
+
+Finally, open the public pages in a browser. Use a hard refresh if the old
 appearance remains cached.
 
 **Success:** Both homepage checks return HTTP 200, static and metadata routes

@@ -45,9 +45,11 @@ manually is slow and technically demanding.
 5. Principle: **AI can help identify patterns. Coaches provide the judgment that turns evidence into progress.**
 6. Closing: **Great coaching stays human. Better evidence makes it stronger.**
 
-The company story leads. Refer to pitching-analysis ideas and experiments being
-built and tested; never introduce a named flagship product, imply a finished
-commercial platform, or speculate publicly about other sports.
+The company story leads on the marketing homepage. Refer there to pitching-analysis
+ideas and experiments being built and tested; do not imply a finished commercial
+platform or speculate publicly about other sports. The separately authorized Motion
+Privacy Policy and Support pages name the app and describe its audited V1 behavior
+for utility purposes. They do not change the homepage launch positioning.
 
 ## Voice and truth
 

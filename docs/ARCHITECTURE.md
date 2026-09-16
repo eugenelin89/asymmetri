@@ -13,7 +13,7 @@ a separate Vinext and Cloudflare Worker build path for OpenAI Sites.
 
 The repository proves that the current site has:
 
-- one indexed public content page at `/`;
+- three indexed public content pages at `/`, `/privacy`, and `/support`;
 - four homepage sections: hero, Story, Approach, and Contact;
 - local brand, favicon, social-preview, and photography assets;
 - configuration-driven permanent redirects from former routes;
@@ -38,15 +38,19 @@ The repository proves that the current site has:
 
 `components/site-header.tsx` provides the skip link, homepage brand link, and
 anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
-email link, and copyright notice.
+email link, Privacy and Support links, and copyright notice. Primary navigation
+still contains only homepage anchors, with root-relative paths so it works from
+the utility pages.
 
 ### Public routes
 
 | URL | Source | Result |
 | --- | --- | --- |
 | `/` | `app/page.tsx` | Main public marketing page |
+| `/privacy` | `app/privacy/page.tsx` | Asymmetri Motion Privacy Policy |
+| `/support` | `app/support/page.tsx` | Asymmetri Motion Support |
 | `/robots.txt` | `app/robots.ts` | Generated crawler rules and sitemap reference |
-| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing the canonical homepage |
+| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all three canonical content routes |
 | `/favicon.svg` | `public/favicon.svg` | Static SVG favicon |
 | `/og.svg` | `public/og.svg` | Static 1200 by 630 social-preview image |
 | `/story` | `next.config.ts` | Permanent redirect to `/#story` |
@@ -56,8 +60,9 @@ email link, and copyright notice.
 | `/why-asymmetrico` | `next.config.ts` | Permanent redirect to `/#story` |
 | `/work/asymmetrico-platform` | `next.config.ts` | Permanent redirect to `/` |
 
-Next.js uses HTTP 308 for these `permanent: true` redirects. Only `/` is listed
-in the generated sitemap.
+Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/privacy`, and
+`/support` are listed in the generated sitemap. The existing apex canonical origin remains
+`https://asymmetri.co`; the requested `www` URLs must also serve the actual pages.
 
 ### Content and metadata
 
@@ -66,7 +71,7 @@ in the generated sitemap.
 - the company name, canonical URL, email address, and footer descriptor;
 - navigation labels and destinations;
 - page title, description, and social-preview text;
-- all main homepage copy;
+- all main homepage copy and typed Motion privacy/support sections;
 - the public hero image path, dimensions, and alternative text.
 
 `app/layout.tsx` consumes those values to configure:
@@ -77,6 +82,11 @@ in the generated sitemap.
 - Open Graph and X metadata;
 - Organization JSON-LD;
 - language, theme color, and color-scheme metadata.
+
+`lib/metadata.ts` supplies route-specific utility titles, descriptions, canonicals,
+and social metadata. `components/utility-page.tsx` renders the shared readable
+article, section links, headings, lists, contact and related-page link. These are
+server components and add no custom browser JavaScript.
 
 This keeps contact information and public facts out of presentation components.
 
@@ -97,8 +107,8 @@ are recorded in `docs/ASSET_MANIFEST.md`.
 
 ### Static and server responsibilities
 
-The homepage, robots response, and sitemap are generated from repository content
-during the standard Next.js build. Static files remain under `public/` in the
+The homepage, utility pages, robots response, and sitemap are generated from
+repository content during the standard Next.js build. Static files remain under `public/` in the
 production checkout and are served at their root-relative URLs.
 
 The DigitalOcean deployment still requires a running Node.js process. The
@@ -129,6 +139,10 @@ Shared components remain small:
 - `SiteHeader` renders the skip link, brand link, and primary navigation.
 - `SiteFooter` renders the brand descriptor and contact metadata.
 - `HomePage` owns the four-section homepage composition.
+- `UtilityPage` renders the two Motion utility articles.
+
+See `docs/WEBSITE_PRIVACY_AUDIT.md` for source, browser and infrastructure
+evidence, bounded hosting disclosure, and unresolved retention/mailbox facts.
 
 ### TypeScript
 
@@ -166,14 +180,18 @@ No external font service, CSS-in-JS runtime, or UI component library is used.
 │   ├── globals.css          Global design tokens and responsive presentation
 │   ├── layout.tsx           Metadata, icons, JSON-LD, viewport, and root layout
 │   ├── page.tsx             One-page public homepage composition
+│   ├── privacy/page.tsx      Motion Privacy Policy
+│   ├── support/page.tsx      Motion Support
 │   ├── robots.ts            Generated robots.txt response
 │   └── sitemap.ts           Generated sitemap.xml response
 ├── components/
 │   ├── logo.tsx             Reusable brand mark and wordmark
 │   ├── site-header.tsx      Skip link, brand link, and anchor navigation
-│   └── site-footer.tsx      Descriptor, mailbox, and copyright
+│   ├── utility-page.tsx      Shared utility article presentation
+│   └── site-footer.tsx      Descriptor, mailbox, utility links, and copyright
 ├── content/
 │   └── site.ts              Typed public copy, facts, links, and image metadata
+├── lib/metadata.ts          Utility route metadata helper
 ├── public/
 │   ├── brand/               Approved logo and icon assets
 │   ├── images/              Approved photography and retained research imagery
