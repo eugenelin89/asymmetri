@@ -144,3 +144,13 @@ graph: Next.js critical, sharp high, nanoid high and baseline-browser-mapping
 moderate. No automatic fix or dependency upgrade was run. This is not a clean
 security audit; the existing website privacy audit records the known input-path
 limitations. Dependency remediation remains a separate task.
+
+
+## Tutorial extension, September 16, 2026
+
+The subsequent tutorial request authorizes current retained pitching media in genuine
+app captures and reads Motion snapshot `411238a2eaf82f60c7a229dfbb3d5ee7a5f6d6b7`.
+Its purpose requires naming the six normal results and teaching the full normal
+workflow, while retaining the interpretation limits above. It does not change the
+marketing page's concise measurement treatment or release availability. See
+`TUTORIAL_REVIEW.md` for the complete feature/visual matrix and exclusions.

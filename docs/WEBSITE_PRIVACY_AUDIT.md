@@ -157,3 +157,21 @@ is byte-identical; the only added public artwork is the approved generic icon.
 No private app screenshot or athlete record is published. Current source/claims
 and asset provenance are recorded in `MOTION_PRODUCT_REVIEW.md` and
 `ASSET_MANIFEST.md`; internal documentation is not served as a website route.
+
+
+## Tutorial extension, September 16, 2026
+
+The owner explicitly authorized retained pitching photos/videos visible in current
+Motion screenshots for this tutorial. Twenty genuine Mirroring crops expose only
+needed workflow context and authorized pitching media. Profile name/DOB/history,
+location/time-zone detail, system chrome, notifications and unrelated lower settings
+are excluded. No Photos picker contents, private source-organization UI, contact
+identity or account details are published. Current captures preserve actual saved
+values; generated artwork is clearly instructional and contains no app UI/results.
+
+The tutorial adds ephemeral radio/navigation state and native disclosures, with no
+visitor data submission, persistence, tracking or external services. All media are
+local. The existing Privacy Policy and effective date are unchanged. Support gains
+one getting-started tutorial link. See `TUTORIAL_REVIEW.md` for the device action
+scope and `ASSET_MANIFEST.md` for the exact publication set. This dated extension
+supersedes only the prior no-screenshot finding for these explicitly approved assets.

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { motion, site } from "@/content/site";
+import { motion, site, tutorial } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     { url: `${site.company.siteUrl}${motion.path}`, changeFrequency: "monthly", priority: 0.9 },
     ...site.footerNavigation.map((item) => ({
-      url: `${site.company.siteUrl}${item.href}`,
+      url: item.href === tutorial.path ? tutorial.canonical : `${site.company.siteUrl}${item.href}`,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),

@@ -56,8 +56,8 @@ The public site renders one authentic pitching-delivery photograph in the hero.
 It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
 and uniform lettering remain visible without localized softening. The approved
 Motion pitcher-family windup icon appears in the product introduction and
-product hero. No research imagery, interface visual, fake metric or second photo
-is rendered. Future additions must earn a distinct narrative role and remain within the privacy and
+product hero. No research imagery or fake metric is rendered. The separate tutorial includes
+authorized app captures and original instructional imagery described below. Future additions must earn a distinct narrative role and remain within the privacy and
 evidence rules in `docs/ASSET_MANIFEST.md`.
 
 ## Accessibility
@@ -86,3 +86,23 @@ Reduced motion removes both transitions and hover translation.
 
 Focus Blue is 4.65:1 against white and 4.08:1 against ink. The September 16
 product pass darkened the existing blue ring for visibility on both surfaces.
+
+
+## Tutorial reading system
+
+The tutorial keeps the existing header/footer, font, focus and Motion color tokens.
+A modest mineral hero introduces the task. Numbered modules and thin dividers carry
+the hierarchy; no decorative dashboards or fabricated app frames are used. Desktop
+pairs prose with screenshots and uses a sticky module index. At 700px and below,
+the index becomes two columns and all content becomes one reading column. Body copy
+is 16px; controls have at least 44px targets. Radio labels wrap rather than overflow.
+At tablet widths screenshots follow their associated prose. Figures keep their full
+proportions, captions and source labels; original files open in a new tab.
+
+The physical setup artwork is flat editorial teal/mineral illustration with generic
+adult figures and abstract screens. Guide geometry is a rectangle plus a dashed
+centre line, following source proportions; it must never imply calibration.
+Screenshot crops retain original UI/evidence pixels. Do not recolor, replace labels,
+change measurements, trace a fake screen or disguise a generated asset as a capture.
+All instructions are also readable text. Native details and anchors, focus rings,
+reduced motion and no-JavaScript access are part of the design.

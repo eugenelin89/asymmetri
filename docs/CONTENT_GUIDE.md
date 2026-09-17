@@ -11,6 +11,7 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - founder story, pitching focus, and current product positioning;
 - the `motion` product structure, release state, platform, workflow, limitations,
   privacy summary, icon and social image;
+- typed `tutorial` modules/steps, troubleshooting and `tutorialMedia` labels/captions;
 - approved image paths and alt text;
 - closing calls to action;
 - Motion Privacy Policy and Support content in `motionPages`, including the
@@ -127,6 +128,9 @@ public founder story. Describe the work with players and pitchers without
 identifying any individual.
 
 Synthetic product visuals must remain clearly described as reconstructions.
+The tutorial is an explicit, bounded owner-authorized exception for current Motion
+pitching media within genuine screenshots. It does not authorize publishing profile
+identity, unrelated Photos, system UI or screenshots from the private source app.
 
 ## Routes and navigation
 
@@ -160,7 +164,8 @@ the user explicitly requests it.
 
 Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
 The current site renders one privacy-reviewed pitching photograph and the
-owner-approved Motion pitcher-family icon. No app-interface capture is published. Alt text
+owner-approved Motion pitcher-family icon. The tutorial also renders the specifically owner-authorized current Motion
+app captures and clearly labelled original instructional illustrations. Alt text
 should describe the visible action and purpose without adding identity,
 affiliation, or performance claims.
 
@@ -176,3 +181,27 @@ adjacent explanation and should not rely only on embedded image text.
 - Metadata and structured data match visible content.
 - Links, alt text, and route documentation are updated.
 - Relevant checks in `docs/TESTING.md` have been run.
+
+
+## Tutorial maintenance
+
+Keep the ten stable module hashes and individual step IDs in `tutorial` stable when
+editing prose. The footer, Support getting-started section and Motion workflow link
+to `/tutorial`; it does not add primary-header clutter. The exact tutorial canonical
+is `https://www.asymmetri.co/tutorial`; other route canonicals are unchanged.
+
+Use authentic app screenshots for safely reachable software states. Use clearly
+instructional generated illustrations for real-world physical actions that should
+not be recreated solely for tutorial capture. Never generate fake controls, Results
+screens or values. Crops may remove unrelated private content, but must not retouch
+UI or evidence. Label every image with its source type and keep essential directions
+in real page text. Profile fields can be taught without showing a private profile.
+
+Normal V1 teaching enumerates six supported results, with scientific limits separate
+from availability. Side descriptors remain experimental. Preserve conditional HFR,
+manual event confirmation, spatial subject selection, image-relative geometry,
+non-calibrating setups/profile, descriptive history and local-data caveats. Match
+new wording against current source and accepted Decision 50, not an old screenshot.
+The coverage matrix and rationale for omitted dedicated screenshots are in
+`TUTORIAL_REVIEW.md`; generation prompts and asset processing are in
+`TUTORIAL_MEDIA.md`. The existing public policy text/effective date is unchanged.

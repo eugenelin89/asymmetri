@@ -13,7 +13,7 @@ a separate Vinext and Cloudflare Worker build path for OpenAI Sites.
 
 The repository proves that the current site has:
 
-- four indexed public content pages at `/`, `/motion`, `/privacy`, and `/support`;
+- five indexed public content pages at `/`, `/motion`, `/tutorial`, `/privacy`, and `/support`;
 - five homepage sections: hero, Story, Approach, Product and Contact;
 - local brand, favicon, social-preview, and photography assets;
 - configuration-driven permanent redirects from former routes;
@@ -40,7 +40,7 @@ The repository proves that the current site has:
 
 `components/site-header.tsx` provides the skip link, homepage brand link, and
 product and anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
-email link, Privacy and Support links, and copyright notice. Primary navigation
+email link, Tutorial, Privacy and Support links, and copyright notice. Primary navigation
 contains root-relative Story/Approach/Product/Contact homepage anchors in page
 order, so it works from every route. The Product target is keyboard-focusable;
 the existing header scroll padding keeps anchored content visible.
@@ -51,10 +51,11 @@ the existing header scroll padding keeps anchored content visible.
 | --- | --- | --- |
 | `/` | `app/page.tsx` | Main public marketing page |
 | `/motion` | `app/motion/page.tsx` | Detailed Motion product marketing page |
+| `/tutorial` | `app/tutorial/page.tsx` | Progressive normal V1 product tutorial |
 | `/privacy` | `app/privacy/page.tsx` | Asymmetri Motion Privacy Policy |
 | `/support` | `app/support/page.tsx` | Asymmetri Motion Support |
 | `/robots.txt` | `app/robots.ts` | Generated crawler rules and sitemap reference |
-| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all four canonical content routes |
+| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all five canonical content routes |
 | `/favicon.svg` | `public/favicon.svg` | Static SVG favicon |
 | `/og.svg` | `public/og.svg` | Static 1200 by 630 social-preview image |
 | `/story` | `next.config.ts` | Permanent redirect to `/#story` |
@@ -64,9 +65,11 @@ the existing header scroll padding keeps anchored content visible.
 | `/why-asymmetrico` | `next.config.ts` | Permanent redirect to `/#story` |
 | `/work/asymmetrico-platform` | `next.config.ts` | Permanent redirect to `/` |
 
-Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/motion`, `/privacy`, and
+Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/motion`, `/tutorial`, `/privacy`, and
 `/support` are listed in the generated sitemap. The existing apex canonical origin remains
-`https://asymmetri.co`; the requested `www` URLs must also serve the actual pages.
+`https://asymmetri.co` for the existing pages. The tutorial uses the owner-requested
+`https://www.asymmetri.co/tutorial` canonical and sitemap entry; both hosts must serve
+the actual route. No host redirect or infrastructure change is introduced.
 
 ### Content and metadata
 
@@ -381,3 +384,27 @@ sudo nginx -T
 
 Routine application redeployment does not require a DNS, certificate, Nginx,
 port, or systemd change. See `docs/DEPLOYMENT.md` for the production procedure.
+
+
+## Progressive tutorial
+
+`content/site.ts` exports typed `tutorial` modules/steps and `tutorialMedia` captions,
+alt text, exact dimensions and visual-source labels. `app/tutorial/page.tsx` renders
+all essential prose, lists, troubleshooting disclosures and media as server content.
+The narrowly scoped `components/tutorial-reader.tsx` receives server-rendered header
+and content slots plus a small navigation index. It adds module selection, ephemeral
+Record/Import and Back/Side radios, Previous/Next and complete-guide mode.
+
+The URL hash is the navigation source of truth through `useSyncExternalStore`.
+Deep links reveal their module and branch; browser Back/Forward follows hash history.
+After hydration, inactive modules use native `hidden`. Before hydration, or with no
+JavaScript, all modules and paths remain visible and native anchors/disclosures work.
+No progress is stored, sent to a server or used for analytics. Print CSS exposes all
+modules and branches. Focus follows hash destinations; scrolling respects the shared
+reduced-motion preference. Image links open the original asset in another tab.
+
+Tutorial captures are local lossless PNG crops rendered without image optimization
+to preserve screenshot pixels. Original generated setup illustrations use local
+WebP; guide/sequence diagrams are local SVG. All have intrinsic dimensions, lazy
+loading, responsive CSS, text equivalents and explicit visual-source labels. No
+new dependency, backend, form submission, database, account or external embed exists.

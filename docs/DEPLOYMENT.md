@@ -266,7 +266,9 @@ system packages during a content deployment; resolve the runtime mismatch with
 the owner before installation/build. For the September 16 Motion utility-page
 publication, the owner explicitly authorized the existing Node 22 runtime with
 production checks/build before restart. This is a scoped exception, not a change
-to `.nvmrc`. Local validation still uses Node 24.
+to `.nvmrc`. The owner separately renewed this exception for the Motion tutorial
+publication, again requiring successful production checks/build before restart
+and leaving Node unchanged. Local validation still uses Node 24.
 The installed Next.js 16.2.12
 package requires Node.js 20.9.0 or newer. Production should normally match the
 repository target instead of relying only on the framework minimum.
@@ -431,7 +433,7 @@ curl -sS -o /dev/null \
 Then check important routes against the local Next.js server:
 
 ```bash
-for p in / /motion /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
+for p in / /motion /tutorial /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
   curl -sS -o /dev/null \
     -w "$p -> HTTP %{http_code}  %{redirect_url}\n" \
     "http://127.0.0.1:3001$p"
@@ -440,7 +442,7 @@ done
 
 Expected results:
 
-- `/`, `/motion`, `/privacy`, and `/support` return HTTP 200 with their intended content.
+- `/`, `/motion`, `/tutorial`, `/privacy`, and `/support` return HTTP 200 with their intended content.
 - `/favicon.svg` returns HTTP 200.
 - `/robots.txt` returns HTTP 200.
 - `/sitemap.xml` returns HTTP 200.
@@ -448,10 +450,11 @@ Expected results:
 - `/contact` returns an HTTP 308 permanent redirect to `/#contact`.
 
 Verify actual unauthenticated content at `https://www.asymmetri.co/motion`,
-`https://www.asymmetri.co/privacy`,
+`https://www.asymmetri.co/tutorial`, `https://www.asymmetri.co/privacy`,
 `https://www.asymmetri.co/support`, and the homepage. A redirect to the homepage
-is not publication success. Check titles, apex canonicals, mutual links, footer
-links, `mailto:info@asymmetri.co`, mobile readability, all four sitemap routes
+is not publication success. Check titles, the existing apex canonicals and the tutorial’s explicit www
+canonical, mutual links, footer links, `mailto:info@asymmetri.co`, mobile readability,
+all five sitemap routes
 and permissive robots rules. Also verify the apex URLs, product metadata and
 SoftwareApplication schema, and the Motion icon/social assets. Product release
 wording must still match the verified source state; website publication does not
@@ -826,3 +829,13 @@ This workflow must not be substituted for the DigitalOcean commands above.
 OpenAI Sites publishing requires a successful Vinext build, an explicitly
 requested release, exact source provenance, and the Sites version workflow.
 Generated `dist/` output is ignored and is not committed.
+
+
+## Tutorial release checks
+
+For `/tutorial`, confirm the exact title and canonical
+`https://www.asymmetri.co/tutorial`, all ten module jumps, hash deep links,
+Record/Import and Back/Side choices, full-guide mode, image-original links, genuine
+screenshots, labelled setup illustrations and mobile layout. Check Support →
+Tutorial, Motion → Tutorial and shared footer links. Serve tutorial assets locally;
+no DNS, Nginx, TLS, OS, Node or firewall change is needed for this route.

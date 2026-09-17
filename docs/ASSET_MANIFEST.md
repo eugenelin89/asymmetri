@@ -140,3 +140,84 @@ dark/tinted variants are not copied.
 `motion-release.svg` and `motion-release.png` are retained historical variants
 with no current page or metadata references. The company logo, favicons,
 `public/og.svg`, and authentic hero photograph remain unchanged.
+
+
+## Motion tutorial publication, September 16, 2026
+
+The owner expressly authorizes current retained pitching media inside genuine
+Motion screenshots for this tutorial. This narrowly supersedes the earlier
+no-interface-publication assessment for the following assets only. All other
+private-source exclusions remain. `TUTORIAL_REVIEW.md` records source authority,
+coverage, capture actions and omissions. `TUTORIAL_MEDIA.md` records complete
+generation prompts, methods, media identifiers and privacy/rights review.
+
+Use authentic app screenshots for safely reachable software states. Use clearly
+instructional generated illustrations for real-world physical actions that should
+not be recreated solely for tutorial capture. No app screen or result is generated.
+
+All paths below are in `public/images/motion/tutorial/`. Screenshots are lossless
+PNG crops of fresh 410×898 Mirroring captures of app 1.0 (1), without UI/value
+retouching. Crop coordinates are x, y, width, height in original pixels. Each is
+rendered responsively with its original aspect ratio and an original-image link.
+Each screenshot shares the owner authorization and privacy review above.
+
+| Asset | Dimensions | Source / processing | Public role and alt text |
+| --- | --- | --- | --- |
+| `acquisition.png` | 370×246 | Current app; crop 20, 422, 370, 246 | The acquisition actions in My Pitches. Choose the path that matches your video. Alt: “My Pitches actions: Explore your pitches, Import Video and Record New Pitch.” |
+| `back-setup.webp` | 1536×1024 | Original ImageGen 1536×1024; WebP quality 88 | Back View: place the phone behind the pitcher. Portrait is recommended. Positioning illustration, not calibrated geometry or prescribed technique. Alt: “An upright phone on a tripod behind a full-body pitcher facing the throwing target.” |
+| `side-setup.webp` | 1536×1024 | Original ImageGen 1536×1024; WebP quality 88 | Side View: record from beside the pitcher. Landscape is recommended. Leave room for the whole delivery. Alt: “A horizontal phone on a tripod beside a pitcher, with room for the entire stride.” |
+| `framing-guides.svg` | 960×650 | Original SVG; no raster processing | The framing guide uses a rectangle and dashed centre line. This diagram follows the current guide proportions; it is not an app screen or calibration tool. Alt: “Portrait Back and landscape Side framing rectangles, each with a dashed vertical centre line and a full-body figure inside.” |
+| `recording-sequence.svg` | 960×320 | Original SVG; no raster processing | Set up, record the delivery, stop and wait, then review. Illustration of the physical sequence; phone screens are abstract. Alt: “Four physical recording stages: a steady phone, a pitcher throwing, waiting for saving, and reviewing the saved pitch.” |
+| `camera-view.png` | 370×483 | Current app; crop 20, 359, 370, 483 | An existing Back View pitch. Confirm the camera position used for your own video. Alt: “Camera View step with Back View selected and the Next button.” |
+| `throwing-arm.png` | 370×421 | Current app; crop 20, 423, 370, 421 | Choose the pitcher's throwing arm, regardless of where the arm appears in the image. Alt: “Throwing Arm step with Right selected, guidance for Unknown, and Back and Next buttons.” |
+| `mark-ffc.png` | 370×698 | Current app; crop 20, 158, 370, 698 | An existing FFC mark. The exact selected frame and the saved frame are shown separately. This screenshot does not prescribe an event frame for another video. Alt: “Saved Front Foot Contact at exact frame 831 of 1,296, with playback, fine adjustment and Move Front Foot Contact controls.” |
+| `analyze.png` | 370×418 | Current app; crop 20, 458, 370, 418 | An existing pitch with current results. Viewing this screen does not run a new analysis. Alt: “Pitch Mechanics summary showing three of three results up to date and the Analyze Pitch button.” |
+| `results-back.png` | 346×387 | Current app; crop 30, 469, 346, 387 | One real saved Back View result at FFC. The displayed value describes this image; it is not a target or grade. Alt: “A saved 2D Trunk-Segment Orientation result of 4 degrees toward image left, with a Details and Annotated Image link.” |
+| `evidence.png` | 315×723 | Current app; crop 45, 158, 315, 723 | The annotated evidence behind that result. The original image proportions, landmarks and saved value are unchanged. Alt: “The saved pitching frame annotated with trunk landmarks and a vertical reference, followed by Save to Photos and Share.” |
+| `explorer-home.png` | 370×650 | Current app; crop 20, 166, 370, 650 | Start with the marked video frames or explore available measurements. Alt: “Your pitching history with Review marked frames and Measurement history entry points.” |
+| `marked-history.png` | 370×690 | Current app; crop 20, 169, 370, 690 | Review the exact marks you saved. The number of marked pitches depends on the selected event and filters. Alt: “Marked frames for Front Foot Contact, List and Frames options, saved pitch thumbnail and Choose A and Choose B buttons.” |
+| `choose-b.png` | 370×580 | Current app; crop 20, 110, 370, 580 | Select a different pitch for B. Both sides compare the same marked event. Alt: “Choose pitch B sheet with one retained pitch already selected as A and another eligible FFC mark.” |
+| `comparison.png` | 370×661 | Current app; crop 20, 180, 370, 661 | A real pair with different camera views. The layout preserves image proportions; placing frames together does not make their perspectives equivalent. Alt: “Two retained Front Foot Contact frames side by side, with Open A, Open B and Auto layout controls.” |
+| `measurement-chooser.png` | 370×654 | Current app; crop 20, 185, 370, 654 | Choose one measurement. This crop shows the upper part of the list; lead-knee bend at FFC and Ball Release are also available for Side View. Alt: “The upper part of the measurement chooser, showing Back-view measures and the Side-view ankle-span ratio.” |
+| `chart.png` | 370×571 | Current app; crop 20, 169, 370, 571 | Trunk-orientation history in Chart. These are actual saved observations, not benchmark or ideal values. Alt: “History Chart with individual recorded values in degrees and Chart, Table and Evidence tabs.” |
+| `table.png` | 370×535 | Current app; crop 20, 216, 370, 535 | Table makes individual contributors readable. A pitch date and the date the video was added can differ. Alt: “History Table showing two dated retained pitches and their saved degree values.” |
+| `questions.png` | 314×235 | Current app; crop 28, 209, 314, 235 | Four ways to ask a descriptive question of supported saved history. Alt: “Explorer question menu: History, Two pitches, Grouped summary and Two periods.” |
+| `filters.png` | 370×520 | Current app; crop 20, 133, 370, 520 | Options narrow the included history. Apply confirms your changes; Cancel leaves the current question unchanged. Alt: “Explorer options for pitch dates, camera view and throwing side, with Cancel and Apply.” |
+| `date-range.png` | 319×367 | Current app; crop 50, 245, 319, 367 | Choose a relative window, a custom range, all dates or pitches with no known pitch date. Alt: “Date choices: Last 7 days, Last 30 days, Last 90 days, All, Custom and pitches without a pitch date.” |
+| `save-view.png` | 382×310 | Current app; crop 14, 322, 382, 310 | A Saved View remembers a question and its settings. Its results refresh from current history when reopened. Alt: “Save as New View dialog with an empty view name, Cancel and Save buttons.” |
+| `settings.png` | 370×470 | Current app; crop 20, 110, 370, 470 | Settings provides version information and links to privacy and support. Alt: “Settings with About, Privacy Policy and Support.” |
+| `about.png` | 370×275 | Current app; crop 20, 112, 370, 275 | App version and build help support investigate a problem. Your installed version may differ. Alt: “About showing Asymmetri Motion version 1.0 (1).” |
+
+The two generated setup illustrations use generic adult figures and abstract
+phones. They inherit no private photo and imply neither calibrated geometry nor
+ideal mechanics. The original framing/sequence SVGs are instructional diagrams,
+not UI. Generation is owner-authorized; no third-party trademark clearance is
+claimed. No existing asset is changed, replaced or removed, and no additional
+unused tutorial asset is published.
+
+### Final asset SHA-256
+
+- `acquisition.png`: `1e9dccbdb2c4ccf11d88f2de90b7431bfc353ca52339ffae05773b7c488c7dff`.
+- `back-setup.webp`: `54cd8686b64b37a502004d083b966756207267f0b15ba77bdc5f8ff4cce45677`.
+- `side-setup.webp`: `ab566226df0f8ddf24757c5d3a234f995d5a68daf3f0b976edc9b7795fc9f3a9`.
+- `framing-guides.svg`: `25aabfd878d48b41e7b3b15380a550a9d99de9503dcb4c52c96acda39860a01e`.
+- `recording-sequence.svg`: `c8d8f72ee76cd86fa540a2415dd892324222cf2ed29b83745e0260c2efe53250`.
+- `camera-view.png`: `b9c038cd58e0ecfbf78c0a0a764aa65b34b9dd9c97a54bc550ac8810db1a66df`.
+- `throwing-arm.png`: `df7fbf087b82e29eac993f6e693854df82a91d9bde80338632b5d152ef4889b8`.
+- `mark-ffc.png`: `528fad3f3dc5030bec062e2e2e3003e95fabd0e6719bd0233bd0426f78944be5`.
+- `analyze.png`: `393e36d4ffa8103a3fa1d352b2021dfba1660d51c33b481b5d11eeaed1e65bb4`.
+- `results-back.png`: `719154338dcbbacd2d06c8dd34479098e0981d58ef06aca1bf98bf8b7b334faf`.
+- `evidence.png`: `9d0845564ab1d0b782f6c8bb6cea43290db7637f6d226f496a263312331be236`.
+- `explorer-home.png`: `4612b037716ad5f9d4b5e46b35267aae58a0ba5de5d1fc7f9a657613874b48f8`.
+- `marked-history.png`: `7b465b8655946d534efa0ddb149a843ac409452ee89c58372f07e2338c22d374`.
+- `choose-b.png`: `ea7ff7586bc32468cd07d1e4d5c1e1b083bbf95f1ce95ea87886f98627a6b9b0`.
+- `comparison.png`: `484703155da9e3a9b889d86b80a4ff67e3eb6c7a2fad6af83fe95a455ea60e08`.
+- `measurement-chooser.png`: `0648ef9abd26075d8cf71bc55bd5a8a5bea9ddd26884f1644237d9c029929972`.
+- `chart.png`: `6e064befcdfe16de92e061e50b026d516dba6b6899f6d32a976924f5ef80061e`.
+- `table.png`: `83e51abb1814f2e8d0111666f9bf6272f92390c79c271dcf5f46f80f029748a8`.
+- `questions.png`: `5677425f3c8a85c372e6b450c82c5157726c809d41448b321a48d1a624b0321b`.
+- `filters.png`: `22634d25432c3205f718bf5532b4a48e3e83caeea620a5618a62a77375620c62`.
+- `date-range.png`: `3b32d41a0994a63b688091ae8650cc90174eefce093562788d9077f98b0e9f59`.
+- `save-view.png`: `317acb8f50dc709e626ecdb8dac5e64688998bcb2f210c3b710aa46654652588`.
+- `settings.png`: `56b6e592af80774c951b1f17666b89852c342f4c0046c5fba3d54bb8e97ec267`.
+- `about.png`: `14f777ae70f306dad5ad48e67b0acdbee334f05b340efc7530c22a9b00a73528`.

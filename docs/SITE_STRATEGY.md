@@ -29,7 +29,7 @@ homepage order. All four use root-relative homepage anchors; Product targets
 `/#product` from every route. The Product section's Explore button opens `/motion`.
 Privacy and Support remain indexed utility
 articles with quiet footer links, mutual links and contextual product-page links.
-All four pages appear in the sitemap. Legacy redirects remain intact.
+All five pages appear in the sitemap. Legacy redirects remain intact.
 
 ## Evidence and privacy
 
@@ -40,8 +40,25 @@ No future roadmap, App Store listing, price or scientific validation is inferred
 Comparisons describe recorded differences, not improvement or causation.
 
 The approved pitcher-family icon nests Motion's teal/mineral palette within the Labs
-identity. No app screenshot, private footage, fixture measurement or public white
-paper is published. The existing photograph and its owner-approved marks remain
+identity. Marketing pages publish no fixture measurement or public white paper. The
+tutorial uses specifically owner-authorized retained pitching media inside genuine
+current app captures, with profile/system/private details excluded. The existing photograph and its owner-approved marks remain
 unchanged. No customer, private organization or source repository appears in the
 rendered site. There is no new data collection. Parents support development
 alongside coaches; the app does not prescribe training.
+
+
+## Practical tutorial
+
+`/tutorial` is a product guide rather than a second sales page. Ten modules connect
+acquisition, setup, exact marking, explicit analysis, evidence, saved pitches,
+Explorer, profile/settings and troubleshooting. Readers can follow Previous/Next,
+choose Record/Import and Back/Side, jump to stable step links or browse everything.
+The full content remains readable without JavaScript. Small screens use a two-column
+module index and a single reading column, with original images available to enlarge.
+
+Authentic screenshots explain safely reachable software states. Clearly labelled
+original illustrations explain physical camera placement, framing and recording.
+No physical pitching activity is staged solely for screenshots, no result is invented,
+and no generated image is represented as app UI. Support and Motion provide contextual
+links; the shared footer adds Tutorial while the primary navigation stays compact.

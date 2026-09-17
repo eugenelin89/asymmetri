@@ -18,8 +18,10 @@ architecture. Verified V1 capability is distinct from public release availabilit
 ## Routes
 
 `/` is the company marketing page and `/motion` is the detailed product page.
+`/tutorial` teaches the complete normal V1 workflow with interactive modules,
+mobile-friendly branches, authentic app captures and labelled setup illustrations.
 `/privacy` and `/support` provide the Asymmetri Motion Privacy Policy and Support guidance, with quiet footer links and mutual
-links. All four routes are indexable and included in the sitemap. The former
+links. All five routes are indexable and included in the sitemap. The former
 `/story`, `/contact`,
 `/about`, `/work`, `/why-asymmetrico`, and named-product routes permanently
 redirect to the relevant homepage section or the homepage itself. Next.js also
@@ -31,7 +33,8 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind
 Nginx and systemd on a DigitalOcean Ubuntu Droplet. There is no analytics, form
-backend, database, authentication, or public athlete data.
+backend, database, authentication or visitor tracking. Tutorial screenshots contain only the
+owner-authorized retained pitching media described in the asset manifest.
 
 ## Local development
 
@@ -68,3 +71,5 @@ changing public assets.
 - [Motion product claims and source review](docs/MOTION_PRODUCT_REVIEW.md)
 - [Website privacy audit](docs/WEBSITE_PRIVACY_AUDIT.md)
 - [Asset manifest](docs/ASSET_MANIFEST.md)
+- [Tutorial coverage and source review](docs/TUTORIAL_REVIEW.md)
+- [Tutorial media and generation prompts](docs/TUTORIAL_MEDIA.md)

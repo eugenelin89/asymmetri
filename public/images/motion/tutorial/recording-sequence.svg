@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="320" viewBox="0 0 960 320" role="img" aria-labelledby="title desc">
+<title id="title">The physical recording sequence</title><desc id="desc">A steady phone, a pitcher throwing, a pause for saving and a saved pitch ready for review. Abstract instructional symbols, not app controls.</desc>
+<rect width="960" height="320" rx="16" fill="#e8efed"/>
+<g fill="none" stroke="#006b64" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+<rect x="73" y="55" width="62" height="100" rx="8"/><path d="M104 155v45m0-27-37 48m37-48 37 48"/>
+<path d="m322 118 27 45m-12-35 46-35 37 6m-71 64-41 39-34 17m75-56 42 56h39"/><circle cx="315" cy="91" r="16" fill="#006b64"/><circle cx="435" cy="92" r="6" stroke="none" fill="#006b64"/>
+<circle cx="605" cy="135" r="54"/><path d="M605 97v41l27 19"/>
+<rect x="800" y="57" width="70" height="130" rx="9"/><path d="m817 128 14 14 25-30"/>
+<path d="M195 135h43m-12-12 12 12-12 12m253-12h44m-12-12 12 12-12 12m215-12h44m-12-12 12 12-12 12" stroke-width="4"/>
+</g>
+<g font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#152a27" text-anchor="middle"><text x="104" y="275">Set up</text><text x="350" y="275">Record</text><text x="605" y="275">Stop and wait</text><text x="836" y="275">Review</text></g>
+</svg>

@@ -3,7 +3,7 @@ import Image from "next/image";
 import { EvidenceChain } from "@/components/evidence-chain";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { motion, site } from "@/content/site";
+import { motion, site, tutorial } from "@/content/site";
 
 export const metadata: Metadata = {
   ...motion.metadata,
@@ -77,6 +77,7 @@ export default function MotionPage() {
             <div className="product-heading section-heading">
               <p className="eyebrow">{motion.workflow.eyebrow}</p>
               <h2>{motion.workflow.headline}</h2>
+              <a className="text-link motion-tutorial-link" href={tutorial.link.href}>{tutorial.link.label} →</a>
             </div>
             <ol className="workflow-list">
               {motion.workflow.steps.map((step, index) => (

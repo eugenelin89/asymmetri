@@ -24,6 +24,7 @@ When routes or shared layout code change, verify:
 
 - `/`
 - `/motion` (real product page, truthful release status)
+- `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/story`, `/contact`, and `/about` (permanent redirects to homepage anchors)
 - `/work`, the legacy name route, and the named-product URL (permanent redirects
@@ -34,10 +35,10 @@ When routes or shared layout code change, verify:
 - `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets. Verify footer links on all four pages, mutual
+broken public assets. Verify footer links on all five pages, mutual
 Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
-The sitemap must include all four canonical routes; robots must allow them.
+The sitemap must include all five canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
 against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
 network resources for accidental tracking, forms or external scripts/fonts.
@@ -89,7 +90,8 @@ After content, asset, metadata, or product-visual changes:
 - scan for the private source organization and its abbreviations;
 - scan for former company-name/product combinations;
 - scan for credentials, private keys, tokens, and athlete information;
-- confirm public product data is synthetic;
+- confirm public product reconstructions are synthetic; the specifically authorized
+  tutorial captures must retain genuine values and exclude profile/system details;
 - confirm verified V1 capabilities, scientific interpretation limits and future
   direction remain distinct;
 - confirm the asset manifest reflects all public asset changes.
@@ -137,3 +139,28 @@ Store link or price. Check the icon and product Open Graph/Twitter image, factua
 SoftwareApplication schema and absence of offer/rating fields. Compare the utility
 content export with its prior committed version; shared navigation must not alter
 the audited Privacy/Support bodies. New assets require provenance and rights review.
+
+
+## Tutorial regression
+
+At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all five routes.
+Inspect the actual `innerWidth` when browser zoom affects viewport overrides.
+Exercise all ten module links, Previous/Next and browser Back/Forward; load a fresh
+URL containing a module hash and a step hash. Check deep links into a previously
+hidden branch, Record/Import and Back/Side radios, complete-guide mode, module step
+contents, image-original links and native troubleshooting disclosures. Keyboard
+focus must reach the newly exposed section and remain visible; radio arrows and
+summary Enter/Space must work without pointer dependence.
+
+Check all module/step content is present in the initial server HTML. A no-JavaScript
+render must expose all ten modules and both paths/views with working native anchors
+and disclosures. Verify reduced motion removes smooth scrolling and animation.
+Check screenshot natural dimensions, no broken/missing-alt images, image labels,
+consistent aspect ratios, footer/context links, canonical/OG/description, sitemap
+uniqueness and console errors. Privacy review includes final image crops, not only
+text scans. Generated physical setup imagery must never be mistaken for app UI.
+
+The tutorial adds no persistent browser storage, cookies, forms, tracking or external
+runtime resources. Support's only substantive addition is the tutorial link; privacy
+copy and policy date must remain unchanged. Runtime device preservation claims must
+be limited to the actions actually performed, not inferred byte-level preservation.
