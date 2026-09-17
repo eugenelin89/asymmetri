@@ -58,6 +58,9 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
+- the Story → Approach → Product → Get in touch navigation follows homepage
+  order; Product reaches `/#product` from every route and is visible below the
+  sticky header; the section's Explore button still opens `/motion`;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
 - image loading, crops, and alt text;

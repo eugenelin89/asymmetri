@@ -130,9 +130,12 @@ Synthetic product visuals must remain clearly described as reconstructions.
 
 ## Routes and navigation
 
-The homepage is the company narrative with `#story`, `#approach`, and `#contact`
-anchors. `/motion` is the detailed product page, linked from primary navigation
-and the homepage introduction. Privacy and Support are separate indexed utility
+The homepage follows `#story`, `#approach`, `#product`, then `#contact`. Product is
+the final substantive section before the contact close, with the eyebrow
+“Product” rather than “Our first product.” Primary navigation follows that order
+and uses root-relative anchors from every route. `/motion` is the detailed
+product page, reached through “Explore Asymmetri Motion” in `#product`.
+Privacy and Support are separate indexed utility
 pages with quiet footer links, mutual article links and contextual product links. Former secondary routes
 redirect permanently. When adding or removing a
 public route:

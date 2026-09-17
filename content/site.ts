@@ -23,9 +23,9 @@ export const site = {
       "Introducing Asymmetri Motion. Pitching evidence that supports coaching.",
   },
   navigation: [
-    { label: "Motion", href: "/motion" },
     { label: "Story", href: "/#story" },
     { label: "Approach", href: "/#approach" },
+    { label: "Product", href: "/#product" },
     { label: "Get in touch", href: "/#contact" },
   ] satisfies NavItem[],
   footerNavigation: [
@@ -36,7 +36,7 @@ export const site = {
     eyebrow: "Baseball technology",
     headline: "Better evidence for better pitching.",
     support:
-      "Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents see pitching development more clearly. Our first product, Asymmetri Motion for iPhone, is preparing for release.",
+      "Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents see pitching development more clearly. Asymmetri Motion for iPhone is preparing for release.",
   },
   story: {
     eyebrow: "Where it began",
@@ -110,7 +110,7 @@ export const motion = {
   } satisfies SiteImage,
   socialImage: "/brand/motion-pitcher.png",
   introduction: {
-    eyebrow: "Our first product",
+    eyebrow: "Product",
     paragraphs: [
       "Record a pitch or import video from Photos. Choose the camera view and throwing arm, mark the important moments, and inspect the available projected 2D measurements.",
       "Open annotated evidence to see what contributed to a result. Save pitches, revisit your history and compare supported observations over time. The goal is evidence you can trace back to the pitch.",
@@ -118,7 +118,7 @@ export const motion = {
     link: { label: "Explore Asymmetri Motion", href: "/motion" },
   },
   hero: {
-    eyebrow: "The first product from Asymmetri Labs",
+    eyebrow: "An Asymmetri Labs product",
     support:
       "Pitching video, human-confirmed frame marking, projected 2D measurements, annotated evidence and pitching history. One iPhone workflow, built around evidence you can inspect.",
     link: { label: "How Motion works", href: "#how-it-works" },

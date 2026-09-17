@@ -8,9 +8,10 @@ evidence strengthens coaching without replacing it.
 ## Website purpose
 
 This repository contains the official company website. The landing page
-preserves the company hero and authentic pitching photograph, introduces Motion,
-then connects the founder story, Capture / Understand / Improve approach and
-human-coaching principle to direct contact. A detailed product page explains the
+preserves the company hero and authentic pitching photograph, follows with the
+founder story and Capture / Understand / Improve approach, then presents the
+Product section before the human-coaching close and direct contact. The Product
+menu link targets `/#product`; its Explore button opens `/motion`. That page explains the
 current workflow, inspectable evidence, history, scientific limits and local-first
 architecture. Verified V1 capability is distinct from public release availability.
 

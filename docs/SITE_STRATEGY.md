@@ -9,9 +9,10 @@ It connects everyday video to human-confirmed frames, projected 2D measurements,
 annotated evidence and saved history. A phone is not a motion-capture laboratory.
 
 The homepage preserves the company headline, authentic photograph and founder's
-origin as a coach and division coordinator. Its sequence is hero, substantial
-Motion introduction, founder story, Capture / Understand / Improve, and the
-human-coaching closing/contact. Sensor experiments remain historical context;
+origin as a coach and division coordinator. Its sequence is hero, founder story,
+Capture / Understand / Improve, Product, and the human-coaching closing/contact.
+Product is the final substantive section before contact: the story and approach
+establish the need, then Motion provides a concrete next step. Sensor experiments remain historical context;
 they are not Motion V1 features. The company is broader than one app, while
 Motion is its clear present focus.
 
@@ -23,8 +24,10 @@ an accessible six-stage evidence chain; history and descriptive comparison;
 scientific limits; bounded local-first privacy; and coaching/release contact.
 It uses editorial sections and dividers rather than a feature-card inventory.
 
-Primary navigation is Motion, Story, Approach and Get in touch. The last three
-remain root-relative homepage anchors. Privacy and Support remain indexed utility
+Primary navigation is Story, Approach, Product and Get in touch, matching the
+homepage order. All four use root-relative homepage anchors; Product targets
+`/#product` from every route. The Product section's Explore button opens `/motion`.
+Privacy and Support remain indexed utility
 articles with quiet footer links, mutual links and contextual product-page links.
 All four pages appear in the sitemap. Legacy redirects remain intact.
 

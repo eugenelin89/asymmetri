@@ -14,7 +14,7 @@ a separate Vinext and Cloudflare Worker build path for OpenAI Sites.
 The repository proves that the current site has:
 
 - four indexed public content pages at `/`, `/motion`, `/privacy`, and `/support`;
-- five homepage sections: hero, Motion introduction, Story, Approach and Contact;
+- five homepage sections: hero, Story, Approach, Product and Contact;
 - local brand, favicon, social-preview, and photography assets;
 - configuration-driven permanent redirects from former routes;
 - generated `/robots.txt` and `/sitemap.xml` responses;
@@ -31,17 +31,19 @@ The repository proves that the current site has:
 
 1. The hero presents the company’s baseball technology position and the pitching
    photograph.
-2. The Motion introduction presents the first product and links to `/motion`.
-3. `#story` explains how smartphone video and later sensor experiments led to
+2. `#story` explains how smartphone video and later sensor experiments led to
    the company idea.
-4. `#approach` presents Capture, Understand, and Improve.
+3. `#approach` presents Capture, Understand, and Improve.
+4. `#product` introduces Motion and links to `/motion`; it follows the company
+   narrative and precedes the closing contact section.
 5. `#contact` closes with the company’s public email action.
 
 `components/site-header.tsx` provides the skip link, homepage brand link, and
 product and anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
 email link, Privacy and Support links, and copyright notice. Primary navigation
-contains Motion and root-relative Story/Approach/Contact homepage anchors, so it
-works from every route.
+contains root-relative Story/Approach/Product/Contact homepage anchors in page
+order, so it works from every route. The Product target is keyboard-focusable;
+the existing header scroll padding keeps anchored content visible.
 
 ### Public routes
 
