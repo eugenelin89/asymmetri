@@ -89,7 +89,11 @@ connects a difference back to its actual pitches without implying improvement.
 Scientific restraint and the human coaching principle are part of the product
 story, not a hidden disclaimer.
 
-Use only the original approved A Release icon and unchanged company photograph.
+The original product introduction used the approved A Release icon. The owner's
+subsequent artwork refresh adopts Decision 52's pitcher-family default icon from
+source snapshot `cd414dbb0d4eef913fa4058e629e7afaa23be68a`, superseding Decision
+51's artwork choice only. Its packaged PNG is generated raster illustration,
+not hand-authored vector geometry. The company photograph remains unchanged.
 The screenshot audit did not establish a suitable current marketing capture;
 generated engineering media and older tutorials are not automatically approved
 product screenshots. Private retained-device media stays out. The asset manifest

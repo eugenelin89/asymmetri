@@ -36,7 +36,7 @@ in capture, normal measurement visibility, iPhone scope and release preparation.
 No future roadmap, App Store listing, price or scientific validation is inferred.
 Comparisons describe recorded differences, not improvement or causation.
 
-The approved A Release icon nests Motion's teal/mineral palette within the Labs
+The approved pitcher-family icon nests Motion's teal/mineral palette within the Labs
 identity. No app screenshot, private footage, fixture measurement or public white
 paper is published. The existing photograph and its owner-approved marks remain
 unchanged. No customer, private organization or source repository appears in the

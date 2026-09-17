@@ -104,8 +104,10 @@ This keeps contact information and public facts out of presentation components.
 `public/images/` stores approved sports and research imagery at stable public
 URLs. The homepage retains
 `public/images/baseball/pitching-delivery.webp` and adds the approved Motion icon.
-`public/brand/motion-release.svg` is the exact editable master used on the pages;
-`motion-release.png` is the exact 1024-square packaged export used for social metadata.
+`public/brand/motion-pitcher.png` is the exact 1024-square packaged app icon used
+on both marketing pages and in Motion social metadata. Next.js supplies optimized
+page-image sizes. The former `motion-release.svg` and `motion-release.png` remain
+unreferenced historical identity assets; the current illustration is raster artwork.
 
 `public/favicon.svg` is served directly at `/favicon.svg`.
 `public/og.svg` is the social-preview asset referenced by both Open Graph and X

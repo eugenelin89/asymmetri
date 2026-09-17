@@ -55,7 +55,7 @@ secondary to the marketing navigation. No new image or visual asset is used.
 The public site renders one authentic pitching-delivery photograph in the hero.
 It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
 and uniform lettering remain visible without localized softening. The approved
-Motion A Release icon appears in the product introduction and
+Motion pitcher-family windup icon appears in the product introduction and
 product hero. No research imagery, interface visual, fake metric or second photo
 is rendered. Future additions must earn a distinct narrative role and remain within the privacy and
 evidence rules in `docs/ASSET_MANIFEST.md`.
@@ -73,7 +73,9 @@ mobile ordering matches reading order, and animation respects
 Keep the Labs header, typography, orange calls to action, paper/ink surfaces and
 closing principle. Motion uses `--motion-teal` (#006B64), `--motion-mineral`
 (#E8EFED), `--motion-text` (#152A27) and `--motion-line` (#CFDAD6). The icon retains
-its original geometry and palette; CSS supplies corner masking only.
+its original illustration and palette; CSS supplies corner masking only. Use the
+packaged default PNG, not the historical A Release SVG. The mineral-white pitcher
+and asymmetric teal arc are illustrative identity, not a coaching diagram.
 
 The product page uses a typographic hero and icon panel, numbered workflow rows,
 a semantic evidence-chain ordered list, and divided history/limits prose.

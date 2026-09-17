@@ -103,12 +103,12 @@ export const motion = {
       "Record or import pitching video, confirm key frames, inspect projected 2D measurements and annotated evidence, and revisit your history. For iPhone, iOS 17 or later.",
   },
   icon: {
-    src: "/brand/motion-release.svg",
-    alt: "Asymmetri Motion icon: an overhand pitcher and released ball on deep teal.",
+    src: "/brand/motion-pitcher.png",
+    alt: "Asymmetri Motion icon: an illustrated pitcher in a high-knee windup, framed by a teal motion arc.",
     width: 1024,
     height: 1024,
   } satisfies SiteImage,
-  socialImage: "/brand/motion-release.png",
+  socialImage: "/brand/motion-pitcher.png",
   introduction: {
     eyebrow: "Our first product",
     paragraphs: [

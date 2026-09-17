@@ -75,11 +75,12 @@ were removed because the public site now uses one pitching photograph. No
 product screenshot, research plot, workbench image, sensor image, team photo, or
 second baseball action image is rendered.
 
-## Motion product identity, September 16, 2026
+## Original Motion product identity, September 16, 2026 (superseded)
 
-The website introduces only the owner-approved **A Release** artwork. Both files
-are byte-for-byte copies from the read-only product reference; no app repository
-file was modified and no exporter was run there.
+The initial website introduction used the owner-approved **A Release** artwork.
+Both files remain as unreferenced historical identity variants after the
+pitcher-family refresh below. They are byte-for-byte copies from the read-only
+product reference; no app repository file was modified and no exporter was run there.
 
 | Public file | Exact source in the Motion reference | Dimensions and processing | Role / alt text / rights |
 | --- | --- | --- | --- |
@@ -113,3 +114,29 @@ reconstruction of an app screen. Its six steps explain the public workflow with
 text and list order; there are no athlete illustrations or invented values.
 B/C icon alternatives, dark/tinted variants, Store templates and white-paper files
 are not added to the public site. No existing asset is removed.
+
+## Current Motion pitcher-family identity, September 16, 2026
+
+The owner requested that the website match the app's changed artwork. Accepted
+Motion Decision 52 and the current release-brand README supersede the A Release
+choice with the pitcher family. Only the default app icon is needed for the
+website's existing image placements; Back/Side capture-card illustrations and
+dark/tinted variants are not copied.
+
+| Field | Record |
+| --- | --- |
+| Public file | `public/brand/motion-pitcher.png` |
+| Exact copied source | `ios/AsymmetriMotion/AsymmetriMotion/Assets.xcassets/AppIcon.appiconset/AppIcon-default.png` in the read-only Motion reference |
+| Original master | `docs/design/release-brand/source/pitcher-family/icon-default.png` |
+| Source snapshot | `cd414dbb0d4eef913fa4058e629e7afaa23be68a` |
+| Generation provenance | Built-in image_gen, September 16, 2026, Motion Prompt 62; owner's seven concept images informed the new illustration. Exact prompts are preserved in Motion `docs/design/release-brand/GENERATION_PROMPTS.md`; export settings/hashes are recorded in its `render.cjs` and `asset-manifest.json`. No generation or export was rerun for the website. |
+| Dimensions / format / size | 1024×1024 opaque sRGB PNG, 1,022,578 bytes |
+| Processing | Packaged export copied byte-for-byte. Existing Next.js Image optimization supplies page sizes; existing CSS supplies corner masking. Social metadata uses the original PNG. |
+| SHA256 | `d0a00a3991990aefd499a50c6cf0d69d51e1ef9d52a2fc3820c0cb321b98aa56` |
+| Public role | Homepage Motion introduction, `/motion` hero, and Motion Open Graph/Twitter image. New URL avoids reusing the former identity's cache key. |
+| Alt text | Asymmetri Motion icon: an illustrated pitcher in a high-knee windup, framed by a teal motion arc. |
+| Rights / privacy assessment | Owner-requested, accepted generated illustration; raster artwork with a vector illustration appearance. No real athlete photo, private app screen/data, jersey identity, imported logo, font or stock image. The pose is illustrative identity, not prescribed technique or scientific evidence. No trademark clearance is claimed. |
+
+`motion-release.svg` and `motion-release.png` are retained historical variants
+with no current page or metadata references. The company logo, favicons,
+`public/og.svg`, and authentic hero photograph remain unchanged.

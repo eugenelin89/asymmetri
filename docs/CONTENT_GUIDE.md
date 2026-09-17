@@ -157,7 +157,7 @@ the user explicitly requests it.
 
 Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
 The current site renders one privacy-reviewed pitching photograph and the
-owner-approved Motion A Release icon. No app-interface capture is published. Alt text
+owner-approved Motion pitcher-family icon. No app-interface capture is published. Alt text
 should describe the visible action and purpose without adding identity,
 affiliation, or performance claims.
 
