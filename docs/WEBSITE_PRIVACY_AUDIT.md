@@ -175,3 +175,10 @@ local. The existing Privacy Policy and effective date are unchanged. Support gai
 one getting-started tutorial link. See `TUTORIAL_REVIEW.md` for the device action
 scope and `ASSET_MANIFEST.md` for the exact publication set. This dated extension
 supersedes only the prior no-screenshot finding for these explicitly approved assets.
+
+
+The owner's immediate tutorial follow-up replaces nine screenshot crops with
+brighter August 27 footage (IMG_7594/IMG_7595). It uses the same explicit public
+media authorization and crop-only treatment. System/location/profile details
+remain excluded; raw captures stay outside the repository. No app data mutation,
+new collection mechanism or policy-copy change accompanies the replacement.

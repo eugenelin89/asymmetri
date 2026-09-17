@@ -15,13 +15,23 @@ color, label or image content was painted over or replaced. The native mirrored
 pointer visible in some captures is retained, not retouched. Crops keep original
 pixel resolution; PNGs use the unoptimized image path and can be opened directly.
 
-Published footage principally shows the retained September 14 Back/Side practice
-clips whose app labels are IMG_8802 and IMG_8801. The chart/table also display actual
-stored August observations, including IMG_7330 and IMG_7594. These are authorized
-media identifiers, not athlete names. The chooser crop excludes later unrelated
-rows. No profile identity/date of birth, notifications or private account details
-are included. Screenshots are examples of this retained library, not prescriptions
-for event timing or ideal values. No new video was imported or recorded.
+The final footage examples show the brighter August 27 pitches requested by the
+owner: IMG_7594 (Back View, FFC 1,212 of 1,643, existing 7° toward-image-left trunk
+result) and IMG_7595 (Side View, FFC 456). Nine files were recaptured and replaced
+at the same URLs: camera-view, throwing-arm, mark-ffc, analyze, results-back,
+evidence, marked-history, choose-b and comparison. The earlier dark September 14
+footage no longer appears in public tutorial images. This was a source replacement,
+not a brightness edit. The chart/table retain real August observations including
+IMG_7330 and IMG_7594; the eleven other screenshots are unchanged.
+
+These are authorized media identifiers, not athlete names. No profile identity,
+date of birth, notifications or private account details are included. Screenshots
+are examples of this retained library, not prescriptions for event timing or ideal
+values. No new video was imported or recorded, and no marks or results were changed.
+An August 27-only Explorer filter and A/B selections were temporary; reopening the
+view confirmed the default All saved history, Frames and empty A/B state before
+returning to My Pitches. The refreshed crop rectangles, dimensions and hashes are
+recorded in ASSET_MANIFEST.md.
 
 ## Original physical setup illustrations
 

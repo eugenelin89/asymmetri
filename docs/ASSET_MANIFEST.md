@@ -168,16 +168,16 @@ Each screenshot shares the owner authorization and privacy review above.
 | `side-setup.webp` | 1536×1024 | Original ImageGen 1536×1024; WebP quality 88 | Side View: record from beside the pitcher. Landscape is recommended. Leave room for the whole delivery. Alt: “A horizontal phone on a tripod beside a pitcher, with room for the entire stride.” |
 | `framing-guides.svg` | 960×650 | Original SVG; no raster processing | The framing guide uses a rectangle and dashed centre line. This diagram follows the current guide proportions; it is not an app screen or calibration tool. Alt: “Portrait Back and landscape Side framing rectangles, each with a dashed vertical centre line and a full-body figure inside.” |
 | `recording-sequence.svg` | 960×320 | Original SVG; no raster processing | Set up, record the delivery, stop and wait, then review. Illustration of the physical sequence; phone screens are abstract. Alt: “Four physical recording stages: a steady phone, a pitcher throwing, waiting for saving, and reviewing the saved pitch.” |
-| `camera-view.png` | 370×483 | Current app; crop 20, 359, 370, 483 | An existing Back View pitch. Confirm the camera position used for your own video. Alt: “Camera View step with Back View selected and the Next button.” |
-| `throwing-arm.png` | 370×421 | Current app; crop 20, 423, 370, 421 | Choose the pitcher's throwing arm, regardless of where the arm appears in the image. Alt: “Throwing Arm step with Right selected, guidance for Unknown, and Back and Next buttons.” |
-| `mark-ffc.png` | 370×698 | Current app; crop 20, 158, 370, 698 | An existing FFC mark. The exact selected frame and the saved frame are shown separately. This screenshot does not prescribe an event frame for another video. Alt: “Saved Front Foot Contact at exact frame 831 of 1,296, with playback, fine adjustment and Move Front Foot Contact controls.” |
-| `analyze.png` | 370×418 | Current app; crop 20, 458, 370, 418 | An existing pitch with current results. Viewing this screen does not run a new analysis. Alt: “Pitch Mechanics summary showing three of three results up to date and the Analyze Pitch button.” |
-| `results-back.png` | 346×387 | Current app; crop 30, 469, 346, 387 | One real saved Back View result at FFC. The displayed value describes this image; it is not a target or grade. Alt: “A saved 2D Trunk-Segment Orientation result of 4 degrees toward image left, with a Details and Annotated Image link.” |
-| `evidence.png` | 315×723 | Current app; crop 45, 158, 315, 723 | The annotated evidence behind that result. The original image proportions, landmarks and saved value are unchanged. Alt: “The saved pitching frame annotated with trunk landmarks and a vertical reference, followed by Save to Photos and Share.” |
+| `camera-view.png` | 370×498 | Current app, August 27 recapture; crop 20, 344, 370, 498 | An existing Back View pitch. Confirm the camera position used for your own video. Alt: “Camera View step with Back View selected and the Next button.” |
+| `throwing-arm.png` | 370×431 | Current app, August 27 recapture; crop 20, 398, 370, 431 | Choose the pitcher's throwing arm, regardless of where the arm appears in the image. Alt: “Throwing Arm step with Right selected, guidance for Unknown, and Back and Next buttons.” |
+| `mark-ffc.png` | 370×698 | Current app, August 27 recapture; crop 20, 158, 370, 698 | An existing FFC mark. The exact selected frame and the saved frame are shown separately. This screenshot does not prescribe an event frame for another video. Alt: “Saved Front Foot Contact at exact frame 1,212 of 1,643, with playback, fine adjustment and Move Front Foot Contact controls.” |
+| `analyze.png` | 370×418 | Current app, August 27 recapture; crop 20, 458, 370, 418 | An existing pitch with current results. Viewing this screen does not run a new analysis. Alt: “Pitch Mechanics summary showing three of three results up to date and the Analyze Pitch button.” |
+| `results-back.png` | 346×387 | Current app, August 27 recapture; crop 30, 469, 346, 387 | One real saved Back View result at FFC. The displayed value describes this image; it is not a target or grade. Alt: “A saved 2D Trunk-Segment Orientation result of 7 degrees toward image left, with a Details and Annotated Image link.” |
+| `evidence.png` | 315×723 | Current app, August 27 recapture; crop 45, 158, 315, 723 | The annotated evidence behind that result. The original image proportions, landmarks and saved value are unchanged. Alt: “The saved pitching frame annotated with trunk landmarks and a vertical reference, followed by Save to Photos and Share.” |
 | `explorer-home.png` | 370×650 | Current app; crop 20, 166, 370, 650 | Start with the marked video frames or explore available measurements. Alt: “Your pitching history with Review marked frames and Measurement history entry points.” |
-| `marked-history.png` | 370×690 | Current app; crop 20, 169, 370, 690 | Review the exact marks you saved. The number of marked pitches depends on the selected event and filters. Alt: “Marked frames for Front Foot Contact, List and Frames options, saved pitch thumbnail and Choose A and Choose B buttons.” |
-| `choose-b.png` | 370×580 | Current app; crop 20, 110, 370, 580 | Select a different pitch for B. Both sides compare the same marked event. Alt: “Choose pitch B sheet with one retained pitch already selected as A and another eligible FFC mark.” |
-| `comparison.png` | 370×661 | Current app; crop 20, 180, 370, 661 | A real pair with different camera views. The layout preserves image proportions; placing frames together does not make their perspectives equivalent. Alt: “Two retained Front Foot Contact frames side by side, with Open A, Open B and Auto layout controls.” |
+| `marked-history.png` | 370×690 | Current app, August 27 recapture; crop 20, 169, 370, 690 | Review the exact marks you saved. The number of marked pitches depends on the selected event and filters. Alt: “August 27 Front Foot Contact marks, List and Frames options, two saved pitch thumbnails and Choose A and Choose B buttons.” |
+| `choose-b.png` | 370×580 | Current app, August 27 recapture; crop 20, 110, 370, 580 | Select a different pitch for B. Both sides compare the same marked event. Alt: “Choose pitch B sheet with one August 27 pitch already selected as A and another eligible August 27 FFC mark.” |
+| `comparison.png` | 370×661 | Current app, August 27 recapture; crop 20, 180, 370, 661 | A real pair with different camera views. The layout preserves image proportions; placing frames together does not make their perspectives equivalent. Alt: “Two August 27 Front Foot Contact frames side by side, with Open A, Open B and Auto layout controls.” |
 | `measurement-chooser.png` | 370×654 | Current app; crop 20, 185, 370, 654 | Choose one measurement. This crop shows the upper part of the list; lead-knee bend at FFC and Ball Release are also available for Side View. Alt: “The upper part of the measurement chooser, showing Back-view measures and the Side-view ankle-span ratio.” |
 | `chart.png` | 370×571 | Current app; crop 20, 169, 370, 571 | Trunk-orientation history in Chart. These are actual saved observations, not benchmark or ideal values. Alt: “History Chart with individual recorded values in degrees and Chart, Table and Evidence tabs.” |
 | `table.png` | 370×535 | Current app; crop 20, 216, 370, 535 | Table makes individual contributors readable. A pitch date and the date the video was added can differ. Alt: “History Table showing two dated retained pitches and their saved degree values.” |
@@ -192,8 +192,27 @@ The two generated setup illustrations use generic adult figures and abstract
 phones. They inherit no private photo and imply neither calibrated geometry nor
 ideal mechanics. The original framing/sequence SVGs are instructional diagrams,
 not UI. Generation is owner-authorized; no third-party trademark clearance is
-claimed. No existing asset is changed, replaced or removed, and no additional
-unused tutorial asset is published.
+claimed. The follow-up below replaces nine screenshot files at their stable URLs;
+no additional unused tutorial asset is published.
+
+### August 27 footage refresh
+
+At the owner's request, nine screenshots were recaptured in the same September 16
+session (September 17 UTC), replacing the darker September 14 examples. The new
+Back example is August 27 IMG_7594: saved FFC 1,212 of 1,643 and its existing 7°
+toward-image-left trunk result. The Side comparison is August 27 IMG_7595, saved
+FFC 456. No marks or result values were edited or recalculated. Camera View,
+Throwing Arm and Analyze captures were also refreshed from that same Back pitch
+for consistency. List, chooser and comparison captures use an ephemeral August
+27-only date filter; leaving and reopening Explorer restored All saved history,
+Frames and empty A/B selections. No Saved View was created.
+
+Only lossless crops are applied; no brightness adjustment, retouching, compositing
+or fabricated UI. The two input-control crops have revised dimensions to retain
+complete controls. All other screenshot dimensions and all illustration files are
+unchanged. Crops exclude system/location/profile information. The eleven remaining
+screenshots show general controls or previously authorized history and contain no
+September 14 pitching image. Raw captures remain outside the repository.
 
 ### Final asset SHA-256
 
@@ -202,16 +221,16 @@ unused tutorial asset is published.
 - `side-setup.webp`: `ab566226df0f8ddf24757c5d3a234f995d5a68daf3f0b976edc9b7795fc9f3a9`.
 - `framing-guides.svg`: `25aabfd878d48b41e7b3b15380a550a9d99de9503dcb4c52c96acda39860a01e`.
 - `recording-sequence.svg`: `c8d8f72ee76cd86fa540a2415dd892324222cf2ed29b83745e0260c2efe53250`.
-- `camera-view.png`: `b9c038cd58e0ecfbf78c0a0a764aa65b34b9dd9c97a54bc550ac8810db1a66df`.
-- `throwing-arm.png`: `df7fbf087b82e29eac993f6e693854df82a91d9bde80338632b5d152ef4889b8`.
-- `mark-ffc.png`: `528fad3f3dc5030bec062e2e2e3003e95fabd0e6719bd0233bd0426f78944be5`.
-- `analyze.png`: `393e36d4ffa8103a3fa1d352b2021dfba1660d51c33b481b5d11eeaed1e65bb4`.
-- `results-back.png`: `719154338dcbbacd2d06c8dd34479098e0981d58ef06aca1bf98bf8b7b334faf`.
-- `evidence.png`: `9d0845564ab1d0b782f6c8bb6cea43290db7637f6d226f496a263312331be236`.
+- `camera-view.png`: `f5d495b54dfeb2a95c5f4edcc1708e634d30dd23037cea091686d83b972f8575`.
+- `throwing-arm.png`: `e940c128ef9765740384f164fa4eb5cd04094d21d9538c42f7ab3e7e3f4d1f82`.
+- `mark-ffc.png`: `d8d2510a3a930891805d50747a66a74c52e29fb58d2e9055dd694e53cb3c61a9`.
+- `analyze.png`: `aa86e1fb5fe24190f14724b521895675949c62180dbc1b763c20759b40cd9436`.
+- `results-back.png`: `bd64eea905910deb188541306d93059aa94ada9c73578dbbd180f802462eda2e`.
+- `evidence.png`: `1ff18c24d3ec8211f4545454022edc3270da7c34b9f1d7f5c80c3c0d0de64401`.
 - `explorer-home.png`: `4612b037716ad5f9d4b5e46b35267aae58a0ba5de5d1fc7f9a657613874b48f8`.
-- `marked-history.png`: `7b465b8655946d534efa0ddb149a843ac409452ee89c58372f07e2338c22d374`.
-- `choose-b.png`: `ea7ff7586bc32468cd07d1e4d5c1e1b083bbf95f1ce95ea87886f98627a6b9b0`.
-- `comparison.png`: `484703155da9e3a9b889d86b80a4ff67e3eb6c7a2fad6af83fe95a455ea60e08`.
+- `marked-history.png`: `bbb8af622823d40da182c1b2e0f26d30c810057bbb3cd29a09b60adcfe32a070`.
+- `choose-b.png`: `ddd867eb2be52ca318464658fe38df803f6ba37c9dabdec028be7100f7a9c2b9`.
+- `comparison.png`: `f88b9b929881a6f32500ee960ce442a059037562bd727dbad140a7a8c4207e49`.
 - `measurement-chooser.png`: `0648ef9abd26075d8cf71bc55bd5a8a5bea9ddd26884f1644237d9c029929972`.
 - `chart.png`: `6e064befcdfe16de92e061e50b026d516dba6b6899f6d32a976924f5ef80061e`.
 - `table.png`: `83e51abb1814f2e8d0111666f9bf6272f92390c79c271dcf5f46f80f029748a8`.

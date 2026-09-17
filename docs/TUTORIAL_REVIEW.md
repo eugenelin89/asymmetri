@@ -128,3 +128,43 @@ a running service, 1.6 GB free disk, approximately 513 MiB available memory and
 owner explicitly approved its use for this tutorial deployment per DEPLOYMENT.md,
 requiring successful production checks/build before restart and no Node change. No
 production source, dependency, configuration or service mutation preceded approval.
+
+
+## Follow-up: brighter August 27 screenshots
+
+The owner found the September 14 footage too dark and requested August 27 pitches.
+The clean website starting point for this bounded refresh was
+`e72b6a650c228caa83827813947bc7dbc3dba0d0`; fast-forward pull succeeded. The Motion
+reference remains clean at the same read-only SHA above. Mirroring resumed with
+My Pitches already scrolled to August 27, so no import was needed.
+
+Nine screenshots were recaptured from Back IMG_7594 and Side IMG_7595. The Back
+pitch's existing FFC is 1,212/1,643 and its saved trunk result is 7° toward image
+left; the Side comparison FFC is 456. Matching alt text and two changed crop
+heights were updated. All screenshot pixels are direct lossless crops; brighter
+footage replaces the previous source without changing exposure or UI values.
+
+Navigation reviewed existing inputs, used Go to saved Frame, opened existing
+results/evidence and selected a temporary August 27-only Explorer range and A/B
+pair. No Camera View/Throwing Arm selection, mark edit, analysis, pitch/profile
+edit, import, recording, Saved View write, Photos export or share was performed.
+Reopening marked frames restored All saved history, Frames and empty A/B choices;
+then the app returned to the August 27 library, its starting screen. Three of
+three Back results still displayed as current. Preservation is bounded to these
+observed actions/states, with no forensic file comparison claimed.
+
+See prompt 020 for refreshed validation and release sequencing. The complete
+initial functionality checks above remain the baseline; this follow-up changes
+media and matching descriptors only.
+
+Refresh validation: TypeScript/ESLint, standard Next.js build, retained Vinext
+build and whitespace checks pass on Node 24.10.0. All nine replacement PNGs match
+their source crop pixels. All 24 assets match their manifest hashes, dimensions
+and alt text. HTTP route/link/media checks pass; rendered-content scans contain
+neither old September footage identifiers nor stale frame/value descriptions or
+private paths/location/developer references. Tutorial checks at effective widths
+320, 390, 768, 1024 and 1440 show no overflow, missing alt text or broken loaded
+images. Desktop marking, phone evidence and tablet comparison were visually
+reviewed; step links/focus and module navigation work with no browser errors.
+The unchanged production dependency audit still has four findings. No new
+full-device Safari/VoiceOver acceptance is claimed.
