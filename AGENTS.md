@@ -124,6 +124,12 @@ implementations. Explain meaningful dependency additions in the implementation
 summary. Keep `package-lock.json` committed and synchronized with
 `package.json`.
 
+For the existing DigitalOcean production deployment, the owner has standing
+approval for the Node 22 runtime (September 19, 2026: “always approve node 22
+runtime. don't ask me again.”). Do not request renewed runtime-exception approval
+for subsequent website deployments. Run production checks/build successfully
+before restarting. Local development/validation continues to use `.nvmrc`.
+
 Use the Node version in `.nvmrc`. When nvm is installed but not already loaded,
 load it with:
 

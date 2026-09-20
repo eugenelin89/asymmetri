@@ -260,18 +260,15 @@ df -h /
 free -h
 ```
 
-The repository targets Node.js 24 in `.nvmrc`. September 16 console inspection
-found production Node 22.23.1 and npm 10.9.8, with no nvm. Do not silently change
-system packages during a content deployment; resolve the runtime mismatch with
-the owner before installation/build. For the September 16 Motion utility-page
-publication, the owner explicitly authorized the existing Node 22 runtime with
-production checks/build before restart. This is a scoped exception, not a change
-to `.nvmrc`. The owner separately renewed this exception for the Motion tutorial
-publication, again requiring successful production checks/build before restart
-and leaving Node unchanged. Local validation still uses Node 24.
-The installed Next.js 16.2.12
-package requires Node.js 20.9.0 or newer. Production should normally match the
-repository target instead of relying only on the framework minimum.
+The repository targets Node.js 24 in `.nvmrc` for local development/validation.
+Production runs Node 22.23.1 with npm 10.9.8. On September 19 the owner explicitly
+gave standing approval for Node 22 production deployment: “always approve node 22
+runtime. don't ask me again.” This replaces the earlier per-deployment exceptions
+for the utility pages and tutorial. Do not ask to renew this approval. Keep the
+production runtime in place and require successful production checks/build before
+restart. The installed Next.js 16.2.12 package requires Node.js 20.9.0 or newer.
+A concrete compatibility/build failure still needs diagnosis; no OS/runtime
+upgrade is part of a copy deployment.
 
 **Success:** Node and npm execute successfully for `django-user`, the Node
 release is compatible, and disk and memory have reasonable headroom.
@@ -839,3 +836,38 @@ Record/Import and Back/Side choices, full-guide mode, image-original links, genu
 screenshots, labelled setup illustrations and mobile layout. Check Support →
 Tutorial, Motion → Tutorial and shared footer links. Serve tutorial assets locally;
 no DNS, Nginx, TLS, OS, Node or firewall change is needed for this route.
+
+
+## Copy-only deployment with unchanged dependencies
+
+For small content updates with an identical package/lockfile/runtime configuration,
+use a temporary build workspace to preserve the serving `.next/` directory until
+production validation passes. This avoids replacing live dependencies or build
+files during compilation on the small Droplet.
+
+1. Complete local checks/journal/push and the production clean-source/remote/commit
+   checks above. Record the current production commit. Fetch, inspect the incoming
+   range and confirm package/lockfile/configuration equality before a fast-forward.
+2. As `django-user`, create a unique workspace under `/var/tmp`, extract the exact
+   reviewed Git source there with `git archive`, and hard-link the existing
+   unchanged `node_modules` tree using `cp -al`. Do not run `npm ci` in either
+   linked dependency tree. If dependencies need changing, use a separately
+   reviewed installation/deployment path; do not reuse this shortcut.
+3. In the workspace, disable build telemetry, use the documented 1536 MiB Node
+   heap limit, and run `npm run check` then `npm run build:next`. Capture exit
+   status. Confirm the original live service and URLs remain healthy before
+   switching. Failed compilation never replaces the serving build.
+4. After successful build, stop only `asymmetri.service`, move the previous `.next`
+   into that workspace as a rollback copy, move the new `.next` into the normal
+   application path, then start the same service. All source/build file operations
+   run as `django-user`; only systemd operations use administrator privilege.
+5. Verify active service, loopback and public routes/content. If the replacement
+   fails, restore the preserved `.next` while the service is stopped and restart;
+   preserve both builds and investigate. Do not reset or discard production source.
+6. Record source/build identity, runtime and sanitized checks. The current source
+   remains on clean `main`; the temporary workspace/previous build stay outside
+   Git for bounded rollback. Do not remove unrelated backups or caches.
+
+This is the same Next.js/systemd/Nginx deployment path, with compilation isolated
+from live generated output. No port, service definition, DNS, Nginx, dependency,
+OS or logging change is required.

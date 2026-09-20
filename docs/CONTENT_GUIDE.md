@@ -63,10 +63,17 @@ the distinction between local app records, Apple/Photos/iCloud/backups/sharing,
 website technical requests and support email. Never strengthen bounded app
 claims into "data never leaves the device," secure erasure, or remote deletion.
 
-Support is email-only through the central mailbox. No SLA, form, analytics,
-tracking, cookie banner, account, or database is needed. Do not invent server-log
-or email-retention periods, mailbox providers or deletion guarantees. Reaudit
-when behavior changes and revise the effective date when the policy changes.
+Support is email-only through the central mailbox, using owner-confirmed Gmail
+with the owner as the only human operator. The adopted policy is support/debugging
+only: delete attachments within 30 days after resolution and threads within 90 days;
+honor verified sender deletion requests. Necessary authorized athlete video is not
+permission for public reuse. Preserve the provider/backup/sender-copy limits and
+attachment-bearing-message handling in the approved text. Apple-provided reporting
+is for operation/debugging/improvement, with no added app analytics/crash SDK,
+advertising or profiling. Website logs are separate and their total retention
+remains unknown. No SLA, form, tracking, cookie banner, account or database is
+needed. Do not invent broader deletion guarantees. Reaudit when behavior changes
+and revise the effective date when the policy changes.
 
 ## Voice
 

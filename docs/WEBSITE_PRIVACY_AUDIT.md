@@ -1,5 +1,50 @@
 # Website and support privacy audit
 
+## Current policy reconciliation — September 19, 2026
+
+The owner approved the REL-13 Privacy/Support wording and instructed publication
+through the existing DigitalOcean workflow. The source authority is Motion's
+`release/1.0` at `2cf98747a062c1d5d265504d22a14ce1682ae5c1`,
+`docs/release/public-pages/REL13_POLICY_RECONCILIATION.md`. The copy changes only
+six approved paragraphs and the Privacy effective date; no visitor collection,
+tracking, forms, dependencies, media or design is introduced.
+
+Current confirmed operations supersede the September 16 unknown-mail-policy
+statements below: Gmail support, sole human owner access, support/debugging-only
+use, attachments deleted within 30 days after resolution and threads within 90,
+and verified sender deletion requests. The copy explicitly limits promises about
+provider/backup/sender copies and explains deletion of the containing message
+when an attachment cannot be removed separately. Athlete video is requested only
+when needed and authorized, with guardian authorization for identifiable minors;
+support permission does not authorize public reuse.
+
+Apple-provided analytics, diagnostics, ratings/reviews and feedback are used for
+operation, debugging and improvement. No app-owned or third-party reporting SDK
+is added and no advertising/profiling use or identity correlation is authorized.
+Website access/error and system/service logs are acknowledged, while exact total
+retention remains unknown. The support deadlines do not apply to infrastructure
+logs. This publishes the adopted policy; it does not claim an inbox deletion job,
+new server-log audit or an App Store privacy submission.
+
+Preflight: clean local and production source both `d5b32d8`; production service
+active with its existing Node 22.23.1 runtime, unchanged dependencies, about
+1.6 GiB available disk, 481 MiB available RAM and 1.9 GiB free swap. Local
+validation uses Node 24.10.0. The owner now grants standing Node 22 production-runtime approval;
+future deployments must not ask again. This deployment requires successful
+production check/build before restart and introduces no OS upgrade. Build in a temporary source directory using unchanged
+installed dependencies; retain the live build until the replacement passes.
+Local `npm run check`, `npm run build:next` and `npm run build` pass.
+All six paragraphs match the authority and generated Privacy/Support HTML;
+contact/mutual links and the effective date pass. The production dependency
+audit still reports four existing findings (one critical, two high, one
+moderate); this copy-only change does not resolve or change them.
+Sanitized deployment/HTTP/rendering results will be recorded in the task
+completion receipt and Motion's REL-13 ledger after execution. No private host identifiers,
+credentials, visitor logs or account/compliance details are committed.
+
+The dated audit below retains its original evidence scope.
+
+
 Audit date: September 16, 2026. This record separates source-backed facts,
 bounded infrastructure disclosure and unknown operational facts. It is not a
 legal certification or a claim that every platform/provider copy can be deleted.

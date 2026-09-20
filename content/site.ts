@@ -242,7 +242,7 @@ export const motionPages = {
     title: "Asymmetri Motion Privacy Policy",
     description:
       "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, and support email.",
-    effectiveDate: { label: "September 16, 2026", value: "2026-09-16" },
+    effectiveDate: { label: "September 19, 2026", value: "2026-09-19" },
     introduction: [
       "Asymmetri Labs operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
       "Asymmetri Labs does not sell personal information.",
@@ -283,6 +283,7 @@ export const motionPages = {
         paragraphs: [
           "Photos may download selected originals from iCloud, Photos copies may sync through iCloud Photos, and app data may be included in device backups. These behaviors depend on Apple services and your device/account settings. The app does not exclude its data from ordinary device backups.",
           "Apple, backup providers and services you choose for sharing handle their copies under their own privacy practices. Asymmetri Motion does not control those copies or guarantee deletion when you remove something in the app.",
+          "We use the analytics, crash and diagnostic information, ratings, reviews and customer feedback Apple makes available to operate, debug and improve Asymmetri Motion. The app includes no app-owned or third-party analytics or crash-reporting SDK. We do not use this information for advertising or profiling, or combine it with personally identifiable athlete information for those purposes. Apple handles information through its own services and privacy practices; some feedback you choose to send may include comments, contact details or screenshots.",
         ],
       },
       {
@@ -308,14 +309,16 @@ export const motionPages = {
         paragraphs: [
           "The website provides public information and email links. It does not set cookies or use analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no contact or support form, visitor accounts, or website database. It does not load third-party fonts, scripts or embeds.",
           "The website is hosted on a DigitalOcean server. Website hosting and server infrastructure may process standard technical request information, such as IP address, browser/request information, requested URLs and request times, as needed to deliver, operate and protect the website. This infrastructure processing is separate from the app's on-device records.",
+          "We use website information only to operate and support the informational site, not for advertising, profiling, sale or sharing for unrelated purposes. Our DigitalOcean server has access/error logging and system/service logs. Exact total retention across the host, server and other infrastructure copies is not currently established. We do not promise a fixed deletion period for those logs.",
         ],
       },
       {
         id: "support-email",
         heading: "Support email",
         paragraphs: [
-          "Support uses email. If you email us, your email address, message and any attachments you choose to send are transmitted through email services and received for the support interaction. The app's on-device processing does not make that correspondence local to your phone.",
-          "Start with a written description and remove unnecessary personal or private information. Screenshots or clips are optional. Do not send private athlete footage unless intentionally needed to investigate the issue and you are authorized and comfortable sharing it. Obtain parent or guardian authorization for identifiable footage involving a minor.",
+          "Support is provided by email at info@asymmetri.co using Gmail. Asymmetri Motion's owner is the only human operator with access to the support inbox. Email providers process correspondence under their own service terms and privacy practices.",
+          "We use your email address, message and chosen attachments only to respond to support requests and debug reported issues. Start with a written description. You may provide redacted screenshots and relevant logs; remove unnecessary personal information. We request athlete video only when needed for the issue and when you are authorized to share it. Obtain parent or guardian authorization for identifiable footage involving a minor. Sending a video is not required to ask for help, and support permission does not authorize public reuse.",
+          "Our support policy is to delete attachments within 30 days after the issue is resolved and message threads within 90 days after resolution. Where an attachment cannot be removed separately, we delete the containing message within the shorter period and retain only a necessary text summary for the remainder of the message-retention period. You can request deletion by emailing info@asymmetri.co; we verify that the request comes from the sender before acting. These periods describe our handling of the inbox and retained support copies, not guaranteed erasure from email-provider systems, independent backups or senders' copies.",
         ],
       },
       {
@@ -421,6 +424,7 @@ export const motionPages = {
         closing: [
           "Start with a written description. A screenshot can help, but screenshots and clips are optional. Remove unnecessary personal or private information before sending support material.",
           "Do not send private athlete footage unless it is intentionally needed to investigate the problem and you are authorized and comfortable sharing it. Obtain parent or guardian authorization for identifiable footage involving a minor. A video is not required to ask for help.",
+          "Support is handled by the app owner through Gmail. Use written reports, redacted screenshots and relevant logs; provide athlete video only when needed and authorized. Our support policy deletes attachments within 30 days after resolution and message threads within 90 days, and honors verified sender deletion requests. See the Privacy Policy for provider-copy limits and further details.",
         ],
         link: {
           label: site.company.contactEmail,
