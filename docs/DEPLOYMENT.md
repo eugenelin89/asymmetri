@@ -3,6 +3,14 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+For the configured Mac SSH login and restricted deployment commands, see
+[CLI access](CLI_ACCESS.md). Connect with `ssh asymmetri` as `webdeploy`, then
+define the documented `app` function. When following application commands below,
+replace `sudo -u django-user -H` with `app`; it retains the application owner
+while disabling privilege elevation. The guide also lists the exact allowed
+service-control and log commands. Root-console examples remain available for
+server administrators.
+
 The production application:
 
 - lives at `/var/www/asymmetri`;

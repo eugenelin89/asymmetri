@@ -65,6 +65,7 @@ changing public assets.
 
 - [Architecture](docs/ARCHITECTURE.md)
 - [DigitalOcean deployment and rollback](docs/DEPLOYMENT.md)
+- [SSH and CLI deployment access](docs/CLI_ACCESS.md)
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Testing](docs/TESTING.md)
 - [Content guide](docs/CONTENT_GUIDE.md)
