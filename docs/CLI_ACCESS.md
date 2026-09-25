@@ -2,8 +2,9 @@
 
 This setup supports the existing local Git → GitHub → DigitalOcean workflow.
 The scoped deployment access was installed and verified on September 24, 2026.
-Use the deployment login for routine releases. Broader administration has a
-separate installer and authorization scope.
+Use the deployment login for routine releases. The separate full-server
+administrator route was explicitly approved, activated, and verified on the
+same date.
 
 ## Log in from the configured Mac
 
@@ -120,8 +121,9 @@ dry-run push and server read access through the helper before deployment.
 
 ## Separate full-server administration
 
-Full server administration is a separate, explicitly authorized capability.
-The scoped deployment installer does not enable it. The additional
+Full server administration is a separate capability explicitly approved by the
+owner and verified active on September 24, 2026. The scoped deployment installer
+does not enable it. The additional
 `ops/access/install-admin-access.sh` installer creates `webadmin` with
 `NOPASSWD` sudo for any command as root. It affects the entire Ubuntu instance,
 including other websites, files, accounts, services, packages, and networking.
@@ -134,7 +136,7 @@ outside Git and do not print, upload, or copy its contents. Only its public half
 is installed on the server. The aliases `webadmin` and `asymmetri-admin` select
 this identity with strict host-key verification and agent forwarding disabled.
 
-After the administrator setup has been activated and verified:
+The administrator setup is active. To connect and enter a root shell:
 
 ```bash
 ssh webadmin
@@ -164,3 +166,16 @@ Installation does not restart websites or alter application ownership. To revoke
 administrator authority, a root administrator removes that sudoers entry;
 revoke its SSH key separately if login must also be removed. Maintain the
 DigitalOcean root console as a recovery route.
+
+## Activation verification
+
+On September 24, 2026, `ssh webadmin` authenticated as the dedicated administrator
+and `sudo -n id` returned UID 0. The account has a locked login password and uses
+its separate SSH key. Its `.ssh` directory and authorized-key file are 0700 and
+0600; the root-owned sudo policy is 0440 and passed `visudo -c`. The private key
+and SSH configuration on the Mac are 0600.
+
+The routine `webdeploy` login still could not run an arbitrary root command,
+while its application helper remained functional. Both hosted websites returned
+HTTP 200; the running Asymmetri process remained unchanged. No website restart,
+application release, ownership change, or global SSH-policy change was needed.

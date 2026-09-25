@@ -188,6 +188,25 @@ Documentation is part of implementation.
 - Never store passwords, credentials, private keys, API tokens, or secrets in
   documentation.
 
+## Existing Production CLI Access
+
+The owner has approved persistent SSH deployment access and a separate full-server
+administrator route on the existing DigitalOcean instance (September 24, 2026).
+See `docs/CLI_ACCESS.md` for verified identities, commands, and boundaries.
+
+- Use `ssh asymmetri` for routine deployments as `webdeploy`. Run application
+  commands through the documented root-owned helper as `django-user`; it disables
+  privilege elevation while preserving application ownership and Git access.
+- Use `ssh webadmin` (alias `asymmetri-admin`) when an authorized administration
+  task requires root. `sudo -n` is available for any root command on this instance.
+  Do not request renewed setup approval for these existing access permissions.
+- This administrator route affects all sites on the instance. Preserve unrelated
+  websites and configurations; keep changes within the user's requested scope.
+- Run application Git, dependency, and build operations as the application owner,
+  not root. Root access does not replace the checks/build/activation/rollback rules.
+- Keep private keys in the Mac's `.ssh` directory, outside the repository and all
+  prompt records. Never print or copy their contents into tools, logs, or documents.
+
 ## Default Git and Release Workflow
 
 This is a personal repository. Unless the user explicitly requests another
