@@ -946,5 +946,7 @@ changing its source or discarding recovery data:
    and extract as the application owner into an empty staging location, then check
    source/build identity and ownership before the usual directory activation.
 
-This changes the storage form of the older rollback, not its retention. The
-September 28 Work release uses this procedure for the pre-portfolio rollback.
+This changes the storage form of the older rollback, not its retention. During
+September 28 Work preparation, the archive was created and verified. A separate
+owner-authorized cleanup then provided sufficient capacity, so the original
+pre-portfolio rollback directory was retained alongside its archive.
