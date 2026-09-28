@@ -604,7 +604,7 @@ deployment copies, package caches, or oversized journals. Review ownership and
 rollback needs before deleting anything.
 
 The September 28 cleanup and science-fair relay retirement are recorded in
-[Server storage maintenance](SERVER_MAINTENANCE.md), including preserved research,
+[Server storage maintenance](SERVER_MAINTENANCE.md), including authorized project removal,
 recovery inputs, capacity, and health checks. The obsolete `asymmetri-next` checkout
 now contains source only; it is not an executable rollback.
 
