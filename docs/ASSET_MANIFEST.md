@@ -252,7 +252,7 @@ icon and every tutorial file retain their established URLs and bytes.
 | Asset | Source and processing | Dimensions | Role, alt text and rights |
 | --- | --- | --- | --- |
 | `public/images/labs-social.svg` | Original HTML/SVG-style geometric artwork authored for this redesign; local system type, no external media | 1200×630 | Editable source for the Labs social image; company headline and branching coordination diagram. Original geometry, no stock or third-party brand asset. |
-| `public/images/labs-social.png` | Rasterized from the preceding SVG with existing Sharp; no new dependency | 1200×630 | Labs/About/BotSquad Open Graph and Twitter preview; description: Asymmetri Labs, Build an asymmetric advantage. |
+| `public/images/labs-social.png` | Rasterized from the preceding SVG with existing Sharp; no new dependency | 1200×630 | Labs/Work/About/BotSquad Open Graph and Twitter preview; description: Asymmetri Labs, Build an asymmetric advantage. |
 | `public/images/sport-social.png` | Rasterized from preserved `public/og.svg`; original SVG unchanged | 1200×630 | Sport social preview, retaining the baseball/evidence identity. Existing owner-approved source and rights. |
 | `public/images/motion/explorer-home-concept.webp` | Owner-supplied Explorer design `home.png`, quality-90 WebP, no crop or UI retouching | 523×1106 | Small Motion design-process figure. Alt: Early Explorer design concept with options to explore observations, compare pitches and compare periods; synthetic content. Owner supplied and requested selected local concepts for this task; not a current app capture or validated result. |
 | `public/images/motion/explorer-saved-views-concept.webp` | Owner-supplied Explorer design `saved.png`, quality-90 WebP, no crop or UI retouching | 523×1106 | Small design-process figure. Alt: Early Saved Views design concept showing two illustrative saved questions; not a current app capture. Same synthetic-concept authorization and limits. |
@@ -283,3 +283,10 @@ embedding/linking for this site; it does not claim independent clearance of ever
 third-party element. Both render only after activation in a 16:9 privacy-enhanced
 iframe; before activation all visible poster assets are first-party. Google may
 process requests after loading. Always retain the external fallback and disclosure.
+
+
+### Work domain reuse, September 28, 2026
+
+`/work` reuses the unchanged 1200×630 Labs raster social image. Its accessible
+direction/coordination/review figure is semantic HTML/CSS with no image download
+or external asset. No public asset was added, replaced or removed for this update.

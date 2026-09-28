@@ -2,7 +2,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerDiagram } from "@/components/worker-diagram";
-import { botsquad, introductions, site } from "@/content/site";
+import { botsquad, introductions, site, work } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(botsquad.metadata, botsquad.path);
@@ -45,6 +45,9 @@ export default function BotSquadPage() {
                 </a>
               </div>
               <p className="botsquad-hero__status">{botsquad.status}</p>
+              <a className="text-link text-link--light" href={work.path}>
+                Part of {work.name} ↗
+              </a>
             </div>
             <WorkerDiagram />
           </div>

@@ -4,7 +4,8 @@
 
 **Asymmetri Labs creates technologies that give individuals and small teams
 outsized capability.** Its current portfolio comprises BotSquad and Asymmetri
-Motion. Asymmetri Sport is the sports-technology branch and home of the baseball
+Motion. Asymmetri Work is the software and AI-coordination domain, starting with
+BotSquad. Asymmetri Sport is the sports-technology domain and home of the baseball
 origin story. Use singular “Sport” for the brand, plural “sports technology” for
 the category.
 
@@ -40,11 +41,13 @@ Sensors remain part of that history, not a requirement or feature of Motion V1.
 2. Company hero: **Build an asymmetric advantage.**
 3. Company support: **We create technologies that give individuals and small teams outsized capability.**
 4. Portfolio: **BotSquad** and **Asymmetri Motion**.
-5. Sports branch: **Asymmetri Sport**, with **Better evidence for better pitching.**
-6. Motion product line: **See your pitch more clearly.**
-7. Sport closing: **Great coaching stays human. Better evidence makes it stronger.**
+5. Work domain: **Asymmetri Work**, with **Do more with the team you have.**
+6. Sports domain: **Asymmetri Sport**, with **Better evidence for better pitching.**
+7. Motion product line: **See your pitch more clearly.**
+8. Sport closing: **Great coaching stays human. Better evidence makes it stronger.**
 
-The homepage introduces the portfolio; `/sport` preserves the founder narrative;
+The homepage introduces the portfolio; `/work` explains individual capability and
+coordinated AI; `/sport` preserves the founder narrative;
 `/motion` and `/botsquad` explain the products; `/about` explains the company idea.
 Current capability, scientific interpretation, future work and release availability
 remain distinct. Consult the product source reviews before changing claims.

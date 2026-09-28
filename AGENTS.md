@@ -15,10 +15,11 @@ same implementation commit.
 
 ## Project Purpose
 
-This repository contains the official Asymmetrico company website. Asymmetrico
-builds accessible sports technology that helps athletes, coaches, and sports
-organizations see development more clearly and do more with the resources they
-have.
+This repository contains the official Asymmetri Labs company website. Labs builds
+technology that gives individuals and small teams outsized capability. Asymmetri
+Work covers software and coordinated AI, starting with BotSquad. Asymmetri Sport
+covers sports technology, starting with Asymmetri Motion. Preserve this domain
+hierarchy while keeping both products directly accessible.
 
 The site should communicate asymmetric advantage through credible evidence,
 clear product truth states, and a privacy-conscious account of work originating

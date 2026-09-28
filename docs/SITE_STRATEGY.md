@@ -8,10 +8,20 @@ and small teams outsized capability.” Its sequence is hero, short philosophy,
 BotSquad and Motion introductions, common thread, then company contact. The
 conceptual diagram shows two distinct inputs and outputs without invented results.
 
-The shared navigation is Products (`/#products`), Sport (`/sport`), About
-(`/about`) and Contact (`/#contact`). BotSquad and Motion receive direct product
-links in the portfolio and footer. Motion tutorial, privacy and support links are
-explicitly product-labelled. The eight public pages appear once in the sitemap.
+The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
+Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and
+a direct product link (BotSquad or Motion). The homepage retains its `#products`
+portfolio. Motion tutorial, privacy and support links remain explicitly labelled
+in the footer. The nine public pages appear once in the sitemap.
+
+## Work and BotSquad
+
+Asymmetri Work is the domain for software and coordinated AI that help individuals
+and small teams do more with the resources they have. `/work` explains intention,
+coordination, inspectable results and human judgment. Its diagram is a design
+approach, not proof of autonomy or performance. BotSquad is the first product; its
+detailed workflow, availability, runtime and limitations stay on `/botsquad`.
+The domain page is not an additional required step to reach either product.
 
 ## Sport and Motion
 

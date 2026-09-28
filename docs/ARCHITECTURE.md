@@ -2,7 +2,7 @@
 
 ## Overview
 
-The public site presents the Labs portfolio, Sport origin, two product pages,
+The public site presents the Labs portfolio, Work and Sport domains, two product pages,
 company philosophy and Motion resources. It uses Next.js App Router, React,
 strict TypeScript, Tailwind and shared CSS. DigitalOcean serves the standard
 Next.js build behind Nginx; Vinext/Cloudflare Worker packaging remains separate.
@@ -13,16 +13,16 @@ There is no website database, authentication, API, form backend, CMS or analytic
 | URL | Source / result |
 | --- | --- |
 | `/` | `app/page.tsx`: Labs portfolio and company contact |
+| `/work` | `app/work/page.tsx`: individual capability, AI coordination and human judgment |
 | `/sport` | `app/sport/page.tsx`: preserved former homepage narrative |
 | `/motion` | `app/motion/page.tsx`: detailed Motion product page |
 | `/botsquad` | `app/botsquad/page.tsx`: AI worker coordination product page |
 | `/about` | `app/about/page.tsx`: company philosophy, real page |
 | `/tutorial` | `app/tutorial/page.tsx`: progressive Motion guide |
 | `/privacy`, `/support` | Motion policy and support articles |
-| `/robots.txt`, `/sitemap.xml` | Generated metadata routes; eight canonical pages |
+| `/robots.txt`, `/sitemap.xml` | Generated metadata routes; nine canonical pages |
 | `/story` | HTTP 308 to `/sport#story` |
 | `/contact` | HTTP 308 to `/#contact` |
-| `/work` | HTTP 308 to `/#products` |
 | `/why-asymmetrico` | HTTP 308 to `/about` |
 | `/work/asymmetrico-platform` | HTTP 308 to `/sport` |
 
@@ -37,7 +37,7 @@ and singular `#product` to the same fragment on `/sport`. Plural `#products` and
 
 `content/site.ts` remains the shared identity/contact/navigation source and owns
 Sport's preserved narrative, Motion facts, tutorial content and Motion utility
-articles. `site.ts` also supplies separate typed exports for Labs/BotSquad/About copy,
+articles. `site.ts` also supplies separate typed exports for Labs/Work/BotSquad/About copy,
 Sport navigation, labelled concept images and approved video IDs/disclosures.
 Product facts and external URLs stay in this central content source; page components
 own composition and small connective passages.
@@ -45,7 +45,7 @@ own composition and small connective passages.
 `app/layout.tsx` supplies the shared metadata and Organization JSON-LD.
 `lib/metadata.ts` supplies product/company/utility route metadata helpers. Product
 SoftwareApplication JSON-LD includes no invented offers, ratings or download data.
-Labs, About and BotSquad use `public/images/labs-social.png` (1200×630); Sport uses
+Labs, Work, About and BotSquad use `public/images/labs-social.png` (1200×630); Sport uses
 `public/images/sport-social.png`, a raster export of the retained `public/og.svg`.
 Motion retains its approved raster icon. Existing logo/favicon/social assets remain.
 The Sport photograph and tutorial files retain their stable URLs and original bytes.
@@ -59,7 +59,8 @@ client components are limited to:
 
 - `tutorial-reader.tsx`: the existing progressive guide and ephemeral branches;
 - `legacy-home-fragments.tsx`: three moved homepage fragment destinations;
-- `introduction-video.tsx`: explicit video loading and closing.
+- `introduction-video.tsx`: explicit video loading and closing;
+- `site-navigation.tsx`: Escape/outside-pointer dismissal for native domain disclosures.
 
 The reusable video component initially renders a local HTML/CSS poster and a
 normal external link. Clicking Load creates a fixed-ID `youtube-nocookie.com`
@@ -72,7 +73,10 @@ poster and keyboard focus; the external fallback is always visible. Cross-origin
 player errors are not reliably exposed to the parent, so the fallback does not
 depend on error detection.
 
-`SiteHeader` supplies a skip link and Products/Sport/About/Contact navigation.
+`SiteHeader` supplies a skip link and Work/Sport/About/Contact navigation.
+Work and Sport use native exclusive `details` disclosures with overview and direct
+product links. Enter/Space and navigation work without JavaScript; the small client
+enhancement adds outside-pointer dismissal and Escape with focus restoration.
 `SiteFooter` adds explicit product/company links and Motion resource labels.
 `CapabilityDiagram`, `WorkerDiagram` and `EvidenceChain` use semantic HTML/CSS.
 `UtilityPage` remains a server-rendered article. No external fonts, UI library,

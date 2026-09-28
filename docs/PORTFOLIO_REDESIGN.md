@@ -47,12 +47,17 @@ Detailed plot concepts were excluded. Original design files remain untouched.
 ## Structural decisions
 
 - Labs owns `/`: approved company hero, two-product portfolio and company contact.
+- Asymmetri Work owns `/work`: individual capability, coordinated AI and human
+  judgment, with BotSquad as its first product. Work/Sport navigation exposes direct
+  product links alongside each domain overview. The owner approved this follow-up
+  after reviewing the original Products/Sport imbalance.
 - Asymmetri Sport owns `/sport`: preserved photograph, central headings, founder
   paragraphs, approach, Motion introduction and coaching close in their original order.
 - `/motion` retains its depth; optional video immediately follows the hero.
 - `/botsquad` explains the real access/runtime model, persistence, handoffs and limits.
-- `/about` becomes a real philosophy page. `/work` redirects to `/#products`;
-  `/why-asymmetrico` to `/about`; the old named-platform route to `/sport`.
+- `/about` is a real philosophy page. `/work` is a real Work page; the earlier
+  portfolio redirect is removed. `/why-asymmetrico` redirects to `/about`; the old
+  named-platform route remains `/sport`. `/#products` stays available.
 - Three old root fragments migrate to Sport. Plural `#products` and root contact
   remain Labs destinations. No-JavaScript links preserve access to moved sections.
 - Tutorial modules, branches, hashes, original assets and exact www canonical remain.
@@ -61,7 +66,7 @@ Detailed plot concepts were excluded. Original design files remain untouched.
   pages remain real pages with stable links. AGENTS and the content/testing guides
   record them as protected dependencies for future work.
 - Shared copy stays centralized in typed exports in `content/site.ts`, including
-  Labs/BotSquad/About, Sport navigation, concept images and approved video details.
+  Labs/Work/BotSquad/About, Sport navigation, concept images and approved video details.
 
 The singular Sport brand was retained after the owner's wording question. Use
 “sports technology” as the descriptive category.

@@ -603,6 +603,11 @@ on them. Identify safe cleanup targets separately, such as old confirmed
 deployment copies, package caches, or oversized journals. Review ownership and
 rollback needs before deleting anything.
 
+The September 28 cleanup and science-fair relay retirement are recorded in
+[Server storage maintenance](SERVER_MAINTENANCE.md), including preserved research,
+recovery inputs, capacity, and health checks. The obsolete `asymmetri-next` checkout
+now contains source only; it is not an executable rollback.
+
 ### Git reports dubious ownership
 
 Run production Git commands as the deployment owner:
@@ -638,15 +643,16 @@ commits actually exist.
 
 ### Option 1: Immediate directory rollback
 
-A previous deployment directory may exist at
-`/var/www/asymmetri-next`. Do not assume it is complete or known-good. Inspect
-it first:
+The preceding complete release retained after the September 28 cleanup is
+`/var/www/asymmetri-rollback-20260928-850536c`. Reconfirm its contents and suitability
+for the current incident before use; the old `/var/www/asymmetri-next` directory
+no longer has dependencies or a build. Inspect the retained release first:
 
 ```bash
-ls -ld /var/www/asymmetri /var/www/asymmetri-next
-sudo -u django-user -H git -C /var/www/asymmetri-next log -1 --oneline
-sudo -u django-user -H test -x /var/www/asymmetri-next/node_modules/.bin/next
-sudo -u django-user -H test -d /var/www/asymmetri-next/.next
+ls -ld /var/www/asymmetri /var/www/asymmetri-rollback-20260928-850536c
+sudo -u django-user -H git -C /var/www/asymmetri-rollback-20260928-850536c log -1 --oneline
+sudo -u django-user -H test -x /var/www/asymmetri-rollback-20260928-850536c/node_modules/.bin/next
+sudo -u django-user -H test -d /var/www/asymmetri-rollback-20260928-850536c/.next
 ```
 
 If it is a confirmed previous working deployment and immediate recovery is more
@@ -658,7 +664,7 @@ systemctl stop asymmetri.service
 
 failed_dir="/var/www/asymmetri-failed-$(date +%Y%m%d%H%M%S)"
 mv /var/www/asymmetri "$failed_dir"
-mv /var/www/asymmetri-next /var/www/asymmetri
+mv /var/www/asymmetri-rollback-20260928-850536c /var/www/asymmetri
 
 systemctl start asymmetri.service
 systemctl status asymmetri.service --no-pager -l
@@ -882,9 +888,9 @@ OS or logging change is required.
 
 ## Staged portfolio release with route changes
 
-The September 28 portfolio redesign changes route composition and redirect
-configuration, so it uses a complete isolated candidate rather than the copy-only
-hard-link shortcut. Existing service, Nginx, DNS, TLS and Node 22 remain unchanged.
+Releases that change route composition or redirect configuration, including the
+September 28 portfolio and Work domain releases, use a complete isolated candidate
+rather than the copy-only hard-link shortcut. Existing service, Nginx, DNS, TLS and Node 22 remain unchanged.
 The owner's standing Node 22 approval applies; local checks still use Node 24.
 
 1. Record the clean live `main` SHA, fetched remote, `.next/BUILD_ID`, service
@@ -898,7 +904,7 @@ The owner's standing Node 22 approval applies; local checks still use Node 24.
    independently from the reviewed lockfile. Never install or build in the live tree.
 3. Run production `npm run check` and `npm run build:next` inside the candidate with
    telemetry disabled and the documented 1536 MiB heap limit. Start its Next.js
-   server on a confirmed-unused temporary loopback port. Smoke-test all eight
+   server on a confirmed-unused temporary loopback port. Smoke-test all nine
    routes, old redirects, metadata, images and changed content before activation.
 4. Preserve the complete previous checkout, dependencies, public assets and `.next`
    as a uniquely named sibling rollback directory. Stop only `asymmetri.service`,
@@ -919,3 +925,26 @@ Record exact candidate/rollback directory names, SHAs, build IDs and health resu
 in a task release receipt outside tracked source. Keep the rollback directory until
 the owner chooses a retention policy. Do not delete unrelated backups to make space.
 No release receipt should include credentials, private key contents or visitor logs.
+
+
+### Compressing an older retained rollback when capacity is limited
+
+Keep the current serving release and the immediate pre-activation rollback as
+complete independent directories. An older inactive website rollback may be
+retained as a lossless archive to make room for the next candidate, without
+changing its source or discarding recovery data:
+
+1. Confirm its exact source SHA, build ID, clean state and inactive status.
+2. As the application owner, archive the entire older directory, including Git,
+   dependencies, public files and `.next`, to a unique file outside all checkouts.
+3. Run gzip integrity, tar content comparison against the still-present directory,
+   and a SHA-256 checksum. Stop on any mismatch or insufficient staging headroom.
+4. Only after successful comparison, remove that exact uncompressed duplicate.
+   Retain the archive and checksum; do not remove unrelated backups or caches.
+5. Record the archive location, checksum and original source/build IDs in the
+   external release receipt. Before using this older rollback, verify its checksum
+   and extract as the application owner into an empty staging location, then check
+   source/build identity and ownership before the usual directory activation.
+
+This changes the storage form of the older rollback, not its retention. The
+September 28 Work release uses this procedure for the pre-portfolio rollback.

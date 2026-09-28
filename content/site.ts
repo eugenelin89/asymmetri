@@ -6,6 +6,7 @@ export type SiteImage = {
 };
 
 export type NavItem = { label: string; href: string };
+export type PrimaryNavItem = NavItem & { children?: readonly NavItem[] };
 
 export const site = {
   company: {
@@ -23,13 +24,26 @@ export const site = {
       "Technology for individuals and small teams.",
   },
   navigation: [
-    { label: "Products", href: "/#products" },
-    { label: "Sport", href: "/sport" },
+    {
+      label: "Work", href: "/work",
+      children: [
+        { label: "Explore Asymmetri Work", href: "/work" },
+        { label: "BotSquad", href: "/botsquad" },
+      ],
+    },
+    {
+      label: "Sport", href: "/sport",
+      children: [
+        { label: "Explore Asymmetri Sport", href: "/sport" },
+        { label: "Asymmetri Motion", href: "/motion" },
+      ],
+    },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/#contact" },
-  ] satisfies NavItem[],
+  ] satisfies PrimaryNavItem[],
   companyNavigation: [
     { label: "About Labs", href: "/about" },
+    { label: "Asymmetri Work", href: "/work" },
     { label: "Asymmetri Sport", href: "/sport" },
     { label: "BotSquad", href: "/botsquad" },
     { label: "Asymmetri Motion", href: "/motion" },
@@ -699,6 +713,51 @@ export const sportNavigation: NavItem[] = [
   { label: "Contact", href: "/sport#contact" },
 ];
 
+export const work = {
+  name: "Asymmetri Work",
+  path: "/work",
+  metadata: {
+    title: "Asymmetri Work | More Capability for Small Teams",
+    description:
+      "Software and coordinated AI for individuals and small teams. Explore Asymmetri Work's approach to useful capability, inspectable results and human judgment, starting with BotSquad.",
+  },
+  headline: "Do more with the team you have.",
+  introduction:
+    "A person with an idea should be able to take it further. Asymmetri Work explores how software and coordinated AI can help individuals and small teams turn an intention into work they can inspect and direct.",
+  productLink: { label: "Explore BotSquad", href: "/botsquad" },
+  approachLink: { label: "Our approach", href: "/work#approach" },
+  portfolioLink: { label: "See all products", href: "/#products" },
+  loop: {
+    title: "Capability, under your direction.",
+    steps: [
+      { owner: "You", title: "Set the direction", body: "Define the goal and the boundaries." },
+      { owner: "Tools & AI", title: "Coordinate the effort", body: "Keep tasks, context and handoffs connected." },
+      { owner: "You", title: "Review what comes back", body: "Inspect the evidence. Decide what happens next." },
+    ],
+    caption: "Our approach to software, coordinated AI and human judgment.",
+  },
+  approach: {
+    eyebrow: "The work between idea and result",
+    headline: "Make coordination less of the job.",
+    body: "Small teams have to carry the idea and the work around it: organizing tasks, repeating context, checking results and deciding what comes next. We look for ways software can carry more of that coordination, leaving people better equipped to think, build and judge.",
+    principles: [
+      { title: "Start with a clear intention", body: "Give a task a purpose, a scope and a useful result to work toward. More activity is not the same as progress." },
+      { title: "Keep the work connected", body: "Make context and handoffs easier to follow. A result should come with enough evidence to understand how it was reached." },
+      { title: "Keep judgment with people", body: "Make review and intervention part of the workflow. People set priorities, question results and decide where authority belongs." },
+    ] satisfies ProductStep[],
+  },
+  product: {
+    eyebrow: "Starting with BotSquad",
+    headline: "An AI team with a shared workspace.",
+    body: "BotSquad is our first product in this domain. It brings the question into practice: how can one person coordinate several AI workers while keeping the work visible and authority bounded?",
+  },
+  closing: {
+    headline: "What could a better tool put within reach?",
+    body: "Work and Sport share that question. They apply it to different tasks, with the same respect for evidence and human judgment.",
+    link: { label: "Explore Asymmetri Sport", href: "/sport" },
+  },
+} as const;
+
 export const botsquad = {
   name: "BotSquad",
   path: "/botsquad",
@@ -812,7 +871,7 @@ export const about = {
     },
   ] satisfies ProductStep[],
   origin:
-    "Our work began in baseball, with a phone camera and a question about making pitching evidence easier to understand. Asymmetri Sport carries that story forward. BotSquad explores the same ambition through coordinated AI work.",
+    "Our work began in baseball, with a phone camera and a question about making pitching evidence easier to understand. Asymmetri Sport carries that story forward. Asymmetri Work explores the same ambition through software and coordinated AI, starting with BotSquad.",
 } as const;
 
 export const motionGallery = {

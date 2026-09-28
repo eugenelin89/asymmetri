@@ -17,7 +17,7 @@ after activation. Privacy-enhanced does not mean tracking-free. The visible noti
 links to Google's policy and `/privacy#website-media`; a fallback remains available
 without JavaScript or when the player is unavailable.
 
-The Labs/Sport/About/BotSquad content and diagrams add no forms, account, cookies,
+The Labs/Work/Sport/About/BotSquad content and diagrams add no forms, account, cookies,
 storage, analytics or server-owned state. New Motion concepts use synthetic data
 and explicit labels; preserved tutorial images retain their prior authorization.
 No private sports organization is identified. Public BotSquad repository links are

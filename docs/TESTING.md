@@ -23,6 +23,7 @@ path.
 When routes or shared layout code change, verify:
 
 - `/` (Labs portfolio)
+- `/work` (real Work domain page, no redirect)
 - `/sport` (preserved founder story and anchors)
 - `/botsquad` (current access versus future web/mobile)
 - `/about` (real company page, no redirect)
@@ -30,7 +31,7 @@ When routes or shared layout code change, verify:
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/story` → `/sport#story`; `/contact` → `/#contact`
-- `/work` → `/#products`; `/why-asymmetrico` → `/about`;
+- `/why-asymmetrico` → `/about`;
   `/work/asymmetrico-platform` → `/sport`
 - `/robots.txt`
 - `/sitemap.xml`
@@ -38,10 +39,10 @@ When routes or shared layout code change, verify:
 - `/images/labs-social.png`, `/images/sport-social.png` and retained `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets. Verify footer links on all eight pages, mutual
+broken public assets. Verify footer links on all nine pages, mutual
 Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
-The sitemap must include all eight canonical routes; robots must allow them.
+The sitemap must include all nine canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
 against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
 network resources for accidental tracking, forms or external scripts/fonts.
@@ -62,7 +63,11 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
-- Products reaches `/#products` from every route; Sport/About/Contact work;
+- Work/Sport disclosures expose overview and direct BotSquad/Motion links;
+- Enter/Space opens disclosures, Tab reaches links, Escape closes and restores
+  focus, outside-pointer interaction closes, and opening one closes the other;
+- disclosures and their links remain usable without JavaScript;
+- About/Contact work and the homepage retains `#products`;
 - Sport retains Story → Approach → Product → Contact and its Motion action;
 - old root `#story`, `#approach`, `#product` migrate to Sport while plural
   `#products` and company `#contact` stay on Labs;
@@ -148,7 +153,7 @@ disclosure and effective-date history change with the videos. New assets require
 
 ## Tutorial regression
 
-At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all eight routes.
+At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all nine routes.
 Inspect the actual `innerWidth` when browser zoom affects viewport overrides.
 Exercise all ten module links, Previous/Next and browser Back/Forward; load a fresh
 URL containing a module hash and a step hash. Check deep links into a previously

@@ -4,7 +4,7 @@ import { WorkerDiagram } from "@/components/worker-diagram";
 import { LegacyHomeFragments } from "@/components/legacy-home-fragments";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { botsquad, labs, motion, site } from "@/content/site";
+import { botsquad, labs, motion, site, work } from "@/content/site";
 
 export default function HomePage() {
   return (
@@ -76,6 +76,9 @@ export default function HomePage() {
                     Watch the introduction
                   </a>
                 </div>
+                <a className="sport-story-link" href={work.path}>
+                  {work.name}: our approach <span aria-hidden="true">↗</span>
+                </a>
               </div>
               <WorkerDiagram />
             </article>

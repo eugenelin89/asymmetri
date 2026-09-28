@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
     return [
       { source: "/story", destination: "/sport#story", permanent: true },
       { source: "/contact", destination: "/#contact", permanent: true },
-      { source: "/work", destination: "/#products", permanent: true },
       {
         source: "/why-asymmetrico",
         destination: "/about",

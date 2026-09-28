@@ -2,7 +2,8 @@
 
 Asymmetri Labs creates technologies that give individuals and small teams outsized
 capability. The public portfolio introduces BotSquad and Asymmetri Motion, with
-the baseball founder story preserved under Asymmetri Sport.
+Asymmetri Work for software/AI coordination and the baseball founder story
+preserved under Asymmetri Sport.
 
 ## Website purpose
 
@@ -18,6 +19,7 @@ scientific validation or public App Store availability.
 | Route | Purpose |
 | --- | --- |
 | `/` | Labs philosophy, product portfolio and company contact |
+| `/work` | Work philosophy, individual capability, coordinated AI and BotSquad introduction |
 | `/sport` | Preserved pitching photograph, founder story, approach and Motion introduction |
 | `/motion` | Detailed product workflow, evidence, limitations and introduction video |
 | `/botsquad` | Source-grounded product explanation, introduction video and GitHub access |
@@ -30,7 +32,7 @@ Motion policy, support, tutorial and product pages are protected app/release
 resources and must remain available; see the continuity rules in `AGENTS.md` and
 [Content guide](docs/CONTENT_GUIDE.md).
 
-All eight pages are indexable. The tutorial retains the exact canonical
+All nine pages are indexable. The tutorial retains the exact canonical
 `https://www.asymmetri.co/tutorial`; other pages use the apex origin. Legacy routes
 and the three moved homepage fragments retain useful destinations. See
 [Architecture](docs/ARCHITECTURE.md) for the complete mapping.
@@ -76,6 +78,7 @@ changing public assets.
 - [Architecture](docs/ARCHITECTURE.md)
 - [DigitalOcean deployment and rollback](docs/DEPLOYMENT.md)
 - [SSH and CLI deployment access](docs/CLI_ACCESS.md)
+- [Server storage maintenance](docs/SERVER_MAINTENANCE.md)
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Testing](docs/TESTING.md)
 - [Content guide](docs/CONTENT_GUIDE.md)

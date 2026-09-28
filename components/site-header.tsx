@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Logo } from "@/components/logo";
+import { SiteNavigation } from "@/components/site-navigation";
 
 export function SiteHeader() {
   return (
@@ -12,13 +13,7 @@ export function SiteHeader() {
         <Link href="/" className="site-header__brand" aria-label="Asymmetri Labs home">
           <Logo tone="canvas" />
         </Link>
-        <nav className="primary-nav" aria-label="Primary navigation">
-          {site.navigation.map((item) => (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <SiteNavigation items={site.navigation} />
       </div>
     </header>
   );

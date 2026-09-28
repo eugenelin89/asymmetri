@@ -147,11 +147,14 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 Labs `/` introduces the portfolio with `#products` and company `#contact`.
 `/sport` preserves `#story`, `#approach`, `#product` and its coaching contact.
-Shared navigation is Products, Sport, About and Contact. `/about` is a real page;
+Shared navigation is Work, Sport, About and Contact. Work and Sport disclose both
+their overview and a direct product link. The `work` export owns `/work` philosophy,
+metadata, diagram text and BotSquad introduction; existing product facts are reused
+from `botsquad`. `/about` is a real page;
 `/motion` and `/botsquad` are detailed product pages. Footer resource links say
 Motion tutorial, Motion privacy and Motion support. The three moved root fragments
-have a client compatibility mapping to Sport; `/work` now redirects to the Labs
-portfolio. Other legacy redirects are listed in `ARCHITECTURE.md`.
+have a client compatibility mapping to Sport. `/work` is now a real domain page;
+its former portfolio redirect is removed, while `/#products` stays available. Other legacy redirects are listed in `ARCHITECTURE.md`.
 
 When adding or removing a
 public route:

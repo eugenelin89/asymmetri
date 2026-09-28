@@ -123,3 +123,12 @@ notice and external link. The poster is useful without third-party requests;
 loading is voluntary, and native playback controls remain available. Concepts
 keep full image proportions and adjacent source labels. The Sport narrative and
 existing tutorial presentation retain their original visual systems.
+
+
+## Work domain and shared navigation
+
+Work reuses the company ink/orange palette, editorial grid and system typography.
+Its text-only direction/coordination/review figure describes design principles; it
+does not imitate a product screen or show invented results. Work and Sport have
+matching disclosure menus with 44px minimum summary targets and explicit overview
+and product links. Panels remain within the viewport at mobile widths.
