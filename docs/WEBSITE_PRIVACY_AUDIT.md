@@ -1,6 +1,36 @@
 # Website and support privacy audit
 
-## Current policy reconciliation — September 19, 2026
+## Website media extension — September 28, 2026
+
+This extension supersedes the historical “no third-party embeds” finding only for
+the optional product introductions. The policy effective date is September 28,
+2026, with a separate history note. Approved Motion app, Apple reporting and
+support-retention disclosures retain their meaning; this is not a general
+BotSquad privacy policy or an iOS privacy-label submission.
+
+`IntroductionVideo` initially serves local HTML/CSS artwork, a button and a normal
+external link. There is no iframe, external image, SDK, preconnect, DNS prefetch
+or persisted consent before activation. A deliberate Load action creates the fixed
+`youtube-nocookie.com` iframe. It has no autoplay and uses an origin referrer policy.
+Google-controlled services may process IP/browser/referrer and playback requests
+after activation. Privacy-enhanced does not mean tracking-free. The visible notice
+links to Google's policy and `/privacy#website-media`; a fallback remains available
+without JavaScript or when the player is unavailable.
+
+The Labs/Sport/About/BotSquad content and diagrams add no forms, account, cookies,
+storage, analytics or server-owned state. New Motion concepts use synthetic data
+and explicit labels; preserved tutorial images retain their prior authorization.
+No private sports organization is identified. Public BotSquad repository links are
+an intentional exception to the ban on exposing private source-system identifiers.
+
+Verification results and limitations are recorded in the implementation journal and
+release receipt. Browser extension traffic is distinct from site-controlled traffic.
+The unchanged dependency graph retains four known production audit findings;
+this redesign is not a dependency remediation or a clean security-audit claim.
+
+Reference: [YouTube embedding and privacy-enhanced mode](https://support.google.com/youtube/answer/171780?hl=en).
+
+## Adopted app/support policy reconciliation — September 19, 2026
 
 The owner approved the REL-13 Privacy/Support wording and instructed publication
 through the existing DigitalOcean workflow. The source authority is Motion's

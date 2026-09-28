@@ -1,8 +1,8 @@
 # Asymmetri Labs asset manifest
 
-Last updated: 2026-09-16
+Last updated: 2026-09-28
 
-This internal provenance record covers public assets. Nothing is hotlinked. The
+This internal provenance record covers public assets. Local images are not hotlinked. Optional third-party videos are described below. The
 owner has explicitly approved public visibility of the cap logo and uniform
 lettering in the selected hero photograph.
 
@@ -45,7 +45,7 @@ action.
 | Output dimensions | 2400×1600 |
 | Output format and size | WebP, quality 86, 1,176,976 bytes |
 | Processing | Existing restrained desaturation, slight contrast increase, and slight exposure reduction preserved; high-quality Lanczos source resize used to restore the real cap logo and uniform lettering through two localized feathered regions; no privacy blur remains; EXIF and ICC metadata omitted |
-| Public role | The only rendered photograph; homepage hero |
+| Public role | Preserved authentic photograph; `/sport` hero |
 | Alt text | A pitcher follows through on the mound as the baseball travels toward the plate. |
 | Privacy assessment | One pitcher, no bystanders, no signage, and no private screen or document; cap and uniform marks are visible with explicit owner approval |
 | Reason selected | The image communicates pitching mechanics, effort, and development immediately while providing a focused, premium composition that works in a wide desktop panel and a full-width mobile crop |
@@ -240,3 +240,46 @@ September 14 pitching image. Raw captures remain outside the repository.
 - `save-view.png`: `317acb8f50dc709e626ecdb8dac5e64688998bcb2f210c3b710aa46654652588`.
 - `settings.png`: `56b6e592af80774c951b1f17666b89852c342f4c0046c5fba3d54bb8e97ec267`.
 - `about.png`: `14f777ae70f306dad5ad48e67b0acdbee334f05b340efc7530c22a9b00a73528`.
+
+
+## Labs portfolio extension, September 28, 2026
+
+The dated records above retain their historical scope. No prior public asset was
+removed or overwritten. The former homepage photograph now appears on `/sport`;
+its bytes, crop behavior and approved mark visibility are preserved. The Motion
+icon and every tutorial file retain their established URLs and bytes.
+
+| Asset | Source and processing | Dimensions | Role, alt text and rights |
+| --- | --- | --- | --- |
+| `public/images/labs-social.svg` | Original HTML/SVG-style geometric artwork authored for this redesign; local system type, no external media | 1200×630 | Editable source for the Labs social image; company headline and branching coordination diagram. Original geometry, no stock or third-party brand asset. |
+| `public/images/labs-social.png` | Rasterized from the preceding SVG with existing Sharp; no new dependency | 1200×630 | Labs/About/BotSquad Open Graph and Twitter preview; description: Asymmetri Labs, Build an asymmetric advantage. |
+| `public/images/sport-social.png` | Rasterized from preserved `public/og.svg`; original SVG unchanged | 1200×630 | Sport social preview, retaining the baseball/evidence identity. Existing owner-approved source and rights. |
+| `public/images/motion/explorer-home-concept.webp` | Owner-supplied Explorer design `home.png`, quality-90 WebP, no crop or UI retouching | 523×1106 | Small Motion design-process figure. Alt: Early Explorer design concept with options to explore observations, compare pitches and compare periods; synthetic content. Owner supplied and requested selected local concepts for this task; not a current app capture or validated result. |
+| `public/images/motion/explorer-saved-views-concept.webp` | Owner-supplied Explorer design `saved.png`, quality-90 WebP, no crop or UI retouching | 523×1106 | Small design-process figure. Alt: Early Saved Views design concept showing two illustrative saved questions; not a current app capture. Same synthetic-concept authorization and limits. |
+| `public/images/motion/tutorial/evidence.png` (reuse) | Existing approved authentic tutorial capture; unchanged | 315×723 | Homepage Motion introduction. The established bounded publication authorization applies; no new athlete media or values were introduced. |
+
+The local design README identifies September 2026 Explorer proposals, not verified
+implementation or scientific findings. `visual.png` and `chart.png` were reviewed
+but excluded: detailed synthetic numerical plots would add confusion and excess
+marketing weight. Original sources remain untouched and outside this repository.
+Public captions and embedded source labels retain the concept/synthetic distinction.
+
+`CapabilityDiagram` and `WorkerDiagram` are semantic HTML/CSS visuals, not app
+screenshots or customer results. Introduction posters are original local HTML/CSS
+geometry and typography, with no image download, hotlinked thumbnail or personal
+information. The same palette and source text supply an accessible equivalent.
+
+### Owner-selected external videos
+
+- BotSquad: `https://youtu.be/E5r_lOecC-M`, the English introduction explicitly
+  selected in the owner's follow-up. It supersedes the earlier supplied Taiwanese
+  version. Public title observed: BotSquad; duration approximately 7:03.
+- Motion: `https://youtu.be/kaSatKC8HBg`, owner-selected introduction; approximately
+  0:42. Promotional content does not establish release availability or scientific
+  validity; current product limits are stated alongside it.
+
+Videos are not downloaded, re-edited or republished. Owner selection authorizes
+embedding/linking for this site; it does not claim independent clearance of every
+third-party element. Both render only after activation in a 16:9 privacy-enhanced
+iframe; before activation all visible poster assets are first-party. Google may
+process requests after loading. Always retain the external fallback and disclosure.

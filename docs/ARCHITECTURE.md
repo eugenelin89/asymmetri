@@ -2,166 +2,83 @@
 
 ## Overview
 
-The Asymmetri Labs website is the company’s public marketing site. It explains
-the baseball pitching focus, first product Asymmetri Motion, founder story,
-Capture / Understand / Improve approach and how to contact the company.
+The public site presents the Labs portfolio, Sport origin, two product pages,
+company philosophy and Motion resources. It uses Next.js App Router, React,
+strict TypeScript, Tailwind and shared CSS. DigitalOcean serves the standard
+Next.js build behind Nginx; Vinext/Cloudflare Worker packaging remains separate.
+There is no website database, authentication, API, form backend, CMS or analytics.
 
-The application uses Next.js 16 App Router, React 19, strict TypeScript, Tailwind
-CSS, PostCSS, and a shared global stylesheet. The current DigitalOcean production
-system runs the standard Next.js server behind Nginx. The repository also retains
-a separate Vinext and Cloudflare Worker build path for OpenAI Sites.
+## Routes and compatibility
 
-The repository proves that the current site has:
+| URL | Source / result |
+| --- | --- |
+| `/` | `app/page.tsx`: Labs portfolio and company contact |
+| `/sport` | `app/sport/page.tsx`: preserved former homepage narrative |
+| `/motion` | `app/motion/page.tsx`: detailed Motion product page |
+| `/botsquad` | `app/botsquad/page.tsx`: AI worker coordination product page |
+| `/about` | `app/about/page.tsx`: company philosophy, real page |
+| `/tutorial` | `app/tutorial/page.tsx`: progressive Motion guide |
+| `/privacy`, `/support` | Motion policy and support articles |
+| `/robots.txt`, `/sitemap.xml` | Generated metadata routes; eight canonical pages |
+| `/story` | HTTP 308 to `/sport#story` |
+| `/contact` | HTTP 308 to `/#contact` |
+| `/work` | HTTP 308 to `/#products` |
+| `/why-asymmetrico` | HTTP 308 to `/about` |
+| `/work/asymmetrico-platform` | HTTP 308 to `/sport` |
 
-- five indexed public content pages at `/`, `/motion`, `/tutorial`, `/privacy`, and `/support`;
-- five homepage sections: hero, Story, Approach, Product and Contact;
-- local brand, favicon, social-preview, and photography assets;
-- configuration-driven permanent redirects from former routes;
-- generated `/robots.txt` and `/sitemap.xml` responses;
-- no database, authentication, API routes, form backend, uploads, analytics,
-  visitor tracking, CMS, or server-side product business logic;
-- no third-party runtime scripts or application-specific runtime environment
-  variables for the public website.
+The apex canonical origin remains `https://asymmetri.co`, except for the preserved
+`https://www.asymmetri.co/tutorial`. Both hosts serve the actual tutorial. No host
+redirect or infrastructure change is introduced. Browsers do not send fragments
+to the server: a small homepage-only component maps old root `#story`, `#approach`
+and singular `#product` to the same fragment on `/sport`. Plural `#products` and
+`#contact` stay on the Labs homepage. No-JavaScript visitors have explicit Sport links.
 
-## Product-level architecture
+## Content, metadata and assets
 
-### Public page and sections
+`content/site.ts` remains the shared identity/contact/navigation source and owns
+Sport's preserved narrative, Motion facts, tutorial content and Motion utility
+articles. `site.ts` also supplies separate typed exports for Labs/BotSquad/About copy,
+Sport navigation, labelled concept images and approved video IDs/disclosures.
+Product facts and external URLs stay in this central content source; page components
+own composition and small connective passages.
 
-`app/page.tsx` composes the public homepage from five semantic sections:
+`app/layout.tsx` supplies the shared metadata and Organization JSON-LD.
+`lib/metadata.ts` supplies product/company/utility route metadata helpers. Product
+SoftwareApplication JSON-LD includes no invented offers, ratings or download data.
+Labs, About and BotSquad use `public/images/labs-social.png` (1200×630); Sport uses
+`public/images/sport-social.png`, a raster export of the retained `public/og.svg`.
+Motion retains its approved raster icon. Existing logo/favicon/social assets remain.
+The Sport photograph and tutorial files retain their stable URLs and original bytes.
+All new and reused media are recorded in `ASSET_MANIFEST.md`.
 
-1. The hero presents the company’s baseball technology position and the pitching
-   photograph.
-2. `#story` explains how smartphone video and later sensor experiments led to
-   the company idea.
-3. `#approach` presents Capture, Understand, and Improve.
-4. `#product` introduces Motion and links to `/motion`; it follows the company
-   narrative and precedes the closing contact section.
-5. `#contact` closes with the company’s public email action.
+## Rendering and interaction
 
-`components/site-header.tsx` provides the skip link, homepage brand link, and
-product and anchor navigation. `components/site-footer.tsx` provides the brand descriptor,
-email link, Tutorial, Privacy and Support links, and copyright notice. Primary navigation
-contains root-relative Story/Approach/Product/Contact homepage anchors in page
-order, so it works from every route. The Product target is keyboard-focusable;
-the existing header scroll padding keeps anchored content visible.
+Routes and shared structure are server components. Essential copy, navigation,
+product diagrams and tutorial content are available in the initial HTML. Small
+client components are limited to:
 
-### Public routes
+- `tutorial-reader.tsx`: the existing progressive guide and ephemeral branches;
+- `legacy-home-fragments.tsx`: three moved homepage fragment destinations;
+- `introduction-video.tsx`: explicit video loading and closing.
 
-| URL | Source | Result |
-| --- | --- | --- |
-| `/` | `app/page.tsx` | Main public marketing page |
-| `/motion` | `app/motion/page.tsx` | Detailed Motion product marketing page |
-| `/tutorial` | `app/tutorial/page.tsx` | Progressive normal V1 product tutorial |
-| `/privacy` | `app/privacy/page.tsx` | Asymmetri Motion Privacy Policy |
-| `/support` | `app/support/page.tsx` | Asymmetri Motion Support |
-| `/robots.txt` | `app/robots.ts` | Generated crawler rules and sitemap reference |
-| `/sitemap.xml` | `app/sitemap.ts` | Generated sitemap containing all five canonical content routes |
-| `/favicon.svg` | `public/favicon.svg` | Static SVG favicon |
-| `/og.svg` | `public/og.svg` | Static 1200 by 630 social-preview image |
-| `/story` | `next.config.ts` | Permanent redirect to `/#story` |
-| `/contact` | `next.config.ts` | Permanent redirect to `/#contact` |
-| `/about` | `next.config.ts` | Permanent redirect to `/#story` |
-| `/work` | `next.config.ts` | Permanent redirect to `/` |
-| `/why-asymmetrico` | `next.config.ts` | Permanent redirect to `/#story` |
-| `/work/asymmetrico-platform` | `next.config.ts` | Permanent redirect to `/` |
+The reusable video component initially renders a local HTML/CSS poster and a
+normal external link. Clicking Load creates a fixed-ID `youtube-nocookie.com`
+iframe, with no autoplay, no persisted consent, native controls and fullscreen.
+It uses `strict-origin-when-cross-origin` so YouTube receives the required origin
+referrer. It adds no API SDK, preconnect, remote thumbnail or visitor storage.
+Google-controlled resources load only after activation and may process requests;
+the public notice and policy explain this boundary. A close action restores the
+poster and keyboard focus; the external fallback is always visible. Cross-origin
+player errors are not reliably exposed to the parent, so the fallback does not
+depend on error detection.
 
-Next.js uses HTTP 308 for these `permanent: true` redirects. `/`, `/motion`, `/tutorial`, `/privacy`, and
-`/support` are listed in the generated sitemap. The existing apex canonical origin remains
-`https://asymmetri.co` for the existing pages. The tutorial uses the owner-requested
-`https://www.asymmetri.co/tutorial` canonical and sitemap entry; both hosts must serve
-the actual route. No host redirect or infrastructure change is introduced.
-
-### Content and metadata
-
-`content/site.ts` is the primary editable source for:
-
-- the company name, canonical URL, email address, and footer descriptor;
-- navigation labels and destinations;
-- page title, description, and social-preview text;
-- all main homepage copy, the structured `motion` product content and typed
-  Motion privacy/support sections;
-- the public hero image path, dimensions, and alternative text.
-
-`app/layout.tsx` consumes those values to configure:
-
-- title and description metadata;
-- canonical metadata;
-- favicon and Apple touch icon references;
-- Open Graph and X metadata;
-- Organization JSON-LD;
-- language, theme color, and color-scheme metadata.
-
-`lib/metadata.ts` supplies route-specific utility titles, descriptions, canonicals,
-and social metadata. `components/utility-page.tsx` renders the shared readable
-article, section links, headings, lists, contact and related-page link. These are
-server components and add no custom browser JavaScript.
-
-`app/motion/page.tsx` supplies product title/description, canonical, Open Graph
-and Twitter metadata plus factual SoftwareApplication JSON-LD. The schema includes
-no price, offer, review, rating, download count or Store URL. Product social metadata
-uses the approved raster Motion icon.
-
-This keeps contact information and public facts out of presentation components.
-
-### Assets
-
-`public/brand/` stores the approved logo variants and raster icon fallbacks.
-`public/images/` stores approved sports and research imagery at stable public
-URLs. The homepage retains
-`public/images/baseball/pitching-delivery.webp` and adds the approved Motion icon.
-`public/brand/motion-pitcher.png` is the exact 1024-square packaged app icon used
-on both marketing pages and in Motion social metadata. Next.js supplies optimized
-page-image sizes. The former `motion-release.svg` and `motion-release.png` remain
-unreferenced historical identity assets; the current illustration is raster artwork.
-
-`public/favicon.svg` is served directly at `/favicon.svg`.
-`public/og.svg` is the social-preview asset referenced by both Open Graph and X
-metadata. `public/og.png` and several older image assets are retained but are not
-currently referenced by the public page.
-
-Asset provenance, dimensions, processing, public roles, and rights assessments
-are recorded in `docs/ASSET_MANIFEST.md`.
-
-### Static and server responsibilities
-
-The homepage, product page, utility pages, robots response, and sitemap are generated from
-repository content during the standard Next.js build. Static files remain under `public/` in the
-production checkout and are served at their root-relative URLs.
-
-The DigitalOcean deployment still requires a running Node.js process. The
-standard Next.js production server:
-
-- serves the built application;
-- applies configured redirects;
-- serves generated metadata routes;
-- handles Next.js runtime requests and image optimization;
-- listens only on `127.0.0.1:3001`.
-
-There is no application-owned data store or long-running business process. The
-Node.js server exists to serve the built Next.js application, not to run a
-database, account system, form processor, or product API.
+`SiteHeader` supplies a skip link and Products/Sport/About/Contact navigation.
+`SiteFooter` adds explicit product/company links and Motion resource labels.
+`CapabilityDiagram`, `WorkerDiagram` and `EvidenceChain` use semantic HTML/CSS.
+`UtilityPage` remains a server-rendered article. No external fonts, UI library,
+server state or new dependency is introduced.
 
 ## Application architecture
-
-### Rendering and components
-
-The current React components are server components. No file contains a
-`"use client"` directive, and the site does not require browser JavaScript for
-application state or custom interaction. Navigation and contact actions use
-normal links and `mailto:` URLs.
-
-Shared components remain small:
-
-- `Logo` renders the inline brand mark and optional wordmark.
-- `SiteHeader` renders the skip link, brand link, and primary navigation.
-- `SiteFooter` renders the brand descriptor and contact metadata.
-- `HomePage` owns the five-section homepage composition.
-- `MotionPage` composes the editorial product page.
-- `EvidenceChain` renders a semantic six-stage ordered list from shared content.
-- `UtilityPage` renders the two Motion utility articles.
-
-See `docs/WEBSITE_PRIVACY_AUDIT.md` for source, browser and infrastructure
-evidence, bounded hosting disclosure, and unresolved retention/mailbox facts.
 
 ### TypeScript
 
@@ -191,44 +108,17 @@ selectors in `app/globals.css`. That file owns:
 
 No external font service, CSS-in-JS runtime, or UI component library is used.
 
-### Important directories and files
+### Directory responsibilities
 
-```text
-.
-├── app/
-│   ├── globals.css          Global design tokens and responsive presentation
-│   ├── layout.tsx           Metadata, icons, JSON-LD, viewport, and root layout
-│   ├── page.tsx             One-page public homepage composition
-│   ├── privacy/page.tsx      Motion Privacy Policy
-│   ├── support/page.tsx      Motion Support
-│   ├── robots.ts            Generated robots.txt response
-│   └── sitemap.ts           Generated sitemap.xml response
-├── components/
-│   ├── logo.tsx             Reusable brand mark and wordmark
-│   ├── site-header.tsx      Skip link, brand link, and anchor navigation
-│   ├── utility-page.tsx      Shared utility article presentation
-│   └── site-footer.tsx      Descriptor, mailbox, utility links, and copyright
-├── content/
-│   └── site.ts              Typed public copy, facts, links, and image metadata
-├── lib/metadata.ts          Utility route metadata helper
-├── public/
-│   ├── brand/               Approved logo and icon assets
-│   ├── images/              Approved photography and retained research imagery
-│   ├── favicon.svg          Primary favicon
-│   └── og.svg               Active social-preview artwork
-├── docs/                    Architecture, operations, strategy, tests, and journals
-├── build/
-│   └── sites-vite-plugin.ts OpenAI Sites manifest-copying build plugin
-├── worker/
-│   └── index.ts             Vinext Cloudflare Worker and image optimization entry
-├── next.config.ts           Permanent redirect configuration
-├── tailwind.config.ts       Tailwind content paths and theme extension
-├── postcss.config.cjs       Tailwind and Autoprefixer pipeline
-├── vite.config.ts           Vinext, Vite, Cloudflare, and Sites configuration
-├── package.json             Dependencies and executable npm scripts
-├── package-lock.json        Exact npm dependency graph
-└── .nvmrc                   Repository Node.js major version
-```
+- `app/`: routes, metadata, sitemap, robots, composition and global styles.
+- `components/`: shared structure, editorial visuals and small interactions.
+- `content/`: typed public copy, product facts, links and asset descriptions.
+- `lib/metadata.ts`: shared metadata helpers.
+- `public/brand/`, `public/images/`: local approved assets and raster social images.
+- `docs/`: strategy, source reviews, development, verification and operations.
+- `build/`, `worker/`, `vite.config.ts`: retained Sites/Vinext packaging.
+- `next.config.ts`: permanent route redirects.
+- `package.json`, `package-lock.json`, `.nvmrc`: unchanged runtime/dependency contract.
 
 ### npm scripts
 
@@ -406,5 +296,6 @@ reduced-motion preference. Image links open the original asset in another tab.
 Tutorial captures are local lossless PNG crops rendered without image optimization
 to preserve screenshot pixels. Original generated setup illustrations use local
 WebP; guide/sequence diagrams are local SVG. All have intrinsic dimensions, lazy
-loading, responsive CSS, text equivalents and explicit visual-source labels. No
-new dependency, backend, form submission, database, account or external embed exists.
+loading, responsive CSS, text equivalents and explicit visual-source labels. The tutorial adds no
+new dependency, backend, form submission, database, account or external embed.
+Optional third-party videos exist only on the two product pages described above.

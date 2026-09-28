@@ -52,11 +52,12 @@ secondary to the marketing navigation. No new image or visual asset is used.
 
 ## Photography and interface imagery
 
-The public site renders one authentic pitching-delivery photograph in the hero.
+The Sport page renders the preserved authentic pitching-delivery photograph in its hero.
 It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
 and uniform lettering remain visible without localized softening. The approved
 Motion pitcher-family windup icon appears in the product introduction and
-product hero. No research imagery or fake metric is rendered. The separate tutorial includes
+product hero. Two small Explorer design concepts on Motion are explicitly labelled synthetic
+and not current app captures; their mock data is never presented as evidence. The separate tutorial includes
 authorized app captures and original instructional imagery described below. Future additions must earn a distinct narrative role and remain within the privacy and
 evidence rules in `docs/ASSET_MANIFEST.md`.
 
@@ -106,3 +107,19 @@ Screenshot crops retain original UI/evidence pixels. Do not recolor, replace lab
 change measurements, trace a fake screen or disguise a generated asset as a capture.
 All instructions are also readable text. Native details and anchors, focus rings,
 reduced motion and no-JavaScript access are part of the design.
+
+
+## Labs portfolio and optional media
+
+The Labs hero uses the existing ink/orange palette, large system typography and a
+quiet grid. Its two conceptual tracks connect one person to coordinated AI work
+and one iPhone to inspectable pitching evidence. Product sections use generous
+space and distinct BotSquad paper/orange and Motion mineral/teal cues. No invented
+metric, testimonial, affiliation or replacement logo is added.
+
+BotSquad's worker diagram is semantic text and CSS, explicitly illustrative.
+Videos use local HTML/CSS artwork at 16:9, a visible Load video button, privacy
+notice and external link. The poster is useful without third-party requests;
+loading is voluntary, and native playback controls remain available. Concepts
+keep full image proportions and adjacent source labels. The Sport narrative and
+existing tutorial presentation retain their original visual systems.

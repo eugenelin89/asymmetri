@@ -879,3 +879,43 @@ files during compilation on the small Droplet.
 This is the same Next.js/systemd/Nginx deployment path, with compilation isolated
 from live generated output. No port, service definition, DNS, Nginx, dependency,
 OS or logging change is required.
+
+## Staged portfolio release with route changes
+
+The September 28 portfolio redesign changes route composition and redirect
+configuration, so it uses a complete isolated candidate rather than the copy-only
+hard-link shortcut. Existing service, Nginx, DNS, TLS and Node 22 remain unchanged.
+The owner's standing Node 22 approval applies; local checks still use Node 24.
+
+1. Record the clean live `main` SHA, fetched remote, `.next/BUILD_ID`, service
+   process/start time and a served-page marker. Treat source identity and running
+   build identity as separate evidence. Check disk/RAM/swap and competing builds.
+2. After both local commits are pushed, create an independent `django-user`-owned
+   checkout of the exact remote SHA under a unique `/var/tmp/asymmetri-release-*`
+   directory. Use the existing authenticated Git route, no alternate object store
+   or hard-linked dependency tree. Confirm package and lockfile equality with the
+   live release before copying unchanged installed dependencies. Otherwise install
+   independently from the reviewed lockfile. Never install or build in the live tree.
+3. Run production `npm run check` and `npm run build:next` inside the candidate with
+   telemetry disabled and the documented 1536 MiB heap limit. Start its Next.js
+   server on a confirmed-unused temporary loopback port. Smoke-test all eight
+   routes, old redirects, metadata, images and changed content before activation.
+4. Preserve the complete previous checkout, dependencies, public assets and `.next`
+   as a uniquely named sibling rollback directory. Stop only `asymmetri.service`,
+   then rename the complete candidate into `/var/www/asymmetri` and restart the
+   existing service. The full-server administrator route may perform these two
+   directory renames because `/var/www` is root-owned; all Git, dependency and
+   build operations remain application-owned. Verify ownership after the move.
+5. Verify loopback and both public HTTPS hosts, canonical/sitemap/redirect values,
+   new product/video references, raster assets, service status and recent errors.
+   Confirm the candidate SHA and build ID match the activated release and clean
+   `main`. Capture desktop/mobile browser evidence and video behavior.
+6. If health fails, stop the service, preserve the failed candidate under a separate
+   name, restore the complete prior directory and restart. Verify the prior source
+   SHA, prior build ID and served content. This restores source/public/dependencies
+   together; swapping only `.next` is insufficient for this routing change.
+
+Record exact candidate/rollback directory names, SHAs, build IDs and health results
+in a task release receipt outside tracked source. Keep the rollback directory until
+the owner chooses a retention policy. Do not delete unrelated backups to make space.
+No release receipt should include credentials, private key contents or visitor logs.

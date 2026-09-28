@@ -9,9 +9,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
-    { url: `${site.company.siteUrl}${motion.path}`, changeFrequency: "monthly", priority: 0.9 },
+    {
+      url: `${site.company.siteUrl}${motion.path}`,
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    ...["/sport", "/botsquad", "/about"].map((path) => ({
+      url: `${site.company.siteUrl}${path}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     ...site.footerNavigation.map((item) => ({
-      url: item.href === tutorial.path ? tutorial.canonical : `${site.company.siteUrl}${item.href}`,
+      url:
+        item.href === tutorial.path
+          ? tutorial.canonical
+          : `${site.company.siteUrl}${item.href}`,
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),

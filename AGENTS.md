@@ -74,6 +74,21 @@ human, technically credible, and quietly unconventional. Avoid vague
 “AI-powered” language, militaristic framing, generic SaaS claims, and language
 that suggests technology replaces coaches.
 
+## Motion App Store and app-link continuity
+
+The owner explicitly requires Motion's website resources to remain available
+through company redesigns (September 28, 2026). Treat `/privacy`, `/support`,
+`/tutorial` and `/motion` as protected product routes. Do not delete their pages,
+remove navigation to them, or turn the Motion policy/support content into generic
+company articles. The iPhone app currently references
+`https://www.asymmetri.co/privacy` and `https://www.asymmetri.co/support`.
+
+Preserve working pages on both apex and `www`, the tutorial's exact `www`
+canonical, tutorial hashes and original-image URLs. A future owner-approved URL
+migration must retain useful compatibility redirects and coordinate with the app
+release; do not assume every installed app immediately updates. Verify these URLs
+and footer/context links before and after every website release.
+
 ## Implementation Style
 
 Prefer Next.js App Router server components. Add client components or browser

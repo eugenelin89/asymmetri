@@ -10,6 +10,11 @@ export function SiteFooter() {
           <p>{site.company.descriptor}</p>
         </div>
         <div className="site-footer__meta">
+          <nav className="site-footer__links" aria-label="Company and products">
+            {site.companyNavigation.map((item) => (
+              <a key={item.href} href={item.href}>{item.label}</a>
+            ))}
+          </nav>
           <nav className="site-footer__links" aria-label="Footer navigation">
             {site.footerNavigation.map((item) => (
               <a key={item.href} href={item.href}>

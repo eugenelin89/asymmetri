@@ -12,32 +12,38 @@ export const site = {
     name: "Asymmetri Labs",
     siteUrl: "https://asymmetri.co",
     contactEmail: "info@asymmetri.co",
-    descriptor: "Baseball technology for clearer pitching development",
+    descriptor: "Technology for individuals and small teams",
   },
   metadata: {
-    title: "Asymmetri Labs | Baseball Technology",
+    title: "Asymmetri Labs | Build an Asymmetric Advantage",
     description:
-      "Asymmetri Labs builds baseball technology for clearer pitching development. Meet Asymmetri Motion, our iPhone pitching video and projected 2D analysis app.",
-    socialHeadline: "Better evidence for better pitching.",
+      "Technologies that give individuals and small teams outsized capability. Explore BotSquad, Asymmetri Motion and the story behind Asymmetri Labs.",
+    socialHeadline: "Build an asymmetric advantage.",
     socialSupport:
-      "Introducing Asymmetri Motion. Pitching evidence that supports coaching.",
+      "Technology for individuals and small teams.",
   },
   navigation: [
-    { label: "Story", href: "/#story" },
-    { label: "Approach", href: "/#approach" },
-    { label: "Product", href: "/#product" },
-    { label: "Get in touch", href: "/#contact" },
+    { label: "Products", href: "/#products" },
+    { label: "Sport", href: "/sport" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/#contact" },
+  ] satisfies NavItem[],
+  companyNavigation: [
+    { label: "About Labs", href: "/about" },
+    { label: "Asymmetri Sport", href: "/sport" },
+    { label: "BotSquad", href: "/botsquad" },
+    { label: "Asymmetri Motion", href: "/motion" },
   ] satisfies NavItem[],
   footerNavigation: [
-    { label: "Tutorial", href: "/tutorial" },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Support", href: "/support" },
+    { label: "Motion tutorial", href: "/tutorial" },
+    { label: "Motion privacy", href: "/privacy" },
+    { label: "Motion support", href: "/support" },
   ] satisfies NavItem[],
   hero: {
-    eyebrow: "Baseball technology",
+    eyebrow: "Asymmetri Sport · Starting with baseball",
     headline: "Better evidence for better pitching.",
     support:
-      "Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents see pitching development more clearly. Asymmetri Motion for iPhone is preparing for release.",
+      "Asymmetri Sport brings better evidence to pitchers, coaches and parents. Baseball is where our work began. Asymmetri Motion for iPhone is preparing for release.",
   },
   story: {
     eyebrow: "Where it began",
@@ -242,7 +248,7 @@ export const motionPages = {
     title: "Asymmetri Motion Privacy Policy",
     description:
       "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, and support email.",
-    effectiveDate: { label: "September 19, 2026", value: "2026-09-19" },
+    effectiveDate: { label: "September 28, 2026", value: "2026-09-28" },
     introduction: [
       "Asymmetri Labs operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
       "Asymmetri Labs does not sell personal information.",
@@ -307,10 +313,20 @@ export const motionPages = {
         id: "website",
         heading: "The asymmetri.co website",
         paragraphs: [
-          "The website provides public information and email links. It does not set cookies or use analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no contact or support form, visitor accounts, or website database. It does not load third-party fonts, scripts or embeds.",
+          "The website provides public information and email links. It has no site-owned analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no contact or support form, visitor accounts, or website database. Fonts and images are served locally. YouTube introduction videos connect to a third party only when you choose to load a player or follow an external link, as explained below.",
           "The website is hosted on a DigitalOcean server. Website hosting and server infrastructure may process standard technical request information, such as IP address, browser/request information, requested URLs and request times, as needed to deliver, operate and protect the website. This infrastructure processing is separate from the app's on-device records.",
           "We use website information only to operate and support the informational site, not for advertising, profiling, sale or sharing for unrelated purposes. Our DigitalOcean server has access/error logging and system/service logs. Exact total retention across the host, server and other infrastructure copies is not currently established. We do not promise a fixed deletion period for those logs.",
         ],
+      },
+      {
+        id: "website-media",
+        heading: "Optional website videos",
+        paragraphs: [
+          "The BotSquad and Asymmetri Motion product pages offer YouTube introduction videos. Before you select Load video, the website displays local artwork and does not load the YouTube player, thumbnails, scripts or media. Scrolling and hovering do not activate a video. Your choice is not saved as permission for later visits.",
+          "Selecting Load video connects your browser to YouTube using its privacy-enhanced player at youtube-nocookie.com. YouTube and Google may then process information such as your IP address, browser information and interactions, and may use storage or serve advertising under their policies. Privacy-enhanced mode does not mean no data collection or advertising. The player does not autoplay.",
+          "Watch on YouTube opens the corresponding video on YouTube, where Google's policies apply. These optional website videos do not change the Motion app's local data handling. This is not a privacy policy for the BotSquad application.",
+        ],
+        link: { label: "Google privacy policy", href: "https://policies.google.com/privacy" },
       },
       {
         id: "support-email",
@@ -337,6 +353,7 @@ export const motionPages = {
         heading: "Policy updates",
         paragraphs: [
           "We may update this policy as the app or our practices change. Updates will appear on this page with a revised effective date.",
+          "September 28, 2026: updated website coverage for optional, user-activated YouTube introductions and the Asymmetri Labs portfolio. The Motion app, Apple services and support-email handling described in the September 19, 2026 policy are unchanged.",
         ],
       },
     ],
@@ -620,3 +637,241 @@ export const tutorial = {
     { id: "empty-history", title: "History, evidence or a comparison is missing", body: "Check the event or measurement, date window, camera view, throwing side and included count. Include unknown pitch dates if relevant. The chosen pair needs matching marks or compatible measurement records. Reopen each original pitch to inspect its saved inputs and current result. Replace missing Saved View selections when asked." },
   ],
 } as const;
+
+// Labs portfolio, product concepts and optional introduction media.
+export const labs = {
+  motionPreview: {
+    src: "/images/motion/tutorial/evidence.png",
+    alt: "A Motion app capture connecting a saved pitching frame to annotated trunk landmarks and a vertical reference.",
+    width: 315,
+    height: 723,
+  } satisfies SiteImage,
+  hero: {
+    eyebrow: "Asymmetri Labs",
+    headline: "Build an asymmetric advantage.",
+    support:
+      "We create technologies that give individuals and small teams outsized capability.",
+    primary: { label: "See what we're building", href: "/#products" },
+    secondary: { label: "Why Asymmetri", href: "/about" },
+  },
+  philosophy: {
+    headline: "Small input. Outsized capability.",
+    body: "An advantage can come from better information, useful automation and tools that make more possible with the resources you have. That is the idea behind Asymmetri.",
+  },
+  products: {
+    eyebrow: "What we're building",
+    headline: "Different tools.\nA shared ambition.",
+  },
+  common: {
+    eyebrow: "The common thread",
+    headline: "More within reach.",
+    body: "Coordinating AI work and understanding a pitch are different problems. Both start with the same question: what could one person do with a better tool? We build for useful capability, inspectable results and human judgment.",
+    link: { label: "The thinking behind Asymmetri", href: "/about" },
+  },
+  contact: {
+    eyebrow: "Get in touch",
+    headline: "What are you working on?",
+    body: "Building with a small team? Seeing a problem from a different angle? We'd like to hear from you.",
+  },
+  diagram: {
+    caption: "Two ways to make more possible. Conceptual diagram.",
+    tracks: [
+      {
+        input: "One person",
+        product: "BotSquad",
+        output: "Coordinated AI workers",
+        steps: ["Research", "Build", "Review"],
+      },
+      {
+        input: "One iPhone",
+        product: "Asymmetri Motion",
+        output: "Inspectable pitching evidence",
+        steps: ["Frames", "Measurements", "History"],
+      },
+    ],
+  },
+} as const;
+
+export const sportNavigation: NavItem[] = [
+  { label: "Story", href: "/sport#story" },
+  { label: "Approach", href: "/sport#approach" },
+  { label: "Motion", href: "/motion" },
+  { label: "Contact", href: "/sport#contact" },
+];
+
+export const botsquad = {
+  name: "BotSquad",
+  path: "/botsquad",
+  headline: "One person. An AI team.",
+  descriptor:
+    "A self-hosted workspace for coordinating persistent AI workers, from a clear task to a result you can inspect.",
+  status: "Open source · early development",
+  licenseNote:
+    "MIT licensed. The public repository includes the source, setup instructions and validation records.",
+  metadata: {
+    title: "BotSquad | An AI Team, Under Your Direction",
+    description:
+      "Coordinate persistent AI workers, explicit tasks and inspectable results. Self-hosted browser access through a tunnel today; standard web access and mobile in development.",
+  },
+  source: {
+    label: "View on GitHub",
+    href: "https://github.com/eugenelin89/bot_messenger",
+  },
+  gettingStarted: {
+    label: "Getting started",
+    href: "https://github.com/eugenelin89/bot_messenger#set-up-a-brand-new-botsquad-server",
+  },
+  problem: {
+    eyebrow: "From scattered conversations to shared work",
+    headline: "Spend less effort on the handoff.",
+    body: "Working across AI conversations can mean repeating context, copying results and remembering what still needs review. BotSquad gives that coordination a home: named workers, explicit tasks, durable messages and visible execution history.",
+  },
+  workflow: [
+    {
+      title: "Give the work a shape",
+      body: "Define roles and assign explicit tasks with clear boundaries. Workers keep their identities and can resume their conversations as work continues.",
+    },
+    {
+      title: "Keep the handoff in context",
+      body: "Messages, task state and artifacts stay in the workspace. Workers can pass work along without making you carry every result between conversations.",
+    },
+    {
+      title: "Run, inspect, review",
+      body: "The current runtime executes work through Codex. Supported software workflows use scoped changes, recorded test results and independent review before integration.",
+    },
+    {
+      title: "Keep authority bounded",
+      body: "Review outputs, pause work and decide on protected operations. Publication and infrastructure actions use specific approval paths, within the supported workflow.",
+    },
+  ] satisfies ProductStep[],
+  persistence:
+    "Persistent means the worker's identity and recorded context endure. It does not mean a model runs continuously or has unlimited memory. Work is dispatched when queued, with bounded concurrency.",
+  example: {
+    eyebrow: "Illustrative research handoff",
+    headline: "A question. A brief. A review.",
+    request:
+      "Compare approaches to a small software project. Gather sources and uncertainties. No spending, publishing or outreach.",
+    steps: [
+      {
+        title: "Coordinate",
+        body: "A manager gives a researcher a bounded question.",
+      },
+      {
+        title: "Investigate",
+        body: "The researcher returns a source-linked artifact and open questions.",
+      },
+      {
+        title: "Review",
+        body: "The manager checks the evidence and brings the result back to you.",
+      },
+    ] satisfies ProductStep[],
+    caption:
+      "Synthetic workflow illustration, not a customer result or a live dashboard.",
+  },
+  control: {
+    headline: "You can see the work.\nYou stay in control.",
+    body: "Tasks, messages, execution records and artifacts make progress and failures inspectable. Scoped authority and review help contain the work. They are safeguards, not guarantees of perfect security or error-free output.",
+  },
+  access: {
+    headline: "Where it stands.",
+    current:
+      "Open source and self-hosted. Access the current interface in your browser through a tunnel.",
+    future:
+      "Standard web access and a mobile app for interacting with BotSquad are in development. Neither is released, and no launch date is announced.",
+    runtime:
+      "The current setup uses an operator-controlled Ubuntu host, Node.js and the Codex runtime. Follow the repository's setup instructions for supported versions and requirements.",
+    privacy:
+      "Coordination state stays on your host. Configured external model services may receive task context for execution; self-hosted does not mean entirely offline inference.",
+  },
+} as const;
+
+export const about = {
+  metadata: {
+    title: "Why Asymmetri | Asymmetri Labs",
+    description:
+      "Useful tools, inspectable evidence and human control. Why Asymmetri Labs builds technology for individuals and small teams.",
+  },
+  eyebrow: "Why Asymmetri",
+  headline: "An advantage doesn't have to start with more.",
+  introduction:
+    "More people. More time. More resources. Those are familiar ways to gain an advantage. We are interested in another: tools that change what a person or small team can do with what they already have.",
+  meaning:
+    "That is what asymmetric advantage means to us. Better information can make a conversation more useful. Automation can make a handoff less manual. A well-designed tool can put a previously difficult task within reach.",
+  principles: [
+    {
+      title: "Useful tools",
+      body: "Start with a real task and make the work clearer. Technology earns its place through what it helps someone do.",
+    },
+    {
+      title: "Inspectable evidence",
+      body: "Keep results connected to their sources. Make limitations visible so people can judge what a result means.",
+    },
+    {
+      title: "Human control",
+      body: "Support judgment, context and responsibility. Give people a clear view of the work and a meaningful say in what happens next.",
+    },
+  ] satisfies ProductStep[],
+  origin:
+    "Our work began in baseball, with a phone camera and a question about making pitching evidence easier to understand. Asymmetri Sport carries that story forward. BotSquad explores the same ambition through coordinated AI work.",
+} as const;
+
+export const motionGallery = {
+  eyebrow: "Inside the design process",
+  headline: "A question worth returning to.",
+  description:
+    "These early Explorer design studies show the thinking behind asking a question of saved pitching history, then returning to it. They are concept illustrations with synthetic content, not current app screenshots or scientific validation. For the current workflow, see the Motion tutorial.",
+  images: [
+    {
+      src: "/images/motion/explorer-home-concept.webp",
+      width: 523,
+      height: 1106,
+      alt: "Early Explorer design concept with options to explore observations, compare pitches and compare periods; synthetic content.",
+      caption: "Explorer entry concept · September 2026",
+    },
+    {
+      src: "/images/motion/explorer-saved-views-concept.webp",
+      width: 523,
+      height: 1106,
+      alt: "Early Saved Views design concept showing two illustrative saved questions; not a current app capture.",
+      caption: "Saved questions concept · September 2026",
+    },
+  ] satisfies (SiteImage & { caption: string })[],
+} as const;
+
+export const mediaDisclosure = {
+  notice:
+    "Loading this video connects to YouTube. Google's privacy policy applies.",
+  privacy: {
+    label: "Google privacy policy",
+    href: "https://policies.google.com/privacy",
+  },
+  website: {
+    label: "About website videos and privacy",
+    href: "/privacy#website-media",
+  },
+};
+
+export const introductions = {
+  botsquad: {
+    product: "BotSquad",
+    videoId: "E5r_lOecC-M",
+    source: "https://youtu.be/E5r_lOecC-M",
+    headline: "Meet BotSquad.",
+    posterLine: "One person. An AI team.",
+    description:
+      "An introduction to BotSquad and the idea of coordinating AI workers. The current interface uses tunnel-based browser access; standard web access and mobile interaction remain in development.",
+    tone: "botsquad",
+  },
+  motion: {
+    product: "Asymmetri Motion",
+    videoId: "kaSatKC8HBg",
+    source: "https://youtu.be/kaSatKC8HBg",
+    headline: "Meet Asymmetri Motion.",
+    posterLine: "See your pitch more clearly.",
+    description:
+      "A short introduction to Asymmetri Motion. The app is preparing for release. Promotional imagery does not establish public availability or scientific validation; the workflow and limits below describe the product.",
+    tone: "motion",
+  },
+} as const;
+
+export type Introduction = (typeof introductions)[keyof typeof introductions];

@@ -3,7 +3,8 @@ import Image from "next/image";
 import { EvidenceChain } from "@/components/evidence-chain";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { motion, site, tutorial } from "@/content/site";
+import { motion, site, tutorial, introductions, motionGallery } from "@/content/site";
+import { IntroductionVideo } from "@/components/introduction-video";
 
 export const metadata: Metadata = {
   ...motion.metadata,
@@ -14,7 +15,14 @@ export const metadata: Metadata = {
     siteName: site.company.name,
     type: "website",
     locale: "en_CA",
-    images: [{ url: motion.socialImage, width: 1024, height: 1024, alt: motion.icon.alt }],
+    images: [
+      {
+        url: motion.socialImage,
+        width: 1024,
+        height: 1024,
+        alt: motion.icon.alt,
+      },
+    ],
   },
   twitter: {
     ...motion.metadata,
@@ -32,7 +40,11 @@ const softwareSchema = {
   operatingSystem: motion.operatingSystem,
   availableOnDevice: motion.device,
   applicationCategory: "SportsApplication",
-  publisher: { "@type": "Organization", name: site.company.name, url: site.company.siteUrl },
+  publisher: {
+    "@type": "Organization",
+    name: site.company.name,
+    url: site.company.siteUrl,
+  },
 };
 
 export default function MotionPage() {
@@ -52,7 +64,13 @@ export default function MotionPage() {
               </a>
             </div>
             <div className="motion-product">
-              <Image src={motion.icon.src} alt={motion.icon.alt} width={224} height={224} priority />
+              <Image
+                src={motion.icon.src}
+                alt={motion.icon.alt}
+                width={224}
+                height={224}
+                priority
+              />
               <p className="motion-product__descriptor">{motion.descriptor}</p>
               <div className="motion-product__details">
                 <p>{motion.platform}</p>
@@ -61,6 +79,7 @@ export default function MotionPage() {
             </div>
           </div>
         </section>
+        <IntroductionVideo video={introductions.motion} />
         <section className="section motion-gap">
           <div className="shell product-split">
             <div className="product-heading">
@@ -68,7 +87,9 @@ export default function MotionPage() {
               <h2>{motion.gap.headline}</h2>
             </div>
             <div className="product-prose">
-              {motion.gap.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {motion.gap.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </section>
@@ -77,7 +98,12 @@ export default function MotionPage() {
             <div className="product-heading section-heading">
               <p className="eyebrow">{motion.workflow.eyebrow}</p>
               <h2>{motion.workflow.headline}</h2>
-              <a className="text-link motion-tutorial-link" href={tutorial.link.href}>{tutorial.link.label} →</a>
+              <a
+                className="text-link motion-tutorial-link"
+                href={tutorial.link.href}
+              >
+                {tutorial.link.label} →
+              </a>
             </div>
             <ol className="workflow-list">
               {motion.workflow.steps.map((step, index) => (
@@ -86,14 +112,19 @@ export default function MotionPage() {
                   <div>
                     <h3>{step.title}</h3>
                     <p>{step.body}</p>
-                    {"note" in step && <p className="workflow-list__note">{step.note}</p>}
+                    {"note" in step && (
+                      <p className="workflow-list__note">{step.note}</p>
+                    )}
                   </div>
                 </li>
               ))}
             </ol>
           </div>
         </section>
-        <section className="section motion-evidence" aria-labelledby="evidence-title">
+        <section
+          className="section motion-evidence"
+          aria-labelledby="evidence-title"
+        >
           <div className="shell">
             <div className="product-split">
               <div className="product-heading">
@@ -103,7 +134,9 @@ export default function MotionPage() {
               <p className="product-lead">{motion.evidence.support}</p>
             </div>
             <EvidenceChain />
-            <p className="motion-evidence__closing">{motion.evidence.closing}</p>
+            <p className="motion-evidence__closing">
+              {motion.evidence.closing}
+            </p>
           </div>
         </section>
         <section className="section motion-history">
@@ -142,6 +175,40 @@ export default function MotionPage() {
             </dl>
           </div>
         </section>
+        <section className="section motion-concepts">
+          <div className="shell product-split">
+            <div className="product-heading">
+              <p className="eyebrow">{motionGallery.eyebrow}</p>
+              <h2>{motionGallery.headline}</h2>
+              <p className="product-lead">{motionGallery.description}</p>
+              <a className="text-link" href="/tutorial">
+                See the current app workflow →
+              </a>
+            </div>
+            <div className="concept-gallery">
+              {motionGallery.images.map((image) => (
+                <figure key={image.src}>
+                  <a
+                    href={image.src}
+                    aria-label={`Open original: ${image.caption}`}
+                  >
+                    <Image
+                      src={image.src}
+                      width={image.width}
+                      height={image.height}
+                      alt={image.alt}
+                      sizes="(max-width: 550px) 75vw, (max-width: 820px) 40vw, 22vw"
+                    />
+                  </a>
+                  <figcaption>
+                    {image.caption}
+                    <span>Concept illustration · synthetic content</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
         <section className="section motion-privacy">
           <div className="shell product-split">
             <div className="product-heading">
@@ -149,8 +216,12 @@ export default function MotionPage() {
               <h2>{motion.privacy.headline}</h2>
             </div>
             <div className="product-prose">
-              {motion.privacy.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              <a className="text-link" href={motion.privacy.link.href}>{motion.privacy.link.label}</a>
+              {motion.privacy.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              <a className="text-link" href={motion.privacy.link.href}>
+                {motion.privacy.link.label}
+              </a>
             </div>
           </div>
         </section>
@@ -173,15 +244,30 @@ export default function MotionPage() {
             <div className="motion-release">
               <p>{motion.releaseStatement}</p>
               <div className="button-row">
-                <a className="button button--ink" href={`mailto:${site.company.contactEmail}`}>Get in touch</a>
-                {site.footerNavigation.map((link) => <a className="text-link" key={link.href} href={link.href}>{link.label}</a>)}
+                <a className="text-link" href="/sport#story">
+                  The Asymmetri Sport story
+                </a>
+                <a
+                  className="button button--ink"
+                  href={`mailto:${site.company.contactEmail}`}
+                >
+                  Get in touch
+                </a>
+                {site.footerNavigation.map((link) => (
+                  <a className="text-link" key={link.href} href={link.href}>
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
         </section>
       </main>
       <SiteFooter />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
     </div>
   );
 }

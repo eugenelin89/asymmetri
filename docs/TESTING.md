@@ -22,23 +22,26 @@ path.
 
 When routes or shared layout code change, verify:
 
-- `/`
+- `/` (Labs portfolio)
+- `/sport` (preserved founder story and anchors)
+- `/botsquad` (current access versus future web/mobile)
+- `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
-- `/story`, `/contact`, and `/about` (permanent redirects to homepage anchors)
-- `/work`, the legacy name route, and the named-product URL (permanent redirects
-  to the homepage or Story anchor)
+- `/story` → `/sport#story`; `/contact` → `/#contact`
+- `/work` → `/#products`; `/why-asymmetrico` → `/about`;
+  `/work/asymmetrico-platform` → `/sport`
 - `/robots.txt`
 - `/sitemap.xml`
 - `/favicon.svg`
-- `/og.svg`
+- `/images/labs-social.png`, `/images/sport-social.png` and retained `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets. Verify footer links on all five pages, mutual
+broken public assets. Verify footer links on all eight pages, mutual
 Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
-The sitemap must include all five canonical routes; robots must allow them.
+The sitemap must include all eight canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
 against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
 network resources for accidental tracking, forms or external scripts/fonts.
@@ -59,9 +62,10 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
-- the Story → Approach → Product → Get in touch navigation follows homepage
-  order; Product reaches `/#product` from every route and is visible below the
-  sticky header; the section's Explore button still opens `/motion`;
+- Products reaches `/#products` from every route; Sport/About/Contact work;
+- Sport retains Story → Approach → Product → Contact and its Motion action;
+- old root `#story`, `#approach`, `#product` migrate to Sport while plural
+  `#products` and company `#contact` stay on Labs;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
 - image loading, crops, and alt text;
@@ -137,13 +141,14 @@ qualifiers, descriptive comparison and the release state against the current
 source review. Do not expose Developer-only metrics, future features, an unverified
 Store link or price. Check the icon and product Open Graph/Twitter image, factual
 SoftwareApplication schema and absence of offer/rating fields. Compare the utility
-content export with its prior committed version; shared navigation must not alter
-the audited Privacy/Support bodies. New assets require provenance and rights review.
+content export with its prior committed version; shared navigation must preserve
+the audited app/Apple/support-retention meaning. Only the approved website-media
+disclosure and effective-date history change with the videos. New assets require provenance and rights review.
 
 
 ## Tutorial regression
 
-At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all five routes.
+At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all eight routes.
 Inspect the actual `innerWidth` when browser zoom affects viewport overrides.
 Exercise all ten module links, Previous/Next and browser Back/Forward; load a fresh
 URL containing a module hash and a step hash. Check deep links into a previously
@@ -161,6 +166,30 @@ uniqueness and console errors. Privacy review includes final image crops, not on
 text scans. Generated physical setup imagery must never be mistaken for app UI.
 
 The tutorial adds no persistent browser storage, cookies, forms, tracking or external
-runtime resources. Support's only substantive addition is the tutorial link; privacy
-copy and policy date must remain unchanged. Runtime device preservation claims must
+runtime resources. Tutorial changes must not silently change policy. The September 28 media
+disclosure is a separate authorized website change. Runtime device preservation claims must
 be limited to the actions actually performed, not inferred byte-level preservation.
+
+
+## Optional video regression
+
+Test both `/botsquad` and `/motion` with a fresh browser request log. Before Load,
+there must be no iframe, remote thumbnail, preconnect or request to YouTube, Google,
+ytimg or advertising domains attributable to the site. External links alone do not
+load those resources. After Load, inspect the exact iframe ID and native playback.
+BotSquad uses the owner-corrected English `E5r_lOecC-M`; Motion uses `kaSatKC8HBg`.
+Confirm no autoplay, title, origin referrer policy, responsive 16:9 reservation,
+fullscreen, keyboard access, visible disclosure and an always-available fallback.
+Close must restore the poster and button focus. Check no-JavaScript and blocked
+frames, plus reduced-motion navigation. Do not weaken browser privacy settings to
+force playback; document provider/network limitations when they remain.
+
+
+## Motion release-link continuity
+
+Before and after deployment, require HTTP 200 and the actual Motion article title
+at `https://www.asymmetri.co/privacy` and `https://www.asymmetri.co/support`, the
+current app Settings destinations. Also check apex equivalents, both tutorial
+hosts, `/motion`, shared Motion-labelled footer links and mutual policy/support
+links. These are protected app/App Store resources, not disposable marketing
+routes. Preserve tutorial step hashes and original-image destinations.

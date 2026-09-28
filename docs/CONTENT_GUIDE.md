@@ -2,7 +2,8 @@
 
 ## Source of truth
 
-Shared public content lives in `content/site.ts`. Update that file for:
+Shared public content is centralized in `content/`. `site.ts` owns shared identity,
+Motion and the preserved Sport narrative. Update it for:
 
 - company name and positioning;
 - canonical URL and public contact mailbox;
@@ -16,6 +17,9 @@ Shared public content lives in `content/site.ts`. Update that file for:
 - closing calls to action;
 - Motion Privacy Policy and Support content in `motionPages`, including the
   effective date, section IDs, metadata, contact labels and mutual links.
+
+Additional typed exports in `content/site.ts` own Labs/BotSquad/About copy, Sport
+navigation, concept captions, video IDs, external URLs and notices.
 
 Page files under `app/` own narrative sequence and route-specific connective
 copy. Components should focus on presentation and should not quietly introduce
@@ -141,14 +145,15 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 ## Routes and navigation
 
-The homepage follows `#story`, `#approach`, `#product`, then `#contact`. Product is
-the final substantive section before the contact close, with the eyebrow
-“Product” rather than “Our first product.” Primary navigation follows that order
-and uses root-relative anchors from every route. `/motion` is the detailed
-product page, reached through “Explore Asymmetri Motion” in `#product`.
-Privacy and Support are separate indexed utility
-pages with quiet footer links, mutual article links and contextual product links. Former secondary routes
-redirect permanently. When adding or removing a
+Labs `/` introduces the portfolio with `#products` and company `#contact`.
+`/sport` preserves `#story`, `#approach`, `#product` and its coaching contact.
+Shared navigation is Products, Sport, About and Contact. `/about` is a real page;
+`/motion` and `/botsquad` are detailed product pages. Footer resource links say
+Motion tutorial, Motion privacy and Motion support. The three moved root fragments
+have a client compatibility mapping to Sport; `/work` now redirects to the Labs
+portfolio. Other legacy redirects are listed in `ARCHITECTURE.md`.
+
+When adding or removing a
 public route:
 
 1. update the route under `app/`;
@@ -170,7 +175,7 @@ the user explicitly requests it.
 ## Images and alt text
 
 Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
-The current site renders one privacy-reviewed pitching photograph and the
+Sport retains the privacy-reviewed pitching photograph and the
 owner-approved Motion pitcher-family icon. The tutorial also renders the specifically owner-authorized current Motion
 app captures and clearly labelled original instructional illustrations. Alt text
 should describe the visible action and purpose without adding identity,
@@ -211,4 +216,48 @@ non-calibrating setups/profile, descriptive history and local-data caveats. Matc
 new wording against current source and accepted Decision 50, not an old screenshot.
 The coverage matrix and rationale for omitted dedicated screenshots are in
 `TUTORIAL_REVIEW.md`; generation prompts and asset processing are in
-`TUTORIAL_MEDIA.md`. The existing public policy text/effective date is unchanged.
+`TUTORIAL_MEDIA.md`. The September 28 website-media disclosure is separate from these unchanged app
+and tutorial facts.
+
+
+## BotSquad and introduction videos
+
+BotSquad is MIT licensed, open source and self-hosted. Persistent logical workers
+have durable identity/context and bounded execution, not continuous inference or
+unlimited memory. Current browser access uses a tunnel. Standard web access and a
+mobile app are in development, without a release date or SaaS promise. Distinguish
+host-local coordination state from task context sent to configured model services.
+See `PORTFOLIO_REDESIGN.md` for exact reviewed revisions and source precedence.
+
+Use the owner-corrected English BotSquad video `E5r_lOecC-M` and Motion video
+`kaSatKC8HBg`. A video is explanatory media, not authority for release/capability
+claims. Keep local posters, deliberate loading, external fallback links and the
+visible Google privacy notice. Optional embedding uses `youtube-nocookie.com`;
+never describe it as tracking-free. `/privacy#website-media` explains the boundary
+and is not a general BotSquad privacy policy. The effective date is September 28,
+2026; approved Motion/app and support-retention disclosures retain their meaning.
+
+The two small Explorer images are synthetic design concepts, not current software
+captures or a new-feature announcement. Preserve that distinction in alt text,
+captions and adjacent prose. Never promote their mock values to product evidence.
+
+
+## Protected Motion app and App Store resources
+
+The owner explicitly requires these pages and links to survive the Labs redesign
+and later website work. The redesign preserves every existing route unchanged:
+
+| Resource | Stable URL | Dependency |
+| --- | --- | --- |
+| Motion Privacy Policy | `https://www.asymmetri.co/privacy` | Current iPhone Settings release link and App Store policy destination |
+| Motion Support | `https://www.asymmetri.co/support` | Current iPhone Settings release link and release support resource |
+| Motion tutorial | `https://www.asymmetri.co/tutorial` | Public product guide, stable modules/steps and original-image URLs |
+| Motion product page | `https://asymmetri.co/motion` | Product information, tutorial and policy/support discovery |
+
+Read-only review of the app's `Features/Settings/ReleaseLinks.swift` and
+`ReleaseLinksTests.swift` confirmed the two exact www policy/support URLs on
+September 28, 2026. No app source or App Store configuration was changed here.
+Both apex and www must serve real policy/support pages. Footer links remain
+explicitly labelled Motion resources, and contextual/mutual links remain intact.
+Future approved moves must preserve compatibility for installed app versions;
+coordinating a new app link alone does not retire the old destination safely.

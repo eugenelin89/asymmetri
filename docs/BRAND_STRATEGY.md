@@ -2,24 +2,24 @@
 
 ## Positioning
 
-**Asymmetri Labs builds baseball technology that helps pitchers, coaches and
-parents see pitching development more clearly.** Its first product is Asymmetri
-Motion, an iPhone pitching-video and projected 2D motion-analysis app built around
-evidence people can inspect. It is preparing for release, not advertised as
-publicly available. The company retains room for future research without making
-that research part of current product promises.
+**Asymmetri Labs creates technologies that give individuals and small teams
+outsized capability.** Its current portfolio comprises BotSquad and Asymmetri
+Motion. Asymmetri Sport is the sports-technology branch and home of the baseball
+origin story. Use singular “Sport” for the brand, plural “sports technology” for
+the category.
 
 ## Mission and point of view
 
-Make useful pitching evidence easier to capture, compare and understand. Everyday
-video can become a lasting record when selected frames, human-confirmed moments,
-measurements and annotated evidence stay connected. The value is the relationship
-between an observation and its source, not the number of metrics or an AI label.
+Useful tools can change what someone can do with the resources they already have.
+BotSquad explores coordinated AI work; Motion explores inspectable pitching evidence.
+The common principles are useful capability, results connected to their sources,
+and human control. These are distinct products, not a claim that one platform
+powers everything.
 
-Coaches provide judgment, context, experience and human understanding. Pitchers
-gain clearer insight into their work. Parents gain context to support development
-alongside a coach. A comparison is descriptive, not a mechanics grade, a causal
-training result or an automatic recommendation.
+For Motion, coaches provide judgment, context, experience and human understanding.
+Pitchers gain clearer insight and parents gain context to support development.
+Recorded differences are descriptive, not proof of improvement or causation.
+BotSquad supports bounded coordination and review, not unlimited autonomy.
 
 ## Founder origin
 
@@ -36,17 +36,18 @@ Sensors remain part of that history, not a requirement or feature of Motion V1.
 
 ## Messaging hierarchy
 
-1. Company category: **Baseball technology**.
-2. Company hero: **Better evidence for better pitching.**
-3. First product: **Asymmetri Motion**.
-4. Product line: **See your pitch more clearly.**
-5. Descriptor: **Pitching video and projected 2D analysis for iPhone.**
-6. Evidence idea: **From the number back to the pitch.**
-7. Closing: **Great coaching stays human. Better evidence makes it stronger.**
+1. Company: **Asymmetri Labs**.
+2. Company hero: **Build an asymmetric advantage.**
+3. Company support: **We create technologies that give individuals and small teams outsized capability.**
+4. Portfolio: **BotSquad** and **Asymmetri Motion**.
+5. Sports branch: **Asymmetri Sport**, with **Better evidence for better pitching.**
+6. Motion product line: **See your pitch more clearly.**
+7. Sport closing: **Great coaching stays human. Better evidence makes it stronger.**
 
-The homepage is the company narrative; `/motion` explains the real product.
-Verified V1 capabilities, experimental scientific interpretation and future
-direction remain distinct. Read `MOTION_PRODUCT_REVIEW.md` before changing claims.
+The homepage introduces the portfolio; `/sport` preserves the founder narrative;
+`/motion` and `/botsquad` explain the products; `/about` explains the company idea.
+Current capability, scientific interpretation, future work and release availability
+remain distinct. Consult the product source reviews before changing claims.
 
 ## Voice
 

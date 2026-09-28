@@ -1,39 +1,49 @@
 # Asymmetri Labs
 
-Asymmetri Labs builds baseball technology that helps pitchers, coaches and parents
-see pitching development more clearly. Its first product, Asymmetri Motion, is an
-iPhone pitching-video and projected 2D analysis app preparing for release. Better
-evidence strengthens coaching without replacing it.
+Asymmetri Labs creates technologies that give individuals and small teams outsized
+capability. The public portfolio introduces BotSquad and Asymmetri Motion, with
+the baseball founder story preserved under Asymmetri Sport.
 
 ## Website purpose
 
-This repository contains the official company website. The landing page
-preserves the company hero and authentic pitching photograph, follows with the
-founder story and Capture / Understand / Improve approach, then presents the
-Product section before the human-coaching close and direct contact. The Product
-menu link targets `/#product`; its Explore button opens `/motion`. That page explains the
-current workflow, inspectable evidence, history, scientific limits and local-first
-architecture. Verified V1 capability is distinct from public release availability.
+The company homepage explains asymmetric advantage and introduces two products.
+BotSquad coordinates persistent logical AI workers in a self-hosted workspace;
+current browser access uses a tunnel, while standard web access and mobile remain
+in development. Asymmetri Motion creates inspectable pitching evidence on iPhone
+and is preparing for release. Neither implementation nor promotional media proves
+scientific validation or public App Store availability.
 
 ## Routes
 
-`/` is the company marketing page and `/motion` is the detailed product page.
-`/tutorial` teaches the complete normal V1 workflow with interactive modules,
-mobile-friendly branches, authentic app captures and labelled setup illustrations.
-`/privacy` and `/support` provide the Asymmetri Motion Privacy Policy and Support guidance, with quiet footer links and mutual
-links. All five routes are indexable and included in the sitemap. The former
-`/story`, `/contact`,
-`/about`, `/work`, `/why-asymmetrico`, and named-product routes permanently
-redirect to the relevant homepage section or the homepage itself. Next.js also
-generates `/robots.txt` and `/sitemap.xml`.
+| Route | Purpose |
+| --- | --- |
+| `/` | Labs philosophy, product portfolio and company contact |
+| `/sport` | Preserved pitching photograph, founder story, approach and Motion introduction |
+| `/motion` | Detailed product workflow, evidence, limitations and introduction video |
+| `/botsquad` | Source-grounded product explanation, introduction video and GitHub access |
+| `/about` | Company philosophy and origins |
+| `/tutorial` | Complete progressive Motion guide with original-image links |
+| `/privacy` | Motion policy, support/hosting disclosures and optional website videos |
+| `/support` | Motion support guidance |
+
+Motion policy, support, tutorial and product pages are protected app/release
+resources and must remain available; see the continuity rules in `AGENTS.md` and
+[Content guide](docs/CONTENT_GUIDE.md).
+
+All eight pages are indexable. The tutorial retains the exact canonical
+`https://www.asymmetri.co/tutorial`; other pages use the apex origin. Legacy routes
+and the three moved homepage fragments retain useful destinations. See
+[Architecture](docs/ARCHITECTURE.md) for the complete mapping.
 
 ## Technology
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind
-Nginx and systemd on a DigitalOcean Ubuntu Droplet. There is no analytics, form
-backend, database, authentication or visitor tracking. Tutorial screenshots contain only the
+Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytics, form
+backend, database, authentication or application-owned visitor tracking. Optional
+YouTube players connect to Google only after explicit activation; local posters
+and normal external links are available beforehand. Tutorial screenshots contain only the
 owner-authorized retained pitching media described in the asset manifest.
 
 ## Local development
@@ -57,8 +67,8 @@ npm audit --omit=dev
 git diff --check
 ```
 
-Primary public copy, metadata, contact details, and the selected hero-image
-description live in `content/site.ts`. See `docs/ASSET_MANIFEST.md` before
+Shared identity, navigation, product copy, contact details, concept captions and
+approved video IDs/disclosures live in typed exports in `content/site.ts`. See `docs/ASSET_MANIFEST.md` before
 changing public assets.
 
 ## Documentation
@@ -74,3 +84,5 @@ changing public assets.
 - [Asset manifest](docs/ASSET_MANIFEST.md)
 - [Tutorial coverage and source review](docs/TUTORIAL_REVIEW.md)
 - [Tutorial media and generation prompts](docs/TUTORIAL_MEDIA.md)
+
+- [Portfolio decisions and product evidence](docs/PORTFOLIO_REDESIGN.md)

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: "en_CA",
     images: [
       {
-        url: "/og.svg",
+        url: "/images/labs-social.png",
         width: 1200,
         height: 630,
         alt: `${site.company.name}: ${site.metadata.socialHeadline} ${site.metadata.socialSupport}`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.metadata.title,
     description: site.metadata.description,
-    images: ["/og.svg"],
+    images: ["/images/labs-social.png"],
   },
 };
 
@@ -56,11 +56,9 @@ const organizationSchema = {
   description: site.metadata.description,
   email: site.company.contactEmail,
   knowsAbout: [
-    "Baseball technology",
-    "Pitching development",
-    "Pitching mechanics",
-    "Smartphone video",
-    "Projected 2D motion analysis",
+    "AI worker coordination",
+    "Sports technology",
+    "Inspectable evidence",
   ],
 };
 

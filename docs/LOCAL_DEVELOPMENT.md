@@ -85,7 +85,8 @@ configuration, not an environment file or credential store.
 ## Editing workflow
 
 1. Read `AGENTS.md` and the relevant documents under `docs/`.
-2. Change shared copy and facts in `content/site.ts`.
+2. Change shared identity, product facts, portfolio copy and approved video
+   IDs/notices in the typed exports in `content/site.ts`.
 3. Change route composition under `app/`.
 4. Change shared visuals or structure under `components/`.
 5. Update documentation and the asset manifest when their subject changes.
@@ -120,3 +121,13 @@ If the stack points to `worker/index.ts` and `/_vinext/image`, stop and restart
 `npm run dev`. The Cloudflare Vite configuration declares the local `ASSETS`
 and `IMAGES` bindings required by Vinext image optimization. A server that was
 already running before a configuration update may need a full restart.
+
+
+### Product-video checks
+
+Product pages render local posters until Load video is activated. A fresh Network
+panel should show no Google/YouTube resources before that action. Check the native
+player and fallback afterwards. The iframe's origin referrer is intentional;
+removing it can cause YouTube error 153. Do not add an SDK, remote thumbnail or
+preconnect to solve playback failures. Cross-origin player errors are not reliably
+observable by the parent, so the external link is always present.
