@@ -2,6 +2,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
+import { WorkerFlow } from "@/components/worker-flow";
 import { botsquad, introductions, site, work } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -49,7 +50,7 @@ export default function BotSquadPage() {
                 Part of {work.name} ↗
               </a>
             </div>
-            <WorkerExample />
+            <WorkerFlow />
           </div>
         </section>
         <IntroductionVideo video={introductions.botsquad} />
@@ -66,7 +67,7 @@ export default function BotSquadPage() {
           <div className="shell product-split">
             <div className="product-heading section-heading">
               <p className="eyebrow">How it works</p>
-              <h2>From an assigned task to a reviewed result.</h2>
+              <h2>{botsquad.workflowHeadline}</h2>
               <p className="product-note">{botsquad.persistence}</p>
             </div>
             <ol className="workflow-list">
@@ -80,6 +81,11 @@ export default function BotSquadPage() {
                 </li>
               ))}
             </ol>
+          </div>
+        </section>
+        <section className="section botsquad-example">
+          <div className="shell">
+            <WorkerExample />
           </div>
         </section>
         <section className="section labs-common">

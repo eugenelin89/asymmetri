@@ -7,8 +7,9 @@ preserved under Asymmetri Sport.
 
 ## Website purpose
 
-The company homepage introduces two products in plain language, shows their current
-status and connects the work to the founder’s coaching experience. The visual
+The company homepage introduces Labs, its Work and Sport domains, and the products
+within them. Company principles frame the two product panels; the founder's
+coaching story lives on Sport and About. The visual
 system uses warm paper surfaces, readable system typography and approved real media.
 BotSquad coordinates persistent logical AI workers in a self-hosted workspace;
 current browser access uses a tunnel, while standard web access and mobile remain

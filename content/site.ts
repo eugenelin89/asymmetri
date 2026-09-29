@@ -759,6 +759,7 @@ export const botsquad = {
     headline: "Tired of carrying context between chats?",
     body: "One conversation has the plan. Another has the code. You’re copying between them and trying to remember what needs checking. BotSquad keeps named workers, tasks, messages and execution records in one place.",
   },
+  workflowHeadline: "From an assigned task to a reviewed result.",
   workflow: [
     {
       title: "Assign a task",

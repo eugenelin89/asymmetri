@@ -4,11 +4,20 @@ import { botsquad } from "@/content/site";
 export function WorkerExample() {
   return (
     <figure className="worker-example">
-      <p className="eyebrow">{botsquad.example.eyebrow}</p>
-      <blockquote>{botsquad.example.request}</blockquote>
+      <div className="product-split">
+        <div className="product-heading">
+          <p className="eyebrow">{botsquad.example.eyebrow}</p>
+          <h2>{botsquad.example.headline}</h2>
+        </div>
+        <blockquote>{botsquad.example.request}</blockquote>
+      </div>
       <ol>
-        {botsquad.example.steps.map((step) => (
-          <li key={step.title}><strong>{step.title}.</strong> {step.body}</li>
+        {botsquad.example.steps.map((step, index) => (
+          <li key={step.title}>
+            <span aria-hidden="true">0{index + 1}</span>
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </li>
         ))}
       </ol>
       <figcaption>{botsquad.example.caption}</figcaption>

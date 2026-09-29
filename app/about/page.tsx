@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { about, site } from "@/content/site";
+import { about, labs, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(about.metadata, "/about");
@@ -14,10 +14,9 @@ export default function AboutPage() {
         <section className="about-hero">
           <div className="shell">
             <p className="eyebrow eyebrow--light">{about.eyebrow}</p>
-            <h1>{about.headline}</h1>
+            <h1>{about.eyebrow}?</h1>
             <div className="about-introduction">
-              <p>{about.introduction}</p>
-              <p>{about.meaning}</p>
+              <p>{about.origin}</p>
             </div>
           </div>
         </section>
@@ -37,11 +36,12 @@ export default function AboutPage() {
         <section className="section about-origin">
           <div className="shell product-split">
             <div className="product-heading">
-              <p className="eyebrow">Why the name</p>
-              <h2>Why Asymmetri?</h2>
+              <p className="eyebrow">{labs.origin.eyebrow}</p>
+              <h2>{about.headline}</h2>
             </div>
             <div className="product-prose">
-              <p>{about.origin}</p>
+              <p>{about.introduction}</p>
+              <p>{about.meaning}</p>
               <a className="text-link" href="/sport#story">
                 Read the Sport story ↗
               </a>

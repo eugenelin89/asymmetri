@@ -2,11 +2,13 @@
 
 ## Company and portfolio
 
-The homepage opens with “A small team can do a lot.” It explains BotSquad and
-Motion directly, shows current availability, introduces both products and brings
-the founder’s coaching story and authentic pitching photograph into the page.
-A simple contact invitation closes it. Repeated philosophy slogans and the
-conceptual capability diagram have been removed.
+The homepage opens with “A small team can do a lot.” Its nested overview makes
+Labs → Work → BotSquad and Labs → Sport → Motion explicit, with direct links at
+both levels and current product availability. A company principle precedes the
+two distinct product panels. Shared thinking and contact follow. The founder's
+coaching account and photograph belong on Sport, with the company origin also on
+About. The warm palette and conversational copy are retained; the earlier page
+sequence and clearer content levels are restored.
 
 The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
 Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and
@@ -18,7 +20,8 @@ in the footer. The nine public pages appear once in the sitemap.
 
 Asymmetri Work is the domain for software and coordinated AI that help individuals
 and small teams do more with the resources they have. `/work` explains the practical problem of carrying context between AI chats,
-then introduces task boundaries, review and BotSquad. BotSquad is the first product; its
+with a split hero and short approach outline, then introduces task boundaries,
+review and BotSquad. BotSquad is the first product; its
 detailed workflow, availability, runtime and limitations stay on `/botsquad`.
 The domain page is not an additional required step to reach either product.
 
@@ -48,9 +51,11 @@ tunnel; standard web access and a mobile app are in development. No public login
 hosted SaaS availability or automatic success is promised. The public repository
 is MIT licensed following the owner's explicit license instruction.
 
-`/about` explains the name, useful tools, inspectable evidence and human control.
-It opens with the first-person coaching origin, then explains the name and the
-choices behind both products.
+BotSquad's compact hero workflow leads to the video, problem, detailed workflow,
+standalone worked example, review/permissions and availability sections.
+
+`/about` explains the name first, then useful tools, inspectable evidence and human
+control. The first-person coaching origin follows those company-level principles.
 
 ## Evidence, privacy and media
 

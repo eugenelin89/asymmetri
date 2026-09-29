@@ -32,7 +32,8 @@ sentence structure, comfortable line spacing and restrained dark-gray text.
 Small section labels use sentence case instead of tracked uppercase.
 
 Light, solid surfaces replace dark technical grids and decorative gradients.
-Product introductions are divided rows rather than large boxed marketing cards.
+Product introductions use two distinct panels within the earlier portfolio layout,
+with paper and Motion mineral surfaces drawn from the same palette.
 Underlined links, the existing orange action color and dark accent text retain
 the identity. The header uses a solid paper background and the original ink mark.
 The footer remains dark. Keep the local font stack; no remote fonts, fabricated
@@ -109,11 +110,14 @@ reduced motion and no-JavaScript access are part of the design.
 
 ## Labs portfolio and optional media
 
-The Labs hero pairs a plain introduction with a short linked availability index.
-Product rows explain BotSquad and Motion directly. BotSquad uses a written,
-explicitly made-up task and a numbered handoff example; Motion retains the
-approved genuine evidence capture. The founder’s account and the original
-pitching photo follow the products. No performance figures or testimonials are added.
+The Labs hero pairs a plain introduction with nested company/domain/product links
+and current availability. A short company principle precedes two product panels.
+BotSquad uses an ordered workflow outline; Motion retains the approved genuine
+evidence capture. Shared principles and contact follow the products. The original
+pitching photo and founder account remain on Sport, with the origin also on About.
+BotSquad's explicitly made-up task has its own section after the detailed workflow,
+using a split heading/brief and three numbered handoff columns that stack on phones.
+No performance figures or testimonials are added.
 
 Video posters use simple local typography at a compact desktop width. Decorative
 circles and offset squares are removed. The unloaded poster can grow vertically
@@ -122,8 +126,8 @@ external fallback, focus restoration and privacy boundaries are unchanged.
 
 ## Work domain and shared navigation
 
-Work reuses the paper/ink/orange palette and system typography. A direct prose
-introduction explains the coordination problem. The former abstract direction
-diagram is removed. Work and Sport have
+Work reuses the paper/ink/orange palette and system typography. Its split hero pairs
+the introduction with a short ordered approach outline, using the existing copy.
+Work and Sport have
 matching disclosure menus with 44px minimum summary targets and explicit overview
 and product links. Panels remain within the viewport at mobile widths.

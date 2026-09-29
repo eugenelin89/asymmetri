@@ -312,3 +312,17 @@ or external asset. No public asset was added, replaced or removed for this updat
   diagram and decorative video-poster geometry. BotSquad’s CSS diagram becomes
   a labelled written example (`WorkerExample`), not a screen reconstruction.
   No public image URL was deleted or renamed.
+
+## Hierarchy restoration, September 29, 2026
+
+The authentic 2400×1600 pitching photograph returns to its Sport-hero role; its
+homepage reuse is removed as the company-level section sequence is restored.
+Source, bytes, processing, alt text and existing rights assessment are unchanged.
+No public image asset is added, replaced or deleted. Labs social artwork keeps
+the approved paper palette and current wording. The existing 315×723 evidence
+capture remains in the Motion product panel with the same caption and alt text.
+
+New rendered structure uses semantic HTML/CSS: a nested company/domain/product
+navigation, Work approach outline, and `WorkerFlow` ordered list based on existing
+copy. `WorkerExample` returns to a standalone product-page section. These are
+textual explanations, not app captures, scientific evidence or third-party media.

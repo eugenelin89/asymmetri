@@ -64,7 +64,8 @@ Do not use em dashes or en dashes in public copy.
 ## September 29 editorial direction
 
 Lead with the work and the people doing it. The founder’s first-person coaching
-account belongs on Sport and About, with a short introduction on the homepage.
+account belongs on Sport and About. The homepage establishes Labs, Work/Sport and
+the products before visitors reach those deeper stories.
 Use contractions and specific situations where natural. Avoid repeated aphorisms,
 three-part slogans and abstract claims about capability. A brief product
 introduction should say what someone can do and how far along the product is.

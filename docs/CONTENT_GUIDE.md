@@ -280,3 +280,11 @@ all product and research limits. The audited `motionPages`, tutorial modules,
 media captions, hashes and original-image links were preserved unchanged in this
 pass. Plain utility instructions already serve their readers; do not rewrite
 policy commitments for stylistic variety.
+
+The owner's subsequent structure preference restores the earlier company → domain
+→ product presentation and section sequence while retaining this copy. Homepage
+principle sections reuse `about.principles`; its nested hierarchy reuses the primary
+navigation. The founder story now belongs on Sport and About. About renders its
+existing name explanation before its founder paragraphs. BotSquad's example is
+again a standalone section; `workflowHeadline` centralizes the existing shared
+workflow heading for the compact outline and detailed section.

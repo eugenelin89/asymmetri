@@ -78,10 +78,16 @@ Work and Sport use native exclusive `details` disclosures with overview and dire
 product links. Enter/Space and navigation work without JavaScript; the small client
 enhancement adds outside-pointer dismissal and Escape with focus restoration.
 `SiteFooter` adds explicit product/company links and Motion resource labels.
-`WorkerExample` renders a labelled written task and ordered handoff steps;
+`WorkerFlow` renders a compact ordered workflow in the homepage product panel and
+BotSquad hero. `WorkerExample` renders a labelled written task and ordered handoff
+steps in its own section after the detailed BotSquad workflow;
 `EvidenceChain` uses semantic HTML/CSS. The former capability and worker diagrams
-are removed. The homepage uses product status links, divided product rows and a
-founder section. Work uses prose without a diagram.
+are removed. The homepage restores the company introduction, principles, two
+product panels, common principles and contact sequence. Its nested navigation
+reuses the shared Work/Sport and product links to expose the company hierarchy.
+Work restores its split hero with a short approach outline. About introduces the
+company name before its principles and founder story. Colors and marketing copy
+retain the September 29 editorial treatment.
 `UtilityPage` remains a server-rendered article. No external fonts, UI library,
 server state or new dependency is introduced.
 
