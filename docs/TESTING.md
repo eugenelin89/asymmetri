@@ -76,6 +76,8 @@ Check:
 - paper-header logo/nav contrast, the nested Labs → Work/Sport → product links,
   product statuses and distinct product panels at all widths;
 - homepage introduction → principle → products → shared thinking → contact;
+- homepage HTML, accessible copy, metadata and social artwork contain no baseball,
+  pitch, pitching or pitcher terms; the Sport panel uses no discipline-specific imagery;
 - Work's split hero, About's company → principles → founder sequence and
   BotSquad's standalone written example after its detailed workflow;
 - image loading, crops, and alt text;

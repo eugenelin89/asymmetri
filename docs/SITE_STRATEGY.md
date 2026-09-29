@@ -10,6 +10,11 @@ coaching account and photograph belong on Sport, with the company origin also on
 About. The warm palette and conversational copy are retained; the earlier page
 sequence and clearer content levels are restored.
 
+Homepage copy, metadata and social artwork use sport-level language. The Sport
+panel introduces Motion as the first product, retaining status and direct links,
+but does not show the discipline-specific icon or evidence capture. Product scope
+and detailed capability claims remain on Motion; no broader sport support is implied.
+
 The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
 Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and
 a direct product link (BotSquad or Motion). The homepage retains its `#products`

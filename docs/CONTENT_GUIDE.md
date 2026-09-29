@@ -288,3 +288,10 @@ navigation. The founder story now belongs on Sport and About. About renders its
 existing name explanation before its founder paragraphs. BotSquad's example is
 again a standalone section; `workflowHeadline` centralizes the existing shared
 workflow heading for the compact outline and detailed section.
+
+The homepage must refer to sport broadly, without baseball, pitch, pitching or
+pitcher language in visible copy, accessible descriptions, metadata or social
+artwork. `labs.philosophy` and `labs.sport` own the homepage-specific summaries;
+do not reuse Motion's discipline-specific headline, hero or images there. This is
+company positioning, not a claim that Motion supports every sport. Keep Motion's
+actual scope, workflow and limits on its product page and protected resources.

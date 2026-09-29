@@ -112,8 +112,9 @@ reduced motion and no-JavaScript access are part of the design.
 
 The Labs hero pairs a plain introduction with nested company/domain/product links
 and current availability. A short company principle precedes two product panels.
-BotSquad uses an ordered workflow outline; Motion retains the approved genuine
-evidence capture. Shared principles and contact follow the products. The original
+BotSquad uses an ordered workflow outline; the Sport panel uses a text overview
+for athletes and coaches. The Motion icon and evidence capture are reserved for
+deeper product resources. Shared principles and contact follow the products. The original
 pitching photo and founder account remain on Sport, with the origin also on About.
 BotSquad's explicitly made-up task has its own section after the detailed workflow,
 using a split heading/brief and three numbered handoff columns that stack on phones.

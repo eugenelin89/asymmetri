@@ -39,7 +39,7 @@ Sensors remain part of that history, not a requirement or feature of Motion V1.
 
 1. Company: **Asymmetri Labs**.
 2. Company hero: **A small team can do a lot.**
-3. Company support: **BotSquad brings AI tasks into one workspace. Asymmetri Motion helps pitchers and coaches take a closer look at a delivery.**
+3. Company support: **BotSquad brings AI tasks into one workspace. Asymmetri Sport explores technology for athletes and coaches.**
 4. Portfolio: **BotSquad** and **Asymmetri Motion**.
 5. Work domain: **Asymmetri Work**, with **Less time moving work between chats.**
 6. Sports domain: **Asymmetri Sport**, with **Take another look at the pitch.**
@@ -66,6 +66,10 @@ Do not use em dashes or en dashes in public copy.
 Lead with the work and the people doing it. The founder’s first-person coaching
 account belongs on Sport and About. The homepage establishes Labs, Work/Sport and
 the products before visitors reach those deeper stories.
+Keep the homepage at the sport level: no baseball, pitch, pitching or pitcher
+language or imagery there, including metadata and social previews. Detailed
+product pages retain their precise scope; general company positioning must not
+become a claim that Motion supports every sport.
 Use contractions and specific situations where natural. Avoid repeated aphorisms,
 three-part slogans and abstract claims about capability. A brief product
 introduction should say what someone can do and how far along the product is.

@@ -88,6 +88,9 @@ reuses the shared Work/Sport and product links to expose the company hierarchy.
 Work restores its split hero with a short approach outline. About introduces the
 company name before its principles and founder story. Colors and marketing copy
 retain the September 29 editorial treatment.
+The homepage's Sport panel uses a domain-level text overview instead of the
+Motion icon and evidence capture. Homepage-specific Sport and principle summaries
+live in `labs`, keeping discipline-specific content on deeper pages.
 `UtilityPage` remains a server-rendered article. No external fonts, UI library,
 server state or new dependency is introduced.
 

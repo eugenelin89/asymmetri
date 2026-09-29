@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { WorkerFlow } from "@/components/worker-flow";
 import { LegacyHomeFragments } from "@/components/legacy-home-fragments";
 import { SiteFooter } from "@/components/site-footer";
@@ -48,8 +47,8 @@ export default function HomePage() {
         </section>
         <section className="labs-philosophy">
           <div className="shell product-split">
-            <h2>{about.principles[0].title}</h2>
-            <p>{about.principles[0].body}</p>
+            <h2>{labs.philosophy.headline}</h2>
+            <p>{labs.philosophy.body}</p>
           </div>
         </section>
         <section className="section portfolio" id="products" tabIndex={-1} aria-labelledby="products-title">
@@ -75,22 +74,22 @@ export default function HomePage() {
             <article className="product-showcase product-showcase--motion">
               <div className="product-showcase__copy">
                 <a className="product-domain" href="/sport">Asymmetri Sport</a>
-                <div className="motion-identity">
-                  <Image src={motion.icon.src} alt={motion.icon.alt} width={64} height={64} />
-                  <p className="product-showcase__name">{motion.name}</p>
-                </div>
-                <h3>{motion.headline}</h3>
-                <p>{motion.hero.support}</p>
+                <p className="product-showcase__name">{motion.name}</p>
+                <h3>{labs.sport.headline}</h3>
+                <p>{labs.sport.body}</p>
                 <p className="showcase-status">{motion.platform} · {motion.releaseStatus}</p>
                 <div className="button-row">
                   <a className="button button--ink" href={motion.path}>More about Motion</a>
                   <a className="text-link" href="/motion#introduction-video">Watch the introduction</a>
                 </div>
               </div>
-              <figure className="motion-showcase-visual">
-                <Image src={labs.motionPreview.src} alt={labs.motionPreview.alt} width={labs.motionPreview.width} height={labs.motionPreview.height} sizes="(max-width: 700px) 70vw, 230px" />
-                <figcaption>An actual Motion capture. The lines show the projected 2D geometry used for this result.</figcaption>
-              </figure>
+              <aside className="sport-overview">
+                <p className="sport-overview__heading">{labs.sport.overview.headline}</p>
+                <p>{labs.sport.overview.body}</p>
+                <a className="text-link" href={labs.sport.overview.link.href}>
+                  {labs.sport.overview.link.label} <span aria-hidden="true">↗</span>
+                </a>
+              </aside>
             </article>
           </div>
         </section>

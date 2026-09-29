@@ -326,3 +326,16 @@ New rendered structure uses semantic HTML/CSS: a nested company/domain/product
 navigation, Work approach outline, and `WorkerFlow` ordered list based on existing
 copy. `WorkerExample` returns to a standalone product-page section. These are
 textual explanations, not app captures, scientific evidence or third-party media.
+
+## Sport-level homepage, September 29, 2026
+
+- `public/images/labs-social.svg` and `.png` remain 1200×630 original typographic
+  artwork. The Motion support line now reads “Part of Asymmetri Sport.” The SVG
+  was edited in source and rasterized with the existing Sharp dependency. Palette,
+  composition, local fonts and rights assessment are unchanged. Social alt text
+  remains the company name, current headline and company descriptor.
+- The 315×723 evidence capture and 1024×1024 Motion icon are no longer rendered on
+  the homepage. Their original bytes, public URLs, accurate alt descriptions and
+  deeper-page roles are preserved. No asset is deleted or misleadingly relabelled.
+- A semantic text overview replaces the homepage Sport image treatment. It adds
+  no generated image, stock media, athlete depiction or third-party rights claim.

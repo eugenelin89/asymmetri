@@ -18,7 +18,7 @@ export const site = {
   metadata: {
     title: "Asymmetri Labs | Tools for Small Teams",
     description:
-      "We build tools for individuals and small teams: BotSquad for coordinating AI work and Asymmetri Motion for reviewing pitching video.",
+      "We build tools for individuals and small teams: software and coordinated AI under Asymmetri Work, and sports technology under Asymmetri Sport.",
     socialHeadline: "A small team can do a lot.",
     socialSupport:
       "Technology for individuals and small teams.",
@@ -654,23 +654,30 @@ export const tutorial = {
 
 // Labs portfolio, product concepts and optional introduction media.
 export const labs = {
-  motionPreview: {
-    src: "/images/motion/tutorial/evidence.png",
-    alt: "A Motion app capture connecting a saved pitching frame to annotated trunk landmarks and a vertical reference.",
-    width: 315,
-    height: 723,
-  } satisfies SiteImage,
   hero: {
     eyebrow: "Asymmetri Labs",
     headline: "A small team can do a lot.",
     support:
-      "We build tools that help. BotSquad brings AI tasks into one workspace. Asymmetri Motion helps pitchers and coaches take a closer look at a delivery.",
+      "We build tools that help. BotSquad brings AI tasks into one workspace. Asymmetri Sport explores technology for athletes and coaches.",
     primary: { label: "See what we're building", href: "/#products" },
     secondary: { label: "Why Asymmetri", href: "/about" },
   },
   products: {
     eyebrow: "The products",
     headline: "Here’s what we’re working on.",
+  },
+  philosophy: {
+    headline: "Begin with a real task",
+    body: "A task to complete. A skill to practice. Start there, and make the tool useful for the person doing it.",
+  },
+  sport: {
+    headline: "Technology for sport.",
+    body: "Our work in sport starts with Asymmetri Motion for iPhone. Explore the product to see its workflow, evidence and limits.",
+    overview: {
+      headline: "For athletes and coaches.",
+      body: "A coach brings experience and context. We build tools to support that judgment.",
+      link: { label: "Explore Asymmetri Sport", href: "/sport" },
+    },
   },
   origin: {
     eyebrow: "It began in baseball",
