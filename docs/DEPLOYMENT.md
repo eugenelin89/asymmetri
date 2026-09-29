@@ -926,6 +926,23 @@ in a task release receipt outside tracked source. Keep the rollback directory un
 the owner chooses a retention policy. Do not delete unrelated backups to make space.
 No release receipt should include credentials, private key contents or visitor logs.
 
+### September 29, 2026: editorial redesign release
+
+The human-voice and visual redesign was activated from clean `main` at
+`08862c3d439ea007db5dfbb4e657e94c44afb873`, using the complete isolated-candidate
+procedure above. The independent candidate passed `npm run check` and
+`npm run build:next` on the existing Node 22 runtime before activation. Package
+and lockfile equality allowed an independent copy of installed dependencies.
+
+Post-activation checks passed on loopback, apex and `www`: all nine pages,
+37 image/static URLs, four compatibility redirects, nine sitemap entries,
+canonical values, ten tutorial modules and the protected Motion resources.
+Desktop/mobile browser checks confirmed the new design and the Motion video's
+click-to-load wrapper. The previous complete release remains available for
+rollback. Exact deployment paths and build identities are recorded in the
+external task receipt. Subsequent documentation-only commits may advance source
+HEAD without changing the validated running build.
+
 
 ### Compressing an older retained rollback when capacity is limited
 
