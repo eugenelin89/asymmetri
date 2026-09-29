@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { CapabilityDiagram } from "@/components/capability-diagram";
-import { WorkerDiagram } from "@/components/worker-diagram";
+import { WorkerExample } from "@/components/worker-example";
 import { LegacyHomeFragments } from "@/components/legacy-home-fragments";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -15,45 +14,21 @@ export default function HomePage() {
         <section className="labs-hero">
           <div className="shell labs-hero__grid">
             <div className="labs-hero__copy">
-              <p className="eyebrow eyebrow--light">{labs.hero.eyebrow}</p>
+              <p className="eyebrow">{labs.hero.eyebrow}</p>
               <h1>{labs.hero.headline}</h1>
               <p className="hero__support">{labs.hero.support}</p>
-              <div className="button-row">
-                <a
-                  className="button button--accent"
-                  href={labs.hero.primary.href}
-                >
-                  {labs.hero.primary.label}
-                </a>
-                <a
-                  className="text-link text-link--light"
-                  href={labs.hero.secondary.href}
-                >
-                  {labs.hero.secondary.label} ↗
-                </a>
-              </div>
+              <a className="text-link" href={labs.hero.primary.href}>
+                {labs.hero.primary.label} <span aria-hidden="true">↓</span>
+              </a>
             </div>
-            <CapabilityDiagram />
-          </div>
-          <div className="shell labs-hero__foot">
-            <span>Independent thinking. Practical technology.</span>
-            <a href="#products">
-              Explore the work <span aria-hidden="true">↓</span>
-            </a>
+            <aside className="product-index" aria-label="Product availability">
+              <p className="eyebrow">{labs.availability}</p>
+              <a href={botsquad.path}><strong>{botsquad.name} <span aria-hidden="true">↗</span></strong><span>{botsquad.status}</span></a>
+              <a href={motion.path}><strong>{motion.name} <span aria-hidden="true">↗</span></strong><span>{motion.releaseStatus}</span></a>
+            </aside>
           </div>
         </section>
-        <section className="labs-philosophy">
-          <div className="shell product-split">
-            <h2>{labs.philosophy.headline}</h2>
-            <p>{labs.philosophy.body}</p>
-          </div>
-        </section>
-        <section
-          className="section portfolio"
-          id="products"
-          tabIndex={-1}
-          aria-labelledby="products-title"
-        >
+        <section className="section portfolio" id="products" tabIndex={-1} aria-labelledby="products-title">
           <div className="shell">
             <div className="portfolio__heading">
               <p className="eyebrow">{labs.products.eyebrow}</p>
@@ -61,129 +36,67 @@ export default function HomePage() {
             </div>
             <article className="product-showcase product-showcase--botsquad">
               <div className="product-showcase__copy">
-                <p className="product-showcase__index">01 / AI coordination</p>
-                <p className="product-showcase__name">{botsquad.name}</p>
-                <h3>{botsquad.headline}</h3>
+                <a className="product-domain" href={work.path}>{work.name}</a>
+                <h3>{botsquad.name}</h3>
                 <p>{botsquad.descriptor}</p>
-                <p className="showcase-status">
-                  {botsquad.status} · MIT licensed
-                </p>
+                <p className="showcase-status">{botsquad.status} · MIT licensed</p>
                 <div className="button-row">
-                  <a className="button button--ink" href={botsquad.path}>
-                    Explore BotSquad
-                  </a>
-                  <a className="text-link" href="/botsquad#introduction-video">
-                    Watch the introduction
-                  </a>
+                  <a className="text-link" href={botsquad.path}>More about BotSquad <span aria-hidden="true">↗</span></a>
+                  <a className="text-link" href={botsquad.source.href}>{botsquad.source.label}</a>
                 </div>
-                <a className="sport-story-link" href={work.path}>
-                  {work.name}: our approach <span aria-hidden="true">↗</span>
-                </a>
               </div>
-              <WorkerDiagram />
+              <WorkerExample />
             </article>
             <article className="product-showcase product-showcase--motion">
               <div className="product-showcase__copy">
+                <a className="product-domain" href="/sport">Asymmetri Sport</a>
                 <div className="motion-identity">
-                  <Image
-                    src={motion.icon.src}
-                    alt={motion.icon.alt}
-                    width={64}
-                    height={64}
-                  />
-                  <p className="product-showcase__index">
-                    02 / Pitching evidence
-                  </p>
+                  <Image src={motion.icon.src} alt={motion.icon.alt} width={64} height={64} />
+                  <h3>{motion.name}</h3>
                 </div>
-                <p className="product-showcase__name">{motion.name}</p>
-                <h3>{motion.headline}</h3>
-                <p>
-                  {motion.descriptor} Record, mark and inspect a pitch. Return
-                  to the evidence as your history grows.
-                </p>
-                <p className="showcase-status">{motion.releaseStatus}</p>
+                <p>{motion.hero.support}</p>
+                <p className="showcase-status">{motion.platform} · {motion.releaseStatus}</p>
                 <div className="button-row">
-                  <a className="button button--ink" href={motion.path}>
-                    Explore Asymmetri Motion
-                  </a>
-                  <a className="text-link" href="/motion#introduction-video">
-                    Watch the introduction
-                  </a>
+                  <a className="text-link" href={motion.path}>More about Motion <span aria-hidden="true">↗</span></a>
+                  <a className="text-link" href="/tutorial">Read the guide</a>
                 </div>
-                <a className="sport-story-link" href="/sport#story">
-                  Asymmetri Sport: where it began{" "}
-                  <span aria-hidden="true">↗</span>
-                </a>
               </div>
               <figure className="motion-showcase-visual">
-                <div
-                  className="motion-showcase-visual__frames"
-                  aria-hidden="true"
-                >
-                  <span>Video</span>
-                  <span>Marked frame</span>
-                  <span>Evidence</span>
-                </div>
-                <Image
-                  src={labs.motionPreview.src}
-                  alt={labs.motionPreview.alt}
-                  width={labs.motionPreview.width}
-                  height={labs.motionPreview.height}
-                  sizes="(max-width: 700px) 70vw, 260px"
-                />
-                <figcaption>
-                  Actual app capture. Projected 2D evidence, interpreted in
-                  context.
-                </figcaption>
+                <Image src={labs.motionPreview.src} alt={labs.motionPreview.alt} width={labs.motionPreview.width} height={labs.motionPreview.height} sizes="(max-width: 700px) 70vw, 230px" />
+                <figcaption>An actual Motion capture. The lines show the projected 2D geometry used for this result.</figcaption>
               </figure>
             </article>
           </div>
         </section>
-        <section className="section labs-common">
+        <section className="section home-origin">
           <div className="shell product-split">
-            <div>
-              <p className="eyebrow eyebrow--light">{labs.common.eyebrow}</p>
-              <h2>{labs.common.headline}</h2>
-            </div>
-            <div className="product-prose">
-              <p>{labs.common.body}</p>
-              <a
-                className="text-link text-link--light"
-                href={labs.common.link.href}
-              >
-                {labs.common.link.label} ↗
-              </a>
+            <figure>
+              <Image src={site.images.pitchingDelivery.src} alt={site.images.pitchingDelivery.alt} width={site.images.pitchingDelivery.width} height={site.images.pitchingDelivery.height} sizes="(max-width: 900px) 100vw, 50vw" />
+              <figcaption>{labs.origin.caption}</figcaption>
+            </figure>
+            <div className="product-heading product-prose">
+              <p className="eyebrow">{labs.origin.eyebrow}</p>
+              <h2>{labs.origin.headline}</h2>
+              <p>{labs.origin.body}</p>
+              <p className="founder-attribution">{labs.origin.attribution}</p>
+              <a className="text-link" href={labs.origin.link.href}>{labs.origin.link.label} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </section>
         <section className="section closing" id="contact">
           <div className="shell closing__grid">
-            <div>
-              <p className="eyebrow">{labs.contact.eyebrow}</p>
-              <h2>{labs.contact.headline}</h2>
-            </div>
+            <div><p className="eyebrow">{labs.contact.eyebrow}</p><h2>{labs.contact.headline}</h2></div>
             <div className="closing__action">
               <p>{labs.contact.body}</p>
-              <a
-                className="button button--ink"
-                href={`mailto:${site.company.contactEmail}`}
-              >
-                {site.company.contactEmail} <span aria-hidden="true">↗</span>
-              </a>
+              <a className="text-link" href={`mailto:${site.company.contactEmail}`}>{site.company.contactEmail} <span aria-hidden="true">↗</span></a>
             </div>
           </div>
         </section>
         <noscript>
           <nav className="shell legacy-links" aria-label="Moved Sport sections">
-            <span id="story">
-              <a href="/sport#story">Sport story</a>
-            </span>
-            <span id="approach">
-              <a href="/sport#approach">Sport approach</a>
-            </span>
-            <span id="product">
-              <a href="/sport#product">Sport product</a>
-            </span>
+            <span id="story"><a href="/sport#story">Sport story</a></span>
+            <span id="approach"><a href="/sport#approach">Sport approach</a></span>
+            <span id="product"><a href="/sport#product">Sport product</a></span>
           </nav>
         </noscript>
       </main>

@@ -23,7 +23,7 @@ export default function AboutPage() {
         </section>
         <section className="section">
           <div className="shell">
-            <p className="eyebrow">What guides the work</p>
+            <p className="eyebrow">What matters in the tools we build</p>
             <dl className="product-details product-details--columns about-principles">
               {about.principles.map((p) => (
                 <div key={p.title}>
@@ -37,8 +37,8 @@ export default function AboutPage() {
         <section className="section about-origin">
           <div className="shell product-split">
             <div className="product-heading">
-              <p className="eyebrow">Where it began</p>
-              <h2>A phone camera. A better question.</h2>
+              <p className="eyebrow">Why the name</p>
+              <h2>Why Asymmetri?</h2>
             </div>
             <div className="product-prose">
               <p>{about.origin}</p>
@@ -50,7 +50,7 @@ export default function AboutPage() {
         </section>
         <section className="section about-next">
           <div className="shell">
-            <h2>See the idea at work.</h2>
+            <h2>Have something you’d like to ask?</h2>
             <div className="button-row">
               <Link className="button button--ink" href="/#products">
                 Explore the products
@@ -59,7 +59,7 @@ export default function AboutPage() {
                 className="text-link"
                 href={`mailto:${site.company.contactEmail}`}
               >
-                Start a conversation ↗
+                Email us ↗
               </a>
             </div>
           </div>

@@ -1,6 +1,6 @@
 # Asymmetri Labs asset manifest
 
-Last updated: 2026-09-28
+Last updated: 2026-09-29
 
 This internal provenance record covers public assets. Local images are not hotlinked. Optional third-party videos are described below. The
 owner has explicitly approved public visibility of the cap logo and uniform
@@ -290,3 +290,25 @@ process requests after loading. Always retain the external fallback and disclosu
 `/work` reuses the unchanged 1200×630 Labs raster social image. Its accessible
 direction/coordination/review figure is semantic HTML/CSS with no image download
 or external asset. No public asset was added, replaced or removed for this update.
+
+
+## Human editorial pass, September 29, 2026
+
+- `public/images/baseball/pitching-delivery.webp` (2400×1600): unchanged approved
+  photo, now also used beside the homepage founder account. The Sport hero and
+  homepage render the original full 3:2 composition without the former dark CSS
+  overlay. Alt text remains “A pitcher follows through on the mound as the
+  baseball travels toward the plate.” The same bounded owner approval applies;
+  no additional athlete media or processing was introduced.
+- `public/images/labs-social.svg` and `.png` (1200×630): original typographic
+  artwork replaces the dark branching diagram with the paper palette, current
+  company headline and two product descriptions. PNG rasterized with the existing
+  Sharp dependency. Social description: “Asymmetri Labs, A small team can do a lot.”
+  No external artwork, font download or third-party rights claim.
+- The approved 315×723 Motion evidence screenshot retains its homepage role,
+  bytes, URL and alt text. All tutorial media, concepts, logos, icon variants,
+  favicon fallbacks and other social files remain byte-identical.
+- Removed rendered visuals: the semantic capability diagram, Work direction
+  diagram and decorative video-poster geometry. BotSquad’s CSS diagram becomes
+  a labelled written example (`WorkerExample`), not a screen reconstruction.
+  No public image URL was deleted or renamed.

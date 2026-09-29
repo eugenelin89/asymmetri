@@ -60,7 +60,7 @@ export default function TutorialPage() {
           <p className="tutorial-hero__meta">10 modules · Record or import · Back and Side View</p>
         </div>
       </header>
-      <TutorialReader headers={modules.map((module, index) => <header key={module.id} className="tutorial-module__header">
+      <TutorialReader headers={modules.map((module, index) => <header key={`${module.id}-header`} className="tutorial-module__header">
           <p className="eyebrow">{String(index + 1).padStart(2, "0")} / {module.label}</p>
           <h2 id={`${module.id}-title`}>{module.title}</h2><p>{module.intro}</p>
           {module.steps.length > 2 && <details className="tutorial-contents"><summary>In this module · {module.steps.length} steps</summary>
@@ -68,7 +68,7 @@ export default function TutorialPage() {
               <a href={`#${step.id}`}>{step.title}</a></li>)}</ul>
           </details>}
         </header>)} modules={modules.map(({ id, label, steps }) => ({ id, label, steps: steps.map(({ id, path, view }) => ({ id, path, view })) }))}
-        panels={modules.map((module, index) => <ModuleContent key={module.id} module={module} number={index + 1} />)} />
+        panels={modules.map((module, index) => <ModuleContent key={`${module.id}-content`} module={module} number={index + 1} />)} />
       <div className="tutorial-help shell">
         <div><h2>Need a hand?</h2><p>Use the support guide or revisit how Motion handles your data.</p></div>
         <div className="button-row"><a className="button button--ink" href="/support">Motion Support</a><a className="text-link" href="/privacy">Privacy Policy</a></div>

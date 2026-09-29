@@ -11,7 +11,7 @@ export default function WorkPage() {
       <SiteHeader />
       <main id="main-content" tabIndex={-1}>
         <section className="work-hero">
-          <div className="shell product-split">
+          <div className="shell work-hero__copy">
             <div>
               <p className="eyebrow eyebrow--light">{work.name}</p>
               <h1>{work.headline}</h1>
@@ -25,18 +25,7 @@ export default function WorkPage() {
                 </a>
               </div>
             </div>
-            <figure className="work-direction" aria-labelledby="work-direction-title">
-              <h2 id="work-direction-title">{work.loop.title}</h2>
-              <ol>
-                {work.loop.steps.map((step) => (
-                  <li key={step.title}>
-                    <span>{step.owner}</span>
-                    <div><h3>{step.title}</h3><p>{step.body}</p></div>
-                  </li>
-                ))}
-              </ol>
-              <figcaption>{work.loop.caption}</figcaption>
-            </figure>
+
           </div>
         </section>
         <section className="section" id="approach" tabIndex={-1}>

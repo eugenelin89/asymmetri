@@ -11,36 +11,34 @@ baseball symbol.
 
 | Token | Value | Role |
 | --- | --- | --- |
-| Ink | `#0E1110` | Dominant dark surface and text |
+| Ink | `#0E1110` | Primary text and retained dark footer |
 | Ink Soft | `#171D1A` | Secondary dark surface |
-| Paper | `#F5F6F2` | Primary light surface |
+| Paper | `#F7F5F0` | Warm primary light surface |
 | White | `#FFFFFF` | High-contrast type and closing surface |
 | Accent Orange | `#F47743` | Primary action and limited emphasis |
 | Accent Dark | `#A43C1A` | Accessible accent text on light surfaces |
 | Focus Blue | `#267D9F` | Visible keyboard focus |
 
-Near-black and white dominate. Orange remains the company brand accent.
+Warm paper and white dominate; near-black anchors the type, footer and video posters. Orange remains the company brand accent.
 Motion-specific teal/mineral cues are
 nested inside product sections; blue is reserved for keyboard focus.
 
 ## Typography and layout
 
-Display and body type both use a bold modern system sans-serif stack led by
-Avenir Next. Large concise headlines, tight hierarchy, thin dividers, generous
-space, and a restrained technical grid create the startup-oriented presentation.
+Display and body use the local Avenir Next system sans-serif stack. Headlines
+use moderate weight and a maximum near 80px, with section headings near 48px.
+The 76rem reading grid gives pages quieter proportions. Paragraphs use familiar
+sentence structure, comfortable line spacing and restrained dark-gray text.
+Small section labels use sentence case instead of tracked uppercase.
 
-Supporting typography uses a fluid scale rather than fixed small labels. On wide
-screens, navigation and button labels settle near 15 to 16 pixels, eyebrow labels
-near 13 to 14 pixels, primary supporting copy near 20 to 21 pixels, and footer
-text near 14 to 15 pixels. Mobile copy remains compact but does not fall below a
-practical reading size. The closing section gives its supporting column more
-width and uses a slightly smaller display maximum so the headline and action read
-as one composition.
-
-The system avoids serif editorial styling, floating statistics, badges, pill
-collections, fake interfaces, decorative research graphics, and visual clutter.
-Motion is limited to small hover responses and removed when reduced motion is
-requested.
+Light, solid surfaces replace dark technical grids and decorative gradients.
+Product introductions are divided rows rather than large boxed marketing cards.
+Underlined links, the existing orange action color and dark accent text retain
+the identity. The header uses a solid paper background and the original ink mark.
+The footer remains dark. Keep the local font stack; no remote fonts, fabricated
+handwriting, stock photography, fake testimonials or invented product screens.
+Animation remains limited to small existing hover responses and is removed for
+reduced motion.
 
 ## Utility pages
 
@@ -56,7 +54,7 @@ The Sport page renders the preserved authentic pitching-delivery photograph in i
 It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
 and uniform lettering remain visible without localized softening. The approved
 Motion pitcher-family windup icon appears in the product introduction and
-product hero. Two small Explorer design concepts on Motion are explicitly labelled synthetic
+product hero. Two Explorer design concepts on Motion are explicitly labelled synthetic
 and not current app captures; their mock data is never presented as evidence. The separate tutorial includes
 authorized app captures and original instructional imagery described below. Future additions must earn a distinct narrative role and remain within the privacy and
 evidence rules in `docs/ASSET_MANIFEST.md`.
@@ -78,7 +76,7 @@ its original illustration and palette; CSS supplies corner masking only. Use the
 packaged default PNG, not the historical A Release SVG. The mineral-white pitcher
 and asymmetric teal arc are illustrative identity, not a coaching diagram.
 
-The product page uses a typographic hero and icon panel, numbered workflow rows,
+The product page uses a light typographic hero and compact icon panel, numbered workflow rows,
 a semantic evidence-chain ordered list, and divided history/limits prose.
 The chain has six columns on large screens, three on tablet and a vertical
 sequence on mobile. It contains no fabricated numerical result or app interface.
@@ -111,24 +109,21 @@ reduced motion and no-JavaScript access are part of the design.
 
 ## Labs portfolio and optional media
 
-The Labs hero uses the existing ink/orange palette, large system typography and a
-quiet grid. Its two conceptual tracks connect one person to coordinated AI work
-and one iPhone to inspectable pitching evidence. Product sections use generous
-space and distinct BotSquad paper/orange and Motion mineral/teal cues. No invented
-metric, testimonial, affiliation or replacement logo is added.
+The Labs hero pairs a plain introduction with a short linked availability index.
+Product rows explain BotSquad and Motion directly. BotSquad uses a written,
+explicitly made-up task and a numbered handoff example; Motion retains the
+approved genuine evidence capture. The founder’s account and the original
+pitching photo follow the products. No performance figures or testimonials are added.
 
-BotSquad's worker diagram is semantic text and CSS, explicitly illustrative.
-Videos use local HTML/CSS artwork at 16:9, a visible Load video button, privacy
-notice and external link. The poster is useful without third-party requests;
-loading is voluntary, and native playback controls remain available. Concepts
-keep full image proportions and adjacent source labels. The Sport narrative and
-existing tutorial presentation retain their original visual systems.
-
+Video posters use simple local typography at a compact desktop width. Decorative
+circles and offset squares are removed. The unloaded poster can grow vertically
+on narrow screens; the loaded iframe retains 16:9. Load video, disclosures,
+external fallback, focus restoration and privacy boundaries are unchanged.
 
 ## Work domain and shared navigation
 
-Work reuses the company ink/orange palette, editorial grid and system typography.
-Its text-only direction/coordination/review figure describes design principles; it
-does not imitate a product screen or show invented results. Work and Sport have
+Work reuses the paper/ink/orange palette and system typography. A direct prose
+introduction explains the coordination problem. The former abstract direction
+diagram is removed. Work and Sport have
 matching disclosure menus with 44px minimum summary targets and explicit overview
 and product links. Panels remain within the viewport at mobile widths.

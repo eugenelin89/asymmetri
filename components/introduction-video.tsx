@@ -19,7 +19,7 @@ export function IntroductionVideo({ video }: { video: Introduction }) {
       <div className="shell">
         <div className="video-heading">
           <div>
-            <p className="eyebrow">The introduction</p>
+            <p className="eyebrow">Watch a walkthrough</p>
             <h2 id="introduction-title">{video.headline}</h2>
           </div>
           <p>{video.description}</p>
@@ -38,11 +38,6 @@ export function IntroductionVideo({ video }: { video: Introduction }) {
             />
           ) : (
             <div className="video-poster">
-              <div className="video-poster__art" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </div>
               <div className="video-poster__copy">
                 <span>{video.product}</span>
                 <p>{video.posterLine}</p>

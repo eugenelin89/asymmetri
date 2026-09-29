@@ -16,10 +16,10 @@ export const site = {
     descriptor: "Technology for individuals and small teams",
   },
   metadata: {
-    title: "Asymmetri Labs | Build an Asymmetric Advantage",
+    title: "Asymmetri Labs | Tools for Small Teams",
     description:
-      "Technologies that give individuals and small teams outsized capability. Explore BotSquad, Asymmetri Motion and the story behind Asymmetri Labs.",
-    socialHeadline: "Build an asymmetric advantage.",
+      "We build tools for individuals and small teams: BotSquad for coordinating AI work and Asymmetri Motion for reviewing pitching video.",
+    socialHeadline: "A small team can do a lot.",
     socialSupport:
       "Technology for individuals and small teams.",
   },
@@ -55,23 +55,23 @@ export const site = {
   ] satisfies NavItem[],
   hero: {
     eyebrow: "Asymmetri Sport · Starting with baseball",
-    headline: "Better evidence for better pitching.",
+    headline: "Take another look at the pitch.",
     support:
-      "Asymmetri Sport brings better evidence to pitchers, coaches and parents. Baseball is where our work began. Asymmetri Motion for iPhone is preparing for release.",
+      "Our work in sports technology began with a coach, a phone camera and time spent reviewing pitches. We’re building Asymmetri Motion to make that review easier.",
   },
   story: {
     eyebrow: "Where it began",
     headline: "It started with a phone camera.",
     paragraphs: [
-      "As a baseball coach and division coordinator, I wanted a clearer way to understand how pitchers were moving. I began recording pitching deliveries in slow motion on a smartphone, comparing pitches frame by frame, and studying differences in movement and timing.",
-      "Working with players, we identified possible areas for improvement, made small adjustments, recorded again, and compared new deliveries with earlier ones. Later, I experimented with affordable wearable sensors to capture evidence that video alone could not show as clearly.",
-      "The goal was not to automate coaching. It was to make useful evidence easier to see. Coaches could then apply their judgment, players could better understand what they were working on, and changes could be tracked over time.",
-      "The evidence was valuable. Extracting it was slow, manual, technically demanding, and dependent on knowing what to look for. Asymmetri Labs grew from a question: could everyday technology make pitching analysis clearer and easier to use while keeping coaches at the centre of development? That question became Asymmetri Motion.",
+      "I was coaching baseball and coordinating a division when I started recording pitchers in slow motion on my phone. I would go through deliveries frame by frame, looking at movement and timing.",
+      "We would try a small adjustment, record another pitch and compare it with the earlier one. Later, I tried affordable wearable sensors to look at things the video couldn’t show as clearly.",
+      "Having something we could look at together helped the conversation. A player could see the moment we were discussing. As a coach, I still had to decide what it meant and what to work on next.",
+      "The review took a lot of time, and finding useful evidence depended on knowing where to look. I wanted to make that part easier with the phone we already had. That’s where Asymmetri Motion began. The sensor experiments remain part of the research; Motion V1 works with iPhone video.",
     ],
   },
   approach: {
-    eyebrow: "From video to a clearer conversation",
-    headline: "Capture. Understand. Improve.",
+    eyebrow: "Working with a coach",
+    headline: "From recording to review.",
     introduction:
       "Motion brings this approach into one iPhone workflow, from recording a pitch to revisiting the evidence with a coach.",
     steps: [
@@ -80,11 +80,11 @@ export const site = {
         body: "Record high-frame-rate video on a supported iPhone or import from Photos. Back and Side framing guides and optional Recording Setups help prepare the next recording.",
       },
       {
-        title: "Understand",
+        title: "Look closely",
         body: "Confirm the exact pitching moments. On-device pose analysis connects available projected 2D measurements to annotated evidence, with camera view and throwing arm kept in context.",
       },
       {
-        title: "Improve",
+        title: "Review together",
         body: "Revisit pitches, compare observations and notice patterns worth discussing. Coaches interpret the evidence and guide training; parents gain context to support the process.",
       },
     ],
@@ -92,9 +92,9 @@ export const site = {
       "A recorded difference starts a conversation. Coaches bring the judgment and context.",
   },
   closing: {
-    eyebrow: "Built around people",
-    headline: "Great coaching stays human. Better evidence makes it stronger.",
-    body: "We are preparing Asymmetri Motion for release and continuing to learn from the work of pitching development. If this approach speaks to your experience, we would like to hear from you.",
+    eyebrow: "Talk to us",
+    headline: "There’s more to a pitch than a measurement.",
+    body: "How do you review pitching video? We’d like to hear what helps, what takes too long and what you wish you could see. Motion is still preparing for release.",
   },
   images: {
     pitchingDelivery: {
@@ -141,20 +141,20 @@ export const motion = {
   hero: {
     eyebrow: "An Asymmetri Labs product",
     support:
-      "Pitching video, human-confirmed frame marking, projected 2D measurements, annotated evidence and pitching history. One iPhone workflow, built around evidence you can inspect.",
+      "Record a delivery, find the frame you want to discuss and look closely. Motion keeps the marked frames, projected 2D measurements and annotated images together on your iPhone.",
     link: { label: "How Motion works", href: "#how-it-works" },
   },
   gap: {
-    eyebrow: "Everyday video, lasting evidence",
-    headline: "Keep more than the clip.",
+    eyebrow: "Why we’re building it",
+    headline: "Find that pitch again.",
     paragraphs: [
       "Slow-motion video is easy to record. Turning it into something you can return to is harder. A pitch gets watched, scrubbed and discussed, then disappears into a camera roll.",
-      "Laboratory motion capture can measure much more, but it is rarely part of everyday training. Motion makes phone video more structured, inspectable and useful over time, without treating it as a motion-capture laboratory.",
+      "Motion keeps the video, the moments you marked and the available measurements together. You can come back to the same pitch at the next practice. The measurements describe the 2D image; they are not laboratory motion capture.",
     ],
   },
   workflow: {
     eyebrow: "How it works",
-    headline: "A pitch worth returning to.",
+    headline: "Review a pitch, step by step.",
     steps: [
       {
         title: "Record or import",
@@ -180,10 +180,10 @@ export const motion = {
     ] satisfies ProductStep[],
   },
   evidence: {
-    eyebrow: "Evidence first",
-    headline: "From the number back to the pitch.",
+    eyebrow: "Behind a measurement",
+    headline: "See where the number came from.",
     support:
-      "The goal is not just more numbers. It is keeping the result connected to the observation that produced it.",
+      "A measurement is easier to discuss when you can open the frame and see the landmarks and reference lines used to calculate it.",
     chain: [
       { title: "Source video", body: "The pitch you recorded or imported." },
       { title: "Exact selected frame", body: "A specific image you can return to." },
@@ -196,8 +196,8 @@ export const motion = {
       "You confirm the key frames. Motion connects measurements to those observations and keeps the annotated evidence available for later review.",
   },
   history: {
-    eyebrow: "Built for the long view",
-    headline: "See what changed. Inspect the pitches behind it.",
+    eyebrow: "Saved pitches",
+    headline: "Put two pitches side by side.",
     support:
       "One pitch is a starting point. My Pitches and Explore let you return to the work over time without losing the detail behind a comparison.",
     items: [
@@ -209,16 +209,16 @@ export const motion = {
       "Comparisons are descriptive. A difference does not establish improvement, and a trend does not prove a training change worked. Camera setup and marking choices still matter.",
   },
   limits: {
-    eyebrow: "Designed to be honest about what it sees",
-    headline: "Clarity includes the limits.",
+    eyebrow: "Before you interpret a result",
+    headline: "What Motion can’t tell you.",
     items: [
-      { title: "The image is the reference", body: "Measurements describe projected 2D geometry in the video image. Camera position and perspective affect what you see. Motion does not produce anatomical 3D biomechanics or laboratory-calibrated measurements." },
-      { title: "An estimate stays an estimate", body: "Pose landmarks are estimates, and you confirm the pitching moments. Missing landmarks or unresolved ambiguity can leave a measurement unavailable. Motion does not fill the gap with an invented result." },
-      { title: "Interpretation stays human", body: "Motion does not score mechanics, predict injury or provide medical advice. It does not automatically coach an athlete or recommend a change to their delivery." },
+      { title: "Camera position matters", body: "Measurements describe projected 2D geometry in the video image. Camera position and perspective affect what you see. Motion does not produce anatomical 3D biomechanics or laboratory-calibrated measurements." },
+      { title: "Landmarks can be missing", body: "Pose landmarks are estimates, and you confirm the pitching moments. Missing landmarks or unresolved ambiguity can leave a measurement unavailable. Motion does not fill the gap with an invented result." },
+      { title: "A coach brings the context", body: "Motion does not score mechanics, predict injury or provide medical advice. It does not automatically coach an athlete or recommend a change to their delivery." },
     ] satisfies ProductStep[],
   },
   privacy: {
-    eyebrow: "Local-first",
+    eyebrow: "Storage and privacy",
     headline: "Your pitching record, on your iPhone.",
     paragraphs: [
       "No account is required. Pitch videos, optional Athlete Profile details and analysis records are stored locally. Apple Vision performs pose analysis on the device.",
@@ -228,7 +228,7 @@ export const motion = {
     link: { label: "Read the Privacy Policy", href: "/privacy" },
   },
   coaching: {
-    eyebrow: "Built for coaching conversations",
+    eyebrow: "At the next practice",
     audiences: [
       { title: "Pitchers", body: "See your work more clearly." },
       { title: "Coaches", body: "Inspect the evidence. Bring your judgment." },
@@ -662,48 +662,31 @@ export const labs = {
   } satisfies SiteImage,
   hero: {
     eyebrow: "Asymmetri Labs",
-    headline: "Build an asymmetric advantage.",
+    headline: "A small team can do a lot.",
     support:
-      "We create technologies that give individuals and small teams outsized capability.",
+      "We build tools that help. BotSquad brings AI tasks into one workspace. Asymmetri Motion helps pitchers and coaches take a closer look at a delivery.",
     primary: { label: "See what we're building", href: "/#products" },
     secondary: { label: "Why Asymmetri", href: "/about" },
   },
-  philosophy: {
-    headline: "Small input. Outsized capability.",
-    body: "An advantage can come from better information, useful automation and tools that make more possible with the resources you have. That is the idea behind Asymmetri.",
-  },
   products: {
-    eyebrow: "What we're building",
-    headline: "Different tools.\nA shared ambition.",
+    eyebrow: "The products",
+    headline: "Here’s what we’re working on.",
   },
-  common: {
-    eyebrow: "The common thread",
-    headline: "More within reach.",
-    body: "Coordinating AI work and understanding a pitch are different problems. Both start with the same question: what could one person do with a better tool? We build for useful capability, inspectable results and human judgment.",
-    link: { label: "The thinking behind Asymmetri", href: "/about" },
+  origin: {
+    eyebrow: "It began in baseball",
+    headline: "A phone camera, and a lot of replaying.",
+    body: "As a coach, I started recording pitches in slow motion and comparing them frame by frame. The useful part was looking at the same moment with a player. The slow part was finding it again. That experience led to Motion.",
+    attribution: "From the founder",
+    link: { label: "Read the story", href: "/sport#story" },
+    caption: "Pitching is where our work began.",
   },
+  availability: "In progress",
   contact: {
     eyebrow: "Get in touch",
     headline: "What are you working on?",
-    body: "Building with a small team? Seeing a problem from a different angle? We'd like to hear from you.",
+    body: "Tell us what you’re trying to do, or what’s getting in the way. Questions about either product are welcome.",
   },
-  diagram: {
-    caption: "Two ways to make more possible. Conceptual diagram.",
-    tracks: [
-      {
-        input: "One person",
-        product: "BotSquad",
-        output: "Coordinated AI workers",
-        steps: ["Research", "Build", "Review"],
-      },
-      {
-        input: "One iPhone",
-        product: "Asymmetri Motion",
-        output: "Inspectable pitching evidence",
-        steps: ["Frames", "Measurements", "History"],
-      },
-    ],
-  },
+
 } as const;
 
 export const sportNavigation: NavItem[] = [
@@ -721,39 +704,30 @@ export const work = {
     description:
       "Software and coordinated AI for individuals and small teams. Explore Asymmetri Work's approach to useful capability, inspectable results and human judgment, starting with BotSquad.",
   },
-  headline: "Do more with the team you have.",
+  headline: "Less time moving work between chats.",
   introduction:
-    "A person with an idea should be able to take it further. Asymmetri Work explores how software and coordinated AI can help individuals and small teams turn an intention into work they can inspect and direct.",
+    "Asymmetri Work is where we build software for individuals and small teams. We’re starting with a familiar problem: keeping track of tasks, context and results when several AI workers are involved.",
   productLink: { label: "Explore BotSquad", href: "/botsquad" },
   approachLink: { label: "Our approach", href: "/work#approach" },
   portfolioLink: { label: "See all products", href: "/#products" },
-  loop: {
-    title: "Capability, under your direction.",
-    steps: [
-      { owner: "You", title: "Set the direction", body: "Define the goal and the boundaries." },
-      { owner: "Tools & AI", title: "Coordinate the effort", body: "Keep tasks, context and handoffs connected." },
-      { owner: "You", title: "Review what comes back", body: "Inspect the evidence. Decide what happens next." },
-    ],
-    caption: "Our approach to software, coordinated AI and human judgment.",
-  },
   approach: {
-    eyebrow: "The work between idea and result",
-    headline: "Make coordination less of the job.",
-    body: "Small teams have to carry the idea and the work around it: organizing tasks, repeating context, checking results and deciding what comes next. We look for ways software can carry more of that coordination, leaving people better equipped to think, build and judge.",
+    eyebrow: "The problem we’re working on",
+    headline: "The handoffs take time.",
+    body: "Using several AI conversations means keeping track of which one has the latest context, what each is doing and what still needs review. We want the workspace to carry more of that bookkeeping.",
     principles: [
-      { title: "Start with a clear intention", body: "Give a task a purpose, a scope and a useful result to work toward. More activity is not the same as progress." },
-      { title: "Keep the work connected", body: "Make context and handoffs easier to follow. A result should come with enough evidence to understand how it was reached." },
-      { title: "Keep judgment with people", body: "Make review and intervention part of the workflow. People set priorities, question results and decide where authority belongs." },
+      { title: "Say what you need", body: "Give each task a clear result to work toward and say what is out of scope. It helps the worker, and gives you something to check." },
+      { title: "Keep the context nearby", body: "Keep the task, its messages and its output together so you can follow what happened without piecing it together from separate chats." },
+      { title: "Make review part of the job", body: "Read the result, question it and decide what should happen next. Some actions need your approval before the work can continue." },
     ] satisfies ProductStep[],
   },
   product: {
     eyebrow: "Starting with BotSquad",
-    headline: "An AI team with a shared workspace.",
-    body: "BotSquad is our first product in this domain. It brings the question into practice: how can one person coordinate several AI workers while keeping the work visible and authority bounded?",
+    headline: "Our first attempt at making this easier.",
+    body: "BotSquad is early, open source and self-hosted. It gives AI workers names, tasks and a place to pass work along. You can try it, read the code and see how it handles review.",
   },
   closing: {
-    headline: "What could a better tool put within reach?",
-    body: "Work and Sport share that question. They apply it to different tasks, with the same respect for evidence and human judgment.",
+    headline: "The same question comes up on a baseball field.",
+    body: "Reviewing a pitch and reviewing AI work both involve looking closely at how a result was reached. Our sports work began with that kind of patient, frame-by-frame attention.",
     link: { label: "Explore Asymmetri Sport", href: "/sport" },
   },
 } as const;
@@ -761,14 +735,14 @@ export const work = {
 export const botsquad = {
   name: "BotSquad",
   path: "/botsquad",
-  headline: "One person. An AI team.",
+  headline: "Give your AI workers a place to work together.",
   descriptor:
-    "A self-hosted workspace for coordinating persistent AI workers, from a clear task to a result you can inspect.",
+    "Assign tasks to AI workers, follow their conversations and review what they produce. BotSquad keeps the work in a shared workspace that you host.",
   status: "Open source · early development",
   licenseNote:
     "MIT licensed. The public repository includes the source, setup instructions and validation records.",
   metadata: {
-    title: "BotSquad | An AI Team, Under Your Direction",
+    title: "BotSquad | A Shared Workspace for AI Workers",
     description:
       "Coordinate persistent AI workers, explicit tasks and inspectable results. Self-hosted browser access through a tunnel today; standard web access and mobile in development.",
   },
@@ -781,43 +755,43 @@ export const botsquad = {
     href: "https://github.com/eugenelin89/bot_messenger#set-up-a-brand-new-botsquad-server",
   },
   problem: {
-    eyebrow: "From scattered conversations to shared work",
-    headline: "Spend less effort on the handoff.",
-    body: "Working across AI conversations can mean repeating context, copying results and remembering what still needs review. BotSquad gives that coordination a home: named workers, explicit tasks, durable messages and visible execution history.",
+    eyebrow: "Why BotSquad",
+    headline: "Tired of carrying context between chats?",
+    body: "One conversation has the plan. Another has the code. You’re copying between them and trying to remember what needs checking. BotSquad keeps named workers, tasks, messages and execution records in one place.",
   },
   workflow: [
     {
-      title: "Give the work a shape",
+      title: "Assign a task",
       body: "Define roles and assign explicit tasks with clear boundaries. Workers keep their identities and can resume their conversations as work continues.",
     },
     {
-      title: "Keep the handoff in context",
+      title: "Pass the work along",
       body: "Messages, task state and artifacts stay in the workspace. Workers can pass work along without making you carry every result between conversations.",
     },
     {
-      title: "Run, inspect, review",
+      title: "Check the result",
       body: "The current runtime executes work through Codex. Supported software workflows use scoped changes, recorded test results and independent review before integration.",
     },
     {
-      title: "Keep authority bounded",
+      title: "Decide what happens next",
       body: "Review outputs, pause work and decide on protected operations. Publication and infrastructure actions use specific approval paths, within the supported workflow.",
     },
   ] satisfies ProductStep[],
   persistence:
-    "Persistent means the worker's identity and recorded context endure. It does not mean a model runs continuously or has unlimited memory. Work is dispatched when queued, with bounded concurrency.",
+    "Workers keep their names and saved context between tasks. They run when work is queued, with limits on how many can run at once. They are not continuously running models, and their memory is not unlimited.",
   example: {
-    eyebrow: "Illustrative research handoff",
-    headline: "A question. A brief. A review.",
+    eyebrow: "An example task",
+    headline: "Start with a question you need answered.",
     request:
-      "Compare approaches to a small software project. Gather sources and uncertainties. No spending, publishing or outreach.",
+      "Compare two ways to build this small software project. Link the sources, explain the tradeoffs and flag what still needs checking. Don’t spend money, publish or contact anyone.",
     steps: [
       {
         title: "Coordinate",
-        body: "A manager gives a researcher a bounded question.",
+        body: "A manager assigns the question to a researcher.",
       },
       {
         title: "Investigate",
-        body: "The researcher returns a source-linked artifact and open questions.",
+        body: "The researcher returns a written comparison, sources and unanswered questions.",
       },
       {
         title: "Review",
@@ -825,14 +799,14 @@ export const botsquad = {
       },
     ] satisfies ProductStep[],
     caption:
-      "Synthetic workflow illustration, not a customer result or a live dashboard.",
+      "Made-up task to show the workflow. This is not a customer result or a product screen.",
   },
   control: {
-    headline: "You can see the work.\nYou stay in control.",
-    body: "Tasks, messages, execution records and artifacts make progress and failures inspectable. Scoped authority and review help contain the work. They are safeguards, not guarantees of perfect security or error-free output.",
+    headline: "Read the work before you rely on it.",
+    body: "You can read tasks, messages, execution records and the files workers produce. Review matters: AI workers can make mistakes. Scoped permissions and approval steps help limit what they can do, but do not guarantee security or correct results.",
   },
   access: {
-    headline: "Where it stands.",
+    headline: "Trying BotSquad today.",
     current:
       "Open source and self-hosted. Access the current interface in your browser through a tunnel.",
     future:
@@ -846,37 +820,37 @@ export const botsquad = {
 
 export const about = {
   metadata: {
-    title: "Why Asymmetri | Asymmetri Labs",
+    title: "About Asymmetri Labs | Where the Work Began",
     description:
-      "Useful tools, inspectable evidence and human control. Why Asymmetri Labs builds technology for individuals and small teams.",
+      "From reviewing pitching video to building tools for small teams. Read how Asymmetri Labs began and why we’re building Motion and BotSquad.",
   },
   eyebrow: "Why Asymmetri",
-  headline: "An advantage doesn't have to start with more.",
+  headline: "It started with time spent watching pitches.",
   introduction:
-    "More people. More time. More resources. Those are familiar ways to gain an advantage. We are interested in another: tools that change what a person or small team can do with what they already have.",
+    "As a baseball coach and division coordinator, I recorded deliveries on my phone and went through them frame by frame. We would try a small adjustment, record again and compare. It helped us see things we could talk about at practice.",
   meaning:
-    "That is what asymmetric advantage means to us. Better information can make a conversation more useful. Automation can make a handoff less manual. A well-designed tool can put a previously difficult task within reach.",
+    "Getting useful information out of those recordings took time. That led to Motion, and to the question behind Asymmetri Labs: what could someone do with the tools they already have, if those tools were a little more useful?",
   principles: [
     {
-      title: "Useful tools",
-      body: "Start with a real task and make the work clearer. Technology earns its place through what it helps someone do.",
+      title: "Begin with a real task",
+      body: "A pitch to review. A piece of software to build. Start there, and make the tool useful for the person doing it.",
     },
     {
-      title: "Inspectable evidence",
-      body: "Keep results connected to their sources. Make limitations visible so people can judge what a result means.",
+      title: "Show how a result was reached",
+      body: "Keep the source close to the result, whether that’s a video frame or an AI worker’s notes. Make it possible to check.",
     },
     {
-      title: "Human control",
-      body: "Support judgment, context and responsibility. Give people a clear view of the work and a meaningful say in what happens next.",
+      title: "Leave room for judgment",
+      body: "A coach knows things a camera cannot. A person reviewing AI work can question its assumptions. The tool should help them make that call.",
     },
   ] satisfies ProductStep[],
   origin:
-    "Our work began in baseball, with a phone camera and a question about making pitching evidence easier to understand. Asymmetri Sport carries that story forward. Asymmetri Work explores the same ambition through software and coordinated AI, starting with BotSquad.",
+    "Asymmetri is named for the idea that a small team can find an advantage without simply getting bigger. We’re pursuing that through two areas: Asymmetri Sport, starting with Motion, and Asymmetri Work, starting with BotSquad.",
 } as const;
 
 export const motionGallery = {
   eyebrow: "Inside the design process",
-  headline: "A question worth returning to.",
+  headline: "Earlier Explorer sketches",
   description:
     "These early Explorer design studies show the thinking behind asking a question of saved pitching history, then returning to it. They are concept illustrations with synthetic content, not current app screenshots or scientific validation. For the current workflow, see the Motion tutorial.",
   images: [
@@ -915,8 +889,8 @@ export const introductions = {
     product: "BotSquad",
     videoId: "E5r_lOecC-M",
     source: "https://youtu.be/E5r_lOecC-M",
-    headline: "Meet BotSquad.",
-    posterLine: "One person. An AI team.",
+    headline: "A walkthrough of BotSquad",
+    posterLine: "Give your AI workers a place to work together.",
     description:
       "An introduction to BotSquad and the idea of coordinating AI workers. The current interface uses tunnel-based browser access; standard web access and mobile interaction remain in development.",
     tone: "botsquad",
@@ -925,10 +899,10 @@ export const introductions = {
     product: "Asymmetri Motion",
     videoId: "kaSatKC8HBg",
     source: "https://youtu.be/kaSatKC8HBg",
-    headline: "Meet Asymmetri Motion.",
+    headline: "A quick look at Motion",
     posterLine: "See your pitch more clearly.",
     description:
-      "A short introduction to Asymmetri Motion. The app is preparing for release. Promotional imagery does not establish public availability or scientific validation; the workflow and limits below describe the product.",
+      "This short introduction gives a feel for Motion. It’s preparing for release; the workflow and measurement limits are explained below.",
     tone: "motion",
   },
 } as const;

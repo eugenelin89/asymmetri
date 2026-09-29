@@ -1,7 +1,7 @@
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
-import { WorkerDiagram } from "@/components/worker-diagram";
+import { WorkerExample } from "@/components/worker-example";
 import { botsquad, introductions, site, work } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -49,7 +49,7 @@ export default function BotSquadPage() {
                 Part of {work.name} ↗
               </a>
             </div>
-            <WorkerDiagram />
+            <WorkerExample />
           </div>
         </section>
         <IntroductionVideo video={introductions.botsquad} />
@@ -66,7 +66,7 @@ export default function BotSquadPage() {
           <div className="shell product-split">
             <div className="product-heading section-heading">
               <p className="eyebrow">How it works</p>
-              <h2>Give each worker a role. Keep the work connected.</h2>
+              <h2>From an assigned task to a reviewed result.</h2>
               <p className="product-note">{botsquad.persistence}</p>
             </div>
             <ol className="workflow-list">
@@ -82,31 +82,10 @@ export default function BotSquadPage() {
             </ol>
           </div>
         </section>
-        <section className="section botsquad-example">
-          <div className="shell">
-            <div className="product-split">
-              <div className="product-heading">
-                <p className="eyebrow">{botsquad.example.eyebrow}</p>
-                <h2>{botsquad.example.headline}</h2>
-              </div>
-              <blockquote>{botsquad.example.request}</blockquote>
-            </div>
-            <ol className="example-steps">
-              {botsquad.example.steps.map((step, index) => (
-                <li key={step.title}>
-                  <span>0{index + 1}</span>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="product-note">{botsquad.example.caption}</p>
-          </div>
-        </section>
         <section className="section labs-common">
           <div className="shell product-split">
             <div className="product-heading">
-              <p className="eyebrow eyebrow--light">Human control</p>
+              <p className="eyebrow eyebrow--light">Review and permissions</p>
               <h2>{botsquad.control.headline}</h2>
             </div>
             <div className="product-prose">
@@ -118,7 +97,7 @@ export default function BotSquadPage() {
         <section className="section botsquad-access" id="availability">
           <div className="shell">
             <div className="product-heading">
-              <p className="eyebrow">Current product / future work</p>
+              <p className="eyebrow">Getting started</p>
               <h2>{botsquad.access.headline}</h2>
             </div>
             <div className="access-grid">

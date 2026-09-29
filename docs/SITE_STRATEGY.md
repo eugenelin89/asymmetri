@@ -2,11 +2,11 @@
 
 ## Company and portfolio
 
-The homepage makes the company proposition explicit: “Build an asymmetric
-advantage.” The supporting line is “We create technologies that give individuals
-and small teams outsized capability.” Its sequence is hero, short philosophy,
-BotSquad and Motion introductions, common thread, then company contact. The
-conceptual diagram shows two distinct inputs and outputs without invented results.
+The homepage opens with “A small team can do a lot.” It explains BotSquad and
+Motion directly, shows current availability, introduces both products and brings
+the founder’s coaching story and authentic pitching photograph into the page.
+A simple contact invitation closes it. Repeated philosophy slogans and the
+conceptual capability diagram have been removed.
 
 The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
 Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and
@@ -17,18 +17,17 @@ in the footer. The nine public pages appear once in the sitemap.
 ## Work and BotSquad
 
 Asymmetri Work is the domain for software and coordinated AI that help individuals
-and small teams do more with the resources they have. `/work` explains intention,
-coordination, inspectable results and human judgment. Its diagram is a design
-approach, not proof of autonomy or performance. BotSquad is the first product; its
+and small teams do more with the resources they have. `/work` explains the practical problem of carrying context between AI chats,
+then introduces task boundaries, review and BotSquad. BotSquad is the first product; its
 detailed workflow, availability, runtime and limitations stay on `/botsquad`.
 The domain page is not an additional required step to reach either product.
 
 ## Sport and Motion
 
 Asymmetri Sport is the brand name; “sports technology” is descriptive language.
-`/sport` preserves the former homepage's authentic photograph, central headings,
-founder paragraphs, Capture / Understand / Improve approach, Motion introduction
-and human-coaching close, in that order. Local navigation reaches the story,
+`/sport` preserves the authentic photograph and first-person coaching history,
+with shorter prose and a Capture / Look closely / Review together sequence,
+followed by Motion and the coaching contact. Local navigation reaches the story,
 approach, Motion and Sport contact. The old `#story`, `#approach`, `#product` and
 `#contact` IDs remain on Sport. Historical root fragments for the first three
 migrate there; the new root `#contact` remains company contact.
@@ -50,7 +49,8 @@ hosted SaaS availability or automatic success is promised. The public repository
 is MIT licensed following the owner's explicit license instruction.
 
 `/about` explains the name, useful tools, inspectable evidence and human control.
-It connects to the Sport origin without duplicating the preserved founder story.
+It opens with the first-person coaching origin, then explains the name and the
+choices behind both products.
 
 ## Evidence, privacy and media
 

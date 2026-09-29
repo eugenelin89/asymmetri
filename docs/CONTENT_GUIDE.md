@@ -149,7 +149,7 @@ Labs `/` introduces the portfolio with `#products` and company `#contact`.
 `/sport` preserves `#story`, `#approach`, `#product` and its coaching contact.
 Shared navigation is Work, Sport, About and Contact. Work and Sport disclose both
 their overview and a direct product link. The `work` export owns `/work` philosophy,
-metadata, diagram text and BotSquad introduction; existing product facts are reused
+metadata, coordination prose and BotSquad introduction; existing product facts are reused
 from `botsquad`. `/about` is a real page;
 `/motion` and `/botsquad` are detailed product pages. Footer resource links say
 Motion tutorial, Motion privacy and Motion support. The three moved root fragments
@@ -264,3 +264,19 @@ Both apex and www must serve real policy/support pages. Footer links remain
 explicitly labelled Motion resources, and contextual/mutual links remain intact.
 Future approved moves must preserve compatibility for installed app versions;
 coordinating a new app link alone does not retire the old destination safely.
+
+
+## Human editorial pass, September 29, 2026
+
+The homepage `labs` export owns its availability label and founder introduction;
+product names/statuses remain in the existing product exports. Work explains
+coordination through concrete prose. About opens with the founder’s coaching
+experience. Sport retains the same history with shorter first-person paragraphs.
+`WorkerExample` reuses BotSquad’s labelled synthetic brief and handoff steps.
+Do not turn that written example into a claimed customer outcome or app capture.
+
+Marketing headings and supporting copy can be conversational while preserving
+all product and research limits. The audited `motionPages`, tutorial modules,
+media captions, hashes and original-image links were preserved unchanged in this
+pass. Plain utility instructions already serve their readers; do not rewrite
+policy commitments for stylistic variety.

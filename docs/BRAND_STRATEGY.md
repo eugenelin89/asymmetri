@@ -38,13 +38,13 @@ Sensors remain part of that history, not a requirement or feature of Motion V1.
 ## Messaging hierarchy
 
 1. Company: **Asymmetri Labs**.
-2. Company hero: **Build an asymmetric advantage.**
-3. Company support: **We create technologies that give individuals and small teams outsized capability.**
+2. Company hero: **A small team can do a lot.**
+3. Company support: **BotSquad brings AI tasks into one workspace. Asymmetri Motion helps pitchers and coaches take a closer look at a delivery.**
 4. Portfolio: **BotSquad** and **Asymmetri Motion**.
-5. Work domain: **Asymmetri Work**, with **Do more with the team you have.**
-6. Sports domain: **Asymmetri Sport**, with **Better evidence for better pitching.**
+5. Work domain: **Asymmetri Work**, with **Less time moving work between chats.**
+6. Sports domain: **Asymmetri Sport**, with **Take another look at the pitch.**
 7. Motion product line: **See your pitch more clearly.**
-8. Sport closing: **Great coaching stays human. Better evidence makes it stronger.**
+8. Sport closing: **There’s more to a pitch than a measurement.**
 
 The homepage introduces the portfolio; `/work` explains individual capability and
 coordinated AI; `/sport` preserves the founder narrative;
@@ -59,3 +59,15 @@ pitching language and explain meaningful limits near the benefit they qualify.
 Avoid generic startup superlatives, AI-powered claims, invented outcomes and
 public feature inventories that confuse stored research with normal V1 use.
 Do not use em dashes or en dashes in public copy.
+
+
+## September 29 editorial direction
+
+Lead with the work and the people doing it. The founder’s first-person coaching
+account belongs on Sport and About, with a short introduction on the homepage.
+Use contractions and specific situations where natural. Avoid repeated aphorisms,
+three-part slogans and abstract claims about capability. A brief product
+introduction should say what someone can do and how far along the product is.
+Retain the company’s asymmetric-advantage idea in the About explanation; it no
+longer needs to appear as a large slogan on every page. Do not invent anecdotes,
+customers, quotes or results to make the writing feel personal.

@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   {
-    title: "Asymmetri Sport | Better Evidence for Better Pitching",
+    title: "Asymmetri Sport | A Closer Look at Pitching",
     description:
       "Where Asymmetri began: a phone camera, developing pitchers and better evidence for human coaching. Meet Asymmetri Motion.",
   },

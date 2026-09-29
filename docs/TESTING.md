@@ -73,6 +73,8 @@ Check:
   `#products` and company `#contact` stay on Labs;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
+- paper-header logo/nav contrast, linked product statuses, founder/photo section
+  and the written BotSquad example at all widths;
 - image loading, crops, and alt text;
 - compact mobile navigation;
 - keyboard navigation and visible focus;

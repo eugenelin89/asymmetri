@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0e1110"/><g stroke="#222924" stroke-width="1"><path d="M0 0v630"/><path d="M64 0v630"/><path d="M128 0v630"/><path d="M192 0v630"/><path d="M256 0v630"/><path d="M320 0v630"/><path d="M384 0v630"/><path d="M448 0v630"/><path d="M512 0v630"/><path d="M576 0v630"/><path d="M640 0v630"/><path d="M704 0v630"/><path d="M768 0v630"/><path d="M832 0v630"/><path d="M896 0v630"/><path d="M960 0v630"/><path d="M1024 0v630"/><path d="M1088 0v630"/><path d="M1152 0v630"/><path d="M0 0h1200"/><path d="M0 64h1200"/><path d="M0 128h1200"/><path d="M0 192h1200"/><path d="M0 256h1200"/><path d="M0 320h1200"/><path d="M0 384h1200"/><path d="M0 448h1200"/><path d="M0 512h1200"/><path d="M0 576h1200"/></g><g font-family="Arial, Helvetica, sans-serif"><text x="64" y="86" fill="#f47743" font-size="24" font-weight="700">ASYMMETRI LABS</text><g fill="#f5f6f2" font-size="86" font-weight="700" letter-spacing="-4"><text x="60" y="230">Build an</text><text x="60" y="327">asymmetric</text><text x="60" y="424">advantage.</text></g><text x="64" y="540" fill="#b9c2bd" font-size="25">Technology for individuals and small teams.</text></g><g fill="none" stroke="#f47743" stroke-width="2"><path d="M856 250h72v-74h130M928 250h130M928 250v74h130"/><circle cx="835" cy="250" r="20"/><rect x="1058" y="160" width="28" height="28"/><rect x="1058" y="236" width="28" height="28"/><rect x="1058" y="310" width="28" height="28"/></g><path d="M64 580h1072" stroke="#46504a"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f5f0"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="70" y="88" fill="#a43c1a" font-size="26">Asymmetri Labs</text>
+    <g fill="#0e1110" font-size="82" font-weight="500" letter-spacing="-3">
+      <text x="66" y="236">A small team</text>
+      <text x="66" y="328">can do a lot.</text>
+    </g>
+    <text x="70" y="409" fill="#4b554f" font-size="25">Tools for individuals and small teams.</text>
+    <path d="M70 475h1060" stroke="#d7dcd8"/>
+    <text x="70" y="533" fill="#0e1110" font-size="25">BotSquad</text>
+    <text x="70" y="573" fill="#4b554f" font-size="20">A workspace for AI workers</text>
+    <text x="640" y="533" fill="#0e1110" font-size="25">Asymmetri Motion</text>
+    <text x="640" y="573" fill="#4b554f" font-size="20">A closer look at pitching</text>
+  </g>
+</svg>

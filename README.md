@@ -7,7 +7,9 @@ preserved under Asymmetri Sport.
 
 ## Website purpose
 
-The company homepage explains asymmetric advantage and introduces two products.
+The company homepage introduces two products in plain language, shows their current
+status and connects the work to the founder’s coaching experience. The visual
+system uses warm paper surfaces, readable system typography and approved real media.
 BotSquad coordinates persistent logical AI workers in a self-hosted workspace;
 current browser access uses a tunnel, while standard web access and mobile remain
 in development. Asymmetri Motion creates inspectable pitching evidence on iPhone

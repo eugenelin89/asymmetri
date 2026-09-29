@@ -11,7 +11,7 @@ export function SiteHeader() {
       </a>
       <div className="site-header__inner">
         <Link href="/" className="site-header__brand" aria-label="Asymmetri Labs home">
-          <Logo tone="canvas" />
+          <Logo tone="ink" />
         </Link>
         <SiteNavigation items={site.navigation} />
       </div>

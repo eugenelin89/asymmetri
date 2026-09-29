@@ -78,7 +78,10 @@ Work and Sport use native exclusive `details` disclosures with overview and dire
 product links. Enter/Space and navigation work without JavaScript; the small client
 enhancement adds outside-pointer dismissal and Escape with focus restoration.
 `SiteFooter` adds explicit product/company links and Motion resource labels.
-`CapabilityDiagram`, `WorkerDiagram` and `EvidenceChain` use semantic HTML/CSS.
+`WorkerExample` renders a labelled written task and ordered handoff steps;
+`EvidenceChain` uses semantic HTML/CSS. The former capability and worker diagrams
+are removed. The homepage uses product status links, divided product rows and a
+founder section. Work uses prose without a diagram.
 `UtilityPage` remains a server-rendered article. No external fonts, UI library,
 server state or new dependency is introduced.
 
@@ -303,3 +306,7 @@ WebP; guide/sequence diagrams are local SVG. All have intrinsic dimensions, lazy
 loading, responsive CSS, text equivalents and explicit visual-source labels. The tutorial adds no
 new dependency, backend, form submission, database, account or external embed.
 Optional third-party videos exist only on the two product pages described above.
+
+Tutorial header and content slots use distinct React keys because both become
+siblings inside each module. Their key prefixes differ; module/step DOM IDs and
+public hashes do not change.
