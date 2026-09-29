@@ -339,3 +339,21 @@ textual explanations, not app captures, scientific evidence or third-party media
   deeper-page roles are preserved. No asset is deleted or misleadingly relabelled.
 - A semantic text overview replaces the homepage Sport image treatment. It adds
   no generated image, stock media, athlete depiction or third-party rights claim.
+
+## Root content restoration from 0c05c7b, September 29, 2026
+
+- `public/images/home-social.svg` and `.png` are new 1200×630 original typographic
+  assets for `/` only. Source: the current light Labs social SVG composition,
+  with the requested historical headline/support and product lines. Processing:
+  SVG source editing and PNG export through the existing Sharp dependency.
+  Description: “Asymmetri Labs, Build an asymmetric advantage.” The page's social
+  alt uses its restored title. No external font, stock art or new rights claim.
+  Existing `labs-social` files and their use on other pages are unchanged.
+- The unchanged 315×723 tutorial evidence capture and 1024×1024 Motion icon return
+  to the homepage at the owner's explicit request to restore historical content.
+  Their original URLs, accurate alt descriptions and approved provenance remain.
+  The evidence caption again reads “Actual app capture. Projected 2D evidence,
+  interpreted in context.” No screenshot value or image pixel is modified.
+- `HomeCapability` and `HomeWorkerFlow` render the historical explanation as semantic
+  HTML/CSS lists in the current light design. They retain conceptual/synthetic
+  disclosures and do not represent a live application or customer outcome.

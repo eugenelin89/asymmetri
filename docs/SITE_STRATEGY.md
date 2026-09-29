@@ -2,18 +2,16 @@
 
 ## Company and portfolio
 
-The homepage opens with “A small team can do a lot.” Its nested overview makes
-Labs → Work → BotSquad and Labs → Sport → Motion explicit, with direct links at
-both levels and current product availability. A company principle precedes the
-two distinct product panels. Shared thinking and contact follow. The founder's
-coaching account and photograph belong on Sport, with the company origin also on
-About. The warm palette and conversational copy are retained; the earlier page
-sequence and clearer content levels are restored.
+The homepage restores the content from `0c05c7b`, opening with “Build an asymmetric
+advantage.” The small-input conceptual explanation, company principle, original
+product summaries, common thread and contact appear in the current warm/light
+design. Motion's icon and genuine evidence capture return with original captions.
+Its historical approach/story and direct product/video links are preserved.
+The founder account remains on Sport and About. Other route copy is unchanged.
 
-Homepage copy, metadata and social artwork use sport-level language. The Sport
-panel introduces Motion as the first product, retaining status and direct links,
-but does not show the discipline-specific icon or evidence capture. Product scope
-and detailed capability claims remain on Motion; no broader sport support is implied.
+The root page has its own historical title/description and a light social preview
+with the restored wording; shared defaults and other route previews stay current.
+The preceding sport-only homepage trial is superseded by this explicit revision.
 
 The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
 Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and

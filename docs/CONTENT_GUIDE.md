@@ -289,9 +289,11 @@ existing name explanation before its founder paragraphs. BotSquad's example is
 again a standalone section; `workflowHeadline` centralizes the existing shared
 workflow heading for the compact outline and detailed section.
 
-The homepage must refer to sport broadly, without baseball, pitch, pitching or
-pitcher language in visible copy, accessible descriptions, metadata or social
-artwork. `labs.philosophy` and `labs.sport` own the homepage-specific summaries;
-do not reuse Motion's discipline-specific headline, hero or images there. This is
-company positioning, not a claim that Motion supports every sport. Keep Motion's
-actual scope, workflow and limits on its product page and protected resources.
+The owner's latest content trial restores `/` to the content in
+`0c05c7bacde8dad43701361b8488a113c8a21f87` while retaining the current design.
+This supersedes the intervening sport-only homepage wording: its original Motion
+language, evidence capture and accurate alt text return. `labs` owns the restored
+hero, principles, portfolio, conceptual explanation, contact, metadata and a
+homepage-only BotSquad summary. Do not revert shared product or other route copy.
+About's existing origin value remains unchanged. Root social artwork has its own
+`home-social.svg`/`.png` so other page previews remain untouched.

@@ -38,8 +38,8 @@ Sensors remain part of that history, not a requirement or feature of Motion V1.
 ## Messaging hierarchy
 
 1. Company: **Asymmetri Labs**.
-2. Company hero: **A small team can do a lot.**
-3. Company support: **BotSquad brings AI tasks into one workspace. Asymmetri Sport explores technology for athletes and coaches.**
+2. Company hero: **Build an asymmetric advantage.**
+3. Company support: **We create technologies that give individuals and small teams outsized capability.**
 4. Portfolio: **BotSquad** and **Asymmetri Motion**.
 5. Work domain: **Asymmetri Work**, with **Less time moving work between chats.**
 6. Sports domain: **Asymmetri Sport**, with **Take another look at the pitch.**
@@ -66,13 +66,13 @@ Do not use em dashes or en dashes in public copy.
 Lead with the work and the people doing it. The founder’s first-person coaching
 account belongs on Sport and About. The homepage establishes Labs, Work/Sport and
 the products before visitors reach those deeper stories.
-Keep the homepage at the sport level: no baseball, pitch, pitching or pitcher
-language or imagery there, including metadata and social previews. Detailed
-product pages retain their precise scope; general company positioning must not
-become a claim that Motion supports every sport.
+The homepage is an owner-requested content trial using `0c05c7b` within the current
+design. Its original positioning and Motion-specific references override the
+intervening sport-only wording. Detailed product pages retain their current copy
+and precise scope; do not extend this content restoration to other routes.
 Use contractions and specific situations where natural. Avoid repeated aphorisms,
 three-part slogans and abstract claims about capability. A brief product
 introduction should say what someone can do and how far along the product is.
-Retain the company’s asymmetric-advantage idea in the About explanation; it no
-longer needs to appear as a large slogan on every page. Do not invent anecdotes,
+The homepage again leads with asymmetric advantage, while other pages retain
+their current conversational treatment. Do not invent anecdotes,
 customers, quotes or results to make the writing feel personal.

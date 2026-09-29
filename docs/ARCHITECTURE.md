@@ -78,19 +78,22 @@ Work and Sport use native exclusive `details` disclosures with overview and dire
 product links. Enter/Space and navigation work without JavaScript; the small client
 enhancement adds outside-pointer dismissal and Escape with focus restoration.
 `SiteFooter` adds explicit product/company links and Motion resource labels.
-`WorkerFlow` renders a compact ordered workflow in the homepage product panel and
-BotSquad hero. `WorkerExample` renders a labelled written task and ordered handoff
+`WorkerFlow` renders a compact ordered workflow in the BotSquad hero.
+`WorkerExample` renders a labelled written task and ordered handoff
 steps in its own section after the detailed BotSquad workflow;
-`EvidenceChain` uses semantic HTML/CSS. The former capability and worker diagrams
-are removed. The homepage restores the company introduction, principles, two
-product panels, common principles and contact sequence. Its nested navigation
-reuses the shared Work/Sport and product links to expose the company hierarchy.
+`EvidenceChain` uses semantic HTML/CSS. `HomeCapability` and `HomeWorkerFlow`
+present the restored `0c05c7b` homepage explanation in the current light list style.
+The homepage retains the company introduction, principles, two product panels,
+common principles and contact sequence. Shared navigation still exposes Work/Sport
+and their products; the homepage restores its historical approach/story links.
 Work restores its split hero with a short approach outline. About introduces the
 company name before its principles and founder story. Colors and marketing copy
 retain the September 29 editorial treatment.
-The homepage's Sport panel uses a domain-level text overview instead of the
-Motion icon and evidence capture. Homepage-specific Sport and principle summaries
-live in `labs`, keeping discipline-specific content on deeper pages.
+Homepage copy lives in `labs`, including a homepage-only historical BotSquad
+summary so the current product page remains unchanged. About's `labs.origin`
+value is preserved. Root page metadata overrides the shared default and uses
+`home-social.png`; other pages retain `labs-social.png`. The Motion icon and
+approved evidence capture are restored on the homepage with their original labels.
 `UtilityPage` remains a server-rendered article. No external fonts, UI library,
 server state or new dependency is introduced.
 

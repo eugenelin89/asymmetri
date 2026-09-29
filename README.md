@@ -11,8 +11,9 @@ The company homepage introduces Labs, its Work and Sport domains, and the produc
 within them. Company principles frame the two product panels; the founder's
 coaching story lives on Sport and About. The visual
 system uses warm paper surfaces, readable system typography and approved real media.
-The homepage speaks about sport broadly; discipline-specific copy and imagery
-belong on the Sport and Motion pages.
+The homepage uses the content from `0c05c7b` with the current light design,
+including its original positioning, product summaries and Motion evidence image.
+Other pages retain their current copy.
 BotSquad coordinates persistent logical AI workers in a self-hosted workspace;
 current browser access uses a tunnel, while standard web access and mobile remain
 in development. Asymmetri Motion creates inspectable pitching evidence on iPhone

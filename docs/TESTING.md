@@ -73,11 +73,12 @@ Check:
   `#products` and company `#contact` stay on Labs;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
-- paper-header logo/nav contrast, the nested Labs → Work/Sport → product links,
+- paper-header logo/nav contrast, the shared Labs → Work/Sport → product links,
   product statuses and distinct product panels at all widths;
 - homepage introduction → principle → products → shared thinking → contact;
-- homepage HTML, accessible copy, metadata and social artwork contain no baseball,
-  pitch, pitching or pitcher terms; the Sport panel uses no discipline-specific imagery;
+- homepage content and root metadata match the requested `0c05c7b` source while
+  the current light palette, typography and responsive layout remain; Motion's
+  restored icon/evidence labels and root-only social image are accurate;
 - Work's split hero, About's company → principles → founder sequence and
   BotSquad's standalone written example after its detailed workflow;
 - image loading, crops, and alt text;

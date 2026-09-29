@@ -110,15 +110,20 @@ reduced motion and no-JavaScript access are part of the design.
 
 ## Labs portfolio and optional media
 
-The Labs hero pairs a plain introduction with nested company/domain/product links
-and current availability. A short company principle precedes two product panels.
-BotSquad uses an ordered workflow outline; the Sport panel uses a text overview
-for athletes and coaches. The Motion icon and evidence capture are reserved for
-deeper product resources. Shared principles and contact follow the products. The original
+The Labs hero pairs the restored `0c05c7b` introduction with its conceptual
+small-input explanation, presented as light typographic rows. A short company
+principle precedes two product panels. BotSquad's historical direction/handoff/result
+outline uses the current list styling. Motion again shows its approved icon and
+genuine evidence capture. Shared principles and contact follow the products. The original
 pitching photo and founder account remain on Sport, with the origin also on About.
 BotSquad's explicitly made-up task has its own section after the detailed workflow,
 using a split heading/brief and three numbered handoff columns that stack on phones.
 No performance figures or testimonials are added.
+
+The root's `home-social.svg`/`.png` use the current paper palette and typography
+with the restored headline and product lines. Other pages retain their existing
+social artwork. No dark grid, oversized historical type or decorative branching
+geometry is restored with the homepage content.
 
 Video posters use simple local typography at a compact desktop width. Decorative
 circles and offset squares are removed. The unloaded poster can grow vertically

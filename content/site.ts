@@ -654,30 +654,22 @@ export const tutorial = {
 
 // Labs portfolio, product concepts and optional introduction media.
 export const labs = {
-  hero: {
-    eyebrow: "Asymmetri Labs",
-    headline: "A small team can do a lot.",
-    support:
-      "We build tools that help. BotSquad brings AI tasks into one workspace. Asymmetri Sport explores technology for athletes and coaches.",
-    primary: { label: "See what we're building", href: "/#products" },
-    secondary: { label: "Why Asymmetri", href: "/about" },
+  // Homepage copy restored from 0c05c7b; detailed product-page copy stays current.
+  metadata: {
+    "title": "Asymmetri Labs | Build an Asymmetric Advantage",
+    "description": "Technologies that give individuals and small teams outsized capability. Explore BotSquad, Asymmetri Motion and the story behind Asymmetri Labs.",
+    "socialHeadline": "Build an asymmetric advantage.",
+    "socialSupport": "Technology for individuals and small teams."
   },
-  products: {
-    eyebrow: "The products",
-    headline: "Here’s what we’re working on.",
-  },
-  philosophy: {
-    headline: "Begin with a real task",
-    body: "A task to complete. A skill to practice. Start there, and make the tool useful for the person doing it.",
-  },
-  sport: {
-    headline: "Technology for sport.",
-    body: "Our work in sport starts with Asymmetri Motion for iPhone. Explore the product to see its workflow, evidence and limits.",
-    overview: {
-      headline: "For athletes and coaches.",
-      body: "A coach brings experience and context. We build tools to support that judgment.",
-      link: { label: "Explore Asymmetri Sport", href: "/sport" },
-    },
+  botsquadPreview: {
+    "headline": "One person. An AI team.",
+    "descriptor": "A self-hosted workspace for coordinating persistent AI workers, from a clear task to a result you can inspect.",
+    "steps": [
+      "Coordinate",
+      "Investigate",
+      "Review"
+    ],
+    "caption": "Synthetic workflow illustration, not a customer result or a live dashboard."
   },
   origin: {
     eyebrow: "It began in baseball",
@@ -687,13 +679,57 @@ export const labs = {
     link: { label: "Read the story", href: "/sport#story" },
     caption: "Pitching is where our work began.",
   },
-  availability: "In progress",
+
+  motionPreview: {
+    src: "/images/motion/tutorial/evidence.png",
+    alt: "A Motion app capture connecting a saved pitching frame to annotated trunk landmarks and a vertical reference.",
+    width: 315,
+    height: 723,
+  } satisfies SiteImage,
+  hero: {
+    eyebrow: "Asymmetri Labs",
+    headline: "Build an asymmetric advantage.",
+    support:
+      "We create technologies that give individuals and small teams outsized capability.",
+    primary: { label: "See what we're building", href: "/#products" },
+    secondary: { label: "Why Asymmetri", href: "/about" },
+  },
+  philosophy: {
+    headline: "Small input. Outsized capability.",
+    body: "An advantage can come from better information, useful automation and tools that make more possible with the resources you have. That is the idea behind Asymmetri.",
+  },
+  products: {
+    eyebrow: "What we're building",
+    headline: "Different tools.\nA shared ambition.",
+  },
+  common: {
+    eyebrow: "The common thread",
+    headline: "More within reach.",
+    body: "Coordinating AI work and understanding a pitch are different problems. Both start with the same question: what could one person do with a better tool? We build for useful capability, inspectable results and human judgment.",
+    link: { label: "The thinking behind Asymmetri", href: "/about" },
+  },
   contact: {
     eyebrow: "Get in touch",
     headline: "What are you working on?",
-    body: "Tell us what you’re trying to do, or what’s getting in the way. Questions about either product are welcome.",
+    body: "Building with a small team? Seeing a problem from a different angle? We'd like to hear from you.",
   },
-
+  diagram: {
+    caption: "Two ways to make more possible. Conceptual diagram.",
+    tracks: [
+      {
+        input: "One person",
+        product: "BotSquad",
+        output: "Coordinated AI workers",
+        steps: ["Research", "Build", "Review"],
+      },
+      {
+        input: "One iPhone",
+        product: "Asymmetri Motion",
+        output: "Inspectable pitching evidence",
+        steps: ["Frames", "Measurements", "History"],
+      },
+    ],
+  },
 } as const;
 
 export const sportNavigation: NavItem[] = [
