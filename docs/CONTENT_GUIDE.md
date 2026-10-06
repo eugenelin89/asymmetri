@@ -60,6 +60,13 @@ measurements” rather than the white paper's older all-eleven claim. Read
 
 ## Motion utility-page facts
 
+October 6, 2026: the utility pages cover the accepted Motion 1.2 candidate's
+Notes, manually entered Pitch Context, local Files/Reference acquisition, study
+records, Saved Comparisons and explicit PDF/original-video sharing. This update
+does not establish public App Store availability. Reference content remains
+separate from personal analysis and sharing. Existing Apple, Gmail and website
+handling and their retention limits remain unchanged.
+
 `/privacy` and `/support` follow the source-audited Motion V1 drafts, with the
 website/support audit recorded in `docs/WEBSITE_PRIVACY_AUDIT.md`. The marketing pages now describe the same current V1 product, with release
 availability stated separately. Preserve these audited articles substantively. Preserve

@@ -262,7 +262,7 @@ export const motionPages = {
     title: "Asymmetri Motion Privacy Policy",
     description:
       "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, and support email.",
-    effectiveDate: { label: "September 28, 2026", value: "2026-09-28" },
+    effectiveDate: { label: "October 6, 2026", value: "2026-10-06" },
     introduction: [
       "Asymmetri Labs operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
       "Asymmetri Labs does not sell personal information.",
@@ -281,6 +281,9 @@ export const motionPages = {
           "Optional Athlete Profile information: name, date of birth, throwing arm, batting side, positions, and dated height and weight entries and corrections.",
           "Camera view, throwing arm, Setup Reference and event marks, pitcher selection, detected pose landmarks and confidence, projected 2D measurements and analysis history.",
           "Rendered, annotated evidence images, recording setups, saved views and preferences.",
+          "Optional Athlete Notes and Pitch Notes, and manually entered Pitch Context such as pitch type, reported velocity and its source, chart-relative location and result. Explorer Saved Views retain your chosen review settings.",
+          "Authorized footage imported from Photos or Files into a separate Reference Library, with optional user-entered metadata, study intervals, event marks, bookmarks and notes.",
+          "Saved Comparisons containing the chosen personal pitch and Reference pair and comparison settings. These configurations do not duplicate videos or create measurement records for the Reference subject.",
         ],
         closing: [
           "Apple Vision processes analysis on your device. No account is required. The app has no Asymmetri-operated server-upload or cloud-sync feature for these records and does not send your videos, Athlete Profile or analysis records to Asymmetri Labs for remote analysis.",
@@ -289,12 +292,15 @@ export const motionPages = {
       },
       {
         id: "camera-photos-sharing",
-        heading: "Camera, Photos and sharing",
+        heading: "Camera, Photos, Files and sharing",
         paragraphs: [
           "Camera access enables rear-camera pitching video. Direct recording does not use the microphone; imported originals can contain audio.",
           "Photos access lets the app obtain your selected original video and copy it into app storage. After saving a recording locally, the app attempts to add a separate copy to Photos, subject to permission. You can also save annotated evidence to Photos. A failed Photos copy does not remove a locally saved pitch.",
           "Review Camera and Photos permissions in iOS Settings. Denying access can prevent the corresponding recording, import or Photos-save operation.",
+          "Reference import from Files uses the system document picker and makes an app-owned local source copy. The selected file provider or Photos/iCloud may download an original according to that service's settings.",
           "Sharing sends an annotated image and its visible information to the recipient or service you choose through the system share sheet. Check the image before sharing; the recipient or service controls its copy.",
+          "Share Analysis can create a temporary Pitch Review PDF from one personal pitch, selected context, current measurements and verified evidence. Individual notes, the athlete display name and marked frames are included only when you select them. Preview the report before sharing. Reference videos and Reference Notes are not included in personal Share Analysis.",
+          "Share Original Video is a separate action. Sharing sends only the output you choose through the system share sheet; external services and recipients control their copies.",
         ],
       },
       {
@@ -312,6 +318,7 @@ export const motionPages = {
         paragraphs: [
           "App records remain locally until you delete the relevant records or remove the app's local data. Deleting a pitch removes it from My Pitches and deletes its app-owned video, marks, analysis history and annotated evidence. If file cleanup cannot finish, the app explains that files remain and offers Try Cleanup Again.",
           "Deleting a pitch does not delete your separate Athlete Profile or independent Photos, backup or shared copies. Profile corrections can retain earlier entries.",
+          "Deleting a Reference removes that Reference and its app-owned source and study information; personal pitches and their scientific history remain separate. Deleting a saved Comparison removes its configuration without deleting either source. A saved Comparison can become unavailable if a source is missing; the app does not silently substitute another video. Notes and context can be edited through their own controls.",
           "Deleting the app and its local data removes records from that installation. Reinstalling alone does not guarantee recovery; restoring a backup may restore earlier data. A Photos video or exported evidence image does not preserve complete analysis history. These operations do not provide a secure-erasure guarantee.",
         ],
       },
@@ -367,6 +374,7 @@ export const motionPages = {
         heading: "Policy updates",
         paragraphs: [
           "We may update this policy as the app or our practices change. Updates will appear on this page with a revised effective date.",
+          "October 6, 2026: added Motion 1.2 coverage for Notes, Pitch Context, References, Files import, Saved Comparisons and PDF/original-video sharing. Website, Apple-service and support-email handling remains unchanged.",
           "September 28, 2026: updated website coverage for optional, user-activated YouTube introductions and the Asymmetri Labs portfolio. The Motion app, Apple services and support-email handling described in the September 19, 2026 policy are unchanged.",
         ],
       },
@@ -375,9 +383,9 @@ export const motionPages = {
   support: {
     title: "Asymmetri Motion Support",
     description:
-      "Help with Asymmetri Motion for iPhone: getting started, Camera and Photos permissions, recording, import, results, and local data.",
+      "Help with Asymmetri Motion for iPhone: recording, import, notes, results, Reference Study, comparisons, sharing and local data.",
     introduction: [
-      "Asymmetri Motion for iPhone helps you record or import pitching videos, mark key moments, inspect projected 2D measurements and revisit saved results and evidence.",
+      "Asymmetri Motion for iPhone helps you record or import pitching videos, mark key moments, inspect projected 2D measurements and keep notes beside saved evidence. You can also study authorized Reference footage and compare it with your own pitch.",
       "Results describe measurements projected from the video image. They are not anatomical 3D measurements, medical advice, injury diagnosis or automatic coaching.",
       "For help, email us with the details below. Response times may vary.",
     ],
@@ -403,7 +411,7 @@ export const motionPages = {
         id: "device-recording-requirements",
         heading: "Device and recording requirements",
         paragraphs: [
-          "V1 supports iPhone with iOS 17 or later. Direct recording requires a supported rear wide-angle camera mode at 240 or 120 frames per second. The app selects from supported formats; not every iPhone supports every mode. If no suitable mode is available, use Photos import with a compatible video.",
+          "Motion supports iPhone with iOS 17 or later. Direct recording requires a supported rear wide-angle camera mode at 240 or 120 frames per second. The app selects from supported formats; not every iPhone supports every mode. If no suitable mode is available, use Photos import with a compatible video.",
           "Back View recording is recommended in portrait and Side View in landscape. Keep the full pitcher visible. Direct recordings are video-only; imported originals may contain audio.",
         ],
       },
@@ -442,6 +450,23 @@ export const motionPages = {
         ],
       },
       {
+        id: "notes-context-sharing",
+        heading: "Notes, Pitch Context and sharing",
+        paragraphs: [
+          "Open Athlete Notes from My Pitches, or Pitch Notes and Pitch Context from Pitch Details. Context is optional and manually entered. Motion does not measure ball velocity, and the location chart is a manual record rather than a calibrated plate measurement.",
+          "From Pitch Details, choose Share Analysis to prepare and preview a Pitch Review PDF. Select individual notes, the athlete display name and marked frames only when you want them included. Share Original Video is separate. Review the output before choosing a recipient in the iOS share sheet.",
+        ],
+      },
+      {
+        id: "reference-study-compare",
+        heading: "Reference Study and comparisons",
+        paragraphs: [
+          "Open References, choose Add Reference, select Photos or Files, add any optional metadata and Save. Open Study Reference to review the clip, choose a study interval, mark events, add bookmarks and keep notes. Use authorized clips only; a user-entered label does not verify identity or imply endorsement.",
+          "In Study Reference, choose Compare With My Pitch and select one exact personal pitch. Review independently, or mark the same observable Front Foot Contact or Ball Release event on each side and select Align. Linked playback compares source clip time; edited or replay timing can differ from physical capture time.",
+          "Saved Comparisons reopen paused and need deliberate alignment. Deleting a saved Comparison removes the configuration without deleting either source. If a source is missing or changed, follow the recovery message and preserve your notes and configuration. Do not delete or reinstall the app as the first troubleshooting step; send support the exact version/build and error, with private information removed.",
+        ],
+      },
+      {
         id: "reporting-a-problem",
         heading: "Reporting a problem",
         paragraphs: ["Include these details in your email:"],
@@ -466,7 +491,7 @@ export const motionPages = {
         id: "before-deleting",
         heading: "Before deleting or reinstalling",
         paragraphs: [
-          "Pitches, Athlete Profile information, marks and analysis history are stored locally. Deleting the app and its data can remove them; reinstalling alone does not guarantee recovery. A Photos video or exported evidence image does not preserve the complete app history. Contact support before deleting or reinstalling as a troubleshooting step.",
+          "Pitches, Athlete Profile information, Notes, Pitch Context, marks, analysis history, References and Saved Comparisons are stored locally. Deleting the app and its data can remove them; reinstalling alone does not guarantee recovery. A Photos video or exported evidence image does not preserve the complete app history. Contact support before deleting or reinstalling as a troubleshooting step.",
           "Deleting a pitch does not delete independent Photos, backup or shared copies. For privacy questions or requests about information sent to support, use the privacy contact on our Privacy Policy page.",
         ],
         link: { label: "Read the Privacy Policy", href: "/privacy" },
