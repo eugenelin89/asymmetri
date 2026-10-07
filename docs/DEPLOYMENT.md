@@ -26,6 +26,14 @@ The repository also contains a Vinext and Cloudflare build path. That path uses
 startup path. Do not use `npm run start` for the DigitalOcean service because
 the script invokes Vinext.
 
+The October 7 dependency patch uses the owner-approved isolated candidate
+procedure below, preserving live dependencies until activation. Its advisory
+review and unchanged-runtime contract are recorded in
+[Dependency security review](DEPENDENCY_SECURITY_2026-10-07.md). For this release,
+compare all discovered virtual-host health baselines and shared-service/configuration
+fingerprints before mutation and after activation; pre-existing failures must
+remain unchanged. No shared infrastructure changes are part of the release.
+
 ## Production guardrails
 
 - Perform application Git and npm operations as `django-user`.
@@ -274,7 +282,7 @@ gave standing approval for Node 22 production deployment: “always approve node
 runtime. don't ask me again.” This replaces the earlier per-deployment exceptions
 for the utility pages and tutorial. Do not ask to renew this approval. Keep the
 production runtime in place and require successful production checks/build before
-restart. The installed Next.js 16.2.12 package requires Node.js 20.9.0 or newer.
+restart. The installed Next.js 16.3.6 package requires Node.js 20.9.0 or newer.
 A concrete compatibility/build failure still needs diagnosis; no OS/runtime
 upgrade is part of a copy deployment.
 

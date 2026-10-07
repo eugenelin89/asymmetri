@@ -1,5 +1,9 @@
 # Website and support privacy audit
 
+Current dependency status is recorded in the [October 7 security review](DEPENDENCY_SECURITY_2026-10-07.md).
+The dependency findings in the dated publication records below describe their
+original lockfiles; they are not the current security baseline.
+
 ## Website media extension — September 28, 2026
 
 This extension supersedes the historical “no third-party embeds” finding only for

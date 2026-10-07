@@ -88,6 +88,7 @@ changing public assets.
 - [Server storage maintenance](docs/SERVER_MAINTENANCE.md)
 - [Local development](docs/LOCAL_DEVELOPMENT.md)
 - [Testing](docs/TESTING.md)
+- [October 7 dependency security review](docs/DEPENDENCY_SECURITY_2026-10-07.md)
 - [Content guide](docs/CONTENT_GUIDE.md)
 - [Motion product claims and source review](docs/MOTION_PRODUCT_REVIEW.md)
 - [Website privacy audit](docs/WEBSITE_PRIVACY_AUDIT.md)

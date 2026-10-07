@@ -114,7 +114,7 @@ No external font service, CSS-in-JS runtime, or UI component library is used.
 - `docs/`: strategy, source reviews, development, verification and operations.
 - `build/`, `worker/`, `vite.config.ts`: retained Sites/Vinext packaging.
 - `next.config.ts`: permanent route redirects.
-- `package.json`, `package-lock.json`, `.nvmrc`: unchanged runtime/dependency contract.
+- `package.json`, `package-lock.json`, `.nvmrc`: runtime/dependency contract.
 
 ### npm scripts
 
@@ -199,7 +199,7 @@ The current operational baseline is:
 - the service runs as `django-user`;
 - production application files live under `/var/www/asymmetri`;
 - the repository targets Node.js 24 through `.nvmrc`;
-- Next.js 16.2.12 requires Node.js 20.9.0 or newer;
+- Next.js 16.3.6 requires Node.js 20.9.0 or newer;
 - the Droplet is resource-constrained, so disk and memory should be checked
   before dependency installation or a production build.
 
