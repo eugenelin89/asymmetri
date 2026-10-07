@@ -42,7 +42,12 @@ fallback anchors remain; `#products` and root `#contact` are unchanged.
 `motionFamily` names, grouping, statuses and entitlements; `productStatusLabels`
 (current/preparing/development/planned); and existing tutorial, utility, concept and
 approved-video records. Sports owns its narrative instead of company-level `site`.
-Labs owns a project list that reuses the `botsquad` facts. No old `work` content export.
+Labs owns a typed `LabsProject` list with name, description, status, required source
+link and optional detail/license links. The single current entry reuses `botsquad`
+facts. The server page renders a brief hero, generic project articles and a closing
+line; it has no approach/principles section or BotSquad-specific access fields.
+All Labs projects are open source; Sports has no blanket open-source requirement.
+No old `work` content export.
 
 `MotionFamily` is a server component reused on Sports and Motion: two individual
 apps and exactly one professional app with nested entitlement rows. Names/statuses

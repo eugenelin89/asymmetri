@@ -23,7 +23,7 @@ path.
 When routes or shared layout code change, verify:
 
 - `/` (Asymmetri umbrella and peer divisions)
-- `/labs` (experimental division and project list)
+- `/labs` (open-source playground and project list)
 - `/sports` (division, founder story, Motion family and anchors)
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/about` (real company page, no redirect)
@@ -81,7 +81,10 @@ Check:
 - explicit peer division links in the hero, then current product panels;
 - Pitching preparation versus planned Hitting/Team, exactly one professional app,
   its three nested entitlements, finite Cloud and later Mechanics Lab/Enterprise;
-- Labs project list, About origin and BotSquad example/access/current focus;
+- Labs introduction/open-source statement, “Currently playing with,” GitHub/detail/
+  established-license links and short closing; no Labs approach/principles section
+  or stale `/labs#approach` links;
+- About origin and BotSquad example/access/current focus;
 - image loading, crops, and alt text;
 - compact mobile navigation;
 - keyboard navigation and visible focus;

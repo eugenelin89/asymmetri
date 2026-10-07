@@ -9,8 +9,9 @@ Asymmetri / Asymmetri.co is the umbrella brand. Two peer divisions sit beneath i
 
 - **Asymmetri Sports:** technology for athletes, coaches and teams, starting with
   Asymmetri Motion and its individual/professional baseball product family.
-- **Asymmetri Labs:** experimental technology and open-source projects, starting
-  with BotSquad.
+- **Asymmetri Labs:** a playground for open-source experiments, starting with
+  BotSquad. Everything built in Labs is open source, including future projects.
+  This is a Labs rule, not a company-wide licensing commitment for Sports.
 
 Use plural Sports. Labs is not the parent company; Work is no longer a division.
 Do not infer a legal corporation name from the public brand hierarchy.
@@ -38,8 +39,9 @@ athlete outcomes, affiliations or a private organization's identity.
 ## Voice and truth
 
 Be confident, concise, human, technically credible and quietly unconventional.
-Use concrete tasks and familiar words. Avoid vague AI-powered claims, generic
-SaaS language, militaristic framing, invented metrics and superlatives. No em or
+Use concrete tasks and familiar words. Labs is curious, informal and open: a
+place to play with ideas, not a consultancy or formal innovation department.
+Avoid vague AI-powered claims, generic SaaS language, militaristic framing, invented metrics and superlatives. No em or
 en dashes in public copy. Preserve limits near the claims they qualify.
 
 Implemented capability, release preparation, active development and roadmap are

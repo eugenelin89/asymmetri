@@ -1682,21 +1682,17 @@ p {
   margin-top: 2.5rem;
 }
 .labs-hero { padding-bottom: clamp(4rem, 7vw, 7rem); }
-.labs-hero .product-split { align-items: center; }
-.labs-direction { border-top: 1px solid var(--line); }
-.labs-direction > p { padding-block: 1.25rem; }
-.labs-direction ol { list-style: none; padding: 0; margin: 0; }
-.labs-direction li { display: flex; align-items: baseline; gap: 1.25rem; padding-block: 1.5rem; border-top: 1px solid var(--line); }
-.labs-direction li > span { color: var(--theme-primary); font-size: 0.8rem; }
-.labs-direction li p { font-size: var(--type-step); }
-.labs-hero h1 { max-width: 20ch; margin: 1.4rem 0 2rem; }
+.labs-hero h1 { max-width: 17ch; margin: 1.4rem 0 2rem; }
 .labs-hero .hero__support { max-width: 48ch; }
-.labs-principles { margin-top: 3rem; }
+.labs-hero__open-source { margin-top: 1.25rem; font-size: var(--type-body); }
 .labs-product { background: var(--labs-surface); }
+.labs-product h2 { max-width: 14ch; }
+.labs-projects { display: grid; gap: 3rem; min-width: 0; }
 .labs-product__card { border-top: 2px solid var(--theme-primary); padding-top: 2rem; }
 .labs-product__card h3 { font-size: 2rem; margin-bottom: 1rem; }
-.labs-product__card .button-row { margin-top: 2rem; }
+.labs-product__card .button-row { margin-top: 1.5rem; }
 .labs-product__card > p { margin-top: 1rem; }
+.labs-closing { padding-block: clamp(2.5rem, 5vw, 5rem); color: var(--ink-secondary); font-size: var(--type-body); }
 .legacy-links {
   display: flex;
   gap: 2rem;
@@ -1820,7 +1816,7 @@ p {
 .botsquad-page .company-common :focus-visible { outline-color: var(--brand-bright); }
 .sports-page .hero__figure { border-bottom: 4px solid var(--sports-primary); border-bottom-color: var(--brand-primary); }
 .labs-hero, .botsquad-hero { background: var(--labs-surface); }
-.labs-direction, .worker-flow {
+.worker-flow {
   border: 1px solid var(--labs-line);
   border-top: 3px solid var(--labs-primary);
   padding: clamp(1.25rem, 2.5vw, 2.5rem);
@@ -1828,9 +1824,9 @@ p {
   border-color: var(--line-dark);
   border-top-color: var(--brand-primary);
 }
-.labs-direction ol, .worker-flow ol { border-left: 1px solid var(--labs-line); margin-left: .25rem; }
-.labs-direction li, .worker-flow li { border-color: var(--labs-line); padding-left: 1.25rem; position: relative; }
-.labs-direction li::before, .worker-flow li::before {
+.worker-flow ol { border-left: 1px solid var(--labs-line); margin-left: .25rem; }
+.worker-flow li { border-color: var(--labs-line); padding-left: 1.25rem; position: relative; }
+.worker-flow li::before {
   content: "";
   position: absolute;
   left: -4px;
@@ -1935,7 +1931,7 @@ p {
   background: var(--brand-primary);
 }
 .product-showcase--botsquad .worker-flow { background: var(--graphite); }
-.labs-direction li > span, .worker-flow li > span:first-child { color: var(--on-dark-secondary); }
+.worker-flow li > span:first-child { color: var(--on-dark-secondary); }
 .labs-product, .botsquad-example { background: var(--graphite-raised); }
 .labs-product__card, .access-grid > div { border-top-color: var(--brand-primary); }
 .company-common, .home-page .company-common, .botsquad-page .company-common,

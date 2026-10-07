@@ -1041,3 +1041,16 @@ annotated `website-dark-teal-theme-2026-10-07` tag at that exact revision (use a
 unique suffix if occupied), push it and verify both remote peeled targets. Record
 the exact source/build IDs, retained candidate/rollback paths and health evidence
 in the external release receipt. Preserve historical exploration commits and tags.
+
+## Labs open-source playground release
+
+The October 7 Labs simplification retains the selected Graphite + Teal identity,
+all routes, public assets, dependencies and runtime configuration. Use the copy-only
+staged build procedure, preserving the live `.next` until checks/build succeed.
+The immutable pre-change tag `website-pre-labs-simplification-2026-10-07` points to
+verified healthy production at `bc85e3a4425b1133dd848711573981c56f6a22c8`.
+After the final pushed revision passes production verification, annotate and push
+`website-labs-open-source-playground-2026-10-07` at that deployed SHA (use a unique
+suffix if occupied). Never move either tag. Record exact build/snapshot paths in
+the external release receipt. Recheck both hosts' Motion resources and tutorial
+originals as well as Labs, BotSquad and the homepage.

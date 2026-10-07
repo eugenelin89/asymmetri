@@ -11,9 +11,10 @@ Asymmetri.co
     └── BotSquad
 ```
 
-Sports builds for athletes, coaches and teams. Labs explores experimental
-technology and open-source projects. They share useful capability, inspectable
-results and human judgment as principles, without claiming a common codebase.
+Sports builds products for athletes, coaches and teams. Labs is a playground for
+open-source experiments, starting with BotSquad. Everything built in Labs is open
+source; this rule does not apply to every Sports product. The two remain peers
+under Asymmetri, without claiming a common codebase.
 
 Motion's current pitching V1.2 candidate is preparing for release. Separate
 individual Hitting and one professional Cloud-backed Team app remain planned.
@@ -27,7 +28,7 @@ Ubuntu HQ, accessed through a private SSH-tunnel browser. Native mobile is defer
 | --- | --- |
 | `/` | Umbrella, two peer divisions, current work and company contact |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
-| `/labs` | Experimental technology division and data-driven project list |
+| `/labs` | Open-source playground and current experiments |
 | `/motion` | Current pitching workflow, evidence, Notes/Reference/Compare, limits and family roadmap |
 | `/botsquad` | Experimental project, workflow, review, current access, approved video and GitHub |
 | `/about` | Company philosophy and founder's sports origin |

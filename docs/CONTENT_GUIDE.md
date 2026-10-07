@@ -20,7 +20,16 @@ Motion and the preserved Sports narrative. Update it for:
 
 Exports `home`, `sports`, `labs`, `about`, `divisions`, `motionFamily` and
 `productStatusLabels` make the umbrella, peer divisions and product states explicit.
-`labs.projects` reuses BotSquad facts. Concept captions, videos and URLs stay centralized.
+`labs.projects` uses the small `LabsProject` type: name, short description, status,
+required source link, optional detail link and optional established license link.
+BotSquad reuses its existing name/status/source/license URL; never assume MIT for
+future entries. Concept captions, videos and URLs stay centralized.
+
+Labs is a playground for open-source experiments. “Everything we build in Labs is
+open source” is an owner decision covering current and future Labs projects, not
+all Sports products. Keep Labs to its introduction, current projects and one short
+closing. Use curious, informal copy; detailed project explanations belong on their
+own pages, not in replacement approach or principles sections.
 
 Page files under `app/` own narrative sequence and route-specific connective
 copy. Components should focus on presentation and should not quietly introduce
@@ -166,7 +175,7 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 Asymmetri `/` introduces Sports and Labs, with `#products` and company `#contact`.
 Sports `/sports` preserves story/approach/product/contact hashes and Motion access.
-Labs `/labs` hosts experimental projects; `botsquad` owns current implementation,
+Labs `/labs` hosts open-source experiments; `botsquad` owns current implementation,
 MIT/self-hosting/access facts. Sports/Labs disclosures expose direct product links.
 About is the company page. Footer Motion labels remain explicit. `/sport` and
 `/work` permanently redirect to `/sports` and `/labs`; old root fragments migrate

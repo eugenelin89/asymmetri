@@ -33,9 +33,13 @@ Names and states are centralized; future changes should not require a new hierar
 
 ## Labs, BotSquad and About
 
-`/labs` introduces experimental technology and iterates a project list currently
-containing only BotSquad. It retains the useful task/context/review approach from
-the old Work page. No invented future projects or investment experiment are advertised.
+`/labs` is a short open-source playground: “A playground for ideas,” “Currently
+playing with,” and one closing sentence. Everything built in Labs is open source.
+This includes future Labs projects, without imposing that license policy on Sports.
+The formal approach/principles sections are removed. BotSquad is the only current
+project, with a short description, actual status, prominent GitHub action, detail
+page and MIT license link. Technical explanations stay on `/botsquad`; no future
+projects are invented.
 
 `/botsquad` is an experimental Asymmetri Labs project: MIT licensed, open source
 and self-hosted. It retains its approved video, worker-flow visual, synthetic worked

@@ -45,7 +45,9 @@ Teal is an accent. Neutral light sections interrupt the graphite shell on Home,
 Sports, Motion and About; Privacy, Support and Tutorial retain light reading areas.
 Labs and BotSquad are predominantly graphite. Keep pale teal limited to established
 Motion areas, rather than adding institutional-looking teal washes. Motion's poster
-keeps deep product teal. Dark/light transitions retain existing section geometry.
+keeps deep product teal. Dark/light transitions retain the selected palette.
+Labs uses a brief open hero, one project-list section and a simple closing line with generous space; the removed
+approach/principles panels are not replaced with decoration.
 
 ## Typography, hierarchy and interaction
 

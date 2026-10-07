@@ -7,6 +7,14 @@ export type SiteImage = {
 
 export type NavItem = { label: string; href: string };
 export type PrimaryNavItem = NavItem & { children?: readonly NavItem[] };
+export type LabsProject = {
+  name: string;
+  description: string;
+  status: string;
+  detail?: NavItem;
+  source: NavItem;
+  license?: NavItem;
+};
 
 export const divisions = {
   sports: {
@@ -20,7 +28,7 @@ export const divisions = {
     label: "Labs",
     name: "Asymmetri Labs",
     path: "/labs",
-    description: "Experimental technology and open-source projects.",
+    description: "A playground for open-source experiments.",
     product: { name: "BotSquad", path: "/botsquad" },
   },
 } as const;
@@ -938,40 +946,31 @@ export const botsquad = {
   },
 } as const;
 
+const labsProjects: readonly LabsProject[] = [
+  {
+    name: botsquad.name,
+    description: "An open-source experiment in giving AI workers a place to work together.",
+    status: botsquad.status,
+    detail: { label: "Explore BotSquad", href: botsquad.path },
+    source: botsquad.source,
+    license: { label: "MIT licensed", href: botsquad.licenseUrl },
+  },
+];
+
 export const labs = {
   ...divisions.labs,
   metadata: {
-    title: "Asymmetri Labs | Experimental Technology and Open Source",
+    title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      "Experimental technology for individuals and small teams. Explore BotSquad, an open-source, self-hosted project under Asymmetri Labs.",
+      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and whatever we're curious enough to build next.",
   },
-  headline: "Room to try a different approach.",
+  headline: "A playground for ideas.",
   introduction:
-    "Asymmetri Labs explores experimental technology for individuals and small teams. We start with a practical question, build something we can inspect, and share what we learn. BotSquad is our first open-source project.",
-  projects: [botsquad],
-  productLink: { label: "Explore BotSquad", href: "/botsquad" },
-  approachLink: { label: "Our approach", href: "/labs#approach" },
-  portfolioLink: { label: "Explore Asymmetri", href: "/#products" },
-  approach: {
-    eyebrow: "The problem we’re working on",
-    headline: "The handoffs take time.",
-    body: "Using several AI conversations means keeping track of which one has the latest context, what each is doing and what still needs review. We want the workspace to carry more of that bookkeeping.",
-    principles: [
-      { title: "Say what you need", body: "Give each task a clear result to work toward and say what is out of scope. It helps the worker, and gives you something to check." },
-      { title: "Keep the context nearby", body: "Keep the task, its messages and its output together so you can follow what happened without piecing it together from separate chats." },
-      { title: "Make review part of the job", body: "Read the result, question it and decide what should happen next. Some actions need your approval before the work can continue." },
-    ] satisfies ProductStep[],
-  },
-  product: {
-    eyebrow: "Starting with BotSquad",
-    headline: "An open experiment in coordinated AI work.",
-    body: "BotSquad is experimental, open source and self-hosted. It gives AI workers names, tasks and a place to pass work along. You can try it, read the code and see how it handles review.",
-  },
-  closing: {
-    headline: "The same question comes up on a baseball field.",
-    body: "Reviewing a pitch and reviewing AI work both involve looking closely at how a result was reached. Our sports work began with that kind of patient, frame-by-frame attention.",
-    link: { label: "Explore Asymmetri Sports", href: "/sports" },
-  },
+    "This is where we experiment, prototype, and build things we're curious about.",
+  openSource: "Everything we build in Labs is open source.",
+  projectsHeading: "Currently playing with",
+  projects: labsProjects,
+  closing: "More experiments will show up here when they're worth sharing.",
 } as const;
 
 export const about = {
