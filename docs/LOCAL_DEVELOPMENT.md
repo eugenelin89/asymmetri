@@ -136,3 +136,16 @@ player and fallback afterwards. The iframe's origin referrer is intentional;
 removing it can cause YouTube error 153. Do not add an SDK, remote thumbnail or
 preconnect to solve playback failures. Cross-origin player errors are not reliably
 observable by the parent, so the external link is always present.
+
+## Local theme comparison (experimental branch only)
+
+Use `.nvmrc` and the existing lockfile. Build once with `npm run build:next`, then
+run `node exploration/review.mjs` from this worktree. It starts an unchanged Next.js
+server on loopback port 4314, three themed proxies on 4311–4313, and the comparison
+on 4310. All five ports must be free. Ctrl+C stops this process and its own Next.js
+child; it does not stop unrelated development servers.
+
+Theme CSS is read per request. Reload the page after CSS edits; no application
+rebuild is needed. Comparison controls retain state only in the open page. The
+normal website commands do not load this experiment. See
+[DARK_THEME_EXPLORATION.md](DARK_THEME_EXPLORATION.md) for exact URLs and captures.

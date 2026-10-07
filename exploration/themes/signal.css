@@ -1,0 +1,24 @@
+:root {
+  --explore-base: #0b0d0f;
+  --explore-raised: #14171a;
+  --explore-soft: #1c2024;
+  --explore-text: #f5f5f2;
+  --explore-secondary: #a4a7aa;
+  --explore-line: #303438;
+  --explore-light: #f7f7f4;
+  --explore-light-raised: #ffffff;
+  --explore-dark-text: #111315;
+  --explore-light-secondary: #55595d;
+  --explore-light-line: #ced0d1;
+  --explore-accent: #ff4d3d;
+  --explore-accent-hover: #ff796d;
+  --explore-link-dark: #f5f5f2;
+  --explore-link-light: #111315;
+  --explore-button: #f5f5f2;
+  --explore-button-hover: #d9dcde;
+  --explore-on-button: #111315;
+  --explore-rule: #60676d;
+  --explore-marker: #ff796d;
+  --explore-light-button: #111315;
+  --explore-light-button-hover: #303438;
+}

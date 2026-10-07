@@ -101,3 +101,17 @@ changing public assets.
 - [Tutorial media and generation prompts](docs/TUTORIAL_MEDIA.md)
 
 - [Historical September portfolio decisions](docs/PORTFOLIO_REDESIGN.md)
+
+## Local visual theme experiment (design branch only)
+
+The `design/dark-theme-exploration-20261007` branch contains three local-only
+visual alternatives. Production application files remain identical to the tagged
+baseline. After `npm ci` and `npm run build:next`, run:
+
+```bash
+node exploration/review.mjs
+```
+
+Open [the comparison](http://127.0.0.1:4310). See the
+[theme study and verification](docs/DARK_THEME_EXPLORATION.md). This is not a
+production feature or release; do not merge or deploy this branch.

@@ -311,3 +311,19 @@ Sports tokens while retaining its original teal. Tailwind maps to CSS variables.
 `HomeCapability` is still a server-rendered native-link hierarchy; its equal
 division fields and connectors add no JavaScript. Static social SVGs/rasters and
 favicon match the palette; authentic media and historical source variants remain.
+
+## Isolated October 7 theme study
+
+On the experimental design branch, `exploration/` is a standalone Node review tool,
+not an App Router route or build plugin. Three loopback-only, read-only proxies
+append one theme stylesheet link to HTML from a single unchanged Next.js build.
+One shared theme stylesheet maps existing semantic tokens to three palette files.
+No duplicate pages, application imports, dependency changes, query persistence,
+cookies, analytics or production feature flag are added. Native site navigation
+retains the theme by staying on its local port. RSC responses and assets pass through.
+
+The comparison gallery and iframe exist only on port 4310. Captures live under
+`docs/previews/dark-themes`, outside `public/`. The optional `?capture=1` proxy
+mode eagerly loads existing local images solely for complete-page screenshots;
+normal live review preserves the application's image and video loading behavior.
+Neither production build imports or serves these files.

@@ -234,3 +234,24 @@ and link underlines alongside color. Keep original Motion image bytes, tutorial
 hashes/original links, policy/support text and video IDs unchanged. Browser checks
 should measure effective innerWidth and look for clipped descendants as well as
 document overflow, since the site container uses overflow clipping.
+
+## Local dark-theme study
+
+Run the unchanged required checks plus `node --check exploration/review.mjs`.
+Start `node exploration/review.mjs`; compare baseline 4314 with theme ports
+4311–4313. All nine pages, sitemap and robots must be byte-identical after removing
+the single injected stylesheet link. The baseline must return 404 for
+`/__exploration/theme.css` and `/exploration`; experimental tokens must be absent
+from `.next/static` and `dist`. All review servers bind 127.0.0.1 and carry noindex.
+
+Repeat desktop/mobile/tablet contrast, clipping, menu/focus and image checks for
+each theme. Measure effective `innerWidth`, accounting for browser zoom. Closed
+native disclosure contents are excluded from visible clipping/contrast checks.
+Use `?capture=1` only on a theme proxy when capturing full pages, to eagerly load
+local images after hydration. Normal review must retain lazy image loading and
+deliberate video activation. Check captures visually, including the far-right edge
+and footer: a browser's full-page exporter can crop incorrectly when zoomed.
+The delivered captures use the unzoomed in-app browser.
+
+Exact results and bounded verification claims are recorded in
+[DARK_THEME_EXPLORATION.md](DARK_THEME_EXPLORATION.md).

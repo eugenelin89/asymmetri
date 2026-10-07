@@ -403,3 +403,18 @@ favicon/app-icon fallbacks remain intact; their older orange is intentional
 preservation, not the active website palette. Video IDs, local text posters,
 explicit activation and disclosures remain; posters inherit division colors.
 Semantic hierarchy/flow visuals are CSS and real text, not fabricated screens.
+
+## Local-only theme study captures, October 7, 2026
+
+No public asset was added, removed, regenerated, recolored or replaced. The entire
+`public/` tree remains byte-identical to `website-visual-identity-update-2026-10-07`.
+
+`docs/previews/dark-themes/` holds local review screenshots of that existing site:
+three themes × five routes (Home, Sports, Labs, Motion, BotSquad) × desktop and
+full-page captures; three 390×844 homepage captures; three baseline desktop captures.
+Desktop captures are 1440×1000 JPEG; full pages are 1440px wide at natural page
+height. Source: browser rendering, with no image editing or generated imagery.
+Processing: native JPEG capture only. Role: local comparison, excluded from public
+assets, sitemap and deployment entry points. Accessible gallery descriptions name
+the theme, page and viewport. Existing authentic-media approvals and synthetic
+concept labels carry through; screenshots grant no new athlete-media rights.
