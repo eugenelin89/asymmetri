@@ -418,3 +418,8 @@ Processing: native JPEG capture only. Role: local comparison, excluded from publ
 assets, sitemap and deployment entry points. Accessible gallery descriptions name
 the theme, page and viewport. Existing authentic-media approvals and synthetic
 concept labels carry through; screenshots grant no new athlete-media rights.
+
+Completion replaced only the three `*-sports-full.jpg` captures, correcting a
+browser export that omitted the loaded hero photograph. Each is 1440×4789;
+photograph and footer pixels were visually checked. The other 33 captures were
+preserved. No raster editing or public-asset changes were involved.

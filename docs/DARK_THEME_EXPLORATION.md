@@ -8,14 +8,19 @@ Date: October 7, 2026. Status: experimental, local only. Owner selection pending
 - Baseline SHA: `c35ed81cd71bcfa0a96fd510e74046cff1a92386`.
 - The existing annotated production-release tag already marks current main. Its
   peeled remote target was verified, so no duplicate tag was created or moved.
-- Latest origin/main equals this SHA. The primary checkout was clean, with no
-  untracked files; no concurrent active website task or other worktree existed.
+- At initial setup, origin/main equalled this SHA and the primary checkout was
+  clean. Recovery confirmed the same local/remote main and the existing design
+  worktree; no unrelated work was changed.
 - Branch: `design/dark-theme-exploration-20261007`, separate managed worktree.
 - Production unchanged: **YES**. No SSH, deployment, hosted preview, main commit,
   merge, service restart, infrastructure edit or production asset change.
-- Preservation: two local commits, implementation followed by prompt journal.
-  The experimental branch is intentionally not pushed. The baseline tag is already
-  preserved on origin. No additional user choice is required to review the themes.
+- Preservation checkpoint: `36be16902110ec4a48481f6345a7020f624aa9a1`
+  (`Checkpoint dark theme exploration`), pushed immediately to
+  `origin/design/dark-theme-exploration-20261007` before further browser work.
+- Completion commit: `Finish dark theme screenshots and handoff`; its SHA and the
+  implementation history are recorded in the [completion journal](prompts/038-design.md).
+  Prompt journals follow in a separate documentation commit. The branch remains
+  experimental: pushing it is preservation, not publication or a production release.
 
 ## Open the study
 
@@ -121,7 +126,12 @@ there is no production feature flag or application component to untangle.
 A future chosen theme should be deliberately integrated as a separate owner-approved
 implementation, not by deploying this review tool or merging the whole branch.
 
-## Verification
+## Recovered validation evidence
+
+These results were completed before the final checkpoint request. They were
+retained rather than presented as newly rerun checks.
+
+### Original exploration
 
 - Node 24.10.0 matches `.nvmrc` major 24; nvm is unavailable. Unchanged lockfile
   installed with `npm ci`; no dependency changes or audit fix.
@@ -150,10 +160,62 @@ implementation, not by deploying this review tool or merging the whole branch.
   are byte-identical to baseline. No new public copy requires a new product claim.
 - Responsive screenshots: 15 desktop at 1440×1000, 15 full pages at 1440px wide,
   three homepage mobile at 390×844, three baseline desktop. Full-page captures were
-  checked for complete image loading and far-right/footer coverage.
-- Reduced-motion rules remove smooth scrolling, transitions and animations in every
-  theme. Existing player/tutorial behavior remains source-identical; see additional
-  interaction checks in the completion receipt for exercised actions.
+  checked for dimensions and page coverage. Recovery subsequently found and repaired
+  missing photograph pixels in the three Sports full-page exports; see below.
+- Reduced-motion CSS removes smooth scrolling, transitions and animations in every
+  theme. Rules were inspected; OS-level reduced-motion emulation was not performed.
+  Existing player/tutorial behavior remains source-identical.
 
 Browser matrix, HTTP parity and interaction receipts are also saved with the owner's
 local screenshot delivery. No production release was performed.
+
+
+### First recovery, before checkpoint
+
+- Re-ran `npm run check`, `npm run build:next`, `npm run build`, and
+  `npm audit --omit=dev`: passed. The same existing tutorial lint warning and
+  Vinext/Browserslist notices remain; production audit reports zero vulnerabilities.
+- Ran **81 additional rendered checks**, all three themes × all nine routes ×
+  320, 768 and 1440 actual CSS pixels. No overflow, visible clipping, missing alt
+  text, broken loaded images or measured text-contrast failures. Minimum: **5.12:1**.
+  No browser warnings/errors in the verification tab.
+- Repeated 320px keyboard checks in all themes: Enter and Space open menus;
+  Tab reaches 48px menu links with visible 3px focus outlines; Escape closes and
+  restores summary focus; outside clicks dismiss. These are inherited recovery
+  results, not another matrix run during completion.
+- Exercised desktop/mobile/full-page gallery selection and live theme/route changes,
+  including the protected Tutorial page. Motion's light panels and original teal,
+  BotSquad diagrams, captions, footer and utility readability were included in
+  the route checks and visual review.
+
+## Final checkpoint and completion checks
+
+Only screenshots and documentation changed after the checkpoint. No application,
+review-tool, theme CSS, dependency or build configuration changed. Accordingly,
+full builds and the 162/81-case matrices were **not repeated**.
+
+- Replaced only `cobalt-sports-full.jpg`, `teal-sports-full.jpg`, and
+  `signal-sports-full.jpg`. All three are **1440 × 4789**, with the actual hero
+  photograph, product icon, complete page width and footer visually confirmed.
+  Fresh tabs resolved an intermittent browser-export omission despite loaded-image
+  DOM status. No photograph was composited or recolored. The other 33 captures
+  remain byte-identical to the checkpoint.
+- Repository and delivery copies of all 36 screenshots match byte for byte.
+- Short comparison smoke test: Home/Sports/Labs desktop selectors load all three
+  themes; mobile loads 390px captures and disables the page selector; full-page
+  mode loads all three corrected Sports files at 1440 × 4789.
+- Live selectors render Cobalt/Home, Teal/Sports and Signal/Labs with the expected
+  headings, frame URLs and matching full-window links. No console warnings/errors.
+- `git diff --check`: passed. `docs/VISUAL_IDENTITY.md`, application sources,
+  product facts, public assets and dependencies remain identical to the baseline.
+- Production deployment performed: **NO**. Main merged: **NO**. Production service
+  restarted: **NO**. Production source changed: **NO**. Owner decision: **pending**.
+
+## Screenshot delivery
+
+The repository's authoritative set is `docs/previews/dark-themes/`. The synchronized
+owner delivery is `/Users/eugenelin/Desktop/Asymmetri/dark-theme-exploration-2026-10-07/`.
+Files use `{cobalt,teal,signal}-{home,sports,labs,motion,botsquad}-{desktop,full}.jpg`,
+plus each theme's `home-mobile.jpg` and three `baseline-*-desktop.jpg` references.
+Browser matrices, interaction checks and the final smoke receipt remain in the
+local delivery directory; no logs, caches or browser profiles are committed.
