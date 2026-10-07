@@ -3,7 +3,7 @@
 ## Source of truth
 
 Shared public content is centralized in `content/`. `site.ts` owns shared identity,
-Motion and the preserved Sport narrative. Update it for:
+Motion and the preserved Sports narrative. Update it for:
 
 - company name and positioning;
 - canonical URL and public contact mailbox;
@@ -18,8 +18,9 @@ Motion and the preserved Sport narrative. Update it for:
 - Motion Privacy Policy and Support content in `motionPages`, including the
   effective date, section IDs, metadata, contact labels and mutual links.
 
-Additional typed exports in `content/site.ts` own Labs/BotSquad/About copy, Sport
-navigation, concept captions, video IDs, external URLs and notices.
+Exports `home`, `sports`, `labs`, `about`, `divisions`, `motionFamily` and
+`productStatusLabels` make the umbrella, peer divisions and product states explicit.
+`labs.projects` reuses BotSquad facts. Concept captions, videos and URLs stay centralized.
 
 Page files under `app/` own narrative sequence and route-specific connective
 copy. Components should focus on presentation and should not quietly introduce
@@ -45,12 +46,23 @@ limit interpretation. Projected 2D measurements are not anatomical 3D biomechani
 A recorded difference is not proof of improvement or a causal training effect.
 Sensor experiments belong to the founder/company history, not current Motion V1.
 
-### Future direction
+### Release preparation, development and roadmap
 
-Unimplemented concepts such as Cloud/accounts, multi-athlete/team workflows,
-companion capture, whole-delivery replay, velocity/outcomes and automated coaching
-must not become present-tense claims. No future feature inventory is needed on
-the product page.
+Pitching V1.2 is implemented and preparing for distribution, not publicly released.
+Hitting and Team are approved roadmap work with no active implementation plan at
+the October 7 review. Use Planned, not In development. `productStatusLabels` supports
+all four states; future status changes require new evidence. Final Store names are
+not fixed by the family roadmap. Update `motionFamily` names/statuses centrally.
+
+Team is one professional app with Pitching/Hitting/Baseball entitlements over the
+same account, organization, roster, Athlete identities and Cloud data. Team requires
+Cloud with finite quota-aware storage; the local-first pitching policy does not
+cover that future service. Enterprise and deeper Mechanics Lab follow Hitting/Team.
+No launch dates, prices, quotas or unimplemented science are advertised.
+
+Current V1.2 marketing includes Notes, manually entered context, Reference Study,
+Compare With My Pitch and explicit review sharing. These do not infer Reference
+measurements or improved performance. See the October 7 source review.
 
 Current code/tests take precedence, followed by accepted decisions, current
 product/release documentation, roadmaps and dated white papers. Decision 50 hides
@@ -152,16 +164,13 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 ## Routes and navigation
 
-Labs `/` introduces the portfolio with `#products` and company `#contact`.
-`/sport` preserves `#story`, `#approach`, `#product` and its coaching contact.
-Shared navigation is Work, Sport, About and Contact. Work and Sport disclose both
-their overview and a direct product link. The `work` export owns `/work` philosophy,
-metadata, coordination prose and BotSquad introduction; existing product facts are reused
-from `botsquad`. `/about` is a real page;
-`/motion` and `/botsquad` are detailed product pages. Footer resource links say
-Motion tutorial, Motion privacy and Motion support. The three moved root fragments
-have a client compatibility mapping to Sport. `/work` is now a real domain page;
-its former portfolio redirect is removed, while `/#products` stays available. Other legacy redirects are listed in `ARCHITECTURE.md`.
+Asymmetri `/` introduces Sports and Labs, with `#products` and company `#contact`.
+Sports `/sports` preserves story/approach/product/contact hashes and Motion access.
+Labs `/labs` hosts experimental projects; `botsquad` owns current implementation,
+MIT/self-hosting/access facts. Sports/Labs disclosures expose direct product links.
+About is the company page. Footer Motion labels remain explicit. `/sport` and
+`/work` permanently redirect to `/sports` and `/labs`; old root fragments migrate
+to Sports. Complete mappings live in `ARCHITECTURE.md`.
 
 When adding or removing a
 public route:
@@ -185,7 +194,7 @@ the user explicitly requests it.
 ## Images and alt text
 
 Use approved local assets and record provenance in `docs/ASSET_MANIFEST.md`.
-Sport retains the privacy-reviewed pitching photograph and the
+Sports retains the privacy-reviewed pitching photograph and the
 owner-approved Motion pitcher-family icon. The tutorial also renders the specifically owner-authorized current Motion
 app captures and clearly labelled original instructional illustrations. Alt text
 should describe the visible action and purpose without adding identity,
@@ -234,8 +243,7 @@ and tutorial facts.
 
 BotSquad is MIT licensed, open source and self-hosted. Persistent logical workers
 have durable identity/context and bounded execution, not continuous inference or
-unlimited memory. Current browser access uses a tunnel. Standard web access and a
-mobile app are in development, without a release date or SaaS promise. Distinguish
+unlimited memory. Current browser access uses a tunnel. Native iOS/no-tunnel access is deferred; the current focus is Personal Operator reliability and daily use. Distinguish
 host-local coordination state from task context sent to configured model services.
 See `PORTFOLIO_REDESIGN.md` for exact reviewed revisions and source precedence.
 
@@ -254,7 +262,7 @@ captions and adjacent prose. Never promote their mock values to product evidence
 
 ## Protected Motion app and App Store resources
 
-The owner explicitly requires these pages and links to survive the Labs redesign
+The owner explicitly requires these pages and links to survive company redesigns
 and later website work. The redesign preserves every existing route unchanged:
 
 | Resource | Stable URL | Dependency |
@@ -273,34 +281,12 @@ Future approved moves must preserve compatibility for installed app versions;
 coordinating a new app link alone does not retire the old destination safely.
 
 
-## Human editorial pass, September 29, 2026
 
-The homepage `labs` export owns its availability label and founder introduction;
-product names/statuses remain in the existing product exports. Work explains
-coordination through concrete prose. About opens with the founder’s coaching
-experience. Sport retains the same history with shorter first-person paragraphs.
-`WorkerExample` reuses BotSquad’s labelled synthetic brief and handoff steps.
-Do not turn that written example into a claimed customer outcome or app capture.
+## October 7 authority
 
-Marketing headings and supporting copy can be conversational while preserving
-all product and research limits. The audited `motionPages`, tutorial modules,
-media captions, hashes and original-image links were preserved unchanged in this
-pass. Plain utility instructions already serve their readers; do not rewrite
-policy commitments for stylistic variety.
-
-The owner's subsequent structure preference restores the earlier company → domain
-→ product presentation and section sequence while retaining this copy. Homepage
-principle sections reuse `about.principles`; its nested hierarchy reuses the primary
-navigation. The founder story now belongs on Sport and About. About renders its
-existing name explanation before its founder paragraphs. BotSquad's example is
-again a standalone section; `workflowHeadline` centralizes the existing shared
-workflow heading for the compact outline and detailed section.
-
-The owner's latest content trial restores `/` to the content in
-`0c05c7bacde8dad43701361b8488a113c8a21f87` while retaining the current design.
-This supersedes the intervening sport-only homepage wording: its original Motion
-language, evidence capture and accurate alt text return. `labs` owns the restored
-hero, principles, portfolio, conceptual explanation, contact, metadata and a
-homepage-only BotSquad summary. Do not revert shared product or other route copy.
-About's existing origin value remains unchanged. Root social artwork has its own
-`home-social.svg`/`.png` so other page previews remain untouched.
+[Company architecture and source review](COMPANY_ARCHITECTURE_2026-10-07.md)
+supersedes older Labs-parent/Work/singular-Sport assumptions. BotSquad is an
+experimental Asymmetri Labs project, not hosted SaaS. Investment/Ask BotSquad remain
+design-only and are intentionally absent from public copy. Current umbrella name
+references in Motion policy are updated to Asymmetri without changing handling,
+retention, scientific or privacy commitments or the October 6 policy date.

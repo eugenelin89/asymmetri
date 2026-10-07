@@ -1,47 +1,48 @@
-# Asymmetri Labs
+# Asymmetri
 
-Asymmetri Labs creates technologies that give individuals and small teams outsized
-capability. The public portfolio introduces BotSquad and Asymmetri Motion, with
-Asymmetri Work for software/AI coordination and the baseball founder story
-preserved under Asymmetri Sport.
+Asymmetri builds technology that gives people and small teams more capability
+with the resources they already have.
 
-## Website purpose
+```text
+Asymmetri.co
+├── Asymmetri Sports
+│   └── Asymmetri Motion
+└── Asymmetri Labs
+    └── BotSquad
+```
 
-The company homepage introduces Labs, its Work and Sport domains, and the products
-within them. Company principles frame the two product panels; the founder's
-coaching story lives on Sport and About. The visual
-system uses warm paper surfaces, readable system typography and approved real media.
-The homepage uses the content from `0c05c7b` with the current light design,
-including its original positioning, product summaries and Motion evidence image.
-Other pages retain their current copy.
-BotSquad coordinates persistent logical AI workers in a self-hosted workspace;
-current browser access uses a tunnel, while standard web access and mobile remain
-in development. Asymmetri Motion creates inspectable pitching evidence on iPhone
-and is preparing for release. Neither implementation nor promotional media proves
-scientific validation or public App Store availability.
+Sports builds for athletes, coaches and teams. Labs explores experimental
+technology and open-source projects. They share useful capability, inspectable
+results and human judgment as principles, without claiming a common codebase.
+
+Motion's current pitching V1.2 candidate is preparing for release. Separate
+individual Hitting and one professional Cloud-backed Team app remain planned.
+Team Pitching/Hitting/Baseball are entitlements within that one Team app.
+BotSquad is experimental, MIT licensed and self-hosted on an operator-controlled
+Ubuntu HQ, accessed through a private SSH-tunnel browser. Native mobile is deferred.
 
 ## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Labs philosophy, product portfolio and company contact |
-| `/work` | Work philosophy, individual capability, coordinated AI and BotSquad introduction |
-| `/sport` | Preserved pitching photograph, founder story, approach and Motion introduction |
-| `/motion` | Detailed product workflow, evidence, limitations and introduction video |
-| `/botsquad` | Source-grounded product explanation, introduction video and GitHub access |
-| `/about` | Company philosophy and origins |
-| `/tutorial` | Complete progressive Motion guide with original-image links |
-| `/privacy` | Motion policy, support/hosting disclosures and optional website videos |
-| `/support` | Motion support guidance |
+| `/` | Umbrella, two peer divisions, current work and company contact |
+| `/sports` | Sports division, authentic baseball origin, Motion and product family |
+| `/labs` | Experimental technology division and data-driven project list |
+| `/motion` | Current pitching workflow, evidence, Notes/Reference/Compare, limits and family roadmap |
+| `/botsquad` | Experimental project, workflow, review, current access, approved video and GitHub |
+| `/about` | Company philosophy and founder's sports origin |
+| `/tutorial` | Protected Motion guide with stable hashes and original-image links |
+| `/privacy`, `/support` | Protected Motion policy and support articles |
+| `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
 
-Motion policy, support, tutorial and product pages are protected app/release
-resources and must remain available; see the continuity rules in `AGENTS.md` and
-[Content guide](docs/CONTENT_GUIDE.md).
+The nine canonical pages are indexable. Tutorial retains exactly
+`https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
+Protected Motion routes serve actual content on both hosts. Legacy fragments
+and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
 
-All nine pages are indexable. The tutorial retains the exact canonical
-`https://www.asymmetri.co/tutorial`; other pages use the apex origin. Legacy routes
-and the three moved homepage fragments retain useful destinations. See
-[Architecture](docs/ARCHITECTURE.md) for the complete mapping.
+Current decision, source review and verified pre-change rollback marker:
+[October 7 company architecture](docs/COMPANY_ARCHITECTURE_2026-10-07.md).
+The September portfolio record and prompt journals remain historical evidence.
 
 ## Technology
 
@@ -94,4 +95,4 @@ changing public assets.
 - [Tutorial coverage and source review](docs/TUTORIAL_REVIEW.md)
 - [Tutorial media and generation prompts](docs/TUTORIAL_MEDIA.md)
 
-- [Portfolio decisions and product evidence](docs/PORTFOLIO_REDESIGN.md)
+- [Historical September portfolio decisions](docs/PORTFOLIO_REDESIGN.md)

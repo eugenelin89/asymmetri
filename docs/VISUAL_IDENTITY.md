@@ -1,9 +1,9 @@
-# Asymmetri Labs visual identity
+# Asymmetri visual identity
 
 ## Identity
 
 The existing asymmetric mark remains unchanged. The rendered lockup pairs it
-with the public name, Asymmetri Labs. The open, interrupted “A” uses unequal
+with the public umbrella name, Asymmetri. The open, interrupted “A” uses unequal
 forms to express asymmetry, leverage, motion, and balance without a literal
 baseball symbol.
 
@@ -51,7 +51,7 @@ secondary to the marketing navigation. No new image or visual asset is used.
 
 ## Photography and interface imagery
 
-The Sport page renders the preserved authentic pitching-delivery photograph in its hero.
+The Sports page renders the preserved authentic pitching-delivery photograph in its hero.
 It uses a restrained, slightly desaturated grade. Its owner-approved cap logo
 and uniform lettering remain visible without localized softening. The approved
 Motion pitcher-family windup icon appears in the product introduction and
@@ -70,7 +70,7 @@ mobile ordering matches reading order, and animation respects
 
 ## Motion product presentation
 
-Keep the Labs header, typography, orange calls to action, paper/ink surfaces and
+Keep the Asymmetri header, typography, orange calls to action, paper/ink surfaces and
 closing principle. Motion uses `--motion-teal` (#006B64), `--motion-mineral`
 (#E8EFED), `--motion-text` (#152A27) and `--motion-line` (#CFDAD6). The icon retains
 its original illustration and palette; CSS supplies corner masking only. Use the
@@ -108,32 +108,29 @@ All instructions are also readable text. Native details and anchors, focus rings
 reduced motion and no-JavaScript access are part of the design.
 
 
-## Labs portfolio and optional media
+## Company, division and product hierarchy
 
-The Labs hero pairs the restored `0c05c7b` introduction with its conceptual
-small-input explanation, presented as light typographic rows. A short company
-principle precedes two product panels. BotSquad's historical direction/handoff/result
-outline uses the current list styling. Motion again shows its approved icon and
-genuine evidence capture. Shared principles and contact follow the products. The original
-pitching photo and founder account remain on Sport, with the origin also on About.
-BotSquad's explicitly made-up task has its own section after the detailed workflow,
-using a split heading/brief and three numbered handoff columns that stack on phones.
-No performance figures or testimonials are added.
+The homepage retains its paper hero and asymmetric-advantage positioning. The
+adjacent semantic hierarchy shows equally weighted Sports and Labs links, with
+direct Motion/BotSquad access. Sports uses the existing mineral/teal accent; Labs
+uses the company orange. Product panels retain the Motion icon/evidence capture
+and BotSquad synthetic handoff. The authentic photo remains on Sports.
 
-The root's `home-social.svg`/`.png` use the current paper palette and typography
-with the restored headline and product lines. Other pages retain their existing
-social artwork. No dark grid, oversized historical type or decorative branching
-geometry is restored with the homepage content.
+The shared Motion family section uses two open columns with rules: Individual
+contains two products; Professional contains one Team product with subordinate
+entitlement rows. Explicit textual status labels accompany each product. At 700px
+it becomes one reading column. No empty product routes or simulated interfaces.
 
-Video posters use simple local typography at a compact desktop width. Decorative
-circles and offset squares are removed. The unloaded poster can grow vertically
-on narrow screens; the loaded iframe retains 16:9. Load video, disclosures,
+Sports and Labs keep native disclosure menus with 44px summary targets and
+explicit overview/product links. Their panels remain within narrow viewports.
+Labs evolves the previous Work split hero and ordered approach; About preserves
+the founder narrative. Motion Notes/Study/Compare details use the existing type
+and divided prose styles. All public copy and status facts remain in `site.ts`.
+
+Social images keep the existing 1200×630 composition and local type: umbrella
+Sports/Labs hierarchy on Home/About, experimental BotSquad on Labs, and retained
+baseball imagery on Sports with its corrected plural identity. No external font,
+stock art or new public photo. See the asset manifest.
+
+Video posters remain compact local typography. Loading, Google disclosure,
 external fallback, focus restoration and privacy boundaries are unchanged.
-
-## Work domain and shared navigation
-
-Work reuses the paper/ink/orange palette and system typography. Its split hero pairs
-the introduction with a short ordered approach outline, using the existing copy.
-Work and Sport have
-matching disclosure menus with 44px minimum summary targets and explicit overview
-and product links. Panels remain within the viewport at mobile widths.

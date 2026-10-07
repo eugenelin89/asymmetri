@@ -1,25 +1,21 @@
-import { labs } from "@/content/site";
+import { divisions, home } from "@/content/site";
 
 export function HomeCapability() {
   return (
-    <figure className="home-capability">
-      <div className="home-capability__heading">
-        <span>Small input</span>
-        <span>Greater capability ↗</span>
-      </div>
+    <nav className="division-overview" aria-label="Asymmetri divisions">
+      <p className="eyebrow">{home.divisionHeading}</p>
       <ul>
-        {labs.diagram.tracks.map((track) => (
-          <li key={track.product}>
-            <p className="home-capability__input">{track.input}</p>
-            <ul className="home-capability__steps">
-              {track.steps.map((step) => <li key={step}>{step}</li>)}
-            </ul>
-            <p className="home-capability__output">{track.output}</p>
-            <p className="home-capability__product">{track.product}</p>
+        {Object.entries(divisions).map(([key, division], index) => (
+          <li className={`division-overview__${key}`} key={division.path}>
+            <span className="division-overview__number" aria-hidden="true">0{index + 1}</span>
+            <div>
+              <h2><a href={division.path}>{division.name} <span aria-hidden="true">↗</span></a></h2>
+              <p>{division.description}</p>
+              <a className="text-link" href={division.product.path}>{division.product.name} →</a>
+            </div>
           </li>
         ))}
       </ul>
-      <figcaption>{labs.diagram.caption}</figcaption>
-    </figure>
+    </nav>
   );
 }

@@ -1,9 +1,10 @@
+import { MotionFamily } from "@/components/motion-family";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EvidenceChain } from "@/components/evidence-chain";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { motion, site, tutorial, introductions, motionGallery } from "@/content/site";
+import { motion, site, sports, tutorial, introductions, motionGallery } from "@/content/site";
 import { IntroductionVideo } from "@/components/introduction-video";
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function MotionPage() {
               <a className="button button--accent" href={motion.hero.link.href}>
                 {motion.hero.link.label}
               </a>
+              <a className="text-link motion-family-link" href="#motion-family">Explore the Motion family ↓</a>
             </div>
             <div className="motion-product">
               <Image
@@ -159,6 +161,20 @@ export default function MotionPage() {
             </div>
           </div>
         </section>
+        <section className="section motion-study">
+          <div className="shell">
+            <div className="product-heading">
+              <p className="eyebrow">{motion.study.eyebrow}</p>
+              <h2>{motion.study.headline}</h2>
+            </div>
+            <dl className="product-details motion-study__items">
+              {motion.study.items.map((item) => (
+                <div key={item.title}><dt>{item.title}</dt><dd>{item.body}</dd></div>
+              ))}
+            </dl>
+            <p className="product-note">{motion.study.note}</p>
+          </div>
+        </section>
         <section className="section motion-limits">
           <div className="shell">
             <div className="product-heading">
@@ -175,6 +191,7 @@ export default function MotionPage() {
             </dl>
           </div>
         </section>
+        <MotionFamily />
         <section className="section motion-concepts">
           <div className="shell product-split">
             <div className="product-heading">
@@ -230,7 +247,7 @@ export default function MotionPage() {
             <div className="closing__grid">
               <div>
                 <p className="eyebrow">{motion.coaching.eyebrow}</p>
-                <h2>{site.closing.headline}</h2>
+                <h2>{sports.closing.headline}</h2>
               </div>
               <dl className="product-details">
                 {motion.coaching.audiences.map((audience) => (
@@ -244,8 +261,8 @@ export default function MotionPage() {
             <div className="motion-release">
               <p>{motion.releaseStatement}</p>
               <div className="button-row">
-                <a className="text-link" href="/sport#story">
-                  The Asymmetri Sport story
+                <a className="text-link" href="/sports#story">
+                  The Asymmetri Sports story
                 </a>
                 <a
                   className="button button--ink"

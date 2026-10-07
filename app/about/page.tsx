@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { about, labs, site } from "@/content/site";
+import { about, home, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(about.metadata, "/about");
@@ -36,14 +36,14 @@ export default function AboutPage() {
         <section className="section about-origin">
           <div className="shell product-split">
             <div className="product-heading">
-              <p className="eyebrow">{labs.origin.eyebrow}</p>
+              <p className="eyebrow">{home.origin.eyebrow}</p>
               <h2>{about.headline}</h2>
             </div>
             <div className="product-prose">
               <p>{about.introduction}</p>
               <p>{about.meaning}</p>
-              <a className="text-link" href="/sport#story">
-                Read the Sport story ↗
+              <a className="text-link" href="/sports#story">
+                Read the Sports story ↗
               </a>
             </div>
           </div>
@@ -53,7 +53,7 @@ export default function AboutPage() {
             <h2>Have something you’d like to ask?</h2>
             <div className="button-row">
               <Link className="button button--ink" href="/#products">
-                Explore the products
+                Explore Sports and Labs
               </Link>
               <a
                 className="text-link"

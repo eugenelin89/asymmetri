@@ -10,7 +10,7 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="site-header__inner">
-        <Link href="/" className="site-header__brand" aria-label="Asymmetri Labs home">
+        <Link href="/" className="site-header__brand" aria-label={`${site.company.name} home`}>
           <Logo tone="ink" />
         </Link>
         <SiteNavigation items={site.navigation} />

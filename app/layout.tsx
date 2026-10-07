@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { site } from "@/content/site";
+import { divisions, site } from "@/content/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: "en_CA",
     images: [
       {
-        url: "/images/labs-social.png",
+        url: "/images/home-social.png",
         width: 1200,
         height: 630,
         alt: `${site.company.name}: ${site.metadata.socialHeadline} ${site.metadata.socialSupport}`,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.metadata.title,
     description: site.metadata.description,
-    images: ["/images/labs-social.png"],
+    images: ["/images/home-social.png"],
   },
 };
 
@@ -55,6 +55,11 @@ const organizationSchema = {
   logo: `${site.company.siteUrl}/favicon.svg`,
   description: site.metadata.description,
   email: site.company.contactEmail,
+  subOrganization: Object.values(divisions).map((division) => ({
+    "@type": "Organization",
+    name: division.name,
+    url: `${site.company.siteUrl}${division.path}`,
+  })),
   knowsAbout: [
     "AI worker coordination",
     "Sports technology",

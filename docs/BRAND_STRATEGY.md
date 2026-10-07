@@ -1,78 +1,51 @@
-# Asymmetri Labs brand strategy
+# Asymmetri brand strategy
 
-## Positioning
+## Positioning and hierarchy
 
-**Asymmetri Labs creates technologies that give individuals and small teams
-outsized capability.** Its current portfolio comprises BotSquad and Asymmetri
-Motion. Asymmetri Work is the software and AI-coordination domain, starting with
-BotSquad. Asymmetri Sport is the sports-technology domain and home of the baseball
-origin story. Use singular “Sport” for the brand, plural “sports technology” for
-the category.
+**Build an asymmetric advantage.** Asymmetri creates technology that gives people
+and small teams more capability with the resources they already have.
 
-## Mission and point of view
+Asymmetri / Asymmetri.co is the umbrella brand. Two peer divisions sit beneath it:
 
-Useful tools can change what someone can do with the resources they already have.
-BotSquad explores coordinated AI work; Motion explores inspectable pitching evidence.
-The common principles are useful capability, results connected to their sources,
-and human control. These are distinct products, not a claim that one platform
-powers everything.
+- **Asymmetri Sports:** technology for athletes, coaches and teams, starting with
+  Asymmetri Motion and its individual/professional baseball product family.
+- **Asymmetri Labs:** experimental technology and open-source projects, starting
+  with BotSquad.
 
-For Motion, coaches provide judgment, context, experience and human understanding.
-Pitchers gain clearer insight and parents gain context to support development.
-Recorded differences are descriptive, not proof of improvement or causation.
-BotSquad supports bounded coordination and review, not unlimited autonomy.
+Use plural Sports. Labs is not the parent company; Work is no longer a division.
+Do not infer a legal corporation name from the public brand hierarchy.
+The October 7 owner decision supersedes the September homepage trials and
+Labs → Work/Sport architecture. Historical prompt records retain their dates.
+
+## Shared point of view
+
+Useful tools change what someone can do with the resources they already have.
+Sports and Labs share a philosophy, not a claimed technical platform: useful
+capability, results connected to their sources, and human judgment/control.
+Motion supports coaching; it does not replace coaches. BotSquad explores
+bounded AI coordination; it does not promise unlimited autonomy or success.
 
 ## Founder origin
 
-The company began with the founder's experience as a baseball coach and division
-coordinator. He recorded pitching deliveries in smartphone slow motion, compared
-movement and timing frame by frame, worked with players on small adjustments,
-recorded again and compared deliveries. Later affordable-sensor experiments
-added evidence that video alone could not show as clearly.
+Preserve the first-person account of coaching baseball and coordinating a
+division: smartphone slow motion, frame-by-frame review, small adjustments,
+recording again, and later affordable-sensor experiments. Finding useful evidence
+was slow; that practical problem led to Motion. Sports keeps this origin while
+allowing the division to grow beyond one pitching app. Labs carries the broader
+question into experimental projects. Do not invent corporate milestones,
+athlete outcomes, affiliations or a private organization's identity.
 
-The evidence was valuable; extracting and interpreting it manually was slow and
-technically demanding. That question became Motion. Preserve the human story
-without identifying athletes, family relationships or private organizations.
-Sensors remain part of that history, not a requirement or feature of Motion V1.
+## Voice and truth
 
-## Messaging hierarchy
+Be confident, concise, human, technically credible and quietly unconventional.
+Use concrete tasks and familiar words. Avoid vague AI-powered claims, generic
+SaaS language, militaristic framing, invented metrics and superlatives. No em or
+en dashes in public copy. Preserve limits near the claims they qualify.
 
-1. Company: **Asymmetri Labs**.
-2. Company hero: **Build an asymmetric advantage.**
-3. Company support: **We create technologies that give individuals and small teams outsized capability.**
-4. Portfolio: **BotSquad** and **Asymmetri Motion**.
-5. Work domain: **Asymmetri Work**, with **Less time moving work between chats.**
-6. Sports domain: **Asymmetri Sport**, with **Take another look at the pitch.**
-7. Motion product line: **See your pitch more clearly.**
-8. Sport closing: **There’s more to a pitch than a measurement.**
-
-The homepage introduces the portfolio; `/work` explains individual capability and
-coordinated AI; `/sport` preserves the founder narrative;
-`/motion` and `/botsquad` explain the products; `/about` explains the company idea.
-Current capability, scientific interpretation, future work and release availability
-remain distinct. Consult the product source reviews before changing claims.
-
-## Voice
-
-Be concise, observant, technically credible, human and grounded. Use literal
-pitching language and explain meaningful limits near the benefit they qualify.
-Avoid generic startup superlatives, AI-powered claims, invented outcomes and
-public feature inventories that confuse stored research with normal V1 use.
-Do not use em dashes or en dashes in public copy.
-
-
-## September 29 editorial direction
-
-Lead with the work and the people doing it. The founder’s first-person coaching
-account belongs on Sport and About. The homepage establishes Labs, Work/Sport and
-the products before visitors reach those deeper stories.
-The homepage is an owner-requested content trial using `0c05c7b` within the current
-design. Its original positioning and Motion-specific references override the
-intervening sport-only wording. Detailed product pages retain their current copy
-and precise scope; do not extend this content restoration to other routes.
-Use contractions and specific situations where natural. Avoid repeated aphorisms,
-three-part slogans and abstract claims about capability. A brief product
-introduction should say what someone can do and how far along the product is.
-The homepage again leads with asymmetric advantage, while other pages retain
-their current conversational treatment. Do not invent anecdotes,
-customers, quotes or results to make the writing feel personal.
+Implemented capability, release preparation, active development and roadmap are
+separate. Motion's current V1.2 candidate is preparing for distribution, Hitting
+and Team are planned, and Mechanics Lab/Enterprise are later directions. No dates,
+Store names, pricing or availability are inferred. BotSquad is experimental,
+open source, self-hosted and MIT licensed; private SSH-tunnel browser access is
+current and native mobile is deferred. Current product authority is recorded in
+[the October 7 decision](COMPANY_ARCHITECTURE_2026-10-07.md).

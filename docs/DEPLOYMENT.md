@@ -438,7 +438,7 @@ curl -sS -o /dev/null \
 Then check important routes against the local Next.js server:
 
 ```bash
-for p in / /motion /tutorial /privacy /support /favicon.svg /robots.txt /sitemap.xml /story /contact; do
+for p in / /sports /labs /motion /botsquad /about /tutorial /privacy /support /sport /work /favicon.svg /robots.txt /sitemap.xml /story /contact; do
   curl -sS -o /dev/null \
     -w "$p -> HTTP %{http_code}  %{redirect_url}\n" \
     "http://127.0.0.1:3001$p"
@@ -451,7 +451,8 @@ Expected results:
 - `/favicon.svg` returns HTTP 200.
 - `/robots.txt` returns HTTP 200.
 - `/sitemap.xml` returns HTTP 200.
-- `/story` returns an HTTP 308 permanent redirect to `/#story`.
+- `/story` returns an HTTP 308 permanent redirect to `/sports#story`.
+- `/sport` and `/work` return HTTP 308 to `/sports` and `/labs`.
 - `/contact` returns an HTTP 308 permanent redirect to `/#contact`.
 
 Verify actual unauthenticated content at `https://www.asymmetri.co/motion`,
@@ -459,7 +460,7 @@ Verify actual unauthenticated content at `https://www.asymmetri.co/motion`,
 `https://www.asymmetri.co/support`, and the homepage. A redirect to the homepage
 is not publication success. Check titles, the existing apex canonicals and the tutorial’s explicit www
 canonical, mutual links, footer links, `mailto:info@asymmetri.co`, mobile readability,
-all five sitemap routes
+all nine sitemap routes
 and permissive robots rules. Also verify the apex URLs, product metadata and
 SoftwareApplication schema, and the Motion icon/social assets. Product release
 wording must still match the verified source state; website publication does not
@@ -679,42 +680,35 @@ preserves the failed deployment in a timestamped directory for investigation.
 Before using it, confirm that both directories have the expected ownership and
 that the service file still points to `/var/www/asymmetri`.
 
-### Option 2: Git rollback to a known commit
+### Option 2: Restore tagged source without rewriting history
 
-List recent commits:
-
-```bash
-sudo -u django-user -H git -C /var/www/asymmetri log --oneline -10
-```
-
-Choose a commit that is known to have built and run successfully. Then:
+For the October 7 architecture redesign, the immutable known-good marker is
+`website-pre-architecture-redesign-2026-10-07`, peeled commit
+`679f3378701af6b04557c0bebff15120f21e3754`. Verify both local and remote identity:
 
 ```bash
-sudo -u django-user -H git -C /var/www/asymmetri reset --hard <KNOWN_GOOD_COMMIT>
-
-sudo -u django-user -H bash -lc '
-cd /var/www/asymmetri
-npm ci --no-fund
-export NEXT_TELEMETRY_DISABLED=1
-export NODE_OPTIONS="--max-old-space-size=1536"
-npm run build:next
-'
-
-systemctl restart asymmetri.service
-
-curl -sS -o /dev/null \
-  -w 'Public: HTTP %{http_code}\n' \
-  https://asymmetri.co/
+git fetch origin tag website-pre-architecture-redesign-2026-10-07
+git rev-parse 'website-pre-architecture-redesign-2026-10-07^{commit}'
+git ls-remote origin 'refs/tags/website-pre-architecture-redesign-2026-10-07*'
 ```
 
-Replace `<KNOWN_GOOD_COMMIT>` with the reviewed full or unambiguous abbreviated
-SHA.
+For immediate service recovery prefer the verified complete pre-activation directory
+and preserve the failed release using Option 1/the staged-release procedure. Its
+exact path and build ID are in the external release receipt. Verify source, tracked
+public assets, `.next` and independent dependencies before a swap; do not mix builds.
+Routine service stop/start uses `ssh asymmetri`; only root-owned-parent directory
+renames use the documented `ssh webadmin` administrator route.
 
-Resetting production to an old commit does not change `origin/main`. The next
-normal deployment will move production forward again. Prefer fixing or
-reverting the bad commit in GitHub so `main` once again describes the intended
-production state. Do not leave production permanently detached from `main`
-without recording and resolving that decision.
+If the directory is unavailable, create an independent application-owned candidate
+from the tag, install its exact lockfile, check/build and smoke-test it on an unused
+loopback port. Activate through the same full-directory swap. Keep the running tagged
+revision and incident record explicit; do not reset or clean the existing checkout.
+
+To restore the source through shared `main`, inspect all commits after the tag and
+create reviewed revert commit(s) for the intended redesign changes. Do not blindly
+revert unrelated later work. Validate and journal the rollback, push normally, then
+fast-forward/deploy through the standard staged process. Never force-push or move
+an immutable tag. A rollback is an explicit new event in history.
 
 ### Option 3: Restore a known-good service file
 
@@ -967,3 +961,18 @@ This changes the storage form of the older rollback, not its retention. During
 September 28 Work preparation, the archive was created and verified. A separate
 owner-authorized cleanup then provided sufficient capacity, so the original
 pre-portfolio rollback directory was retained alongside its archive.
+
+
+## Immutable architecture-release markers
+
+Before October 7 implementation, the verified live source was permanently tagged
+`website-pre-architecture-redesign-2026-10-07` at
+`679f3378701af6b04557c0bebff15120f21e3754`; see the
+[baseline and product review](COMPANY_ARCHITECTURE_2026-10-07.md).
+After the pushed redesign is activated and verified, create a separate annotated
+`website-sports-labs-redesign-2026-10-07` tag at the verified production SHA.
+If a proposed tag exists, use a unique suffix; never move or delete either marker.
+Verify peeled remote targets. Record the final SHA, tags, candidate/rollback paths,
+build IDs and health in the external task receipt. Tags mark source; the retained
+complete directory supplies immediate runtime rollback. Fetchable tracked public
+assets and the exact lockfile supply source-level recovery independent of local builds.

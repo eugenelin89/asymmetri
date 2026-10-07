@@ -1,4 +1,4 @@
-import { labs } from "@/content/site";
+import { home } from "@/content/site";
 
 export function HomeWorkerFlow() {
   return (
@@ -8,7 +8,7 @@ export function HomeWorkerFlow() {
         <p>A clear task. Defined boundaries.</p>
       </div>
       <ol>
-        {labs.botsquadPreview.steps.map((step, index) => (
+        {home.botsquadPreview.steps.map((step, index) => (
           <li key={step}>
             <span aria-hidden="true">0{index + 1}</span>
             <span>{step}</span>
@@ -19,7 +19,7 @@ export function HomeWorkerFlow() {
         <p className="eyebrow">Back to you</p>
         <p>Evidence you can inspect.</p>
       </div>
-      <figcaption>{labs.botsquadPreview.caption}</figcaption>
+      <figcaption>{home.botsquadPreview.caption}</figcaption>
     </figure>
   );
 }

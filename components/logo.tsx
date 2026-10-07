@@ -1,3 +1,5 @@
+import { site } from "@/content/site";
+
 type LogoProps = {
   tone?: "ink" | "canvas";
   compact?: boolean;
@@ -14,7 +16,7 @@ export function Logo({
   return (
     <span
       className={`brand-logo ${compact ? "brand-logo--compact" : ""} ${className}`}
-      aria-label="Asymmetri Labs"
+      aria-label={site.company.name}
     >
       <svg
         className="brand-logo__mark"
@@ -32,7 +34,7 @@ export function Logo({
       </svg>
       {!compact ? (
         <span className="brand-logo__word" style={{ color }}>
-          Asymmetri <span>Labs</span>
+          {site.company.name}
         </span>
       ) : null}
     </span>

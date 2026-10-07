@@ -22,17 +22,18 @@ path.
 
 When routes or shared layout code change, verify:
 
-- `/` (Labs portfolio)
-- `/work` (real Work domain page, no redirect)
-- `/sport` (preserved founder story and anchors)
-- `/botsquad` (current access versus future web/mobile)
+- `/` (Asymmetri umbrella and peer divisions)
+- `/labs` (experimental division and project list)
+- `/sports` (division, founder story, Motion family and anchors)
+- `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
-- `/story` → `/sport#story`; `/contact` → `/#contact`
+- `/sport` → `/sports`; `/work` → `/labs` (308, including fragment preservation);
+- `/story` → `/sports#story`; `/contact` → `/#contact`
 - `/why-asymmetrico` → `/about`;
-  `/work/asymmetrico-platform` → `/sport`
+  `/work/asymmetrico-platform` → `/sports`
 - `/robots.txt`
 - `/sitemap.xml`
 - `/favicon.svg`
@@ -63,24 +64,23 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
-- Work/Sport disclosures expose overview and direct BotSquad/Motion links;
+- Sports/Labs disclosures expose overview and direct BotSquad/Motion links;
 - Enter/Space opens disclosures, Tab reaches links, Escape closes and restores
   focus, outside-pointer interaction closes, and opening one closes the other;
 - disclosures and their links remain usable without JavaScript;
 - About/Contact work and the homepage retains `#products`;
-- Sport retains Story → Approach → Product → Contact and its Motion action;
-- old root `#story`, `#approach`, `#product` migrate to Sport while plural
-  `#products` and company `#contact` stay on Labs;
+- Sports retains Story → Approach → Product → Contact and its Motion action;
+- old root `#story`, `#approach`, `#product` migrate to Sports while plural
+  `#products` and company `#contact` stay on the company homepage;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
-- paper-header logo/nav contrast, the shared Labs → Work/Sport → product links,
+- paper-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
   product statuses and distinct product panels at all widths;
 - homepage introduction → principle → products → shared thinking → contact;
-- homepage content and root metadata match the requested `0c05c7b` source while
-  the current light palette, typography and responsive layout remain; Motion's
-  restored icon/evidence labels and root-only social image are accurate;
-- Work's split hero, About's company → principles → founder sequence and
-  BotSquad's standalone written example after its detailed workflow;
+- explicit peer division links in the hero, then current product panels;
+- Pitching preparation versus planned Hitting/Team, exactly one professional app,
+  its three nested entitlements, finite Cloud and later Mechanics Lab/Enterprise;
+- Labs project list, About origin and BotSquad example/access/current focus;
 - image loading, crops, and alt text;
 - compact mobile navigation;
 - keyboard navigation and visible focus;
@@ -206,3 +206,19 @@ current app Settings destinations. Also check apex equivalents, both tutorial
 hosts, `/motion`, shared Motion-labelled footer links and mutual policy/support
 links. These are protected app/App Store resources, not disposable marketing
 routes. Preserve tutorial step hashes and original-image destinations.
+
+
+## Architecture-release regression
+
+Confirm the four status vocabulary entries can represent current, preparation,
+development and roadmap while public values use only source-supported states.
+Scan rendered pages and metadata for obsolete Asymmetri Work/singular Sport and
+Labs-as-umbrella claims. Historical policy update descriptions and unused retained
+logo/source variants are not current hierarchy claims. Compare utility text against
+the baseline; only current brand references and tutorial title affiliation change.
+No tutorial ID/original asset or audited data-handling commitment may disappear.
+Verify no pre-Load Google/YouTube requests and both exact approved video IDs.
+
+For the route-change deployment, use the complete isolated-candidate procedure,
+verify the source SHA/build ID, retain the full old directory and remotely verify
+both immutable tags. The pre-change tag must resolve to `679f3378701af6b04557c0bebff15120f21e3754`.

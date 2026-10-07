@@ -15,11 +15,18 @@ same implementation commit.
 
 ## Project Purpose
 
-This repository contains the official Asymmetri Labs company website. Labs builds
-technology that gives individuals and small teams outsized capability. Asymmetri
-Work covers software and coordinated AI, starting with BotSquad. Asymmetri Sport
-covers sports technology, starting with Asymmetri Motion. Preserve this domain
-hierarchy while keeping both products directly accessible.
+This repository contains the official Asymmetri / Asymmetri.co company website.
+Asymmetri is the umbrella brand with two peer divisions: Asymmetri Sports, home
+to Asymmetri Motion, and Asymmetri Labs, home to experimental open-source projects
+such as BotSquad. Labs is not the parent of Sports. The former Work division and
+singular Sport branding are superseded. Preserve direct access to both products.
+This is a public brand hierarchy, not a newly asserted legal corporation name.
+
+Motion has separate individual Pitching and planned Hitting applications, and one
+planned professional Team application. Team Pitching/Hitting/Baseball are
+entitlements inside that one Team app. Centralize names/statuses in `motionFamily`;
+implementation, release preparation, active development and roadmap are distinct.
+Read `docs/COMPANY_ARCHITECTURE_2026-10-07.md` for current evidence and rollback tags.
 
 The site should communicate asymmetric advantage through credible evidence,
 clear product truth states, and a privacy-conscious account of work originating

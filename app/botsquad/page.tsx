@@ -3,18 +3,20 @@ import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
 import { WorkerFlow } from "@/components/worker-flow";
-import { botsquad, introductions, site, work } from "@/content/site";
+import { botsquad, introductions, site, labs } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata(botsquad.metadata, botsquad.path);
+export const metadata = pageMetadata(botsquad.metadata, botsquad.path, "/images/labs-social.png");
 const softwareSchema = {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
+  "@type": ["SoftwareApplication", "SoftwareSourceCode"],
   name: botsquad.name,
   description: botsquad.descriptor,
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Ubuntu",
   url: `${site.company.siteUrl}${botsquad.path}`,
+  codeRepository: botsquad.source.href,
+  license: botsquad.licenseUrl,
   publisher: { "@type": "Organization", name: site.company.name },
 };
 
@@ -46,8 +48,8 @@ export default function BotSquadPage() {
                 </a>
               </div>
               <p className="botsquad-hero__status">{botsquad.status}</p>
-              <a className="text-link text-link--light" href={work.path}>
-                Part of {work.name} ↗
+              <a className="text-link text-link--light" href={labs.path}>
+                An {labs.name} project ↗
               </a>
             </div>
             <WorkerFlow />
@@ -88,7 +90,7 @@ export default function BotSquadPage() {
             <WorkerExample />
           </div>
         </section>
-        <section className="section labs-common">
+        <section className="section company-common">
           <div className="shell product-split">
             <div className="product-heading">
               <p className="eyebrow eyebrow--light">Review and permissions</p>
@@ -108,15 +110,15 @@ export default function BotSquadPage() {
             </div>
             <div className="access-grid">
               <div>
-                <h3>Available now</h3>
+                <h3>Source and self-hosting</h3>
                 <p>{botsquad.access.current}</p>
                 <p className="product-note">{botsquad.licenseNote}</p>
               </div>
               <div>
-                <h3>In development</h3>
-                <p>{botsquad.access.future}</p>
+                <h3>Current focus</h3>
+                <p>{botsquad.access.priority}</p>
                 <p className="product-note">
-                  Standard web access does not imply a hosted SaaS service.
+                  {botsquad.access.deferred}
                 </p>
               </div>
             </div>

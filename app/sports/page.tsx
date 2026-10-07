@@ -1,29 +1,22 @@
+import { MotionFamily } from "@/components/motion-family";
 import Image from "next/image";
-import { sportNavigation, motion, site } from "@/content/site";
+import { sportsNavigation, sports, motion, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata(
-  {
-    title: "Asymmetri Sport | A Closer Look at Pitching",
-    description:
-      "Where Asymmetri began: a phone camera, developing pitchers and better evidence for human coaching. Meet Asymmetri Motion.",
-  },
-  "/sport",
-  "/images/sport-social.png",
-);
+export const metadata = pageMetadata(sports.metadata, sports.path, "/images/sport-social.png");
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
-export default function SportPage() {
+export default function SportsPage() {
   return (
     <div className="site">
       <SiteHeader />
       <main id="main-content" tabIndex={-1}>
-        <nav className="sport-nav" aria-label="Asymmetri Sport navigation">
+        <nav className="sports-nav" aria-label="Asymmetri Sports navigation">
           <div className="shell">
-            <span>Asymmetri Sport</span>
+            <span>Asymmetri Sports</span>
             <div>
-              {sportNavigation.map((link) => (
+              {sportsNavigation.map((link) => (
                 <a key={link.href} href={link.href}>
                   {link.label}
                 </a>
@@ -34,9 +27,9 @@ export default function SportPage() {
         <section className="hero">
           <div className="shell hero__grid">
             <div className="hero__copy">
-              <p className="eyebrow eyebrow--light">{site.hero.eyebrow}</p>
-              <h1>{site.hero.headline}</h1>
-              <p className="hero__support">{site.hero.support}</p>
+              <p className="eyebrow eyebrow--light">{sports.hero.eyebrow}</p>
+              <h1>{sports.hero.headline}</h1>
+              <p className="hero__support">{sports.hero.support}</p>
               <div className="button-row">
                 <a className="button button--accent" href="#story">
                   Our story
@@ -48,8 +41,8 @@ export default function SportPage() {
             </div>
             <figure className="hero__figure">
               <Image
-                src={site.images.pitchingDelivery.src}
-                alt={site.images.pitchingDelivery.alt}
+                src={sports.images.pitchingDelivery.src}
+                alt={sports.images.pitchingDelivery.alt}
                 fill
                 sizes="(max-width: 820px) 100vw, 56vw"
                 priority
@@ -60,11 +53,11 @@ export default function SportPage() {
         <section className="section story" id="story">
           <div className="shell story__grid">
             <div className="section-heading">
-              <p className="eyebrow">{site.story.eyebrow}</p>
-              <h2>{site.story.headline}</h2>
+              <p className="eyebrow">{sports.story.eyebrow}</p>
+              <h2>{sports.story.headline}</h2>
             </div>
             <div className="story__body">
-              {site.story.paragraphs.map((paragraph) => (
+              {sports.story.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -75,14 +68,14 @@ export default function SportPage() {
             <div className="approach__heading">
               <div>
                 <p className="eyebrow eyebrow--light">
-                  {site.approach.eyebrow}
+                  {sports.approach.eyebrow}
                 </p>
-                <h2>{site.approach.headline}</h2>
+                <h2>{sports.approach.headline}</h2>
               </div>
-              <p>{site.approach.introduction}</p>
+              <p>{sports.approach.introduction}</p>
             </div>
             <ol className="approach__steps">
-              {site.approach.steps.map((step, index) => (
+              {sports.approach.steps.map((step, index) => (
                 <li key={step.title}>
                   <span aria-hidden="true">0{index + 1}</span>
                   <h3>{step.title}</h3>
@@ -90,7 +83,7 @@ export default function SportPage() {
                 </li>
               ))}
             </ol>
-            <p className="approach__principle">{site.approach.principle}</p>
+            <p className="approach__principle">{sports.approach.principle}</p>
           </div>
         </section>
         <section
@@ -130,14 +123,15 @@ export default function SportPage() {
             </div>
           </div>
         </section>
+        <MotionFamily />
         <section className="section closing" id="contact">
           <div className="shell closing__grid">
             <div>
-              <p className="eyebrow">{site.closing.eyebrow}</p>
-              <h2>{site.closing.headline}</h2>
+              <p className="eyebrow">{sports.closing.eyebrow}</p>
+              <h2>{sports.closing.headline}</h2>
             </div>
             <div className="closing__action">
-              <p>{site.closing.body}</p>
+              <p>{sports.closing.body}</p>
               <a
                 className="button button--ink"
                 href={`mailto:${site.company.contactEmail}`}

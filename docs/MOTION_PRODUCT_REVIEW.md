@@ -1,8 +1,19 @@
 # Motion product marketing source review
 
-Reviewed September 16, 2026 for the website's homepage evolution and `/motion`.
+Historical baseline reviewed September 16, 2026 for the website's homepage evolution and `/motion`.
 This is an internal claims/provenance record, not a public paper or scientific
 validation. No reference repository was modified, built, configured or released.
+
+
+## Current authority, October 7, 2026
+
+See [company architecture/source review](COMPANY_ARCHITECTURE_2026-10-07.md) for
+fetched Motion `83058e5`, V1.2 candidate/distribution truth and Decision 88.
+The dated review below remains provenance for retained capabilities/imagery.
+Its exclusions of manually entered context and Reference/Compare are superseded
+by the accepted V1.2 implementation. Pitching remains preparing for release;
+Hitting and the one Cloud-backed Team app are planned. No reference-subject science,
+public availability, launch date, price or developer-only metric is promoted.
 
 ## Authority and current sources
 

@@ -1,5 +1,11 @@
 # Portfolio redesign decisions and evidence
 
+> Historical September 28–29 record. The October 7 owner-directed hierarchy and
+> current product/access states supersede the architecture and availability text
+> below. See [current company architecture](COMPANY_ARCHITECTURE_2026-10-07.md).
+> Preserve this record as evidence of decisions at its date.
+
+
 Review date: September 28, 2026. This document records source authority and bounded
 claims for the Labs portfolio redesign. It is not a scientific validation, security
 certification or release announcement for either product.

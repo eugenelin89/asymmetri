@@ -1,6 +1,6 @@
-# Asymmetri Labs asset manifest
+# Asymmetri asset manifest
 
-Last updated: 2026-09-29
+Last updated: 2026-10-07
 
 This internal provenance record covers public assets. Local images are not hotlinked. Optional third-party videos are described below. The
 owner has explicitly approved public visibility of the cap logo and uniform
@@ -357,3 +357,26 @@ textual explanations, not app captures, scientific evidence or third-party media
 - `HomeCapability` and `HomeWorkerFlow` render the historical explanation as semantic
   HTML/CSS lists in the current light design. They retain conceptual/synthetic
   disclosures and do not represent a live application or customer outcome.
+
+
+## Sports/Labs architecture evolution, October 7, 2026
+
+This section supersedes current roles in earlier dated entries; provenance and
+historical approvals above remain unchanged. No authentic image pixels change.
+
+| Asset | Dimensions / processing | Current role, description and rights |
+| --- | --- | --- |
+| `public/images/home-social.svg` and `.png` | 1200×630; edit existing SVG typography, export with installed Sharp | Umbrella/Home/About/default preview: Asymmetri, Build an asymmetric advantage; Sports → Motion and Labs → BotSquad. Original local typography, no external font or new third-party rights. |
+| `public/images/labs-social.svg` and `.png` | 1200×630; edit existing SVG, Sharp PNG export | Labs/BotSquad preview: experimental technology and open-source work. Removed Motion-as-Labs relationship. Same original source and rights. |
+| `public/og.svg` and `public/images/sport-social.png` | 1200×630; identity and headline changed in retained SVG, Sharp PNG export | Sports preview retains the dark editorial composition; plural Asymmetri Sports, “A closer look at the game,” and technology for athletes, coaches and teams. Stable old file URLs, unchanged source rights. |
+| `public/images/baseball/pitching-delivery.webp` | 2400×1600; unchanged bytes and crop rules | Hero now at `/sports`; same approved athlete photo, visible marks, alt text and bounded privacy assessment. |
+| `public/brand/motion-pitcher.png` and tutorial `evidence.png` | 1024×1024 / 315×723; unchanged | Homepage/Motion product identity and genuine evidence capture; same alt/caption and approval. |
+
+The rendered company lockup changes text from Asymmetri Labs to Asymmetri; its
+inline mark geometry, source logo variants and favicon fallbacks remain intact.
+`HomeCapability` now presents actual division links; `MotionFamily` uses semantic
+HTML/CSS, explicit states and nested Team entitlement rows. These are explanatory
+structures, not product screenshots or fabricated evidence. Existing BotSquad
+flow/example, Explorer concepts and all tutorial originals retain their labels,
+bytes and URLs. No new bitmap, stock photo, generated media or video is added.
+Approved videos keep their IDs, local posters and explicit privacy-aware loading.

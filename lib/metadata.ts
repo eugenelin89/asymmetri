@@ -4,7 +4,7 @@ import { site, type UtilityPageContent } from "@/content/site";
 export function pageMetadata(
   page: { title: string; description: string },
   path: string,
-  image = "/images/labs-social.png",
+  image = "/images/home-social.png",
 ): Metadata {
   return {
     ...page,

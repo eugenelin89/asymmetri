@@ -8,56 +8,80 @@ export type SiteImage = {
 export type NavItem = { label: string; href: string };
 export type PrimaryNavItem = NavItem & { children?: readonly NavItem[] };
 
+export const divisions = {
+  sports: {
+    name: "Asymmetri Sports",
+    path: "/sports",
+    description: "Technology for athletes, coaches and teams.",
+    product: { name: "Asymmetri Motion", path: "/motion" },
+  },
+  labs: {
+    name: "Asymmetri Labs",
+    path: "/labs",
+    description: "Experimental technology and open-source projects.",
+    product: { name: "BotSquad", path: "/botsquad" },
+  },
+} as const;
+
 export const site = {
   company: {
-    name: "Asymmetri Labs",
+    name: "Asymmetri",
     siteUrl: "https://asymmetri.co",
     contactEmail: "info@asymmetri.co",
     descriptor: "Technology for individuals and small teams",
   },
   metadata: {
-    title: "Asymmetri Labs | Tools for Small Teams",
+    title: "Asymmetri | Build an Asymmetric Advantage",
     description:
-      "We build tools for individuals and small teams: software and coordinated AI under Asymmetri Work, and sports technology under Asymmetri Sport.",
-    socialHeadline: "A small team can do a lot.",
+      "Technology that gives people and small teams more capability. Asymmetri Sports builds sports technology; Asymmetri Labs explores experimental, open-source work.",
+    socialHeadline: "Build an asymmetric advantage.",
     socialSupport:
       "Technology for individuals and small teams.",
   },
   navigation: [
     {
-      label: "Work", href: "/work",
+      label: "Sports", href: divisions.sports.path,
       children: [
-        { label: "Explore Asymmetri Work", href: "/work" },
-        { label: "BotSquad", href: "/botsquad" },
+        { label: divisions.sports.name, href: divisions.sports.path },
+        { label: divisions.sports.product.name, href: divisions.sports.product.path },
+        { label: "Motion product family", href: "/sports#motion-family" },
       ],
     },
     {
-      label: "Sport", href: "/sport",
+      label: "Labs", href: divisions.labs.path,
       children: [
-        { label: "Explore Asymmetri Sport", href: "/sport" },
-        { label: "Asymmetri Motion", href: "/motion" },
+        { label: divisions.labs.name, href: divisions.labs.path },
+        { label: divisions.labs.product.name, href: divisions.labs.product.path },
       ],
     },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/#contact" },
   ] satisfies PrimaryNavItem[],
   companyNavigation: [
-    { label: "About Labs", href: "/about" },
-    { label: "Asymmetri Work", href: "/work" },
-    { label: "Asymmetri Sport", href: "/sport" },
-    { label: "BotSquad", href: "/botsquad" },
-    { label: "Asymmetri Motion", href: "/motion" },
+    { label: "About Asymmetri", href: "/about" },
+    { label: divisions.sports.name, href: divisions.sports.path },
+    { label: divisions.labs.name, href: divisions.labs.path },
+    { label: divisions.sports.product.name, href: divisions.sports.product.path },
+    { label: divisions.labs.product.name, href: divisions.labs.product.path },
   ] satisfies NavItem[],
   footerNavigation: [
     { label: "Motion tutorial", href: "/tutorial" },
     { label: "Motion privacy", href: "/privacy" },
     { label: "Motion support", href: "/support" },
   ] satisfies NavItem[],
+} as const;
+
+export const sports = {
+  ...divisions.sports,
+  metadata: {
+    title: "Asymmetri Sports | Technology for Athletes, Coaches and Teams",
+    description: "Sports technology grounded in coaching. Discover Asymmetri Motion, its pitching roots and the planned individual and professional baseball product family.",
+  },
   hero: {
-    eyebrow: "Asymmetri Sport · Starting with baseball",
-    headline: "Take another look at the pitch.",
+    eyebrow: divisions.sports.name,
+    headline: "A closer look at the game.",
     support:
-      "Our work in sports technology began with a coach, a phone camera and time spent reviewing pitches. We’re building Asymmetri Motion to make that review easier.",
+      "Technology for athletes, coaches and teams. Our work began with a phone camera and a pitch to review. Asymmetri Motion carries that approach into a growing family of baseball tools.",
   },
   story: {
     eyebrow: "Where it began",
@@ -94,7 +118,7 @@ export const site = {
   closing: {
     eyebrow: "Talk to us",
     headline: "There’s more to a pitch than a measurement.",
-    body: "How do you review pitching video? We’d like to hear what helps, what takes too long and what you wish you could see. Motion is still preparing for release.",
+    body: "How do you review movement with your athletes? We’d like to hear what helps, what takes too long and what you wish you could see.",
   },
   images: {
     pitchingDelivery: {
@@ -108,16 +132,77 @@ export const site = {
 
 export type ProductStep = { title: string; body: string; note?: string };
 
+export const productStatusLabels = {
+  current: "Available now",
+  preparing: "Preparing for release",
+  development: "In development",
+  planned: "Planned",
+} as const;
+export type ProductStatus = keyof typeof productStatusLabels;
+export type MotionFamilyProduct = {
+  id: string;
+  name: string;
+  status: ProductStatus;
+  description: string;
+  detail: string;
+  link?: NavItem;
+};
+
+// Display names and release states live here; these are not final Store names.
+export const motionFamily = {
+  name: divisions.sports.product.name,
+  headline: "One Motion family. Individual and team perspectives.",
+  introduction: "The current pitching app is the starting point. Separate individual apps and one professional Team app are the next direction for Motion, sharing review technology while keeping pitching and hitting distinct.",
+  individual: {
+    label: "Individual",
+    description: "Separate, focused apps for one athlete.",
+    products: [
+      {
+        id: "pitching", name: "Pitching", status: "preparing",
+        description: "The current Motion experience for iPhone: capture, exact-frame review, projected 2D evidence and pitching history.",
+        detail: "The V1.2 candidate is complete. App Store distribution is still being prepared; public availability is not yet announced.",
+        link: { label: "Explore the pitching experience", href: "/motion#how-it-works" },
+      },
+      {
+        id: "hitting", name: "Hitting", status: "planned",
+        description: "The next focused individual app, bringing Motion’s review approach to hitting with its own events, measurements and terminology.",
+        detail: "Approved roadmap work. Hitting-specific definitions and evidence come before analysis claims; development has not yet begun.",
+      },
+    ] satisfies MotionFamilyProduct[],
+  },
+  professional: {
+    label: "Professional",
+    description: "One app for coaches working with multiple athletes.",
+    product: {
+      id: "team", name: "Team", status: "planned",
+      description: "A professional Motion app built around one account, organization, roster and Athlete identity system, with required Team Cloud for shared records and cross-device work.",
+      detail: "Planned after Hitting. Team Pitching, Team Hitting and Team Baseball are entitlement configurations inside this one app.",
+    } satisfies MotionFamilyProduct,
+    entitlements: [
+      { name: "Team Pitching", description: "Pitching module" },
+      { name: "Team Hitting", description: "Hitting module" },
+      { name: "Team Baseball", description: "Both modules" },
+    ],
+    continuity: "Adding the second module keeps the same account, organization, roster, Athlete identities and Cloud data.",
+    cloud: "Team Cloud will use finite, quota-aware storage. Exact plans and storage allowances are still to be decided.",
+  },
+  future: {
+    title: "Further ahead",
+    body: "Team productionization and Enterprise expansion follow the first Team product. Deeper Mechanics Lab work, exploring movement through a delivery or swing, comes later. These are future directions, not released capabilities.",
+  },
+  note: "Pitching, Hitting and Team describe the product direction. Final names may change. No launch dates are announced.",
+} as const;
+
 export const motion = {
-  name: "Asymmetri Motion",
-  path: "/motion",
+  name: divisions.sports.product.name,
+  path: divisions.sports.product.path,
   headline: "See your pitch more clearly.",
   descriptor: "Pitching video and projected 2D analysis for iPhone.",
   platform: "iPhone · iOS 17 or later",
   device: "iPhone",
   operatingSystem: "iOS 17 or later",
-  releaseStatus: "Preparing for release",
-  releaseStatement: "Asymmetri Motion for iPhone is preparing for release.",
+  releaseStatus: productStatusLabels[motionFamily.individual.products[0].status],
+  releaseStatement: "Motion’s current pitching app for iPhone is preparing for release.",
   metadata: {
     title: "Asymmetri Motion | Pitching Video & 2D Analysis",
     description:
@@ -139,7 +224,7 @@ export const motion = {
     link: { label: "Explore Asymmetri Motion", href: "/motion" },
   },
   hero: {
-    eyebrow: "An Asymmetri Labs product",
+    eyebrow: "An Asymmetri Sports product · Current pitching experience",
     support:
       "Record a delivery, find the frame you want to discuss and look closely. Motion keeps the marked frames, projected 2D measurements and annotated images together on your iPhone.",
     link: { label: "How Motion works", href: "#how-it-works" },
@@ -208,6 +293,17 @@ export const motion = {
     note:
       "Comparisons are descriptive. A difference does not establish improvement, and a trend does not prove a training change worked. Camera setup and marking choices still matter.",
   },
+  study: {
+    eyebrow: "Context, study and comparison",
+    headline: "Keep the conversation with the video.",
+    items: [
+      { title: "Notes and pitch context", body: "Keep Athlete Notes and Pitch Notes alongside your work. Add pitch type, reported velocity, chart-relative location and result yourself; these are recorded context, not video-derived measurements." },
+      { title: "Reference Study", body: "Import authorized footage from Photos or Files into a separate Reference Library. Review a saved interval, add event marks, bookmarks and Reference Notes, and return to the original source." },
+      { title: "Compare With My Pitch", body: "Put one personal pitch beside a Reference. Review independently or explicitly align Front Foot Contact or Ball Release. Save the comparison settings without turning the Reference into personal measurement history." },
+      { title: "Share a review", body: "Preview a Pitch Review PDF with your selected context, measurements and evidence. Notes, athlete display name and marked frames are included only when selected. Share Original Video is a separate action." },
+    ] satisfies ProductStep[],
+    note: "These tools are implemented in the V1.2 pitching candidate. They do not measure the Reference subject, identify an ideal delivery or prove that a change improved performance.",
+  },
   limits: {
     eyebrow: "Before you interpret a result",
     headline: "What Motion can’t tell you.",
@@ -264,8 +360,8 @@ export const motionPages = {
       "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, and support email.",
     effectiveDate: { label: "October 6, 2026", value: "2026-10-06" },
     introduction: [
-      "Asymmetri Labs operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
-      "Asymmetri Labs does not sell personal information.",
+      "Asymmetri operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
+      "Asymmetri does not sell personal information.",
     ],
     contactLabel: "Privacy contact",
     related: { label: "Asymmetri Motion Support", href: "/support" },
@@ -286,7 +382,7 @@ export const motionPages = {
           "Saved Comparisons containing the chosen personal pitch and Reference pair and comparison settings. These configurations do not duplicate videos or create measurement records for the Reference subject.",
         ],
         closing: [
-          "Apple Vision processes analysis on your device. No account is required. The app has no Asymmetri-operated server-upload or cloud-sync feature for these records and does not send your videos, Athlete Profile or analysis records to Asymmetri Labs for remote analysis.",
+          "Apple Vision processes analysis on your device. No account is required. The app has no Asymmetri-operated server-upload or cloud-sync feature for these records and does not send your videos, Athlete Profile or analysis records to Asymmetri for remote analysis.",
           "The app has no app-owned analytics SDK, advertising or tracking system, or crash-reporting SDK. It does not sell your locally stored app data. Local diagnostic messages may still be produced; Apple may handle system diagnostics under its own services and your settings.",
         ],
       },
@@ -559,7 +655,7 @@ export const tutorial = {
   canonical: "https://www.asymmetri.co/tutorial",
   title: "Asymmetri Motion Tutorial",
   metadata: {
-    title: "Asymmetri Motion Tutorial | Asymmetri Labs",
+    title: "Asymmetri Motion Tutorial | Asymmetri Sports",
     description: "Learn how to record or import a pitch, mark pitching moments, inspect projected 2D results and evidence, and explore your saved pitching history in Asymmetri Motion.",
   },
   introduction: "From your first video to a useful conversation with a coach. Follow the steps in order, or jump straight to the part you need.",
@@ -677,12 +773,11 @@ export const tutorial = {
   ],
 } as const;
 
-// Labs portfolio, product concepts and optional introduction media.
-export const labs = {
-  // Homepage copy restored from 0c05c7b; detailed product-page copy stays current.
+// Umbrella homepage, division copy and optional introduction media.
+export const home = {
   metadata: {
-    "title": "Asymmetri Labs | Build an Asymmetric Advantage",
-    "description": "Technologies that give individuals and small teams outsized capability. Explore BotSquad, Asymmetri Motion and the story behind Asymmetri Labs.",
+    "title": "Asymmetri | Build an Asymmetric Advantage",
+    "description": "Technology for outsized capability. Explore Asymmetri Sports and Motion, and Asymmetri Labs and its experimental open-source project BotSquad.",
     "socialHeadline": "Build an asymmetric advantage.",
     "socialSupport": "Technology for individuals and small teams."
   },
@@ -701,10 +796,12 @@ export const labs = {
     headline: "A phone camera, and a lot of replaying.",
     body: "As a coach, I started recording pitches in slow motion and comparing them frame by frame. The useful part was looking at the same moment with a player. The slow part was finding it again. That experience led to Motion.",
     attribution: "From the founder",
-    link: { label: "Read the story", href: "/sport#story" },
+    link: { label: "Read the story", href: "/sports#story" },
     caption: "Pitching is where our work began.",
   },
 
+  motionSummary: "Record, mark and inspect a pitch. The family roadmap adds a separate hitting app and one professional Team app.",
+  divisionHeading: "Two divisions. One Asymmetri.",
   motionPreview: {
     src: "/images/motion/tutorial/evidence.png",
     alt: "A Motion app capture connecting a saved pitching frame to annotated trunk landmarks and a vertical reference.",
@@ -712,10 +809,10 @@ export const labs = {
     height: 723,
   } satisfies SiteImage,
   hero: {
-    eyebrow: "Asymmetri Labs",
+    eyebrow: "Asymmetri.co",
     headline: "Build an asymmetric advantage.",
     support:
-      "We create technologies that give individuals and small teams outsized capability.",
+      "Technology that gives people and small teams more capability with the resources they already have.",
     primary: { label: "See what we're building", href: "/#products" },
     secondary: { label: "Why Asymmetri", href: "/about" },
   },
@@ -725,7 +822,7 @@ export const labs = {
   },
   products: {
     eyebrow: "What we're building",
-    headline: "Different tools.\nA shared ambition.",
+    headline: "Two divisions.\nA shared ambition.",
   },
   common: {
     eyebrow: "The common thread",
@@ -738,81 +835,30 @@ export const labs = {
     headline: "What are you working on?",
     body: "Building with a small team? Seeing a problem from a different angle? We'd like to hear from you.",
   },
-  diagram: {
-    caption: "Two ways to make more possible. Conceptual diagram.",
-    tracks: [
-      {
-        input: "One person",
-        product: "BotSquad",
-        output: "Coordinated AI workers",
-        steps: ["Research", "Build", "Review"],
-      },
-      {
-        input: "One iPhone",
-        product: "Asymmetri Motion",
-        output: "Inspectable pitching evidence",
-        steps: ["Frames", "Measurements", "History"],
-      },
-    ],
-  },
+
 } as const;
 
-export const sportNavigation: NavItem[] = [
-  { label: "Story", href: "/sport#story" },
-  { label: "Approach", href: "/sport#approach" },
+export const sportsNavigation: NavItem[] = [
+  { label: "Story", href: "/sports#story" },
+  { label: "Approach", href: "/sports#approach" },
   { label: "Motion", href: "/motion" },
-  { label: "Contact", href: "/sport#contact" },
+  { label: "Contact", href: "/sports#contact" },
 ];
 
-export const work = {
-  name: "Asymmetri Work",
-  path: "/work",
-  metadata: {
-    title: "Asymmetri Work | More Capability for Small Teams",
-    description:
-      "Software and coordinated AI for individuals and small teams. Explore Asymmetri Work's approach to useful capability, inspectable results and human judgment, starting with BotSquad.",
-  },
-  headline: "Less time moving work between chats.",
-  introduction:
-    "Asymmetri Work is where we build software for individuals and small teams. We’re starting with a familiar problem: keeping track of tasks, context and results when several AI workers are involved.",
-  productLink: { label: "Explore BotSquad", href: "/botsquad" },
-  approachLink: { label: "Our approach", href: "/work#approach" },
-  portfolioLink: { label: "See all products", href: "/#products" },
-  approach: {
-    eyebrow: "The problem we’re working on",
-    headline: "The handoffs take time.",
-    body: "Using several AI conversations means keeping track of which one has the latest context, what each is doing and what still needs review. We want the workspace to carry more of that bookkeeping.",
-    principles: [
-      { title: "Say what you need", body: "Give each task a clear result to work toward and say what is out of scope. It helps the worker, and gives you something to check." },
-      { title: "Keep the context nearby", body: "Keep the task, its messages and its output together so you can follow what happened without piecing it together from separate chats." },
-      { title: "Make review part of the job", body: "Read the result, question it and decide what should happen next. Some actions need your approval before the work can continue." },
-    ] satisfies ProductStep[],
-  },
-  product: {
-    eyebrow: "Starting with BotSquad",
-    headline: "Our first attempt at making this easier.",
-    body: "BotSquad is early, open source and self-hosted. It gives AI workers names, tasks and a place to pass work along. You can try it, read the code and see how it handles review.",
-  },
-  closing: {
-    headline: "The same question comes up on a baseball field.",
-    body: "Reviewing a pitch and reviewing AI work both involve looking closely at how a result was reached. Our sports work began with that kind of patient, frame-by-frame attention.",
-    link: { label: "Explore Asymmetri Sport", href: "/sport" },
-  },
-} as const;
-
 export const botsquad = {
-  name: "BotSquad",
-  path: "/botsquad",
+  name: divisions.labs.product.name,
+  path: divisions.labs.product.path,
   headline: "Give your AI workers a place to work together.",
   descriptor:
     "Assign tasks to AI workers, follow their conversations and review what they produce. BotSquad keeps the work in a shared workspace that you host.",
-  status: "Open source · early development",
+  status: "Experimental · Open source · Self-hosted",
+  licenseUrl: "https://github.com/eugenelin89/bot_messenger/blob/main/LICENSE",
   licenseNote:
     "MIT licensed. The public repository includes the source, setup instructions and validation records.",
   metadata: {
     title: "BotSquad | A Shared Workspace for AI Workers",
     description:
-      "Coordinate persistent AI workers, explicit tasks and inspectable results. Self-hosted browser access through a tunnel today; standard web access and mobile in development.",
+      "An experimental Asymmetri Labs project. Coordinate persistent AI workers, conversations, working groups and reviewed tasks on an operator-controlled Ubuntu HQ. MIT licensed.",
   },
   source: {
     label: "View on GitHub",
@@ -835,7 +881,7 @@ export const botsquad = {
     },
     {
       title: "Pass the work along",
-      body: "Messages, task state and artifacts stay in the workspace. Workers can pass work along without making you carry every result between conversations.",
+      body: "Direct conversations and working groups let workers discuss a question. Messages, task state and artifacts stay in the workspace; a discussion becomes assigned work through an explicit owner action.",
     },
     {
       title: "Check the result",
@@ -877,9 +923,11 @@ export const botsquad = {
   access: {
     headline: "Trying BotSquad today.",
     current:
-      "Open source and self-hosted. Access the current interface in your browser through a tunnel.",
-    future:
-      "Standard web access and a mobile app for interacting with BotSquad are in development. Neither is released, and no launch date is announced.",
+      "Run BotSquad on an operator-controlled Ubuntu HQ. The current interface is a private browser workspace reached through an SSH tunnel; it is not a hosted SaaS service or a public HQ login.",
+    priority:
+      "The current Personal Operator focus is reliability, clear status, smoother daily workflows and simpler maintenance for one owner.",
+    deferred:
+      "Native iOS and no-tunnel mobile access are deferred. The SSH-tunnel browser remains the preferred operator path.",
     runtime:
       "The current setup uses an operator-controlled Ubuntu host, Node.js and the Codex runtime. Follow the repository's setup instructions for supported versions and requirements.",
     privacy:
@@ -887,18 +935,54 @@ export const botsquad = {
   },
 } as const;
 
+export const labs = {
+  ...divisions.labs,
+  metadata: {
+    title: "Asymmetri Labs | Experimental Technology and Open Source",
+    description:
+      "Experimental technology for individuals and small teams. Explore BotSquad, an open-source, self-hosted project under Asymmetri Labs.",
+  },
+  headline: "Room to try a different approach.",
+  introduction:
+    "Asymmetri Labs explores experimental technology for individuals and small teams. We start with a practical question, build something we can inspect, and share what we learn. BotSquad is our first open-source project.",
+  projects: [botsquad],
+  productLink: { label: "Explore BotSquad", href: "/botsquad" },
+  approachLink: { label: "Our approach", href: "/labs#approach" },
+  portfolioLink: { label: "Explore Asymmetri", href: "/#products" },
+  approach: {
+    eyebrow: "The problem we’re working on",
+    headline: "The handoffs take time.",
+    body: "Using several AI conversations means keeping track of which one has the latest context, what each is doing and what still needs review. We want the workspace to carry more of that bookkeeping.",
+    principles: [
+      { title: "Say what you need", body: "Give each task a clear result to work toward and say what is out of scope. It helps the worker, and gives you something to check." },
+      { title: "Keep the context nearby", body: "Keep the task, its messages and its output together so you can follow what happened without piecing it together from separate chats." },
+      { title: "Make review part of the job", body: "Read the result, question it and decide what should happen next. Some actions need your approval before the work can continue." },
+    ] satisfies ProductStep[],
+  },
+  product: {
+    eyebrow: "Starting with BotSquad",
+    headline: "An open experiment in coordinated AI work.",
+    body: "BotSquad is experimental, open source and self-hosted. It gives AI workers names, tasks and a place to pass work along. You can try it, read the code and see how it handles review.",
+  },
+  closing: {
+    headline: "The same question comes up on a baseball field.",
+    body: "Reviewing a pitch and reviewing AI work both involve looking closely at how a result was reached. Our sports work began with that kind of patient, frame-by-frame attention.",
+    link: { label: "Explore Asymmetri Sports", href: "/sports" },
+  },
+} as const;
+
 export const about = {
   metadata: {
-    title: "About Asymmetri Labs | Where the Work Began",
+    title: "About Asymmetri | Where the Work Began",
     description:
-      "From reviewing pitching video to building tools for small teams. Read how Asymmetri Labs began and why we’re building Motion and BotSquad.",
+      "From reviewing pitching video to building tools for small teams. Read how Asymmetri began and why we’re building Motion and BotSquad.",
   },
   eyebrow: "Why Asymmetri",
   headline: "It started with time spent watching pitches.",
   introduction:
     "As a baseball coach and division coordinator, I recorded deliveries on my phone and went through them frame by frame. We would try a small adjustment, record again and compare. It helped us see things we could talk about at practice.",
   meaning:
-    "Getting useful information out of those recordings took time. That led to Motion, and to the question behind Asymmetri Labs: what could someone do with the tools they already have, if those tools were a little more useful?",
+    "Getting useful information out of those recordings took time. That led to Motion, and to the question behind Asymmetri: what could someone do with the tools they already have, if those tools were a little more useful?",
   principles: [
     {
       title: "Begin with a real task",
@@ -914,7 +998,7 @@ export const about = {
     },
   ] satisfies ProductStep[],
   origin:
-    "Asymmetri is named for the idea that a small team can find an advantage without simply getting bigger. We’re pursuing that through two areas: Asymmetri Sport, starting with Motion, and Asymmetri Work, starting with BotSquad.",
+    "Asymmetri is named for the idea that a small team can find an advantage without simply getting bigger. We’re pursuing that through two areas: Asymmetri Sports, home to Motion, and Asymmetri Labs, where experimental projects such as BotSquad live. They share a philosophy of useful tools and human judgment, not a claim to one technical platform.",
 } as const;
 
 export const motionGallery = {
@@ -961,7 +1045,7 @@ export const introductions = {
     headline: "A walkthrough of BotSquad",
     posterLine: "Give your AI workers a place to work together.",
     description:
-      "An introduction to BotSquad and the idea of coordinating AI workers. The current interface uses tunnel-based browser access; standard web access and mobile interaction remain in development.",
+      "An introduction to BotSquad and coordinating AI workers. The current operator interface uses private browser access through an SSH tunnel. Native mobile access is deferred.",
     tone: "botsquad",
   },
   motion: {

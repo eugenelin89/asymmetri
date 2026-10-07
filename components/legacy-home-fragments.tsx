@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-/** Only the three moved Sport fragments need browser-side route compatibility. */
+/** Only the three moved Sports fragments need browser-side route compatibility. */
 export function LegacyHomeFragments() {
   useEffect(() => {
     const migrate = () => {
@@ -10,7 +10,7 @@ export function LegacyHomeFragments() {
         window.location.pathname === "/" &&
         ["#story", "#approach", "#product"].includes(window.location.hash)
       ) {
-        window.location.replace(`/sport${window.location.hash}`);
+        window.location.replace(`/sports${window.location.hash}`);
       }
     };
     migrate();

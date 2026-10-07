@@ -1,80 +1,66 @@
-# Asymmetri Labs site strategy
+# Asymmetri site strategy
 
-## Company and portfolio
+## Company and divisions
 
-The homepage restores the content from `0c05c7b`, opening with “Build an asymmetric
-advantage.” The small-input conceptual explanation, company principle, original
-product summaries, common thread and contact appear in the current warm/light
-design. Motion's icon and genuine evidence capture return with original captions.
-Its historical approach/story and direct product/video links are preserved.
-The founder account remains on Sport and About. Other route copy is unchanged.
+The homepage introduces Asymmetri with “Build an asymmetric advantage.” Its hero
+pairs that positioning with two equally prominent division links: Sports → Motion
+and Labs → BotSquad. Sports appears first, followed by Labs. Existing principles,
+Motion icon/evidence image, BotSquad handoff illustration and company contact are
+retained. The two divisions share a philosophy without a shared-codebase claim.
 
-The root page has its own historical title/description and a light social preview
-with the restored wording; shared defaults and other route previews stay current.
-The preceding sport-only homepage trial is superseded by this explicit revision.
+Primary navigation is Sports, Labs, About and Contact. Native disclosures expose
+each division overview and direct product/project links; Sports also links to
+the Motion family. All nine canonical pages occur once in the sitemap.
 
-The shared navigation is Work, Sport, About (`/about`) and Contact (`/#contact`).
-Work and Sport each open a disclosure with an overview (`/work` or `/sport`) and
-a direct product link (BotSquad or Motion). The homepage retains its `#products`
-portfolio. Motion tutorial, privacy and support links remain explicitly labelled
-in the footer. The nine public pages appear once in the sitemap.
+## Sports and Motion
 
-## Work and BotSquad
+`/sports` is a genuine division page. It preserves the approved pitching photo,
+first-person founder story, Capture / Look closely / Review together sequence,
+Motion introduction and contact. The broader hero describes athletes, coaches
+and teams. The shared `MotionFamily` section follows the current product introduction.
 
-Asymmetri Work is the domain for software and coordinated AI that help individuals
-and small teams do more with the resources they have. `/work` explains the practical problem of carrying context between AI chats,
-with a split hero and short approach outline, then introduces task boundaries,
-review and BotSquad. BotSquad is the first product; its
-detailed workflow, availability, runtime and limitations stay on `/botsquad`.
-The domain page is not an additional required step to reach either product.
+`/motion` remains the deep current pitching destination. Capture/import, exact
+human-confirmed frames, analysis, evidence, history, Notes/context, Reference Study,
+Compare, sharing, scientific limits and local storage remain explicit. An optional
+approved introduction follows the hero. The current candidate and future family
+are visibly distinct. Individual Pitching and Hitting are separate apps; Team is
+one professional application with three entitlements, one organization/roster/Athlete
+system and required finite, quota-aware Cloud. No empty future product routes.
+Enterprise and deeper Mechanics Lab are later directions after Hitting/Team.
 
-## Sport and Motion
+The exact release/roadmap evidence is in `COMPANY_ARCHITECTURE_2026-10-07.md`.
+Names and states are centralized; future changes should not require a new hierarchy.
 
-Asymmetri Sport is the brand name; “sports technology” is descriptive language.
-`/sport` preserves the authentic photograph and first-person coaching history,
-with shorter prose and a Capture / Look closely / Review together sequence,
-followed by Motion and the coaching contact. Local navigation reaches the story,
-approach, Motion and Sport contact. The old `#story`, `#approach`, `#product` and
-`#contact` IDs remain on Sport. Historical root fragments for the first three
-migrate there; the new root `#contact` remains company contact.
+## Labs, BotSquad and About
 
-`/motion` retains its detailed workflow, evidence chain, history, scientific limits
-and bounded local-first explanation. An optional introduction video follows its
-hero. A small, explicitly labelled design-process section uses two synthetic
-Explorer concepts. These are not current app screenshots, released features or
-scientific evidence. Current workflow screenshots remain in the complete tutorial.
-No App Store link, price, launch date or new feature campaign is inferred.
+`/labs` introduces experimental technology and iterates a project list currently
+containing only BotSquad. It retains the useful task/context/review approach from
+the old Work page. No invented future projects or investment experiment are advertised.
 
-## BotSquad and About
+`/botsquad` is an experimental Asymmetri Labs project: MIT licensed, open source
+and self-hosted. It retains its approved video, worker-flow visual, synthetic worked
+example, persistence limits and review/permission explanation. Conversations and
+working groups are current. Personal Operator reliability is the current focus;
+private SSH-tunnel browser access is preferred and native mobile is deferred.
+There is no public HQ login, hosted SaaS, perfect-memory or guaranteed-outcome claim.
 
-`/botsquad` explains persistent logical workers, explicit tasks, durable messages,
-artifacts, review and bounded authority. Persistence does not mean an always-running
-model or unlimited memory. Current access is self-hosted browser access through a
-tunnel; standard web access and a mobile app are in development. No public login,
-hosted SaaS availability or automatic success is promised. The public repository
-is MIT licensed following the owner's explicit license instruction.
+`/about` connects the practical coaching origin, Motion/Sports, the asymmetric
+capability philosophy and experimental Labs work without inventing corporate history.
 
-BotSquad's compact hero workflow leads to the video, problem, detailed workflow,
-standalone worked example, review/permissions and availability sections.
+## Compatibility, media and privacy
 
-`/about` explains the name first, then useful tools, inspectable evidence and human
-control. The first-person coaching origin follows those company-level principles.
+`/sport` → `/sports`, `/work` → `/labs` are server-side permanent redirects.
+Sports retains `#story`, `#approach`, `#product` and `#contact`; old root story,
+approach and singular product fragments migrate to Sports with explicit no-JS
+fallback links. Root plural `#products` and company `#contact` remain in place.
 
-## Evidence, privacy and media
+Motion `/motion`, `/tutorial`, `/privacy`, `/support`, tutorial hashes, exact www
+canonical and original-image URLs remain protected. Audited policy disclosures
+retain their meaning; only current umbrella brand references change. Current
+pitching privacy statements do not describe future Team Cloud.
 
-Current implementation and accepted decisions outrank dated proposals and videos.
-See `PORTFOLIO_REDESIGN.md` for reviewed sources and `MOTION_PRODUCT_REVIEW.md` for
-the established Motion limits. No customers, outcomes or measurements are invented.
-The private sports organization remains anonymous.
-
-Both product videos use local HTML/CSS posters. The YouTube privacy-enhanced iframe
-is created only after a deliberate Load video action, without autoplay, SDK,
-preconnect or remote thumbnail. Google may process requests after loading; the
-notice and `/privacy#website-media` say so. Privacy-enhanced is not tracking-free.
-External Watch on YouTube links remain available if JavaScript or playback fails.
-
-The practical tutorial keeps all ten modules, Record/Import and Back/Side choices,
-stable hashes, Previous/Next, full-guide mode, original images and no-JavaScript
-content. Its approved genuine captures and instructional illustrations retain their
-original provenance. Policy/support changes are limited to website media disclosure
-and shared navigation; the approved app and support-retention meaning is preserved.
+Both videos keep local posters, explicit Load video, no autoplay/preconnect/remote
+thumbnail, `youtube-nocookie.com`, visible Google processing notice, Close/focus
+restoration and external fallback. No trackers, external fonts, accounts, visitor
+storage or backend are added. Authentic imagery and clearly labelled synthetic
+concepts retain their approvals and scientific limits.
