@@ -75,7 +75,7 @@ Check:
   `#products` and company `#contact` stay on the company homepage;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
-- mineral-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
+- graphite-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
   product statuses and distinct product panels at all widths;
 - homepage introduction → principle → products → shared thinking → contact;
 - explicit peer division links in the hero, then current product panels;
@@ -227,8 +227,10 @@ both immutable tags. The pre-change tag must resolve to `679f3378701af6b04557c0b
 
 ## Visual identity regression
 
-Check equal Sports/Labs hierarchy, teal/slate context on actions and diagrams,
-mineral company backgrounds, dark-section text/focus contrast and social previews.
+Check equal Sports/Labs hierarchy in the shared Graphite + Teal system, neutral
+light reading sections, dark/light text and focus contrast, and retained social
+exports. Ensure no theme selector, query switch, comparison route or review tool
+is included in production. Compare all public asset bytes against the baseline.
 Calculate rendered contrast (including hover states), and verify explicit labels
 and link underlines alongside color. Keep original Motion image bytes, tutorial
 hashes/original links, policy/support text and video IDs unchanged. Browser checks

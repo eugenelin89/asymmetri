@@ -68,9 +68,9 @@ concepts retain their approvals and scientific limits.
 
 ## Visual differentiation, October 7
 
-The homepage makes the peer divisions visible with equal teal/slate fields,
-explicit names, direct product links and fine branch rules. Sports heroes carry
-teal and authentic photography; Labs heroes carry slate and structured semantic
-diagrams. Mineral company pages and shared type/control shapes preserve cohesion.
+The homepage makes the peer divisions visible with equal graphite fields and teal
+accents, explicit names, direct product links and fine branch rules. Sports retains
+authentic photography; Labs retains structured semantic diagrams. Neutral light
+reading sections and shared type/control shapes preserve cohesion.
 The shared-thinking section uses one deep emphasis field. No new content claims,
 route hierarchy, animation, screenshot treatments or media-loading behavior.

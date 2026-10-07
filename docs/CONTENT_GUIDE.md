@@ -296,7 +296,7 @@ retention, scientific or privacy commitments or the October 6 policy date.
 
 `divisions.*.label` provides the short Sports/Labs heading under the shared
 Asymmetri name. Full names, direct product links and statuses retain their
-authority. Do not encode release status only in color. The mineral umbrella,
-teal Sports and slate Labs palettes live in CSS; `site.metadata.themeColor`
-mirrors the umbrella canvas for browser chrome. Static social exports follow
-those palettes without changing their factual descriptions.
+authority. Do not encode release status only in color. Sports and Labs share
+the Graphite + Teal umbrella palette in CSS; Motion retains its product identity.
+`site.metadata.themeColor` mirrors the graphite canvas for browser chrome.
+Existing social exports and all public copy retain their approved contents.

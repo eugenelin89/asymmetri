@@ -3,40 +3,56 @@
 @tailwind utilities;
 
 :root {
-  /* Umbrella palette. Keep raw color values in this token block. */
-  --surface-base: #eef3f2;
-  --surface-raised: #f8faf9;
-  --surface-muted: #e2eae7;
-  --ink: #10201d;
-  --ink-secondary: #52615d;
-  --ink-body: #354641;
-  --line: #cbd6d2;
-  --on-dark: #f8faf9;
-  --on-dark-secondary: #c0d3cc;
-  --line-dark: #3d5550;
-  --brand-primary: #007a70;
-  --brand-bright: #45c5b5;
-  --brand-deep: #005d57;
-  --brand-surface: #deeeea;
-  --sports-primary: #006b64;
-  --sports-surface: #e4efec;
-  --sports-deep: #133b37;
-  --sports-line: #bdd2ca;
-  --labs-primary: #35465e;
-  --labs-surface: #e8edf3;
-  --labs-deep: #202c3d;
-  --labs-line: #c1ccdb;
-  --labs-highlight: #bed0e7;
-  --focus: #267d9f;
-  --theme-primary: var(--brand-primary);
-  --theme-deep: var(--brand-deep);
-  --theme-surface: var(--brand-surface);
-  --theme-line: var(--line);
-  /* Motion keeps its recognizable product color and original image pixels. */
-  --motion-teal: var(--sports-primary);
-  --motion-mineral: var(--sports-surface);
-  --motion-text: var(--sports-deep);
-  --motion-line: var(--sports-line);
+  /* Selected Graphite + Teal identity. Raw palette values stay centralized. */
+  color-scheme: dark;
+  --graphite: #0c1111;
+  --graphite-raised: #141b1a;
+  --graphite-soft: #1a2321;
+  --light-surface: #f5f7f5;
+  --light-raised: #ffffff;
+  --light-ink: #101514;
+  --light-secondary: #4f605a;
+  --light-line: #c7d3ce;
+  --on-dark: #f3f6f4;
+  --on-dark-secondary: #a5b2ae;
+  --line-dark: #293633;
+  --brand-primary: #00a99d;
+  --brand-bright: #29c7b9;
+  --brand-deep: #00766f;
+  --brand-surface: #ddf4f0;
+  /* Deeper variants preserve small-text/button contrast on light surfaces. */
+  --brand-on-light: #006d66;
+  --brand-on-light-hover: #005851;
+  --surface-base: var(--graphite);
+  --surface-raised: var(--graphite-raised);
+  --surface-muted: var(--graphite-soft);
+  --ink: var(--on-dark);
+  --ink-secondary: var(--on-dark-secondary);
+  --ink-body: var(--on-dark-secondary);
+  --line: var(--line-dark);
+  /* Existing division aliases share the same umbrella identity. */
+  --sports-primary: var(--brand-bright);
+  --sports-surface: var(--graphite-raised);
+  --sports-deep: var(--graphite);
+  --sports-line: var(--line-dark);
+  --labs-primary: var(--brand-bright);
+  --labs-surface: var(--graphite-raised);
+  --labs-deep: var(--graphite);
+  --labs-line: var(--line-dark);
+  --labs-highlight: var(--on-dark-secondary);
+  --focus: var(--brand-bright);
+  --theme-primary: var(--brand-bright);
+  --theme-deep: var(--on-dark);
+  --theme-surface: var(--graphite-raised);
+  --theme-line: var(--line-dark);
+  --action-bg: var(--brand-primary);
+  --action-hover: var(--brand-bright);
+  --action-ink: var(--graphite);
+  /* Motion's product identity is independent of the umbrella palette. */
+  --motion-teal: #006b64;
+  --motion-mineral: #e4efec;
+  --motion-text: #133b37;
+  --motion-line: #bdd2ca;
   --sans:
     "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
@@ -57,9 +73,9 @@
 }
 
 html {
-  background: var(--ink);
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
+  background: var(--graphite);
 }
 
 body {
@@ -122,8 +138,8 @@ p {
 }
 
 ::selection {
-  background: var(--brand-bright);
-  color: var(--ink);
+  background: var(--brand-primary);
+  color: var(--graphite);
 }
 
 :focus-visible {
@@ -134,32 +150,6 @@ p {
 .site {
   min-height: 100vh;
   overflow: clip;
-}
-
-/* Shared components inherit a division context; the company header stays neutral. */
-.sports-page,
-.motion-page,
-.tutorial-page,
-.about-origin,
-.product-showcase--motion,
-.division-overview__sports {
-  --theme-primary: var(--sports-primary);
-  --theme-deep: var(--sports-deep);
-  --theme-surface: var(--sports-surface);
-  --theme-line: var(--sports-line);
-}
-.labs-page,
-.botsquad-page,
-.product-showcase--botsquad,
-.division-overview__labs {
-  --theme-primary: var(--labs-primary);
-  --theme-deep: var(--labs-deep);
-  --theme-surface: var(--labs-surface);
-  --theme-line: var(--labs-line);
-}
-.site-header {
-  --theme-primary: var(--brand-primary);
-  --theme-deep: var(--brand-deep);
 }
 
 .shell {
@@ -243,7 +233,7 @@ p {
 }
 
 .text-link:hover {
-  color: var(--theme-deep);
+  color: var(--ink);
 }
 
 .skip-link {
@@ -267,6 +257,8 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
+  --theme-primary: var(--brand-bright);
+  --theme-deep: var(--on-dark);
 }
 
 
@@ -348,9 +340,9 @@ p {
   top: calc(100% + 0.75rem);
   width: min(20rem, calc(100vw - 2rem));
   padding: 0.5rem 1rem;
-  background: var(--surface-raised);
   border: 1px solid var(--line);
   box-shadow: 0 0.5rem 1.5rem rgb(0 0 0 / 6%);
+  background: var(--graphite-raised);
 }
 .nav-domain__links a {
   display: flex;
@@ -431,8 +423,8 @@ p {
 
 
 .approach {
-  background: var(--surface-raised);
   color: var(--ink);
+  background: var(--graphite-raised);
 }
 
 .approach__heading {
@@ -501,6 +493,7 @@ p {
   margin-top: clamp(3rem, 6vw, 6rem);
   max-width: 38ch;
   padding-left: 1.25rem;
+  border-left-color: var(--brand-primary);
 }
 
 .closing {
@@ -534,10 +527,10 @@ p {
 }
 
 .site-footer {
-  background: var(--ink);
   border-top: 1px solid var(--line-dark);
-  color: var(--surface-raised);
   padding: 2.75rem 0;
+  background: var(--graphite);
+  color: var(--on-dark);
 }
 
 .site-footer__inner {
@@ -549,9 +542,9 @@ p {
 
 .site-footer__brand p,
 .site-footer__meta {
-  color: var(--on-dark-secondary);
   font-size: var(--type-footer);
   line-height: 1.5;
+  color: var(--on-dark-secondary);
 }
 
 .site-footer__brand p {
@@ -566,9 +559,9 @@ p {
 }
 
 .site-footer__meta a {
-  color: var(--surface-raised);
   display: inline-block;
   padding: 0.25rem 0;
+  color: var(--on-dark);
 }
 
 .site-footer__links {
@@ -1193,7 +1186,7 @@ p {
 
 /* Tutorial: server-rendered reading, progressively enhanced navigation. */
 .motion-tutorial-link { display: inline-block; margin-top: 1.5rem; }
-.tutorial-hero { background: var(--motion-mineral); border-bottom: 1px solid var(--motion-line); padding: 2rem 0 3rem; }
+.tutorial-hero { background: var(--motion-mineral); border-bottom: 1px solid var(--motion-line); padding: 2rem 0 3rem; color: var(--motion-text); }
 .tutorial-back { display: inline-flex; align-items: center; min-height: 44px; margin-bottom: 1.5rem; color: var(--motion-teal); font-weight: 650; }
 .tutorial-hero h1 { max-width: 18ch; font-size: clamp(2.6rem, 5.2vw, 5rem); line-height: 1.04; margin-top: .75rem; color: var(--motion-text); }
 .tutorial-hero__intro { max-width: 56ch; font-size: clamp(1.1rem, 1.5vw, 1.35rem); margin-top: 1.25rem; }
@@ -1320,14 +1313,14 @@ p {
   margin: 1.3rem 0 1.75rem;
 }
 .home-hero .hero__support { max-width: 43ch; }
-.home-hero__foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 3rem; color: var(--ink-secondary); font-size: 0.875rem; }
+.home-hero__foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 3rem; color: var(--ink-secondary); font-size: 0.875rem; position: relative; }
 .home-hero__foot a { display: inline-flex; align-items: center; gap: 1rem; min-height: 44px; color: var(--ink); }
 .home-philosophy { padding: clamp(3rem, 6vw, 6rem) 0; border-block: 1px solid var(--line); }
 .home-philosophy h2 { max-width: 15ch; }
 .home-philosophy p { color: var(--ink-body); font-size: var(--type-body); max-width: 42ch; }
 .product-domain { display: inline-flex; align-items: center; min-height: 44px; color: var(--theme-primary); font-size: 0.9rem; text-decoration: underline; text-underline-offset: 0.2em; }
 .portfolio {
-  background: var(--surface-raised);
+  background: var(--graphite);
 }
 .portfolio__heading {
   margin-bottom: clamp(3rem, 5vw, 5rem);
@@ -1348,10 +1341,11 @@ p {
   margin-top: 2rem;
 }
 .product-showcase--botsquad {
-  background: var(--labs-surface);
+  background: var(--graphite-raised);
 }
 .product-showcase--motion {
   background: var(--motion-mineral);
+  border-top-color: var(--motion-teal);
 }
 .product-showcase__copy .product-showcase__index {
   font-size: 0.8125rem;
@@ -1472,7 +1466,7 @@ p {
 }
 .botsquad-workflow,
 .botsquad-access {
-  background: var(--surface-raised);
+  background: var(--graphite);
 }
 .botsquad-workflow .workflow-list li > span {
   color: var(--theme-primary);
@@ -1578,17 +1572,17 @@ p {
   align-items: center;
   gap: 0.75rem;
   border: 1px solid var(--line-dark);
-  background: var(--surface-raised);
-  color: var(--ink);
   font-size: clamp(0.875rem, 1.4vw, 1.1rem);
   padding: 0.8rem 1.2rem;
   margin-top: 2rem;
   min-height: 3rem;
   cursor: pointer;
   font-weight: 650;
+  background: var(--light-surface);
+  color: var(--light-ink);
 }
 .video-load:hover {
-  background: var(--surface-base);
+  background: var(--light-raised);
 }
 .video-load > span {
   font-size: 0.8em;
@@ -1629,6 +1623,7 @@ p {
   border: 1px solid var(--line);
   background: var(--surface-base);
   cursor: pointer;
+  color: var(--ink);
 }
 .video-failed {
   margin-top: 1.5rem;
@@ -1749,12 +1744,12 @@ p {
   gap: 1rem;
 }
 .division-overview li {
-  background: var(--theme-surface);
   border-top: 3px solid var(--theme-primary);
   display: flex;
   flex-direction: column;
   padding: clamp(1rem, 2vw, 1.75rem);
   position: relative;
+  background: var(--graphite-raised);
 }
 .division-overview li::before {
   content: "";
@@ -1768,7 +1763,6 @@ p {
 .division-overview__number {
   align-self: start;
   border: 1px solid var(--theme-primary);
-  color: var(--theme-primary);
   font-size: .75rem;
   font-variant-numeric: tabular-nums;
   display: grid;
@@ -1776,11 +1770,13 @@ p {
   width: 2rem;
   height: 2rem;
   margin-bottom: 2rem;
+  border-color: var(--line-dark);
+  color: var(--on-dark-secondary);
 }
 .division-overview__sports .division-overview__number { border-radius: 50%; }
 .division-overview h2 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); letter-spacing: -.035em; }
 .division-overview h2 a { display: flex; align-items: start; justify-content: space-between; gap: .5rem; min-height: 44px; }
-.division-overview h2 a > span:last-child { font-size: 1.1rem; }
+.division-overview h2 a > span:last-child { font-size: 1.1rem; color: var(--brand-bright); }
 .division-overview__parent { display: block; font-size: .875rem; font-weight: 500; letter-spacing: 0; margin-bottom: .4rem; }
 .division-overview li > div { display: flex; flex: 1; flex-direction: column; }
 .division-overview li p { margin-block: 1rem 1.5rem; max-width: 31ch; color: var(--ink-secondary); }
@@ -1810,25 +1806,27 @@ p {
   .motion-family-link { margin-left: 0; display: flex; width: fit-content; }
 }
 
-/* Mineral umbrella, movement in teal, systems in slate. */
+/* Shared geometry for the umbrella and its two peer divisions. */
 .home-hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
 .home-philosophy { background: var(--surface-raised); }
 .sports-page .hero, .motion-hero { background: var(--sports-surface); }
-.motion-product { background: var(--surface-raised); border-top: 3px solid var(--sports-primary); }
-.sports-nav { background: var(--sports-deep); color: var(--on-dark); }
+.motion-product { border-top: 3px solid var(--sports-primary); background: var(--light-surface); border-top-color: var(--motion-teal); }
+.sports-nav { background: var(--graphite-raised); color: var(--on-dark); }
 .sports-nav .shell > span { color: var(--on-dark-secondary); }
 .sports-nav :focus-visible,
 .video-poster :focus-visible,
 .site-footer :focus-visible,
 .home-page .company-common :focus-visible,
 .botsquad-page .company-common :focus-visible { outline-color: var(--brand-bright); }
-.sports-page .hero__figure { border-bottom: 4px solid var(--sports-primary); }
+.sports-page .hero__figure { border-bottom: 4px solid var(--sports-primary); border-bottom-color: var(--brand-primary); }
 .labs-hero, .botsquad-hero { background: var(--labs-surface); }
 .labs-direction, .worker-flow {
-  background: var(--surface-raised);
   border: 1px solid var(--labs-line);
   border-top: 3px solid var(--labs-primary);
   padding: clamp(1.25rem, 2.5vw, 2.5rem);
+  background: var(--graphite-raised);
+  border-color: var(--line-dark);
+  border-top-color: var(--brand-primary);
 }
 .labs-direction ol, .worker-flow ol { border-left: 1px solid var(--labs-line); margin-left: .25rem; }
 .labs-direction li, .worker-flow li { border-color: var(--labs-line); padding-left: 1.25rem; position: relative; }
@@ -1839,7 +1837,7 @@ p {
   top: 1.8rem;
   width: 7px;
   height: 7px;
-  background: var(--labs-primary);
+  background: var(--brand-bright);
 }
 .product-showcase { border-top: 3px solid var(--theme-primary); }
 .product-showcase__copy .product-showcase__index { color: var(--theme-primary); }
@@ -1856,7 +1854,7 @@ p {
 .brand-logo--ink { color: var(--ink); }
 .brand-logo--canvas { color: var(--on-dark); }
 .brand-logo__accent { fill: var(--brand-primary); }
-.brand-logo--canvas .brand-logo__accent { fill: var(--brand-bright); }
+.brand-logo--canvas .brand-logo__accent { fill: var(--brand-primary); }
 @media (max-width: 1100px) {
   .home-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .home-hero__copy { max-width: 46rem; }
@@ -1867,4 +1865,98 @@ p {
   .division-overview li { padding: 1.25rem; }
   .division-overview li + li::before { display: none; }
   .division-overview__number { margin-bottom: 1rem; }
+}
+/* Graphite framing and light reading contexts share one Asymmetri palette. */
+:where(.sports-page, .motion-page, .tutorial-page, .labs-page, .botsquad-page) {
+  --theme-deep: var(--on-dark);
+}
+.site-header, .home-hero, .sports-page .hero, .motion-hero,
+.labs-hero, .botsquad-hero, .about-hero { background: var(--graphite); }
+.site-header .brand-logo__accent { fill: var(--brand-primary); }
+.site-header .primary-nav :is(a:hover, summary:hover),
+.site-header .nav-domain[open] summary { color: var(--brand-bright); }
+.button--primary, .button--ink {
+  background: var(--action-bg);
+  color: var(--action-ink);
+  border-color: var(--action-bg);
+  border-radius: 2px;
+}
+.button--primary:hover, .button--ink:hover {
+  background: var(--action-hover);
+  border-color: var(--action-hover);
+  color: var(--action-ink);
+}
+/* A light reading plane interrupts the dark shell. Sports and Motion keep
+   more light than Labs; these selectors do not alter section order or size. */
+.home-philosophy, .product-showcase--motion, .story, .motion-intro,
+.motion-page :is(.introduction-video, .motion-gap, .motion-workflow,
+  .motion-evidence, .motion-history, .motion-study, .motion-limits,
+  .motion-family, .motion-concepts, .motion-privacy),
+.sports-page .motion-family, .motion-product,
+.about-page main > .section:not(.about-next),
+.utility-page, .tutorial-page main {
+  color-scheme: light;
+  --surface-base: var(--light-surface);
+  --surface-raised: var(--light-raised);
+  --surface-muted: var(--light-line);
+  --ink: var(--light-ink);
+  --ink-secondary: var(--light-secondary);
+  --ink-body: var(--light-secondary);
+  --line: var(--light-line);
+  --theme-primary: var(--brand-on-light);
+  --theme-deep: var(--light-ink);
+  --theme-line: var(--light-line);
+  --sports-primary: var(--brand-on-light);
+  --labs-primary: var(--brand-on-light);
+  --labs-line: var(--light-line);
+  --focus: var(--brand-on-light);
+  --action-bg: var(--brand-on-light);
+  --action-hover: var(--brand-on-light-hover);
+  --action-ink: var(--light-raised);
+  background: var(--light-surface);
+  color: var(--light-ink);
+}
+.motion-page :is(.motion-evidence, .motion-family, .motion-concepts),
+.sports-page .motion-family { background: var(--motion-mineral); }
+.motion-page :is(.motion-gap, .motion-history, .motion-limits) {
+  border-top: 1px solid var(--line);
+}
+.tutorial-page main { --theme-primary: var(--motion-teal); }
+.product-showcase, .division-overview li { border-top-color: var(--brand-primary); }
+.product-showcase--motion { border-top-color: var(--motion-teal); }
+.product-showcase--motion .product-showcase__index { color: var(--motion-teal); }
+.home-hero__foot::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 3.25rem;
+  height: 2px;
+  background: var(--brand-primary);
+}
+.product-showcase--botsquad .worker-flow { background: var(--graphite); }
+.labs-direction li > span, .worker-flow li > span:first-child { color: var(--on-dark-secondary); }
+.labs-product, .botsquad-example { background: var(--graphite-raised); }
+.labs-product__card, .access-grid > div { border-top-color: var(--brand-primary); }
+.company-common, .home-page .company-common, .botsquad-page .company-common,
+.closing, .about-next {
+  background: var(--graphite);
+  color: var(--on-dark);
+  border-top: 1px solid var(--line-dark);
+}
+.home-page .company-common .eyebrow, .home-page .company-common .text-link,
+.botsquad-page .company-common .eyebrow { color: var(--brand-bright); }
+.closing .product-details { --theme-line: var(--line-dark); }
+.video-poster {
+  background: var(--graphite-soft);
+  color: var(--on-dark);
+}
+.video-poster__copy > span, .introduction-video--motion .video-poster__copy > span {
+  color: var(--on-dark);
+}
+/* Two-tone focus remains visible on both colored actions and mixed surfaces. */
+.button:focus-visible { box-shadow: 0 0 0 2px var(--graphite); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }

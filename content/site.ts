@@ -33,7 +33,7 @@ export const site = {
     descriptor: "Technology for individuals and small teams",
   },
   metadata: {
-    themeColor: "#EEF3F2",
+    themeColor: "#0C1111",
     title: "Asymmetri | Build an Asymmetric Advantage",
     description:
       "Technology that gives people and small teams more capability. Asymmetri Sports builds sports technology; Asymmetri Labs explores experimental, open-source work.",

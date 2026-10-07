@@ -1027,3 +1027,17 @@ routes passed loopback and both public hosts. The separate
 `website-visual-identity-update-2026-10-07` release tag is created only after the
 new production passes verification; use a unique suffix if occupied. Verify both
 remote peeled targets, never move/delete them.
+
+
+## Selected Graphite + Teal release
+
+Use the staged visual-identity process above for this CSS/browser-theme-color
+promotion. Routes, configurations, dependencies and all public assets remain
+byte-identical to the preceding release. No experimental review tools are copied.
+The previous verified production marker `website-visual-identity-update-2026-10-07`
+remains immutable at `c35ed81cd71bcfa0a96fd510e74046cff1a92386`.
+After the pushed final main revision passes production verification, create an
+annotated `website-dark-teal-theme-2026-10-07` tag at that exact revision (use a
+unique suffix if occupied), push it and verify both remote peeled targets. Record
+the exact source/build IDs, retained candidate/rollback paths and health evidence
+in the external release receipt. Preserve historical exploration commits and tags.

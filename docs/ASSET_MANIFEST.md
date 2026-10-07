@@ -403,3 +403,14 @@ favicon/app-icon fallbacks remain intact; their older orange is intentional
 preservation, not the active website palette. Video IDs, local text posters,
 explicit activation and disclosures remain; posters inherit division colors.
 Semantic hierarchy/flow visuals are CSS and real text, not fabricated screens.
+
+
+## Selected Graphite + Teal promotion — October 7, 2026
+
+This release adds, replaces, generates and removes no public asset. All tracked
+`public/` files retain their previous bytes, dimensions, sources, rights and alt
+text. Motion screenshots/icons, tutorial originals and authentic photography are
+unchanged. The existing rendered logo receives its accent through CSS, without
+geometry changes. Existing social exports and favicons remain approved retained
+assets from the preceding palette; `VISUAL_IDENTITY.md` is current CSS authority.
+No exploration screenshots, comparison pages or review assets ship with production.

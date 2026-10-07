@@ -44,9 +44,9 @@ Current decision, source review and verified pre-change rollback marker:
 [October 7 company architecture](docs/COMPANY_ARCHITECTURE_2026-10-07.md).
 The September portfolio record and prompt journals remain historical evidence.
 
-The visual identity uses a cool mineral umbrella, teal Sports/Motion and slate
-Labs/BotSquad. Shared CSS tokens control surfaces, actions and diagrams; authentic
-product imagery is unchanged. See [Visual identity](docs/VISUAL_IDENTITY.md).
+The selected Graphite + Teal identity gives Sports and Labs one shared dark
+umbrella system, with neutral light reading sections. Motion retains its own teal
+and all existing assets. Shared CSS tokens control surfaces, actions and diagrams. See [Visual identity](docs/VISUAL_IDENTITY.md).
 
 ## Technology
 

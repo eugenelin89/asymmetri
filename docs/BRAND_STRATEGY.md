@@ -53,8 +53,8 @@ current and native mobile is deferred. Current product authority is recorded in
 
 ## Visual expression
 
-The October 7 identity refinement expresses the peer divisions through a mineral
-umbrella, teal Sports and slate Labs. Sports stays photographic and grounded in
+The selected October 7 Graphite + Teal identity gives both peer divisions one
+shared umbrella palette with neutral light reading surfaces. Sports stays photographic and grounded in
 movement; Labs uses structured handoffs and connected rows. Shared typography,
 spacing, controls and equal division hierarchy hold them together. Orange no
 longer defines the active site. This is an evolution of Asymmetri’s own product
