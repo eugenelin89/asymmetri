@@ -24,7 +24,9 @@ Useful tools change what someone can do with the resources they already have.
 Sports and Labs share a philosophy, not a claimed technical platform: useful
 capability, results connected to their sources, and human judgment/control.
 Motion supports coaching; it does not replace coaches. BotSquad explores
-bounded AI coordination; it does not promise unlimited autonomy or success.
+persistent AI teams that can talk, research, build and review bounded work. Its public
+story leads with the experiment and concrete capabilities, with current limitations
+and future directions kept visible. It does not promise unlimited autonomy or success.
 
 ## Founder origin
 

@@ -21,6 +21,8 @@ individual Hitting and one professional Cloud-backed Team app remain planned.
 Team Pitching/Hitting/Baseball are entitlements within that one Team app.
 BotSquad is experimental, MIT licensed and self-hosted on an operator-controlled
 Ubuntu HQ, accessed through a private SSH-tunnel browser. Native mobile is deferred.
+The [BotSquad public-story review](docs/BOTSQUAD_PAGE_REVIEW_2026-10-07.md) records
+current evidence, engineering limits and the illustrative Motion workflow.
 
 ## Routes
 
@@ -30,7 +32,7 @@ Ubuntu HQ, accessed through a private SSH-tunnel browser. Native mobile is defer
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Current pitching workflow, evidence, Notes/Reference/Compare, limits and family roadmap |
-| `/botsquad` | Experimental project, workflow, review, current access, approved video and GitHub |
+| `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |

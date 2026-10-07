@@ -1,26 +1,24 @@
 import { botsquad } from "@/content/site";
 
-/** A written example, deliberately presented as prose rather than a simulated UI. */
+/** An illustrative scenario; no simulated product UI or claim of a completed project. */
 export function WorkerExample() {
+  const example = botsquad.example;
   return (
-    <figure className="worker-example">
-      <div className="product-split">
-        <div className="product-heading">
-          <p className="eyebrow">{botsquad.example.eyebrow}</p>
-          <h2>{botsquad.example.headline}</h2>
-        </div>
-        <blockquote>{botsquad.example.request}</blockquote>
-      </div>
-      <ol>
-        {botsquad.example.steps.map((step, index) => (
+    <figure className="squad-example product-split">
+      <figcaption className="product-heading">
+        <p className="eyebrow">{example.eyebrow}</p>
+        <h2>{example.headline}</h2>
+        <blockquote>{example.request}</blockquote>
+        <p className="squad-example__caption">{example.caption}</p>
+      </figcaption>
+      <ol className="squad-example__flow">
+        {example.steps.map((step, index) => (
           <li key={step.title}>
             <span aria-hidden="true">0{index + 1}</span>
-            <h3>{step.title}</h3>
-            <p>{step.body}</p>
+            <div><h3>{step.title}</h3><p>{step.body}</p></div>
           </li>
         ))}
       </ol>
-      <figcaption>{botsquad.example.caption}</figcaption>
     </figure>
   );
 }

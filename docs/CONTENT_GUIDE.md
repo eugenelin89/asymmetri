@@ -250,11 +250,29 @@ and tutorial facts.
 
 ## BotSquad and introduction videos
 
-BotSquad is MIT licensed, open source and self-hosted. Persistent logical workers
-have durable identity/context and bounded execution, not continuous inference or
-unlimited memory. Current browser access uses a tunnel. Native iOS/no-tunnel access is deferred; the current focus is Personal Operator reliability and daily use. Distinguish
-host-local coordination state from task context sent to configured model services.
-See `PORTFOLIO_REDESIGN.md` for exact reviewed revisions and source precedence.
+The `botsquad` content object owns the goal, worker model, reference team, current
+capabilities, design principles, illustrative workflow, Asymmetri uses, setup steps,
+technical facts, roadmap, human control and source links. Keep this small project-specific
+structure; do not move product facts into JSX or turn it into a generic CMS.
+
+`/botsquad` explains an open-source experiment in persistent AI teams. README/current
+state/validation establish capability, the roadmap and Decision 026 establish current
+focus and deferred ideas, and the white paper supplies design philosophy. Its older
+status/numbering passages are superseded. The dated evidence map is
+[BOTSQUAD_PAGE_REVIEW_2026-10-07.md](BOTSQUAD_PAGE_REVIEW_2026-10-07.md).
+
+Always distinguish implemented workflows, current Personal Operator / Daily Driver work,
+future possibilities and illustrative scenarios. The Hitting example has not been
+performed; Hitting remains planned, and bounded Node engineering does not establish
+Motion iOS build support. Asymmetri uses are reference experiments, not automatic external
+authority. The actual pilot proved one supervised document action and scheduled review,
+not app development, a merged release or business improvement.
+
+BotSquad is MIT licensed and self-hosted. Worker identity/history outlives model sessions;
+context is bounded and idle workers do not call models. Browser work requires explicit
+grants and isolated environments; write acceptance is fixture-only. Current access uses
+an SSH tunnel. Coordination state stays on the operator's host, while configured model
+services may receive bounded context. No hosted login, native iOS or offline inference claim.
 
 Use the owner-corrected English BotSquad video `E5r_lOecC-M` and Motion video
 `kaSatKC8HBg`. A video is explanatory media, not authority for release/capability

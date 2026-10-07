@@ -69,8 +69,12 @@ server. `SiteHeader` includes a skip link and Sports/Labs/About/Contact navigati
 Native exclusive `details` menus work without JS; a small enhancement dismisses on
 outside pointer/Escape and restores focus. Footer links label Motion resources.
 `HomeCapability` now renders the actual two-division hierarchy with direct product
-links. `HomeWorkerFlow`, `WorkerFlow`, `WorkerExample` and `EvidenceChain` preserve
-semantic text visuals and synthetic-example labels. `UtilityPage` is a server article.
+links. `HomeWorkerFlow` retains the homepage summary. On BotSquad, `WorkerFlow` renders the
+reference team as nested semantic lists; `WorkerExample` renders the illustrative Motion
+scenario as an ordered sequence with explicit limitations. `EvidenceChain` retains Motion
+evidence presentation. All diagrams are server-rendered text, with no diagram library.
+BotSquad-specific `.squad-*` CSS uses existing Graphite + Teal tokens. Its native page
+index preserves `#how-it-works`, `#availability` and `#introduction-video`. `UtilityPage` is a server article.
 
 Client components remain limited to tutorial progression, legacy root fragments,
 menu dismissal and deliberate video loading. Video posters load no remote resource.

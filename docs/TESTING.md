@@ -239,3 +239,15 @@ and link underlines alongside color. Keep original Motion image bytes, tutorial
 hashes/original links, policy/support text and video IDs unchanged. Browser checks
 should measure effective innerWidth and look for clipped descendants as well as
 document overflow, since the site container uses overflow clipping.
+
+
+## BotSquad project-page regression
+
+Check the reference hierarchy at 320/390, 768/1024 and 1440px: Atlas owns Maya,
+Turing and Scout; Linus/Ada/Grace remain nested under Turing. Verify native page-index
+anchors, current capability limits, illustrative Hitting label, planned Hitting state,
+and Today / Current focus / Later distinctions. Check source, setup, white paper,
+roadmap and video links. No internal prompt numbers or private workspace identifiers
+belong in public copy. Keep setup and approvals understandable without implying broad
+iOS engineering, browser writes, public hosting or publication authority. Smoke-test
+Labs/home and protected Motion resources on both production hosts.

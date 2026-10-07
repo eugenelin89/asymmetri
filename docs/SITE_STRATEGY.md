@@ -41,12 +41,20 @@ project, with a short description, actual status, prominent GitHub action, detai
 page and MIT license link. Technical explanations stay on `/botsquad`; no future
 projects are invented.
 
-`/botsquad` is an experimental Asymmetri Labs project: MIT licensed, open source
-and self-hosted. It retains its approved video, worker-flow visual, synthetic worked
-example, persistence limits and review/permission explanation. Conversations and
-working groups are current. Personal Operator reliability is the current focus;
-private SSH-tunnel browser access is preferred and native mobile is deferred.
-There is no public HQ login, hosted SaaS, perfect-memory or guaranteed-outcome claim.
+`/botsquad` explains the persistent AI-team experiment: why it exists, what persists,
+the validated reference organization, current functionality, design ideas, an
+illustrative Hitting workflow, Asymmetri reference uses, setup, technical boundaries,
+current focus and open-source entry points. The team and workflow are semantic diagrams,
+not private screenshots. The approved video remains deliberately loaded.
+
+Capabilities come from current README, roadmap, implementation and acceptance records;
+the white paper supplies design ideas and the reference organization, not current status.
+Engineering currently supports bounded Node projects, not the Motion iOS build. The
+Hitting scenario is explicitly illustrative. Motion, website and future Labs uses are
+experiments to explore, not claims of shipped work or standing publication authority.
+Personal Operator / Daily Driver is the current focus. Private SSH-tunnel browser access
+is current; multi-company, federation and native mobile remain deferred. See
+[BotSquad source review](BOTSQUAD_PAGE_REVIEW_2026-10-07.md) for the evidence map.
 
 `/about` connects the practical coaching origin, Motion/Sports, the asymmetric
 capability philosophy and experimental Labs work without inventing corporate history.

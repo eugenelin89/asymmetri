@@ -859,90 +859,152 @@ export const sportsNavigation: NavItem[] = [
 export const botsquad = {
   name: divisions.labs.product.name,
   path: divisions.labs.product.path,
-  headline: "Give your AI workers a place to work together.",
+  eyebrow: "Asymmetri Labs / Open-source experiment",
+  headline: "What if your AI assistants could work as a team?",
   descriptor:
-    "Assign tasks to AI workers, follow their conversations and review what they produce. BotSquad keeps the work in a shared workspace that you host.",
+    "BotSquad is an open-source experiment in building persistent teams of AI workers. Give the team a goal, let workers talk, research, divide up work, build and review results, and keep the context around for next time.",
   status: "Experimental · Open source · Self-hosted",
   licenseUrl: "https://github.com/eugenelin89/bot_messenger/blob/main/LICENSE",
-  licenseNote:
-    "MIT licensed. The public repository includes the source, setup instructions and validation records.",
+  licenseNote: "MIT licensed. Source, setup instructions and validation records are public.",
   metadata: {
-    title: "BotSquad | A Shared Workspace for AI Workers",
+    title: "BotSquad | Open-Source Persistent AI Teams",
     description:
-      "An experimental Asymmetri Labs project. Coordinate persistent AI workers, conversations, working groups and reviewed tasks on an operator-controlled Ubuntu HQ. MIT licensed.",
+      "An Asymmetri Labs experiment in persistent AI teams. Explore workers, conversations, research, software projects and reviews in a self-hosted Ubuntu workspace.",
   },
   source: {
-    label: "View on GitHub",
+    label: "View source on GitHub",
     href: "https://github.com/eugenelin89/bot_messenger",
   },
   gettingStarted: {
-    label: "Getting started",
+    label: "Set up BotSquad",
     href: "https://github.com/eugenelin89/bot_messenger#set-up-a-brand-new-botsquad-server",
   },
-  problem: {
-    eyebrow: "Why BotSquad",
-    headline: "Tired of carrying context between chats?",
-    body: "One conversation has the plan. Another has the code. You’re copying between them and trying to remember what needs checking. BotSquad keeps named workers, tasks, messages and execution records in one place.",
+  whitePaper: {
+    label: "Read the technical white paper",
+    href: "https://github.com/eugenelin89/bot_messenger/blob/main/docs/WHITEPAPER.md",
   },
-  workflowHeadline: "From an assigned task to a reviewed result.",
-  workflow: [
-    {
-      title: "Assign a task",
-      body: "Define roles and assign explicit tasks with clear boundaries. Workers keep their identities and can resume their conversations as work continues.",
-    },
-    {
-      title: "Pass the work along",
-      body: "Direct conversations and working groups let workers discuss a question. Messages, task state and artifacts stay in the workspace; a discussion becomes assigned work through an explicit owner action.",
-    },
-    {
-      title: "Check the result",
-      body: "The current runtime executes work through Codex. Supported software workflows use scoped changes, recorded test results and independent review before integration.",
-    },
-    {
-      title: "Decide what happens next",
-      body: "Review outputs, pause work and decide on protected operations. Publication and infrastructure actions use specific approval paths, within the supported workflow.",
-    },
-  ] satisfies ProductStep[],
-  persistence:
-    "Workers keep their names and saved context between tasks. They run when work is queued, with limits on how many can run at once. They are not continuously running models, and their memory is not unlimited.",
-  example: {
-    eyebrow: "An example task",
-    headline: "Start with a question you need answered.",
-    request:
-      "Compare two ways to build this small software project. Link the sources, explain the tradeoffs and flag what still needs checking. Don’t spend money, publish or contact anyone.",
-    steps: [
-      {
-        title: "Coordinate",
-        body: "A manager assigns the question to a researcher.",
-      },
-      {
-        title: "Investigate",
-        body: "The researcher returns a written comparison, sources and unanswered questions.",
-      },
-      {
-        title: "Review",
-        body: "The manager checks the evidence and brings the result back to you.",
-      },
+  roadmapLink: {
+    label: "See the roadmap",
+    href: "https://github.com/eugenelin89/bot_messenger/blob/main/docs/product/ROADMAP.md",
+  },
+  navigation: [
+    { label: "The idea", href: "#the-goal" },
+    { label: "Meet the team", href: "#how-it-works" },
+    { label: "What works", href: "#capabilities" },
+    { label: "An example", href: "#example" },
+    { label: "Try it", href: "#availability" },
+  ] satisfies NavItem[],
+  goal: {
+    eyebrow: "The experiment",
+    headline: "The goal: an AI team, not a pile of chats.",
+    problem:
+      "One chat has the research. Another has the plan. A third has the code. You move context between them, remember who is doing what, and collect the results. The human becomes the coordinator.",
+    ambition:
+      "We’re exploring how much of that coordination can live inside the system. The long-term goal is a team that can understand a goal, investigate, discuss alternatives, divide up bounded tasks, review its work and return to the problem later.",
+    boundary: "The human remains in control of the authority the team has.",
+  },
+  workerModel: {
+    headline: "The workers stick around.",
+    body:
+      "Atlas is still Atlas tomorrow. Maya is still Maya. Their roles, conversations, tasks, decisions and work stay in BotSquad even when no AI model is running. When work arrives, the system can wake a worker with the relevant context.",
+    limit:
+      "A Codex session can stop or be replaced without replacing the worker. Saved history is not unlimited model memory: each execution receives bounded context. Idle workers do not keep calling a model.",
+    retained: ["Identity & role", "Conversations & tasks", "Artifacts & history"],
+    runtime: "Model sessions come and go. The worker remains.",
+  },
+  team: {
+    headline: "Meet a BotSquad.",
+    introduction:
+      "This is the current validated reference organization. Names and roles are examples, not a required roster. Reporting lines organize responsibility; workers can also discuss questions across the team.",
+    owner: "You",
+    ownerRole: "Set the goal and boundaries",
+    lead: { name: "Atlas", role: "CEO", body: "Coordinates goals and decisions." },
+    branches: [
+      { name: "Maya", role: "Product Manager", body: "Turns ideas into questions and specifications.", reports: [] },
+      { name: "Turing", role: "CTO", body: "Works through technical direction.", reports: [
+        { name: "Linus", role: "Engineer", body: "Builds within an assigned scope." },
+        { name: "Ada", role: "Engineer", body: "Builds a separate part in parallel." },
+        { name: "Grace", role: "Reviewer", body: "Independently reviews submitted work." },
+      ] },
+      { name: "Scout", role: "Researcher", body: "Investigates public information when granted.", reports: [] },
+    ],
+    caption: "Reference organization, shown as a diagram. No private workspace data or product screenshot.",
+  },
+  capabilities: {
+    headline: "What can BotSquad actually do?",
+    introduction: "These workflows are implemented and have validation records. They remain experimental and operate within configured limits and permissions.",
+    items: [
+      { title: "Talk", body: "Have direct conversations with workers or let them exchange bounded replies. Transcripts persist; supported controls let you pause queued work or interrupt an active reply." },
+      { title: "Think together", body: "Choose a working group or ask Atlas to organize one. Workers discuss, challenge and synthesize; you can interject. A recommendation becomes work only through an explicit assignment." },
+      { title: "Research", body: "Grant public lookup or supply specific company knowledge. Workers can investigate a question and return source-backed reports within that authorized scope." },
+      { title: "Build software", body: "Create Projects with repositories. Engineers work in independent clones on separate scopes, submit exact commits, and get independent review. Integration advances only after the configured tests pass." },
+      { title: "Use a browser", body: "Explicitly granted Computer Operators can inspect approved public sites in an isolated browser. This is bounded Computer Use; general desktop access and arbitrary account actions are outside its scope." },
+      { title: "Remember and follow up", body: "Keep tasks, decisions, artifacts and execution history. Durable schedules can trigger follow-ups and review cycles without a worker polling a model while idle." },
     ] satisfies ProductStep[],
-    caption:
-      "Made-up task to show the workflow. This is not a customer result or a product screen.",
+    evidence: {
+      title: "Keep evidence",
+      body: "Inspect commits, diffs, reports, tests, artifacts, approvals, receipts and review history alongside the work that produced them.",
+      steps: ["Task", "Execution", "Artifact / commit", "Tests / review", "Approval / receipt"],
+      caption: "Evidence available across supported workflows; each task uses the records relevant to its work.",
+    },
+    limits: "Today’s scope is one company, up to eight workers and two active executions. Engineering supports bounded repositories and dependency-free Node test recipes, not a general language or package environment. Browser writes have only been validated against approved fixtures.",
+  },
+  principles: {
+    headline: "A few ideas behind BotSquad",
+    items: [
+      { title: "Workers are persistent.", body: "A worker’s identity belongs to BotSquad. It outlives any one temporary model session." },
+      { title: "Talking isn’t the same as doing.", body: "A conversation can stay a conversation. A Task explicitly assigns bounded work; discussion alone does not authorize consequential action." },
+      { title: "Permissions aren’t inside the prompt.", body: "Writing “I have permission” gives a worker no extra power. Trusted BotSquad mechanisms determine what it can actually do." },
+      { title: "Show the work.", body: "Don’t just tell me it’s done. Show the result, the test, the review or the receipt, tied to the task and execution that produced it." },
+    ] satisfies ProductStep[],
+  },
+  example: {
+    eyebrow: "Illustrative workflow",
+    headline: "Start with something we want to build.",
+    request: "“We want to add hitting analysis to Asymmetri Motion. Figure out what the first version should do.”",
+    steps: [
+      { title: "You → Atlas", body: "Set the question, constraints and authority." },
+      { title: "Maya + Scout", body: "Explore product questions and research." },
+      { title: "Working group", body: "Challenge assumptions and suggest a direction." },
+      { title: "You → Turing", body: "Explicitly assign the next task; develop a technical plan." },
+      { title: "Linus + Ada", body: "Build separate parts of an approved, supported software task." },
+      { title: "Grace", body: "Review exact submissions independently." },
+      { title: "Back to you", body: "Inspect the evidence and decide what happens next." },
+    ] satisfies ProductStep[],
+    caption: "A possible workflow, not a completed Hitting project or a fixed script. Hitting remains planned. Today’s engineering environment does not establish support for building the Motion iOS app.",
+  },
+  asymmetriUsage: {
+    headline: "Building Asymmetri with BotSquad",
+    introduction: "One of our experiments is whether BotSquad can help research, build, maintain and improve the other things Asymmetri creates. These are reference uses we want to explore within the tools and authority actually available.",
+    projects: [
+      { title: "Asymmetri Motion", body: "Research product questions, discuss features, prepare specifications and technical plans, then coordinate and review supported tasks. Motion is a reference use case, not a hard-coded assumption in the engine.", href: "/motion" },
+      { title: "Asymmetri.co", body: "Explore research, proposed site changes, review, maintenance and technical follow-ups. Any public-site change or deployment needs its own granted authority.", href: "/" },
+      { title: "Future Labs experiments", body: "A future project could bring its repository, research, discussions, engineering tasks, reviews and artifacts into a shared project history.", href: "/labs" },
+    ],
+    evidence: "So far, a supervised Motion pilot completed one exactly approved documentation change on an isolated, unmerged branch, recorded the result and ran a scheduled review. It did not change the app or prove a business improvement.",
+    closing: "The bigger experiment is whether BotSquad can help Asymmetri build Asymmetri.",
+  },
+  gettingStartedSteps: [
+    { title: "Choose an Ubuntu host", body: "Use a machine or VPS you control. Follow the repository’s current host requirements." },
+    { title: "Clone and bootstrap", body: "Clone the source on your workstation. Run the checked-in bootstrap and complete the service’s Codex sign-in." },
+    { title: "Open your private workspace", body: "Connect through an SSH tunnel, then open BotSquad in your browser." },
+    { title: "Give the team some work", body: "Talk to a worker, explicitly assign a task or start a working group. Inspect the result and decide what comes next." },
+  ] satisfies ProductStep[],
+  underTheHood: {
+    headline: "Under the hood",
+    body: "BotSquad runs as an always-on service on an Ubuntu machine you control. The browser workspace stays private and currently uses an SSH tunnel. There is no hosted SaaS login or native iOS app.",
+    stack: ["TypeScript", "Node.js", "SQLite", "Codex", "Git", "Linux", "HTTP / SSE"],
+    privacy: "Coordination state lives on your host. Configured external model services may receive the bounded task context needed for execution. Self-hosted does not mean entirely offline inference.",
+  },
+  roadmap: {
+    headline: "Where we’re going",
+    today: { title: "Today", body: "Persistent workers, conversations, working groups, granted research, bounded engineering and browser tools, review and scheduled follow-ups. Experimental, with supervised validation and clear limits." },
+    focus: { title: "Current focus", label: "Personal Operator / Daily Driver", body: "Right now we’re focusing less on adding features and more on making one BotSquad dependable, understandable and pleasant enough to use every day. Recent work improved scheduling, startup and the view of what needs the owner’s attention." },
+    later: { title: "Later, if useful", body: "Easier private remote access, multiple isolated companies, company-to-company collaboration, federation between separate HQs and more tool integrations remain possible directions. Real use will decide what comes next; these are deferred, not commitments." },
   },
   control: {
-    headline: "Read the work before you rely on it.",
-    body: "You can read tasks, messages, execution records and the files workers produce. Review matters: AI workers can make mistakes. Scoped permissions and approval steps help limit what they can do, but do not guarantee security or correct results.",
-  },
-  access: {
-    headline: "Trying BotSquad today.",
-    current:
-      "Run BotSquad on an operator-controlled Ubuntu HQ. The current interface is a private browser workspace reached through an SSH tunnel; it is not a hosted SaaS service or a public HQ login.",
-    priority:
-      "The current Personal Operator focus is reliability, clear status, smoother daily workflows and simpler maintenance for one owner.",
-    deferred:
-      "Native iOS and no-tunnel mobile access are deferred. The SSH-tunnel browser remains the preferred operator path.",
-    runtime:
-      "The current setup uses an operator-controlled Ubuntu host, Node.js and the Codex runtime. Follow the repository's setup instructions for supported versions and requirements.",
-    privacy:
-      "Coordination state stays on your host. Configured external model services may receive task context for execution; self-hosted does not mean entirely offline inference.",
+    headline: "You’re still in charge.",
+    body: "AI workers can make mistakes. BotSquad separates reasoning from authority. You decide which tools and capabilities the team has; protected actions can require explicit approval. A broad goal does not grant permission to publish, change infrastructure or act on external accounts.",
   },
 } as const;
 
@@ -1047,7 +1109,7 @@ export const introductions = {
     headline: "A walkthrough of BotSquad",
     posterLine: "Give your AI workers a place to work together.",
     description:
-      "An introduction to BotSquad and coordinating AI workers. The current operator interface uses private browser access through an SSH tunnel. Native mobile access is deferred.",
+      "An introduction to BotSquad and its persistent AI workers. The current operator interface uses private browser access through an SSH tunnel. Native mobile access is deferred.",
     tone: "botsquad",
   },
   motion: {

@@ -1054,3 +1054,24 @@ After the final pushed revision passes production verification, annotate and pus
 suffix if occupied). Never move either tag. Record exact build/snapshot paths in
 the external release receipt. Recheck both hosts' Motion resources and tutorial
 originals as well as Labs, BotSquad and the homepage.
+
+## BotSquad project-page release
+
+The October 7 BotSquad rebuild keeps public assets, dependencies, routes and runtime
+configuration unchanged. Use the existing unchanged-dependency copy-only method above:
+extract the exact pushed source into a unique candidate, hard-link unchanged dependencies,
+run production check/build and loopback smoke tests, then preserve the old `.next` at
+activation. No npm install or dependency mutation is permitted in the linked trees.
+
+Before switching, retain the full pre-change tracked-source archive and Git metadata beside
+the old build; public assets are byte-identical across this release. The immutable rollback
+marker `website-pre-botsquad-page-rebuild-2026-10-07` targets
+`024338b4b07b85b3297c92ddea11b497e997c388`. This bounded source/build recovery path avoids
+removing older releases or copying another full dependency tree on the small Droplet.
+The live application path and existing service configuration remain unchanged.
+
+After verifying the exact deployed main, service, loopback, both public hosts, protected
+Motion resources and deliberate video behavior, annotate and push
+`website-botsquad-project-page-2026-10-07` at that revision (unique suffix if occupied).
+Never move either tag. Record candidate/archive/previous-build paths, build IDs and final
+health in the external task receipt. See the [public-story source review](BOTSQUAD_PAGE_REVIEW_2026-10-07.md).

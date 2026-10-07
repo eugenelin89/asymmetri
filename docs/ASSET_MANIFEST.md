@@ -414,3 +414,23 @@ unchanged. The existing rendered logo receives its accent through CSS, without
 geometry changes. Existing social exports and favicons remain approved retained
 assets from the preceding palette; `VISUAL_IDENTITY.md` is current CSS authority.
 No exploration screenshots, comparison pages or review assets ship with production.
+
+
+## BotSquad project-page diagrams, October 7, 2026
+
+No public image, logo, social export, font or video file was added, removed or changed.
+The existing `WorkerFlow` product-page visual is replaced by a semantic reference-team
+hierarchy; `WorkerExample` replaces the generic comparison with an illustrative Hitting
+workflow. Homepage `HomeWorkerFlow` is unchanged. New retained-context labels and evidence
+rows are HTML/CSS, not raster assets or app screenshots.
+
+- Source: original website markup/CSS; names/reporting structure from the public BotSquad
+  white paper at `968a0e2b8c96eb1f1bde397227f4fab8e4e30c76`; scenario directed by owner.
+- Dimensions/processing: fluid text diagrams; three team branches become a nested single
+  column below 700px. No image processing or remote resources.
+- Public role: explain persistence, responsibility, evidence and a possible reference use.
+- Text alternative: the visible nested/ordered lists supply the complete reading order;
+  figure labels/captions identify the reference team and illustrative, unperformed scenario.
+- Rights/privacy: original presentation of public MIT-source facts and owner-requested copy;
+  no private HQ records, athlete data, third-party photos or fabricated product screens.
+- Video: approved `E5r_lOecC-M`, local typographic poster and deliberate activation remain.
