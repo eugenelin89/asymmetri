@@ -17,7 +17,7 @@ export default function LabsPage() {
               <h1>{labs.headline}</h1>
               <p className="hero__support">{labs.introduction}</p>
               <div className="button-row">
-                <a className="button button--accent" href={labs.productLink.href}>
+                <a className="button button--primary" href={labs.productLink.href}>
                   {labs.productLink.label}
                 </a>
                 <a className="text-link text-link--light" href={labs.approachLink.href}>

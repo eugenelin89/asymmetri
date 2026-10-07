@@ -290,3 +290,13 @@ experimental Asymmetri Labs project, not hosted SaaS. Investment/Ask BotSquad re
 design-only and are intentionally absent from public copy. Current umbrella name
 references in Motion policy are updated to Asymmetri without changing handling,
 retention, scientific or privacy commitments or the October 6 policy date.
+
+
+## Division presentation
+
+`divisions.*.label` provides the short Sports/Labs heading under the shared
+Asymmetri name. Full names, direct product links and statuses retain their
+authority. Do not encode release status only in color. The mineral umbrella,
+teal Sports and slate Labs palettes live in CSS; `site.metadata.themeColor`
+mirrors the umbrella canvas for browser chrome. Static social exports follow
+those palettes without changing their factual descriptions.

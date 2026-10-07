@@ -9,7 +9,7 @@ import { SiteHeader } from "@/components/site-header";
 
 export default function SportsPage() {
   return (
-    <div className="site">
+    <div className="site sports-page">
       <SiteHeader />
       <main id="main-content" tabIndex={-1}>
         <nav className="sports-nav" aria-label="Asymmetri Sports navigation">
@@ -31,7 +31,7 @@ export default function SportsPage() {
               <h1>{sports.hero.headline}</h1>
               <p className="hero__support">{sports.hero.support}</p>
               <div className="button-row">
-                <a className="button button--accent" href="#story">
+                <a className="button button--primary" href="#story">
                   Our story
                 </a>
                 <a className="text-link text-link--light" href="#contact">

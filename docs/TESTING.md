@@ -60,7 +60,8 @@ For visual, layout, or navigation changes, verify the affected routes at:
 - 390 CSS pixels;
 - 768 CSS pixels;
 - 1024 CSS pixels;
-- 1440 CSS pixels.
+- 1440 CSS pixels;
+- 1920 CSS pixels for wide desktop.
 
 Check:
 
@@ -74,7 +75,7 @@ Check:
   `#products` and company `#contact` stay on the company homepage;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
-- paper-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
+- mineral-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
   product statuses and distinct product panels at all widths;
 - homepage introduction → principle → products → shared thinking → contact;
 - explicit peer division links in the hero, then current product panels;
@@ -222,3 +223,14 @@ Verify no pre-Load Google/YouTube requests and both exact approved video IDs.
 For the route-change deployment, use the complete isolated-candidate procedure,
 verify the source SHA/build ID, retain the full old directory and remotely verify
 both immutable tags. The pre-change tag must resolve to `679f3378701af6b04557c0bebff15120f21e3754`.
+
+
+## Visual identity regression
+
+Check equal Sports/Labs hierarchy, teal/slate context on actions and diagrams,
+mineral company backgrounds, dark-section text/focus contrast and social previews.
+Calculate rendered contrast (including hover states), and verify explicit labels
+and link underlines alongside color. Keep original Motion image bytes, tutorial
+hashes/original links, policy/support text and video IDs unchanged. Browser checks
+should measure effective innerWidth and look for clipped descendants as well as
+document overflow, since the site container uses overflow clipping.

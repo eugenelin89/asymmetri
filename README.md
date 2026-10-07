@@ -44,6 +44,10 @@ Current decision, source review and verified pre-change rollback marker:
 [October 7 company architecture](docs/COMPANY_ARCHITECTURE_2026-10-07.md).
 The September portfolio record and prompt journals remain historical evidence.
 
+The visual identity uses a cool mineral umbrella, teal Sports/Motion and slate
+Labs/BotSquad. Shared CSS tokens control surfaces, actions and diagrams; authentic
+product imagery is unchanged. See [Visual identity](docs/VISUAL_IDENTITY.md).
+
 ## Technology
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata

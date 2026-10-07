@@ -1,16 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f7f5f0"/>
+  <rect width="1200" height="630" fill="#eef3f2"/>
+  <rect x="50" y="478" width="542" height="128" fill="#e4efec"/>
+  <rect x="608" y="478" width="542" height="128" fill="#e8edf3"/>
+  <path d="M50 478h542" stroke="#006b64" stroke-width="3"/>
+  <path d="M608 478h542" stroke="#35465e" stroke-width="3"/>
   <g font-family="Arial, Helvetica, sans-serif">
-    <text x="70" y="88" fill="#a43c1a" font-size="26">Asymmetri</text>
-    <g fill="#0e1110" font-size="82" font-weight="500" letter-spacing="-3">
+    <text x="70" y="88" fill="#007a70" font-size="26">Asymmetri</text>
+    <g fill="#10201d" font-size="82" font-weight="500" letter-spacing="-3">
       <text x="66" y="236">Build an</text>
       <text x="66" y="328">asymmetric advantage.</text>
     </g>
-    <text x="70" y="409" fill="#4b554f" font-size="25">Technology for individuals and small teams.</text>
-    <path d="M70 475h1060" stroke="#d7dcd8"/>
-    <text x="70" y="533" fill="#0e1110" font-size="25">Asymmetri Sports</text>
-    <text x="70" y="573" fill="#4b554f" font-size="20">Asymmetri Motion</text>
-    <text x="640" y="533" fill="#0e1110" font-size="25">Asymmetri Labs</text>
-    <text x="640" y="573" fill="#4b554f" font-size="20">BotSquad · Experimental and open source</text>
+    <text x="70" y="409" fill="#52615d" font-size="25">Technology for individuals and small teams.</text>
+    <text x="70" y="533" fill="#10201d" font-size="25">Asymmetri Sports</text>
+    <text x="70" y="573" fill="#52615d" font-size="20">Asymmetri Motion</text>
+    <text x="640" y="533" fill="#10201d" font-size="25">Asymmetri Labs</text>
+    <text x="640" y="573" fill="#52615d" font-size="20">BotSquad · Experimental and open source</text>
   </g>
 </svg>

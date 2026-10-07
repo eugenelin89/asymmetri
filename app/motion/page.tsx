@@ -60,7 +60,7 @@ export default function MotionPage() {
               <p className="motion-hero__name">{motion.name}</p>
               <h1>{motion.headline}</h1>
               <p className="hero__support">{motion.hero.support}</p>
-              <a className="button button--accent" href={motion.hero.link.href}>
+              <a className="button button--primary" href={motion.hero.link.href}>
                 {motion.hero.link.label}
               </a>
               <a className="text-link motion-family-link" href="#motion-family">Explore the Motion family ↓</a>

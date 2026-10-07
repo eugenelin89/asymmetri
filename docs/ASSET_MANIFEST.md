@@ -380,3 +380,26 @@ structures, not product screenshots or fabricated evidence. Existing BotSquad
 flow/example, Explorer concepts and all tutorial originals retain their labels,
 bytes and URLs. No new bitmap, stock photo, generated media or video is added.
 Approved videos keep their IDs, local posters and explicit privacy-aware loading.
+
+
+## Visual identity differentiation, October 7, 2026
+
+Supersedes palette roles above without rewriting their dated provenance. No new
+media, external art, font or athlete depiction. SVG edits and PNG rasterization
+use original repository artwork and the existing Sharp dependency.
+
+| Asset | Dimensions / processing | Public role, description and rights |
+| --- | --- | --- |
+| `public/images/home-social.svg` and `.png` | 1200×630; mineral/teal/slate source edit and Sharp PNG export | Home/About/default preview; Asymmetri, Build an asymmetric advantage, Sports → Motion and Labs → BotSquad. Equal division fields; unchanged copy and original-art rights. |
+| `public/images/labs-social.svg` and `.png` | 1200×630; slate source edit and Sharp PNG export | Labs/BotSquad preview, experimental technology and open-source projects. Existing typography and claims retained; original-art rights. |
+| `public/og.svg` and `public/images/sport-social.png` | 1200×630; deep green/teal source edit and Sharp PNG export | Sports preview, A closer look at the game; athletes, coaches and teams. Retains vector mark/composition, no photo or new rights claim. |
+| `public/favicon.svg` | 96×96 viewBox; color values only | Current browser icon: established asymmetric mark in mineral/teal on deep ink. Original geometry and rights retained. |
+| Inline `Logo` in `components/logo.tsx` | 96×96 viewBox, rendered 32px mark | Header/footer company identity. Existing paths now use CSS ink/teal tokens; accessible company label unchanged. |
+
+All authentic baseball photos, genuine Motion screenshots, Explorer concepts,
+Motion icons and tutorial originals remain byte-identical at stable URLs with
+unchanged alt text and bounded approval. All historical logo sources and raster
+favicon/app-icon fallbacks remain intact; their older orange is intentional
+preservation, not the active website palette. Video IDs, local text posters,
+explicit activation and disclosures remain; posters inherit division colors.
+Semantic hierarchy/flow visuals are CSS and real text, not fabricated screens.

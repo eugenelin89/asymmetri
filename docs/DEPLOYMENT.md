@@ -984,3 +984,46 @@ Verify peeled remote targets. Record the final SHA, tags, candidate/rollback pat
 build IDs and health in the external task receipt. Tags mark source; the retained
 complete directory supplies immediate runtime rollback. Fetchable tracked public
 assets and the exact lockfile supply source-level recovery independent of local builds.
+
+
+## Visual identity release with unchanged routes and dependencies
+
+The October 7 identity update uses only the routine `ssh asymmetri` account. It
+changes CSS, markup and static artwork without changing routing, dependencies or
+runtime configuration. Use the staged copy-only model with these asset safeguards:
+
+1. Inspect clean live `main`, fetch and verify the exact pushed SHA. Confirm
+   package/lockfile, Next/Vinext/Worker configurations and route redirects are
+   identical to the live revision. Record the running build ID and route health.
+2. As the application owner, extract the reviewed Git revision into a unique
+   `/var/tmp/asymmetri-visual-*` candidate. Copy unchanged dependencies independently
+   with `cp -a` (no live install). Run check and Next build with telemetry disabled
+   and `NODE_OPTIONS=--max-old-space-size=1536`. Smoke-test on a free loopback port.
+3. Before activation, preserve a complete independent copy of the live checkout,
+   including Git, public assets, dependencies and `.next`, under a unique
+   `/var/tmp/asymmetri-rollback-*` directory. Check its SHA/build ID and tracked
+   assets. Keep ample disk capacity; never delete other releases to make room.
+4. Stop only `asymmetri.service`. Fast-forward live `main` to the exact reviewed
+   `origin/main`, updating tracked CSS sources and social assets together. Move
+   live `.next` into the candidate as `previous.next`, then move the validated
+   candidate `.next` into the application directory. Start the same service.
+   The application-owned live directory itself stays in place, so no full-server
+   admin route or root-owned parent rename is needed.
+5. Verify live source/build identity, all nine routes on loopback/apex/www,
+   redirects, protected Motion resources, static artwork, logs and browser palette.
+   Keep the complete snapshot and previous build; record paths in the task receipt.
+
+If activation fails, stop the service, preserve all live directory contents
+(including dotfiles) in a unique failed-release directory, then copy the complete
+verified snapshot back into the existing live directory as the application owner.
+Restart and verify the old source/build and routes. Do not reset or clean Git.
+For a later non-emergency source rollback, create reviewed revert commits and
+redeploy through this staged process, preserving shared history.
+
+The immutable pre-update marker is
+`website-pre-visual-identity-update-2026-10-07`, pointing to
+`699c7b22007174300d63673162515165139e43c7`. It was created only after all nine
+routes passed loopback and both public hosts. The separate
+`website-visual-identity-update-2026-10-07` release tag is created only after the
+new production passes verification; use a unique suffix if occupied. Verify both
+remote peeled targets, never move/delete them.

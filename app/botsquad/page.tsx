@@ -35,7 +35,7 @@ export default function BotSquadPage() {
               <p className="hero__support">{botsquad.descriptor}</p>
               <div className="button-row">
                 <a
-                  className="button button--accent"
+                  className="button button--primary"
                   href={botsquad.source.href}
                 >
                   {botsquad.source.label} ↗

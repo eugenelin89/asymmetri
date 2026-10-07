@@ -299,3 +299,15 @@ Optional third-party videos exist only on the two product pages described above.
 Tutorial header and content slots use distinct React keys because both become
 siblings inside each module. Their key prefixes differ; module/step DOM IDs and
 public hashes do not change.
+
+
+## Semantic visual tokens
+
+`app/globals.css` defines the mineral surfaces, ink, brand, Sports and Labs
+palettes. Route/product scopes assign four `--theme-*` variables to shared
+components; the shared header always uses umbrella colors. Motion aliases the
+Sports tokens while retaining its original teal. Tailwind maps to CSS variables.
+`Logo` uses currentColor and a token-driven accent without inline color literals.
+`HomeCapability` is still a server-rendered native-link hierarchy; its equal
+division fields and connectors add no JavaScript. Static social SVGs/rasters and
+favicon match the palette; authentic media and historical source variants remain.

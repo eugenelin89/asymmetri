@@ -10,12 +10,14 @@ export type PrimaryNavItem = NavItem & { children?: readonly NavItem[] };
 
 export const divisions = {
   sports: {
+    label: "Sports",
     name: "Asymmetri Sports",
     path: "/sports",
     description: "Technology for athletes, coaches and teams.",
     product: { name: "Asymmetri Motion", path: "/motion" },
   },
   labs: {
+    label: "Labs",
     name: "Asymmetri Labs",
     path: "/labs",
     description: "Experimental technology and open-source projects.",
@@ -31,6 +33,7 @@ export const site = {
     descriptor: "Technology for individuals and small teams",
   },
   metadata: {
+    themeColor: "#EEF3F2",
     title: "Asymmetri | Build an Asymmetric Advantage",
     description:
       "Technology that gives people and small teams more capability. Asymmetri Sports builds sports technology; Asymmetri Labs explores experimental, open-source work.",

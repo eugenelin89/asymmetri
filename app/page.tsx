@@ -24,7 +24,7 @@ export default function HomePage() {
               <p className="hero__support">{home.hero.support}</p>
               <div className="button-row">
                 <a
-                  className="button button--accent"
+                  className="button button--primary"
                   href={home.hero.primary.href}
                 >
                   {home.hero.primary.label}

@@ -49,3 +49,14 @@ Store names, pricing or availability are inferred. BotSquad is experimental,
 open source, self-hosted and MIT licensed; private SSH-tunnel browser access is
 current and native mobile is deferred. Current product authority is recorded in
 [the October 7 decision](COMPANY_ARCHITECTURE_2026-10-07.md).
+
+
+## Visual expression
+
+The October 7 identity refinement expresses the peer divisions through a mineral
+umbrella, teal Sports and slate Labs. Sports stays photographic and grounded in
+movement; Labs uses structured handoffs and connected rows. Shared typography,
+spacing, controls and equal division hierarchy hold them together. Orange no
+longer defines the active site. This is an evolution of Asymmetri’s own product
+and evidence vocabulary, not an imitation of another company. See
+[Visual identity](VISUAL_IDENTITY.md) for tokens and accessible use.

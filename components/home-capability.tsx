@@ -1,4 +1,4 @@
-import { divisions, home } from "@/content/site";
+import { divisions, home, site } from "@/content/site";
 
 export function HomeCapability() {
   return (
@@ -9,7 +9,12 @@ export function HomeCapability() {
           <li className={`division-overview__${key}`} key={division.path}>
             <span className="division-overview__number" aria-hidden="true">0{index + 1}</span>
             <div>
-              <h2><a href={division.path}>{division.name} <span aria-hidden="true">↗</span></a></h2>
+              <h2>
+                <a href={division.path}>
+                  <span><span className="division-overview__parent">{site.company.name} </span>{division.label}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </h2>
               <p>{division.description}</p>
               <a className="text-link" href={division.product.path}>{division.product.name} →</a>
             </div>

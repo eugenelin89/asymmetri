@@ -11,11 +11,9 @@ export function Logo({
   compact = false,
   className = "",
 }: LogoProps) {
-  const color = tone === "canvas" ? "#FAF8F3" : "#0B1020";
-
   return (
     <span
-      className={`brand-logo ${compact ? "brand-logo--compact" : ""} ${className}`}
+      className={`brand-logo brand-logo--${tone} ${compact ? "brand-logo--compact" : ""} ${className}`}
       aria-label={site.company.name}
     >
       <svg
@@ -25,15 +23,15 @@ export function Logo({
       >
         <path
           d="M10 80 39 17h14L26 68h31l8 12H10Z"
-          fill={color}
+          fill="currentColor"
         />
         <path
           d="m48 39 10-12 29 53H72L52 45l-4-6Z"
-          fill="#C86D45"
+          className="brand-logo__accent"
         />
       </svg>
       {!compact ? (
-        <span className="brand-logo__word" style={{ color }}>
+        <span className="brand-logo__word">
           {site.company.name}
         </span>
       ) : null}
