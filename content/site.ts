@@ -924,6 +924,7 @@ export const botsquad = {
         { name: "Grace", portrait: { src: "/images/botsquad/grace.webp", width: 384, height: 384, alt: "Illustrated portrait of Grace, a BotSquad AI worker." }, role: "Reviewer", body: "Independently reviews submitted work." },
       ] },
       { name: "Scout", portrait: { src: "/images/botsquad/scout.webp", width: 384, height: 384, alt: "Illustrated portrait of Scout, a BotSquad AI worker." }, role: "Researcher", body: "Investigates public information when granted.", reports: [] },
+      { name: "Nix", portrait: { src: "/images/botsquad/nix.webp", width: 384, height: 384, alt: "Illustrated portrait of Nix, a BotSquad AI worker." }, role: "DevOps", body: "Coordinates worker infrastructure with human approval.", reports: [] },
     ],
   },
   capabilities: {

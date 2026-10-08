@@ -244,7 +244,10 @@ document overflow, since the site container uses overflow clipping.
 ## BotSquad project-page regression
 
 Check the reference hierarchy at 320/390, 768/1024 and 1440px: Atlas owns Maya,
-Turing and Scout; Linus/Ada/Grace remain nested under Turing. Verify native page-index
+Turing, Scout and Nix; Linus/Ada/Grace remain nested under Turing. Four branches
+sit alongside each other above 1100px and become a nested single column at or
+below that width. Verify all eight portraits load inside the name/role cards,
+including Nix's DevOps portrait. Verify native page-index
 anchors, current capability limits, illustrative Hitting label, planned Hitting state,
 and Today / Current focus / Later distinctions. Check source, setup, white paper,
 roadmap and video links. No internal prompt numbers or private workspace identifiers

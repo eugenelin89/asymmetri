@@ -256,10 +256,16 @@ technical facts, roadmap, human control and source links. Keep this small projec
 structure; do not move product facts into JSX or turn it into a generic CMS.
 
 Each `botsquad.team` worker includes a `portrait` with its local path, intrinsic
-dimensions and alt text. The seven faces are fictional AI-worker illustrations,
+dimensions and alt text. The eight faces are fictional AI-worker illustrations,
 not human staff photos. Keep names, roles and reporting relationships independent
 of portrait appearance. See [the portrait generation record](BOTSQUAD_PORTRAITS.md)
 and asset manifest when replacing or adding artwork.
+
+Nix is the DevOps worker reporting directly to Atlas. The role and relationship
+are verified in BotSquad `src/control/company.ts` and `src/runtime/codex.ts` at
+`cb2fd43b8ffbec274df294f483d242a90385765e`. His card describes coordination with
+human approval, without implying unrestricted infrastructure access. The four
+Atlas branches use a desktop grid and a nested single column at 1100px and below.
 
 `/botsquad` explains an open-source experiment in persistent AI teams. README/current
 state/validation establish capability, the roadmap and Decision 026 establish current

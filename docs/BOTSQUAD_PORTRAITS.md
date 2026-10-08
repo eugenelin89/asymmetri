@@ -1,6 +1,6 @@
 # BotSquad worker portraits
 
-Date: October 7, 2026. Generated with the built-in image generation tool for the owner's request to add faces to the seven Meet BotSquad worker cards.
+Dates: October 7–8, 2026. Generated with the built-in image generation tool for the owner's request to add faces to Meet BotSquad: the original seven workers, followed by Nix.
 
 ## References and intent
 
@@ -14,7 +14,7 @@ The following prompt was sent separately for each portrait, followed by its subj
 
 ## Subject prompts and outputs
 
-Each generated source is 1254 × 1254 pixels. Final public assets are 384 × 384 WebP at quality 86, encoded with the existing Sharp dependency (effort 6); the complete square composition is retained without cropping or retouching. All seven together are 131,666 bytes. Full-resolution PNG originals are retained in the owner's local artifact folder, outside public assets.
+Each generated source is 1254 × 1254 pixels. Final public assets are 384 × 384 WebP at quality 86, encoded with the existing Sharp dependency (effort 6); the complete square composition is retained without cropping or retouching. The original seven total 131,666 bytes; with Nix, all eight total 146,578 bytes. Full-resolution PNG originals are retained in the owner's local artifact folder, outside public assets.
 
 ### Atlas
 
@@ -72,9 +72,40 @@ Each generated source is 1254 × 1254 pixels. Final public assets are 384 × 384
 - Public asset: `public/images/botsquad/scout.webp`.
 - Alt text: “Illustrated portrait of Scout, a BotSquad AI worker.”
 
+### Nix — October 8 addition
+
+The owner specified an Asian man in his early 20s, a short buzz cut, an earring,
+a tattoo and a white T-shirt. These are character-design choices, not demographic
+facts about a human employee. His DevOps role and direct reporting to Atlas come
+from the public BotSquad implementation at `cb2fd43b8ffbec274df294f483d242a90385765e`
+(`src/control/company.ts`, `initializeNix`, and `src/runtime/codex.ts`).
+
+Generation used the shared prompt above followed by this initial subject prompt:
+
+> Nix, a fictional androgynous adult AI-worker character in their early 30s, warm olive skin, short dark wavy hair with a subtle silver streak near the front, softly angular face, dark brown eyes, no glasses or facial hair, charcoal collared overshirt over a muted deep-teal crewneck, composed observant expression with a slight friendly smile. Distinctive but understated appearance that belongs alongside the existing BotSquad illustrated workers.
+
+The built-in image tool then revised the same portrait as the owner refined the
+character: male; Asian and early 20s; buzz cut; silver hoop and a small abstract
+neck tattoo; finally a plain white T-shirt. Only the final version is public.
+The source chain is retained for reproducibility:
+
+1. Initial: `exec-9d0dd65f-6be0-4950-8464-146564be4140.png`.
+2. Male revision: `exec-1bd00c0a-ded3-4b3f-8037-6830470e7e9b.png`.
+3. Age and appearance: `exec-95fb7431-37a4-400d-a901-a5c9ab60d7c1.png`.
+4. Buzz cut: `exec-14805a80-5571-4d3d-94eb-fb9425c196d7.png`.
+5. Earring and tattoo: `exec-d565c1a7-6ba3-4c7a-bc9f-19359b1798f2.png`.
+6. Final: `exec-fc8f3ad6-5359-4aec-8f46-e29b0ebeecc0.png`.
+
+Final edit prompt, using the fifth image above as the sole edit target:
+
+> Use case: precise-object-edit. Edit target: the supplied illustrated Nix portrait. Change ONLY his clothing: replace both the charcoal overshirt and teal undershirt with one plain white crew-neck T-shirt, no jacket or overshirt, no pattern or logo. Use natural soft light-gray cel shading in the white fabric. Preserve everything else exactly: Asian man in his early 20s, youthful clean-shaven face and identity, short black buzz cut, small silver hoop earring in his left ear (viewer right), small black fine-line geometric tattoo on the left side of his neck (viewer right), calm friendly slight smile, gaze and pose. Keep the same square centered head-and-shoulders framing, warm blurred beige background, crisp ink outlines and sophisticated angular cel-shaded illustration style. Do not remove, move or redesign the earring or tattoo. No text, logos, border or watermark. Opaque background.
+
+- Public asset: `public/images/botsquad/nix.webp` (14,912 bytes).
+- Alt text: “Illustrated portrait of Nix, a BotSquad AI worker.”
+- Card: DevOps, “Coordinates worker infrastructure with human approval.”
+
 ## Presentation and maintenance
 
-`content/site.ts` owns each worker's portrait path, intrinsic dimensions and alt text. `WorkerFlow` uses Next.js Image with an 80px responsive image hint; CSS reserves a square beside the name and role within each existing worker card. The responsibility text remains below. The owner node receives no invented portrait. The Atlas → Maya/Turing/Scout and Turing → Linus/Ada/Grace hierarchy is unchanged.
+`content/site.ts` owns each worker's portrait path, intrinsic dimensions and alt text. `WorkerFlow` uses Next.js Image with an 80px responsive image hint; CSS reserves a square beside the name and role within each worker card. The responsibility text remains below. The owner node receives no invented portrait. Atlas has Maya/Turing/Scout/Nix as direct reports; Turing retains Linus/Ada/Grace. Four desktop branches become a nested single column at 1100px and below so portraits and labels remain readable.
 
 Portraits use the reference artwork's warm neutral backgrounds inside the selected Graphite + Teal cards. No remote resources, new dependencies, animation or interaction is added. Keep the existing portrait set visually coherent, do not replace authentic Motion or sports media with generated faces, and update the asset manifest whenever a portrait changes.
-

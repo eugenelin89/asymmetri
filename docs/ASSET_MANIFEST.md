@@ -1,6 +1,6 @@
 # Asymmetri asset manifest
 
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 
 This internal provenance record covers public assets. Local images are not hotlinked. Optional third-party videos are described below. The
 owner has explicitly approved public visibility of the cap logo and uniform
@@ -469,3 +469,26 @@ owner-supplied visual references; no stock photography, external hotlink, privat
 capture, athlete identity or partnership assertion. The references guide illustration
 style rather than reproducing named real people. This is not an independent rights-clearance
 claim. No previously approved asset is replaced or removed.
+
+## Nix worker portrait, October 8, 2026
+
+- Public asset: `public/images/botsquad/nix.webp`, 384×384, 14,912 bytes.
+- Source: built-in image generation followed by owner-directed edits; final source
+  `exec-fc8f3ad6-5359-4aec-8f46-e29b0ebeecc0.png`, 1254×1254. The same two
+  owner-supplied September 5 illustrations guide the style. Full source lineage
+  and final prompt are in [the generation record](BOTSQUAD_PORTRAITS.md).
+- Processing: proportional Sharp downscale, WebP quality 86 / effort 6, metadata
+  omitted; no post-generation crop or retouching. Full-resolution final PNG is
+  retained outside public source in the owner's local artifact folder.
+- Public role: Nix's DevOps card, directly under Atlas in Meet BotSquad. An 80px
+  square served locally by Next.js Image, with intrinsic dimensions reserved.
+- Alt text: “Illustrated portrait of Nix, a BotSquad AI worker.”
+- Character design: owner-specified Asian man in his early 20s, black buzz cut,
+  silver hoop earring, small abstract neck tattoo and white T-shirt. Fictional
+  worker illustration; it is not a human employee photograph or biography.
+- Rights/privacy: generated at the owner's request from their style references;
+  no stock photo, athlete identity, private screenshot or partnership claim.
+  The tattoo is an abstract decorative mark. This is not independent rights
+  clearance. Existing seven portraits and all other approved assets are unchanged.
+- Layout: four peer branches under Atlas on desktop; nested single column at
+  1100px and below. This changes the semantic diagram, not the source product.
