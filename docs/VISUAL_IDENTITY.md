@@ -41,8 +41,9 @@ dark contexts. Explicit light reading contexts reassign those aliases and declar
 are independent literals so future umbrella changes cannot silently recolor it.
 The browser theme color in `site.metadata.themeColor` is `#0C1111`.
 
-Teal is an accent. Neutral light sections interrupt the graphite shell on Home,
-Sports, Motion and About; Privacy, Support and Tutorial retain light reading areas.
+Teal is an accent. Home is a single graphite gateway with equal division panels.
+Neutral light sections interrupt the graphite shell on Sports, Motion and About;
+Privacy, Support and Tutorial retain light reading areas.
 Labs and BotSquad are predominantly graphite. Keep pale teal limited to established
 Motion areas, rather than adding institutional-looking teal washes. Motion's poster
 keeps deep product teal. Dark/light transitions retain the selected palette.

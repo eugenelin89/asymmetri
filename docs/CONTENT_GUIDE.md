@@ -173,7 +173,12 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 ## Routes and navigation
 
-Asymmetri `/` introduces Sports and Labs, with `#products` and company `#contact`.
+Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs links,
+direct Motion/BotSquad links and “Why Asymmetri” to About. `home` owns the hero and
+division heading; the shared About origin label remains in use. Do not restore
+product previews, philosophy, common-thread or contact sections here. Contact uses
+the centralized mailbox; legacy `/#contact` reaches the footer email. Link to `/`
+instead of the removed product-showcase fragment.
 Sports `/sports` preserves story/approach/product/contact hashes and Motion access.
 Labs `/labs` hosts open-source experiments; `botsquad` owns current implementation,
 MIT/self-hosting/access facts. Sports/Labs disclosures expose direct product links.

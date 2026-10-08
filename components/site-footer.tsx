@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
 import { Logo } from "@/components/logo";
 
-export function SiteFooter() {
+export function SiteFooter({ contactId }: { contactId?: string }) {
   return (
     <footer className="site-footer">
       <div className="shell site-footer__inner">
@@ -22,7 +22,7 @@ export function SiteFooter() {
               </a>
             ))}
           </nav>
-          <a href={`mailto:${site.company.contactEmail}`}>
+          <a id={contactId} href={`mailto:${site.company.contactEmail}`}>
             {site.company.contactEmail}
           </a>
           <span>

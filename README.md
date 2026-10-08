@@ -28,7 +28,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Umbrella, two peer divisions, current work and company contact |
+| `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Current pitching workflow, evidence, Notes/Reference/Compare, limits and family roadmap |
@@ -37,6 +37,10 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/tutorial` | Protected Motion guide with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
+
+The root homepage introduces Asymmetri and routes visitors directly to Sports and
+Labs without repeating division or product content. Contact opens the shared mailbox;
+legacy contact URLs still reach the footer email.
 
 The nine canonical pages are indexable. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.

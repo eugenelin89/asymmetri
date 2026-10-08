@@ -492,3 +492,12 @@ claim. No previously approved asset is replaced or removed.
   clearance. Existing seven portraits and all other approved assets are unchanged.
 - Layout: four peer branches under Atlas on desktop; nested single column at
   1100px and below. This changes the semantic diagram, not the source product.
+
+## Homepage gateway simplification, October 8, 2026
+
+The homepage no longer renders the Motion icon/evidence showcase or the semantic
+`HomeWorkerFlow` preview. Their historical usage records above remain evidence.
+All public files, dimensions, alt text, rights assessments and stable URLs remain
+unchanged; the Motion icon and evidence capture remain on their dedicated product
+and tutorial pages. The homepage retains its existing social image. No raster,
+logo, portrait, tutorial original or generated public asset is added or removed.

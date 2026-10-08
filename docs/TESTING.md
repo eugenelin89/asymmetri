@@ -31,7 +31,7 @@ When routes or shared layout code change, verify:
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/sport` → `/sports`; `/work` → `/labs` (308, including fragment preservation);
-- `/story` → `/sports#story`; `/contact` → `/#contact`
+- `/story` → `/sports#story`; `/contact` → `/#contact` (existing footer email)
 - `/why-asymmetrico` → `/about`;
   `/work/asymmetrico-platform` → `/sports`
 - `/robots.txt`
@@ -41,7 +41,7 @@ When routes or shared layout code change, verify:
 
 Confirm successful responses, correct page titles and canonical values, and no
 broken public assets. Verify footer links on all nine pages, mutual
-Privacy/Support links, the `mailto:info@asymmetri.co` contact, homepage anchor
+Privacy/Support links, the `mailto:info@asymmetri.co` contact, direct company/product
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
 The sitemap must include all nine canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
@@ -69,16 +69,19 @@ Check:
 - Enter/Space opens disclosures, Tab reaches links, Escape closes and restores
   focus, outside-pointer interaction closes, and opening one closes the other;
 - disclosures and their links remain usable without JavaScript;
-- About/Contact work and the homepage retains `#products`;
+- About opens `/about`; Contact opens the centralized mailbox; no current link
+  targets the removed homepage product showcase;
 - Sports retains Story → Approach → Product → Contact and its Motion action;
-- old root `#story`, `#approach`, `#product` migrate to Sports while plural
-  `#products` and company `#contact` stay on the company homepage;
+- old root `#story`, `#approach`, `#product` migrate to Sports;
+  legacy `/#contact` and `/contact` reach the homepage footer email;
 - no horizontal overflow;
 - readable hierarchy and comfortable line lengths;
 - graphite-header logo/nav contrast, the shared Asymmetri → Sports/Labs → product links,
   product statuses and distinct product panels at all widths;
-- homepage introduction → principle → products → shared thinking → contact;
-- explicit peer division links in the hero, then current product panels;
+- homepage contains one gateway section between header/footer, with no philosophy,
+  product showcases, common-thread or contact section;
+- explicit equal division/product links, one “Why Asymmetri” action, comfortable
+  responsive height and no clipped content or excessive empty space;
 - Pitching preparation versus planned Hitting/Team, exactly one professional app,
   its three nested entitlements, finite Cloud and later Mechanics Lab/Enterprise;
 - Labs introduction/open-source statement, “Currently playing with,” GitHub/detail/

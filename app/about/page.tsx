@@ -52,7 +52,7 @@ export default function AboutPage() {
           <div className="shell">
             <h2>Have something you’d like to ask?</h2>
             <div className="button-row">
-              <Link className="button button--ink" href="/#products">
+              <Link className="button button--ink" href="/">
                 Explore Sports and Labs
               </Link>
               <a

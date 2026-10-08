@@ -12,7 +12,7 @@ separate. No site-owned database, authentication, API, CMS, forms or analytics.
 
 | URL | Source / result |
 | --- | --- |
-| `/` | `app/page.tsx`: umbrella, divisions, current work and contact |
+| `/` | `app/page.tsx`: concise umbrella gateway with division/product links |
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/motion` | Current pitching workflow and family roadmap |
@@ -24,7 +24,7 @@ separate. No site-owned database, authentication, API, CMS, forms or analytics.
 | `/sport` | HTTP 308 to `/sports` |
 | `/work` | HTTP 308 to `/labs` |
 | `/story` | HTTP 308 to `/sports#story` |
-| `/contact` | HTTP 308 to `/#contact` |
+| `/contact` | HTTP 308 to `/#contact` (footer email) |
 | `/why-asymmetrico` | HTTP 308 to `/about` |
 | `/work/asymmetrico-platform` | HTTP 308 to `/sports` |
 
@@ -33,7 +33,9 @@ Both hosts serve protected pages. No host/infrastructure redirect change.
 Browsers retain legacy `/sport` fragments across its fragment-free redirect;
 Sports retains story/approach/product/contact IDs. The homepage-only compatibility
 component maps old root `#story`, `#approach`, `#product` to Sports. Explicit no-JS
-fallback anchors remain; `#products` and root `#contact` are unchanged.
+fallback anchors remain. The product showcase is removed; current gateway links
+use `/`. Root `#contact` remains on the footer email for historical contact URLs,
+while primary navigation uses the centralized mailto link.
 
 ## Content, metadata and assets
 
@@ -69,7 +71,8 @@ server. `SiteHeader` includes a skip link and Sports/Labs/About/Contact navigati
 Native exclusive `details` menus work without JS; a small enhancement dismisses on
 outside pointer/Escape and restores focus. Footer links label Motion resources.
 `HomeCapability` now renders the actual two-division hierarchy with direct product
-links. `HomeWorkerFlow` retains the homepage summary. On BotSquad, `WorkerFlow` renders the
+links in the only homepage section. Homepage-only showcases, copy and `HomeWorkerFlow`
+are removed; dedicated pages retain product detail. On BotSquad, `WorkerFlow` renders the
 reference team as nested semantic lists; `WorkerExample` renders the illustrative Motion
 scenario as an ordered sequence with explicit limitations. `EvidenceChain` retains Motion
 evidence presentation. All diagrams are server-rendered text, with no diagram library.

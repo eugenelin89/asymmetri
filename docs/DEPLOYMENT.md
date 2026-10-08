@@ -461,7 +461,8 @@ Expected results:
 - `/sitemap.xml` returns HTTP 200.
 - `/story` returns an HTTP 308 permanent redirect to `/sports#story`.
 - `/sport` and `/work` return HTTP 308 to `/sports` and `/labs`.
-- `/contact` returns an HTTP 308 permanent redirect to `/#contact`.
+- `/contact` returns an HTTP 308 permanent redirect to `/#contact`, targeting the
+  existing footer email rather than a separate homepage contact section.
 
 Verify actual unauthenticated content at `https://www.asymmetri.co/motion`,
 `https://www.asymmetri.co/tutorial`, `https://www.asymmetri.co/privacy`,

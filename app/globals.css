@@ -1300,7 +1300,12 @@ p {
   color: var(--ink);
   padding: clamp(3.5rem, 6vw, 6rem) 0 0;
 }
-.home-hero { padding-bottom: clamp(3rem, 6vw, 6rem); }
+.home-hero {
+  display: grid;
+  align-items: center;
+  min-height: min(44rem, calc(100svh - var(--header-height)));
+  padding-bottom: clamp(3.5rem, 6vw, 6rem);
+}
 .home-hero__grid {
   display: grid;
   align-items: center;
@@ -1313,86 +1318,7 @@ p {
   margin: 1.3rem 0 1.75rem;
 }
 .home-hero .hero__support { max-width: 43ch; }
-.home-hero__foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 3rem; color: var(--ink-secondary); font-size: 0.875rem; position: relative; }
-.home-hero__foot a { display: inline-flex; align-items: center; gap: 1rem; min-height: 44px; color: var(--ink); }
-.home-philosophy { padding: clamp(3rem, 6vw, 6rem) 0; border-block: 1px solid var(--line); }
-.home-philosophy h2 { max-width: 15ch; }
-.home-philosophy p { color: var(--ink-body); font-size: var(--type-body); max-width: 42ch; }
 .product-domain { display: inline-flex; align-items: center; min-height: 44px; color: var(--theme-primary); font-size: 0.9rem; text-decoration: underline; text-underline-offset: 0.2em; }
-.portfolio {
-  background: var(--graphite);
-}
-.portfolio__heading {
-  margin-bottom: clamp(3rem, 5vw, 5rem);
-}
-.portfolio__heading h2 {
-  margin-top: 1.5rem;
-  white-space: pre-line;
-  max-width: 17ch;
-}
-.product-showcase {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  gap: clamp(2rem, 4vw, 4rem);
-  padding: clamp(1.5rem, 4vw, 4rem);
-  align-items: center;
-}
-.product-showcase + .product-showcase {
-  margin-top: 2rem;
-}
-.product-showcase--botsquad {
-  background: var(--graphite-raised);
-}
-.product-showcase--motion {
-  background: var(--motion-mineral);
-  border-top-color: var(--motion-teal);
-}
-.product-showcase__copy .product-showcase__index {
-  font-size: 0.8125rem;
-  letter-spacing: 0.08em;
-  text-transform: none;
-  color: var(--ink-secondary);
-}
-.product-showcase__name {
-  font-size: 1.25rem;
-  font-weight: 650;
-  margin-top: 1.25rem;
-}
-.product-showcase h3 {
-  font-size: clamp(2rem, 3.4vw, 3rem);
-  max-width: 21ch;
-  margin: 1rem 0 1.5rem;
-}
-.product-showcase__copy > p:not([class]) {
-  font-size: var(--type-step);
-  color: var(--ink-body);
-  max-width: 42ch;
-}
-.product-showcase .showcase-status {
-  font-size: 0.875rem;
-  color: var(--ink-body);
-  margin: 1.5rem 0;
-}
-.product-showcase .button-row {
-  gap: 1rem 1.5rem;
-}
-.product-showcase .text-link {
-  font-size: 0.9rem;
-}
-.sport-story-link {
-  display: inline-flex;
-  gap: 1rem;
-  padding: 0.8rem 0;
-  font-size: 0.9rem;
-  margin-top: 1.25rem;
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-}
-.worker-flow { width: 100%; border-block: 1px solid var(--line); }
-.worker-flow figcaption { padding-block: 1.25rem; font-size: 1rem; font-weight: 600; }
-.worker-flow ol { margin: 0; padding: 0; list-style: none; }
-.worker-flow li { display: flex; gap: 1.25rem; border-top: 1px solid var(--line); padding-block: 1.25rem; }
-.worker-flow li > span:first-child { color: var(--theme-primary); font-size: 0.8rem; padding-top: 0.15rem; }
 .botsquad-example { background: var(--labs-surface); }
 .worker-example blockquote { margin: 0; padding-left: 1.5rem; border-left: 2px solid var(--theme-primary); font-size: var(--type-body); line-height: 1.6; }
 .worker-example ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; padding: 0; margin: 3rem 0 1.5rem; list-style: none; }
@@ -1401,29 +1327,6 @@ p {
 .worker-example h3 { margin: 1.25rem 0 1rem; }
 .worker-example li p { font-size: var(--type-step); }
 .worker-example figcaption { font-size: 0.8rem; color: var(--ink-secondary); line-height: 1.5; }
-.home-worker-flow__summary { padding-block: 1.25rem; }
-.home-worker-flow__summary > p + p { margin-top: 0.75rem; }
-.home-worker-flow__summary + figcaption { padding-top: 0; font-size: 0.8rem; font-weight: 400; color: var(--ink-secondary); }
-.home-page .motion-identity { margin: 0.5rem 0 1rem; gap: 1rem; }
-.home-page .motion-identity img { width: 3.5rem; height: 3.5rem; }
-.motion-showcase-visual { display: grid; justify-items: center; gap: 1.5rem; }
-.motion-showcase-visual img { height: auto; width: min(100%, 14.375rem); border-radius: 0.65rem; border: 1px solid var(--motion-line); }
-.motion-showcase-visual__frames { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; color: var(--motion-teal); font-size: 0.8rem; }
-.motion-showcase-visual__frames span + span::before { content: "→"; margin-right: 0.5rem; }
-.motion-showcase-visual figcaption { font-size: 0.8rem; color: var(--ink-body); max-width: 32ch; text-align: center; line-height: 1.5; }
-.company-common {
-  background: var(--surface-base);
-  color: var(--ink);
-}
-.company-common h2 {
-  margin-top: 1.4rem;
-}
-.company-common .product-prose p {
-  color: var(--ink-secondary);
-}
-.home-page .closing h2 {
-  max-width: 14ch;
-}
 .closing .button {
   gap: 1.5rem;
 }
@@ -1705,7 +1608,7 @@ p {
   .home-hero__grid { gap: 2.5rem; }
 }
 @media (max-width: 820px) {
-  .home-hero__grid, .product-showcase { grid-template-columns: minmax(0, 1fr); }
+  .home-hero__grid { grid-template-columns: minmax(0, 1fr); }
   .division-overview { width: 100%; }
   .site-footer__inner { flex-direction: column; }
   .site-footer__meta { text-align: left; }
@@ -1805,49 +1708,15 @@ p {
 
 /* Shared geometry for the umbrella and its two peer divisions. */
 .home-hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
-.home-philosophy { background: var(--surface-raised); }
 .sports-page .hero, .motion-hero { background: var(--sports-surface); }
 .motion-product { border-top: 3px solid var(--sports-primary); background: var(--light-surface); border-top-color: var(--motion-teal); }
 .sports-nav { background: var(--graphite-raised); color: var(--on-dark); }
 .sports-nav .shell > span { color: var(--on-dark-secondary); }
 .sports-nav :focus-visible,
 .video-poster :focus-visible,
-.site-footer :focus-visible,
-.home-page .company-common :focus-visible,
-.botsquad-page .company-common :focus-visible { outline-color: var(--brand-bright); }
+.site-footer :focus-visible { outline-color: var(--brand-bright); }
 .sports-page .hero__figure { border-bottom: 4px solid var(--sports-primary); border-bottom-color: var(--brand-primary); }
 .labs-hero, .botsquad-hero { background: var(--labs-surface); }
-.worker-flow {
-  border: 1px solid var(--labs-line);
-  border-top: 3px solid var(--labs-primary);
-  padding: clamp(1.25rem, 2.5vw, 2.5rem);
-  background: var(--graphite-raised);
-  border-color: var(--line-dark);
-  border-top-color: var(--brand-primary);
-}
-.worker-flow ol { border-left: 1px solid var(--labs-line); margin-left: .25rem; }
-.worker-flow li { border-color: var(--labs-line); padding-left: 1.25rem; position: relative; }
-.worker-flow li::before {
-  content: "";
-  position: absolute;
-  left: -4px;
-  top: 1.8rem;
-  width: 7px;
-  height: 7px;
-  background: var(--brand-bright);
-}
-.product-showcase { border-top: 3px solid var(--theme-primary); }
-.product-showcase__copy .product-showcase__index { color: var(--theme-primary); }
-.home-page .company-common, .botsquad-page .company-common {
-  background: var(--ink);
-  color: var(--on-dark);
-}
-.botsquad-page .company-common { background: var(--labs-deep); }
-.home-page .company-common .eyebrow,
-.home-page .company-common .text-link { color: var(--brand-bright); }
-.botsquad-page .company-common .eyebrow { color: var(--labs-highlight); }
-.home-page .company-common .product-prose p,
-.botsquad-page .company-common .product-prose p { color: var(--on-dark-secondary); }
 .brand-logo--ink { color: var(--ink); }
 .brand-logo--canvas { color: var(--on-dark); }
 .brand-logo__accent { fill: var(--brand-primary); }
@@ -1885,7 +1754,7 @@ p {
 }
 /* A light reading plane interrupts the dark shell. Sports and Motion keep
    more light than Labs; these selectors do not alter section order or size. */
-.home-philosophy, .product-showcase--motion, .story, .motion-intro,
+.story, .motion-intro,
 .motion-page :is(.introduction-video, .motion-gap, .motion-workflow,
   .motion-evidence, .motion-history, .motion-study, .motion-limits,
   .motion-family, .motion-concepts, .motion-privacy),
@@ -1919,30 +1788,14 @@ p {
   border-top: 1px solid var(--line);
 }
 .tutorial-page main { --theme-primary: var(--motion-teal); }
-.product-showcase, .division-overview li { border-top-color: var(--brand-primary); }
-.product-showcase--motion { border-top-color: var(--motion-teal); }
-.product-showcase--motion .product-showcase__index { color: var(--motion-teal); }
-.home-hero__foot::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 3.25rem;
-  height: 2px;
-  background: var(--brand-primary);
-}
-.product-showcase--botsquad .worker-flow { background: var(--graphite); }
-.worker-flow li > span:first-child { color: var(--on-dark-secondary); }
+.division-overview li { border-top-color: var(--brand-primary); }
 .labs-product, .botsquad-example { background: var(--graphite-raised); }
 .labs-product__card, .access-grid > div { border-top-color: var(--brand-primary); }
-.company-common, .home-page .company-common, .botsquad-page .company-common,
 .closing, .about-next {
   background: var(--graphite);
   color: var(--on-dark);
   border-top: 1px solid var(--line-dark);
 }
-.home-page .company-common .eyebrow, .home-page .company-common .text-link,
-.botsquad-page .company-common .eyebrow { color: var(--brand-bright); }
 .closing .product-details { --theme-line: var(--line-dark); }
 .video-poster {
   background: var(--graphite-soft);

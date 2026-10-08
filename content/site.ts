@@ -33,11 +33,13 @@ export const divisions = {
   },
 } as const;
 
+const contactEmail = "info@asymmetri.co";
+
 export const site = {
   company: {
     name: "Asymmetri",
     siteUrl: "https://asymmetri.co",
-    contactEmail: "info@asymmetri.co",
+    contactEmail,
     descriptor: "Technology for individuals and small teams",
   },
   metadata: {
@@ -66,7 +68,7 @@ export const site = {
       ],
     },
     { label: "About", href: "/about" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Contact", href: `mailto:${contactEmail}` },
   ] satisfies PrimaryNavItem[],
   companyNavigation: [
     { label: "About Asymmetri", href: "/about" },
@@ -792,16 +794,6 @@ export const home = {
     "socialHeadline": "Build an asymmetric advantage.",
     "socialSupport": "Technology for individuals and small teams."
   },
-  botsquadPreview: {
-    "headline": "One person. An AI team.",
-    "descriptor": "A self-hosted workspace for coordinating persistent AI workers, from a clear task to a result you can inspect.",
-    "steps": [
-      "Coordinate",
-      "Investigate",
-      "Review"
-    ],
-    "caption": "Synthetic workflow illustration, not a customer result or a live dashboard."
-  },
   origin: {
     eyebrow: "It began in baseball",
     headline: "A phone camera, and a lot of replaying.",
@@ -811,42 +803,14 @@ export const home = {
     caption: "Pitching is where our work began.",
   },
 
-  motionSummary: "Record, mark and inspect a pitch. The family roadmap adds a separate hitting app and one professional Team app.",
   divisionHeading: "Two divisions. One Asymmetri.",
-  motionPreview: {
-    src: "/images/motion/tutorial/evidence.png",
-    alt: "A Motion app capture connecting a saved pitching frame to annotated trunk landmarks and a vertical reference.",
-    width: 315,
-    height: 723,
-  } satisfies SiteImage,
   hero: {
     eyebrow: "Asymmetri.co",
     headline: "Build an asymmetric advantage.",
     support:
       "Technology that gives people and small teams more capability with the resources they already have.",
-    primary: { label: "See what we're building", href: "/#products" },
-    secondary: { label: "Why Asymmetri", href: "/about" },
+    about: { label: "Why Asymmetri", href: "/about" },
   },
-  philosophy: {
-    headline: "Small input. Outsized capability.",
-    body: "An advantage can come from better information, useful automation and tools that make more possible with the resources you have. That is the idea behind Asymmetri.",
-  },
-  products: {
-    eyebrow: "What we're building",
-    headline: "Two divisions.\nA shared ambition.",
-  },
-  common: {
-    eyebrow: "The common thread",
-    headline: "More within reach.",
-    body: "Coordinating AI work and understanding a pitch are different problems. Both start with the same question: what could one person do with a better tool? We build for useful capability, inspectable results and human judgment.",
-    link: { label: "The thinking behind Asymmetri", href: "/about" },
-  },
-  contact: {
-    eyebrow: "Get in touch",
-    headline: "What are you working on?",
-    body: "Building with a small team? Seeing a problem from a different angle? We'd like to hear from you.",
-  },
-
 } as const;
 
 export const sportsNavigation: NavItem[] = [
