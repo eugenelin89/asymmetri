@@ -255,6 +255,12 @@ capabilities, design principles, illustrative workflow, Asymmetri uses, setup st
 technical facts, roadmap, human control and source links. Keep this small project-specific
 structure; do not move product facts into JSX or turn it into a generic CMS.
 
+Each `botsquad.team` worker includes a `portrait` with its local path, intrinsic
+dimensions and alt text. The seven faces are fictional AI-worker illustrations,
+not human staff photos. Keep names, roles and reporting relationships independent
+of portrait appearance. See [the portrait generation record](BOTSQUAD_PORTRAITS.md)
+and asset manifest when replacing or adding artwork.
+
 `/botsquad` explains an open-source experiment in persistent AI teams. README/current
 state/validation establish capability, the roadmap and Decision 026 establish current
 focus and deferred ideas, and the white paper supplies design philosophy. Its older

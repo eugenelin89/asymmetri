@@ -1,11 +1,27 @@
-import { botsquad } from "@/content/site";
+import Image from "next/image";
+import { botsquad, type SiteImage } from "@/content/site";
 
-type Worker = { readonly name: string; readonly role: string; readonly body: string };
+type Worker = {
+  readonly name: string;
+  readonly role: string;
+  readonly body: string;
+  readonly portrait: SiteImage;
+};
 
 function WorkerCard({ worker }: { worker: Worker }) {
   return (
     <div className="squad-worker">
-      <div><strong>{worker.name}</strong><span>{worker.role}</span></div>
+      <div className="squad-worker__header">
+        <Image
+          className="squad-worker__portrait"
+          src={worker.portrait.src}
+          width={worker.portrait.width}
+          height={worker.portrait.height}
+          alt={worker.portrait.alt}
+          sizes="80px"
+        />
+        <div className="squad-worker__identity"><strong>{worker.name}</strong><span>{worker.role}</span></div>
+      </div>
       <p>{worker.body}</p>
     </div>
   );

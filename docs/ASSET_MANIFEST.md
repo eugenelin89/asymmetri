@@ -434,3 +434,38 @@ rows are HTML/CSS, not raster assets or app screenshots.
 - Rights/privacy: original presentation of public MIT-source facts and owner-requested copy;
   no private HQ records, athlete data, third-party photos or fabricated product screens.
 - Video: approved `E5r_lOecC-M`, local typographic poster and deliberate activation remain.
+
+## BotSquad worker portraits, October 7, 2026
+
+Seven owner-requested fictional AI-worker portraits now appear inside the existing
+Meet BotSquad cards. This adds illustrations to the semantic diagram; it does not
+replace authentic project media or depict human employees. The owner node, hierarchy,
+names, roles and responsibilities are unchanged.
+
+Source: built-in image generation using the owner's two September 5 illustrated
+headshots as style references only. References remain untouched and unpublished.
+The [generation record](BOTSQUAD_PORTRAITS.md) retains exact prompts and source IDs.
+All generated originals are 1254×1254 PNG; public exports are 384×384 WebP, quality 86,
+Sharp effort 6, metadata omitted. Only proportional downscaling and encoding were
+performed: no crop, retouching or color change. The seven public files total 131,666 bytes.
+
+| Public asset | Bytes | Public role / alt text |
+| --- | ---: | --- |
+| `public/images/botsquad/atlas.webp` | 15,844 | CEO card; “Illustrated portrait of Atlas, a BotSquad AI worker.” |
+| `public/images/botsquad/maya.webp` | 20,636 | Product Manager card; “Illustrated portrait of Maya, a BotSquad AI worker.” |
+| `public/images/botsquad/turing.webp` | 19,742 | CTO card; “Illustrated portrait of Turing, a BotSquad AI worker.” |
+| `public/images/botsquad/linus.webp` | 19,000 | Engineer card; “Illustrated portrait of Linus, a BotSquad AI worker.” |
+| `public/images/botsquad/ada.webp` | 18,174 | Engineer card; “Illustrated portrait of Ada, a BotSquad AI worker.” |
+| `public/images/botsquad/grace.webp` | 19,860 | Reviewer card; “Illustrated portrait of Grace, a BotSquad AI worker.” |
+| `public/images/botsquad/scout.webp` | 18,410 | Researcher card; “Illustrated portrait of Scout, a BotSquad AI worker.” |
+
+Responsive use: an 80px square beside each name/role, intrinsic dimensions reserved,
+served locally through Next.js Image with lazy loading. Warm neutral portrait backdrops
+remain inside Graphite + Teal cards. Full-resolution PNGs are retained outside public
+source in the owner's local artifact folder.
+
+Rights/privacy assessment: explicitly requested generated fictional characters using
+owner-supplied visual references; no stock photography, external hotlink, private workspace
+capture, athlete identity or partnership assertion. The references guide illustration
+style rather than reproducing named real people. This is not an independent rights-clearance
+claim. No previously approved asset is replaced or removed.

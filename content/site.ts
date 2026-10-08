@@ -915,15 +915,15 @@ export const botsquad = {
     headline: "Meet BotSquad",
     owner: "You",
     ownerRole: "Set the goal and boundaries",
-    lead: { name: "Atlas", role: "CEO", body: "Coordinates goals and decisions." },
+    lead: { name: "Atlas", portrait: { src: "/images/botsquad/atlas.webp", width: 384, height: 384, alt: "Illustrated portrait of Atlas, a BotSquad AI worker." }, role: "CEO", body: "Coordinates goals and decisions." },
     branches: [
-      { name: "Maya", role: "Product Manager", body: "Turns ideas into questions and specifications.", reports: [] },
-      { name: "Turing", role: "CTO", body: "Works through technical direction.", reports: [
-        { name: "Linus", role: "Engineer", body: "Builds within an assigned scope." },
-        { name: "Ada", role: "Engineer", body: "Builds a separate part in parallel." },
-        { name: "Grace", role: "Reviewer", body: "Independently reviews submitted work." },
+      { name: "Maya", portrait: { src: "/images/botsquad/maya.webp", width: 384, height: 384, alt: "Illustrated portrait of Maya, a BotSquad AI worker." }, role: "Product Manager", body: "Turns ideas into questions and specifications.", reports: [] },
+      { name: "Turing", portrait: { src: "/images/botsquad/turing.webp", width: 384, height: 384, alt: "Illustrated portrait of Turing, a BotSquad AI worker." }, role: "CTO", body: "Works through technical direction.", reports: [
+        { name: "Linus", portrait: { src: "/images/botsquad/linus.webp", width: 384, height: 384, alt: "Illustrated portrait of Linus, a BotSquad AI worker." }, role: "Engineer", body: "Builds within an assigned scope." },
+        { name: "Ada", portrait: { src: "/images/botsquad/ada.webp", width: 384, height: 384, alt: "Illustrated portrait of Ada, a BotSquad AI worker." }, role: "Engineer", body: "Builds a separate part in parallel." },
+        { name: "Grace", portrait: { src: "/images/botsquad/grace.webp", width: 384, height: 384, alt: "Illustrated portrait of Grace, a BotSquad AI worker." }, role: "Reviewer", body: "Independently reviews submitted work." },
       ] },
-      { name: "Scout", role: "Researcher", body: "Investigates public information when granted.", reports: [] },
+      { name: "Scout", portrait: { src: "/images/botsquad/scout.webp", width: 384, height: 384, alt: "Illustrated portrait of Scout, a BotSquad AI worker." }, role: "Researcher", body: "Investigates public information when granted.", reports: [] },
     ],
   },
   capabilities: {

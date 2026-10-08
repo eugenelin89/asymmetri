@@ -1985,10 +1985,12 @@ p {
 .squad-team__root > li { position: relative; padding-top: 2rem; }
 .squad-team__root > li::before { content: ""; position: absolute; top: 0; left: 50%; height: 2rem; border-left: 1px solid var(--brand-primary); }
 .squad-worker { padding: 1.15rem 1.25rem; border: 1px solid var(--line); background: var(--graphite); }
-.squad-worker > div { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .7rem; }
+.squad-worker__header { display: grid; grid-template-columns: 5rem minmax(0, 1fr); align-items: center; gap: .75rem; }
+.squad-worker__portrait { display: block; width: 100%; height: auto; aspect-ratio: 1; border: 1px solid var(--line); }
+.squad-worker__identity { display: flex; flex-direction: column; align-items: flex-start; gap: .2rem; }
 .squad-worker strong { font-size: 1.25rem; font-weight: 600; }
 .squad-worker span { color: var(--brand-bright); font-size: .85rem; }
-.squad-worker p { color: var(--ink-secondary); font-size: .95rem; line-height: 1.5; margin-top: .45rem; }
+.squad-worker p { color: var(--ink-secondary); font-size: .95rem; line-height: 1.5; margin-top: .85rem; }
 .squad-team__root > li > .squad-worker { max-width: 25rem; margin-inline: auto; border-top: 2px solid var(--brand-primary); }
 .squad-team .squad-team__branches { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; padding-top: 2rem; position: relative; }
 .squad-team__branches::before { content: ""; position: absolute; top: 0; left: 50%; height: 1rem; border-left: 1px solid var(--line); }
