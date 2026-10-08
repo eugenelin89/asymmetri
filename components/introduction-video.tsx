@@ -22,7 +22,7 @@ export function IntroductionVideo({ video }: { video: Introduction }) {
             <p className="eyebrow">Watch a walkthrough</p>
             <h2 id="introduction-title">{video.headline}</h2>
           </div>
-          <p>{video.description}</p>
+          {"description" in video && <p>{video.description}</p>}
         </div>
         <div className="video-frame">
           {loaded && !failed ? (

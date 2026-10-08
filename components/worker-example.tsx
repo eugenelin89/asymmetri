@@ -9,7 +9,6 @@ export function WorkerExample() {
         <p className="eyebrow">{example.eyebrow}</p>
         <h2>{example.headline}</h2>
         <blockquote>{example.request}</blockquote>
-        <p className="squad-example__caption">{example.caption}</p>
       </figcaption>
       <ol className="squad-example__flow">
         {example.steps.map((step, index) => (

@@ -1506,6 +1506,7 @@ p {
   align-items: end;
   margin-bottom: 1.5rem;
 }
+.video-heading > :only-child { grid-column: 1 / -1; }
 .video-heading h2 {
   font-size: clamp(2.2rem, 3.4vw, 3.6rem);
   margin-top: 1rem;
@@ -1972,9 +1973,9 @@ p {
 .squad-memory { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
 .squad-memory span, .squad-stack li { padding: .55rem .8rem; border: 1px solid var(--line); font-size: .85rem; }
 .squad-memory p { flex-basis: 100%; font-size: .9rem; color: var(--ink-secondary); margin-top: .35rem; }
-.squad-team-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; border-top: 1px solid var(--line); margin-top: 4rem; padding-top: 2.5rem; }
+.squad-team-heading { border-top: 1px solid var(--line); margin-top: 4rem; padding-top: 2.5rem; }
 .squad-team-heading h2 { margin-top: 0; }
-.squad-team-heading > p, .squad-section-heading > p:last-child { color: var(--ink-body); font-size: var(--type-step); line-height: 1.65; max-width: 66ch; }
+.squad-section-heading > p:last-child { color: var(--ink-body); font-size: var(--type-step); line-height: 1.65; max-width: 66ch; }
 .squad-section-heading { max-width: 58rem; margin-bottom: 2.5rem; }
 .squad-section-heading > p:last-child { margin-top: 1.5rem; }
 .squad-team { margin-top: 2.5rem; }
@@ -1999,7 +2000,7 @@ p {
 .squad-team .squad-team__reports { padding-left: 1.2rem; border-left: 1px solid var(--line); margin-left: 1.2rem; padding-top: 1rem; }
 .squad-team__reports > li { position: relative; margin-top: .6rem; }
 .squad-team__reports > li::before { content: ""; position: absolute; left: -1.2rem; top: 1.6rem; width: 1.2rem; border-top: 1px solid var(--line); }
-.squad-team figcaption, .squad-evidence figcaption, .squad-example__caption { font-size: .85rem; color: var(--ink-secondary); line-height: 1.6; margin-top: 1.5rem; }
+.squad-evidence figcaption { font-size: .85rem; color: var(--ink-secondary); line-height: 1.6; margin-top: 1.5rem; }
 .squad-capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 3rem; }
 .squad-capabilities article { border-top: 1px solid var(--line); padding-top: 1.25rem; }
 .squad-number { color: var(--brand-bright); font-size: .85rem; }
@@ -2038,7 +2039,7 @@ p {
   .squad-roadmap, .squad-usage { gap: 1.5rem; }
 }
 @media (max-width: 700px) {
-  .squad-team-heading, .squad-capabilities, .squad-principles, .squad-usage, .squad-roadmap, .squad-evidence { grid-template-columns: minmax(0, 1fr); }
+  .squad-capabilities, .squad-principles, .squad-usage, .squad-roadmap, .squad-evidence { grid-template-columns: minmax(0, 1fr); }
   .squad-team .squad-team__branches { display: block; margin-left: 1rem; padding: 1rem 0 0 1rem; border-left: 1px solid var(--line); }
   .squad-team__branches::before, .squad-team__branches > li::after { display: none; }
   .squad-team__branches > li { margin-top: 1rem; }

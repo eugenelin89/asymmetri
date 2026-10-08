@@ -907,15 +907,12 @@ export const botsquad = {
     headline: "The workers stick around.",
     body:
       "Atlas is still Atlas tomorrow. Maya is still Maya. Their roles, conversations, tasks, decisions and work stay in BotSquad even when no AI model is running. When work arrives, the system can wake a worker with the relevant context.",
-    limit:
-      "A Codex session can stop or be replaced without replacing the worker. Saved history is not unlimited model memory: each execution receives bounded context. Idle workers do not keep calling a model.",
+    continuity: "A Codex session can stop or be replaced without replacing the worker.",
     retained: ["Identity & role", "Conversations & tasks", "Artifacts & history"],
     runtime: "Model sessions come and go. The worker remains.",
   },
   team: {
-    headline: "Meet a BotSquad.",
-    introduction:
-      "This is the current validated reference organization. Names and roles are examples, not a required roster. Reporting lines organize responsibility; workers can also discuss questions across the team.",
+    headline: "Meet BotSquad",
     owner: "You",
     ownerRole: "Set the goal and boundaries",
     lead: { name: "Atlas", role: "CEO", body: "Coordinates goals and decisions." },
@@ -928,11 +925,9 @@ export const botsquad = {
       ] },
       { name: "Scout", role: "Researcher", body: "Investigates public information when granted.", reports: [] },
     ],
-    caption: "Reference organization, shown as a diagram. No private workspace data or product screenshot.",
   },
   capabilities: {
     headline: "What can BotSquad actually do?",
-    introduction: "These workflows are implemented and have validation records. They remain experimental and operate within configured limits and permissions.",
     items: [
       { title: "Talk", body: "Have direct conversations with workers or let them exchange bounded replies. Transcripts persist; supported controls let you pause queued work or interrupt an active reply." },
       { title: "Think together", body: "Choose a working group or ask Atlas to organize one. Workers discuss, challenge and synthesize; you can interject. A recommendation becomes work only through an explicit assignment." },
@@ -947,7 +942,6 @@ export const botsquad = {
       steps: ["Task", "Execution", "Artifact / commit", "Tests / review", "Approval / receipt"],
       caption: "Evidence available across supported workflows; each task uses the records relevant to its work.",
     },
-    limits: "Today’s scope is one company, up to eight workers and two active executions. Engineering supports bounded repositories and dependency-free Node test recipes, not a general language or package environment. Browser writes have only been validated against approved fixtures.",
   },
   principles: {
     headline: "A few ideas behind BotSquad",
@@ -971,7 +965,6 @@ export const botsquad = {
       { title: "Grace", body: "Review exact submissions independently." },
       { title: "Back to you", body: "Inspect the evidence and decide what happens next." },
     ] satisfies ProductStep[],
-    caption: "A possible workflow, not a completed Hitting project or a fixed script. Hitting remains planned. Today’s engineering environment does not establish support for building the Motion iOS app.",
   },
   asymmetriUsage: {
     headline: "Building Asymmetri with BotSquad",
@@ -1108,8 +1101,6 @@ export const introductions = {
     source: "https://youtu.be/E5r_lOecC-M",
     headline: "A walkthrough of BotSquad",
     posterLine: "Give your AI workers a place to work together.",
-    description:
-      "An introduction to BotSquad and its persistent AI workers. The current operator interface uses private browser access through an SSH tunnel. Native mobile access is deferred.",
     tone: "botsquad",
   },
   motion: {

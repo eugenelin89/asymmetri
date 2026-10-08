@@ -34,7 +34,6 @@ export function WorkerFlow() {
           </ul>
         </li>
       </ul>
-      <figcaption>{team.caption}</figcaption>
     </figure>
   );
 }

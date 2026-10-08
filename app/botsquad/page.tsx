@@ -59,17 +59,17 @@ export default function BotSquadPage() {
                   <p>{botsquad.workerModel.runtime}</p>
                 </div>
               </div>
-              <div className="squad-prose"><p>{botsquad.workerModel.body}</p><p>{botsquad.workerModel.limit}</p></div>
+              <div className="squad-prose"><p>{botsquad.workerModel.body}</p><p>{botsquad.workerModel.continuity}</p></div>
             </div>
             <div className="squad-team-heading product-heading">
-              <h2>{botsquad.team.headline}</h2><p>{botsquad.team.introduction}</p>
+              <h2>{botsquad.team.headline}</h2>
             </div>
             <WorkerFlow />
           </div>
         </section>
         <section className="section" id="capabilities">
           <div className="shell">
-            <div className="squad-section-heading product-heading"><p className="eyebrow">Current capabilities</p><h2>{botsquad.capabilities.headline}</h2><p>{botsquad.capabilities.introduction}</p></div>
+            <div className="squad-section-heading product-heading"><p className="eyebrow">Current capabilities</p><h2>{botsquad.capabilities.headline}</h2></div>
             <div className="squad-capabilities">
               {botsquad.capabilities.items.map((item, index) => (
                 <article key={item.title}><span className="squad-number" aria-hidden="true">0{index + 1}</span><h3>{item.title}</h3><p>{item.body}</p></article>
@@ -82,7 +82,6 @@ export default function BotSquadPage() {
                 <figcaption>{botsquad.capabilities.evidence.caption}</figcaption>
               </figure>
             </div>
-            <p className="squad-limit"><strong>Current limits. </strong>{botsquad.capabilities.limits}</p>
           </div>
         </section>
         <section className="section squad-raised" id="design-ideas">
