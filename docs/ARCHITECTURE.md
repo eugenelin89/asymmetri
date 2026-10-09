@@ -175,9 +175,7 @@ unsupported-OS exception with review before future deployment/public exposure.
 Django retirement and the static 410 proposal were evaluated, not executed; Django,
 Gunicorn/socket, SQLite, dormant PG data, shared accounts and all runtimes remain.
 `ops/infra/` contains reusable operator HTTP comparison and recovery tools with no
-website/runtime integration. Future receiver deployment requires separate authorization
-and actual host compatibility, security, capacity and recovery acceptance; it does
-not automatically depend on restarting the cancelled migration.
+website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the receiver under a dedicated identity with an empty private archive, masked unrelated filesystem trees and no public ingress. Actual Linux/native SQLite, isolated transparent Nginx, confinement and bounded-load evidence is recorded in [validation](INFRA-02-VALIDATION.md). The unit remains static/inactive, config disabled, with no publisher. Public HTTP/TLS ingress and real activation remain separate gates; the tested nginx 1.22 HTTP profile did not preserve duplicate Connection headers.
 
 ### Request path
 

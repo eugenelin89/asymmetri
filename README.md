@@ -67,7 +67,7 @@ Ubuntu 22.10 on the original Droplet/IP. The temporary migration snapshot was de
 after verified off-server recovery checks; cleanup is complete. Django and all other
 sites/services remain unchanged. The unsupported-OS exception requires review before
 future deployment/public exposure; migration is no automatic prerequisite to local
-investment development. INFRA-02 has not started. Historical preparation and test
+investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) installs and privately validates the receiver, leaving it stopped and public publishing disabled. Historical preparation and test
 records remain available through the cancellation record.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
@@ -76,7 +76,7 @@ APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytics, form
 backend or application-owned visitor tracking. A separate, default-disabled
 INV-02 investment archive receiver now has its own SQLite/signature boundary;
-it is not deployed or wired into website pages. See [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
+it is installed independently, stopped/default disabled, and not wired into website pages. See [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
 YouTube players connect to Google only after explicit activation; local posters
 and normal external links are available beforehand. Tutorial screenshots contain only the
 owner-authorized retained pitching media described in the asset manifest.

@@ -1,6 +1,10 @@
 # Server storage maintenance
 
-## October 9, 2026 cancellation and final cleanup — current
+## October 9, 2026 private receiver installation — current
+
+[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the isolated receiver while preserving the original website/source/build, Nginx, Django/socket, dormant PG, rollback and swap. Its empty migration-001 archive has no publisher or investment run, and its unit finishes static/inactive with disabled configuration. Temporary synthetic instances/credentials/storage are removed after reconciliation. No global packages, OS upgrade, firewall/DNS edits or unrelated restarts occur. See [measured capacity and final preservation](INFRA-02-VALIDATION.md); receiver backups/retention and public activation remain separately reviewed future work.
+
+## October 9, 2026 cancellation and final cleanup — historical checkpoint
 
 The owner [cancelled/deferred migration](INFRA-01-CANCELLATION.md), retained Ubuntu
 22.10 and explicitly authorized deletion of the migration snapshot. After all 12
@@ -18,7 +22,8 @@ scripts, rollback, 2 GiB swap and all production applications/data remain.
 The 198-request/15-host baseline and DNS/TLS checks pass. Service master PIDs/start
 times, OS/Droplet/IPs, source/build and 48 configuration fingerprints are unchanged.
 No service restart, Nginx/DNS change or Django retirement occurred. Review the
-unsupported-OS exception before future deployments; INFRA-02 remains unstarted.
+unsupported-OS exception before future deployments; INFRA-02 was unstarted at this
+historical checkpoint and is recorded separately above.
 
 ## Historical preparation and cleanup chronology
 

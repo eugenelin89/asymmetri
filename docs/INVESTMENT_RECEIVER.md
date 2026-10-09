@@ -1,8 +1,6 @@
 # Investment archive receiver (INV-02)
 
-Implemented locally, default disabled, synthetic validation only. Nothing in this
-milestone deploys a service, grants a real publisher, changes HQ, collects prices,
-or activates Ask. Next.js remains the page-rendering system; its existing routes
+INV-02 was implemented and validated locally; the separately owner-selected [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) now installs it privately on the existing Ubuntu 22.10 host. It remains stopped/default disabled with an empty operational archive, no real publisher, HQ change, collected prices or Ask activation. Next.js remains the page-rendering system; its existing routes
 and Vinext packaging do not start or import the receiver runtime.
 
 ## Contract and runtime
@@ -21,7 +19,7 @@ Receiver has an independent package and lockfile: better-sqlite3 13.0.3 (SQLite
 3.53.4), AJV 8.20.0/ajv-formats 3.0.1, canonicalize 2.1.0, jsonc-parser 3.3.1.
 TypeScript 5.9.3 builds it. Tested on macOS arm64 Node 24.10.0 and 22.23.1,
 including the actual native SQLite module and all integration tests on both.
-Linux ABI/filesystem/systemd/host-resource validation remains a deployment gate.
+[INFRA-02 validation](INFRA-02-VALIDATION.md) records actual Linux ABI/filesystem/systemd tests and bounded shared-host measurements; larger live archives remain unproven.
 No container, Redis, queue, cloud database or provider integration is introduced.
 
 ## Local setup (explicit, disposable)
@@ -118,7 +116,7 @@ A future Nginx proxy must preserve the explicitly configured Host, remove all
 Forwarded/X-Forwarded-* headers, preserve request bytes and signed path, avoid
 redirects/rewrites, reject ambiguous framing, and set matching body/time limits.
 The receiver trusts no forwarded authority, accepts no transfer/content encoding,
-and binds loopback only. Do not install a proxy as part of INV-02.
+and binds loopback only. INFRA-02 tested a disposable transparent Nginx proxy; its HTTP-layer profile failed duplicate Connection preservation. Exact public HTTP/TLS ingress remains unaccepted; no operational proxy was installed.
 
 Decision 029: market-data acquisition/licensing budget is **US$0**. Receiver has
 no vendor credentials, scraper, fetch of source URLs or paid-feed assumption.
@@ -244,39 +242,37 @@ Backup procedure for a later authorized operator:
    return the same receipt; absent batches must pass full validation. Old cursors
    return CURSOR_RESET. Lost public archive history cannot cause HQ to rerun a trade.
 
-Local tests use SQLite's backup API for a consistent isolated database snapshot,
+INV-02 local tests use SQLite's backup API for a consistent isolated database snapshot,
 copy CAS, validate every fixture object, fence authority, install a fresh disposable
 key, reconcile exact original receipt/retry and verify cursor reset. Real process
 SIGKILL tests cover pre/post-SQL commit and post-content-rename boundaries. These
 do not simulate hardware power loss, filesystem corruption repair or offsite DR.
 
-## Future deployment and rollback (proposal only)
+## Installed private service and future activation
 
-`receiver/deploy/asymmetri-investment.service.example` is an uninstalled template,
-without an Install target. It requires an explicit marker AND enabled config,
+`receiver/deploy/asymmetri-investment.service.example` is the hardened INFRA-02 installed-unit profile, without an Install target. See the [current installation/rollback record](INFRA-02-RECEIVER-DEPLOYMENT.md); the paragraphs below describe remaining real/public activation gates. It requires an explicit marker AND enabled config,
 separate non-root identity/storage, loopback network restriction, memory/CPU/task
 limits and filesystem isolation. It is not an activation script.
 
-Before a separately authorized deployment, review the owner's time-limited
-[Ubuntu 22.10 exception](INFRA-01-CANCELLATION.md). INFRA-01 was cancelled/deferred;
-upgrading is no longer an automatic prerequisite. Recheck actual Node.js/SQLite
-compatibility, disk/RAM/CPU/swap and OS risks. Do not reuse INV-01's historical
-96%-used/1.1GB-free observation as current capacity. Closure measured about 44% root
-usage and 13.54 GiB available, without proving receiver load capacity. Compensating
-controls need separate authorization and do not replace missing OS patches. Establish
-independent user/group/directories, verify Linux Node22 native install and
-filesystem fsync/rename behavior, full backup/restore drill, proxy/signature bytes,
-restricted firewall, TLS, disabled migration and empty authority first. Preserve
-all existing websites. Approve resource and verified source-publication budgets
-before any real publisher; Ask has separate future storage/identity/budgets.
+Before later activation, re-review the owner's [Ubuntu 22.10 exception](INFRA-01-CANCELLATION.md).
+INFRA-01 stays cancelled; migration is an independent project. INFRA-02 accepted
+actual Node22/Linux native compatibility, isolated ownership and systemd protection,
+fsync/rename, migration 001, recovery, and bounded shared-host load. See the
+[measured evidence](INFRA-02-VALIDATION.md); historical disk observations are not
+current capacity guarantees. The unit is installed, static and stopped; config is
+disabled and operational authority/data are empty.
 
-Only after those gates and explicit deployment/activation authorization should a
-future operator install a disabled unit, run read-only/synthetic health checks,
-configure the exact proxy, authorize a finite publisher, then deliberately enable
-admission. Rollback stops admission and unit, restores prior compatible code and
-validated config. Keep additive DB/history; do not roll back by dropping tables
-or losing receipts. A necessary older backup restore uses the fence/reconciliation
-procedure above. Never roll back HQ trades from a website receipt or display error.
+Real/public activation still requires an accepted exact HTTP/TLS ingress design,
+representative archive sizing, reviewed retention/backup custody and schedule,
+finite publisher/key lifecycle and HQ reconciliation, verified source-publication
+rights under Decision 029, completed feature gates and explicit owner authorization.
+The tested HTTP proxy failed duplicate-header preservation; local stream transport
+acceptance does not close that gate. Ask has separate storage/identity/budget gates.
+
+Receiver-only rollback stops admission and its unit, restores compatible receiver
+code and validated disabled config, and preserves additive DB/history and receipts.
+An older backup restore uses the fencing/reconciliation procedure above. Never
+roll back HQ trades from a website receipt or display error.
 
 ## Contract update procedure
 
@@ -293,5 +289,5 @@ floating branch as production protocol.
 
 INV-03 public artifact downloads/renderers/transcript pages, later dashboard UI,
 HQ publisher/grants, official-run selection UI, collectors/providers/calendar,
-authoritative trading, real rights approval workflow, deployments and the entire
-private Ask service. INV-02 provides usable local REST/archive foundations only.
+authoritative trading, real rights approval workflow, public activation and the entire
+private Ask service. INV-02 provides REST/archive foundations; INFRA-02 adds stopped private-host installation and synthetic Linux acceptance.

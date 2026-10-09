@@ -1,0 +1,26 @@
+// Explicit temporary-unit probe. No configuration/grants or production data reads.
+import assert from 'node:assert/strict';
+import { access, open, rename, unlink, readFile, readdir } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import { join } from 'node:path';
+import { createServer, connect } from 'node:net';
+import { once } from 'node:events';
+const dir=process.env.INFRA02_PROBE_DIR;
+assert.ok(dir?.startsWith('/var/lib/infra02-acceptance/'));
+assert.notEqual(process.getuid(),0);
+const status=await readFile('/proc/self/status','utf8');
+assert.match(status,/NoNewPrivs:\s+1/);
+for(const field of ['CapInh','CapPrm','CapEff','CapBnd','CapAmb'])assert.match(status,new RegExp(field+':\\s+0+\\n'));
+const hidden=['/var/www','/var/backups','/var/lib/postgresql','/home/django-user','/root','/run/systemd/private','/etc/nginx','/etc/letsencrypt','/etc/ssh','/etc/ssl/private'];
+assert.deepEqual(await readdir('/srv'), [], 'unrelated service roots must be hidden');
+for(const path of hidden)await assert.rejects(access(path,constants.R_OK),undefined,`must be unreadable: ${path}`);
+await assert.rejects(open('/opt/asymmetri-receiver/receiver/infra02-write-probe','wx'));
+await assert.rejects(open('/etc/infra02-write-probe','wx'));
+const a=join(dir,'sync-probe-a'),b=join(dir,'sync-probe-b');
+const file=await open(a,'wx',0o600);await file.writeFile('disposable synthetic durability probe');await file.sync();await file.close();await rename(a,b);
+const parent=await open(dir,'r');await parent.sync();await parent.close();assert.equal(await readFile(b,'utf8'),'disposable synthetic durability probe');await unlink(b);
+const tcp=createServer(socket=>socket.end());tcp.listen(0,'127.0.0.1');await once(tcp,'listening');
+const loop=connect(tcp.address().port,'127.0.0.1');await once(loop,'connect');loop.destroy();await new Promise(resolve=>tcp.close(resolve));
+const network=await new Promise(resolve=>{const socket=connect(80,'169.254.169.254');socket.setTimeout(1500,()=>{socket.destroy();resolve('timeout');});socket.on('connect',()=>{socket.destroy();resolve('CONNECTED');});socket.on('error',error=>resolve(error.code));});
+assert.notEqual(network,'CONNECTED','non-loopback network must be denied');
+console.log(JSON.stringify({uid:process.getuid(),gid:process.getgid(),groups:process.getgroups(),noNewPrivileges:true,capabilities:'all-zero',hiddenPaths: hidden.length,codeReadOnly:true,fileSync:true,atomicRename:true,directorySync:true,loopback:true,nonLoopback:network}));

@@ -1092,6 +1092,8 @@ Motion resources and deliberate video behavior, annotate and push
 Never move either tag. Record candidate/archive/previous-build paths, build IDs and final
 health in the external task receipt. See the [public-story source review](BOTSQUAD_PAGE_REVIEW_2026-10-07.md).
 
-## Investment receiver is not deployed
+## Independent private investment receiver
 
-INV-02 adds a locally validated, default-disabled service; none of the existing website deployment commands deploys or starts it. Do not package SQLite into Cloudflare Workers. The [receiver runbook](INVESTMENT_RECEIVER.md) and uninstalled `receiver/deploy/asymmetri-investment.service.example` describe separate identity/storage, documented OS-exception review and capacity, Node22 Linux validation, proxy-signature checks, backups/restore fencing and explicit future activation/rollback gates. These are proposals, not an INV-02 deployment authorization.
+[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. It leaves `asymmetri-investment.service` static/inactive, without its explicit-enable marker, public ingress or publisher authority. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
+
+Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) and [actual Linux acceptance](INFRA-02-VALIDATION.md). A transparent loopback Nginx test passed; the nginx 1.22 HTTP profile failed duplicate Connection preservation and is not accepted for public/real traffic. Exact HTTP/TLS ingress, recurring backups/retention, representative live capacity, OS-exception review and explicit owner activation remain future gates.

@@ -285,3 +285,42 @@ Labs/home and protected Motion resources on both production hosts.
 ## INV-02 receiver checks
 
 Run `npm run receiver:check`, `npm run receiver:test` and `npm --prefix receiver audit --omit=dev`, in addition to both website builds/check/audit. The test command verifies exact contract hashes/type regeneration and real HTTP/SQLite tests, including separate-process races/SIGKILL, signed replay/revocation, immutable financial ordering, CAS and isolated restore. Run the compiled tests on Node22 as well as `.nvmrc` Node24; see [INV-02-VALIDATION.md](INV-02-VALIDATION.md) for results and untested deployment gates.
+
+## Private receiver Linux acceptance
+
+[INFRA-02](INFRA-02-VALIDATION.md) records actual Ubuntu 22.10/Node22 results;
+[the runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) owns setup, confinement and cleanup.
+These are explicitly invoked, synthetic deployment tools, not startup scripts or
+production health endpoints. Build the receiver first and use a disposable non-root
+Linux copy with the installed nginx stream module and private temporary paths:
+
+```sh
+npm run receiver:check
+npm --prefix receiver test
+cd receiver
+node --test --test-concurrency=1 deploy/nginx-acceptance.test.mjs deploy/restore-acceptance.test.mjs
+```
+
+The nginx harness defaults to loopback stream transport and checks raw signed bytes,
+ambiguous headers/framing, limits and retry receipts. `INFRA02_NGINX_MODE=http`
+selects the diagnostic HTTP profile: **it currently fails duplicate Connection
+preservation on nginx 1.22 and is not accepted ingress**. Keep this assertion.
+No test modifies production nginx. The restore test copies complete stopped storage,
+checks hashes/integrity/CAS/receipts and reconciles newer withholding before reads.
+
+`isolation-probe.mjs` requires an explicit disposable unit and
+`INFRA02_PROBE_DIR` beneath `/var/lib/infra02-acceptance/`; verify masked site roots,
+zero capabilities, denied network and writable fsync/rename behavior under the
+installed unit's restrictions. `capacity-acceptance.mjs` and
+`restart-acceptance.mjs` require the documented disposable archive/config/loopback
+ports and operator orchestration; never point them at operational data. Their
+signing keys remain in memory. Stop/fence and reconcile before fixture removal.
+`archive-audit.mjs` requires disabled config and an offline operational archive;
+it opens SQLite and asserts empty authority/data plus schema/integrity/settings.
+It is an operator-only audit, not a read-only file command or a background job.
+
+Measure CPU/cgroup/RSS/swap/disk/WAL and site latency separately. A startup memory
+snapshot is not a settled idle interval. Repeat the established 198-request/15-host
+baseline, DNS/TLS and original service/configuration identities after cleanup.
+No fixture test establishes public TLS ingress, sustained full-archive capacity,
+hardware power-loss tolerance or an approved recurring backup policy.

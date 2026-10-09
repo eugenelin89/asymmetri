@@ -1,9 +1,11 @@
-# PROPOSAL ONLY. INV-02 does not install, enable or start this unit.
-# No [Install] section: deployment/identity/proxy/activation are separately authorized.
+# Explicit-start private installation. See docs/INFRA-02-RECEIVER-DEPLOYMENT.md.
+# No [Install] section: no boot enablement or implicit publication authority.
 [Unit]
-Description=Asymmetri public investment archive receiver
+Description=Asymmetri private investment archive receiver
 After=network.target
 ConditionPathExists=/etc/asymmetri-investment/explicitly-enabled
+StartLimitIntervalSec=60
+StartLimitBurst=3
 
 [Service]
 Type=simple
@@ -18,14 +20,30 @@ RestartSec=5
 TimeoutStopSec=30
 UMask=0077
 NoNewPrivileges=true
+CapabilityBoundingSet=
+AmbientCapabilities=
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=strict
 ProtectHome=true
+# Hide unrelated websites, retained data/backups, sockets and application trees.
+# Bind back only this root-owned release and its private writable archive.
+TemporaryFileSystem=/var:ro /run:ro /opt:ro /srv:ro
+BindReadOnlyPaths=/opt/asymmetri-receiver
+BindPaths=/var/lib/asymmetri-investment
+InaccessiblePaths=-/etc/nginx -/etc/letsencrypt -/etc/ssh -/etc/ssl/private
 ReadWritePaths=/var/lib/asymmetri-investment
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
 RestrictAddressFamilies=AF_UNIX AF_INET
 IPAddressDeny=any
 IPAddressAllow=localhost
 MemoryMax=256M
+MemorySwapMax=64M
 TasksMax=32
 CPUQuota=50%
