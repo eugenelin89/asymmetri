@@ -3,6 +3,12 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+For the separately selected OS migration, use [INFRA-01](INFRA-01-UBUNTU-MIGRATION.md)
+and its [acceptance ledger](INFRA-01-VALIDATION.md). That task preserves the exact
+existing production release rather than deploying current main. It remains at
+resource/recovery gates; no replacement or traffic cutover has occurred. Routine
+redeployment commands below do not authorize an OS migration or receiver activation.
+
 For the configured Mac SSH login and restricted deployment commands, see
 [CLI access](CLI_ACCESS.md). Connect with `ssh asymmetri` as `webdeploy`, then
 define the documented `app` function. When following application commands below,

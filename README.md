@@ -62,6 +62,11 @@ scientific measurement mappings.
 
 ## Technology
 
+The owner-selected [INFRA-01 migration](docs/INFRA-01-UBUNTU-MIGRATION.md) is
+prepared with [current inventory and validation](docs/INFRA-01-VALIDATION.md).
+Production remains on Ubuntu 22.10; a fresh LTS host, recovery acceptance and
+separate resource/cutover approvals are outstanding. INFRA-02 has not started.
+
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind

@@ -1,5 +1,14 @@
 # Server storage maintenance
 
+## October 9, 2026 INFRA-01 preparation
+
+A later [read-only infrastructure inventory](INFRA-01-UBUNTU-MIGRATION.md) and
+[backup/acceptance record](INFRA-01-VALIDATION.md) reconfirm the original Ubuntu
+22.10 host, approximately 44% disk usage, current source/build and all hosted-site
+baselines. Encrypted off-server preparation is distinct from the cleanup below.
+No additional cleanup, application upgrade, restart, DNS change, purchase or
+cutover was performed. The original Droplet and predecessor rollback remain.
+
 ## October 9, 2026 cleanup
 
 After a read-only audit, the owner requested aggressive disk cleanup. The root

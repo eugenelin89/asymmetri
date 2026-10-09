@@ -133,6 +133,14 @@ compatibility and the affected dependency path.
 
 ## Deployment verification
 
+INFRA-01 compares every hosted site against an independently reviewed production
+baseline, including expected errors and retired endpoints. See
+[its validation ledger](INFRA-01-VALIDATION.md) and the
+[Python/curl helper](../ops/infra/README.md). Run the helper's focused checks with
+`python3 -m unittest discover -s ops/infra -p 'test_*.py'`. Keep its private manifests,
+DNS/TLS records and responses outside Git. Local macOS builds and SQLite restoration
+do not establish Ubuntu LTS, every-site staging, renewal or production-cutover acceptance.
+
 A DigitalOcean deployment requires a successful local `npm run build:next`
 before the commit is pushed. On production, the standard Next.js build must
 complete before `asymmetri.service` is restarted. Verify the loopback

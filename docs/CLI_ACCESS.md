@@ -8,6 +8,12 @@ same date.
 
 ## Log in from the configured Mac
 
+October 9 INFRA-01 reverified both existing aliases, administrator sudo and the
+deployment helper's `NoNewPrivs: 1`. The [migration runbook](INFRA-01-UBUNTU-MIGRATION.md)
+requires a separately verified console recovery route and candidate host-key
+verification before any access/firewall change. Current SSH success alone does
+not establish authenticated DigitalOcean console access; that check is pending.
+
 ```bash
 ssh asymmetri
 whoami
