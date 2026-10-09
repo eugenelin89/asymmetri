@@ -1,5 +1,98 @@
 # Server storage maintenance
 
+## October 9, 2026 cleanup
+
+After a read-only audit, the owner requested aggressive disk cleanup. The root
+filesystem was 96% full, with 1.05 GiB available. Cleanup recovered approximately
+12.58 GiB net, leaving 13.63 GiB available and 44% usage. Inode usage fell from
+23% to 9%. These are measured results, not a recurring capacity guarantee.
+
+This was server maintenance through the existing administrator SSH route, not a
+website deployment. The Asymmetri and Nginx processes were not restarted.
+
+### Removed and preserved
+
+- Removed 24 obsolete Asymmetri checkout, rollback and staging directories under
+  `/var/www` and `/var/tmp`, plus the September 28 compressed rollback and its
+  checksum. This includes the old source-only `asymmetri-next` checkout. Existing
+  Git checkouts were clean, their commits were ancestors of live production, and
+  their ignored files were generated builds, dependencies or TypeScript caches.
+  Running process references, memory mappings, service/Nginx/cron configurations
+  and nested mounts were checked before deletion.
+- Preserved the current application and assembled one complete, independent
+  immediate-predecessor rollback before removing older recovery material. Shared
+  dependency hard links were accounted for; deletion unlinked obsolete copies
+  without modifying live file contents.
+- Cleared npm download caches, the unused Node compile cache, and apt downloads
+  and regenerable package caches. Active installed application dependencies and
+  Python/Conda environments were preserved.
+- Rotated journals and applied a one-time 128 MiB / seven-day vacuum, removed
+  rotated numbered logs older than seven days that were not open, and removed
+  unused 2022 journals belonging to a retired machine identity. Current journal
+  usage was approximately 109.5 MiB afterward. No persistent journal limit or
+  automatic cleanup schedule was installed.
+- Removed disabled snapd revision 27738 using Snap's package command and unlinked
+  download-cache entries. Current revisions and seed/application data remain.
+  Most snap cache entries shared hard links with installed snaps, so their apparent
+  sizes were not counted as additional reclaimed capacity.
+- Preserved other websites, project source/results, databases, the active 2 GiB
+  swap file, installed operating-system packages other than the disabled snap
+  revision, and earlier root-only maintenance receipts.
+
+### Current recovery directory
+
+The retained complete rollback is
+`/var/www/asymmetri-rollback-20261009-fd65c46`, owned by `django-user`:
+
+- Source: `fd65c46c16588903bb74198f1988cafff8d8b20c`.
+- Build: `3sb31Jjj0R0QRPODTe0e_`.
+- Source/public files and Git metadata were restored from the immediate prior
+  release archives; the prior production build and matching installed dependencies
+  were copied independently. No dependency install or rebuild was needed.
+- Content hashes verified all 174 source archive files, 306 Git archive files,
+  28,491 dependency files/links and 379 build files/links. File ownership and
+  independent runtime inodes were checked, along with clean Git state and matching
+  dependency manifests.
+- All nine pages, robots and sitemap returned HTTP 200 from a temporary private
+  loopback test process. That process was stopped after verification.
+
+The initial tar metadata comparison detected the source archive's synthetic
+ownership and a Git index refresh, not source corruption. Verification used exact
+file-content comparison after restoring the archived index, plus explicit
+application ownership checks. The rollback was validated before any release
+directory was deleted.
+
+The old `/var/tmp` rollback workspaces and historical complete snapshots are now
+absent. Use the current directory above and the inspection/swap procedure in
+[Deployment](DEPLOYMENT.md), checking its identity again before a future recovery.
+This cleanup does not authorize automatic deletion of future release snapshots.
+
+### Verification and receipt
+
+Live production remained on clean source
+`745a92c676bcbe85c3aa675a1099d26321f1c1e2`, build `Ic-zxi4WHpmgjiSDnsJCw`.
+The before/after content digest matched for all 29,025 checked source, asset,
+dependency and build files/links; Git metadata and the mutable Next cache
+were excluded from that aggregate and source identity was checked separately.
+
+All 35 HTTPS response checks across 15 configured hosts matched their baselines,
+including all nine Asymmetri pages, robots and sitemap on both apex and `www`.
+Independent public apex/www requests also returned 200. The unrelated draft
+site's existing 502 and retired relays' 410 responses were unchanged.
+
+Nginx configuration and live service identities/start times were unchanged. The
+systemd directory changed only by Snap removing the obsolete revision's mount
+unit and its two enablement symlinks; virtual reinsertion of those three entries
+reproduced the original directory checksum. No significant deleted-open disk
+files remained.
+
+The root-only receipt directory
+`/var/backups/asymmetri-disk-cleanup-20261009` records exact removed paths,
+source/build identities, rollback checks, before/after fingerprints, health
+responses and final capacity. It contains no copied private keys. Historical
+sections below describe earlier states; their retained paths are not current
+recovery guarantees.
+
 ## September 28, 2026 cleanup
 
 The owner requested an aggressive disk audit and cleanup of the existing

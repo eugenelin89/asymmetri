@@ -613,10 +613,12 @@ on them. Identify safe cleanup targets separately, such as old confirmed
 deployment copies, package caches, or oversized journals. Review ownership and
 rollback needs before deleting anything.
 
-The September 28 cleanup and science-fair relay retirement are recorded in
-[Server storage maintenance](SERVER_MAINTENANCE.md), including authorized project removal,
-recovery inputs, capacity, and health checks. The obsolete `asymmetri-next` checkout
-now contains source only; it is not an executable rollback.
+The September 28 and October 9 cleanups are recorded in
+[Server storage maintenance](SERVER_MAINTENANCE.md), including authorized removals,
+recovery inputs, capacity, and health checks. The October 9 cleanup replaces older
+deployment copies with one verified, independent immediate-predecessor rollback.
+The obsolete `asymmetri-next` checkout and older staging/rollback paths were removed.
+Do not rely on historical release receipts as proof that a directory still exists.
 
 ### Git reports dubious ownership
 
@@ -653,16 +655,20 @@ commits actually exist.
 
 ### Option 1: Immediate directory rollback
 
-The preceding complete release retained after the September 28 cleanup is
-`/var/www/asymmetri-rollback-20260928-850536c`. Reconfirm its contents and suitability
-for the current incident before use; the old `/var/www/asymmetri-next` directory
-no longer has dependencies or a build. Inspect the retained release first:
+The complete preceding release retained after the October 9 cleanup is
+`/var/www/asymmetri-rollback-20261009-fd65c46`, source
+`fd65c46c16588903bb74198f1988cafff8d8b20c`, build `3sb31Jjj0R0QRPODTe0e_`.
+It contains source, Git metadata, public assets, the previous production build,
+and independently copied dependencies. File-content checks and all nine pages,
+robots and sitemap passed on a temporary loopback server, which was then stopped.
+Reconfirm its identity, contents and suitability for the current incident before
+use; subsequent deployments may establish a newer rollback. Inspect it first:
 
 ```bash
-ls -ld /var/www/asymmetri /var/www/asymmetri-rollback-20260928-850536c
-sudo -u django-user -H git -C /var/www/asymmetri-rollback-20260928-850536c log -1 --oneline
-sudo -u django-user -H test -x /var/www/asymmetri-rollback-20260928-850536c/node_modules/.bin/next
-sudo -u django-user -H test -d /var/www/asymmetri-rollback-20260928-850536c/.next
+ls -ld /var/www/asymmetri /var/www/asymmetri-rollback-20261009-fd65c46
+sudo -u django-user -H git -C /var/www/asymmetri-rollback-20261009-fd65c46 log -1 --oneline
+sudo -u django-user -H test -x /var/www/asymmetri-rollback-20261009-fd65c46/node_modules/.bin/next
+sudo -u django-user -H test -d /var/www/asymmetri-rollback-20261009-fd65c46/.next
 ```
 
 If it is a confirmed previous working deployment and immediate recovery is more
@@ -674,7 +680,7 @@ systemctl stop asymmetri.service
 
 failed_dir="/var/www/asymmetri-failed-$(date +%Y%m%d%H%M%S)"
 mv /var/www/asymmetri "$failed_dir"
-mv /var/www/asymmetri-rollback-20260928-850536c /var/www/asymmetri
+mv /var/www/asymmetri-rollback-20261009-fd65c46 /var/www/asymmetri
 
 systemctl start asymmetri.service
 systemctl status asymmetri.service --no-pager -l
