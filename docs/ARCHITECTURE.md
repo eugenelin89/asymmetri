@@ -167,18 +167,17 @@ explicitly retires one path.
 
 ## Production infrastructure architecture
 
-The October 9 [INFRA-01 inventory and migration plan](INFRA-01-UBUNTU-MIGRATION.md)
-accounts for all 15 named hosts on the shared server. Production still uses
-Ubuntu 22.10 and its independently pinned website release. The accepted path is a
-clean 24.04 LTS rebuild of the same Droplet/IP, with no second host or DNS cutover.
-The old running disk will cease to exist after erasure; verified independent recovery,
-snapshot rollback and separate rebuild/outage approval are required. `ops/infra/`
-contains operator-only HTTP comparison and archive restoration tools, with no
-website/runtime integration. The [retirement amendment](INFRA-01-DJANGO-RETIREMENT.md)
-proposes an Nginx static 410 notice for the peer Django site and archival retention of
-its SQLite/source and the dormant PG cluster; no live behavior changed. Keep the shared
-application owner and OS Python while omitting unused application runtimes on the future
-target.
+The October 9 [INFRA-01 cancellation](INFRA-01-CANCELLATION.md) retains the original
+Ubuntu 22.10 Droplet/IP and independently pinned website release. All 15 hosts retain
+their baseline behavior. The migration snapshot was deleted after backup verification;
+independent encrypted recovery sets remain. The OS carries an explicit time-limited
+unsupported-OS exception with review before future deployment/public exposure.
+Django retirement and the static 410 proposal were evaluated, not executed; Django,
+Gunicorn/socket, SQLite, dormant PG data, shared accounts and all runtimes remain.
+`ops/infra/` contains reusable operator HTTP comparison and recovery tools with no
+website/runtime integration. Future receiver deployment requires separate authorization
+and actual host compatibility, security, capacity and recovery acceptance; it does
+not automatically depend on restarting the cancelled migration.
 
 ### Request path
 

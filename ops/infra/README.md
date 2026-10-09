@@ -44,7 +44,9 @@ asset URLs and review the generated-asset delta against the pinned source/build;
 do not hide a failure by automatically replacing baseline hashes. The helper does
 not check browser interactions, database integrity, certificates' renewal ability,
 source identity, firewall rules, authenticated journeys or service readiness.
-Those remain separate requirements in [the migration runbook](../../docs/INFRA-01-UBUNTU-MIGRATION.md).
+The [migration runbook](../../docs/INFRA-01-UBUNTU-MIGRATION.md) preserves those
+historical acceptance checks. Migration is cancelled; the [closure decision](../../docs/INFRA-01-CANCELLATION.md)
+owns current scope and readiness requirements for separately authorized future work.
 
 ## Private archive restoration
 

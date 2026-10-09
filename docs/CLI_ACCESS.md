@@ -9,17 +9,15 @@ same date.
 ## Log in from the configured Mac
 
 October 9 INFRA-01 reverified both existing aliases, administrator sudo and the
-deployment helper's `NoNewPrivs: 1`. The [migration runbook](INFRA-01-UBUNTU-MIGRATION.md)
-requires an authenticated console recovery route and verification of newly generated
-host keys after a same-Droplet rebuild. Cloud sign-in and encrypted recovery-console
-transport to the Ubuntu login prompt are verified; an administrator recovery shell
-is still unverified. Read-only checks found root and the administrator password entries
-locked; the owner should not be asked to guess a console password. Original custom
-cloud-init user-data is empty, so target account bootstrap needs an explicit reviewed
-recovery route. Existing SSH aliases do not prove access after disk erasure.
-Do not disable host-key checking, change SSH policy or reset credentials to bypass
-that gate. Restore reviewed users/public keys/helper/sudo boundaries and verify two
-independent sessions before applying target firewall restrictions.
+deployment helper's `NoNewPrivs: 1`. The [migration is now cancelled](INFRA-01-CANCELLATION.md);
+existing SSH remains the operational access route. No console login is needed to
+complete cancellation. Cloud sign-in and recovery-console transport reached the
+Ubuntu login prompt, but an authenticated recovery shell remains unverified.
+Root/admin password entries were locked; do not ask the owner to guess a password
+or reset credentials for this cleanup. These are retained recovery limitations,
+not an automatic block on all local development. Any future disk-erasing project
+must establish its own recovery/bootstrap and host-key verification before approval;
+existing SSH alone would not prove access after erasure.
 
 ```bash
 ssh asymmetri

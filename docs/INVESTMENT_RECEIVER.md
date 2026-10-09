@@ -204,7 +204,7 @@ Limits return safe explicit errors; they are not a promise of production sizing.
 At defaults, reserve at least 1 GiB free storage plus independent backups and
 website/build headroom. Proposed receiver RAM ceiling is 256 MiB with 128 MiB JS
 heap. The minimum configurable archive payload budget is 4 MiB (16 MiB DB). Measure sustained real-sized synthetic archives with the website under load
-on a supported target OS before activation; the historical 1 GiB shared host may
+on the actual selected host under the [OS exception review](INFRA-01-CANCELLATION.md#time-limited-unsupported-os-exception) before activation; the historical 1 GiB shared host may
 need more RAM. There is no unbounded queue or automatic data deletion to recover
 space. Journal metadata and pages consume capacity as well as payloads.
 
@@ -257,10 +257,13 @@ without an Install target. It requires an explicit marker AND enabled config,
 separate non-root identity/storage, loopback network restriction, memory/CPU/task
 limits and filesystem isolation. It is not an activation script.
 
-Before a separately authorized deployment: remediate unsupported Ubuntu 22.10;
-recheck disk/RAM/OS rather than reusing INV-01's historical 96%-used/1.1GB-free
-snapshot. `SERVER_MAINTENANCE.md` records separate October 9 cleanup (~13.63GiB
-free, 44% used then); this task did not inspect or change the server. Establish
+Before a separately authorized deployment, review the owner's time-limited
+[Ubuntu 22.10 exception](INFRA-01-CANCELLATION.md). INFRA-01 was cancelled/deferred;
+upgrading is no longer an automatic prerequisite. Recheck actual Node.js/SQLite
+compatibility, disk/RAM/CPU/swap and OS risks. Do not reuse INV-01's historical
+96%-used/1.1GB-free observation as current capacity. Closure measured about 44% root
+usage and 13.54 GiB available, without proving receiver load capacity. Compensating
+controls need separate authorization and do not replace missing OS patches. Establish
 independent user/group/directories, verify Linux Node22 native install and
 filesystem fsync/rename behavior, full backup/restore drill, proxy/signature bytes,
 restricted firewall, TLS, disabled migration and empty authority first. Preserve

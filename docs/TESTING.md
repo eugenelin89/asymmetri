@@ -133,7 +133,9 @@ compatibility and the affected dependency path.
 
 ## Deployment verification
 
-INFRA-01 compares every hosted site against an independently reviewed production
+The [INFRA-01 cancellation](INFRA-01-CANCELLATION.md) passed the unchanged 198-request
+baseline; no retirement response overlay was applied. Reusable INFRA-01 tooling
+compares every hosted site against an independently reviewed production
 baseline, including expected errors and retired endpoints. See
 [its validation ledger](INFRA-01-VALIDATION.md) and the
 [Python/curl helper](../ops/infra/README.md). Run the helper's focused checks with
@@ -144,7 +146,7 @@ acceptance. The archive helper requires a new case-sensitive destination and
 independently trusted manifest/hash. Linux synthetic owner tests remain distinct from
 private Mac file restoration. Retired-domain response changes need a separately approved
 expected-result overlay; preserve the original baseline. See the [retirement acceptance
-amendment](INFRA-01-DJANGO-RETIREMENT.md).
+amendment](INFRA-01-DJANGO-RETIREMENT.md), now a deferred historical proposal.
 
 A DigitalOcean deployment requires a successful local `npm run build:next`
 before the commit is pushed. On production, the standard Next.js build must

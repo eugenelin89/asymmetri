@@ -1,5 +1,14 @@
 # INFRA-01 validation — retirement amendment and recovery verification
 
+> **Current status (October 9, 2026): migration cancelled/deferred; snapshot deleted;
+> cleanup complete.** The [cancellation record](INFRA-01-CANCELLATION.md) supersedes
+> all execution and snapshot-retention instructions below. Django retirement was
+> evaluated but not executed; services/data remain intact. The following text is
+> retained historical phase evidence, including failed attempts and unperformed gates.
+> It is not an active plan or authority to rebuild, retire, or start INFRA-02.
+
+## Historical preparation record — superseded
+
 **INFRA-01 RECOVERY PARTIALLY VERIFIED — SPECIFIC BLOCKERS REMAIN**
 
 Updated 2026-10-09. Production remains Ubuntu 22.10 on the same Droplet/IP and pinned

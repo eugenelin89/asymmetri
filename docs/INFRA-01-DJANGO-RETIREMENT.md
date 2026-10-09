@@ -1,5 +1,14 @@
 # INFRA-01 — Django retirement amendment
 
+> **Current status (October 9, 2026): migration cancelled/deferred; snapshot deleted;
+> cleanup complete.** The [cancellation record](INFRA-01-CANCELLATION.md) supersedes
+> all execution and snapshot-retention instructions below. Django retirement was
+> evaluated but not executed; services/data remain intact. The following text is
+> retained historical phase evidence, including failed attempts and unperformed gates.
+> It is not an active plan or authority to rebuild, retire, or start INFRA-02.
+
+## Historical preparation record — superseded
+
 Updated 2026-10-09. **Preparation complete for owner review; retirement not executed.**
 This changes the existing [migration plan](INFRA-01-UBUNTU-MIGRATION.md), not its
 milestone. The owner selected archival retirement instead of running Django on

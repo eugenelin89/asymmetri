@@ -1,5 +1,31 @@
 # Server storage maintenance
 
+## October 9, 2026 cancellation and final cleanup — current
+
+The owner [cancelled/deferred migration](INFRA-01-CANCELLATION.md), retained Ubuntu
+22.10 and explicitly authorized deletion of the migration snapshot. After all 12
+encrypted copies passed fresh recovery verification, the exact 11.23 GB snapshot
+was deleted; account absence confirmed at 13:05:58 PDT / 20:05:58 UTC. Approximately
+US$0.6738/month before tax is eliminated; prior usage is not refunded and is not yet
+itemized in daily billing.
+
+New cleanup removed six disposable/duplicate Mac files: 31,224 logical / 49,152
+allocated bytes; observed free-space increase 32,768 bytes. HQ and production had
+no task remnants, so newly reclaimed bytes there are zero. Earlier 1.73 GB HQ cleanup
+is historical and not counted again. Required backups, keys, manifests, recovery
+scripts, rollback, 2 GiB swap and all production applications/data remain.
+
+The 198-request/15-host baseline and DNS/TLS checks pass. Service master PIDs/start
+times, OS/Droplet/IPs, source/build and 48 configuration fingerprints are unchanged.
+No service restart, Nginx/DNS change or Django retirement occurred. Review the
+unsupported-OS exception before future deployments; INFRA-02 remains unstarted.
+
+## Historical preparation and cleanup chronology
+
+The dated records below preserve earlier facts and decisions. Their migration,
+retirement and snapshot-retention instructions are superseded by cancellation;
+they do not describe current snapshot availability or authorize further work.
+
 ## October 9, 2026 retirement preparation and rehearsal cleanup
 
 The owner selected [Django retirement and PG archival

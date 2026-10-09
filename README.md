@@ -62,15 +62,13 @@ scientific measurement mappings.
 
 ## Technology
 
-The owner-selected [INFRA-01 migration](docs/INFRA-01-UBUNTU-MIGRATION.md) is
-prepared with [current inventory and validation](docs/INFRA-01-VALIDATION.md).
-Production remains on Ubuntu 22.10. The owner selected a clean Ubuntu 24.04 rebuild
-of the existing Droplet with the same IP. The approved live snapshot is complete;
-recovery acceptance and separate destructive-rebuild/outage approval remain required.
-The owner selected [Django retirement and PG archival
-preservation](docs/INFRA-01-DJANGO-RETIREMENT.md); public retirement behavior/service
-changes still need approval. Recovery tests and BotSquad cleanup are documented;
-production remains unchanged. INFRA-02 has not started.
+The owner [cancelled/deferred INFRA-01](docs/INFRA-01-CANCELLATION.md) and retained
+Ubuntu 22.10 on the original Droplet/IP. The temporary migration snapshot was deleted
+after verified off-server recovery checks; cleanup is complete. Django and all other
+sites/services remain unchanged. The unsupported-OS exception requires review before
+future deployment/public exposure; migration is no automatic prerequisite to local
+investment development. INFRA-02 has not started. Historical preparation and test
+records remain available through the cancellation record.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The

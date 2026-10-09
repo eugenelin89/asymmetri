@@ -3,17 +3,15 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the separately selected OS migration, use [INFRA-01](INFRA-01-UBUNTU-MIGRATION.md)
-and its [acceptance ledger](INFRA-01-VALIDATION.md). That task preserves the exact
-existing production release rather than deploying current main. It remains at
-recovery and destructive-rebuild/outage gates. The existing Droplet/IP will be
-retained; its whole disk must be restored after a clean Ubuntu 24.04 rebuild. Snapshot
-storage is approved up to US$1.50/month and deletion is mandatory only after accepted
-migration, healthy observation and independent recovery. The [retirement
-amendment](INFRA-01-DJANGO-RETIREMENT.md) removes active Django/Gunicorn/PG installation
-from the target plan after archival obligations and retirement approval. Keep shared
-`django-user` ownership and OS Python. No rebuild or retirement has occurred.
-Routine redeployment commands below do not authorize this migration or receiver activation.
+The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
+Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
+review it before the next deployment or new public exposure. The migration snapshot
+was deleted after backup verification and cleanup is complete. Django retirement
+was evaluated but not executed. Preserve all existing runtimes, shared identities,
+data, domains and recovery material. Do not reactivate historical rebuild instructions.
+Future deployments require explicit scope and actual Linux/runtime, proxy/signature,
+capacity, least-privilege and recovery acceptance. An Ubuntu upgrade is no longer an
+automatic prerequisite. Routine commands below do not authorize receiver activation.
 
 For the configured Mac SSH login and restricted deployment commands, see
 [CLI access](CLI_ACCESS.md). Connect with `ssh asymmetri` as `webdeploy`, then
@@ -801,8 +799,7 @@ service switch, but that is not the default routine workflow.
 
 ## Security and maintenance notes
 
-- Ubuntu 22.10 is end-of-life. Plan migration or upgrade to a supported Ubuntu
-  LTS release in a dedicated maintenance window.
+- Ubuntu 22.10 is end-of-life. Apply the [owner exception and review triggers](INFRA-01-CANCELLATION.md#time-limited-unsupported-os-exception). A future upgrade needs a separately requested project; do not silently restart INFRA-01.
 - The Droplet is small and resource-constrained. Check disk and memory before
   large installs or builds.
 - Review direct root SSH exposure as a separate infrastructure task.
@@ -1097,4 +1094,4 @@ health in the external task receipt. See the [public-story source review](BOTSQU
 
 ## Investment receiver is not deployed
 
-INV-02 adds a locally validated, default-disabled service; none of the existing website deployment commands deploys or starts it. Do not package SQLite into Cloudflare Workers. The [receiver runbook](INVESTMENT_RECEIVER.md) and uninstalled `receiver/deploy/asymmetri-investment.service.example` describe separate identity/storage, supported OS/capacity, Node22 Linux validation, proxy-signature checks, backups/restore fencing and explicit future activation/rollback gates. These are proposals, not an INV-02 deployment authorization.
+INV-02 adds a locally validated, default-disabled service; none of the existing website deployment commands deploys or starts it. Do not package SQLite into Cloudflare Workers. The [receiver runbook](INVESTMENT_RECEIVER.md) and uninstalled `receiver/deploy/asymmetri-investment.service.example` describe separate identity/storage, documented OS-exception review and capacity, Node22 Linux validation, proxy-signature checks, backups/restore fencing and explicit future activation/rollback gates. These are proposals, not an INV-02 deployment authorization.
