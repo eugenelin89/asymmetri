@@ -6,8 +6,11 @@ DigitalOcean Ubuntu Droplet.
 For the separately selected OS migration, use [INFRA-01](INFRA-01-UBUNTU-MIGRATION.md)
 and its [acceptance ledger](INFRA-01-VALIDATION.md). That task preserves the exact
 existing production release rather than deploying current main. It remains at
-resource/recovery gates; no replacement or traffic cutover has occurred. Routine
-redeployment commands below do not authorize an OS migration or receiver activation.
+recovery and destructive-rebuild/outage gates. The existing Droplet/IP will be
+retained; its whole disk must be restored after a clean Ubuntu 24.04 rebuild. Snapshot
+storage is approved up to US$1.50/month and deletion is mandatory only after accepted
+migration, healthy observation and independent recovery. No rebuild has occurred.
+Routine redeployment commands below do not authorize this migration or receiver activation.
 
 For the configured Mac SSH login and restricted deployment commands, see
 [CLI access](CLI_ACCESS.md). Connect with `ssh asymmetri` as `webdeploy`, then

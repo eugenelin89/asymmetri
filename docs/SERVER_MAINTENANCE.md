@@ -1,5 +1,21 @@
 # Server storage maintenance
 
+## October 9, 2026 INFRA-01 same-Droplet continuation
+
+The owner superseded the replacement-host proposal with a clean Ubuntu 24.04 rebuild
+of the existing Droplet, preserving its identity/IP and DNS. Production has not been
+rebuilt or stopped. The approved live snapshot completed at 11.23 GB, approximately
+US$0.67/month before tax, within the US$1.50/month ceiling. It remains retained and
+is supplemental to independently tested encrypted exports.
+
+A same-disk rebuild erases both the current release and the rollback directory
+listed below. Neither can be treated as an available old-host fallback afterward.
+Use the [revised runbook](INFRA-01-UBUNTU-MIGRATION.md) and
+[actual validation record](INFRA-01-VALIDATION.md) for recovery gates, Linux rehearsal,
+write freeze, snapshot restoration and mandatory post-acceptance snapshot deletion.
+No new cleanup of the production filesystem, service activation or INFRA-02 work
+is authorized by these preparations. Historical cleanup evidence below is unchanged.
+
 ## October 9, 2026 INFRA-01 preparation
 
 A later [read-only infrastructure inventory](INFRA-01-UBUNTU-MIGRATION.md) and

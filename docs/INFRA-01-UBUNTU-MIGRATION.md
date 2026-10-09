@@ -1,29 +1,38 @@
-# INFRA-01 — Ubuntu LTS migration and existing-site acceptance
+# INFRA-01 — Same-Droplet Ubuntu LTS rebuild and existing-site acceptance
 
-Updated: 2026-10-09. **Prepared; resource and later migration approvals required.**
-Production remains on the original Ubuntu 22.10 Droplet. No replacement, snapshot,
-DNS change, routing change, restart, release, or receiver activation was performed.
-See [validation](INFRA-01-VALIDATION.md) for measured evidence and its limits.
+Updated: 2026-10-09. **Preparation documented; recovery gaps remain; destructive rebuild not authorized.**
+The accepted direction is a clean Ubuntu 24.04 LTS amd64 rebuild of the **existing
+Droplet**, retaining its identity, public IP and DNS destinations. Production remains
+Ubuntu 22.10. [Validation](INFRA-01-VALIDATION.md) separates actual evidence from
+unperformed rebuild steps. INFRA-02 has not started.
 
-## Authority and gates
+## Authority, strategy change and gates
 
-The owner selected INFRA-01 only: inventory, baselines, backup preparation,
-compatibility investigation, migration engineering, documentation and safe work on
-existing resources. This is not a BotSquad HQ or runtime-worker administration task.
+The October 9 continuation supersedes the replacement-Droplet proposal in
+[preparation commit 50fb207](https://github.com/eugenelin89/asymmetri/blob/50fb207ffbd752ebd1d3d2a0e35c3612826b16dd/docs/INFRA-01-UBUNTU-MIGRATION.md)
+and [journal 050](prompts/050-deployment.md). That proposal's 2 GiB plan, parallel
+host, overlap billing and DNS cutover are historical only. No replacement Droplet,
+resize or permanent additional hosting expense is authorized. Do not follow a chain
+of obsolete Ubuntu upgrades. The original observations and failed attempts remain
+in the validation history; no document update means a migration occurred.
 
-| Gate | Current state | Required before crossing |
-| --- | --- | --- |
-| New paid resources | Not approved; none created | Exact size/image/region, recurring cost, overlap and backup budget approved |
-| Production traffic | Not approved; unchanged | Every-site staging acceptance, recoverability and explicit cutover approval |
-| Interruption | Not approved; services left running | Agreed write-freeze/downtime scope and window for the peer mutable application |
-| Destruction | Not approved; original host/data/rollback retained | Separate owner decision, including post-cutover writes and retention |
-| Cloud recovery | SSH works; authenticated cloud console not verified | Owner signs into DigitalOcean; confirm emergency console and independent recovery |
+| Action | Authority and acceptance |
+| --- | --- |
+| Read-only inspection, independent backups and isolated recovery rehearsal | Authorized; preserve running services and unrelated data |
+| Snapshot of existing Droplet | Explicitly approved, aggregate migration-snapshot storage up to US$1.50/month; verify size and cost |
+| Production write freeze, shutdown or outage | Not yet authorized; agree scope/window after readiness |
+| Erase/rebuild existing disk | Not authorized; separate explicit owner approval after demonstrated recovery |
+| DNS, cloud firewall or SSH policy changes | Not authorized during preparation |
+| New Droplet, receiver activation or application upgrades | Not authorized |
+| Migration snapshot deletion | Required and authorized **only after** all completion/observation/recovery gates below pass |
+| BotSquad test environment | Later owner instruction permits `ssh botsquad` for isolated rehearsal and requires cleanup; no HQ application, data or authority change |
 
-Do not interpret approved SSH/root access as approval for these gates. Do not use
-an unsupported direct 22.10-to-24.04 upgrade or boot a restored 22.10 image as the
-replacement LTS host. Do not install/activate INV-02, start INFRA-02, generate its
-prompt, begin INV-03, or modify HQ. Market-data spending remains US$0 under Decision
-029; hosting requires its own approval.
+[DigitalOcean's rebuild procedure](https://docs.digitalocean.com/products/droplets/how-to/rebuild/)
+states that rebuilding replaces the disk while retaining the Droplet IP; Ubuntu to
+Ubuntu satisfies its OS-family rule. This is **not** destroy-and-create. The exact
+existing Droplet ID and assigned IPv4 must be matched before and after every cloud
+action. If IP retention cannot be established, stop for an owner decision. Never
+substitute another host or change DNS to conceal a failed same-Droplet procedure.
 
 ## Current inventory
 
@@ -88,13 +97,13 @@ Next 16.3.6. The immediate predecessor is
 `fd65c46c16588903bb74198f1988cafff8d8b20c`, build `3sb31Jjj0R0QRPODTe0e_`.
 Repository preparation began at `66a882d3f2c95deb1ac1a2808c36b4627742586b`.
 GitHub main contains Next 16.3.8 and the disabled receiver; it is **not** the
-approved replacement website release. Do not run a floating `git pull` on the
-candidate or copy this repository's new receiver into service configuration.
+approved migration website release. Do not run a floating `git pull` on the
+restored website or copy this repository's new receiver into service configuration.
 
-Prepare the candidate from the exact live SHA and lockfile, installing dependencies
+Prepare the restored website from the exact live SHA and lockfile, installing dependencies
 on the new OS as the application owner. Do not copy native node_modules or Python
 virtual environments as the new runtime. Preserve generated current output for
-recovery, but rebuild and test a candidate before use. A rebuilt build ID may
+recovery, but rebuild and test it before use. A rebuilt build ID may
 differ: compare public content, route/asset contracts and exact source identity,
 and record both build IDs. Never bless unexpected changes by rewriting a baseline.
 
@@ -105,171 +114,348 @@ ownership separately from rebuildable dependencies. No data/schema migration is
 authorized merely by installing Python.
 
 The known Next security patch remains undeployed. Inspect the exact patch separately
-and record an explicitly chosen candidate if remediation must accompany migration;
+and record an explicitly chosen release if remediation must accompany migration;
 do not silently substitute newer main. A vulnerable baseline is evidence, not a
 security acceptance waiver.
 
-## Backup and restoration plan
+## Independent recovery and custody
 
-The existing single-site rollback on the same disk is not a whole-server backup.
-This preparation adds encrypted off-server application/configuration exports and
-an isolated SQLite restore; precise completion and limitations are in validation.
+A rebuild erases the current executable release, predecessor rollback, databases,
+users, installed packages and all other root-disk state. Those directories cease
+to be a fallback. A snapshot and tested off-server recovery must replace that
+assumption before approval. Selected-file exports are not a complete disk image.
 
-Backup classes must remain distinct:
+| Recovery class | Required proof before destruction |
+| --- | --- |
+| Pinned Next website | Exact source/lockfile at 745a92c, Node 22, native dependencies, successful Linux checks/build/startup and route/asset comparison; retain original and rebuilt build IDs |
+| Active Django | Source plus production settings overlay, exact installed package inventory, consistent SQLite, media/static files, Python 3.12 environment, Gunicorn startup and representative application requests |
+| SQLite | Read-only-source backup API, independently decrypted copy, full integrity/FK checks and canonical schema/data comparison; repeat after final write freeze |
+| Dormant PostgreSQL 14 | Entire cleanly stopped cluster, configuration and tablespaces; isolated compatible PG 14 Linux startup, logical export/integrity checks, clean shutdown; no public activation or data-format upgrade |
+| Static and retained files | All source/deployed roots, complete member/content/link/mode/numeric-owner comparison on a case-sensitive Linux filesystem; retained environments remain dormant |
+| TLS and server configuration | Certificate chains/private keys and ACME configuration; reviewed Nginx, units, schedules, users/groups/public keys, sudo/helper/firewall/network/logging requirements; reconstruct LTS configuration deliberately |
+| Whole-disk fallback | Completed snapshot identified against this Droplet, restore compatibility and usable out-of-band administrator recovery; old image is emergency Ubuntu 22.10 rollback only |
 
-1. Exact Git source plus **production-only overlays**, static files and retained
-   user projects; current/predecessor executable releases for immediate recovery.
-2. App-consistent SQLite snapshot using Python's SQLite backup API from a read-only
-   source connection. Validate integrity, foreign keys, deterministic schema/data
-   digest and isolated application startup. A filesystem copy of a live database
-   is not sufficient. [SQLite backup API](https://www.sqlite.org/backup.html).
-3. Dormant PostgreSQL 14: prove no postmaster and clean shutdown, then preserve the
-   whole cluster/configuration/tablespaces. It must be restored on an isolated,
-   compatible PostgreSQL 14 runtime before any conversion. A raw cluster cannot
-   be attached to Ubuntu's different default major version. Preserve dormant
-   state on the candidate. [PostgreSQL filesystem backup](https://www.postgresql.org/docs/14/backup-file.html).
-   PostgreSQL 14 reaches upstream end of support on November 12, 2026; this isolated
-   recovery rehearsal does not authorize reactivation. Later activation requires a
-   supported-version decision. [Version policy](https://www.postgresql.org/support/versioning/).
-4. Nginx, systemd, schedules, UID/GID/public-key mappings, firewall/network rules,
-   access helpers, log rotation and necessary environment files. Reconstruct the
-   LTS configuration deliberately; never overlay old `/etc`, APT sources, kernels
-   or system libraries onto it.
-5. TLS/ACME keys and renewal configuration transferred only through encrypted
-   private backup/SSH channels, preserving root ownership and restrictive modes.
-   Never commit them, password databases, environment values or SSH private keys.
-6. Separately approved original-host snapshot as additional rollback protection.
-   A live snapshot is not an application-consistency substitute. A powered-down
-   snapshot needs interruption approval; old-OS snapshot restore is only recovery.
+The original five encrypted exports, trusted hashes and receipts are in the owner's
+protected INFRA-01 administrator storage outside Git. The operator index is
+`README-RECOVERY.md`; `FINAL-LEDGER.json` and the continuation receipts own exact
+paths, identities, timestamps and private inventory. Never put the recovery key,
+TLS private keys, application settings, user records or raw inventories in Git.
 
-Local administrator storage is mode 0700, evidence/archive/key files 0600. The
-export encryption uses AES-256-CBC/PBKDF2-SHA256, 600,000 iterations and a random
-recovery passphrase; ciphertext SHA-256 receipts detect accidental corruption.
-CBC is not authenticated encryption: verify a trusted independent digest before
-decrypting, do not accept an archive and replacement checksum from an untrusted
-source. Move the recovery passphrase and trusted checksums to owner-controlled
-separate recovery custody before cutover; current same-device custody is a limit.
-No private values are displayed or stored in public Git. Incomplete exports are excluded from acceptance; a known missing optional path
-was resolved only through independent complete-membership and source-hash checks
-recorded in validation.
+Archives use AES-256-CBC, PBKDF2-SHA256 and 600,000 iterations. CBC is not authenticated:
+verify the expected ciphertext SHA-256 from independently trusted evidence before
+decryption. Use `-pass file:...`, never a literal password or shell tracing. Both
+ciphertext and decryption material exist off production. Separate-copy tests on the
+Mac prove independence from the production disk, **not** separate-device disaster
+custody. Keep a separately protected key/checksum copy and usable archives before
+rebuild; record the custodian/location privately.
 
-During final synchronization, explicitly approve freezing peer Django writes,
-drain in-flight requests and stop its writers in the agreed window. Keep both
-candidate and old clone unable to write until the final SQLite+media snapshot has
-been verified and exactly one host is selected as writer. Inventory scheduled
-writers too. If caches still send requests to the old host, preserve read-only or
-maintenance behavior there, or use a separately approved temporary proxy to the
-single authoritative writer. Do not allow independent writable database copies.
+Safe reusable inspection pattern (private shell, reviewed paths only):
 
-## Replacement proposal and cost gate
+```sh
+umask 077
+# RECOVERY_DIR, ARCHIVE and KEY_FILE refer to verified private operator records.
+shasum -a 256 "$ARCHIVE"
+# Compare with the trusted receipt before executing any decrypt/restore step.
+openssl enc -d -aes-256-cbc -pbkdf2 -iter 600000 -md sha256 \
+  -pass "file:$KEY_FILE" -in "$ARCHIVE" | gzip -t
+```
 
-Prefer fresh **Ubuntu 24.04 LTS amd64** with current security updates. Canonical
-lists standard maintenance through May 2029. Ubuntu 26.04 is released and appears
-in DigitalOcean's catalog, but a newer Python/system stack adds compatibility work
-without evidence of a benefit here. Choosing 24.04 is a compatibility inference,
-not proof of staged acceptance. [Ubuntu lifecycle](https://ubuntu.com/about/release-cycle),
-[DigitalOcean image catalog](https://docs.digitalocean.com/products/droplets/details/images/).
+The last command applies to encrypted tar/gzip archives, not the raw SQLite export.
+A private restore helper must reject escaping paths and symlink-parent traversal,
+verify complete membership/content/metadata, consume the gzip trailer and check
+both pipeline exits. A successful tar listing does not prove application recovery.
+Do not overlay old `/etc`, kernels, APT sources, libraries or virtual environments
+onto Ubuntu 24.04. Preserve originals as evidence; create reviewed target files.
 
-Propose SFO3 to match the original region. **Actual SFO3 image/size availability
-and account entitlement remain unverified** while the cloud console is signed out.
-Before purchase inspect the exact distribution image's regions, region/size
-availability, minimum disk, image ID and current checkout price in the authenticated
-account/API. Do not infer availability solely from the public image catalog.
+SQLite was captured through Python's backup API, with canonical schema/row checks;
+see [SQLite's backup guidance](https://www.sqlite.org/backup.html). PG 14 must stay on
+major version 14 for cold restore; Ubuntu's default PostgreSQL major is not a
+substitute. [Filesystem backup rules](https://www.postgresql.org/docs/14/backup-file.html).
+PG 14 reaches upstream end of support November 12, 2026; a later supported-version
+migration needs a separate tested decision, without activating the dormant site.
+[PostgreSQL version policy](https://www.postgresql.org/support/versioning/).
 
-| Proposed item | Expected incremental cost, USD before taxes/excess usage | State |
+## Snapshot procedure, cost and mandatory cleanup
+
+The owner approved up to **US$1.50/month** for necessary migration snapshot storage.
+Current [DigitalOcean pricing](https://docs.digitalocean.com/products/snapshots/details/pricing/)
+is US$0.06 per billable GB/month, with a US$0.01 minimum. Count **all simultaneously
+retained migration snapshots** against the ceiling. A nominal 25 GiB disk is not
+proof of 25 billable GB. Verify account pricing/taxes and measured usage before any
+additional snapshot; ask only if the expected charge exceeds the approved bound.
+
+Actual continuation action: after authenticated account verification, the existing
+Droplet's **Take Live Snapshot** operation completed. The UI reports **11.23 GB in
+SFO3**, approximately **US$0.6738/month before tax**. Exact name, originating Droplet and creation evidence are protected operator
+records. The UI exposes the unique snapshot name/size/source, but its numeric image
+ID and minimum restore-disk field remain unverified; resolve those before rebuild. Existing compute
+remains the account-displayed US$6/month plan. No new Droplet or backup subscription
+was purchased. Droplet Activity reports a completed snapshot action taking **2 minutes
+8 seconds**. The snapshot remains retained; deletion has not occurred.
+
+This live snapshot is supplemental and may be crash-consistent. It is not the final
+write-frozen checkpoint. DigitalOcean recommends shutdown for consistent snapshots;
+that requires the separate outage authorization. [Snapshot procedure](https://docs.digitalocean.com/products/snapshots/how-to/snapshot-droplets/).
+Before the final snapshot, stop/drain all mutable writers, complete consistent
+SQLite/media/configuration exports, verify cold PG state, and capture exact source
+identities. Record snapshot action completion, image ID/name/time, source Droplet
+ID, region, minimum restore disk and billable size. A submitted action or a progress
+bar at 100% alone is not completion evidence.
+
+Snapshots contain disk state, not all account/network metadata; attached volumes
+need separate protection. [Snapshot limits](https://docs.digitalocean.com/products/snapshots/details/limits/).
+Do not delete the preliminary snapshot to make budget room while recovery is
+uncertain. Re-evaluate aggregate size before adding a final frozen snapshot; if it
+would exceed the cap, request the difference. Do not quietly leave several images
+billing beyond the owner's bound.
+
+**Mandatory cleanup gate:** retain the exact task snapshots until the same Droplet
+runs Ubuntu 24.04 with its original IP; all 15 hosts and default behavior pass;
+Django/data/retained files, TLS/renewal, SSH/firewall, units and schedules pass; tested
+independent recovery of the accepted Ubuntu 24.04 configuration and **current**
+SQLite/media remains (pre-rebuild exports alone do not satisfy this gate); and no incident needs old-OS rollback. Observe for
+**at least 48 healthy hours**, including a scheduled Certbot timer execution and
+representative peer usage. Extend the period for any unresolved incident or missing
+scheduled-cycle evidence; 48 hours is a minimum proposal, not automatic permission
+to discard needed recovery.
+
+Once all conditions are evidenced, delete only the exact migration snapshot(s),
+verify absence in the account and cessation of storage accrual, and retain the
+snapshot identity, UTC deletion time and billing verification privately. Previously
+accrued charges may still appear on the invoice; absence of future accrual is the
+claim to verify. Leave unrelated snapshots/backups untouched. If deletion fails,
+report the continuing cost and keep INFRA-01 incomplete. Snapshot cleanup is part
+of completion, not an optional follow-up or an authorization to delete it now.
+
+## Network, DNS and access continuity
+
+Authenticated account inspection matched the server metadata's existing Droplet ID,
+SFO3 and original IPv4. An assigned public IPv6 and private VPC address are present;
+**absence of published AAAA records did not mean absence of IPv6**. The Droplet has
+no attached DigitalOcean cloud firewall and automated backups are not enabled.
+Preserve host UFW rules and every assigned address. Record network masks/gateways,
+VPC membership, Reserved IP/volume state, reverse DNS and bootstrap metadata privately.
+
+Fifteen host A/CNAME answers, original TTLs and authoritative providers are in the
+DNS baseline. Asymmetri uses registrar-servers.com; the two peer zones use DigitalOcean.
+All queried named hosts lacked AAAA at initial inspection. Recheck authoritative
+A/AAAA/CNAME and PTR before and after rebuild. Preserve MX/TXT/CAA/delegations and
+unrelated records. Inventory any external IP allowlists with their owners; absence
+of an observed dependency is not proof no allowlist exists. **No DNS changes are
+part of this plan**, including TTL changes. IPv6/interface recovery and account-side
+settings must be explicitly verified, not inferred from IPv4 documentation.
+
+The recovery console connects through encrypted QEMU transport and displays the
+correct old Ubuntu login prompt. An authenticated administrator recovery shell is
+still a separate acceptance item. Successful `ssh asymmetri` and
+`ssh asymmetri-admin` do not establish access if networking/sshd fails after erasure.
+Do not enable password SSH, reset a password, power-cycle, or change recovery boot
+mode merely to bypass this gate.
+
+Before erasure, inspect the original cloud-init/user-data and initial public-key
+configuration privately. Rebuild uses original configuration parameters; the current
+on-disk admin/deploy accounts are not guaranteed to reappear. Resolve bootstrap and
+console authentication before approval. The existing access installer/helper and
+sudo policy must be reviewed against the clean target before use.
+
+Fresh host keys are expected. From a verified console session, record:
+
+```sh
+ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub -E sha256
+ssh-keygen -lf /etc/ssh/ssh_host_rsa_key.pub -E sha256
+```
+
+On the Mac, preserve the old known-host record and replace only the verified
+host/alias entries after comparing fingerprints over the authenticated console.
+Never disable host-key checking or blindly accept a changed key. Verify independent
+admin and deployment sessions, scoped helper identity/NoNewPrivs and `visudo -c`
+before applying SSH or UFW restrictions. Client private keys stay on the Mac.
+
+## Ubuntu 24.04 rehearsal contract
+
+Use an authorized isolated Ubuntu 24.04 **amd64** environment. An arm64 macOS build
+or file extraction is not Linux runtime acceptance. The owner subsequently selected
+the existing `ssh botsquad` host for rehearsal and required cleanup. Public-source
+and dependency tests are authorized. Automatic approval review blocked private settings/database/TLS archive
+transfer pending specific owner permission; no such data has transferred as of this
+record. Do not treat general host access as clearance to bypass that block. Use only a
+private task directory, isolated mount/PID/network namespaces, non-root application
+processes, no host Unix sockets, explicit resource limits and serial builds. Acquire
+public dependencies separately from restored secrets. Do not change HQ services,
+packages, data, authority or boot configuration. Record before/after service and
+listener identities and remove task processes/files after collecting safe receipts.
+
+The public pinned Next release passed Linux checks/build/native-image/startup tests
+and 22 application requests. BotSquad cleanup completed on October 9 at 18:37:09 UTC;
+the task directory/processes/units are gone and HQ service/listener identities are
+unchanged. Full private recovery is still unverified. See the
+[actual results and cleanup](INFRA-01-VALIDATION.md#linux-results-and-cleanup).
+
+Keep test writes disposable and external integrations disabled. Do not let restored
+Django mail/webhooks or scheduled tasks contact production. Test against copied data;
+never migrate the original database just to satisfy a startup check. Record exact
+runtime/dependency versions and adaptations, including any test-only host/socket/
+settings overrides. Such overrides are not approved production configuration.
+
+The installed peer package inventory is: Django 5.2.9, Gunicorn 23.0.0, Markdown
+3.10.1, asgiref 3.11.0, packaging 25.0, sqlparse 0.5.5, typing_extensions 4.15.0,
+pip 25.3 and setuptools 59.6.0. Its source requirements contain broad ranges and
+omit Gunicorn; using them alone is not an exact restoration. Create a private pinned
+recovery manifest and verify a compatible Python 3.12 environment.
+[Django compatibility](https://docs.djangoproject.com/en/5.2/faq/install/).
+
+Test all of the following and attach receipts to validation:
+
+1. Restore each file class with complete hashes/links/numeric owners/modes; verify
+   case-sensitive paths and available filesystem space.
+2. Install Node 22 and exact source lockfile as the application owner; run check,
+   `npm run build:next`, actual Next startup and native image dependency checks.
+3. Restore peer source/settings/SQLite, run integrity/FK/schema checks, Django system
+   checks and migration **plan only**; start Gunicorn on an isolated Unix socket.
+   Exercise homepage/list/detail routes, login/CSRF handling, static/media and a
+   disposable authenticated read journey. No test records are written to production.
+4. Restore PG 14 in isolation with no TCP listener. Verify control data, database
+   accessibility, schema/data export and relevant structural checks; stop cleanly.
+   Record collation/extension/ABI warnings and leave the real draft disabled.
+5. Validate all 13 Nginx site configurations/25 blocks, upstreams, default host,
+   redirects/static assets, certificate/key matches, SAN/chain/expiry and permissions.
+6. Verify systemd unit semantics/ownership, sudo/access, intended listeners, schedules
+   and restart/reboot recovery. A transient test unit is not full reboot acceptance.
+7. Compare all 198 baseline requests with ordinary TLS verification and correct Host/SNI;
+   explicitly review generated Next asset changes without replacing the old baseline.
+   Add deeper peer journeys and browser checks. Prove Certbot challenge/renewal with
+   an authorized method; timer installation alone is insufficient.
+
+## Ordered production run sheet — NOT EXECUTED
+
+This is an operator draft, not a shell script to execute automatically. Fill and
+review the private command sheet with the exact Droplet/image/snapshot identifiers,
+users, paths, package checksums and final tested timings. Unresolved values or failed
+rehearsal steps block approval. Record UTC start/end, command exit/result, receipts,
+corrections and an explicit PASS/STOP decision at every checkpoint.
+
+| Step | Ordered operation and concrete checkpoint | Stop/recovery decision |
 | --- | --- | --- |
-| Recommended Basic Regular 1 vCPU, 2 GiB, 50 GiB SSD | $12/month cap; $0.01786 hourly equivalent | Approval required; provisional sizing |
-| Lower-cost 1 vCPU, 1 GiB, 25 GiB alternative | $6/month cap; $0.00893 hourly equivalent | Keeps current memory constraint; not recommended for builds/concurrent growth |
-| Seven / fourteen days of recommended replacement overlap | Approximately $3 / $6, plus the original server's existing charges | Proposed overlap, not an automatic retention/deletion deadline |
-| Original-host snapshot | $0.06 per stored GB/month; e.g. 10–25 GB is $0.60–$1.50/month | Size/budget and snapshot consistency/window need approval |
-| Volumes, new Reserved IP, managed backup add-on | None proposed | Not authorized |
+| 0 — Readiness | Match existing ID/IP/plan; verify cloud and console access, target `ubuntu-24-04-x64` availability/minimum disk, signed packages, independent recovery and completed snapshot. Review all rehearsal receipts and exact private run sheet. | Any gap: keep current host serving; do not schedule erasure. |
+| 1 — Authorization | Owner approves exact outage/window, write freeze, same-ID clean rebuild, failure deadline and snapshot rollback procedure. Record authorized window and responsible operator. | Approval absent: preparation only. |
+| 2 — Final baseline | Read source/build and `systemctl show` identities; run `nginx -t`, all-site HTTP/TLS/DNS baseline, database and resource checks. Compare with accepted historical baseline. | Unexpected production state: investigate before freeze. |
+| 3 — Freeze | Enter the approved maintenance response; drain peer requests and stop peer Gunicorn and any inventoried writers/schedules. Record first unavailable request as outage start. Keep SSH/admin access. | Unidentified writer or failed drain: restore normal operation and stop. |
+| 4 — Final data | Use SQLite backup API; copy final media/settings/static deltas; verify hashes/integrity and PG clean shutdown; record exact source/build, owners and config. Confirm independent decrypt/restore of final exports. | Failed backup: do not erase; resume old service when safe. |
+| 5 — Final snapshot | Within approved window, gracefully shut down if selected, take final snapshot within aggregate budget, verify completed action/identity/region/size/restore compatibility. | Failed/uncertain snapshot: stop; power on existing disk if needed. |
+| 6 — Rebuild | On the **existing Droplet's** Settings → Rebuild flow, match ID/IP, choose verified Ubuntu 24.04 amd64 image, review destructive confirmation, then perform only under explicit authorization. Record action ID, image ID and times. | Never Destroy/Create. Unknown action outcome: inspect once settled; do not resubmit blindly. |
+| 7 — Bootstrap | Connect through verified console; inspect `/etc/os-release`, `uname -r`, `ip -br address`, routes and provider metadata. Verify same ID and both assigned address families; obtain new host-key fingerprints. | Wrong ID/IP/image or inaccessible console: stop and execute authorized recovery decision. |
+| 8 — Clean OS | Apply supported security updates/reboot within window. Reconstruct reviewed accounts/UIDs/groups, public keys, sudo/helper and independent admin/deploy access. Recreate the reviewed 2 GiB swapfile/fstab entry before builds; verify `free -h`/`swapon --show`. Install signed compatible runtimes and Nginx. | No old APT/system-library overlay. No global firewall restriction until recovery access works. |
+| 9 — Restore | Restore exact Next source/public files, build under app owner with tested lockfile/Node 22; peer source/settings/SQLite/media and Python environment; all static/retained roots; PG 14 kept dormant. Restore reviewed units/logging/schedules/TLS permissions. | Any source/data/mode discrepancy: preserve evidence and hold writers stopped. |
+| 10 — Start privately | `visudo -c`, `sshd -t`, `nginx -t`, `systemd-analyze verify` reviewed units, then `systemctl daemon-reload`; start only intended services with writes fenced. Check loopback/socket health and error logs. | Failed critical check: fix only tested minimal adaptation, or rollback at deadline. |
+| 11 — Accept | All named/default hosts, 198 requests/assets plus peer functional journeys, DB integrity, TLS/renewal, redirects, access/firewall/schedules, DNS/IP comparison and capacity pass. Record new runtime/build IDs. | Do not reopen writes to hide a partial restore. |
+| 12 — Resume | Deliberately select restored data as the sole writer, release the maintenance fence, recheck external journeys and record outage end. | Preserve every new write for any later rollback. |
+| 13 — Observe/clean | Observe at least the documented healthy period, test independent recovery, then delete only task snapshots and verify billing cessation. Commit final actual configuration/evidence and update BotSquad roadmap. | Any incident or failed deletion keeps INFRA-01 incomplete. No automatic INFRA-02. |
 
-Sources: [Droplet pricing](https://www.digitalocean.com/pricing/droplets),
-[billing rules](https://docs.digitalocean.com/products/droplets/details/pricing/),
-[snapshot pricing](https://docs.digitalocean.com/products/snapshots/details/pricing/).
-Compute is billed while resources exist, including powered-off Droplets; snapshots
-continue billing while retained. Billing has per-second granularity and a monthly
-cap; estimates are not an account quote. Existing plan/backups/taxes are not verified.
-No billable resource was created. Original-server charges continue; ordinary
-transfer usage and any account overage are not verified while signed out.
+Reviewed command patterns to incorporate into the exact private sheet, **only at
+the authorized phase**, include:
 
-The 2 GiB recommendation provides more build/runtime room; it is not acceptance of
-future receiver load. Retain measured swap/headroom and perform one build at a time.
-If the expense is declined, keep production intact, retain these preparations and
-seek an existing approved Linux staging resource. There is no approved safe zero-cost
-in-place shortcut to a fresh supported host.
+```sh
+# Read-only identity and service/configuration checks.
+cat /etc/os-release
+uname -r
+ip -br address
+systemctl show asymmetri.service nginx.service -p ActiveState -p MainPID -p ActiveEnterTimestamp
+sudo -n nginx -t
+sudo -n visudo -c
+sudo -n sshd -t
 
-## Deterministic staging sequence — not executed
+# Inside the isolated/restored app directory, as its application owner.
+node --version
+npm --version
+npm ci
+npm run check
+npm run build:next
+node_modules/.bin/next start -p 3001 -H 127.0.0.1
 
-1. Resolve cloud/account/recovery access; approve exact compute and backup costs.
-   Record old-host identity, recovery route and evidence checksums privately.
-2. Provision a fresh 24.04 image. Verify its SSH host-key fingerprints through the
-   authenticated console before recording known-hosts; never disable host checking.
-   Apply supported updates and any required reboot on the new host only.
-3. Recreate intended application/deployment/admin identities and compatible numeric
-   ownership, checking conflicts first. Install reviewed access helpers/sudo rules;
-   validate visudo and independently test admin and restricted deployment sessions.
-   Confirm console recovery before target firewall or SSH restrictions. Preserve
-   the old aliases until deliberate cutover; use a separate candidate alias.
-4. Install supported Nginx, compatible Node 22 and Python 3.12/venv dependencies.
-   Django 5.2 supports Python 3.12, but exact application/extension behavior still
-   needs rehearsal. [Django compatibility](https://docs.djangoproject.com/en/5.2/faq/install/).
-   Rebuild from pinned manifests; preserve the peer settings overlay and data.
-5. Restore reviewed site definitions, service semantics, static roots, log rotation,
-   public authorized keys and required configuration. Maintain only intended public
-   22/80/443 exposure; app loopback/Unix socket and disabled services stay private.
-   Reconstruct necessary schedules without enabling duplicate external actions.
-6. Restore encrypted TLS material securely or use a separately authorized validated
-   issuance method. Verify all SANs, full chains, expiry, permissions and renewal
-   mapping. Do not run the old host's nginx Certbot dry-run without considering its
-   reload behavior. Stage renewal configuration; prove challenges after approved
-   routing or approved DNS validation. No `curl -k`/disabled host validation.
-7. Start only intended candidate applications with externally effective writes
-   disabled. Restore/test SQLite and the retained PG14 cluster in isolation, check
-   uploads and owner/mode inventories, then leave the historical draft inactive.
-8. Run pinned website checks/build and all controlled-resolution host/route/asset
-   comparisons. Use `ops/infra/http-baseline.py` with private manifest/output and
-   `--resolve VERIFIED_CANDIDATE_IP --against BASELINE_JSON`; it retains Host/SNI
-   and validates TLS. Review known generated build-asset changes explicitly.
-9. Check Nginx syntax, systemd units, SSH/sudo boundaries, renewal, no unexpected
-   listeners, process errors, disk/RAM/swap and important journeys. Compare browser
-   tutorial hashes/original images, navigation, privacy/support and all peer sites.
-   Run authenticated read-only application journeys only with existing authorization.
-10. Complete every unresolved backup, compatibility and acceptance item in validation.
-    Freeze exact candidate identities and request the separate production gate.
+# From the administrator workstation; manifest/baseline are protected files.
+python3 ops/infra/http-baseline.py "$MANIFEST" "$NEW_RECEIPT" \
+  --resolve "$VERIFIED_ORIGINAL_IPV4" --against "$ACCEPTED_BASELINE"
+```
 
-## Cutover and rollback — not authorized or executed
+The original target has only 956 MiB visible RAM. A rebuild removes its 2 GiB swap
+file and old fstab. On the clean target, after checking no swapfile already exists,
+recreate it at restrictive mode before any build, then persist exactly one reviewed
+fstab entry and verify capacity:
 
-DNS inventory found two authoritative provider groups: registrar-servers.com for
-Asymmetri and DigitalOcean nameservers for the two peer zones. Relevant published
-A/CNAME answers and original TTLs are stored privately. No queried host had an AAAA
-answer at inspection. Provider metadata reports no assigned floating IPv4; account
-Reserved IP/firewall/volume inventory is still unverified. Do not assume there are
-no additional records, cloud firewalls or reserved resources.
+```sh
+# Authorized clean target only; never run mkswap over an existing file/device.
+(
+  set -eu
+  if [ -e /swapfile ] || [ -L /swapfile ]; then
+    printf '%s\n' 'STOP: /swapfile already exists; inspect before continuing.' >&2
+    exit 1
+  fi
+  sudo -n fallocate -l 2G /swapfile
+  sudo -n chmod 600 /swapfile
+  sudo -n mkswap /swapfile
+  sudo -n swapon /swapfile
+)
+# Add the reviewed '/swapfile none swap sw 0 0' entry exactly once.
+free -h
+swapon --show
+```
 
-Before cutover export all affected authoritative zones through authenticated access,
-record old A/AAAA/CNAME/TTL values and preserve MX/TXT/CAA/delegations/unrelated records.
-If DNS is chosen, explicitly approve any TTL change, wait at least the prior TTL,
-and recheck authoritative and public resolvers. Change only the reviewed records
-after final write freeze/sync, both-owner acceptance and explicit traffic approval.
-No old/new concurrent writes; no automatic destruction at the end of overlap.
+Stop if the file exists unexpectedly; inspect rather than overwrite it. The clean
+fstab must retain the new image's own root/EFI identifiers. A successful build on
+the 2 GiB rehearsal host is not sufficient evidence of 1 GiB production capacity;
+record bounded-build memory/swap and preserve headroom for OS and peer services.
+No resize or additional paid capacity is approved.
 
-Immediately test the complete baseline externally and on the candidate, plus
-process readiness, TLS, private/retired endpoints, database/media integrity, log
-errors and capacity. Restore normal TTL only after stability and approval as part
-of the traffic change. Observe through the agreed retention window; old-server
-power/retention continues until a separate owner decision.
+The Next start example is a foreground rehearsal command; production uses the
+reviewed systemd unit, not a second competing process. Root handles OS configuration;
+Git/dependency/build commands run as the application owner. `.nvmrc` remains for
+local development, while Node 22 has existing production approval. Do not run a
+floating pull of current main, an application schema migration, `npm audit fix`,
+receiver setup or unrelated hardening as part of this sheet.
 
-Stop/rollback for SSH lockout, TLS or critical-route failure, persistent new 502/503,
-broken peer sites, data loss/corruption, unexpected service exposure, unsafe capacity,
-or unresolved writer ownership. **Before new writes**, approved DNS/routing rollback
-can restore the exact original destinations and verified original runtime. **After
-new writes**, freeze candidate writes, preserve a fresh consistent candidate backup,
-reconcile database/media onto the chosen authoritative recovery host, validate it,
-then restore routing. Never overwrite newer data with the older snapshot or revert
-DNS while assuming new data is disposable. Stop after an uncertain outcome; no
-automatic repeated cutover cycles.
+## Downtime and rollback
 
-INFRA-02 readiness is **not satisfied** until live LTS migration and every existing
-site's acceptance are complete. Its receiver deployment/Linux testing remains a
-separate owner-selected task and changes no investment feature milestone status.
+No production outage has been measured or started. Local seconds for file extraction
+and individual Linux checks are not a full-server recovery time. Build, transfer,
+provider rebuild/snapshot, package installation, console recovery and all-site
+acceptance must be timed in the final rehearsal. Plan in **hours**, with an explicit
+failure deadline and a separate rollback allowance; no defensible minute-level
+promise exists yet. The live snapshot took 2 minutes 8 seconds in provider Activity. The UI also displays
+a general 1–3 minutes per used GB estimate; neither observation bounds a future
+frozen snapshot, rebuild or whole-service restoration.
+
+There is no old live server after same-Droplet erasure. Rollback means selecting the
+verified old snapshot in the existing Droplet's restore flow and replacing its disk
+again. [DigitalOcean restore procedure](https://docs.digitalocean.com/products/snapshots/how-to/create-and-restore-droplets/).
+Record its exact image/Droplet IDs and verify no second host or DNS operation is
+selected. Reverify original IP, old OS/build, SSH fingerprint, all sites/data and
+access after restoration. Old SSH keys may return with the snapshot: verify them
+through the console before updating known-hosts. Ubuntu 22.10 remains unsupported;
+rollback restores service temporarily, not INFRA-01 success.
+
+Rollback triggers include lost administrator access, wrong IP, critical TLS/route
+failure, new sustained 502/503, missing/corrupt peer data, unexpected exposure or
+insufficient capacity. Before new writes, the accepted frozen snapshot plus final
+consistent application backup is the recovery point. **After new writes**, freeze
+again, export/reconcile newer SQLite/media and configuration before restoring the
+old image. Never overwrite those writes with a pre-rebuild snapshot. Unknown data
+ownership or reconciliation blocks reopening writes and may extend the outage.
+
+## Actual execution record and final configuration requirements
+
+[Validation](INFRA-01-VALIDATION.md) records performed, failed, corrected and
+unperformed actions chronologically. The private ledger retains exact commands,
+checksums, snapshot IDs, address/host mappings and protected output. The Engineering
+Journal summarizes decisions without raw logs or private attachment paths.
+
+After an authorized migration, record before/after Ubuntu/kernel/resources, runtime
+versions, source/build IDs, deployment and DB paths, user/service ownership, Nginx/
+TLS/renewal, host/cloud firewall, SSH recovery, timers/cron, logging/update/backup
+procedures, disk/RAM/swap, every-site results, actual outage and observation times,
+remaining risks and snapshot deletion receipt. Until those measurements exist,
+**the original inventory remains the production configuration**, not a fictional
+Ubuntu 24.04 final state. Update deployment/access/maintenance docs from that evidence.
+
+INFRA-01 completion requires the same live Droplet on 24.04, original IP and domain
+functionality, accepted services/data/recovery, healthy observation, verified snapshot
+cleanup and committed documentation. INFRA-02 still needs separate owner selection.

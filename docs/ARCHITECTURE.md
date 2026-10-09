@@ -169,9 +169,11 @@ explicitly retires one path.
 
 The October 9 [INFRA-01 inventory and migration plan](INFRA-01-UBUNTU-MIGRATION.md)
 accounts for all 15 named hosts on the shared server. Production still uses
-Ubuntu 22.10 and its independently pinned website release. A fresh 24.04 LTS
-replacement is proposed, not provisioned or accepted. `ops/infra/` contains an
-operator-only HTTP comparison tool, with no website/runtime integration.
+Ubuntu 22.10 and its independently pinned website release. The accepted path is a
+clean 24.04 LTS rebuild of the same Droplet/IP, with no second host or DNS cutover.
+The old running disk will cease to exist after erasure; verified independent recovery,
+snapshot rollback and separate rebuild/outage approval are required. `ops/infra/`
+contains an operator-only HTTP comparison tool, with no website/runtime integration.
 
 ### Request path
 

@@ -10,9 +10,13 @@ same date.
 
 October 9 INFRA-01 reverified both existing aliases, administrator sudo and the
 deployment helper's `NoNewPrivs: 1`. The [migration runbook](INFRA-01-UBUNTU-MIGRATION.md)
-requires a separately verified console recovery route and candidate host-key
-verification before any access/firewall change. Current SSH success alone does
-not establish authenticated DigitalOcean console access; that check is pending.
+requires an authenticated console recovery route and verification of newly generated
+host keys after a same-Droplet rebuild. Cloud sign-in and encrypted recovery-console
+transport to the Ubuntu login prompt are verified; an administrator recovery shell
+is still unverified. Existing SSH aliases do not prove access after disk erasure.
+Do not disable host-key checking, change SSH policy or reset credentials to bypass
+that gate. Restore reviewed users/public keys/helper/sudo boundaries and verify two
+independent sessions before applying target firewall restrictions.
 
 ```bash
 ssh asymmetri

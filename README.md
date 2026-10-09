@@ -64,8 +64,10 @@ scientific measurement mappings.
 
 The owner-selected [INFRA-01 migration](docs/INFRA-01-UBUNTU-MIGRATION.md) is
 prepared with [current inventory and validation](docs/INFRA-01-VALIDATION.md).
-Production remains on Ubuntu 22.10; a fresh LTS host, recovery acceptance and
-separate resource/cutover approvals are outstanding. INFRA-02 has not started.
+Production remains on Ubuntu 22.10. The owner selected a clean Ubuntu 24.04 rebuild
+of the existing Droplet with the same IP. The approved live snapshot is complete;
+recovery acceptance and separate destructive-rebuild/outage approval remain required.
+INFRA-02 has not started.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
