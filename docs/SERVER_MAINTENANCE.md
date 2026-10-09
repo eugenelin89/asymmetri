@@ -1,5 +1,21 @@
 # Server storage maintenance
 
+## October 9, 2026 retirement preparation and rehearsal cleanup
+
+The owner selected [Django retirement and PG archival
+retention](INFRA-01-DJANGO-RETIREMENT.md) within INFRA-01. Current
+source/static/settings match the encrypted archive; consistent SQLite recovery and the
+PG TLS supplement are verified. No live service/data/configuration changed. Final
+write-frozen exports and approval of the proposed static 410 response/service/socket
+changes remain necessary.
+
+The second BotSquad rehearsal used synthetic data only and installed no host packages.
+Cleanup at 19:24:58 UTC removed the exact task directory and confirmed unchanged HQ
+service/listeners/package inventory. The encrypted Mac test image/key and temporary
+plaintext restoration/runtime were also removed; encrypted backups and receipts remain.
+This is test cleanup, not permission to remove any production Django/PG data or the
+retained cloud snapshot.
+
 ## October 9, 2026 INFRA-01 same-Droplet continuation
 
 The owner superseded the replacement-host proposal with a clean Ubuntu 24.04 rebuild

@@ -173,7 +173,12 @@ Ubuntu 22.10 and its independently pinned website release. The accepted path is 
 clean 24.04 LTS rebuild of the same Droplet/IP, with no second host or DNS cutover.
 The old running disk will cease to exist after erasure; verified independent recovery,
 snapshot rollback and separate rebuild/outage approval are required. `ops/infra/`
-contains an operator-only HTTP comparison tool, with no website/runtime integration.
+contains operator-only HTTP comparison and archive restoration tools, with no
+website/runtime integration. The [retirement amendment](INFRA-01-DJANGO-RETIREMENT.md)
+proposes an Nginx static 410 notice for the peer Django site and archival retention of
+its SQLite/source and the dormant PG cluster; no live behavior changed. Keep the shared
+application owner and OS Python while omitting unused application runtimes on the future
+target.
 
 ### Request path
 

@@ -139,7 +139,12 @@ baseline, including expected errors and retired endpoints. See
 [Python/curl helper](../ops/infra/README.md). Run the helper's focused checks with
 `python3 -m unittest discover -s ops/infra -p 'test_*.py'`. Keep its private manifests,
 DNS/TLS records and responses outside Git. Local macOS builds and SQLite restoration
-do not establish Ubuntu LTS, every-site staging, renewal or production-cutover acceptance.
+do not establish Ubuntu LTS, every-site staging, renewal or production-cutover
+acceptance. The archive helper requires a new case-sensitive destination and
+independently trusted manifest/hash. Linux synthetic owner tests remain distinct from
+private Mac file restoration. Retired-domain response changes need a separately approved
+expected-result overlay; preserve the original baseline. See the [retirement acceptance
+amendment](INFRA-01-DJANGO-RETIREMENT.md).
 
 A DigitalOcean deployment requires a successful local `npm run build:next`
 before the commit is pushed. On production, the standard Next.js build must

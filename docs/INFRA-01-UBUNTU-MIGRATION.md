@@ -1,9 +1,11 @@
 # INFRA-01 — Same-Droplet Ubuntu LTS rebuild and existing-site acceptance
 
-Updated: 2026-10-09. **Preparation documented; recovery gaps remain; destructive rebuild not authorized.**
+Updated: 2026-10-09. **Retirement amendment incorporated; recovery partially verified; destructive rebuild not authorized.**
 The accepted direction is a clean Ubuntu 24.04 LTS amd64 rebuild of the **existing
 Droplet**, retaining its identity, public IP and DNS destinations. Production remains
-Ubuntu 22.10. [Validation](INFRA-01-VALIDATION.md) separates actual evidence from
+Ubuntu 22.10. The owner now selects [Django retirement and PG archival
+preservation](INFRA-01-DJANGO-RETIREMENT.md), with domain behavior and service changes
+awaiting approval. [Validation](INFRA-01-VALIDATION.md) separates actual evidence from
 unperformed rebuild steps. INFRA-02 has not started.
 
 ## Authority, strategy change and gates
@@ -20,6 +22,8 @@ in the validation history; no document update means a migration occurred.
 | --- | --- |
 | Read-only inspection, independent backups and isolated recovery rehearsal | Authorized; preserve running services and unrelated data |
 | Snapshot of existing Droplet | Explicitly approved, aggregate migration-snapshot storage up to US$1.50/month; verify size and cost |
+| Django retirement / former-domain response | Archival preparation authorized; static 410 notice and precise service/socket changes proposed, approval required before public change |
+| Private production payload on BotSquad | Explicitly prohibited without separate authorization; use synthetic fixtures only |
 | Production write freeze, shutdown or outage | Not yet authorized; agree scope/window after readiness |
 | Erase/rebuild existing disk | Not authorized; separate explicit owner approval after demonstrated recovery |
 | DNS, cloud firewall or SSH policy changes | Not authorized during preparation |
@@ -44,7 +48,7 @@ does not contain unrelated application settings, visitor data or credentials.
 | Host group | Named hosts | Current behavior and migration responsibility |
 | --- | ---: | --- |
 | Asymmetri apex and www | 2 | Next.js on loopback 3001; all nine pages, robots and sitemap 200; preserve Motion resources |
-| Peer active Django site, apex and www | 2 | Homepage 200; admin requires login redirect; SQLite and local settings overlay must survive |
+| Peer active Django site, apex and www | 2 | Still live: homepage 200/admin login redirect. Preserve SQLite/source/settings; proposed static 410 retirement awaits approval |
 | Peer static portfolio, apex and www | 2 | Static 200; preserve exact deployed files and canonical behavior |
 | Peer static utility subdomains | 5 | Static 200; preserve HTML/meta refresh and destinations as well as HTTP behavior |
 | Peer static research site | 1 | Static application 200; preserve deployed assets and separately retained source |
@@ -121,17 +125,19 @@ security acceptance waiver.
 ## Independent recovery and custody
 
 A rebuild erases the current executable release, predecessor rollback, databases,
-users, installed packages and all other root-disk state. Those directories cease
+users, installed packages and all other root-disk state. Retired data must remain in
+verified protected recovery storage even when its runtime is omitted. Those directories
+cease
 to be a fallback. A snapshot and tested off-server recovery must replace that
 assumption before approval. Selected-file exports are not a complete disk image.
 
 | Recovery class | Required proof before destruction |
 | --- | --- |
 | Pinned Next website | Exact source/lockfile at 745a92c, Node 22, native dependencies, successful Linux checks/build/startup and route/asset comparison; retain original and rebuilt build IDs |
-| Active Django | Source plus production settings overlay, exact installed package inventory, consistent SQLite, media/static files, Python 3.12 environment, Gunicorn startup and representative application requests |
+| Retiring Django | Source/settings/package pins, consistent final SQLite, static and any new media, verified off-server archives and recovery instructions; actual-data Mac read recovery passed. No active target Django/Gunicorn requirement after retirement approval |
 | SQLite | Read-only-source backup API, independently decrypted copy, full integrity/FK checks and canonical schema/data comparison; repeat after final write freeze |
-| Dormant PostgreSQL 14 | Entire cleanly stopped cluster, configuration and tablespaces; isolated compatible PG 14 Linux startup, logical export/integrity checks, clean shutdown; no public activation or data-format upgrade |
-| Static and retained files | All source/deployed roots, complete member/content/link/mode/numeric-owner comparison on a case-sensitive Linux filesystem; retained environments remain dormant |
+| Dormant PostgreSQL 14 | Entire cleanly stopped cluster/configuration/WAL plus supplemental TLS files; hash/member/source verification and cold-recovery instructions. Synthetic Linux recovery passed; actual-cluster runtime remains untested. No target PG install/activation |
+| Static and retained files | All source/deployed roots, complete member/content/link/mode comparison on a case-sensitive filesystem, audit numeric owner metadata and test Linux owner application separately; retained environments remain dormant |
 | TLS and server configuration | Certificate chains/private keys and ACME configuration; reviewed Nginx, units, schedules, users/groups/public keys, sudo/helper/firewall/network/logging requirements; reconstruct LTS configuration deliberately |
 | Whole-disk fallback | Completed snapshot identified against this Droplet, restore compatibility and usable out-of-band administrator recovery; old image is emergency Ubuntu 22.10 rollback only |
 
@@ -188,7 +194,10 @@ Actual continuation action: after authenticated account verification, the existi
 Droplet's **Take Live Snapshot** operation completed. The UI reports **11.23 GB in
 SFO3**, approximately **US$0.6738/month before tax**. Exact name, originating Droplet and creation evidence are protected operator
 records. The UI exposes the unique snapshot name/size/source, but its numeric image
-ID and minimum restore-disk field remain unverified; resolve those before rebuild. Existing compute
+ID and minimum restore-disk field are not exposed by the inspected UI. A later
+inspection confirmed both Ubuntu 24.04 LTS x64 and this uniquely named snapshot are
+offered by this existing Droplet’s Rebuild selector; no rebuild was submitted. Record
+exact selected identity again before the authorized action. Existing compute
 remains the account-displayed US$6/month plan. No new Droplet or backup subscription
 was purchased. Droplet Activity reports a completed snapshot action taking **2 minutes
 8 seconds**. The snapshot remains retained; deletion has not occurred.
@@ -211,11 +220,13 @@ billing beyond the owner's bound.
 
 **Mandatory cleanup gate:** retain the exact task snapshots until the same Droplet
 runs Ubuntu 24.04 with its original IP; all 15 hosts and default behavior pass;
-Django/data/retained files, TLS/renewal, SSH/firewall, units and schedules pass; tested
+approved retired-domain responses and archival data/retained files, TLS/renewal, SSH/firewall, units and schedules pass; tested
 independent recovery of the accepted Ubuntu 24.04 configuration and **current**
-SQLite/media remains (pre-rebuild exports alone do not satisfy this gate); and no incident needs old-OS rollback. Observe for
+live mutable data plus final retired SQLite/media remains (pre-rebuild exports alone do
+not satisfy the current-system recovery gate); and no incident needs old-OS rollback.
+Observe for
 **at least 48 healthy hours**, including a scheduled Certbot timer execution and
-representative peer usage. Extend the period for any unresolved incident or missing
+representative surviving-site usage and retired-domain requests. Extend the period for any unresolved incident or missing
 scheduled-cycle evidence; 48 hours is a minimum proposal, not automatic permission
 to discard needed recovery.
 
@@ -247,13 +258,18 @@ settings must be explicitly verified, not inferred from IPv4 documentation.
 
 The recovery console connects through encrypted QEMU transport and displays the
 correct old Ubuntu login prompt. An authenticated administrator recovery shell is
-still a separate acceptance item. Successful `ssh asymmetri` and
+still a separate acceptance item. Read-only password-status checks found root and the
+administrator account locked; the owner does not have a console password to enter. Do
+not request that login again as though a password were known. Successful `ssh asymmetri`
+and
 `ssh asymmetri-admin` do not establish access if networking/sshd fails after erasure.
 Do not enable password SSH, reset a password, power-cycle, or change recovery boot
 mode merely to bypass this gate.
 
-Before erasure, inspect the original cloud-init/user-data and initial public-key
-configuration privately. Rebuild uses original configuration parameters; the current
+Original cloud-init user-data was inspected: zero bytes. Vendor data exists and its
+digest is retained privately; this does not recreate custom admin/deploy accounts.
+Before erasure, verify initial public-key selection and an approved working
+emergency/bootstrap route. Rebuild uses original configuration parameters; the current
 on-disk admin/deploy accounts are not guaranteed to reappear. Resolve bootstrap and
 console authentication before approval. The existing access installer/helper and
 sudo policy must be reviewed against the clean target before use.
@@ -276,9 +292,10 @@ before applying SSH or UFW restrictions. Client private keys stay on the Mac.
 Use an authorized isolated Ubuntu 24.04 **amd64** environment. An arm64 macOS build
 or file extraction is not Linux runtime acceptance. The owner subsequently selected
 the existing `ssh botsquad` host for rehearsal and required cleanup. Public-source
-and dependency tests are authorized. Automatic approval review blocked private settings/database/TLS archive
-transfer pending specific owner permission; no such data has transferred as of this
-record. Do not treat general host access as clearance to bypass that block. Use only a
+and dependency tests are authorized. Automatic approval review previously blocked
+private archive transfer. The current owner instruction explicitly prohibits sensitive
+production archives on BotSquad without separate authorization; no private payload was
+transferred. Do not treat general host access as permission. Use only a
 private task directory, isolated mount/PID/network namespaces, non-root application
 processes, no host Unix sockets, explicit resource limits and serial builds. Acquire
 public dependencies separately from restored secrets. Do not change HQ services,
@@ -288,8 +305,8 @@ listener identities and remove task processes/files after collecting safe receip
 The public pinned Next release passed Linux checks/build/native-image/startup tests
 and 22 application requests. BotSquad cleanup completed on October 9 at 18:37:09 UTC;
 the task directory/processes/units are gone and HQ service/listener identities are
-unchanged. Full private recovery is still unverified. See the
-[actual results and cleanup](INFRA-01-VALIDATION.md#linux-results-and-cleanup).
+unchanged. Later synthetic Django/PG and combined-service tests, private Mac restoration and second cleanup are recorded separately. See the
+[current results and cleanup](INFRA-01-VALIDATION.md#current-acceptance-table).
 
 Keep test writes disposable and external integrations disabled. Do not let restored
 Django mail/webhooks or scheduled tasks contact production. Test against copied data;
@@ -301,29 +318,32 @@ The installed peer package inventory is: Django 5.2.9, Gunicorn 23.0.0, Markdown
 3.10.1, asgiref 3.11.0, packaging 25.0, sqlparse 0.5.5, typing_extensions 4.15.0,
 pip 25.3 and setuptools 59.6.0. Its source requirements contain broad ranges and
 omit Gunicorn; using them alone is not an exact restoration. Create a private pinned
-recovery manifest and verify a compatible Python 3.12 environment.
+recovery manifest. Python 3.12 recovery tests exposed setuptools 59.6.0 incompatibility;
+68.2.2 imports passed in isolated tests. These pins are archival recovery information,
+not target runtime requirements.
 [Django compatibility](https://docs.djangoproject.com/en/5.2/faq/install/).
 
 Test all of the following and attach receipts to validation:
 
-1. Restore each file class with complete hashes/links/numeric owners/modes; verify
-   case-sensitive paths and available filesystem space.
+1. Restore private archival file classes with complete hashes/links/non-symlink
+   modes on case-sensitive storage and audit recorded numeric owners. Keep synthetic
+   Linux owner-application tests distinct; verify actual target service ownership
+   during surviving-site restoration. Check filesystem space.
 2. Install Node 22 and exact source lockfile as the application owner; run check,
    `npm run build:next`, actual Next startup and native image dependency checks.
-3. Restore peer source/settings/SQLite, run integrity/FK/schema checks, Django system
-   checks and migration **plan only**; start Gunicorn on an isolated Unix socket.
-   Exercise homepage/list/detail routes, login/CSRF handling, static/media and a
-   disposable authenticated read journey. No test records are written to production.
-4. Restore PG 14 in isolation with no TCP listener. Verify control data, database
-   accessibility, schema/data export and relevant structural checks; stop cleanly.
-   Record collation/extension/ABI warnings and leave the real draft disabled.
+3. Verify retiring peer source/settings/static and consistent SQLite archives;
+   repeat final capture after approved write freeze. Preserve the successful actual-data
+   Mac read tests and synthetic Linux application tests as distinct evidence.
+4. Verify the full cold PG14 archive and supplemental TLS dependency. Keep the real
+   cluster inactive; synthetic compatible-major recovery is not an actual-data check.
+   Actual PG startup is deferred historical-recovery work, not a live target dependency.
 5. Validate all 13 Nginx site configurations/25 blocks, upstreams, default host,
    redirects/static assets, certificate/key matches, SAN/chain/expiry and permissions.
 6. Verify systemd unit semantics/ownership, sudo/access, intended listeners, schedules
    and restart/reboot recovery. A transient test unit is not full reboot acceptance.
 7. Compare all 198 baseline requests with ordinary TLS verification and correct Host/SNI;
    explicitly review generated Next asset changes without replacing the old baseline.
-   Add deeper peer journeys and browser checks. Prove Certbot challenge/renewal with
+   Preserve the old baseline and add a separately approved retirement expectation for the former peer; add surviving-site browser checks. Prove Certbot challenge/renewal with
    an authorized method; timer installation alone is insufficient.
 
 ## Ordered production run sheet — NOT EXECUTED
@@ -339,16 +359,16 @@ corrections and an explicit PASS/STOP decision at every checkpoint.
 | 0 — Readiness | Match existing ID/IP/plan; verify cloud and console access, target `ubuntu-24-04-x64` availability/minimum disk, signed packages, independent recovery and completed snapshot. Review all rehearsal receipts and exact private run sheet. | Any gap: keep current host serving; do not schedule erasure. |
 | 1 — Authorization | Owner approves exact outage/window, write freeze, same-ID clean rebuild, failure deadline and snapshot rollback procedure. Record authorized window and responsible operator. | Approval absent: preparation only. |
 | 2 — Final baseline | Read source/build and `systemctl show` identities; run `nginx -t`, all-site HTTP/TLS/DNS baseline, database and resource checks. Compare with accepted historical baseline. | Unexpected production state: investigate before freeze. |
-| 3 — Freeze | Enter the approved maintenance response; drain peer requests and stop peer Gunicorn and any inventoried writers/schedules. Record first unavailable request as outage start. Keep SSH/admin access. | Unidentified writer or failed drain: restore normal operation and stop. |
+| 3 — Freeze | Enter the approved maintenance response; drain peer requests and stop the active peer socket and Gunicorn service together, plus any inventoried writers/schedules. Verify both units inactive and no socket activation or remaining writer before final backup. Record first unavailable request as outage start. Keep SSH/admin access. | Unidentified writer or failed drain: restore normal operation and stop. |
 | 4 — Final data | Use SQLite backup API; copy final media/settings/static deltas; verify hashes/integrity and PG clean shutdown; record exact source/build, owners and config. Confirm independent decrypt/restore of final exports. | Failed backup: do not erase; resume old service when safe. |
 | 5 — Final snapshot | Within approved window, gracefully shut down if selected, take final snapshot within aggregate budget, verify completed action/identity/region/size/restore compatibility. | Failed/uncertain snapshot: stop; power on existing disk if needed. |
 | 6 — Rebuild | On the **existing Droplet's** Settings → Rebuild flow, match ID/IP, choose verified Ubuntu 24.04 amd64 image, review destructive confirmation, then perform only under explicit authorization. Record action ID, image ID and times. | Never Destroy/Create. Unknown action outcome: inspect once settled; do not resubmit blindly. |
 | 7 — Bootstrap | Connect through verified console; inspect `/etc/os-release`, `uname -r`, `ip -br address`, routes and provider metadata. Verify same ID and both assigned address families; obtain new host-key fingerprints. | Wrong ID/IP/image or inaccessible console: stop and execute authorized recovery decision. |
 | 8 — Clean OS | Apply supported security updates/reboot within window. Reconstruct reviewed accounts/UIDs/groups, public keys, sudo/helper and independent admin/deploy access. Recreate the reviewed 2 GiB swapfile/fstab entry before builds; verify `free -h`/`swapon --show`. Install signed compatible runtimes and Nginx. | No old APT/system-library overlay. No global firewall restriction until recovery access works. |
-| 9 — Restore | Restore exact Next source/public files, build under app owner with tested lockfile/Node 22; peer source/settings/SQLite/media and Python environment; all static/retained roots; PG 14 kept dormant. Restore reviewed units/logging/schedules/TLS permissions. | Any source/data/mode discrepancy: preserve evidence and hold writers stopped. |
+| 9 — Restore | Restore exact Next source/public files, build under app owner with tested lockfile/Node 22; all surviving static/retained roots and approved retirement notice; preserve retired source/settings/SQLite and full PG archives without installing their application runtimes. Restore reviewed units/logging/schedules/TLS permissions. | Any source/data/mode discrepancy: preserve evidence and hold writers stopped. |
 | 10 — Start privately | `visudo -c`, `sshd -t`, `nginx -t`, `systemd-analyze verify` reviewed units, then `systemctl daemon-reload`; start only intended services with writes fenced. Check loopback/socket health and error logs. | Failed critical check: fix only tested minimal adaptation, or rollback at deadline. |
-| 11 — Accept | All named/default hosts, 198 requests/assets plus peer functional journeys, DB integrity, TLS/renewal, redirects, access/firewall/schedules, DNS/IP comparison and capacity pass. Record new runtime/build IDs. | Do not reopen writes to hide a partial restore. |
-| 12 — Resume | Deliberately select restored data as the sole writer, release the maintenance fence, recheck external journeys and record outage end. | Preserve every new write for any later rollback. |
+| 11 — Accept | All named/default hosts, 198 baseline requests/assets with only explicitly approved retirement differences, archive integrity, TLS/renewal, redirects, access/firewall/schedules, DNS/IP comparison and capacity pass. Record new runtime/build IDs. | Do not reopen writes to hide a partial restore. |
+| 12 — Resume | Resume accepted surviving services, retain retired writers stopped/disabled, recheck external journeys and record outage end. Any retained live mutable application must have one deliberate writer. | Preserve every new write for any later rollback. |
 | 13 — Observe/clean | Observe at least the documented healthy period, test independent recovery, then delete only task snapshots and verify billing cessation. Commit final actual configuration/evidence and update BotSquad roadmap. | Any incident or failed deletion keeps INFRA-01 incomplete. No automatic INFRA-02. |
 
 Reviewed command patterns to incorporate into the exact private sheet, **only at
@@ -456,6 +476,6 @@ remaining risks and snapshot deletion receipt. Until those measurements exist,
 **the original inventory remains the production configuration**, not a fictional
 Ubuntu 24.04 final state. Update deployment/access/maintenance docs from that evidence.
 
-INFRA-01 completion requires the same live Droplet on 24.04, original IP and domain
-functionality, accepted services/data/recovery, healthy observation, verified snapshot
+INFRA-01 completion requires the same live Droplet on 24.04, original IP and approved domain
+behavior (including explicitly approved retirements), accepted services/data/recovery, healthy observation, verified snapshot
 cleanup and committed documentation. INFRA-02 still needs separate owner selection.

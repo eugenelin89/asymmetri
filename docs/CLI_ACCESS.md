@@ -13,7 +13,10 @@ deployment helper's `NoNewPrivs: 1`. The [migration runbook](INFRA-01-UBUNTU-MIG
 requires an authenticated console recovery route and verification of newly generated
 host keys after a same-Droplet rebuild. Cloud sign-in and encrypted recovery-console
 transport to the Ubuntu login prompt are verified; an administrator recovery shell
-is still unverified. Existing SSH aliases do not prove access after disk erasure.
+is still unverified. Read-only checks found root and the administrator password entries
+locked; the owner should not be asked to guess a console password. Original custom
+cloud-init user-data is empty, so target account bootstrap needs an explicit reviewed
+recovery route. Existing SSH aliases do not prove access after disk erasure.
 Do not disable host-key checking, change SSH policy or reset credentials to bypass
 that gate. Restore reviewed users/public keys/helper/sudo boundaries and verify two
 independent sessions before applying target firewall restrictions.

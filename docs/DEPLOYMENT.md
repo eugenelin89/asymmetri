@@ -9,7 +9,10 @@ existing production release rather than deploying current main. It remains at
 recovery and destructive-rebuild/outage gates. The existing Droplet/IP will be
 retained; its whole disk must be restored after a clean Ubuntu 24.04 rebuild. Snapshot
 storage is approved up to US$1.50/month and deletion is mandatory only after accepted
-migration, healthy observation and independent recovery. No rebuild has occurred.
+migration, healthy observation and independent recovery. The [retirement
+amendment](INFRA-01-DJANGO-RETIREMENT.md) removes active Django/Gunicorn/PG installation
+from the target plan after archival obligations and retirement approval. Keep shared
+`django-user` ownership and OS Python. No rebuild or retirement has occurred.
 Routine redeployment commands below do not authorize this migration or receiver activation.
 
 For the configured Mac SSH login and restricted deployment commands, see
