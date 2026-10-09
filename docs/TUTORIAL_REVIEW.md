@@ -2,6 +2,34 @@
 
 Review date: September 16, 2026 (capture session continued into September 17 UTC).
 
+## Current update, October 8, 2026
+
+The [Motion product review](MOTION_PRODUCT_REVIEW.md#mandatory-terminology-gate)
+records fetched main `56c88a0`, release/1.2 `571ee24` and accepted 1.2 (2) binary
+source `8a2f5e5`. Their iOS runtime trees agree. No baseball-first rename or normal
+Side trunk promotion has landed; six current technical names remain, now shared
+with the product page through `motionMeasurements`. The actual app help path is
+Settings → About → Measurements.
+
+Start now explains why one measurement becomes more useful through repetition and
+history, before the practical loop. Analyze adds “What should I track?” Saved
+Pitches adds manual Pitch Context; Explore History adds questions about repeated
+measurements and exact-pitch performance/context inspection. No top-level module
+is added or renamed. Every prior step/module ID, original-image URL, exact www
+canonical, radio branch, complete-guide and no-JavaScript/print path is preserved.
+New subordinate IDs are `what-motion-is-for`, `what-should-i-track`, `pitch-context`,
+`why-repeat-measurements` and `mechanics-and-performance`.
+
+Philosophy: **Measure changes. Preserve the evidence. Investigate relationships.
+Humans interpret.** Context is manual and observational; no ball-speed inference,
+automatic outcome detection, mechanics grading, coaching prescription or causal
+claim is taught. Reference/Compare coverage on the product page remains unchanged.
+
+The existing approved screenshot bytes/captions remain historical examples; no
+new iPhone session or capture was needed. Disclosure identifies the V1.2 candidate
+workflow, its preparation state and version-dependent screens. The dated capture
+review below remains evidence for those assets; it is not a new device audit.
+
 ## Preflight
 
 Website: clean `main`, local and `origin/main` at

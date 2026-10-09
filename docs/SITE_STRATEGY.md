@@ -21,7 +21,16 @@ first-person founder story, Capture / Look closely / Review together sequence,
 Motion introduction and contact. The broader hero describes athletes, coaches
 and teams. The shared `MotionFamily` section follows the current product introduction.
 
-`/motion` remains the deep current pitching destination. Capture/import, exact
+`/motion` leads with **Measure. Track. Compare. Learn.** Its personal-history story
+moves from one pitch to repeated measurements, comparable history, changes alongside
+manual performance context, and the exact video/evidence behind each observation.
+Measure changes. Preserve the evidence. Investigate relationships. Humans interpret.
+The event-grouped measurement section uses accepted V1.2 labels; future baseball-first
+names stay gated by the current product review. Explorer is a primary reason to
+repeat the workflow, while Reference Study/Compare supports deeper investigation.
+The tutorial teaches the same idea within its existing module navigation.
+
+Capture/import, exact
 human-confirmed frames, analysis, evidence, history, Notes/context, Reference Study,
 Compare, sharing, scientific limits and local storage remain explicit. An optional
 approved introduction follows the hero. The current candidate and future family

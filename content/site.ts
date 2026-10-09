@@ -178,7 +178,7 @@ export const motionFamily = {
       },
       {
         id: "hitting", name: "Hitting", status: "planned",
-        description: "The next focused individual app, bringing Motion’s review approach to hitting with its own events, measurements and terminology.",
+        description: "A planned individual app for measuring, tracking and comparing hitting over time, reviewing evidence alongside recorded context, and learning with a coach.",
         detail: "Approved roadmap work. Hitting-specific definitions and evidence come before analysis claims; development has not yet begun.",
       },
     ] satisfies MotionFamilyProduct[],
@@ -206,20 +206,45 @@ export const motionFamily = {
   note: "Pitching, Hitting and Team describe the product direction. Final names may change. No launch dates are announced.",
 } as const;
 
+// Current normal-user vocabulary: Motion 1.2 (2), Decisions 50/77.
+// Baseball-first renaming and Side trunk promotion remain gated; see MOTION_PRODUCT_REVIEW.md.
+export const motionMeasurements = {
+  eyebrow: "By view and event",
+  headline: "What Motion tracks",
+  support: "Repeat the same measurement at the same pitching event. The current app offers these projected 2D observations for your history.",
+  groups: [
+    { view: "Side View", event: "Front Foot Contact", items: [
+      { title: "2D FFC Ankle-Span Ratio", body: "Compare projected ankle separation at Front Foot Contact with the nose-to-ankle-midpoint span in the earlier Setup image. A stride-related video estimate, not physical stride distance or a percentage of body height." },
+      { title: "2D Lead-Knee Bend Angle", body: "Track the projected bend of the lead leg at Front Foot Contact, using the estimated hip, knee and ankle." },
+    ] },
+    { view: "Side View", event: "Ball Release", items: [
+      { title: "2D Lead-Knee Bend Angle", body: "Track projected lead-leg bend at release. This is a separate observation from Front Foot Contact, not a measure of blocking force or continuous leg movement." },
+    ] },
+    { view: "Back View", event: "Front Foot Contact", items: [
+      { title: "2D Trunk-Segment Orientation", body: "Track projected trunk position relative to image vertical at Front Foot Contact. Image vertical is not a calibrated gravity reference." },
+    ] },
+    { view: "Back View", event: "Ball Release", items: [
+      { title: "2D Shoulder-Upper Arm Angle", body: "Compare the projected angle between the shoulder line and throwing upper arm at release." },
+      { title: "2D Throwing-Side Shoulder-Wrist Orientation", body: "Compare the shoulder-to-wrist direction with image vertical at release. This is not a direct Arm Slot measurement." },
+    ] },
+  ],
+  note: "For exact definitions, open Settings → About → Measurements in the app. Camera position, event marking and pose estimates affect every comparison; higher or lower is not a score.",
+} as const;
+
 export const motion = {
   name: divisions.sports.product.name,
   path: divisions.sports.product.path,
-  headline: "See your pitch more clearly.",
-  descriptor: "Pitching video and projected 2D analysis for iPhone.",
+  headline: "Measure. Track. Compare. Learn.",
+  descriptor: "Pitching mechanics, tracked over time. For iPhone.",
   platform: "iPhone · iOS 17 or later",
   device: "iPhone",
   operatingSystem: "iOS 17 or later",
   releaseStatus: productStatusLabels[motionFamily.individual.products[0].status],
   releaseStatement: "Motion’s current pitching app for iPhone is preparing for release.",
   metadata: {
-    title: "Asymmetri Motion | Pitching Video & 2D Analysis",
+    title: "Asymmetri Motion | Track Pitching Mechanics Over Time",
     description:
-      "Record or import pitching video, confirm key frames, inspect projected 2D measurements and annotated evidence, and revisit your history. For iPhone, iOS 17 or later.",
+      "Track pitching-mechanics measurements over time, compare changes alongside recorded performance context, and return to the video and evidence. For iPhone.",
   },
   icon: {
     src: "/brand/motion-pitcher.png",
@@ -239,20 +264,24 @@ export const motion = {
   hero: {
     eyebrow: "An Asymmetri Sports product · Current pitching experience",
     support:
-      "Record a delivery, find the frame you want to discuss and look closely. Motion keeps the marked frames, projected 2D measurements and annotated images together on your iPhone.",
+      "Track pitching-mechanics measurements over time. See what changed, explore it alongside recorded performance context, and return to the video and evidence behind each result.",
+    philosophy: "Motion gives you measurements and evidence. You and your coach decide what they mean.",
     link: { label: "How Motion works", href: "#how-it-works" },
   },
   gap: {
-    eyebrow: "Why we’re building it",
-    headline: "Find that pitch again.",
-    paragraphs: [
-      "Slow-motion video is easy to record. Turning it into something you can return to is harder. A pitch gets watched, scrubbed and discussed, then disappears into a camera roll.",
-      "Motion keeps the video, the moments you marked and the available measurements together. You can come back to the same pitch at the next practice. The measurements describe the 2D image; they are not laboratory motion capture.",
-    ],
+    eyebrow: "Why repeat the measurement?",
+    headline: "Track what changes",
+    items: [
+      { title: "One pitch", body: "A measurement describes one observation: one pitch, a particular event, and the image you recorded." },
+      { title: "Repeated pitches", body: "Repeating the same measurement makes differences visible. Keep the camera view and event selection as consistent as you can." },
+      { title: "A history", body: "Investigate whether a difference persists, whether one pitch was an outlier, and what else changed during the same period." },
+    ] satisfies ProductStep[],
+    questions: "Has my stride-related measurement changed? Is my lead-leg position different? Does my trunk position look consistent across several sessions? Start with a question, then inspect the pitches behind it.",
   },
+  measurements: motionMeasurements,
   workflow: {
     eyebrow: "How it works",
-    headline: "Review a pitch, step by step.",
+    headline: "A loop you can return to.",
     steps: [
       {
         title: "Record or import",
@@ -260,20 +289,32 @@ export const motion = {
         note: "Direct recording uses supported 240 or 120 fps camera modes. Availability depends on the iPhone. A Recording Setup is guidance, not camera calibration.",
       },
       {
-        title: "Mark the moments",
-        body: "Choose the Camera View and Throwing Arm. Scrub and fine-adjust to the exact frame for Front Foot Contact and Ball Release. Side View also uses a Setup Reference. You choose and confirm each frame.",
+        title: "Mark the same meaningful events",
+        body: "Confirm Camera View and Throwing Arm. Scrub and fine-adjust to Front Foot Contact and Ball Release; Side View also uses a Setup Reference. Choose and confirm each exact frame so you can revisit the same event across pitches.",
       },
       {
-        title: "Analyze the pitch",
-        body: "Analyze Pitch calculates the available projected 2D measurements using on-device pose analysis. Results depend on the view, your inputs and visible landmarks. If several people appear, Pitcher Selection lets you identify the pitcher to analyze.",
+        title: "Measure",
+        body: "Choose Analyze Pitch for the available on-device, projected 2D measurements. Results depend on the view, your inputs and visible landmarks. If several people appear, Pitcher Selection lets you identify the pitcher to analyze.",
       },
       {
-        title: "Inspect the evidence",
-        body: "Open the saved annotated images to inspect the selected frames, estimated landmarks and reference lines behind a result. Save an evidence image to Photos or share it through the iPhone share sheet.",
+        title: "Build history",
+        body: "Repeat the workflow across comparable recordings. My Pitches keeps each observation with its video, marks, results and evidence.",
       },
       {
-        title: "Revisit and compare",
-        body: "Return to My Pitches for saved videos, marks and results. Explore your pitching history, compare exact marked frames or supported measurements, and save a view to revisit later.",
+        title: "Compare",
+        body: "Use Explore to inspect two pitches, follow a measurement over time or compare two periods. Save a question as a Saved View to return to it.",
+      },
+      {
+        title: "Look at performance and context",
+        body: "Examine measurements alongside the velocity, pitch type, location and result you recorded. Ask what changed during the same period.",
+      },
+      {
+        title: "Return to the evidence",
+        body: "Open the contributing pitch, exact event frame and saved annotated image. Check the landmarks and reference lines behind a difference. Save evidence to Photos or share it deliberately.",
+      },
+      {
+        title: "Learn with your coach",
+        body: "Bring the observations to a conversation. You and your coach decide what they mean, what to investigate next and what to keep tracking.",
       },
     ] satisfies ProductStep[],
   },
@@ -281,7 +322,7 @@ export const motion = {
     eyebrow: "Behind a measurement",
     headline: "See where the number came from.",
     support:
-      "A measurement is easier to discuss when you can open the frame and see the landmarks and reference lines used to calculate it.",
+      "A change in history is worth looking at closely. Follow a measurement back to its pitch, exact event frame, and the landmarks and reference lines used to calculate it.",
     chain: [
       { title: "Source video", body: "The pitch you recorded or imported." },
       { title: "Exact selected frame", body: "A specific image you can return to." },
@@ -291,23 +332,32 @@ export const motion = {
       { title: "Pitch history", body: "Saved observations to revisit and compare." },
     ] satisfies ProductStep[],
     closing:
-      "You confirm the key frames. Motion connects measurements to those observations and keeps the annotated evidence available for later review.",
+      "History stays connected to individual observations. Review the saved evidence before interpreting a pattern; if a source or evidence is unavailable, Motion shows that state.",
   },
   history: {
-    eyebrow: "Saved pitches",
-    headline: "Put two pitches side by side.",
-    support:
-      "One pitch is a starting point. My Pitches and Explore let you return to the work over time without losing the detail behind a comparison.",
+    eyebrow: "Your pitching history",
+    headline: "From one pitch to a pattern.",
+    support: "Explore is central to the work: follow your own measurements over time, then open the observations behind a difference.",
     items: [
-      { title: "Return to the moment", body: "Review the exact frames you marked, alongside saved results and annotated evidence." },
-      { title: "Put two pitches in view", body: "Use A/B comparison for marked frames or supported measurements. Inspect both pitches behind a difference." },
-      { title: "Follow your history", body: "Browse supported measurement history and save an investigation as a Saved View." },
+      { title: "Compare two pitches", body: "Inspect a difference directly with A/B marked frames or a supported measurement. Open either pitch to review its evidence." },
+      { title: "Follow a measurement over time", body: "Use Measurement history to see whether a difference persists or appears in just one pitch. Check the individual contributors behind a chart or summary." },
+      { title: "Compare periods", body: "Use Two periods to investigate what changed between earlier and later training dates. Save the question and its settings as a Saved View." },
     ] satisfies ProductStep[],
-    note:
-      "Comparisons are descriptive. A difference does not establish improvement, and a trend does not prove a training change worked. Camera setup and marking choices still matter.",
+    note: "Keep the view, framing and event selection comparable. A date is not proof of a session, and a numerical difference alone does not establish improvement.",
+  },
+  performance: {
+    eyebrow: "What changed with it?",
+    headline: "Mechanics + performance",
+    support: "Mechanics history becomes more useful when you can investigate what else was happening during those pitches.",
+    items: [
+      { title: "Add the context you know", body: "Record velocity and its source, pitch type, chart-relative pitch location and outcome in Pitch Context. These are manual entries; Motion does not derive ball speed or determine the outcome from video." },
+      { title: "Look alongside the measurement", body: "Inspect recorded velocity and location with an exact measurement in Chart, Table or A/B comparison. Use supported context filters to narrow the pitches you are investigating. Leave unknown context unrecorded." },
+      { title: "Ask a specific question", body: "Did the stride-related measurement change during a period of increased recorded velocity? Do harder pitches show a different trunk position in Back View? Do pitches with different outcomes share an observable pattern?" },
+    ] satisfies ProductStep[],
+    note: "A relationship does not prove causation. Motion surfaces evidence for investigation. The athlete and coach decide what it means.",
   },
   study: {
-    eyebrow: "Context, study and comparison",
+    eyebrow: "Deeper investigation",
     headline: "Keep the conversation with the video.",
     items: [
       { title: "Notes and pitch context", body: "Keep Athlete Notes and Pitch Notes alongside your work. Add pitch type, reported velocity, chart-relative location and result yourself; these are recorded context, not video-derived measurements." },
@@ -319,11 +369,11 @@ export const motion = {
   },
   limits: {
     eyebrow: "Before you interpret a result",
-    headline: "What Motion can’t tell you.",
+    headline: "Measurements and evidence, not a mechanics grade.",
     items: [
       { title: "Camera position matters", body: "Measurements describe projected 2D geometry in the video image. Camera position and perspective affect what you see. Motion does not produce anatomical 3D biomechanics or laboratory-calibrated measurements." },
       { title: "Landmarks can be missing", body: "Pose landmarks are estimates, and you confirm the pitching moments. Missing landmarks or unresolved ambiguity can leave a measurement unavailable. Motion does not fill the gap with an invented result." },
-      { title: "A coach brings the context", body: "Motion does not score mechanics, predict injury or provide medical advice. It does not automatically coach an athlete or recommend a change to their delivery." },
+      { title: "A coach brings the context", body: "You and your coach interpret the evidence. Motion does not label mechanics good or bad, prescribe changes, predict injury or provide medical advice." },
     ] satisfies ProductStep[],
   },
   privacy: {
@@ -669,18 +719,19 @@ export const tutorial = {
   title: "Asymmetri Motion Tutorial",
   metadata: {
     title: "Asymmetri Motion Tutorial | Asymmetri Sports",
-    description: "Learn how to record or import a pitch, mark pitching moments, inspect projected 2D results and evidence, and explore your saved pitching history in Asymmetri Motion.",
+    description: "Learn to measure pitching mechanics, build history, compare changes with recorded performance context, and return to the video and evidence in Asymmetri Motion.",
   },
-  introduction: "From your first video to a useful conversation with a coach. Follow the steps in order, or jump straight to the part you need.",
-  disclosure: "For the normal V1 iPhone workflow. App screenshots show real retained pitching media used with the owner's permission. Physical setup images are instructional illustrations. Screen details may vary by version.",
+  introduction: "Measure. Track. Compare. Learn. Build a pitching history, investigate changes alongside recorded context, and return to the evidence with your coach. Follow the steps or jump to what you need.",
+  disclosure: "For the normal pitching workflow in the V1.2 candidate, which is preparing for release. App screenshots show real retained pitching media used with the owner's permission. Physical setup images are instructional illustrations. Screen details may vary by version.",
   link: { label: "Follow the Motion tutorial", href: "/tutorial" },
   modules: [
     {
-      id: "start", label: "Start", title: "One pitch. Evidence you can revisit.",
-      intro: "You choose the video, confirm the moments and decide what to examine. Motion keeps the saved pitch and its evidence together.",
+      id: "start", label: "Start", title: "Measure once. Build a history.",
+      intro: "One measurement tells you about one pitch. Repeating the same measurement across comparable pitches lets you see whether something is changing.",
       steps: [
-        { id: "your-first-pitch", title: "The path through a pitch", paragraphs: ["Start in My Pitches. Choose Record Pitch for a fresh recording, or Import Video for a video already in Photos. The recording button says Record New Pitch when you already have a pitch."], items: ["Record or import a video.", "Confirm Camera View and Throwing Arm.", "Mark the required moments, one exact frame at a time.", "Choose Analyze Pitch.", "Open a result and inspect its evidence.", "Reopen the saved pitch or explore your history."], media: "acquisition" },
-        { id: "before-you-start", title: "What you need", paragraphs: ["Use an iPhone running iOS 17 or later. Direct recording needs a supported high-frame-rate rear camera mode. Import is also a first-class path into the same review workflow.", "Keep the full pitcher visible, with enough light and space for the delivery. A steady camera and clear landmarks make review more useful. Athlete Profile is optional; you can start with a video."], note: "Results are projected 2D measurements from video images. They are not 3D anatomy, injury predictions, ball velocity, mechanics grades or automatic coaching. A coach supplies the context." },
+        { id: "what-motion-is-for", title: "What Motion is for", paragraphs: ["A history lets you investigate whether a change is consistent, whether one pitch was an outlier, and what else changed during the same period.", "Motion gives you measurements and evidence. You and your coach decide what they mean. It does not tell you how you should throw."] },
+        { id: "your-first-pitch", title: "The workflow you will repeat", paragraphs: ["Start in My Pitches. Choose Record Pitch for a fresh recording, or Import Video for a video already in Photos. The recording button says Record New Pitch when you already have a pitch."], items: ["Record or import comparable pitches; confirm Camera View and Throwing Arm.", "Mark the same meaningful events, one exact frame at a time.", "Choose Analyze Pitch and inspect the result.", "Repeat to build your saved history.", "Explore changes in the same measurement over time.", "Compare those changes with the performance context you recorded.", "Return to each pitch’s video and evidence, then discuss what you see with your coach."], media: "acquisition" },
+        { id: "before-you-start", title: "What you need", paragraphs: ["Use an iPhone running iOS 17 or later. Direct recording needs a supported high-frame-rate rear camera mode. Import is also a first-class path into the same review workflow.", "Keep the full pitcher visible, with enough light and space for the delivery. A steady camera and clear landmarks make review more useful. For comparisons, aim to repeat the camera position, framing and event-selection approach. Athlete Profile is optional; you can start with a video."], note: "Results are projected 2D measurements from video images. They are not 3D anatomy, injury predictions, ball velocity, mechanics grades or automatic coaching. A coach supplies the context." },
       ],
     },
     {
@@ -718,9 +769,10 @@ export const tutorial = {
       id: "analyze", label: "Analyze", title: "Turn the confirmed inputs into results.",
       intro: "Analysis is an explicit action. Available results depend on view, marks, throwing arm, pitcher selection and visible landmarks.",
       steps: [
+        { id: "what-should-i-track", title: "What should I track?", paragraphs: ["Choose a question and a measurement you can revisit at the same event. Side View offers the ankle-span ratio at Front Foot Contact and separate lead-knee bend results at Front Foot Contact and Ball Release. Back View offers trunk orientation at Front Foot Contact and the two arm-related results at Ball Release.", "The results below use the current app’s names. For exact technical definitions, open Settings → About → Measurements. Keep each event’s result separate; these are observations to investigate, not targets to achieve."] },
         { id: "run-analysis", title: "Choose Analyze Pitch", paragraphs: ["At Results, check the Pitch Mechanics summary and choose Analyze Pitch. Let processing finish, then read the state of each result.", "Motion performs pose analysis on device. Eligible measurements can finish independently: one unavailable result does not mean every other result failed. Opening Results alone does not run a new analysis."], media: "analyze" },
-        { id: "back-results", title: "Back View: three supported results", view: "back", paragraphs: ["These are measurements projected in the video image. Each belongs to a particular marked event."], items: ["2D Trunk-Segment Orientation at FFC: the trunk segment relative to image vertical, including the displayed direction.", "2D Shoulder-Upper Arm Angle at Ball Release: the included angle formed by the shoulder line and throwing upper arm in the image.", "2D Throwing-Side Shoulder-Wrist Orientation at Ball Release: the shoulder-to-wrist direction relative to image vertical."], note: "Image vertical is not ground or gravity vertical. Camera roll and perspective affect these values. They do not establish anatomical joint angles or arm slot.", media: "result" },
-        { id: "side-results", title: "Side View: three supported results", view: "side", paragraphs: ["Side View uses the marked starting stance and events where each measurement requires them."], items: ["2D FFC Ankle-Span Ratio: projected ankle separation at FFC relative to the projected nose-to-ankle reference from Setup, expressed as a percentage.", "2D Lead-Knee Bend Angle at FFC: projected bend from the estimated lead hip, knee and ankle.", "2D Lead-Knee Bend Angle at Ball Release: the same kind of projected bend at the separate release event."], note: "The ratio is not physical stride length or percentage of actual body height. These Side-view descriptors remain experimental; availability in the app does not establish scientific accuracy or an ideal range. Higher or lower is not a score." },
+        { id: "back-results", title: "Back View: three supported results", view: "back", paragraphs: ["These are measurements projected in the video image. Each belongs to a particular marked event."], items: motionMeasurements.groups.filter((group) => group.view === "Back View").flatMap((group) => group.items.map((item) => `${item.title} at ${group.event}: ${item.body}`)), note: "Image vertical is not ground or gravity vertical. Camera roll and perspective affect these values. They do not establish anatomical joint angles or arm slot.", media: "result" },
+        { id: "side-results", title: "Side View: three supported results", view: "side", paragraphs: ["Side View uses the marked starting stance and events where each measurement requires them."], items: motionMeasurements.groups.filter((group) => group.view === "Side View").flatMap((group) => group.items.map((item) => `${item.title} at ${group.event}: ${item.body}`)), note: "The ratio is not physical stride length or percentage of actual body height. These Side-view descriptors remain experimental; availability in the app does not establish scientific accuracy or an ideal range. Higher or lower is not a score." },
         { id: "result-status", title: "Read the status before the number", paragraphs: ["Current results correspond to the saved inputs. If an input changed, review the affected result's status and analyze again. If a result is unavailable, follow its reason: missing marks, unknown throwing arm, ambiguous pitcher selection or missing landmarks may need attention.", "A failed new attempt does not make an older saved result a new success. Review the event, context and currentness before comparing values. No number is better than a number inferred from evidence that is not there." ] },
       ],
     },
@@ -737,13 +789,15 @@ export const tutorial = {
       intro: "My Pitches is your local library. A saved pitch keeps its own video, setup, marks and analysis history.",
       steps: [
         { id: "reopen-pitch", title: "Open a saved pitch", paragraphs: ["Return to My Pitches and use the thumbnail and date to find the observation. Open it to revisit Results, evidence or Review Pitch Inputs. Use the saved mark's Go To action when you want to inspect its frame.", "Pitch Date can come from the source or a date you specify. An Added date means when the video entered the app, not necessarily when the pitch was thrown. Keep that distinction in mind when exploring development over time."], media: "acquisition" },
+        { id: "pitch-context", title: "Record what else was happening", paragraphs: ["In the saved pitch’s details, open Pitch Context to add or edit the context you know: Pitch Type, Velocity with its unit and reported source, Pitch Location on the chart, and Pitch Result. Save your changes.", "Mechanics history becomes more useful when you can investigate what else was happening during those pitches. Record context consistently and leave unknown information unrecorded. These are manual entries; Motion does not measure ball velocity or automatically determine an outcome."] },
         { id: "keep-history", title: "Understand what is local", paragraphs: ["Two imports kept as separate observations have separate review histories. Changing one does not turn it into a revision of the other.", "Deleting a pitch removes that app observation and its local video, marks, analysis and evidence. It does not delete an independent Photos copy or the Athlete Profile. Use deletion only when you intend to remove that observation."], note: "Deleting or reinstalling the app can remove local history. A Photos video or exported evidence image does not restore the complete app record. Contact support before deleting or reinstalling as troubleshooting." },
       ],
     },
     {
       id: "explore-history", label: "Explore History", title: "Ask a question of your saved pitches.",
-      intro: "Choose Explore your pitches from My Pitches. Review marked frames for a visual question, or Measurement history for a numerical one.",
+      intro: "Use your history to investigate what changed, whether it persisted, and what changed alongside it. Choose Explore your pitches from My Pitches to begin.",
       steps: [
+        { id: "why-repeat-measurements", title: "Why repeat measurements?", paragraphs: ["One pitch can be an outlier. A history lets you look for consistency across several pitches and training dates before deciding what a difference means."], items: ["Has my stride-related measurement changed?", "Is my Back View trunk position different now?", "Has my lead-leg position changed between training periods?", "Did those differences occur during the same period my recorded velocity changed?", "Are they consistent, or present in only one pitch?"], note: "Compare the same measurement and event, then check the camera perspective and evidence behind the difference." },
         { id: "history-entry", title: "Choose frames or measurements", paragraphs: ["Review marked frames lets you revisit the exact moments you confirmed, including pitches without a usable measurement. Measurement history uses supported saved results and their evidence."], media: "explorer" },
         { id: "marked-frames", title: "Review the same event across pitches", paragraphs: ["In Review marked frames, choose Front Foot Contact, Ball Release or Setup Reference. Switch between List and Frames. The count tells you how many included pitches have a saved mark for that event.", "Open a row or Show frame to inspect the exact saved image. Change the date and context filters when you want a narrower set."], media: "marked" },
         { id: "choose-pair", title: "Choose A, then choose B", paragraphs: ["Use Choose A and Choose B to select two different pitches with the matching marked event. Replace either side to try another pair. The choices are temporary unless you save the view."], media: "chooseB" },
@@ -751,6 +805,7 @@ export const tutorial = {
         { id: "measurement-history", title: "Choose one measurement", paragraphs: ["Open Measurement history and choose a supported measure. The same six normal results described in Analyze are available where saved records exist. An empty history can simply mean that no included pitch has an eligible result for that measure."], media: "chooser" },
         { id: "chart", title: "Chart: locate an observation", paragraphs: ["Use Chart to see the included recorded values across pitch dates. Touch a plotted item, or use Previous / Next, to choose an observation.", "Read the included count and context before interpreting the pattern. Large histories may be summarized into date bins; inspect the contributors and ranges instead of treating a summary as a new pitch."], media: "chart" },
         { id: "table-evidence", title: "Table and Evidence: inspect the contributors", paragraphs: ["Use Table for readable values, pitch dates and individual contributors. Open an observation to understand which pitch supplied it.", "Use Evidence to inspect the saved annotated image associated with the selected result. Return to the original pitch when you need the video or marked frame. If evidence or a source pitch is unavailable, follow the displayed state rather than assuming the missing item was included."], media: "table" },
+        { id: "mechanics-and-performance", title: "Look at mechanics and performance together", paragraphs: ["Select an individual measurement in Chart, Table or Two pitches to inspect its recorded velocity, graphical pitch location, pitch type and result where available. For a grouped point, open an exact contributing pitch before treating its context as an individual observation.", "Use supported Pitch Context filters to compare the pitches relevant to your question. Ask whether a change in the measurement appeared during the same period as a change in recorded performance. Then return to the contributing pitch, marked frame and evidence."], note: "A relationship does not prove causation. Motion surfaces evidence for investigation; you and your coach decide what it means." },
         { id: "history-questions", title: "Choose the question", paragraphs: ["The question menu changes what you are investigating. These views describe recorded data; they do not estimate improvement or prescribe targets."], items: ["History: review individual observations over time.", "Two pitches: choose an exact A/B pair for one supported measurement.", "Grouped summary: compare groups using the available grouping, centre and weighting choices.", "Two periods: compare an earlier date interval with a later one; the earlier period must finish before the later period begins."], note: "A numerical difference requires compatible recorded meanings. If a difference is unavailable, inspect the reason and the individual evidence. Filtering cannot make incompatible records comparable.", media: "questions" },
         { id: "history-filters", title: "Narrow the recorded context", paragraphs: ["Open Options and choose Camera View and Throwing side filters. Apply confirms the draft choices; Cancel leaves the current view unchanged.", "For summaries, choose the centre, such as mean or median, and weighting. Each Pitch gives each included pitch weight. Each Pitch Date gives dates equal weight. A pitch date is not proof that all pitches came from one session."], media: "filters" },
         { id: "history-dates", title: "Set the date window", paragraphs: ["Choose Last 7 days, Last 30 days, Last 90 days, All or Custom. Pitches without a pitch date have a separate choice. Check the date boundaries and the time zone used for the question.", "Relative windows move with time. A custom range expresses specific dates. Inspect included pitch dates when a result or comparison seems unexpectedly empty."], note: "Angle differences use degrees. Differences between percentage-valued ankle-span ratios use percentage points. Neither unit makes a difference evidence of improvement.", media: "dates" },

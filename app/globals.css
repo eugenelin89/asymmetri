@@ -761,6 +761,29 @@ p {
   max-width: 17ch;
 }
 
+.motion-hero__philosophy {
+  color: var(--ink);
+  font-size: var(--type-step);
+  line-height: 1.6;
+  margin: 1.5rem 0 2rem;
+  max-width: 45ch;
+}
+
+.motion-measurements__groups {
+  display: grid;
+  gap: 2.5rem 3rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 3rem;
+}
+
+.motion-measurements__groups h3 {
+  margin: 0.75rem 0 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .motion-measurements__groups { grid-template-columns: minmax(0, 1fr); }
+}
+
 .motion-product {
   background: var(--motion-mineral);
   color: var(--motion-text);
@@ -1756,7 +1779,7 @@ p {
    more light than Labs; these selectors do not alter section order or size. */
 .story, .motion-intro,
 .motion-page :is(.introduction-video, .motion-gap, .motion-workflow,
-  .motion-evidence, .motion-history, .motion-study, .motion-limits,
+  .motion-measurements, .motion-evidence, .motion-history, .motion-performance, .motion-study, .motion-limits,
   .motion-family, .motion-concepts, .motion-privacy),
 .sports-page .motion-family, .motion-product,
 .about-page main > .section:not(.about-next),

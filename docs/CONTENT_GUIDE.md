@@ -79,6 +79,31 @@ five stored measurement families from normal V1; use “available projected 2D
 measurements” rather than the white paper's older all-eleven claim. Read
 `MOTION_PRODUCT_REVIEW.md` for the dated audit and maintenance rules.
 
+## Motion tracking story and terminology
+
+Lead `/motion` and the tutorial with **Measure. Track. Compare. Learn.** Explain
+one observation, repeated measurement and history before the detailed controls.
+Keep Explorer, descriptive period comparisons, manual performance context and
+returning to original evidence central. The governing philosophy is: **Measure
+changes. Preserve the evidence. Investigate relationships. Humans interpret.**
+A relationship does not prove causation; consistency of recording is something to
+inspect, not a validated repeatability promise.
+
+`motionMeasurements` centralizes the six normal V1.2 results by view/event and
+supplies both the product section and tutorial Analyze lists. Current Side terms
+remain 2D FFC Ankle-Span Ratio and separate 2D Lead-Knee Bend Angle results at FFC
+and Ball Release. Do not publish Stride Length, Front Leg Block, Side Trunk Tilt
+or 2D Lateral Trunk Lean as current app labels until accepted source/release and
+normal visibility establish them. The gate and inspected SHAs are in
+`MOTION_PRODUCT_REVIEW.md`. Current help is Settings → About → Measurements.
+
+Tutorial conceptual additions belong within Start, Analyze, Saved Pitches and
+Explore History; preserve the ten modules, every existing hash and image link.
+Only supported manually recorded velocity/type/location/result are taught as
+performance context. Reference Study/Compare remains deeper investigation after
+the personal longitudinal story. Hitting inherits the philosophy, never guessed
+hitting-specific events or measurements.
+
 ## Motion utility-page facts
 
 October 6, 2026: the utility pages cover the accepted Motion 1.2 candidate's

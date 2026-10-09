@@ -60,6 +60,7 @@ export default function MotionPage() {
               <p className="motion-hero__name">{motion.name}</p>
               <h1>{motion.headline}</h1>
               <p className="hero__support">{motion.hero.support}</p>
+              <p className="motion-hero__philosophy">{motion.hero.philosophy}</p>
               <a className="button button--primary" href={motion.hero.link.href}>
                 {motion.hero.link.label}
               </a>
@@ -88,11 +89,39 @@ export default function MotionPage() {
               <p className="eyebrow">{motion.gap.eyebrow}</p>
               <h2>{motion.gap.headline}</h2>
             </div>
-            <div className="product-prose">
-              {motion.gap.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
+            <div>
+              <dl className="product-details">
+                {motion.gap.items.map((item) => (
+                  <div key={item.title}><dt>{item.title}</dt><dd>{item.body}</dd></div>
+                ))}
+              </dl>
+              <p className="product-note">{motion.gap.questions}</p>
+            </div>
+          </div>
+        </section>
+        <section className="section motion-measurements" aria-labelledby="measurements-title">
+          <div className="shell">
+            <div className="product-split">
+              <div className="product-heading">
+                <p className="eyebrow">{motion.measurements.eyebrow}</p>
+                <h2 id="measurements-title">{motion.measurements.headline}</h2>
+              </div>
+              <p className="product-lead">{motion.measurements.support}</p>
+            </div>
+            <div className="motion-measurements__groups">
+              {motion.measurements.groups.map((group) => (
+                <div key={`${group.view}-${group.event}`}>
+                  <p className="eyebrow">{group.view}</p>
+                  <h3>{group.event}</h3>
+                  <dl className="product-details">
+                    {group.items.map((item) => (
+                      <div key={item.title}><dt>{item.title}</dt><dd>{item.body}</dd></div>
+                    ))}
+                  </dl>
+                </div>
               ))}
             </div>
+            <p className="product-note">{motion.measurements.note}</p>
           </div>
         </section>
         <section className="section motion-workflow" id="how-it-works">
@@ -158,6 +187,23 @@ export default function MotionPage() {
                 ))}
               </dl>
               <p className="product-note">{motion.history.note}</p>
+            </div>
+          </div>
+        </section>
+        <section className="section motion-performance" aria-labelledby="performance-title">
+          <div className="shell product-split">
+            <div className="product-heading">
+              <p className="eyebrow">{motion.performance.eyebrow}</p>
+              <h2 id="performance-title">{motion.performance.headline}</h2>
+              <p className="product-lead">{motion.performance.support}</p>
+            </div>
+            <div>
+              <dl className="product-details">
+                {motion.performance.items.map((item) => (
+                  <div key={item.title}><dt>{item.title}</dt><dd>{item.body}</dd></div>
+                ))}
+              </dl>
+              <p className="product-note">{motion.performance.note}</p>
             </div>
           </div>
         </section>

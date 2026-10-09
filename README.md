@@ -31,10 +31,10 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
-| `/motion` | Current pitching workflow, evidence, Notes/Reference/Compare, limits and family roadmap |
+| `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/about` | Company philosophy and founder's sports origin |
-| `/tutorial` | Protected Motion guide with stable hashes and original-image links |
+| `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
 
@@ -54,6 +54,10 @@ The September portfolio record and prompt journals remain historical evidence.
 The selected Graphite + Teal identity gives Sports and Labs one shared dark
 umbrella system, with neutral light reading sections. Motion retains its own teal
 and all existing assets. Shared CSS tokens control surfaces, actions and diagrams. See [Visual identity](docs/VISUAL_IDENTITY.md).
+
+Motion’s public philosophy is **Measure changes. Preserve the evidence. Investigate
+relationships. Humans interpret.** The [current product review](docs/MOTION_PRODUCT_REVIEW.md)
+records the accepted V1.2 terminology and the deferred baseball-first names.
 
 ## Technology
 

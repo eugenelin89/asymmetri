@@ -155,7 +155,7 @@ accessibility, and privacy verification.
 
 ## Motion marketing regression
 
-Verify the five-step workflow and six-stage evidence list remain readable at every
+Verify the eight-step workflow, event-grouped measurements and six-stage evidence list remain readable at every
 width. Confirm conditional HFR wording, exact human confirmation, projected 2D
 qualifiers, descriptive comparison and the release state against the current
 source review. Do not expose Developer-only metrics, future features, an unverified
@@ -165,6 +165,12 @@ content export with its prior committed version; shared navigation must preserve
 the audited app/Apple/support-retention meaning. Only the approved website-media
 disclosure and effective-date history change with the videos. New assets require provenance and rights review.
 
+
+Check Measure / Track / Compare / Learn, one pitch → history, two-period questions,
+manual mechanics/performance context, evidence return and human interpretation.
+Verify the six normal metric names against the latest accepted Motion source;
+keep future Side trunk and baseball-first labels out. The terminology gate must
+be recorded before committing. Tutorial Analyze and `/motion` use the same inventory.
 
 ## Tutorial regression
 

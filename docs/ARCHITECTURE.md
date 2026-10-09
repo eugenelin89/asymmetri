@@ -284,6 +284,16 @@ Routine application redeployment does not require a DNS, certificate, Nginx,
 port, or systemd change. See `docs/DEPLOYMENT.md` for the production procedure.
 
 
+## Motion story and shared measurement inventory
+
+`content/site.ts` owns `motionMeasurements`, the accepted normal V1.2 measurement
+names/definitions grouped by view and event. `/motion` renders the groups as
+semantic headings and definition lists; tutorial Analyze derives its Back/Side
+lists from the same inventory. The eight-step workflow and history/performance
+sections remain server-rendered content with existing tokens. No new client
+component, dependency, data store or media asset is required. The product review
+documents the release gate for future names and Side trunk visibility.
+
 ## Progressive tutorial
 
 `content/site.ts` exports typed `tutorial` modules/steps and `tutorialMedia` captions,
