@@ -11,5 +11,8 @@ export default defineConfig([
     "dist/**",
     ".wrangler/**",
     "next-env.d.ts",
+    "receiver/dist/**",
+    "receiver/vendor/**",
+    "receiver/node_modules/**",
   ]),
 ]);

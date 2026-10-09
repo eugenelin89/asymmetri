@@ -136,3 +136,11 @@ player and fallback afterwards. The iframe's origin referrer is intentional;
 removing it can cause YouTube error 153. Do not add an SDK, remote thumbnail or
 preconnect to solve playback failures. Cross-origin player errors are not reliably
 observable by the parent, so the external link is always present.
+
+## Isolated investment receiver
+
+Install its separate lockfile with `npm --prefix receiver ci`; run `npm run receiver:test` and `npm run receiver:build`. No installation/build starts it. Runtime data must be private and outside checkout. Explicit configuration, manual startup and diagnostics are in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Tests use only disposable local keys/storage and synthetic data.
+
+INV-02 advances the local repository security baseline to Next.js and
+`eslint-config-next` 16.3.8, the minimal available patch outside the newly reported
+16.0.0–16.3.7 audit range. This does not change the installed production version.

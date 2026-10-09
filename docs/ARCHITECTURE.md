@@ -6,7 +6,9 @@ Asymmetri / Asymmetri.co is the umbrella; Asymmetri Sports and Asymmetri Labs ar
 peer divisions. Motion belongs to Sports; experimental open-source BotSquad belongs
 to Labs. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
-separate. No site-owned database, authentication, API, CMS, forms or analytics.
+separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
+default-disabled INV-02 receiver owns a public archive/signature boundary described
+in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md); no production API is activated.
 
 ## Routes and compatibility
 
@@ -211,7 +213,7 @@ The current operational baseline is:
 - the service runs as `django-user`;
 - production application files live under `/var/www/asymmetri`;
 - the repository targets Node.js 24 through `.nvmrc`;
-- Next.js 16.3.6 requires Node.js 20.9.0 or newer;
+- Next.js 16.3.8 requires Node.js 20.9.0 or newer;
 - the Droplet is resource-constrained, so disk and memory should be checked
   before dependency installation or a production build.
 
@@ -335,3 +337,12 @@ teal. Tailwind maps to CSS variables. No exploration runtime or review routes sh
 division fields and connectors add no JavaScript. The browser theme color follows
 graphite. Existing social exports, favicons, authentic media and source variants
 retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
+
+## INV-02 standalone archive boundary
+
+`receiver/` has an independent Node22/24 package, pinned contract, SQLite migration,
+Ed25519 HTTP authentication, immutable events/receipts, financial validation and
+private CAS. Next/Vinext builds exclude its runtime; `lib/investment-archive.ts`
+provides only type-safe read locations/types, disabled unless explicitly configured.
+No existing page fetches it. See the [runbook](INVESTMENT_RECEIVER.md) for trust,
+transaction, visibility, capacity, recovery and later private Ask boundaries.

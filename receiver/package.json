@@ -1,0 +1,30 @@
+{
+  "name": "asymmetri-investment-receiver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.23.1 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "contracts:check": "node scripts/check-contract.mjs",
+    "test": "npm run contracts:check && npm run build && node --test dist/test/*.test.js",
+    "start": "node dist/src/cli.js serve",
+    "admin": "node dist/src/cli.js"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "better-sqlite3": "13.0.3",
+    "canonicalize": "2.1.0",
+    "jsonc-parser": "3.3.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
+    "@types/node": "22.13.10",
+    "json-schema-to-typescript": "15.0.4",
+    "typescript": "5.9.3"
+  }
+}

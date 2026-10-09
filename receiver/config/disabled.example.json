@@ -1,0 +1,11 @@
+{
+  "enabled": false,
+  "dataDir": "/var/lib/asymmetri-investment",
+  "host": "127.0.0.1",
+  "port": 3101,
+  "authority": "127.0.0.1:3101",
+  "maxArchiveBytes": 67108864,
+  "maxRunBytes": 16777216,
+  "maxContentBytes": 268435456,
+  "minFreeBytes": 268435456
+}

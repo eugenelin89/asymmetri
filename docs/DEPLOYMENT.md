@@ -282,7 +282,7 @@ gave standing approval for Node 22 production deployment: “always approve node
 runtime. don't ask me again.” This replaces the earlier per-deployment exceptions
 for the utility pages and tutorial. Do not ask to renew this approval. Keep the
 production runtime in place and require successful production checks/build before
-restart. The installed Next.js 16.3.6 package requires Node.js 20.9.0 or newer.
+restart. The repository Next.js 16.3.8 package requires Node.js 20.9.0 or newer.
 A concrete compatibility/build failure still needs diagnosis; no OS/runtime
 upgrade is part of a copy deployment.
 
@@ -1082,3 +1082,7 @@ Motion resources and deliberate video behavior, annotate and push
 `website-botsquad-project-page-2026-10-07` at that revision (unique suffix if occupied).
 Never move either tag. Record candidate/archive/previous-build paths, build IDs and final
 health in the external task receipt. See the [public-story source review](BOTSQUAD_PAGE_REVIEW_2026-10-07.md).
+
+## Investment receiver is not deployed
+
+INV-02 adds a locally validated, default-disabled service; none of the existing website deployment commands deploys or starts it. Do not package SQLite into Cloudflare Workers. The [receiver runbook](INVESTMENT_RECEIVER.md) and uninstalled `receiver/deploy/asymmetri-investment.service.example` describe separate identity/storage, supported OS/capacity, Node22 Linux validation, proxy-signature checks, backups/restore fencing and explicit future activation/rollback gates. These are proposals, not an INV-02 deployment authorization.

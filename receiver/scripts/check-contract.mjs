@@ -1,0 +1,16 @@
+import { readFile, readdir } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { compile } from 'json-schema-to-typescript';
+const root = new URL('../vendor/investment/v1/', import.meta.url);
+const digest = b => createHash('sha256').update(b).digest('hex');
+const pin = JSON.parse(await readFile(new URL('../vendor/source.json', import.meta.url)));
+const bytes = await readFile(new URL('manifest.json', root));
+if (digest(bytes) !== pin.manifestSha256) throw Error('Manifest pin drift');
+const manifest = JSON.parse(bytes);
+const files = await readdir(root);
+if (JSON.stringify(files.sort()) !== JSON.stringify([...Object.keys(manifest.files), 'manifest.json'].sort())) throw Error('Package membership drift');
+for (const [name, hash] of Object.entries(manifest.files)) if (digest(await readFile(new URL(name, root))) !== hash) throw Error(`Contract drift: ${name}`);
+const schema = JSON.parse(await readFile(new URL('schema.json', root)));
+const generated = await compile(schema, 'InvestmentShowcaseContract', { bannerComment: '/* Generated from schema.json by npm run contracts:generate. Do not edit. */', unreachableDefinitions: true, additionalProperties: false, maxItems: -1 });
+if (generated !== await readFile(new URL('types.d.ts', root), 'utf8')) throw Error('Generated declaration drift');
+console.log(`Contract 1.0: exact 9-file package, generated types, source ${pin.commit}, manifest ${pin.manifestSha256}`);

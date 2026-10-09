@@ -66,7 +66,9 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind
 Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytics, form
-backend, database, authentication or application-owned visitor tracking. Optional
+backend or application-owned visitor tracking. A separate, default-disabled
+INV-02 investment archive receiver now has its own SQLite/signature boundary;
+it is not deployed or wired into website pages. See [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
 YouTube players connect to Google only after explicit activation; local posters
 and normal external links are available beforehand. Tutorial screenshots contain only the
 owner-authorized retained pitching media described in the asset manifest.

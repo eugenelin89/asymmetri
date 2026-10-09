@@ -1,0 +1,31 @@
+# PROPOSAL ONLY. INV-02 does not install, enable or start this unit.
+# No [Install] section: deployment/identity/proxy/activation are separately authorized.
+[Unit]
+Description=Asymmetri public investment archive receiver
+After=network.target
+ConditionPathExists=/etc/asymmetri-investment/explicitly-enabled
+
+[Service]
+Type=simple
+User=asymmetri-investment
+Group=asymmetri-investment
+WorkingDirectory=/opt/asymmetri-receiver/receiver
+Environment=NODE_ENV=production
+Environment=ASYMMETRI_RECEIVER_CONFIG=/etc/asymmetri-investment/config.json
+ExecStart=/usr/bin/node --max-old-space-size=128 dist/src/cli.js serve
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/asymmetri-investment
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=256M
+TasksMax=32
+CPUQuota=50%

@@ -266,3 +266,7 @@ roadmap and video links. No internal prompt numbers or private workspace identif
 belong in public copy. Keep setup and approvals understandable without implying broad
 iOS engineering, browser writes, public hosting or publication authority. Smoke-test
 Labs/home and protected Motion resources on both production hosts.
+
+## INV-02 receiver checks
+
+Run `npm run receiver:check`, `npm run receiver:test` and `npm --prefix receiver audit --omit=dev`, in addition to both website builds/check/audit. The test command verifies exact contract hashes/type regeneration and real HTTP/SQLite tests, including separate-process races/SIGKILL, signed replay/revocation, immutable financial ordering, CAS and isolated restore. Run the compiled tests on Node22 as well as `.nvmrc` Node24; see [INV-02-VALIDATION.md](INV-02-VALIDATION.md) for results and untested deployment gates.
