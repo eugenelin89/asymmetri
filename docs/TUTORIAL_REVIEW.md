@@ -4,12 +4,21 @@ Review date: September 16, 2026 (capture session continued into September 17 UTC
 
 ## Current update, October 8, 2026
 
-The [Motion product review](MOTION_PRODUCT_REVIEW.md#mandatory-terminology-gate)
-records fetched main `56c88a0`, release/1.2 `571ee24` and accepted 1.2 (2) binary
-source `8a2f5e5`. Their iOS runtime trees agree. No baseball-first rename or normal
-Side trunk promotion has landed; six current technical names remain, now shared
-with the product page through `motionMeasurements`. The actual app help path is
-Settings → About → Measurements.
+The [Motion product review](MOTION_PRODUCT_REVIEW.md#current-authority-october-8-2026-owner-approved-measurement-presentation)
+records the owner's explicit approval of baseball-first public names, superseding
+the prior website-only gate despite older frozen-binary labels. `motionMeasurements`
+now supplies eight view/event entries: five Side and three Back. Stride Length,
+Front Leg Block, Trunk Tilt and 2D Lateral Trunk Lean are normal instructional
+names; the two Back arm names remain technical. Each event retains its separate
+scientific identity. No app repository, formula or persisted record was changed.
+Exact methods remain at Settings → About → Measurements.
+
+“What should I track?” and Explore History questions use these names with event
+context, while preserving relationship ≠ causation and human interpretation.
+Descriptions explain observation and repeat use, with concise shared technical
+notes. The historical screenshots keep their original bytes, URLs and accurate
+alt text; updated captions explain older labels without retouching the evidence.
+The earlier September coverage and capture records below remain historical.
 
 Start now explains why one measurement becomes more useful through repetition and
 history, before the practical loop. Analyze adds “What should I track?” Saved
@@ -25,7 +34,7 @@ Humans interpret.** Context is manual and observational; no ball-speed inference
 automatic outcome detection, mechanics grading, coaching prescription or causal
 claim is taught. Reference/Compare coverage on the product page remains unchanged.
 
-The existing approved screenshot bytes/captions remain historical examples; no
+The existing approved screenshot bytes remain historical examples; no
 new iPhone session or capture was needed. Disclosure identifies the V1.2 candidate
 workflow, its preparation state and version-dependent screens. The dated capture
 review below remains evidence for those assets; it is not a new device audit.

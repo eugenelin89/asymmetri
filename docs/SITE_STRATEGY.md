@@ -25,9 +25,9 @@ and teams. The shared `MotionFamily` section follows the current product introdu
 moves from one pitch to repeated measurements, comparable history, changes alongside
 manual performance context, and the exact video/evidence behind each observation.
 Measure changes. Preserve the evidence. Investigate relationships. Humans interpret.
-The event-grouped measurement section uses accepted V1.2 labels; future baseball-first
-names stay gated by the current product review. Explorer is a primary reason to
-repeat the workflow, while Reference Study/Compare supports deeper investigation.
+The event-grouped measurement section uses owner-approved baseball-first public
+names with scientific definitions preserved in detailed measurement documentation.
+Explorer is a primary reason to repeat the workflow, while Reference Study/Compare supports deeper investigation.
 The tutorial teaches the same idea within its existing module navigation.
 
 Capture/import, exact

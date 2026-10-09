@@ -5,7 +5,58 @@ This is an internal claims/provenance record, not a public paper or scientific
 validation. No reference repository was modified, built, configured or released.
 
 
-## Current authority, October 8, 2026: longitudinal product story
+## Current authority, October 8, 2026: owner-approved measurement presentation
+
+The owner explicitly supersedes the prior website-only terminology gate. Normal
+public-facing Motion content now uses baseball-first measurement names while
+preserving technical/scientific definitions in detailed measurement documentation.
+This is presentation language for the names being implemented for V1.2, even where
+the frozen 1.2 (2) binary or retained screenshots still show older technical labels.
+It does not assert that the binary changed or that distribution is complete.
+The Motion application repository is outside this website task and was not modified.
+
+The shared `motionMeasurements` inventory supplies eight view/event entries to
+`/motion` and tutorial Analyze. Preserve these mappings; no formula, provenance,
+persisted identifier or scientific record changes:
+
+| View | Event | Public name | Existing scientific measurement |
+| --- | --- | --- | --- |
+| Side | Front Foot Contact | Stride Length | 2D FFC Ankle-Span Ratio, relative to Setup Reference |
+| Side | Front Foot Contact | Front Leg Block | 2D Lead-Knee Bend Angle at FFC |
+| Side | Front Foot Contact | Trunk Tilt | Side trunk-segment orientation at FFC |
+| Side | Ball Release | Front Leg Block | 2D Lead-Knee Bend Angle at Ball Release |
+| Side | Ball Release | Trunk Tilt | Side trunk-segment orientation at Ball Release |
+| Back | Front Foot Contact | 2D Lateral Trunk Lean | Back trunk-segment orientation at FFC |
+| Back | Ball Release | 2D Shoulder–Upper Arm Angle | Existing shoulder/upper-arm angle at Ball Release |
+| Back | Ball Release | 2D Throwing-Side Shoulder–Wrist Orientation | Existing throwing-side shoulder/wrist orientation at Ball Release |
+
+Both Front Leg Block results and both Trunk Tilt results remain separate event
+measurements. Back 2D Lateral Trunk Lean remains distinct from Side Trunk Tilt.
+Neither arm result is renamed Arm Slot. No additional measurement is introduced.
+
+Descriptions explain what is observed, at which event, and how repeated observations
+help someone investigate change. One short section note points to **Settings →
+About → Measurements** and mentions camera setup, event selection and pose estimation.
+Individual measurement descriptions contain no repeated “what it is not” caveats.
+The longitudinal story, evidence chain, human interpretation, Reference Study,
+Compare, product family, privacy, release status and visual design remain intact.
+
+Tutorial instructional prose and tracking questions use the same public names and
+explicit event context. Original image bytes/URLs and every module/step hash remain
+unchanged. Captions bridge the retained screenshots' technical labels to the public
+names; image alt text still accurately describes the actual captured screen.
+
+Pre-change production was verified at `fd65c46c16588903bb74198f1988cafff8d8b20c`,
+build `3sb31Jjj0R0QRPODTe0e_`, with the expected articles returning HTTP 200 on
+both hosts. Immutable pre-change tag:
+`website-pre-motion-measurement-names-2026-10-08`. Final validation/deployment
+identities belong in the prompt journal and external release receipt.
+
+## Prior source review, October 8, 2026: longitudinal product story
+
+The source observations below describe the earlier review. Its terminology gate
+is historical and superseded by the explicit owner decision above; the remaining
+longitudinal story and scientific boundaries continue to apply.
 
 Governing philosophy: **Measure changes. Preserve the evidence. Investigate
 relationships. Humans interpret.** The website teaches repeat use of the existing
@@ -29,7 +80,7 @@ change adds no Dual View claims. No later accepted baseball-first presentation
 or release-scope revision was found. Decision 77 remains the latest relevant
 measurement-presentation decision, explicitly future and outside frozen V1.2.
 
-### Mandatory terminology gate
+### Historical terminology gate (superseded)
 
 Paths below are in the Motion repository under
 `ios/AsymmetriMotion/AsymmetriMotion/`. Source evidence is shared by fetched main,

@@ -89,13 +89,21 @@ changes. Preserve the evidence. Investigate relationships. Humans interpret.**
 A relationship does not prove causation; consistency of recording is something to
 inspect, not a validated repeatability promise.
 
-`motionMeasurements` centralizes the six normal V1.2 results by view/event and
-supplies both the product section and tutorial Analyze lists. Current Side terms
-remain 2D FFC Ankle-Span Ratio and separate 2D Lead-Knee Bend Angle results at FFC
-and Ball Release. Do not publish Stride Length, Front Leg Block, Side Trunk Tilt
-or 2D Lateral Trunk Lean as current app labels until accepted source/release and
-normal visibility establish them. The gate and inspected SHAs are in
-`MOTION_PRODUCT_REVIEW.md`. Current help is Settings → About → Measurements.
+`motionMeasurements` centralizes eight owner-approved public entries by view/event
+and supplies both the product section and tutorial Analyze lists. Side View uses
+Stride Length at Front Foot Contact, plus separate Front Leg Block and Trunk Tilt
+results at Front Foot Contact and Ball Release. Back View uses 2D Lateral Trunk Lean
+at Front Foot Contact and the unchanged shoulder/upper-arm and shoulder/wrist names
+at Ball Release. Do not rename either arm result Arm Slot or merge view/event results.
+
+The October 8 owner decision explicitly supersedes the earlier website-only gate,
+including older frozen-binary labels. It changes public presentation, not scientific
+identities, formulas or persisted records. The exact mapping is in
+`MOTION_PRODUCT_REVIEW.md`; detailed methods remain at Settings → About → Measurements.
+Write positive descriptions of what/when someone tracks and why repeat observations
+help. Keep one short general technical note below the measurement section, rather
+than caveats in every entry. Retained screenshots can show earlier labels; describe
+them accurately and bridge the names in captions without altering captured evidence.
 
 Tutorial conceptual additions belong within Start, Analyze, Saved Pitches and
 Explore History; preserve the ten modules, every existing hash and image link.
@@ -267,11 +275,13 @@ screens or values. Crops may remove unrelated private content, but must not reto
 UI or evidence. Label every image with its source type and keep essential directions
 in real page text. Profile fields can be taught without showing a private profile.
 
-Normal V1 teaching enumerates six supported results, with scientific limits separate
-from availability. Side descriptors remain experimental. Preserve conditional HFR,
+Normal public teaching uses the eight owner-approved view/event entries above,
+with scientific limits separate from presentation. Side descriptors retain their
+existing experimental scientific status. Preserve conditional HFR,
 manual event confirmation, spatial subject selection, image-relative geometry,
 non-calibrating setups/profile, descriptive history and local-data caveats. Match
-new wording against current source and accepted Decision 50, not an old screenshot.
+new wording against current source and explicit owner decisions, including the
+October 8 public naming override, not an old screenshot.
 The coverage matrix and rationale for omitted dedicated screenshots are in
 `TUTORIAL_REVIEW.md`; generation prompts and asset processing are in
 `TUTORIAL_MEDIA.md`. The September 28 website-media disclosure is separate from these unchanged app

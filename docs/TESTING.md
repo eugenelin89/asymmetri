@@ -168,9 +168,12 @@ disclosure and effective-date history change with the videos. New assets require
 
 Check Measure / Track / Compare / Learn, one pitch → history, two-period questions,
 manual mechanics/performance context, evidence return and human interpretation.
-Verify the six normal metric names against the latest accepted Motion source;
-keep future Side trunk and baseball-first labels out. The terminology gate must
-be recorded before committing. Tutorial Analyze and `/motion` use the same inventory.
+Verify all eight view/event entries against the owner-approved public mapping in
+`MOTION_PRODUCT_REVIEW.md`: three Side FFC, two Side Ball Release, one Back FFC
+and two Back Ball Release. Keep event results separate, preserve scientific
+identities and retain both technical Back arm names. Check positive descriptions,
+one general methods note and tutorial Analyze/History terminology consistency.
+The October 8 owner decision supersedes the earlier website-only naming gate.
 
 ## Tutorial regression
 

@@ -57,7 +57,8 @@ and all existing assets. Shared CSS tokens control surfaces, actions and diagram
 
 Motion’s public philosophy is **Measure changes. Preserve the evidence. Investigate
 relationships. Humans interpret.** The [current product review](docs/MOTION_PRODUCT_REVIEW.md)
-records the accepted V1.2 terminology and the deferred baseball-first names.
+records the owner-approved baseball-first public names and their unchanged
+scientific measurement mappings.
 
 ## Technology
 
