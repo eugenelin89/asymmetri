@@ -1,0 +1,15 @@
+/* eslint-disable @next/next/no-img-element -- Exact validated bytes must bypass image optimization and reusable caches. */
+import { ArchiveShell,Content,Links,Sources,author,artifactHref } from "@/components/investment/archive";
+import { archiveId,archiveRead,artifactBytes } from "@/lib/investment-archive";
+import type { ArtifactDetail,RecordDetail } from "@/receiver/vendor/investment/v1/types";
+export const dynamic="force-dynamic";
+export const metadata={title:"Exact artifact version · BotSquad",robots:{index:false,follow:false}};
+export default async function Page({params}:{params:Promise<{artifactId:string;version:string}>}){
+ const {artifactId:id,version}=await params;
+ if(!archiveId(id)||!/^([1-9][0-9]{0,5}|1000000)$/.test(version))return <ArchiveShell title="Invalid record identity"><p>This artifact URL is invalid.</p></ArchiveShell>;
+ const [candidate,record]=await Promise.all([artifactBytes(id,version),archiveRead<RecordDetail>(`records/artifact/${id}/versions/${version}`)]);
+ // Recheck after byte and reference reads so a mid-render withdrawal removes metadata too.
+ const result=await archiveRead<ArtifactDetail>(`artifacts/${id}/versions/${version}`),d=result.data,p=d?.metadata;
+ const content=p&&['published','superseded'].includes(d!.status)?candidate:null;
+ return <ArchiveShell title={p?.title??'Artifact unavailable'} mode={record?.data?.event?.event.evidenceMode}>{!d?<p role="status">{result.error}</p>:<><p className="archive-status">{d.status.replaceAll('_',' ')} · Exact version {version}</p>{!p?<p>{d.safeReason}</p>:<><dl className="archive-facts"><dt>Author</dt><dd>{author(p.author)}</dd><dt>Created</dt><dd><time>{p.createdAt}</time></dd><dt>Published</dt><dd><time>{p.publishedAt}</time></dd><dt>Format / size</dt><dd>{p.contentType} · {p.sizeBytes} bytes</dd><dt>SHA-256</dt><dd><code>{p.sha256}</code></dd><dt>Publication rights</dt><dd>{p.rights.replaceAll('_',' ')}</dd></dl>{p.derivative&&<p className="archive-notice">Public summary or derivative; this is not a verbatim original.</p>}<section><h2>Content</h2>{content?(content.type==='image/png'?<figure>{/* Validated local content; never an uploaded URL. */}<img src={artifactHref(id,Number(version))+'/content?display=1'} alt={p.title} width={640} height={400}/><figcaption>{p.title} · exact version {version}</figcaption></figure>:<Content text={new TextDecoder().decode(content.bytes)} type={content.type}/>):<p role="status">Content is missing or unavailable. No download can be verified.</p>}{content&&<a className="archive-download" href={artifactHref(id,Number(version))+'/content'}>Download exact version {version}</a>}</section><Sources sources={p.sources}/><section><h2>Evidence limitations</h2><ul>{p.limitations.map((x,i)=><li key={i}>{x}</li>)}</ul></section><section><h2>Related discussions and decisions</h2><Links refs={p.relationships}/></section><section><h2>Corrections and history</h2>{p.supersedes?<Links refs={[p.supersedes]}/>:<p>First published version.</p>}{d.status==='superseded'&&<a href={artifactHref(id,Number(version)+1)}>Read the next version</a>}</section></>}</>}</ArchiveShell>;
+}

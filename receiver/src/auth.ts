@@ -16,6 +16,7 @@ export function rawHeaders(req: IncomingMessage, authority: string): Map<string,
   // A future proxy must preserve the configured Host. Forwarded authority is never trusted.
   need(![...h.keys()].some(k=>k==='forwarded'||k.startsWith('x-forwarded-')),'UNAUTHENTICATED');
   need(!h.has('transfer-encoding') && !h.has('content-encoding') && !h.has('expect') && !h.has('trailer'),'INVALID_REQUEST');
+  need(!h.has('connection')||/^(close|keep-alive)$/i.test(h.get('connection')!),'INVALID_REQUEST');
   return h;
 }
 export function identify(db: Archive, h: Map<string,string>, experiment: string, run: string, now: number): KeyRow {

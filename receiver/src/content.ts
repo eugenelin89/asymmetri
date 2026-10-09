@@ -38,7 +38,12 @@ function normalizedPng(bytes: Buffer): void {
   need(ended && offset === bytes.length, 'UNSUPPORTED_MEDIA');
   const expected = height * (1 + width * 4);
   let pixels: Buffer;
-  try { pixels = inflateSync(Buffer.concat(data), { maxOutputLength: expected }); }
+  try {
+    const compressed = Buffer.concat(data);
+    const result = inflateSync(compressed, { maxOutputLength: expected, info: true }) as unknown as {buffer: Buffer; engine: {bytesWritten: number}};
+    need(result.engine.bytesWritten === compressed.length, 'UNSUPPORTED_MEDIA');
+    pixels = result.buffer;
+  }
   catch { need(false, 'UNSUPPORTED_MEDIA'); }
   need(pixels.length === expected, 'UNSUPPORTED_MEDIA');
   for (let row = 0; row < height; row++) need(pixels[row * (1 + width * 4)] === 0, 'UNSUPPORTED_MEDIA');

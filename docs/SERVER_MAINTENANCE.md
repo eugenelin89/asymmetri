@@ -249,3 +249,14 @@ count shared hard links, so use filesystem free-space changes to measure recover
 Do not delete active website dependencies, production output, databases, research
 results, swap, or the retained rollback merely because they are large. No periodic
 cleanup job, package upgrade, logging configuration change, or reboot was added.
+
+## October 9 INV-03 recovery-custody correction
+
+The earlier INFRA-01 off-server backups and keys were subsequently deleted by
+owner-approved Mac cleanup, after the migration snapshot was removed. No surviving
+independent copy is verified. Do not treat historical backup validation as current
+recoverability. [INV-03 operations](INV-03-OPERATIONS.md) proposes daily encrypted
+receiver backups, independent device custody, retention and restore objectives;
+no schedule, paid service or production backup upload was activated. Receiver-only
+rollback copies and synthetic recovery evidence do not replace whole-host disaster
+recovery. Existing website rollback and unrelated data remain untouched.

@@ -128,7 +128,7 @@ test('public pagination is bounded, opaque, fixed-watermark, reset after epoch/f
 test('withdrawal cannot leak bodies in events, details, exact records, caches or derived references',async t=>{
   const h=await harness(t);await h.stage();await h.batch();const before=await h.get(prefix+'/events');expectStatus(await h.get(prefix+'/events',[['If-None-Match',String(before.headers.etag)]]),304);
   const target=of(golden.batch,'discussion.contribution');h.receiver.db.hide('fixture-experiment','fixture-run',target.eventId,'withdrawn',new Date(h.now()*1000).toISOString());
-  const after=await h.get(prefix+'/events',[['If-None-Match',String(before.headers.etag)]]);expectStatus(after,200);assert.ok(!(after.body.items as {event:Event}[]).some(x=>x.event.eventId===target.eventId));assert.equal(after.headers['cache-control'],'public, max-age=0, must-revalidate');
+  const after=await h.get(prefix+'/events',[['If-None-Match',String(before.headers.etag)]]);expectStatus(after,200);assert.ok(!(after.body.items as {event:Event}[]).some(x=>x.event.eventId===target.eventId));assert.equal(after.headers['cache-control'],'private, no-store');
   const exact=await h.get(prefix+'/records/contribution/'+target.payload.contributionId+'/versions/1');expectStatus(exact,200);assert.equal(exact.body.visibility,'withdrawn');assert.equal(exact.body.event,null);
   const detail=await h.get(prefix+'/discussions/fixture-discussion');assert.ok(!(detail.body.contributions as Event[]).some(x=>x.eventId===target.eventId));
 });
@@ -143,7 +143,7 @@ test('staging is private, hash/type/size checked, idempotent and crash recoverab
   const unsupported=await h.send(h.signed('PUT',path,Buffer.from(c.text),'html','text/html'));assert.ok([415,422].includes(unsupported.status));
   expectStatus(await h.get(prefix+'/artifacts/fixture-artifact/versions/1/content'),404);
   expectStatus(await h.batch(),409);assert.equal(h.receiver.db.get<{n:number}>('SELECT count(*) n FROM events')!.n,0);
-  await h.stage();await h.batch();expectStatus(await h.get(prefix+'/artifacts/fixture-artifact/versions/1/content'),503);
+  await h.stage();await h.batch();expectStatus(await h.get(prefix+'/artifacts/fixture-artifact/versions/1/content'),200);
   const bytes=await readFile(h.receiver.storage.path(c.sha256));assert.equal(sha256(bytes),c.sha256);assert.deepEqual(await readdir(join(h.dir,'incoming')),[]);
 });
 

@@ -1932,3 +1932,27 @@ p {
   .squad-index { gap: .25rem 1.25rem; }
   .squad-section-heading h2 { max-width: 22ch; }
 }
+
+/* INV-03: focused evidence reading, using the existing Graphite + Teal tokens. */
+.archive { max-width: 76rem; padding-block: clamp(2rem, 5vw, 5rem); }
+.archive nav { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+.archive a { color: var(--brand-bright); text-decoration: underline; text-underline-offset: .2em; }
+.archive h1 { font-size: clamp(2rem, 5vw, 4.5rem); line-height: 1.08; max-width: 20ch; overflow-wrap: anywhere; }
+.archive h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-block: 1.8rem 1rem; }
+.archive h3 { font-size: 1.2rem; margin-block: 1rem .6rem; }
+.archive p, .archive li { line-height: 1.7; }
+.archive p { margin-block: .8rem; }
+.archive section { padding-block: 1.5rem; border-bottom: 1px solid var(--line-dark); }
+.archive-lead { font-size: 1.2rem; max-width: 65ch; }
+.archive-notice { padding: 1rem 1.25rem; border-left: 3px solid var(--brand-primary); background: var(--graphite-raised); margin-block: 2rem; }
+.archive-list { padding-left: 1.5rem; max-width: 85ch; }
+.archive-list > li { padding-block: 1rem; border-bottom: 1px solid var(--line-dark); }
+.archive-facts { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr); gap: .8rem 1.5rem; margin-block: 2rem; }
+.archive-facts dt { color: var(--on-dark-secondary); }
+.archive-facts dd { margin: 0; overflow-wrap: anywhere; }
+.archive-body { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 85ch; line-height: 1.8; font-family: inherit; }
+.archive img { max-width: 100%; width: auto; height: auto; }
+.archive-download { display: inline-flex; min-height: 44px; align-items: center; margin-block: 1rem; }
+.archive-status { font-weight: 700; }
+@media (max-width: 600px) { .archive-facts { grid-template-columns: 1fr; gap: .3rem; } .archive-facts dd { margin-bottom: .8rem; } }
+.archive h2, .archive h3, .archive li, .archive p { overflow-wrap: anywhere; }

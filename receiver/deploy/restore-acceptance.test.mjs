@@ -9,6 +9,8 @@ import { harness, golden, prefix } from '../dist/test/helpers.js';
 import { Archive } from '../dist/src/database.js';
 import { Storage } from '../dist/src/storage.js';
 import { config } from '../dist/src/config.js';
+import { Controls } from '../dist/src/controls.js';
+import { canonicalHash } from '../dist/src/schema.js';
 import { PublicReads } from '../dist/src/reads.js';
 
 test('stopped complete archive backup restores hashes, receipts and newer withdrawals with fenced authority',async t=>{
@@ -42,6 +44,8 @@ test('stopped complete archive backup restores hashes, receipts and newer withdr
     assert.ok(newer);
     db.hide('fixture-experiment','fixture-run',newer.eventId,'withheld',new Date((h.now()+1)*1000).toISOString());
     const reads=new PublicReads(db,h.now);
+    assert.throws(()=>reads.read(prefix+'/events',new URLSearchParams(),'fixture-experiment','fixture-run',['events']));
+    const controls=new Controls(db),snapshot=controls.snapshot();controls.reconcile(snapshot,canonicalHash(snapshot),new Date(h.now()*1000).toISOString());
     assert.equal(reads.read(prefix+'/snapshot',new URLSearchParams(),'fixture-experiment','fixture-run',['snapshot']).body.snapshot,null);
     const events=reads.read(prefix+'/events',new URLSearchParams(),'fixture-experiment','fixture-run',['events']).body.items;
     assert.ok(!events.some(x=>[snapshot.eventId,newer.eventId].includes(x.event.eventId)));

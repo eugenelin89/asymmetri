@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { connect } from 'node:net';
 import { generateKeyPairSync } from 'node:crypto';
+import { Controls } from '../src/controls.js';
 import { Storage } from '../src/storage.js';
 import { createReceiver } from '../src/http.js';
 import { canonicalHash } from '../src/schema.js';
@@ -90,6 +91,8 @@ test('offline snapshot copy, integrity checks and restore fence preserve data bu
     service.db.authorize(h.scope,h.key,new Date(h.now()*1000).toISOString());
     assert.deepEqual((await send(h.signed('GET',prefix+'/receipts/'+golden.batch.batchId))).body,receipt);
     const retry=await send(h.signed('POST',prefix+'/events',encode(golden.batch),golden.batch.batchId));assert.equal(retry.status,200);assert.deepEqual(retry.body,receipt);
+    assert.equal((await wireHttp(port,'GET',prefix+'/events',[['Host',h.cfg.authority]])).status,503);
+    const controls=new Controls(service.db),snapshot=new Controls(h.receiver.db).snapshot();controls.reconcile(snapshot,canonicalHash(snapshot),new Date(h.now()*1000).toISOString());
     const reset=await wireHttp(port,'GET',prefix+'/events?limit=2&after='+cursor,[['Host',h.cfg.authority]]);assert.equal(reset.body.code,'CURSOR_RESET');
     assert.equal(service.db.get<{n:number}>('SELECT count(*) n FROM events')!.n,27);
   }finally{await service.close();}

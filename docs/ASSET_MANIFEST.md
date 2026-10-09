@@ -501,3 +501,13 @@ All public files, dimensions, alt text, rights assessments and stable URLs remai
 unchanged; the Motion icon and evidence capture remain on their dedicated product
 and tutorial pages. The homepage retains its existing social image. No raster,
 logo, portrait, tutorial original or generated public asset is added or removed.
+
+## INV-03 archive rendering — October 9, 2026
+
+No public file asset was added, replaced or removed. Synthetic runtime PNG fixtures
+are normalized test bytes in disposable private CAS, served only through exact
+metadata authorization; they are not approved production imagery or static assets.
+Their dimensions/hash/type are validated, alt text uses the permitted artifact
+title, and fixture labels identify their synthetic role. Local QA screenshots are
+private acceptance evidence, not published media. Existing tutorial/brand images
+retain original URLs and bytes.

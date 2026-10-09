@@ -1,12 +1,15 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
-import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { existsSync, readFileSync } from 'node:fs';
 import { unlink } from 'node:fs/promises';
+import type { Socket } from 'node:net';
 import { randomUUID } from 'node:crypto';
 import type { Config } from './config.js';
 import type { ContentType } from '../vendor/investment/v1/types.js';
 import { Archive } from './database.js';
 import { Storage, type Fault } from './storage.js';
 import { Ingestion } from './ingestion.js';
+import { download } from './download.js';
 import { PublicReads } from './reads.js';
 import { rawHeaders, identify, authenticate } from './auth.js';
 import { ContractError, problem, requireContract as need, validate } from './schema.js';
@@ -28,19 +31,25 @@ async function body(req:IncomingMessage,length:number,limit:number):Promise<Buff
 }
 export interface Diagnostics {requests:number;accepted:number;errors:number;active:number}
 export async function createReceiver(config:Config,options:{now?:()=>number;fault?:Fault;log?:(entry:{requestId:string;code:string;status:number})=>void}={}) {
-  need(config.enabled,'UNAVAILABLE');
+  need(config.enabled&&!existsSync(join(config.dataDir,'RESTORE_INCOMPLETE')),'UNAVAILABLE');
   const now=options.now??(()=>Math.floor(Date.now()/1000)),fault=options.fault??(()=>{});
   const db=new Archive(config),storage=new Storage(db,fault);await storage.init();
   const ingestion=new Ingestion(db,storage,now,fault),reads=new PublicReads(db,now);
   const diagnostics:Diagnostics={requests:0,accepted:0,errors:0,active:0};
   let bucket=-1,count=0,closing=false;
+  // One HTTP/1.1 request per connection: close headers alone do not fence
+  // requests Node has already parsed from a pipelined TCP write.
+  const claimed = new WeakSet<Socket>();
   function send(res:ServerResponse,status:number,value:unknown,cache='private, no-store',headers:Record<string,string>={}):void {
     const bytes=Buffer.from(JSON.stringify(value));need(bytes.length<=2097152,'UNAVAILABLE');
-    res.writeHead(status,{'Content-Type':status>=400?'application/problem+json':'application/json','Cache-Control':cache,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; frame-ancestors 'none'; sandbox",'Referrer-Policy':'no-referrer','Content-Length':String(bytes.length),...headers});res.end(bytes);
+    res.writeHead(status,{Connection:'close','Content-Type':status>=400?'application/problem+json':'application/json','Cache-Control':cache,'X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; frame-ancestors 'none'; sandbox",'Referrer-Policy':'no-referrer','Content-Length':String(bytes.length),...headers});res.end(bytes);
   }
   const server=createServer({maxHeaderSize:16384,requestTimeout:15000,keepAliveTimeout:2000},async(req,res)=>{
+    if(claimed.has(req.socket)){req.socket.destroy();return;}
+    claimed.add(req.socket);res.shouldKeepAlive=false;
     const requestId=randomUUID();let active=false,temp:string|undefined;
     try {
+      need(req.httpVersion==='1.1','INVALID_REQUEST');
       diagnostics.requests++;
       if(bucket!==Math.floor(now()/60)){bucket=Math.floor(now()/60);count=0;}
       need(!closing&&++count<=600,'RATE_LIMITED');need(diagnostics.active<8,'RATE_LIMITED');diagnostics.active++;active=true;
@@ -64,10 +73,11 @@ export async function createReceiver(config:Config,options:{now?:()=>number;faul
         need(method==='GET'&&(!h.has('content-length')||h.get('content-length')==='0')&&!h.has('content-type')&&!h.has('content-digest'),'INVALID_REQUEST');
         const prefix=`/api/experiments/v1/experiments/${experiment}/runs/${run}/`;
         const tail=run?path.slice(prefix.length).split('/'):[];
+        if(tail[0]==='artifacts'&&tail[4]==='content'){await download(reads,storage,res,experiment,run!,tail[1]!,Number(tail[3]),fault);return;}
         const result=reads.read(path,query,experiment,run,tail);
         // Revalidation on every reuse prevents shared caches serving withdrawn bodies.
-        const cache='public, max-age=0, must-revalidate';
-        if(h.get('if-none-match')===result.etag){res.writeHead(304,{'Cache-Control':cache,ETag:result.etag,'X-Content-Type-Options':'nosniff'});res.end();return;}
+        const cache='private, no-store';
+        if(h.get('if-none-match')===result.etag){res.writeHead(304,{Connection:'close','Cache-Control':cache,ETag:result.etag,'X-Content-Type-Options':'nosniff'});res.end();return;}
         send(res,200,result.body,cache,{ETag:result.etag});return;
       }
       need(run,'FORBIDDEN');identify(db,h,experiment,run,now());
@@ -103,8 +113,11 @@ export async function createReceiver(config:Config,options:{now?:()=>number;faul
   server.on('timeout',socket=>socket.destroy());
   let connections=0;
   server.on('connection',socket=>{if(++connections>64)socket.destroy();socket.once('close',()=>connections--);});
-  server.on('clientError',(_error,socket)=>{if(socket.writable)socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\nCache-Control: private, no-store\r\nContent-Length: 0\r\n\r\n');});
-  server.on('checkContinue',(_req,res)=>{send(res,400,problem('INVALID_REQUEST',randomUUID()),'private, no-store',{Connection:'close'});});
+  server.on('clientError',(_error,socket)=>{claimed.add(socket as Socket);if(socket.writable)socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\nCache-Control: private, no-store\r\nContent-Length: 0\r\n\r\n');});
+  for(const event of ['checkContinue','checkExpectation'] as const) server.on(event,(req,res)=>{
+    claimed.add(req.socket);send(res,400,problem('INVALID_REQUEST',randomUUID()));
+  });
+  for(const event of ['upgrade','connect'] as const) server.on(event,(_req,socket)=>{claimed.add(socket as Socket);socket.destroy();});
   await new Promise<void>((resolve,reject)=>{server.once('error',reject);server.listen(config.port,config.host,()=>{server.off('error',reject);resolve();});});
   const address=server.address();need(address&&typeof address==='object');
   return {server,db,storage,diagnostics,url:`http://127.0.0.1:${address.port}`,async close(){closing=true;await new Promise<void>(resolve=>server.close(()=>resolve()));db.close();}};

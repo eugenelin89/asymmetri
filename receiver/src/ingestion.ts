@@ -1,3 +1,5 @@
+import { PublicReads } from './reads.js';
+import { Controls } from './controls.js';
 import { randomUUID } from 'node:crypto';
 import type { EventBatch, PublicationReceipt, Heartbeat, HeartbeatReceipt, ContentReceipt, ContentType } from '../vendor/investment/v1/types.js';
 import { Archive, eventFrom } from './database.js';
@@ -33,6 +35,13 @@ export class Ingestion {
       const history=this.db.history(e,r).map(eventFrom), content=new Map<string,StagedContent>();
       for(const event of batch.events) if(event.type==='artifact.published'&&!history.some(x=>x.eventId===event.eventId)) {
         const p=event.payload;
+        const controls=new Controls(this.db), state=controls.state(e,r,p.artifactId);
+        const registration=[...history,...batch.events].find(x=>x.type==='artifact.registered'&&x.payload.artifactId===p.artifactId);
+        const registrationState=state??(registration?.type==='artifact.registered'?registration.payload.status:undefined);
+        const suppressed=this.db.get('SELECT 1 FROM recovery_suppressions WHERE experiment_id=? AND run_id=? AND event_id=?',e,r,event.eventId);
+        need(!suppressed&&!['withheld','withdrawn'].includes(registrationState??'')&&(!registration||!new PublicReads(this.db,this.now).visible(e,r).hidden.has(registration.eventId)),'WITHDRAWN');
+        need(!this.db.get('SELECT 1 FROM denied_content WHERE sha256=?',p.sha256),'WITHDRAWN');
+        if(event.evidenceMode==='observed_paper')need(new Controls(this.db).approved(e,r,p),'FORBIDDEN');
         const c=this.db.get<{size_bytes:number}>('SELECT c.size_bytes FROM staged_content s JOIN content_objects c USING(sha256) WHERE experiment_id=? AND run_id=? AND sha256=? AND content_type=?',e,r,p.sha256,p.contentType);
         need(c&&c.size_bytes===p.sizeBytes,'DEPENDENCY_NOT_READY');
         try { await this.storage.read(p.sha256,p.contentType,p.sizeBytes); } catch { need(false,'DEPENDENCY_NOT_READY'); }
@@ -98,11 +107,12 @@ export class Ingestion {
   async content(auth:Auth,temp:string,type:ContentType,hash:string):Promise<ContentReceipt> {
     const id=new Map(auth.message.headers).get('idempotency-key')!,digest=sha256(auth.message.body),target=auth.message.path+' '+type;
     need(auth.scope.contentTypes.includes(type),'FORBIDDEN');
+    need(!this.db.get('SELECT 1 FROM denied_content WHERE sha256=?',hash),'WITHDRAWN');
     const old=this.request(auth,id,target,digest);
     recheck(this.db,auth,this.now());
     await this.storage.install(temp,Buffer.from(auth.message.body),type,hash,this.now());
     return this.db.atomic(()=>{
-      recheck(this.db,auth,this.now());const prior=this.request(auth,id,target,digest);
+      recheck(this.db,auth,this.now());need(!this.db.get('SELECT 1 FROM denied_content WHERE sha256=?',hash),'WITHDRAWN');const prior=this.request(auth,id,target,digest);
       const receivedAt=new Date(this.now()*1000).toISOString();
       this.db.run('INSERT INTO staged_content VALUES(?,?,?,?,?) ON CONFLICT(experiment_id,run_id,sha256,content_type) DO UPDATE SET touched_at=excluded.touched_at',auth.scope.experimentId,auth.scope.runId,hash,type,this.now());
       // Cleanup may expire unpublished bytes; a same-byte retry restores staging but keeps its original receipt.

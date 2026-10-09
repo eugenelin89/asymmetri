@@ -301,10 +301,10 @@ cd receiver
 node --test --test-concurrency=1 deploy/nginx-acceptance.test.mjs deploy/restore-acceptance.test.mjs
 ```
 
-The nginx harness defaults to loopback stream transport and checks raw signed bytes,
+The nginx harness defaults to loopback stream transport and checks canonical signatures,
 ambiguous headers/framing, limits and retry receipts. `INFRA02_NGINX_MODE=http`
-selects the diagnostic HTTP profile: **it currently fails duplicate Connection
-preservation on nginx 1.22 and is not accepted ingress**. Keep this assertion.
+selects the diagnostic HTTP profile: **it fails duplicate Connection preservation,
+HTTP/1.0 rejection and keep-alive pipeline isolation on nginx 1.22 and is not accepted ingress**. Keep this assertion.
 No test modifies production nginx. The restore test copies complete stopped storage,
 checks hashes/integrity/CAS/receipts and reconciles newer withholding before reads.
 
@@ -320,7 +320,33 @@ it opens SQLite and asserts empty authority/data plus schema/integrity/settings.
 It is an operator-only audit, not a read-only file command or a background job.
 
 Measure CPU/cgroup/RSS/swap/disk/WAL and site latency separately. A startup memory
-snapshot is not a settled idle interval. Repeat the established 198-request/15-host
-baseline, DNS/TLS and original service/configuration identities after cleanup.
+snapshot is not a settled idle interval. Preserve a fresh before-state manifest and
+repeat it after cleanup, including DNS/TLS and service/configuration identities. The
+old 198-request manifest was deleted during later owner-approved Mac cleanup; INV-03
+uses a fresh 228-request/15-host manifest and does not claim the two are identical.
 No fixture test establishes public TLS ingress, sustained full-archive capacity,
 hardware power-loss tolerance or an approved recurring backup policy.
+
+## INV-03 archive, TLS and recovery acceptance
+
+Run `npm run receiver:test` for artifact lifecycle, safe formats, owner controls,
+exact downloads, alias withdrawal, prepublication suppression, interrupted restore,
+current-control reconciliation, encrypted-file tampering and stalled-download tests.
+The existing contract/auth/financial/crash tests remain unchanged in purpose.
+
+On a disposable Linux copy, `INFRA02_NGINX_MODE=tls node --test --test-concurrency=1
+receiver/deploy/nginx-acceptance.test.mjs receiver/deploy/restore-acceptance.test.mjs`
+tests installed Nginx/OpenSSL with loopback SNI/TLS only. `INFRA02_NGINX_MODE=http`
+retains all three HTTP-profile failures; a nonzero result is evidence that this
+profile is rejected, never a waived production check.
+
+`receiver/deploy/sustained-acceptance.mjs` is explicitly bound to disposable INV-03
+paths/port. Use hard runtime/resource ceilings and a host/site safety monitor, then
+`inv03-recovery.mjs` for overlap/contention, restart comparison and isolated restore.
+`low-disk.test.mjs` requires a dedicated small tmpfs; never fill the production disk.
+[Validation](INV-03-VALIDATION.md) records actual counts, failures and limits.
+
+Browser acceptance covers default/no-backend, exact versions, waiting/withheld/
+withdrawn/missing records, cursor reset, five formats, long reports, source safety,
+fixture labels, semantic headings, keyboard focus and responsive widths. No public
+website release, real workers or market observations are implied.

@@ -354,5 +354,17 @@ retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 Ed25519 HTTP authentication, immutable events/receipts, financial validation and
 private CAS. Next/Vinext builds exclude its runtime; `lib/investment-archive.ts`
 provides only type-safe read locations/types, disabled unless explicitly configured.
-No existing page fetches it. See the [runbook](INVESTMENT_RECEIVER.md) for trust,
+Existing company pages do not fetch it. INV-03 adds explicitly configured, default-disabled
+server pages under `/botsquad/investment`, with no-store verified content proxying. See the [runbook](INVESTMENT_RECEIVER.md) for trust,
 transaction, visibility, capacity, recovery and later private Ask boundaries.
+
+
+## INV-03 archive and owner-control boundary
+
+[Operations](INV-03-OPERATIONS.md) describes additive migration 002, exact metadata
+rights approval, registry/withdrawal controls, correction review, interrupted-restore
+startup fencing and current-control reconciliation. `components/investment` owns
+safe text/Markdown rendering and evidence links; `content/site.ts` owns archive
+copy. No receiver runtime, signing key or private path enters the website bundle.
+`receiver/src/backup.ts` snapshots private CAS plus SQLite; encryption is an offline
+owner utility. No public administrative route, collection job or Ask service exists.

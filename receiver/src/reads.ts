@@ -1,7 +1,8 @@
 import { randomUUID } from 'node:crypto';
-import type { Event, Freshness, PortfolioSnapshot, RunPublished, RunState, ArtifactRegistryEntry } from '../vendor/investment/v1/types.js';
+import type { Event, Freshness, PortfolioSnapshot, RunPublished, RunState, ArtifactRegistryEntry, ArtifactDetail } from '../vendor/investment/v1/types.js';
 import { Archive, eventFrom, received, type EventRow } from './database.js';
 import { canonicalHash, requireContract as need, validate } from './schema.js';
+import { Controls } from './controls.js';
 import { recordKeys } from './publication.js';
 
 export interface PublicResult { name: string; body: unknown; etag: string }
@@ -10,12 +11,26 @@ export class PublicReads {
   constructor(readonly db:Archive,readonly now:()=>number) {}
   visible(experiment:string,run:string):{rows:EventRow[];all:EventRow[];hidden:Map<string,'withheld'|'withdrawn'>} {
     const all=this.db.history(experiment,run), hidden=new Map<string,'withheld'|'withdrawn'>();
-    for(const row of this.db.all<{event_id:string;visibility:'withheld'|'withdrawn'}>('SELECT event_id,visibility FROM visibility_actions WHERE experiment_id=? AND run_id=? ORDER BY id',experiment,run)) hidden.set(row.event_id,row.visibility);
-    const links=this.db.all<{event_id:string;target:string}>('SELECT l.event_id,r.event_id target FROM record_links l JOIN records r ON r.experiment_id=l.experiment_id AND r.run_id=l.run_id AND r.kind=l.kind AND r.record_id=l.record_id AND r.version=l.version WHERE l.experiment_id=? AND l.run_id=?',experiment,run);
+    const mark=(id:string,status:'withheld'|'withdrawn')=>{if(hidden.get(id)!=='withdrawn')hidden.set(id,status);};
+    for(const row of this.db.all<{event_id:string;visibility:'withheld'|'withdrawn'}>('SELECT event_id,visibility FROM visibility_actions WHERE experiment_id=? AND run_id=? ORDER BY id',experiment,run)) mark(row.event_id,row.visibility);
+    for(const row of this.db.all<{event_id:string;visibility:'withheld'|'withdrawn'}>('SELECT event_id,visibility FROM recovery_suppressions WHERE experiment_id=? AND run_id=?',experiment,run))mark(row.event_id,row.visibility);
+    const controls=new Controls(this.db);
+    for(const row of all){
+      if(row.event_type!=='artifact.registered'&&row.event_type!=='artifact.published')continue;
+      const event=eventFrom(row);
+      if(event.type==='artifact.registered'||event.type==='artifact.published'){
+        const status=controls.state(experiment,run,event.payload.artifactId)??(event.type==='artifact.registered'?event.payload.status:undefined);
+        if(status==='withheld'||status==='withdrawn')mark(row.event_id,status);
+        if(event.type==='artifact.published'&&this.db.get('SELECT 1 FROM denied_content WHERE sha256=?',event.payload.sha256))mark(row.event_id,'withdrawn');
+        if(event.type==='artifact.published'&&event.evidenceMode==='observed_paper'&&!controls.approved(experiment,run,event.payload))mark(row.event_id,'withheld');
+      }
+    }
+    const links=this.db.all<{event_id:string;target:string;relation:string}>('SELECT l.event_id,r.event_id target,l.relation FROM record_links l JOIN records r ON r.experiment_id=l.experiment_id AND r.run_id=l.run_id AND r.kind=l.kind AND r.record_id=l.record_id AND r.version=l.version WHERE l.experiment_id=? AND l.run_id=?',experiment,run);
     const runEvent=all.find(x=>x.event_type==='run.published');
-    if(runEvent&&hidden.has(runEvent.event_id)) for(const row of all) hidden.set(row.event_id,'withdrawn');
+    if(runEvent&&hidden.has(runEvent.event_id)) for(const row of all) mark(row.event_id,'withdrawn');
+    const released=new Set(this.db.all<{event_id:string;prior_event_id:string}>('SELECT event_id,prior_event_id FROM correction_releases WHERE experiment_id=? AND run_id=?',experiment,run).map(x=>x.event_id+':'+x.prior_event_id));
     let changed=true;
-    while(changed) {changed=false;for(const link of links) if(hidden.has(link.target)&&!hidden.has(link.event_id)){hidden.set(link.event_id,'withheld');changed=true;}}
+    while(changed) {changed=false;for(const link of links) if(hidden.has(link.target)&&!hidden.has(link.event_id)&&!(link.relation==='supersedes'&&released.has(link.event_id+':'+link.target))){mark(link.event_id,'withheld');changed=true;}}
     return {rows:all.filter(x=>!hidden.has(x.event_id)),all,hidden};
   }
   snapshot(rows:EventRow[],all=rows):PortfolioSnapshot|null {
@@ -60,12 +75,26 @@ export class PublicReads {
     need(!latest||!hidden.has(latest.eventId),'UNAVAILABLE');
     return latest?.type==='run.status'?latest.payload.state:initial;
   }
+  artifact(e:string,r:string,id:string,version:number):PublicResult {
+    validate('Id',id);need(Number.isSafeInteger(version)&&version>=1&&version<=1000000);
+    need(!new Controls(this.db).held(),'UNAVAILABLE');
+    const {all,hidden}=this.visible(e,r);
+    const row=all.filter(row=>row.event_type==='artifact.published').find(row=>{const x=eventFrom(row);return x.type==='artifact.published'&&x.payload.artifactId===id&&x.payload.version===version;});
+    const registration=all.filter(row=>row.event_type==='artifact.registered').find(row=>{const x=eventFrom(row);return x.type==='artifact.registered'&&x.payload.artifactId===id;});
+    need(row||registration&&version===1,'NOT_FOUND');
+    const event=row?eventFrom(row):undefined,reg=registration?eventFrom(registration):undefined;
+    const hiddenState=hidden.get((row??registration)!.event_id);
+    const newer=all.filter(row=>row.event_type==='artifact.published').some(row=>{const x=eventFrom(row);return x.type==='artifact.published'&&x.payload.artifactId===id&&x.payload.version>version;});
+    const status=hiddenState??(event?'published':new Controls(this.db).state(e,r,id)??(reg?.type==='artifact.registered'?reg.payload.status:'registered'));
+    const body:ArtifactDetail={schemaVersion:'1.0',experimentId:e,runId:r,artifactId:id,version,status:status==='published'&&newer?'superseded':status,metadata:!hiddenState&&event?.type==='artifact.published'?event.payload:null,safeReason:hiddenState?'This artifact is unavailable.':!event?'This deliverable has no published content.':null};
+    return this.result('ArtifactDetail',body);
+  }
   read(path:string,query:URLSearchParams,e:string,r:string|undefined,tail:string[]):PublicResult {
     // One short read transaction gives a consistent metadata/projection snapshot. No filesystem/network I/O.
     return this.db.atomic(()=>this.project(path,query,e,r,tail));
   }
   project(path:string,query:URLSearchParams,e:string,r:string|undefined,tail:string[]):PublicResult {
-    const meta=this.db.meta();void meta;
+    need(!new Controls(this.db).held(),'UNAVAILABLE');
     if(!r) {
       const rows=this.db.all<{run_id:string;published_json:string;receiver_sequence:number}>('SELECT r.run_id,r.published_json,e.receiver_sequence FROM runs r JOIN events e ON e.experiment_id=r.experiment_id AND e.run_id=r.run_id AND e.event_type=? WHERE r.experiment_id=? ORDER BY e.receiver_sequence','run.published',e).filter(x=>this.visible(e,x.run_id).rows.some(y=>y.event_type==='run.published'));
       need(rows.length,'NOT_FOUND');
@@ -73,6 +102,7 @@ export class PublicReads {
       const pointer=this.db.get<{official_run_id:string|null}>('SELECT official_run_id FROM experiments WHERE experiment_id=?',e)?.official_run_id??null;
       return this.result('PublicExperiment',{schemaVersion:'1.0',experimentId:e,title:first.title,purpose:first.purpose,objective:first.objective,officialRunId:rows.some(x=>x.run_id===pointer)?pointer:null,runs:page.items.map(row=>{const p=JSON.parse(row.published_json) as RunPublished,v=this.visible(e,row.run_id);return {runId:row.run_id,kind:p.runKind,state:this.state(v.rows.map(eventFrom),p.state,v.all.map(eventFrom),v.hidden),methodologyVersion:p.configuration.methodologyVersion};}),nextCursor:page.nextCursor});
     }
+    if(tail[0]==='artifacts'&&tail.length>1)return this.artifact(e,r,tail[1]!,Number(tail[3]));
     const {rows,all,hidden}=this.visible(e,r),events=rows.map(eventFrom),runEvent=events.find(x=>x.type==='run.published');
     // Exact tombstone reads still work if the enclosing run was withdrawn.
     if(tail[0]==='records') {
@@ -115,17 +145,16 @@ export class PublicReads {
         return this.result('DecisionDetail',{...base,decision,orders:[...orders.values()].map(x=>x.payload),transactions,reviews,freshness});
       }
       case 'artifacts': {
-        if(tail.length===1){const p=page(rows.filter(x=>x.event_type==='artifact.registered'));return collection('ArtifactPage',{...p,items:p.items.map(row=>{
+        if(tail.length===1){const p=page(all.filter(x=>x.event_type==='artifact.registered'));return collection('ArtifactPage',{...p,items:p.items.map(row=>{
           const reg=eventFrom(row);need(reg.type==='artifact.registered');
-          const latest=all.map(eventFrom).filter(x=>x.type==='artifact.published'&&x.payload.artifactId===reg.payload.artifactId).sort((a,b)=>a.type==='artifact.published'&&b.type==='artifact.published'?a.payload.version-b.payload.version:0).at(-1);
+          const state=new Controls(this.db).state(e,r,reg.payload.artifactId)??reg.payload.status;
+          if(hidden.has(row.event_id))return {registration:{...reg.payload,title:'Unavailable investment deliverable',author:{kind:'system'},reason:null,relationships:[]},status:hidden.get(row.event_id)!,currentPublishedVersion:null,publishedReference:null,safeReason:'This deliverable is unavailable.'} satisfies ArtifactRegistryEntry;
+          const latest=all.filter(x=>x.event_type==='artifact.published').map(eventFrom).filter(x=>x.type==='artifact.published'&&x.payload.artifactId===reg.payload.artifactId).sort((a,b)=>a.type==='artifact.published'&&b.type==='artifact.published'?a.payload.version-b.payload.version:0).at(-1);
           if(latest&&hidden.has(latest.eventId))return {registration:reg.payload,status:hidden.get(latest.eventId)!,currentPublishedVersion:null,publishedReference:null,safeReason:'This artifact is unavailable.'} satisfies ArtifactRegistryEntry;
           const version=latest?.type==='artifact.published'?latest.payload.version:null;
-          return {registration:reg.payload,status:version?'published':reg.payload.status,currentPublishedVersion:version,publishedReference:version?{kind:'artifact',id:reg.payload.artifactId,version,relation:'supports'}:null,safeReason:version?null:reg.payload.reason} satisfies ArtifactRegistryEntry;
+          return {registration:reg.payload,status:version?'published':state,currentPublishedVersion:version,publishedReference:version?{kind:'artifact',id:reg.payload.artifactId,version,relation:'supports'}:null,safeReason:version?null:reg.payload.reason} satisfies ArtifactRegistryEntry;
         })});}
-        const version=Number(tail[3]);need(Number.isSafeInteger(version)&&version>0&&version<=1000000);
-        const row=all.find(row=>{const x=eventFrom(row);return x.type==='artifact.published'&&x.payload.artifactId===tail[1]&&x.payload.version===version;});need(row,'NOT_FOUND');
-        if(tail[4]==='content'){need(!hidden.has(row.event_id),'WITHDRAWN');need(false,'UNAVAILABLE');} // INV-03 owns public download/rendering.
-        return this.result('ArtifactDetail',{...base,artifactId:tail[1],version,status:hidden.get(row.event_id)??'published',metadata:hidden.has(row.event_id)?null:eventFrom(row).payload,safeReason:hidden.has(row.event_id)?'This artifact is unavailable.':null});
+        need(false,'NOT_FOUND');
       }
       default: need(false,'NOT_FOUND');
     }

@@ -1097,3 +1097,11 @@ health in the external task receipt. See the [public-story source review](BOTSQU
 [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. It leaves `asymmetri-investment.service` static/inactive, without its explicit-enable marker, public ingress or publisher authority. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
 
 Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) and [actual Linux acceptance](INFRA-02-VALIDATION.md). A transparent loopback Nginx test passed; the nginx 1.22 HTTP profile failed duplicate Connection preservation and is not accepted for public/real traffic. Exact HTTP/TLS ingress, recurring backups/retention, representative live capacity, OS-exception review and explicit owner activation remain future gates.
+
+## INV-03 private receiver compatibility update
+
+[INV-03 acceptance](INV-03-VALIDATION.md) records a receiver-only update, additive
+schema 002 and disabled empty operational state. No website release or Nginx restart
+is part of it. Use [receiver operations](INV-03-OPERATIONS.md) for rollback, backup
+and owner controls; [ingress gates](INV-03-INGRESS.md) for future shared-443 work.
+The new website routes remain local/source-only until separately authorized.

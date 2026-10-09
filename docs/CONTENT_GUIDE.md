@@ -365,8 +365,9 @@ coordinating a new app link alone does not retire the old destination safely.
 
 [Company architecture and source review](COMPANY_ARCHITECTURE_2026-10-07.md)
 supersedes older Labs-parent/Work/singular-Sport assumptions. BotSquad is an
-experimental Asymmetri Labs project, not hosted SaaS. Investment/Ask BotSquad remain
-design-only and are intentionally absent from public copy. Current umbrella name
+experimental Asymmetri Labs project, not hosted SaaS. At that review, Investment/Ask were design-only and absent from public copy. INV-03
+now implements a disabled experimental archive in source; the public site is unchanged
+and Ask remains unimplemented. Current umbrella name
 references in Motion policy are updated to Asymmetri without changing handling,
 retention, scientific or privacy commitments or the October 6 policy date.
 
@@ -379,3 +380,12 @@ authority. Do not encode release status only in color. Sports and Labs share
 the Graphite + Teal umbrella palette in CSS; Motion retains its product identity.
 `site.metadata.themeColor` mirrors the graphite canvas for browser chrome.
 Existing social exports and all public copy retain their approved contents.
+
+## Investment evidence archive
+
+`content/site.ts` owns `investmentArchive` copy. Exact version pages and discussion
+records live under `/botsquad/investment`; these are experimental evidence views,
+not a claim of live investment operations. Keep synthetic labels on unavailable
+fixture states, sources/rights/limitations visible on permitted records, and safe
+tombstones free of withdrawn titles/authors/content. Ask is not enabled. No published
+experiment is the default until trusted server read configuration is explicitly set.

@@ -76,9 +76,10 @@ All routes come from the pinned OpenAPI. Base `R` is
 | GET `R/transactions`, `R/artifacts` | Bounded public projections |
 | GET `R/artifacts/{id}/versions/{version}` | Published metadata or safe withdrawal state |
 | GET `R/records/{kind}/{id}/versions/{version}` | Exact version, tombstone when hidden |
-| GET `R/artifacts/{id}/versions/{version}/content` | Explicit 503 unavailable for published content; 404 absent, 410 hidden |
+| GET `R/artifacts/{id}/versions/{version}/content` | INV-03 exact verified bytes; 404 absent, 409 unstaged/unpublished, 410 hidden |
 
-17 contract operations are recognized; public downloads/rendering remain INV-03.
+17 contract operations are recognized. INV-03 implements exact downloads and human
+artifact/discussion views; all public activation remains disabled.
 Worker roster/activity events are queryable through EventPage, with durable typed
 projection identities. There is no invented worker route. All output DTOs and
 Problems are schema validated. `/api/ask/v1` is unimplemented and has no tables,
@@ -287,7 +288,18 @@ floating branch as production protocol.
 
 ## Deferred scope
 
-INV-03 public artifact downloads/renderers/transcript pages, later dashboard UI,
+Later INV-04 dashboard UI,
 HQ publisher/grants, official-run selection UI, collectors/providers/calendar,
 authoritative trading, real rights approval workflow, public activation and the entire
 private Ask service. INV-02 provides REST/archive foundations; INFRA-02 adds stopped private-host installation and synthetic Linux acceptance.
+
+
+## INV-03 current implementation
+
+The [INV-03 runbook](INV-03-OPERATIONS.md) supersedes the earlier deferred-download
+and receiver-backup procedures: exact-version downloads/human discussion views are
+implemented; migration 002 adds owner controls and restore read holds. Signed transport
+is separate from exact artifact publication rights. The [TLS record](INV-03-INGRESS.md)
+accepts isolated actual-host TLS stream transport while keeping public shared-443
+activation gated. [Validation](INV-03-VALIDATION.md) records measured capacity, private
+installation, independent review and the still-unverified production backup custody.

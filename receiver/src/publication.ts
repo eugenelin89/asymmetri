@@ -236,14 +236,15 @@ export function checkPublicationBatch(bytes: Uint8Array, idempotencyKey: string,
       case 'discussion.opened': event.payload.participants.forEach(eligible); break;
       case 'discussion.contribution': {
         const p = event.payload, discussion = byId(records, 'discussion', p.discussionId); need(discussion.type === 'discussion.opened');
-        need(event.actor.kind === 'worker' && discussion.payload.participants.includes(event.actor.workerId), 'FORBIDDEN');
+        need(event.actor.kind !== 'worker' || discussion.payload.participants.includes(event.actor.workerId), 'FORBIDDEN');
+        need(!events.some(e=>e.type==='discussion.closed'&&e.payload.discussionId===p.discussionId),'CONFLICT');
         const previous = events.filter(e => e.type === 'discussion.contribution' && e.payload.discussionId === p.discussionId);
         need(BigInt(p.ordinal) === BigInt(previous.length + 1), 'DEPENDENCY_NOT_READY');
         if (p.replyTo) need(previous.some(e => e.type === 'discussion.contribution' && e.payload.contributionId === p.replyTo), 'DEPENDENCY_NOT_READY');
         break;
       }
-      case 'discussion.closed': byId(records, 'discussion', event.payload.discussionId); need(event.payload.synthesis.kind === 'artifact'); break;
-      case 'artifact.registered': need(canonicalHash(event.payload.author) === canonicalHash(event.actor), 'FORBIDDEN'); break;
+      case 'discussion.closed': byId(records, 'discussion', event.payload.discussionId); need(event.payload.synthesis.kind === 'artifact'); need(!events.some(e=>e.type==='discussion.closed'&&e.payload.discussionId===event.payload.discussionId),'CONFLICT'); break;
+      case 'artifact.registered': need(canonicalHash(event.payload.author) === canonicalHash(event.actor), 'FORBIDDEN'); need(!['published','superseded'].includes(event.payload.status),'INVALID_REQUEST'); break;
       case 'artifact.published': {
         const p = event.payload, registration = byId(records, 'artifact', p.artifactId, 0);
         need(registration.type === 'artifact.registered' && canonicalHash(registration.payload.author) === canonicalHash(p.author), 'FORBIDDEN');

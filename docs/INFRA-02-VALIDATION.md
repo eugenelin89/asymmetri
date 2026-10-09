@@ -209,3 +209,10 @@ trading or Ask acceptance is claimed. INV-03 can be separately requested for loc
 synthetic implementation; this milestone does not start it.
 
 **INFRA-02 COMPLETE — RECEIVER INSTALLED AND PRIVATELY VALIDATED; PUBLIC PUBLISHING DISABLED**
+
+## Subsequent INV-03 remediation
+
+This record remains the original INFRA-02 evidence. [INV-03 validation](INV-03-VALIDATION.md)
+records expanded TLS, capacity, recovery and archive tests. The rejected HTTP proxy
+regression is retained. Earlier retained-backup claims no longer establish present
+custody: later owner-approved cleanup deleted both Mac backup sets and recovery keys.

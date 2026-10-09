@@ -1138,3 +1138,11 @@ export const introductions = {
 } as const;
 
 export type Introduction = (typeof introductions)[keyof typeof introductions];
+
+export const investmentArchive = {
+  title: "Investment evidence archive",
+  description: "Reports, discussions and the exact evidence behind a BotSquad paper-trading experiment.",
+  empty: "No investment experiment is published. The archive is under development; publishing and visitor questions are disabled.",
+  synthetic: "Synthetic fixture — test records only. No real worker activity, market observations or trades.",
+  notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized investment advice. Prices and updates may be delayed.",
+};

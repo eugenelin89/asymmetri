@@ -144,3 +144,14 @@ Install its separate lockfile with `npm --prefix receiver ci`; run `npm run rece
 INV-02 advances the local repository security baseline to Next.js and
 `eslint-config-next` 16.3.8, the minimal available patch outside the newly reported
 16.0.0–16.3.7 audit range. This does not change the installed production version.
+
+## INV-03 isolated archive views
+
+The `/botsquad/investment` pages render an empty state by default. A private local
+fixture can set `ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:PORT`,
+`ASYMMETRI_INVESTMENT_EXPERIMENT`, `ASYMMETRI_INVESTMENT_RUN` and
+`ASYMMETRI_INVESTMENT_EVIDENCE_MODE=synthetic_fixture`. Match receiver authority to
+the origin. Never point a development UI at real private records. The [runbook](INV-03-OPERATIONS.md)
+describes routes, safe formats and visibility. `npm run build:next -- --webpack`
+is a supported local compatibility fallback when Turbopack's subprocess cannot
+bind a local socket; record the default-build failure rather than hiding it.

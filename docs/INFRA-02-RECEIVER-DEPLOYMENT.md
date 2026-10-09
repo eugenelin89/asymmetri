@@ -1,5 +1,9 @@
 # INFRA-02 — Private investment receiver installation
 
+**Historical installation baseline.** The [INV-03 acceptance](INV-03-VALIDATION.md)
+and [operations runbook](INV-03-OPERATIONS.md) supersede source/schema, TLS test and
+backup procedures below. The hardened unit and stopped/default-disabled boundary remain.
+
 Owner-selected scope, October 9, 2026: install the accepted INV-02 receiver on the
 existing Ubuntu 22.10 Droplet and validate with disposable synthetic data. Public
 publishing and real HQ traffic remain disabled. See [acceptance](INFRA-02-VALIDATION.md)
@@ -112,7 +116,8 @@ then repeat real TLS/signature/framing tests without weakening the contract.
 ## Consistent receiver backup and restore
 
 No paid snapshot or backup subscription was created. Historical encrypted recovery
-archives remain preserved; they do not contain this new receiver. No recurring
+archives were later deleted in owner-approved Mac cleanup; no surviving independent
+copy is verified. They did not contain this new receiver. No recurring
 receiver backup policy has been activated. Review retention, independent custody,
 encryption, recovery-point/time objectives and an actual schedule before live data.
 

@@ -46,18 +46,22 @@ export class Archive {
   run(sql: string, ...params: SQL[]): Database.RunResult { return this.db.prepare(sql).run(...params); }
   atomic<T>(fn: () => T): T { return this.db.transaction(fn).immediate(); }
   migrate(): void {
-    const sql = readFileSync(new URL('../../migrations/001-archive.sql', import.meta.url), 'utf8');
+    const files = ['001-archive.sql','002-artifact-controls.sql'];
     this.atomic(() => {
       this.db.exec('CREATE TABLE IF NOT EXISTS schema_migrations (version INTEGER PRIMARY KEY, digest TEXT NOT NULL)');
-      const migrations = this.all<{version: number; digest: string}>('SELECT * FROM schema_migrations ORDER BY version');
-      need(migrations.length <= 1 && (!migrations[0] || migrations[0].version === 1 && migrations[0].digest === sha256(sql)), 'UNAVAILABLE');
-      if (!migrations.length) {
+      const migrations = this.all<{version:number;digest:string}>('SELECT * FROM schema_migrations ORDER BY version');
+      need(migrations.length <= files.length, 'UNAVAILABLE');
+      for(const [index,file] of files.entries()) {
+        const version=index+1, sql=readFileSync(new URL('../../migrations/'+file,import.meta.url),'utf8');
+        const prior=migrations[index];
+        if(prior) {need(prior.version===version && prior.digest===sha256(sql),'UNAVAILABLE');continue;}
         this.db.exec(sql);
-        this.run('INSERT INTO archive_meta(id,epoch) VALUES(1,?)', randomUUID());
-        this.run('INSERT INTO schema_migrations VALUES(1,?)', sha256(sql));
+        if(version===1)this.run('INSERT INTO archive_meta(id,epoch) VALUES(1,?)',randomUUID());
+        this.run('INSERT INTO schema_migrations VALUES(?,?)',version,sha256(sql));
       }
     });
   }
+
   /** Leave physical DB headroom for nonce-protected reconciliation and diagnostics. */
   admitWrite(estimatedBytes: number): void {
     const size=Number(this.db.pragma('page_size',{simple:true}));
@@ -174,6 +178,12 @@ export class Archive {
   hide(experiment: string, run: string, eventId: string, visibility: 'withheld'|'withdrawn', now: string): void {
     this.atomic(() => {
       need(this.get('SELECT 1 FROM events WHERE experiment_id=? AND run_id=? AND event_id=?',experiment,run,eventId),'NOT_FOUND');
+      const prior=this.get<{visibility:string}>('SELECT visibility FROM visibility_actions WHERE experiment_id=? AND run_id=? AND event_id=? ORDER BY id DESC LIMIT 1',experiment,run,eventId);
+      if(prior?.visibility===visibility || prior?.visibility==='withdrawn')return;
+      const artifact=this.get<{body_json:string}>('SELECT body_json FROM events WHERE experiment_id=? AND run_id=? AND event_id=?',experiment,run,eventId);
+      const hiddenEvent=JSON.parse(artifact!.body_json) as Event;
+      if(hiddenEvent.type==='artifact.published')this.run('INSERT OR IGNORE INTO denied_content VALUES(?,?)',hiddenEvent.payload.sha256,now);
+      if(hiddenEvent.type==='artifact.registered')for(const a of this.all<{sha256:string}>('SELECT sha256 FROM artifact_versions WHERE experiment_id=? AND run_id=? AND artifact_id=?',experiment,run,hiddenEvent.payload.artifactId))this.run('INSERT OR IGNORE INTO denied_content VALUES(?,?)',a.sha256,now);
       this.run('INSERT INTO visibility_actions(experiment_id,run_id,event_id,visibility,recorded_at) VALUES(?,?,?,?,?)',experiment,run,eventId,visibility,now);
       this.run('UPDATE archive_meta SET visibility_epoch=visibility_epoch+1,revision=revision+1 WHERE id=1');
     });
@@ -186,7 +196,10 @@ export class Archive {
         this.run('UPDATE publishers SET scope_json=?,generation=? WHERE publisher_id=?',JSON.stringify(scope),scope.generation,p.publisher_id);
         this.run('INSERT INTO authority_audit(recorded_at,publisher_id,action) VALUES(?,?,?)',now,p.publisher_id,'restore fenced; reconcile before new keys');
       }
-      this.run('UPDATE publisher_keys SET revoked=1');this.run('DELETE FROM publication_approvals');this.resetEpoch();
+      this.run('UPDATE publisher_keys SET revoked=1');this.run('DELETE FROM publication_approvals');
+      this.run('DELETE FROM artifact_approvals');this.run('DELETE FROM correction_releases');
+      this.run('UPDATE recovery_control SET reads_held=1,reconciled_digest=NULL WHERE id=1');
+      this.run('UPDATE archive_meta SET visibility_epoch=visibility_epoch+1 WHERE id=1');this.resetEpoch();
     });
   }
   resetEpoch(): void { this.atomic(() => { this.run('UPDATE archive_meta SET epoch=?,revision=revision+1 WHERE id=1',randomUUID()); this.run('DELETE FROM cursors'); }); }
