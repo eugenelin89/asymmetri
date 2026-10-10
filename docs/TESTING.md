@@ -350,3 +350,22 @@ Browser acceptance covers default/no-backend, exact versions, waiting/withheld/
 withdrawn/missing records, cursor reset, five formats, long reports, source safety,
 fixture labels, semantic headings, keyboard focus and responsive widths. No public
 website release, real workers or market observations are implied.
+
+## INV-04 interface acceptance
+
+Run `npm run test:investment` for exact decimal rounding (including values beyond
+Number precision), null handling, 18-digit sequence ordering, CSV formula safety,
+run context and benchmark missing-peak guards. Run `npm run receiver:test` for the
+full regression suite including the author-created showcase, corrected valuations,
+negative/partial observations, terminal orders, large-history tail cursor, immutable
+page watermarks, expiry and withdrawal. No fixture bypasses publication validation.
+
+Use the disposable preview described in LOCAL_DEVELOPMENT for browser acceptance.
+Check actual CSS viewport widths 320, 390, 768, 1024, 1440 and 1920; inspect the
+research → discussion → decision → fill → later-review path and exact-version links.
+Verify keyboard focus, upward-scroll pause, unread count, latest jump, refresh,
+chart window/table/export, stale/empty/ended states, visibility withdrawal, mode
+failure, offline recovery and unavailable Ask. Test static methodology/Ask with an
+offline receiver. Review reduced-motion CSS and absence of animated presence.
+The [INV-04 record](INV-04-VALIDATION.md) distinguishes browser checks from source
+review and synthetic receiver tests; no live HQ/public-capacity result is implied.

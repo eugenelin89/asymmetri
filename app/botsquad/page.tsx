@@ -3,7 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
 import { WorkerFlow } from "@/components/worker-flow";
-import { botsquad, introductions, site } from "@/content/site";
+import { botsquad, introductions, site, investmentShowcase } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(botsquad.metadata, botsquad.path, "/images/labs-social.png");
@@ -135,6 +135,7 @@ export default function BotSquadPage() {
             <div className="squad-prose"><p>{botsquad.control.body}</p><a className="text-link" href={botsquad.whitePaper.href}>{botsquad.whitePaper.label} ↗</a></div>
           </div>
         </section>
+        <section className="section squad-raised"><div className="shell product-split"><div className="product-heading"><p className="eyebrow">A transparent experiment</p><h2>{investmentShowcase.discovery.title}</h2></div><div className="squad-prose"><p>{investmentShowcase.discovery.body}</p><a className="text-link" href={investmentShowcase.discovery.href}>Explore the showcase →</a></div></div></section>
         <IntroductionVideo video={introductions.botsquad} />
       </main>
       <SiteFooter />

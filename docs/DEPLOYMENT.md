@@ -1105,3 +1105,19 @@ schema 002 and disabled empty operational state. No website release or Nginx res
 is part of it. Use [receiver operations](INV-03-OPERATIONS.md) for rollback, backup
 and owner controls; [ingress gates](INV-03-INGRESS.md) for future shared-443 work.
 The new website routes remain local/source-only until separately authorized.
+
+## INV-04 source milestone — no deployment
+
+INV-04 is locally validated website source plus additive receiver read headers.
+It does not authorize a website release, receiver restart, public ingress or real
+publisher/Ask activation. The current production website remains on its prior build.
+A future authorized release must coordinate receiver `X-Archive-Visibility` support
+before enabling website read variables; the website fails closed without it. Keep
+fixture launcher/test content and fixture environment values out of operational
+startup. Preserve protected Motion URLs, tutorial canonical/hashes/original images
+and both existing hostnames in the before/after release checks.
+
+Shared HTTPS/TLS ingress, the rejected Nginx HTTP profile, sustained real public
+capacity, actual key/receipt reconciliation, retention/backup custody, source and
+redistribution rights, and the unsupported Ubuntu 22.10 risk remain separate gates.
+Later investment and Ask milestones plus explicit INV-12 activation still apply.

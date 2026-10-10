@@ -1142,7 +1142,36 @@ export type Introduction = (typeof introductions)[keyof typeof introductions];
 export const investmentArchive = {
   title: "Investment evidence archive",
   description: "Reports, discussions and the exact evidence behind a BotSquad paper-trading experiment.",
-  empty: "No investment experiment is published. The archive is under development; publishing and visitor questions are disabled.",
-  synthetic: "Synthetic fixture — test records only. No real worker activity, market observations or trades.",
+  empty: "No investment experiment is published. The official experiment has not started; publishing and visitor questions are disabled.",
+  synthetic: "Synthetic demonstration — not live trading or real worker activity",
   notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized investment advice. Prices and updates may be delayed.",
 };
+
+export const investmentShowcase = {
+  headline: 'Watch an AI team work.',
+  introduction: 'BotSquad is a system of persistent AI employees collaborating on ongoing projects. This investment experiment makes their research, disagreement, decisions and reviews inspectable.',
+  purpose: 'The team is the experiment. The portfolio is one way to measure what happens.',
+  unstarted: 'The official investment experiment has not started. Actual investment workers, market data, simulated trading operations and visitor answers are not enabled.',
+  ask: 'Eventually, one relevant BotSquad employee will answer questions about the project, research or a particular decision. Actual employee responses are not yet enabled. This preview accepts no questions.',
+  discovery: {title:'Investment showcase',body:'Explore the planned research desk, evidence archive and paper-portfolio experience. The official experiment has not started; local demonstrations use clearly labelled synthetic records.',href:'/botsquad/investment'},
+  navigation: [['team','The team'],['desk','Investment desk'],['portfolio','Portfolio'],['decisions','Decisions'],['research','Research'],['journal','Journal'],['method','Method'],['ask','Ask preview']],
+  process: [
+    ['Research','Workers gather permitted evidence and publish a report with its limitations.'],
+    ['Challenge','Discussion makes alternatives, objections and unresolved questions visible.'],
+    ['Decide','A proposal binds exact evidence. Independent review precedes any accepted order.'],
+    ['Measure & review','Trusted accounting records simulated effects. Later reviews examine what happened.'],
+  ],
+  methodology: [
+    ['Why this experiment exists','The aim is to examine persistent teamwork: research, delegation, discussion, accountability and adaptation. Returns alone do not prove that an organization reasons well.'],
+    ['Paper trading & capital','No real money or securities are traded. Capital, universe, benchmark, limits and dates for an official run require owner approval. Values in the demonstration are synthetic test settings, not approved operational defaults.'],
+    ['Research & decisions','Workers may propose BUY, SELL or HOLD. Reports, objections, synthesis and independent review remain separate records. HOLD is a decision even when no order follows. Only typed financial records supply portfolio results.'],
+    ['Deterministic accounting','The planned simulator uses a frozen configuration, exact decimal postings, weighted-average cost basis and explicit fees, slippage and corporate actions. Models propose; trusted software accounts. Simulator implementation belongs to INV-05.'],
+    ['Prices & data quality','The incremental market-data budget is US$0. Real sources are not yet selected. Automated access, retention and public or derived-display rights must each be verified. A missing price stays missing; delayed observations cannot be described as live quotes.'],
+    ['Benchmark & comparison','Portfolio and benchmark use the same starting capital and comparable sessions. The accepted convention uses raw prices, explicit dividends and next eligible opening reinvestment for the benchmark. Simple excess return is a percentage-point difference. It is not alpha.'],
+    ['Risk controls','Long-only exposure, no leverage, position and sector limits, price guards, deadlines and stop conditions are part of the proposed methodology. Official values remain unconfigured. A loss threshold cannot guarantee a maximum loss.'],
+    ['Publication & source rights','Public material must be an approved investment deliverable. Original activity time, recorded time, publication time and valuation time have different meanings. Publication can lag; missing heartbeat means activity is unknown. Private reasoning, prompts and unrelated company discussions are excluded.'],
+    ['Corrections & human interventions','Exact versions preserve the original evidence used by a decision. Corrections are visible additions. Exceptional privacy, security or rights withdrawals remove future access and may leave evidence gaps. Owner interventions are recorded; already downloaded copies cannot be recalled.'],
+    ['Fixtures, trials & official runs','Synthetic fixtures, private trials and official runs have distinct identities. An archived run stays addressable. A losing run must never silently be replaced by a more favorable one. The current local demo proves interface behavior, not real worker or market performance.'],
+    ['Limits of interpretation','The experiment is not personalized investment advice. Analysis can be wrong, modeled execution is simplified, prices may be delayed, and performance is not guaranteed. Real employee collaboration, market integration and a forward-running trial remain later milestones.'],
+  ],
+} as const;

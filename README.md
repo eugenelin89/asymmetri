@@ -126,3 +126,16 @@ changing public assets.
 - [Tutorial media and generation prompts](docs/TUTORIAL_MEDIA.md)
 
 - [Historical September portfolio decisions](docs/PORTFOLIO_REDESIGN.md)
+
+## BotSquad investment showcase (INV-04)
+
+The source-level [investment showcase](docs/INV-04-VALIDATION.md) adds the team,
+discussion desk, research, decisions, portfolio, holdings and transaction journal
+at `/botsquad/investment`, exact-run pages at `/botsquad/investment/runs/[runId]`,
+decision pages, methodology, and a disabled `/botsquad/ask` preview. Existing exact
+artifact, discussion and record URLs remain available. These routes are noindex
+and are not added to the public sitemap. No website deployment is implied.
+
+Official investment operations have not started. The default website has no read
+backend; it renders a truthful unconfigured state. See [local development](docs/LOCAL_DEVELOPMENT.md)
+for the explicitly invoked disposable synthetic preview and [receiver boundaries](docs/INVESTMENT_RECEIVER.md).

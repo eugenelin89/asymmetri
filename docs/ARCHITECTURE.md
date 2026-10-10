@@ -368,3 +368,44 @@ safe text/Markdown rendering and evidence links; `content/site.ts` owns archive
 copy. No receiver runtime, signing key or private path enters the website bundle.
 `receiver/src/backup.ts` snapshots private CAS plus SQLite; encryption is an offline
 owner utility. No public administrative route, collection job or Ask service exists.
+
+## INV-04 showcase read boundary
+
+`app/botsquad/investment/` composes a streaming static introduction plus bounded
+server reads. New exact-run, decision and methodology pages complement INV-03
+artifact/version, discussion and record pages. `/botsquad/ask` is explanatory only.
+No question submission, storage, provider connection or public write endpoint exists.
+`content/site.ts` owns `investmentShowcase` copy and `investmentArchive` disclosures.
+
+`lib/investment-archive.ts` validates configured origin/scope, an exact GET allowlist,
+query constraints and named frozen v1 DTO schemas through AJV 8.20.0/ajv-formats 3.0.1.
+The server allows two concurrent reads, nine requests per landing render, 8-second
+read deadlines and a 2 MiB JSON ceiling. Artifact bytes retain exact digest/type/size
+checks and post-read visibility checks. Financial strings remain exact for labels;
+Number conversion is confined to display chart coordinates/derived plotting ratios.
+
+`components/investment/` separates desk, portfolio/history, journal, collections,
+run history, exports, human-readable exact records, disabled Ask and visibility.
+Native SVG, meters and semantic tables require no chart library. CSV formula cells
+are neutralized; exports contain only the shown page and retain synthetic labels.
+Snapshot fields, original timestamps and receiver publication receipts stay distinct.
+No roster/financial data clients mount before the run's evidence mode is verified.
+
+The same-origin `/botsquad/investment/read` GET route exposes only approved public
+read resources; it adds no HQ access, authentication or write authority. Receiver
+transport adds `X-Archive-Visibility` (archive epoch + visibility epoch hash) and an
+optional `X-Archive-Latest-Cursor` for the latest bounded event window. They do not
+change the frozen OpenAPI/schema/DTO package. Successful website reads require the
+visibility witness; an older receiver without it fails closed. A future coordinated
+release must install this receiver source before enabling website reads.
+
+Ordinary publication changes do not remount readers. A visibility change hides cached
+content and refreshes the server projection. Final server witnesses cover all loaded
+pages, including run history; detail pages recheck title/body visibility. Visible
+status polling is 15 seconds; the desk polls about 12–13 seconds with backoff to
+96–97 seconds. Hidden tabs skip reads. Desk requests are aborted on unmount and
+preserve paused content/scroll while counting unseen tail events. The tail hint uses
+the existing opaque cursor, fixed watermark, visibility epoch, 15-minute expiry,
+100-record and 1 MiB page bounds. No recursive catch-up occurs. Withdrawal cannot
+recall data already copied by a reader; open UI suppression has a bounded polling
+interval, not a claim of instantaneous distributed revocation.

@@ -5,7 +5,7 @@ import { canonicalHash, requireContract as need, validate } from './schema.js';
 import { Controls } from './controls.js';
 import { recordKeys } from './publication.js';
 
-export interface PublicResult { name: string; body: unknown; etag: string }
+export interface PublicResult { name: string; body: unknown; etag: string; visibility: string; tailCursor?: string }
 interface Cursor { binding:string; epoch:string; visibility_epoch:number; upper_watermark:number; after_sequence:number; expires:number }
 export class PublicReads {
   constructor(readonly db:Archive,readonly now:()=>number) {}
@@ -69,7 +69,7 @@ export class PublicReads {
     for(const row of candidates) {const n=Buffer.byteLength(JSON.stringify(row));if(items.length>=limit||items.length>0&&bytes+n>1048576)break;items.push(row);bytes+=n;}
     return {items,nextCursor:candidates.length>items.length?this.token(binding,upper,items.at(-1)!.receiver_sequence):null};
   }
-  result(name:string,body:unknown):PublicResult {validate(name,body);return {name,body,etag:'"'+canonicalHash({epoch:this.db.meta().visibility_epoch,body})+'"'};}
+  result(name:string,body:unknown):PublicResult {validate(name,body);return {name,body,etag:'"'+canonicalHash({epoch:this.db.meta().visibility_epoch,body})+'"',visibility:canonicalHash({epoch:this.db.meta().epoch,visibility:this.db.meta().visibility_epoch})};}
   state(events:Event[],initial:RunState,all=events,hidden:Map<string,string>=new Map()):RunState {
     const latest=all.filter(e=>e.type==='run.status').sort((a,b)=>BigInt(a.sourceSequence)<BigInt(b.sourceSequence)?-1:1).at(-1);
     need(!latest||!hidden.has(latest.eventId),'UNAVAILABLE');
@@ -119,7 +119,19 @@ export class PublicReads {
     switch(tail[0]) {
       case 'status': return this.result('PublicStatus',{...base,state:this.state(events,runEvent.payload.state,all.map(eventFrom),hidden),watermark,freshness,notices:events.filter(x=>x.type==='publication.notice').slice(-20).map(x=>x.payload)});
       case 'snapshot': return this.result('SnapshotResponse',{...base,snapshot:this.snapshot(rows,all),watermark,freshness});
-      case 'events': {const p=page(rows);return collection('EventPage',{...p,items:p.items.map(received)});}
+      case 'events': {
+        const p=page(rows), result=collection('EventPage',{...p,items:p.items.map(received)});
+        // Optional transport hint, never a new DTO field or query. The opaque cursor
+        // uses the same binding, fixed watermark, expiry and visibility checks.
+        const limit=query.has('limit')?Number(query.get('limit')):50;
+        if(!query.has('after')&&p.nextCursor){
+          let start=rows.length,bytes=0;
+          while(start>0&&rows.length-start<limit){const n=Buffer.byteLength(JSON.stringify(rows[start-1]));if(start<rows.length&&bytes+n>1048576)break;bytes+=n;start--;}
+          const filters=Object.fromEntries([...query].filter(([k])=>k!=='after'&&k!=='limit').sort(([a],[b])=>a.localeCompare(b)));
+          result.tailCursor=this.token(JSON.stringify({path,filters,limit}),upper,rows[start-1]!.receiver_sequence);
+        }
+        return result;
+      }
       case 'performance': {
         const p=page(rows.filter(row=>{const ev=eventFrom(row);return ev.type==='portfolio.snapshot'&&(!query.has('from')||ev.payload.session>=query.get('from')!)&&(!query.has('to')||ev.payload.session<=query.get('to')!);}));
         return collection('PerformancePage',{...p,items:p.items.map(x=>eventFrom(x).payload)});

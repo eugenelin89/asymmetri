@@ -389,3 +389,19 @@ not a claim of live investment operations. Keep synthetic labels on unavailable
 fixture states, sources/rights/limitations visible on permitted records, and safe
 tombstones free of withdrawn titles/authors/content. Ask is not enabled. No published
 experiment is the default until trusted server read configuration is explicitly set.
+
+## Investment showcase copy and evidence
+
+`investmentShowcase` in `content/site.ts` owns the introduction, discovery link,
+process explanation, methodology and disabled Ask copy. Keep official not-started
+status distinct from a local synthetic demonstration. Synthetic identities, prose,
+financial values and content live only in `receiver/test/showcase-fixture.ts`; do
+not copy them into operational content or label them as actual worker output.
+
+Every public read is contract typed and scoped to an exact run. Artifact links use
+verified versions; historical decision references remain historical after correction.
+Unknown monetary values say “Unavailable”. Derived benchmark drawdown requires a
+complete contiguous loaded series from valuation sequence 1 and usable benchmark
+marks; missing peaks suppress that comparison. Source freshness never follows from
+transport connectivity. Ask preview displays a trusted exact ContextRef but has no
+input, submission or conversation state.

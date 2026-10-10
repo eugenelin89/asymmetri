@@ -77,8 +77,8 @@ export async function createReceiver(config:Config,options:{now?:()=>number;faul
         const result=reads.read(path,query,experiment,run,tail);
         // Revalidation on every reuse prevents shared caches serving withdrawn bodies.
         const cache='private, no-store';
-        if(h.get('if-none-match')===result.etag){res.writeHead(304,{Connection:'close','Cache-Control':cache,ETag:result.etag,'X-Content-Type-Options':'nosniff'});res.end();return;}
-        send(res,200,result.body,cache,{ETag:result.etag});return;
+        if(h.get('if-none-match')===result.etag){res.writeHead(304,{Connection:'close','Cache-Control':cache,ETag:result.etag,'X-Archive-Visibility':result.visibility,'X-Content-Type-Options':'nosniff'});res.end();return;}
+        send(res,200,result.body,cache,{ETag:result.etag,'X-Archive-Visibility':result.visibility,...(result.tailCursor?{'X-Archive-Latest-Cursor':result.tailCursor}:{})});return;
       }
       need(run,'FORBIDDEN');identify(db,h,experiment,run,now());
       const methodTyped=method as SignedMessage['method'];let bytes:Buffer=Buffer.alloc(0),contentType:ContentType|undefined;

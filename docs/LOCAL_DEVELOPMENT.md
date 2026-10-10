@@ -155,3 +155,37 @@ the origin. Never point a development UI at real private records. The [runbook](
 describes routes, safe formats and visibility. `npm run build:next -- --webpack`
 is a supported local compatibility fallback when Turbopack's subprocess cannot
 bind a local socket; record the default-build failure rather than hiding it.
+
+## Disposable INV-04 showcase preview
+
+Use Node from `.nvmrc` and install the existing root/receiver lockfiles. This is
+explicit local tooling, never application startup or a production seed command:
+
+```sh
+npm run showcase:preview
+# Another terminal:
+ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:4318 \
+ASYMMETRI_INVESTMENT_EXPERIMENT=fixture-experiment \
+ASYMMETRI_INVESTMENT_RUN=fixture-run \
+ASYMMETRI_INVESTMENT_EVIDENCE_MODE=synthetic_fixture \
+npm run dev:next -- --webpack --hostname 127.0.0.1 --port 4317
+```
+
+Open `http://127.0.0.1:4317/botsquad/investment`. The launcher creates a new private
+temporary database/content tree, signs and validates synthetic fixture batches,
+then disables its publisher and revokes all ephemeral test keys. The loopback
+adapter accepts GET only. Ctrl-C closes it and removes its disposable files.
+There is no production data-directory argument and no operational credentials.
+
+After `npm run receiver:build`, `node receiver/dist/test/showcase-preview.js --stale`
+advances only the synthetic clock. `--empty` creates no published records. Test-only
+stdin commands are `offline`, `online`, `fail-events`, `withdraw`, `reset` (expire
+cursors) and `append`. Append briefly authorizes one in-memory local test key,
+submits one signed synthetic activity, then revokes it in `finally`. These commands
+are not HTTP endpoints and cannot target production. A withdrawn fixture is
+monotonic; restart the disposable preview to obtain a fresh fixture.
+
+Omit all `ASYMMETRI_INVESTMENT_*` values to verify the default unconfigured state.
+Never set fixture variables on the operational deployment. Stop development before
+production builds to avoid competing writes to `.next`; run `npm run build:next --
+--webpack` if the documented Turbopack environment-permission failure occurs.

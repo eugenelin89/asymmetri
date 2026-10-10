@@ -303,3 +303,25 @@ is separate from exact artifact publication rights. The [TLS record](INV-03-INGR
 accepts isolated actual-host TLS stream transport while keeping public shared-443
 activation gated. [Validation](INV-03-VALIDATION.md) records measured capacity, private
 installation, independent review and the still-unverified production backup custody.
+
+## INV-04 read transport integration
+
+The frozen v1 nine-file contract package and schema002 remain unchanged. Public
+JSON reads now attach `X-Archive-Visibility`, a hash of archive/visibility epochs
+computed within the same read transaction. Ordinary publications retain this value;
+withdrawal/restore changes it. Website projections bracket related reads with this
+witness, hide content on disagreement and revalidate open views on bounded timers.
+ETag retains its existing content semantics and is not used as a visibility-only key.
+
+First event pages may additionally attach `X-Archive-Latest-Cursor`. It is an existing
+standard opaque cursor into the last window fitting both limit and byte ceiling,
+with the same path/filter/limit binding, snapshot watermark, expiry and visibility
+checks. It adds neither a canonical DTO field nor a new query or authority surface.
+The client uses at most two event reads to catch up; explicit pagination remains
+stable. Exact financial/visibility/security regressions are retained.
+
+`receiver/test/showcase-fixture.ts` and the explicitly invoked local preview are
+synthetic test tooling, excluded from normal receiver startup. The preview uses
+only a disposable private archive and in-memory keys, revoked after each publication
+exercise; it never reads operational credentials or seeds operational storage.
+No production receiver source was installed by INV-04.

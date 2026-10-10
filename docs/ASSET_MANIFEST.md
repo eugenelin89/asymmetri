@@ -511,3 +511,20 @@ Their dimensions/hash/type are validated, alt text uses the permitted artifact
 title, and fixture labels identify their synthetic role. Local QA screenshots are
 private acceptance evidence, not published media. Existing tutorial/brand images
 retain original URLs and bytes.
+
+## INV-04 showcase — October 9, 2026
+
+No `public/brand/` or `public/images/` asset was added, replaced or removed. Worker
+marks are CSS initials on explicitly synthetic roster cards; SVG charts are drawn
+from typed financial observations. They are not employee portraits or market data.
+Fixture prose and values are author-created test content derived from the pinned
+contract's synthetic golden fixture, served only from a disposable private archive.
+
+`docs/validation/inv04/` retains local browser evidence: desktop introduction and
+portfolio JPEGs (1440 × 1000), mobile introduction JPEG (390 × 900), viewport
+measurements and a labelled synthetic performance CSV downloaded through the UI.
+The committed CSV normalizes CRLF to LF; all downloaded field values are preserved.
+Screenshots are unedited captures, not public product media; no private app, athlete,
+HQ conversation, real employee, publisher key or operational data appears. Their
+role is acceptance evidence; Markdown descriptions identify the synthetic UI.
+Existing tutorial original-image URLs and all brand fallbacks are unchanged.
