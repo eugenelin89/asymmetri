@@ -348,6 +348,12 @@ division fields and connectors add no JavaScript. The browser theme color follow
 graphite. Existing social exports, favicons, authentic media and source variants
 retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 
+## BotSquad investment: repository and release ownership
+
+The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
+
+INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. INV-04's showcase source is not on the public site. The existing Ubuntu 22.10 receiver has a private, stopped/default-disabled schema-002 installation from INV-03; its public authority and operational data are empty. The newer INV-04 receiver response headers `X-Archive-Visibility` and `X-Archive-Latest-Cursor` require a future coordinated compatibility release before the website can read live records. Private installation, website deployment, receiver ingress, real HQ publishing and public Ask are independently authorized gates. Future OS upgrade is a separate project. No RECOVERY-01 project is required for local INV-05 source work; operational backup/retention acceptance remains a later live-data gate.
+
 ## INV-02 standalone archive boundary
 
 `receiver/` has an independent Node22/24 package, pinned contract, SQLite migration,

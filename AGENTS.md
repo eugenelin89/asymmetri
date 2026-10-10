@@ -33,6 +33,10 @@ clear product truth states, and a privacy-conscious account of work originating
 in community sport. It should not feel like a generic SaaS landing page, sports
 advertisement, inflated startup pitch, or legacy robotics/AI company site.
 
+## BotSquad investment cross-repository boundary
+
+This repository owns the Asymmetri website, isolated investment receiver, and public archive/showcase; the [BotSquad repository](https://github.com/eugenelin89/bot_messenger) owns persistent employees, HQ control plane, the planned simulator, free market-data adapter, and trusted publisher. The [integration map](docs/BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) identify responsibilities and current status. BotSquad `contracts/investment/v1/` is the canonical v1.0 interface; website `receiver/vendor/investment/v1/` is a pinned, verified consumer, not an independent contract fork. Review both repositories' current guidance before modifying cross-system behavior. Do not change BotSquad HQ or its grants as an incidental website task. A website Git commit, private receiver installation, public website release, HQ publishing activation and public Ask activation are separate operations.
+
 ## Architecture Boundaries
 
 - `app/` owns routes, route metadata, page composition, sitemap, robots rules,

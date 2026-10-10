@@ -3,6 +3,8 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [local INV-04 acceptance](INV-04-VALIDATION.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The INV-04 UI is committed in this repository **but not deployed**. Its strict visibility-witness reads require a compatible receiver release; the currently installed private receiver is stopped/default disabled. A source update, receiver compatibility installation, shared TLS ingress, public website release and actual HQ publication each require independent verification and explicit authorization. Do not deploy latest `main` as a shortcut to activating any of these.
+
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
 review it before the next deployment or new public exposure. The migration snapshot

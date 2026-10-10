@@ -158,6 +158,10 @@ bind a local socket; record the default-build failure rather than hiding it.
 
 ## Disposable INV-04 showcase preview
 
+This local preview is part of the Asymmetri website/receiver repository, not a BotSquad HQ deployment. It uses the pinned `receiver/vendor/investment/v1/` files from [BotSquad's canonical contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1). See the [integration map](BOTSQUAD_INTEGRATION.md) and [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The demonstration has no real worker execution or investment publisher authority; it must never populate operational receiver storage.
+
+
+
 Use Node from `.nvmrc` and install the existing root/receiver lockfiles. This is
 explicit local tooling, never application startup or a production seed command:
 

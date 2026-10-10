@@ -5,6 +5,9 @@ and Vinext packaging do not start or import the receiver runtime.
 
 ## Contract and runtime
 
+**Cross-repository guide:** [Asymmetri/BotSquad integration map](BOTSQUAD_INTEGRATION.md). The [BotSquad canonical investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) owns milestone and source-of-truth responsibilities; Asymmetri owns this receiver and site implementation. INV-04 is accepted in source and local synthetic browser validation, not released to the live website.
+
+
 `receiver/vendor/investment/v1/` is the exact nine-file contract 1.0 from
 [eugenelin89/bot_messenger at ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1).
 Manifest SHA-256:
@@ -288,8 +291,7 @@ floating branch as production protocol.
 
 ## Deferred scope
 
-Later INV-04 dashboard UI,
-HQ publisher/grants, official-run selection UI, collectors/providers/calendar,
+INV-04's complete showcase UI is implemented in source and locally validated, but **not deployed or activated**. Remaining deferred work includes real HQ publisher/grants, official-run selection/activation controls, collectors/providers/calendar,
 authoritative trading, real rights approval workflow, public activation and the entire
 private Ask service. INV-02 provides REST/archive foundations; INFRA-02 adds stopped private-host installation and synthetic Linux acceptance.
 

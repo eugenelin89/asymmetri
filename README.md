@@ -33,6 +33,8 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
+| `/botsquad/investment` | INV-04 investment showcase implemented in source only; truthful unconfigured state until an approved release and data activation |
+| `/botsquad/ask` | Disabled preview of future visitor-to-employee Q&A; no live question service |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
@@ -128,6 +130,9 @@ changing public assets.
 - [Historical September portfolio decisions](docs/PORTFOLIO_REDESIGN.md)
 
 ## BotSquad investment showcase (INV-04)
+
+**Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
+
 
 The source-level [investment showcase](docs/INV-04-VALIDATION.md) adds the team,
 discussion desk, research, decisions, portfolio, holdings and transaction journal
