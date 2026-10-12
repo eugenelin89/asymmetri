@@ -1175,3 +1175,189 @@ export const investmentShowcase = {
     ['Limits of interpretation','The experiment is not personalized investment advice. Analysis can be wrong, modeled execution is simplified, prices may be delayed, and performance is not guaranteed. Real employee collaboration, market integration and a forward-running trial remain later milestones.'],
   ],
 } as const;
+
+// Hitting candidate copy: source-only; publication is blocked pending the
+// operational/legal decisions in docs/HITTING_PUBLICATION_PLAN.md.
+export const hittingPages = {
+  privacy: {
+    title: "Asymmetri Hitting Privacy Policy",
+    description: "How Asymmetri Hitting handles local Swing videos, experimental 2D evidence, sharing, external services and support.",
+    introduction: [
+      "Asymmetri Hitting is an iPhone app for personal Swing video review and experimental image-plane 2D measurements. This policy distinguishes information stored in the app from information handled by Apple, sharing services, the Asymmetri website and customer support.",
+    ],
+    contactLabel: "Privacy contact",
+    related: { label: "Asymmetri Hitting Support", href: "/support/hitting" },
+    sections: [
+      {
+        id: "local-information", heading: "Information stored in Hitting",
+        items: [
+          "Imported or recorded original videos, thumbnails and saved Swings; source filenames, selected Photos identifiers when available, dates and their provenance, media metadata, integrity information and exact sample timing. Imported originals may include audio and embedded metadata.",
+          "A stable local Athlete identifier, Swing identifiers, declared batting side and Camera View. This local identity is not an online account; Hitting does not provide the Athlete Profile fields in the separate Pitching app.",
+          "Manually marked moments and revisions, detected body landmarks and confidence, human review choices, experimental 2D measurements and their saved evidence and history.",
+          "Optional Swing Context, Swing Notes and independent Athlete Notes. Information you enter may include personal information.",
+          "A separate Reference Library of authorized original videos from Photos or Files, attribution and study information, intervals, bookmarks, manual marks and Reference Notes.",
+          "Saved comparisons containing source identifiers and metadata, dates, review settings and snapshots of manual moments used for alignment. These records do not duplicate the videos or create measurements of a Reference subject.",
+        ],
+        closing: [
+          "Apple Vision processes pose analysis on the device. No account is required. Hitting has no Asymmetri-operated upload, remote-analysis or cloud-sync feature for these records and no app-owned analytics, advertising, tracking or crash-reporting SDK.",
+          "Local processing does not mean that Apple services, file providers or destinations you choose for sharing never use a network.",
+        ],
+      },
+      {
+        id: "camera-photos-files", heading: "Camera, Photos and Files",
+        paragraphs: [
+          "Camera permission enables rear-camera video recording. Direct recording does not record microphone audio. A saved recording stays in Hitting's app storage; Hitting does not automatically add it to Photos.",
+          "Photos import obtains the selected original and makes an app-owned copy. Photos or iCloud may need to download that original. Reference import from Files uses the system picker and copies the selected original; the file provider may use its own network services.",
+          "Review Camera and Photos permissions in iOS Settings. Denying access can prevent the corresponding operation. Only record, import, study and share footage you have permission to use, including permission for other people shown in it.",
+        ],
+      },
+      {
+        id: "sharing", heading: "Reports and sharing you control",
+        paragraphs: [
+          "Share Analysis prepares a temporary Swing Review PDF from one saved Swing and the information you choose, including Context, eligible current experimental measurements and verified original frames. Individual Swing Notes and Athlete Notes start unselected. Preview the report and check your selections before sharing. Personal Swing Review does not include Reference videos, Reference Notes or comparison recipes.",
+          "Share Original Video is separate. It prepares a byte-verified copy of the complete original, which can contain existing audio and embedded metadata beyond the information selected for a PDF.",
+          "Sharing uses the iOS share sheet and the destination you select. Opening these controls does not automatically send a message or upload to Asymmetri. Hitting retires inactive temporary sharing copies when it can; external services and recipients control their copies.",
+        ],
+      },
+      {
+        id: "retention-deletion", heading: "Retention and deletion",
+        paragraphs: [
+          "Saved records remain in the installation until you delete them or remove the app's local data. Delete Swing removes the selected Swing from My Swings and cleans up its positively identified app-owned original, thumbnail, marks and history, Swing Context, Swing Notes and scientific history. The confirmation describes the scope; Hitting cannot undo this deletion.",
+          "Deleting a Swing preserves the local Athlete identity and Athlete Notes, other Swings, References and Reference Notes, and saved comparisons. Comparisons can retain source metadata and snapshots of manual moments used for alignment; the deleted video becomes unavailable and is not replaced by another Swing. Delete a comparison separately to remove its recipe.",
+          "After successful cleanup, minimal local integrity markers retain Swing, source, import-operation and Athlete identifiers and a receipt digest to prevent stale work from recreating deleted records. These markers do not retain videos, Notes, Context or scientific history.",
+          "If cleanup cannot finish, Hitting shows Cleanup Pending and offers Try Cleanup Again. Unrecognized files and uncertain ownership are preserved. Recovery Required means Hitting cannot safely establish the outcome; it does not mean all files were removed.",
+          "Deleting a Reference removes it from its library. Ownership-checked cleanup of its original and study files may occur after restarting the app; uncertain files are preserved. Deleting a saved comparison removes only its recipe. Notes and Context have separate editing controls.",
+          "These actions are not secure erasure. In-app deletion does not delete Photos originals, recall shared PDFs or videos, erase backups or control provider records. A restored backup may restore earlier app data. A standalone video or exported report does not preserve the complete app history.",
+        ],
+      },
+      {
+        id: "apple-backups", heading: "Apple services and backups",
+        paragraphs: [
+          "Photos/iCloud, file providers, system sharing, diagnostics and backups operate under their own privacy practices and your settings. App data may be included in ordinary device backups; Hitting does not exclude it from those backups. Hitting has no separate Asymmetri cloud backup or sync service.",
+          "Apple may make analytics, crash or diagnostic information, ratings, reviews and feedback available to the developer. Information you choose to include in feedback may contain comments, contact details or screenshots. Apple-provided reports are separate from Hitting's local video and scientific records.",
+        ],
+      },
+      {
+        id: "support-email", heading: "Support email and optional attachments",
+        paragraphs: [
+          "Contact info@asymmetri.co for Hitting support or privacy questions. The app can open your email application with a Hitting support subject; you decide whether to send the message. Nothing is automatically attached.",
+          "Your email address, message and chosen attachments pass through your email provider, Asymmetri support and its email provider. Describe the issue first and send only information needed to resolve it. Avoid identifiable athlete videos or personal Notes unless needed and authorized. Contact the same address about information you have sent or a request to remove it.",
+          "Removing app data does not remove email already sent, recipient copies, email-provider records or backups.",
+        ],
+      },
+      {
+        id: "minor-athletes", heading: "Footage of minor athletes",
+        paragraphs: [
+          "Parents, guardians and authorized adults should supervise recording and sharing involving minors and obtain appropriate permission. Do not send identifiable footage or personal Notes about a minor to support unless necessary and authorized by their parent or guardian. Permission to assist with a support issue does not authorize public reuse of footage.",
+        ],
+      },
+      {
+        id: "website", heading: "Website visits and external services",
+        paragraphs: [
+          "Opening a web link leaves the app's local-data boundary. Asymmetri's website hosting and server infrastructure may process IP addresses, requested URLs, request times and other technical request information to deliver, operate and protect the site. This does not mean the server receives your local Swing records.",
+          "The website has no site-owned visitor analytics or advertising tracker. Optional external media and email links involve their respective services when you choose them. Website/server records, support correspondence and local app records have separate handling; no fixed infrastructure-log retention or provider-wide deletion is promised here.",
+        ],
+      },
+    ],
+  },
+  support: {
+    title: "Asymmetri Hitting Support",
+    description: "Help with Swing capture and import, exact-frame review, manual moments, experimental 2D evidence, Notes, Reference Study, Compare, sharing and deletion.",
+    introduction: [
+      "Asymmetri Hitting is a separate iPhone app for reviewing your Swing videos. Its core review workflows are implemented and release preparation is in progress. It is not publicly released yet.",
+      "The three implemented measurements are experimental image-plane 2D results. They do not grade a Swing, measure physical bat speed or exit velocity, predict injury, or establish laboratory or validated 3D biomechanics.",
+    ],
+    contactLabel: "Hitting support",
+    related: { label: "Asymmetri Hitting Privacy Policy", href: "/privacy/hitting" },
+    sections: [
+      {
+        id: "first-use", heading: "Start with a Swing video",
+        paragraphs: [
+          "Open My Swings and choose Import Video or Record Swing. No online account is required. Review the original and declare batting side and Camera View before saving. Use only footage you are authorized to record, study and share.",
+          "After saving, open the Swing from My Swings. Athlete Notes are independent of an individual Swing; Reference videos belong in the separate Reference Library.",
+        ],
+      },
+      {
+        id: "permissions-import", heading: "Permissions and importing",
+        paragraphs: [
+          "Allow the Camera or Photos access needed for the action in iOS Settings. If access is denied, the corresponding action may be unavailable. Photos or iCloud may need a connection to download a selected original; allow the acquisition to finish or use Cancel.",
+          "My Swings imports from Photos. Review the acquired original, batting side and Camera View, then save explicitly. Resolve any duplicate-import choice before continuing. Files import is available for References, not as a general My Swings import path.",
+        ],
+      },
+      {
+        id: "record", heading: "Record a Swing",
+        paragraphs: [
+          "Choose Record Swing, select Batting Side and Camera View, review the camera setup, then choose Start Recording and stop when finished. Review the result and choose Save Swing to keep it. Direct recording uses the rear camera without microphone audio and does not automatically save a Photos copy.",
+          "Available recording formats depend on the device. An interruption, insufficient storage or unavailable camera can prevent recording or saving; follow the app's message rather than assuming a recording was retained.",
+        ],
+      },
+      {
+        id: "exact-review", heading: "Review exact original frames",
+        paragraphs: [
+          "Use playback, slow-review controls, scrubbing and frame steps to inspect the original. Wait for the requested frame to resolve before marking it. Full Screen provides a larger review surface.",
+          "Frame steps follow actual source samples and presentation times. A nominal frame-rate label does not guarantee uniform sample spacing. Missing, changed or unsupported source media can make exact review unavailable; the app does not silently substitute another source.",
+        ],
+      },
+      {
+        id: "moments", heading: "Mark Moments",
+        items: [
+          "Setup is a clear pre-stride stance frame you choose, or a clear pre-swing stance sample for a no-stride swing. It is a manual reference, not a biological event or precise physical instant.",
+          "The lead foot is the batter’s front foot toward the pitcher; do not identify it from screen-left or screen-right.",
+          "Lead Foot Lift is the earliest selected sampled image after Setup where the lead shoe visibly separates from the playing surface and the previous contact phase is interpretable. It is not force unloading. Use Not Applicable for a no-lift technique, or Not Observable when the view cannot establish it.",
+          "Foot Plant is the earliest selected sampled image after a visible stride where part of the lead shoe appears to contact the playing surface again. It is apparent visual shoe contact, not force or load acceptance.",
+          "Contact is the first selected sampled image that supports actual bat–ball contact. Mere projected overlap, blur or occlusion is insufficient. Do not infer contact from a later ball trajectory or treat it as automatically detected.",
+        ],
+        closing: [
+          "Use Set, Go To, deliberate Move and Clear controls for exact marks. Keep an unavailable or not-applicable reason when the video cannot support a moment. Changing a contributing mark can make a saved measurement stale without deleting its history.",
+        ],
+      },
+      {
+        id: "experimental-measurements", heading: "Experimental measurements and unavailable evidence",
+        paragraphs: [
+          "Stance Width, Stride Change and Trunk Lean at Foot Plant are the three implemented Experimental 2D methods. Follow each method's camera-view, marked-frame, visible-landmark and human-review requirements. Read the explanation and contributing evidence with the result.",
+          "All three methods require the Across-Plate camera view. Stance Width is horizontal ankle span at Setup; Stride Change is the change in that span to Foot Plant. Both are expressed relative to projected Setup torso length, not physical distance. Trunk Lean is the shoulder-to-hip midpoint segment’s angle from image-up, positive toward image-right; it is not anatomical trunk flexion.",
+          "Occlusion, foreshortening, camera placement or incomplete detection can make a result unavailable or misleading. An unavailable result is not zero and is not a technique score. Successful inference and independent scientific acceptance on representative real-batter footage remain pending.",
+          "If a result is stale, review what changed in its contributing source or marks before choosing a new calculation. Older scientific records remain history; Notes or manual Context are not automatic inputs that validate a measurement.",
+        ],
+      },
+      {
+        id: "notes-context", heading: "Notes and Context",
+        paragraphs: [
+          "Use Swing Notes for observations about one Swing and Athlete Notes for independent observations across training. Context records information you enter about training and contact or outcome; it is not automatically inferred performance data.",
+          "Review optional text before sharing. Editing human Notes or Context does not rewrite saved moments or scientific history.",
+        ],
+      },
+      {
+        id: "reference-compare", heading: "Reference Study and Compare",
+        paragraphs: [
+          "In References, import authorized video from Photos or Files and record useful attribution, batting side and Camera View. Study the original with an interval, bookmarks, manual marks and separate Reference Notes. A Reference does not become a personal Swing or create biomechanics results for its subject.",
+          "Compare pairs a Reference with a saved personal Swing. Inspect each source independently or use the available manual-moment alignment. Saved comparisons preserve the chosen pair and review settings; they do not copy videos or imply that two performances are scientifically equivalent.",
+          "If a source is deleted, changed or unavailable, a saved comparison remains unavailable instead of rebinding. Delete its recipe separately if you no longer need it. Personal-Swing-versus-personal-Swing selection is not provided.",
+        ],
+      },
+      {
+        id: "share", heading: "Share a Swing Review",
+        paragraphs: [
+          "Open Share Analysis on a saved Swing, select the information you intend to disclose and preview the Swing Review PDF. Individual Swing Notes and Athlete Notes start unselected. Only eligible current experimental results and verified original frames can be included; Reference content is not part of this personal report.",
+          "Share Original Video is separate and includes the complete original with any existing audio or metadata. Choose the destination in the system share sheet. The recipient controls their copy; deleting local records will not recall it.",
+        ],
+      },
+      {
+        id: "delete", heading: "Delete a saved Swing and check cleanup",
+        paragraphs: [
+          "Use the saved Swing row's Delete action, review the selected identity and consequences, then confirm or Cancel. Deletion cannot be undone through Hitting. Finish active review, import, recording, editing or sharing operations if deletion is temporarily unavailable.",
+          "Delete Swing removes that Swing and its positively identified files. It preserves Athlete Notes, other Swings, References and saved comparisons. A comparison may retain source metadata and manual-moment snapshots even though the deleted video is unavailable; delete that recipe separately if needed.",
+          "Cleanup Pending means some files remain. Use Try Cleanup Again when available. Recovery Required means the app cannot safely establish the outcome; contact support instead of deleting unfamiliar files. Photos originals, external shared copies and backups are separate.",
+        ],
+      },
+      {
+        id: "report-issue", heading: "Report an issue with minimal private information",
+        paragraphs: [
+          "Email info@asymmetri.co with the app version, iOS version, device model, the action you tried, the message shown and whether it involved Photos import, recording, a Reference or sharing. Begin with a description rather than a video or personal Notes. Nothing is sent automatically by the app.",
+          "Send footage, screenshots or reports only if needed, authorized and checked for private information. Identifiable minor-athlete footage requires parent or guardian authorization. Testing or support permission does not authorize marketing reuse.",
+          "If email cannot open or you are offline, copy the address and contact us when a connection is available. Keep the original media and valuable records intact while seeking help; do not uninstall the app as a routine troubleshooting step.",
+        ],
+      },
+    ],
+  },
+} as const satisfies Record<string, UtilityPageContent>;
