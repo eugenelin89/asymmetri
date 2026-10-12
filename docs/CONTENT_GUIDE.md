@@ -1,5 +1,9 @@
 # Content guide
 
+## Hitting draft preparation — October 12, 2026
+
+Candidate Hitting-specific policy/help lives once in `content/site.ts` → `hittingPages`, rendered at `/privacy/hitting` and `/support/hitting`. Preserve existing Pitching `motionPages` and routes. Internal policy questions/effective-date approval stay in [the review plan](HITTING_PUBLICATION_PLAN.md), not rendered placeholders. Source preparation, scientific acceptance and publication are separate. Historical Hitting family wording is audited with a proposed correction in that plan; it is not changed in this bounded draft.
+
 ## Source of truth
 
 Shared public content is centralized in `content/`. `site.ts` owns shared identity,

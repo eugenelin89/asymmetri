@@ -1,5 +1,9 @@
 # Architecture
 
+## Hitting draft preparation — October 12, 2026
+
+`app/privacy/hitting` and `app/support/hitting` are source-only candidate routes reusing UtilityPage/utilityMetadata. Their copy lives in `hittingPages` in `content/site.ts`. They carry noindex/nofollow and are absent from navigation/sitemap; these are indexing precautions, not access controls. Do not merge/deploy before [publication approval](HITTING_PUBLICATION_PLAN.md). No shared renderer, dependency or server change.
+
 ## Overview
 
 Asymmetri / Asymmetri.co is the umbrella; Asymmetri Sports and Asymmetri Labs are

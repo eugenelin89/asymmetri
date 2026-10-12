@@ -1,5 +1,9 @@
 # Website and support privacy audit
 
+## Hitting draft preparation — October 12, 2026
+
+Hitting candidate policy/support copy is scoped to `hittingPages` and two unlinked draft routes. No tracking/form/provider/dependency or server change. Source-derived local data, comparison residual metadata, user-selected sharing, email/Apple/provider/backup boundaries were reviewed; support retention/readers/providers/minors, Apple-report practices and operator/effective-date facts remain pending owner/legal review. See [the gated publication plan](HITTING_PUBLICATION_PLAN.md). This audit does not approve publication or certify legal compliance.
+
 Current dependency status is recorded in the [October 7 security review](DEPENDENCY_SECURITY_2026-10-07.md).
 The dependency findings in the dated publication records below describe their
 original lockfiles; they are not the current security baseline.

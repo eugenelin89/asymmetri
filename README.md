@@ -1,5 +1,9 @@
 # Asymmetri
 
+## Hitting draft preparation — October 12, 2026
+
+Hitting privacy/support source drafts at `/privacy/hitting` and `/support/hitting` are prepared under Motion Prompt159. They are not authorized for publication. See [the publication plan](docs/HITTING_PUBLICATION_PLAN.md) for owner/legal gates and local validation. Existing Pitching routes remain unchanged.
+
 Asymmetri builds technology that gives people and small teams more capability
 with the resources they already have.
 

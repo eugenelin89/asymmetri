@@ -1,5 +1,9 @@
 # Testing
 
+## Hitting draft preparation — October 12, 2026
+
+Motion Prompt159 adds source-only Hitting policy/support routes. Check both drafts and existing `/privacy` and `/support` at390/768/1440px, keyboard focus/reduced motion, article semantics, canonical/robots/mutual links, no horizontal overflow or private review placeholders. Selected Node24 checks/Next/Vinext builds and local browser evidence are recorded in [the publication plan](HITTING_PUBLICATION_PLAN.md). Actual public HTTPS/native opening remains a later publication gate.
+
 ## Required checks
 
 For meaningful implementation changes, confirm that `node --version` matches
