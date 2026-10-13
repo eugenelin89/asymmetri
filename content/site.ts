@@ -33,6 +33,13 @@ export const divisions = {
   },
 } as const;
 
+export const botsquadStructure = {
+  overview: { label: 'BotSquad', navLabel: 'Overview', href: '/botsquad' },
+  research: { label: 'BotSquad Research', navLabel: 'Research', href: '/botsquad/research' },
+  investment: { label: 'BotSquad Investment', navLabel: 'Investment', href: '/botsquad/investment' },
+  ask: { label: 'Ask BotSquad', navLabel: 'Ask BotSquad', href: '/botsquad/ask' },
+} as const;
+
 const contactEmail = "info@asymmetri.co";
 
 export const site = {
@@ -65,6 +72,9 @@ export const site = {
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
         { label: divisions.labs.product.name, href: divisions.labs.product.path },
+        botsquadStructure.research,
+        botsquadStructure.investment,
+        botsquadStructure.ask,
       ],
     },
     { label: "About", href: "/about" },
@@ -909,6 +919,7 @@ export const botsquad = {
     href: "https://github.com/eugenelin89/bot_messenger/blob/main/docs/product/ROADMAP.md",
   },
   navigation: [
+    { label: "Explore BotSquad", href: "#explore-botsquad" },
     { label: "The idea", href: "#the-goal" },
     { label: "Meet the team", href: "#how-it-works" },
     { label: "What works", href: "#capabilities" },
@@ -1026,7 +1037,7 @@ export const botsquad = {
 const labsProjects: readonly LabsProject[] = [
   {
     name: botsquad.name,
-    description: "An open-source experiment in giving AI workers a place to work together.",
+    description: "An open-source project for persistent AI teams, and home to BotSquad Research.",
     status: botsquad.status,
     detail: { label: "Explore BotSquad", href: botsquad.path },
     source: botsquad.source,
@@ -1048,6 +1059,31 @@ export const labs = {
   projectsHeading: "Currently playing with",
   projects: labsProjects,
   closing: "More experiments will show up here when they're worth sharing.",
+} as const;
+
+export const botsquadResearch = {
+  ...botsquadStructure.research,
+  metadata: {
+    title: 'BotSquad Research | Asymmetri Labs',
+    description: 'Research projects within BotSquad. Explore how persistent AI teams investigate questions, discuss evidence and make decisions, starting with BotSquad Investment.',
+  },
+  headline: 'Research with the work in view.',
+  introduction: 'BotSquad Research brings together projects that study how persistent AI teams investigate questions, discuss evidence and make decisions.',
+  relationship: 'A research area within BotSquad, an Asymmetri Labs project.',
+  projectsHeading: 'Research projects',
+  project: {
+    ...botsquadStructure.investment,
+    description: 'Follow an AI team’s research, discussions and investment decisions. Inspect the records behind its work and how the portfolio develops.',
+    action: 'Explore BotSquad Investment',
+  },
+  closing: 'Each research project keeps its questions, methods and published evidence together.',
+} as const;
+
+export const botsquadDirectory = {
+  headline: 'Explore BotSquad.',
+  introduction: 'Research is one area of the BotSquad project. Ask is the place for questions about the project and its work.',
+  research: 'Projects that examine how AI teams work, starting with BotSquad Investment.',
+  ask: 'A place for general questions and questions about published research or decisions. Questions are not open yet.',
 } as const;
 
 export const about = {

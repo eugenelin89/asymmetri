@@ -4,7 +4,8 @@
 
 Asymmetri / Asymmetri.co is the umbrella; Asymmetri Sports and Asymmetri Labs are
 peer divisions. Motion belongs to Sports; experimental open-source BotSquad belongs
-to Labs. Next.js App Router, strict TypeScript and shared CSS render the site.
+to Labs. BotSquad contains BotSquad Research, which contains BotSquad Investment;
+Ask BotSquad is a shared sibling of Research. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
 separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
 default-disabled INV-02 receiver owns a public archive/signature boundary described
@@ -20,11 +21,14 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/motion` | Current pitching workflow and family roadmap |
-| `/botsquad` | Experimental self-hosted project |
+| `/botsquad` | Umbrella project overview, software story and area directory |
+| `/botsquad/research` | Research hub linking to BotSquad Investment |
+| `/botsquad/investment` | Investment research project and retained evidence routes |
+| `/botsquad/ask` | Shared BotSquad question service, currently closed |
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
 | `/privacy`, `/support` | Protected Motion articles |
-| `/robots.txt`, `/sitemap.xml` | Nine canonical routes, permissive robots |
+| `/robots.txt`, `/sitemap.xml` | Ten indexable canonical routes, permissive robots |
 | `/sport` | HTTP 308 to `/sports` |
 | `/work` | HTTP 308 to `/labs` |
 | `/story` | HTTP 308 to `/sports#story` |
@@ -54,6 +58,14 @@ facts. The server page renders a brief hero, generic project articles and a clos
 line; it has no approach/principles section or BotSquad-specific access fields.
 All Labs projects are open source; Sports has no blanket open-source requirement.
 No old `work` content export.
+
+`botsquadStructure` owns the stable area names and URLs. `botsquadResearch` owns
+the research hub; `botsquadDirectory` owns the overview area cards. The server-only
+`BotSquadNavigation` renders ancestor breadcrumbs and Overview/Research/Investment/Ask
+links on the overview, hub, investment, archive and Ask pages. Ask is a sibling
+of Research, not an investment-only child. Existing investment and Ask URLs remain
+stable; page hierarchy does not change the canonical evidence/API protocol.
+See [the October 13 hierarchy decision](BOTSQUAD_HIERARCHY_2026-10-13.md).
 
 `MotionFamily` is a server component reused on Sports and Motion: two individual
 apps and exactly one professional app with nested entitlement rows. Names/statuses

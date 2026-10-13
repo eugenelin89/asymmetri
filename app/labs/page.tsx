@@ -33,14 +33,14 @@ export default function LabsPage() {
                     </a>
                   )}
                   <div className="button-row">
-                    <a className="button button--primary" href={project.source.href}>
-                      {project.source.label} ↗
-                    </a>
                     {project.detail && (
-                      <a className="text-link" href={project.detail.href}>
+                      <a className="button button--primary" href={project.detail.href}>
                         {project.detail.label} →
                       </a>
                     )}
+                    <a className="text-link" href={project.source.href}>
+                      {project.source.label} ↗
+                    </a>
                   </div>
                 </article>
               ))}

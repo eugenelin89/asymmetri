@@ -40,10 +40,10 @@ When routes or shared layout code change, verify:
 - `/images/labs-social.png`, `/images/sport-social.png` and retained `/og.svg`
 
 Confirm successful responses, correct page titles and canonical values, and no
-broken public assets. Verify footer links on all nine pages, mutual
+broken public assets. Verify footer links on all ten main pages, mutual
 Privacy/Support links, the `mailto:info@asymmetri.co` contact, direct company/product
 navigation from utility pages, exactly one H1 per article and ordered H2 sections.
-The sitemap must include all nine canonical routes; robots must allow them.
+The sitemap must include all ten indexable canonical routes; robots must allow them.
 Check the policy effective date and bounded app/platform/website/email claims
 against `docs/WEBSITE_PRIVACY_AUDIT.md`. Inspect cookies, browser storage and
 network resources for accidental tracking, forms or external scripts/fonts.
@@ -192,7 +192,7 @@ The October 8 owner decision supersedes the earlier website-only naming gate.
 
 ## Tutorial regression
 
-At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all nine routes.
+At 320, 390, 768, 1024 and 1440 **effective CSS pixels**, verify all ten main routes.
 Inspect the actual `innerWidth` when browser zoom affects viewport overrides.
 Exercise all ten module links, Previous/Next and browser Back/Forward; load a fresh
 URL containing a module hash and a step hash. Check deep links into a previously
@@ -471,3 +471,15 @@ receiver. It verifies the subscription variant and mixed-mode rejection without
 opening a listener. The merged package is now pinned, and `npm run receiver:test` runs these four
 cases with `ASK_CAPABILITY_RUNTIME=.` after its existing suite. Historical
 candidate evidence remains in the [package review](ASK-04-CAPABILITY-REVIEW.md).
+
+
+## BotSquad hierarchy navigation
+
+Verify Labs → BotSquad → Research → Investment through visible links, and return
+through the breadcrumbs. Overview, Research, Investment and Ask must be reachable
+from the shared area navigation and global Labs menu. Ask breadcrumbs place it
+beside Research. Verify archive and methodology pages retain exact-run navigation.
+The Research hub must have its apex canonical and sitemap entry. Existing
+investment/Ask URLs and noindex policy stay intact. At 390/768/1440 CSS pixels,
+check wrapping, 44px targets, visible focus, current-page indication and no overflow;
+verify menus by keyboard and preserve reduced-motion rules and Motion footer links.

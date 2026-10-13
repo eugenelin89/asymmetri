@@ -1,9 +1,10 @@
+import { BotSquadNavigation } from "@/components/botsquad-navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
 import { WorkerFlow } from "@/components/worker-flow";
-import { botsquad, introductions, site, investmentShowcase } from "@/content/site";
+import { botsquad, introductions, site, botsquadDirectory, botsquadStructure } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(botsquad.metadata, botsquad.path, "/images/labs-social.png");
@@ -27,6 +28,7 @@ export default function BotSquadPage() {
     <div className="site botsquad-page">
       <SiteHeader />
       <main id="main-content" tabIndex={-1}>
+        <div className="shell"><BotSquadNavigation current="overview" /></div>
         <section className="botsquad-hero">
           <div className="shell">
             <p className="eyebrow eyebrow--light">{botsquad.eyebrow}</p>
@@ -43,6 +45,15 @@ export default function BotSquadPage() {
         <nav className="squad-index shell" aria-label="On this page">
           {botsquad.navigation.map((item) => <a key={item.href} href={item.href}>{item.label} <span aria-hidden="true">↓</span></a>)}
         </nav>
+        <section className="section squad-raised" id="explore-botsquad">
+          <div className="shell">
+            <div className="squad-section-heading product-heading"><h2>{botsquadDirectory.headline}</h2><p>{botsquadDirectory.introduction}</p></div>
+            <div className="squad-areas">
+              <article><p className="eyebrow">Research</p><h3><a href={botsquadStructure.research.href}>{botsquadStructure.research.label} →</a></h3><p>{botsquadDirectory.research}</p><a className="text-link" href={botsquadStructure.investment.href}>{botsquadStructure.investment.label} →</a></article>
+              <article><p className="eyebrow">Questions &amp; answers</p><h3><a href={botsquadStructure.ask.href}>{botsquadStructure.ask.label} →</a></h3><p>{botsquadDirectory.ask}</p></article>
+            </div>
+          </div>
+        </section>
         <section className="section" id="the-goal">
           <div className="shell product-split">
             <div className="product-heading"><p className="eyebrow">{botsquad.goal.eyebrow}</p><h2>{botsquad.goal.headline}</h2></div>
@@ -135,7 +146,6 @@ export default function BotSquadPage() {
             <div className="squad-prose"><p>{botsquad.control.body}</p><a className="text-link" href={botsquad.whitePaper.href}>{botsquad.whitePaper.label} ↗</a></div>
           </div>
         </section>
-        <section className="section squad-raised"><div className="shell product-split"><div className="product-heading"><p className="eyebrow">A transparent experiment</p><h2>{investmentShowcase.discovery.title}</h2></div><div className="squad-prose"><p>{investmentShowcase.discovery.body}</p><a className="text-link" href={investmentShowcase.discovery.href}>Explore the showcase →</a></div></div></section>
         <IntroductionVideo video={introductions.botsquad} />
       </main>
       <SiteFooter />

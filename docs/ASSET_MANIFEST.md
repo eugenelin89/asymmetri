@@ -528,3 +528,11 @@ Screenshots are unedited captures, not public product media; no private app, ath
 HQ conversation, real employee, publisher key or operational data appears. Their
 role is acceptance evidence; Markdown descriptions identify the synthetic UI.
 Existing tutorial original-image URLs and all brand fallbacks are unchanged.
+
+
+## BotSquad Research hub, October 13, 2026
+
+The Research hub reuses `public/images/labs-social.png` (1200×630) for social
+metadata. Its existing original typography, source SVG, processing and rights
+assessment remain unchanged. No asset bytes or public URLs changed, and no new
+visible image or alt text was introduced. Navigation and project cards use HTML/CSS.

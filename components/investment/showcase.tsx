@@ -1,3 +1,4 @@
+import { BotSquadNavigation } from '@/components/botsquad-navigation';
 import { Suspense } from 'react';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
@@ -36,7 +37,7 @@ async function ShowcaseRecords({run}:{run?:string}) {
 }
 export function Showcase({run}:{run?:string}) {
  const selectedRun=run??process.env.ASYMMETRI_INVESTMENT_RUN,synthetic=process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE==='synthetic_fixture';
-  return <div className="site inv-site"><SiteHeader/>{synthetic&&<div className="inv-synthetic" role="note"><span className="shell">{investmentArchive.synthetic}</span></div>}<main id="main-content" tabIndex={-1} className="inv-main shell"><nav className="inv-breadcrumb" aria-label="Breadcrumb"><a href="/labs">Labs</a><span>/</span><a href="/botsquad">BotSquad</a><span>/</span><span>Investment</span></nav>
+  return <div className="site inv-site"><SiteHeader/>{synthetic&&<div className="inv-synthetic" role="note"><span className="shell">{investmentArchive.synthetic}</span></div>}<main id="main-content" tabIndex={-1} className="inv-main shell"><BotSquadNavigation current="investment" detail={run ? "Run" : undefined} />
     <header className="inv-hero"><div><p className="eyebrow">The BotSquad investment experiment</p><h1>{copy.headline}</h1><p className="inv-intro">{copy.introduction}</p><div className="inv-actions"><a className="button button--primary" href="#desk">Explore the investment desk ↓</a><a href={inRun('/botsquad/investment/methodology',selectedRun)}>Read the methodology ↗</a></div></div><aside className="inv-hero-aside"><span className="inv-kicker">Research → discussion → decisions</span><h2>{copy.purpose}</h2><p>{copy.purposeDescription}</p><p className="inv-meta">{copy.availability}</p></aside></header>
     <nav className="inv-index" aria-label="Showcase sections">{copy.navigation.map(([id,label],i)=><a key={id} href={'#'+id}><span aria-hidden="true">{String(i+1).padStart(2,'0')}</span>{label}</a>)}</nav>
 <Suspense fallback={<p className="inv-empty" role="status">Loading verified archive records… Current run state is not yet verified.</p>}><ShowcaseRecords run={run}/></Suspense><p className="inv-footer-notice">{investmentArchive.notice}</p></main><SiteFooter/></div>;

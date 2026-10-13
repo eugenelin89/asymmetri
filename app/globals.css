@@ -1935,7 +1935,7 @@ p {
 
 /* INV-03: focused evidence reading, using the existing Graphite + Teal tokens. */
 .archive { max-width: 76rem; padding-block: clamp(2rem, 5vw, 5rem); }
-.archive nav { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
+.archive > nav { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 3rem; }
 .archive a { color: var(--brand-bright); text-decoration: underline; text-underline-offset: .2em; }
 .archive h1 { font-size: clamp(2rem, 5vw, 4.5rem); line-height: 1.08; max-width: 20ch; overflow-wrap: anywhere; }
 .archive h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-block: 1.8rem 1rem; }
@@ -1956,3 +1956,19 @@ p {
 .archive-status { font-weight: 700; }
 @media (max-width: 600px) { .archive-facts { grid-template-columns: 1fr; gap: .3rem; } .archive-facts dd { margin-bottom: .8rem; } }
 .archive h2, .archive h3, .archive li, .archive p { overflow-wrap: anywhere; }
+
+/* BotSquad project hierarchy and cross-area navigation. */
+.squad-navigation { padding-block: 1.5rem; }
+.squad-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .65rem; list-style: none; margin: 0; padding: 0; color: var(--ink-secondary); font-size: .85rem; }
+.squad-breadcrumb li { display: inline-flex; align-items: center; gap: .65rem; }
+.squad-breadcrumb li + li::before { content: "/"; color: var(--ink-secondary); }
+.squad-breadcrumb a, .squad-breadcrumb [aria-current] { display: inline-flex; align-items: center; min-height: 44px; }
+.squad-area-nav { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .75rem; border-block: 1px solid var(--line); }
+.squad-area-nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: .5rem; font-size: .95rem; text-underline-offset: .3em; }
+.squad-area-nav a[aria-current] { color: var(--ink); font-weight: 700; text-decoration-line: underline; text-decoration-thickness: 2px; }
+.squad-areas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 5rem); }
+.squad-areas article { border-top: 2px solid var(--brand-primary); padding-top: 1.5rem; }
+.squad-areas h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; }
+.squad-areas p { max-width: 55ch; }
+.squad-areas .text-link { margin-top: 1rem; }
+@media (max-width: 700px) { .squad-areas { grid-template-columns: 1fr; } }

@@ -103,3 +103,10 @@ Video posters remain local typography. No third-party player loads until the use
 chooses Load video; preserve Google disclosure, approved IDs, no autoplay, close
 and focus restoration, and the external fallback. Product privacy behavior is
 independent of the selected visual identity.
+
+
+BotSquad's October 13 area navigation uses existing graphite surfaces, teal links,
+thin rules and native anchors. Breadcrumbs show Labs, BotSquad, Research and the
+current project; Ask branches directly from BotSquad. Current area links use bold
+text plus a thicker underline. Research/Ask overview cards stack below 700px.
+No new imagery, font, animation or design system accompanies this hierarchy.
