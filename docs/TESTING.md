@@ -464,3 +464,10 @@ The actual SIGKILL cases verify text exclusion and unfinished-copy rejection wit
 a valid manifest digest. The read scenario measures 80 requests/six in flight,
 then ordinary quota exhaustion while reserved cancellation/control paths succeed.
 It is not a genuine model-load or provider-cost benchmark.
+
+The explicit `receiver/deploy/ask-capability-acceptance.test.mjs` requires
+`ASK_CAPABILITY_RUNTIME` to name an isolated compiled candidate or accepted
+receiver. It verifies the subscription variant and mixed-mode rejection without
+opening a listener. It intentionally cannot pass against the old pinned package.
+Keep an unmerged candidate outside the vendor tree; see the
+[frozen package review](ASK-04-CAPABILITY-REVIEW.md#frozen-candidate-acceptance-not-adopted).

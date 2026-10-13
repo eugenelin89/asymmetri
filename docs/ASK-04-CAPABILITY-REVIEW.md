@@ -9,8 +9,9 @@ No vendored file, live configuration or approved privacy notice changes here.
 ## Proposed shape and compatibility
 
 HQ proposes adding `activity_capped_subscription` to
-`AskLimits.monetaryEnforcement`. That mode requires `dailyBudgetUsd:null` and a
-closed `subscriptionActivityPolicy` object with these exact values:
+`AskLimits.monetaryEnforcement`. That mode requires `dailyBudgetUsd:null`,
+zero router/research executions and a closed `subscriptionActivityPolicy` object
+with these exact values:
 
 | Property | Required value |
 | --- | --- |
@@ -86,3 +87,55 @@ authority and pre-wire attempt custody, without a runtime caller, dispatcher,
 contract change or public admission. It is not the deployment of this proposal;
 recorded running HQ remains d262a8d. Preserve the exact live investment IDs and
 receiver process throughout this later Ask work.
+
+## Frozen candidate acceptance (not adopted)
+
+HQ supplied a frozen, still-unmerged candidate on October 13. The nine-file package
+and every manifest member were independently hashed. Candidate identities:
+
+| File | SHA-256 |
+| --- | --- |
+| Manifest | `27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264` |
+| Schema | `101f9cd1e2d7ff4e40d5885360185f2e51a2735ca717ec972e03eba0ed281a62` |
+| Protocol | `4ac790a5b4b1f08659828a0a63c7558a3fe1d59c5f05618c45a00f203f245b93` |
+| Types | `ecbb999ceea4058825fdb86d438aad0da839147896978b3434e253ef68592f0b` |
+
+Only `AskLimits` and the new nested `AskSubscriptionActivityPolicy` definition
+change in the schema. The catalogue, goldens, OpenAPI, response examples and
+signature vector remain byte-identical. The nested policy is not a new endpoint
+or independently admitted public root. All existing investment definitions and
+signatures remain unchanged. The protocol explicitly requires zero optional
+router/research work and describes durable holds, complete usage preservation,
+unknown costs and window accounting as HQ responsibilities.
+
+The candidate was copied only into a disposable receiver staging tree, with an
+explicit `UNMERGED-CANDIDATE-NOT-A-RELEASE` source marker. The repository and live
+vendor directories were not replaced. Exact-package/type-regeneration checks,
+TypeScript build and all 236 existing receiver tests passed on local Node 24.10.0.
+All 15 existing browser-logic tests passed against the candidate schema in the
+same separate tree. The current pinned consumer was independently confirmed to
+reject the new mode with `INVALID_SCHEMA`, as intended.
+
+`receiver/deploy/ask-capability-acceptance.test.mjs` provides four additional
+consumer cases against an explicitly selected compiled runtime. They pass for:
+
+- null cost preserved with all activation flags still false;
+- mixed numeric budget/router/research combinations, missing/extra/wrong policy
+  fields and changed policy constants rejected;
+- both strict shapes preserved, subscription policy forbidden there, and the
+  receiver's positive verified-budget rule retained;
+- unchanged owner-approval, non-null approval record and roster requirements for
+  each operational flag. Parsing a synthetic approved object starts no listener.
+
+The existing `askConfig` validates the complete canonical object and preserves it;
+no duplicate website-owned conditional parser is needed. The browser's canonical
+validator accepts unchanged public DTOs. This candidate adds no public limits or
+usage endpoint, so visitor limits/cost disclosure still needs reviewed fixed copy
+for the actual service/privacy pair, with clear monitored-threshold and unavailable
+cost wording. No notice is published from candidate test results.
+
+After the accepted HQ merge is supplied, verify its exact package equals these
+reviewed bytes, update the repository source pin and exact vendor package, then
+run the committed acceptance against that installed source. If any bytes change,
+repeat the affected acceptance. Operational deployment/admission is a separate
+step requiring genuine integration evidence; this packet performs neither.

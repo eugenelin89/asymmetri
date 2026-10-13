@@ -66,6 +66,13 @@ authority. Its initial execution budget is 16; future renewals cannot reset the
 portfolio or silently rewrite this frozen configuration. No elapsed session,
 decision, market observation, employee execution or investment result is claimed.
 HQ reports its first real collection is scheduled October 14 at 11:45 UTC.
+This is the first scheduled full prospective paper session, not a Yahoo restriction
+on reading already available data. HQ reports activation at 20:28 UTC (13:28
+Vancouver), after the October 13 regular close and this method's morning decision
+cutoff. Integration tests and current-data diagnostics need not wait for October
+14; they cannot be backdated as a qualifying prior decision or market result. The
+existing finite epoch remains limited to its approved October 14–15 requests.
+This explanation changes no schedule, receiver generation, portfolio or clock.
 
 ### Backup and unchanged-service evidence
 
