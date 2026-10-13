@@ -420,3 +420,12 @@ the existing opaque cursor, fixed watermark, visibility epoch, 15-minute expiry,
 100-record and 1 MiB page bounds. No recursive catch-up occurs. Withdrawal cannot
 recall data already copied by a reader; open UI suppression has a bounded polling
 interval, not a claim of instantaneous distributed revocation.
+
+## Private Ask boundary
+
+`receiver/src/ask/` is a separate, default-disabled loopback process with its own
+`ask-migrations/`, `ask.sqlite`, service authority and offline CLI. It does not open
+the public archive database or add server state to Next.js. Its fixed loopback
+adapter verifies public evidence and visibility; raw questions/answers never enter
+the archive/feed/export. See [ASK-01](ASK-01-PRIVATE-RECEIVER.md) for sessions,
+limits, privacy controls, non-content recovery and activation prerequisites.

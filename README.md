@@ -140,7 +140,7 @@ discussion desk, research, decisions, portfolio, holdings and transaction journa
 at `/botsquad/investment`, exact-run pages at `/botsquad/investment/runs/[runId]`,
 decision pages, methodology, and a disabled `/botsquad/ask` preview. Existing exact
 artifact, discussion and record URLs remain available. These routes are noindex
-and are not added to the public sitemap. No website deployment is implied.
+and are not added to the public sitemap. The website was released on October 13; see the release receipt below.
 
 Official investment operations have not started. The default website has no read
 backend; it renders a truthful unconfigured state. See [local development](docs/LOCAL_DEVELOPMENT.md)
@@ -148,3 +148,7 @@ for the explicitly invoked disposable synthetic preview and [receiver boundaries
 
 Current observed-paper website semantics, source acceptance, release status and remaining
 integration are recorded in [INV-REAL-01 website handoff](docs/INV-REAL-01-WEBSITE.md).
+
+Private Ask receiver source and recovery commands are documented in
+[ASK-01 private boundary](docs/ASK-01-PRIVATE-RECEIVER.md). The public Ask page
+remains disabled; this source milestone does not activate visitor intake or HQ.

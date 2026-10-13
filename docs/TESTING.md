@@ -382,3 +382,13 @@ source limitations, incomplete-quality explanations and distinct as-of/retrieval
 accounting clocks in the journal and export. An unavailable archive must not claim
 that the experiment has never started. Verify the observed-paper label only with
 an accepted observed producer record; fixture mode cannot be relabelled to obtain it.
+
+## ASK-01 private source acceptance
+
+The full receiver suite includes `ask.test.ts`, `ask-context.test.ts` and
+`ask-recovery.test.ts`. They exercise only synthetic private sessions, claims,
+receipts, cancellation/expiry races, ancestor context withdrawal, millisecond
+ordering, bounded Unicode pagination, dedicated auth, traffic reserves and
+non-content recovery. [The boundary record](ASK-01-PRIVATE-RECEIVER.md) explains
+the limits. Public ingress, real employee execution, off-host backup custody and
+private Linux runtime acceptance remain separate release evidence.

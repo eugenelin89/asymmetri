@@ -358,3 +358,12 @@ synthetic test tooling, excluded from normal receiver startup. The preview uses
 only a disposable private archive and in-memory keys, revoked after each publication
 exercise; it never reads operational credentials or seeds operational storage.
 No production receiver source was installed by INV-04.
+
+## Separate private Ask source
+
+[ASK-01](ASK-01-PRIVATE-RECEIVER.md) implements a separate default-disabled
+loopback listener, private database, dedicated Ask verification scopes and offline
+CLI. Its directories cannot overlap this archive or backup tree. Investment keys
+do not authorize private Ask, and no raw Ask text is copied into public outputs.
+The installed production receiver remains the source recorded in the
+[INV-REAL-01 receipt](INV-REAL-01-WEBSITE.md); Ask is not yet installed or enabled.

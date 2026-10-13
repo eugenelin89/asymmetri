@@ -193,3 +193,13 @@ Omit all `ASYMMETRI_INVESTMENT_*` values to verify the default unconfigured stat
 Never set fixture variables on the operational deployment. Stop development before
 production builds to avoid competing writes to `.next`; run `npm run build:next --
 --webpack` if the documented Turbopack environment-permission failure occurs.
+
+## Private Ask source verification
+
+Use `npm run check --prefix receiver`, `npm run build --prefix receiver`, then
+`node --test receiver/dist/test/ask*.test.js` for the focused synthetic boundary.
+Tests need local loopback socket permission and disposable private directories.
+The full `npm run receiver:test` includes these files. Runtime has a distinct
+`ASYMMETRI_ASK_CONFIG` and offline CLI, documented in
+[ASK-01](ASK-01-PRIVATE-RECEIVER.md); no public Ask UI or production service starts
+automatically. No additional package dependency is required.

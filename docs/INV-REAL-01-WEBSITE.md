@@ -151,6 +151,16 @@ approval and explicit checked official selection without SQL edits or a wire/sch
 migration; [commands](INVESTMENT_RECEIVER.md#observed-run-approval-and-official-selection).
 No operational run approval or selection has been made.
 
-Receiver compatibility installation/strict HTTPS delivery; verified backup/retention and recovery;
-actual publication and as-of history; separately implemented Ask integration. No
-fixture or empty archive substitutes for these outcomes.
+The private receiver compatibility installation is complete at
+`c2edfd50ed12ba576c06e6991091090b9ced3e31`: 207/207 actual Linux tests and 61/61
+isolated TLS checks. Runtime source is recorded in `/opt/asymmetri-receiver/SOURCE_COMMIT`;
+rollback is `/opt/asymmetri-receiver/rollback-20261013-inv-real`. The unit remains
+inactive/static, configuration disabled, no port 3101 listener, and zero events,
+batches, nonces, content objects or publishers. Migration 2 integrity/FK checks
+pass. Website PID/start time, receiver configuration/unit and Nginx were unchanged.
+
+[Private Ask source](ASK-01-PRIVATE-RECEIVER.md) adds a separate disabled subsystem;
+it is not included in that installed receiver identity. Remaining: strict shared-apex
+HTTPS delivery, verified ongoing backup/retention custody, genuine publication and
+as-of history, private Ask interoperability/installation and visitor UI. No fixture
+or empty archive substitutes for these outcomes.
