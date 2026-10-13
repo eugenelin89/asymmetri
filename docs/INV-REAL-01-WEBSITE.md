@@ -27,6 +27,231 @@ investigation or provider-rights approval milestone is required. Preserve normal
 technical provenance, integrity, rate limits, access-denial handling and point-in-time
 accounting. No real trades, paid data or credit purchase/reload is included.
 
+## Executable receiver activation handoff
+
+Read-only inspection completed **2026-10-13 20:22:17 UTC**. This section is a
+preparation receipt, not an activation receipt. No administrative mutation or
+publication was performed; production code and services were left in place.
+HQ is preparing the first prospective
+observed portfolio on deployed `d262a8dff59ab82587bd6444b083e5e9b7603cf0`, with
+October 14–15 sessions, USD 100,000 virtual capital and its existing eight-equity
+plus SPY defaults. Those intentions are not a substitute for the actual frozen
+configuration, scope or event. No run/publisher/key ID has been invented here.
+
+HQ reports strict private account/eligibility verification passed after the owner
+repaired login, and its retained authentic reload-OFF evidence remains valid under
+Decision 047. That decision permits up to 31 days for this recurring observed
+purpose, bound to the same account and the original confirmation time/evidence
+hash. This is not a new attestation or a website-side account check. Ask remains
+subject to its separate integration and authority.
+
+### Verified live state
+
+| Boundary | Observed value |
+| --- | --- |
+| Investment source | `c2edfd50ed12ba576c06e6991091090b9ced3e31`, from `/opt/asymmetri-receiver/SOURCE_COMMIT` |
+| Process | `asymmetri-investment.service`, active; PID `2376449`, started `2026-10-13 17:18:09 UTC`; user/group `asymmetri-investment` |
+| Installed CLI | `/opt/asymmetri-receiver/receiver/dist/src/cli.js`; SHA-256 `daf816260866315689c92b36e8416054e14d5e7fd79469d088c4929b46180503` |
+| Configuration | `/etc/asymmetri-investment/config.json`, root:asymmetri-investment 0640; SHA-256 `298998720d18bf8e3d029658f398e748784c7ff76813b1f1e7ec5684167a5c4c` |
+| Listener and signed authority | `enabled:true`, `127.0.0.1:3101`, exact authority `asymmetri.co` |
+| Private store | `/var/lib/asymmetri-investment`, receiver-owned 0700; database `archive.sqlite` |
+| Configured bounds | Archive 67,108,864 bytes; per run 16,777,216; content 268,435,456; minimum free disk 268,435,456 |
+| Schema and integrity | Migrations 1 and 2; SQLite `quick_check: ok`; no foreign-key violations |
+| Authority | Zero publishers, publisher keys, publication approvals, authority-audit or control-audit rows |
+| Publication | Zero experiments, runs, events, batches, nonces and content objects; therefore no official selection |
+| Receiver read hold | `recovery_control.reads_held=0`; revision `0`, visibility epoch `1`; an empty archive has no public run to return |
+| Website | Source `d0c454314d646b74895f4d9e3e4a014c63c666a6`, build `P7LP4PKXMUyZ96RJnAgcz`; PID `2379577`, started `19:08:30 UTC` |
+| Website read enablement | No `ASYMMETRI_INVESTMENT_*` entries in the actual running process environment; HTTPS investment page returns 200 and **Public archive not configured** |
+| Ask preservation | PID `2384365`, started `19:38:30 UTC`; configuration SHA-256 `ae4a0bb70ac41a58f28c0d5d9bc5c44fae6869ad5afdc43b4ba3081f75913e5c` unchanged; admission, claims and delivery false; archive origin null |
+
+Anonymous apex HTTPS checks returned 200 for investment, Ask and Ask availability.
+All three set no cookie. Ask had no form; availability returned `state:disabled`
+with `Cache-Control: private, no-store`. These are narrow readiness checks, not a
+new all-host release verification. No unrelated source was deployed or rebuilt.
+
+### Materials HQ must supply
+
+Supply the real public-only handoff with file hashes and the current durable HQ
+generation, keeping signing private keys and account credentials on HQ. The two
+receiver inputs are different JSON documents:
+
+1. **Authorization document**, at most 16,384 UTF-8 bytes, with exactly four
+   top-level keys: `scope`, `publicKey`, `notBefore`, `notAfter`. `publicKey` is the
+   actual Ed25519 verification PEM, normalized by the receiver to public SPKI.
+   The validity values are safe-integer Unix seconds with `notBefore < notAfter`.
+   Current signed traffic must fall within that interval and before scope expiry.
+2. **Run approval document**, at most 262,144 UTF-8 bytes: the complete canonical
+   `RunPublishedEvent` preview that HQ will publish, not just its configuration,
+   not an EventBatch and not HQ's private portfolio configuration. The receiver
+   validates its schema and configuration hash before recording approval.
+
+The authorization shape, expressed as types rather than fabricated material, is:
+
+```ts
+{
+  publicKey: string; // Real Ed25519 public PEM only.
+  notBefore: number; // Unix seconds.
+  notAfter: number;  // Unix seconds, exclusive.
+  scope: {
+    publisherId: string; keyId: string; experimentId: string; runId: string;
+    eventTypes: string[]; contentTypes: string[];
+    publicationPolicyVersion: string; expiresAt: string; enabled: boolean;
+    generation: string; writesPerMinute: number; bytesPerDay: number;
+  };
+}
+```
+
+All scope fields are required; extra fields are rejected. IDs follow
+`^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$`. `expiresAt` is UTC ISO time, seconds or exactly
+three fractional digits followed by `Z`. Event types must be the exact authorized
+subset of the contract's 18 types, with 1–18 unique entries. Content types require
+1–5 unique entries from `text/plain`, `text/markdown`, `application/json`,
+`image/png`, `text/csv`. Decision 047's events-only publisher advertises
+`application/json` to satisfy this v1 constraint while keeping HQ's content-job
+allowlist empty; this is not website authority to stage artifacts. Writes per
+minute must be 1–60; bytes per day 1–1,073,741,824. Use the actual finite HQ grant,
+not those schema maxima as default budgets. Exact definitions remain in the
+[pinned schema](../receiver/vendor/investment/v1/schema.json) and
+[types](../receiver/vendor/investment/v1/types.d.ts).
+
+The event's required top-level keys are `schemaVersion`, `eventId`, `experimentId`,
+`runId`, `sourceSequence`, `type`, `occurredAt`, `recordedAt`, `actor`,
+`publicationPolicyVersion`, `evidenceMode`, `references`, `payload`.
+`schemaVersion` is `1.0`, type is `run.published`, and evidence mode must be
+`observed_paper`. Its payload contains exactly `title`, `purpose`, `objective`,
+`runKind`, `state`, `configuration`, `configurationHash`, `startsAt`, `endsAt`,
+`previousRunId`. Use `runKind:official` for this intended official run; approval
+also supports `private_trial`, but selection cannot promote it to official later.
+
+`payload.configuration` is the complete pinned `RunConfiguration`: versions and
+methodology hash, universe/instrument records, capital and USD currency, benchmark
+and calendar conventions, provider/feed and opening definition, execution/cutoff/
+slippage/commission/accounting rules, risk limits, cadence/session count, finite
+execution budgets, publication policy/heartbeat/staleness/outbox limits, data
+delay/attribution/rights references, approval and limitations, opening wait bound.
+Preserve HQ's exact decimal strings and values. It must have
+`configurationStatus:owner_approved`, a non-null `approvalRecordId`, and
+`configurationHash` equal to the receiver's SHA-256 of canonical JSON for the
+configuration (`canonicalHash` in `receiver/src/schema.ts`). An ordinary file hash
+does not replace that canonical configuration hash. Match experiment/run/policy
+identities across the authorization, event and configuration before admission.
+This exact configuration approval is not a renewed Yahoo investigation.
+
+### Generation and identity rule
+
+For a genuinely new publisher, the receiver's minimum valid generation is the
+string **`"1"`**. The schema requires a positive decimal string of 1–18 digits;
+`0`, numeric `1`, signs and leading zeroes are invalid. There is no receiver-wide
+generation floor in this empty database. Use HQ's **actual current durable
+publisher generation**, which may already exceed 1 after cold provisioning or
+restart; the signed `BotSquad-Generation` must match it exactly. Do not reset HQ
+to 1 or invent a generation to fit this handoff.
+
+For an existing publisher, experiment/run identity cannot change and generation
+cannot decrease. Reusing a key ID requires identical publisher, normalized public
+key and validity interval and an unrevoked key. A revoked key ID cannot be reused.
+After restore, the documented fencing/reconciliation procedure needs new key
+authority and a generation above both HQ and receiver history. A normal receiver
+restart itself does not increment the publisher generation. Reconcile any HQ
+restart before enabling delivery; never erase accepted events or receipts to
+resolve a generation mismatch.
+
+### Exact command sequence after receiving the real materials
+
+On `ssh webadmin`, define the existing owner-only command wrapper:
+
+```sh
+inv() {
+  sudo -n runuser -u asymmetri-investment -- env \
+    ASYMMETRI_RECEIVER_CONFIG=/etc/asymmetri-investment/config.json \
+    /usr/bin/node /opt/asymmetri-receiver/receiver/dist/src/cli.js "$@"
+}
+```
+
+The uppercase shell variables below are operator placeholders, not supplied IDs
+or paths. Set `INV_AUTHORIZATION_JSON` and `INV_RUN_EVENT_JSON` to the actual
+validated absolute file paths, privately staged outside the repository/public
+root and readable by `asymmetri-investment`. Set `INV_EXPERIMENT_ID` and
+`INV_RUN_ID` from those same documents. Preserve their bytes/hashes in the private
+release receipt; do not commit operational key material or fabricate JSON.
+
+Keep HQ publication delivery held while validating the supplied materials and
+capturing a consistent pre-activation backup. Follow the existing
+[backup/restore runbook](INV-03-OPERATIONS.md): `backup` requires a gracefully
+stopped receiver and a new receiver-writable destination outside its data tree.
+Verify the full backup and retain the root-owned config/unit/source receipt.
+Restart only the investment unit after the backup, verify its listener, then:
+
+```sh
+inv diagnostics
+inv authorize "${INV_AUTHORIZATION_JSON:?supply the verified authorization file}"
+inv approve-run "${INV_RUN_EVENT_JSON:?supply the canonical run.published preview}"
+```
+
+Record the stored publisher scope/key fingerprint, finite validity and exact
+approved configuration hash. If approval fails after authorization, keep HQ held
+and disable/revoke the newly granted authority as appropriate; do not enable
+delivery or silently change the frozen configuration. An identical run approval
+is a no-op; a different configuration for the same experiment/run conflicts.
+
+HQ then enables only its finite investment delivery and sends the actual ordered,
+signed EventBatch with POST to
+`https://asymmetri.co/api/experiments/v1/experiments/{experimentId}/runs/{runId}/events`,
+substituting the two real IDs. The signature authority is **`asymmetri.co`**, not
+`www`, the loopback address or a redirected URL. Reconcile the immutable publication
+receipt through its authenticated GET using current signed authority, and verify
+the exact public run/configuration/visibility witness before selection.
+Do not use a website-side synthetic publisher or manufacture sessions/results.
+
+Inspect `GET /api/experiments/v1/experiments/{experimentId}`. Only if its current
+`officialRunId` is null after successful signed ingestion, execute:
+
+```sh
+inv select-official "${INV_EXPERIMENT_ID:?supply the actual experiment ID}" \
+  "${INV_RUN_ID:?supply the actual run ID}" -
+```
+
+The third argument is compare-and-swap: `-` means no previous selection. If a run
+is already selected, inspect it and use that exact expected prior ID for an
+authorized change. An uncertain success must be read back before retry: repeating
+`-` after a successful selection conflicts. Selection requires a visible, locally
+approved `observed_paper` run whose immutable kind is `official`; it cannot create
+or ingest a run. Verify `officialRunId` and retain the selection audit afterward.
+
+Installed code confirms `authorize`, `approve-run`, `select-official` and
+`diagnostics` do **not** acquire `receiver.lock`; they can run with this listener.
+Only `serve`, `migrate`, `cleanup`, `restore-fence`, `backup`, `restore` and
+`reconcile-controls` use the exclusive lock. No restart is required merely to
+load an authorization/approval/selection. Never remove a live lock.
+
+Website reads are a separate final configuration step after receiver acceptance:
+
+```text
+ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:3101
+ASYMMETRI_INVESTMENT_READ_AUTHORITY=asymmetri.co
+ASYMMETRI_INVESTMENT_EXPERIMENT=<actual experiment ID>
+ASYMMETRI_INVESTMENT_RUN=<actual run ID>
+```
+
+These are server-only runtime settings. Preserve the current website source/build
+and enable them through its reviewed service configuration, then verify actual
+public views, visibility witnesses, receipts and protected Motion routes. No
+unrelated rebuild or Ask setting belongs to this operation. If public read
+verification fails, hold/remove these read settings while preserving the accepted
+archive and immutable receipts; never rewind the financial database as a page
+rollback. Existing Ask admission/claims/delivery remain false throughout.
+
+### Access status and remaining handoff
+
+SSH administrator read-only inspection succeeded. The default filesystem sandbox
+denied the initial Git fetch write; the approved escalated `git pull --ff-only
+origin main` then succeeded with main already current. **No unresolved tool-
+approval blocker prevented this preparation.** No mutating activation command was
+attempted. The remaining input is HQ's real public key/finite scope and canonical
+run event/configuration, including its durable generation and file hashes, followed
+by the backed-up activation and genuine signed receipt reconciliation above.
+HQ can consume this committed document directly; no outbound chat message is needed.
+
 ## Compatible website implementation
 
 The canonical v1 manifest remains
