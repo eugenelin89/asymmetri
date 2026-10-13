@@ -117,3 +117,23 @@ source with no application wiring, no operational HQ deployment and no genuine
 model calls. Its `contentPurgeVerified`, `restorationVerified` and Linux observed
 workflow readiness remain false. This source milestone does not close real-use
 custody, both-store restore, execution-process integration or capacity gates.
+
+## HQ documentary integration
+
+HQ [PR 84](https://github.com/eugenelin89/bot_messenger/pull/84) merged as
+`36ef02747fa6a8c6f6b84894f15718089efa2170`, following accepted source PR 83 at
+`8034404c5df1b89c6cff10ed990814c154172478`. Its documentary implementation is
+`27a3cc02f340fbb1e3aa74fdc90b4bd755cd4e8a`. The pinned
+[morning handoff](https://github.com/eugenelin89/bot_messenger/blob/36ef02747fa6a8c6f6b84894f15718089efa2170/docs/operations/INV-REAL-01.md)
+incorporates this website's receiver release and recovered startup attempt.
+HQ's recorded anonymous HTTPS GETs at 19:41 UTC (12:41 America/Vancouver) returned
+200 for Ask, investment and methodology; Ask had no form, and availability was
+disabled with no cookie. These public observations do not independently verify
+server identity, private custody or operational readiness.
+
+HQ's next source work is separate finite Ask grants and immutable attempts using
+the accepted private storage. It is not deployed authority. Account sign-in repair
+alone establishes neither public Ask eligibility nor consent, custody/restore,
+finite authority or combined-workload capacity. Those gates remain incomplete.
+This documentary reconciliation changes no deployed identity, rollback material
+or closed service configuration and requires no redeployment.

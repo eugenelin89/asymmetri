@@ -56,3 +56,14 @@ The [closed Ask receiver rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) install
 source 4daa713 without changing website or ingress identity. Updated readiness
 also pins HQ's dormant private-content receipt from PR 83; neither source packet
 activates operational HQ execution, finite Ask authority or visitor intake.
+
+HQ documentary integration [PR 84](https://github.com/eugenelin89/bot_messenger/pull/84)
+merged at `36ef02747fa6a8c6f6b84894f15718089efa2170`, after accepted private-storage
+source `8034404c5df1b89c6cff10ed990814c154172478`. Its pinned
+[morning handoff](https://github.com/eugenelin89/bot_messenger/blob/36ef02747fa6a8c6f6b84894f15718089efa2170/docs/operations/INV-REAL-01.md)
+records the closed receiver release and HQ's anonymous public read-back.
+[Readiness](ASK-04-READINESS.md#hq-documentary-integration) separates those public
+observations from unverified genuine employee, custody/restore and capacity gates.
+Finite Ask grants and immutable attempts are next HQ source work; login repair
+alone cannot enable intake or establish public Ask eligibility. Website d0c4543,
+Ask receiver 4daa713 and their independent rollback records remain unchanged.
