@@ -170,3 +170,7 @@ its current public deployment and unchanged private-service boundaries.
 The subsequent [closed Ask receiver rollout](docs/ASK-04-RECEIVER-RELEASE_2026-10-13.md)
 installs its reviewed recovery/availability fixes with intake still disabled,
 236 passing Linux receiver tests and independent rollback evidence.
+
+The [Ask operational safeguards](docs/ASK-04-OPERATIONS_2026-10-13.md) add verified
+zero-swap/core-memory limits and isolated recovery acceptance while keeping intake
+closed and preserving the live investment.

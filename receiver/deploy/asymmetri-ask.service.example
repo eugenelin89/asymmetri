@@ -13,11 +13,13 @@ Group=asymmetri-ask
 WorkingDirectory=/opt/asymmetri-ask/receiver
 Environment=NODE_ENV=production
 Environment=ASYMMETRI_ASK_CONFIG=/etc/asymmetri-ask/config.json
-ExecStart=/usr/bin/node --max-old-space-size=96 dist/src/ask/cli.js serve
+ExecStart=/usr/local/libexec/asymmetri-ask-private-exec /usr/bin/node --max-old-space-size=96 dist/src/ask/cli.js serve
 Restart=on-failure
 RestartSec=5
 TimeoutStopSec=30
 UMask=0077
+LimitCORE=0
+CoredumpFilter=0x0
 NoNewPrivileges=true
 CapabilityBoundingSet=
 AmbientCapabilities=
@@ -43,6 +45,6 @@ RestrictAddressFamilies=AF_UNIX AF_INET
 IPAddressDeny=any
 IPAddressAllow=localhost
 MemoryMax=192M
-MemorySwapMax=32M
+MemorySwapMax=0
 TasksMax=32
 CPUQuota=25%

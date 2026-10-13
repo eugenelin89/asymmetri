@@ -4,8 +4,9 @@ October 13, 2026. The separate production Ask service/database and shared HTTPS
 are installed and verified; [the release receipt](INGRESS_RELEASE_2026-10-13.md)
 records original identities. The subsequent [Ask-only rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) installs receiver source 4daa713. The public `/botsquad/ask` page accepts no questions.
 Admission, claims and delivery remain disabled, with no service keys, visitor
-data or model execution. HQ remains account-401 held. Listener installation does
-not establish genuine employee authority or private-data custody.
+data or model execution. HQ reports repaired private authentication; public-service
+eligibility is still unverified. Listener installation does not establish genuine
+employee authority or private-data custody.
 
 ## Ownership and contract
 
@@ -216,6 +217,17 @@ The unit masks unrelated application/data trees and exposes only its private sto
 for writes. A root-owned empty `archive-reference` directory is mounted at the
 public store path solely for configuration realpath/separation checks; the archive
 SQLite/content tree is not mounted. Public context remains a verified loopback
-HTTP read. Memory/swap ceilings are 192/32 MiB, CPU quota 25%, and connections are
+HTTP read. Memory/swap ceilings are 192/0 MiB, CPU quota 25%, and connections are
 limited to loopback. Installing a unit is not proof of live employee eligibility,
 ongoing privacy-journal custody, paid-budget approval or question-service activation.
+
+The [operational hardening receipt](ASK-04-OPERATIONS_2026-10-13.md) records the
+installed zero-swap limit and core-memory exclusion. Install
+`receiver/deploy/ask-private-exec.sh` as root-owned mode 0755
+`/usr/local/libexec/asymmetri-ask-private-exec` before using the unit example. The
+launcher writes and verifies its own core mapping filter, then replaces itself
+with Node. Keep `LimitCORE=0` and `CoredumpFilter=0x0` in the unit as well. The
+launcher is necessary on the observed systemd 251 host: the directive alone did
+not change the process filter. A failed filter write/read stops startup. This
+reduces managed-process spill; it does not prove physical erasure or prevent a
+privileged host operator from inspecting memory.

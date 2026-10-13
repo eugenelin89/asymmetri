@@ -1201,3 +1201,12 @@ Ask-only guarded activation/rollback, retained startup failure and recovery, exa
 closed-state acceptance, bounded Linux resources and four pre-existing IPv6 TLS
 exceptions. Its root-held rollback command operates only Ask code and preserves
 private state and HTTP protection counters.
+
+## Closed Ask memory and recovery safeguards
+
+The [operational receipt](ASK-04-OPERATIONS_2026-10-13.md) records the Ask-only
+launcher/drop-in, zero swap/core limits, actual process read-back, non-content
+backup and isolated held restore. Install the root-owned launcher before the
+updated unit example. Keep the running application source/configuration separate
+from this service-profile change; no website or investment restart is needed.
+The receipt gives the guarded Ask-only rollback and exact unresolved custody gates.

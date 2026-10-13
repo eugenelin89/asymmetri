@@ -449,3 +449,18 @@ pre-existing failure is separately classified and fingerprinted before/after.
 Known-failure read-throughs are explicitly unverified TLS and must never count
 as healthy HTTPS. Keep Motion routes, tutorial links/images, unrelated service
 identities and Nginx hashes in the preservation set.
+
+## Ask operational fault and capacity fixture
+
+`receiver/deploy/ask-readiness-acceptance.test.mjs` imports an existing compiled
+receiver selected by `ASK_REHEARSAL_RUNTIME` (defaults to its parent receiver).
+Run it explicitly with `node --test --test-concurrency=1` after receiver build.
+It creates only disposable synthetic stores and loopback listeners; it must never
+receive live configuration. `ASK_REHEARSAL_CONFINED=1` additionally requires the
+isolated Linux profile and verifies live stores are inaccessible and core memory
+is excluded. The [host receipt](ASK-04-OPERATIONS_2026-10-13.md) documents the
+180-second unit, masked mounts, resource/public-health bounds and retained profiles.
+The actual SIGKILL cases verify text exclusion and unfinished-copy rejection with
+a valid manifest digest. The read scenario measures 80 requests/six in flight,
+then ordinary quota exhaustion while reserved cancellation/control paths succeed.
+It is not a genuine model-load or provider-cost benchmark.

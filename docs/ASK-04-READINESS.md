@@ -153,7 +153,19 @@ HQ reports no raw credentials or screenshots retained in project evidence.
 
 Private authentication repair does not establish public Ask account eligibility,
 reload-OFF attestation, new finite authority or genuine employee acceptance.
-Ask intake remains closed and the investment archive remains unconfigured.
+Ask intake remains closed. The later [investment activation](INV-REAL-01-WEBSITE.md)
+serves the exact live configured portfolio; it is independent of Ask readiness.
 Custody/restore, disclosures, separate finite budgets and combined-workload
 capacity remain incomplete; no website activation or redeployment follows from
 this update.
+
+## Website operational completion and capability review
+
+The [October 13 operational receipt](ASK-04-OPERATIONS_2026-10-13.md) records
+Ask-only memory hardening, actual interrupted-copy faults, bounded Linux reads,
+non-content backup/held restore and current custody exclusions. These close
+specific website-side checks, not combined genuine HQ workload acceptance.
+
+The [subscription capability review](ASK-04-CAPABILITY-REVIEW.md) gives the exact
+consumer plan and remaining evidence requirements for HQ’s proposed explicit
+activity-capped mode. No canonical pin or public disclosure was changed.
