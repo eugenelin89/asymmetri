@@ -206,3 +206,5 @@ The full `npm run receiver:test` includes these files. Runtime has a distinct
 `ASYMMETRI_ASK_CONFIG` and offline CLI, documented in
 [ASK-01](ASK-01-PRIVATE-RECEIVER.md); no public Ask UI or production service starts
 automatically. No additional package dependency is required.
+
+For producer typed-client acceptance, use the explicit [synthetic HTTPS fixture](ASK-01-INTEROPERABILITY.md). It creates only temporary loopback state and a one-hour test key; its command is never an operational service or public preview.

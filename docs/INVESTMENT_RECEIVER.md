@@ -1,6 +1,6 @@
 # Investment archive receiver (INV-02)
 
-INV-02 was implemented and validated locally; the separately owner-selected [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) now installs it privately on the existing Ubuntu 22.10 host. It remains stopped/default disabled with an empty operational archive, no real publisher, HQ change, collected prices or Ask activation. Next.js remains the page-rendering system; its existing routes
+INV-02 was implemented and validated locally; the separately owner-selected [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) now installs it privately on the existing Ubuntu 22.10 host. The later [October 13 shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) starts its listener with an empty operational archive and no real publisher, collected prices or Ask intake. Next.js remains the page-rendering system; its existing routes
 and Vinext packaging do not start or import the receiver runtime.
 
 ## Contract and runtime
@@ -82,11 +82,11 @@ All routes come from the pinned OpenAPI. Base `R` is
 | GET `R/artifacts/{id}/versions/{version}/content` | INV-03 exact verified bytes; 404 absent, 409 unstaged/unpublished, 410 hidden |
 
 17 contract operations are recognized. INV-03 implements exact downloads and human
-artifact/discussion views; all public activation remains disabled.
+artifact/discussion views; publication authority remains absent.
 Worker roster/activity events are queryable through EventPage, with durable typed
 projection identities. There is no invented worker route. All output DTOs and
-Problems are schema validated. `/api/ask/v1` is unimplemented and has no tables,
-queue, sessions, questions, dispatch or authority in this service.
+Problems are schema validated. `/api/ask/v1` belongs to a separate private service;
+this investment receiver has no Ask tables, sessions, questions or authority.
 
 Public GETs use `max-age=0, must-revalidate` and visibility-sensitive ETags;
 withdrawal invalidates old cursors/ETags and suppresses transitive dependencies,
@@ -294,15 +294,15 @@ INFRA-01 stays cancelled; migration is an independent project. INFRA-02 accepted
 actual Node22/Linux native compatibility, isolated ownership and systemd protection,
 fsync/rename, migration 001, recovery, and bounded shared-host load. See the
 [measured evidence](INFRA-02-VALIDATION.md); historical disk observations are not
-current capacity guarantees. The unit is installed, static and stopped; config is
-disabled and operational authority/data are empty.
+current capacity guarantees. The initial installation was static/stopped. The [later ingress release](INGRESS_RELEASE_2026-10-13.md)
+explicitly starts its listener; operational authority/data remain empty.
 
-Real/public activation still requires an accepted exact HTTP/TLS ingress design,
-representative archive sizing, reviewed retention/backup custody and schedule,
-finite publisher/key lifecycle and HQ reconciliation, verified source-publication
-rights under Decision 029, completed feature gates and explicit owner authorization.
-The tested HTTP proxy failed duplicate-header preservation; local stream transport
-acceptance does not close that gate. Ask has separate storage/identity/budget gates.
+Strict shared HTTPS is now verified. Real publication still requires representative
+archive sizing, reviewed retention/backup custody and schedule, finite publisher/key
+lifecycle, HQ reconciliation and completed feature gates. Owner deployment and
+Yahoo permission statements are recorded in the current handoff; they do not create
+a publisher grant. Existing exact-content rights controls remain. The rejected
+normalizing HTTP profile remains unsuitable. Ask has separate authority/budget gates.
 
 Receiver-only rollback stops admission and its unit, restores compatible receiver
 code and validated disabled config, and preserves additive DB/history and receipts.
@@ -322,9 +322,12 @@ floating branch as production protocol.
 
 ## Deferred scope
 
-INV-04's complete showcase UI is implemented in source and locally validated, but **not deployed or activated**. Remaining deferred work includes real HQ publisher/grants, official-run selection/activation controls, collectors/providers/calendar,
-authoritative trading, real rights approval workflow, public activation and the entire
-private Ask service. INV-02 provides REST/archive foundations; INFRA-02 adds stopped private-host installation and synthetic Linux acceptance.
+The showcase website and strict ingress are publicly deployed. Owner-only observed
+run approval and official selection controls exist, but no run is approved or
+selected. The separate Ask service is installed with intake/claims/delivery disabled.
+Remaining integration includes genuine HQ publication and observed history, finite
+authority, ongoing private-data custody and visitor Ask UI/healthy execution. Source
+completion and synthetic fixtures do not establish those outcomes.
 
 
 ## INV-03 current implementation
@@ -333,8 +336,8 @@ The [INV-03 runbook](INV-03-OPERATIONS.md) supersedes the earlier deferred-downl
 and receiver-backup procedures: exact-version downloads/human discussion views are
 implemented; migration 002 adds owner controls and restore read holds. Signed transport
 is separate from exact artifact publication rights. The [TLS record](INV-03-INGRESS.md)
-accepts isolated actual-host TLS stream transport while keeping public shared-443
-activation gated. [Validation](INV-03-VALIDATION.md) records measured capacity, private
+records the isolated actual-host TLS stream proof and the subsequent
+[public shared-443 release](INGRESS_RELEASE_2026-10-13.md). [Validation](INV-03-VALIDATION.md) records measured capacity, private
 installation, independent review and the still-unverified production backup custody.
 
 ## INV-04 read transport integration
@@ -366,4 +369,5 @@ loopback listener, private database, dedicated Ask verification scopes and offli
 CLI. Its directories cannot overlap this archive or backup tree. Investment keys
 do not authorize private Ask, and no raw Ask text is copied into public outputs.
 The installed production receiver remains the source recorded in the
-[INV-REAL-01 receipt](INV-REAL-01-WEBSITE.md); Ask is not yet installed or enabled.
+[INV-REAL-01 receipt](INV-REAL-01-WEBSITE.md). Ask is separately installed with
+admission, claims and delivery disabled; see the [ingress receipt](INGRESS_RELEASE_2026-10-13.md).

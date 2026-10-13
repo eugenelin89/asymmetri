@@ -1,10 +1,11 @@
 # ASK-01 private receiver boundary
 
-October 13, 2026. Private source implementation and synthetic acceptance only.
-The public `/botsquad/ask` page still accepts no questions. There is no production
-Ask database, service, visitor intake, employee authorization, or model execution.
-Owner authorization covers implementation and verified deployment; the producer's
-account-401 hold and strict shared-apex ingress requirement remain effective.
+October 13, 2026. The separate production Ask service/database and shared HTTPS
+are installed and verified; [the release receipt](INGRESS_RELEASE_2026-10-13.md)
+records exact identities. The public `/botsquad/ask` page accepts no questions.
+Admission, claims and delivery remain disabled, with no service keys, visitor
+data or model execution. HQ remains account-401 held. Listener installation does
+not establish genuine employee authority or private-data custody.
 
 ## Ownership and contract
 
@@ -128,7 +129,8 @@ inside a private owner-supplied scope file; the website never needs HQ's secret 
 
 Every command takes the same exclusive `ask.lock`; stop the service for owner
 operations. Never remove a lock until its recorded process is verified stopped.
-No production systemd unit or automatic schedule is introduced in this milestone.
+The separately installed systemd unit is documented below; no automatic admission
+or authority schedule is introduced.
 
 | Command | Result |
 | --- | --- |
@@ -189,11 +191,12 @@ Committed Ask source `8c7a346a4509f793b270f1b73df34ad9d799ccdb` passed all 227
 receiver tests on actual Ubuntu/Node 22.23.1 in an isolated directory. This is
 runtime acceptance, not an operational Ask installation.
 
-Remaining: production shared-apex HTTPS routing (isolated source acceptance is
-documented in [the ingress record](INV-03-INGRESS.md)), producer interoperability
-against a committed website source, private installation/operations proof, genuine healthy HQ
-eligibility and cost authority, and the separately implemented visitor UI/privacy
-copy. Keep public Ask disabled until these have concrete verification. Neither a
+Shared HTTPS, installed confinement and renewal are verified in the
+[release receipt](INGRESS_RELEASE_2026-10-13.md). Remaining: producer
+interoperability against a committed website source, ongoing privacy/backup
+custody, genuine healthy HQ eligibility and cost authority, and visitor UI/privacy
+copy. Use the [disposable fixture](ASK-01-INTEROPERABILITY.md) for authored transport
+acceptance. Keep public Ask disabled until these have concrete verification. Neither a
 normalizing HTTP proxy nor a fixture relabelled as genuine satisfies activation.
 
 
@@ -204,7 +207,7 @@ identity, read-only `/opt/asymmetri-ask/receiver`, private 0700 data tree and
 root-owned 0640 configuration. Its explicit-enable marker starts only the listener;
 admission, claims and delivery flags remain independent and default false. Empty
 roster, missing keys, held metadata or stale privacy barriers cannot admit sessions
-or questions. A disabled listener may return truthful availability without HQ work.
+or questions. A listener with disabled intake may return truthful availability without HQ work.
 
 The unit masks unrelated application/data trees and exposes only its private store
 for writes. A root-owned empty `archive-reference` directory is mounted at the

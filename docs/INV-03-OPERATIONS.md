@@ -146,7 +146,11 @@ production backups. No authorized independent destination was available, and no
 new snapshot/subscription/schedule/upload was created. Durable production backup
 custody and final retention choices remain explicit owner-action gates.
 
-## Private-install rollback
+## Historical private-install rollback
+
+This describes the earlier stopped compatibility installation. The later active
+listener/shared-HTTPS state and its exact configuration rollback are recorded in
+[the October 13 receipt](INGRESS_RELEASE_2026-10-13.md).
 
 Preserve root-owned previous receiver code, disabled configuration and the complete
 empty schema 001 operational archive before compatibility installation. Check exact

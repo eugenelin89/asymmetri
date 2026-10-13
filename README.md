@@ -70,7 +70,7 @@ after verified off-server recovery checks. A later owner-approved Mac cleanup de
 those backup copies and keys; independent recovery custody is currently unverified. Django and all other
 sites/services remain unchanged. The unsupported-OS exception requires review before
 future deployment/public exposure; migration is no automatic prerequisite to local
-investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) installs and privately validates the receiver, leaving it stopped and public publishing disabled. Historical preparation and test
+investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) records the initial stopped receiver installation. The [October 13 ingress release](docs/INGRESS_RELEASE_2026-10-13.md) starts the empty investment and disabled-intake Ask listeners with verified shared HTTPS; no publisher grant is configured. Historical preparation and test
 records remain available through the cancellation record.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
@@ -80,7 +80,7 @@ Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytic
 backend or application-owned visitor tracking. A separate, default-disabled
 investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
-the independent private installation remains stopped/default disabled. The investment
+the installed receiver is empty and has no publisher authority. The investment
 website is public; see the [current release receipt](docs/INV-REAL-01-WEBSITE.md) and
 [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
 YouTube players connect to Google only after explicit activation; local posters
@@ -153,7 +153,4 @@ Private Ask receiver source and recovery commands are documented in
 [ASK-01 private boundary](docs/ASK-01-PRIVATE-RECEIVER.md). The public Ask page
 remains disabled; this source milestone does not activate visitor intake or HQ.
 
-Shared-apex transport source and its isolated Linux proof are documented in
-[the ingress runbook](docs/INV-03-INGRESS.md). The owner authorized continued
-integration/deployment; production routing and Ask intake remain held for their
-technical verification.
+Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_RELEASE_2026-10-13.md) records exact sources, confinement, renewal and all-host preservation. Ask intake remains disabled and HQ remains account-401 held. The [synthetic interoperability launcher](docs/ASK-01-INTEROPERABILITY.md) provides a separate temporary HTTPS fixture for typed-client acceptance.

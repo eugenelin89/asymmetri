@@ -40,7 +40,7 @@ This accepts the isolated TLS transport. It does not approve a public shared 443
 or measure sustained TLS-handshake capacity. [Validation](INV-03-VALIDATION.md) contains
 actual counts, failed profiles and the direct-loopback capacity envelope.
 
-## Shared 443 production integration — authorized, verification outstanding
+## Shared 443 production integration requirements
 
 The owner authorized deployment and all necessary work on October 13. This is not
 a renewed permission gate. The current host has multiple IPv4/IPv6 HTTPS virtual
@@ -71,8 +71,11 @@ those HTTP listeners on 443. Production integration must:
    immediate config rollback. Add connection/handshake budgets and real ingress capacity
    measurements before exposing the constrained 1 GB host.
 
-No DNS, firewall, port 443, certificates, renewal settings or production Nginx files were
-changed here. Public `/api/experiments/v1` remains absent. Unsupported Ubuntu 22.10 remains
+These requirements were subsequently verified during the authorized October 13
+cutover. Public API routing is live with empty/disabled authority;
+[the release receipt](INGRESS_RELEASE_2026-10-13.md) records all-host preservation,
+confinement, installed identities, actual renewal and rollback. DNS/firewall were
+unchanged. Unsupported Ubuntu 22.10 remains
 an accepted owner exception, not a claim of vendor security support. Decision 030 defers
 OS migration to a separate project; Decision 029 and all publication/launch gates remain.
 

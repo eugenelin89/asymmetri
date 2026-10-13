@@ -89,7 +89,7 @@ in effect; use the repository's `.nvmrc` for local validation.
 
 ## Independent receiver administration
 
-[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) adds a separate `asymmetri-investment` system identity and static, inactive unit. Use `ssh webadmin` for receiver unit/directory operations; use `sudo -n runuser -u asymmetri-investment -- ...` for application-owned offline commands. The webdeploy sudo helper is unchanged and does not operate this receiver. No real keys, grants or public Nginx route exist. Follow the receiver-specific integrity/backup/stale-lock/rollback procedure; do not restart the website for receiver maintenance.
+[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) added a separate `asymmetri-investment` identity. The [October 13 release](INGRESS_RELEASE_2026-10-13.md) explicitly starts its static unit plus the separate disabled-intake Ask service and boot-enabled TLS bridge. Use `ssh webadmin` for receiver unit/directory operations; use `sudo -n runuser -u asymmetri-investment -- ...` for application-owned offline commands. The webdeploy sudo helper is unchanged and does not operate this receiver. Strict public HTTPS routing is verified; real publisher/Ask keys and grants remain absent. Follow the receiver-specific integrity/backup/stale-lock/rollback procedure; do not restart the website for receiver maintenance.
 
 ## Control only the Asymmetri service
 

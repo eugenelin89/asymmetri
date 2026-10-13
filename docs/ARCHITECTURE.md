@@ -8,7 +8,9 @@ to Labs. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
 separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
 default-disabled INV-02 receiver owns a public archive/signature boundary described
-in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md); no production API is activated.
+in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Strict production API routing
+is live with an empty investment archive and disabled Ask intake; no publisher or
+Ask service authority is active.
 
 ## Routes and compatibility
 
@@ -175,7 +177,7 @@ unsupported-OS exception with review before future deployment/public exposure.
 Django retirement and the static 410 proposal were evaluated, not executed; Django,
 Gunicorn/socket, SQLite, dormant PG data, shared accounts and all runtimes remain.
 `ops/infra/` contains reusable operator HTTP comparison and recovery tools with no
-website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the receiver under a dedicated identity with an empty private archive, masked unrelated filesystem trees and no public ingress. Actual Linux/native SQLite, isolated transparent Nginx, confinement and bounded-load evidence is recorded in [validation](INFRA-02-VALIDATION.md). The unit remains static/inactive, config disabled, with no publisher. Public HTTP/TLS ingress and real activation remain separate gates; the tested nginx 1.22 HTTP profile did not preserve duplicate Connection headers.
+website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the receiver under a dedicated identity with an empty private archive, masked unrelated filesystem trees and no public ingress. Actual Linux/native SQLite, isolated transparent Nginx, confinement and bounded-load evidence is recorded in [validation](INFRA-02-VALIDATION.md). The [October 13 release](INGRESS_RELEASE_2026-10-13.md) starts the empty receiver and disabled-intake Ask listener behind verified strict HTTPS. Both units remain static; publisher/Ask authority is absent. The rejected nginx 1.22 HTTP profile did not preserve duplicate Connection headers.
 
 ### Request path
 
@@ -183,7 +185,9 @@ website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) install
 Browser
   -> DNS provider
   -> DigitalOcean Droplet
-  -> Nginx on ports 80 and 443
+  -> Nginx HTTP on 80 / stream SNI dispatch on 443
+  -> apex: TLS bridge 3103 -> raw router 3100 -> Nginx website 3080
+     www/other SNI: ordinary Nginx TLS 8443/8444
   -> 127.0.0.1:3001
   -> asymmetri.service
   -> standard Next.js production server
@@ -197,8 +201,9 @@ Browser
 | DNS provider | Publishes records for `asymmetri.co` and `www.asymmetri.co` that point to the Droplet |
 | DigitalOcean Droplet | Provides the virtual server, network interface, disk, memory, and CPU |
 | Ubuntu | Supplies the operating system, users, package management, process controls, and logs |
-| Nginx | Accepts public HTTP and HTTPS traffic, terminates TLS, and proxies requests to the local Next.js port |
-| Let’s Encrypt and Certbot | Provide and renew the certificate used by Nginx |
+| Nginx | Accepts HTTP and dispatches HTTPS by SNI; terminates www/other TLS and proxies ordinary pages to Next.js |
+| Dedicated TLS/raw router | Terminates apex TLS and preserves API HTTP bytes for the separate investment and Ask receivers |
+| Let’s Encrypt and Certbot | Renew Nginx certificates; a verified deploy hook atomically reloads the apex TLS bridge |
 | systemd | Starts, restarts, monitors, and enables `asymmetri.service` at boot |
 | Node.js | Executes the installed Next.js runtime |
 | npm | Installs the exact lockfile dependency graph and runs validation and build scripts |
@@ -215,7 +220,7 @@ zone as long as the records resolve to the Droplet’s public address.
 The current operational baseline is:
 
 - an Ubuntu DigitalOcean Droplet;
-- Nginx terminates HTTPS for `asymmetri.co` and `www.asymmetri.co`;
+- the dedicated bridge terminates apex HTTPS; Nginx terminates www/other HTTPS;
 - an existing Let’s Encrypt certificate covers both hostnames;
 - Nginx proxies application traffic to `127.0.0.1:3001`;
 - port 3001 is bound to loopback and is not directly exposed to the internet;
@@ -352,7 +357,7 @@ retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 
 The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
 
-INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 website release is public with truthful unconfigured archive and disabled Ask states. The private receiver compatibility update provides visibility headers and owner controls, with schema 002 empty and stopped/default disabled. See [the release receipt](INV-REAL-01-WEBSITE.md) for exact identities. The owner authorized continued integration/deployment; receiver ingress, genuine HQ publishing, operational backup custody and public Ask still require their technical acceptance. The OS upgrade remains a separate project.
+INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 website release is public with truthful unconfigured archive and disabled Ask states. The private receiver compatibility update provides visibility headers and owner controls. Schema 002 remains empty, with no publisher. See [the ingress release receipt](INGRESS_RELEASE_2026-10-13.md) for active listener identities, confinement, renewal and all-host checks. Genuine HQ publishing, operational backup custody and public Ask still require their technical acceptance. The OS upgrade remains a separate project.
 
 ## INV-02 standalone archive boundary
 
@@ -381,7 +386,8 @@ default-disabled Ask source is described below.
 `app/botsquad/investment/` composes a streaming static introduction plus bounded
 server reads. New exact-run, decision and methodology pages complement INV-03
 artifact/version, discussion and record pages. `/botsquad/ask` is explanatory only.
-No question submission, storage, provider connection or public write endpoint exists.
+The website has no question submission UI or provider connection. The independent
+Ask API is routed separately and rejects visitor intake while disabled.
 `content/site.ts` owns `investmentShowcase` copy and `investmentArchive` disclosures.
 
 `lib/investment-archive.ts` validates configured origin/scope, an exact GET allowlist,
@@ -440,6 +446,6 @@ Separate investment and Ask APIs receive unchanged HTTP, while ordinary Nginx
 receives trusted client metadata. The combined CLI and example default disabled.
 No ingress code or private key enters the website bundle. The
 [ingress runbook](INV-03-INGRESS.md) records limits, actual Linux verification and
-outstanding production/renewal checks. `lib/investment-read-transport.ts` adds only
+the completed [production/renewal receipt](INGRESS_RELEASE_2026-10-13.md). `lib/investment-read-transport.ts` adds only
 an explicit server-owned loopback Host override; default fetch/Sites behavior stays
 unchanged when that environment setting is absent.

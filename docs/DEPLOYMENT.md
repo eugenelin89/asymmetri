@@ -3,7 +3,7 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [current website release receipt](INV-REAL-01-WEBSITE.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require a compatible receiver release; the installed private receiver remains stopped/default disabled. Receiver compatibility installation, strict TLS ingress and actual HQ publication still require independent verification. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [current website release receipt](INV-REAL-01-WEBSITE.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. Genuine HQ publication and ongoing backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
@@ -1102,9 +1102,9 @@ health in the external task receipt. See the [public-story source review](BOTSQU
 
 ## Independent private investment receiver
 
-[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. It leaves `asymmetri-investment.service` static/inactive, without its explicit-enable marker, public ingress or publisher authority. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
+[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. That initial installation left `asymmetri-investment.service` static/inactive. The [October 13 ingress release](INGRESS_RELEASE_2026-10-13.md) explicitly starts it with strict HTTPS and an empty archive; publisher authority remains absent. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
 
-Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) and [actual Linux acceptance](INFRA-02-VALIDATION.md). A transparent loopback Nginx test passed; the nginx 1.22 HTTP profile failed duplicate Connection preservation and is not accepted for public/real traffic. Exact HTTP/TLS ingress, recurring backups/retention, representative live capacity, OS-exception review and explicit owner activation remain future gates.
+Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) and [actual Linux acceptance](INFRA-02-VALIDATION.md). A transparent loopback Nginx test passed; the nginx 1.22 HTTP profile failed duplicate Connection preservation and is not accepted for public/real traffic. Exact HTTP/TLS ingress is now verified by the release receipt. Recurring backups/retention, representative live capacity and genuine publication remain separate gates; owner deployment authorization and the existing OS exception remain in effect.
 
 ## INV-03 private receiver compatibility update
 
@@ -1133,15 +1133,15 @@ redistribution rights, and the unsupported Ubuntu 22.10 risk remain separate gat
 Later investment and Ask milestones plus explicit INV-12 activation still apply.
 
 
-## October 13 shared-apex ingress preparation
+## October 13 shared-apex ingress release
 
 [The ingress runbook](INV-03-INGRESS.md) now includes source and isolated Linux
 acceptance for a bounded Node TLS/raw router behind the installed Nginx SNI
 stream dispatcher. Its example remains disabled; no ordinary website deployment
 command installs an ingress unit, copies certificate keys, edits listener or
-renewal configuration, or activates Ask. The owner authorized that integration,
-but production needs exact listener rollback, trusted metadata, renewal and
-all-vhost/protected-route read-back before and after activation. The explicit
+renewal configuration, or activates Ask. The owner-authorized integration is now installed: [the release receipt](INGRESS_RELEASE_2026-10-13.md)
+records exact listener rollback, trusted metadata, renewal and 112 before/after
+all-vhost/protected-route checks. The explicit
 website loopback authority setting is `ASYMMETRI_INVESTMENT_READ_AUTHORITY`.
 
 

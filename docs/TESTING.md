@@ -390,10 +390,13 @@ The full receiver suite includes `ask.test.ts`, `ask-context.test.ts` and
 receipts, cancellation/expiry races, ancestor context withdrawal, millisecond
 ordering, bounded Unicode pagination, dedicated auth, traffic reserves and
 non-content recovery. [The boundary record](ASK-01-PRIVATE-RECEIVER.md) explains
-the limits. Public ingress, real employee execution, off-host backup custody and
-private runtime installation remain separate release evidence. The committed Ask
-source passed 227/227 tests on actual Linux Node 22.23.1 in an isolated directory;
-this did not start or install an operational Ask service.
+the limits. The committed Ask source first passed 227/227 tests on actual Linux
+Node 22.23.1; the later full receiver source passed 230/230 before installation.
+[The release receipt](INGRESS_RELEASE_2026-10-13.md) separately records installed
+confinement, public ingress and certificate renewal. Real employee execution and
+ongoing off-host backup custody remain unverified. Use the
+[temporary HTTPS launcher](ASK-01-INTEROPERABILITY.md) for typed-client acceptance;
+its authored synthetic exchange is not a genuine execution result.
 
 
 ## Shared-apex transport checks
