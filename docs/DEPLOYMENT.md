@@ -1222,3 +1222,8 @@ Public Ask remains closed; the later configuration-read amendment is separate.
 The subsequent [portrait release](BOTSQUAD-PORTRAITS-RELEASE_2026-10-13.md)
 records website source da09185, exact build/activation identity, guarded code-only
 rollback and live image acceptance. Ask and investment receivers are unchanged.
+
+The later [Ask configuration release](ASK-CONFIGURATION-RELEASE_2026-10-13.md)
+installs receiver source 2b63015 after 254 isolated Linux cases, with intake closed
+and exact code-only rollback. Its [older runtime retention record](WEBSITE-ROLLBACK-ARCHIVES_2026-10-13.md)
+explains the two archived historical website trees and restoration commands.

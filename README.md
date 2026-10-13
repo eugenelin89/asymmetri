@@ -192,3 +192,7 @@ Public Ask remains closed. The subsequent [configuration-read source packet](doc
 The subsequent [portrait release](docs/BOTSQUAD-PORTRAITS-RELEASE_2026-10-13.md)
 adds the approved Atlas/Maya images to Investment team cards, with verified live
 images and preserved product routes. It updates only the website runtime.
+
+The [closed configuration endpoint release](docs/ASK-CONFIGURATION-RELEASE_2026-10-13.md)
+installs the signed private reconciliation read after 254 passing Linux cases.
+Public Ask stays closed; the website portrait build and investment service are preserved.

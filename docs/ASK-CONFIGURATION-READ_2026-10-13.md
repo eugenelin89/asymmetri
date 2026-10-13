@@ -74,3 +74,6 @@ The public-service entitlement verifier remains absent and public Ask stays clos
 Production activation must preserve website portrait source/build, investment
 scope/records, all private metadata/configuration and unrelated services, and retain
 an exact code-only rollback. Its separate receipt records actual installed identity.
+
+The [production receipt](ASK-CONFIGURATION-RELEASE_2026-10-13.md) now confirms the
+closed Ask-only rollout, 254 passing Linux cases and unchanged private/live records.
