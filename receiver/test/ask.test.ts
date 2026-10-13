@@ -215,3 +215,61 @@ test('same-second millisecond status and answer timestamps remain valid and rece
   const answer=await h.send(h.signed('POST',`${p}/hq/questions/${q.admission.questionId}/answer`,{...q.delivery,answer:{...q.answer,generatedAt}}));
   assert.equal(answer.status,200,answer.raw);assert.equal(answer.body.receivedAt,time(h.now()));assert.ok(Date.parse(answer.body.receivedAt as string)>Date.parse(generatedAt));
 });
+
+test('lost session response recovers with its cookie during pause and restart without creating another session',async t=>{
+  const h=await askHarness(t),id=randomUUID(),a=await h.session(id);
+  h.cfg.admissionEnabled=false;await h.restart();
+  const retry=await h.browser(a,'POST',p+'/sessions',examples.AskSessionCreate,id);
+  assert.equal(retry.status,201,retry.raw);assert.deepEqual(retry.body,a.body);assert.equal(retry.headers['set-cookie'],undefined);
+  assert.equal(h.service.store.get<{n:number}>('SELECT count(*) n FROM sessions')!.n,1);
+  assert.equal((await h.browser(a,'POST',p+'/sessions',examples.AskSessionCreate)).status,503);
+  assert.equal((await h.browser(a,'POST',p+'/sessions',{...examples.AskSessionCreate as object,privacyNoticeVersion:'changed'},id)).status,409);
+  h.service.store.run('UPDATE ask_meta SET held=1');
+  assert.equal((await h.browser(a,'POST',p+'/sessions',examples.AskSessionCreate,id)).status,503);
+});
+
+test('pending admission and outcome-unknown status survive restart while duplicate keys retain one question',async t=>{
+  const h=await askHarness(t),a=await h.session(),c=await h.conversation(a),id=randomUUID(),first=await h.question(a,c,{},id);
+  assert.equal(first.status,202);await h.restart();h.cfg.admissionEnabled=false;
+  assert.deepEqual((await h.question(a,c,{},id)).body,first.body);
+  const status=JSON.parse(h.service.store.get<{status_json:string}>('SELECT status_json FROM questions')!.status_json);status.state='outcome_unknown';
+  h.service.store.run("UPDATE questions SET state='outcome_unknown',status_json=?",JSON.stringify(status));await h.restart();
+  const page=await h.browser(a,'GET',`${p}/conversations/${c.conversationId}`);
+  assert.equal(page.status,200);assert.equal((page.body.turns as {status:{state:string}}[])[0]!.status.state,'outcome_unknown');
+  assert.equal(h.service.store.get<{n:number}>('SELECT count(*) n FROM questions')!.n,1);
+});
+
+test('queue saturation reports busy and privacy controls survive ordinary multi-tab capacity exhaustion',async t=>{
+  const h=await askHarness(t);h.cfg.limits.queueCapacity=1;
+  const a=await h.session(),c=await h.conversation(a),q=await h.question(a,c);assert.equal(q.status,202);
+  const busy=await h.request('GET',p+'/availability');assert.equal(busy.body.state,'busy');assert.equal(busy.body.retryAfterSeconds,60);
+  // Twenty tabs: one availability + one owned read every thirty seconds, plus HQ polling.
+  h.setClock(h.now()+60);let ordinary=0;
+  for(let tick=0;tick<2;tick++){
+    for(let tab=0;tab<20;tab++){
+      assert.equal((await h.request('GET',p+'/availability')).status,200);ordinary++;
+      assert.equal((await h.browser(a,'GET',`${p}/conversations/${c.conversationId}`)).status,200);ordinary++;
+    }
+    assert.equal((await h.claim()).status,200);ordinary++;
+  }
+  assert.equal(ordinary,82);
+  while((await h.request('GET',p+'/availability')).status===200)ordinary++;
+  assert.equal(ordinary,120);
+  const deleted=await h.browser(a,'DELETE',`${p}/conversations/${c.conversationId}`);assert.equal(deleted.status,200);
+  const controls=await h.sync();assert.equal(controls.status,200);
+  const acknowledged=await h.sync((controls.body.controls as AskControlReceipt[]).map(row=>row.controlId),controls.body.nextCursor as string|null);assert.equal(acknowledged.status,200);
+  h.setClock(h.now()+60);await h.barrier();assert.equal((await h.request('GET',p+'/availability')).body.state,'available');
+});
+
+for(const action of ['delete','expire'] as const)test(`${action} during awaited answer verification suppresses late body and survives a lost control response`,async t=>{
+  const h=await askHarness(t);h.cfg.limits.queueTtlSeconds=60;const q=await h.ready();let entered!:()=>void,finish!:(value:boolean)=>void;
+  const started=new Promise<void>(resolve=>{entered=resolve;});
+  h.contextHook(()=>{entered();return new Promise<boolean>(resolve=>{finish=resolve;});});
+  const pending=h.send(h.signed('POST',`${p}/hq/questions/${q.admission.questionId}/answer`,q.delivery));await started;
+  const id=randomUUID();let deletion;
+  if(action==='delete')deletion=await h.browser(q.session,'DELETE',`${p}/conversations/${q.conversation.conversationId}`,undefined,id);
+  else{h.setClock(h.now()+61);h.service.lifecycle.cleanup(h.now());}
+  finish(true);const reply=await pending;assert.equal(reply.status,200,reply.raw);assert.equal(reply.body.disposition,action==='delete'?'discarded_deleted':'discarded_expired');
+  assert.equal(h.service.store.get<{answer_json:null}>('SELECT answer_json FROM answers')!.answer_json,null);
+  if(deletion){await h.restart();const retry=await h.browser(q.session,'DELETE',`${p}/conversations/${q.conversation.conversationId}`,undefined,id);assert.deepEqual(retry.body,deletion.body);}
+});

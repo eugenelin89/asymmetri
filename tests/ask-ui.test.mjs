@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {askDto,askId,askEntryHref,askContext,askEvidenceHref,askSourceHref,validConversation,activeQuestion,
-  askRequest,askConversation,decodeAskTab,freshAskTab,confirmsPending,controlSatisfied,canReplayPending} from '../lib/ask-client.ts';
+  askRequest,askConversation,decodeAskTab,freshAskTab,confirmsPending,controlSatisfied,canReplayPending,encodeAskTab,restoreAskTab,askStorageKey,legacyAskStorageKey,approvedAskNotice,sameAskIdentity,askReadDelay,pendingAfterControl} from '../lib/ask-client.ts';
 const examples=JSON.parse(readFileSync(new URL('../receiver/vendor/investment/v1/responses.json',import.meta.url),'utf8')).examples;
 const copy=v=>structuredClone(v),json=(v,status=200)=>new Response(JSON.stringify(v),{status,headers:{'Content-Type':status>=400?'application/problem+json':'application/json'}});
 
@@ -54,15 +54,66 @@ test('pagination refuses repeated cursors, duplicate turns and a changed convers
  await assert.rejects(()=>askConversation(id,session,undefined,async()=>json({...page,conversation:{...page.conversation,conversationId:'someone-else'}})),{code:'UNVERIFIED'});
 });
 
-test('tab restoration keeps only bounded owned metadata and a retryable pending input, never an answer cache',()=>{
- const state=freshAskTab();state.session={...examples.AskSession,expiresAt:'2027-01-01T00:00:00Z'};
- state.conversationId='fixture-conversation-a';state.pending={id:'pending-once',admission:null,input:copy(examples.AskQuestionInput)};
- assert.deepEqual(decodeAskTab(JSON.stringify(state),0),state);assert.equal('answers' in state,false);
- assert.equal(decodeAskTab(JSON.stringify({...state,answers:[examples.AskAnswer]}),0),null);
- assert.equal(decodeAskTab(JSON.stringify({...state,session:{...state.session,serviceId:'real-service'}}),0),null);
- assert.equal(decodeAskTab(JSON.stringify(state),Date.parse('2027-01-02')),null);
- assert.equal(decodeAskTab(JSON.stringify({...state,pending:{id:null,input:state.pending.input}}),0),null);
- state.control={kind:'delete',id:'delete-once',questionId:null};assert.equal(decodeAskTab(JSON.stringify(state),0).control.id,'delete-once');
+const memoryStorage=()=>{const values=new Map();return {values,getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value),removeItem:key=>values.delete(key)};};
+const ownedTab=()=>{const tab=freshAskTab();tab.session=copy(examples.AskSession);tab.sessionIdentity={serviceId:tab.session.serviceId,privacyNoticeVersion:tab.session.privacyNoticeVersion};tab.conversationId='fixture-conversation-a';return tab;};
+test('allowlisted tab storage never persists question text, answers, context or injected fields',()=>{
+ const state=ownedTab(),sentinel='PRIVATE-SYNTHETIC-STORAGE-SENTINEL';
+ state.pending={id:'pending-once',admission:null,input:{...copy(examples.AskQuestionInput),text:sentinel}};
+ state.answers=[{text:sentinel}];state.session.extra=sentinel;
+ const encoded=encodeAskTab(state),restored=decodeAskTab(encoded);
+ assert.ok(restored);assert.equal(encoded.includes(sentinel),false);assert.equal(encoded.includes('input'),false);assert.equal(encoded.includes('context'),false);
+ assert.equal(restored.pending.input,null);assert.equal(restored.pending.id,'pending-once');assert.equal(canReplayPending(restored),false);
+ // Expired metadata stays an uncertainty fence; only the receiver determines access.
+ assert.ok(decodeAskTab(encoded));
+ for(const extra of [{answers:[]},{pending:{...state.pending}},{sessionIdentity:{serviceId:'wrong-service',privacyNoticeVersion:state.session.privacyNoticeVersion}}])assert.equal(decodeAskTab(JSON.stringify({...JSON.parse(encoded),...extra})),null);
+ state.control={kind:'delete',id:'delete-once',questionId:null};assert.equal(decodeAskTab(encodeAskTab(state)).control.id,'delete-once');
+});
+
+test('legacy migration removes raw input and keeps pending/control identity without restoring consent or body',()=>{
+ const storage=memoryStorage(),state=ownedTab(),sentinel='PRIVATE-LEGACY-TEXT';delete state.sessionIdentity;
+ state.pending={id:'legacy-pending',admission:null,input:{...copy(examples.AskQuestionInput),text:sentinel}};
+ state.control={kind:'delete',id:'legacy-delete',questionId:null};storage.setItem(legacyAskStorageKey,JSON.stringify(state));
+ const restored=restoreAskTab(storage);assert.equal(restored.pending.input,null);assert.equal(restored.pending.id,'legacy-pending');assert.equal(restored.control.id,'legacy-delete');
+ assert.equal(storage.getItem(legacyAskStorageKey),null);assert.equal([...storage.values.values()].join('').includes(sentinel),false);
+ assert.deepEqual(restoreAskTab(storage),restored);
+});
+
+test('failed receipt persistence retains the durable uncertainty fence; failed legacy cleanup blocks admission',()=>{
+ const storage=memoryStorage(),state=ownedTab();state.pending={id:'pending',admission:null,input:copy(examples.AskQuestionInput)};
+ storage.setItem(askStorageKey,encodeAskTab(state));const earlier=storage.getItem(askStorageKey);
+ const failed={...storage,setItem:()=>{throw Error('storage blocked');}};
+ assert.throws(()=>failed.setItem(askStorageKey,encodeAskTab({...state,pending:null})));
+ assert.equal(storage.getItem(askStorageKey),earlier);assert.ok(restoreAskTab(storage).pending);
+ storage.setItem(legacyAskStorageKey,JSON.stringify(state));
+ assert.throws(()=>restoreAskTab({...storage,removeItem:()=>{throw Error('cleanup blocked');}}));
+});
+
+test('known admission reconciles after reload; an unknown admission cannot be cleared by another cancellation',()=>{
+ const state=ownedTab(),page=copy(examples.AskConversationPage),turn=page.turns[0];
+ state.pending={id:'pending',input:copy(turn.input),admission:{questionId:turn.questionId,questionHash:turn.status.questionHash}};
+ const restored=decodeAskTab(encodeAskTab(state));assert.equal(confirmsPending(restored.pending,page),true);
+ restored.pending.admission=null;assert.equal(confirmsPending(restored.pending,page),false);
+ const receipt={...examples.AskControlReceipt,questionId:turn.questionId,action:'cancel'};
+ assert.deepEqual(pendingAfterControl(restored.pending,receipt),restored.pending);
+ assert.equal(pendingAfterControl({...restored.pending,input:turn.input},receipt).input,null);
+ assert.equal(pendingAfterControl(restored.pending,{...receipt,questionId:null,action:'delete'}),null);
+ assert.equal(pendingAfterControl(state.pending,receipt),null);
+});
+
+test('approved notice must match advertised service and privacy version; disabled status grants no admission',()=>{
+ const status=copy(examples.AskAvailability),notice={serviceId:status.serviceId,privacyNoticeVersion:status.privacyNoticeVersion,paragraphs:['Synthetic notice'],consent:'Synthetic consent'};
+ assert.equal(approvedAskNotice(status,[]),null);assert.equal(approvedAskNotice(null,[notice]),null);
+ assert.equal(approvedAskNotice({...status,privacyNoticeVersion:'new-version'},[notice]),null);
+ assert.equal(approvedAskNotice({...status,serviceId:'different-service'},[notice]),null);
+ assert.equal(approvedAskNotice(status,[notice]),notice);
+ assert.equal(sameAskIdentity({...status,privacyNoticeVersion:'new-version'},notice),false);
+});
+
+test('polling respects retry delays and bounded exponential backoff without a tight retry loop',()=>{
+ assert.equal(askReadDelay(null),30000);assert.equal(askReadDelay(60),60000);
+ assert.equal(askReadDelay(1800,1),1800000);assert.equal(askReadDelay(null,1),60000);
+ assert.equal(askReadDelay(null,100),480000);assert.equal(askReadDelay(86400),86400000);
+ assert.equal(askReadDelay(null,0),30000);
 });
 
 
@@ -90,4 +141,14 @@ test('expiry or a conversation-wide deletion can satisfy an owned cancellation w
  assert.equal(controlSatisfied(command,id,{...receipt,questionId:null,action:'delete'}),true);
  assert.equal(controlSatisfied(command,id,{...receipt,questionId:'other-question',action:'expire'}),false);
  assert.equal(controlSatisfied({...command,kind:'delete',questionId:null},id,{...receipt,questionId:null,action:'expire'}),false);
+});
+
+
+test('legacy migration under quota pressure replaces raw text before attempting the new key',()=>{
+ const storage=memoryStorage(),state=ownedTab();state.pending={id:'pending',admission:null,input:{...copy(examples.AskQuestionInput),text:'PRIVATE-QUOTA-SENTINEL'}};
+ storage.setItem(legacyAskStorageKey,JSON.stringify(state));
+ const quota={...storage,setItem:(key,value)=>{if(key===askStorageKey)throw Error('quota');storage.setItem(key,value);}};
+ const restored=restoreAskTab(quota);assert.equal(restored.pending.input,null);assert.equal(restored.pending.id,'pending');
+ assert.equal(storage.getItem(legacyAskStorageKey).includes('PRIVATE-QUOTA-SENTINEL'),false);
+ assert.equal(restoreAskTab(quota).pending.id,'pending');
 });

@@ -102,12 +102,22 @@ export async function askConversation(id:string,session:AskSession,signal?:Abort
 }
 
 
-export interface PendingQuestion { id:string; input:AskQuestionInput; admission:{questionId:string;questionHash:string}|null }
+export interface AskIdentity { serviceId:string; privacyNoticeVersion:string }
+export interface AskPrivacyNotice extends AskIdentity { paragraphs:readonly string[]; consent:string }
+export const sameAskIdentity=(a:AskIdentity|null|undefined,b:AskIdentity|null|undefined):boolean=>
+  !!a&&!!b&&a.serviceId===b.serviceId&&a.privacyNoticeVersion===b.privacyNoticeVersion;
+export function approvedAskNotice(status:AskAvailability|null,notices:readonly AskPrivacyNotice[]):AskPrivacyNotice|null {
+  return status?notices.find(notice=>sameAskIdentity(notice,status))??null:null;
+}
+/** Availability is a presentation hint; the receiver authorizes every action. */
+export function askReadDelay(retryAfterSeconds:number|null,failures=0):number {
+  return Math.max(30000*Math.pow(2,Math.min(4,failures)),Math.min(86400,Math.max(0,retryAfterSeconds??0))*1000);
+}
+export interface PendingQuestion { id:string; input:AskQuestionInput|null; admission:{questionId:string;questionHash:string}|null }
 /** Text equality cannot identify a request: old declined turns can have identical input. */
 export function confirmsPending(pending:PendingQuestion,page:AskConversationPage):boolean {
   return !!pending.admission&&page.turns.some(turn=>turn.questionId===pending.admission!.questionId&&turn.status.questionHash===pending.admission!.questionHash&&
-    turn.input.text===pending.input.text&&turn.input.priorQuestionId===pending.input.priorQuestionId&&turn.input.language===pending.input.language&&
-    JSON.stringify(turn.input.context)===JSON.stringify(pending.input.context));
+    (!pending.input||JSON.stringify(turn.input)===JSON.stringify(pending.input)));
 }
 export function controlSatisfied(command:NonNullable<AskTab['control']>,conversationId:string,receipt:AskControlReceipt):boolean {
   if(receipt.conversationId!==conversationId)return false;
@@ -115,26 +125,63 @@ export function controlSatisfied(command:NonNullable<AskTab['control']>,conversa
   return receipt.questionId===command.questionId&&(receipt.action==='cancel'||receipt.action==='expire') ||
     receipt.questionId===null&&(receipt.action==='delete'||receipt.action==='expire');
 }
-export function canReplayPending(tab:AskTab|null):boolean{return !!(tab?.pending&&tab.session&&tab.conversationId&&!tab.control);}
+export function canReplayPending(tab:AskTab|null):boolean{return !!(tab?.pending?.input&&tab.session&&tab.conversationId&&!tab.control);}
+export function pendingAfterControl(pending:PendingQuestion|null,receipt:AskControlReceipt):PendingQuestion|null {
+  return receipt.questionId===null||pending?.admission?.questionId===receipt.questionId?null:pending?{...pending,input:null}:null;
+}
 export interface AskTab {
-  session:AskSession|null; sessionRequestId:string; conversationId:string|null;
+  session:AskSession|null; sessionRequestId:string; sessionIdentity:AskIdentity|null; conversationId:string|null;
   conversationRequestId:string; pending:PendingQuestion|null;
   control:{kind:'cancel'|'delete';id:string;questionId:string|null}|null;
 }
-export const askStorageKey='asymmetri-ask-synthetic-tab-v1';
+export const askStorageKey='asymmetri-ask-tab-v2';
+export const legacyAskStorageKey='asymmetri-ask-synthetic-tab-v1';
 export function freshAskTab():AskTab{return {session:null,sessionRequestId:crypto.randomUUID(),conversationId:null,
-  conversationRequestId:crypto.randomUUID(),pending:null,control:null};}
-export function decodeAskTab(raw:string|null,now=Date.now()):AskTab|null {
+  sessionIdentity:null,conversationRequestId:crypto.randomUUID(),pending:null,control:null};}
+/** Explicit allowlist: draft, request body, answers and arbitrary properties never persist. */
+export function encodeAskTab(tab:AskTab):string {
+  const s=tab.session;
+  return JSON.stringify({session:s?{schemaVersion:s.schemaVersion,serviceId:s.serviceId,sessionId:s.sessionId,
+    createdAt:s.createdAt,expiresAt:s.expiresAt,privacyNoticeVersion:s.privacyNoticeVersion,csrfToken:s.csrfToken}:null,
+    sessionRequestId:tab.sessionRequestId,sessionIdentity:tab.sessionIdentity?{serviceId:tab.sessionIdentity.serviceId,privacyNoticeVersion:tab.sessionIdentity.privacyNoticeVersion}:null,
+    conversationId:tab.conversationId,conversationRequestId:tab.conversationRequestId,
+    pending:tab.pending?{id:tab.pending.id,admission:tab.pending.admission?{questionId:tab.pending.admission.questionId,questionHash:tab.pending.admission.questionHash}:null}:null,
+    control:tab.control?{kind:tab.control.kind,id:tab.control.id,questionId:tab.control.questionId}:null});
+}
+export function decodeAskTab(raw:string|null):AskTab|null {
   try {
-    if(!raw||raw.length>32768)return null;const v=JSON.parse(raw) as AskTab;
-    if(!v||typeof v!=='object'||Object.keys(v).sort().join()!=='control,conversationId,conversationRequestId,pending,session,sessionRequestId')return null;
+    if(!raw||raw.length>8192)return null;const v=JSON.parse(raw) as AskTab;
+    if(!v||typeof v!=='object'||Object.keys(v).sort().join()!=='control,conversationId,conversationRequestId,pending,session,sessionIdentity,sessionRequestId')return null;
     if(!askId(v.sessionRequestId)||!askId(v.conversationRequestId)||v.conversationId!==null&&!askId(v.conversationId))return null;
-    if(v.session!==null&&(!askDto('AskSession',v.session)||Date.parse(v.session.expiresAt)<=now||v.session.serviceId!=='fixture-ask'||v.session.privacyNoticeVersion!=='fixture-privacy-1'))return null;
+    if(v.sessionIdentity!==null&&(!askId(v.sessionIdentity?.serviceId)||!askId(v.sessionIdentity?.privacyNoticeVersion)||Object.keys(v.sessionIdentity).sort().join()!=='privacyNoticeVersion,serviceId'))return null;
+    if(v.session!==null&&(!askDto('AskSession',v.session)||!sameAskIdentity(v.session,v.sessionIdentity)))return null;
     if(v.conversationId&&!v.session)return null;
-    if(v.pending&&((v.pending.admission!==null&&(!askId(v.pending.admission?.questionId)||typeof v.pending.admission.questionHash!=='string'||!/^[a-f0-9]{64}$/.test(v.pending.admission.questionHash)))||!askId(v.pending.id)||!askDto('AskQuestionInput',v.pending.input)||!v.session||!v.conversationId))return null;
-    if(v.control&&(!['cancel','delete'].includes(v.control.kind)||!askId(v.control.id)||!v.conversationId||
+    if(v.pending!==null&&(!v.pending||Object.keys(v.pending).sort().join()!=='admission,id'||(v.pending.admission!==null&&
+      (!askId(v.pending.admission?.questionId)||typeof v.pending.admission.questionHash!=='string'||!/^[a-f0-9]{64}$/.test(v.pending.admission.questionHash)||Object.keys(v.pending.admission).sort().join()!=='questionHash,questionId'))||!askId(v.pending.id)||!v.session||!v.conversationId))return null;
+    if(v.control!==null&&(!v.control||Object.keys(v.control).sort().join()!=='id,kind,questionId'||!['cancel','delete'].includes(v.control.kind)||!askId(v.control.id)||!v.conversationId||
       v.control.kind==='cancel'&&(typeof v.control.questionId!=='string'||!askId(v.control.questionId))||
       v.control.kind==='delete'&&v.control.questionId!==null))return null;
-    return v;
+    return {...v,pending:v.pending?{...v.pending,input:null}:null};
   }catch{return null;}
+}
+export interface AskStorage { getItem(key:string):string|null; setItem(key:string,value:string):void; removeItem(key:string):void }
+/** Remove the old raw-input format while retaining its ownership and uncertainty fences. */
+export function restoreAskTab(storage:AskStorage):AskTab {
+  const current=storage.getItem(askStorageKey),legacy=storage.getItem(legacyAskStorageKey);
+  let tab=decodeAskTab(current);
+  if(current&&!tab)throw new AskRequestError('STORAGE_UNVERIFIED');
+  if(legacy!==null){
+    if(!tab){
+      try { const old=JSON.parse(legacy) as AskTab;
+        const projected=encodeAskTab({...old,sessionIdentity:old.session?{serviceId:old.session.serviceId,privacyNoticeVersion:old.session.privacyNoticeVersion}:null});
+        tab=decodeAskTab(projected);
+      }catch{/* Invalid legacy content is removed, never submitted. */}
+    }
+    if(!tab){storage.removeItem(legacyAskStorageKey);throw new AskRequestError('STORAGE_UNVERIFIED');}
+    // Shrink the existing key first: a quota failure when adding v2 must not lose the fence.
+    storage.setItem(legacyAskStorageKey,encodeAskTab(tab));
+    try{storage.setItem(askStorageKey,encodeAskTab(tab));}catch{return tab;}
+    storage.removeItem(legacyAskStorageKey);
+  }
+  return tab??freshAskTab();
 }

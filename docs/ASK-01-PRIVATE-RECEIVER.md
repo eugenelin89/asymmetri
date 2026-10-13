@@ -192,12 +192,15 @@ receiver tests on actual Ubuntu/Node 22.23.1 in an isolated directory. This is
 runtime acceptance, not an operational Ask installation.
 
 Shared HTTPS, installed confinement and renewal are verified in the
-[release receipt](INGRESS_RELEASE_2026-10-13.md). Remaining: producer
-interoperability against a committed website source, ongoing privacy/backup
-custody, genuine healthy HQ eligibility and cost authority, and visitor UI/privacy
-copy. Use the [disposable fixture](ASK-01-INTEROPERABILITY.md) for authored transport
-acceptance. Keep public Ask disabled until these have concrete verification. Neither a
-normalizing HTTP proxy nor a fixture relabelled as genuine satisfies activation.
+[release receipt](INGRESS_RELEASE_2026-10-13.md). Producer typed-client interoperability is recorded in
+[ASK-04 readiness](ASK-04-READINESS.md), alongside the production visitor path and
+remaining private custody, disclosure, genuine HQ eligibility and cost-authority
+gates. The source now recovers an authenticated exact-body session-create receipt
+before new-admission checks, while preserving held/expiry/ownership fences, and
+reports `busy` when the question queue reaches capacity. These source fixes do not
+change installed listener configuration. Keep public Ask closed until operational
+gates have concrete verification. Neither a normalizing proxy nor a fixture
+relabelled as genuine satisfies activation.
 
 
 ## Private Linux service packaging

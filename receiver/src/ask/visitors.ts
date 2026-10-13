@@ -53,9 +53,7 @@ export class AskVisitors {
     this.sameOrigin(headers, true);
     const input = validate<AskSessionCreate>('AskSessionCreate', parseJson(bytes, this.store.config.limits.requestBytes));
     validate('Id', requestId);
-    need(input.privacyNoticeVersion === this.store.config.privacyNoticeVersion, 'CONFLICT');
     return this.store.atomic(() => {
-      need(!this.store.meta().held && this.store.config.admissionEnabled && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
       const prior = this.store.get<{digest:string;session_id:string}>('SELECT * FROM session_creates WHERE request_id=?', requestId);
       if (prior) {
         // Idempotency is not cookie recovery. A lost initial cookie requires a fresh request.
@@ -63,6 +61,8 @@ export class AskVisitors {
         need(visitor.row.id === prior.session_id && prior.digest === sha256(bytes), 'CONFLICT');
         return { body: this.sessionDto(visitor) };
       }
+      need(input.privacyNoticeVersion === this.store.config.privacyNoticeVersion, 'CONFLICT');
+      need(!this.store.meta().held && this.store.config.admissionEnabled && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
       this.store.space();
       need(this.store.get<{n:number}>('SELECT count(*) n FROM sessions')!.n < 3000, 'BUDGET_EXHAUSTED');
       const now = this.now();

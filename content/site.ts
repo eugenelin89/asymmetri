@@ -1181,8 +1181,9 @@ export const investmentShowcase = {
   ],
 } as const;
 
-/** Ask remains closed to public intake. Active UI validation uses local synthetic state only. */
+/** Production disclosure facts remain unapproved; a version string alone never enables a composer. */
 export const askExperience = {
+  serviceOrigin: 'https://asymmetri.co',
   title: 'Ask BotSquad',
   introduction: 'A place to ask about the project, its research, or the evidence behind a recorded decision.',
   unavailableTitle: 'Questions are not open yet.',
@@ -1201,10 +1202,29 @@ export const askExperience = {
   synthetic: 'Synthetic interface test. Authored fixtures only; no actual employee, model call or investment activity.',
   fixturePrivacy: [
     'Use synthetic text only. This local test sends it to a disposable private receiver; no AI provider or research service is connected.',
-    'This tab stores its session details and any unconfirmed submission to let you retry the same request after refresh. Answers are fetched again and are not stored in browser storage.',
+    'This tab stores session and request identifiers, never question text or answers. An unconfirmed question can be retried while this tab retains its text in memory. After a reload, an unknown submission stays held until conversation deletion is confirmed.',
     'The receiver uses a separate private store. Stop the preview to remove it. Cancel/delete responses prove receiver suppression, not physical deletion from an external provider or another system.',
   ],
-  consent: 'I will use synthetic text only and understand how this local test stores it.',
+  consent: 'I will use synthetic text only and understand how this local test handles it.',
+  checking: 'Checking the question service.',
+  statusUnavailable: 'Service availability could not be verified. Existing owned reads and privacy controls can still be checked independently.',
+  checked: 'Service status checked. The receiver checks every request before accepting it.',
+  busy: 'The queue is full. New questions must wait; existing privacy controls remain available.',
+  disabled: 'Questions are not open. Existing privacy controls remain available.',
+  paused: 'New questions are paused. Existing read, cancellation and deletion controls remain available.',
+  apexOnly: 'Private conversations use the main Asymmetri address. No session is created on this address.',
+  reconciled: 'The receiver confirmed the earlier question through an owned read.',
+  reloadUnknown: 'An earlier submission is unresolved. Its text was not stored. Check status, or delete this conversation to request suppression before starting again. Cancelling another question does not resolve this submission.',
+  controlPending: 'The privacy request is not confirmed. Retry the same request.',
+  storageUnavailable: 'Tab storage is unavailable or could not be verified. New questions are disabled. Keep this tab open for any existing-request and privacy controls.',
+  limitReached: 'The service limit has been reached. Wait before retrying the same request.',
+  recordUnavailable: 'The selected record or request is unavailable. Check the owned conversation; an unresolved submission keeps its identity. You can request conversation deletion.',
+  accepted: 'Question accepted. Waiting for a verified status.',
+  deleted: 'The receiver confirmed deletion. Late replies are suppressed. This does not verify deletion by another system.',
+  expired: 'The receiver confirmed expiry. This conversation is no longer available.',
+  questionExpired: 'The question expired before cancellation. The receiver confirms that late replies are suppressed.',
+  cancelled: 'The receiver confirmed cancellation. No late answer will be shown for this turn.',
+  forgotten: 'Tab state forgotten. Any earlier unconfirmed request or deletion remains unconfirmed. A new session starts only when you send.',
   questionLabel: 'Your question',
   placeholder: 'Ask a general question or refer to the selected public record.',
   send: 'Send question',
@@ -1213,6 +1233,12 @@ export const askExperience = {
   unknown: 'Submission could not be confirmed. Retrying uses the same question and request identity; it does not create a new question.',
   noAnswer: 'No verified answer is available for this turn.',
   error: 'The service could not be reached or its response could not be verified. Previously displayed answers are hidden until the next verified read.',
-  unavailableChat: 'This conversation is unavailable or has expired. Its IDs cannot restore access. You can start a new session.',
+  unavailableChat: 'This conversation is unavailable or has expired. Its IDs cannot restore access, and deletion has not been confirmed. You can explicitly forget the unavailable tab state.',
   deleteNotice: 'Delete this conversation from the receiver and request suppression of late replies. This does not verify deletion of copies held by another system.',
 } as const;
+
+/** Populate only with verified operator/provider/research/retention/deletion facts. No activation flag. */
+export const approvedAskPrivacyNotices: readonly import('@/lib/ask-client').AskPrivacyNotice[] = [];
+export const syntheticAskPrivacyNotices: readonly import('@/lib/ask-client').AskPrivacyNotice[] = [{
+  serviceId:'fixture-ask',privacyNoticeVersion:'fixture-privacy-1',paragraphs:askExperience.fixturePrivacy,consent:askExperience.consent,
+}];

@@ -1,58 +1,77 @@
-# Ask visitor interface: dormant production, synthetic local acceptance
+# Ask visitor interface: production path, closed intake
 
-The public `/botsquad/ask` page remains closed to questions. It renders an honest
-unavailable state and the disclosures required before opening. It creates no
-session, makes no Ask API requests, and has no question form. General entry and
-exact public record links are supported. Unknown or duplicate query fields are
-rejected; private question text and conversation IDs never belong in URLs.
+The public `/botsquad/ask` page remains closed to questions. The production client
+can read authoritative same-origin availability at `https://asymmetri.co`; it never
+creates a session just by loading. The approved production disclosure list in
+`content/site.ts` is empty, so no question form is exposed even if a receiver
+advertises `available`. A genuine service must advertise a service/privacy-version
+pair matching verified operator, provider, research, retention and deletion facts.
+Consent binds that exact pair. Availability is presentation only: each receiver
+action independently checks ownership, authority, limits and current suppression.
 
-This packet implements an interactive **local synthetic** client. It does not
-enable genuine employees, providers, research, operational service authority or
-public intake. No production enable switch exists. Opening to real visitors
-requires a separate reviewed change with verified provider/retention disclosures,
-eligible roster, authority, budgets, interoperability and actual execution evidence.
-The infrastructure receipt remains [the October 13 release](INGRESS_RELEASE_2026-10-13.md).
-The unavailable public page is now deployed by the [website-only release](ASK-03-RELEASE_2026-10-13.md); the functional client remains development-only.
+`www` retains the useful page and exact public context link, with an apex entry
+link for private conversations. It does not cross origins to fetch credentials or
+private content. Unknown/duplicate query fields are rejected. Private text and
+conversation/session IDs never enter public URLs. Motion policy routes stay separate.
 
-## Ownership and boundaries
+## Ownership and recovery
 
-- `content/site.ts` owns `askExperience` copy. The protected Motion privacy page
-  is not reused as an Ask policy.
-- `app/botsquad/ask/page.tsx` renders the server page, noindex/nofollow and
-  no-referrer metadata. Only development plus
-  `ASYMMETRI_ASK_UI_MODE=synthetic_fixture` mounts `components/ask/ask-chat.tsx`.
-- `components/ask/use-ask-chat.ts` owns consent, owned history, retryable requests,
-  polling and privacy controls. `lib/ask-client.ts` validates the unchanged
-  canonical DTOs using the existing AJV dependencies and permits only relative
-  same-origin browser API paths. It has no HQ signing key or provider access.
-- `app/botsquad/ask/ask.css` uses existing graphite/teal tokens and semantic
-  responsive layout. No images, new dependencies or animation are added.
+- `app/botsquad/ask/page.tsx` provides noindex/nofollow/no-referrer composition.
+  Only development plus `ASYMMETRI_ASK_UI_MODE=synthetic_fixture` supplies the
+  synthetic disclosure; a production build ignores that fixture flag.
+- `components/ask/use-ask-chat.ts` owns consent, memory-only text, owned history,
+  request recovery and privacy controls. `lib/ask-client.ts` validates unchanged
+  canonical DTOs and permits only relative browser API paths. Neither has an HQ
+  signing key, provider access or an activation switch.
+- `content/site.ts` owns public copy and the reviewed disclosure registry.
+  No production provider or retention facts are invented by the interface.
 
-The local client accepts only `fixture-ask` / `fixture-privacy-1`. Consent precedes
-the first explicit Send. A session cookie remains receiver-owned and HttpOnly;
-tab storage contains bounded session/CSRF metadata and frozen unconfirmed request
-identity/input, never an answer transcript. Responses are fetched again after
-refresh. Session expiry or lost ownership cannot be bypassed with an ID.
+Tab storage v2 uses an explicit allowlist: session/CSRF metadata, a frozen
+session-create service/privacy pair, conversation/request IDs, optional admission
+ID/hash, and pending privacy controls. Drafts, frozen request bodies, answers and
+record context stay in memory. Legacy migration first replaces the existing key
+with content-free metadata, then writes v2 and removes the legacy key. A failed
+later write preserves the earlier durable uncertainty marker. Validated metadata
+is usable in memory for read/delete even when storage writes fail; fresh questions
+remain blocked. A browser that forbids all storage changes cannot guarantee cleanup
+of an existing legacy value; that failure blocks admission and is not reported as
+successful removal.
 
-Question retries preserve the exact idempotency key and body, including context
-and prior turn. Only a matching admission ID/hash and owned input clear a pending
-request. Paused intake does not block reconciliation. New questions require
-verified availability, consent, storage, no active turn and the eight-answer limit.
-Wire pages contain at most eight turns; bounded assembly permits up to 32 admitted
-turns, including declined turns. Reads cap bytes/pages/time and reject identity,
-hash, worker, routing-policy or service mismatches.
+A retry while the exact body remains in memory uses the same idempotency key and
+body. After reload, a known admission resolves only through its exact owned
+question ID/hash. Canonical v1 has no visitor lookup by submission key, so an
+unknown admission cannot be guessed from identical text or the latest turn.
+It remains held until an owned conversation-wide suppression receipt. Cancelling
+another visible question preserves that marker and retires any remaining body;
+no hidden text is replayed. Lost cookies/expiry cannot be bypassed by IDs. Explicit
+local Forget invalidates in-flight reads and never claims server deletion.
 
-Polling runs every 30 seconds while visible. Hiding the page or losing a verified
-read removes answer bodies; resuming fetches again. Cancellation/deletion clear
-visible bodies before the request and retain their retry identity until an owned
-receipt confirms suppression. A stronger expiry/deletion receipt is recognized
-without claiming a new physical deletion. Lost ownership has an explicit local
-forget action which does not claim server deletion. Unknown outcomes stay held.
-Replies use plain React text, exact evidence links, attribution, timestamps and
-interpretation limits. No automatic scrolling occurs. Polite numbered answer
-announcements distinguish consecutive replies without exposing private IDs.
+Owned reads and cancel/delete work independently of admission availability,
+roster and disclosure checks. A changed privacy version revokes consent and
+preserves old ownership for read/delete. Each Send rechecks advertised identity;
+it cannot change the body of an existing session-create key. Controls hide bodies
+before transmission and retain their identity until an owned suppression receipt.
+
+Ordinary polling waits at least 30 seconds, respects advertised/problem retry
+delays (up to 24 hours), and backs off exponentially to eight minutes on repeated
+failures. A closed page without a conversation waits five minutes. Roster reads
+are at most once per five minutes. Manual Check respects the same deadline;
+privacy controls are independent. Hidden tabs abort reads. Displayed conversation
+bodies expire after 30 seconds, checked by a five-second timer, even when another
+endpoint extends polling backoff. Pages cap time, bytes and turn count and reject
+inconsistent identities. Replies use plain text, exact evidence links, attribution,
+timestamps and polite announcements without automatic scrolling.
+
+The [readiness and gap matrix](ASK-04-READINESS.md) distinguishes source acceptance,
+synthetic evidence and the remaining operational gates. The [earlier website
+release](ASK-03-RELEASE_2026-10-13.md) is historical deployment evidence; it does not
+claim that this new source packet is already installed.
 
 ## Local verification
+
+The commands remain current; browser observations below describe the original
+October 13 synthetic packet. See ASK-04 for the subsequent recovery changes.
+
 
 Use `.nvmrc` and run:
 
@@ -94,13 +113,13 @@ The responsive browser API ignored viewport overrides, so disposable iframe
 viewports inspected actual 390/768/1440 CSS-pixel layouts without overflow.
 This is desktop-engine responsive verification, not an actual phone/device test.
 
-The focused nine-test suite covers unsafe/ambiguous links, response binding,
+The original nine-test suite covers unsafe/ambiguous links, response binding,
 same-request replay, bounded/error responses, pagination, storage, identical old
 questions, histories with declined turns, and stronger privacy receipts. These
 checks do not establish provider retention, genuine execution, operational
 capacity, or HQ physical purge/restore behavior.
 
-Final local checks passed: nine focused tests, TypeScript/ESLint (one existing
+Original packet checks passed: nine focused tests, TypeScript/ESLint (one existing
 tutorial navigation warning), Next webpack production build, retained Vinext
 build, production dependency audit with zero findings and `git diff --check`.
 Turbopack encountered the documented local socket-permission failure; the

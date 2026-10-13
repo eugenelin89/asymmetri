@@ -34,7 +34,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/investment` | Public investment showcase; truthful unconfigured state until verified observed records are connected |
-| `/botsquad/ask` | Unavailable public Q&A page; interactive client restricted to local synthetic tests |
+| `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
@@ -158,8 +158,9 @@ Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_
 ## Dormant Ask visitor interface
 
 [Ask UI boundaries and local acceptance](docs/ASK-03-WEBSITE-UI.md) cover the
-public unavailable page and interactive synthetic client. Genuine intake remains
-disabled; no production configuration enables the local fixture.
+production visitor path and isolated synthetic acceptance. Genuine intake remains
+disabled through the absent reviewed disclosure and disabled receiver. No production
+configuration enables the local fixture. See [readiness and remaining gates](docs/ASK-04-READINESS.md).
 
 The [unavailable Ask page release](docs/ASK-03-RELEASE_2026-10-13.md) records
 its current public deployment and unchanged private-service boundaries.

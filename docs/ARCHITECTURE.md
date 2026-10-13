@@ -84,7 +84,7 @@ BotSquad-specific `.squad-*` CSS uses existing Graphite + Teal tokens. Its nativ
 index preserves `#how-it-works`, `#availability` and `#introduction-video`. `UtilityPage` is a server article.
 
 Client components remain limited to tutorial progression, legacy root fragments,
-menu dismissal and deliberate video loading, plus the development-only synthetic Ask client. Video posters load no remote resource.
+menu dismissal and deliberate video loading, plus the availability/disclosure-gated Ask client. Video posters load no remote resource.
 Clicking Load creates a fixed-ID privacy-enhanced iframe with no autoplay, SDK or
 persisted consent; origin referrer, native controls/fullscreen, visible Google
 notice, Close/focus restoration and external fallback remain. Google processing
@@ -385,7 +385,7 @@ default-disabled Ask source is described below.
 
 `app/botsquad/investment/` composes a streaming static introduction plus bounded
 server reads. New exact-run, decision and methodology pages complement INV-03
-artifact/version, discussion and record pages. `/botsquad/ask` is explanatory only.
+artifact/version, discussion and record pages. `/botsquad/ask` remains closed and can inspect same-origin availability.
 The website has no question submission UI or provider connection. The independent
 Ask API is routed separately and rejects visitor intake while disabled.
 `content/site.ts` owns `investmentShowcase` copy and `investmentArchive` disclosures.
@@ -452,8 +452,9 @@ unchanged when that environment setting is absent.
 
 ## Dormant Ask visitor interface
 
-[Ask UI boundaries](ASK-03-WEBSITE-UI.md) describe the server-only public page
-and development-only client. The hook owns consent, tab metadata, safe retries
+[Ask UI boundaries](ASK-03-WEBSITE-UI.md) describe the closed production path
+and development-only synthetic disclosure. The approved production disclosure
+registry is empty; availability cannot enable a composer by itself. The hook owns consent, tab metadata, safe retries
 and privacy controls; `lib/ask-client.ts` validates unchanged canonical DTOs and
 relative browser-only API requests. The separate receiver still owns all private
 server state. There is no new dependency, provider connection or production

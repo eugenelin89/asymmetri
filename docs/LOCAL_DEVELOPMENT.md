@@ -213,5 +213,6 @@ For producer typed-client acceptance, use the explicit [synthetic HTTPS fixture]
 
 [The local Ask guide](ASK-03-WEBSITE-UI.md#local-verification) records the
 explicit development-only flag, focused Node tests and disposable browser-adapter
-requirements. The flag alone supplies no receiver. It cannot enable the client
-in a production build. Stop Next development before either production build.
+requirements. The flag alone supplies no receiver. It cannot provide a synthetic disclosure or enable questions
+in a production build. The production client may check apex availability while
+the approved production disclosure list remains empty. Stop Next development before either production build.

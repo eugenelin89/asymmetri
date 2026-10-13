@@ -421,8 +421,10 @@ virtual-host sets. Final release checks still include direct tutorial image URLs
 ## Dormant Ask visitor interface
 
 Run `node --test tests/ask-ui.test.mjs` on the local Node version. The
-[nine-case suite and browser receipt](ASK-03-WEBSITE-UI.md#local-verification)
+[focused suite and browser receipt](ASK-03-WEBSITE-UI.md#local-verification)
 cover response identity, bounded pagination, same-request retries, owned privacy
-controls and no answer cache. Verify both the default unavailable page and the
+controls, metadata-only storage, legacy migration, consent identity and backoff.
+[ASK-04](ASK-04-READINESS.md) maps the additional receiver recovery/race/capacity
+fixtures to remaining operational gates. Verify both the default unavailable page and the
 explicit synthetic client. Synthetic browser transport does not prove genuine
 execution, operational Secure cookies or provider deletion.

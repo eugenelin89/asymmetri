@@ -405,8 +405,10 @@ Unknown monetary values say “Unavailable”. Derived benchmark drawdown requir
 complete contiguous loaded series from valuation sequence 1 and usable benchmark
 marks; missing peaks suppress that comparison. Source freshness never follows from
 transport connectivity. Production Ask displays an exact ContextRef as a reference, not proof of current
-visibility, and has no input, submission or conversation state. `askExperience`
-owns the unavailable page and synthetic-only client copy. Keep provider/retention
+visibility. It currently has no question form or visitor intake. `askExperience`
+owns public status and synthetic disclosure copy; `approvedAskPrivacyNotices` is
+empty until real disclosure facts are verified. Private ownership controls remain
+separate from new-question availability. Keep provider/retention
 promises conditional until actual configuration is verified.
 
 INV-REAL-01 adds published run purpose/objective and frozen settings, explicit
