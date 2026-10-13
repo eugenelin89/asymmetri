@@ -1,7 +1,10 @@
 # INV-REAL-01 — Website integration and release handoff
 
 Date: October 13, 2026 (America/Vancouver). **Website publicly released and verified.
-Observed-data activation remains held by producer authentication.** This investment
+Observed-data activation remains incomplete.** HQ reports repaired private
+authentication; the [current readiness update](ASK-04-READINESS.md#repaired-private-authentication)
+separates that repair from remaining authority, eligibility and genuine acceptance.
+This investment
 handoff supersedes the next-milestone descriptions in historical INV-04. Its
 97b4087 deployment details describe the initial release. The later
 [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md) supplies current
@@ -102,8 +105,10 @@ sequence-gap counts. Both fixes have focused regression tests.
 Fixtures prove interface/accounting behavior, never genuine reasoning or elapsed
 market sessions. Producer later delivered PR75 at deployed
 `d262a8dff59ab82587bd6444b083e5e9b7603cf0`, with signed acceptance against this
-compiled receiver (5/5). Its production account returned 401, so no observed run or
-new employee authority is active. Later Ask source PR77/78 remains separate.
+compiled receiver (5/5). Its production account returned 401 at that earlier
+acceptance, preventing an observed run or new employee authority then. HQ now
+reports repaired private authentication; genuine activation remains incomplete.
+Later Ask source PR77/78 remains separate.
 
 ## Production baseline and release receipt
 

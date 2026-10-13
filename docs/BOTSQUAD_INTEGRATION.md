@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | Persistent employees, private Task/conversation/working-group and execution control | [BotSquad HQ](https://github.com/eugenelin89/bot_messenger), including `src/` and private host `ssh botsquad` | Existing product; no investment authority merely because workers exist |
 | Canonical versioned investment protocol, types, fixtures and signature vectors | [BotSquad `contracts/investment/v1/`](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1) | Contract 1.0 accepted; do not fork independently |
-| Paper-trading ledger, permitted free-source market adapter, trusted public publisher, employee collaboration and operating cadence | [BotSquad investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md), INV-05–09 | Source has advanced; genuine activity remains account-401 held; see current handoff |
+| Paper-trading ledger, permitted free-source market adapter, trusted public publisher, employee collaboration and operating cadence | [BotSquad investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md), INV-05–09 | HQ reports repaired private authentication; genuine activation and publication gates remain incomplete; see current handoff |
 | Investment signed REST receiver, SQLite archive, CAS, exact-version artifacts, withdrawal controls | [Asymmetri `receiver/`](../receiver/) and [receiver runbook](INVESTMENT_RECEIVER.md) | Installed with strict HTTPS, empty archive and no publisher authority |
 | Public pages, live-desk UI, charts, evidence/journal/Ask preview | [Asymmetri `app/botsquad/`](../app/botsquad/), [components/investment](../components/investment/), [INV-04 acceptance](INV-04-VALIDATION.md) | Public October 13 release; archive unconfigured, Ask intake disabled |
 | Public Ask UI and private Q&A integration | [BotSquad Ask roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ASK_BOTSQUAD_ROADMAP.md) and [Asymmetri interface](ASK-03-WEBSITE-UI.md) | Local synthetic UI and typed transport accepted; unavailable public page released, genuine intake closed |
@@ -67,3 +67,9 @@ observations from unverified genuine employee, custody/restore and capacity gate
 Finite Ask grants and immutable attempts are next HQ source work; login repair
 alone cannot enable intake or establish public Ask eligibility. Website d0c4543,
 Ask receiver 4daa713 and their independent rollback records remain unchanged.
+
+The [later private-authentication update](ASK-04-READINESS.md#repaired-private-authentication)
+records HQ's successful account/configuration/routing/private-investment eligibility
+checks at 19:55–19:56 UTC, without model turns. The old 401 is historical. Public
+Ask eligibility, reload-OFF attestation, new authority, genuine employee acceptance
+and custody/restore/capacity gates remain incomplete; no public activation follows.

@@ -2,8 +2,10 @@
 
 Date: October 13, 2026. This source packet prepares the genuine visitor path while
 keeping operational intake closed. It grants no keys, employee authority, roster,
-publisher access, paid data, model execution or financial activity. HQ remains
-account-401 held; its newly merged source is not a new production deployment.
+publisher access, paid data, model execution or financial activity. HQ reports
+repaired private authentication; the earlier 401 is historical. Public Ask
+eligibility and operational acceptance remain incomplete, and merged source is
+not a new production deployment.
 
 ## Contract and producer receipts
 
@@ -137,3 +139,21 @@ alone establishes neither public Ask eligibility nor consent, custody/restore,
 finite authority or combined-workload capacity. Those gates remain incomplete.
 This documentary reconciliation changes no deployed identity, rollback material
 or closed service configuration and requires no redeployment.
+
+## Repaired private authentication
+
+HQ reports that the owner personally completed the official server Codex device
+login. On October 13, the strict account read at 12:55 America/Vancouver (19:55 UTC)
+matched the previously owner-confirmed identity. At 12:56 (19:56 UTC), the deployed
+`CreditAccountVerifier` passed configuration, routing and current private
+finite-investment eligibility checks, with zero model turns and no inherited MCP
+servers. The prior 401 is historical. This later coordination update postdates
+PR 84; the website writer did not repeat the account probe or inspect credentials.
+HQ reports no raw credentials or screenshots retained in project evidence.
+
+Private authentication repair does not establish public Ask account eligibility,
+reload-OFF attestation, new finite authority or genuine employee acceptance.
+Ask intake remains closed and the investment archive remains unconfigured.
+Custody/restore, disclosures, separate finite budgets and combined-workload
+capacity remain incomplete; no website activation or redeployment follows from
+this update.
