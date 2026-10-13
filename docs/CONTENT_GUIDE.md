@@ -425,3 +425,12 @@ See [the current handoff](INV-REAL-01-WEBSITE.md) for acceptance and release sta
 future disclosures and local synthetic consent distinct. Exact record links are
 references until visibility is checked. Do not put private question/session
 identities in URLs or treat Motion privacy as an Ask policy.
+
+## Ask subscription limits disclosure
+
+`askExperience.privacy` describes the planned activity-capped subscription mode:
+unknown operator cost, no verified dollar cap, monitored token thresholds that
+can overshoot through provider retries, and admission holds for missing usage or
+threshold breach. It does not state that the live receiver selected the mode.
+`approvedAskPrivacyNotices` remains empty until actual provider/custody/retention
+facts and genuine integration are reviewed for the advertised service/version.

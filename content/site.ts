@@ -1195,6 +1195,7 @@ export const askExperience = {
     'The service will explain who operates it, which AI providers process questions, whether research shares a limited query, and how long each copy is retained before you send anything.',
     'The intended experience uses a private browser session, not a public comment feed. Private does not mean end-to-end encrypted or inaccessible to the operator and configured providers.',
     'Cancellation and deletion controls are being tested. We will describe their limits, including provider copies and recovery records, before accepting visitor questions.',
+    'A planned subscription mode would use monitored token thresholds, with no verified dollar cap and no available measure of the operator’s actual model cost. Usage could exceed those thresholds, including through provider retries. Missing usage data or a threshold breach would pause new questions.',
   ],
   context: 'Selected public record reference',
   contextNotice: 'The exact record will be checked before a question is accepted. A reference in this link is not evidence that the record is currently public.',

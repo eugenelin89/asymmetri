@@ -9,10 +9,13 @@ not a new production deployment.
 
 ## Contract and producer receipts
 
-The nine vendored canonical files remain byte-identical to producer
-`ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755`; manifest SHA-256
-`7ec71b39d7a25c7067ade8b26d37f1a58552b2dbfd14e9b6d7aa827ccc867e31`.
-No public DTO or endpoint extension is introduced.
+The nine vendored canonical files now match merged HQ PR 86 at
+`9ff8cc984954f2e822ec191de60dcd39607ea1a7`; manifest SHA-256
+`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
+The explicit subscription mode is a reviewed package extension, with unknown/null
+cost and monitored thresholds that may overshoot. No public DTO endpoint,
+investment signature/record shape, approved privacy notice or intake is added.
+See the [capability review](ASK-04-CAPABILITY-REVIEW.md) for consumer evidence.
 
 HQ PR 82 merge is `7fcb57303141a188c5fdfe212fa447551421a6d7`, with implementation
 `9a1eb5caf4a0cc3125f9da2ffe9a941cea68c0fc` and evidence
@@ -166,6 +169,7 @@ Ask-only memory hardening, actual interrupted-copy faults, bounded Linux reads,
 non-content backup/held restore and current custody exclusions. These close
 specific website-side checks, not combined genuine HQ workload acceptance.
 
-The [subscription capability review](ASK-04-CAPABILITY-REVIEW.md) gives the exact
-consumer plan and remaining evidence requirements for HQ’s proposed explicit
-activity-capped mode. No canonical pin or public disclosure was changed.
+The [subscription capability review](ASK-04-CAPABILITY-REVIEW.md) records adoption
+of HQ's merged explicit activity-capped mode and its remaining operational gates.
+The canonical pin and conditional advance explanation changed; the approved
+service/privacy registry remains empty and live Ask configuration is unchanged.

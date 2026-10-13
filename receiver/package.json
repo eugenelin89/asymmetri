@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig.json",
     "check": "tsc -p tsconfig.json --noEmit",
     "contracts:check": "node scripts/check-contract.mjs",
-    "test": "npm run contracts:check && npm run build && node --test dist/test/*.test.js",
+    "test": "npm run contracts:check && npm run build && node --test dist/test/*.test.js && ASK_CAPABILITY_RUNTIME=. node --test deploy/ask-capability-acceptance.test.mjs",
     "start": "node dist/src/cli.js serve",
     "admin": "node dist/src/cli.js"
   },

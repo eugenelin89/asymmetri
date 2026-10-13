@@ -9,9 +9,9 @@ and Vinext packaging do not start or import the receiver runtime.
 
 
 `receiver/vendor/investment/v1/` is the exact nine-file contract 1.0 from
-[eugenelin89/bot_messenger at ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1).
+[eugenelin89/bot_messenger at 9ff8cc984954f2e822ec191de60dcd39607ea1a7](https://github.com/eugenelin89/bot_messenger/tree/9ff8cc984954f2e822ec191de60dcd39607ea1a7/contracts/investment/v1).
 Manifest SHA-256:
-`7ec71b39d7a25c7067ade8b26d37f1a58552b2dbfd14e9b6d7aa827ccc867e31`.
+`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
 `vendor/source.json` records the pin. The checker verifies complete membership,
 manifest/file hashes and independently regenerated TypeScript declarations.
 Runtime has no GitHub dependency. Schema, signature, publication and content

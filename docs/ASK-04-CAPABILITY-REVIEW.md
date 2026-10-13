@@ -1,14 +1,16 @@
 # Ask subscription capability consumer review
 
-October 13, 2026. This is a source implementation plan for HQ's proposed canonical
-amendment, not an accepted manifest, runtime capability or admission authorization.
-The website still vendors producer ba3dd74 and manifest
-`7ec71b39d7a25c7067ade8b26d37f1a58552b2dbfd14e9b6d7aa827ccc867e31`.
-No vendored file, live configuration or approved privacy notice changes here.
+October 13, 2026. The repository now adopts merged HQ PR 86 at
+`9ff8cc984954f2e822ec191de60dcd39607ea1a7`, reviewed source
+`b2f3de2612e71acf8ebda60af7d2ccc701bf1ab5`, with manifest
+`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
+It is byte-identical to the previously accepted candidate below. This permits
+validation of the explicit mode; it creates no runtime enforcement or admission
+claim. Live configuration and the empty approved privacy registry stay unchanged.
 
-## Proposed shape and compatibility
+## Accepted shape and compatibility
 
-HQ proposes adding `activity_capped_subscription` to
+HQ added `activity_capped_subscription` to
 `AskLimits.monetaryEnforcement`. That mode requires `dailyBudgetUsd:null`,
 zero router/research executions and a closed `subscriptionActivityPolicy` object
 with these exact values:
@@ -35,7 +37,7 @@ HQ reports Codex 0.157 provides neither an included-only selector nor hard
 capabilities. An 8,000-character published answer bound is enforceable locally;
 it is distinct from provider generation tokens, internal retries and billing.
 
-## Consumer implementation after an accepted canonical hash
+## Consumer implementation and remaining integration
 
 1. Verify HQ's accepted commit, manifest, all nine file hashes, generated types,
    examples and protocol text; vendor the exact package through the existing
@@ -72,8 +74,8 @@ it is distinct from provider generation tokens, internal retries and billing.
 
 ## Blockers and owner intent
 
-There is no website design objection to the explicit variant. Acceptance still
-needs the canonical hash and the producer enforcement/usage evidence above.
+There is no website design objection to the explicit variant. The accepted hash closes package identity; operational acceptance still
+needs the producer enforcement/usage evidence above.
 Public-service account eligibility remains a factual evidence requirement, not an
 invented provider API flag. Operational HQ custody/restore, genuine employee
 execution, actual privacy disclosure and combined workload capacity remain open.
@@ -88,7 +90,7 @@ contract change or public admission. It is not the deployment of this proposal;
 recorded running HQ remains d262a8d. Preserve the exact live investment IDs and
 receiver process throughout this later Ask work.
 
-## Frozen candidate acceptance (not adopted)
+## Historical frozen candidate acceptance
 
 HQ supplied a frozen, still-unmerged candidate on October 13. The nine-file package
 and every manifest member were independently hashed. Candidate identities:
@@ -113,7 +115,7 @@ explicit `UNMERGED-CANDIDATE-NOT-A-RELEASE` source marker. The repository and li
 vendor directories were not replaced. Exact-package/type-regeneration checks,
 TypeScript build and all 236 existing receiver tests passed on local Node 24.10.0.
 All 15 existing browser-logic tests passed against the candidate schema in the
-same separate tree. The current pinned consumer was independently confirmed to
+same separate tree. The previous pinned consumer was independently confirmed to
 reject the new mode with `INVALID_SCHEMA`, as intended.
 
 `receiver/deploy/ask-capability-acceptance.test.mjs` provides four additional
@@ -134,8 +136,43 @@ usage endpoint, so visitor limits/cost disclosure still needs reviewed fixed cop
 for the actual service/privacy pair, with clear monitored-threshold and unavailable
 cost wording. No notice is published from candidate test results.
 
-After the accepted HQ merge is supplied, verify its exact package equals these
-reviewed bytes, update the repository source pin and exact vendor package, then
-run the committed acceptance against that installed source. If any bytes change,
-repeat the affected acceptance. Operational deployment/admission is a separate
-step requiring genuine integration evidence; this packet performs neither.
+The merged package was independently compared with the candidate, then adopted
+byte-for-byte with the merged source pin. The four capability cases now run in
+`npm run receiver:test` after the existing receiver suite. Canonical validation
+and existing owner/roster/strict-budget guards require no duplicate runtime parser.
+The closed page describes the planned monitored mode, unknown operator cost,
+possible retry overshoot and hold conditions. This is advance disclosure, not
+consent for a configured live provider; the approved notice registry stays empty.
+
+HQ reports 396 affected passes, zero failures and one optional unconfigured
+interoperability skip, plus 32/32 expanded authority cases, build/typecheck/contract
+checks, 424 source hashes and 15 retained logs. GitHub checks/statuses/reviews were
+empty; no CI success is inferred. These are producer-reported source results.
+Actual AskService/Dispatcher/ephemeral employee/outbox integration and genuine
+operational acceptance remain the next HQ packet. The preceding deployment
+receipts identify the installed source until a separate rollout is verified.
+
+
+## Accepted consumer source verification
+
+The adopted merged package passed the exact nine-file/generated-types check,
+236 existing receiver tests, four capability acceptance groups and fifteen UI
+logic tests on Node 24.10.0. Website TypeScript/ESLint passed with the existing
+tutorial navigation warning; standard Next webpack and Vinext production builds
+passed. Both production dependency audits reported zero vulnerabilities. Initial
+sandbox socket/DNS denial was retained separately; approved reruns passed.
+
+The closed production build was checked in a desktop browser engine at
+390/768/1440 CSS pixels: no composer, horizontal overflow, broken images or console
+errors, and a 3px keyboard focus outline. This is responsive browser evidence,
+not physical-device or genuine model acceptance. No styling, animation or asset
+changed. The changed public copy was reviewed for private organization, athlete,
+credential and prohibited product references; it introduces none.
+
+Two independent read-only reviews accepted the canonical compatibility and
+closed UI/consent boundary. They reviewed base b25cb43 and initial binary-diff
+SHA-256 e28c756dab14d00c9c2f990016465eae6d275f4d973ef19bf786fb59c6f26e9a.
+Their stale architecture/readiness documentation findings were corrected before
+commit; no runtime finding remained. Production stays at website d0c4543 and
+Ask receiver 4daa713 until the separately verified release. Investment generation
+one and its runtime read configuration remain independent and must be preserved.

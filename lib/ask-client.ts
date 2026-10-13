@@ -1,4 +1,4 @@
-/** Browser-safe validation and links for the unchanged canonical Ask contract. */
+/** Browser-safe validation and links for the pinned canonical Ask contract. */
 import { Ajv2020 } from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import schema from '../receiver/vendor/investment/v1/schema.json' with { type: 'json' };

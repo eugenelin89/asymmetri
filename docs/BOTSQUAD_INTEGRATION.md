@@ -7,7 +7,7 @@
 | Responsibility | Repository / location | Status |
 | --- | --- | --- |
 | Persistent employees, private Task/conversation/working-group and execution control | [BotSquad HQ](https://github.com/eugenelin89/bot_messenger), including `src/` and private host `ssh botsquad` | Existing product; no investment authority merely because workers exist |
-| Canonical versioned investment protocol, types, fixtures and signature vectors | [BotSquad `contracts/investment/v1/`](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1) | Contract 1.0 accepted; do not fork independently |
+| Canonical versioned investment protocol, types, fixtures and signature vectors | [BotSquad `contracts/investment/v1/`](https://github.com/eugenelin89/bot_messenger/tree/9ff8cc984954f2e822ec191de60dcd39607ea1a7/contracts/investment/v1) | Contract 1.0 accepted; do not fork independently |
 | Paper-trading ledger, permitted free-source market adapter, trusted public publisher, employee collaboration and operating cadence | [BotSquad investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md), INV-05–09 | Finite observed portfolio active; initial signed publication verified; actual future market/employee execution remains to be observed |
 | Investment signed REST receiver, SQLite archive, CAS, exact-version artifacts, withdrawal controls | [Asymmetri `receiver/`](../receiver/) and [receiver runbook](INVESTMENT_RECEIVER.md) | Strict HTTPS, exact finite publisher authority and five accepted initial events; official run selected |
 | Public pages, live-desk UI, charts, evidence/journal/Ask preview | [Asymmetri `app/botsquad/`](../app/botsquad/), [components/investment](../components/investment/), [INV-04 acceptance](INV-04-VALIDATION.md) | Live real configured archive on unchanged d0c4543 build; Ask intake disabled |
@@ -17,7 +17,7 @@
 
 ## Contract and integration boundary
 
-Canonical contract commit: `ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755`; nine files; manifest SHA-256 `7ec71b39d7a25c7067ade8b26d37f1a58552b2dbfd14e9b6d7aa827ccc867e31`. Asymmetri's `receiver/vendor/investment/v1/` is a byte-identical, pinned consumer as checked during the October 9 review. Run `npm --prefix receiver run contracts:check` after contract-related edits. Neither project fetches the protocol from GitHub at runtime.
+Canonical contract commit: `9ff8cc984954f2e822ec191de60dcd39607ea1a7`; nine files; manifest SHA-256 `27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`. Asymmetri's `receiver/vendor/investment/v1/` is a byte-identical, pinned consumer with the October 13 Ask subscription amendment adopted from merged HQ PR 86. Run `npm --prefix receiver run contracts:check` after contract-related edits. Neither project fetches the protocol from GitHub at runtime.
 
 The approved authority flow is: trusted BotSquad HQ public projection and publisher (later INV-07) **outbound signed HTTPS** → isolated Asymmetri receiver and public archive → bounded read-only Next.js routes → visitors. Website receipts are not trading commands, and the website must not obtain private HQ employee state or signing keys. Ask BotSquad uses a separate private-session Q&A boundary with public intake disabled; an investment publication grant does not authorize Ask.
 

@@ -9,8 +9,8 @@ DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging rema
 separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
 default-disabled INV-02 receiver owns a public archive/signature boundary described
 in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Strict production API routing
-is live with an empty investment archive and disabled Ask intake; no publisher or
-Ask service authority is active.
+is live with the exact finite investment publisher and initial configured portfolio.
+Ask intake remains disabled and no Ask service authority is active.
 
 ## Routes and compatibility
 
@@ -355,9 +355,9 @@ retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 
 ## BotSquad investment: repository and release ownership
 
-The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
+The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/9ff8cc984954f2e822ec191de60dcd39607ea1a7/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
 
-INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 website release is public with truthful unconfigured archive and disabled Ask states. The private receiver compatibility update provides visibility headers and owner controls. Schema 002 remains empty, with no publisher. See [the ingress release receipt](INGRESS_RELEASE_2026-10-13.md) for active listener identities, confinement, renewal and all-host checks. Genuine HQ publishing, operational backup custody and public Ask still require their technical acceptance. The OS upgrade remains a separate project.
+INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 [investment activation](INV-REAL-01-WEBSITE.md) subsequently installed finite publisher authority, accepted five initial events and enabled website reads for the exact official run. The public portfolio is configured; market results remain unavailable and Ask stays closed. See [the ingress release receipt](INGRESS_RELEASE_2026-10-13.md) for listener identities, confinement, renewal and all-host checks. Operational backup custody, genuine market-session outcomes and public Ask still require their respective acceptance. The OS upgrade remains a separate project.
 
 ## INV-02 standalone archive boundary
 
@@ -415,7 +415,8 @@ transport adds `X-Archive-Visibility` (archive epoch + visibility epoch hash) an
 optional `X-Archive-Latest-Cursor` for the latest bounded event window. They do not
 change the frozen OpenAPI/schema/DTO package. Successful website reads require the
 visibility witness; an older receiver without it fails closed. The installed private
-receiver has compatible source; website read configuration remains disabled.
+receiver has compatible source; the [investment activation](INV-REAL-01-WEBSITE.md)
+enabled exact-run website reads through the preserved runtime configuration.
 
 Ordinary publication changes do not remount readers. A visibility change hides cached
 content and refreshes the server projection. Final server witnesses cover all loaded

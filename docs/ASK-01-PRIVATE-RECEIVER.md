@@ -18,7 +18,7 @@ substitute for HQ token, cost, deadline or duty-cycle enforcement. No website co
 executes a model, buys credits, fetches visitor URLs, or creates publication grants.
 
 The nine canonical v1 files remain byte-identical to manifest
-`7ec71b39d7a25c7067ade8b26d37f1a58552b2dbfd14e9b6d7aa827ccc867e31`.
+`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
 The implementation serves their `/api/ask/v1/` routes through a separate HTTP
 listener and SQLite database. It never opens the public archive database. It reads
 public evidence only through an explicitly configured loopback HTTP adapter.

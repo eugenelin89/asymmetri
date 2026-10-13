@@ -468,6 +468,6 @@ It is not a genuine model-load or provider-cost benchmark.
 The explicit `receiver/deploy/ask-capability-acceptance.test.mjs` requires
 `ASK_CAPABILITY_RUNTIME` to name an isolated compiled candidate or accepted
 receiver. It verifies the subscription variant and mixed-mode rejection without
-opening a listener. It intentionally cannot pass against the old pinned package.
-Keep an unmerged candidate outside the vendor tree; see the
-[frozen package review](ASK-04-CAPABILITY-REVIEW.md#frozen-candidate-acceptance-not-adopted).
+opening a listener. The merged package is now pinned, and `npm run receiver:test` runs these four
+cases with `ASK_CAPABILITY_RUNTIME=.` after its existing suite. Historical
+candidate evidence remains in the [package review](ASK-04-CAPABILITY-REVIEW.md).
