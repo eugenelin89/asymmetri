@@ -406,7 +406,15 @@ verified versions; historical decision references remain historical after correc
 Unknown monetary values say “Unavailable”. Derived benchmark drawdown requires a
 complete contiguous loaded series from valuation sequence 1 and usable benchmark
 marks; missing peaks suppress that comparison. Source freshness never follows from
-transport connectivity. Production Ask displays an exact ContextRef as a reference, not proof of current
+transport connectivity. The status panel labels the canonical combined status
+as archive freshness and displays publisher heartbeat receipt separately. Missing
+review times mean “Not published” in the loaded public records, not an unconfigured
+private schedule. The known unknown-freshness reason about the absent public
+calendar collector is presented as market freshness unavailable in the public
+archive; other reasons (including stale contact or valuation) remain intact.
+Snapshot session dates identify the session a record describes, not proof that a
+market observation occurred. Null financial values and unknown activity remain
+unchanged. Production Ask displays an exact ContextRef as a reference, not proof of current
 visibility. It currently has no question form or visitor intake. `askExperience`
 owns public status and synthetic disclosure copy; `approvedAskPrivacyNotices` is
 empty until real disclosure facts are verified. Private ownership controls remain
