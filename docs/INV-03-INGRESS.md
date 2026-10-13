@@ -204,3 +204,14 @@ other certificate lineages are ignored. Certbot's installed `--run-deploy-hooks`
 help confirms a successful dry run invokes hooks with the active certificate,
 not the disposable staging certificate. Actual dry-run/installed-service receipts
 remain required before public activation.
+
+
+The first real loopback installation exposed a startup race: systemd Type=simple
+reported active before Node finished loading and registered HUP. An immediate
+hook signal terminated the process cleanly. The hook now verifies the existing
+live TLS certificate before publishing or signaling a replacement, with a bounded
+15-second readiness window. The TLS unit restarts on any unexpected exit;
+`systemctl stop` still stops it. A successful `systemctl start` alone is never
+readiness evidence. This happened before public routing changed. Initial operator
+configuration directories also required explicit 0750 after root umask 0077;
+certificate files and hook-managed directories already enforce their exact modes.

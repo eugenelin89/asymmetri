@@ -47,7 +47,8 @@ def reload_service():
 def verify(expected):
     context = ssl.create_default_context()
     context.set_alpn_protocols(['http/1.1'])
-    for _ in range(20):
+    deadline = time.monotonic()+15
+    while time.monotonic() < deadline:
         try:
             with socket.create_connection(('127.0.0.1', 3103), timeout=2) as raw:
                 raw.sendall(b'PROXY TCP4 127.0.0.1 127.0.0.1 49152 443\r\n')
@@ -102,6 +103,12 @@ def main():
     previous = os.readlink(current) if current.is_symlink() else None
     if current.exists() and previous is None:
         raise RuntimeError('Current certificate path is not the managed symlink.')
+    # Type=simple can be active while Node still loads modules. Never send HUP
+    # before the application has installed its signal handler and accepts TLS.
+    if active:
+        if previous is None:
+            raise RuntimeError('Active TLS service lacks a managed certificate.')
+        verify(validate(current))
     staged = ROOT/'releases'/uuid.uuid4().hex
     staged.mkdir(mode=0o750);os.chown(staged, 0, group);os.chmod(staged, 0o750)
     for name in ['fullchain.pem', 'privkey.pem']:
