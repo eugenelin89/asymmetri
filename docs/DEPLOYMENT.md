@@ -1227,3 +1227,10 @@ The later [Ask configuration release](ASK-CONFIGURATION-RELEASE_2026-10-13.md)
 installs receiver source 2b63015 after 254 isolated Linux cases, with intake closed
 and exact code-only rollback. Its [older runtime retention record](WEBSITE-ROLLBACK-ARCHIVES_2026-10-13.md)
 explains the two archived historical website trees and restoration commands.
+
+## Investment status wording release
+
+The [October 13 status-copy receipt](BOTSQUAD-STATUS-RELEASE_2026-10-13.md) records
+website source `f47f99b`, guarded activation and complete `da09185` rollback runtime.
+Public review, publisher-contact and snapshot-session labels changed; receiver
+versions, data, authority and closed Ask gates are preserved.
