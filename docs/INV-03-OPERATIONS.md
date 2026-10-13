@@ -69,6 +69,8 @@ approve rights or release corrections.
 | `withdraw EXPERIMENT RUN EVENT withheld\|withdrawn` | Immutable control; invalidate visibility epoch/cursors; suppress dependents and known byte aliases |
 | `registry-state EXPERIMENT RUN ARTIFACT STATE` | Account for nonpublication states; withdrawn is terminal |
 | `approve-artifact EXPERIMENT RUN PRIVATE_METADATA_JSON` | Bind review to exact immutable metadata and version |
+| `approve-run PRIVATE_RUN_EVENT_JSON` | INV-REAL-01: approve exact observed frozen configuration before signed ingestion; see [receiver runbook](INVESTMENT_RECEIVER.md#observed-run-approval-and-official-selection) |
+| `select-official EXPERIMENT RUN EXPECTED_PRIOR_OR_-` | INV-REAL-01: select an accepted visible approved observed official run using a checked previous pointer |
 | `release-correction EXPERIMENT RUN EVENT` | Owner-reviewed replacement may cross only its own supersedes edge, never arbitrary evidence edges |
 | `export-controls` | Protected current suppression snapshot; store its digest independently |
 | `reconcile-controls PRIVATE_SNAPSHOT_JSON VERIFIED_SHA256` | After restore, reconcile current controls before read hold is released; publisher fencing remains |

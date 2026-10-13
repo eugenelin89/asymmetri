@@ -33,7 +33,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
-| `/botsquad/investment` | INV-04 investment showcase implemented in source only; truthful unconfigured state until an approved release and data activation |
+| `/botsquad/investment` | Public investment showcase; truthful unconfigured state until verified observed records are connected |
 | `/botsquad/ask` | Disabled preview of future visitor-to-employee Q&A; no live question service |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
@@ -80,8 +80,9 @@ Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytic
 backend or application-owned visitor tracking. A separate, default-disabled
 investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
-the independent private installation remains stopped/default disabled and the public
-website is unchanged. See [INV-03 acceptance](docs/INV-03-VALIDATION.md). See [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
+the independent private installation remains stopped/default disabled. The investment
+website is public; see the [current release receipt](docs/INV-REAL-01-WEBSITE.md) and
+[receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
 YouTube players connect to Google only after explicit activation; local posters
 and normal external links are available beforehand. Tutorial screenshots contain only the
 owner-authorized retained pitching media described in the asset manifest.

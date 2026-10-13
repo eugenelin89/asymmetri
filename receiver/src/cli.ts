@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { loadConfig } from './config.js';
 import { backup, restore } from './backup.js';
 import { Controls } from './controls.js';
+import { RunControls } from './run-controls.js';
 import { Archive } from './database.js';
 import { Storage } from './storage.js';
 import { createReceiver } from './http.js';
@@ -16,7 +17,7 @@ async function main():Promise<void>{
   const [command,...args]=process.argv.slice(2),path=process.env.ASYMMETRI_RECEIVER_CONFIG;
   if(!path){console.error('Receiver disabled: set ASYMMETRI_RECEIVER_CONFIG to an explicit private local configuration.');process.exitCode=1;return;}
   const config=loadConfig(path);
-  const commands=['serve','migrate','diagnostics','authorize','revoke-key','cleanup','restore-fence','withdraw','registry-state','approve-artifact','release-correction','export-controls','reconcile-controls','backup','restore'];need(command&&commands.includes(command));
+  const commands=['serve','migrate','diagnostics','authorize','revoke-key','cleanup','restore-fence','withdraw','registry-state','approve-artifact','approve-run','select-official','release-correction','export-controls','reconcile-controls','backup','restore'];need(command&&commands.includes(command));
   const offline=['serve','migrate','cleanup','restore-fence','backup','restore','reconcile-controls'].includes(command),lock=join(config.dataDir,'receiver.lock');
   const handle=offline?await open(lock,'wx',0o600):null;
   if(handle)await handle.writeFile(String(process.pid));
@@ -37,6 +38,8 @@ async function main():Promise<void>{
         case 'withdraw':need(args.length===4);args.slice(0,3).forEach(x=>validate('Id',x));need(['withheld','withdrawn'].includes(args[3]!));db.hide(args[0]!,args[1]!,args[2]!,args[3] as 'withheld'|'withdrawn',time);console.log('Visibility control recorded.');break;
         case 'registry-state':need(args.length===4);controls.registry(args[0]!,args[1]!,args[2]!,args[3] as Parameters<Controls['registry']>[3],time);console.log('Registry control recorded.');break;
         case 'approve-artifact':need(args.length===3);controls.approve(args[0]!,args[1]!,parseJson(readFileSync(args[2]!),16384) as ArtifactVersion,time);console.log('Exact artifact rights approval recorded.');break;
+        case 'approve-run':need(args.length===1);new RunControls(db).approve(parseJson(readFileSync(args[0]!),262144),time);console.log('Exact observed run configuration approved.');break;
+        case 'select-official':need(args.length===3);new RunControls(db).selectOfficial(args[0]!,args[1]!,args[2]==='-'?null:args[2]!,time);console.log('Official run selection recorded.');break;
         case 'release-correction':need(args.length===3);controls.releaseCorrection(args[0]!,args[1]!,args[2]!,time);console.log('Reviewed correction release recorded.');break;
         case 'export-controls':console.log(JSON.stringify(controls.snapshot()));break;
         case 'reconcile-controls':need(args.length===2);controls.reconcile(parseJson(readFileSync(args[0]!),16777216) as Parameters<Controls['reconcile']>[0],args[1]!,time);console.log('Current control snapshot reconciled; publisher authority remains fenced.');break;

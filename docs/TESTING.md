@@ -288,6 +288,12 @@ Run `npm run receiver:check`, `npm run receiver:test` and `npm --prefix receiver
 
 ## Private receiver Linux acceptance
 
+INV-REAL-01 owner controls add signed observed-run preapproval/ingestion tests,
+duplicate/conflicting configuration checks, official-run replacement with stale
+expected-pointer rejection, restart persistence, fixture/private-trial denial and
+restore/withdrawal fences in `receiver/test/run-controls.test.ts`. These disposable
+fixtures do not approve a real operational configuration or select a live run.
+
 [INFRA-02](INFRA-02-VALIDATION.md) records actual Ubuntu 22.10/Node22 results;
 [the runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) owns setup, confinement and cleanup.
 These are explicitly invoked, synthetic deployment tools, not startup scripts or

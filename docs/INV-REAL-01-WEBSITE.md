@@ -146,6 +146,11 @@ change the running build identity above.
 
 ## Remaining integration
 
-Receiver operational setup/strict HTTPS delivery; verified backup/retention and recovery;
+Owner-only `approve-run` and `select-official` source now provide exact configuration
+approval and explicit checked official selection without SQL edits or a wire/schema
+migration; [commands](INVESTMENT_RECEIVER.md#observed-run-approval-and-official-selection).
+No operational run approval or selection has been made.
+
+Receiver compatibility installation/strict HTTPS delivery; verified backup/retention and recovery;
 actual publication and as-of history; separately implemented Ask integration. No
 fixture or empty archive substitutes for these outcomes.

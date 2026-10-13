@@ -5,7 +5,7 @@ and Vinext packaging do not start or import the receiver runtime.
 
 ## Contract and runtime
 
-**Cross-repository guide:** [Asymmetri/BotSquad integration map](BOTSQUAD_INTEGRATION.md). The [BotSquad canonical investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) owns milestone and source-of-truth responsibilities; Asymmetri owns this receiver and site implementation. INV-04 is accepted in source and local synthetic browser validation, not released to the live website.
+**Cross-repository guide:** [Asymmetri/BotSquad integration map](BOTSQUAD_INTEGRATION.md). The [BotSquad canonical investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) owns milestone and source-of-truth responsibilities; Asymmetri owns this receiver and site implementation. The later [INV-REAL-01 website release](INV-REAL-01-WEBSITE.md) is public with no configured archive or enabled Ask.
 
 
 `receiver/vendor/investment/v1/` is the exact nine-file contract 1.0 from
@@ -127,8 +127,39 @@ no vendor credentials, scraper, fetch of source URLs or paid-feed assumption.
 `observed_paper` publication additionally requires a trusted local approval for
 the exact frozen configuration hash in `publication_approvals`; publisher claims
 and public URLs alone do not establish rights. No operational approval was made.
-A future reviewed approval workflow belongs with permitted-source/live activation
-work. Synthetic fixtures need no real source connection.
+The owner reports Yahoo permission for the complete personal noncommercial project;
+this local control binds the exact frozen configuration and is not a renewed licensing
+gate. Synthetic fixtures need no real source connection.
+
+### Observed run approval and official selection
+
+These owner-only CLI operations use existing schema 002; no SQL editing, HTTP admin
+route, publisher key or new migration is needed. Commands are executed as the receiver
+identity using its explicit private configuration:
+
+```sh
+node dist/src/cli.js approve-run /absolute/private/run-published-event.json
+node dist/src/cli.js select-official EXPERIMENT RUN -
+```
+
+`approve-run` accepts one canonical `RunPublishedEvent`, requires `observed_paper`,
+non-fixture run kind, owner-approved configuration/non-null approval record and the
+exact canonical configuration hash. It can precede the first publication. A differing
+configuration for the same experiment/run conflicts; identical retry is a no-op.
+It does not ingest the run or provision a publisher. Normal signed ingestion still
+performs all financial, event, identity and frozen-configuration checks.
+
+After successful signed ingestion, `select-official` requires an existing visible,
+locally approved observed run with frozen `runKind:official`. The third argument is
+the expected current official run, or `-` for no selection. A stale expectation
+conflicts; inspect the current public experiment before retrying an uncertain result.
+The change and prior/new identity audit commit together and invalidate visibility
+cursors. History is retained, and fixtures/private trials cannot become official.
+Both operations reject a restored archive's read hold until controls are reconciled.
+
+The website's explicit experiment/run/read configuration is a separate activation
+step. These controls do not bypass current key/grant/generation checks, provision
+authority, repair HQ login or activate an otherwise disabled receiver.
 
 ## SQLite, ordering and transaction boundaries
 
@@ -152,8 +183,8 @@ order transitions, evidence, roster, references, valuation sequence/revision,
 frozen config and explicit data quality are validated. Delayed independent source
 events are allowed; source gaps remain explicit. Current snapshot selection uses
 valuation sequence and revision, never HTTP arrival. Prior versions remain
-addressable. Official-run selection is reserved for an explicit future operator
-decision; publication does not silently set that pointer.
+addressable. Official-run selection uses the explicit local `select-official`
+operation; publication does not silently set that pointer.
 
 Same request ID/target requires identical bytes; different bytes conflict. A new
 batch cannot duplicate immutable events or source/financial identities. Successful
