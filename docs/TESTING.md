@@ -428,3 +428,24 @@ controls, metadata-only storage, legacy migration, consent identity and backoff.
 fixtures to remaining operational gates. Verify both the default unavailable page and the
 explicit synthetic client. Synthetic browser transport does not prove genuine
 execution, operational Secure cookies or provider deletion.
+
+## Closed Ask receiver rollout checks
+
+The [Ask-only release](ASK-04-RECEIVER-RELEASE_2026-10-13.md) passed all 236 receiver
+tests on Linux/Node 22.23.1 in isolated authored state under the service's memory,
+swap and CPU ceilings. Its bounded concurrent public checks and resource record
+are not a real HQ/visitor capacity promise. No application source changed in the
+rollout packet, so the prior website build/browser evidence remains applicable.
+
+Operational verification must bind a successful source receipt to a nonzero
+active service identity and final disabled/no-cookie HTTPS responses. Use a
+bounded monotonic readiness deadline that permits cold startup under the CPU
+quota. Compare content, authority, generation and root-held configuration exactly;
+validate and preserve normal HTTP rate counters separately. Never reset counters
+to make a snapshot match. Preserve failed activation and recovery evidence.
+
+All-host verification rejects transport failures unless an exact, documented
+pre-existing failure is separately classified and fingerprinted before/after.
+Known-failure read-throughs are explicitly unverified TLS and must never count
+as healthy HTTPS. Keep Motion routes, tutorial links/images, unrelated service
+identities and Nginx hashes in the preservation set.

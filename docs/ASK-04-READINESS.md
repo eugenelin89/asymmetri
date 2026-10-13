@@ -42,8 +42,7 @@ performance bound. Recorded running HQ source remains
 The receiver tests use disposable private directories and authored data only. No
 fixture configuration is promoted into production. Existing WAL purge, content-free
 backup, signature/TLS, control barrier and protected-route evidence is reused where
-source is unchanged. The source changes to receiver session replay and queue
-availability require receiver rollout separately from a website build.
+source is unchanged. The receiver changes were installed in the separate [closed Ask rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md), preserving disabled intake and generation zero.
 
 ## Remaining operational acceptance
 
@@ -93,13 +92,28 @@ flag still had no form; off-apex hydration offered the apex link and made no
 private request. The adapter's temporary private tree was removed on shutdown.
 
 The original browser/API evidence remains applicable to unchanged answer rendering,
-links and TLS boundaries. Receiver source rollout and operational capacity remain
-explicit follow-up gates, not implied by this website-only release preparation.
+links and TLS boundaries. The separate receiver rollout is now verified. Genuine combined-workload capacity
+remains an explicit follow-up gate; bounded Linux observations do not establish it.
 
 
 ## Installed website
 
 The [closed production-path release](ASK-04-RELEASE_2026-10-13.md) installs website
 source d0c4543. It records the actual Linux build, complete rollback, live closed
-browser state and 112 all-host checks. The receiver source corrections in this
-packet remain a separate rollout; no operational gate is inferred from the release.
+browser state and 112 all-host checks. The receiver source corrections were subsequently installed from 4daa713 by the
+[Ask-only rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md). All 236 receiver tests
+passed on Linux; no operational authority was inferred from either release.
+
+## Subsequent HQ private-content source receipt
+
+HQ PR 83 merged as `8034404c5df1b89c6cff10ed990814c154172478`, implementation
+`d9e422ea691f25ef79f13ed183bb76f49597e859`, evidence
+`ab14f6a09bab4fcfd746643b28592810b654329c`. The website independently checked
+acceptance-file SHA-256
+`b40eac6a6a64cdd451b4ae31f0abb0a1fe407c775331d34ac9a32bdb43a7aa41`.
+That receipt reports 458/458 selected Linux tests, 59 private-content cases and
+seven actual child-process SIGKILL boundaries. It explicitly describes dormant
+source with no application wiring, no operational HQ deployment and no genuine
+model calls. Its `contentPurgeVerified`, `restorationVerified` and Linux observed
+workflow readiness remain false. This source milestone does not close real-use
+custody, both-store restore, execution-process integration or capacity gates.

@@ -1157,7 +1157,9 @@ it did not itself change production listener files.
 
 The [Ask UI packet](ASK-03-WEBSITE-UI.md) leaves production intake closed.
 Do not deploy `ASYMMETRI_ASK_UI_MODE=synthetic_fixture` or any fixture adapter, key
-or data tree. Even that flag cannot mount the client when NODE_ENV is production.
+or data tree. That flag cannot enable the synthetic fixture in production. The
+current production client reads authoritative availability and remains closed
+without an approved disclosure.
 Website deployment alone grants no Ask authority. Retain the shared ingress,
 receiver identities and protected Motion compatibility checks for every release.
 
@@ -1169,5 +1171,13 @@ only the website and leaves shared ingress/receiver authority unchanged.
 
 The subsequent [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md)
 is the current website at `d0c454314d646b74895f4d9e3e4a014c63c666a6`, with complete
-prior d51288f rollback. Its receiver fixes remain source-only for a separate private
-service rollout. No operational intake, authority or archive reads were enabled.
+prior d51288f rollback. At that website release, its receiver fixes remained
+source-only; the separate rollout below subsequently installed them. No operational
+intake, authority or archive reads were enabled.
+
+The [closed Ask receiver rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) installs
+private source 4daa713 separately from the unchanged d0c4543 website. It records
+Ask-only guarded activation/rollback, retained startup failure and recovery, exact
+closed-state acceptance, bounded Linux resources and four pre-existing IPv6 TLS
+exceptions. Its root-held rollback command operates only Ask code and preserves
+private state and HTTP protection counters.

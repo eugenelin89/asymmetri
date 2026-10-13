@@ -2,7 +2,7 @@
 
 October 13, 2026. The separate production Ask service/database and shared HTTPS
 are installed and verified; [the release receipt](INGRESS_RELEASE_2026-10-13.md)
-records exact identities. The public `/botsquad/ask` page accepts no questions.
+records original identities. The subsequent [Ask-only rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) installs receiver source 4daa713. The public `/botsquad/ask` page accepts no questions.
 Admission, claims and delivery remain disabled, with no service keys, visitor
 data or model execution. HQ remains account-401 held. Listener installation does
 not establish genuine employee authority or private-data custody.
@@ -197,8 +197,8 @@ Shared HTTPS, installed confinement and renewal are verified in the
 remaining private custody, disclosure, genuine HQ eligibility and cost-authority
 gates. The source now recovers an authenticated exact-body session-create receipt
 before new-admission checks, while preserving held/expiry/ownership fences, and
-reports `busy` when the question queue reaches capacity. These source fixes do not
-change installed listener configuration. Keep public Ask closed until operational
+reports `busy` when the question queue reaches capacity. The [separate closed rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) installed
+these fixes after 236/236 Linux tests without changing listener configuration. Keep public Ask closed until operational
 gates have concrete verification. Neither a normalizing proxy nor a fixture
 relabelled as genuine satisfies activation.
 

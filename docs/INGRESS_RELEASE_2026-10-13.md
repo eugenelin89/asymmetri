@@ -108,3 +108,9 @@ The subsequent [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md
 installs website d0c4543 and verifies all 112 preservation checks again. The Ask,
 ingress, investment and Nginx identities above are unchanged. Receiver source fixes
 in that packet are explicitly separate from the installed private-service source.
+
+The subsequent [Ask-only receiver rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md)
+installs source 4daa713 and changes only the Ask process identity; ingress,
+investment and Nginx remain unchanged. Its stricter audit distinguishes four
+pre-existing other-domain IPv6 certificate-name failures from healthy HTTPS.
+The 112 comparisons above preserve prior behavior, not universal TLS health.

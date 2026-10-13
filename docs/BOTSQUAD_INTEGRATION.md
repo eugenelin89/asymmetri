@@ -51,3 +51,8 @@ Live receiver ingress, publisher grants/keys, operational market source, real HQ
 advertised disclosure binding, focused restore/race/capacity evidence and the
 independent receiver rollout boundary. Production has no approved Ask disclosure
 and no intake; authority and HQ content custody remain independently verified gates.
+
+The [closed Ask receiver rollout](ASK-04-RECEIVER-RELEASE_2026-10-13.md) installs
+source 4daa713 without changing website or ingress identity. Updated readiness
+also pins HQ's dormant private-content receipt from PR 83; neither source packet
+activates operational HQ execution, finite Ask authority or visitor intake.
