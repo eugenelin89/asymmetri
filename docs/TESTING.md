@@ -369,3 +369,10 @@ failure, offline recovery and unavailable Ask. Test static methodology/Ask with 
 offline receiver. Review reduced-motion CSS and absence of animated presence.
 The [INV-04 record](INV-04-VALIDATION.md) distinguishes browser checks from source
 review and synthetic receiver tests; no live HQ/public-capacity result is implied.
+
+INV-REAL-01 also tests chart path breaks across absent/withdrawn valuation sequences,
+including sequences above Number's integer precision. Inspect frozen run settings,
+source limitations, incomplete-quality explanations and distinct as-of/retrieval/
+accounting clocks in the journal and export. An unavailable archive must not claim
+that the experiment has never started. Verify the observed-paper label only with
+an accepted observed producer record; fixture mode cannot be relabelled to obtain it.

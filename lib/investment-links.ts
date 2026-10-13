@@ -13,7 +13,7 @@ export function actorName(actor: Actor, workers: Worker[] = []): string {
   return actor.kind === 'worker' ? workers.find(w => w.workerId === actor.workerId)?.name ?? actor.workerId : actor.kind === 'owner' ? 'Owner contribution' : 'System event';
 }
 export function displayTime(value: string | null): string {
-  return value ? new Intl.DateTimeFormat('en-CA', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }).format(new Date(value)) + ' UTC' : 'Unknown';
+  return value ? new Date(value).toISOString().replace('T', ' ').replace('Z', ' UTC') : 'Unknown';
 }
 const unit=BigInt(1000000);
 function micros(value:string):bigint {

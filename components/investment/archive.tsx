@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { investmentArchive } from "@/content/site";
+import { investmentArchive, investmentShowcase } from "@/content/site";
 import { VisibilityBoundary } from "./visibility-boundary";
 import { sourceUrl, archiveRead } from "@/lib/investment-archive";
 import type { RecordRef, Source, Mode } from "@/receiver/vendor/investment/v1/types";
-import { artifactHref, recordHref, actorName, inRun } from "@/lib/investment-links";
+import { artifactHref, recordHref, actorName, inRun, displayTime } from "@/lib/investment-links";
 export { artifactHref, recordHref };
 export const author = actorName;
 export async function ArchiveShell({ title, children, mode, run, witness, staticContent=false }: {
@@ -18,7 +18,7 @@ export async function ArchiveShell({ title, children, mode, run, witness, static
 }) {
     const status=staticContent?{data:null,fingerprint:undefined}:await archiveRead<import("@/receiver/vendor/investment/v1/types").PublicStatus>("status",run);
     const verified=!witness || status.data&&status.fingerprint===witness;
-    return <div className="site"><SiteHeader />{(mode === 'synthetic_fixture' || process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE === 'synthetic_fixture') && <div className="inv-synthetic" role="note"><span className="shell">{investmentArchive.synthetic}</span></div>}<main id="main-content" tabIndex={-1} className="archive shell"><nav aria-label="Archive navigation"><a href="/botsquad">BotSquad</a><a href={run?"/botsquad/investment/runs/"+run:"/botsquad/investment"}>Investment showcase</a><a href={inRun("/botsquad/investment/methodology",run)}>Methodology</a></nav><p className="eyebrow">BotSquad / Investment</p><VisibilityBoundary revision={status.data?status.fingerprint:undefined} run={run} enabled={!staticContent&&!!process.env.ASYMMETRI_INVESTMENT_READ_ORIGIN}><h1>{verified?title:"Archive visibility changed"}</h1>{(mode === 'synthetic_fixture' || process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE === 'synthetic_fixture') && <p className="archive-notice" role="note">{investmentArchive.synthetic}</p>}{verified?children:<p role="status">Records changed during this read. Refresh to verify current content.</p>}</VisibilityBoundary><aside className="archive-notice">{investmentArchive.notice} Visitor questions are not enabled.</aside></main><SiteFooter /></div>;
+    return <div className="site"><SiteHeader />{(mode === 'synthetic_fixture' || process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE === 'synthetic_fixture') && <div className="inv-synthetic" role="note"><span className="shell">{investmentArchive.synthetic}</span></div>}<main id="main-content" tabIndex={-1} className="archive shell"><nav aria-label="Archive navigation"><a href="/botsquad">BotSquad</a><a href={run?"/botsquad/investment/runs/"+run:"/botsquad/investment"}>Investment showcase</a><a href={inRun("/botsquad/investment/methodology",run)}>Methodology</a></nav><p className="eyebrow">BotSquad / Investment</p><VisibilityBoundary revision={status.data?status.fingerprint:undefined} run={run} enabled={!staticContent&&!!process.env.ASYMMETRI_INVESTMENT_READ_ORIGIN}><h1>{verified?title:"Archive visibility changed"}</h1>{(mode === 'synthetic_fixture' || process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE === 'synthetic_fixture') && <p className="archive-notice" role="note">{investmentArchive.synthetic}</p>}{mode === 'observed_paper' && <p className="archive-notice" role="note">{investmentShowcase.observed}</p>}{verified?children:<p role="status">Records changed during this read. Refresh to verify current content.</p>}</VisibilityBoundary><aside className="archive-notice">{investmentArchive.notice} Visitor questions are not enabled.</aside></main><SiteFooter /></div>;
 }
 export function Links({ refs, run }: {
     refs: RecordRef[];
@@ -26,7 +26,7 @@ export function Links({ refs, run }: {
 }) { return refs.length ? <ul>{refs.map((ref, i) => <li key={i}><a href={recordHref(ref,run)}>{ref.relation.replaceAll('_', ' ')} · {ref.kind} {ref.id} · version {ref.version}</a></li>)}</ul> : <p>No related public records.</p>; }
 export function Sources({ sources }: {
     sources: Source[];
-}) { return <section><h2>Sources and rights</h2>{sources.length ? <ul>{sources.map(s => <li key={s.sourceId}>{sourceUrl(s.url) ? <a href={sourceUrl(s.url)!} rel="noreferrer noopener">{s.title}</a> : s.title}<p>{s.publisher} · {s.rights.replaceAll('_', ' ')} · Retrieved {s.retrievedAt}</p><p>Published: {s.publishedAt ?? 'Unknown'}</p></li>)}</ul> : <p>No external sources supplied.</p>}</section>; }
+}) { return <section><h2>Published source summaries</h2>{sources.length ? <ul>{sources.map(s => <li key={s.sourceId}>{sourceUrl(s.url) ? <a href={sourceUrl(s.url)!} rel="noreferrer noopener">{s.title}</a> : s.title}<p>{s.summary}</p><p>{s.publisher} · {s.rights.replaceAll('_', ' ')} · Retrieved {displayTime(s.retrievedAt)}</p><p>Source published: {displayTime(s.publishedAt)} · Event as of: {displayTime(s.eventAt)}</p>{s.limitations.length>0&&<ul>{s.limitations.map((limitation,i)=><li key={i}>{limitation}</li>)}</ul>}</li>)}</ul> : <p>No external sources supplied.</p>}</section>; }
 function inline(text: string): ReactNode[] {
     const parts: ReactNode[] = [];
     let last = 0;

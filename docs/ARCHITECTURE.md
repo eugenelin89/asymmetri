@@ -397,6 +397,11 @@ are neutralized; exports contain only the shown page and retain synthetic labels
 Snapshot fields, original timestamps and receiver publication receipts stay distinct.
 No roster/financial data clients mount before the run's evidence mode is verified.
 
+INV-REAL-01 adds a public run-configuration component using existing `RunPublished`
+fields, source/valuation limitations and explicit evidence/accounting clocks. Chart
+paths use exact sequence comparisons to break across missing observations. No new
+DTO, database or client authority is added. See [the current integration handoff](INV-REAL-01-WEBSITE.md).
+
 The same-origin `/botsquad/investment/read` GET route exposes only approved public
 read resources; it adds no HQ access, authentication or write authority. Receiver
 transport adds `X-Archive-Visibility` (archive epoch + visibility epoch hash) and an

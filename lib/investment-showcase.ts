@@ -20,6 +20,6 @@ export async function readShowcase(run = process.env.ASYMMETRI_INVESTMENT_RUN): 
   const witness=await archiveRead<PublicStatus>('status',run);
   const results=[experiment,status,snapshot,events,performance,artifacts,discussions,transactions];
   const invalid=results.some(result=>result.data&&result.fingerprint!==(witness.data?witness.fingerprint:undefined))||!witness.data;
-  if(invalid){const denied={data:null,error:status.code==='NOT_CONFIGURED'?'No archive read service is configured.':'Archive visibility changed or is unavailable. Refresh to verify current records.',code:'UNAVAILABLE'} as const;return {run,experiment:denied,status:denied,snapshot:denied,events:denied,performance:denied,artifacts:denied,discussions:denied,transactions:denied};}
+  if(invalid){const denied={data:null,error:status.code==='NOT_CONFIGURED'?'No archive read service is configured.':'Archive visibility changed or is unavailable. Refresh to verify current records.',code:status.code==='NOT_CONFIGURED'?'NOT_CONFIGURED':'UNAVAILABLE'} as const;return {run,experiment:denied,status:denied,snapshot:denied,events:denied,performance:denied,artifacts:denied,discussions:denied,transactions:denied};}
   return {run,experiment,status:witness,snapshot,events,performance,artifacts,discussions,transactions};
 }

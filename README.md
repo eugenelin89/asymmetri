@@ -129,7 +129,7 @@ changing public assets.
 
 - [Historical September portfolio decisions](docs/PORTFOLIO_REDESIGN.md)
 
-## BotSquad investment showcase (INV-04)
+## BotSquad investment showcase (INV-04 / INV-REAL-01)
 
 **Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
 
@@ -144,3 +144,6 @@ and are not added to the public sitemap. No website deployment is implied.
 Official investment operations have not started. The default website has no read
 backend; it renders a truthful unconfigured state. See [local development](docs/LOCAL_DEVELOPMENT.md)
 for the explicitly invoked disposable synthetic preview and [receiver boundaries](docs/INVESTMENT_RECEIVER.md).
+
+Current observed-paper website semantics, source acceptance, release status and remaining
+integration are recorded in [INV-REAL-01 website handoff](docs/INV-REAL-01-WEBSITE.md).

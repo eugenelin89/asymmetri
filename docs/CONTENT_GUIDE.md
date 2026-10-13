@@ -393,8 +393,9 @@ experiment is the default until trusted server read configuration is explicitly 
 ## Investment showcase copy and evidence
 
 `investmentShowcase` in `content/site.ts` owns the introduction, discovery link,
-process explanation, methodology and disabled Ask copy. Keep official not-started
-status distinct from a local synthetic demonstration. Synthetic identities, prose,
+process explanation, methodology and disabled Ask copy. Keep verified run status,
+unconfigured reads, verification failure and synthetic demonstrations distinct. Do
+not call an unavailable archive “not started.” Synthetic identities, prose,
 financial values and content live only in `receiver/test/showcase-fixture.ts`; do
 not copy them into operational content or label them as actual worker output.
 
@@ -405,3 +406,11 @@ complete contiguous loaded series from valuation sequence 1 and usable benchmark
 marks; missing peaks suppress that comparison. Source freshness never follows from
 transport connectivity. Ask preview displays a trusted exact ContextRef but has no
 input, submission or conversation state.
+
+INV-REAL-01 adds published run purpose/objective and frozen settings, explicit
+observed-paper labels, owner-reported Yahoo confirmation and prospective OPEN
+methodology. Describe market as-of, availability/retrieval and accounting times
+separately. Show published source/valuation limitations; never turn nulls or a
+missing valuation sequence into a result. The signed publisher supplies public
+summaries; do not copy private transcripts or raw source bodies into the site.
+See [the current handoff](INV-REAL-01-WEBSITE.md) for acceptance and release status.

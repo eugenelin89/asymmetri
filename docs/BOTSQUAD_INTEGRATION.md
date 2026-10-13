@@ -1,6 +1,6 @@
 # BotSquad and Asymmetri — Investment Showcase integration map
 
-**Current state: October 9, 2026.** This is a navigation and ownership guide, not an implementation or activation grant. Follow the more detailed documents below for their normative rules.
+**Current coordination: October 13, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. Follow the detailed handoff for accepted commits and release identity.
 
 ## Which repository owns what?
 
