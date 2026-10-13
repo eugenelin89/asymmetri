@@ -1,0 +1,47 @@
+[Unit]
+Description=Asymmetri apex TLS and strict raw API routing
+After=network.target
+Before=nginx.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=asymmetri-ingress
+Group=asymmetri-ingress
+WorkingDirectory=/opt/asymmetri-ingress/receiver
+Environment=NODE_ENV=production
+Environment=ASYMMETRI_INGRESS_CONFIG=/etc/asymmetri-ingress/config.json
+ExecStart=/usr/bin/node --max-old-space-size=96 dist/src/ingress-tls-cli.js
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=2
+TimeoutStopSec=10
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+TemporaryFileSystem=/var:ro /run:ro /opt:ro /srv:ro
+BindReadOnlyPaths=/opt/asymmetri-ingress
+InaccessiblePaths=-/etc/nginx -/etc/letsencrypt -/etc/ssh -/etc/ssl/private -/etc/asymmetri-investment -/etc/asymmetri-ask
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=192M
+MemorySwapMax=32M
+TasksMax=32
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

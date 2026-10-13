@@ -164,3 +164,43 @@ peak RSS 111,677,440 bytes and CPU 5,416 ms. Local Node 24.10.0 and actual Linux
 receiver tests. Six website helper tests and both Next/Sites production builds
 passed; root/receiver production audits reported zero vulnerabilities. The isolated process/certificates
 were removed by test cleanup; production service/listener state was unchanged.
+
+
+## Shared-host rehearsal and service packaging
+
+At 2026-10-13 16:48:26 UTC, a disposable root-owned Nginx instance completed
+64 checks in each of baseline, shared routing and rollback phases. It used only
+high loopback ports, the installed virtual-host definitions and protected temporary
+certificate copies. All 15 host baselines, separate IPv4/IPv6 name/default
+selection, default/unknown-SNI certificates, 28 Asymmetri route checks, HTTP
+redirects, tutorial canonical and 54 tutorial hash links matched across phases.
+The existing draft 502 and relay 410 responses remained unchanged. Both graceful
+HTTP-to-stream and stream-to-HTTP listener transitions passed. Temporary TLS key
+copies were deleted and the disposable processes stopped. A first rehearsal
+syntax check found a relative `proxy_params` include; staging resolved it against
+the existing Nginx directory before the successful run. Production was untouched.
+
+`receiver/deploy/asymmetri-ingress.service.example` defines a dedicated loopback-
+only, confined TLS/router identity with a read-only release, 192 MiB memory ceiling,
+32 MiB swap ceiling and 50% CPU quota. Its optional boot enablement is necessary
+only when it becomes the active apex entrypoint. Keep ordinary Nginx independent:
+a failed apex worker must not make all unrelated sites depend on its startup.
+
+`receiver/deploy/renew-ingress-certificate.py` is the root-only Certbot deploy hook
+for exactly `/etc/letsencrypt/live/asymmetri.co`. It validates the SAN, validity,
+matching key and TLS context; creates root-owned/group-readable versioned copies;
+fsyncs files/directories; atomically updates `tls/current`; signals the service;
+and verifies the live loopback certificate fingerprint using normal CA/hostname
+validation. Failed replacement restores the previous symlink and context. Exact
+0750 directories and 0640 PEM modes are enforced even under a restrictive caller
+umask. No private key bytes enter source, output or the website runtime.
+
+The example TLS configuration now reads `tls/current/fullchain.pem` and
+`tls/current/privkey.pem`. Initial operator setup uses `--initialize` before first
+service startup; it refuses an existing managed certificate. `--check` validates
+without changing it. Normal renewal requires an active service. Install the hook
+as a root-owned executable and invoke it from a root-owned Certbot deploy wrapper;
+other certificate lineages are ignored. Certbot's installed `--run-deploy-hooks`
+help confirms a successful dry run invokes hooks with the active certificate,
+not the disposable staging certificate. Actual dry-run/installed-service receipts
+remain required before public activation.

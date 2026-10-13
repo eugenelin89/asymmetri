@@ -406,3 +406,11 @@ website Host/HTTPS/client metadata, forged forwarding denial, normalized API-pat
 and pipeline isolation, certificate replacement/failure retention and handshake
 bounds. `npm run test:investment` verifies native loopback Host mapping. Run both
 Next and Sites builds after transport changes to preserve packaging compatibility.
+
+
+Service packaging requires actual Linux `systemd-analyze verify`, the certificate
+hook's non-mutating `--check`, confined service read/write/network probes, and
+Certbot dry-run with deploy-hook read-back. Test under a restrictive root umask;
+certificate group-read permission must not depend on the invoking shell. The
+shared-host rehearsal covers baseline/new-routing/rollback and separate IPv4/IPv6
+virtual-host sets. Final release checks still include direct tutorial image URLs.

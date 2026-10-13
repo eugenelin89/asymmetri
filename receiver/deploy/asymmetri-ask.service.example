@@ -1,0 +1,48 @@
+# Private service remains explicitly started; installing this file admits no questions.
+[Unit]
+Description=Asymmetri private Ask receiver
+After=network.target
+ConditionPathExists=/etc/asymmetri-ask/explicitly-enabled
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=simple
+User=asymmetri-ask
+Group=asymmetri-ask
+WorkingDirectory=/opt/asymmetri-ask/receiver
+Environment=NODE_ENV=production
+Environment=ASYMMETRI_ASK_CONFIG=/etc/asymmetri-ask/config.json
+ExecStart=/usr/bin/node --max-old-space-size=96 dist/src/ask/cli.js serve
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+TemporaryFileSystem=/var:ro /run:ro /opt:ro /srv:ro
+BindReadOnlyPaths=/opt/asymmetri-ask
+BindPaths=/var/lib/asymmetri-ask
+# Expose only an empty directory at the public store path for configuration checks.
+BindReadOnlyPaths=/etc/asymmetri-ask/archive-reference:/var/lib/asymmetri-investment
+InaccessiblePaths=-/etc/nginx -/etc/letsencrypt -/etc/ssh -/etc/ssl/private -/etc/asymmetri-investment -/etc/asymmetri-ingress
+ReadWritePaths=/var/lib/asymmetri-ask
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+RestrictNamespaces=true
+LockPersonality=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=192M
+MemorySwapMax=32M
+TasksMax=32
+CPUQuota=25%

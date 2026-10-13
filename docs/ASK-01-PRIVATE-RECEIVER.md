@@ -195,3 +195,21 @@ against a committed website source, private installation/operations proof, genui
 eligibility and cost authority, and the separately implemented visitor UI/privacy
 copy. Keep public Ask disabled until these have concrete verification. Neither a
 normalizing HTTP proxy nor a fixture relabelled as genuine satisfies activation.
+
+
+## Private Linux service packaging
+
+`receiver/deploy/asymmetri-ask.service.example` uses a separate `asymmetri-ask`
+identity, read-only `/opt/asymmetri-ask/receiver`, private 0700 data tree and
+root-owned 0640 configuration. Its explicit-enable marker starts only the listener;
+admission, claims and delivery flags remain independent and default false. Empty
+roster, missing keys, held metadata or stale privacy barriers cannot admit sessions
+or questions. A disabled listener may return truthful availability without HQ work.
+
+The unit masks unrelated application/data trees and exposes only its private store
+for writes. A root-owned empty `archive-reference` directory is mounted at the
+public store path solely for configuration realpath/separation checks; the archive
+SQLite/content tree is not mounted. Public context remains a verified loopback
+HTTP read. Memory/swap ceilings are 192/32 MiB, CPU quota 25%, and connections are
+limited to loopback. Installing a unit is not proof of live employee eligibility,
+ongoing privacy-journal custody, paid-budget approval or question-service activation.

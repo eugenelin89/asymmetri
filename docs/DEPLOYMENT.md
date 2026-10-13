@@ -1143,3 +1143,12 @@ renewal configuration, or activates Ask. The owner authorized that integration,
 but production needs exact listener rollback, trusted metadata, renewal and
 all-vhost/protected-route read-back before and after activation. The explicit
 website loopback authority setting is `ASYMMETRI_INVESTMENT_READ_AUTHORITY`.
+
+
+Service examples now exist for the independent TLS/router and private Ask process.
+Use the [ingress certificate procedure](INV-03-INGRESS.md#shared-host-rehearsal-and-service-packaging)
+and [Ask installation boundary](ASK-01-PRIVATE-RECEIVER.md#private-linux-service-packaging).
+Run `systemd-analyze verify` on installed-path candidates and verify actual
+confinement, certificate reload/renewal and disabled-intake state before exposure.
+The all-vhost rehearsal verified 64 checks in each baseline/shared/rollback phase;
+it did not itself change production listener files.
