@@ -6,7 +6,9 @@ duplicate fields. The rejected HTTP profile also normalizes HTTP/1.0 to accepted
 HTTP/1.1 and allows a keep-alive pipeline sentinel to mutate durable state. All three
 negative regressions remain recorded as failures. Header forwarding directives cannot
 reconstruct lost input. The installed stock modules provide no demonstrated pre-normalization HTTP
-rule adequate for the full threat model; an additional bespoke proxy is unnecessary.
+rule adequate for the full threat model. The October 13 shared-apex design below
+adds a bounded raw TLS bridge because the separate-SNI proof cannot route website
+and API paths on the same fixed authority.
 
 ## Tested loopback design
 
@@ -38,27 +40,28 @@ This accepts the isolated TLS transport. It does not approve a public shared 443
 or measure sustained TLS-handshake capacity. [Validation](INV-03-VALIDATION.md) contains
 actual counts, failed profiles and the direct-loopback capacity envelope.
 
-## Future shared 443 integration — explicit separate approval required
+## Shared 443 production integration — authorized, verification outstanding
 
-The current host has multiple IPv4/IPv6 HTTPS virtual hosts and Certbot-managed
-certificates. A stream listener cannot simply coexist with those HTTP listeners on
-443. A future plan must:
+The owner authorized deployment and all necessary work on October 13. This is not
+a renewed permission gate. The current host has multiple IPv4/IPv6 HTTPS virtual
+hosts and Certbot-managed certificates. A stream listener cannot coexist with
+those HTTP listeners on 443. Production integration must:
 
 1. Select an approved receiver DNS authority and certificate. Keep the signed authority
    equal to the public receiver authority all the way to Node; never synthesize a
-   different Host from an untrusted forwarding header. The current website read helper
-   sends a loopback Host and therefore cannot share the future public-authority receiver
-   configuration unchanged. Before combined activation, implement and test an explicit
-   trusted server-only authority mapping on loopback reads, preserving strict Host
-   equality and preventing user-controlled authority injection.
+   different Host from an untrusted forwarding header. The website read helper supports
+   `ASYMMETRI_INVESTMENT_READ_AUTHORITY=asymmetri.co` for its strictly loopback
+   origin. It uses native Node HTTP because tested Node fetch discarded Host
+   overrides. The configured value is server-owned; user/forwarded headers are
+   never authority inputs. Enable it only with matching receiver configuration.
 2. Move every existing IPv4/IPv6 HTTP TLS listener to a protected internal socket/port
    and put an SNI dispatcher on the original 443 addresses. Preserve the ordinary default
    and unknown-SNI behavior; no HTTP path routing is possible in encrypted passthrough.
 3. Preserve ordinary-site client IP using a reviewed PROXY-protocol path with matching
-   trusted Nginx listeners. The current isolated fixture loses original client IP and
-   is not a drop-in production configuration. Node's strict receiver must not receive
+   trusted Nginx listeners. The earlier separate-SNI fixture lost client IP;
+   the shared-apex fixture below verifies it for both website paths and other SNI. Node's strict receiver must not receive
    an unexpected PROXY preamble. Do not accept client-supplied forwarding claims.
-4. Provide the receiver stream terminator's real certificate and key through root-owned
+4. Provide the Node TLS bridge's real certificate and key through root-owned
    configuration, TLS 1.2/1.3 and HTTP1.1 ALPN. Do not introduce an HTTP2 downgrade layer.
 5. Exercise Certbot HTTP01/webroot and existing nginx-plugin behavior, renewal/deploy
    hooks, stream certificate reload and ordinary-site certificates using staged issuance
@@ -72,3 +75,92 @@ No DNS, firewall, port 443, certificates, renewal settings or production Nginx f
 changed here. Public `/api/experiments/v1` remains absent. Unsupported Ubuntu 22.10 remains
 an accepted owner exception, not a claim of vendor security support. Decision 030 defers
 OS migration to a separate project; Decision 029 and all publication/launch gates remain.
+
+
+## October 13 shared-apex source
+
+`receiver/src/tls-ingress.ts` consumes a bounded, validated PROXY-v1 preamble from
+an outer loopback Nginx stream dispatcher, then terminates TLS for `asymmetri.co`.
+It uses Node's documented `TLSSocket` over a generic `Duplex`; no undocumented
+socket internals or HTTP reconstruction are involved. The installed Nginx stream
+module lacks optional `stream_realip`: an earlier isolated prototype using
+`set_real_ip_from` in stream failed syntax validation. No production module or
+package was changed. Nginx's HTTP real-IP module is available for ordinary sites.
+
+After TLS, `receiver/src/ingress.ts` inspects only the first request line. Exact
+`/api/experiments/v1` and `/api/ask/v1` prefixes reach their separate loopback
+receivers with the original HTTP bytes, without a PROXY preamble. Unknown `/api/`
+paths fail. All other targets reach the ordinary Nginx plaintext listener with the
+validated PROXY preamble. Each connection has one chosen upstream, no retry and
+backpressure in both directions. Receivers retain strict authority/signature and
+one-request fencing. There is no interpretation or rewriting of signed headers.
+
+The ordinary listener must enforce the expected Host, deny normalized `/api/`
+paths, allow one request per connection, and overwrite forwarding metadata. Set
+Host and X-Forwarded-Host from validated `$host`, X-Real-IP/X-Forwarded-For from
+trusted PROXY-derived `$remote_addr`, X-Forwarded-Proto to `https` and
+X-Forwarded-Port to `443`; clear Forwarded. `$scheme` is `http` on this internal
+plaintext hop and must not be forwarded as the public scheme. Existing Next.js
+can preserve a supplied forwarded host, so leaving client values intact is unsafe.
+Other SNI remains on ordinary Nginx HTTPS with matching trusted PROXY listeners.
+
+Both listeners bind `127.0.0.1`. Limits: 256 connections, at most 32 pending TLS
+handshakes with five-second deadlines, aggregate handshake bucket of 64 with
+32/second refill, at most 32 API connections, 4 KiB first request line, two-second
+upstream connect, 15-second idle, and 30-second API/60-second website duration.
+The handshake budget stores only counters/time, no client identifiers. The outer
+proxy needs its own connection/preread/time limits. These bounds do not guarantee
+availability under a sustained hostile load or constitute full production capacity.
+
+`receiver/ingress-tls.config.example.json` defaults both flags false. Build the
+receiver, prepare a root-owned private config/certificate copy, and explicitly run:
+
+```sh
+ASYMMETRI_INGRESS_CONFIG=/etc/asymmetri-ingress/config.json \
+node receiver/dist/src/ingress-tls-cli.js
+```
+
+The CLI starts routing before TLS and shuts both down on TERM/INT. HUP loads a new
+certificate context only after parsing, matching SAN hostname, current validity
+and key compatibility checks succeed. Failure retains the working context. The
+renewal hook must stage a matching pair atomically and verify the new certificate
+externally; merely signaling HUP is not a renewal receipt. No service unit or
+renewal hook is installed by this source command.
+
+## Acceptance scope
+
+The dedicated TLS test covers fragmented PROXY input, duplicate-header byte
+preservation, h1/mixed/no ALPN, h2 rejection, wrong SNI, invalid and valid-but-wrong-
+host certificate reload rejection, different valid same-host rotation, aggregate
+handshake exhaustion and recovery. Raw router tests cover routing and rejection.
+The actual Linux shared profile adds both signed APIs, Secure/HttpOnly/SameSite
+browser cookies, ordinary website backend metadata, forged forwarding headers,
+normalized-path denial, website-first pipeline sentinels and preserved other-SNI
+client IP. It creates only disposable synthetic keys, databases and certificates.
+
+Run from the built receiver on Linux, as a non-root identity:
+
+```sh
+INFRA02_NGINX_MODE=shared node --test deploy/nginx-acceptance.test.mjs
+# Optional bounded 60-second, 480-request TLS workload:
+INFRA02_NGINX_MODE=shared INFRA02_INGRESS_LOAD=1 \
+node --test deploy/nginx-acceptance.test.mjs
+```
+
+The workload reports latency, Node CPU and peak Node RSS for the combined isolated
+TLS/router/receiver/HTTP fixture. It excludes production Next.js and full archive
+writes; the earlier archive-capacity evidence remains separately scoped. Production
+443 routing, all-vhost read-back, actual renewal behavior, operational rollback,
+private Ask installation and genuine HQ execution remain separate evidence.
+
+Primary API references: [Node TLS](https://nodejs.org/docs/latest-v22.x/api/tls.html),
+[Nginx stream PROXY transport](https://nginx.org/en/docs/stream/ngx_stream_proxy_module.html#proxy_protocol),
+and [optional stream real-IP module](https://nginx.org/en/docs/stream/ngx_stream_realip_module.html).
+
+On October 13, actual Ubuntu 22.10 / Node 22.23.1 passed 68/68 shared-ingress
+checks including the optional 480-request workload: 59.99 seconds, eight concurrent
+requests per round, p50 76 ms, p95 118 ms, maximum 160 ms, combined fixture Node
+peak RSS 111,677,440 bytes and CPU 5,416 ms. Local Node 24.10.0 and actual Linux Node 22.23.1 each passed 230/230
+receiver tests. Six website helper tests and both Next/Sites production builds
+passed; root/receiver production audits reported zero vulnerabilities. The isolated process/certificates
+were removed by test cleanup; production service/listener state was unchanged.

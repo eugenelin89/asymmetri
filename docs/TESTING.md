@@ -391,4 +391,18 @@ receipts, cancellation/expiry races, ancestor context withdrawal, millisecond
 ordering, bounded Unicode pagination, dedicated auth, traffic reserves and
 non-content recovery. [The boundary record](ASK-01-PRIVATE-RECEIVER.md) explains
 the limits. Public ingress, real employee execution, off-host backup custody and
-private Linux runtime acceptance remain separate release evidence.
+private runtime installation remain separate release evidence. The committed Ask
+source passed 227/227 tests on actual Linux Node 22.23.1 in an isolated directory;
+this did not start or install an operational Ask service.
+
+
+## Shared-apex transport checks
+
+The full receiver suite includes raw-routing and TLS-bridge tests. Actual Linux
+Nginx acceptance uses `INFRA02_NGINX_MODE=shared`; optional
+`INFRA02_INGRESS_LOAD=1` adds a bounded 60-second TLS workload. Follow
+[ingress acceptance](INV-03-INGRESS.md) for exact scope and command. Verify trusted
+website Host/HTTPS/client metadata, forged forwarding denial, normalized API-path
+and pipeline isolation, certificate replacement/failure retention and handshake
+bounds. `npm run test:investment` verifies native loopback Host mapping. Run both
+Next and Sites builds after transport changes to preserve packaging compatibility.

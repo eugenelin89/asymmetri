@@ -152,3 +152,8 @@ integration are recorded in [INV-REAL-01 website handoff](docs/INV-REAL-01-WEBSI
 Private Ask receiver source and recovery commands are documented in
 [ASK-01 private boundary](docs/ASK-01-PRIVATE-RECEIVER.md). The public Ask page
 remains disabled; this source milestone does not activate visitor intake or HQ.
+
+Shared-apex transport source and its isolated Linux proof are documented in
+[the ingress runbook](docs/INV-03-INGRESS.md). The owner authorized continued
+integration/deployment; production routing and Ask intake remain held for their
+technical verification.

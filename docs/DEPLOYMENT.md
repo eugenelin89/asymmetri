@@ -1112,13 +1112,15 @@ Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPL
 schema 002 and disabled empty operational state. No website release or Nginx restart
 is part of it. Use [receiver operations](INV-03-OPERATIONS.md) for rollback, backup
 and owner controls; [ingress gates](INV-03-INGRESS.md) for future shared-443 work.
-The new website routes remain local/source-only until separately authorized.
+The website routes were separately released October 13; see the current release
+receipt. Receiver activation remains independent.
 
-## INV-04 source milestone — no deployment
+## Historical INV-04 source milestone and subsequent release
 
 INV-04 is locally validated website source plus additive receiver read headers.
 It does not authorize a website release, receiver restart, public ingress or real
-publisher/Ask activation. The current production website remains on its prior build.
+publisher/Ask activation. That source milestone itself did not change production. The subsequently authorized
+October 13 website release is recorded in [INV-REAL-01](INV-REAL-01-WEBSITE.md).
 A future authorized release must coordinate receiver `X-Archive-Visibility` support
 before enabling website read variables; the website fails closed without it. Keep
 fixture launcher/test content and fixture environment values out of operational
@@ -1129,3 +1131,15 @@ Shared HTTPS/TLS ingress, the rejected Nginx HTTP profile, sustained real public
 capacity, actual key/receipt reconciliation, retention/backup custody, source and
 redistribution rights, and the unsupported Ubuntu 22.10 risk remain separate gates.
 Later investment and Ask milestones plus explicit INV-12 activation still apply.
+
+
+## October 13 shared-apex ingress preparation
+
+[The ingress runbook](INV-03-INGRESS.md) now includes source and isolated Linux
+acceptance for a bounded Node TLS/raw router behind the installed Nginx SNI
+stream dispatcher. Its example remains disabled; no ordinary website deployment
+command installs an ingress unit, copies certificate keys, edits listener or
+renewal configuration, or activates Ask. The owner authorized that integration,
+but production needs exact listener rollback, trusted metadata, renewal and
+all-vhost/protected-route read-back before and after activation. The explicit
+website loopback authority setting is `ASYMMETRI_INVESTMENT_READ_AUTHORITY`.

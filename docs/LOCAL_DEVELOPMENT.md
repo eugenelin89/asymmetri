@@ -151,7 +151,10 @@ The `/botsquad/investment` pages render an empty state by default. A private loc
 fixture can set `ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:PORT`,
 `ASYMMETRI_INVESTMENT_EXPERIMENT`, `ASYMMETRI_INVESTMENT_RUN` and
 `ASYMMETRI_INVESTMENT_EVIDENCE_MODE=synthetic_fixture`. Match receiver authority to
-the origin. Never point a development UI at real private records. The [runbook](INV-03-OPERATIONS.md)
+the origin. For an explicitly public-authority receiver on loopback, set the
+server-only `ASYMMETRI_INVESTMENT_READ_AUTHORITY` to that exact authority. The
+transport validates the loopback origin and uses native HTTP to preserve Host;
+never derive this setting from visitor headers. Never point a development UI at real private records. The [runbook](INV-03-OPERATIONS.md)
 describes routes, safe formats and visibility. `npm run build:next -- --webpack`
 is a supported local compatibility fallback when Turbopack's subprocess cannot
 bind a local socket; record the default-build failure rather than hiding it.

@@ -164,3 +164,11 @@ it is not included in that installed receiver identity. Remaining: strict shared
 HTTPS delivery, verified ongoing backup/retention custody, genuine publication and
 as-of history, private Ask interoperability/installation and visitor UI. No fixture
 or empty archive substitutes for these outcomes.
+
+
+October 13 follow-up: private Ask source passed 227/227 actual Linux tests. The
+shared-apex ingress source then passed 68/68 actual Linux checks with a bounded
+480-request TLS workload; [ingress evidence](INV-03-INGRESS.md) preserves the exact
+limits and production tasks. Native loopback Host mapping now supports the fixed
+public authority without trusting visitor headers. These source checks did not
+change the running website or create public receiver/Ask authority.

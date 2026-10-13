@@ -1,0 +1,11 @@
+{
+  "router": {"enabled": false, "port": 3100, "websitePort": 3080, "investmentPort": 3101, "askPort": 3102},
+  "tls": {
+    "enabled": false,
+    "port": 3103,
+    "upstreamPort": 3100,
+    "servername": "asymmetri.co",
+    "certificatePath": "/etc/asymmetri-ingress/tls/fullchain.pem",
+    "privateKeyPath": "/etc/asymmetri-ingress/tls/privkey.pem"
+  }
+}

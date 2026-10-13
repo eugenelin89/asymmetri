@@ -185,9 +185,13 @@ Independent read-only reviews drive fixes; test evidence is recorded in the prom
 journal. No stress/power-loss/production Ask or real employee execution result is
 implied by these focused tests.
 
-Remaining: strict shared-apex HTTPS routing that preserves raw signed requests and
-all existing websites, producer interoperability acceptance against a committed
-website source, private Linux installation/operations proof, genuine healthy HQ
+Committed Ask source `8c7a346a4509f793b270f1b73df34ad9d799ccdb` passed all 227
+receiver tests on actual Ubuntu/Node 22.23.1 in an isolated directory. This is
+runtime acceptance, not an operational Ask installation.
+
+Remaining: production shared-apex HTTPS routing (isolated source acceptance is
+documented in [the ingress record](INV-03-INGRESS.md)), producer interoperability
+against a committed website source, private installation/operations proof, genuine healthy HQ
 eligibility and cost authority, and the separately implemented visitor UI/privacy
 copy. Keep public Ask disabled until these have concrete verification. Neither a
 normalizing HTTP proxy nor a fixture relabelled as genuine satisfies activation.

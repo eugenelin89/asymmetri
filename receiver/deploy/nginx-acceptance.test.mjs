@@ -10,7 +10,11 @@ import { mkdtemp, writeFile, rm, readFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer, connect } from 'node:net';
+import { createServer as createHttpServer } from 'node:http';
 import { setTimeout as delay } from 'node:timers/promises';
+import { createTlsIngress } from '../dist/src/tls-ingress.js';
+import { createIngress } from '../dist/src/ingress.js';
+import { askHarness } from '../dist/test/ask-helpers.js';
 import { harness, golden, prefix, encode, clone } from '../dist/test/helpers.js';
 
 async function unusedPort() {
@@ -45,7 +49,7 @@ test('actual isolated nginx transport preserves signatures and rejects ambiguous
   const port = await unusedPort(), upstream = h.receiver.server.address().port;
   const config = join(directory, 'nginx.conf');
   const mode=process.env.INFRA02_NGINX_MODE ?? 'stream';
-  assert.ok(['stream','tls','http'].includes(mode));
+  assert.ok(['stream','tls','shared','http'].includes(mode));
   // HTTP mode intentionally retains the failed 1.22 duplicate-Connection regression.
   const httpConfig=`daemon off;
 master_process off;
@@ -106,11 +110,29 @@ stream {
   }
 }
 `;
+  let sharedAsk;
   let selected=mode==='http'?httpConfig:streamConfig;
-  if(mode==='tls'){
-    const tlsPort=await unusedPort(),sitePort=await unusedPort();
+  if(mode==='tls'||mode==='shared'){
+    const tlsPort=await unusedPort(),sitePort=await unusedPort(),plainSitePort=await unusedPort();
+    let routedUpstream=upstream,webUpstream;
     const cert=join(directory,'test.crt'),key=join(directory,'test.key');
     execFileSync('/usr/bin/openssl',['req','-x509','-newkey','rsa:2048','-nodes','-keyout',key,'-out',cert,'-days','1','-subj','/CN=receiver.test','-addext','subjectAltName=DNS:receiver.test,DNS:website.test'],{stdio:'ignore'});
+    if(mode==='shared'){
+      const ask=await askHarness(t,{authority:'receiver.test',origin:'https://receiver.test'});
+      const router=await createIngress({enabled:true,port:0,websitePort:plainSitePort,investmentPort:upstream,askPort:ask.service.server.address().port});
+      t.after(()=>router.close());routedUpstream=router.server.address().port;
+      const tls=await createTlsIngress({enabled:true,port:tlsPort,upstreamPort:routedUpstream,servername:'receiver.test',certificatePath:cert,privateKeyPath:key});
+      t.after(()=>tls.close());sharedAsk=ask;
+      const web=createHttpServer((req,res)=>{
+        res.setHeader('Content-Type','application/json');
+        res.end(JSON.stringify({fixture:'SYNTHETIC same-apex website preserved',path:req.url,
+          host:req.headers.host,client:req.headers['x-real-ip'],forwarded:req.headers['x-forwarded-for'],
+          protocol:req.headers['x-forwarded-proto'],forwardedHost:req.headers['x-forwarded-host'],forwardedPort:req.headers['x-forwarded-port'],
+          forwardedStandard:req.headers.forwarded??null}));
+      });
+      web.listen(0,'127.0.0.1');await once(web,'listening');webUpstream=web.address().port;
+      t.after(()=>new Promise(resolve=>web.close(resolve)));
+    }
     tlsOptions={servername:'receiver.test',ca:await readFile(cert),rejectUnauthorized:true,ALPNProtocols:['http/1.1']};
     selected=`load_module /usr/lib/nginx/modules/ngx_stream_module.so;
 daemon off; master_process off; worker_processes 1;
@@ -118,21 +140,36 @@ pid ${directory}/nginx.pid; error_log ${directory}/error.log warn;
 events { worker_connections 128; }
 stream {
  map $ssl_preread_server_name $destination { receiver.test 127.0.0.1:${tlsPort}; default 127.0.0.1:${sitePort}; }
- server { listen 127.0.0.1:${port}; ssl_preread on; proxy_pass $destination; proxy_connect_timeout 2s; proxy_timeout 5s; }
- server {
-  listen 127.0.0.1:${tlsPort} ssl;
+ server { listen 127.0.0.1:${port}; ssl_preread on; proxy_pass $destination; ${mode==='shared'?'proxy_protocol on;':''} proxy_connect_timeout 2s; proxy_timeout 5s; }
+ ${mode==='shared'?'':` server {
+  listen 127.0.0.1:${tlsPort} ssl ;
   ssl_protocols TLSv1.2 TLSv1.3; ssl_alpn http/1.1;
   ssl_certificate ${cert}; ssl_certificate_key ${key}; ssl_handshake_timeout 5s;
-  proxy_pass 127.0.0.1:${upstream}; proxy_connect_timeout 2s; proxy_timeout 5s;
- }
+  proxy_pass 127.0.0.1:${routedUpstream}; proxy_connect_timeout 2s; proxy_timeout 5s;
+ }`}
+
 }
 http {
  access_log off; client_body_temp_path ${directory}/body;
  proxy_temp_path ${directory}/proxy; fastcgi_temp_path ${directory}/fastcgi;
  uwsgi_temp_path ${directory}/uwsgi; scgi_temp_path ${directory}/scgi;
- server {listen 127.0.0.1:${sitePort} ssl; server_name website.test;
+ server {listen 127.0.0.1:${sitePort} ssl ${mode==='shared'?'proxy_protocol':''}; server_name website.test;
+ ${mode==='shared'?'set_real_ip_from 127.0.0.1; real_ip_header proxy_protocol;':''}
  ssl_certificate ${cert}; ssl_certificate_key ${key}; ssl_protocols TLSv1.2 TLSv1.3;
- location / {return 200 'SYNTHETIC ordinary website preserved';}}
+ if ($http_host != 'website.test') {return 400;}
+ location /api/ {return 404;}
+ location / {return 200 'SYNTHETIC ordinary website preserved $remote_addr';}}
+ ${mode==='shared'?`server {listen 127.0.0.1:${plainSitePort} proxy_protocol; server_name receiver.test;
+ set_real_ip_from 127.0.0.1; real_ip_header proxy_protocol; keepalive_requests 1;
+ if ($http_host != 'receiver.test') {return 400;}
+ location /api/ {return 404;}
+ location / {
+  proxy_pass http://127.0.0.1:${webUpstream}; proxy_http_version 1.1;
+  proxy_set_header Host $host; proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $remote_addr; proxy_set_header X-Forwarded-Proto https;
+  proxy_set_header X-Forwarded-Host $host; proxy_set_header X-Forwarded-Port 443; proxy_set_header Forwarded "";
+  proxy_set_header Connection close; proxy_next_upstream off;
+ }}`:''}
 }
 `;
   }
@@ -148,7 +185,7 @@ http {
     try {await raw(port,'GET',prefix+'/status',[['Host','receiver.test'],['Connection','close']]);ready=true;break;}catch {await delay(50);}
   }
   assert.ok(ready,'isolated proxy started');
-  if(mode==='tls'){
+  if(mode==='tls'||mode==='shared'){
     const original=tlsOptions;
     for(const version of ['TLSv1.2','TLSv1.3'])await t.test('verified '+version,async()=>{
       tlsOptions={...original,minVersion:version,maxVersion:version};const result=await raw(port,'GET',prefix+'/status',[['Host','receiver.test']]);assert.equal(result.status,404);assert.equal(result.protocol,version);assert.equal(result.alpn,'http/1.1');
@@ -163,6 +200,50 @@ http {
     await t.test('plaintext cannot enter TLS ingress',async()=>{tlsOptions=undefined;const result=await raw(port,'GET',prefix+'/status',[['Host','receiver.test']],Buffer.alloc(0),true);assert.ok(!result.status||result.status>=400);});
     tlsOptions=original;
     await t.test('fragmented TLS request remains unambiguous',async()=>{const result=await raw(port,'GET',prefix+'/status',[['Host','receiver.test']],Buffer.alloc(0),false,'1.1',true);assert.equal(result.status,404);});
+  }
+  if(mode==='shared'){
+    const original=tlsOptions;
+    await t.test('same TLS apex preserves website and original client IP',async()=>{
+      tlsOptions={...original,localAddress:'127.0.0.2'};
+      const result=await raw(port,'GET','/tutorial?fixture=1',[['Host','receiver.test'],['Connection','close'],
+        ['X-Forwarded-For','untrusted'],['X-Forwarded-Proto','http'],['X-Real-IP','untrusted'],
+        ['X-Forwarded-Host','untrusted'],['X-Forwarded-Port','80'],['Forwarded','host=untrusted;proto=http']]);
+      assert.equal(result.status,200);assert.deepEqual(JSON.parse(result.payload),{
+        fixture:'SYNTHETIC same-apex website preserved',path:'/tutorial?fixture=1',host:'receiver.test',
+        client:'127.0.0.2',forwarded:'127.0.0.2',protocol:'https',forwardedHost:'receiver.test',forwardedPort:'443',forwardedStandard:null});
+    });
+    await t.test('other SNI preserves original client IP',async()=>{
+      tlsOptions={...original,servername:'website.test',localAddress:'127.0.0.2'};
+      const result=await raw(port,'GET','/',[['Host','website.test'],['Connection','close']]);
+      assert.equal(result.status,200);assert.match(result.payload,/ordinary website preserved 127\.0\.0\.2/);
+    });
+    tlsOptions=original;
+    await t.test('ordinary paths reject foreign Host and normalized API paths',async()=>{
+      for(const target of ['/api%2fask/v1/availability','/x/../api/ask/v1/availability'])assert.equal((await raw(port,'GET',target,[['Host','receiver.test'],['Connection','close']])).status,404);
+      assert.equal((await raw(port,'GET','/',[['Host','foreign.test'],['Connection','close']])).status,400);
+      tlsOptions={...original,servername:'website.test'};
+      assert.equal((await raw(port,'GET','/',[['Host','receiver.test'],['Connection','close']])).status,400);tlsOptions=original;
+    });
+    await t.test('website-first signed API pipeline cannot reach private or archive state',async()=>{
+      const before=JSON.stringify([h.receiver.db.all('SELECT * FROM nonces'),sharedAsk.service.store.all('SELECT * FROM nonces')]);
+      const sentinel=sharedAsk.signed('GET','/api/ask/v1/hq/answers/unknown/receipt');
+      const next=Buffer.from(`GET ${sentinel.path} HTTP/1.1\r\nHost: receiver.test\r\n${sentinel.headers.map(([k,v])=>`${k}: ${v}`).join('\r\n')}\r\n\r\n`);
+      await raw(port,'GET','/',[['Host','receiver.test'],['Connection','keep-alive']],next);
+      await delay(50);assert.equal(JSON.stringify([h.receiver.db.all('SELECT * FROM nonces'),sharedAsk.service.store.all('SELECT * FROM nonces')]),before);
+    });
+    await t.test('same TLS apex accepts dedicated Ask signature and private browser session',async()=>{
+      const id='shared-tls-claim',m=sharedAsk.signed('POST','/api/ask/v1/hq/claims',{schemaVersion:'1.0',serviceId:sharedAsk.scope.serviceId,consumerGeneration:sharedAsk.scope.consumerGeneration,claimRequestId:id,capacity:1},id);
+      const result=await raw(port,m.method,m.path,[['Host','receiver.test'],...m.headers,['Content-Length',String(m.body.length)]],m.body);
+      assert.equal(result.status,200);assert.equal(JSON.parse(result.payload).claim,null);
+      const body=Buffer.from(JSON.stringify({schemaVersion:'1.0',privacyNoticeVersion:'fixture-privacy-1'}));
+      const session=await raw(port,'POST','/api/ask/v1/sessions',[['Host','receiver.test'],['Origin','https://receiver.test'],['Idempotency-Key','shared-tls-session'],['Content-Type','application/json'],['Content-Length',String(body.length)]],body);
+      assert.equal(session.status,201);assert.match(session.response,/__Host-botsquad_ask=.*Secure; HttpOnly; SameSite=Strict/);assert.match(session.response,/private, no-store/);
+    });
+    await t.test('same-apex Ask rejects duplicated original header before creating private state',async()=>{
+      const before=sharedAsk.service.store.get('SELECT count(*) n FROM sessions').n;
+      const result=await raw(port,'GET','/api/ask/v1/availability',[['Host','receiver.test'],['Connection','close'],['Connection','close']]);
+      assert.equal(result.status,401);assert.equal(sharedAsk.service.store.get('SELECT count(*) n FROM sessions').n,before);
+    });
   }
   const message = () => h.signed('POST',prefix+'/events',encode(golden.batch),golden.batch.batchId);
   const headers = m => [['Host','receiver.test'],...m.headers,['Content-Length',String(m.body.length)],['Connection','close']];
@@ -230,5 +311,25 @@ http {
   });
   h.receiver.db.revokeKey(h.scope.keyId,new Date(h.now()*1000).toISOString());
   await deny('revoked key receipt',()=>send(h.signed('GET',prefix+'/receipts/'+golden.batch.batchId)));
+  if(mode==='shared'&&process.env.INFRA02_INGRESS_LOAD==='1')await t.test('bounded 60-second synthetic TLS ingress load',async()=>{
+    const started=performance.now(),cpu=process.cpuUsage(),durations=[];let peakRss=process.memoryUsage().rss;
+    const sample=setInterval(()=>{peakRss=Math.max(peakRss,process.memoryUsage().rss);},100);
+    try{
+      for(let round=0;round<60;round++){
+        const began=performance.now();
+        await Promise.all(Array.from({length:8},async(_,i)=>{
+          const start=performance.now(),target=i===0?prefix+'/status':'/tutorial?synthetic-load=1';
+          const result=await raw(port,'GET',target,[['Host','receiver.test'],['Connection','close']]);
+          assert.equal(result.status,200);durations.push(performance.now()-start);
+        }));
+        await delay(Math.max(0,1000-(performance.now()-began)));
+      }
+    }finally{clearInterval(sample);}
+    const elapsed=performance.now()-started,used=process.cpuUsage(cpu);durations.sort((a,b)=>a-b);
+    console.log(JSON.stringify({syntheticIngressCapacity:true,requests:durations.length,elapsedMs:elapsed,
+      concurrency:8,requestsPerSecond:8,p50Ms:durations[Math.floor(durations.length*.5)],
+      p95Ms:durations[Math.floor(durations.length*.95)],maxMs:durations.at(-1),peakNodeRssBytes:peakRss,
+      nodeCpuMs:(used.user+used.system)/1000,scope:'isolated TLS/router/receiver/HTTP fixture; excludes production Next and sustained archive writes'}));
+  });
   const log=await readFile(join(directory,'error.log'),'utf8');assert.doesNotMatch(log,/\[emerg\]/);
 });

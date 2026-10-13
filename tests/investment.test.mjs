@@ -1,4 +1,6 @@
 import test from 'node:test';
+import {createServer} from 'node:http';
+import {investmentReadHeaders,investmentArchiveFetch} from '../lib/investment-read-transport.ts';
 import assert from 'node:assert/strict';
 import {money,percent,ratio,csv,compareSequence,inRun,displayTime} from '../lib/investment-links.ts';
 import {benchmarkDrawdowns,performancePath,performanceSequenceGaps} from '../lib/investment-performance.ts';
@@ -32,4 +34,15 @@ test('evidence clocks retain seconds and milliseconds in explicit UTC',()=>{
  assert.equal(displayTime('2026-10-13T13:30:00.123Z'),'2026-10-13 13:30:00.123 UTC');
  assert.equal(displayTime('2026-10-13T09:30:59.456-04:00'),'2026-10-13 13:30:59.456 UTC');
  assert.equal(displayTime(null),'Unknown');
+});
+
+test('archive authority override is explicit, server-owned and restricted to loopback',async t=>{
+ const server=createServer((req,res)=>{res.end(req.headers.host);});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>server.close(resolve)));
+ const url=`http://127.0.0.1:${server.address().port}/api/experiments/v1/status`;
+ const response=await investmentArchiveFetch(url,5000,1024,'asymmetri.co');
+ assert.equal(await response.text(),'asymmetri.co');
+ for(const authority of ['','asymmetri.co\r\nForwarded: attacker','https://asymmetri.co','asymmetri.co@evil.test','asymmetri.co:65536']) assert.throws(()=>investmentReadHeaders(url,authority));
+ assert.throws(()=>investmentReadHeaders('https://evil.test/archive','asymmetri.co'));
+ assert.throws(()=>investmentReadHeaders('http://user@127.0.0.1/archive','asymmetri.co'));
 });

@@ -1,6 +1,8 @@
 /** Framework-neutral, disabled-by-default public server read boundary.
  * No SQLite, signing keys, receiver runtime imports or startup side effects.
  */
+import { investmentArchiveFetch } from "./investment-read-transport";
+
 export type {
   PublicExperiment, PublicStatus, SnapshotResponse, EventPage, PerformancePage,
   TransactionPage, DiscussionPage, DiscussionDetail, DecisionDetail, ArtifactPage,
@@ -62,7 +64,7 @@ export function archiveDto(path: string): string | null {
 async function readUrl<T>(url: string | null, name: string, run?: string): Promise<ArchiveResponse<T>> {
   if (!url) return {data:null,error:'No published experiment',code:'NOT_CONFIGURED'};
   try {
-    const response = await fetch(url, {cache:'no-store', redirect:'error', signal:AbortSignal.timeout(8000)});
+    const response = await investmentArchiveFetch(url,8000,2097152);
     if (!response.body) throw new Error('Empty response');
     const reader = response.body.getReader();
     const chunks: Uint8Array[] = []; let length = 0;
@@ -103,7 +105,8 @@ export async function artifactBytes(id:string,version:string,run?:string):Promis
   const path=`artifacts/${id}/versions/${version}`,before=await archiveRead<ArtifactDTO>(path,run),p=before.data?.metadata;
   if(!p||!['published','superseded'].includes(before.data!.status))return null;
   try {
-    const response=await fetch(archiveLocation(path+'/content',run)!,{cache:"no-store",redirect:"error",signal:AbortSignal.timeout(10000)});
+    const location=archiveLocation(path+'/content',run)!;
+    const response=await investmentArchiveFetch(location,10000,4194304);
     if(!response.ok||response.headers.get('content-type')!==p.contentType||!response.body)return null;
     const reader=response.body.getReader(),parts:Uint8Array[]=[];let size=0;
     for(;;){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>p.sizeBytes||size>4194304){await reader.cancel();return null;}parts.push(value);}

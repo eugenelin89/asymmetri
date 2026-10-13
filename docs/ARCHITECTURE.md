@@ -352,7 +352,7 @@ retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 
 The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
 
-INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. INV-04's showcase source is not on the public site. The existing Ubuntu 22.10 receiver has a private, stopped/default-disabled schema-002 installation from INV-03; its public authority and operational data are empty. The newer INV-04 receiver response headers `X-Archive-Visibility` and `X-Archive-Latest-Cursor` require a future coordinated compatibility release before the website can read live records. Private installation, website deployment, receiver ingress, real HQ publishing and public Ask are independently authorized gates. Future OS upgrade is a separate project. No RECOVERY-01 project is required for local INV-05 source work; operational backup/retention acceptance remains a later live-data gate.
+INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 website release is public with truthful unconfigured archive and disabled Ask states. The private receiver compatibility update provides visibility headers and owner controls, with schema 002 empty and stopped/default disabled. See [the release receipt](INV-REAL-01-WEBSITE.md) for exact identities. The owner authorized continued integration/deployment; receiver ingress, genuine HQ publishing, operational backup custody and public Ask still require their technical acceptance. The OS upgrade remains a separate project.
 
 ## INV-02 standalone archive boundary
 
@@ -373,7 +373,8 @@ startup fencing and current-control reconciliation. `components/investment` owns
 safe text/Markdown rendering and evidence links; `content/site.ts` owns archive
 copy. No receiver runtime, signing key or private path enters the website bundle.
 `receiver/src/backup.ts` snapshots private CAS plus SQLite; encryption is an offline
-owner utility. No public administrative route, collection job or Ask service exists.
+owner utility. No public administrative route or collection job exists. The separate
+default-disabled Ask source is described below.
 
 ## INV-04 showcase read boundary
 
@@ -407,8 +408,8 @@ read resources; it adds no HQ access, authentication or write authority. Receive
 transport adds `X-Archive-Visibility` (archive epoch + visibility epoch hash) and an
 optional `X-Archive-Latest-Cursor` for the latest bounded event window. They do not
 change the frozen OpenAPI/schema/DTO package. Successful website reads require the
-visibility witness; an older receiver without it fails closed. A future coordinated
-release must install this receiver source before enabling website reads.
+visibility witness; an older receiver without it fails closed. The installed private
+receiver has compatible source; website read configuration remains disabled.
 
 Ordinary publication changes do not remount readers. A visibility change hides cached
 content and refreshes the server projection. Final server witnesses cover all loaded
@@ -429,3 +430,16 @@ the public archive database or add server state to Next.js. Its fixed loopback
 adapter verifies public evidence and visibility; raw questions/answers never enter
 the archive/feed/export. See [ASK-01](ASK-01-PRIVATE-RECEIVER.md) for sessions,
 limits, privacy controls, non-content recovery and activation prerequisites.
+
+
+## Shared-apex ingress source
+
+`receiver/src/tls-ingress.ts` terminates SNI-selected TLS after a validated trusted
+PROXY preamble; `receiver/src/ingress.ts` routes only by the first raw request line.
+Separate investment and Ask APIs receive unchanged HTTP, while ordinary Nginx
+receives trusted client metadata. The combined CLI and example default disabled.
+No ingress code or private key enters the website bundle. The
+[ingress runbook](INV-03-INGRESS.md) records limits, actual Linux verification and
+outstanding production/renewal checks. `lib/investment-read-transport.ts` adds only
+an explicit server-owned loopback Host override; default fetch/Sites behavior stays
+unchanged when that environment setting is absent.
