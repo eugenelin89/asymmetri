@@ -188,3 +188,7 @@ shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
 Public Ask remains closed; the later configuration-read amendment is separate.
+
+The subsequent [portrait release](docs/BOTSQUAD-PORTRAITS-RELEASE_2026-10-13.md)
+adds the approved Atlas/Maya images to Investment team cards, with verified live
+images and preserved product routes. It updates only the website runtime.

@@ -1218,3 +1218,7 @@ shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
 Public Ask remains closed; the later configuration-read amendment is separate.
+
+The subsequent [portrait release](BOTSQUAD-PORTRAITS-RELEASE_2026-10-13.md)
+records website source da09185, exact build/activation identity, guarded code-only
+rollback and live image acceptance. Ask and investment receivers are unchanged.
