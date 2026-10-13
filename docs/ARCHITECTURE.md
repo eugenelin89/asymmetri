@@ -472,3 +472,11 @@ and privacy controls; `lib/ask-client.ts` validates unchanged canonical DTOs and
 relative browser-only API requests. The separate receiver still owns all private
 server state. There is no new dependency, provider connection or production
 activation setting.
+
+## October 13 navigation and closed contract release
+
+The [current release receipt](BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records the BotSquad Research hub,
+shared navigation, neutral investment introduction and installed closed Ask
+activity-contract source. It supersedes earlier runtime identities while preserving
+live investment records, protected Motion pages and unchanged service configuration.
+Public Ask remains closed; the later configuration-read amendment is separate.

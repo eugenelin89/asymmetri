@@ -76,3 +76,11 @@ restore/capacity gates remain separate. HQ reports retained reload-OFF evidence
 valid for private investment under Decision 047. The investment activation receipt
 now verifies finite publication authority and public initial records; it does not
 activate Ask or prove future market/employee execution.
+
+## October 13 navigation and closed contract release
+
+The [current release receipt](BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records the BotSquad Research hub,
+shared navigation, neutral investment introduction and installed closed Ask
+activity-contract source. It supersedes earlier runtime identities while preserving
+live investment records, protected Motion pages and unchanged service configuration.
+Public Ask remains closed; the later configuration-read amendment is separate.

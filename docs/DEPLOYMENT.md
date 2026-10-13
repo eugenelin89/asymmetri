@@ -1210,3 +1210,11 @@ backup and isolated held restore. Install the root-owned launcher before the
 updated unit example. Keep the running application source/configuration separate
 from this service-profile change; no website or investment restart is needed.
 The receipt gives the guarded Ask-only rollback and exact unresolved custody gates.
+
+## October 13 navigation and closed contract release
+
+The [current release receipt](BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records the BotSquad Research hub,
+shared navigation, neutral investment introduction and installed closed Ask
+activity-contract source. It supersedes earlier runtime identities while preserving
+live investment records, protected Motion pages and unchanged service configuration.
+Public Ask remains closed; the later configuration-read amendment is separate.

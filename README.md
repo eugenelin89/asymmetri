@@ -180,3 +180,11 @@ installs its reviewed recovery/availability fixes with intake still disabled,
 The [Ask operational safeguards](docs/ASK-04-OPERATIONS_2026-10-13.md) add verified
 zero-swap/core-memory limits and isolated recovery acceptance while keeping intake
 closed and preserving the live investment.
+
+## October 13 navigation and closed contract release
+
+The [current release receipt](docs/BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records the BotSquad Research hub,
+shared navigation, neutral investment introduction and installed closed Ask
+activity-contract source. It supersedes earlier runtime identities while preserving
+live investment records, protected Motion pages and unchanged service configuration.
+Public Ask remains closed; the later configuration-read amendment is separate.
