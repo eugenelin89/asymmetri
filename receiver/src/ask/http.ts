@@ -22,7 +22,8 @@ const routes = Object.entries(api.paths).filter(([path]) => path.startsWith('/ap
   pattern: new RegExp('^' + path.replace(/\{[^}]+\}/g, '([^/]+)') + '$'),
 }));
 const permissions: Record<string, AskAuth['permission']> = { claimAskQuestion: 'claim', renewAskClaim: 'claim',
-  deliverAskStatus: 'status', deliverAskAnswer: 'answer', readAskAnswerReceipt: 'receipt', syncAskPrivacyControls: 'control_sync' };
+  deliverAskStatus: 'status', deliverAskAnswer: 'answer', readAskAnswerReceipt: 'receipt', syncAskPrivacyControls: 'control_sync',
+  readAskServiceConfiguration: 'control_sync' };
 
 async function readBody(req: IncomingMessage, headers: Map<string, string>, limit: number): Promise<Buffer> {
   const text = headers.get('content-length');
@@ -79,7 +80,7 @@ export async function createAsk(config: AskConfig, options: { now?: () => number
         need(operation.parameters?.some(parameter => parameter.in === 'query' && parameter.name === name));
         if (name === 'after') validate('Id', value);
       }
-      const control = ['cancelOwnAskQuestion', 'deleteOwnAskConversation', 'syncAskPrivacyControls', 'readAskAnswerReceipt'].includes(operation.operationId);
+      const control = ['cancelOwnAskQuestion', 'deleteOwnAskConversation', 'syncAskPrivacyControls', 'readAskAnswerReceipt', 'readAskServiceConfiguration'].includes(operation.operationId);
       if (!control) {
         need(ordinaryActive < 6, 'RATE_LIMITED'); ordinaryActive++; ordinaryEntered = true;
         store.atomic(() => store.charge('http:ordinary', 60, 120, now()));
@@ -117,6 +118,7 @@ export async function createAsk(config: AskConfig, options: { now?: () => number
         case 'deliverAskAnswer': send(res, 200, await hq.answer(auth!, params.id!)); break;
         case 'readAskAnswerReceipt': send(res, 200, hq.receipt(auth!, params.answerId!)); break;
         case 'syncAskPrivacyControls': send(res, 200, hq.controls.sync(auth!)); break;
+        case 'readAskServiceConfiguration': send(res, 200, hq.configuration(auth!)); break;
         default: need(false, 'NOT_FOUND');
       }
     } catch (error) {

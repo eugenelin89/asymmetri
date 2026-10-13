@@ -9,12 +9,13 @@ not a new production deployment.
 
 ## Contract and producer receipts
 
-The nine vendored canonical files now match merged HQ PR 86 at
-`9ff8cc984954f2e822ec191de60dcd39607ea1a7`; manifest SHA-256
-`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
+The nine vendored canonical files now match merged HQ PR 87 at
+`00d9e82668dcfd39b25294d9a05a7f97e4d28295`; manifest SHA-256
+`5396443e475d3fe69825ef8af4e916a408b39452182e9c4828fa17b7faf37a84`.
 The explicit subscription mode is a reviewed package extension, with unknown/null
-cost and monitored thresholds that may overshoot. No public DTO endpoint,
-investment signature/record shape, approved privacy notice or intake is added.
+cost and monitored thresholds that may overshoot. The later configuration-read amendment adds a private signed reconciliation DTO
+and endpoint. Investment signature/record shapes, approved privacy notices and
+visitor intake are unchanged.
 See the [capability review](ASK-04-CAPABILITY-REVIEW.md) for consumer evidence.
 
 HQ PR 82 merge is `7fcb57303141a188c5fdfe212fa447551421a6d7`, with implementation
@@ -180,4 +181,4 @@ The [current release receipt](BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records
 shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
-Public Ask remains closed; the later configuration-read amendment is separate.
+Public Ask remains closed. The subsequent [configuration-read source packet](ASK-CONFIGURATION-READ_2026-10-13.md) adds the private reconciliation endpoint; its deployment is recorded separately.

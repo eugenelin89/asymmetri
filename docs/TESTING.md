@@ -452,6 +452,11 @@ identities and Nginx hashes in the preservation set.
 
 ## Ask operational fault and capacity fixture
 
+`receiver/test/ask-configuration.test.ts` verifies the signed configuration read:
+closed intake, strict authorization/framing, per-caller persistent revisions,
+canonical hashes, reserved quotas, freshness/expiry, storage bounds and held
+recovery. These synthetic checks do not establish public-service eligibility.
+
 `receiver/deploy/ask-readiness-acceptance.test.mjs` imports an existing compiled
 receiver selected by `ASK_REHEARSAL_RUNTIME` (defaults to its parent receiver).
 Run it explicitly with `node --test --test-concurrency=1` after receiver build.

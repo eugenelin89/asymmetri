@@ -18,12 +18,17 @@ substitute for HQ token, cost, deadline or duty-cycle enforcement. No website co
 executes a model, buys credits, fetches visitor URLs, or creates publication grants.
 
 The nine canonical v1 files remain byte-identical to manifest
-`27f73af2099dc086ebf1893bb2613c5a8f18200b752d8d48960107386cb40264`.
+`5396443e475d3fe69825ef8af4e916a408b39452182e9c4828fa17b7faf37a84`.
 The implementation serves their `/api/ask/v1/` routes through a separate HTTP
 listener and SQLite database. It never opens the public archive database. It reads
 public evidence only through an explicitly configured loopback HTTP adapter.
 Public archive backup cannot contain the Ask directory: configuration rejects
 identical or nested directories in either direction, including symlink aliases.
+
+The [configuration-read packet](ASK-CONFIGURATION-READ_2026-10-13.md) adds the
+private signed `GET /api/ask/v1/service/configuration` reconciliation endpoint.
+It exposes only the caller's exact scope and public configuration DTO, retains
+per-caller revision observations through recovery, and creates no control barrier.
 
 ## Private lifecycle
 

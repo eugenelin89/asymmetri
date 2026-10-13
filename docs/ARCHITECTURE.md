@@ -367,7 +367,7 @@ retain their bytes; CSS authority is documented in `VISUAL_IDENTITY.md`.
 
 ## BotSquad investment: repository and release ownership
 
-The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/9ff8cc984954f2e822ec191de60dcd39607ea1a7/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
+The [cross-repository integration map](BOTSQUAD_INTEGRATION.md) and BotSquad's [investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) describe the coordinated system. **BotSquad** (`eugenelin89/bot_messenger`) owns private employees, Tasks, the future HQ financial simulator and market adapter, trusted publishing, and the canonical [v1 contract](https://github.com/eugenelin89/bot_messenger/tree/00d9e82668dcfd39b25294d9a05a7f97e4d28295/contracts/investment/v1). **Asymmetri** (this repository) owns the independently secured receiver and public Next.js archive/showcase; nine canonical files are pinned in `receiver/vendor/investment/v1/` and checked by `npm --prefix receiver run contracts:check`.
 
 INV-01–04 are complete **for their documented source, synthetic and private-installation scopes**. The October 13 [investment activation](INV-REAL-01-WEBSITE.md) subsequently installed finite publisher authority, accepted five initial events and enabled website reads for the exact official run. The public portfolio is configured; market results remain unavailable and Ask stays closed. See [the ingress release receipt](INGRESS_RELEASE_2026-10-13.md) for listener identities, confinement, renewal and all-host checks. Operational backup custody, genuine market-session outcomes and public Ask still require their respective acceptance. The OS upgrade remains a separate project.
 
@@ -479,4 +479,4 @@ The [current release receipt](BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) records
 shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
-Public Ask remains closed; the later configuration-read amendment is separate.
+Public Ask remains closed. The subsequent [configuration-read source packet](ASK-CONFIGURATION-READ_2026-10-13.md) adds the private reconciliation endpoint; its deployment is recorded separately.

@@ -138,7 +138,7 @@ changing public assets.
 
 ## BotSquad investment showcase (INV-04 / INV-REAL-01)
 
-**Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/9ff8cc984954f2e822ec191de60dcd39607ea1a7/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
+**Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/00d9e82668dcfd39b25294d9a05a7f97e4d28295/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
 
 
 The source-level [investment showcase](docs/INV-04-VALIDATION.md) adds the team,
@@ -187,7 +187,7 @@ The [current release receipt](docs/BOTSQUAD-NAVIGATION-RELEASE_2026-10-13.md) re
 shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
-Public Ask remains closed; the later configuration-read amendment is separate.
+Public Ask remains closed. The subsequent [configuration-read source packet](docs/ASK-CONFIGURATION-READ_2026-10-13.md) adds the private reconciliation endpoint; its deployment is recorded separately.
 
 The subsequent [portrait release](docs/BOTSQUAD-PORTRAITS-RELEASE_2026-10-13.md)
 adds the approved Atlas/Maya images to Investment team cards, with verified live

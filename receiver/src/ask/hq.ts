@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import type { AskAnswer, AskAnswerDelivery, AskAnswerReceipt, AskClaim, AskClaimInput,
-  AskClaimPage, AskQuestion, AskRenewInput, AskStatus, AskStatusDelivery } from '../../vendor/investment/v1/types.js';
+  AskClaimPage, AskQuestion, AskRenewInput, AskServiceConfiguration, AskStatus, AskStatusDelivery } from '../../vendor/investment/v1/types.js';
 import { canonicalHash, checkPublicStrings, parseJson, requireContract as need, validate } from '../schema.js';
 import { AskStore, time, type QuestionRow } from './database.js';
 import { AskAuthority, type AskAuth } from './auth.js';
@@ -18,6 +18,45 @@ export class AskHq {
     readonly authority: AskAuthority, readonly contextVisible: ContextVerifier) {
     this.transport = new AskTransport(store, now, authority);
     this.controls = new AskSync(store, now, authority, this.transport);
+  }
+
+  configuration(auth: AskAuth): AskServiceConfiguration {
+    return this.store.atomic(() => {
+      this.authority.recheck(auth);
+      need(auth.permission === 'control_sync', 'FORBIDDEN');
+      const now = this.now(), meta = this.store.meta(), config = this.store.config;
+      const checkedAt = time(now), validUntil = time(Math.min(now + 60,
+        Date.parse(auth.scope.expiresAt) / 1000, auth.key.not_after, meta.generation_expires));
+      need(Date.parse(validUntil) > Date.parse(checkedAt), 'EXPIRED');
+      const held = !!meta.held, claimsEnabled = !held && config.claimsEnabled,
+        deliveryEnabled = !held && config.deliveryEnabled;
+      // Configured readiness is independent of queue occupancy and control barriers.
+      const stable = { schemaVersion: '1.0' as const, serviceId: config.serviceId,
+        consumerGeneration: auth.scope.consumerGeneration, scope: auth.scope,
+        limits: config.limits, roster: config.roster, privacyNoticeVersion: config.privacyNoticeVersion,
+        admissionEnabled: !held && config.admissionEnabled && claimsEnabled && deliveryEnabled,
+        claimsEnabled, deliveryEnabled, held };
+      const digest = canonicalHash(stable);
+      const action = 'Ask configuration observed:' + auth.scope.consumerGeneration + ':' + auth.scope.keyId;
+      let observation = this.store.get<{revision:string;digest:string}>(
+        'SELECT CAST(id AS TEXT) revision,target_hash digest FROM owner_audit WHERE action=? ORDER BY id DESC LIMIT 1', action);
+      if (!observation || observation.digest !== digest) {
+        // Existing non-content audit projection survives rollback and held restore.
+        // Stay within the integer range preserved by the existing recovery copier.
+        this.store.space(8192, true);
+        const maximum = this.store.get<{id:string}>('SELECT CAST(COALESCE(MAX(id),0) AS TEXT) id FROM owner_audit')!.id;
+        need(BigInt(maximum) < BigInt(Number.MAX_SAFE_INTEGER), 'BUDGET_EXHAUSTED');
+        this.store.run('INSERT INTO owner_audit(action,target_hash,recorded_at) VALUES(?,?,?)', action, digest, checkedAt);
+        observation = this.store.get<{revision:string;digest:string}>(
+          'SELECT CAST(id AS TEXT) revision,target_hash digest FROM owner_audit WHERE id=last_insert_rowid()')!;
+        need(BigInt(observation.revision) > BigInt(maximum), 'UNAVAILABLE');
+        this.store.touch();
+      }
+      const configurationRevision = validate<string>('Sequence', observation.revision);
+      const hashed = { ...stable, configurationRevision };
+      return validate<AskServiceConfiguration>('AskServiceConfiguration', { ...hashed,
+        configurationHash: canonicalHash(hashed), checkedAt, validUntil });
+    });
   }
 
   question(id: string): QuestionRow {
