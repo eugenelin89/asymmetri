@@ -457,6 +457,11 @@ closed intake, strict authorization/framing, per-caller persistent revisions,
 canonical hashes, reserved quotas, freshness/expiry, storage bounds and held
 recovery. These synthetic checks do not establish public-service eligibility.
 
+The [interoperability launcher](ASK-01-INTEROPERABILITY.md) accepts separate explicit
+strict and subscription-activity flags. Validate each over trusted loopback TLS,
+including signed configuration before the control drain, unchanged strict limits,
+null subscription cost/policy and both startup-cancellation and normal cleanup.
+
 `receiver/deploy/ask-readiness-acceptance.test.mjs` imports an existing compiled
 receiver selected by `ASK_REHEARSAL_RUNTIME` (defaults to its parent receiver).
 Run it explicitly with `node --test --test-concurrency=1` after receiver build.

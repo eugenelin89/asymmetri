@@ -8,13 +8,14 @@ import { connect, type Socket } from 'node:net';
 import { createServer, createSecureContext, type TLSSocket } from 'node:tls';
 import { askConfig } from '../src/ask/config.js';
 import { createAsk } from '../src/ask/http.js';
-import type { AskServiceScope } from '../vendor/investment/v1/types.js';
+import type { AskLimits, AskServiceScope } from '../vendor/investment/v1/types.js';
 import { examples, clone } from './helpers.js';
 
 process.umask(0o077);
 async function main(): Promise<void> {
-  if (process.argv.length !== 3 || process.argv[2] !== '--start-synthetic-interop') {
-    throw new Error('Explicit --start-synthetic-interop flag required.');
+  const mode = process.argv[2];
+  if (process.argv.length !== 3 || !['--start-synthetic-interop', '--start-synthetic-subscription-interop'].includes(mode!)) {
+    throw new Error('Explicit synthetic interoperability mode required.');
   }
   let root: string | undefined;
   let service: Awaited<ReturnType<typeof createAsk>> | undefined;
@@ -33,10 +34,18 @@ async function main(): Promise<void> {
     const dataDir=join(root,'private'),publicArchiveDir=join(root,'empty-public');
     await mkdir(dataDir,{mode:0o700});await mkdir(publicArchiveDir,{mode:0o700});
     ensureRunning();
+    const limits: AskLimits = {...clone(examples.AskLimits as AskLimits),
+      configurationStatus:'owner_approved',approvalRecordId:'synthetic-interop-only'};
+    if (mode === '--start-synthetic-subscription-interop') {
+      limits.monetaryEnforcement = 'activity_capped_subscription';
+      limits.dailyBudgetUsd = null; limits.maxRouterExecutions = 0; limits.maxResearchCalls = 0;
+      limits.subscriptionActivityPolicy = {version:'1',tokenLimits:'monitored_thresholds',actualCost:'unavailable',
+        overshoot:'possible',internalRetries:'possible',onMissingUsage:'hold',onThresholdViolation:'hold'};
+    }
     const config=askConfig({enabled:true,admissionEnabled:true,claimsEnabled:true,deliveryEnabled:true,
       dataDir,publicArchiveDir,port:0,authority:'asymmetri.co',origin:'https://asymmetri.co',
       serviceId:'fixture-ask',privacyNoticeVersion:'fixture-privacy-1',
-      limits:{...clone(examples.AskLimits as object),configurationStatus:'owner_approved',approvalRecordId:'synthetic-interop-only'},
+      limits,
       roster:clone(examples.AskRoster)});
     // This fixture has no published context. Non-empty evidence must fail closed.
     service=await createAsk(config,{contextVisible:async refs=>refs.length===0});

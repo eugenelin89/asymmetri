@@ -16,6 +16,28 @@ npm run receiver:build
 node receiver/dist/test/ask-interop-fixture.js --start-synthetic-interop
 ```
 
+The original flag preserves the strict authored fixture limits. For HQ's explicit
+subscription-activity integration case, use this separate test-only mode:
+
+```sh
+node receiver/dist/test/ask-interop-fixture.js --start-synthetic-subscription-interop
+```
+
+It uses the canonical `activity_capped_subscription` policy, unknown/null daily
+cost, no router execution and no research calls. Monitored thresholds may overshoot;
+the fixture invents no charge or hard provider cap. All authority, data, TLS and
+cleanup behavior stays disposable and synthetic. Neither flag changes production
+configuration, public eligibility or intake. Only one exact startup flag is accepted.
+
+The October 13 subscription extension passed receiver type-check/build and two
+19-request verified-TLS smoke sequences, one per mode. Each verified signed
+configuration/hash/limits before the existing claim/status/answer/receipt/control
+sequence; configuration alone left availability paused. The original mode's limits
+matched its previous fixture exactly. Both modes passed startup cancellation with
+SIGINT and SIGTERM, normal shutdown, and removal of all temporary keys/trees.
+Zero model executions occurred. This is website-side synthetic fixture acceptance;
+HQ's actual typed coordinator interoperability remains separately reported.
+
 The launcher prints only a private temporary manifest path and expiry. The 0600
 manifest contains the loopback TLS port, certificate/private signing-key paths,
 scope, limits, synthetic roster and privacy-notice version. Do not print or copy
@@ -39,6 +61,10 @@ No public evidence is available in this fixture. The service starts with no
 privacy freshness barrier, so availability is paused until HQ synchronizes.
 
 ## Minimum sequence
+
+First sign `GET /api/ask/v1/service/configuration` with no body, digest, query or
+idempotency header. Validate its exact scope, limits/policy, canonical hash and
+freshness. This read does not create a barrier; continue with the control drain below.
 
 1. Use the real typed producer client to sign `POST /api/ask/v1/hq/control-sync`.
    Include schemaVersion `1.0`, serviceId `fixture-ask`, consumerGeneration `1`,
