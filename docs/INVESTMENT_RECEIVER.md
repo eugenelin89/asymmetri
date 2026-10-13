@@ -5,7 +5,7 @@ and Vinext packaging do not start or import the receiver runtime.
 
 ## Contract and runtime
 
-**Cross-repository guide:** [Asymmetri/BotSquad integration map](BOTSQUAD_INTEGRATION.md). The [BotSquad canonical investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) owns milestone and source-of-truth responsibilities; Asymmetri owns this receiver and site implementation. The later [INV-REAL-01 website release](INV-REAL-01-WEBSITE.md) is public with no configured archive or enabled Ask.
+**Cross-repository guide:** [Asymmetri/BotSquad integration map](BOTSQUAD_INTEGRATION.md). The [BotSquad canonical investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) owns milestone and source-of-truth responsibilities; Asymmetri owns this receiver and site implementation. The later [INV-REAL-01 activation](INV-REAL-01-WEBSITE.md) connects the official configured portfolio under finite HQ authority; Ask remains closed.
 
 
 `receiver/vendor/investment/v1/` is the exact nine-file contract 1.0 from
@@ -120,13 +120,13 @@ A future Nginx proxy must preserve the explicitly configured Host, remove all
 Forwarded/X-Forwarded-* headers, preserve request bytes and signed path, avoid
 redirects/rewrites, reject ambiguous framing, and set matching body/time limits.
 The receiver trusts no forwarded authority, accepts no transfer/content encoding,
-and binds loopback only. INFRA-02 tested a disposable transparent Nginx proxy; its HTTP-layer profile failed duplicate Connection preservation. Exact public HTTP/TLS ingress remains unaccepted; no operational proxy was installed.
+and binds loopback only. INFRA-02 tested a disposable transparent Nginx proxy; its HTTP-layer profile failed duplicate Connection preservation. That normalizing HTTP profile remains rejected. The later [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) verifies the installed raw-byte ingress used by real HQ publication.
 
 Decision 029: market-data acquisition/licensing budget is **US$0**. Receiver has
 no vendor credentials, scraper, fetch of source URLs or paid-feed assumption.
 `observed_paper` publication additionally requires a trusted local approval for
 the exact frozen configuration hash in `publication_approvals`; publisher claims
-and public URLs alone do not establish rights. No operational approval was made.
+and public URLs alone do not establish rights. The [activation receipt](INV-REAL-01-WEBSITE.md) records the exact real configuration approval.
 The owner reports Yahoo permission for the complete personal noncommercial project;
 this local control binds the exact frozen configuration and is not a renewed licensing
 gate. Synthetic fixtures need no real source connection.
@@ -295,13 +295,14 @@ actual Node22/Linux native compatibility, isolated ownership and systemd protect
 fsync/rename, migration 001, recovery, and bounded shared-host load. See the
 [measured evidence](INFRA-02-VALIDATION.md); historical disk observations are not
 current capacity guarantees. The initial installation was static/stopped. The [later ingress release](INGRESS_RELEASE_2026-10-13.md)
-explicitly starts its listener; operational authority/data remain empty.
+explicitly started its empty listener. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) installs finite generation-1 authority and serves five real initial events.
 
-Strict shared HTTPS is now verified. Real publication still requires representative
-archive sizing, reviewed retention/backup custody and schedule, finite publisher/key
-lifecycle, HQ reconciliation and completed feature gates. Owner deployment and
-Yahoo permission statements are recorded in the current handoff; they do not create
-a publisher grant. Existing exact-content rights controls remain. The rejected
+Strict shared HTTPS, finite publisher/key authorization, exact configuration
+approval, signed HQ receipt reconciliation and initial public reads are now
+verified. The activation includes a consistent host-local backup and isolated
+fenced restore check. Representative live archive sizing, ongoing retention/backup
+schedule and independent custody remain unverified. Owner deployment and Yahoo
+permission statements are recorded separately from the actual installed grant. Existing exact-content rights controls remain. The rejected
 normalizing HTTP profile remains unsuitable. Ask has separate authority/budget gates.
 
 Receiver-only rollback stops admission and its unit, restores compatible receiver

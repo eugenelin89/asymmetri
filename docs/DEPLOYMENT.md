@@ -3,7 +3,7 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-04-RELEASE_2026-10-13.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. Genuine HQ publication and ongoing backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-04-RELEASE_2026-10-13.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution and ongoing independent backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
@@ -1102,7 +1102,7 @@ health in the external task receipt. See the [public-story source review](BOTSQU
 
 ## Independent private investment receiver
 
-[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. That initial installation left `asymmetri-investment.service` static/inactive. The [October 13 ingress release](INGRESS_RELEASE_2026-10-13.md) explicitly starts it with strict HTTPS and an empty archive; publisher authority remains absent. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
+[INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the accepted INV-02 receiver independently at `/opt/asymmetri-receiver`, with private SQLite under `/var/lib/asymmetri-investment` and root-owned disabled configuration under `/etc/asymmetri-investment`. That initial installation left `asymmetri-investment.service` static/inactive. The [October 13 ingress release](INGRESS_RELEASE_2026-10-13.md) explicitly started it with strict HTTPS and an empty archive. The subsequent investment activation installs an exact finite publisher scope, approves the frozen configuration and selects the first accepted official run. None of the website deployment commands deploys or starts it; no website source/build/dependency update accompanied installation. Do not package SQLite into Cloudflare Workers.
 
 Use the receiver's [installation/backup/rollback runbook](INFRA-02-RECEIVER-DEPLOYMENT.md) and [actual Linux acceptance](INFRA-02-VALIDATION.md). A transparent loopback Nginx test passed; the nginx 1.22 HTTP profile failed duplicate Connection preservation and is not accepted for public/real traffic. Exact HTTP/TLS ingress is now verified by the release receipt. Recurring backups/retention, representative live capacity and genuine publication remain separate gates; owner deployment authorization and the existing OS exception remain in effect.
 
@@ -1152,6 +1152,26 @@ Run `systemd-analyze verify` on installed-path candidates and verify actual
 confinement, certificate reload/renewal and disabled-intake state before exposure.
 The all-vhost rehearsal verified 64 checks in each baseline/shared/rollback phase;
 it did not itself change production listener files.
+
+## Live investment read configuration — October 13
+
+The [complete activation receipt](INV-REAL-01-WEBSITE.md#signed-publication-selection-and-website-activation-receipt)
+records the exact real run, publisher generation/expiry, configuration hash, signed
+receipts, backup/restore validation and public checks. Website source d0c4543 and
+build P7LP4PKXMUyZ96RJnAgcz are unchanged; PID 2386085 started at 20:36:55 UTC.
+The systemd drop-in `/etc/systemd/system/asymmetri.service.d/20-investment-read.conf`
+sets only `ASYMMETRI_INVESTMENT_READ_ORIGIN`, `ASYMMETRI_INVESTMENT_READ_AUTHORITY`,
+`ASYMMETRI_INVESTMENT_EXPERIMENT` and `ASYMMETRI_INVESTMENT_RUN`. Read origin is
+`http://127.0.0.1:3101`, with fixed Host `asymmetri.co`; exact IDs are in the receipt.
+These server-only settings are neither build-time public variables nor Ask authority.
+
+The guarded read-configuration rollback is
+`sudo -n python3 /var/lib/asymmetri-investment-activation-20261013/website-enable.py rollback`.
+It restores the unconfigured read state on the same verified build, preserving
+all accepted receiver records and other services. It checks the exact task-owned
+drop-in before removal. This is separate from earlier source/build rollback swaps;
+re-review after subsequent website releases. Never restore an empty pre-activation
+database over accepted history to reverse a page configuration.
 
 ## Dormant Ask visitor interface
 

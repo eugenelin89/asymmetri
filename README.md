@@ -33,7 +33,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
-| `/botsquad/investment` | Public investment showcase; truthful unconfigured state until verified observed records are connected |
+| `/botsquad/investment` | Live configured paper portfolio, actual roster and initial journal; market results remain unavailable |
 | `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
@@ -70,7 +70,7 @@ after verified off-server recovery checks. A later owner-approved Mac cleanup de
 those backup copies and keys; independent recovery custody is currently unverified. Django and all other
 sites/services remain unchanged. The unsupported-OS exception requires review before
 future deployment/public exposure; migration is no automatic prerequisite to local
-investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) records the initial stopped receiver installation. The [October 13 ingress release](docs/INGRESS_RELEASE_2026-10-13.md) starts the empty investment and disabled-intake Ask listeners with verified shared HTTPS; no publisher grant is configured. Historical preparation and test
+investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) records the initial stopped receiver installation. The [October 13 ingress release](docs/INGRESS_RELEASE_2026-10-13.md) started the empty investment and disabled-intake Ask listeners with verified shared HTTPS. The subsequent [investment activation](docs/INV-REAL-01-WEBSITE.md) installs a finite real publisher and connects the initial records. Historical preparation and test
 records remain available through the cancellation record.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
@@ -80,7 +80,7 @@ Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytic
 backend or application-owned visitor tracking. A separate, default-disabled
 investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
-the installed receiver is empty and has no publisher authority. The investment
+the installed receiver now accepts the exact finite HQ publisher scope and serves the initial configured portfolio. The investment
 website is public; see the [current release receipt](docs/INV-REAL-01-WEBSITE.md) and
 [receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
 YouTube players connect to Google only after explicit activation; local posters
@@ -142,8 +142,10 @@ decision pages, methodology, and a disabled `/botsquad/ask` preview. Existing ex
 artifact, discussion and record URLs remain available. These routes are noindex
 and are not added to the public sitemap. The website was released on October 13; see the release receipt below.
 
-Official investment operations have not started. The default website has no read
-backend; it renders a truthful unconfigured state. See [local development](docs/LOCAL_DEVELOPMENT.md)
+Production reads now expose the official configured portfolio, actual Atlas/Maya
+roster and USD 100,000 initialization journal. No market observation, employee turn
+or completed investment result is established yet. Unconfigured environments
+still render their truthful empty state. See [local development](docs/LOCAL_DEVELOPMENT.md)
 for the explicitly invoked disposable synthetic preview and [receiver boundaries](docs/INVESTMENT_RECEIVER.md).
 
 Current observed-paper website semantics, source acceptance, release status and remaining
@@ -153,7 +155,7 @@ Private Ask receiver source and recovery commands are documented in
 [ASK-01 private boundary](docs/ASK-01-PRIVATE-RECEIVER.md). The public Ask page
 remains disabled; this source milestone does not activate visitor intake or HQ.
 
-Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_RELEASE_2026-10-13.md) records exact sources, confinement, renewal and all-host preservation. Ask intake remains disabled and HQ remains account-401 held. The [synthetic interoperability launcher](docs/ASK-01-INTEROPERABILITY.md) provides a separate temporary HTTPS fixture for typed-client acceptance.
+Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_RELEASE_2026-10-13.md) records exact sources, confinement, renewal and all-host preservation. Ask intake remains disabled. HQ reports repaired private authentication; initial signed investment publication and public reads are verified in the current handoff. The [synthetic interoperability launcher](docs/ASK-01-INTEROPERABILITY.md) provides a separate temporary HTTPS fixture for typed-client acceptance.
 
 ## Dormant Ask visitor interface
 

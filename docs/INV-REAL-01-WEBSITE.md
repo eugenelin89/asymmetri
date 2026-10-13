@@ -1,15 +1,17 @@
 # INV-REAL-01 — Website integration and release handoff
 
 Date: October 13, 2026 (America/Vancouver). **Website publicly released and verified.
-Receiver authorization and run approval are ready; signed ingestion and website
-read enablement remain pending.** HQ reports repaired private
+Real HQ publication, official selection and website read enablement verified.**
+The live page shows the initial configured portfolio, not completed market results.
+HQ reports repaired private
 authentication; the [current readiness update](ASK-04-READINESS.md#repaired-private-authentication)
 separates that repair from remaining authority, eligibility and genuine acceptance.
 This investment
 handoff supersedes the next-milestone descriptions in historical INV-04. Its
 97b4087 deployment details describe the initial release. The later
 [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md) supplies current
-website identity d0c4543 and preserves this unconfigured investment behavior.
+website identity d0c4543. The activation below connects that unchanged build to
+the real public archive; Ask remains closed.
 
 ## Authority and scope
 
@@ -28,13 +30,14 @@ investigation or provider-rights approval milestone is required. Preserve normal
 technical provenance, integrity, rate limits, access-denial handling and point-in-time
 accounting. No real trades, paid data or credit purchase/reload is included.
 
-## Production activation — receiver ready for signed HQ delivery
+## Production activation — live observed-paper configuration
 
-**2026-10-13 20:32:33 UTC:** the real finite publisher scope and exact observed
-run configuration are installed and read back successfully. HQ delivery remains
-held pending its own consent step. No experiment/run/event/batch has yet been
-ingested; no official pointer or website read setting has been enabled. Ask stays
-closed. This status supersedes the empty-authority preparation baseline below.
+At **2026-10-13 20:32:33 UTC**, the real finite publisher scope and exact observed
+run configuration were installed and read back successfully. HQ delivery was
+still held, with no experiment/run/event/batch, official pointer or website reads.
+HQ then enabled signed delivery; the completed activation receipt follows below.
+Ask remained closed throughout. This supersedes the empty-authority preparation
+baseline later in this document.
 
 The supplied authorization and canonical run-event files matched SHA-256
 `551985183859be12e6d977b720e43af37f7d1f145f4f433d46c30a342e22a29d`
@@ -54,7 +57,7 @@ hash were checked. No private signing key was transferred or stored here.
 | Delivery bound | 12 writes/minute; 16,777,216 bytes/day; exact 11 event types; JSON content capability required by v1, with no HQ content jobs or artifact event authority |
 | Approval recorded | `2026-10-13T20:32:32.560Z` |
 | Authority counts | One publisher, one unrevoked key, one publication approval |
-| Publication counts | Zero experiments, runs, events, batches, nonces and content objects |
+| Publication counts at authorization | Zero experiments, runs, events, batches, nonces and content objects; later ingestion is recorded below |
 
 The frozen public run is `official` / `configured`, with USD 100,000 cash capital,
 an annual public horizon ending `2027-01-01T01:00:00.000Z` and 251 configured
@@ -91,9 +94,100 @@ accepted financial history.
 Actual owner CLI commands completed in order: `diagnostics`, `authorize` with the
 verified authorization file, and `approve-run` with the canonical event. SQLite
 integrity and foreign keys passed afterward. No tool approval blocked activation.
-Next: HQ signed publication and immutable receipt reconciliation, verified null
-official predecessor, `select-official`, then server-only website read enablement
-and public/protected-route verification. Do not enable Ask during these steps.
+
+### Signed publication, selection and website activation receipt
+
+HQ delivered five real public events at **20:34:09 UTC**: `run.published`,
+`team.published`, `discussion.opened`, `paper.ledger_transaction` and
+`portfolio.snapshot`, plus a separate heartbeat. The receiver's stored immutable
+snapshot receipt matches HQ's reported acknowledgement exactly:
+
+- Batch `01aa74b9817207fc097eaab2191f6f0d7c0a7b89e8abdcbf`; receipt
+  `db63be6e-4861-411b-a6aa-aebd5db7875a`.
+- Body digest `e9550227f66ecb5f7673adf65aa8f4f345a47d57a02502fda82e11d55cfd7a5f`.
+- Source watermark `5`, journal sequence `1`, no source gaps; journal hash
+  `fe3d8a28951b7569aa2b541690ad73bf0fdefceabe2d62a4155827e70e139523`.
+
+The public experiment's official pointer was verified null. The owner CLI
+`select-official` then succeeded with expected predecessor `-`, and public readback
+confirmed the exact run and a changed visibility witness at **20:35:50 UTC**.
+The first read-only verification query mistakenly referenced `event_json`; SQLite
+rejected it before selection. Inspection confirmed the actual `body_json` column;
+the corrected readback passed. No run or financial record was modified by that
+failed query.
+
+The existing website source **`d0c454314d646b74895f4d9e3e4a014c63c666a6`**, build
+**`P7LP4PKXMUyZ96RJnAgcz`**, was reused without rebuild or source deployment.
+Root-owned `/etc/systemd/system/asymmetri.service.d/20-investment-read.conf`
+contains only these server runtime settings:
+
+```text
+ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:3101
+ASYMMETRI_INVESTMENT_READ_AUTHORITY=asymmetri.co
+ASYMMETRI_INVESTMENT_EXPERIMENT=16496aa38732845beeea0a75f4614b93136be792accbb4e0
+ASYMMETRI_INVESTMENT_RUN=0f6ea49caee91243f2f028a8ddde55abaa68faaaa2de453c
+```
+
+Drop-in SHA-256 is
+`52a4c20eb2a914569b212b4a5624f8123bbcb633b369692ea25d0f58c8323f1f`.
+The effective unit passed `systemd-analyze verify`. Only the website restarted
+for this read configuration: **PID `2386085`, active since 20:36:55 UTC**.
+The actual process environment, unchanged source/build and populated HTTPS page
+were verified at **20:37:00 UTC**. Investment PID `2385469`, Ask PID `2384365`,
+ingress PID `2375255` and Nginx PID `826` remained active and unchanged.
+
+Final acceptance at **20:39:29 UTC** verified:
+
+- Seven public API DTOs pass the installed canonical schema, bind the exact
+  experiment/run, provide valid visibility witnesses and set no cookies. Public
+  `run.published` recomputes to the exact approved configuration hash above.
+- Exact-run, methodology, real discussion and initialization record/receipt pages
+  return HTTPS 200 with connected archive content.
+- The live UI shows Atlas/Maya, configured status, USD 100,000 starting capital,
+  the real initialization journal and no decisions or employee contributions.
+  The initial snapshot is **partial** because an exact benchmark closing mark
+  does not yet exist. `/snapshot` correctly returns null for the last *complete*
+  valuation; `/performance` and exact records preserve the partial observation
+  and USD 100,000 cash. Unavailable equity/returns remain gaps, not zero results.
+- The UI's `Next authorized review: Unconfigured` is the absence of a published
+  `run.status` schedule record. HQ's reported future collection schedule is not
+  inferred into the public contract. A heartbeat proves transport contact only;
+  publication/market freshness remains `unknown` before qualified observations.
+- Actual browser CSS widths 320, 390, 780 and 1440 have no horizontal overflow or
+  broken images. Keyboard Enter toggles the frozen configuration, its exact hash
+  is visible, and focus has a visible teal outline. No console warning/error was
+  observed. Temporary viewport overrides were reset. No new reduced-motion or
+  assistive-technology audit is claimed for this configuration-only activation.
+- The 112 before/after observations comprise **104 verified HTTP responses,
+  four fallback-certificate fingerprints and four pre-existing IPv6 TLS failures**.
+  All match the baseline. The four known certificate mismatches are not counted
+  as healthy HTTPS. Eighteen receiver/Ask/Nginx configuration hashes are preserved.
+- Both hosts' protected Motion routes return 200. Tutorial canonical/hash links
+  and all 48 original-image responses/hashes match the baseline. Existing shared
+  host statuses, including draft 502 and relay 410, remain unchanged.
+- Ask availability stays 200/`disabled`, no cookie; a real session POST returns
+  503/`UNAVAILABLE` without a cookie or session. Its session/question/answer/key/
+  claim/nonce tables remain empty. No approved Ask disclosure or authority changed.
+
+The private 29-file evidence manifest SHA-256 is
+`5b6dceaeda23b27324244afa8c00088ded655c2182c2c15fbc103f1a66f65ff5`.
+This proves initial publication and public read integration, not market collection,
+genuine employee turns, completed forward sessions or sustained operating capacity.
+
+### Configuration-only rollback
+
+The exact guarded rollback is retained with the receipt:
+
+```sh
+sudo -n python3 /var/lib/asymmetri-investment-activation-20261013/website-enable.py rollback
+```
+
+It checks the current source/build and exact task-owned drop-in, removes only that
+read configuration, reloads systemd, restarts the same website build and verifies
+the truthful unconfigured state. It does not rewind SQLite, revoke authority,
+erase immutable records or operate Ask/ingress/Nginx. Holding HQ publication or
+revoking its key is a separate scoped action if a publication fault requires it.
+Re-review this guard after any subsequent website or configuration release.
 
 ## Executable receiver activation handoff
 
@@ -400,7 +494,8 @@ market sessions. Producer later delivered PR75 at deployed
 `d262a8dff59ab82587bd6444b083e5e9b7603cf0`, with signed acceptance against this
 compiled receiver (5/5). Its production account returned 401 at that earlier
 acceptance, preventing an observed run or new employee authority then. HQ now
-reports repaired private authentication; genuine activation remains incomplete.
+reports repaired private authentication; the initial signed publication is verified
+above, while genuine employee/market execution remains to be observed.
 Later Ask source PR77/78 remains separate.
 
 ## Production baseline and release receipt
@@ -450,7 +545,7 @@ release supersedes it; documentation-only commits do not change a running build.
 Owner-only `approve-run` and `select-official` source now provide exact configuration
 approval and explicit checked official selection without SQL edits or a wire/schema
 migration; [commands](INVESTMENT_RECEIVER.md#observed-run-approval-and-official-selection).
-No operational run approval or selection has been made.
+The real generation-1 run approval and official selection above are now complete.
 
 The private receiver compatibility installation is complete at
 `c2edfd50ed12ba576c06e6991091090b9ced3e31`: 207/207 actual Linux tests and 61/61
@@ -465,8 +560,9 @@ page release updates only the website. The ingress receipt records the Nginx cha
 [Private Ask](ASK-01-PRIVATE-RECEIVER.md) runs separately from that receiver
 identity, with admission/claims/delivery disabled. Shared-apex HTTPS and installed
 confinement/renewal are verified. Remaining: ongoing backup/retention custody,
-genuine publication and as-of history, real-use Ask content custody, finite
-budgets and actual employee/provider execution. [Typed-client synthetic
+ongoing as-of market history, real-use Ask content custody, finite Ask
+budgets and actual employee/provider execution. Initial signed publication is now
+verified above. [Typed-client synthetic
 interoperability](ASK-01-INTEROPERABILITY.md#producer-typed-client-receipt) and
 [local visitor UI acceptance](ASK-03-WEBSITE-UI.md) have passed; the public page
 remains unavailable. No fixture or empty archive substitutes for genuine outcomes.
