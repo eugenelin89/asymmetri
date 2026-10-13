@@ -162,5 +162,5 @@ production visitor path and isolated synthetic acceptance. Genuine intake remain
 disabled through the absent reviewed disclosure and disabled receiver. No production
 configuration enables the local fixture. See [readiness and remaining gates](docs/ASK-04-READINESS.md).
 
-The [unavailable Ask page release](docs/ASK-03-RELEASE_2026-10-13.md) records
+The [closed Ask production-path release](docs/ASK-04-RELEASE_2026-10-13.md) records
 its current public deployment and unchanged private-service boundaries.

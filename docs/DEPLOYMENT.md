@@ -3,7 +3,7 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-03-RELEASE_2026-10-13.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. Genuine HQ publication and ongoing backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-04-RELEASE_2026-10-13.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. Genuine HQ publication and ongoing backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
@@ -1165,3 +1165,9 @@ The [October 13 unavailable Ask page release](ASK-03-RELEASE_2026-10-13.md)
 records live source `d51288fc52b0faa4401848ec9d009ad3cc3ae87b`, exact build,
 112 preservation checks and the complete 97b4087 predecessor rollback. It changes
 only the website and leaves shared ingress/receiver authority unchanged.
+
+
+The subsequent [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md)
+is the current website at `d0c454314d646b74895f4d9e3e4a014c63c666a6`, with complete
+prior d51288f rollback. Its receiver fixes remain source-only for a separate private
+service rollout. No operational intake, authority or archive reads were enabled.

@@ -63,9 +63,10 @@ inconsistent identities. Replies use plain text, exact evidence links, attributi
 timestamps and polite announcements without automatic scrolling.
 
 The [readiness and gap matrix](ASK-04-READINESS.md) distinguishes source acceptance,
-synthetic evidence and the remaining operational gates. The [earlier website
-release](ASK-03-RELEASE_2026-10-13.md) is historical deployment evidence; it does not
-claim that this new source packet is already installed.
+synthetic evidence and the remaining operational gates. The [closed production-path
+release](ASK-04-RELEASE_2026-10-13.md) records the installed website, complete rollback
+and unchanged independent private services. The earlier ASK-03 receipt remains
+historical evidence.
 
 ## Local verification
 

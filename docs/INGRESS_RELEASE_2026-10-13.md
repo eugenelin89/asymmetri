@@ -102,3 +102,9 @@ UI/privacy copy. [The disposable interoperability fixture](ASK-01-INTEROPERABILI
 tests authored transport only. HQ control acknowledgement does not establish
 physical body purge or restoration; retain those separate unverified states.
 Ubuntu 22.10 remains the existing accepted exception; OS migration is separate.
+
+
+The subsequent [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md)
+installs website d0c4543 and verifies all 112 preservation checks again. The Ask,
+ingress, investment and Nginx identities above are unchanged. Receiver source fixes
+in that packet are explicitly separate from the installed private-service source.

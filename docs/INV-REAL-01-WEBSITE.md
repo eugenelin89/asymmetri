@@ -4,8 +4,8 @@ Date: October 13, 2026 (America/Vancouver). **Website publicly released and veri
 Observed-data activation remains held by producer authentication.** This investment
 handoff supersedes the next-milestone descriptions in historical INV-04. Its
 97b4087 deployment details describe the initial release. The later
-[unavailable Ask page release](ASK-03-RELEASE_2026-10-13.md) supplies current
-website identity d51288f and preserves this unconfigured investment behavior.
+[closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md) supplies current
+website identity d0c4543 and preserves this unconfigured investment behavior.
 
 ## Authority and scope
 

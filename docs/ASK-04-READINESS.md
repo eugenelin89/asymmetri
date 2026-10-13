@@ -95,3 +95,11 @@ private request. The adapter's temporary private tree was removed on shutdown.
 The original browser/API evidence remains applicable to unchanged answer rendering,
 links and TLS boundaries. Receiver source rollout and operational capacity remain
 explicit follow-up gates, not implied by this website-only release preparation.
+
+
+## Installed website
+
+The [closed production-path release](ASK-04-RELEASE_2026-10-13.md) installs website
+source d0c4543. It records the actual Linux build, complete rollback, live closed
+browser state and 112 all-host checks. The receiver source corrections in this
+packet remain a separate rollout; no operational gate is inferred from the release.

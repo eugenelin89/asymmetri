@@ -1,6 +1,6 @@
 # BotSquad and Asymmetri — Investment Showcase integration map
 
-**Current coordination: October 13, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [later unavailable Ask release](ASK-03-RELEASE_2026-10-13.md) records current website source/build identity; the detailed investment handoff retains its initial-release history.
+**Current coordination: October 13, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [closed Ask production-path release](ASK-04-RELEASE_2026-10-13.md) records current website source/build identity; the detailed investment handoff retains its initial-release history.
 
 ## Which repository owns what?
 
@@ -21,7 +21,7 @@ Canonical contract commit: `ba3dd74bc6be495f655b5ad1e6e4ba3fdf85b755`; nine file
 
 The approved authority flow is: trusted BotSquad HQ public projection and publisher (later INV-07) **outbound signed HTTPS** → isolated Asymmetri receiver and public archive → bounded read-only Next.js routes → visitors. Website receipts are not trading commands, and the website must not obtain private HQ employee state or signing keys. Ask BotSquad uses a separate private-session Q&A boundary with public intake disabled; an investment publication grant does not authorize Ask.
 
-The website requires a verified `X-Archive-Visibility` header and optionally a bounded `X-Archive-Latest-Cursor` header. The installed receiver supports these headers. The current d51288f website includes the fixed-authority loopback helper. Before configuring live reads, verify the exact run and retained visibility checks. Shared-443 HTTPS is now verified; the rejected normalizing HTTP profile remains unsuitable.
+The website requires a verified `X-Archive-Visibility` header and optionally a bounded `X-Archive-Latest-Cursor` header. The installed receiver supports these headers. The current d0c4543 website includes the fixed-authority loopback helper. Before configuring live reads, verify the exact run and retained visibility checks. Shared-443 HTTPS is now verified; the rejected normalizing HTTP profile remains unsuitable.
 
 ## Historical October 9 milestone baseline
 
@@ -38,10 +38,16 @@ Cross-repository provenance: [BotSquad INV-04 handoff](https://github.com/eugene
 
 INFRA-01 Ubuntu migration was cancelled. The present Droplet runs unsupported Ubuntu 22.10 under [Decision 030](https://github.com/eugenelin89/bot_messenger/blob/main/docs/decisions/decision_030_defer_ubuntu_migration.md); a future OS upgrade is a separate owner project. RECOVERY-01 is not a required development milestone. Independently verified backup custody is currently unestablished after the later deletion of historical archives; any valuable *live* data and public activation need a separate backup/retention and security review. Do not silently claim that GitHub stores private databases/configuration.
 
-Live receiver ingress, publisher grants/keys, operational market source, real HQ synchronization, visitor Ask and capacity/retention are **not enabled** by INV-01–04. The later [October 13 shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) starts the empty investment and disabled-intake Ask listeners with verified confinement/renewal; zero operational publishers/events and no Ask service keys remain. The current website release is `d51288fc52b0faa4401848ec9d009ad3cc3ae87b`, superseding the initial `97b4087` release, with no configured archive reads or visitor intake. Owner-reported Yahoo permission and producer authentication status are recorded in the [current handoff](INV-REAL-01-WEBSITE.md). Always verify the current source and service state before changes.
+Live receiver ingress, publisher grants/keys, operational market source, real HQ synchronization, visitor Ask and capacity/retention are **not enabled** by INV-01–04. The later [October 13 shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) starts the empty investment and disabled-intake Ask listeners with verified confinement/renewal; zero operational publishers/events and no Ask service keys remain. The current website release is `d0c454314d646b74895f4d9e3e4a014c63c666a6`, superseding the initial `97b4087` release, with no configured archive reads or visitor intake. Owner-reported Yahoo permission and producer authentication status are recorded in the [current handoff](INV-REAL-01-WEBSITE.md). Always verify the current source and service state before changes.
 
 ## How future Codex work is routed
 
 - **Asymmetri.co Codex project:** website, isolated receiver, API serving, Nginx/Ubuntu web-hosting and future website release. Follow this repository's `AGENTS.md`, mainline/two-commit journal workflow and explicit deployment gate.
 - **BotSquad Codex project:** HQ employees, paper simulator INV-05, market adapter INV-06, HQ publisher INV-07, later team/scheduler and private HQ Ask integration. Follow BotSquad's `AGENTS.md`, short-lived branch/worktree, review/PR workflow.
 - If a task touches both, keep one owning implementation repository per packet, pin exact contract SHA and both tested source commits, record a documentation handoff to the other repository, and do not assume an atomic cross-repository deploy. No implementation milestone is started by reading this document.
+
+
+[INV-ASK-03/04 readiness](ASK-04-READINESS.md) records metadata-only visitor recovery,
+advertised disclosure binding, focused restore/race/capacity evidence and the
+independent receiver rollout boundary. Production has no approved Ask disclosure
+and no intake; authority and HQ content custody remain independently verified gates.
