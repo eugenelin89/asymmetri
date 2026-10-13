@@ -6,6 +6,10 @@ are no publisher grants, approved/official runs, Ask service keys or visitor dat
 HQ's account-401 hold remains in force. This is infrastructure acceptance, not
 evidence of genuine employee execution, market collection or a completed trial.
 
+The later [website-only Ask page release](ASK-03-RELEASE_2026-10-13.md) changes
+the website source/build while preserving this ingress and private receiver state.
+The identities below describe the original 17:19 cutover.
+
 ## Installed identities
 
 | Component | Recorded source | Runtime at final verification |

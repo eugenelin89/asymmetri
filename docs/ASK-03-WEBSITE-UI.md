@@ -12,6 +12,7 @@ public intake. No production enable switch exists. Opening to real visitors
 requires a separate reviewed change with verified provider/retention disclosures,
 eligible roster, authority, budgets, interoperability and actual execution evidence.
 The infrastructure receipt remains [the October 13 release](INGRESS_RELEASE_2026-10-13.md).
+The unavailable public page is now deployed by the [website-only release](ASK-03-RELEASE_2026-10-13.md); the functional client remains development-only.
 
 ## Ownership and boundaries
 

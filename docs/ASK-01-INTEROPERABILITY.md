@@ -94,3 +94,23 @@ setup cancellation; failure output does not claim cleanup succeeded. The initial
 idempotency key and received the expected 409; correcting the harness produced
 the passing sequence. This is receiver/fixture acceptance, not yet a producer
 typed-client result, real execution or operational activation.
+
+## Producer typed-client receipt
+
+HQ reports a passing actual typed-client run against website fixture commit
+`d1ddbe679c05314158310183518afaaaedd8ae00`, using its real `askOfflineClient`
+and `AskControlJournal`. Producer implementation is
+`9a1eb5caf4a0cc3125f9da2ffe9a941cea68c0fc` on `codex/inv-real-01`; final
+integration/receipt promotion is owned by HQ. This does not change its operational
+runtime or account-401 hold.
+
+The one test passed in 5667.157187 ms (runner 6292.268361 ms). Its 16 verified-TLS
+requests were four control synchronizations, six visitor requests, one claim,
+one renewal, one status, two immutable-answer deliveries/retries and one signed
+receipt read. One deletion control was durably suppressed, the owned post-delete
+read returned 404, and a derived acknowledgment/final empty barrier completed.
+All 87 receiver source files and 50 compiled artifacts were pinned; private
+fixture tree, signing material and listener cleanup were verified. Canonical
+manifest remains unchanged. This is producer-reported authored synthetic
+acceptance: `modelCalls: 0`, `contentPurgeVerified: false`,
+`restorationVerified: false`. It is not real employee/provider execution.

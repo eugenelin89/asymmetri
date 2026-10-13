@@ -1,8 +1,11 @@
 # INV-REAL-01 — Website integration and release handoff
 
 Date: October 13, 2026 (America/Vancouver). **Website publicly released and verified.
-Observed-data activation remains held by producer authentication.** This is the current
-handoff, superseding the next-milestone descriptions in the historical INV-04 record.
+Observed-data activation remains held by producer authentication.** This investment
+handoff supersedes the next-milestone descriptions in historical INV-04. Its
+97b4087 deployment details describe the initial release. The later
+[unavailable Ask page release](ASK-03-RELEASE_2026-10-13.md) supplies current
+website identity d51288f and preserves this unconfigured investment behavior.
 
 ## Authority and scope
 
@@ -141,8 +144,8 @@ dependency version was changed. The existing tutorial lint warning remains.
   was activated by this website release.
 
 Sanitized detailed baselines and screenshots are retained outside tracked source.
-This documentation follows the deployed source; documentation-only commits do not
-change the running build identity above.
+The build identity above is the initial investment release. The later Ask page
+release supersedes it; documentation-only commits do not change a running build.
 
 ## Remaining integration
 
@@ -158,14 +161,17 @@ rollback is `/opt/asymmetri-receiver/rollback-20261013-inv-real`. This initial
 installation left it inactive. The later [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md)
 explicitly starts the listener while preserving zero events, batches, nonces,
 content objects or publishers. Migration 2 integrity/FK checks pass. Website
-PID/start/build remain unchanged; the release receipt records the Nginx changes.
+PID/start/build remained unchanged during that ingress cutover; the later Ask
+page release updates only the website. The ingress receipt records the Nginx changes.
 
 [Private Ask](ASK-01-PRIVATE-RECEIVER.md) runs separately from that receiver
 identity, with admission/claims/delivery disabled. Shared-apex HTTPS and installed
 confinement/renewal are verified. Remaining: ongoing backup/retention custody,
-genuine publication and as-of history, private Ask typed-client interoperability
-and visitor UI. No fixture
-or empty archive substitutes for these outcomes.
+genuine publication and as-of history, real-use Ask content custody, finite
+budgets and actual employee/provider execution. [Typed-client synthetic
+interoperability](ASK-01-INTEROPERABILITY.md#producer-typed-client-receipt) and
+[local visitor UI acceptance](ASK-03-WEBSITE-UI.md) have passed; the public page
+remains unavailable. No fixture or empty archive substitutes for genuine outcomes.
 
 
 October 13 follow-up: private Ask source passed 227/227 actual Linux tests. The

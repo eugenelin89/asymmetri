@@ -160,3 +160,6 @@ Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_
 [Ask UI boundaries and local acceptance](docs/ASK-03-WEBSITE-UI.md) cover the
 public unavailable page and interactive synthetic client. Genuine intake remains
 disabled; no production configuration enables the local fixture.
+
+The [unavailable Ask page release](docs/ASK-03-RELEASE_2026-10-13.md) records
+its current public deployment and unchanged private-service boundaries.
