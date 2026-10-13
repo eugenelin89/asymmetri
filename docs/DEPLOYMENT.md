@@ -3,7 +3,7 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [local INV-04 acceptance](INV-04-VALIDATION.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The INV-04 UI is committed in this repository **but not deployed**. Its strict visibility-witness reads require a compatible receiver release; the currently installed private receiver is stopped/default disabled. A source update, receiver compatibility installation, shared TLS ingress, public website release and actual HQ publication each require independent verification and explicit authorization. Do not deploy latest `main` as a shortcut to activating any of these.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [current website release receipt](INV-REAL-01-WEBSITE.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require a compatible receiver release; the installed private receiver remains stopped/default disabled. Receiver compatibility installation, strict TLS ingress and actual HQ publication still require independent verification. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
@@ -926,6 +926,12 @@ The owner's standing Node 22 approval applies; local checks still use Node 24.
    telemetry disabled and the documented 1536 MiB heap limit. Start its Next.js
    server on a confirmed-unused temporary loopback port. Smoke-test all nine
    routes, old redirects, metadata, images and changed content before activation.
+   The October 13 lockfile required npm 11.6.0: production npm 10.9.8 rejected
+   optional emnapi entries despite local locked installation passing. In that
+   isolated candidate, `npm exec --yes --package=npm@11.6.0 -- npm ci --no-audit
+   --no-fund` installed the unchanged lockfile. This is a pinned one-shot package
+   manager, not a global runtime upgrade. Check the candidate's clean Git state
+   afterward; do not repair a deployment by changing its tracked lockfile.
 4. Preserve the complete previous checkout, dependencies, public assets and `.next`
    as a uniquely named sibling rollback directory. Stop only `asymmetri.service`,
    then rename the complete candidate into `/var/www/asymmetri` and restart the

@@ -1,6 +1,6 @@
 # INV-REAL-01 — Website integration and release handoff
 
-Date: October 13, 2026 (America/Vancouver). **Source accepted and locally validated; public release pending.
+Date: October 13, 2026 (America/Vancouver). **Website publicly released and verified.
 Observed-data activation remains held by producer authentication.** This is the current
 handoff, superseding the next-milestone descriptions in the historical INV-04 record.
 
@@ -110,12 +110,42 @@ Read-only preflight: clean production main
 free swap. These are bounded observations, not load acceptance. Existing Node 22
 approval remains effective. The unsupported Ubuntu 22.10 exception is reviewed for
 this release; no OS upgrade or unrelated-site configuration change is included.
-Current rollback, build identity, protected-route checks and activation results will
-be recorded here after verification. Do not infer a live release from this document.
+The isolated candidate passed production checks and the Next.js build before the
+existing website service was switched at **2026-10-13 15:04:43 UTC**. Released source
+is `97b4087b79c5f0f1472fd71dde86765489273400`, build
+`kcKfT0zA-jDnr0xVy1Suy`; service PID 2369353. Production source is clean main.
+The complete preceding source/dependencies/assets/build remain at
+`/var/www/asymmetri-rollback-20261013-745a92c`, source
+`745a92c676bcbe85c3aa675a1099d26321f1c1e2`, build `Ic-zxi4WHpmgjiSDnsJCw`.
+The temporary candidate listener was stopped after activation.
+
+Production npm 10.9.8 rejected the existing lockfile with missing optional emnapi
+entries. The candidate installed the unchanged lockfile successfully using pinned,
+one-shot npm 11.6.0, matching local validation. No global npm/Node, lockfile or
+dependency version was changed. The existing tutorial lint warning remains.
+
+- All 28 checks across apex and www returned 200, including the four protected
+  Motion routes, investment, methodology, Ask, robots and sitemap.
+- Tutorial's exact www canonical, anchor IDs and original image URL sets match the
+  pre-release baseline; all 48 image requests across both hosts return image/200.
+  A local concurrent image probe hit a TLS timeout; the complete server-side HTTPS
+  check passed. This does not establish a new persistent availability fault.
+- All 15 discovered shared-vhost responses match their baseline, including the
+  existing draft 502 and two relay 410 responses. Nginx/config hashes are unchanged.
+- Website and Nginx are active; no service errors appeared in the release window.
+  Public browser widths 1440 and 390 have no overflow, broken images or console
+  warnings/errors. Temporary viewport overrides were reset.
+- Investment explicitly displays **Public archive not configured**. Methodology
+  displays the observed-paper method and owner-reported Yahoo confirmation. Ask
+  accepts no questions. No receiver/publisher key, grant, run or read configuration
+  was activated by this website release.
+
+Sanitized detailed baselines and screenshots are retained outside tracked source.
+This documentation follows the deployed source; documentation-only commits do not
+change the running build identity above.
 
 ## Remaining integration
 
-Accepted observed producer projection and genuine public summaries; receiver
-operational setup/strict HTTPS delivery; verified backup/retention and recovery;
+Receiver operational setup/strict HTTPS delivery; verified backup/retention and recovery;
 actual publication and as-of history; separately implemented Ask integration. No
 fixture or empty archive substitutes for these outcomes.

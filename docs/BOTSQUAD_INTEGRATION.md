@@ -29,7 +29,7 @@ The INV-04 website source requires a verified `X-Archive-Visibility` header and 
 - **INV-02:** Receiver implemented and locally tested in Asymmetri.
 - **INFRA-02:** Receiver installed on existing Ubuntu 22.10, privately validated, left inactive/static and config disabled.
 - **INV-03:** Artifacts, discussions, exact downloads, controls and isolated TLS stream tests; source and private installation complete.
-- **INV-04:** Full investment interface with 53-event *synthetic* fixture and disabled Ask preview; source/browser acceptance complete, **not deployed**.
+- **INV-04:** Full investment interface with 53-event *synthetic* fixture and disabled Ask preview; source/browser acceptance complete. The later INV-REAL-01 website release is live with unconfigured archive and disabled Ask states; no fixture was published.
 - **INV-05:** Next owner-selectable milestone. Implement deterministic paper simulator in **BotSquad**, with synthetic prices/clocks only.
 
 Cross-repository provenance: [BotSquad INV-04 handoff](https://github.com/eugenelin89/bot_messenger/blob/main/docs/validation/investment/INV-04.md) pins the [Asymmetri implementation](https://github.com/eugenelin89/asymmetri/commit/c31f500c6ebb063341bca7444dac6782df7a7b17), [journal](https://github.com/eugenelin89/asymmetri/commit/3d9e1ad55dc5ad1861393e63d05370a2a1a7b054) and [browser/fixture checks](INV-04-VALIDATION.md).
@@ -38,7 +38,7 @@ Cross-repository provenance: [BotSquad INV-04 handoff](https://github.com/eugene
 
 INFRA-01 Ubuntu migration was cancelled. The present Droplet runs unsupported Ubuntu 22.10 under [Decision 030](https://github.com/eugenelin89/bot_messenger/blob/main/docs/decisions/decision_030_defer_ubuntu_migration.md); a future OS upgrade is a separate owner project. RECOVERY-01 is not a required development milestone. Independently verified backup custody is currently unestablished after the later deletion of historical archives; any valuable *live* data and public activation need a separate backup/retention and security review. Do not silently claim that GitHub stores private databases/configuration.
 
-Live receiver ingress, publisher grants/keys, operational market source and rights under US$0 Decision 029, real HQ synchronization, visitor Ask, capacity/retention and public release are **not enabled** by INV-01–04. The installed receiver ends with zero operational publishers/events and no listener; the website is still on a separately pinned production release. Always verify the current source and service state before changes.
+Live receiver ingress, publisher grants/keys, operational market source, real HQ synchronization, visitor Ask and capacity/retention are **not enabled** by INV-01–04. The installed receiver has zero operational publishers/events and no listener. The October 13 website release at `97b4087` is public, with no configured archive reads or visitor intake. Owner-reported Yahoo permission and producer authentication status are recorded in the [current handoff](INV-REAL-01-WEBSITE.md). Always verify the current source and service state before changes.
 
 ## How future Codex work is routed
 
