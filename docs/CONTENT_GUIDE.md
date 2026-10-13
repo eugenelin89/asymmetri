@@ -367,7 +367,7 @@ coordinating a new app link alone does not retire the old destination safely.
 supersedes older Labs-parent/Work/singular-Sport assumptions. BotSquad is an
 experimental Asymmetri Labs project, not hosted SaaS. At that review, Investment/Ask were design-only and absent from public copy. INV-03
 now implements a disabled experimental archive in source; the public site is unchanged
-and Ask remains unimplemented. Current umbrella name
+and Ask remains closed to public intake. Current umbrella name
 references in Motion policy are updated to Asymmetri without changing handling,
 retention, scientific or privacy commitments or the October 6 policy date.
 
@@ -404,8 +404,10 @@ verified versions; historical decision references remain historical after correc
 Unknown monetary values say “Unavailable”. Derived benchmark drawdown requires a
 complete contiguous loaded series from valuation sequence 1 and usable benchmark
 marks; missing peaks suppress that comparison. Source freshness never follows from
-transport connectivity. Ask preview displays a trusted exact ContextRef but has no
-input, submission or conversation state.
+transport connectivity. Production Ask displays an exact ContextRef as a reference, not proof of current
+visibility, and has no input, submission or conversation state. `askExperience`
+owns the unavailable page and synthetic-only client copy. Keep provider/retention
+promises conditional until actual configuration is verified.
 
 INV-REAL-01 adds published run purpose/objective and frozen settings, explicit
 observed-paper labels, owner-reported Yahoo confirmation and prospective OPEN
@@ -414,3 +416,10 @@ separately. Show published source/valuation limitations; never turn nulls or a
 missing valuation sequence into a result. The signed publisher supplies public
 summaries; do not copy private transcripts or raw source bodies into the site.
 See [the current handoff](INV-REAL-01-WEBSITE.md) for acceptance and release status.
+
+## Dormant Ask visitor interface
+
+[Ask copy and privacy boundaries](ASK-03-WEBSITE-UI.md) keep public availability,
+future disclosures and local synthetic consent distinct. Exact record links are
+references until visibility is checked. Do not put private question/session
+identities in URLs or treat Motion privacy as an Ask policy.

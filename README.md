@@ -34,7 +34,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/investment` | Public investment showcase; truthful unconfigured state until verified observed records are connected |
-| `/botsquad/ask` | Disabled preview of future visitor-to-employee Q&A; no live question service |
+| `/botsquad/ask` | Unavailable public Q&A page; interactive client restricted to local synthetic tests |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
@@ -154,3 +154,9 @@ Private Ask receiver source and recovery commands are documented in
 remains disabled; this source milestone does not activate visitor intake or HQ.
 
 Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_RELEASE_2026-10-13.md) records exact sources, confinement, renewal and all-host preservation. Ask intake remains disabled and HQ remains account-401 held. The [synthetic interoperability launcher](docs/ASK-01-INTEROPERABILITY.md) provides a separate temporary HTTPS fixture for typed-client acceptance.
+
+## Dormant Ask visitor interface
+
+[Ask UI boundaries and local acceptance](docs/ASK-03-WEBSITE-UI.md) cover the
+public unavailable page and interactive synthetic client. Genuine intake remains
+disabled; no production configuration enables the local fixture.

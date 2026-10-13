@@ -208,3 +208,10 @@ The full `npm run receiver:test` includes these files. Runtime has a distinct
 automatically. No additional package dependency is required.
 
 For producer typed-client acceptance, use the explicit [synthetic HTTPS fixture](ASK-01-INTEROPERABILITY.md). It creates only temporary loopback state and a one-hour test key; its command is never an operational service or public preview.
+
+## Dormant Ask visitor interface
+
+[The local Ask guide](ASK-03-WEBSITE-UI.md#local-verification) records the
+explicit development-only flag, focused Node tests and disposable browser-adapter
+requirements. The flag alone supplies no receiver. It cannot enable the client
+in a production build. Stop Next development before either production build.

@@ -84,7 +84,7 @@ BotSquad-specific `.squad-*` CSS uses existing Graphite + Teal tokens. Its nativ
 index preserves `#how-it-works`, `#availability` and `#introduction-video`. `UtilityPage` is a server article.
 
 Client components remain limited to tutorial progression, legacy root fragments,
-menu dismissal and deliberate video loading. Video posters load no remote resource.
+menu dismissal and deliberate video loading, plus the development-only synthetic Ask client. Video posters load no remote resource.
 Clicking Load creates a fixed-ID privacy-enhanced iframe with no autoplay, SDK or
 persisted consent; origin referrer, native controls/fullscreen, visible Google
 notice, Close/focus restoration and external fallback remain. Google processing
@@ -449,3 +449,12 @@ No ingress code or private key enters the website bundle. The
 the completed [production/renewal receipt](INGRESS_RELEASE_2026-10-13.md). `lib/investment-read-transport.ts` adds only
 an explicit server-owned loopback Host override; default fetch/Sites behavior stays
 unchanged when that environment setting is absent.
+
+## Dormant Ask visitor interface
+
+[Ask UI boundaries](ASK-03-WEBSITE-UI.md) describe the server-only public page
+and development-only client. The hook owns consent, tab metadata, safe retries
+and privacy controls; `lib/ask-client.ts` validates unchanged canonical DTOs and
+relative browser-only API requests. The separate receiver still owns all private
+server state. There is no new dependency, provider connection or production
+activation setting.

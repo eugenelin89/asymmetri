@@ -1180,3 +1180,39 @@ export const investmentShowcase = {
     ['Limits of interpretation','The experiment is not personalized investment advice. Analysis can be wrong, modeled execution is simplified, prices may be delayed, and performance is not guaranteed. Only actual published observations establish forward-running history. Fixture tests do not establish genuine employee reasoning or elapsed market sessions. Ask BotSquad remains a separate, unavailable integration.'],
   ],
 } as const;
+
+/** Ask remains closed to public intake. Active UI validation uses local synthetic state only. */
+export const askExperience = {
+  title: 'Ask BotSquad',
+  introduction: 'A place to ask about the project, its research, or the evidence behind a recorded decision.',
+  unavailableTitle: 'Questions are not open yet.',
+  unavailable: 'Employee answers are not enabled. This page does not create a session, collect a question, or contact a model.',
+  next: 'The planned service will route a question to one relevant employee. When an answer is available, it will identify that employee, explain the selection and link the public evidence used.',
+  separation: 'Your conversation will be separate from the public investment discussion. Asking a question will not change a portfolio or assign company tasks.',
+  privacyTitle: 'Before questions open',
+  privacy: [
+    'The service will explain who operates it, which AI providers process questions, whether research shares a limited query, and how long each copy is retained before you send anything.',
+    'The intended experience uses a private browser session, not a public comment feed. Private does not mean end-to-end encrypted or inaccessible to the operator and configured providers.',
+    'Cancellation and deletion controls are being tested. We will describe their limits, including provider copies and recovery records, before accepting visitor questions.',
+  ],
+  context: 'Selected public record reference',
+  contextNotice: 'The exact record will be checked before a question is accepted. A reference in this link is not evidence that the record is currently public.',
+  historical: 'An explanation written later is separate from the original recorded reason. Always inspect the original evidence and its timestamp.',
+  synthetic: 'Synthetic interface test. Authored fixtures only; no actual employee, model call or investment activity.',
+  fixturePrivacy: [
+    'Use synthetic text only. This local test sends it to a disposable private receiver; no AI provider or research service is connected.',
+    'This tab stores its session details and any unconfirmed submission to let you retry the same request after refresh. Answers are fetched again and are not stored in browser storage.',
+    'The receiver uses a separate private store. Stop the preview to remove it. Cancel/delete responses prove receiver suppression, not physical deletion from an external provider or another system.',
+  ],
+  consent: 'I will use synthetic text only and understand how this local test stores it.',
+  questionLabel: 'Your question',
+  placeholder: 'Ask a general question or refer to the selected public record.',
+  send: 'Send question',
+  limit: 'Up to 2,000 characters. One pending question at a time; up to eight answered turns.',
+  retry: 'Retry the same submission',
+  unknown: 'Submission could not be confirmed. Retrying uses the same question and request identity; it does not create a new question.',
+  noAnswer: 'No verified answer is available for this turn.',
+  error: 'The service could not be reached or its response could not be verified. Previously displayed answers are hidden until the next verified read.',
+  unavailableChat: 'This conversation is unavailable or has expired. Its IDs cannot restore access. You can start a new session.',
+  deleteNotice: 'Delete this conversation from the receiver and request suppression of late replies. This does not verify deletion of copies held by another system.',
+} as const;

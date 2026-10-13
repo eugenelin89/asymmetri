@@ -1152,3 +1152,11 @@ Run `systemd-analyze verify` on installed-path candidates and verify actual
 confinement, certificate reload/renewal and disabled-intake state before exposure.
 The all-vhost rehearsal verified 64 checks in each baseline/shared/rollback phase;
 it did not itself change production listener files.
+
+## Dormant Ask visitor interface
+
+The [Ask UI packet](ASK-03-WEBSITE-UI.md) leaves production intake closed.
+Do not deploy `ASYMMETRI_ASK_UI_MODE=synthetic_fixture` or any fixture adapter, key
+or data tree. Even that flag cannot mount the client when NODE_ENV is production.
+Website deployment alone grants no Ask authority. Retain the shared ingress,
+receiver identities and protected Motion compatibility checks for every release.

@@ -417,3 +417,12 @@ Certbot dry-run with deploy-hook read-back. Test under a restrictive root umask;
 certificate group-read permission must not depend on the invoking shell. The
 shared-host rehearsal covers baseline/new-routing/rollback and separate IPv4/IPv6
 virtual-host sets. Final release checks still include direct tutorial image URLs.
+
+## Dormant Ask visitor interface
+
+Run `node --test tests/ask-ui.test.mjs` on the local Node version. The
+[nine-case suite and browser receipt](ASK-03-WEBSITE-UI.md#local-verification)
+cover response identity, bounded pagination, same-request retries, owned privacy
+controls and no answer cache. Verify both the default unavailable page and the
+explicit synthetic client. Synthetic browser transport does not prove genuine
+execution, operational Secure cookies or provider deletion.
