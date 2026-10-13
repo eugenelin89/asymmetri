@@ -887,6 +887,9 @@ export const sportsNavigation: NavItem[] = [
   { label: "Contact", href: "/sports#contact" },
 ];
 
+const atlasPortrait: SiteImage = { src: "/images/botsquad/atlas.webp", width: 384, height: 384, alt: "Illustrated portrait of Atlas, a BotSquad AI worker." };
+const mayaPortrait: SiteImage = { src: "/images/botsquad/maya.webp", width: 384, height: 384, alt: "Illustrated portrait of Maya, a BotSquad AI worker." };
+
 export const botsquad = {
   name: divisions.labs.product.name,
   path: divisions.labs.product.path,
@@ -947,9 +950,9 @@ export const botsquad = {
     headline: "Meet BotSquad",
     owner: "You",
     ownerRole: "Set the goal and boundaries",
-    lead: { name: "Atlas", portrait: { src: "/images/botsquad/atlas.webp", width: 384, height: 384, alt: "Illustrated portrait of Atlas, a BotSquad AI worker." }, role: "CEO", body: "Coordinates goals and decisions." },
+    lead: { name: "Atlas", portrait: atlasPortrait, role: "CEO", body: "Coordinates goals and decisions." },
     branches: [
-      { name: "Maya", portrait: { src: "/images/botsquad/maya.webp", width: 384, height: 384, alt: "Illustrated portrait of Maya, a BotSquad AI worker." }, role: "Product Manager", body: "Turns ideas into questions and specifications.", reports: [] },
+      { name: "Maya", portrait: mayaPortrait, role: "Product Manager", body: "Turns ideas into questions and specifications.", reports: [] },
       { name: "Turing", portrait: { src: "/images/botsquad/turing.webp", width: 384, height: 384, alt: "Illustrated portrait of Turing, a BotSquad AI worker." }, role: "CTO", body: "Works through technical direction.", reports: [
         { name: "Linus", portrait: { src: "/images/botsquad/linus.webp", width: 384, height: 384, alt: "Illustrated portrait of Linus, a BotSquad AI worker." }, role: "Engineer", body: "Builds within an assigned scope." },
         { name: "Ada", portrait: { src: "/images/botsquad/ada.webp", width: 384, height: 384, alt: "Illustrated portrait of Ada, a BotSquad AI worker." }, role: "Engineer", body: "Builds a separate part in parallel." },
@@ -1181,6 +1184,12 @@ export const investmentArchive = {
   empty: "No verified investment experiment is available in this view. No activity or portfolio result is inferred. Visitor questions remain unavailable.",
   synthetic: "Synthetic demonstration — not live trading or real worker activity",
   notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized investment advice. Prices and updates may be delayed.",
+};
+
+// Published public worker identities; no name-based or remote image lookup.
+export const investmentWorkerPortraits: Readonly<Record<string, SiteImage>> = {
+  '3b81014148920905b6ce846a8be85edd27699686b8158f2c': atlasPortrait,
+  'b4ddaf4429ff30919a6e8bd2d4fcd049b10a573654749f96': mayaPortrait,
 };
 
 export const investmentShowcase = {

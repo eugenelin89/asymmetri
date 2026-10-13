@@ -451,3 +451,11 @@ Research opens Investment. Shared breadcrumbs, area links and the global Labs me
 allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified
 worker activity or financial results; existing archive truth states still apply.
+
+### Investment employee portraits
+
+`investmentWorkerPortraits` in `content/site.ts` binds exact public roster worker
+IDs to approved local `SiteImage` values. Atlas and Maya reuse the overview's
+portrait objects. Add future mappings only for verified public worker identities
+and approved assets, updating the asset manifest. Unknown IDs retain initials;
+never derive an image URL from a worker name or trust a publisher-supplied URL.

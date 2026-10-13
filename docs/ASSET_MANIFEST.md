@@ -536,3 +536,19 @@ The Research hub reuses `public/images/labs-social.png` (1200×630) for social
 metadata. Its existing original typography, source SVG, processing and rights
 assessment remain unchanged. No asset bytes or public URLs changed, and no new
 visible image or alt text was introduced. Navigation and project cards use HTML/CSS.
+
+## Investment team portrait reuse, October 13, 2026
+
+The owner requested employee images on the Investment team's Atlas and Maya cards.
+The existing approved `/images/botsquad/atlas.webp` and `maya.webp` illustrations
+are reused without changing their bytes: 384×384 WebP, 15,844 and 20,636 bytes,
+respectively. Their October 7 generation provenance and rights/privacy assessment
+above remain applicable. No new generation, crop, processing or source upload.
+
+Investment cards display a 96×96 CSS-pixel square through Next.js Image, reserving
+intrinsic dimensions and retaining the existing illustrated-worker alt text. The
+central `investmentWorkerPortraits` registry maps exact already-published worker
+IDs to these local assets; names, roles and activity still come from the verified
+roster. Unmapped identities retain initials. No remote image URL is accepted and
+no fictional fixture identity receives an actual worker portrait by name matching.
+The same portraits remain in the BotSquad overview's team diagram.
