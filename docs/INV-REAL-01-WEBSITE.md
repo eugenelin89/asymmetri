@@ -1,7 +1,8 @@
 # INV-REAL-01 — Website integration and release handoff
 
 Date: October 13, 2026 (America/Vancouver). **Website publicly released and verified.
-Observed-data activation remains incomplete.** HQ reports repaired private
+Receiver authorization and run approval are ready; signed ingestion and website
+read enablement remain pending.** HQ reports repaired private
 authentication; the [current readiness update](ASK-04-READINESS.md#repaired-private-authentication)
 separates that repair from remaining authority, eligibility and genuine acceptance.
 This investment
@@ -26,6 +27,73 @@ independent written verification is claimed. No additional Yahoo licensing
 investigation or provider-rights approval milestone is required. Preserve normal
 technical provenance, integrity, rate limits, access-denial handling and point-in-time
 accounting. No real trades, paid data or credit purchase/reload is included.
+
+## Production activation — receiver ready for signed HQ delivery
+
+**2026-10-13 20:32:33 UTC:** the real finite publisher scope and exact observed
+run configuration are installed and read back successfully. HQ delivery remains
+held pending its own consent step. No experiment/run/event/batch has yet been
+ingested; no official pointer or website read setting has been enabled. Ask stays
+closed. This status supersedes the empty-authority preparation baseline below.
+
+The supplied authorization and canonical run-event files matched SHA-256
+`551985183859be12e6d977b720e43af37f7d1f145f4f433d46c30a342e22a29d`
+and `f05e12e098a6462ace575f121637d4bf473250a9c56ee684459606379469c2a9`.
+Both pass pinned contract validation. Scope/event/configuration identity and policy
+bindings, Ed25519 public-only key type, finite expiry, and canonical configuration
+hash were checked. No private signing key was transferred or stored here.
+
+| Installed control | Verified value |
+| --- | --- |
+| Public experiment | `16496aa38732845beeea0a75f4614b93136be792accbb4e0` |
+| Public run | `0f6ea49caee91243f2f028a8ddde55abaa68faaaa2de453c` |
+| Exact configuration hash | `4658b4d6b435595e6ab15151713eb6a284d7ea29217d6786120868963da52fe3` |
+| Scope generation | `1`, matching HQ's supplied durable channel generation |
+| Key fingerprint | Public SPKI DER SHA-256 `9043fffc8146d90d69bd4f60dd26f1782e31024fbd1bb9ce23f1396896f7556b` |
+| Key / scope expiration | `2026-10-15T23:40:00.000Z` |
+| Delivery bound | 12 writes/minute; 16,777,216 bytes/day; exact 11 event types; JSON content capability required by v1, with no HQ content jobs or artifact event authority |
+| Approval recorded | `2026-10-13T20:32:32.560Z` |
+| Authority counts | One publisher, one unrevoked key, one publication approval |
+| Publication counts | Zero experiments, runs, events, batches, nonces and content objects |
+
+The frozen public run is `official` / `configured`, with USD 100,000 cash capital,
+an annual public horizon ending `2027-01-01T01:00:00.000Z` and 251 configured
+sessions. This is distinct from HQ's current finite October 14–15 operating
+authority. Its initial execution budget is 16; future renewals cannot reset the
+portfolio or silently rewrite this frozen configuration. No elapsed session,
+decision, market observation, employee execution or investment result is claimed.
+HQ reports its first real collection is scheduled October 14 at 11:45 UTC.
+
+### Backup and unchanged-service evidence
+
+Before authorization, the unchanged investment receiver alone was gracefully
+stopped. The matching installed CLI created a consistent SQLite/CAS backup at
+`/var/lib/asymmetri-investment-backups-20261013/before`, canonical manifest digest
+`1fc9d3227a111f147379dbe5a7a655660cde0249c1d2f991db6554c68ca397bc`.
+The backup's hashes, full SQLite integrity, foreign keys and content references
+were verified by an actual isolated restore into the sibling `restore-check`
+directory. That copy is fenced with reads held and no publisher authority.
+The live empty archive's counts and metadata remained identical across backup.
+
+Investment restarted at `20:31:53 UTC`, PID `2385469`, still source
+`c2edfd50ed12ba576c06e6991091090b9ced3e31` and the same configuration hash.
+Website PID `2379577`, Ask PID `2384365`, ingress PID `2375255` and Nginx PID `826`
+were unchanged. Ask's configuration hash also remained unchanged. No source,
+package, website build or unrelated service was deployed or rebuilt.
+
+Protected host configuration/unit/source receipts, backup/restore results and
+authority readback are in the root-owned private directory
+`/var/lib/asymmetri-investment-activation-20261013`. This establishes a verified
+host-local pre-activation backup, not a recurring backup schedule or independent
+off-server recovery custody. No old archive is to be copied over subsequently
+accepted financial history.
+
+Actual owner CLI commands completed in order: `diagnostics`, `authorize` with the
+verified authorization file, and `approve-run` with the canonical event. SQLite
+integrity and foreign keys passed afterward. No tool approval blocked activation.
+Next: HQ signed publication and immutable receipt reconciliation, verified null
+official predecessor, `select-official`, then server-only website read enablement
+and public/protected-route verification. Do not enable Ask during these steps.
 
 ## Executable receiver activation handoff
 
