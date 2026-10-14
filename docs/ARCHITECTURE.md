@@ -4,7 +4,7 @@
 
 Asymmetri / Asymmetri.co is the umbrella; Asymmetri Sports and Asymmetri Labs are
 peer divisions. Motion belongs to Sports; experimental open-source BotSquad belongs
-to Labs. BotSquad contains BotSquad Research, which contains BotSquad Investment;
+to Labs. BotSquad contains BotSquad Research, which contains BotSquad Trade;
 Ask BotSquad is a shared sibling of Research. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
 separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
@@ -22,8 +22,8 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/motion` | Current pitching workflow and family roadmap |
 | `/botsquad` | Umbrella project overview, software story and area directory |
-| `/botsquad/research` | Research hub linking to BotSquad Investment |
-| `/botsquad/investment` | Investment research project and retained evidence routes |
+| `/botsquad/research` | Research hub linking to BotSquad Trade |
+| `/botsquad/investment` | Trade research project and retained evidence routes |
 | `/botsquad/ask` | Shared BotSquad question service, currently closed |
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
@@ -61,7 +61,7 @@ No old `work` content export.
 
 `botsquadStructure` owns the stable area names and URLs. `botsquadResearch` owns
 the research hub; `botsquadDirectory` owns the overview area cards. The server-only
-`BotSquadNavigation` renders ancestor breadcrumbs and Overview/Research/Investment/Ask
+`BotSquadNavigation` renders ancestor breadcrumbs and Overview/Research/Trade/Ask
 links on the overview, hub, investment, archive and Ask pages. Ask is a sibling
 of Research, not an investment-only child. Existing investment and Ask URLs remain
 stable; page hierarchy does not change the canonical evidence/API protocol.

@@ -1,14 +1,14 @@
 # BotSquad public hierarchy — October 13, 2026
 
 The owner organizes Asymmetri Labs around projects. BotSquad is one such project,
-with Research as an area beneath it. Investment is a project within Research.
+with Research as an area beneath it. Trade is a project within Research.
 The owner accepted placing Ask directly under BotSquad beside Research.
 
 ```text
 Asymmetri Labs /labs
 └── BotSquad /botsquad
     ├── BotSquad Research /botsquad/research
-    │   └── BotSquad Investment /botsquad/investment
+    │   └── BotSquad Trade /botsquad/investment
     └── Ask BotSquad /botsquad/ask
 ```
 
@@ -19,17 +19,17 @@ and Labs remain peer divisions and Motion remains under Sports.
 ## Navigation and routes
 
 Labs primarily links to the BotSquad overview. Its early area directory introduces
-Research and Ask, with a direct Investment link nested in the Research card.
-The new Research hub introduces the current Investment project. A shared server
-component provides ancestor breadcrumbs and direct Overview/Research/Investment/Ask
+Research and Ask, with a direct Trade link nested in the Research card.
+The new Research hub introduces the current Trade project. A shared server
+component provides ancestor breadcrumbs and direct Overview/Research/Trade/Ask
 links on all related pages. The global Labs menu exposes those destinations too.
 
-Existing Investment, methodology, run, record, artifact, read and Ask URLs are
+Existing Trade project, methodology, run, record, artifact, read and Ask URLs are
 stable. Their logical parentage is represented in the pages and navigation without
 a URL migration that could break published references or signed API paths.
 Contextual Ask links still preserve exact records; Ask also accepts general context
 when the separately gated service becomes available. Research is indexable and
-included in the sitemap; Investment/Ask keep their existing noindex policy.
+included in the sitemap; Trade/Ask keep their existing noindex policy.
 
 ## Product and release boundaries
 
@@ -61,3 +61,11 @@ All 11 local route probes, 35 referenced image sources and ten sitemap destinati
 passed, including the protected Motion routes and exact tutorial www canonical.
 New copy and diffs were reviewed for privacy and unsupported claims; no personal
 records, private identifiers, invented project areas or additional assets were added.
+
+## October 14 public naming update
+
+The owner renamed the public project to **BotSquad Trade** and its desk heading to
+**Live Trading Desk**. Navigation, page metadata and website-authored descriptions
+use Trade (or trading where grammatical). The hierarchy is unchanged. Existing
+`/botsquad/investment` URLs, technical identifiers, contracts and exact published
+records remain stable; this is a presentation change, not a data migration.

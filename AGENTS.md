@@ -21,7 +21,7 @@ to Asymmetri Motion, and Asymmetri Labs, home to experimental open-source projec
 such as BotSquad. Labs is not the parent of Sports. The former Work division and
 singular Sport branding are superseded. Preserve direct access to both products.
 This is a public brand hierarchy, not a newly asserted legal corporation name.
-Within BotSquad, BotSquad Research contains BotSquad Investment. Ask BotSquad is
+Within BotSquad, BotSquad Research contains BotSquad Trade. Ask BotSquad is
 a shared sibling of Research. Follow `docs/BOTSQUAD_HIERARCHY_2026-10-13.md`; keep
 existing investment/evidence URLs and exact-run context stable.
 

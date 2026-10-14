@@ -10,7 +10,7 @@ Asymmetri.co
 └── Asymmetri Labs
     └── BotSquad
         ├── BotSquad Research
-        │   └── BotSquad Investment
+        │   └── BotSquad Trade
         └── Ask BotSquad
 ```
 
@@ -36,7 +36,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
-| `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Investment |
+| `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
 | `/botsquad/investment` | Live configured paper portfolio, actual roster and initial journal; market results remain unavailable |
 | `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
@@ -48,7 +48,7 @@ The root homepage introduces Asymmetri and routes visitors directly to Sports an
 Labs without repeating division or product content. Contact opens the shared mailbox;
 legacy contact URLs still reach the footer email.
 
-The ten main canonical pages are indexable. Investment and Ask retain their existing noindex policy. Tutorial retains exactly
+The ten main canonical pages are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).

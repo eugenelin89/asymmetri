@@ -448,14 +448,14 @@ facts and genuine integration are reviewed for the advertised service/version.
 
 ## BotSquad areas and research hierarchy
 
-Use Asymmetri Labs → BotSquad → BotSquad Research → BotSquad Investment.
+Use Asymmetri Labs → BotSquad → BotSquad Research → BotSquad Trade.
 Ask BotSquad belongs directly to BotSquad alongside Research and supports general
 or contextual questions. `botsquadStructure` centralizes area labels and URLs;
 `botsquadResearch` and `botsquadDirectory` own hub and overview copy. Add future
 areas only when the owner defines them; do not invent placeholder projects.
 
 The Labs card primarily opens BotSquad. Its area directory opens Research and Ask;
-Research opens Investment. Shared breadcrumbs, area links and the global Labs menu
+Research opens Trade. Shared breadcrumbs, area links and the global Labs menu
 allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified
 worker activity or financial results; existing archive truth states still apply.
@@ -477,3 +477,12 @@ Do not infer a completed trade from an amendment, present the missed OPEN as
 executed, or reconstruct missing historical employee usage/cost. Decisions keep
 their own rationale/review; valuations keep limitations and benchmark allocation
 proof. See the [October 14 packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md).
+
+## BotSquad Trade naming
+
+Use **BotSquad Trade** for the project and **Live Trading Desk** for its desk
+heading. `botsquadStructure` supplies the global and local navigation labels;
+`investmentShowcase.deskTitle` supplies the exact desk heading. Use trade/trading
+in website-authored descriptions and accessible labels. Preserve existing
+`/botsquad/investment` URLs and technical identifiers. Do not rewrite immutable
+publisher-authored records, titles or evidence to match a marketing rename.

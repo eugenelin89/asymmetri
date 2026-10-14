@@ -36,7 +36,7 @@ export const divisions = {
 export const botsquadStructure = {
   overview: { label: 'BotSquad', navLabel: 'Overview', href: '/botsquad' },
   research: { label: 'BotSquad Research', navLabel: 'Research', href: '/botsquad/research' },
-  investment: { label: 'BotSquad Investment', navLabel: 'Investment', href: '/botsquad/investment' },
+  investment: { label: 'BotSquad Trade', navLabel: 'Trade', href: '/botsquad/investment' },
   ask: { label: 'Ask BotSquad', navLabel: 'Ask BotSquad', href: '/botsquad/ask' },
 } as const;
 
@@ -1068,7 +1068,7 @@ export const botsquadResearch = {
   ...botsquadStructure.research,
   metadata: {
     title: 'BotSquad Research | Asymmetri Labs',
-    description: 'Research projects within BotSquad. Explore how persistent AI teams investigate questions, discuss evidence and make decisions, starting with BotSquad Investment.',
+    description: 'Research projects within BotSquad. Explore how persistent AI teams investigate questions, discuss evidence and make decisions, starting with BotSquad Trade.',
   },
   headline: 'Research with the work in view.',
   introduction: 'BotSquad Research brings together projects that study how persistent AI teams investigate questions, discuss evidence and make decisions.',
@@ -1076,8 +1076,8 @@ export const botsquadResearch = {
   projectsHeading: 'Research projects',
   project: {
     ...botsquadStructure.investment,
-    description: 'Follow an AI team’s research, discussions and investment decisions. Inspect the records behind its work and how the portfolio develops.',
-    action: 'Explore BotSquad Investment',
+    description: 'Follow an AI team’s research, discussions and trade decisions. Inspect the records behind its work and how the portfolio develops.',
+    action: 'Explore BotSquad Trade',
   },
   closing: 'Each research project keeps its questions, methods and published evidence together.',
 } as const;
@@ -1085,7 +1085,7 @@ export const botsquadResearch = {
 export const botsquadDirectory = {
   headline: 'Explore BotSquad.',
   introduction: 'Research is one area of the BotSquad project. Ask is the place for questions about the project and its work.',
-  research: 'Projects that examine how AI teams work, starting with BotSquad Investment.',
+  research: 'Projects that examine how AI teams work, starting with BotSquad Trade.',
   ask: 'A place for general questions and questions about published research or decisions. Questions are not open yet.',
 } as const;
 
@@ -1179,11 +1179,11 @@ export const introductions = {
 export type Introduction = (typeof introductions)[keyof typeof introductions];
 
 export const investmentArchive = {
-  title: "Investment evidence archive",
+  title: "Trade evidence archive",
   description: "Reports, discussions and the exact evidence behind a BotSquad paper-trading experiment.",
-  empty: "No verified investment experiment is available in this view. No activity or portfolio result is inferred. Visitor questions remain unavailable.",
+  empty: "No verified trade experiment is available in this view. No activity or portfolio result is inferred. Visitor questions remain unavailable.",
   synthetic: "Synthetic demonstration — not live trading or real worker activity",
-  notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized investment advice. Prices and updates may be delayed.",
+  notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized trading advice. Prices and updates may be delayed.",
 };
 
 // Published public worker identities; no name-based or remote image lookup.
@@ -1193,8 +1193,9 @@ export const investmentWorkerPortraits: Readonly<Record<string, SiteImage>> = {
 };
 
 export const investmentShowcase = {
+  deskTitle: 'Live Trading Desk',
   headline: 'Watch an AI team work.',
-  introduction: 'BotSquad is a system of persistent AI employees collaborating on ongoing projects. This investment experiment makes their research, disagreement, decisions and reviews inspectable.',
+  introduction: 'BotSquad is a system of persistent AI employees collaborating on ongoing projects. This trade experiment makes their research, disagreement, decisions and reviews inspectable.',
   purpose: 'The team is the experiment. The portfolio is one way to measure what happens.',
   purposeDescription: 'Follow the team’s research, discussions and decisions. Inspect the evidence behind each conclusion.',
   availability: 'Published records below establish the run, evidence mode and latest known state. Missing records do not establish worker activity or financial results. Visitor answers remain unavailable.',
@@ -1209,11 +1210,11 @@ export const investmentShowcase = {
     marketUnavailable: 'Market freshness is unavailable in the public archive.',
   },
   ask: 'Eventually, one relevant BotSquad employee will answer questions about the project, research or a particular decision. Actual employee responses are not yet enabled. This preview accepts no questions.',
-  discovery: {title:'Investment showcase',body:'Inspect published research, decisions and paper-portfolio history. Each run identifies its methodology and evidence mode; synthetic demonstrations remain clearly labelled.',href:'/botsquad/investment'},
+  discovery: {title:'Trade showcase',body:'Inspect published research, decisions and paper-portfolio history. Each run identifies its methodology and evidence mode; synthetic demonstrations remain clearly labelled.',href:'/botsquad/investment'},
   methodologyIntroduction: 'Read these rules alongside the selected run’s original configuration, published amendments and limitations. Describing a method does not establish that a run is active or that market observations have been published.',
   observed: 'Observed market data · modeled paper results · no real trades',
   methodologyLimits: 'The selected run’s original configuration and any published, session-specific amendment govern its method. Capital, universe, fees, slippage and limits remain in the frozen configuration. Missing or blocked observations stay explicit. Published results do not prove reasoning quality or predict future performance.',
-  navigation: [['team','The team'],['desk','Investment desk'],['portfolio','Portfolio'],['decisions','Decisions'],['research','Research'],['journal','Journal'],['method','Method'],['ask','Ask preview']],
+  navigation: [['team','The team'],['desk','Trading desk'],['portfolio','Portfolio'],['decisions','Decisions'],['research','Research'],['journal','Journal'],['method','Method'],['ask','Ask preview']],
   process: [
     ['Research','Workers gather permitted evidence and publish a report with its limitations.'],
     ['Challenge','Discussion makes alternatives, objections and unresolved questions visible.'],
@@ -1234,7 +1235,7 @@ export const investmentShowcase = {
     ['Public summaries & evidence','This website receives approved public experiment descriptions and employee research, decision and review summaries through the signed archive contract. It does not expose raw private transcripts, raw source responses, prompts, credentials or operational controls. A signature establishes publication authority, not analytical correctness. Publication can lag; a heartbeat does not make market data fresh.'],
     ['Corrections & human interventions','Exact versions preserve the original evidence used by a decision. Corrections are visible additions. Exceptional privacy, security or rights withdrawals remove future access and may leave evidence gaps. Owner interventions are recorded; already downloaded copies cannot be recalled.'],
     ['Fixtures, trials & official runs','Synthetic fixtures, private trials and official runs have distinct identities. An archived run stays addressable. A losing run must never silently be replaced by a more favorable one. The current local demo proves interface behavior, not real worker or market performance.'],
-    ['Limits of interpretation','The experiment is not personalized investment advice. Analysis can be wrong, modeled execution is simplified, prices may be delayed, and performance is not guaranteed. Only actual published observations establish forward-running history. Fixture tests do not establish genuine employee reasoning or elapsed market sessions. Ask BotSquad remains a separate, unavailable integration.'],
+    ['Limits of interpretation','The experiment is not personalized trading advice. Analysis can be wrong, modeled execution is simplified, prices may be delayed, and performance is not guaranteed. Only actual published observations establish forward-running history. Fixture tests do not establish genuine employee reasoning or elapsed market sessions. Ask BotSquad remains a separate, unavailable integration.'],
   ],
 } as const;
 
@@ -1255,7 +1256,7 @@ export const askExperience = {
   unavailableTitle: 'Questions are not open yet.',
   unavailable: 'Employee answers are not enabled. This page does not create a session, collect a question, or contact a model.',
   next: 'The planned service will route a question to one relevant employee. When an answer is available, it will identify that employee, explain the selection and link the public evidence used.',
-  separation: 'Your conversation will be separate from the public investment discussion. Asking a question will not change a portfolio or assign company tasks.',
+  separation: 'Your conversation will be separate from the public trade discussion. Asking a question will not change a portfolio or assign company tasks.',
   privacyTitle: 'Before questions open',
   privacy: [
     'Asymmetri is preparing a service that would send your question, relevant conversation history and selected public evidence to OpenAI to produce an answer. The proposed first version has no external research service.',
@@ -1267,7 +1268,7 @@ export const askExperience = {
   context: 'Selected public record reference',
   contextNotice: 'The exact record will be checked before a question is accepted. A reference in this link is not evidence that the record is currently public.',
   historical: 'An explanation written later is separate from the original recorded reason. Always inspect the original evidence and its timestamp.',
-  synthetic: 'Synthetic interface test. Authored fixtures only; no actual employee, model call or investment activity.',
+  synthetic: 'Synthetic interface test. Authored fixtures only; no actual employee, model call or trade activity.',
   fixturePrivacy: [
     'Use synthetic text only. This local test sends it to a disposable private receiver; no AI provider or research service is connected.',
     'This tab stores session and request identifiers, never question text or answers. An unconfirmed question can be retried while this tab retains its text in memory. After a reload, an unknown submission stays held until conversation deletion is confirmed.',
@@ -1310,7 +1311,7 @@ export const candidateAskApiPrivacyNotice = {
   serviceId:'asymmetri-ask',privacyNoticeVersion:'ask-api-privacy-v1',
   paragraphs:[
     'This is a proposed notice for a service that is not accepting questions. Asymmetri would operate Ask BotSquad and its private processing service. Authorized host operators can access stored conversation data; it is not end-to-end encrypted.',
-    'To answer, the proposed service would send your question, up to eight relevant answered turns and selected public evidence to OpenAI. The first version would make one stateless request, without external research, browsing or other tool destinations. It would not publish your conversation to the investment archive.',
+    'To answer, the proposed service would send your question, up to eight relevant answered turns and selected public evidence to OpenAI. The first version would make one stateless request, without external research, browsing or other tool destinations. It would not publish your conversation to the trade archive.',
     'The proposed OpenAI Responses request would use store:false. OpenAI does not train its models on API content by default. Abuse-monitoring logs can retain content for up to 30 days, with legal and safety exceptions. Special account retention controls have not been verified; store:false alone does not mean zero retention.',
     'The proposed local limits are a one-hour session, a ten-minute queue window and at most 24 hours for raw conversation content. Expiry, cancellation or deletion can suppress replies and remove local content earlier. These limits are not installed or approved for public intake yet.',
     'This tab keeps session and request identifiers, not question or answer text. Drafts and unconfirmed submissions remain in memory while the tab is open. Reloading can lose that text; identifiers alone cannot restore access without the session cookie.',
