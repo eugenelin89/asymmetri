@@ -1248,11 +1248,12 @@ export const askExperience = {
   separation: 'Your conversation will be separate from the public investment discussion. Asking a question will not change a portfolio or assign company tasks.',
   privacyTitle: 'Before questions open',
   privacy: [
-    'The service will explain who operates it, which AI providers process questions, whether research shares a limited query, and how long each copy is retained before you send anything.',
+    'Asymmetri is preparing a service that would send your question, relevant conversation history and selected public evidence to OpenAI to produce an answer. The proposed first version has no external research service.',
     'The intended experience uses a private browser session, not a public comment feed. Private does not mean end-to-end encrypted or inaccessible to the operator and configured providers.',
-    'Cancellation and deletion controls are being tested. We will describe their limits, including provider copies and recovery records, before accepting visitor questions.',
-    'A planned subscription mode would use monitored token thresholds, with no verified dollar cap and no available measure of the operator’s actual model cost. Usage could exceed those thresholds, including through provider retries. Missing usage data or a threshold breach would pause new questions.',
+    'OpenAI does not use API content for model training by default. Its abuse-monitoring logs can retain content for up to 30 days, with legal and safety exceptions. We have not verified special retention controls for this service.',
+    'Before questions open, we will publish the actual local retention periods and consent notice. Cancellation or deletion here cannot guarantee erasure from provider logs, backups or physical storage.',
   ],
+  privacyLink: {label:'OpenAI API data controls',href:'https://developers.openai.com/api/docs/guides/your-data'},
   context: 'Selected public record reference',
   contextNotice: 'The exact record will be checked before a question is accepted. A reference in this link is not evidence that the record is currently public.',
   historical: 'An explanation written later is separate from the original recorded reason. Always inspect the original evidence and its timestamp.',
@@ -1293,6 +1294,23 @@ export const askExperience = {
   unavailableChat: 'This conversation is unavailable or has expired. Its IDs cannot restore access, and deletion has not been confirmed. You can explicitly forget the unavailable tab state.',
   deleteNotice: 'Delete this conversation from the receiver and request suppression of late replies. This does not verify deletion of copies held by another system.',
 } as const;
+
+/** Candidate only: proposed limits and HQ custody still require operational verification. */
+export const candidateAskApiPrivacyNotice = {
+  serviceId:'asymmetri-ask',privacyNoticeVersion:'ask-api-privacy-v1',
+  paragraphs:[
+    'This is a proposed notice for a service that is not accepting questions. Asymmetri would operate Ask BotSquad and its private processing service. Authorized host operators can access stored conversation data; it is not end-to-end encrypted.',
+    'To answer, the proposed service would send your question, up to eight relevant answered turns and selected public evidence to OpenAI. The first version would make one stateless request, without external research, browsing or other tool destinations. It would not publish your conversation to the investment archive.',
+    'The proposed OpenAI Responses request would use store:false. OpenAI does not train its models on API content by default. Abuse-monitoring logs can retain content for up to 30 days, with legal and safety exceptions. Special account retention controls have not been verified; store:false alone does not mean zero retention.',
+    'The proposed local limits are a one-hour session, a ten-minute queue window and at most 24 hours for raw conversation content. Expiry, cancellation or deletion can suppress replies and remove local content earlier. These limits are not installed or approved for public intake yet.',
+    'This tab keeps session and request identifiers, not question or answer text. Drafts and unconfirmed submissions remain in memory while the tab is open. Reloading can lose that text; identifiers alone cannot restore access without the session cookie.',
+    'Cancellation prevents a late answer from appearing here but may not stop a request already sent to OpenAI. Conversation deletion requests local suppression; confirmation from the receiver does not prove deletion by the processing service, OpenAI or another copy holder.',
+    'The proposed suppression-record period is 30 days. Non-content attempt and usage records, response identifiers, hashes and consumed authorization remain for audit and recovery; raw-content deletion does not reset them or promise their erasure.',
+    'The receiver stores content and control records together in its private database. Its supported recovery copies exclude conversation bodies and session credentials. Separate processing-service storage and ordinary-backup exclusions are proposed and must be verified before launch. Provider disk snapshots and physical-media disposal have not been verified, so local deletion is not a promise of erasure from every copy.',
+    'Website access logs can retain IP addresses and request paths. The current host rotates those logs daily and retains 14 rotations; other host log retention is not explicitly bounded. Application logs exclude question and answer bodies. Do not submit confidential or sensitive personal information.',
+  ],
+  consent:'I understand who receives my question, the retention and deletion limits, and that I should not submit sensitive personal information.',
+} satisfies import('@/lib/ask-client').AskPrivacyNotice;
 
 /** Populate only with verified operator/provider/research/retention/deletion facts. No activation flag. */
 export const approvedAskPrivacyNotices: readonly import('@/lib/ask-client').AskPrivacyNotice[] = [];

@@ -7,7 +7,7 @@ import { rawHeaders } from '../auth.js';
 import { ContractError, problem, requireContract as need, validate } from '../schema.js';
 import type { SignedMessage } from '../signatures.js';
 import type { AskAvailability } from '../../vendor/investment/v1/types.js';
-import type { AskConfig } from './config.js';
+import { askAdmissionConfigured, type AskConfig } from './config.js';
 import { AskStore } from './database.js';
 import { AskLifecycle } from './lifecycle.js';
 import { AskVisitors } from './visitors.js';
@@ -100,7 +100,7 @@ export async function createAsk(config: AskConfig, options: { now?: () => number
       switch (operation.operationId) {
         case 'askAvailability': {
           const state: AskAvailability['state'] = store.meta().held || !config.admissionEnabled ? 'disabled' :
-            !config.claimsEnabled || !config.deliveryEnabled || !authority.ready() ? 'paused' :
+            !askAdmissionConfigured(config) || !authority.ready() ? 'paused' :
             store.get<{n:number}>("SELECT count(*) n FROM questions WHERE state NOT IN ('answered','declined','expired','cancelled','failed')")!.n >= config.limits.queueCapacity ? 'busy' : 'available';
           send(res, 200, validate('AskAvailability', { schemaVersion: '1.0', serviceId: config.serviceId, state,
             retryAfterSeconds: state === 'available' ? null : 60, privacyNoticeVersion: config.privacyNoticeVersion })); break;

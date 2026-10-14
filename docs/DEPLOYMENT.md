@@ -48,6 +48,17 @@ remain unchanged. No shared infrastructure changes are part of the release.
 
 ## Production guardrails
 
+The [Ask closed launch packet](ASK-LAUNCH-CLOSED.md) uses the reserved larger Linux
+host for final checks/builds after the website host's resource guard stopped a
+compiler. This is a bounded release exception: run as the staging application
+owner with the exact production Node 22 executable and matching native packages;
+retain source/dependency/build hashes and check peer identities and disk/memory
+headroom. Transfer only the verified candidate artifacts, verify their hashes and
+source files against the committed candidate, and run a production-owner loopback
+smoke test before activation. Do not lower the website host's headroom guard or
+compile inside the live tree. Existing activation/rollback and private-data
+preservation requirements remain unchanged.
+
 - Perform application Git and npm operations as `django-user`.
 - Use root privileges only for operating-system responsibilities such as
   systemd and Nginx.

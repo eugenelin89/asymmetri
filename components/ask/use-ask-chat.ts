@@ -18,7 +18,7 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
   const current=useRef<AskTab|null>(null),writing=useRef(false),epoch=useRef(0),read=useRef<AbortController|null>(null);
   const mounted=useRef(false),storageOkay=useRef(true),mutation=useRef<AbortController|null>(null);
   const visibleUntil=useRef(0);
-  const nextReadAt=useRef(0),failures=useRef(0),rosterReadAt=useRef(0);
+  const nextReadAt=useRef(0),retryReadAt=useRef(0),failures=useRef(0),rosterReadAt=useRef(0);
   const notice=approvedAskNotice(availability,notices),consent=sameAskIdentity(consentIdentity,notice);
   const save=useCallback((next:AskTab,privacyControl=false)=>{
     try{sessionStorage.setItem(askStorageKey,encodeAskTab(next));}
@@ -36,9 +36,9 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
   },[]);
   const refresh=useCallback(async()=>{
     if(!mounted.current||writing.current||document.hidden||Date.now()<nextReadAt.current||(!synthetic&&location.origin!==copy.serviceOrigin))return;
-    nextReadAt.current=Date.now()+30000;setNextCheck(nextReadAt.current);
+    const existing=current.current,owned=!!existing?.conversationId;
+    nextReadAt.current=Date.now()+askReadDelay(null,0,owned);setNextCheck(nextReadAt.current);
     const token=++epoch.current;read.current?.abort();const controller=new AbortController();read.current=controller;
-    const existing=current.current;
     // Availability and roster failures must not prevent owned reads or privacy controls.
     const [statusResult,ownedResult,peopleResult]=await Promise.allSettled([
       askRequest('AskAvailability','/availability',{signal:controller.signal}),
@@ -46,7 +46,7 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
       existing?.conversationId&&Date.now()>=rosterReadAt.current?askRequest('AskRoster','/roster',{signal:controller.signal}):Promise.resolve(null),
     ]);
     if(!mounted.current||token!==epoch.current)return;
-    let delay=30000,failed=false;
+    let delay=askReadDelay(null,0,owned),failed=false;
     for(const result of [statusResult,ownedResult,peopleResult])if(result.status==='rejected'){
       failed=true;if(result.reason instanceof AskRequestError)delay=Math.max(delay,askReadDelay(result.reason.retryAfterSeconds));
     }
@@ -54,7 +54,7 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
     if(statusResult.status==='fulfilled'){
       const status=statusResult.value;setAvailability(status);setCheckedAt(Date.now());
       setConsentIdentity(previous=>sameAskIdentity(previous,status)?previous:null);
-      delay=Math.max(delay,askReadDelay(status.retryAfterSeconds),!existing?.conversationId&&status.state==='disabled'?300000:0);
+      delay=Math.max(delay,askReadDelay(status.retryAfterSeconds,0,owned),!existing?.conversationId&&status.state==='disabled'?300000:0);
       if(!existing?.pending&&!existing?.control)setMessage(status.state==='available'?copy.checked:
         status.state==='busy'?copy.busy:status.state==='disabled'?copy.disabled:copy.paused);
     }else{setAvailability(null);setMessage(copy.statusUnavailable);}
@@ -73,7 +73,8 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
         setLostAccess(true);setConsentIdentity(null);setMessage(copy.unavailableChat);
       }
     }
-    nextReadAt.current=Date.now()+Math.max(delay,askReadDelay(null,failures.current));setNextCheck(nextReadAt.current);
+    nextReadAt.current=Date.now()+Math.max(delay,askReadDelay(null,failures.current,owned));setNextCheck(nextReadAt.current);
+    retryReadAt.current=failed||statusResult.status==='fulfilled'&&!!statusResult.value.retryAfterSeconds?nextReadAt.current:0;
   },[save,adoptPage,synthetic]);
   useEffect(()=>{
     mounted.current=true;
@@ -86,7 +87,7 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
       }catch{storageOkay.current=false;setStorageReady(false);setMessage(copy.storageUnavailable);}
       void refresh();
     },0);
-    const timer=setInterval(()=>{const now=Date.now();setClock(now);if(visibleUntil.current&&now>=visibleUntil.current){visibleUntil.current=0;setPage(null);}void refresh();},5000);
+    const timer=setInterval(()=>{const now=Date.now();setClock(now);if(visibleUntil.current&&now>=visibleUntil.current){visibleUntil.current=0;setPage(null);}void refresh();},1000);
     const visibility=()=>{if(document.hidden){epoch.current++;read.current?.abort();setPage(null);}else void refresh();};
     document.addEventListener('visibilitychange',visibility);
     const stop=()=>{mounted.current=false;epoch.current++;read.current?.abort();mutation.current?.abort();};
@@ -148,6 +149,7 @@ export function useAskChat(context:ContextRef|null,notices:readonly AskPrivacyNo
     const fresh=await askConversation(state.conversationId!,state.session!,signal);
     if(!confirmsPending(state.pending!,fresh))throw new AskRequestError('UNVERIFIED');
     save({...state,pending:null},true);setDraft('');adoptPage(fresh);
+    nextReadAt.current=Math.max(retryReadAt.current,Date.now()+askReadDelay(status.retryAfterSeconds,0,true));setNextCheck(nextReadAt.current);
   });
   const control=async(kind:'cancel'|'delete',questionId:string|null=null)=>run(async(signal)=>{
     let state=current.current;if(!state?.session||!state.conversationId)return;

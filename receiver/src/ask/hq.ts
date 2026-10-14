@@ -6,6 +6,7 @@ import { AskStore, time, type QuestionRow } from './database.js';
 import { AskAuthority, type AskAuth } from './auth.js';
 import { AskTransport } from './transport.js';
 import { AskSync } from './sync.js';
+import { askAdmissionConfigured } from './config.js';
 import { questionContexts } from './evidence.js';
 import type { ContextVerifier } from './context.js';
 
@@ -34,7 +35,7 @@ export class AskHq {
       const stable = { schemaVersion: '1.0' as const, serviceId: config.serviceId,
         consumerGeneration: auth.scope.consumerGeneration, scope: auth.scope,
         limits: config.limits, roster: config.roster, privacyNoticeVersion: config.privacyNoticeVersion,
-        admissionEnabled: !held && config.admissionEnabled && claimsEnabled && deliveryEnabled,
+        admissionEnabled: !held && askAdmissionConfigured(config),
         claimsEnabled, deliveryEnabled, held };
       const digest = canonicalHash(stable);
       const action = 'Ask configuration observed:' + auth.scope.consumerGeneration + ':' + auth.scope.keyId;

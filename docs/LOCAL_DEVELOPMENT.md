@@ -38,6 +38,13 @@ npm ci
 Use `npm install` only when intentionally changing dependencies. Review changes
 to both `package.json` and `package-lock.json`.
 
+The Ask launch validation adds three previously missing optional WASM transitive
+lock entries (`@emnapi/core`, `@emnapi/runtime`, `@emnapi/wasi-threads`) needed by
+the existing dependency graph for a clean Linux install. No top-level package or
+existing locked version changes. Keep isolated validation caches inside ignored
+staging storage, and skip native install scripts on hosts without the matching
+build tooling; receiver native acceptance must use its actual compatible runtime.
+
 The October 7 security baseline uses Next.js/eslint-config-next 16.3.6 and the
 existing Sharp override at 0.35.5. React/React DOM remain 19.2.6. See the
 [dependency security review](DEPENDENCY_SECURITY_2026-10-07.md) for advisory

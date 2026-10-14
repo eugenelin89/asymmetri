@@ -18,7 +18,7 @@ substitute for HQ token, cost, deadline or duty-cycle enforcement. No website co
 executes a model, buys credits, fetches visitor URLs, or creates publication grants.
 
 The nine canonical v1 files remain byte-identical to manifest
-`5396443e475d3fe69825ef8af4e916a408b39452182e9c4828fa17b7faf37a84`.
+`4b61ab70b60f7660a7c2586b88666c5e00ce5ab9b849fb63295ffb095a5aae76`.
 The implementation serves their `/api/ask/v1/` routes through a separate HTTP
 listener and SQLite database. It never opens the public archive database. It reads
 public evidence only through an explicitly configured loopback HTTP adapter.
@@ -63,6 +63,10 @@ per-caller revision observations through recovery, and creates no control barrie
   with every current control acknowledged creates a freshness barrier. A new
   control invalidates the barrier. Available/admission also requires a current
   full-permission key and a fresh barrier, so a disconnected consumer pauses intake.
+  New admission also requires admission, claims and delivery flags together.
+  New conversations/questions reject an obsolete session privacy version after
+  exact receipt lookup; owned reads, original receipts and privacy controls remain
+  available. See the [closed launch packet](ASK-LAUNCH-CLOSED.md).
 - Reads and delivery revalidate original context, answer evidence, and owned
   ancestor contexts/evidence. The adapter allows only exact public transaction,
   order, decision and artifact versions at a fixed loopback origin. It requires

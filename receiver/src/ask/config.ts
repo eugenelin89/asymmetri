@@ -23,6 +23,10 @@ export interface AskConfig {
   archiveAuthority: string | null;
 }
 
+/** Configuration alone cannot grant admission: current authority and controls are also required. */
+export const askAdmissionConfigured = (config: AskConfig): boolean =>
+  config.admissionEnabled && config.claimsEnabled && config.deliveryEnabled;
+
 export function askConfig(input: unknown): AskConfig {
   need(input !== null && typeof input === 'object' && !Array.isArray(input));
   const value = input as Record<string, unknown>;

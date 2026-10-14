@@ -114,6 +114,9 @@ test('polling respects retry delays and bounded exponential backoff without a ti
  assert.equal(askReadDelay(1800,1),1800000);assert.equal(askReadDelay(null,1),60000);
  assert.equal(askReadDelay(null,100),480000);assert.equal(askReadDelay(86400),86400000);
  assert.equal(askReadDelay(null,0),30000);
+ assert.equal(askReadDelay(null,0,true),15000);
+ assert.equal(askReadDelay(60,0,true),60000);
+ assert.equal(askReadDelay(null,1,true),60000);
 });
 
 

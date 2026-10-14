@@ -18,6 +18,16 @@ git diff --check
 production. `npm run build` validates the retained Vinext and Cloudflare Worker
 path.
 
+Ask launch regressions in `receiver/test/ask-admission.test.ts` exercise paused
+claims/delivery and changed session consent through real disposable HTTP listeners.
+They require no provider credentials or model calls. Exact prior receipts, owned
+reads and cancel/delete must survive these admission changes. The authored UI
+helpers run with `node --test tests/ask-ui.test.mjs`; browser acceptance additionally
+checks old publication/unknown event dates, source limitations, disabled context
+removal during delayed preflight, focus across normal renewals and suppression
+after a failed refresh reaches the body deadline. See the
+[closed launch packet](ASK-LAUNCH-CLOSED.md) for the operational boundary.
+
 ## Route checks
 
 When routes or shared layout code change, verify:

@@ -110,8 +110,10 @@ export function approvedAskNotice(status:AskAvailability|null,notices:readonly A
   return status?notices.find(notice=>sameAskIdentity(notice,status))??null:null;
 }
 /** Availability is a presentation hint; the receiver authorizes every action. */
-export function askReadDelay(retryAfterSeconds:number|null,failures=0):number {
-  return Math.max(30000*Math.pow(2,Math.min(4,failures)),Math.min(86400,Math.max(0,retryAfterSeconds??0))*1000);
+export function askReadDelay(retryAfterSeconds:number|null,failures=0,ownedConversation=false):number {
+  // Renew an owned view before its independent 30-second body deadline.
+  const ordinary=ownedConversation&&failures===0?15000:30000*Math.pow(2,Math.min(4,failures));
+  return Math.max(ordinary,Math.min(86400,Math.max(0,retryAfterSeconds??0))*1000);
 }
 export interface PendingQuestion { id:string; input:AskQuestionInput|null; admission:{questionId:string;questionHash:string}|null }
 /** Text equality cannot identify a request: old declined turns can have identical input. */

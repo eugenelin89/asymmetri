@@ -9,6 +9,12 @@ pair matching verified operator, provider, research, retention and deletion fact
 Consent binds that exact pair. Availability is presentation only: each receiver
 action independently checks ownership, authority, limits and current suppression.
 
+The API proposal has a separate, unapproved `candidateAskApiPrivacyNotice`
+(`ask-api-privacy-v1`) in `content/site.ts`. The closed page links provider data
+controls and describes the proposed API recipients. Proposed local limits and
+unverified backup facts cannot silently become operational promises. See the
+[closed launch packet](ASK-LAUNCH-CLOSED.md) for candidate facts and current checks.
+
 `www` retains the useful page and exact public context link, with an apex entry
 link for private conversations. It does not cross origins to fetch credentials or
 private content. Unknown/duplicate query fields are rejected. Private text and
@@ -52,15 +58,21 @@ preserves old ownership for read/delete. Each Send rechecks advertised identity;
 it cannot change the body of an existing session-create key. Controls hide bodies
 before transmission and retain their identity until an owned suppression receipt.
 
-Ordinary polling waits at least 30 seconds, respects advertised/problem retry
-delays (up to 24 hours), and backs off exponentially to eight minutes on repeated
-failures. A closed page without a conversation waits five minutes. Roster reads
+Healthy owned-view polling renews after 15 seconds, before the independent
+30-second body deadline. Without a conversation it waits at least 30 seconds.
+Advertised/problem retry delays (up to 24 hours) take priority, with exponential
+failure backoff up to eight minutes. A closed page without a conversation waits
+five minutes. This increases per-view request load; the historical 20-view fixture
+does not establish current production capacity. Roster reads
 are at most once per five minutes. Manual Check respects the same deadline;
 privacy controls are independent. Hidden tabs abort reads. Displayed conversation
-bodies expire after 30 seconds, checked by a five-second timer, even when another
+bodies expire after 30 seconds, checked by a one-second timer, even when another
 endpoint extends polling backoff. Pages cap time, bytes and turn count and reject
 inconsistent identities. Replies use plain text, exact evidence links, attribution,
-timestamps and polite announcements without automatic scrolling.
+timestamps and polite announcements without automatic scrolling. Published and
+event dates remain distinct from retrieval time; unknown dates and each source's
+limitations are visible. Context removal is disabled throughout submission so the
+displayed record cannot diverge from the frozen request during preflight.
 
 The [readiness and gap matrix](ASK-04-READINESS.md) distinguishes source acceptance,
 synthetic evidence and the remaining operational gates. The [closed production-path

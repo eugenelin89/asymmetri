@@ -5,6 +5,7 @@ import { AskStore, time, type ConversationRow, type QuestionRow, type SessionRow
 import { AskLifecycle } from './lifecycle.js';
 import { questionContexts } from './evidence.js';
 import { AskAuthority } from './auth.js';
+import { askAdmissionConfigured } from './config.js';
 import { canonicalHash, parseJson, requireContract as need, sha256, validate } from '../schema.js';
 
 import type { ContextVerifier } from './context.js';
@@ -62,7 +63,7 @@ export class AskVisitors {
         return { body: this.sessionDto(visitor) };
       }
       need(input.privacyNoticeVersion === this.store.config.privacyNoticeVersion, 'CONFLICT');
-      need(!this.store.meta().held && this.store.config.admissionEnabled && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
+      need(!this.store.meta().held && askAdmissionConfigured(this.store.config) && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
       this.store.space();
       need(this.store.get<{n:number}>('SELECT count(*) n FROM sessions')!.n < 3000, 'BUDGET_EXHAUSTED');
       const now = this.now();
@@ -117,7 +118,8 @@ export class AskVisitors {
     validate('AskConversationCreate', parseJson(bytes, this.store.config.limits.requestBytes));
     return this.store.atomic(() => {
       const old = this.receipt<AskConversation>(visitor, 'conversation:create', requestId, bytes); if (old) return old;
-      need(this.store.config.admissionEnabled && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE'); this.store.space();
+      need(visitor.row.privacy_version === this.store.config.privacyNoticeVersion, 'CONFLICT');
+      need(askAdmissionConfigured(this.store.config) && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE'); this.store.space();
       this.store.charge('conversations:' + visitor.row.id, 86400, 20, this.now());
       this.store.charge('conversations:global', 86400, 200, this.now());
       const id = randomUUID();
@@ -136,7 +138,8 @@ export class AskVisitors {
       const conversation = this.owned(visitor, conversationId);
       const target = conversationId + ':question';
       const old = this.receipt<AskAdmission>(visitor, target, requestId, bytes); if (old) return old;
-      need(this.store.config.admissionEnabled && conversation.state === 'open' && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
+      need(visitor.row.privacy_version === this.store.config.privacyNoticeVersion, 'CONFLICT');
+      need(askAdmissionConfigured(this.store.config) && conversation.state === 'open' && new AskAuthority(this.store, this.now).ready(), 'UNAVAILABLE');
       const active = this.store.all<{state:string}>('SELECT state FROM questions WHERE session_id=? AND suppression IS NULL', visitor.row.id);
       need(active.every(row => terminal.includes(row.state)), 'CONFLICT');
       const queued = this.store.get<{n:number}>("SELECT count(*) n FROM questions WHERE suppression IS NULL AND state NOT IN('answered','declined','expired','cancelled','failed')")!.n;

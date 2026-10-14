@@ -138,7 +138,7 @@ changing public assets.
 
 ## BotSquad investment showcase (INV-04 / INV-REAL-01)
 
-**Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/00d9e82668dcfd39b25294d9a05a7f97e4d28295/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
+**Repository ownership and handoff.** This repository owns the Asymmetri website, investment REST receiver and public artifact/archive views. [BotSquad HQ](https://github.com/eugenelin89/bot_messenger) owns workers, the planned paper simulator (INV-05), free-source adapter (INV-06), trusted HQ publisher (INV-07) and later employee operation. BotSquad also owns the [canonical version 1.0 contract](https://github.com/eugenelin89/bot_messenger/tree/507f93afaa0d5e8ede28922e82fc677b8b5cc4e2/contracts/investment/v1); this repository vendors its nine matching files in `receiver/vendor/investment/v1/`. Follow the [authoritative investment roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md) for milestone dependencies and status, and the [cross-repository integration map](docs/BOTSQUAD_INTEGRATION.md) for ownership and release coordination.
 
 
 The source-level [investment showcase](docs/INV-04-VALIDATION.md) adds the team,
@@ -164,6 +164,10 @@ remains disabled; this source milestone does not activate visitor intake or HQ.
 Shared-apex HTTPS is installed and verified; [the release receipt](docs/INGRESS_RELEASE_2026-10-13.md) records exact sources, confinement, renewal and all-host preservation. Ask intake remains disabled. HQ reports repaired private authentication; initial signed investment publication and public reads are verified in the current handoff. The [synthetic interoperability launcher](docs/ASK-01-INTEROPERABILITY.md) provides a separate temporary HTTPS fixture for typed-client acceptance.
 
 ## Dormant Ask visitor interface
+
+The [closed launch packet](docs/ASK-LAUNCH-CLOSED.md) records the exact inactive
+configuration, remaining authority/custody facts and release sequence. It does
+not enable visitor questions or authorize paid model execution.
 
 [Ask UI boundaries and local acceptance](docs/ASK-03-WEBSITE-UI.md) cover the
 production visitor path and isolated synthetic acceptance. Genuine intake remains
