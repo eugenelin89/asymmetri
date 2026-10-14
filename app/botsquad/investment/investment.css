@@ -9,12 +9,9 @@
 .inv-synthetic .shell { display: block; padding-block: .7rem; }
 .inv-breadcrumb { display: flex; flex-wrap: wrap; gap: .65rem; color: var(--ink-secondary); font-size: .85rem; align-items: center; }
 .inv-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
-.inv-hero { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(2rem,6vw,6rem); padding-block: clamp(2.5rem,6vw,5rem); }
-.inv-hero h1 { font-size: clamp(3rem,6vw,5.5rem); line-height: 1.02; letter-spacing: -.055em; max-width: 11ch; margin-block: 1.2rem 1.6rem; font-weight: 550; }
+.inv-hero { padding-block: clamp(2.5rem,6vw,5rem); }
+.inv-hero h1 { font-size: clamp(3rem,6vw,5.5rem); line-height: 1.02; letter-spacing: -.055em; max-width: 16ch; margin-block: 1.2rem 1.6rem; font-weight: 550; }
 .inv-intro { font-size: 1.15rem; color: var(--ink-secondary); max-width: 54ch; }
-.inv-hero-aside { align-self: end; border-top: 2px solid var(--brand-primary); padding-top: 1.4rem; }
-.inv-hero-aside h2 { font-size: clamp(1.5rem,2.5vw,2.25rem); letter-spacing: -.035em; line-height: 1.25; margin-block: 1.25rem; }
-.inv-hero-aside p { font-size: .95rem; color: var(--ink-secondary); margin-top: 1rem; }
 .inv-kicker { font-size: .8rem; letter-spacing: .04em; color: var(--brand-bright); display: block; }
 .inv-actions { display: flex; flex-wrap: wrap; gap: .7rem 1.2rem; align-items: center; margin-block: 1.25rem; }
 .inv-actions a { display: inline-flex; align-items: center; min-height: 44px; font-size: .93rem; }
@@ -152,13 +149,12 @@
 .inv-ask a { display: inline-flex; align-items: center; min-height: 44px; margin: .5rem 1rem; font-size: .9rem; }
 .inv-footer-notice { max-width: 90ch; font-size: .85rem; color: var(--ink-secondary); border-top: 1px solid var(--line); padding-top: 2rem; }
 @media (max-width: 1000px) {
-  .inv-hero { grid-template-columns: 1.2fr 1fr; gap: 2rem; }
   .inv-team, .inv-decision-grid, .inv-library { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .inv-health { grid-template-columns: 1fr; }
   .inv-process { grid-template-columns: repeat(2,minmax(0,1fr)); }
 }
 @media (max-width: 700px) {
-  .inv-hero, .inv-team, .inv-chart-grid, .inv-holdings, .inv-decision-grid, .inv-library, .inv-journal { grid-template-columns: minmax(0,1fr); }
+  .inv-team, .inv-chart-grid, .inv-holdings, .inv-decision-grid, .inv-library, .inv-journal { grid-template-columns: minmax(0,1fr); }
   .inv-hero h1 { max-width: 12ch; }
   .inv-index { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .inv-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }

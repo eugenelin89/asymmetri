@@ -393,10 +393,12 @@ experiment is the default until trusted server read configuration is explicitly 
 ## Investment showcase copy and evidence
 
 `investmentShowcase` in `content/site.ts` owns the introduction, discovery link,
-process explanation, methodology and disabled Ask copy. The introductory team
-panel uses `purposeDescription` to focus on research, discussion, decisions and
-evidence, without a money-status disclaimer. Keep verified run status,
-unconfigured reads, verification failure and synthetic demonstrations distinct. Do
+process explanation, methodology and disabled Ask copy. The October 14 owner request
+removes the introductory “The team is the experiment” side panel and its supporting
+paragraphs. Keep the opening headline, introduction and desk/methodology links in
+a single column; status and evidence details remain in their existing sections.
+Keep verified run status, unconfigured reads, verification failure and synthetic
+demonstrations distinct. Do
 not call an unavailable archive “not started.” Synthetic identities, prose,
 financial values and content live only in `receiver/test/showcase-fixture.ts`; do
 not copy them into operational content or label them as actual worker output.
