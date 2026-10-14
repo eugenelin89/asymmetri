@@ -3,7 +3,7 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-04-RELEASE_2026-10-13.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution and ongoing independent backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website release receipt](ASK-LAUNCH-RELEASE_2026-10-14.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution and ongoing independent backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
 Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
@@ -1245,3 +1245,10 @@ The [October 13 status-copy receipt](BOTSQUAD-STATUS-RELEASE_2026-10-13.md) reco
 website source `f47f99b`, guarded activation and complete `da09185` rollback runtime.
 Public review, publisher-contact and snapshot-session labels changed; receiver
 versions, data, authority and closed Ask gates are preserved.
+
+## October 14 closed Ask launch preparation release
+
+The [verified closed launch receipt](ASK-LAUNCH-RELEASE_2026-10-14.md) records
+website and Ask receiver source `6a194f0`, the Node 22 Linux build transfer,
+complete rollback trees, native/browser acceptance and unchanged configuration.
+The candidate API notice remains unapproved and public questions remain disabled.

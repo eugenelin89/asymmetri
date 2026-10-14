@@ -76,7 +76,7 @@ displayed record cannot diverge from the frozen request during preflight.
 
 The [readiness and gap matrix](ASK-04-READINESS.md) distinguishes source acceptance,
 synthetic evidence and the remaining operational gates. The [closed production-path
-release](ASK-04-RELEASE_2026-10-13.md) records the installed website, complete rollback
+release](ASK-LAUNCH-RELEASE_2026-10-14.md) records the installed website, complete rollback
 and unchanged independent private services. The earlier ASK-03 receipt remains
 historical evidence.
 
