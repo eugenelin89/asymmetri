@@ -205,3 +205,7 @@ The [October 14 close-recovery packet](docs/INVESTMENT_CLOSE_RECOVERY_2026-10-14
 adds one-session amendment validation and public methodology/benchmark evidence.
 The original run remains immutable; software acceptance is separate from an actual
 employee decision, published fill and production activation. Ask remains paused.
+
+The [verified October 14 investment release](docs/INVESTMENT_CLOSE_RELEASE_2026-10-14.md)
+records current website/receiver identities, preserved archive history, portraits
+and closed Ask state.

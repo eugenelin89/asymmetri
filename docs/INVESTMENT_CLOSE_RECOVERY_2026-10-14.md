@@ -189,3 +189,7 @@ Producer activation waits for the receiver and website release to finish. HQ
 keeps its loop held and does not publish amended records during the compatibility
 transition. The website release changes no publisher scope, key generation,
 approval, original event or financial posting, and does not open Ask.
+
+The compatible production release is now verified in the
+[deployment receipt](INVESTMENT_CLOSE_RELEASE_2026-10-14.md). It records the
+separate activation and readiness handoff without inferring live trading results.

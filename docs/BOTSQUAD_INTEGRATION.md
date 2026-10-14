@@ -1,6 +1,6 @@
 # BotSquad and Asymmetri — Investment Showcase integration map
 
-**Current coordination: October 14, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [closed Ask production-path release](ASK-LAUNCH-RELEASE_2026-10-14.md) records current website source/build identity; the detailed investment handoff retains its initial-release history.
+**Current coordination: October 14, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [close-amendment release](INVESTMENT_CLOSE_RELEASE_2026-10-14.md) records current website/receiver identities and preservation; Ask retains its prior closed release. The detailed investment handoff retains its initial-release history.
 
 ## Which repository owns what?
 
@@ -38,7 +38,7 @@ Cross-repository provenance: [BotSquad INV-04 handoff](https://github.com/eugene
 
 INFRA-01 Ubuntu migration was cancelled. The present Droplet runs unsupported Ubuntu 22.10 under [Decision 030](https://github.com/eugenelin89/bot_messenger/blob/main/docs/decisions/decision_030_defer_ubuntu_migration.md); a future OS upgrade is a separate owner project. RECOVERY-01 is not a required development milestone. Independently verified backup custody is currently unestablished after the later deletion of historical archives; any valuable *live* data and public activation need a separate backup/retention and security review. Do not silently claim that GitHub stores private databases/configuration.
 
-Live receiver ingress, publisher grants/keys, operational market source, real HQ synchronization, visitor Ask and capacity/retention are **not enabled** by INV-01–04. The later [October 13 shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) started the empty investment and disabled-intake Ask listeners with verified confinement/renewal. The subsequent investment activation installed one finite publisher and accepted five initial events plus a heartbeat; no Ask service keys were added. The current website release is `d0c454314d646b74895f4d9e3e4a014c63c666a6`, superseding the initial `97b4087` release, with verified real investment reads and no visitor intake. Owner-reported Yahoo permission and producer authentication status are recorded in the [current handoff](INV-REAL-01-WEBSITE.md). Always verify the current source and service state before changes.
+Live receiver ingress, publisher grants/keys, operational market source, real HQ synchronization, visitor Ask and capacity/retention are **not enabled** by INV-01–04. The later [October 13 shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) started the empty investment and disabled-intake Ask listeners with verified confinement/renewal. The subsequent investment activation installed one finite publisher and accepted five initial events plus a heartbeat; no Ask service keys were added. That initial investment activation used website `d0c454314d646b74895f4d9e3e4a014c63c666a6`, superseding `97b4087`; current identities and preserved reads are recorded in the [October 14 close-amendment release](INVESTMENT_CLOSE_RELEASE_2026-10-14.md). Visitor intake remains closed. Owner-reported Yahoo permission and producer authentication status are recorded in the [current handoff](INV-REAL-01-WEBSITE.md). Always verify the current source and service state before changes.
 
 ## How future Codex work is routed
 
@@ -94,3 +94,7 @@ permitted source and publisher; this repository validates the amendment and
 serves its exact evidence. The status projection keeps the amendment available
 across pagination and later statuses. Ask remains paused. A consumer release is
 not evidence of a decision, accepted fill or completed valuation.
+
+The [verified production release](INVESTMENT_CLOSE_RELEASE_2026-10-14.md) installs
+the compatible receiver and website, preserves the six-event prefix and generation
+1, and records the readiness ACK before HQ resumes its separate workflow.
