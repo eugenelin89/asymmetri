@@ -200,3 +200,8 @@ images and preserved product routes. It updates only the website runtime.
 The [closed configuration endpoint release](docs/ASK-CONFIGURATION-RELEASE_2026-10-13.md)
 installs the signed private reconciliation read after 254 passing Linux cases.
 Public Ask stays closed; the website portrait build and investment service are preserved.
+
+The [October 14 close-recovery packet](docs/INVESTMENT_CLOSE_RECOVERY_2026-10-14.md)
+adds one-session amendment validation and public methodology/benchmark evidence.
+The original run remains immutable; software acceptance is separate from an actual
+employee decision, published fill and production activation. Ask remains paused.

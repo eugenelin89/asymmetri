@@ -1,6 +1,6 @@
 # BotSquad and Asymmetri — Investment Showcase integration map
 
-**Current coordination: October 13, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [closed Ask production-path release](ASK-LAUNCH-RELEASE_2026-10-14.md) records current website source/build identity; the detailed investment handoff retains its initial-release history.
+**Current coordination: October 14, 2026.** The [INV-REAL-01 website handoff](INV-REAL-01-WEBSITE.md) records the owner's release authorization, observed-paper integration and actual verification. The October 9 milestone baseline below is historical; BotSquad INV-05–09 source work has since advanced and INV-REAL-01 is active. Do not infer production activation from source completion. The [closed Ask production-path release](ASK-LAUNCH-RELEASE_2026-10-14.md) records current website source/build identity; the detailed investment handoff retains its initial-release history.
 
 ## Which repository owns what?
 
@@ -17,7 +17,7 @@
 
 ## Contract and integration boundary
 
-Canonical contract commit: `507f93afaa0d5e8ede28922e82fc677b8b5cc4e2`; nine files; manifest SHA-256 `4b61ab70b60f7660a7c2586b88666c5e00ce5ab9b849fb63295ffb095a5aae76`. Asymmetri's `receiver/vendor/investment/v1/` is a byte-identical, pinned consumer with the October 13 Ask subscription amendment from merged HQ PR 86, configuration-read amendment from merged HQ PR 87, and the independently generator-checked input-reservation ceiling amendment. The ceiling changes no service default, budget or authority. Run `npm --prefix receiver run contracts:check` after contract-related edits. Neither project fetches the protocol from GitHub at runtime.
+Canonical contract commit: `fbd26f520e7403a469643ed350df5e08bbc1ec2b`; nine files; manifest SHA-256 `ff9c457580475583614541b76d9f0267ac2a15afff0f87f955acdff5f063e081`. Asymmetri's `receiver/vendor/investment/v1/` is a byte-identical, pinned consumer with the October 13 Ask subscription amendment from merged HQ PR 86, configuration-read amendment from merged HQ PR 87, the independently generator-checked input-reservation ceiling amendment, and the October 14 one-session close amendment from merged HQ PR 95. The ceiling changes no service default, budget or authority. Run `npm --prefix receiver run contracts:check` after contract-related edits. Neither project fetches the protocol from GitHub at runtime.
 
 The approved authority flow is: trusted BotSquad HQ public projection and publisher (later INV-07) **outbound signed HTTPS** → isolated Asymmetri receiver and public archive → bounded read-only Next.js routes → visitors. Website receipts are not trading commands, and the website must not obtain private HQ employee state or signing keys. Ask BotSquad uses a separate private-session Q&A boundary with public intake disabled; an investment publication grant does not authorize Ask.
 
@@ -84,3 +84,13 @@ shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
 Public Ask remains closed. The subsequent [configuration-read source packet](ASK-CONFIGURATION-READ_2026-10-13.md) adds the private reconciliation endpoint; its deployment is recorded separately.
+
+## October 14 prospective close recovery
+
+The [one-session close amendment](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md)
+extends the original frozen run without changing its configuration or historical
+financial journal. HQ owns calendar verification, employee decisions, the
+permitted source and publisher; this repository validates the amendment and
+serves its exact evidence. The status projection keeps the amendment available
+across pagination and later statuses. Ask remains paused. A consumer release is
+not evidence of a decision, accepted fill or completed valuation.

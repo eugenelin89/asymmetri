@@ -143,6 +143,9 @@
 .inv-process p { color: var(--ink-secondary); font-size: .95rem; }
 .inv-method { max-width: 65ch; margin-top: 2.5rem; }
 .inv-method p { margin-block: 1rem; color: var(--ink-secondary); }
+.inv-amendment { border-left: 3px solid var(--brand-primary); padding-left: clamp(1rem,3vw,2rem); max-width: none; }
+.inv-amendment .inv-metrics { grid-template-columns: repeat(auto-fit,minmax(min(100%,15rem),1fr)); }
+.inv-amendment .inv-metrics dd { font-size: 1rem; letter-spacing: normal; overflow-wrap: anywhere; }
 .inv-ask { padding: var(--inv-space,1.5rem); border: 1px solid var(--line); background: var(--graphite-raised); max-width: 65rem; }
 .inv-ask h3 { font-size: 1.5rem; margin-block: 1rem; }
 .inv-ask p { color: var(--ink-secondary); margin-block: 1rem; line-height: 1.6; }

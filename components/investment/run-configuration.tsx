@@ -25,7 +25,7 @@ export function RunConfiguration({ run, mode }: { run: RunPublished; mode: Mode 
     <h3>Published experiment summary</h3>
     <p>{run.purpose}</p><p>{run.objective}</p>
     <p className="inv-meta">The description and settings are supplied by the trusted publisher. Publication does not independently verify employee reasoning or investment claims.</p>
-    <details className="inv-details"><summary>Frozen methodology & run settings</summary>
+    <details className="inv-details"><summary>Original frozen methodology & run settings</summary>
       <dl className="inv-metrics">{settings.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       <p>Universe: {c.universe.map(instrument => instrument.symbol).join(', ')}.</p>
       <p>Opening reference: {c.openingFieldDefinition}</p>

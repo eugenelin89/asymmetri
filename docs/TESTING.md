@@ -503,3 +503,14 @@ The Research hub must have its apex canonical and sitemap entry. Existing
 investment/Ask URLs and noindex policy stay intact. At 390/768/1440 CSS pixels,
 check wrapping, 44px targets, visible focus, current-page indication and no overflow;
 verify menus by keyboard and preserve reduced-motion rules and Motion footer links.
+
+## One-session close amendment
+
+After the receiver build, `node --test receiver/dist/test/close-recovery.test.js`
+checks the authored close chain, unchanged legacy OPEN, strict deadlines, matching
+identities/references, benchmark allocation evidence and immutable old records.
+Its HTTP/SQLite case puts the amendment beyond the first 100 events, appends a
+later status, restarts, and verifies withdrawal propagation. The test remains in
+the normal receiver suite. These are authored fixtures, not proof of live market
+or employee execution. The [packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md) records
+actual validation and release results separately.

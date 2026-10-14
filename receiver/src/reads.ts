@@ -117,7 +117,13 @@ export class PublicReads {
     const page=(source:EventRow[])=>this.page(path,query,source,upper);
     const collection=(name:string,p:{items:unknown[];nextCursor:string|null})=>this.result(name,{...base,...p,watermark,freshness});
     switch(tail[0]) {
-      case 'status': return this.result('PublicStatus',{...base,state:this.state(events,runEvent.payload.state,all.map(eventFrom),hidden),watermark,freshness,notices:events.filter(x=>x.type==='publication.notice').slice(-20).map(x=>x.payload)});
+      case 'status': {
+        // Keep the one immutable amendment visible across later statuses and event pages.
+        // Withholding it must not imply that the original method is again applicable.
+        const executionAmendment=all.map(eventFrom).find(x=>x.type==='run.status'&&x.payload.executionAmendment);
+        need(!executionAmendment||!hidden.has(executionAmendment.eventId),'UNAVAILABLE');
+        return this.result('PublicStatus',{...base,state:this.state(events,runEvent.payload.state,all.map(eventFrom),hidden),watermark,freshness,notices:events.filter(x=>x.type==='publication.notice').slice(-20).map(x=>x.payload),...(executionAmendment?{executionAmendment}:{})});
+      }
       case 'snapshot': return this.result('SnapshotResponse',{...base,snapshot:this.snapshot(rows,all),watermark,freshness});
       case 'events': {
         const p=page(rows), result=collection('EventPage',{...p,items:p.items.map(received)});

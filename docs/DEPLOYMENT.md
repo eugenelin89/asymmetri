@@ -1252,3 +1252,17 @@ The [verified closed launch receipt](ASK-LAUNCH-RELEASE_2026-10-14.md) records
 website and Ask receiver source `6a194f0`, the Node 22 Linux build transfer,
 complete rollback trees, native/browser acceptance and unchanged configuration.
 The candidate API notice remains unapproved and public questions remain disabled.
+
+## October 14 close-recovery compatibility
+
+The [close-recovery packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md) requires a
+matching reviewed canonical manifest before receiver and website installation.
+Deploy the receiver before HQ publishes the new optional fields, preserve its
+configuration, finite publisher generation, receipts, complete prior event prefix
+and ledger, and keep Ask unchanged. Installation does not activate HQ authority.
+
+An older receiver may reject the new event fields after they are accepted. Before
+code rollback, validate every retained event against that older contract; if any
+record is incompatible, retain the data and stop for a compatible forward repair.
+Never restore an older database or remove an accepted amendment to make old code
+start. Website and receiver activation remain separate guarded operations.

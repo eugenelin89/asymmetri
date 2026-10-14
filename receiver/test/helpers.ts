@@ -16,9 +16,9 @@ export const prefix='/api/experiments/v1/experiments/fixture-experiment/runs/fix
 export const encode=(v:unknown)=>Buffer.from(JSON.stringify(v));
 export const clone=<T>(v:T):T=>structuredClone(v);
 export interface Response {status:number;body:Record<string,unknown>;headers:Record<string,string|string[]|undefined>;raw:string;bytes:Buffer}
-export async function harness(t:TestContext){
+export async function harness(t:TestContext, initialTime='2026-01-05T22:00:00Z'){
   const dir=await mkdtemp(join(tmpdir(),'asymmetri-inv02-'));await chmod(dir,0o700);
-  let clock=Math.floor(Date.parse('2026-01-05T22:00:00Z')/1000),fail='',faultAction:undefined|(()=>void);
+  let clock=Math.floor(Date.parse(initialTime)/1000),fail='',faultAction:undefined|(()=>void);
   const cfg=config({enabled:true,dataDir:dir,authority:'receiver.test',port:0,minFreeBytes:1048576});
   const now=()=>clock,options={now,fault:(point:string)=>{if(point===fail){if(faultAction)faultAction();else throw new Error('PRIVATE disk/database diagnostic must not leak');}}};
   let receiver=await createReceiver(cfg,options);

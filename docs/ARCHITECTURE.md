@@ -480,3 +480,14 @@ shared navigation, neutral investment introduction and installed closed Ask
 activity-contract source. It supersedes earlier runtime identities while preserving
 live investment records, protected Motion pages and unchanged service configuration.
 Public Ask remains closed. The subsequent [configuration-read source packet](ASK-CONFIGURATION-READ_2026-10-13.md) adds the private reconciliation endpoint; its deployment is recorded separately.
+
+## Durable investment execution amendment
+
+The [October 14 packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md) adds optional
+canonical v1 fields, without a migration. The receiver validates the exact
+one-session amendment and requires prior event references from its decisions,
+orders and snapshots. Existing dependency links propagate withdrawal. The bounded
+`PublicStatus.executionAmendment` projection returns the immutable status event
+even when it is beyond an event page or a later status supersedes the run state.
+A hidden amendment makes status unavailable. The showcase and archive shell
+render this witnessed projection beside the original frozen settings.

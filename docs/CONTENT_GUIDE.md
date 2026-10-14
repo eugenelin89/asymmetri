@@ -467,3 +467,13 @@ IDs to approved local `SiteImage` values. Atlas and Maya reuse the overview's
 portrait objects. Add future mappings only for verified public worker identities
 and approved assets, updating the asset manifest. Unknown IDs retain initials;
 never derive an image URL from a worker name or trust a publisher-supplied URL.
+
+## Investment method amendments
+
+`investmentRecovery` centralizes the close-recovery explanation. Show a dated
+amendment only from verified `PublicStatus.executionAmendment`, including on
+methodology and evidence pages. Keep original frozen settings labelled separately.
+Do not infer a completed trade from an amendment, present the missed OPEN as
+executed, or reconstruct missing historical employee usage/cost. Decisions keep
+their own rationale/review; valuations keep limitations and benchmark allocation
+proof. See the [October 14 packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md).
