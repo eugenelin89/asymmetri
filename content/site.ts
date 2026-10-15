@@ -1203,7 +1203,7 @@ export const hqGuide = {
   navLabel: 'HQ investigation guide',
   action: 'Investigate Trade in HQ',
   title: 'Investigating BotSquad Trade from HQ',
-  description: 'An illustrated operator guide to examining BotSquad HQ, tracing Trade records, investigating failures and understanding recovery controls.',
+  description: 'An illustrated operator guide to examining BotSquad HQ, tracing Trade records, tailing diagnostic output, investigating failures and understanding recovery controls.',
   eyebrow: 'BotSquad Research / Trade / HQ investigation guide',
   introduction: 'Trace a trading day through the portfolio, scheduled work, employee executions and publication evidence.',
   date: '2026-10-15',

@@ -63,6 +63,10 @@ export const guideContents = [
     "title": "Escalate beyond the UI when the evidence stops"
   },
   {
+    "id": "tail-logs",
+    "title": "Tail logs and follow Trade activity"
+  },
+  {
     "id": "incident-record",
     "title": "Keep a compact incident record and a daily routine"
   },
@@ -256,6 +260,7 @@ export function HqGuideArticle() {
 ]} />
 <p>{"If the source-collection stage is blocked, inspect its retained result before reaching for a different feed or manually entering a price. Determine whether the problem was a request limit, source response, qualification rule, interrupted collection or an expired window. The market-data budget remains US$0 incremental, and automated access/publication permissions remain part of the source boundary. A model-generated substitute price would destroy the experiment's evidence trail. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/docs/decisions/decision_029_zero_cost_market_data.md">{"Market-data decision"}</a></p>
 <p>{"If information seems inconsistent between panels, record observation times, perform one full page reload, and compare identities and scopes before changing anything. Historical cards, bounded views and separate refresh behavior explain some discrepancies. A persistent discrepancy belongs in an incident report with the exact fields, not an improvised state reset."}</p>
+<p>{"For a pause that needs live observation, "}<a href="#tail-logs">{"tail the service journal and follow the selected Trade scope"}</a>{" in separate terminals. A running service, a moving stage and a reviewed submission answer different questions. Preserve the loop's exact reason before attempting recovery."}</p>
 </GuideSection>
 <GuideSection id="controls" title="Know which controls change state">
 <p>{"Investigation and recovery are different phases. Most mistakes come from using an action button to find out what it does. The current interface includes controls with materially different effects:"}</p>
@@ -279,9 +284,42 @@ export function HqGuideArticle() {
 <GuideSection id="beyond-ui" title="Escalate beyond the UI when the evidence stops">
 <p>{"HQ is an inspection interface, not a complete debugger. Escalate when a display lacks terminal settlement detail, a collection was interrupted, a runtime classification is ambiguous, or a recovery invariant needs proof from the durable store."}</p>
 <p>{"The operator's next read-only checks should establish the deployed revision and service status, then examine a narrow log window around the relevant UTC timestamps. Search with the exact private execution or occurrence identifier. Preserve the original failure before changing code or restarting a process. Record both the application outcome and provider-call outcome; a lost response does not prove that no call happened."}</p>
+<p>{"The "}<a href="#tail-logs">{"log-tailing commands below"}</a>{" show how to collect that evidence without restarting HQ or asking an employee to run again."}</p>
 <p>{"For a database investigation, use an approved consistent backup or a read-only connection and queries appropriate to the deployed schema. Join the occurrence, execution, usage, finite reservation, proposal and review records described above. The portfolio database and independently retained finite authority are related evidence sources; inspecting only one can miss a constraint. Do not edit rows to make a status look complete, delete reservations to recover capacity, or copy an old approval onto a new proposal."}</p>
 <p>{"Treat SQL results, runtime logs, expanded receipts and transcripts as private diagnostic material. They can contain identifiers, provider references and content that is not in the public projection. A public incident summary should state the stage, failure class, observed effect, repair and remaining uncertainty without dumping those raw records."}</p>
 <p>{"A good repair verification has three distinct claims: the code change addresses the diagnosed cause; the intended revision is actually deployed; and a future eligible execution demonstrates the repaired behavior. Passing the first two does not justify claiming the third. Documentation screenshots establish what the interface displayed at capture time, not a successful end-to-end trade."}</p>
+</GuideSection>
+<GuideSection id="tail-logs" title="Tail logs and follow Trade activity">
+<p>{"Tailing means keeping a terminal open to show new diagnostic output as it arrives. Use two views: the systemd journal for the HQ process, and saved Trade events for employee and stage activity. They have different sources and neither replaces the "}<a href="#record-chain">{"proposal, review and submission record chain"}</a>{"."}</p>
+<h3>{"Start with authorized SSH access"}</h3>
+<p>{"Run these commands from your own terminal. The name "}<code>{"botsquad"}</code>{" is an SSH alias already configured by this installation's operator, normally in "}<code>{"~/.ssh/config"}</code>{". You need the approved account, key and permission to read the relevant journal or private database. The public website does not provide that access. On another installation, use its operator-approved alias and service name. A hostname-resolution or permission error is an access problem, not evidence that Trade stopped."}</p>
+<h3>{"Follow the service journal"}</h3>
+<GuideCode caption="Live HQ service journal" text={"ssh botsquad 'journalctl -u botsquad.service -f --output=short-iso'"} />
+<p><code>{"-u"}</code>{" selects the HQ service; "}<code>{"-f"}</code>{" displays recent entries and keeps following new ones. "}<code>{"--output=short-iso"}</code>{" gives each journal entry a timestamp with its UTC offset. Press "}<kbd>{"Ctrl+C"}</kbd>{" to leave the viewer. This does not stop or restart "}<code>{"botsquad.service"}</code>{", pause the Trade loop, or cancel an employee's model call."}</p>
+<p>{"To inspect a recent failure without leaving a follower running:"}</p>
+<GuideCode caption="The last 15 minutes of service history" text={"ssh botsquad 'journalctl -u botsquad.service --since \"15 minutes ago\" --no-pager --output=short-iso'"} />
+<p>{"The time filter is evaluated on the server. "}<code>{"--no-pager"}</code>{" prints the matching history and exits. An empty result means no retained entries matched that window. In this installation, "}<code>{"StandardOutput=journal"}</code>{" and "}<code>{"StandardError=inherit"}</code>{" route the service's output into the system journal. In practice, this view is most useful for startup, shutdown and runtime errors. It is not a transcript of every Atlas or Maya action."}</p>
+<h3>{"Follow the October 15 renewal's Trade activity"}</h3>
+<p>{"Employee runtime events are append-only SQLite audit records, not a plain-text log file that can be watched with "}<code>{"tail -f"}</code>{". For the October 15, 2026 owner-authorized renewal, the operator installed this small read-only follower:"}</p>
+<GuideCode caption="Follow the dated Trade activity helper" text={"ssh botsquad 'python3 -u /var/tmp/botsquad-owner-renewal-20261015/tail-trade.py'"} />
+<p className="guide-callout"><strong>{"Incident-specific operator helper."}</strong>{" This dated path is not a permanent BotSquad product command. It follows only the renewal scope selected by that incident's retained configuration. It may be absent on another host or after a later deployment. A missing file does not mean the service is down; use HQ's current inspection views and ask the operator for the appropriate supported diagnostic tool."}</p>
+<p>{"The helper opens SQLite in read-only mode and polls every two seconds. It begins with a bounded window of matching recent events, then prints new Atlas/Maya event types and their execution IDs, plus changes in loop/stage state and reasons, execution-status counts, and proposal/review/submission counts. It does not print the full discussion, invoke a model, write database rows or grant authority. "}<code>{"python3 -u"}</code>{" makes output appear promptly instead of waiting in an output buffer."}</p>
+<p>{"For one current state snapshot, with any matching recent events, add "}<code>{"--once"}</code>{":"}</p>
+<GuideCode caption="Read one Trade activity snapshot and exit" text={"ssh botsquad 'python3 -u /var/tmp/botsquad-owner-renewal-20261015/tail-trade.py --once'"} />
+<p>{"Press "}<kbd>{"Ctrl+C"}</kbd>{" to leave the continuous viewer. The follower prints state only when it changes, so silence is not a heartbeat failure. Its recent-event window is not a complete historical export. Use HQ and the retained records when you need to reconstruct an older attempt."}</p>
+<h3>{"Interpret the evidence before declaring success"}</h3>
+<GuideTable caption="What diagnostic output establishes" wide={true} headings={["Signal", "What it establishes", "What to inspect next"]} rows={[
+[<>{"Service started or ready"}</>,<>{"The HQ process reached that startup point"}</>,<>{"Current loop, due times, prerequisites and authority; startup alone does not establish eligible work"}</>],
+[<>{"A stage is running, complete or blocked"}</>,<>{"A recorded scheduler transition and its reason"}</>,<>{"That exact occurrence's result; completed collection is not completed research"}</>],
+[<>{"An Atlas/Maya event or completed execution"}</>,<>{"An attributable runtime event or terminal execution status"}</>,<>{"Saved output, usage settlement and completeness, then the required typed records"}</>],
+[<>{"Proposal or review counts increased"}</>,<>{"Records exist within this scope"}</>,<>{"The same proposal revision/hash, independent reviewer and review disposition; a review count can include rejection"}</>],
+[<>{"A submission count increased"}</>,<>{"A submission record exists"}</>,<>{"Its accepted result and matching proposal/review; an order or fill, when required, and a separate public-delivery receipt"}</>]
+]} />
+<p>{"If the loop becomes blocked, capture its exact stage and reason. A source-quality failure, expired research window and incomplete usage settlement are different diagnoses even if the public status says paused in each case. Do not infer a successful decision from a reassuring service log, a persuasive response or a nonzero counter. Follow the "}<a href="#troubleshooting">{"symptom-to-evidence path"}</a>{" and verify the linked records."}</p>
+<h3>{"Keep timestamps and diagnostic output unambiguous"}</h3>
+<p>{"The helper prints UTC timestamps. The verified HQ server uses UTC too, so its journal currently shows a "}<code>{"+0000"}</code>{" offset. On a different host, journal output can use that server's local timezone; add "}<code>{"--utc"}</code>{" to either journal command when you need UTC explicitly. Compare the full date and offset, not just the clock time. On October 15, 2026, 21:00 UTC is 2:00 p.m. in Vancouver (UTC−07:00). Convert other dates with "}<code>{"America/Vancouver"}</code>{" rather than assuming a fixed offset for every historical date."}</p>
+<p>{"Keep execution IDs and raw diagnostic output in authorized private operator notes. Do not enable verbose logging of tokens, authentication headers or full private prompts, and do not paste raw logs or receipts into a public report. Share a redacted stage, failure class, timestamp and verified outcome instead. These commands observe existing work; running them does not establish that a new decision has completed."}</p>
+<p>{"Command references: "}<a href="https://man.openbsd.org/ssh_config#Host">{"OpenSSH host configuration"}</a>{" and the "}<a href="https://github.com/systemd/systemd/blob/v249/man/journalctl.xml">{"journalctl manual source"}</a>{". You can also read "}<code>{"man journalctl"}</code>{" on the server. The incident helper was inspected separately; it is not supplied by either tool."}</p>
 </GuideSection>
 <GuideSection id="incident-record" title="Keep a compact incident record and a daily routine">
 <p>{"Use the following template in private operator notes. Include exact IDs there, then remove them from any public version."}</p>
@@ -292,8 +330,9 @@ export function HqGuideArticle() {
 </GuideSection>
 <GuideSection id="version" title="Version, evidence and known interface limits">
 <p>{"This guide describes the HQ implementation deployed from revision "}<code>{"139a1c5"}</code>{" and the October 15 observation window stated above. Its source links are pinned where practical. The screenshots are cropped actual interfaces, not simulated training screens. Expanded private receipts and transcripts were inspected where needed but are not published here."}</p>
+<p>{"The "}<a href="#tail-logs">{"Tail logs section"}</a>{" was added later on October 15 after checking the service's journal settings and the renewal-specific read-only helper. It documents an inspection method, not the outcome of that renewal. The earlier screenshots and failure example remain a dated checkpoint."}</p>
 <p>{"Known limits of this version include the misleading permanent-limit denominator during recovery, shared portfolio-level usage repeated on different loop cards, a generic subscription warning alongside finite-authority state, incomplete refresh coordination between the portfolio panel and loop cards, and a historical awaiting-approval label that does not correspond to a current owner approval. The article explains these behaviors rather than presenting them as fixed."}</p>
-<p>{"The broader experiment remains observed paper trading with no brokerage execution. Genuine research and closing valuation have occurred; a complete reviewed decision/submission/fill sequence has not yet been demonstrated. Read the "}<a href="/botsquad/trade/guide">{"Trade experiment guide"}</a>{" for the portfolio method, daily schedule, source restrictions and rerun semantics, and the "}<a href="/botsquad/trade">{"public Trade page"}</a>{" for the currently published evidence."}</p>
+<p>{"At the screenshot checkpoint, genuine research and closing valuation had occurred; a complete reviewed decision/submission/fill sequence had not been demonstrated. The experiment uses observed paper trading with no brokerage execution. Read the "}<a href="/botsquad/trade/guide">{"Trade experiment guide"}</a>{" for the portfolio method, daily schedule, source restrictions and rerun semantics, and the "}<a href="/botsquad/trade">{"public Trade page"}</a>{" for the currently published evidence."}</p>
 </GuideSection>
   </>;
 }

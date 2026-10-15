@@ -400,6 +400,16 @@ the Trade introduction and archive/methodology navigation. Preserve ordered
 investigation steps, code field names and the keyboard-scrollable record chain
 and incident-note template.
 
+The owner-requested `#tail-logs` section distinguishes the systemd service journal
+from append-only employee audit records in SQLite. Preserve the SSH-alias
+prerequisite, exact read-only commands, Ctrl+C behavior, UTC/local-time explanation,
+and the difference between process readiness, stage progress and accepted decision
+evidence. The October 15 renewal helper is an incident-specific operator utility,
+not a permanent product command or a guarantee of current availability. Its dated
+path and logical SSH alias are approved command examples; do not publish private
+endpoints, keys, execution IDs, receipts, tokens or prompt text. Keep this later
+addition separate from the screenshots' historical observation checkpoint.
+
 The owner explicitly requested real Computer Use screenshots of HQ for this
 public companion. Publish only reviewed crops that exclude private identifiers,
 transcripts, credentials and access endpoints. Keep source labels as plain text,

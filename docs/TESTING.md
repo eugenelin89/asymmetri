@@ -38,7 +38,7 @@ When routes or shared layout code change, verify:
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/botsquad/trade/guide` (dated technical explanation, noindex, contents,
   glossary, readable diagrams/tables and genuine public-interface screenshots)
-- `/botsquad/trade/hq-guide` (companion links, seventeen contents targets,
+- `/botsquad/trade/hq-guide` (companion links, eighteen contents targets,
   seven approved crops, code blocks and numbered investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
@@ -83,6 +83,12 @@ Check:
   and methodology/archive. Its narrow sidebar capture must not be stretched; wide
   captures have full-size original links. Code blocks scroll within labelled,
   keyboard-focusable regions; private source labels never become HQ access links.
+- HQ `#tail-logs` is reachable from contents, pause troubleshooting and escalation.
+  Verify all four SSH command blocks copy as shown, including nested quotes in the
+  recent-history command and `--once`. The dated helper must be labelled as an
+  incident-specific read-only tool. Preserve UTC/Vancouver context, Ctrl+C meaning,
+  private-output handling and the distinctions between service, stage and decision.
+  At narrow widths, command blocks scroll within their labelled keyboard regions.
 - Trade guide links from the showcase, methodology/archive, Research and overview;
   all guide contents anchors and return links; screenshot loading, captions,
   meaningful alt text and full-size original links; tables scroll within their

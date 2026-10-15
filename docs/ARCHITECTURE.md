@@ -50,6 +50,9 @@ companion accepts a plain source label for private-interface captures; it never
 links to or reads a private HQ endpoint. Full-size images remain local static
 assets, capped by their native width. Guide metadata keeps Trade's noindex policy;
 the sitemap is unchanged.
+The HQ guide's `#tail-logs` section contains static operator command examples,
+including service-journal inspection and a clearly dated incident-specific helper.
+Rendering the page never opens SSH, reads a private database or starts a follower.
 Browsers retain legacy `/sport` fragments across its fragment-free redirect;
 Sports retains story/approach/product/contact IDs. The homepage-only compatibility
 component maps old root `#story`, `#approach`, `#product` to Sports. Explicit no-JS
