@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    // Rollback compatibility for cached Trade redirects and new bookmarks.
+    return [{ source: "/botsquad/trade/:path*", destination: "/botsquad/investment/:path*" }];
+  },
   async redirects() {
     return [
       { source: "/sport", destination: "/sports", permanent: true },
