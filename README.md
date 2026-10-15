@@ -39,6 +39,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
 | `/botsquad/investment` | Published roster, decisions, portfolio valuations and journal, with explicit evidence quality |
 | `/botsquad/investment/guide` | Illustrated technical guide to the Trade architecture, daily process, evidence and recovery limits |
+| `/botsquad/investment/hq-guide` | HQ investigation guide: inspect schedules, executions, usage, decisions and publication |
 | `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |

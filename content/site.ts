@@ -1198,6 +1198,18 @@ export const tradeGuide = {
   dateLabel: 'October 15, 2026',
 } as const;
 
+export const hqGuide = {
+  href: '/botsquad/investment/hq-guide',
+  navLabel: 'HQ investigation guide',
+  action: 'Investigate Trade in HQ',
+  title: 'Investigating BotSquad Trade from HQ',
+  description: 'An illustrated operator guide to examining BotSquad HQ, tracing Trade records, investigating failures and understanding recovery controls.',
+  eyebrow: 'BotSquad Research / Trade / HQ investigation guide',
+  introduction: 'Trace a trading day through the portfolio, scheduled work, employee executions and publication evidence.',
+  date: '2026-10-15',
+  dateLabel: 'October 15, 2026',
+} as const;
+
 // Published public worker identities; no name-based or remote image lookup.
 export const investmentWorkerPortraits: Readonly<Record<string, SiteImage>> = {
   '3b81014148920905b6ce846a8be85edd27699686b8158f2c': atlasPortrait,
@@ -1393,5 +1405,72 @@ export const tradeGuideFigures = {
     "caption": "Figure 3. The benchmark evidence makes the clocks concrete: the October 14 market reference is 20:00 UTC, retrieval is about 20:07, and allocation is recorded about 20:20. “Available Unknown” remains unknown.",
     "source": "https://asymmetri.co/botsquad/investment/records/valuation/98d348b9601bcb90eaf2195084a988c711a764e9f9a389e3/versions/1?run=0f6ea49caee91243f2f028a8ddde55abaa68faaaa2de453c",
     "capturedAt": "2026-10-15T17:42:13.628102+00:00"
+  }
+} as const;
+
+// HQ investigation guide: approved private-interface crops, October 15, 2026.
+export const hqGuideFigures = {
+  "01-hq-navigation": {
+    "src": "/images/botsquad/hq-guide/01-hq-navigation.jpg",
+    "alt": "The HQ sidebar shows Attention, Working Groups, Tasks and Executions.",
+    "width": 260,
+    "height": 720,
+    "caption": "Figure 1. The upper HQ sidebar. Scroll the sidebar to reach Investment run, Investment team, Investment publication and Audit history. Counts are company-wide; they are not all Trade activity.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:40:52.751109+00:00"
+  },
+  "02-portfolio-metrics": {
+    "src": "/images/botsquad/hq-guide/02-portfolio-metrics.jpg",
+    "alt": "The portfolio metrics show USD 100,000 cash and equity, zero returns, and the October 14 valuation timestamp.",
+    "width": 1080,
+    "height": 566,
+    "caption": "Figure 2. The latest valuation is October 14 at 20:00 UTC. The displayed cash and equity are USD 100,000. A freshly opened page does not make that valuation current to October 15.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:34:31.939774+00:00"
+  },
+  "03-loop-and-authority": {
+    "src": "/images/botsquad/hq-guide/03-loop-and-authority.jpg",
+    "alt": "A blocked loop shows six reserved turns, ten permanent calls, one remaining call, and an incomplete-telemetry reason.",
+    "width": 1044,
+    "height": 250,
+    "caption": "Figure 3. The loop is blocked even though an independent authority is present. Each counter covers a different scope. The “remaining 1” value reflects the stricter recovery allowance.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:34:32.040243+00:00"
+  },
+  "04-usage-and-invocations": {
+    "src": "/images/botsquad/hq-guide/04-usage-and-invocations.jpg",
+    "alt": "The AI usage summary shows ten invocations, two incomplete usage records, and ten unpriced records above the execution table.",
+    "width": 1044,
+    "height": 610,
+    "caption": "Figure 4. An excerpt of the aggregate and its first four rows. A completed runtime row can still have incomplete usage. Actual charges and subscription quota are unknown.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:35:47.708213+00:00"
+  },
+  "05-evidence-and-controls": {
+    "src": "/images/botsquad/hq-guide/05-evidence-and-controls.jpg",
+    "alt": "The loop evidence summary shows one proposal, zero reviews, zero submissions and no pending orders above the control buttons.",
+    "width": 1044,
+    "height": 335,
+    "caption": "Figure 5. The counts locate the break: a proposal exists, but no independent review or submission is committed. The buttons below are controls, not diagnostic acknowledgments.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:34:54.794806+00:00"
+  },
+  "06-publication-health": {
+    "src": "/images/botsquad/hq-guide/06-publication-health.jpg",
+    "alt": "Publication health is active with zero pending, uncaptured or uncertain jobs, followed by explicit delivery controls and a collapsed receipts disclosure.",
+    "width": 1044,
+    "height": 290,
+    "caption": "Figure 7. Publication is active with an empty backlog while the investment loop is blocked. No delivery control was activated for this capture.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:39:53.521685+00:00"
+  },
+  "07-review-row": {
+    "src": "/images/botsquad/hq-guide/07-review-row.jpg",
+    "alt": "The final three invocation rows include a Maya review labeled awaiting approval with incomplete usage.",
+    "width": 1044,
+    "height": 250,
+    "caption": "Figure 6. This is a retained historical execution label. It does not establish that an approval is waiting for the owner in the Approvals view.",
+    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "capturedAt": "2026-10-15T18:36:10.219942+00:00"
   }
 } as const;

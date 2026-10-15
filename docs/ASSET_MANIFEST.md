@@ -631,3 +631,92 @@ captures; existing asset rights assessments continue to apply.
 - Alt text: “The public exact valuation shows the benchmark closing allocation, retrieval time and later accounting time.”
 - Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
 - SHA-256: `d1a2fd381161682aa8fc0d9a0b610d753101f0bdb3684420edd24940bc3cbeba`.
+
+
+## HQ investigation guide, October 15, 2026
+
+The owner requested actual Computer Use screenshots for a public companion to the
+Trade guide. These seven reviewed JPEG crops show the private HQ interface with
+private identifiers, transcripts, account details, credentials and endpoints
+excluded. They contain no rewritten pixels, synthetic data or EXIF metadata.
+The published files are byte-identical to the approved crops. The original
+private screens and operational receipts are not copied into the repository.
+Source labels are plain text, never private URLs. Existing BotSquad UI and asset
+rights apply; publication is limited to these owner-authorized reviewed crops.
+
+### 01-hq-navigation.jpg
+
+- Public URL: `/images/botsquad/hq-guide/01-hq-navigation.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:40:52.751109+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 260 × 720 JPEG; 15,843 bytes.
+- Processing: Actual viewport crop, x=0 y=0 width=260 height=720; no pixel rewriting. Private workspace content is excluded. Integration preserves original bytes.
+- Public role and caption: The upper HQ sidebar. Scroll the sidebar to reach Investment run, Investment team, Investment publication and Audit history. Counts are company-wide; they are not all Trade activity.
+- Alt text: “The HQ sidebar shows Attention, Working Groups, Tasks and Executions.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `4ffa02ba35b77363033203b7022541808ba258c63f45509a6e11b2128323b09d`.
+
+### 02-portfolio-metrics.jpg
+
+- Public URL: `/images/botsquad/hq-guide/02-portfolio-metrics.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:34:31.939774+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1080 × 566 JPEG; 33,520 bytes.
+- Processing: Direct Computer Use page crop, x=100 y=534 width=1080 height=566. Portfolio name and private run identifier above the metrics are excluded. Integration preserves original bytes.
+- Public role and caption: The latest valuation is October 14 at 20:00 UTC. The displayed cash and equity are USD 100,000. A freshly opened page does not make that valuation current to October 15.
+- Alt text: “The portfolio metrics show USD 100,000 cash and equity, zero returns, and the October 14 valuation timestamp.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `493094ee1e75f9744e0b6f7bd4059d3764de4a326d4e97e6337fd86c1ab2d54c`.
+
+### 03-loop-and-authority.jpg
+
+- Public URL: `/images/botsquad/hq-guide/03-loop-and-authority.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:34:32.040243+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1044 × 250 JPEG; 21,386 bytes.
+- Processing: Direct Computer Use page crop, x=118 y=1777 width=1044 height=250. Private worker identifier list below the panel is excluded. Integration preserves original bytes.
+- Public role and caption: The loop is blocked even though an independent authority is present. Each counter covers a different scope. The remaining-one value reflects the stricter recovery allowance.
+- Alt text: “A blocked loop shows six reserved turns, ten permanent calls, one remaining call, and an incomplete-telemetry reason.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `e5414d827c127d8c7fe55ab86856b56171635eb1d071e6728f7e33758f1fcea0`.
+
+### 04-usage-and-invocations.jpg
+
+- Public URL: `/images/botsquad/hq-guide/04-usage-and-invocations.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:35:47.708213+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1044 × 610 JPEG; 59,702 bytes.
+- Processing: Direct Computer Use page crop, x=118 y=2130 width=1044 height=610. All private execution/pricing/breakdown disclosures remain closed. Integration preserves original bytes.
+- Public role and caption: An excerpt of the aggregate and its first four rows. A completed runtime row can still have incomplete usage. Actual charges and subscription quota are unknown.
+- Alt text: “The AI usage summary shows ten invocations, two incomplete usage records, and ten unpriced records above the execution table.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `d26051a0119d1698238ef844c06ba89a632387780fe61cc7aac3cf6bbaedb183`.
+
+### 05-evidence-and-controls.jpg
+
+- Public URL: `/images/botsquad/hq-guide/05-evidence-and-controls.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:34:54.794806+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1044 × 335 JPEG; 29,722 bytes.
+- Processing: Direct Computer Use page crop, x=118 y=3306 width=1044 height=335. Private frozen evidence and schedule disclosures remain closed; no control was activated. Integration preserves original bytes.
+- Public role and caption: The counts locate the break: a proposal exists, but no independent review or submission is committed. The buttons below are controls, not diagnostic acknowledgments.
+- Alt text: “The loop evidence summary shows one proposal, zero reviews, zero submissions and no pending orders above the control buttons.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `6f33dd80da77e8bf049fdc34d0ad73f2736c5bd53e7b0443f7a80f4c356bc26d`.
+
+### 06-publication-health.jpg
+
+- Public URL: `/images/botsquad/hq-guide/06-publication-health.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:39:53.521685+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1044 × 290 JPEG; 28,488 bytes.
+- Processing: Direct Computer Use page crop, x=118 y=338 width=1044 height=290. The private channel header and preparation form are excluded; delivery receipts remain closed. Integration preserves original bytes.
+- Public role and caption: Publication is active with an empty backlog while the investment loop is blocked. No delivery control was activated for this capture.
+- Alt text: “Publication health is active with zero pending, uncaptured or uncertain jobs, followed by explicit delivery controls and a collapsed receipts disclosure.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `c296ae43fe35eefa23e01606961eb034f685cc3fb74019ee6c19a574ae7102b0`.
+
+### 07-review-row.jpg
+
+- Public URL: `/images/botsquad/hq-guide/07-review-row.jpg`.
+- Source: Private BotSquad HQ — owner interface; captured `2026-10-15T18:36:10.219942+00:00` through Computer Use. No public source endpoint.
+- Dimensions and format: 1044 × 250 JPEG; 27,000 bytes.
+- Processing: Direct Computer Use page crop, x=118 y=2964 width=1044 height=250. Execution details remain closed; this is an excerpt of the final three invocation rows. Integration preserves original bytes.
+- Public role and caption: This is a retained historical execution label. It does not establish that an approval is waiting for the owner in the Approvals view.
+- Alt text: “The final three invocation rows include a Maya review labeled awaiting approval with incomplete usage.”
+- Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
+- SHA-256: `23fe58f7d15e4fa73ffd04335f17d2626223f98ebc1ef9099272a880056794e0`.

@@ -3,7 +3,7 @@ import { BotSquadNavigation } from '@/components/botsquad-navigation';
 import { Suspense } from 'react';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { investmentArchive, investmentWorkerPortraits, investmentShowcase as copy, tradeGuide } from '@/content/site';
+import { investmentArchive, investmentWorkerPortraits, investmentShowcase as copy, tradeGuide, hqGuide } from '@/content/site';
 import { actorName, displayTime, inRun, recordHref } from '@/lib/investment-links';
 import { readShowcase } from '@/lib/investment-showcase';
 import { publicFreshnessReason } from '@/lib/investment-status';
@@ -41,7 +41,7 @@ async function ShowcaseRecords({run}:{run?:string}) {
 export function Showcase({run}:{run?:string}) {
  const selectedRun=run??process.env.ASYMMETRI_INVESTMENT_RUN,synthetic=process.env.ASYMMETRI_INVESTMENT_EVIDENCE_MODE==='synthetic_fixture';
   return <div className="site inv-site"><SiteHeader/>{synthetic&&<div className="inv-synthetic" role="note"><span className="shell">{investmentArchive.synthetic}</span></div>}<main id="main-content" tabIndex={-1} className="inv-main shell"><BotSquadNavigation current="investment" detail={run ? "Run" : undefined} />
-    <header className="inv-hero"><div><p className="eyebrow">The BotSquad trade experiment</p><h1>{copy.headline}</h1><p className="inv-intro">{copy.introduction}</p><div className="inv-actions"><a className="button button--primary" href="#desk">Explore the trading desk ↓</a><a href={tradeGuide.href}>{tradeGuide.action} →</a><a href={inRun('/botsquad/investment/methodology',selectedRun)}>Read the methodology ↗</a></div></div></header>
+    <header className="inv-hero"><div><p className="eyebrow">The BotSquad trade experiment</p><h1>{copy.headline}</h1><p className="inv-intro">{copy.introduction}</p><div className="inv-actions"><a className="button button--primary" href="#desk">Explore the trading desk ↓</a><a href={tradeGuide.href}>{tradeGuide.action} →</a><a href={hqGuide.href}>{hqGuide.action} →</a><a href={inRun('/botsquad/investment/methodology',selectedRun)}>Read the methodology ↗</a></div></div></header>
     <nav className="inv-index" aria-label="Showcase sections">{copy.navigation.map(([id,label],i)=><a key={id} href={'#'+id}><span aria-hidden="true">{String(i+1).padStart(2,'0')}</span>{label}</a>)}</nav>
 <Suspense fallback={<p className="inv-empty" role="status">Loading verified archive records… Current run state is not yet verified.</p>}><ShowcaseRecords run={run}/></Suspense><p className="inv-footer-notice">{investmentArchive.notice}</p></main><SiteFooter/></div>;
 }

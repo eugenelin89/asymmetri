@@ -25,6 +25,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/botsquad/research` | Research hub linking to BotSquad Trade |
 | `/botsquad/investment` | Trade research project and retained evidence routes |
 | `/botsquad/investment/guide` | Static technical article, actual public-interface captures and dated operational evidence |
+| `/botsquad/investment/hq-guide` | Static companion explaining private HQ inspection through approved cropped screenshots |
 | `/botsquad/ask` | Shared BotSquad question service, currently closed |
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
@@ -43,7 +44,11 @@ The Trade technical guide is a static server-rendered article with local public
 screenshots, native contents links and semantic diagrams/tables. It does not read
 private HQ data, depend on a receiver connection or add an API, parser dependency,
 operational control or model call. Its dated evidence is distinct from the live
-archive. Guide metadata keeps Trade's noindex policy; the sitemap is unchanged.
+archive. Both guide routes share the article layout, contents, tables and styles. The HQ
+companion accepts a plain source label for private-interface captures; it never
+links to or reads a private HQ endpoint. Full-size images remain local static
+assets, capped by their native width. Guide metadata keeps Trade's noindex policy;
+the sitemap is unchanged.
 Browsers retain legacy `/sport` fragments across its fragment-free redirect;
 Sports retains story/approach/product/contact IDs. The homepage-only compatibility
 component maps old root `#story`, `#approach`, `#product` to Sports. Explicit no-JS

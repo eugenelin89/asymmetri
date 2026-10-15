@@ -28,6 +28,10 @@
 .guide-section code { font-size: .88em; background: var(--light-raised); padding: .1em .25em; border: 1px solid var(--line); border-radius: 2px; overflow-wrap: anywhere; }
 .guide-section pre { max-width: 100%; overflow-x: auto; padding: 1.25rem; background: var(--light-raised); border: 1px solid var(--line); font-size: .85rem; line-height: 1.6; }
 .guide-section pre code { border: 0; padding: 0; }
+.guide-code { margin: 2rem 0; }
+.guide-code figcaption { font-weight: 650; }
+.guide-code pre { white-space: pre; }
+.guide-section > ol { list-style: decimal; }
 .guide-callout { border-left: 3px solid var(--brand-on-light); background: var(--light-raised); padding: .5rem 1.3rem; margin-block: 1.75rem; }
 .guide-figure { margin: 2rem 0; }
 .guide-image-link { display: block; max-width: 32rem; margin-inline: auto; background: var(--graphite); border: 1px solid var(--line); }

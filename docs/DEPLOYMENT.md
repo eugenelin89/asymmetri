@@ -1000,6 +1000,17 @@ changing its source or discarding recovery data:
    and extract as the application owner into an empty staging location, then check
    source/build identity and ownership before the usual directory activation.
 
+If production cannot hold the archive while maintaining its required free-space
+floor, stream it over the existing authenticated SSH connection to private,
+durable owner storage outside Git. Sync it there, compare its SHA-256 and size
+with the server's streaming receipt, and verify gzip integrity. Stream that exact
+archive back to GNU tar for a full content and metadata comparison against the
+still-present original. Only then retire the redundant directory. Keep a private
+receipt on the server and beside the archive; restoration requires transferring
+this exact archive back and verifying its checksum before extraction. The current
+release and immediate rollback must remain complete on the server. See the
+[October 15 retention record](WEBSITE-ROLLBACK-ARCHIVES_2026-10-15.md).
+
 This changes the storage form of the older rollback, not its retention. During
 September 28 Work preparation, the archive was created and verified. A separate
 owner-authorized cleanup then provided sufficient capacity, so the original

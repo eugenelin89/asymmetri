@@ -38,6 +38,8 @@ When routes or shared layout code change, verify:
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/botsquad/investment/guide` (dated technical explanation, noindex, contents,
   glossary, readable diagrams/tables and genuine public-interface screenshots)
+- `/botsquad/investment/hq-guide` (companion links, seventeen contents targets,
+  seven approved crops, code blocks and numbered investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
@@ -77,6 +79,10 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
+- Both guides cross-link and the HQ companion is directly discoverable from Trade
+  and methodology/archive. Its narrow sidebar capture must not be stretched; wide
+  captures have full-size original links. Code blocks scroll within labelled,
+  keyboard-focusable regions; private source labels never become HQ access links.
 - Trade guide links from the showcase, methodology/archive, Research and overview;
   all guide contents anchors and return links; screenshot loading, captions,
   meaningful alt text and full-size original links; tables scroll within their

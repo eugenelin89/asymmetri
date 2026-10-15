@@ -392,6 +392,21 @@ experiment is the default until trusted server read configuration is explicitly 
 
 ## Investment showcase copy and evidence
 
+The HQ companion at `/botsquad/investment/hq-guide` explains how an operator
+examines schedules, executions, usage, decision evidence and publication. Its
+shared labels and metadata live in `hqGuide`; route-specific prose lives in its
+article component. The two guides cross-link, with direct HQ-guide links from
+the Trade introduction and archive/methodology navigation. Preserve ordered
+investigation steps, code field names and the keyboard-scrollable record chain
+and incident-note template.
+
+The owner explicitly requested real Computer Use screenshots of HQ for this
+public companion. Publish only reviewed crops that exclude private identifiers,
+transcripts, credentials and access endpoints. Keep source labels as plain text,
+not private links; disclose actual cropping and capture dates. These seven images
+show the actual interface, not a fictional demonstration state. Do not generalize
+this approval to future raw HQ screenshots or expanded private receipts.
+
 The technical guide at `/botsquad/investment/guide` explains the full Trade
 experiment for readers with undergraduate computer-science knowledge. Shared
 metadata and navigation labels live in `tradeGuide` in `content/site.ts`; the
