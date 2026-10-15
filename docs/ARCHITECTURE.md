@@ -23,9 +23,10 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/motion` | Current pitching workflow and family roadmap |
 | `/botsquad` | Umbrella project overview, software story and area directory |
 | `/botsquad/research` | Research hub linking to BotSquad Trade |
-| `/botsquad/investment` | Trade research project and retained evidence routes |
-| `/botsquad/investment/guide` | Static technical article, actual public-interface captures and dated operational evidence |
-| `/botsquad/investment/hq-guide` | Static companion explaining private HQ inspection through approved cropped screenshots |
+| `/botsquad/trade` | Trade research project and retained evidence routes |
+| `/botsquad/trade/guide` | Static technical article, actual public-interface captures and dated operational evidence |
+| `/botsquad/trade/hq-guide` | Static companion explaining private HQ inspection through approved cropped screenshots |
+| `/botsquad/investment/:path*` | HTTP 308 to the same suffix under `/botsquad/trade`, retaining query values |
 | `/botsquad/ask` | Shared BotSquad question service, currently closed |
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
@@ -74,8 +75,8 @@ No old `work` content export.
 the research hub; `botsquadDirectory` owns the overview area cards. The server-only
 `BotSquadNavigation` renders ancestor breadcrumbs and Overview/Research/Trade/Ask
 links on the overview, hub, investment, archive and Ask pages. Ask is a sibling
-of Research, not an investment-only child. Existing investment and Ask URLs remain
-stable; page hierarchy does not change the canonical evidence/API protocol.
+of Research, not an investment-only child. Legacy Investment page URLs remain usable through same-suffix permanent
+redirects to Trade. Ask URLs and the canonical evidence/API protocol are unchanged.
 See [the October 13 hierarchy decision](BOTSQUAD_HIERARCHY_2026-10-13.md).
 
 `MotionFamily` is a server component reused on Sports and Motion: two individual
@@ -389,7 +390,7 @@ Ed25519 HTTP authentication, immutable events/receipts, financial validation and
 private CAS. Next/Vinext builds exclude its runtime; `lib/investment-archive.ts`
 provides only type-safe read locations/types, disabled unless explicitly configured.
 Existing company pages do not fetch it. INV-03 adds explicitly configured, default-disabled
-server pages under `/botsquad/investment`, with no-store verified content proxying. See the [runbook](INVESTMENT_RECEIVER.md) for trust,
+server pages under `/botsquad/trade`, with no-store verified content proxying. See the [runbook](INVESTMENT_RECEIVER.md) for trust,
 transaction, visibility, capacity, recovery and later private Ask boundaries.
 
 
@@ -406,7 +407,7 @@ default-disabled Ask source is described below.
 
 ## INV-04 showcase read boundary
 
-`app/botsquad/investment/` composes a streaming static introduction plus bounded
+`app/botsquad/trade/` composes a streaming static introduction plus bounded
 server reads. New exact-run, decision and methodology pages complement INV-03
 artifact/version, discussion and record pages. `/botsquad/ask` remains closed and can inspect same-origin availability.
 The website has no question submission UI or provider connection. The independent
@@ -432,7 +433,7 @@ fields, source/valuation limitations and explicit evidence/accounting clocks. Ch
 paths use exact sequence comparisons to break across missing observations. No new
 DTO, database or client authority is added. See [the current integration handoff](INV-REAL-01-WEBSITE.md).
 
-The same-origin `/botsquad/investment/read` GET route exposes only approved public
+The same-origin `/botsquad/trade/read` GET route exposes only approved public
 read resources; it adds no HQ access, authentication or write authority. Receiver
 transport adds `X-Archive-Visibility` (archive epoch + visibility epoch hash) and an
 optional `X-Archive-Latest-Cursor` for the latest bounded event window. They do not
@@ -502,3 +503,15 @@ orders and snapshots. Existing dependency links propagate withdrawal. The bounde
 even when it is beyond an event page or a later status supersedes the run state.
 A hidden amendment makes status unavailable. The showcase and archive shell
 render this witnessed projection beside the original frozen settings.
+
+
+## Trade public URL migration
+
+The complete route family lives in `app/botsquad/trade/`; the legacy family has a
+single permanent wildcard redirect in `next.config.ts`. `lib/trade-metadata.ts`
+sets per-page canonical/OG identity with exact-run context while retaining noindex.
+Read/content handlers moved without implementation changes. No ingress or private
+API routing changed. Dated screenshot source links intentionally retain their old
+capture URLs. The [migration contract](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md)
+documents query/fragment/method behavior and the independently built dual-URL
+compatibility fallback required for permanent-redirect rollback.

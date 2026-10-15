@@ -36,7 +36,7 @@ export const divisions = {
 export const botsquadStructure = {
   overview: { label: 'BotSquad', navLabel: 'Overview', href: '/botsquad' },
   research: { label: 'BotSquad Research', navLabel: 'Research', href: '/botsquad/research' },
-  investment: { label: 'BotSquad Trade', navLabel: 'Trade', href: '/botsquad/investment' },
+  investment: { label: 'BotSquad Trade', navLabel: 'Trade', href: '/botsquad/trade' },
   ask: { label: 'Ask BotSquad', navLabel: 'Ask BotSquad', href: '/botsquad/ask' },
 } as const;
 
@@ -1187,7 +1187,7 @@ export const investmentArchive = {
 };
 
 export const tradeGuide = {
-  href: '/botsquad/investment/guide',
+  href: '/botsquad/trade/guide',
   navLabel: 'Trade guide',
   action: 'How the Trade experiment works',
   title: 'How BotSquad Trade works',
@@ -1199,7 +1199,7 @@ export const tradeGuide = {
 } as const;
 
 export const hqGuide = {
-  href: '/botsquad/investment/hq-guide',
+  href: '/botsquad/trade/hq-guide',
   navLabel: 'HQ investigation guide',
   action: 'Investigate Trade in HQ',
   title: 'Investigating BotSquad Trade from HQ',
@@ -1231,7 +1231,7 @@ export const investmentShowcase = {
     marketUnavailable: 'Market freshness is unavailable in the public archive.',
   },
   ask: 'Eventually, one relevant BotSquad employee will answer questions about the project, research or a particular decision. Actual employee responses are not yet enabled. This preview accepts no questions.',
-  discovery: {title:'Trade showcase',body:'Inspect published research, decisions and paper-portfolio history. Each run identifies its methodology and evidence mode; synthetic demonstrations remain clearly labelled.',href:'/botsquad/investment'},
+  discovery: {title:'Trade showcase',body:'Inspect published research, decisions and paper-portfolio history. Each run identifies its methodology and evidence mode; synthetic demonstrations remain clearly labelled.',href:'/botsquad/trade'},
   methodologyIntroduction: 'Read these rules alongside the selected run’s original configuration, published amendments and limitations. Describing a method does not establish that a run is active or that market observations have been published.',
   observed: 'Observed market data · modeled paper results · no real trades',
   methodologyLimits: 'The selected run’s original configuration and any published, session-specific amendment govern its method. Capital, universe, fees, slippage and limits remain in the frozen configuration. Missing or blocked observations stay explicit. Published results do not prove reasoning quality or predict future performance.',

@@ -1283,3 +1283,16 @@ records the actual candidate guards, source/build identities, stopped archive
 backup and public/Ask preservation checks. After new amendment records are
 accepted, older website builds can fail closed on the new status field; prefer
 a compatible forward repair over assuming an old website is a useful rollback.
+
+
+## Trade URL migration rollback
+
+For the October15 Trade URL migration, retain the normal complete pre-activation
+runtime and a separately built compatibility fallback that serves both public URL
+namespaces. A pre-migration runtime alone cannot serve new bookmarks or cached308
+destinations. Use the tested compatibility fallback for operational rollback, keep
+the failed migration for diagnosis, and forward-fix the canonical Trade release.
+Never combine the fallback's Trade→Investment rewrite with the migration's
+Investment→Trade redirect. The [migration contract](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md)
+records scope and validation; exact commits/builds/manifests belong in the release
+receipt. Do not modify ingress, private receivers or stored records for this move.

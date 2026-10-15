@@ -40,8 +40,8 @@ export function askContext(params: Record<string,string|string[]|undefined>): Co
 export function askEvidenceHref(context: ContextRef, experimentId: string | null): string | null {
   if (!askDto('ContextRef',context) || context.experimentId !== experimentId) return null;
   const {record,runId}=context;
-  const path=record.kind==='artifact' ? `/botsquad/investment/artifacts/${record.id}/versions/${record.version}` :
-    `/botsquad/investment/records/${record.kind}/${record.id}/versions/${record.version}`;
+  const path=record.kind==='artifact' ? `/botsquad/trade/artifacts/${record.id}/versions/${record.version}` :
+    `/botsquad/trade/records/${record.kind}/${record.id}/versions/${record.version}`;
   return path+'?run='+encodeURIComponent(runId);
 }
 export function askSourceHref(value: string | null): string | null {

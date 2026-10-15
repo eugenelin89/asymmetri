@@ -154,7 +154,7 @@ INV-02 advances the local repository security baseline to Next.js and
 
 ## INV-03 isolated archive views
 
-The `/botsquad/investment` pages render an empty state by default. A private local
+The `/botsquad/trade` pages render an empty state by default. A private local
 fixture can set `ASYMMETRI_INVESTMENT_READ_ORIGIN=http://127.0.0.1:PORT`,
 `ASYMMETRI_INVESTMENT_EXPERIMENT`, `ASYMMETRI_INVESTMENT_RUN` and
 `ASYMMETRI_INVESTMENT_EVIDENCE_MODE=synthetic_fixture`. Match receiver authority to
@@ -185,7 +185,7 @@ ASYMMETRI_INVESTMENT_EVIDENCE_MODE=synthetic_fixture \
 npm run dev:next -- --webpack --hostname 127.0.0.1 --port 4317
 ```
 
-Open `http://127.0.0.1:4317/botsquad/investment`. The launcher creates a new private
+Open `http://127.0.0.1:4317/botsquad/trade`. The launcher creates a new private
 temporary database/content tree, signs and validates synthetic fixture batches,
 then disables its publisher and revokes all ephemeral test keys. The loopback
 adapter accepts GET only. Ctrl-C closes it and removes its disposable files.

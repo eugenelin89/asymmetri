@@ -40,7 +40,8 @@ preserves methods; unsupported writes still end at a 405. `/api/experiments/v1`,
 are not renamed. Persisted Markdown/source links can remain historical because
 their legacy destinations continue to work. Public image URLs remain unchanged.
 
-Authored navigation, guide sources and Ask evidence links use Trade directly.
+Authored navigation and Ask evidence links use Trade directly. Dated screenshot
+source URLs retain their actual Investment capture locations and work by redirect.
 Page canonical and Open Graph URLs use the new family, preserving explicit run
 context on evidence pages. Trade remains noindex and excluded from the sitemap;
 Motion routes, its exact www tutorial canonical and original assets are protected.

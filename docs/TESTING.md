@@ -36,9 +36,9 @@ When routes or shared layout code change, verify:
 - `/labs` (open-source playground and project list)
 - `/sports` (division, founder story, Motion family and anchors)
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
-- `/botsquad/investment/guide` (dated technical explanation, noindex, contents,
+- `/botsquad/trade/guide` (dated technical explanation, noindex, contents,
   glossary, readable diagrams/tables and genuine public-interface screenshots)
-- `/botsquad/investment/hq-guide` (companion links, seventeen contents targets,
+- `/botsquad/trade/hq-guide` (companion links, seventeen contents targets,
   seven approved crops, code blocks and numbered investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
@@ -509,12 +509,12 @@ candidate evidence remains in the [package review](ASK-04-CAPABILITY-REVIEW.md).
 
 ## BotSquad hierarchy navigation
 
-Verify Labs → BotSquad → Research → Investment through visible links, and return
-through the breadcrumbs. Overview, Research, Investment and Ask must be reachable
+Verify Labs → BotSquad → Research → Trade through visible links, and return
+through the breadcrumbs. Overview, Research, Trade and Ask must be reachable
 from the shared area navigation and global Labs menu. Ask breadcrumbs place it
 beside Research. Verify archive and methodology pages retain exact-run navigation.
 The Research hub must have its apex canonical and sitemap entry. Existing
-investment/Ask URLs and noindex policy stay intact. At 390/768/1440 CSS pixels,
+investment URLs redirect to Trade; Ask URLs and noindex policy stay intact. At 390/768/1440 CSS pixels,
 check wrapping, 44px targets, visible focus, current-page indication and no overflow;
 verify menus by keyboard and preserve reduced-motion rules and Motion footer links.
 
@@ -528,3 +528,22 @@ later status, restarts, and verifies withdrawal propagation. The test remains in
 the normal receiver suite. These are authored fixtures, not proof of live market
 or employee execution. The [packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md) records
 actual validation and release results separately.
+
+
+## Trade route migration regression
+
+After starting the documented disposable showcase preview and local Next server,
+run `TRADE_TEST_ORIGIN=http://127.0.0.1:4327 node --test tests/trade-routing.test.mjs`.
+This suite requires loopback and published synthetic fixture data; never point it
+at production. It verifies permanent redirects, per-page canonical/OG, exact-run
+context, nested/duplicate/empty queries, successful attachment hashes/security
+headers, HEAD, rejected writes, unknown-route 404s and bounded slash normalization.
+It also crawls rendered internal links and verifies guide/navigation anchors.
+Start with a fresh disposable fixture, or enter `reset` in its terminal between
+acceptance runs. Its frozen clock otherwise accumulates requests in one 600-request
+minute bucket; a 429 can make verified downloads correctly fail closed with 410.
+Do not relax production limits or download verification to accommodate a test crawl.
+Also run the existing Ask/archive tests. Browser verification must follow old
+`#desk` and `#record-chain` links and confirm the destination fragment/target.
+Test the separately built compatibility fallback with both namespaces before
+activation; cached redirects must not turn a rollback into broken Trade bookmarks.

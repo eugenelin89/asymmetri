@@ -11,7 +11,7 @@ test('context actions preserve only exact public record identities and reject am
  assert.deepEqual(askContext(query),ref);assert.equal(askContext({...query,version:['1','2']}),null);
  assert.equal(askContext({...query,question:'private text'}),null);assert.equal(askContext({...query,version:'0'}),null);
  assert.equal(askContext({...query,record:'a/../private'}),null);assert.equal(askId(undefined),false);
- assert.equal(askEvidenceHref(ref,'other-experiment'),null);assert.match(askEvidenceHref(ref,ref.experimentId),/\/records\/transaction\/fixture-tx-2\/versions\/1\?run=fixture-run$/);
+ assert.equal(askEvidenceHref(ref,'other-experiment'),null);assert.match(askEvidenceHref(ref,ref.experimentId),/^\/botsquad\/trade\/records\/transaction\/fixture-tx-2\/versions\/1\?run=fixture-run$/);
  for(const url of ['javascript:alert(1)','data:text/html,a','https://user:secret@example.test/','//example.test'])assert.equal(askSourceHref(url),null);
  assert.equal(askSourceHref('https://example.test/evidence'),'https://example.test/evidence');
 });

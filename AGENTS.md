@@ -22,8 +22,10 @@ such as BotSquad. Labs is not the parent of Sports. The former Work division and
 singular Sport branding are superseded. Preserve direct access to both products.
 This is a public brand hierarchy, not a newly asserted legal corporation name.
 Within BotSquad, BotSquad Research contains BotSquad Trade. Ask BotSquad is
-a shared sibling of Research. Follow `docs/BOTSQUAD_HIERARCHY_2026-10-13.md`; keep
-existing investment/evidence URLs and exact-run context stable.
+a shared sibling of Research. Follow `docs/BOTSQUAD_HIERARCHY_2026-10-13.md`; preserve
+legacy investment/evidence URLs through permanent same-suffix redirects to the
+canonical `/botsquad/trade` family, with exact-run context intact. Follow
+`docs/BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md` for compatibility and rollback.
 
 Motion has separate individual Pitching and planned Hitting applications, and one
 planned professional Team application. Team Pitching/Hitting/Baseball are

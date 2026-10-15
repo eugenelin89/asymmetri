@@ -2,7 +2,7 @@ import test from 'node:test';
 import {createServer} from 'node:http';
 import {investmentReadHeaders,investmentArchiveFetch} from '../lib/investment-read-transport.ts';
 import assert from 'node:assert/strict';
-import {money,percent,ratio,csv,compareSequence,inRun,displayTime} from '../lib/investment-links.ts';
+import {money,percent,ratio,csv,compareSequence,inRun,displayTime,artifactHref,recordHref} from '../lib/investment-links.ts';
 import {benchmarkDrawdowns,performancePath,performanceSequenceGaps} from '../lib/investment-performance.ts';
 test('exact decimal labels preserve cent boundaries beyond Number precision and distinguish null',()=>{
  assert.equal(money('999999999999.994999'),'$999,999,999,999.99');
@@ -45,4 +45,10 @@ test('archive authority override is explicit, server-owned and restricted to loo
  for(const authority of ['','asymmetri.co\r\nForwarded: attacker','https://asymmetri.co','asymmetri.co@evil.test','asymmetri.co:65536']) assert.throws(()=>investmentReadHeaders(url,authority));
  assert.throws(()=>investmentReadHeaders('https://evil.test/archive','asymmetri.co'));
  assert.throws(()=>investmentReadHeaders('http://user@127.0.0.1/archive','asymmetri.co'));
+});
+
+test('Trade links preserve exact artifact versions, record identities and retained runs',()=>{
+ assert.equal(artifactHref('artifact-1',3,'retained-run'),'/botsquad/trade/artifacts/artifact-1/versions/3?run=retained-run');
+ assert.equal(recordHref({kind:'discussion',id:'discussion-1',version:1,relation:'supports'},'retained-run'),'/botsquad/trade/discussions/discussion-1?run=retained-run');
+ assert.equal(recordHref({kind:'valuation',id:'valuation-1',version:2,relation:'supports'},'retained-run'),'/botsquad/trade/records/valuation/valuation-1/versions/2?run=retained-run');
 });

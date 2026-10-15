@@ -384,7 +384,7 @@ Existing social exports and all public copy retain their approved contents.
 ## Investment evidence archive
 
 `content/site.ts` owns `investmentArchive` copy. Exact version pages and discussion
-records live under `/botsquad/investment`; these are experimental evidence views,
+records live under `/botsquad/trade`; these are experimental evidence views,
 not a claim of live investment operations. Keep synthetic labels on unavailable
 fixture states, sources/rights/limitations visible on permitted records, and safe
 tombstones free of withdrawn titles/authors/content. Ask is not enabled. No published
@@ -392,7 +392,7 @@ experiment is the default until trusted server read configuration is explicitly 
 
 ## Investment showcase copy and evidence
 
-The HQ companion at `/botsquad/investment/hq-guide` explains how an operator
+The HQ companion at `/botsquad/trade/hq-guide` explains how an operator
 examines schedules, executions, usage, decision evidence and publication. Its
 shared labels and metadata live in `hqGuide`; route-specific prose lives in its
 article component. The two guides cross-link, with direct HQ-guide links from
@@ -407,7 +407,7 @@ not private links; disclose actual cropping and capture dates. These seven image
 show the actual interface, not a fictional demonstration state. Do not generalize
 this approval to future raw HQ screenshots or expanded private receipts.
 
-The technical guide at `/botsquad/investment/guide` explains the full Trade
+The technical guide at `/botsquad/trade/guide` explains the full Trade
 experiment for readers with undergraduate computer-science knowledge. Shared
 metadata and navigation labels live in `tradeGuide` in `content/site.ts`; the
 article owns its route-specific explanation. Its contents links, glossary,
@@ -527,3 +527,15 @@ heading. `botsquadStructure` supplies the global and local navigation labels;
 in website-authored descriptions and accessible labels. Preserve existing
 `/botsquad/investment` URLs and technical identifiers. Do not rewrite immutable
 publisher-authored records, titles or evidence to match a marketing rename.
+
+
+## Trade URL compatibility
+
+The October15 owner-approved migration makes `/botsquad/trade` canonical for the
+whole public page/read/download family. Author new navigation and Ask evidence
+links with that prefix. Preserve `/botsquad/investment` links through permanent
+same-suffix redirects, including exact-run query values and browser fragments.
+Keep dated screenshot `source` URLs and immutable archived Markdown/bytes as
+recorded; they remain valid through redirects. API namespaces, image URLs and
+technical investment identifiers are unchanged. See the [migration contract and
+rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).

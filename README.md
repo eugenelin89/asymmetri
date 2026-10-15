@@ -37,9 +37,10 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
-| `/botsquad/investment` | Published roster, decisions, portfolio valuations and journal, with explicit evidence quality |
-| `/botsquad/investment/guide` | Illustrated technical guide to the Trade architecture, daily process, evidence and recovery limits |
-| `/botsquad/investment/hq-guide` | HQ investigation guide: inspect schedules, executions, usage, decisions and publication |
+| `/botsquad/trade` | Published roster, decisions, portfolio valuations and journal, with explicit evidence quality |
+| `/botsquad/trade/guide` | Illustrated technical guide to the Trade architecture, daily process, evidence and recovery limits |
+| `/botsquad/trade/hq-guide` | HQ investigation guide: inspect schedules, executions, usage, decisions and publication |
+| `/botsquad/investment` and every nested suffix | Permanent compatibility redirect to the matching `/botsquad/trade` URL |
 | `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
@@ -54,6 +55,8 @@ The ten main canonical pages are indexable. Trade and Ask retain their existing 
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
+
+Trade URL compatibility and rollback: [October 15 migration](docs/BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
 Current BotSquad page hierarchy: [October 13 navigation decision](docs/BOTSQUAD_HIERARCHY_2026-10-13.md).
 
@@ -145,7 +148,7 @@ changing public assets.
 
 The source-level [investment showcase](docs/INV-04-VALIDATION.md) adds the team,
 discussion desk, research, decisions, portfolio, holdings and transaction journal
-at `/botsquad/investment`, exact-run pages at `/botsquad/investment/runs/[runId]`,
+at `/botsquad/trade`, exact-run pages at `/botsquad/trade/runs/[runId]`,
 decision pages, methodology, and a disabled `/botsquad/ask` preview. Existing exact
 artifact, discussion and record URLs remain available. These routes are noindex
 and are not added to the public sitemap. The website was released on October 13; see the release receipt below.

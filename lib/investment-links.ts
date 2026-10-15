@@ -1,5 +1,5 @@
 import type { Actor, RecordRef, Worker } from '@/receiver/vendor/investment/v1/types';
-export const investmentPath = '/botsquad/investment';
+export const investmentPath = '/botsquad/trade';
 export function inRun(path: string, run?: string): string {
   return run ? `${path}${path.includes('?') ? '&' : '?'}run=${encodeURIComponent(run)}` : path;
 }

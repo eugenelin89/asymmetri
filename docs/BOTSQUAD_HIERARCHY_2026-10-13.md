@@ -8,7 +8,7 @@ The owner accepted placing Ask directly under BotSquad beside Research.
 Asymmetri Labs /labs
 └── BotSquad /botsquad
     ├── BotSquad Research /botsquad/research
-    │   └── BotSquad Trade /botsquad/investment
+    │   └── BotSquad Trade /botsquad/trade
     └── Ask BotSquad /botsquad/ask
 ```
 
@@ -24,9 +24,10 @@ The new Research hub introduces the current Trade project. A shared server
 component provides ancestor breadcrumbs and direct Overview/Research/Trade/Ask
 links on all related pages. The global Labs menu exposes those destinations too.
 
-Existing Trade project, methodology, run, record, artifact, read and Ask URLs are
-stable. Their logical parentage is represented in the pages and navigation without
-a URL migration that could break published references or signed API paths.
+As of the owner-approved October15 migration, Trade and its methodology, run,
+record, artifact, guide and read pages use `/botsquad/trade`. Every prior
+`/botsquad/investment` URL permanently redirects to the same suffix, preserving
+query context and browser fragments. Ask and signed API paths are unchanged.
 Contextual Ask links still preserve exact records; Ask also accepts general context
 when the separately gated service becomes available. Research is indexable and
 included in the sitemap; Trade/Ask keep their existing noindex policy.
@@ -69,3 +70,12 @@ The owner renamed the public project to **BotSquad Trade** and its desk heading 
 use Trade (or trading where grammatical). The hierarchy is unchanged. Existing
 `/botsquad/investment` URLs, technical identifiers, contracts and exact published
 records remain stable; this is a presentation change, not a data migration.
+
+
+## October 15 URL migration
+
+The owner subsequently requested Trade in the URL as well as the public name.
+The [migration contract](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md) supersedes the
+October14 no-migration decision while retaining all published legacy links.
+Hierarchy and indexing policy remain unchanged; rollback must serve new Trade
+bookmarks and cached permanent redirects as well as old Investment addresses.

@@ -37,8 +37,8 @@ export function TradeGuideLayout({ contents, children, guide = tradeGuide, compa
           <p className="guide-date">Evidence reviewed <time dateTime={guide.date}>{guide.dateLabel}</time></p>
           <nav className="guide-related" aria-label="Trade resources">
             <a href={companion.href}>{companion.navLabel} →</a>
-            <a href="/botsquad/investment">Open the trading desk →</a>
-            <a href="/botsquad/investment/methodology">Methodology &amp; limitations →</a>
+            <a href="/botsquad/trade">Open the trading desk →</a>
+            <a href="/botsquad/trade/methodology">Methodology &amp; limitations →</a>
           </nav>
         </header>
         <div className="guide-reading">
@@ -58,7 +58,7 @@ export function TradeGuideLayout({ contents, children, guide = tradeGuide, compa
               <nav className="guide-end" aria-label="Continue exploring">
                 <a href="#guide-top">Back to the top ↑</a>
                 <a href={companion.href}>{companion.navLabel} →</a>
-                <a href="/botsquad/investment">Return to the trading desk →</a>
+                <a href="/botsquad/trade">Return to the trading desk →</a>
               </nav>
             </article>
           </div>

@@ -1,4 +1,4 @@
-import '../investment/investment.css';
+import '../trade/investment.css';
 import './ask.css';
 import {BotSquadNavigation} from '@/components/botsquad-navigation';
 import {SiteHeader} from '@/components/site-header';
