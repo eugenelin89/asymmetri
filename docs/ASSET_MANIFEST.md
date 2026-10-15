@@ -552,3 +552,82 @@ IDs to these local assets; names, roles and activity still come from the verifie
 roster. Unmapped identities retain initials. No remote image URL is accepted and
 no fictional fixture identity receives an actual worker portrait by name matching.
 The same portraits remain in the BotSquad overview's team diagram.
+
+
+## BotSquad Trade technical guide, October 15, 2026
+
+Six original Computer Use captures of the owner’s public website illustrate the
+reviewed technical guide. Files are copied byte-for-byte into
+`public/images/botsquad/trade-guide/`; no generation, resizing, pixel rewriting
+or redaction was applied during integration. Captures are dated historical
+evidence, not live widgets. Links expose the full original JPEG and source page.
+The approved Atlas illustration remains visible within the public roster capture.
+No private HQ UI, private conversation, credential or athlete appears. Owner
+authorization covers publication of this documentation and its public-site
+captures; existing asset rights assessments continue to apply.
+
+### 01-trade-overview.jpg
+
+- Public URL: `/images/botsquad/trade-guide/01-trade-overview.jpg`.
+- Source: [Trade introduction](https://asymmetri.co/botsquad/investment), captured `2026-10-15T17:37:34.895266+00:00` using Computer Use.
+- Dimensions and format: 492 × 598 JPEG; 31,835 bytes.
+- Processing: No crop; original viewport. Integration preserves original bytes.
+- Public role: Trade introduction in the Trade technical guide.
+- Alt text: “The public Trade introduction, with BotSquad Research and Trade navigation.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `fbb6d1ab34ee73da75a25c41585b517296dcb1305139aeb75f63a907d3c00017`.
+
+### 02-run-status.jpg
+
+- Public URL: `/images/botsquad/trade-guide/02-run-status.jpg`.
+- Source: [Run status and freshness](https://asymmetri.co/botsquad/investment), captured `2026-10-15T17:38:35.061955+00:00` using Computer Use.
+- Dimensions and format: 355 × 515 JPEG; 25,162 bytes.
+- Processing: Direct Computer Use full-page clip of the status panel; no pixel rewriting or redaction. Integration preserves original bytes.
+- Public role: Run status and freshness in the Trade technical guide.
+- Alt text: “The public run status shows paused, unknown archive freshness and distinct publication and publisher-contact times.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `1098aac8af4418cd644e20311431fa094d4f12c85f969070d64924968c923cd6`.
+
+### 03-worker-roster.jpg
+
+- Public URL: `/images/botsquad/trade-guide/03-worker-roster.jpg`.
+- Source: [Atlas roster excerpt](https://asymmetri.co/botsquad/investment#team), captured `2026-10-15T17:39:13.195249+00:00` using Computer Use.
+- Dimensions and format: 492 × 598 JPEG; 22,385 bytes.
+- Processing: No crop; original viewport after navigating to the roster. Maya is outside this capture. Integration preserves original bytes.
+- Public role: Atlas roster excerpt in the Trade technical guide.
+- Alt text: “The public worker roster showing Atlas as the portfolio researcher.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `22517301aa37d4d775bc55408ed5517bbbcdac151d1b9ab97bb4d85c53e97253`.
+
+### 04-portfolio-snapshot.jpg
+
+- Public URL: `/images/botsquad/trade-guide/04-portfolio-snapshot.jpg`.
+- Source: [Last complete portfolio valuation](https://asymmetri.co/botsquad/investment#portfolio), captured `2026-10-15T17:38:49.617540+00:00` using Computer Use.
+- Dimensions and format: 355 × 869 JPEG; 44,016 bytes.
+- Processing: Direct Computer Use full-page clip around the portfolio section; no pixel rewriting or redaction. Integration preserves original bytes.
+- Public role: Last complete portfolio valuation in the Trade technical guide.
+- Alt text: “The public portfolio section reports the last complete valuation and its cash, equity and return values.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `868a01ce600de8b8ff2fe8ecd49d44e6b30917f69e234319dce96b47ec52c6b0`.
+
+### 05-transaction-journal.jpg
+
+- Public URL: `/images/botsquad/trade-guide/05-transaction-journal.jpg`.
+- Source: [Portfolio initialization journal](https://asymmetri.co/botsquad/investment#journal), captured `2026-10-15T17:38:49.747393+00:00` using Computer Use.
+- Dimensions and format: 461 × 1171 JPEG; 60,888 bytes.
+- Processing: Direct Computer Use full-page clip around the journal; no pixel rewriting or redaction. Integration preserves original bytes.
+- Public role: Portfolio initialization journal in the Trade technical guide.
+- Alt text: “The public transaction journal shows the initial simulated capital posting and its exact-record link.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `9ef97439c25a767a78e367faf62d1a923e3e832a5431841d350acc5b73b9858b`.
+
+### 06-benchmark-evidence.jpg
+
+- Public URL: `/images/botsquad/trade-guide/06-benchmark-evidence.jpg`.
+- Source: [Benchmark allocation evidence](https://asymmetri.co/botsquad/investment/records/valuation/98d348b9601bcb90eaf2195084a988c711a764e9f9a389e3/versions/1?run=0f6ea49caee91243f2f028a8ddde55abaa68faaaa2de453c), captured `2026-10-15T17:42:13.628102+00:00` using Computer Use.
+- Dimensions and format: 492 × 598 JPEG; 46,849 bytes.
+- Processing: No crop; original viewport after expanding benchmark evidence and scrolling. Integration preserves original bytes.
+- Public role: Benchmark allocation evidence in the Trade technical guide.
+- Alt text: “The public exact valuation shows the benchmark closing allocation, retrieval time and later accounting time.”
+- Rights and privacy: Owner-requested documentation of the owner’s public site. No private HQ screens, private transcripts, credentials, account information or access details. Any record IDs shown were already public.
+- SHA-256: `d1a2fd381161682aa8fc0d9a0b610d753101f0bdb3684420edd24940bc3cbeba`.

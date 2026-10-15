@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
 import { WorkerFlow } from "@/components/worker-flow";
-import { botsquad, introductions, site, botsquadDirectory, botsquadStructure } from "@/content/site";
+import { botsquad, introductions, site, botsquadDirectory, botsquadStructure, tradeGuide } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(botsquad.metadata, botsquad.path, "/images/labs-social.png");
@@ -49,7 +49,7 @@ export default function BotSquadPage() {
           <div className="shell">
             <div className="squad-section-heading product-heading"><h2>{botsquadDirectory.headline}</h2><p>{botsquadDirectory.introduction}</p></div>
             <div className="squad-areas">
-              <article><p className="eyebrow">Research</p><h3><a href={botsquadStructure.research.href}>{botsquadStructure.research.label} →</a></h3><p>{botsquadDirectory.research}</p><a className="text-link" href={botsquadStructure.investment.href}>{botsquadStructure.investment.label} →</a></article>
+              <article><p className="eyebrow">Research</p><h3><a href={botsquadStructure.research.href}>{botsquadStructure.research.label} →</a></h3><p>{botsquadDirectory.research}</p><div className="button-row"><a className="text-link" href={botsquadStructure.investment.href}>{botsquadStructure.investment.label} →</a><a className="text-link" href={tradeGuide.href}>{tradeGuide.navLabel} →</a></div></article>
               <article><p className="eyebrow">Questions &amp; answers</p><h3><a href={botsquadStructure.ask.href}>{botsquadStructure.ask.label} →</a></h3><p>{botsquadDirectory.ask}</p></article>
             </div>
           </div>

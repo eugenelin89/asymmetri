@@ -392,6 +392,30 @@ experiment is the default until trusted server read configuration is explicitly 
 
 ## Investment showcase copy and evidence
 
+The technical guide at `/botsquad/investment/guide` explains the full Trade
+experiment for readers with undergraduate computer-science knowledge. Shared
+metadata and navigation labels live in `tradeGuide` in `content/site.ts`; the
+article owns its route-specific explanation. Its contents links, glossary,
+semantic diagrams and tables must remain useful without client JavaScript.
+Trade, methodology/evidence, Research and the BotSquad overview link to the guide.
+The guide follows Trade's noindex policy and does not change exact-run URLs.
+
+Distinguish implemented architecture, the intended daily schedule and dated actual
+outcomes. A completed discussion is not a submitted decision; a proposed HOLD is
+not an independently reviewed and submitted HOLD. A benchmark allocation is not
+a portfolio trade. Do not imply reliable daily autonomous trading from authored
+tests, one completed valuation or a healthy server. Keep historical usage gaps,
+spent attempts and missed deadlines visible in the explanation without publishing
+private transcripts, credentials, operational identifiers or access instructions.
+
+Guide screenshots are actual Computer Use captures of the public interface,
+dated in their captions and recorded in `ASSET_MANIFEST.md`. Preserve their image
+content and aspect ratios. Captures illustrate the recorded state; they are not
+live status widgets. Never fill an empty public discussion with invented employee
+contributions. Explain that private work and approved public publication are
+different records. Keep the public guide independent of operational controls and
+Ask activation.
+
 `investmentShowcase` in `content/site.ts` owns the introduction, discovery link,
 process explanation, methodology and disabled Ask copy. The October 14 owner request
 removes the introductory “The team is the experiment” side panel and its supporting

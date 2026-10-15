@@ -1,7 +1,7 @@
 import { BotSquadNavigation } from '@/components/botsquad-navigation';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
-import { botsquadResearch as copy } from '@/content/site';
+import { botsquadResearch as copy, tradeGuide } from '@/content/site';
 import { pageMetadata } from '@/lib/metadata';
 
 export const metadata = pageMetadata(copy.metadata, copy.href, '/images/labs-social.png');
@@ -26,7 +26,7 @@ export default function ResearchPage() {
             <article className="labs-product__card">
               <h3><a href={copy.project.href}>{copy.project.label}</a></h3>
               <p className="product-lead">{copy.project.description}</p>
-              <div className="button-row"><a className="button button--primary" href={copy.project.href}>{copy.project.action} →</a></div>
+              <div className="button-row"><a className="button button--primary" href={copy.project.href}>{copy.project.action} →</a><a className="text-link" href={tradeGuide.href}>{tradeGuide.action} →</a></div>
             </article>
           </div>
         </section>

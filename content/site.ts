@@ -1186,6 +1186,18 @@ export const investmentArchive = {
   notice: "This is a BotSquad paper-trading experiment. No real money or securities are traded. Published analysis may be wrong and is not personalized trading advice. Prices and updates may be delayed.",
 };
 
+export const tradeGuide = {
+  href: '/botsquad/investment/guide',
+  navLabel: 'Trade guide',
+  action: 'How the Trade experiment works',
+  title: 'How BotSquad Trade works',
+  description: 'A technical guide to the AI team, daily research and decision process, portfolio accounting, public evidence and recovery limits of BotSquad Trade.',
+  eyebrow: 'BotSquad Research / Trade / Technical guide',
+  introduction: 'Follow the experiment from a research question to a reviewed decision, a portfolio record and the public archive.',
+  date: '2026-10-15',
+  dateLabel: 'October 15, 2026',
+} as const;
+
 // Published public worker identities; no name-based or remote image lookup.
 export const investmentWorkerPortraits: Readonly<Record<string, SiteImage>> = {
   '3b81014148920905b6ce846a8be85edd27699686b8158f2c': atlasPortrait,
@@ -1325,3 +1337,61 @@ export const approvedAskPrivacyNotices: readonly import('@/lib/ask-client').AskP
 export const syntheticAskPrivacyNotices: readonly import('@/lib/ask-client').AskPrivacyNotice[] = [{
   serviceId:'fixture-ask',privacyNoticeVersion:'fixture-privacy-1',paragraphs:askExperience.fixturePrivacy,consent:askExperience.consent,
 }];
+
+// Trade guide captures: actual public interface, October 15, 2026.
+export const tradeGuideFigures = {
+  "01-trade-overview": {
+    "src": "/images/botsquad/trade-guide/01-trade-overview.jpg",
+    "alt": "The public Trade introduction, with BotSquad Research and Trade navigation.",
+    "width": 492,
+    "height": 598,
+    "caption": "Figure 1. The public Trade page introduces the experiment. These are actual public-interface captures from October 15; the screenshots are dated evidence, not live status panels.",
+    "source": "https://asymmetri.co/botsquad/investment",
+    "capturedAt": "2026-10-15T17:37:34.895266+00:00"
+  },
+  "02-run-status": {
+    "src": "/images/botsquad/trade-guide/02-run-status.jpg",
+    "alt": "The public run status shows paused, unknown archive freshness and distinct publication and publisher-contact times.",
+    "width": 355,
+    "height": 515,
+    "caption": "Figure 6. A recent publisher contact and a paused experiment are compatible. The status panel explicitly says that publisher contact does not establish employee activity or fresh market data.",
+    "source": "https://asymmetri.co/botsquad/investment",
+    "capturedAt": "2026-10-15T17:38:35.061955+00:00"
+  },
+  "03-worker-roster": {
+    "src": "/images/botsquad/trade-guide/03-worker-roster.jpg",
+    "alt": "The public worker roster showing Atlas as the portfolio researcher.",
+    "width": 492,
+    "height": 598,
+    "caption": "Figure 2. This excerpt of the published roster shows Atlas and his portfolio-research role. The full roster also identifies Maya as the independent reviewer; a roster entry alone does not establish current activity.",
+    "source": "https://asymmetri.co/botsquad/investment#team",
+    "capturedAt": "2026-10-15T17:39:13.195249+00:00"
+  },
+  "04-portfolio-snapshot": {
+    "src": "/images/botsquad/trade-guide/04-portfolio-snapshot.jpg",
+    "alt": "The public portfolio section reports the last complete valuation and its cash, equity and return values.",
+    "width": 355,
+    "height": 869,
+    "caption": "Figure 4. Read “last complete valuation” and the as-of timestamp before interpreting the numbers. A complete old snapshot can coexist with a currently paused run and unknown market freshness.",
+    "source": "https://asymmetri.co/botsquad/investment#portfolio",
+    "capturedAt": "2026-10-15T17:38:49.617540+00:00"
+  },
+  "05-transaction-journal": {
+    "src": "/images/botsquad/trade-guide/05-transaction-journal.jpg",
+    "alt": "The public transaction journal shows the initial simulated capital posting and its exact-record link.",
+    "width": 461,
+    "height": 1171,
+    "caption": "Figure 5. The journal's initialization entry records the simulated $100,000 starting capital. It is a financial posting, not a purchase. Benchmark-only activity is represented separately in benchmark evidence.",
+    "source": "https://asymmetri.co/botsquad/investment#journal",
+    "capturedAt": "2026-10-15T17:38:49.747393+00:00"
+  },
+  "06-benchmark-evidence": {
+    "src": "/images/botsquad/trade-guide/06-benchmark-evidence.jpg",
+    "alt": "The public exact valuation shows the benchmark closing allocation, retrieval time and later accounting time.",
+    "width": 492,
+    "height": 598,
+    "caption": "Figure 3. The benchmark evidence makes the clocks concrete: the October 14 market reference is 20:00 UTC, retrieval is about 20:07, and allocation is recorded about 20:20. “Available Unknown” remains unknown.",
+    "source": "https://asymmetri.co/botsquad/investment/records/valuation/98d348b9601bcb90eaf2195084a988c711a764e9f9a389e3/versions/1?run=0f6ea49caee91243f2f028a8ddde55abaa68faaaa2de453c",
+    "capturedAt": "2026-10-15T17:42:13.628102+00:00"
+  }
+} as const;

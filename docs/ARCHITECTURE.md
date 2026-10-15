@@ -24,6 +24,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/botsquad` | Umbrella project overview, software story and area directory |
 | `/botsquad/research` | Research hub linking to BotSquad Trade |
 | `/botsquad/investment` | Trade research project and retained evidence routes |
+| `/botsquad/investment/guide` | Static technical article, actual public-interface captures and dated operational evidence |
 | `/botsquad/ask` | Shared BotSquad question service, currently closed |
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
@@ -38,6 +39,11 @@ Ask intake remains disabled and no Ask service authority is active.
 
 The apex origin is canonical except for exact `https://www.asymmetri.co/tutorial`.
 Both hosts serve protected pages. No host/infrastructure redirect change.
+The Trade technical guide is a static server-rendered article with local public
+screenshots, native contents links and semantic diagrams/tables. It does not read
+private HQ data, depend on a receiver connection or add an API, parser dependency,
+operational control or model call. Its dated evidence is distinct from the live
+archive. Guide metadata keeps Trade's noindex policy; the sitemap is unchanged.
 Browsers retain legacy `/sport` fragments across its fragment-free redirect;
 Sports retains story/approach/product/contact IDs. The homepage-only compatibility
 component maps old root `#story`, `#approach`, `#product` to Sports. Explicit no-JS

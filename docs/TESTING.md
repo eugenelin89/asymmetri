@@ -36,6 +36,8 @@ When routes or shared layout code change, verify:
 - `/labs` (open-source playground and project list)
 - `/sports` (division, founder story, Motion family and anchors)
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
+- `/botsquad/investment/guide` (dated technical explanation, noindex, contents,
+  glossary, readable diagrams/tables and genuine public-interface screenshots)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
@@ -74,6 +76,12 @@ For visual, layout, or navigation changes, verify the affected routes at:
 - 1920 CSS pixels for wide desktop.
 
 Check:
+
+- Trade guide links from the showcase, methodology/archive, Research and overview;
+  all guide contents anchors and return links; screenshot loading, captions,
+  meaningful alt text and full-size original links; tables scroll within their
+  labelled region rather than widening the page; keyboard focus, print styles
+  and readable article measures at narrow and wide widths;
 
 - Sports/Labs disclosures expose overview and direct BotSquad/Motion links;
 - Enter/Space opens disclosures, Tab reaches links, Escape closes and restores

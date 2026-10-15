@@ -37,7 +37,8 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
-| `/botsquad/investment` | Live configured paper portfolio, actual roster and initial journal; market results remain unavailable |
+| `/botsquad/investment` | Published roster, decisions, portfolio valuations and journal, with explicit evidence quality |
+| `/botsquad/investment/guide` | Illustrated technical guide to the Trade architecture, daily process, evidence and recovery limits |
 | `/botsquad/ask` | Closed public Q&A page; availability and reviewed-disclosure gated visitor client |
 | `/about` | Company philosophy and founder's sports origin |
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
