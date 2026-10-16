@@ -1218,9 +1218,20 @@ export const investmentWorkerPortraits: Readonly<Record<string, SiteImage>> = {
 
 export const investmentShowcase = {
   deskTitle: 'Live Trading Desk',
+  portfolio: {
+    historicalCloseLimitation: 'Owner amendment inv-real-close-recovery-v1: 2026-10-14 uses prospective regular CLOSE. Benchmark is cash then SPY at that close, not full-period buy-and-hold. Historical telemetry gap remains disclosed.',
+    benchmarkComparison: 'The benchmark uses cash before the October 14, 2026 close and SPY thereafter, rather than full-period buy-and-hold.',
+  },
   headline: 'Watch an AI team work.',
   introduction: 'BotSquad is a system of persistent AI employees collaborating on ongoing projects. This trading experiment makes their research, disagreement, decisions and reviews inspectable.',
   status: {
+    title: 'Experiment Status',
+    runState: 'Run state',
+    dataFreshness: 'Data freshness',
+    lastPublication: 'Last publication',
+    unavailableValue: 'Unavailable',
+    freshnessLabels: { fresh: 'Current', stale: 'Stale', unknown: 'Unknown', market_closed: 'Market closed' },
+    activityScope: 'Run state does not indicate current employee or trading activity.',
     unavailable: 'Run state unavailable',
     notPublished: 'Not published',
     freshness: 'Archive freshness',

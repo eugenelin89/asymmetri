@@ -445,7 +445,15 @@ Ask activation.
 process explanation, methodology and disabled Ask copy. The October 14 owner request
 removes the introductory “The team is the experiment” side panel and its supporting
 paragraphs. Keep the opening headline, introduction and desk/methodology links in
-a single column; status and evidence details remain in their existing sections.
+a single column. The main Trade landing page uses a compact **Experiment Status**
+summary: run state, data freshness, last publication and next published review.
+Its status cannot establish current employee or trading activity. Retained-run
+history, frozen settings and the close-amendment panel remain on exact-run pages
+and evidence routes; they are omitted from the landing page without a replacement
+disclosure panel. The portfolio shortens only the exact, known historical close
+amendment limitation into its benchmark comparison convention and omits the
+benchmark allocation details on this landing page. Other quality limitations,
+financial values, raw exports, calculations and exact-run presentation stay intact.
 Keep verified run status, unconfigured reads, verification failure and synthetic
 demonstrations distinct. Do
 not call an unavailable archive “not started.” Synthetic identities, prose,
@@ -457,12 +465,13 @@ verified versions; historical decision references remain historical after correc
 Unknown monetary values say “Unavailable”. Derived benchmark drawdown requires a
 complete contiguous loaded series from valuation sequence 1 and usable benchmark
 marks; missing peaks suppress that comparison. Source freshness never follows from
-transport connectivity. The status panel labels the canonical combined status
-as archive freshness and displays publisher heartbeat receipt separately. Missing
-review times mean “Not published” in the loaded public records, not an unconfigured
-private schedule. The known unknown-freshness reason about the absent public
-calendar collector is presented as market freshness unavailable in the public
-archive; other reasons (including stale contact or valuation) remain intact.
+transport connectivity. On the main page, canonical freshness values map to
+Current, Stale, Unknown and Market closed. A failed or unconfigured read says
+“Unavailable”, including its dates. A verified status with no published date says
+“Not published”; it does not imply an unconfigured private schedule. Summary dates
+use readable UTC dates and times; exact evidence retains timestamp precision.
+Detailed exact-run status still separates archive freshness from publisher
+heartbeat receipt and retains the original reasons and context.
 Snapshot session dates identify the session a record describes, not proof that a
 market observation occurred. Null financial values and unknown activity remain
 unchanged. Production Ask displays an exact ContextRef as a reference, not proof of current

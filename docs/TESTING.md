@@ -79,6 +79,12 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
+- The Trade landing page shows only the four-field Experiment Status summary.
+  Exercise fresh, stale, unknown, market-closed and unavailable reads; failed
+  reads must not become “Not published” dates. Dates in this summary use UTC.
+  Confirm full status/history/amendment evidence remains on an exact-run page,
+  current portfolio limitations and comparison conventions remain visible, and
+  raw exports, financial values and charts are unchanged.
 - Both guides cross-link and the HQ companion is directly discoverable from Trade
   and methodology/archive. Its narrow sidebar capture must not be stretched; wide
   captures have full-size original links. Code blocks scroll within labelled,
