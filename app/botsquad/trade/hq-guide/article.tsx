@@ -1,5 +1,5 @@
 import { GuideSection, GuideFigure, GuideCode, GuideTable } from '@/components/investment/guide-layout';
-import { hqGuideFigures as figures } from '@/content/site';
+import { hqGuideFigures as figures, hqUxGuideFigures as currentFigures } from '@/content/site';
 
 export const guideContents = [
   {
@@ -7,12 +7,14 @@ export const guideContents = [
     "title": "Start here"
   },
   {
-    "id": "question",
-    "title": "Start with the right question"
-  },
-  {
     "id": "hq-navigation",
     "title": "Open HQ and learn its navigation"
+  },
+  { "id": "first-task", "title": "Your first task with BotSquad" },
+  { "id": "historical-checkpoint", "title": "Historical Trade investigation: October 15" },
+  {
+    "id": "question",
+    "title": "Start with the right question"
   },
   {
     "id": "identities",
@@ -79,47 +81,83 @@ export const guideContents = [
 export function HqGuideArticle() {
   return <>
 <GuideSection id="overview" title="Start here">
-<p>{"BotSquad HQ is the private control and evidence interface for the Trade experiment. It lets the owner inspect the portfolio, scheduled stages, employee discussions, individual model executions, usage accounting and publication delivery. The public Trade site shows an approved projection of those records. HQ is where you investigate how that projection was produced and why work stopped."}</p>
-<p>{"This is a companion to "}<a href="/botsquad/trade/guide">{"How BotSquad Trade works"}</a>{". That guide explains the experiment and its daily routine. This one explains how to examine a particular day, trace a failure across components, and decide what evidence is needed before any recovery action. It assumes comfort with processes, databases, APIs and state machines, but no prior knowledge of BotSquad's implementation."}</p>
-<p className="guide-callout"><strong>{"Observation checkpoint: October 15, 2026, approximately 11:30–11:45 a.m. Vancouver / 18:30–18:45 UTC."}</strong>{" The screenshots are actual private HQ views captured through Computer Use. They are cropped to exclude private identifiers, transcripts and access details; their contents have not been rewritten. They document this version of the interface, not live status. No model call, source collection, restart, resume, approval or publication delivery was triggered to make this guide."}</p>
-<p>{"The example is a useful real failure: research produced a HOLD proposal, its independent review failed, usage evidence remains incomplete, and the loop is held. The portfolio remains all cash. Meanwhile, publication can still deliver lifecycle heartbeats. Those facts are compatible because they describe different parts of the system."}</p>
+<p>BotSquad HQ is your private workspace for assigning work and checking what the team recorded. An AI employee is a persistent, named team member with a responsibility. Atlas coordinates ordinary tasks; other employees may receive related assignments.</p>
+<p>Start with the current navigation and the <a href="#first-task">first-task exercise</a>. The later investigation sections explain Trade’s portfolio, schedules, work sessions, usage and publication. The public Trade site shows an approved selection of records; private HQ is the place to inspect their operational context.</p>
+<p className="guide-callout"><strong>Current instructions: HQ UX-01.</strong> The five current interface captures use a disposable backend, isolated authored sample records and fake-runtime responses. They demonstrate controls and recorded states, not genuine employee work or live investment outcomes. The retained October 15 incident and seven older captures are explicitly historical.</p>
+<p>This is a companion to <a href="/botsquad/trade/guide">How BotSquad Trade works</a>. Use the operator’s existing private connection instructions to open HQ. This public guide does not provide a private access endpoint.</p>
+</GuideSection>
+<GuideSection id="hq-navigation" title="Open HQ and learn its navigation">
+<p>Use the private access method configured by the operator. In this installation, HQ is reached through an authenticated SSH tunnel. Check that connection and the HQ service if the browser cannot connect. A connection failure alone does not establish an investment pause.</p>
+<GuideFigure figure={currentFigures["home-1440"]} />
+<GuideTable caption="Current HQ navigation" wide={false} headings={["Destination", "Related views and purpose"]} rows={[
+[<>Home</>,<>Current work, owner attention, completed tasks and the AI team</>],
+[<>Tasks</>,<>All tasks · Needs your attention · Browser work</>],
+[<>Team</>,<>Employees · Conversations · Discussions</>],
+[<>Activity</>,<>Recent activity · Team updates · Work sessions · Advanced audit</>],
+[<>Projects</>,<>Software projects · Ongoing goals · Investment</>],
+[<>Settings</>,<>Overview · Approvals · Infrastructure · Devices</>]
+]} />
+<p>On a phone, the six main destinations appear above the page. <strong>Needs you</strong> in the header opens owner attention. <strong>New task</strong> opens the ordinary assignment form. The connection indicator and loading banner distinguish current records from a disconnected or stale view; <strong>Retry loading</strong> refreshes that view.</p>
+<GuideTable caption="Finding familiar tools after UX-01" wide={false} headings={["Former label", "Current location"]} rows={[
+[<>Executive channel</>,<>Activity → Team updates retains shared messages and the original composer. Use New task for an ordinary assignment.</>],
+[<>Attention</>,<>Tasks → Needs your attention, or Needs you in the header</>],
+[<>Working Groups</>,<>Team → Discussions</>],
+[<>Executions</>,<>Activity → Work sessions</>],
+[<>Audit history</>,<>Activity → Advanced audit</>],
+[<>Investment run / team / publication</>,<>Projects → Investment, then Portfolio &amp; work / Team permissions / Publication</>]
+]} />
+<p>The three existing private Investment routes remain <code>/investment-run</code>, <code>/investment-team</code> and <code>/investment-publication</code>. The Investment navigation also returns to Home and Projects. <strong>Other research and legacy setup tools</strong> is an advanced disclosure on the Investment page. Opening an inspection view does not grant permission to operate its controls.</p>
+</GuideSection>
+<GuideSection id="first-task" title="Your first task with BotSquad">
+<h3>1. Describe a small result</h3>
+<p>Choose <strong>New task</strong>. In <strong>What would you like done?</strong>, paste this supplied-text exercise:</p>
+<GuideCode caption="A small first-task request" wrap text={'Read this text and summarize it in three plain-English bullet points: “BotSquad keeps tasks, messages and results. Atlas coordinates assignments. The owner reviews outcomes and controls permissions.” Use only the text in this request. Do not browse, change software or publish anything.'} />
+<GuideFigure figure={currentFigures["new-task-1440"]} />
+<p>Choose <strong>Start task</strong> once. This requests real AI work under the installation’s existing limits and account availability. No web research, software access or publication is needed for the exercise. A task’s text cannot grant extra authority. If the team is paused, a task can remain queued; review all waiting work before using <strong>Settings → Resume queued work</strong>, which affects the team.</p>
+<h3>2. Follow the task and its employee</h3>
+<p>Open <strong>Tasks → All tasks</strong>, find your description and choose <strong>Open task</strong>. Read <strong>What you asked for</strong>, the responsible employee, <strong>What happens next</strong> or <strong>What needs checking</strong>, <strong>Results and files</strong> and <strong>Recorded progress</strong>. <strong>Related assignments</strong> shows any parent or child work. Atlas may do the task or delegate; do not assume a particular sequence.</p>
+<GuideTable caption="Task status and next action" wide={false} headings={["Status", "What to do"]} rows={[
+[<>Waiting to start</>,<>Check the pause banner and existing eligibility; the task is queued.</>],
+[<>In progress</>,<>Follow recorded activity. A work session is one employee attempt, rather than the entire task.</>],
+[<>Waiting for related tasks</>,<>Read the related assignments; avoid submitting another copy.</>],
+[<>Waiting for approval</>,<>Open Needs you and inspect the exact request and scope.</>],
+[<>Could not finish / Waiting · review reason</>,<>Read the reason, previous attempts and any saved results before retrying.</>],
+[<>Completed</>,<>Read and evaluate the recorded outcome and any saved file.</>]
+]} />
+<p>Choose the employee’s name, or <strong>Team → Employees → Open profile</strong>, to see responsibilities and recorded work. <strong>No session running</strong> does not promise eligibility for a new task. AI settings and <strong>Permissions &amp; research</strong> are separate controls; opening a profile does not change them.</p>
+<GuideFigure figure={currentFigures["employee-390"]} />
+<h3>3. Find and check the answer</h3>
+<p>When the original task is <strong>Completed</strong>, open <strong>Results and files</strong> and read its <strong>Recorded outcome</strong>. If a file was saved, select its title. A separate file is optional; related assignments may hold their own results. Finish this exercise only after you can read three sensible points grounded in the supplied text.</p>
+<GuideFigure figure={currentFigures["task-result-1440"]} />
+<GuideFigure figure={currentFigures["saved-result-1440"]} />
+<h3>4. Use the next view when you need it</h3>
+<p><strong>Team → Conversations</strong> opens employee conversations. <strong>Send passive message</strong> saves context; <strong>Send &amp; request reply</strong> requests bounded AI work. <strong>Team → Discussions</strong> contains working groups. <strong>Activity → Recent activity</strong> shows milestones, <strong>Work sessions</strong> shows individual attempts and usage, and <strong>Advanced audit</strong> retains the loaded original events. Task <strong>Advanced details</strong> exposes original records for troubleshooting.</p>
+<p>If creation confirmation is lost, use <strong>Check Tasks</strong> before trying again. If the form says <strong>Task created</strong> but loading failed, use <strong>Open Tasks</strong> or <strong>Retry loading</strong> to find the existing task. If work needs approval or failed, inspect the reason and prior results. <strong>Retry inspected task</strong> appears only where the existing policy permits it and requires acknowledging that review.</p>
+<p>The maintained <a href="https://github.com/eugenelin89/bot_messenger/blob/main/docs/tutorials/first-assignment.md">Your First Task with BotSquad tutorial</a> has the same exercise and private connection instructions. The validation uses structured review and isolated browser tests; it does not claim testing with nontechnical participants or genuine provider work.</p>
+</GuideSection>
+<GuideSection id="historical-checkpoint" title="Historical Trade investigation: October 15">
+<p className="guide-callout"><strong>Historical case, before UX-01.</strong> The following incident values and seven older screenshots were observed October 15, 2026, approximately 11:30–11:45 a.m. Vancouver / 18:30–18:45 UTC. They retain the original interface and are not a statement of current balances, usage, authority or operating state. Navigation instructions use the current locations above; older labels remain visible in the historical images and pinned source.</p>
+<p>In that observation, research produced a HOLD proposal, the independent review failed, usage evidence was incomplete and the loop was held. The portfolio was all cash while publication could still deliver lifecycle heartbeats. The case explains how those separate records can coexist. No restart, approval, model call or recovery action was performed to capture the historical guide.</p>
+<GuideFigure figure={figures["01-hq-navigation"]} />
 </GuideSection>
 <GuideSection id="question" title="Start with the right question">
 <p>{"“Is it running?” is too broad for a system with several durable workflows. Break it into questions that have separate evidence:"}</p>
 <GuideTable caption="Questions and their evidence" wide={true} headings={["Question", "First place to inspect", "Evidence you need"]} rows={[
 [<>{"Can the browser reach HQ?"}</>,<>{"Connection indicator on the home page"}</>,<>{"A current connected view, then a successful refresh"}</>],
-[<>{"Does anything require owner attention?"}</>,<>{"Attention"}</>,<>{"The specific item and its linked workflow"}</>],
-[<>{"What does the portfolio own?"}</>,<>{"Investment run → Persistent observed-paper portfolios"}</>,<>{"Cash, holdings, orders and the latest valuation timestamp"}</>],
+[<>{"Does anything require owner attention?"}</>,<>{"Tasks → Needs your attention (or Needs you in the header)"}</>,<>{"The specific item and its linked workflow"}</>],
+[<>{"What does the portfolio own?"}</>,<>{"Projects → Investment → Portfolio & work"}</>,<>{"Cash, holdings, orders and the latest valuation timestamp"}</>],
 [<>{"What stage should run next?"}</>,<>{"The matching loop card and its schedule disclosure"}</>,<>{"Occurrence identity, due time, expiry, state and reason"}</>],
-[<>{"Did a worker actually execute?"}</>,<>{"Executions; the loop's AI usage table"}</>,<>{"An attributable execution, timestamps and terminal outcome"}</>],
-[<>{"What did the team use and conclude?"}</>,<>{"Working Groups"}</>,<>{"Shared evidence, contributions, synthesis and review records"}</>],
+[<>{"Did a worker actually execute?"}</>,<>{"Activity → Work sessions; the loop’s AI usage table"}</>,<>{"An attributable execution, timestamps and terminal outcome"}</>],
+[<>{"What did the team use and conclude?"}</>,<>{"Team → Discussions"}</>,<>{"Shared evidence, contributions, synthesis and review records"}</>],
 [<>{"Was a paper decision accepted?"}</>,<>{"Loop evidence / portfolio history"}</>,<>{"Matching proposal, independent review and submission"}</>],
-[<>{"Did the website receive it?"}</>,<>{"Investment publication"}</>,<>{"A delivered batch receipt for the relevant records"}</>]
+[<>{"Did the website receive it?"}</>,<>{"Projects → Investment → Publication"}</>,<>{"A delivered batch receipt for the relevant records"}</>]
 ]} />
 <p>{"A healthy HTTP service establishes reachability. It does not establish that the scheduler has eligible work, that a model finished, that a proposal passed review, or that the website received a new financial record. Investigate one assertion at a time."}</p>
 <p>{"The server owns the scheduler and durable state. Your browser is a client. Closing a tab does not stop the daily loop, and reopening one does not replay a missed session. Idle employees do not continuously invoke a model. Reading existing screens does not ask Atlas or Maya to reason again. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/docs/architecture/SYSTEM_ARCHITECTURE.md">{"Architecture"}</a></p>
 </GuideSection>
-<GuideSection id="hq-navigation" title="Open HQ and learn its navigation">
-<p>{"Use the private access method configured by the operator. In this installation, the owner reaches a loopback-bound HQ through an authenticated SSH tunnel. The public Asymmetri website is not that access point. If the browser cannot connect, check that the tunnel and server service are available before investigating investment logic. A connection failure is not evidence of an investment pause."}</p>
-<p>{"This guide deliberately omits private hostnames, credentials and access links. Use the operator's existing access instructions. Do not expose the HQ listener publicly merely to make a documentation link work."}</p>
-<GuideFigure figure={figures["01-hq-navigation"]} />
-<p>{"The most useful entries have different responsibilities:"}</p>
-<GuideTable caption="HQ navigation and responsibilities" wide={false} headings={["HQ entry", "What it is for"]} rows={[
-[<><strong>{"Attention"}</strong></>,<>{"A deterministic list of unresolved owner-facing conditions, with links to existing controls"}</>],
-[<><strong>{"Working Groups"}</strong></>,<>{"Bounded discussions, selected shared evidence, attributable contributions, questions and saved syntheses"}</>],
-[<><strong>{"Executions"}</strong></>,<>{"Runtime attempts across the company, including working-group turns and Tasks"}</>],
-[<><strong>{"Approvals"}</strong></>,<>{"Actual pending application approvals; an execution's status label alone does not create one"}</>],
-[<><strong>{"Investment run"}</strong></>,<>{"The continuing portfolio, finite loop cards, occurrence schedules, usage and paper evidence"}</>],
-[<><strong>{"Investment team"}</strong></>,<>{"Existing scoped responsibilities and permissions, plus a separate form for new scopes"}</>],
-[<><strong>{"Investment publication"}</strong></>,<>{"Consent, outbox health, backlog and receiver acknowledgments"}</>],
-[<><strong>{"Audit history"}</strong></>,<>{"Recorded company operations; useful supporting context alongside the domain-specific evidence"}</>]
-]} />
-<p>{"The "}<strong>{"Executive channel"}</strong>{" is a way to give work to Atlas. It is not the first diagnostic screen for an already recorded failure. Similarly, an empty Task queue does not imply that no investment work occurred: Trade uses working-group conversation executions. Company-wide execution counts can include unrelated projects."}</p>
-<p>{"Open "}<strong>{"Attention"}</strong>{", refresh it, and follow "}<strong>{"Inspect Investment run"}</strong>{" for an investment item. At this checkpoint, Attention showed two items: one investment problem and an unrelated infrastructure coordination Task. Counting both as two investment failures would be incorrect. Attention is a projection over saved state, not a model-generated diagnosis, and it does not independently authorize recovery. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/src/control/attention.ts">{"Attention implementation"}</a></p>
-</GuideSection>
 <GuideSection id="identities" title="Identify the portfolio, scope and loop before comparing numbers">
-<p>{"Open "}<strong>{"Investment run"}</strong>{". The top portfolio panel and the loop cards below it answer different questions. A persistent portfolio can be used by an original operating scope and a later recovery scope. Both can remain visible after one stops."}</p>
-<p>{"The page does not currently have a dedicated “select current run” control. Its "}<strong>{"Approved team"}</strong>{" dropdown belongs to schedule creation; changing that dropdown does not filter the historical cards. Match the records you are inspecting, rather than assuming the first card or a familiar session date must be the correct one."}</p>
+<p>{"Open "}<strong>{"Projects → Investment → Portfolio & work"}</strong>{". The top portfolio panel and the loop cards below it answer different questions. A persistent portfolio can be used by an original operating scope and a later recovery scope. Both can remain visible after one stops."}</p>
+<p>{"At the historical checkpoint the page did not have a dedicated “select current run” control. Its "}<strong>{"Approved team"}</strong>{" dropdown belongs to schedule creation; changing that dropdown does not filter the historical cards. Match the records you are inspecting, rather than assuming the first card or a familiar session date must be the correct one."}</p>
 <p>{"Expand "}<strong>{"Schedule, reservations, measured usage and receipts"}</strong>{" on the relevant card when you need exact identity. In your private incident notes, record:"}</p>
 <GuideTable caption="Private identity fields" wide={false} headings={["Field", "Meaning"]} rows={[
 [<><code>{"loop_id"}</code></>,<>{"The particular scheduled operating loop"}</>],
@@ -139,7 +177,7 @@ export function HqGuideArticle() {
 <p>{"For a flat portfolio, inspect whether the system recorded an accepted HOLD or whether work stopped before submission. Both can leave cash unchanged, but they are different experimental outcomes. Here there is a proposal but no committed review or submission. “The team successfully chose to hold” would overstate the evidence."}</p>
 <p>{"The portfolio panel also shows trading metrics, holdings, sector exposure and valuation rows. Read return fractions and excess-return percentage points according to their labels; do not silently format both as the same unit. The benchmark has its own accounting path. A benchmark allocation does not mean the strategy portfolio bought a stock."}</p>
 <p>{"The "}<strong>{"Original decisions, source evidence, cash flows and immutable ledger"}</strong>{" disclosure exposes reconstructed portfolio evidence. Treat it as an inspection view, not a promise that every raw database journal row or every historical source record is printed there. Some displayed collections are bounded. Use the retained database and journal for an exhaustive audit."}</p>
-<p>{"One current UI limitation matters: the "}<strong>{"Refresh"}</strong>{" button at the top of the investment page reloads the loop cards. The portfolio panel is loaded independently. For a coherent fresh observation of both, reload the whole browser page and note the time. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/observed-investment.js">{"Portfolio interface"}</a></p>
+<p>{"A refresh limitation in the historical capture matters: the "}<strong>{"Refresh"}</strong>{" button at the top of the investment page reloads the loop cards. The portfolio panel is loaded independently. For a coherent fresh observation of both, reload the whole browser page and note the time. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/observed-investment.js">{"Portfolio interface"}</a></p>
 </GuideSection>
 <GuideSection id="loop-checks" title="Interpret a loop card as several independent checks">
 <GuideFigure figure={figures["03-loop-and-authority"]} />
@@ -155,7 +193,7 @@ export function HqGuideArticle() {
 [<><strong>{"Reload-OFF attestation"}</strong></>,<>{"A recorded owner attestation about the funding configuration, not a generic acknowledgment button"}</>]
 ]} />
 <p>{"The permanent denominator is particularly easy to misread. The original policy displays a maximum of 16, but this recovery permits at most seven additional calls after four original calls. The effective ceiling is "}<code>{"min(16, 4 + 7) = 11"}</code>{". With ten consumed calls, only one remains. Subtracting 10 from the displayed 16 gives the wrong answer."}</p>
-<p>{"The current block mentions incomplete finite-HQ telemetry and exact owner resume. That wording does not promise that clicking Resume will pass. Resume must still satisfy all underlying checks, including usage and eligible future work. A free slot is not sufficient authority to replay old work."}</p>
+<p>{"The historical block mentions incomplete finite-HQ telemetry and exact owner resume. That wording does not promise that clicking Resume will pass. Resume must still satisfy all underlying checks, including usage and eligible future work. A free slot is not sufficient authority to replay old work."}</p>
 <p>{"Also distinguish the page's generic included-only subscription warning from the actual finite mode. The inspected scope uses "}<code>{"credit_approved_finite_hq"}</code>{"; the generic warning describes a different execution mode. Inspect the selected scope's policy rather than treating every banner as a new diagnosis of this loop. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/src/control/usage/finite-hq.ts">{"Finite authority checks"}</a></p>
 </GuideSection>
 <GuideSection id="schedule" title="Trace the scheduled occurrence and its clocks">
@@ -175,7 +213,7 @@ export function HqGuideArticle() {
 <p>{"Three clocks often explain a surprising pause: the market session, the occurrence's dispatch window, and the authority's absolute expiry. Provider executions add start/finish times; publication adds delivery times. A new heartbeat cannot extend a research cutoff, and a restart cannot move an expired occurrence back into its original window. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/src/control/investment-loop/service.ts">{"Scheduler state transitions"}</a></p>
 </GuideSection>
 <GuideSection id="executions" title="Follow an execution and its usage evidence">
-<p>{"The loop's "}<strong>{"AI usage"}</strong>{" section is a convenient aggregate. The home page's "}<strong>{"Executions"}</strong>{" view lets you inspect runtime attempts across the company and use "}<strong>{"Usage & cost"}</strong>{" for an individual attempt. Match the working-group origin, worker and timestamp, then confirm the exact execution identifier privately."}</p>
+<p>{"The loop's "}<strong>{"AI usage"}</strong>{" section is a convenient aggregate. The "}<strong>{"Activity → Work sessions"}</strong>{" view lets you inspect runtime attempts across the company and use "}<strong>{"Usage & cost"}</strong>{" for an individual attempt. Match the working-group origin, worker and timestamp, then confirm the exact execution identifier privately."}</p>
 <GuideFigure figure={figures["04-usage-and-invocations"]} />
 <p>{"Do not merge these independent dimensions:"}</p>
 <GuideTable caption="Independent execution and usage dimensions" wide={true} headings={["Dimension", "Example", "Meaning"]} rows={[
@@ -188,15 +226,15 @@ export function HqGuideArticle() {
 <p>{"A final text response does not establish complete usage. A complete usage record does not establish a good proposal. An unpriced record does not mean zero cost. In this snapshot, all ten calls are unpriced, while two have incomplete usage; those are separate counts."}</p>
 <p>{"Expand "}<strong>{"Execution details"}</strong>{" to see the execution, run/cycle references, provider request/thread/turn references, model, timestamps, token categories, pricing restrictions and explanatory unknowns. This smaller disclosure does not display every accounting field. For "}<code>{"settled"}</code>{", inspect "}<code>{"aiUsage.executions"}</code>{" in the larger schedule/receipts JSON."}</p>
 <p>{"Cached input is a subset of input, and reasoning tokens may be included within output. Do not add those subsets a second time to construct a total. Estimates labeled API-equivalent are not actual subscription charges. HQ does not learn the owner's remaining subscription quota merely because it has a token count. Exact model pricing must not be substituted with a similarly named model's price."}</p>
-<p>{"The "}<strong>{"Worker, cycle, day and activity breakdown"}</strong>{" helps locate the source of aggregate usage. The worker inspector's "}<strong>{"AI usage and cost"}</strong>{" is broader than one Trade loop. Likewise, both the predecessor and successor loop cards currently report ten invocations because their reports filter the same persistent portfolio. Do not add the two cards to claim twenty calls."}</p>
+<p>{"The "}<strong>{"Worker, cycle, day and activity breakdown"}</strong>{" helps locate the source of aggregate usage. The worker inspector's "}<strong>{"AI usage and cost"}</strong>{" is broader than one Trade loop. Likewise, both the predecessor and successor loop cards in the historical capture report ten invocations because their reports filter the same persistent portfolio. Do not add the two cards to claim twenty calls."}</p>
 <p>{"Current worker profile settings are not historical execution settings. Inspect the execution's recorded model, reasoning level and runtime provenance when explaining what actually ran. Changes to a worker profile affect future work; they do not rewrite prior execution evidence. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/usage.js">{"Usage UI"}</a>{" · "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/src/control/usage/service.ts">{"Usage accounting"}</a></p>
 </GuideSection>
 <GuideSection id="discussions" title="Examine what the team actually saw and said">
-<p>{"Return to "}<strong>{"Private HQ → Working Groups"}</strong>{". Choose the discussion matching the scope you recorded. The current and predecessor discussions can have the same topic. Confirm their identity and state rather than selecting by title alone."}</p>
-<p>{"Read the charter, shared audience, facilitator, synthesizer, turn/round limits and deadline first. The company sidebar calls Atlas “CEO” and Maya “Product Manager.” Their investment scope gives them specific Trade responsibilities. Those scoped permissions are more relevant to this decision than their company-wide job titles."}</p>
+<p>{"Return to "}<strong>{"Private HQ → Team → Discussions"}</strong>{". Choose the discussion matching the scope you recorded. The current and predecessor discussions can have the same topic. Confirm their identity and state rather than selecting by title alone."}</p>
+<p>{"Read the charter, shared audience, facilitator, synthesizer, turn/round limits and deadline first. The historical company sidebar called Atlas “CEO” and Maya “Product Manager.” Their investment scope gives them specific Trade responsibilities. Those scoped permissions are more relevant to this decision than their company-wide job titles."}</p>
 <p>{"Then examine the evidence in this order:"}</p>
 <ol><li><strong>{"Shared evidence packet"}</strong>{": which selected records were made available to the discussion? "}<strong>{"Inspect shared source"}</strong>{" shows the retained material. Membership alone does not expose private employee histories."}</li><li><strong>{"Attributable discussion"}</strong>{": who contributed, in what order, and against which transcript/evidence revisions? References connect claims to prior contributions and shared material."}</li><li><strong>{"Questions and responses"}</strong>{": which explicit questions were answered, and which remain unresolved?"}</li><li><strong>{"Saved synthesis"}</strong>{": what conclusion was actually retained, and was it marked incomplete?"}</li><li>{"The relevant execution evidence: did the turn that was supposed to produce a result finish and persist the required typed record?"}</li></ol>
-<p>{"A current working-group counter of six used turns out of 24 is a discussion limit. It is not interchangeable with six loop turns out of 16 or the finite family's eleven-call effective ceiling. Multiple limits constrain the same workflow at different layers; the loosest one does not override the others."}</p>
+<p>{"The historical working-group counter of six used turns out of 24 is a discussion limit. It is not interchangeable with six loop turns out of 16 or the finite family's eleven-call effective ceiling. Multiple limits constrain the same workflow at different layers; the loosest one does not override the others."}</p>
 <p>{"Private discussion text can help diagnose a failure, but it is not automatically approved for public publication. The public desk may show a selected derivative rather than the complete transcript. These screenshots therefore keep private contributions and expanded evidence out of view."}</p>
 <p>{"Avoid using "}<strong>{"Resume"}</strong>{", "}<strong>{"Finish with current evidence"}</strong>{", "}<strong>{"Authorize another bounded round"}</strong>{" or "}<strong>{"Request reply"}</strong>{" as inspection tools. They can authorize additional work. Even saving an owner interjection changes the shared record and can affect later authorized turns. Read the existing evidence before asking a worker to explain it again. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/groups.js">{"Working-group interface"}</a></p>
 </GuideSection>
@@ -219,15 +257,15 @@ export function HqGuideArticle() {
 <p>{"Here the evidence stops between proposal and review. That explains the unchanged portfolio without inventing a successful HOLD decision. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/src/control/investment-team/service.ts">{"Investment team admission"}</a></p>
 </GuideSection>
 <GuideSection id="review-failure" title="Work through the October 15 review failure">
-<p>{"The current example shows why a single status label is insufficient. In "}<strong>{"Executions"}</strong>{", Maya's review appears as "}<strong>{"awaiting approval"}</strong>{", with a runtime message about an unavailable approval. In the loop's usage table, the same review has incomplete usage. The company "}<strong>{"Approvals"}</strong>{" count is zero."}</p>
+<p>{"The historical example shows why a single status label is insufficient. In "}<strong>{"Activity → Work sessions"}</strong>{", Maya's review appears as "}<strong>{"awaiting approval"}</strong>{", with a runtime message about an unavailable approval. In the loop's usage table, the same review has incomplete usage. The company "}<strong>{"Settings → Approvals"}</strong>{" count is zero."}</p>
 <GuideFigure figure={figures["07-review-row"]} />
 <p>{"An investigation should proceed as follows:"}</p>
-<ol><li>{"Match the review execution to the correct occurrence and proposal context."}</li><li>{"Read its runtime error and usage explanation. The displayed token numbers do not by themselves establish complete terminal accounting."}</li><li>{"Check the committed review and submission collections. Both are empty here."}</li><li>{"Check "}<strong>{"Approvals"}</strong>{" for an actual actionable record. Do not manufacture an approval from the status text."}</li><li>{"Consult the retained tool/runtime receipt and deployed source when the UI cannot explain the failure precisely."}</li></ol>
+<ol><li>{"Match the review execution to the correct occurrence and proposal context."}</li><li>{"Read its runtime error and usage explanation. The displayed token numbers do not by themselves establish complete terminal accounting."}</li><li>{"Check the committed review and submission collections. Both are empty here."}</li><li>{"Check "}<strong>{"Settings → Approvals"}</strong>{" for an actual actionable record. Do not manufacture an approval from the status text."}</li><li>{"Consult the retained tool/runtime receipt and deployed source when the UI cannot explain the failure precisely."}</li></ol>
 <p>{"The prior technical investigation found a review-clock defect: the tool facade sampled "}<code>{"reviewedAt"}</code>{", then the journal sampled a slightly later "}<code>{"recordedAt"}</code>{" within the same "}<code>{"paper_review"}</code>{" call. The reducer required exact equality and rejected the mismatch. Frozen test clocks had hidden it. PR #102 now samples one trusted commit timestamp after validation for both the review and journal entry, while retaining live authorization and cutoff checks. A separate adapter catch had mislabeled the bounded tool exception as awaiting approval even though no approval request existed; that classification path was also repaired. The UI alone does not prove these causes; the diagnosis required the tool receipt and source analysis. The old execution label and incomplete usage remain historical evidence."}</p>
 <p>{"Deploying the fix changes how a future eligible review is handled. It does not synthesize a missing review, mark an incomplete usage record complete, refund a provider call or replay an elapsed occurrence. This distinction is essential when verifying a repair: source and deployment evidence establish that the fix is installed; a later eligible execution is needed to demonstrate its live path. The complete formal decision/fill path remains unproven at this checkpoint. "}<a href="https://github.com/eugenelin89/bot_messenger/pull/102">{"Review-clock repair"}</a></p>
 </GuideSection>
 <GuideSection id="publication" title="Inspect publication separately from execution">
-<p>{"Open "}<strong>{"Investment publication"}</strong>{" from the sidebar or investment page. Use "}<strong>{"Refresh status"}</strong>{" to inspect the existing channel. The source/destination header identifies the channel privately; it has been excluded from the screenshot."}</p>
+<p>{"Open "}<strong>{"Projects → Investment → Publication"}</strong>{" from Projects or the Investment navigation. Use "}<strong>{"Refresh status"}</strong>{" to inspect the existing channel. The source/destination header identifies the channel privately; it has been excluded from the screenshot."}</p>
 <GuideFigure figure={figures["06-publication-health"]} />
 <p>{"Read the health fields independently:"}</p>
 <GuideTable caption="Publication health fields" wide={false} headings={["Field", "Diagnostic use"]} rows={[
@@ -240,7 +278,7 @@ export function HqGuideArticle() {
 [<>{"Budget/delivery/new-risk flags"}</>,<>{"Whether configured limits or retained conditions block progress"}</>]
 ]} />
 <p>{"Expand "}<strong>{"Delivery receipts and backlog"}</strong>{" privately. It shows health details and jobs with fields such as "}<code>{"kind"}</code>{", "}<code>{"state"}</code>{", "}<code>{"digest"}</code>{", "}<code>{"retryAt"}</code>{" and "}<code>{"receipt"}</code>{". A delivered record batch can include accepted record identifiers, a receiver cursor and a watermark. A heartbeat receipt proves acceptance of a lifecycle contact, not acceptance of a new decision or valuation."}</p>
-<p>{"The current snapshot has no pending, uncaptured or uncertain jobs. That does not mean every private conversation has been published. The channel only covers approved record classes and derivatives. New explanations and artifacts can require another exact preview. “Uncaptured zero” is evaluated within that scope."}</p>
+<p>{"The historical snapshot has no pending, uncaptured or uncertain jobs. That does not mean every private conversation has been published. The channel only covers approved record classes and derivatives. New explanations and artifacts can require another exact preview. “Uncaptured zero” is evaluated within that scope."}</p>
 <p>{"To investigate a missing public record, first establish that the private typed record exists. Then check whether it is eligible under the publication consent, whether it was captured into a job, whether that job was acknowledged, and whether the public view is displaying the corresponding run and record. A website refresh cannot create a private review that never committed."}</p>
 <p>{"Do not use the "}<code>{"publicationHealth: { disabled: true }"}</code>{" value in an observed/private-paper loop's JSON as proof that the separate public publisher is off. Inspect the publication channel itself. Also treat older generic page copy about a “synthetic source” as insufficient to classify the selected source: this channel uses the observed-paper portfolio adapter, with its own evidence mode and publication boundary."}</p>
 <p><strong>{"Capture approved future financial records"}</strong>{", "}<strong>{"Deliver or reconcile one request"}</strong>{" and "}<strong>{"Queue one lifecycle heartbeat"}</strong>{" perform operations. They are not aliases for Refresh. A restored-publisher reconciliation or generation fence needs the operator's recovery procedure and receiver evidence. "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/publication.js">{"Publisher interface"}</a>{" · "}<a href="https://github.com/eugenelin89/asymmetri/blob/main/docs/BOTSQUAD_INTEGRATION.md">{"Publication protocol"}</a></p>
@@ -271,14 +309,14 @@ export function HqGuideArticle() {
 [<>{"Approve/save consent or scope"}</>,<>{"Changes durable authorization/configuration"}</>],
 [<>{"Start / Resume"}</>,<>{"Attempts to authorize eligible future work under current checks"}</>],
 [<>{"Loop Pause / Stop"}</>,<>{"Changes loop control state and fences stale work; unfilled orders are cancelled while completed fills remain"}</>],
-[<>{"Global Pause new dispatch"}</>,<>{"Holds company dispatch; it is a separate control from the investment loop's lifecycle"}</>],
+[<>{"Settings → Pause new work / Resume queued work"}</>,<>{"Holds company dispatch; it is a separate control from the investment loop's lifecycle"}</>],
 [<>{"Group Finish / another bounded round / Request reply"}</>,<>{"Can authorize additional model work"}</>],
 [<>{"Confirm Reload OFF / report funding configuration changed"}</>,<>{"Records a funding-state attestation or change; only use when factually justified"}</>],
 [<>{"Capture / Deliver / Heartbeat / publication reconciliation"}</>,<>{"Changes publication state and may transmit approved data"}</>],
 [<>{"Service restart or deployment"}</>,<>{"Changes process/code state; does not reset durable portfolio, call history or approval evidence"}</>]
 ]} />
 <p>{"Pause is not time travel. Wall-clock windows and authority expiry continue to matter. On resume, elapsed pending work can become missed; cancelled orders and ended cycles do not revive. A stop or generation change also prevents an old asynchronous callback from being treated as current work. An active provider call may still require settlement or reconciliation after interruption."}</p>
-<p>{"The existing Resume path requires an exact matching authority/digest, valid evidence and eligible future work. The current two-gap example cannot be repaired merely by pressing the visible buttons. A new scope or recovery amendment is a separate reviewed operation with retained history, not a fresh empty counter."}</p>
+<p>{"The existing Resume path requires an exact matching authority/digest, valid evidence and eligible future work. The historical two-gap example cannot be repaired merely by pressing the visible buttons. A new scope or recovery amendment is a separate reviewed operation with retained history, not a fresh empty counter."}</p>
 <p>{"There is no need to change any of these controls to collect the evidence described in this guide. The useful recovery question is precise: “Which failed condition has been repaired, what retained evidence proves that, and what future action is now authorized?” "}<a href="https://github.com/eugenelin89/bot_messenger/blob/139a1c537d759e4c88edbc628fab14bd1d4e6a51/public/investment-run.js">{"Loop controls"}</a></p>
 </GuideSection>
 <GuideSection id="beyond-ui" title="Escalate beyond the UI when the evidence stops">
@@ -324,14 +362,14 @@ export function HqGuideArticle() {
 <GuideSection id="incident-record" title="Keep a compact incident record and a daily routine">
 <p>{"Use the following template in private operator notes. Include exact IDs there, then remove them from any public version."}</p>
 <GuideCode caption="Private incident-note template" text={"Observed at: UTC time + local timezone\nDeployed revision:\nPortfolio / scope / loop / authority / plan revision:\nExpected stage and due/expiry window:\nObserved state and exact reason:\nLast completed prerequisite:\nExecution: worker, activity, start/end, runtime status\nUsage: settled, completeness, reasons, pricing availability\nReservation: state, consumed/remaining limits, unresolved outcome?\nDecision chain: proposal / review / submission / order / fill\nPortfolio effect and latest valuation timestamp:\nPublication: consent, pending/uncertain jobs, relevant receipt kind\nWhat is proven / what remains unknown:\nActions already taken and their receipts:\nProposed next action, required authority and verification:"} />
-<p>{"For a normal daily check, open Attention, identify the current loop and session, read the portfolio timestamp, and inspect the latest completed occurrence and execution. After research, verify the decision chain. After the close, verify the closing collection and valuation. Finally, inspect publication receipts and the public page's distinct financial and contact timestamps."}</p>
+<p>{"For a normal daily check, open Tasks → Needs your attention, identify the current loop and session, read the portfolio timestamp, and inspect the latest completed occurrence and execution. After research, verify the decision chain. After the close, verify the closing collection and valuation. Finally, inspect publication receipts and the public page's distinct financial and contact timestamps."}</p>
 <p>{"If something is blocked, preserve the reason and follow its evidence chain before taking action. If nothing is scheduled, verify whether the finite operating scope has ended rather than assuming the always-on server is malfunctioning. Future daily operation needs an eligible schedule and authority; the continuing portfolio alone does not supply either."}</p>
 <p>{"This routine makes an incident explainable in terms of recorded transitions: what was authorized, what was attempted, what committed, what was delivered, and where the chain stopped."}</p>
 </GuideSection>
 <GuideSection id="version" title="Version, evidence and known interface limits">
-<p>{"This guide describes the HQ implementation deployed from revision "}<code>{"139a1c5"}</code>{" and the October 15 observation window stated above. Its source links are pinned where practical. The screenshots are cropped actual interfaces, not simulated training screens. Expanded private receipts and transcripts were inspected where needed but are not published here."}</p>
+<p>{"The historical investigation documents the former HQ implementation at revision "}<code>{"139a1c5"}</code>{" and the October 15 observation window stated above. Its historical source links remain pinned. The seven older screenshots are cropped actual interfaces; the five UX-01 screenshots are actual redesigned interfaces using explicitly authored sample data and a fake runtime. Expanded private receipts and transcripts were inspected where needed but are not published here."}</p>
 <p>{"The "}<a href="#tail-logs">{"Tail logs section"}</a>{" was added later on October 15 after checking the service's journal settings and the renewal-specific read-only helper. It documents an inspection method, not the outcome of that renewal. The earlier screenshots and failure example remain a dated checkpoint."}</p>
-<p>{"Known limits of this version include the misleading permanent-limit denominator during recovery, shared portfolio-level usage repeated on different loop cards, a generic subscription warning alongside finite-authority state, incomplete refresh coordination between the portfolio panel and loop cards, and a historical awaiting-approval label that does not correspond to a current owner approval. The article explains these behaviors rather than presenting them as fixed."}</p>
+<p>{"The historical version exhibited the misleading permanent-limit denominator during recovery, shared portfolio-level usage repeated on different loop cards, a generic subscription warning alongside finite-authority state, incomplete refresh coordination between the portfolio panel and loop cards, and a historical awaiting-approval label that does not correspond to a current owner approval. Those observations are retained as historical evidence. Consult the current installed records before diagnosing the same issue today."}</p>
 <p>{"At the screenshot checkpoint, genuine research and closing valuation had occurred; a complete reviewed decision/submission/fill sequence had not been demonstrated. The experiment uses observed paper trading with no brokerage execution. Read the "}<a href="/botsquad/trade/guide">{"Trade experiment guide"}</a>{" for the portfolio method, daily schedule, source restrictions and rerun semantics, and the "}<a href="/botsquad/trade">{"public Trade page"}</a>{" for the currently published evidence."}</p>
 </GuideSection>
   </>;

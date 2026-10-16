@@ -1200,14 +1200,14 @@ export const tradeGuide = {
 
 export const hqGuide = {
   href: '/botsquad/trade/hq-guide',
-  navLabel: 'HQ investigation guide',
-  action: 'Investigate Trade in HQ',
-  title: 'Investigating BotSquad Trade from HQ',
-  description: 'An illustrated operator guide to examining BotSquad HQ, tracing Trade records, tailing diagnostic output, investigating failures and understanding recovery controls.',
-  eyebrow: 'BotSquad Research / Trade / HQ investigation guide',
-  introduction: 'Trace a trading day through the portfolio, scheduled work, employee executions and publication evidence.',
-  date: '2026-10-15',
-  dateLabel: 'October 15, 2026',
+  navLabel: 'HQ guide',
+  action: 'Learn to use BotSquad HQ',
+  title: 'Using BotSquad HQ',
+  description: 'Learn the current HQ navigation, assign a first task, follow employees and results, then investigate Trade evidence with a dated incident walkthrough.',
+  eyebrow: 'BotSquad Research / Trade / HQ guide',
+  introduction: 'Start a task, follow your team and read the result. Then trace Trade activity through its recorded evidence.',
+  date: '2026-10-16',
+  dateLabel: 'October 16, 2026',
 } as const;
 
 // Published public worker identities; no name-based or remote image lookup.
@@ -1423,65 +1423,114 @@ export const tradeGuideFigures = {
 export const hqGuideFigures = {
   "01-hq-navigation": {
     "src": "/images/botsquad/hq-guide/01-hq-navigation.jpg",
-    "alt": "The HQ sidebar shows Attention, Working Groups, Tasks and Executions.",
+    "alt": "Historical HQ capture: The HQ sidebar shows Attention, Working Groups, Tasks and Executions.",
     "width": 260,
     "height": 720,
-    "caption": "Figure 1. The upper HQ sidebar. Scroll the sidebar to reach Investment run, Investment team, Investment publication and Audit history. Counts are company-wide; they are not all Trade activity.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 1. The upper HQ sidebar. Scroll the sidebar to reach Investment run, Investment team, Investment publication and Audit history. Counts are company-wide; they are not all Trade activity.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:40:52.751109+00:00"
   },
   "02-portfolio-metrics": {
     "src": "/images/botsquad/hq-guide/02-portfolio-metrics.jpg",
-    "alt": "The portfolio metrics show USD 100,000 cash and equity, zero returns, and the October 14 valuation timestamp.",
+    "alt": "Historical HQ capture: The portfolio metrics show USD 100,000 cash and equity, zero returns, and the October 14 valuation timestamp.",
     "width": 1080,
     "height": 566,
-    "caption": "Figure 2. The latest valuation is October 14 at 20:00 UTC. The displayed cash and equity are USD 100,000. A freshly opened page does not make that valuation current to October 15.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 2. The latest valuation is October 14 at 20:00 UTC. The displayed cash and equity are USD 100,000. A freshly opened page does not make that valuation current to October 15.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:34:31.939774+00:00"
   },
   "03-loop-and-authority": {
     "src": "/images/botsquad/hq-guide/03-loop-and-authority.jpg",
-    "alt": "A blocked loop shows six reserved turns, ten permanent calls, one remaining call, and an incomplete-telemetry reason.",
+    "alt": "Historical HQ capture: A blocked loop shows six reserved turns, ten permanent calls, one remaining call, and an incomplete-telemetry reason.",
     "width": 1044,
     "height": 250,
-    "caption": "Figure 3. The loop is blocked even though an independent authority is present. Each counter covers a different scope. The “remaining 1” value reflects the stricter recovery allowance.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 3. The loop is blocked even though an independent authority is present. Each counter covers a different scope. The “remaining 1” value reflects the stricter recovery allowance.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:34:32.040243+00:00"
   },
   "04-usage-and-invocations": {
     "src": "/images/botsquad/hq-guide/04-usage-and-invocations.jpg",
-    "alt": "The AI usage summary shows ten invocations, two incomplete usage records, and ten unpriced records above the execution table.",
+    "alt": "Historical HQ capture: The AI usage summary shows ten invocations, two incomplete usage records, and ten unpriced records above the execution table.",
     "width": 1044,
     "height": 610,
-    "caption": "Figure 4. An excerpt of the aggregate and its first four rows. A completed runtime row can still have incomplete usage. Actual charges and subscription quota are unknown.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 4. An excerpt of the aggregate and its first four rows. A completed runtime row can still have incomplete usage. Actual charges and subscription quota are unknown.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:35:47.708213+00:00"
   },
   "05-evidence-and-controls": {
     "src": "/images/botsquad/hq-guide/05-evidence-and-controls.jpg",
-    "alt": "The loop evidence summary shows one proposal, zero reviews, zero submissions and no pending orders above the control buttons.",
+    "alt": "Historical HQ capture: The loop evidence summary shows one proposal, zero reviews, zero submissions and no pending orders above the control buttons.",
     "width": 1044,
     "height": 335,
-    "caption": "Figure 5. The counts locate the break: a proposal exists, but no independent review or submission is committed. The buttons below are controls, not diagnostic acknowledgments.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 5. The counts locate the break: a proposal exists, but no independent review or submission is committed. The buttons below are controls, not diagnostic acknowledgments.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:34:54.794806+00:00"
   },
   "06-publication-health": {
     "src": "/images/botsquad/hq-guide/06-publication-health.jpg",
-    "alt": "Publication health is active with zero pending, uncaptured or uncertain jobs, followed by explicit delivery controls and a collapsed receipts disclosure.",
+    "alt": "Historical HQ capture: Publication health is active with zero pending, uncaptured or uncertain jobs, followed by explicit delivery controls and a collapsed receipts disclosure.",
     "width": 1044,
     "height": 290,
-    "caption": "Figure 7. Publication is active with an empty backlog while the investment loop is blocked. No delivery control was activated for this capture.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 7. Publication is active with an empty backlog while the investment loop is blocked. No delivery control was activated for this capture.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:39:53.521685+00:00"
   },
   "07-review-row": {
     "src": "/images/botsquad/hq-guide/07-review-row.jpg",
-    "alt": "The final three invocation rows include a Maya review labeled awaiting approval with incomplete usage.",
+    "alt": "Historical HQ capture: The final three invocation rows include a Maya review labeled awaiting approval with incomplete usage.",
     "width": 1044,
     "height": 250,
-    "caption": "Figure 6. This is a retained historical execution label. It does not establish that an approval is waiting for the owner in the Approvals view.",
-    "sourceLabel": "Private BotSquad HQ — owner interface",
+    "caption": "Historical capture · October 15, 2026, before UX-01. Figure 6. This is a retained historical execution label. It does not establish that an approval is waiting for the owner in the Approvals view.",
+    "sourceLabel": "Historical private HQ interface — October 15, 2026",
     "capturedAt": "2026-10-15T18:36:10.219942+00:00"
+  }
+} as const;
+
+// UX-01 actual interface captures; disposable backend and authored fake-runtime responses.
+export const hqUxGuideFigures = {
+  "home-1440": {
+    "src": "/images/botsquad/hq-ux01/home-1440.png",
+    "alt": "HQ Home shows the six navigation destinations, recorded work, attention items and the team.",
+    "width": 1440,
+    "height": 1500,
+    "caption": "Current HQ Home. These counts and tasks are isolated authored sample data, produced with a fake runtime; they do not describe live employees or investment results.",
+    "sourceLabel": "Actual HQ interface · isolated authored sample data",
+    "capturedAt": "2026-10-16"
+  },
+  "new-task-1440": {
+    "src": "/images/botsquad/hq-ux01/new-task-1440.png",
+    "alt": "The New task dialog contains a supplied-text request and the Start task button.",
+    "width": 1440,
+    "height": 1214,
+    "caption": "New task with the tutorial request. This is an actual HQ interface capture from an isolated sample backend; starting a task in your own HQ requests real AI work under existing limits.",
+    "sourceLabel": "Actual HQ interface · isolated authored sample data",
+    "capturedAt": "2026-10-16"
+  },
+  "task-result-1440": {
+    "src": "/images/botsquad/hq-ux01/task-result-1440.png",
+    "alt": "A completed sample task shows its request, responsible employee, recorded outcome and saved summary.",
+    "width": 1440,
+    "height": 1000,
+    "caption": "Open task shows a recorded outcome and a saved result. The fake-runtime answer was authored for repeatable testing; it is not evidence of genuine employee execution.",
+    "sourceLabel": "Actual HQ interface · isolated authored sample data",
+    "capturedAt": "2026-10-16"
+  },
+  "saved-result-1440": {
+    "src": "/images/botsquad/hq-ux01/saved-result-1440.png",
+    "alt": "A saved sample result contains three bullet points grounded in the tutorial text.",
+    "width": 1440,
+    "height": 1000,
+    "caption": "The saved sample summary. Actual HQ interface with isolated authored data and a fake-runtime response; evaluate your own task’s answer before accepting it.",
+    "sourceLabel": "Actual HQ interface · isolated authored sample data",
+    "capturedAt": "2026-10-16"
+  },
+  "employee-390": {
+    "src": "/images/botsquad/hq-ux01/employee-390.png",
+    "alt": "Atlas’s profile on a phone shows responsibilities, work status, conversations and permissions controls.",
+    "width": 390,
+    "height": 1061,
+    "caption": "Employee profile on a phone. This actual HQ capture uses isolated sample records; No session running does not establish eligibility for a new assignment.",
+    "sourceLabel": "Actual HQ interface · isolated authored sample data",
+    "capturedAt": "2026-10-16"
   }
 } as const;

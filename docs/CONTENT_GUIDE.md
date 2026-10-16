@@ -392,8 +392,14 @@ experiment is the default until trusted server read configuration is explicitly 
 
 ## Investment showcase copy and evidence
 
-The HQ companion at `/botsquad/trade/hq-guide` explains how an operator
-examines schedules, executions, usage, decision evidence and publication. Its
+The HQ companion at `/botsquad/trade/hq-guide` begins with current UX-01
+navigation and the supplied-text first-task exercise, then explains how an
+operator examines schedules, work sessions, usage, decisions and publication.
+`hqUxGuideFigures` owns five actual interface captures with isolated authored
+sample records and fake-runtime responses. Each image identifies that boundary;
+none establishes live employee or investment outcomes. The seven original
+October 15 captures and incident remain clearly historical, with stable URLs
+and source links. See [the synchronization inventory](BOTSQUAD_HQ_UX01_2026-10-16.md). Its
 shared labels and metadata live in `hqGuide`; route-specific prose lives in its
 article component. The two guides cross-link, with direct HQ-guide links from
 the Trade introduction and archive/methodology navigation. Preserve ordered
@@ -413,8 +419,10 @@ addition separate from the screenshots' historical observation checkpoint.
 The owner explicitly requested real Computer Use screenshots of HQ for this
 public companion. Publish only reviewed crops that exclude private identifiers,
 transcripts, credentials and access endpoints. Keep source labels as plain text,
-not private links; disclose actual cropping and capture dates. These seven images
-show the actual interface, not a fictional demonstration state. Do not generalize
+not private links; disclose actual cropping and capture dates. These seven historical images show the actual former interface and its dated
+operational checkpoint. The separately approved UX-01 captures show the actual
+redesigned interface with explicitly authored sample data; do not confuse these
+two evidence sources. Do not generalize
 this approval to future raw HQ screenshots or expanded private receipts.
 
 The technical guide at `/botsquad/trade/guide` explains the full Trade

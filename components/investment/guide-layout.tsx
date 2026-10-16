@@ -85,8 +85,8 @@ export function GuideFigure({ figure }: { figure: GuideImage }) {
   );
 }
 
-export function GuideCode({ caption, text }: { caption: string; text: string }) {
-  return <figure className="guide-code"><figcaption>{caption}</figcaption><p className="guide-table-hint">Scroll sideways to read the full block.</p><pre tabIndex={0} role="region" aria-label={caption}><code>{text}</code></pre></figure>;
+export function GuideCode({ caption, text, wrap = false }: { caption: string; text: string; wrap?: boolean }) {
+  return <figure className="guide-code"><figcaption>{caption}</figcaption>{!wrap && <p className="guide-table-hint">Scroll sideways to read the full block.</p>}<pre className={wrap ? 'guide-code-wrap' : undefined} tabIndex={0} role="region" aria-label={caption}><code>{text}</code></pre></figure>;
 }
 
 export function GuideTable({ caption, headings, rows, wide = headings.length >= 4 }: { caption: string; headings: readonly string[]; rows: readonly (readonly ReactNode[])[]; wide?: boolean }) {

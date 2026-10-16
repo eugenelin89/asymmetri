@@ -720,3 +720,79 @@ rights apply; publication is limited to these owner-authorized reviewed crops.
 - Alt text: “The final three invocation rows include a Maya review labeled awaiting approval with incomplete usage.”
 - Rights/privacy: Owner-requested public documentation of BotSquad HQ. Crop inspected for private transcripts, internal/provider identifiers, credentials, account identifiers and private access endpoints. None are visible. Values describe the paper experiment, not a real-money account.
 - SHA-256: `23fe58f7d15e4fa73ffd04335f17d2626223f98ebc1ef9099272a880056794e0`.
+
+
+## HQ UX-01 current tutorial captures, October 16, 2026
+
+These five PNGs are actual HQ browser captures supplied by the coordinated
+BotSquad UX-01 implementation. They use a disposable HTTP/SQLite backend, isolated
+authored sample records and fake-runtime responses. No external provider, market
+operation or live investment outcome is represented. The owner explicitly
+authorized synchronized website tutorials and safe current screenshots.
+
+All five were visually reviewed for private endpoints, credentials, account
+identifiers, genuine transcripts and genuine investment records. None is visible.
+Existing BotSquad UI/portrait rights apply; public use is limited to these reviewed
+sample captures. Original bytes and their source-manifest hashes are preserved:
+no crop, pixel editing, metadata rewrite, generation or hotlinking.
+
+The seven `/images/botsquad/hq-guide/*.jpg` assets remain byte-identical at their
+stable URLs. Their public captions/source labels now explicitly identify them as
+historical October 15 evidence before UX-01. All seven alt descriptions are
+prefixed “Historical HQ capture:” while retaining their original descriptions.
+They are not current navigation.
+
+### home-1440.png
+
+- Public URL: `/images/botsquad/hq-ux01/home-1440.png`.
+- Source: BotSquad `docs/ux/hq-redesign/screenshots/home-1440.png` and its verified capture manifest; captured October 16, 2026, browser locale en-US and timezone America/Vancouver. No private access URL is published.
+- Dimensions/format: 1440 × 1500 PNG; 216,374 bytes.
+- Processing: byte-identical integration of the supplied capture.
+- Public role: current HQ navigation/first-task tutorial; explicit isolated sample/fake-runtime disclosure in the article and each figure.
+- Alt text: “HQ Home shows the six navigation destinations, recorded work, attention items and the team.”
+- Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
+- SHA-256: `4ca2734ddd5b4b766b4a46f3fcb9eac7c4ca5f65ff86f6cbb72fb7866de82b5a`.
+
+### new-task-1440.png
+
+- Public URL: `/images/botsquad/hq-ux01/new-task-1440.png`.
+- Source: BotSquad `docs/ux/hq-redesign/screenshots/new-task-1440.png` and its verified capture manifest; captured October 16, 2026, browser locale en-US and timezone America/Vancouver. No private access URL is published.
+- Dimensions/format: 1440 × 1214 PNG; 227,600 bytes.
+- Processing: byte-identical integration of the supplied capture.
+- Public role: current HQ navigation/first-task tutorial; explicit isolated sample/fake-runtime disclosure in the article and each figure.
+- Alt text: “The New task dialog contains a supplied-text request and the Start task button.”
+- Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
+- SHA-256: `4312a2a0949112271b7c80f52bfe9c6bfd4611c07fc94dcedde0eb4a76a95582`.
+
+### task-result-1440.png
+
+- Public URL: `/images/botsquad/hq-ux01/task-result-1440.png`.
+- Source: BotSquad `docs/ux/hq-redesign/screenshots/task-result-1440.png` and its verified capture manifest; captured October 16, 2026, browser locale en-US and timezone America/Vancouver. No private access URL is published.
+- Dimensions/format: 1440 × 1000 PNG; 195,348 bytes.
+- Processing: byte-identical integration of the supplied capture.
+- Public role: current HQ navigation/first-task tutorial; explicit isolated sample/fake-runtime disclosure in the article and each figure.
+- Alt text: “A completed sample task shows its request, responsible employee, recorded outcome and saved summary.”
+- Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
+- SHA-256: `e467021e9c146099410b6d3a7471eb38785d81e9a7f0fa3aecd0348dcd92ef13`.
+
+### saved-result-1440.png
+
+- Public URL: `/images/botsquad/hq-ux01/saved-result-1440.png`.
+- Source: BotSquad `docs/ux/hq-redesign/screenshots/saved-result-1440.png` and its verified capture manifest; captured October 16, 2026, browser locale en-US and timezone America/Vancouver. No private access URL is published.
+- Dimensions/format: 1440 × 1000 PNG; 174,595 bytes.
+- Processing: byte-identical integration of the supplied capture.
+- Public role: current HQ navigation/first-task tutorial; explicit isolated sample/fake-runtime disclosure in the article and each figure.
+- Alt text: “A saved sample result contains three bullet points grounded in the tutorial text.”
+- Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
+- SHA-256: `8e8a298e7dc81376008d64cf18ffbce87a20aea5fe1729e61caff096db4cf0c3`.
+
+### employee-390.png
+
+- Public URL: `/images/botsquad/hq-ux01/employee-390.png`.
+- Source: BotSquad `docs/ux/hq-redesign/screenshots/employee-390.png` and its verified capture manifest; captured October 16, 2026, browser locale en-US and timezone America/Vancouver. No private access URL is published.
+- Dimensions/format: 390 × 1061 PNG; 87,123 bytes.
+- Processing: byte-identical integration of the supplied capture.
+- Public role: current HQ navigation/first-task tutorial; explicit isolated sample/fake-runtime disclosure in the article and each figure.
+- Alt text: “Atlas’s profile on a phone shows responsibilities, work status, conversations and permissions controls.”
+- Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
+- SHA-256: `1ff7cb41e00f2a5a6513be098622001659d1a5eed9909b597ee384fe4ac33903`.

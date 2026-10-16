@@ -38,8 +38,9 @@ When routes or shared layout code change, verify:
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/botsquad/trade/guide` (dated technical explanation, noindex, contents,
   glossary, readable diagrams/tables and genuine public-interface screenshots)
-- `/botsquad/trade/hq-guide` (companion links, eighteen contents targets,
-  seven approved crops, code blocks and numbered investigation steps)
+- `/botsquad/trade/hq-guide` (companion links, twenty contents targets,
+  five UX-01 sample captures and seven historical crops, preserved anchors,
+  code blocks and numbered task/investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
@@ -79,6 +80,13 @@ For visual, layout, or navigation changes, verify the affected routes at:
 
 Check:
 
+- HQ guide: follow Home → New task → Start task → All tasks → Open task →
+  Results and files in an isolated sample HQ, checking current labels, employee
+  profile, attention, retry-loading instructions and original result visibility.
+  Confirm six destinations and the private Investment navigation. Current sample
+  captures and October 15 historical evidence must be clearly distinguished;
+  original image URLs and historical anchors must remain available. Compare the
+  capture manifest with the final HQ UI asset hashes before releasing the guide.
 - The Trade landing page shows only the four-field Experiment Status summary.
   Exercise fresh, stale, unknown, market-closed and unavailable reads; failed
   reads must not become “Not published” dates. Dates in this summary use UTC.
