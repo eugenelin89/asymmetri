@@ -109,5 +109,40 @@ former sidebar roles/discussion counter are explicitly historical.
   HQ process identity was unchanged.
 - Local six-width walkthrough, preserved anchors/images, focus, console, audit,
   independent review and upstream tutorial-link checks passed as described above.
-- Production website candidate/activation receipts will be appended after the
-  guarded release. No HQ, receiver or Ask operation is part of that activation.
+- Production candidate and activation checks passed; the receipt follows.
+  No HQ, receiver or Ask operation was part of that activation.
+
+## Completed website release
+
+- Implementation: `b6e50af`; deployed source/journal HEAD:
+  `e9b5ab1a4c8397d6ac0d484e69d489298a614d06`.
+- Activated October 16, 2026 at 00:58:47 Vancouver / 07:58:47 UTC;
+  readiness 4.63 seconds. Build `rrTJaSzqUzeWpt2fGqrCH`; artifact SHA-256
+  `0acd7e4d9edfed2d0d4910320fdf3e6726946395931e17352531e474839e68b0`.
+- Twelve isolated candidate route checks passed. Production resource floors
+  remained intact (280584 KiB minimum available during smoke; 7031062528 bytes
+  minimum free during manifest preparation).
+- Final route comparison: 158 observations, 150 verified HTTP responses,
+  84 original image requests. All previous Motion/guide images and protected
+  Motion pages, tutorial canonical/hashes/links and legacy redirects remain.
+  Four pre-existing unrelated IPv6 TLS failures and four fallback certificate
+  fingerprints match baseline; no infrastructure repair was included.
+- All five new PNGs served on apex and www exactly match their final approved
+  hashes. Live guide: one H1, twenty sections, twelve figures (five current
+  sample captures and seven historical captures), zero broken fragment targets.
+  All six required widths pass without page/request overflow or console errors.
+- All fifteen captured receiver tables are exactly unchanged, including events,
+  journal, records, valuations, snapshots and authority. Configuration hashes,
+  closed/empty Ask state and unrelated service identities are unchanged. Only
+  the website service restarted; HQ was not operated by this release.
+- Rollback runtime is retained as
+  `/var/www/asymmetri-rollback-20261016-8ffba38`; no rollback was needed.
+- Private complete receipts, runtime manifests, browser proof and comparison
+  data are retained by the operator. This public handoff summarizes them without
+  publishing raw database rows, transcripts, credentials or private endpoints.
+
+The compiled website source is the deployed commit above. This final handoff
+update is documentation only and does not require another website restart.
+The synchronized guide is available at
+[Using BotSquad HQ](https://asymmetri.co/botsquad/trade/hq-guide); the previous
+`/botsquad/investment/hq-guide` path retains its permanent redirect.
