@@ -108,6 +108,25 @@ generation cannot decrease; revoked key IDs cannot be resurrected. `revoke-key
 <keyId>` takes effect on fresh retries/receipt reads and pending commits. These
 commands expose no HTTP admin route. Scope grants are never accepted from events.
 
+For an ordinary, explicitly approved expiry renewal, register a fresh key ID with
+`authorize` and retain the current publisher, experiment, run, policy, generation
+and limits. The existing key ID's public key and validity interval cannot change.
+The shared scope expiry may extend at the same generation; old keys retain their
+own original expiry. Authentication and final recheck bind the actual signing key,
+so fresh old-key receipt requests remain valid until that key expires. A request
+authenticated before a scope change can fail its final recheck: pause and drain
+publisher delivery before registration. Do not use an expired key for HQ startup
+reconciliation; coordinate rotation in the already-running HQ when necessary.
+
+Validity values are safe-integer Unix seconds, with `notBefore < notAfter`.
+Registration imposes no additional start-time window, but receiver time and the
+signature's creation time must be within the key interval when used. Scope expiry
+and key expiry are hard bounds without the signature timestamp's skew allowance.
+Registration needs no receiver restart; the documented consistent backup does.
+It does not reset receipts, quotas, history, run approval or official selection.
+Restore recovery remains a separate fenced procedure requiring new authority and
+a generation above both systems' history. See the [October 16 renewal receipt](INV-REAL-01-WEBSITE.md#receiver-key-renewal--october-16-utc).
+
 RFC 9421 Ed25519 signatures bind exact method/authority/path, generation and, for
 writes, content type, SHA-256 Content-Digest and idempotency key. The pinned narrow
 profile rejects ambiguous serialization, unsupported components, duplicate raw

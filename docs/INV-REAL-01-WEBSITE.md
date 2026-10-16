@@ -30,7 +30,54 @@ investigation or provider-rights approval milestone is required. Preserve normal
 technical provenance, integrity, rate limits, access-denial handling and point-in-time
 accounting. No real trades, paid data or credit purchase/reload is included.
 
-## Production activation — live observed-paper configuration
+## Receiver key renewal — October 16 UTC
+
+At **2026-10-16 05:22:18 UTC** (October 15, 22:22 Vancouver), the existing
+receiver registered a fresh public verification key and extended the same
+publication scope through **2026-10-16 23:40 UTC** (October 16, 16:40 Vancouver).
+The owner explicitly approved the brief interruption, consistent backup and
+renewal after automatic approval review rejected the earlier broad authorization.
+That rejected attempt executed no production change. HQ subsequently paused and
+drained publication while remaining running; the prior key had already expired.
+
+Only the scope key ID and expiry changed. Publisher, experiment, run, generation
+`1`, policy, the exact 11 event types, JSON content type, 12 writes/minute and
+16,777,216 bytes/day remain unchanged. The new public SPKI DER SHA-256 fingerprint
+is `0df11622f0cf02f93cbdc8cd2c38efa374f30e03e84dfda058f210187c27a9f5`;
+its validity starts `2026-10-15T23:16:53.000Z`. The old key row and its original
+October 15 expiry remain identical. Private signing material stayed on HQ.
+
+The authorization packet SHA-256 is
+`50ad087eb084ec131b511ddfeba63982a5a97ad7a8b967f51ceb27d03692bc7f`.
+Before registration, the installed CLI produced a consistent stopped-receiver
+backup, canonical manifest digest
+`ba1c42fe407f913fbe6c356ba4c35958f4abee4cca5da44f40b580cbe34e4ddd`.
+All three backup files matched their hashes. An isolated restore passed full
+SQLite integrity and foreign-key checks, retained all 17 events and receipts,
+and remained fenced with publishers disabled and keys revoked. The original
+backup hashes remained unchanged. This verifies a host-local recovery copy;
+independent off-server custody and recurring retention are not established.
+
+Registration changed only the publisher scope, added one key and one authority
+audit entry, and incremented the archive revision. All 31 other tables were
+identical, including 17 events, 17 publication receipts, the one-entry financial
+journal, nonces, quotas, run configuration and official selection. The archive and
+visibility epochs did not change. Receiver diagnostics passed after registration.
+
+The receiver alone restarted at 05:22:18 UTC, PID `2435099`. Website, Ask and Nginx
+service identities remained unchanged. Public Trade status/events returned HTTP
+200 with continuous source sequence 1–17, no source gaps, and the same HOLD
+revision-2 event hash and receipt. No source code, dependency, website build,
+financial action or Ask authority changed. HQ channel rotation, renewed consent,
+new-key signed acceptance and restart verification remain separate HQ steps.
+
+A disposable HTTP test with production-matching auth/database code verified
+same-generation overlap: fresh old-key receipt reads and final rechecks succeed
+after registration; both keys return the original receipt; the old key is rejected
+at its original expiry while the new key continues. Requests authenticated before
+the shared scope changes fail final recheck, confirming the need to drain first.
+
+## Initial production activation — October 13
 
 At **2026-10-13 20:32:33 UTC**, the real finite publisher scope and exact observed
 run configuration were installed and read back successfully. HQ delivery was
