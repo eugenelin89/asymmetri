@@ -68,8 +68,14 @@ The receiver alone restarted at 05:22:18 UTC, PID `2435099`. Website, Ask and Ng
 service identities remained unchanged. Public Trade status/events returned HTTP
 200 with continuous source sequence 1–17, no source gaps, and the same HOLD
 revision-2 event hash and receipt. No source code, dependency, website build,
-financial action or Ask authority changed. HQ channel rotation, renewed consent,
-new-key signed acceptance and restart verification remain separate HQ steps.
+financial action or Ask authority changed.
+
+The receiver accepted HQ's replacement-key heartbeat at **05:24:29 UTC**. Readback
+at 05:26:45 verified new-key nonce records and unchanged authority, events,
+receipts and financial journal. The HQ coordinator separately reports completed
+channel rotation and renewed consent, followed by an actual clean restart at
+05:24:52 UTC: receipt/status reconciliation used the new key and current grant
+against the retained batch anchor. HQ reports no new model or market requests.
 
 A disposable HTTP test with production-matching auth/database code verified
 same-generation overlap: fresh old-key receipt reads and final rechecks succeed
