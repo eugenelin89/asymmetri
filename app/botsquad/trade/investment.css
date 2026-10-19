@@ -177,3 +177,26 @@
   .inv-position-bars > div { grid-template-columns: 2.5rem 1fr 4.5rem; }
 }
 @media (prefers-reduced-motion: reduce) { .inv-main *, .inv-synthetic { scroll-behavior: auto !important; transition: none !important; animation: none !important; } }
+
+/* A dated account of the latest published decision, before the detailed archive. */
+.inv-hero { padding-block: 1rem; }
+.inv-hero h1 { font-size: clamp(2.4rem, 4vw, 3.3rem); max-width: none; margin-block: .8rem 1rem; }
+.inv-brief { margin-block: 2rem; padding: var(--inv-space); border: 1px solid var(--brand-primary); background: var(--graphite-raised); scroll-margin-top: 6.5rem; }
+.inv-brief-heading { max-width: 75ch; }
+.inv-brief h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); line-height: 1.15; letter-spacing: -.035em; margin-block: .8rem; }
+.inv-brief-lead { font-size: 1.1rem; }
+.inv-brief-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2.5rem; margin-block: 1.5rem; }
+.inv-brief-grid > div { border-top: 1px solid var(--line); padding-top: 1.2rem; min-width: 0; }
+.inv-brief h3 { font-size: 1.05rem; margin: 0 0 .75rem; font-weight: 600; }
+.inv-brief-grid p, .inv-brief-grid li { font-size: .95rem; }
+.inv-brief-grid ul { padding-left: 1.2rem; }
+.inv-brief-grid li { line-height: 1.65; margin-bottom: .5rem; overflow-wrap: anywhere; }
+.inv-brief-balance { font-size: 1.8rem !important; font-variant-numeric: tabular-nums; margin-block: .5rem; }
+.inv-brief-balance span { display: block; color: var(--ink-secondary); font-size: .95rem; }
+.inv-brief-timeline { border-block: 1px solid var(--line); }
+.inv-brief-timeline ol { padding-left: 1.3rem; }
+.inv-brief-timeline li { padding: .5rem; font-size: .9rem; line-height: 1.6; }
+.inv-brief-timeline strong, .inv-brief-timeline span { display: block; }
+@media (max-width: 640px) { .inv-brief-grid { grid-template-columns: 1fr; gap: 1.2rem; } }
+
+.inv-hero .inv-intro { max-width: 75ch; font-size: 1rem; }

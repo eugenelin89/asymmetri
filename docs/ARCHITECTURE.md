@@ -419,7 +419,7 @@ Ask API is routed separately and rejects visitor intake while disabled.
 
 `lib/investment-archive.ts` validates configured origin/scope, an exact GET allowlist,
 query constraints and named frozen v1 DTO schemas through AJV 8.20.0/ajv-formats 3.0.1.
-The server allows two concurrent reads, nine requests per landing render, 8-second
+The server allows two concurrent reads, nine requests per landing render plus at most one receiver-provided tail page, 8-second
 read deadlines and a 2 MiB JSON ceiling. Artifact bytes retain exact digest/type/size
 checks and post-read visibility checks. Financial strings remain exact for labels;
 Number conversion is confined to display chart coordinates/derived plotting ratios.
@@ -518,3 +518,21 @@ API routing changed. Dated screenshot source links intentionally retain their ol
 capture URLs. The [migration contract](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md)
 documents query/fragment/method behavior and the independently built dual-URL
 compatibility fallback required for permanent-redirect rollback.
+
+## Trade session summary
+
+The landing and exact-run pages lead with `SessionBrief`, a dated public account
+of the latest decision in the receiver's bounded tail window. The first event
+page still verifies run configuration and roster; one optional tail read supplies
+recent facts, under the same final visibility witness. Failed tail reads do not
+fall back to an old decision. No recursive history download is introduced.
+
+The summary separates proposal, independent review and publication times in
+America/Vancouver. It quotes published reasoning and dissent, shows the newest
+available valuation (including a partial one newer than the complete snapshot),
+and displays only an explicitly published next review. A past schedule is labelled
+as past. Cited sources are not research success counts, a decision is not a fill,
+and the page does not infer private execution health or current risk permission.
+No HQ access, new contract, model call, operational control or fixed daily time is
+added. Existing visibility polling refreshes the server summary when the source
+watermark changes; withdrawals and unavailability continue to hide cached content.

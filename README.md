@@ -37,7 +37,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
-| `/botsquad/trade` | Published roster, decisions, portfolio valuations and journal, with explicit evidence quality |
+| `/botsquad/trade` | Dated latest-decision summary, reasoning, portfolio, next review and expandable timeline, followed by the full public archive |
 | `/botsquad/trade/guide` | Illustrated technical guide to the Trade architecture, daily process, evidence and recovery limits |
 | `/botsquad/trade/hq-guide` | Current HQ navigation and first-task tutorial, followed by a historical Trade investigation and diagnostic guide |
 | `/botsquad/investment` and every nested suffix | Permanent compatibility redirect to the matching `/botsquad/trade` URL |

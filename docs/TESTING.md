@@ -87,7 +87,8 @@ Check:
   captures and October 15 historical evidence must be clearly distinguished;
   original image URLs and historical anchors must remain available. Compare the
   capture manifest with the final HQ UI asset hashes before releasing the guide.
-- The Trade landing page shows only the four-field Experiment Status summary.
+- The Trade landing page leads with the latest-decision summary, followed by the
+  four-field Experiment Status summary.
   Exercise fresh, stale, unknown, market-closed and unavailable reads; failed
   reads must not become “Not published” dates. Dates in this summary use UTC.
   Confirm full status/history/amendment evidence remains on an exact-run page,
@@ -567,3 +568,13 @@ Also run the existing Ask/archive tests. Browser verification must follow old
 `#desk` and `#record-chain` links and confirm the destination fragment/target.
 Test the separately built compatibility fallback with both namespaces before
 activation; cached redirects must not turn a rollback into broken Trade bookmarks.
+
+## Latest Trade update
+
+Run `node --test tests/investment-brief.test.mjs tests/investment.test.mjs`.
+Verify dated HOLD/BUY/SELL and approve/reject/revise rendering, missing decisions,
+failed tail reads, source gaps, and incomplete valuations. A newer partial
+valuation must not be hidden by the older complete snapshot. Check Vancouver
+times, exact-run evidence links, and the native timeline disclosure on mobile,
+tablet and desktop. No completed turn/request counts or future close times may
+be inferred from citations, heartbeats or an active run label.

@@ -4,9 +4,10 @@ import { useRouter } from 'next/navigation';
 import { publicRead, pollDelay } from './desk';
 import type { PublicStatus } from '@/receiver/vendor/investment/v1/types';
 /** Visibility witness includes receiver and visibility epochs. Never retain withdrawn cards across a refresh. */
-export function VisibilityBoundary({revision,run,enabled,children}:{revision?:string;run?:string;enabled:boolean;children:ReactNode}) {
+export function VisibilityBoundary({revision,sourceSequence,run,enabled,children}:{revision?:string;sourceSequence?:string;run?:string;enabled:boolean;children:ReactNode}) {
   const router=useRouter(),[expected,setExpected]=useState<string|undefined>(revision),[unavailable,setUnavailable]=useState(false),current=useRef(revision);
-  useEffect(()=>{current.current=revision;},[revision]);
+  const sequence=useRef(sourceSequence);
+  useEffect(()=>{current.current=revision;sequence.current=sourceSequence;},[revision,sourceSequence]);
   useEffect(()=>{
     if(!enabled)return;
     let stopped=false,timer:ReturnType<typeof setTimeout>,busy=false,failures=0;
@@ -19,7 +20,10 @@ export function VisibilityBoundary({revision,run,enabled,children}:{revision?:st
         if(!result.data){setUnavailable(true);failures++;return;}
         failures=0;setUnavailable(false);
         if(result.fingerprint!==current.current){setExpected(result.fingerprint);router.refresh();}
-        else setExpected(current.current);
+        else {
+          setExpected(current.current);
+          if(sequence.current!==undefined&&result.data.watermark.sourceSequence!==sequence.current)router.refresh();
+        }
       }catch{if(!stopped){setUnavailable(true);failures++;}}finally{busy=false;}
     };
     const schedule=()=>{timer=setTimeout(async()=>{await verify();if(!stopped)schedule();},Math.max(15000,pollDelay(failures,document.hidden)));};schedule();
