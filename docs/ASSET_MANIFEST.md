@@ -269,20 +269,31 @@ screenshots or customer results. Introduction posters are original local HTML/CS
 geometry and typography, with no image download, hotlinked thumbnail or personal
 information. The same palette and source text supply an accessible equivalent.
 
-### Owner-selected external videos
+### Official-channel external videos — updated October 21, 2026
 
-- BotSquad: `https://youtu.be/E5r_lOecC-M`, the English introduction explicitly
-  selected in the owner's follow-up. It supersedes the earlier supplied Taiwanese
-  version. Public title observed: BotSquad; duration approximately 7:03.
-- Motion: `https://youtu.be/kaSatKC8HBg`, owner-selected introduction; approximately
-  0:42. Promotional content does not establish release availability or scientific
-  validity; current product limits are stated alongside it.
+- Required publisher: [Asymmetri](https://www.youtube.com/@Asymmetri), explicitly
+  selected by the owner. The channel page and YouTube oEmbed metadata were checked.
+- Motion: `https://youtu.be/KM4TESEzXxA`, public title "Asymmetri Motion | See Your
+  Pitch More Clearly", approximately 0:55. oEmbed reports author "Asymmetri" and
+  author URL `https://www.youtube.com/@Asymmetri`. This replaces `kaSatKC8HBg`.
+- Removed BotSquad embed: `E5r_lOecC-M`. Both earlier embeds reported the personal
+  channel `@christopherlinbaseball`, so they no longer satisfy the owner's channel
+  requirement. No BotSquad introduction was visible among the official channel's
+  three videos. Its preserved section now links directly to the official channel.
+- The channel also showed "Every Pitch, Together" (`nEv9nJO83NM`, approximately
+  0:43) and a Motion Short (`ep6rIkmz1YA`). Neither is substituted for BotSquad.
+
+Promotional content does not establish release availability or scientific validity;
+current product limits remain stated alongside the Motion introduction.
 
 Videos are not downloaded, re-edited or republished. Owner selection authorizes
 embedding/linking for this site; it does not claim independent clearance of every
-third-party element. Both render only after activation in a 16:9 privacy-enhanced
+third-party element. Motion renders only after activation in a 16:9 privacy-enhanced
 iframe; before activation all visible poster assets are first-party. Google may
 process requests after loading. Always retain the external fallback and disclosure.
+No local image bytes, dimensions, alt text or asset rights changed. The retired
+BotSquad poster used only HTML/CSS; its off-channel player and fallback link were
+removed. The official-channel link loads no remote media by itself.
 
 
 ### Work domain reuse, September 28, 2026

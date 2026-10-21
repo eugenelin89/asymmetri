@@ -337,8 +337,14 @@ grants and isolated environments; write acceptance is fixture-only. Current acce
 an SSH tunnel. Coordination state stays on the operator's host, while configured model
 services may receive bounded context. No hosted login, native iOS or offline inference claim.
 
-Use the owner-corrected English BotSquad video `E5r_lOecC-M` and Motion video
-`kaSatKC8HBg`. A video is explanatory media, not authority for release/capability
+Only embed uploads published by `https://www.youtube.com/@Asymmetri`, centralized
+as `youtubeChannel`. Motion uses `KM4TESEzXxA` ("See Your Pitch More Clearly"),
+verified through YouTube's public publisher metadata on October 21, 2026. The
+earlier Motion and BotSquad embeds belonged to the personal channel and are removed.
+No BotSquad introduction was visible on the official channel at that review;
+`/botsquad#introduction-video` now provides a plain official-channel link. Verify
+publisher identity before adding a replacement; do not substitute an unrelated
+Motion video for BotSquad. A video is explanatory media, not authority for release/capability
 claims. Keep local posters, deliberate loading, external fallback links and the
 visible Google privacy notice. Optional embedding uses `youtube-nocookie.com`;
 never describe it as tracking-free. `/privacy#website-media` explains the boundary

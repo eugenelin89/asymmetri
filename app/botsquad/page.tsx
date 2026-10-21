@@ -1,10 +1,9 @@
 import { BotSquadNavigation } from "@/components/botsquad-navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { IntroductionVideo } from "@/components/introduction-video";
 import { WorkerExample } from "@/components/worker-example";
 import { WorkerFlow } from "@/components/worker-flow";
-import { botsquad, introductions, site, botsquadDirectory, botsquadStructure, tradeGuide } from "@/content/site";
+import { botsquad, youtubeChannel, site, botsquadDirectory, botsquadStructure, tradeGuide } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(botsquad.metadata, botsquad.path, "/images/labs-social.png");
@@ -38,7 +37,7 @@ export default function BotSquadPage() {
             <div className="button-row">
               <a className="button button--primary" href={botsquad.source.href}>{botsquad.source.label} ↗</a>
               <a className="text-link text-link--light" href="#how-it-works">See how it works ↓</a>
-              <a className="text-link text-link--light" href="#introduction-video">Watch the introduction ↓</a>
+              <a className="text-link text-link--light" href="#introduction-video">{youtubeChannel.label} ↓</a>
             </div>
           </div>
         </section>
@@ -146,7 +145,13 @@ export default function BotSquadPage() {
             <div className="squad-prose"><p>{botsquad.control.body}</p><a className="text-link" href={botsquad.whitePaper.href}>{botsquad.whitePaper.label} ↗</a></div>
           </div>
         </section>
-        <IntroductionVideo video={introductions.botsquad} />
+        <section className="section introduction-video" id="introduction-video" aria-labelledby="channel-title">
+          <div className="shell product-heading">
+            <h2 id="channel-title">{youtubeChannel.label}</h2>
+            <p>{youtubeChannel.description}</p>
+            <a className="text-link" href={youtubeChannel.href}>{youtubeChannel.label} ↗</a>
+          </div>
+        </section>
       </main>
       <SiteFooter />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />

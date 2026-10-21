@@ -108,7 +108,9 @@ reference team as nested semantic lists; `WorkerExample` renders the illustrativ
 scenario as an ordered sequence with explicit limitations. `EvidenceChain` retains Motion
 evidence presentation. All diagrams are server-rendered text, with no diagram library.
 BotSquad-specific `.squad-*` CSS uses existing Graphite + Teal tokens. Its native page
-index preserves `#how-it-works`, `#availability` and `#introduction-video`. `UtilityPage` is a server article.
+index preserves `#how-it-works`, `#availability` and `#introduction-video`; the last
+now links to the official YouTube channel without embedding an off-channel video.
+`UtilityPage` is a server article.
 
 Client components remain limited to tutorial progression, legacy root fragments,
 menu dismissal and deliberate video loading, plus the availability/disclosure-gated Ask client. Video posters load no remote resource.
@@ -367,7 +369,8 @@ to preserve screenshot pixels. Original generated setup illustrations use local
 WebP; guide/sequence diagrams are local SVG. All have intrinsic dimensions, lazy
 loading, responsive CSS, text equivalents and explicit visual-source labels. The tutorial adds no
 new dependency, backend, form submission, database, account or external embed.
-Optional third-party videos exist only on the two product pages described above.
+The optional third-party player exists only on Motion and uses a verified upload
+from the centralized `youtubeChannel`. BotSquad provides a plain channel link.
 
 Tutorial header and content slots use distinct React keys because both become
 siblings inside each module. Their key prefixes differ; module/step DOM IDs and

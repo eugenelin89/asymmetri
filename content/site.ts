@@ -515,7 +515,7 @@ export const motionPages = {
         id: "website-media",
         heading: "Optional website videos",
         paragraphs: [
-          "The BotSquad and Asymmetri Motion product pages offer YouTube introduction videos. Before you select Load video, the website displays local artwork and does not load the YouTube player, thumbnails, scripts or media. Scrolling and hovering do not activate a video. Your choice is not saved as permission for later visits.",
+          "The Asymmetri Motion product page offers an introduction from Asymmetri's YouTube channel. Before you select Load video, the website displays local artwork and does not load the YouTube player, thumbnails, scripts or media. Scrolling and hovering do not activate a video. Your choice is not saved as permission for later visits.",
           "Selecting Load video connects your browser to YouTube using its privacy-enhanced player at youtube-nocookie.com. YouTube and Google may then process information such as your IP address, browser information and interactions, and may use storage or serve advertising under their policies. Privacy-enhanced mode does not mean no data collection or advertising. The player does not autoplay.",
           "Watch on YouTube opens the corresponding video on YouTube, where Google's policies apply. These optional website videos do not change the Motion app's local data handling. This is not a privacy policy for the BotSquad application.",
         ],
@@ -1168,19 +1168,19 @@ export const mediaDisclosure = {
   },
 };
 
+export const youtubeChannel = {
+  href: "https://www.youtube.com/@Asymmetri",
+  label: "Asymmetri on YouTube",
+  description: "Explore videos from Asymmetri on our official channel.",
+} as const;
+
+// Publisher verified against YouTube's public metadata on October 21, 2026.
+// Only embed videos published by youtubeChannel; see docs/ASSET_MANIFEST.md.
 export const introductions = {
-  botsquad: {
-    product: "BotSquad",
-    videoId: "E5r_lOecC-M",
-    source: "https://youtu.be/E5r_lOecC-M",
-    headline: "A walkthrough of BotSquad",
-    posterLine: "Give your AI workers a place to work together.",
-    tone: "botsquad",
-  },
   motion: {
     product: "Asymmetri Motion",
-    videoId: "kaSatKC8HBg",
-    source: "https://youtu.be/kaSatKC8HBg",
+    videoId: "KM4TESEzXxA",
+    source: "https://youtu.be/KM4TESEzXxA",
     headline: "A quick look at Motion",
     posterLine: "See your pitch more clearly.",
     description:

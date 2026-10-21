@@ -137,7 +137,8 @@ already running before a configuration update may need a full restart.
 
 ### Product-video checks
 
-Product pages render local posters until Load video is activated. A fresh Network
+Motion renders a local poster until Load video is activated; BotSquad has a plain
+official-channel link. A fresh Network
 panel should show no Google/YouTube resources before that action. Check the native
 player and fallback afterwards. The iframe's origin referrer is intentional;
 removing it can cause YouTube error 153. Do not add an SDK, remote thumbnail or
