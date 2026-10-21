@@ -338,9 +338,12 @@ an SSH tunnel. Coordination state stays on the operator's host, while configured
 services may receive bounded context. No hosted login, native iOS or offline inference claim.
 
 Only embed uploads published by `https://www.youtube.com/@Asymmetri`, centralized
-as `youtubeChannel`. Motion uses `KM4TESEzXxA` ("See Your Pitch More Clearly"),
+as `youtubeChannel`. Motion uses the owner's selected `nEv9nJO83NM`
+("Every Pitch, Together"), replacing the earlier official-channel selection
+`KM4TESEzXxA` ("See Your Pitch More Clearly"). The selected publisher was
 verified through YouTube's public publisher metadata on October 21, 2026. The
-earlier Motion and BotSquad embeds belonged to the personal channel and are removed.
+original Motion (`kaSatKC8HBg`) and BotSquad (`E5r_lOecC-M`) embeds belonged to the
+personal channel and are removed.
 No BotSquad introduction was visible on the official channel at that review;
 `/botsquad#introduction-video` now provides a plain official-channel link. Verify
 publisher identity before adding a replacement; do not substitute an unrelated

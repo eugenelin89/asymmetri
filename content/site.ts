@@ -1179,10 +1179,10 @@ export const youtubeChannel = {
 export const introductions = {
   motion: {
     product: "Asymmetri Motion",
-    videoId: "KM4TESEzXxA",
-    source: "https://youtu.be/KM4TESEzXxA",
+    videoId: "nEv9nJO83NM",
+    source: "https://youtu.be/nEv9nJO83NM",
     headline: "A quick look at Motion",
-    posterLine: "See your pitch more clearly.",
+    posterLine: "Every pitch, together.",
     description:
       "This short introduction gives a feel for Motion. It’s preparing for release; the workflow and measurement limits are explained below.",
     tone: "motion",

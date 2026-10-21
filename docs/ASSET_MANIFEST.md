@@ -273,15 +273,19 @@ information. The same palette and source text supply an accessible equivalent.
 
 - Required publisher: [Asymmetri](https://www.youtube.com/@Asymmetri), explicitly
   selected by the owner. The channel page and YouTube oEmbed metadata were checked.
-- Motion: `https://youtu.be/KM4TESEzXxA`, public title "Asymmetri Motion | See Your
-  Pitch More Clearly", approximately 0:55. oEmbed reports author "Asymmetri" and
-  author URL `https://www.youtube.com/@Asymmetri`. This replaces `kaSatKC8HBg`.
+- Motion: `https://youtu.be/nEv9nJO83NM`, explicitly selected by the owner in the
+  follow-up, public title "Asymmetri Motion | Every Pitch, Together", approximately
+  0:43. oEmbed reports author "Asymmetri" and author URL
+  `https://www.youtube.com/@Asymmetri`. This replaces the earlier official-channel
+  choice `KM4TESEzXxA` ("See Your Pitch More Clearly", approximately 0:55), which
+  had replaced `kaSatKC8HBg`. The local HTML/CSS poster now says "Every pitch,
+  together."; no new image or remote thumbnail is introduced.
 - Removed BotSquad embed: `E5r_lOecC-M`. Both earlier embeds reported the personal
   channel `@christopherlinbaseball`, so they no longer satisfy the owner's channel
   requirement. No BotSquad introduction was visible among the official channel's
   three videos. Its preserved section now links directly to the official channel.
-- The channel also showed "Every Pitch, Together" (`nEv9nJO83NM`, approximately
-  0:43) and a Motion Short (`ep6rIkmz1YA`). Neither is substituted for BotSquad.
+- The channel also showed a Motion Short (`ep6rIkmz1YA`). No Motion video is
+  substituted for BotSquad.
 
 Promotional content does not establish release availability or scientific validity;
 current product limits remain stated alongside the Motion introduction.

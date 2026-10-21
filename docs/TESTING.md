@@ -272,7 +272,7 @@ Test `/motion` with a fresh browser request log. Before Load,
 there must be no iframe, remote thumbnail, preconnect or request to YouTube, Google,
 ytimg or advertising domains attributable to the site. External links alone do not
 load those resources. After Load, inspect the exact iframe ID and native playback.
-Motion uses `KM4TESEzXxA`. Verify YouTube's publisher metadata resolves to
+Motion uses `nEv9nJO83NM` ("Every Pitch, Together"). Verify YouTube's publisher metadata resolves to
 `https://www.youtube.com/@Asymmetri` before accepting a video replacement.
 Confirm no autoplay, title, origin referrer policy, responsive 16:9 reservation,
 fullscreen, keyboard access, visible disclosure and an always-available fallback.
