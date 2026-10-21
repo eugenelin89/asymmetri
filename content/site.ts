@@ -98,7 +98,7 @@ export const sports = {
   ...divisions.sports,
   metadata: {
     title: "Asymmetri Sports | Technology for Athletes, Coaches and Teams",
-    description: "Sports technology grounded in coaching. Discover Asymmetri Motion, its pitching roots and the planned individual and professional baseball product family.",
+    description: "Sports technology grounded in coaching. Explore Motion v1.2 for pitching review, history and reference comparison, plus Hitting in development and the planned Team app.",
   },
   hero: {
     eyebrow: divisions.sports.name,
@@ -113,7 +113,7 @@ export const sports = {
       "I was coaching baseball and coordinating a division when I started recording pitchers in slow motion on my phone. I would go through deliveries frame by frame, looking at movement and timing.",
       "We would try a small adjustment, record another pitch and compare it with the earlier one. Later, I tried affordable wearable sensors to look at things the video couldn’t show as clearly.",
       "Having something we could look at together helped the conversation. A player could see the moment we were discussing. As a coach, I still had to decide what it meant and what to work on next.",
-      "The review took a lot of time, and finding useful evidence depended on knowing where to look. I wanted to make that part easier with the phone we already had. That’s where Asymmetri Motion began. The sensor experiments remain part of the research; Motion V1 works with iPhone video.",
+      "The review took a lot of time, and finding useful evidence depended on knowing where to look. I wanted to make that part easier with the phone we already had. That’s where Asymmetri Motion began. The sensor experiments remain part of the research; Motion works with iPhone video.",
     ],
   },
   approach: {
@@ -132,7 +132,7 @@ export const sports = {
       },
       {
         title: "Review together",
-        body: "Revisit pitches, compare observations and notice patterns worth discussing. Coaches interpret the evidence and guide training; parents gain context to support the process.",
+        body: "Revisit your history, study an authorized reference delivery, or share a Pitch Review PDF with selected evidence and notes. Coaches interpret the observations and guide training; parents gain context to support the process.",
       },
     ],
     principle:
@@ -175,21 +175,21 @@ export type MotionFamilyProduct = {
 export const motionFamily = {
   name: divisions.sports.product.name,
   headline: "One Motion family. Individual and team perspectives.",
-  introduction: "The current pitching app is the starting point. Separate individual apps and one professional Team app are the next direction for Motion, sharing review technology while keeping pitching and hitting distinct.",
+  introduction: "Pitching v1.2 is preparing for public release, Hitting is in development, and one professional Team app is planned. The family shares review technology while keeping pitching and hitting distinct.",
   individual: {
     label: "Individual",
     description: "Separate, focused apps for one athlete.",
     products: [
       {
         id: "pitching", name: "Pitching", status: "preparing",
-        description: "The current Motion experience for iPhone: capture, exact-frame review, projected 2D evidence and pitching history.",
-        detail: "The V1.2 candidate is complete. App Store distribution is still being prepared; public availability is not yet announced.",
+        description: "The Motion experience for iPhone: capture, projected 2D measurements, pitching history, Reference Study, event-aligned comparison and review sharing.",
+        detail: "Motion v1.2 is in private TestFlight testing. Public App Store availability is still pending.",
         link: { label: "Explore the pitching experience", href: "/motion#how-it-works" },
       },
       {
-        id: "hitting", name: "Hitting", status: "planned",
-        description: "A planned individual app for measuring, tracking and comparing hitting over time, reviewing evidence alongside recorded context, and learning with a coach.",
-        detail: "Approved roadmap work. Hitting-specific definitions and evidence come before analysis claims; development has not yet begun.",
+        id: "hitting", name: "Hitting", status: "development",
+        description: "A separate individual app in development for swing capture and review, manual event marks, notes, Reference Study, comparison and sharing.",
+        detail: "Hitting measurements remain experimental. Real-footage validation and release preparation are still in progress; the app is not publicly available.",
       },
     ] satisfies MotionFamilyProduct[],
   },
@@ -199,7 +199,7 @@ export const motionFamily = {
     product: {
       id: "team", name: "Team", status: "planned",
       description: "A professional Motion app built around one account, organization, roster and Athlete identity system, with required Team Cloud for shared records and cross-device work.",
-      detail: "Planned after Hitting. Team Pitching, Team Hitting and Team Baseball are entitlement configurations inside this one app.",
+      detail: "Planned for coaches and rosters. Team Pitching, Team Hitting and Team Baseball are entitlement configurations inside this one app.",
     } satisfies MotionFamilyProduct,
     entitlements: [
       { name: "Team Pitching", description: "Pitching module" },
@@ -211,12 +211,12 @@ export const motionFamily = {
   },
   future: {
     title: "Further ahead",
-    body: "Team productionization and Enterprise expansion follow the first Team product. Deeper Mechanics Lab work, exploring movement through a delivery or swing, comes later. These are future directions, not released capabilities.",
+    body: "Planned Dual View capture pairs two iPhones for reviewing two views of a pitch, with one phone controlling the Companion Camera. It is outside v1.2 and does not promise 3D reconstruction. Team productionization, Enterprise expansion and deeper Mechanics Lab work remain later directions.",
   },
   note: "Pitching, Hitting and Team describe the product direction. Final names may change. No launch dates are announced.",
 } as const;
 
-// Owner-approved public vocabulary, October 8, 2026, supersedes the prior website gate.
+// Owner-approved vocabulary now verified in accepted Motion 1.2 (4), October 21, 2026.
 // Scientific identities and event-specific definitions remain unchanged; see MOTION_PRODUCT_REVIEW.md.
 export const motionMeasurements = {
   eyebrow: "By view and event",
@@ -252,11 +252,11 @@ export const motion = {
   device: "iPhone",
   operatingSystem: "iOS 17 or later",
   releaseStatus: productStatusLabels[motionFamily.individual.products[0].status],
-  releaseStatement: "Motion’s current pitching app for iPhone is preparing for release.",
+  releaseStatement: motionFamily.individual.products[0].detail,
   metadata: {
     title: "Asymmetri Motion | Track Pitching Mechanics Over Time",
     description:
-      "Track pitching-mechanics measurements over time, compare changes alongside recorded performance context, and return to the video and evidence. For iPhone.",
+      "Motion v1.2 for iPhone: track pitching mechanics, study reference video, compare the same event and share selected evidence. Preparing for public release.",
   },
   icon: {
     src: "/brand/motion-pitcher.png",
@@ -269,14 +269,14 @@ export const motion = {
     eyebrow: "Product",
     paragraphs: [
       "Record a pitch or import video from Photos. Choose the camera view and throwing arm, mark the important moments, and inspect the available projected 2D measurements.",
-      "Open annotated evidence to see what contributed to a result. Save pitches, revisit your history and compare supported observations over time. The goal is evidence you can trace back to the pitch.",
+      "Build a pitching history with notes and recorded performance context. Study an authorized reference delivery, compare it with your own pitch at the same marked event, and preview selected evidence in a Pitch Review PDF before sharing.",
     ],
     link: { label: "Explore Asymmetri Motion", href: "/motion" },
   },
   hero: {
-    eyebrow: "An Asymmetri Sports product · Current pitching experience",
+    eyebrow: "An Asymmetri Sports product · Motion v1.2",
     support:
-      "Track pitching-mechanics measurements over time. See what changed, explore it alongside recorded performance context, and return to the video and evidence behind each result.",
+      "Track pitching mechanics over time and return to the evidence behind each result. Study a reference delivery, compare the same moment, and bring better questions to your coach.",
     philosophy: "Motion gives you measurements and evidence. You and your coach decide what they mean.",
     link: { label: "How Motion works", href: "#how-it-works" },
   },
@@ -314,7 +314,7 @@ export const motion = {
       },
       {
         title: "Compare",
-        body: "Use Explore to inspect two pitches, follow a measurement over time or compare two periods. Save a question as a Saved View to return to it.",
+        body: "Use Explore to inspect two pitches, follow a measurement over time or compare two periods. New investigations start with all saved history; narrow the dates when needed. Save a question as a Saved View to return to it.",
       },
       {
         title: "Look at performance and context",
@@ -352,10 +352,10 @@ export const motion = {
     support: "Explore is central to the work: follow your own measurements over time, then open the observations behind a difference.",
     items: [
       { title: "Compare two pitches", body: "Inspect a difference directly with A/B marked frames or a supported measurement. Open either pitch to review its evidence." },
-      { title: "Follow a measurement over time", body: "Use Measurement history to see whether a difference persists or appears in just one pitch. Check the individual contributors behind a chart or summary." },
+      { title: "Follow a measurement over time", body: "Measurement history starts with all saved history. Narrow the date window and other filters to investigate a question, then check the individual pitches behind a chart or summary." },
       { title: "Compare periods", body: "Use Two periods to investigate what changed between earlier and later training dates. Save the question and its settings as a Saved View." },
     ] satisfies ProductStep[],
-    note: "Keep the view, framing and event selection comparable. A date is not proof of a session, and a numerical difference alone does not establish improvement.",
+    note: "Saved Views retain their chosen date windows and filters. Keep the view, framing and event selection comparable. A date is not proof of a session, and a numerical difference alone does not establish improvement.",
   },
   performance: {
     eyebrow: "What changed with it?",
@@ -369,15 +369,16 @@ export const motion = {
     note: "A relationship does not prove causation. Motion surfaces evidence for investigation. The athlete and coach decide what it means.",
   },
   study: {
-    eyebrow: "Deeper investigation",
-    headline: "Keep the conversation with the video.",
+    eyebrow: "Study and compare in v1.2",
+    headline: "Study a reference. Compare the same moment.",
     items: [
       { title: "Notes and pitch context", body: "Keep Athlete Notes and Pitch Notes alongside your work. Add pitch type, reported velocity, chart-relative location and result yourself; these are recorded context, not video-derived measurements." },
-      { title: "Reference Study", body: "Import authorized footage from Photos or Files into a separate Reference Library. Review a saved interval, add event marks, bookmarks and Reference Notes, and return to the original source." },
-      { title: "Compare With My Pitch", body: "Put one personal pitch beside a Reference. Review independently or explicitly align Front Foot Contact or Ball Release. Save the comparison settings without turning the Reference into personal measurement history." },
+      { title: "Reference Study", body: "Import authorized footage from Photos or Files into a separate Reference Library. Save and loop a delivery interval, step through the original frames, zoom for inspection, and add event marks, bookmarks and Reference Notes." },
+      { title: "Compare With My Pitch", body: "Review one personal pitch alongside a Reference. Use independent playback or align their manually marked Front Foot Contact or Ball Release for linked review. Saved Comparisons keep the pair and settings, reopen paused, and require deliberate alignment." },
       { title: "Share a review", body: "Preview a Pitch Review PDF with your selected context, measurements and evidence. Notes, athlete display name and marked frames are included only when selected. Share Original Video is a separate action." },
     ] satisfies ProductStep[],
-    note: "These tools are implemented in the V1.2 pitching candidate. They do not measure the Reference subject, identify an ideal delivery or prove that a change improved performance.",
+    note: "Reference comparison follows source-video time. Edited or slow-motion clips can differ from physical capture timing. References stay separate from your measurement history; Motion does not calculate the Reference subject’s biomechanics or identify an ideal delivery.",
+    link: { label: "Learn Reference Study and comparison", href: "/tutorial#reference-study" },
   },
   limits: {
     eyebrow: "Before you interpret a result",
@@ -392,7 +393,7 @@ export const motion = {
     eyebrow: "Storage and privacy",
     headline: "Your pitching record, on your iPhone.",
     paragraphs: [
-      "No account is required. Pitch videos, optional Athlete Profile details and analysis records are stored locally. Apple Vision performs pose analysis on the device.",
+      "No account is required. Pitch videos, optional Athlete Profile details, notes, context, analysis, References and Saved Comparisons are stored locally. Apple Vision performs pose analysis on the device.",
       "There is no app-owned advertising, tracking or analytics SDK, and no Asymmetri-operated upload or cloud-sync system for your local pitch records.",
       "Photos copies, iCloud, device backups and sharing follow the services and settings you use. You choose when to save or share annotated evidence; those separate copies have their own handling.",
     ],
@@ -629,6 +630,14 @@ export const motionPages = {
         ],
       },
       {
+        id: "explore-history",
+        heading: "Finding pitches in Explore",
+        paragraphs: [
+          "In v1.2, a new investigation and Reset View use All saved history. Options lets you narrow the date window, view, throwing side and supported context filters. Check the included count and the separate choice for pitches without a pitch date.",
+          "A Saved View restores its saved date window and filters, including an older relative window. If expected pitches are missing, inspect those settings and the selected measurement or event before assuming data was lost.",
+        ],
+      },
+      {
         id: "reference-study-compare",
         heading: "Reference Study and comparisons",
         paragraphs: [
@@ -734,7 +743,7 @@ export const tutorial = {
     description: "Learn to measure pitching mechanics, build history, compare changes with recorded performance context, and return to the video and evidence in Asymmetri Motion.",
   },
   introduction: "Measure. Track. Compare. Learn. Build a pitching history, investigate changes alongside recorded context, and return to the evidence with your coach. Follow the steps or jump to what you need.",
-  disclosure: "For the normal pitching workflow in the V1.2 candidate, which is preparing for release. App screenshots show real retained pitching media used with the owner's permission. Physical setup images are instructional illustrations. Screen details and measurement labels may vary by version.",
+  disclosure: "For the Motion v1.2 pitching workflow, currently in private TestFlight testing and preparing for public release. App screenshots are retained examples from earlier builds, used with the owner's permission. Physical setup images are instructional illustrations. Follow the written steps for current behavior; screen details and measurement labels may differ.",
   link: { label: "Follow the Motion tutorial", href: "/tutorial" },
   modules: [
     {
@@ -794,6 +803,7 @@ export const tutorial = {
       steps: [
         { id: "read-evidence", title: "Check the frame and its references", paragraphs: ["Open the result's evidence. Check that the marked event, camera view and intended pitcher match what you meant to analyze.", "Inspect the estimated landmarks and reference lines against the visible body. Read the projected value in that image's context. The ankle-span ratio uses two source frames, Setup and FFC; inspect both.", "The overlay makes the calculation inspectable. It does not guarantee that a pose estimate is correct. Occlusion, blur, perspective and event selection can change the result."], media: "evidence" },
         { id: "save-share-evidence", title: "Save or share deliberately", paragraphs: ["Save to Photos adds a copy of the evidence image, subject to Photos permission and storage. Share opens the native sharing options; choose the destination yourself.", "Review what the image includes before sending it. Share identifiable athlete footage only with appropriate permission. An evidence image is useful for discussion, but it is not a backup of the video, marks, profile or complete analysis history." ] },
+        { id: "share-pitch-review", title: "Preview a Pitch Review PDF", paragraphs: ["From Pitch Details, choose Share Analysis. Choose the context, current measurements and evidence to include, then preview the Pitch Review PDF before using the system share sheet.", "Individual Athlete Notes and Pitch Notes, the athlete display name and marked frames are included only when selected. Reference videos and Reference Notes are outside this personal pitch report. Share Original Video is a separate action; review its destination and permissions too."] },
       ],
     },
     {
@@ -802,6 +812,7 @@ export const tutorial = {
       steps: [
         { id: "reopen-pitch", title: "Open a saved pitch", paragraphs: ["Return to My Pitches and use the thumbnail and date to find the observation. Open it to revisit Results, evidence or Review Pitch Inputs. Use the saved mark's Go To action when you want to inspect its frame.", "Pitch Date can come from the source or a date you specify. An Added date means when the video entered the app, not necessarily when the pitch was thrown. Keep that distinction in mind when exploring development over time."], media: "acquisition" },
         { id: "pitch-context", title: "Record what else was happening", paragraphs: ["In the saved pitch’s details, open Pitch Context to add or edit the context you know: Pitch Type, Velocity with its unit and reported source, Pitch Location on the chart, and Pitch Result. Save your changes.", "Mechanics history becomes more useful when you can investigate what else was happening during those pitches. Record context consistently and leave unknown information unrecorded. These are manual entries; Motion does not measure ball velocity or automatically determine an outcome."] },
+        { id: "athlete-pitch-notes", title: "Keep notes beside the evidence", paragraphs: ["Open Athlete Notes from My Pitches for general observations, or Pitch Notes from Pitch Details for one saved pitch. Add or edit the text, then Save; Cancel leaves the saved note unchanged.", "Notes record your observations and questions. They do not change a measurement or establish why a difference occurred. Select individual notes explicitly when you want them in a shared Pitch Review."] },
         { id: "keep-history", title: "Understand what is local", paragraphs: ["Two imports kept as separate observations have separate review histories. Changing one does not turn it into a revision of the other.", "Deleting a pitch removes that app observation and its local video, marks, analysis and evidence. It does not delete an independent Photos copy or the Athlete Profile. Use deletion only when you intend to remove that observation."], note: "Deleting or reinstalling the app can remove local history. A Photos video or exported evidence image does not restore the complete app record. Contact support before deleting or reinstalling as troubleshooting." },
       ],
     },
@@ -820,8 +831,10 @@ export const tutorial = {
         { id: "mechanics-and-performance", title: "Look at mechanics and performance together", paragraphs: ["Select an individual measurement in Chart, Table or Two pitches to inspect its recorded velocity, graphical pitch location, pitch type and result where available. For a grouped point, open an exact contributing pitch before treating its context as an individual observation.", "Use supported Pitch Context filters to compare the pitches relevant to your question. Ask whether a change in the measurement appeared during the same period as a change in recorded performance. Then return to the contributing pitch, marked frame and evidence."], note: "A relationship does not prove causation. Motion surfaces evidence for investigation; you and your coach decide what it means." },
         { id: "history-questions", title: "Choose the question", paragraphs: ["The question menu changes what you are investigating. These views describe recorded data; they do not estimate improvement or prescribe targets."], items: ["History: review individual observations over time.", "Two pitches: choose an exact A/B pair for one supported measurement.", "Grouped summary: compare groups using the available grouping, centre and weighting choices.", "Two periods: compare an earlier date interval with a later one; the earlier period must finish before the later period begins."], note: "A numerical difference requires compatible recorded meanings. If a difference is unavailable, inspect the reason and the individual evidence. Filtering cannot make incompatible records comparable.", media: "questions" },
         { id: "history-filters", title: "Narrow the recorded context", paragraphs: ["Open Options and choose Camera View and Throwing side filters. Apply confirms the draft choices; Cancel leaves the current view unchanged.", "For summaries, choose the centre, such as mean or median, and weighting. Each Pitch gives each included pitch weight. Each Pitch Date gives dates equal weight. A pitch date is not proof that all pitches came from one session."], media: "filters" },
-        { id: "history-dates", title: "Set the date window", paragraphs: ["Choose Last 7 days, Last 30 days, Last 90 days, All or Custom. Pitches without a pitch date have a separate choice. Check the date boundaries and the time zone used for the question.", "Relative windows move with time. A custom range expresses specific dates. Inspect included pitch dates when a result or comparison seems unexpectedly empty."], note: "Angle differences use degrees. Differences between percentage-valued ankle-span ratios use percentage points. Neither unit makes a difference evidence of improvement.", media: "dates" },
+        { id: "history-dates", title: "Set the date window", paragraphs: ["New investigations and Reset View start with All saved history. Choose Last 7 days, Last 30 days, Last 90 days, All or Custom when you want a particular window. Pitches without a pitch date have a separate choice. Check the date boundaries and the time zone used for the question.", "Saved Views keep their saved filters and date windows. Relative windows move with time; a custom range expresses specific dates. Inspect included pitch dates when a result or comparison seems unexpectedly empty."], note: "Angle differences use degrees. Differences between percentage-valued ankle-span ratios use percentage points. Neither unit makes a difference evidence of improvement.", media: "dates" },
         { id: "saved-views", title: "Save a question you want to revisit", paragraphs: ["Use the view controls to Save as New View, give it a useful name, and save. Reopen a Saved View to restore its question, filters, event and exact pitch selections where applicable.", "Update an existing view when you intend to replace its saved settings; Save as New keeps a separate view. Results refresh from current history, so a Saved View is not a frozen snapshot. Relative date windows stay relative. If a pinned pitch is no longer usable, select a replacement. Use Saved View actions to rename or delete a saved question; deleting a view does not delete its pitches."], note: "Camera position, event marking and pose estimation affect comparisons. A recorded difference is descriptive; discuss its meaning with a coach.", media: "savedView" },
+        { id: "reference-study", title: "Study an authorized reference delivery", paragraphs: ["Open References, choose Add Reference, then select an authorized video from Photos or Files. Add optional information and Save. References have their own library and do not become personal pitches or measurement history.", "Open Study Reference. Optionally save a delivery interval and loop it, step through exact source frames, or zoom and pan for inspection. Add manual event marks, labelled bookmarks and Reference Notes to return to the moments and questions that matter. Full Source returns to the whole clip without rewriting the saved interval."] },
+        { id: "compare-reference", title: "Compare a reference with one of your pitches", paragraphs: ["In Study Reference, choose Compare With My Pitch and select one exact saved personal pitch. Each video can be reviewed independently. To link playback, confirm the same observable Front Foot Contact or Ball Release on both sources, choose that event and Align.", "Save the comparison when you want to return to that pair and its settings. Saved Comparisons reopen paused and require deliberate alignment. Changing an event can require Re-align. If a source becomes unavailable, the app preserves the pair instead of silently selecting a different video; deleting a saved comparison removes its settings, not either source."], note: "This is video review aligned to manually marked events. Linked source time is not proof of synchronized physical capture, especially for edited or slow-motion footage. It does not calculate the Reference subject’s measurements." },
       ],
     },
     {

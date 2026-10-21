@@ -47,11 +47,13 @@ Avoid vague AI-powered claims, generic SaaS language, militaristic framing, inve
 en dashes in public copy. Preserve limits near the claims they qualify.
 
 Implemented capability, release preparation, active development and roadmap are
-separate. Motion's current V1.2 candidate is preparing for distribution, Hitting
-and Team are planned, and Mechanics Lab/Enterprise are later directions. No dates,
+separate. Motion v1.2 is privately tested through TestFlight and preparing for its
+first public release. Hitting is in development with experimental measurements;
+Team and Dual View are planned, and Mechanics Lab/Enterprise are later directions. No dates,
 Store names, pricing or availability are inferred. BotSquad is experimental,
 open source, self-hosted and MIT licensed; private SSH-tunnel browser access is
 current and native mobile is deferred. Current product authority is recorded in
+[the Motion source review](MOTION_PRODUCT_REVIEW.md) and the company hierarchy in
 [the October 7 decision](COMPANY_ARCHITECTURE_2026-10-07.md).
 
 

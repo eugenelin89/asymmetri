@@ -78,6 +78,7 @@ export default function MotionPage() {
               <div className="motion-product__details">
                 <p>{motion.platform}</p>
                 <p>{motion.releaseStatus}</p>
+                <p>{motion.releaseStatement}</p>
               </div>
             </div>
           </div>
@@ -207,11 +208,11 @@ export default function MotionPage() {
             </div>
           </div>
         </section>
-        <section className="section motion-study">
+        <section className="section motion-study" id="reference-study" aria-labelledby="study-title">
           <div className="shell">
             <div className="product-heading">
               <p className="eyebrow">{motion.study.eyebrow}</p>
-              <h2>{motion.study.headline}</h2>
+              <h2 id="study-title">{motion.study.headline}</h2>
             </div>
             <dl className="product-details motion-study__items">
               {motion.study.items.map((item) => (
@@ -219,6 +220,7 @@ export default function MotionPage() {
               ))}
             </dl>
             <p className="product-note">{motion.study.note}</p>
+            <a className="text-link" href={motion.study.link.href}>{motion.study.link.label} →</a>
           </div>
         </section>
         <section className="section motion-limits">

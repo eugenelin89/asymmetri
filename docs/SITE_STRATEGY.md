@@ -33,13 +33,16 @@ The tutorial teaches the same idea within its existing module navigation.
 Capture/import, exact
 human-confirmed frames, analysis, evidence, history, Notes/context, Reference Study,
 Compare, sharing, scientific limits and local storage remain explicit. An optional
-approved introduction follows the hero. The current candidate and future family
-are visibly distinct. Individual Pitching and Hitting are separate apps; Team is
+approved introduction follows the hero. Motion v1.2's private TestFlight testing
+and pending public release are explicit in the hero and shared family. Hitting is
+in development; Team and Dual View are planned. Individual Pitching and Hitting
+are separate apps; Team is
 one professional application with three entitlements, one organization/roster/Athlete
 system and required finite, quota-aware Cloud. No empty future product routes.
 Enterprise and deeper Mechanics Lab are later directions after Hitting/Team.
 
-The exact release/roadmap evidence is in `COMPANY_ARCHITECTURE_2026-10-07.md`.
+Current release/roadmap evidence is in `MOTION_PRODUCT_REVIEW.md`; the October 7
+company architecture record preserves the earlier hierarchy decision and source baseline.
 Names and states are centralized; future changes should not require a new hierarchy.
 
 ## Labs, BotSquad and About

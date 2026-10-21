@@ -2,9 +2,38 @@
 
 Review date: September 16, 2026 (capture session continued into September 17 UTC).
 
-## Current update, October 8, 2026
+## Current update, October 21, 2026
 
-The [Motion product review](MOTION_PRODUCT_REVIEW.md#current-authority-october-8-2026-owner-approved-measurement-presentation)
+The [current Motion source review](MOTION_PRODUCT_REVIEW.md#current-authority-october-21-2026-motion-v12-and-family-freshness)
+binds tutorial wording to accepted Motion 1.2 (4), privately tested through
+TestFlight with public release pending. No fresh app capture or device interaction
+was performed. Earlier screenshots remain earlier-build examples; their bytes,
+alt text and original-image URLs are preserved. Written instructions govern the
+current All date-window default and baseball measurement names.
+
+The existing ten modules and every prior step hash remain. Four subordinate
+steps fill gaps in the v1.2 guide:
+
+- `#share-pitch-review` in Inspect Evidence: selected personal PDF contents,
+  preview and separate original video; no Reference inclusion.
+- `#athlete-pitch-notes` in Saved Pitches: independent human notes and explicit
+  sharing selection.
+- `#reference-study` in Explore History: separate Photos/Files library,
+  interval/loop, exact review, focus, marks, bookmarks and notes.
+- `#compare-reference` in Explore History: one exact personal pitch plus one
+  Reference, manual FFC/BR alignment, source-time limits and paused saved reopen.
+
+`#history-dates` explains All for new investigations/Reset View while Saved Views
+retain chosen filters and ranges. Motion links directly to `#reference-study`;
+Support adds matching empty-history guidance. The reader now scrolls immediately
+after switching modules: browser verification found smooth scrolling could stop
+before the requested step after the page height changed. Deep links retain focus
+on the requested step. No privacy policy change, public asset or top-level module
+is introduced.
+
+## Prior update, October 8, 2026
+
+The [Motion product review](MOTION_PRODUCT_REVIEW.md#prior-authority-october-8-2026-owner-approved-measurement-presentation)
 records the owner's explicit approval of baseball-first public names, superseding
 the prior website-only gate despite older frozen-binary labels. `motionMeasurements`
 now supplies eight view/event entries: five Side and three Back. Stride Length,

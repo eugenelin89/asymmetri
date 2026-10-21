@@ -4,6 +4,10 @@ Status: owner-directed current architecture. This supersedes the September
 Labs → Work/Sport hierarchy, singular Sport brand and homepage content trials.
 Historical prompt archives and the dated portfolio decision remain unchanged.
 
+The Motion release and family observations below are the October 7 baseline.
+For current v1.2 release status, implemented Hitting and planned Dual View, use
+the [October 21 source review](MOTION_PRODUCT_REVIEW.md#current-authority-october-21-2026-motion-v12-and-family-freshness).
+
 ## Known-good production rollback baseline
 
 Established **before any implementation edits**, October 7 at 17:46 UTC

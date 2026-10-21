@@ -38,7 +38,9 @@ export function TutorialReader({ modules, panels, headers }: {
     const frame = requestAnimationFrame(() => {
       const destination = document.getElementById(hash);
       destination?.focus({ preventScroll: true });
-      destination?.scrollIntoView({ block: "start" });
+      // Module visibility changes the page height; finish hash navigation in
+      // one step so a concurrent native smooth scroll cannot use the old layout.
+      destination?.scrollIntoView({ block: "start", behavior: "instant" });
     });
     return () => cancelAnimationFrame(frame);
   }, [hash, ready, found]);

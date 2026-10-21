@@ -336,8 +336,12 @@ semantic headings and definition lists; tutorial Analyze derives its Back/Side
 lists from the same inventory. The eight-step workflow and history/performance
 sections remain server-rendered content with existing tokens. No new client
 component, dependency, data store or media asset is required. The product review
-documents the October 8 owner override of the prior website naming gate and the
-unchanged scientific mapping for each view/event result.
+documents the October 8 owner override and its verification against accepted
+Motion 1.2 (4), with unchanged scientific mappings. The shared Pitching family
+detail supplies release wording on both routes. Motion's `#reference-study`
+section links to the tutorial step with the same hash; the tutorial keeps its ten
+modules and existing IDs while adding Notes, PDF sharing and Reference/Compare
+steps. Explorer copy describes the All default separately from saved filters.
 
 ## Progressive tutorial
 
@@ -349,6 +353,8 @@ and content slots plus a small navigation index. It adds module selection, ephem
 Record/Import and Back/Side radios, Previous/Next and complete-guide mode.
 
 The URL hash is the navigation source of truth through `useSyncExternalStore`.
+After module visibility changes, deep-link focus and scrolling resolve immediately
+to the requested step, avoiding native smooth-scroll races with the old page height.
 Deep links reveal their module and branch; browser Back/Forward follows hash history.
 After hydration, inactive modules use native `hidden`. Before hydration, or with no
 JavaScript, all modules and paths remain visible and native anchors/disclosures work.

@@ -5,7 +5,61 @@ This is an internal claims/provenance record, not a public paper or scientific
 validation. No reference repository was modified, built, configured or released.
 
 
-## Current authority, October 8, 2026: owner-approved measurement presentation
+## Current authority, October 21, 2026: Motion v1.2 and family freshness
+
+Reviewed fetched Motion release and future-development refs separately, without
+changing its checkout, scratch file, app data or distribution state:
+
+| Scope | Exact source |
+| --- | --- |
+| Release documentation | `origin/release/1.2` at `3d3f42ddf82028e67e86c51b3fb0f6b303988fcc` |
+| Accepted Motion 1.2 (4) binary source | `ab69695fbcb43f3b10809f7e31c0e596b5a85fd3` |
+| Matching complete iOS tree at both release refs | `a6a72ae708da83ac632f2adc86ff5778678a2a12` |
+| Future development / Hitting | `origin/main` at `1fe5de98af4248f6c7ffc23a3c7241af6d1e7286` |
+
+The October 20 entry in `docs/validation/v12_05_distribution.md` controls release
+status. It records upload, Apple validation, owner-only internal TestFlight and
+accepted retained-device installation/read-only smoke. Public listing approval
+and public App Review/release remain outstanding. Older main/roadmap statements
+about paused distribution or unaccepted build 4 are superseded for release status.
+Public copy says **Preparing for release**, with private TestFlight explained;
+there is no App Store CTA, public beta invitation, launch date or price.
+
+Source authority reviewed: Project Context, Product Understanding, V1.2 release
+plan and distribution ledger on the release branch; main's documentation map,
+Baseball Product Family/October roadmap and H4 readiness register. Direct source
+checks use the accepted release tree for Pitching and main only for future Hitting:
+
+| Website claim | Source evidence and boundary |
+| --- | --- |
+| Eight normal view/event results | `Features/Settings/MeasurementInformation.swift` and `Models/ExplorerQuery.swift`; Decision 93 implements the October 8 public names, including both Side Trunk Tilt endpoints. Existing scientific definitions remain unchanged. |
+| All saved history for new investigations and Reset View | `Models/ExplorerQuery.swift` initializes `window = .all`; `Features/Explorer/ExplorerOptionsView.swift` resets from that query; `ExplorerCoordinator.swift` uses All for new visual and pitch-started review. Saved ranges/filters remain saved. |
+| Independent Reference Library and Study | `Features/References/ReferenceLibraryView.swift` and Study model; Photos/Files sources, optional interval/loop/focus, manual anchors, bookmarks and notes remain separate from personal science. |
+| Event-aligned comparison and saved configuration | `Features/Compare/ComparisonView.swift`, alignment controller/model and saved presentation; one personal pitch plus one Reference, manual FFC/BR alignment, paused reopen and explicit alignment. Source clip time is not physical synchronization or numerical Reference biomechanics. |
+| Deliberate review sharing | `Features/PitchReview/PitchReviewView.swift` and model; personal Pitch Review PDF preview, selected optional notes/name/frames, separate original-video transfer. References are excluded from personal reports. |
+| Hitting in development | Main contains `AsymmetriHitting/HittingRootView.swift`, `HittingLibraryModel.swift`, `HittingComparisonModel.swift`, `SwingMeasurementsModel.swift` and `SwingReviewModel.swift`; H1–H3 integrated evidence and H4 readiness establish implementation, not public availability or normal scientific validity. |
+| Planned Team and Dual View | Accepted family roadmap and Decisions 88/89; one Cloud-backed Team app with three entitlements, plus a primary-controlled Companion iPhone direction outside v1.2. No implemented Team service or 3D capability is advertised. |
+
+The refreshed Sports introduction and Motion page retain the longitudinal story,
+eight-result mapping, human interpretation and bounded local-storage claims.
+The shared family now labels Hitting **In development**, with experimental
+measurement and unfinished real-media/release gates; Team stays **Planned**.
+The current tutorial adds Notes, PDF review and Reference/Compare instructions
+inside existing modules and explains All versus saved date filters. Earlier
+screenshots remain explicitly labelled earlier-build examples, with unchanged
+bytes, original links and all prior hashes. Support adds the same Explorer recovery
+guidance. A bounded reader fix makes deep-link scrolling immediate after module
+switches; browser QA found the previous smooth scroll could stop before the target.
+The Privacy Policy and its effective date are unchanged: source review
+found no new data-handling claim needed for this content update.
+
+No product repository identifiers, private release artifacts, athlete records or
+new images enter the public pages. No app/device validation was performed by this
+website task; upstream acceptance is reused only at its recorded scope. Website
+validation and exact implementation/archive commits are recorded in prompt 104.
+The October 7/8 sections below remain dated provenance, not current release status.
+
+## Prior authority, October 8, 2026: owner-approved measurement presentation
 
 The owner explicitly supersedes the prior website-only terminology gate. Normal
 public-facing Motion content now uses baseball-first measurement names while

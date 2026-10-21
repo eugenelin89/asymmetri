@@ -127,8 +127,14 @@ Check:
   product showcases, common-thread or contact section;
 - explicit equal division/product links, one “Why Asymmetri” action, comfortable
   responsive height and no clipped content or excessive empty space;
-- Pitching preparation versus planned Hitting/Team, exactly one professional app,
-  its three nested entitlements, finite Cloud and later Mechanics Lab/Enterprise;
+- Pitching v1.2 private TestFlight versus pending public release, Hitting in
+  development with experimental measurements, planned Team/Dual View, exactly
+  one professional app and its three nested entitlements, finite Cloud and later
+  Mechanics Lab/Enterprise;
+- the Motion Reference Study link opens `/tutorial#reference-study`; Notes,
+  PDF sharing and comparison steps are reachable in guided/complete/no-JS modes;
+  Explore starts with All while Saved Views retain filters; all prior tutorial
+  hashes and original-image links remain valid;
 - Labs introduction/open-source statement, “Currently playing with,” GitHub/detail/
   established-license links and short closing; no Labs approach/principles section
   or stale `/labs#approach` links;
@@ -320,7 +326,7 @@ Turing, Scout and Nix; Linus/Ada/Grace remain nested under Turing. Four branches
 sit alongside each other above 1100px and become a nested single column at or
 below that width. Verify all eight portraits load inside the name/role cards,
 including Nix's DevOps portrait. Verify native page-index
-anchors, current capability limits, illustrative Hitting label, planned Hitting state,
+anchors, current capability limits, illustrative Hitting label, current Hitting state,
 and Today / Current focus / Later distinctions. Check source, setup, white paper,
 roadmap and video links. No internal prompt numbers or private workspace identifiers
 belong in public copy. Keep setup and approvals understandable without implying broad

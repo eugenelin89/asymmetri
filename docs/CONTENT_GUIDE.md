@@ -41,7 +41,7 @@ Every product or research statement must fit one of these categories:
 
 ### Current verified product capability
 
-Motion V1 behavior verified in current implementation and accepted decisions:
+Motion v1.2 behavior verified in the accepted release source and decisions:
 iPhone/iOS 17, conditional HFR capture, Photos import, Back/Side guides, optional
 Recording Setups, human-confirmed exact-frame marking, supported projected 2D
 results, saved evidence, local history and descriptive comparison. Capability
@@ -57,26 +57,34 @@ Sensor experiments belong to the founder/company history, not current Motion V1.
 
 ### Release preparation, development and roadmap
 
-Pitching V1.2 is implemented and preparing for distribution, not publicly released.
-Hitting and Team are approved roadmap work with no active implementation plan at
-the October 7 review. Use Planned, not In development. `productStatusLabels` supports
-all four states; future status changes require new evidence. Final Store names are
-not fixed by the family roadmap. Update `motionFamily` names/statuses centrally.
+The October 21 review verifies Motion 1.2 (4) in owner-only TestFlight testing,
+with public App Store release still pending. Keep Pitching **Preparing for release**;
+private testing does not authorize an App Store link or a beta invitation.
+Hitting is **In development**, with implemented review workflows but experimental
+measurements and remaining real-media/scientific/release gates. Team is **Planned**.
+`productStatusLabels` supports all four states; future changes require new evidence.
+Update `motionFamily` names/statuses centrally. Its Pitching detail also supplies
+`motion.releaseStatement` so Sports, Motion and the family share one release fact.
 
 Team is one professional app with Pitching/Hitting/Baseball entitlements over the
 same account, organization, roster, Athlete identities and Cloud data. Team requires
 Cloud with finite quota-aware storage; the local-first pitching policy does not
 cover that future service. Enterprise and deeper Mechanics Lab follow Hitting/Team.
+Dual View with a primary-controlled Companion iPhone is planned outside v1.2;
+it does not establish current dual-camera capture or 3D reconstruction.
 No launch dates, prices, quotas or unimplemented science are advertised.
 
 Current V1.2 marketing includes Notes, manually entered context, Reference Study,
 Compare With My Pitch and explicit review sharing. These do not infer Reference
-measurements or improved performance. See the October 7 source review.
+measurements or improved performance. Saved Comparisons reopen paused and need
+deliberate alignment; linked source time is not physical recording synchronization.
+New Explorer investigations and Reset View use All saved history. Saved Views retain
+their chosen ranges and filters. See the current `MOTION_PRODUCT_REVIEW.md` audit.
 
 Current code/tests take precedence, followed by accepted decisions, current
-product/release documentation, roadmaps and dated white papers. Decision 50 hides
-five stored measurement families from normal V1; use “available projected 2D
-measurements” rather than the white paper's older all-eleven claim. Read
+product/release documentation, roadmaps and dated white papers. Decision 93
+promotes the two existing Side Trunk Tilt endpoints and establishes eight normal
+view/event results in v1.2; older six-result and all-eleven inventories are historical. Read
 `MOTION_PRODUCT_REVIEW.md` for the dated audit and maintenance rules.
 
 ## Motion tracking story and terminology
@@ -96,17 +104,20 @@ results at Front Foot Contact and Ball Release. Back View uses 2D Lateral Trunk 
 at Front Foot Contact and the unchanged shoulder/upper-arm and shoulder/wrist names
 at Ball Release. Do not rename either arm result Arm Slot or merge view/event results.
 
-The October 8 owner decision explicitly supersedes the earlier website-only gate,
-including older frozen-binary labels. It changes public presentation, not scientific
-identities, formulas or persisted records. The exact mapping is in
+The October 8 owner decision superseded the earlier website-only gate. The October 21
+review confirms the same public names in accepted 1.2 (4). Presentation does not change
+scientific identities, formulas or persisted records. The exact mapping is in
 `MOTION_PRODUCT_REVIEW.md`; detailed methods remain at Settings → About → Measurements.
 Write positive descriptions of what/when someone tracks and why repeat observations
 help. Keep one short general technical note below the measurement section, rather
 than caveats in every entry. Retained screenshots can show earlier labels; describe
 them accurately and bridge the names in captions without altering captured evidence.
 
-Tutorial conceptual additions belong within Start, Analyze, Saved Pitches and
-Explore History; preserve the ten modules, every existing hash and image link.
+Tutorial additions belong within the existing ten modules; preserve every existing
+hash and image link. Inspect Evidence teaches opt-in Pitch Review sharing, Saved
+Pitches teaches Athlete/Pitch Notes, and Explore History teaches Reference Study
+and Compare after personal history. Retained screenshots are earlier-build examples;
+current written instructions govern labels and the All default.
 Only supported manually recorded velocity/type/location/result are taught as
 performance context. Reference Study/Compare remains deeper investigation after
 the personal longitudinal story. Hitting inherits the philosophy, never guessed
@@ -315,7 +326,7 @@ status/numbering passages are superseded. The dated evidence map is
 
 Always distinguish implemented workflows, current Personal Operator / Daily Driver work,
 future possibilities and illustrative scenarios. The Hitting example has not been
-performed; Hitting remains planned, and bounded Node engineering does not establish
+performed; Hitting is now in development, and bounded Node engineering does not establish
 Motion iOS build support. Asymmetri uses are reference experiments, not automatic external
 authority. The actual pilot proved one supervised document action and scheduled review,
 not app development, a merged release or business improvement.

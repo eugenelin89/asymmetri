@@ -19,8 +19,9 @@ open-source experiments, starting with BotSquad. Everything built in Labs is ope
 source; this rule does not apply to every Sports product. The two remain peers
 under Asymmetri, without claiming a common codebase.
 
-Motion's current pitching V1.2 candidate is preparing for release. Separate
-individual Hitting and one professional Cloud-backed Team app remain planned.
+Motion v1.2 is in private, owner-only TestFlight testing and preparing for its
+first public release. The separate individual Hitting app is in development;
+one professional Cloud-backed Team app remains planned.
 Team Pitching/Hitting/Baseball are entitlements within that one Team app.
 BotSquad is experimental, MIT licensed and self-hosted on an operator-controlled
 Ubuntu HQ, accessed through a private SSH-tunnel browser. Native mobile is deferred.
@@ -70,8 +71,8 @@ and all existing assets. Shared CSS tokens control surfaces, actions and diagram
 
 Motion’s public philosophy is **Measure changes. Preserve the evidence. Investigate
 relationships. Humans interpret.** The [current product review](docs/MOTION_PRODUCT_REVIEW.md)
-records the owner-approved baseball-first public names and their unchanged
-scientific measurement mappings.
+records the October 21 v1.2 source review, current release/family states,
+baseball-first public names and their unchanged scientific measurement mappings.
 
 ## Technology
 
