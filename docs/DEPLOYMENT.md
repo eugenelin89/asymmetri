@@ -3,6 +3,11 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [October 21 Sports/Motion release receipt](MOTION_V12_RELEASE_2026-10-21.md)
+records the v1.2 website refresh, exact production build, protected-route checks,
+retained rollback and verified archival used to restore deployment headroom.
+The website release does not imply public App Store availability.
+
 For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website and investment receiver release receipt](INVESTMENT_CLOSE_RELEASE_2026-10-14.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution and ongoing independent backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
 The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
