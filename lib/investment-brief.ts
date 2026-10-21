@@ -13,6 +13,7 @@ export function investmentBrief(records: ReceivedEvent[], snapshot: PortfolioSna
   const sourceTimes = decision?.payload.proposal.sources.map(source => source.retrievedAt).filter((value): value is string => value !== null).sort((a, b) => Date.parse(a) - Date.parse(b)) ?? [];
   return {
     decision, decisionRecord, valuation,
+    operatingStatus: statusEvent?.type === 'run.status' ? statusEvent : null,
     thesis: decision?.payload.proposal.rationale.split('\n')[0] ?? null,
     sourceCount: decision?.payload.proposal.sources.length ?? 0,
     researchFrom: sourceTimes[0] ?? null,

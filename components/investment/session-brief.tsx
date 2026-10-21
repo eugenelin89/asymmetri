@@ -17,9 +17,15 @@ export function SessionBrief({ events, snapshot, status, workers, run, synthetic
   synthetic: boolean;
 }) {
   const brief = investmentBrief(events.data?.items ?? [], snapshot);
-  const { decision, decisionRecord, valuation } = brief;
+  const { decision, decisionRecord, valuation, operatingStatus } = brief;
+  const operationalUpdate = operatingStatus && <div className="inv-brief-heading">
+    <p className="inv-kicker">Latest operational update</p>
+    <p className="inv-brief-lead">{operatingStatus.payload.reason}</p>
+    <p className="inv-meta">Updated <Time value={operatingStatus.payload.effectiveAt}/>.</p>
+  </div>;
   if (!events.data || !decision || !decisionRecord) return <section id="latest-update" className="inv-brief" aria-labelledby="brief-title">
     <p className="inv-kicker">Latest update{synthetic ? ' · Synthetic demonstration' : ''}</p>
+    {operationalUpdate}
     <h2 id="brief-title">{events.data ? 'No decision in the latest published records.' : 'Latest update unavailable.'}</h2>
     <p>{events.data ? 'A completed decision has not been verified in this event window. The experiment status below does not establish that a session ran or a trade occurred.' : 'The public records could not be verified. Refresh the page to try again.'}</p>
     <a href="#desk">Browse the published record →</a>
@@ -32,6 +38,7 @@ export function SessionBrief({ events, snapshot, status, workers, run, synthetic
   const nextReviewElapsed = brief.nextReviewAt && Date.parse(brief.nextReviewAt) <= checkedAt;
 
   return <section id="latest-update" className="inv-brief" aria-labelledby="brief-title">
+    {operationalUpdate}
     <div className="inv-brief-heading">
       <p className="inv-kicker">Latest published decision{synthetic ? ' · Synthetic demonstration' : ''}</p>
       <p className="inv-meta">{briefDate(proposal.committedAt)} · Vancouver time</p>

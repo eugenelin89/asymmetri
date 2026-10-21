@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { investmentBrief, briefDate, briefTime } from '../lib/investment-brief.ts';
 
-const record = (sequence, type, payload, receivedAt = '2026-10-19T12:05:17Z') => ({ event: { sourceSequence: sequence, type, payload }, receivedAt });
+const record = (sequence, type, payload, receivedAt = '2026-10-19T12:05:17Z') => ({ event: { sourceSequence: sequence, type, payload: type === 'run.status' ? {reason:'Published fixture status',effectiveAt:receivedAt,...payload} : payload }, receivedAt });
 const proposal = { rationale: 'Hold cash.\nFacts: Evidence remains limited.', sources: [{ retrievedAt: '2026-10-19T11:47:34Z' }, { retrievedAt: '2026-10-19T11:45:14Z' }] };
 test('latest decision follows exact source sequence, not late receipt time or input order', () => {
   const newest = record('9007199254740994', 'decision.published', { proposal });
@@ -120,4 +120,12 @@ test('failed or visibility-mismatched tail never falls back to an older decision
     } });
     assert.equal((await readShowcase('run-1')).recentEvents.data, null);
   }
+});
+
+test('new operational failure is shown above the separately dated older decision', () => {
+ const status = record('30', 'run.status', { state: 'paused', reason: 'Research collection stopped on 2026-10-21. The team did not reach its decision stage.', nextReviewAt: null }, '2026-10-21T11:48:00Z');
+ const html = render({ events: { data: { items: [status, decision] }, error: null } });
+ assert.ok(html.indexOf('Research collection stopped') < html.indexOf('Latest published decision'));
+ assert.match(html, /October 19, 2026/);assert.match(html, /did not reach its decision stage/);
+ assert.match(render({ events: { data: { items: [status] }, error: null } }), /Research collection stopped/);
 });
