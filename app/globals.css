@@ -769,6 +769,30 @@ p {
   max-width: 45ch;
 }
 
+.motion-access {
+  max-width: 100%;
+}
+
+.motion-access__details {
+  margin-top: 0.875rem;
+}
+
+.motion-access__details p {
+  color: var(--ink-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.motion-access__details p + p {
+  margin-top: 0.25rem;
+}
+
+.motion-hero__links,
+.product-prose > .motion-access {
+  margin-top: 2rem;
+}
+
 .motion-measurements__groups {
   display: grid;
   gap: 2.5rem 3rem;
@@ -1722,11 +1746,9 @@ p {
 .motion-family__future { border-top: 1px solid var(--motion-line); margin-top: 2.5rem; padding-top: 1.5rem; display: grid; grid-template-columns: 1fr 3fr; gap: 1rem 2rem; }
 .motion-family__future h3 { font-size: 1.1rem; }
 .motion-family__future p { max-width: 75ch; color: var(--motion-text); }
-.motion-family-link { margin: 1rem 0 0 1.5rem; }
 .motion-study__items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; margin-top: 2.5rem; }
 @media (max-width: 700px) {
   .motion-family__groups, .motion-family__future, .motion-study__items { grid-template-columns: minmax(0, 1fr); }
-  .motion-family-link { margin-left: 0; display: flex; width: fit-content; }
 }
 
 /* Shared geometry for the umbrella and its two peer divisions. */

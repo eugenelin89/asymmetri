@@ -4,6 +4,30 @@ Current dependency status is recorded in the [October 7 security review](DEPENDE
 The dependency findings in the dated publication records below describe their
 original lockfiles; they are not the current security baseline.
 
+## TestFlight access extension — October 21, 2026
+
+The owner authorized a public Google Form and private response workbook, then
+approved website links through `/motion/try`. The route issues HTTP 307 to the
+public form; three server-rendered anchors disclose Google Forms before navigation.
+There is no embedded form, Google script, prefetch, new website backend, visitor
+account, tracking or browser storage. The public site stores only the public
+form URL; owner account, editor and private response-sheet URLs stay out of source.
+
+Required fields are first/last name, email, iPhone model/iOS and permission for
+beta contact; baseball role is optional. Google Forms and a private Google Sheet
+hold the responses. Use is device review, invitations and beta/installation
+follow-up, not marketing. Names and email are supplied to Apple when inviting
+through TestFlight. The form and policy exclude athlete footage, health details
+and child personal information; guardians use their own details. Withdrawal or
+deletion requests use the public contact mailbox, with provider-copy limits and
+no invented fixed retention period. Existing support-email deadlines do not
+automatically apply to beta requests.
+
+`/privacy#testflight-access` and the October 21 effective date disclose this new
+boundary. App-local records, Apple reporting, optional video loading and support
+retention remain unchanged. No invitations, outreach automation or app release
+are activated by the website change. Verification is recorded in prompt 108.
+
 ## Website media extension — September 28, 2026
 
 This extension supersedes the historical “no third-party embeds” finding only for

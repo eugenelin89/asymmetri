@@ -7,7 +7,8 @@ peer divisions. Motion belongs to Sports; experimental open-source BotSquad belo
 to Labs. BotSquad contains BotSquad Research, which contains BotSquad Trade;
 Ask BotSquad is a shared sibling of Research. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
-separate. Existing pages have no CMS, forms, accounts or analytics. The independent,
+separate. Existing pages have no CMS, embedded signup forms, accounts or analytics.
+Motion access requests use an external Google Form, reached through `/motion/try`. The independent,
 default-disabled INV-02 receiver owns a public archive/signature boundary described
 in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Strict production API routing
 is live with the exact finite investment publisher and initial configured portfolio.
@@ -21,6 +22,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/motion` | Current pitching workflow and family roadmap |
+| `/motion/try` | HTTP 307 to the external Google Form in `motion.access.formUrl` |
 | `/botsquad` | Umbrella project overview, software story and area directory |
 | `/botsquad/research` | Research hub linking to BotSquad Trade |
 | `/botsquad/trade` | Trade research project and retained evidence routes |
@@ -59,6 +61,18 @@ component maps old root `#story`, `#approach`, `#product` to Sports. Explicit no
 fallback anchors remain. The product showcase is removed; current gateway links
 use `/`. Root `#contact` remains on the footer email for historical contact URLs,
 while primary navigation uses the centralized mailto link.
+
+## Motion access requests
+
+`motion.access` in `content/site.ts` owns the stable route, public form destination,
+CTA and eligibility/provider notice. `next.config.ts` imports that destination and
+uses a temporary 307 redirect so a later signup service can replace Google Forms
+without changing shared website links. It is not a landing page or sitemap entry.
+`MotionAccess` is a server component used at the top and bottom of Motion and in
+the Sports product section. Normal anchors work without JavaScript and do not
+prefetch the form. Google receives a request only after navigation. The website
+holds no submissions, form credentials or response-sheet identifier. Private
+response storage and invitation handling remain outside this repository.
 
 ## Content, metadata and assets
 
@@ -158,7 +172,7 @@ No external font service, CSS-in-JS runtime, or UI component library is used.
 - `public/brand/`, `public/images/`: local approved assets and raster social images.
 - `docs/`: strategy, source reviews, development, verification and operations.
 - `build/`, `worker/`, `vite.config.ts`: retained Sites/Vinext packaging.
-- `next.config.ts`: permanent route redirects.
+- `next.config.ts`: permanent compatibility redirects and the temporary Motion access redirect.
 - `package.json`, `package-lock.json`, `.nvmrc`: runtime/dependency contract.
 
 ### npm scripts

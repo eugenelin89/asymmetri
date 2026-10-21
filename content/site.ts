@@ -253,6 +253,13 @@ export const motion = {
   operatingSystem: "iOS 17 or later",
   releaseStatus: productStatusLabels[motionFamily.individual.products[0].status],
   releaseStatement: motionFamily.individual.products[0].detail,
+  access: {
+    path: "/motion/try",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfYhAdtjq_M_HN80uo7sz7E0lB8sg1mSminpt43enY5fxf35w/viewform",
+    label: "Request TestFlight access",
+    eligibility: "iPhone · iOS 17+ · Invitation required",
+    note: "Opens Google Forms. Invitations depend on beta availability.",
+  },
   metadata: {
     title: "Asymmetri Motion | Track Pitching Mechanics Over Time",
     description:
@@ -433,10 +440,10 @@ export const motionPages = {
   privacy: {
     title: "Asymmetri Motion Privacy Policy",
     description:
-      "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, and support email.",
-    effectiveDate: { label: "October 6, 2026", value: "2026-10-06" },
+      "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, TestFlight access requests, and support email.",
+    effectiveDate: { label: "October 21, 2026", value: "2026-10-21" },
     introduction: [
-      "Asymmetri operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, support email, and Apple or other services you choose to use.",
+      "Asymmetri operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, TestFlight access requests, support email, and Apple or other services you choose to use.",
       "Asymmetri does not sell personal information.",
     ],
     contactLabel: "Privacy contact",
@@ -506,7 +513,7 @@ export const motionPages = {
         id: "website",
         heading: "The asymmetri.co website",
         paragraphs: [
-          "The website provides public information and email links. It has no site-owned analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no contact or support form, visitor accounts, or website database. Fonts and images are served locally. YouTube introduction videos connect to a third party only when you choose to load a player or follow an external link, as explained below.",
+          "The website provides public information, email links and a link to an external TestFlight access form. It has no site-owned analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no embedded signup or support form, visitor accounts, or website database. Fonts and images are served locally. Google Forms and YouTube connect to third parties only when you follow an external link or choose to load a video player, as explained below.",
           "The website is hosted on a DigitalOcean server. Website hosting and server infrastructure may process standard technical request information, such as IP address, browser/request information, requested URLs and request times, as needed to deliver, operate and protect the website. This infrastructure processing is separate from the app's on-device records.",
           "We use website information only to operate and support the informational site, not for advertising, profiling, sale or sharing for unrelated purposes. Our DigitalOcean server has access/error logging and system/service logs. Exact total retention across the host, server and other infrastructure copies is not currently established. We do not promise a fixed deletion period for those logs.",
         ],
@@ -518,6 +525,17 @@ export const motionPages = {
           "The Asymmetri Motion product page offers an introduction from Asymmetri's YouTube channel. Before you select Load video, the website displays local artwork and does not load the YouTube player, thumbnails, scripts or media. Scrolling and hovering do not activate a video. Your choice is not saved as permission for later visits.",
           "Selecting Load video connects your browser to YouTube using its privacy-enhanced player at youtube-nocookie.com. YouTube and Google may then process information such as your IP address, browser information and interactions, and may use storage or serve advertising under their policies. Privacy-enhanced mode does not mean no data collection or advertising. The player does not autoplay.",
           "Watch on YouTube opens the corresponding video on YouTube, where Google's policies apply. These optional website videos do not change the Motion app's local data handling. This is not a privacy policy for the BotSquad application.",
+        ],
+        link: { label: "Google privacy policy", href: "https://policies.google.com/privacy" },
+      },
+      {
+        id: "testflight-access",
+        heading: "TestFlight access requests",
+        paragraphs: [
+          "Request TestFlight access opens a Google Form. The form asks for your first and last name, email address, iPhone model and iOS version, and permission to contact you about beta access. Your role in baseball is optional. Google processes your interaction with the form under its own privacy practices.",
+          "Responses are stored in Google Forms and a private Google Sheet. We use them to review device compatibility, manage invitations and follow up about installation or beta participation. This is not a marketing mailing-list signup. When inviting you through TestFlight, we provide your name and email address to Apple; Apple handles TestFlight under its own terms and privacy practices.",
+          "Provide your own contact details. Parents or guardians requesting access for a young athlete should use their own details. Do not submit athlete footage, health information or a child's personal information through this form.",
+          `You can withdraw your request or ask us to delete the access-request information we hold by emailing ${site.company.contactEmail}. Google and Apple control their own service records and copies.`,
         ],
         link: { label: "Google privacy policy", href: "https://policies.google.com/privacy" },
       },
@@ -546,6 +564,7 @@ export const motionPages = {
         heading: "Policy updates",
         paragraphs: [
           "We may update this policy as the app or our practices change. Updates will appear on this page with a revised effective date.",
+          "October 21, 2026: added coverage for the external Google Form, private response sheet and TestFlight invitation follow-up. The app's local data handling and existing support-email policy are unchanged.",
           "October 6, 2026: added Motion 1.2 coverage for Notes, Pitch Context, References, Files import, Saved Comparisons and PDF/original-video sharing. Website, Apple-service and support-email handling remains unchanged.",
           "September 28, 2026: updated website coverage for optional, user-activated YouTube introductions and the Asymmetri Labs portfolio. The Motion app, Apple services and support-email handling described in the September 19, 2026 policy are unchanged.",
         ],

@@ -59,7 +59,10 @@ Sensor experiments belong to the founder/company history, not current Motion V1.
 
 The October 21 review verifies Motion 1.2 (4) in owner-only TestFlight testing,
 with public App Store release still pending. Keep Pitching **Preparing for release**;
-private testing does not authorize an App Store link or a beta invitation.
+private testing does not authorize an App Store link or establish external beta
+availability. The owner separately authorized an access-request form on October
+21. Use **Request TestFlight access**, not a download or immediate-access promise.
+Actual invitations still depend on a suitable available beta build.
 Hitting is **In development**, with implemented review workflows but experimental
 measurements and remaining real-media/scientific/release gates. Team is **Planned**.
 `productStatusLabels` supports all four states; future changes require new evidence.
@@ -136,7 +139,7 @@ handling and their retention limits remain unchanged.
 website/support audit recorded in `docs/WEBSITE_PRIVACY_AUDIT.md`. The marketing pages now describe the same current V1 product, with release
 availability stated separately. Preserve these audited articles substantively. Preserve
 the distinction between local app records, Apple/Photos/iCloud/backups/sharing,
-website technical requests and support email. Never strengthen bounded app
+website technical requests, external TestFlight access requests and support email. Never strengthen bounded app
 claims into "data never leaves the device," secure erasure, or remote deletion.
 
 Support is email-only through the central mailbox, using owner-confirmed Gmail
@@ -147,9 +150,26 @@ permission for public reuse. Preserve the provider/backup/sender-copy limits and
 attachment-bearing-message handling in the approved text. Apple-provided reporting
 is for operation/debugging/improvement, with no added app analytics/crash SDK,
 advertising or profiling. Website logs are separate and their total retention
-remains unknown. No SLA, form, tracking, cookie banner, account or database is
-needed. Do not invent broader deletion guarantees. Reaudit when behavior changes
+remains unknown. No SLA, embedded support form, tracking, cookie banner, account
+or website database is needed. Do not invent broader deletion guarantees. Reaudit when behavior changes
 and revise the effective date when the policy changes.
+
+## Motion access link
+
+Keep the public signup destination and all CTA wording in `motion.access`. Share
+`https://asymmetri.co/motion/try`, which temporarily redirects to Google Forms;
+the browser address changes after navigation. Keep the provider notice visible
+and the iPhone/iOS requirement beside all three access buttons. Preserve product
+learning links and the existing release statement. Do not add the redirect to the
+sitemap or silently turn it into a permanent redirect.
+
+The form requires first/last name, email, iPhone model/iOS and contact consent;
+baseball role is optional. It is for invitations and beta follow-up, not marketing.
+Responses stay in Google Forms and a private Google Sheet; names/email go to
+Apple when an invitation is issued. Keep `/privacy#testflight-access` aligned with
+that handling. Do not publish sheet/editor URLs, submit test personal data, or
+activate outreach as part of a website link change. The October 21 policy update
+adds this boundary without changing local app or support-retention practices.
 
 ## Voice
 
@@ -351,8 +371,9 @@ Motion video for BotSquad. A video is explanatory media, not authority for relea
 claims. Keep local posters, deliberate loading, external fallback links and the
 visible Google privacy notice. Optional embedding uses `youtube-nocookie.com`;
 never describe it as tracking-free. `/privacy#website-media` explains the boundary
-and is not a general BotSquad privacy policy. The effective date is September 28,
-2026; approved Motion/app and support-retention disclosures retain their meaning.
+and is not a general BotSquad privacy policy. Video coverage was introduced on
+September 28, 2026; the current policy date also reflects the October 21 access
+form extension. Approved Motion/app and support-retention disclosures retain their meaning.
 
 The two small Explorer images are synthetic design concepts, not current software
 captures or a new-feature announcement. Preserve that distinction in alt text,

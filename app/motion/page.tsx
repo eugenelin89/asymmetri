@@ -1,4 +1,5 @@
 import { MotionFamily } from "@/components/motion-family";
+import { MotionAccess } from "@/components/motion-access";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { EvidenceChain } from "@/components/evidence-chain";
@@ -61,10 +62,13 @@ export default function MotionPage() {
               <h1>{motion.headline}</h1>
               <p className="hero__support">{motion.hero.support}</p>
               <p className="motion-hero__philosophy">{motion.hero.philosophy}</p>
-              <a className="button button--primary" href={motion.hero.link.href}>
-                {motion.hero.link.label}
-              </a>
-              <a className="text-link motion-family-link" href="#motion-family">Explore the Motion family ↓</a>
+              <MotionAccess id="motion-hero-access-details" />
+              <div className="button-row motion-hero__links">
+                <a className="text-link" href={motion.hero.link.href}>
+                  {motion.hero.link.label} ↓
+                </a>
+                <a className="text-link" href="#motion-family">Explore the Motion family ↓</a>
+              </div>
             </div>
             <div className="motion-product">
               <Image
@@ -308,6 +312,7 @@ export default function MotionPage() {
             </div>
             <div className="motion-release">
               <p>{motion.releaseStatement}</p>
+              <MotionAccess id="motion-closing-access-details" />
               <div className="button-row">
                 <a className="text-link" href="/sports#story">
                   The Asymmetri Sports story

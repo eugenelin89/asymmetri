@@ -43,6 +43,8 @@ When routes or shared layout code change, verify:
   code blocks and numbered task/investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
+- `/motion/try` (307 to the exact public Google Form in `motion.access.formUrl`;
+  temporary, not 308; no extra landing page or sitemap entry)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
 - `/sport` → `/sports`; `/work` → `/labs` (308, including fragment preservation);
@@ -66,6 +68,19 @@ network resources for accidental tracking, forms or external scripts/fonts.
 When changing Worker or Vite binding configuration, request at least one
 `/_vinext/image` URL from the local Vinext server and confirm that it returns an
 image response without a Worker exception.
+
+## Motion access requests
+
+Verify both Motion access buttons and the Sports product-section button point to
+`/motion/try`, expose their eligibility/provider text through `aria-describedby`,
+and remain reachable with visible keyboard focus at mobile, tablet and desktop
+widths. Retain the how-it-works, Motion family, tutorial, privacy/support and
+product-detail links. Follow an access link to the public form, verify its title
+and required fields, and do not submit a synthetic response to the live sheet.
+Before navigation, the website must not load Google Forms resources or introduce
+form inputs, tracking, cookies or browser storage. Check the October 21 policy
+date and `#testflight-access` disclosure. A request must not imply a confirmed
+invitation, download, App Store launch or external TestFlight build availability.
 
 ## Visual and interaction checks
 

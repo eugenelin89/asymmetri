@@ -20,7 +20,9 @@ source; this rule does not apply to every Sports product. The two remain peers
 under Asymmetri, without claiming a common codebase.
 
 Motion v1.2 is in private, owner-only TestFlight testing and preparing for its
-first public release. The separate individual Hitting app is in development;
+first public release. Visitors can request a future TestFlight invitation through
+`/motion/try`; a request does not establish external beta availability.
+The separate individual Hitting app is in development;
 one professional Cloud-backed Team app remains planned.
 Team Pitching/Hitting/Baseball are entitlements within that one Team app.
 BotSquad is experimental, MIT licensed and self-hosted on an operator-controlled
@@ -36,6 +38,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
+| `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
 | `/botsquad/research` | Research hub within BotSquad, linking to BotSquad Trade |
 | `/botsquad/trade` | Published operational outcome, dated latest-decision summary, reasoning, portfolio, next review and expandable timeline, followed by the full public archive |

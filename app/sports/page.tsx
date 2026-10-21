@@ -1,4 +1,5 @@
 import { MotionFamily } from "@/components/motion-family";
+import { MotionAccess } from "@/components/motion-access";
 import Image from "next/image";
 import { sportsNavigation, sports, motion, site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
@@ -113,8 +114,9 @@ export default function SportsPage() {
               {motion.introduction.paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
+              <MotionAccess id="sports-motion-access-details" />
               <a
-                className="button button--ink"
+                className="text-link"
                 href={motion.introduction.link.href}
               >
                 {motion.introduction.link.label}

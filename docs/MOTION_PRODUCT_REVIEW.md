@@ -5,6 +5,17 @@ This is an internal claims/provenance record, not a public paper or scientific
 validation. No reference repository was modified, built, configured or released.
 
 
+## Access-request extension, October 21, 2026
+
+After the product review below, the owner authorized a Google Form for TestFlight
+access requests and website links through `/motion/try`. The two Motion CTAs and
+Sports product CTA say **Request TestFlight access**, with iPhone/iOS eligibility,
+an explicit Google Forms notice and availability-qualified invitations. This
+authorizes collecting interest; it does not establish external beta readiness,
+change the accepted binary, issue invitations or change the **Preparing for
+release** state. The policy date now reflects that separate signup boundary.
+No Motion repository or distribution setting is changed.
+
 ## Current authority, October 21, 2026: Motion v1.2 and family freshness
 
 Reviewed fetched Motion release and future-development refs separately, without
