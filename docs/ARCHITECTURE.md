@@ -453,6 +453,11 @@ run history, exports, human-readable exact records, disabled Ask and visibility.
 Native SVG, meters and semantic tables require no chart library. CSV formula cells
 are neutralized; exports contain only the shown page and retain synthetic labels.
 Snapshot fields, original timestamps and receiver publication receipts stay distinct.
+The Live Trading Desk shows each bounded event window newest first by original
+event time, breaking ties by descending receiver sequence. Following and Jump to
+latest keep the panel at the top; moving down to older records pauses following.
+Archive pagination keeps its publication-order cursors. Synthetic playback still
+reveals events from oldest to newest, with each newly revealed event at the top.
 No roster/financial data clients mount before the run's evidence mode is verified.
 
 INV-REAL-01 adds a public run-configuration component using existing `RunPublished`
