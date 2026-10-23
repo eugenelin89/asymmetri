@@ -1,15 +1,7 @@
-"use client";
-
-import { useRef, useState } from "react";
 import { mediaDisclosure, type Introduction } from "@/content/site";
 
-/** The iframe is absent until a deliberate click; permission is never persisted. */
+/** Render the native player directly; playback remains visitor-controlled. */
 export function IntroductionVideo({ video }: { video: Introduction }) {
-  const [loaded, setLoaded] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const player = useRef<HTMLIFrameElement>(null);
-  const loadButton = useRef<HTMLButtonElement>(null);
-
   return (
     <section
       className={`section introduction-video introduction-video--${video.tone}`}
@@ -25,41 +17,13 @@ export function IntroductionVideo({ video }: { video: Introduction }) {
           {"description" in video && <p>{video.description}</p>}
         </div>
         <div className="video-frame">
-          {loaded && !failed ? (
-            <iframe
-              ref={player}
-              src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
-              title={`${video.product} introduction video on YouTube`}
-              allow="encrypted-media; picture-in-picture"
-              allowFullScreen
-              referrerPolicy="strict-origin-when-cross-origin"
-              onLoad={() => player.current?.focus()}
-              onError={() => setFailed(true)}
-            />
-          ) : (
-            <div className="video-poster">
-              <div className="video-poster__copy">
-                <span>{video.product}</span>
-                <p>{video.posterLine}</p>
-              </div>
-              {!failed && (
-                <button
-                  ref={loadButton}
-                  className="video-load"
-                  type="button"
-                  aria-label={`Load ${video.product} introduction video`}
-                  onClick={() => setLoaded(true)}
-                >
-                  <span aria-hidden="true">▶</span> Load video
-                </button>
-              )}
-              {failed && (
-                <p className="video-failed" role="status">
-                  The player could not load. Use Watch on YouTube below.
-                </p>
-              )}
-            </div>
-          )}
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+            title={`${video.product} introduction video on YouTube`}
+            allow="encrypted-media; picture-in-picture"
+            allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+          />
         </div>
         <div className="video-details">
           <div>
@@ -76,28 +40,9 @@ export function IntroductionVideo({ video }: { video: Introduction }) {
             Watch on YouTube <span aria-hidden="true">↗</span>
           </a>
         </div>
-        {loaded && !failed && (
-          <div className="video-fallback">
-            <p>
-              If the player is blocked or unavailable, use Watch on YouTube.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                setLoaded(false);
-                setFailed(false);
-                requestAnimationFrame(() => loadButton.current?.focus());
-              }}
-            >
-              Close player
-            </button>
-          </div>
-        )}
-        <noscript>
-          <p className="video-fallback">
-            Use Watch on YouTube to view this introduction without JavaScript.
-          </p>
-        </noscript>
+        <p className="video-fallback">
+          If the player is blocked or unavailable, use Watch on YouTube.
+        </p>
       </div>
     </section>
   );

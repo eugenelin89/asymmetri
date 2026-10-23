@@ -97,10 +97,10 @@ investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
 the installed receiver now accepts the exact finite HQ publisher scope and serves the initial configured portfolio. The investment
 website is public; see the [current release receipt](docs/INV-REAL-01-WEBSITE.md) and
-[receiver runbook](docs/INVESTMENT_RECEIVER.md). Optional
-Motion's YouTube player uses a verified upload from `@Asymmetri` and connects to
-Google only after explicit activation; its local poster and normal external link
-are available beforehand. BotSquad links to the same official channel without an
+[receiver runbook](docs/INVESTMENT_RECEIVER.md).
+Motion's YouTube player uses a verified upload from `@Asymmetri` and appears
+directly on page load without autoplay. Its privacy disclosure and normal
+external fallback link remain visible. BotSquad links to the same official channel without an
 off-channel player. Tutorial screenshots contain only the
 owner-authorized retained pitching media described in the asset manifest.
 

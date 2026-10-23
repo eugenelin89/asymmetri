@@ -137,10 +137,10 @@ already running before a configuration update may need a full restart.
 
 ### Product-video checks
 
-Motion renders a local poster until Load video is activated; BotSquad has a plain
-official-channel link. A fresh Network
-panel should show no Google/YouTube resources before that action. Check the native
-player and fallback afterwards. The iframe's origin referrer is intentional;
+Motion renders its YouTube player directly without autoplay; BotSquad has a plain
+official-channel link. A fresh Network panel can show Google/YouTube resources
+on Motion page load, before Play. Check the native player, disclosure and external
+fallback, including when player requests are blocked. The iframe's origin referrer is intentional;
 removing it can cause YouTube error 153. Do not add an SDK, remote thumbnail or
 preconnect to solve playback failures. Cross-origin player errors are not reliably
 observable by the parent, so the external link is always present.

@@ -368,12 +368,13 @@ No BotSquad introduction was visible on the official channel at that review;
 `/botsquad#introduction-video` now provides a plain official-channel link. Verify
 publisher identity before adding a replacement; do not substitute an unrelated
 Motion video for BotSquad. A video is explanatory media, not authority for release/capability
-claims. Keep local posters, deliberate loading, external fallback links and the
-visible Google privacy notice. Optional embedding uses `youtube-nocookie.com`;
-never describe it as tracking-free. `/privacy#website-media` explains the boundary
+claims. Motion displays its native player directly without autoplay; keep the
+external fallback link and visible Google privacy notice. Embedding uses
+`youtube-nocookie.com` and connects on page load, before Play; never describe it
+as tracking-free. `/privacy#website-media` explains the boundary
 and is not a general BotSquad privacy policy. Video coverage was introduced on
-September 28, 2026; the current policy date also reflects the October 21 access
-form extension. Approved Motion/app and support-retention disclosures retain their meaning.
+September 28, 2026; the October 22 policy date also reflects direct player
+loading and retains the October 21 access form extension. Approved Motion/app and support-retention disclosures retain their meaning.
 
 The two small Explorer images are synthetic design concepts, not current software
 captures or a new-feature announcement. Preserve that distinction in alt text,

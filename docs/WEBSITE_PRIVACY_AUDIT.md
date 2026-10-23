@@ -4,6 +4,21 @@ Current dependency status is recorded in the [October 7 security review](DEPENDE
 The dependency findings in the dated publication records below describe their
 original lockfiles; they are not the current security baseline.
 
+## Direct Motion player — October 22, 2026
+
+The owner requested that `/motion` display the video instead of the custom Load
+video poster. `IntroductionVideo` now server-renders the existing approved
+`youtube-nocookie.com` iframe on page load, with no autoplay or automatic focus.
+Google-controlled requests can begin before Play. The nearby disclosure and
+`/privacy#website-media` now describe this timing, with an October 22 effective
+date and policy history entry. Native controls, origin referrer, fullscreen and
+the external fallback remain. The custom poster and client loading/close state
+are removed; no new dependency, SDK or site storage is introduced.
+
+This supersedes the click-before-connection behavior in the dated media record
+below. App-local records, Apple reporting, TestFlight access and support retention
+are unchanged. The source change does not establish a production release.
+
 ## TestFlight access extension — October 21, 2026
 
 The owner authorized a public Google Form and private response workbook, then

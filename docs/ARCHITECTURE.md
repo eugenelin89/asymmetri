@@ -127,11 +127,12 @@ now links to the official YouTube channel without embedding an off-channel video
 `UtilityPage` is a server article.
 
 Client components remain limited to tutorial progression, legacy root fragments,
-menu dismissal and deliberate video loading, plus the availability/disclosure-gated Ask client. Video posters load no remote resource.
-Clicking Load creates a fixed-ID privacy-enhanced iframe with no autoplay, SDK or
-persisted consent; origin referrer, native controls/fullscreen, visible Google
-notice, Close/focus restoration and external fallback remain. Google processing
-begins only after activation. No new runtime dependency or server state.
+menu dismissal, plus the availability/disclosure-gated Ask client.
+`IntroductionVideo` is a server component that renders the fixed-ID
+privacy-enhanced iframe directly, without autoplay or a site-owned player SDK.
+Google requests can begin on page load, before Play. Origin referrer, native
+controls/fullscreen, visible Google notice and external fallback remain. Loading
+does not move keyboard focus. No new runtime dependency or server state.
 
 ## Application architecture
 

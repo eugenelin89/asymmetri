@@ -78,8 +78,8 @@ widths. Retain the how-it-works, Motion family, tutorial, privacy/support and
 product-detail links. Follow an access link to the public form, verify its title
 and required fields, and do not submit a synthetic response to the live sheet.
 Before navigation, the website must not load Google Forms resources or introduce
-form inputs, tracking, cookies or browser storage. Check the October 21 policy
-date and `#testflight-access` disclosure. A request must not imply a confirmed
+form inputs, tracking, cookies or browser storage for the form. Check the current
+policy date and `#testflight-access` disclosure. A request must not imply a confirmed
 invitation, download, App Store launch or external TestFlight build availability.
 
 ## Visual and interaction checks
@@ -281,18 +281,19 @@ disclosure is a separate authorized website change. Runtime device preservation 
 be limited to the actions actually performed, not inferred byte-level preservation.
 
 
-## Optional video regression
+## Video regression
 
-Test `/motion` with a fresh browser request log. Before Load,
-there must be no iframe, remote thumbnail, preconnect or request to YouTube, Google,
-ytimg or advertising domains attributable to the site. External links alone do not
-load those resources. After Load, inspect the exact iframe ID and native playback.
+Test `/motion` with a fresh browser request log. The initial server HTML must
+include the player iframe without a Load video gate or client-side activation.
+Google/YouTube requests may begin on page load, before Play, as disclosed.
+Inspect the exact iframe ID, native preview and visitor-initiated playback.
 Motion uses `nEv9nJO83NM` ("Every Pitch, Together"). Verify YouTube's publisher metadata resolves to
 `https://www.youtube.com/@Asymmetri` before accepting a video replacement.
 Confirm no autoplay, title, origin referrer policy, responsive 16:9 reservation,
 fullscreen, keyboard access, visible disclosure and an always-available fallback.
-Close must restore the poster and button focus. Check no-JavaScript and blocked
-frames, plus reduced-motion navigation. Do not weaken browser privacy settings to
+Player loading must not steal focus. Check the iframe remains in server HTML
+without site JavaScript and the external link remains usable with scripts disabled
+or blocked frames, plus reduced-motion navigation. Do not weaken browser privacy settings to
 force playback; document provider/network limitations when they remain.
 On `/botsquad`, require no video player or off-channel video link. Preserve the
 `#introduction-video` destination as a plain link to the official Asymmetri channel.
@@ -317,8 +318,8 @@ Labs-as-umbrella claims. Historical policy update descriptions and unused retain
 logo/source variants are not current hierarchy claims. Compare utility text against
 the baseline; only current brand references and tutorial title affiliation change.
 No tutorial ID/original asset or audited data-handling commitment may disappear.
-Verify no pre-Load Google/YouTube requests, the approved Motion video ID and the
-official-channel-only link on BotSquad.
+Verify the direct Motion player, no autoplay, accurate page-load disclosure,
+approved video ID and official-channel-only link on BotSquad.
 
 For the route-change deployment, use the complete isolated-candidate procedure,
 verify the source SHA/build ID, retain the full old directory and remotely verify

@@ -1471,8 +1471,6 @@ p {
   background: var(--surface-raised);
   border-top: 1px solid var(--line);
 }
-.video-frame:has(.video-poster) { aspect-ratio: auto; }
-.video-poster { min-height: clamp(16rem, 35vw, 30rem); }
 .video-frame {
   aspect-ratio: 16 / 9;
   max-width: 54rem;
@@ -1485,58 +1483,6 @@ p {
   width: 100%;
   height: 100%;
   border: 0;
-}
-.video-poster {
-  background: var(--labs-deep);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: clamp(1.5rem, 6vw, 6rem);
-  color: var(--surface-raised);
-  position: relative;
-  isolation: isolate;
-}
-.video-poster__copy {
-  position: relative;
-  z-index: 1;
-  max-width: 70%;
-}
-.video-poster__copy > span {
-  color: var(--labs-highlight);
-  font-size: clamp(0.8rem, 1.5vw, 1.4rem);
-}
-.video-poster__copy p {
-  font-size: clamp(1.5rem, 3.6vw, 3rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  max-width: 21ch;
-  margin-top: 0.9rem;
-}
-.introduction-video--motion .video-poster { background: var(--motion-text); }
-.introduction-video--motion .video-poster__copy > span { color: var(--on-dark-secondary); }
-.video-load {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  border: 1px solid var(--line-dark);
-  font-size: clamp(0.875rem, 1.4vw, 1.1rem);
-  padding: 0.8rem 1.2rem;
-  margin-top: 2rem;
-  min-height: 3rem;
-  cursor: pointer;
-  font-weight: 650;
-  background: var(--light-surface);
-  color: var(--light-ink);
-}
-.video-load:hover {
-  background: var(--light-raised);
-}
-.video-load > span {
-  font-size: 0.8em;
 }
 .video-details {
   display: flex;
@@ -1561,24 +1507,8 @@ p {
   align-content: center;
 }
 .video-fallback {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
   font-size: 0.9rem;
   margin-top: 1rem;
-}
-.video-fallback button {
-  text-decoration: underline;
-  padding: 0.7rem;
-  border: 1px solid var(--line);
-  background: var(--surface-base);
-  cursor: pointer;
-  color: var(--ink);
-}
-.video-failed {
-  margin-top: 1.5rem;
-  max-width: 40ch;
 }
 .motion-concepts {
   background: var(--motion-mineral);
@@ -1668,10 +1598,6 @@ p {
   .access-grid { grid-template-columns: minmax(0, 1fr); }
   .sports-nav .shell { flex-wrap: wrap; gap: 0; padding-top: 0.6rem; }
   .sports-nav .shell > div { gap: 1.25rem; width: 100%; justify-content: flex-start; }
-  .video-poster { padding: 1.25rem; }
-  .video-poster__copy { max-width: 100%; }
-  .video-poster__copy p { margin-top: 0.5rem; }
-  .video-load { margin-top: 0.9rem; padding: 0.65rem 0.85rem; min-height: 2.75rem; }
   .video-details { flex-direction: column; gap: 0.5rem; }
   .concept-gallery { grid-template-columns: minmax(0, 1fr); max-width: 20rem; justify-self: center; }
 }
@@ -1758,7 +1684,6 @@ p {
 .sports-nav { background: var(--graphite-raised); color: var(--on-dark); }
 .sports-nav .shell > span { color: var(--on-dark-secondary); }
 .sports-nav :focus-visible,
-.video-poster :focus-visible,
 .site-footer :focus-visible { outline-color: var(--brand-bright); }
 .sports-page .hero__figure { border-bottom: 4px solid var(--sports-primary); border-bottom-color: var(--brand-primary); }
 .labs-hero, .botsquad-hero { background: var(--labs-surface); }
@@ -1842,13 +1767,6 @@ p {
   border-top: 1px solid var(--line-dark);
 }
 .closing .product-details { --theme-line: var(--line-dark); }
-.video-poster {
-  background: var(--graphite-soft);
-  color: var(--on-dark);
-}
-.video-poster__copy > span, .introduction-video--motion .video-poster__copy > span {
-  color: var(--on-dark);
-}
 /* Two-tone focus remains visible on both colored actions and mixed surfaces. */
 .button:focus-visible { box-shadow: 0 0 0 2px var(--graphite); }
 @media (prefers-reduced-motion: reduce) {
