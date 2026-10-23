@@ -3,6 +3,10 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [October 22 direct Motion video release receipt](MOTION_VIDEO_RELEASE_2026-10-22.md)
+records the live native player, updated website-media disclosure, verified Linux
+build, protected-route acceptance and retained preceding source/build.
+
 The [October 21 Motion access release receipt](MOTION_ACCESS_RELEASE_2026-10-21.md)
 records the live `/motion/try` redirect, website signup actions, privacy extension,
 independent candidate, verified archival and complete preceding-runtime rollback.
