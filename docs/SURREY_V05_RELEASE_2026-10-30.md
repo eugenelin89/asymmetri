@@ -1,14 +1,20 @@
 # Surrey V0.5 — On the Move · 2026-10-30
 
-**Candidate in validation.** Production remains on the preceding approved runtime.
-Richmond released the integration/server window after its verified V0.1 activation.
-Surrey owns the next bounded window and journals144/145; no V0.5 activation has
-occurred. Refreshed approved main is26180893335ca37b04361fc516f177c6aaa36eaa. Public destination remains https://asymmetri.co/labs/surrey.
+**Live:** https://asymmetri.co/labs/surrey (also verified on `www`). Activated
+2026-10-30 at 23:20:24 UTC through the guarded whole-runtime workflow.
+
+- Runtime source: `fcd2b900b512652a94af07571b841e823c61d2de`.
+- Linux build: `VaAKfIoEAK5LbGri4K8V8`; Node `v22.23.1`.
+- Successful CI: https://github.com/eugenelin89/asymmetri/actions/runs/41143061313.
+- Artifact SHA256: `8690e9537824d1039ec70192ba033958d9596f302fe10ebbd82c422f7dc495b5`.
+- Complete immediate rollback: `/var/www/asymmetri-rollback-before-surrey-v05-20261030`,
+  source `be6fc3bc069cd77b54240846b27166027b333d3b`, build `gIRztyRG7Pdh1DR3AAHQR`.
+  This preserves Richmond V0.1, Vancouver V0.5 and Surrey V0.4 together.
 
 ## Scope and provenance
 
-Isolated `codex/surrey-adventure-v05` started from9e5f4cad and rebases onto the
-approved Richmond receipt2618089. Richmond code/assets and its prebuild test gate
+Isolated `codex/surrey-adventure-v05` started from `9e5f4cad` and rebases onto the
+approved Richmond receipt `2618089`. Richmond code/assets and its prebuild test gate
 remain intact. The first
 compact car is playable with safe enter/exit, progressive acceleration/brake/reverse,
 speed-dependent steering, swept oriented-body collision, chase camera and compact
@@ -31,7 +37,7 @@ No dependency, account, upload, mapping backend or shared-engine refactor is add
 
 ## Acceptance evidence
 
-54 Surrey tests pass, including all44 earlier tests and10 new vehicle/transport
+54 Surrey tests pass, including all 44 earlier tests and 10 new vehicle/transport
 regressions. They cover full-body and tiny-hole/sweep collision, source-connected
 route clearance, frame-rate handling, safe enter/exit/recovery, digital-input delivery,
 old-save migration/reload, exact aerial freeze, traffic/pedestrian spacing, train
@@ -61,16 +67,48 @@ multi-touch, battery or thermal certification. Driving into the road boundary st
 the car; the touch Recover action returned it to a clear route pose. Safe exit
 and Journal showed all four cases, $170 and the three original inventory items.
 
-## Release gate and limits
+## Production verification and recovery
 
-Local check (one existing tutorial lint warning),54 Surrey/59 Vancouver/7 investment
-tests, production audit (zero vulnerabilities), Next webpack and Vinext production
-builds pass. Offline transport reproduction is byte-identical; earlier geographic
-snapshots and Vancouver code have no diff. Exact-source Linux/private/public release
-checks follow integration with Richmond. Before
-activation refresh live source/build, peer/config identities and capacity; preserve
-an immediate complete runtime rollback. Only the existing Asymmetri service may
-restart. No OS/DNS/TLS/database or peer-service changes.
+Integrated Node 24 check (one existing tutorial lint warning), 54 Surrey, 27 Richmond,
+59 Vancouver and 7 investment tests pass: 147 tests total. Production audit reports
+zero vulnerabilities; Next webpack and Vinext builds pass. Offline transport
+reproduction is byte-identical. Peer code/data and old snapshots have no diff.
+The exact-source Linux Node 22 candidate passed its independent workflow, including
+both Surrey and Richmond prebuild test gates.
+
+Private candidate: 16 routes, eight protected host checks, 24 tutorial images, 124
+retained tutorial IDs, native image optimization, all 688 Richmond outputs and every
+Surrey snapshot passed. Protected visible content, including Richmond and Vancouver,
+matched the preceding runtime. Public apex and www each passed 16-route/24-image
+comparisons, plus 56 additional geographic, city-copy and redirect checks.
+
+Capacity floors were 192MiB available memory and 6GiB free disk. Independent checkout,
+artifact extraction and private smoke guards all passed. The smoke minimum was
+248,468KiB available and 9,619,771,392 free bytes. Activation continuously checked
+capacity and peer/config identity, with automatic whole-runtime restoration on
+failure. No guard fired. Only Asymmetri restarted; all 55 configuration hashes,
+13 peer virtual hosts, peer service identities and the Node binary remained unchanged.
+Final health at 23:21:19 UTC: 343,152KiB available, 9,619,501,056 free bytes, active/
+running/enabled service, zero automatic restarts and zero post-activation errors.
+The one old shutdown entry is the expected exit143 during the controlled swap.
+
+Server evidence is retained in `/var/lib/asymmetri-surrey-v05-release-20261030`.
+The rollback directory retains the entire previous source, `.next` and `node_modules`.
+To restore it, stop only Asymmetri, move the current tree to a new retained failed
+candidate path, rename that rollback tree to `/var/www/asymmetri`, restart Asymmetri,
+and repeat protected-route/service/capacity checks. Never replace only `.next` or
+delete earlier complete runtimes. No OS, DNS, TLS, database or peer-service changes
+were made. Later documentation commits do not change the running source/build.
+
+## Remaining acceptance limits
+
+The full browser driving delivery and responsive control checks above passed before
+release. Browser-control requests subsequently timed out, including reconnection and
+tab inventory; the post-deploy visual browser recheck could not be completed. Live
+HTTP/asset checks and server health passed. Viewport reset was attempted, but its
+completion could not be confirmed after the connection failed. The local preview
+was stopped. This limitation does not convert earlier browser evidence into a live
+browser or physical-device claim.
 
 Physical iOS/Android testing remains outstanding. Citywide car navigation, train
 boarding, terrain elevation, interiors and full decorative-prop physics are not

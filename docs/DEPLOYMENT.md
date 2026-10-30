@@ -3,8 +3,17 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Surrey V0.5 release receipt](SURREY_V05_RELEASE_2026-10-30.md) records the
+current October 30 runtime: playable driving, a complete delivery, bounded traffic
+and moving train scenery, with Richmond and Vancouver preserved. Runtime source
+`fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. The complete
+immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v05-20261030`.
+Public HTTP/asset and peer guards passed; a post-release visual browser recheck is
+outstanding because browser control stopped responding. Earlier local driving and
+phone-layout acceptance passed. Documentation commits do not change the runtime.
+
 The [Richmond V0.1 release receipt](RICHMOND_RELEASE_2026-10-30.md) records the
-current October 30 runtime: Richmond delivery/mall/YVR gameplay and unobstructed
+preceding October 30 runtime: Richmond delivery/mall/YVR gameplay and unobstructed
 phone controls, exact-source Linux build, private/public acceptance and complete
 Surrey V0.4 rollback. Its deployed identity supersedes the earlier receipts below;
 later documentation commits do not change the running build.
@@ -1450,9 +1459,9 @@ Surrey V0.4 must use the existing guarded exact Linux candidate workflow, refres
 
 ## Surrey V0.5 — On the Move
 
-V0.5 is prepared on `codex/surrey-adventure-v05`. Richmond retains the shared
-main/server window until its explicit handoff; refresh approved main, serving
-source/build, peer identities and complete rollback before any activation.
+V0.5 was integrated on `codex/surrey-adventure-v05` after Richmond handed off
+approved main `2618089`. The exact Linux candidate was activated with a complete
+Richmond V0.1 runtime rollback. Refresh live identities before any later release.
 Use the existing exact-source Linux candidate workflow and 192MiB available-memory /
 6GiB free-disk floors with continuous guards. Preserve all old geographic bytes,
 Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
