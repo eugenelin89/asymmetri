@@ -100,15 +100,29 @@ and repeat protected-route/service/capacity checks. Never replace only `.next` o
 delete earlier complete runtimes. No OS, DNS, TLS, database or peer-service changes
 were made. Later documentation commits do not change the running source/build.
 
-## Remaining acceptance limits
+## Live browser recheck
 
-The full browser driving delivery and responsive control checks above passed before
-release. Browser-control requests subsequently timed out, including reconnection and
-tab inventory; the post-deploy visual browser recheck could not be completed. Live
-HTTP/asset checks and server health passed. Viewport reset was attempted, but its
-completion could not be confirmed after the connection failed. The local preview
-was stopped. This limitation does not convert earlier browser evidence into a live
-browser or physical-device claim.
+Completed October 30 by 23:35 UTC on the deployed apex route after reconnecting
+following a browser restart. The prior browser-control interruption is resolved.
+Continued the existing site save, walked to the car and entered through ordinary
+controls. Held phone acceleration moved the car from (20.00, -68.25) to (26.39, -68.25);
+Handbrake stopped it. Aerial Explore retained car pose, zero speed, elapsed 220.93
+and city time 1372.97 exactly; Street Adventure resumed correctly. Landscape held
+reverse moved it to (24.99, -68.25) and Handbrake stopped it again. Reload and Continue
+restored that occupied pose, heading 1.571 and speed 0; all four cases remained
+available, with $20, health 100, stamina 100 and no inventory items in this site's
+save. This production-origin save is separate from the completed local delivery
+save described above; the full delivery was not repeated on production.
+
+Live CSS viewports 390×844, 320×567 and 844×390 retained one canvas, contained controls
+and no horizontal overflow. Held controls left page scroll unchanged. Portrait and
+landscape screenshots are retained with the release evidence outside Git. No page
+console errors were recorded; warnings came from an unrelated browser extension.
+The game was paused and the temporary viewport override reset, confirmed at
+1800×915. These checks close the live visual recheck recorded as unavailable in
+journal 145. They required no runtime change or additional deployment.
+
+## Remaining acceptance limits
 
 Physical iOS/Android testing remains outstanding. Citywide car navigation, train
 boarding, terrain elevation, interiors and full decorative-prop physics are not

@@ -8,9 +8,11 @@ current October 30 runtime: playable driving, a complete delivery, bounded traff
 and moving train scenery, with Richmond and Vancouver preserved. Runtime source
 `fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. The complete
 immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v05-20261030`.
-Public HTTP/asset and peer guards passed; a post-release visual browser recheck is
-outstanding because browser control stopped responding. Earlier local driving and
-phone-layout acceptance passed. Documentation commits do not change the runtime.
+Public HTTP/asset and peer guards passed. The post-release visual browser recheck
+passed by 23:35 UTC after browser reconnection: held driving controls, aerial
+pause/resume, occupied-car reload and compact portrait/landscape layouts. Physical
+iPhone/Android testing remains outstanding. Documentation commits do not change
+the runtime.
 
 The [Richmond V0.1 release receipt](RICHMOND_RELEASE_2026-10-30.md) records the
 preceding October 30 runtime: Richmond delivery/mall/YVR gameplay and unobstructed
