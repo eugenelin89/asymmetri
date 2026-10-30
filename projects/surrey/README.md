@@ -1,4 +1,4 @@
-# Surrey Adventure V0.2 — Dangerous Streets
+# Surrey, City of Adventure V0.2 — Dangerous Streets
 
 **Survive the streets. Discover the stories.** A fictional third-person adventure
 and aerial city explorer at `/labs/surrey`, using the unchanged 1.31 × 1.45 km

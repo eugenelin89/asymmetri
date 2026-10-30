@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { surrey } from "@/content/site";
 import { MiniMap } from "./MiniMap";
 import { Journal } from "./Journal";
 import { readSave, parseSave, SAVE_KEY } from "./save";
@@ -174,7 +175,7 @@ export function SurreyAdventure() {
     engine.current?.input(input, pressed);
   }
   return (
-    <section className={styles.experience} aria-label="Surrey Adventure game">
+    <section className={styles.experience} aria-label={`${surrey.name} game`}>
       <div
         className={`${styles.viewport} ${expanded ? styles.expanded : ""}`}
         ref={viewport}
@@ -205,7 +206,7 @@ export function SurreyAdventure() {
         }}
         role={expanded ? "dialog" : undefined}
         aria-modal={expanded || undefined}
-        aria-label={expanded ? "Surrey Adventure expanded game" : undefined}
+        aria-label={expanded ? `${surrey.name} expanded game` : undefined}
       >
         <div className={styles.canvas} ref={host} />
         {started && (

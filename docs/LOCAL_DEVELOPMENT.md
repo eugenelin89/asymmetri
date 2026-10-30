@@ -262,7 +262,7 @@ Development mode exposes Local graphics recovery test → Interrupt/Restore WebG
 production omits these controls. Test actual loss and both restore/retry paths,
 independent held controls and blur/background recovery.
 
-## Surrey Adventure
+## Surrey, City of Adventure
 
 `npm run dev:next` serves `/labs/surrey`; choose Play Now to load the map and WebGL2
 runtime. Run `npm run test:surrey` for deterministic gameplay/geometry tests.

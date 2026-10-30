@@ -42,7 +42,7 @@ export const botsquadStructure = {
 
 export const vancouver = {
   name: "Vancouver",
-  navLabel: "Vancouver in Progress",
+  navLabel: "Vancouver, City in Progress",
   path: "/labs/vancouver",
   tagline: "Explore the city. See what's changing.",
   status: "Vancouver V0.4 — Experimental",
@@ -52,27 +52,29 @@ export const vancouver = {
   metadata: { title: "Vancouver — Explore False Creek | Asymmetri Labs", description: "Explore eastern False Creek in an experimental 3D Vancouver. Aerial navigation, arcade driving and source-backed landmarks. An independent Asymmetri Labs project." },
 } as const;
 
+const surreyName = "Surrey, City of Adventure";
+
 export const surrey = {
-  name: "Surrey Adventure",
+  name: surreyName,
   path: "/labs/surrey",
   tagline: "Survive the streets. Discover the stories.",
   status: "V0.2 — Dangerous Streets",
   description: "An experimental open-world adventure set in a fictionalized Surrey City Centre.",
-  source: { label: "View Surrey Adventure source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
+  source: { label: "View Surrey source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
   license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/surrey/THIRD_PARTY_NOTICES.md" },
   dataLicence: "https://www.surrey.ca/sites/default/files/media/documents/BulkGISDataRequestFormSecured.pdf",
   manifest: "/surrey/v0.1-2026-10-30/manifest.json",
-  metadata: { title: "Surrey Adventure — Play the City | Asymmetri Labs", description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve two fictional cases and meet the neighbourhood. A free browser adventure with local saves." },
+  metadata: { title: `${surreyName} | Asymmetri Labs`, description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve two fictional cases and meet the neighbourhood. A free browser adventure with local saves." },
 } as const;
 
 export const gisApps = {
   name: "GIS Apps",
   path: "/labs/gis",
-  description: "Explore real places through open-source maps, city models and playable experiments. Start with Vancouver in Progress and Surrey Adventure.",
+  description: `Explore real places through open-source maps, city models and playable experiments. Start with ${vancouver.navLabel} and ${surrey.name}.`,
   status: "Experimental city projects",
   metadata: {
     title: "GIS Apps | Asymmetri Labs",
-    description: "Explore Vancouver in Progress and Surrey Adventure, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.",
+    description: `Explore ${vancouver.navLabel} and ${surrey.name}, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.`,
   },
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
@@ -89,7 +91,7 @@ export const gisApps = {
       name: surrey.name,
       description: surrey.description,
       status: surrey.status,
-      detail: { label: "Play Surrey Adventure", href: surrey.path },
+      detail: { label: "Play Surrey", href: surrey.path },
       source: surrey.source,
       license: surrey.license,
     },
@@ -118,11 +120,11 @@ export const gisApps = {
     limitsHeading: "What the models can tell you",
     limits: [
       {
-        title: "Vancouver in Progress",
+        title: vancouver.navLabel,
         body: "The False Creek model combines 2015 building footprints with selected historical height measurements and illustrative heights. Terrain is flat; street widths, some footprint trims and decorative details are approximations. Bridges are view-only. It is an exploration experiment, not a current survey or real-world navigation tool.",
       },
       {
-        title: "Surrey Adventure",
+        title: surrey.name,
         body: "City of Surrey geography supplies the layout. Source height values guide stylized buildings, but their units and observation dates are not verified. Facades and landmarks are artistic interpretations. The stories and characters are fictional; game access and events do not describe real property access, crime or neighbourhood safety.",
       },
     ],
@@ -1186,7 +1188,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including Vancouver in Progress and Surrey Adventure.",
+      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including ${vancouver.navLabel} and ${surrey.name}.`,
   },
   headline: "A playground for ideas.",
   introduction:

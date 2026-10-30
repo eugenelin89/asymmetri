@@ -13,8 +13,8 @@ Asymmetri.co
     │   │   └── BotSquad Trade
     │   └── Ask BotSquad
     └── GIS Apps
-        ├── Vancouver in Progress
-        └── Surrey Adventure
+        ├── Vancouver, City in Progress
+        └── Surrey, City of Adventure
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -41,7 +41,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
-| `/labs/surrey` | Surrey Adventure V0.2: street adventure, aerial exploration, two cases and local saves |
+| `/labs/surrey` | Surrey, City of Adventure V0.2: street adventure, aerial exploration, two cases and local saves |
 | `/labs/vancouver` | Vancouver V0.4: free-roaming False Creek, three manual drives and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
@@ -242,7 +242,7 @@ The [Linux candidate workflow](.github/workflows/website-linux-candidate.yml) bu
 public website source on Node 22.23.1 without production credentials or automatic
 deployment. Releases still use the documented SSH candidate/rollback workflow.
 
-## Surrey Adventure
+## Surrey, City of Adventure
 
 A separate playable Labs game with City of Surrey geography, walking, encounters,
 two complete cases, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).

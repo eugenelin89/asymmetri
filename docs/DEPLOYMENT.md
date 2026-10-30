@@ -935,6 +935,17 @@ This is the same Next.js/systemd/Nginx deployment path, with compilation isolate
 from live generated output. No port, service definition, DNS, Nginx, dependency,
 OS or logging change is required.
 
+For copy-only changes, the exact-source Node 22 Linux candidate workflow may
+replace on-host compilation. Verify its successful checks, source SHA, archive
+hash and build ID, then extract only `.next` into the application-owned staging
+workspace. Confirm package, lockfile, runtime configuration, routes and public
+assets are unchanged before reusing installed dependencies; never run an install
+against hard-linked dependencies. Smoke-test that build on a private loopback
+port under the same 192 MiB available-memory and 6 GiB free-disk floors before
+the build swap. Preserve the prior `.next` and source identity for rollback;
+source remains clean `main` and advances only by fast-forward. Route, asset or
+dependency changes still require the complete candidate procedure below.
+
 ## Staged portfolio release with route changes
 
 Releases that change route composition or redirect configuration, including the

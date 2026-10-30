@@ -664,7 +664,7 @@ restore and Retry behavior using the development-only controls. Check map keyboa
 routing and that blur/background never resumes Cruise or held acceleration.
 Physical multitouch, battery and thermal claims require real device evidence.
 
-## Surrey Adventure
+## Surrey, City of Adventure
 
 Run `npm run test:surrey` alongside Vancouver and investment regression tests for
 city-game changes. It exercises the real snapshot and full mission by movement

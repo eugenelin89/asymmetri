@@ -1,4 +1,4 @@
-# Surrey Adventure third-party notices
+# Surrey, City of Adventure third-party notices
 
 Original Surrey code, narrative, CSS illustration and procedural model definitions
 are MIT licensed; see LICENSE. Vancouver's unchanged geometry predicates retain

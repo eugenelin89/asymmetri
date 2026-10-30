@@ -612,11 +612,15 @@ rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
 ## GIS Apps
 
-Asymmetri Labs groups Vancouver in Progress and Surrey Adventure under **GIS Apps**.
+Asymmetri Labs groups Vancouver, City in Progress and Surrey, City of Adventure under **GIS Apps**.
 `gisApps` in `content/site.ts` owns `/labs/gis`, its metadata, city cards and
 reconstruction explanation. The Labs menu and Labs category card open this hub;
 city cards reuse the existing project names, statuses, descriptions, source and
 licence links. Footer city shortcuts remain available alongside GIS Apps.
+Both city display names, GIS descriptions and limitation headings derive from the
+shared identity fields. Surrey metadata and game accessibility labels reuse its
+shared name; the shorter Play Surrey action avoids repeating the full title.
+Naming corrections do not change paths, versioned data, save keys or game behavior.
 
 This is a navigation grouping, not a URL migration. Keep `/labs/vancouver`,
 `/labs/surrey`, their canonical URLs, hashes, source links and versioned public
@@ -633,7 +637,7 @@ changes with the Greater Vancouver GTA project's Vancouver and Surrey work.
 ## Vancouver
 
 `content/site.ts` owns Vancouver identity, metadata, Labs card and navigation links.
-The GIS Apps card uses `vancouver.navLabel` ("Vancouver in Progress"); the project
+The GIS Apps card uses `vancouver.navLabel` ("Vancouver, City in Progress"); the project
 name and existing `/labs/vancouver` URL remain Vancouver. The Labs submenu opens GIS Apps.
 `projects/vancouver/places.ts` owns the six original, source-backed place summaries
 and review labels. The route owns experimental notices, dataset attribution and
@@ -648,7 +652,7 @@ Vancouver's current status is V0.4 — Experimental. UI controls and help live i
 identify illustrative street widths, clearance trims and the decorative
 promenade as well as estimated heights. Expand city view means a full-window
 dialog, without a promise of native browser fullscreen. Preserve the project
-name, source links and “Vancouver in Progress” GIS Apps card wording.
+name, source links and “Vancouver, City in Progress” GIS Apps card wording.
 
 V0.4 distinguishes 18 NRCan February 2013 LiDAR maximum roof heights, 102 City
 2009 heights and 316 illustrative heights. None is described as current survey
@@ -657,7 +661,7 @@ additional routes require manual steering, and relaxed pace does not steer.
 Scenic-loop and roadside navigation labels describe only the simulation. Cruise is optional and manual
 input takes over. Bridges are explicitly view-only in the HUD and minimap.
 
-## Surrey Adventure
+## Surrey, City of Adventure
 
 `surrey` in `content/site.ts` owns the Labs project entry, label, route, release
 status, metadata and source/licence links. Route-specific fiction disclosure stays

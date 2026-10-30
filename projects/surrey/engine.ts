@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 import * as THREE from "three";
+import { surrey } from "@/content/site";
 import { loadCity } from "./data";
 import { createSimulation, seeded } from "./simulation";
 import { buildScenery } from "./scenery";
@@ -46,7 +47,7 @@ export async function createGame(
   canvas.tabIndex = 0;
   canvas.setAttribute(
     "aria-label",
-    "Surrey Adventure. WASD or arrows walk. Shift sprints. Drag camera, wheel zoom. E interacts, M opens map, Escape pauses, R recovers. V toggles aerial view; F returns camera to player. Aerial WASD pans; right drag or two fingers pan. Tab reaches game controls.",
+    `${surrey.name}. WASD or arrows walk. Shift sprints. Drag camera, wheel zoom. E interacts, M opens map, Escape pauses, R recovers. V toggles aerial view; F returns camera to player. Aerial WASD pans; right drag or two fingers pan. Tab reaches game controls.`,
   );
   host.appendChild(canvas);
   const scene = new THREE.Scene();

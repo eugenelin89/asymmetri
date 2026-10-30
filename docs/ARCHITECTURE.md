@@ -633,7 +633,7 @@ replace 13 older measurements and five estimates; 102 City 2009 heights and 316
 estimates remain. Its external PyArrow extractor uses bounded verified byte ranges;
 no new npm dependency or geographic runtime service is needed.
 
-## Surrey Adventure V0.2
+## Surrey, City of Adventure V0.2
 
 `app/labs/surrey` owns the isolated game route. `projects/surrey` separates pure
 collision, seeded simulation, authored story/encounter data, validated local saves,
