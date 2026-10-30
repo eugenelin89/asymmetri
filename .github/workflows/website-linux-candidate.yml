@@ -1,0 +1,54 @@
+name: Website Linux candidate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app/**'
+      - 'components/**'
+      - 'content/**'
+      - 'projects/**'
+      - 'public/**'
+      - 'lib/**'
+      - 'package*.json'
+      - 'next.config.ts'
+      - '.github/workflows/website-linux-candidate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22.23.1'
+      - name: Install the exact reviewed lockfile
+        run: npm exec --yes --package=npm@11.6.0 -- npm ci --no-audit --no-fund
+      - run: npm run check
+      - run: npm run test:vancouver
+      - run: npm audit --omit=dev
+      - run: npm run build:next -- --webpack
+      - name: Package an independent Linux runtime
+        run: |
+          git diff --exit-code
+          printf '%s\n' "$GITHUB_SHA" > source-sha.txt
+          node --version > node-version.txt
+          tar --exclude=.next/cache -czf website-linux-candidate.tar.gz .next node_modules source-sha.txt node-version.txt
+          sha256sum website-linux-candidate.tar.gz > website-linux-candidate.tar.gz.sha256
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: website-linux-candidate
+          path: |
+            website-linux-candidate.tar.gz
+            website-linux-candidate.tar.gz.sha256
+          compression-level: 0
+          retention-days: 7
