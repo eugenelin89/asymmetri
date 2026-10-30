@@ -21,7 +21,7 @@ export function ViewHelp({ close }: { close: () => void }) {
     <p><strong>Street Adventure:</strong> Walk through the city, meet people and complete missions.</p>
     <p><strong>Aerial Explore:</strong> Fly above Surrey to find landmarks and see where you are.</p>
     <p>Switch anytime using the buttons at the top of the game.<span className={styles.keyboardCopy}> On a keyboard, press V.</span></p>
-    <button className={styles.primary} onClick={close}>Got it →</button>
+    <button autoFocus className={styles.primary} onClick={close}>Got it →</button>
   </aside>;
 }
 export function AerialTips() {

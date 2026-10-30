@@ -26,7 +26,7 @@ values83.019997/83.419998 prove small numeric access, not datum/native equivalen
 Ground stays explicitly flat. Original V0.3 data SHA256 is
 `e4cca4b8f8ace1296201f50f77c9bb1d0093365cbfdabeefabb91709a60cccdf`.
 
-## Validation record (in progress)
+## Validation record
 
 44 Surrey tests passed: both new-case approaches/endings through collision movement,
 old missions/encounters, migrated saves, corrupt new-state rejection, midnight/phase/
@@ -73,3 +73,13 @@ Fresh main remains965d5b9 and protected production is44654b3 /
 `em5HpR-sbeh857iO3MUWB`. Fresh preflight:55 configuration fingerprints,13 peer
 virtual hosts,416608KiB available memory and12929560576 free bytes. Runtime
 staging has ample headroom; no older-runtime retirement is required.
+
+Final keyboard acceptance found a menu focus escape: setting actions returned
+focus to the canvas. Settings now retain menu focus; Escape closes map/help before
+opening Pause, and view switches are disabled while those overlays pause the city.
+Map/help now focus their dismissal control and constrain Tab to the open overlay.
+Final production-browser acceptance passed: settings retain menu focus, Map/Help
+focus their dismissal control, Tab stays inside Help, and Escape closes each
+overlay and returns focus to the canvas. No browser errors were recorded.
+Typecheck/lint and both production builds pass after this correction; the release
+requires a new exact Linux candidate before activation.

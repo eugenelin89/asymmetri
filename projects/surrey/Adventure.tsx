@@ -177,7 +177,7 @@ export function SurreyAdventure() {
   function action(fn: (g: Game) => void) {
     if (engine.current) {
       fn(engine.current);
-      engine.current.focus();
+      if (!paused && !inventory && !wide && !viewHelp) engine.current.focus();
     }
   }
   function hold(input: Input, pressed: boolean) {
@@ -196,17 +196,17 @@ export function SurreyAdventure() {
         data-mode={state?.mode ?? "ground"}
         onKeyDown={(e) => {
           const target = e.target as HTMLElement;
-          if (viewShortcut(e, !ready || paused || inventory || !!dialogue, target.isContentEditable || !!target.closest("input, textarea, select"))) {
+          if (viewShortcut(e, !ready || paused || inventory || wide || viewHelp || !!dialogue, target.isContentEditable || !!target.closest("input, textarea, select"))) {
             e.preventDefault();
             action(g => g.mode(state?.mode === "aerial" ? "ground" : "aerial"));
           }
           if (e.key === "Escape" && !e.defaultPrevented) {
             e.preventDefault();
-            if (inventory) setInventory(false); else setPaused((v) => !v);
+            if (inventory) setInventory(false); else if (wide) setWide(false); else if (viewHelp) closeViewHelp(); else setPaused((v) => !v);
           }
-          if (e.key === "Tab" && (paused || dialogue || inventory)) {
+          if (e.key === "Tab" && (paused || dialogue || inventory || wide || viewHelp)) {
             const overlay = viewport.current?.querySelector<HTMLElement>(
-              paused ? `.${styles.screen}` : inventory ? `.${styles.journal}` : `.${styles.dialogue}`,
+              paused ? `.${styles.screen}` : inventory ? `.${styles.journal}` : dialogue ? `.${styles.dialogue}` : wide ? `.${styles.wideMap}` : `.${styles.viewHelp}`,
             );
             const buttons = [
               ...(overlay?.querySelectorAll<HTMLElement>("button:not(:disabled), input, select") ?? []),
@@ -230,7 +230,7 @@ export function SurreyAdventure() {
         <div className={styles.canvas} ref={host} />
         {started && (
           <div className={styles.toolbar}>
-            <ViewControls mode={state?.mode ?? "ground"} disabled={!ready || paused || !!dialogue || inventory} select={mode => action(g => g.mode(mode))} />
+            <ViewControls mode={state?.mode ?? "ground"} disabled={!ready || paused || !!dialogue || inventory || wide || viewHelp} select={mode => action(g => g.mode(mode))} />
             <button className={styles.mobileMenu} disabled={!ready} aria-label="Open game menu" onClick={() => setPaused(true)}>Menu</button>
             <div className={styles.utilityControls}>
               <button disabled={!ready || !!dialogue || paused} onClick={() => setInventory(v => !v)}>Journal</button>

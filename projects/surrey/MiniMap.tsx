@@ -71,7 +71,7 @@ export function MiniMap({
     ];
   return (
     <div className={`${styles.map} ${wide ? styles.wideMap : ""}`}>
-      {wide && <button className={styles.closeMap} onClick={close}>Close map ×</button>}
+      {wide && <button autoFocus className={styles.closeMap} onClick={close}>Close map ×</button>}
       <span className={styles.north}>N ↑</span>
       <svg
         viewBox={`${x} ${z} ${span} ${span}`}
