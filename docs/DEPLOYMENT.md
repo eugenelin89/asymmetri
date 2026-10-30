@@ -1382,3 +1382,8 @@ cases, aerial controls and local saves as well as existing routes. Archive an
 older inactive runtime only after full off-server hash/gzip/tar comparison and
 reference/activity checks; never sacrifice the immediately preceding live runtime
 to stage the candidate. No workflow, proxy, runtime version or service change.
+
+[V0.2 release and recovery receipt](SURREY_V02_RELEASE_2026-10-30.md) records the
+completed exact-source Linux deployment, public/browser checks, capacity floors
+and complete Surrey V0.1 rollback. Later documentation commits do not change
+the deployed source/build identity.

@@ -1,6 +1,9 @@
 # Surrey Adventure V0.2 — Dangerous Streets
 
-## Candidate scope
+Live at [asymmetri.co/labs/surrey](https://asymmetri.co/labs/surrey). The guarded
+activation completed October 30, 2026 at **18:40:46 UTC / 11:40 PDT**.
+
+## Scope
 
 Dedicated branch `codex/surrey-adventure-v02`, based on V0.1 repository head
 `14f6e7f67898e080ac3c4a0efe7f622dd83f8627`. The route stays `/labs/surrey` and the
@@ -73,6 +76,82 @@ SHA-256: `0afe8651a31dc2f060adeac44bee51e419a24a7a5069ddffa42a91b91b15d3a2`;
 Baseline/retention guards preserved six service identities and 55 configuration
 hashes, above 192 MiB available RAM and 6 GiB disk free.
 
-At this candidate-documentation stage, V0.2 is not yet claimed deployed. Exact
-Linux artifact, staged checks, activation and final public receipts follow in a
-separate release documentation commit.
+The isolated candidate passed before the whole-directory swap. No rollback was
+needed. Production remains at the exact tested source below; the final release
+receipt and journal are documentation-only commits, not another runtime deployment.
+
+## Verified Linux candidate
+
+[Workflow run 41107855489](https://github.com/eugenelin89/asymmetri/actions/runs/41107855489)
+completed successfully for exact source `52f4451752c2995a7f397a022090a42a821b31a0`.
+Artifact `13003215702` contains Node `v22.23.1`, Next 16.4.3 and
+Three 0.186.1; Next build ID `kpnCoQ9y6YEz8nDG63G0n`. The downloaded ZIP matched
+GitHub's digest, the inner tar matched its checksum, and archive paths/symlinks
+were inspected before extraction. Runtime tar: 254,106,189 bytes compressed,
+896,061,487 uncompressed file bytes; SHA-256
+`75a31ab792fed582682ad1d18ef366be3be9dbcd2aa8716e80ecb0947c9cb69d`. No live-tree install or build was performed.
+
+## Production acceptance and capacity
+
+- Staged candidate: 12 baseline routes, eight protected host/path checks, 124
+  tutorial IDs, 24 tutorial assets, native Sharp HTTP 200, Motion video/form and
+  Ask/Trade behavior, Surrey page/data/sitemap and unchanged Vancouver content.
+- Public apex and www: 13 routes each returned HTTP 200. Protected content, IDs,
+  links, canonicals and 24 tutorial assets matched the pre-release baseline.
+  Surrey's two data files and all six published Vancouver data files matched
+  committed hashes on each host; the Motion access redirect and image optimizer passed.
+- Live browser: V0.2 content and default-off mature setting, Play, aerial pan/F
+  return, SFU waypoint without teleport, reload/Continue restoring mode/waypoint,
+  ground walking and return to aerial all passed. The final YOU marker and camera
+  centre matched `25.80,29.43`; one canvas, 46 geometries, 14 textures and no console
+  errors. Warm sampled aerial rendering was 60 fps at adaptive DPR 0.75 with 124
+  draw calls. Startup frame rate varied; no fixed hardware-independent rate is promised.
+- All seven preparation guards exited successfully. Minimum available memory was
+  **250.5 MiB**, and free disk **6.522 GiB**, above 192 MiB / 6 GiB throughout.
+  The activation monitor sampled 25 times, with minimum 371.1 MiB available memory
+  and 6.522 GiB disk. Five peer services and 55 configuration hashes stayed unchanged.
+- Final health: website active/running/enabled, zero restarts, no post-activation
+  error entries, about 406.3 MiB available memory and 6.522 GiB free disk. The old
+  process's intentional shutdown exit-143 entry is accounted for separately.
+  Thirteen unrelated virtual-host responses and the Node executable were unchanged.
+
+The implementation is `b171541`; tested/deployed source is
+`52f4451752c2995a7f397a022090a42a821b31a0`. The feature branch and `main` were pushed
+normally, with no force push. Parallel GIS Apps navigation work was told to use an
+isolated clone and wait for activation, then integrate this released source. That
+separate task is not included in the deployed runtime or this release's claims.
+
+## Full recovery retained
+
+The immediately preceding Surrey V0.1 runtime is intact at
+`/var/www/asymmetri-rollback-surrey-v01-20261030-883ebfe`, including its executable
+Linux dependencies, source `883ebfe5d81a191b9d73e6fd183ec2d589d88be6` and build
+`Ph1NW42c_br8k4AmOXJQ4`. The complete preceding Vancouver V0.3 and pre-Vancouver
+runtimes also remain. The older archived V0.2 runtime is recoverable from the
+verified owner-held archive described above.
+
+Activation automatically restored the whole prior runtime on acceptance failure;
+that fallback was not needed, and a deliberate rollback drill was not performed.
+For a later rollback, verify current/previous source/build, clean trees, executable
+dependencies, capacity and peer/configuration fingerprints. Stop only
+`asymmetri.service`, rename the current tree to a new retained failure location,
+rename the verified Surrey V0.1 directory to `/var/www/asymmetri`, start that service
+and repeat protected-route/public/peer checks. Never overwrite a retained runtime,
+reset its Git tree or change a database/receiver for a website rollback.
+
+Remote receipts: `/var/lib/asymmetri-surrey-v02-release-20261030`.
+Owner-held artifacts/archives/receipts/screenshots: `deployment-retention/2026-10-30/surrey-v02/`
+outside Git. Both owned local preview servers were stopped. CI artifact expiry is
+transport retention only; the verified Linux artifact and rollback archive are retained.
+
+## Limits and next three improvements
+
+Architecture and heights remain stylized, source dates/units have limits, and the
+flat map has decorative furniture without full prop collision. No interiors,
+vehicles, combat or transit boarding. Saves are browser-local, per origin, and can
+be cleared by the browser. Physical phones, multi-touch, thermal/battery endurance
+and long-session heap/GPU behavior remain separate acceptance work.
+
+1. Physical iOS/Android input and sustained performance acceptance.
+2. Recurring-character errands, schedules and richer branching consequences.
+3. Verified paths, terrain and transit traversal before expanding geography.

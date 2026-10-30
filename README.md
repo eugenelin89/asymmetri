@@ -236,5 +236,5 @@ deployment. Releases still use the documented SSH candidate/rollback workflow.
 
 ## Surrey Adventure
 
-A separate playable Labs game with City of Surrey geography, walking, encounters
+A separate playable Labs game with City of Surrey geography, walking, encounters,
 two complete cases, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
