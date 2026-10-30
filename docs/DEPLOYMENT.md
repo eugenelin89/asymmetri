@@ -3,6 +3,11 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Vancouver V0.4 release receipt](VANCOUVER_V04_RELEASE_2026-10-30.md)
+records the current October 30 exact-source Linux runtime, included GIS Apps
+grouping, preserved Surrey V0.2, public checks and complete preceding-runtime
+rollback. Later documentation commits do not change that deployed identity.
+
 The [October 22 direct Motion video release receipt](MOTION_VIDEO_RELEASE_2026-10-22.md)
 records the live native player, updated website-media disclosure, verified Linux
 build, protected-route acceptance and retained preceding source/build.
@@ -1312,9 +1317,12 @@ receipt. Do not modify ingress, private receivers or stored records for this mov
 
 ## Vancouver isolated Linux candidates
 
-The [V0.3 release record](VANCOUVER_V03_RELEASE_2026-10-30.md) records the new
-completed release gates and its active identity. The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md) records the preceding
-October 30 production identity, acceptance, rollback and older-runtime retention.
+The [V0.4 release record](VANCOUVER_V04_RELEASE_2026-10-30.md) records the current
+completed release gates and deployed identity. The
+[V0.3 release record](VANCOUVER_V03_RELEASE_2026-10-30.md) preserves the preceding
+Vancouver release evidence. The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md)
+records the earlier October 30 production identity, acceptance, rollback and
+older-runtime retention.
 
 See the [October 30 release record](VANCOUVER_RELEASE_2026-10-30.md) for deployed
 features, verification, runtime identities, recovery and remaining limitations.

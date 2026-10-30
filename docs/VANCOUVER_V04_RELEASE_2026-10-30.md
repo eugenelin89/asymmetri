@@ -53,7 +53,7 @@ The first three runs are successful traversals with recovery, **not collision-fr
 acceptance**. The full reverse north shore run separately demonstrates continuous
 manual traversal without collisions. Village/West reverse routes pass geometric
 full-car-clearance tests, but were not manually traversed end-to-end in reverse.
-The measured geometry tests cover all three directions at every sampled path point;
+The measured geometry tests cover all three routes in both directions at every sampled path point;
 this does not establish that every street in the entire model is equally drivable.
 
 Combined manual session: approximately 3.75 km travelled, average 59.9 FPS,
@@ -167,8 +167,8 @@ diff whitespace checks pass. After integrating Surrey V0.2 and GIS Apps, both
 `npm run build:next -- --webpack` and `npm run build` pass, along with 43 Vancouver,
 29 Surrey and seven investment tests. Existing Browserslist-age and Vinext
 chunk/classification notices remain. No npm dependency or lockfile changes occur.
-The independently built Linux runtime and production identity are recorded after
-release acceptance; local build success alone does not mean publication.
+The independently built Linux runtime passed candidate and public acceptance;
+its exact source and production identity are recorded below.
 
 The independent main checkout avoids changing Surrey's active checkout. Surrey
 V0.2 is retained. The coordinated GIS Apps category keeps city/data/source URLs
@@ -193,9 +193,122 @@ uncompressed directory removed. Archive SHA-256:
 `be9cd1175bd07d7ea53bfb9db1dcccbf6a33b9b0e870be0d07777c22bc257c69`
 (276,060,160 bytes). Free space rose to 8,027,074,560 bytes.
 
-The live Surrey V0.2 and its immediately preceding Surrey V0.1 full runtime remain
-complete. V0.4 activation will preserve the entire serving V0.2 tree as its own
-immediate rollback. Earlier final V0.1 and pre-Vancouver recovery remain retained.
+The preceding Surrey V0.2 and Surrey V0.1 full runtimes remain complete. V0.4
+activation preserved the entire serving V0.2 tree as its immediate rollback.
+Earlier final V0.1 and pre-Vancouver recovery remain retained.
 Floors stay 192 MiB available memory and 6 GiB free disk. No OS, Nginx, DNS, TLS,
 Node binary or peer service change is part of this release. Source/build/runtime
 must remain independent; Mac dependencies are never copied to production.
+
+
+## Completed production release
+
+Activated **October 30, 2026 at 18:59:32 UTC** (11:59:32 Vancouver time), after
+private Linux acceptance. Public URL: <https://asymmetri.co/labs/vancouver>.
+The separately authorized GIS Apps grouping is included; its card retains
+**Vancouver in Progress**, and both city URLs remain direct pages.
+
+| Identity | Verified value |
+| --- | --- |
+| Vancouver implementation | `e1b97b6eef9d08d4e3724944bc438e2e0f4c462c` |
+| Deployed source / implementation journal | `313dba357ecc00f1de28b8db5d2c326ec9d1125e` |
+| Next build | `Zaa4FN3iARR31Yquw4Cij` |
+| Linux runtime | Node `v22.23.1`, Next `16.4.3`, Three `0.186.1` |
+| CI run / job | [41110651124](https://github.com/eugenelin89/asymmetri/actions/runs/41110651124) / `124251878146`, success |
+| Artifact | `13003008184`, `website-linux-candidate` |
+| ZIP SHA-256 | `da5f0e1bc2e9066177bd8b242f970173d29464cd17f74c62cb6f8e92f557343f` |
+| Runtime tar SHA-256 | `64f23ab2d1b2a4f1412fcf6c90d8de4efa4b0b3f5a3720c30554374d04065d0e` |
+| Runtime tar bytes | `254127525`; uncompressed file bytes `896217041` |
+
+Pinned CI actions built the reviewed lockfile on Ubuntu 24.04 with Node 22.23.1
+and npm 11.6.0. CI checks, Vancouver tests, production audit and the Next build
+(including Surrey prebuild tests) passed. ZIP/tar hashes, safe archive paths,
+source receipt, Node version and build ID were independently verified. The exact
+source was fetched into a separate application-owned checkout; no live source or
+dependencies were overwritten during preparation.
+
+The private port-3107 candidate passed 14 general routes plus Vancouver, all four
+immutable Vancouver city/manifest pairs, GIS links/status, Surrey content and all
+Surrey data hashes, native Sharp processing, eight protected host checks, 124
+existing tutorial IDs and 24 tutorial assets. A separate 14-route comparison
+matched protected main content, canonical URLs, links and tutorial assets against
+the preceding public site. The candidate process stopped successfully before
+activation. Checksums matched again after streaming the Linux artifact to the host.
+
+| Guarded phase | Minimum available memory (KiB) | Minimum free disk (bytes) |
+| --- | ---: | ---: |
+| Verified older-runtime archival | 364848 | 7002718208 |
+| Verified redundant-runtime cleanup | 402796 | 7002669056 |
+| Independent checkout | 396984 | 8026902528 |
+| Linux artifact extraction | 403220 | 7033110528 |
+| Private candidate acceptance | 275704 | 6978588672 |
+
+Every guard exited zero with service identities unchanged. The lowest preparation
+memory was **269.2 MiB** and candidate free disk **6.499 GiB**, above unchanged
+192 MiB / 6 GiB floors. Activation's before/after readings were 416712/387848 KiB
+available memory and 6978576384 bytes free disk. The complete-directory swap took
+about 5.6 seconds including health checks; that duration is not a measured external
+outage. Only `asymmetri.service` was stopped/started.
+
+Public checks passed on apex and www: 14 routes per host, protected main
+content/canonicals/links and all 24 tutorial assets preserved. Thirty additional
+HTTPS checks covered GIS/Vancouver/Surrey/Motion pages, access and legacy redirects,
+and every Vancouver V0.1–V0.4 city/manifest hash. Browser checks rendered V0.4,
+launched West-side corners and drove about 23 m manually without a collision;
+GIS links reached both original city URLs. This short public smoke supplements
+the full manual route acceptance, not another end-to-end traversal. A short live
+sample at CSS 1800×915 / DPR 1.6 recorded 58.5 average FPS and 17.3 ms rolling p95;
+it includes startup and is not a mobile benchmark. No application console errors
+were observed; unrelated browser-extension listener warnings remain separate.
+
+An independent GIS release verification also reported 16 page checks, 68 tutorial
+and city-asset hash checks, four redirects and native browser Labs→GIS→both cities
+passing on apex/www. Its separate receipt is owned by the GIS task.
+
+The website is enabled, active/running with zero automatic restarts and no
+post-activation journal errors. The old runtime's expected shutdown exit 143 was
+recorded separately. All five peer service identities, 13 virtual hosts, 55
+configuration hashes and the Node executable hash match the baseline. The
+pre-existing inactive/socket-activated gunicorn state was preserved. The first
+post-release health reading was 397048 KiB available memory and 6978560000 bytes
+free disk. A second check at 19:03:13 UTC retained zero restarts and zero
+post-activation errors, with 411420 KiB available memory and 6978441216 bytes
+free disk. No Nginx, DNS, TLS, OS, Node binary or peer-service changes occurred.
+
+## Immediate recovery and retained evidence
+
+The complete immediately preceding website remains at
+`/var/www/asymmetri-rollback-before-v04-20261030`:
+source `52f4451752c2995a7f397a022090a42a821b31a0`, build
+`kpnCoQ9y6YEz8nDG63G0n`, including its independent dependencies and build. Clean
+source, build identity and executable Next runtime were rechecked. The complete
+pre-Vancouver runtime remains recoverable as well. Rollback would restore the
+preceding combined website, including Vancouver V0.3 and Surrey V0.2; it would
+also revert this release's GIS navigation grouping.
+
+Use the established whole-directory rollback procedure in `DEPLOYMENT.md`: stop
+only the website, move the current tree to a fresh diagnosis path, move the verified
+rollback tree back to `/var/www/asymmetri`, start the website and repeat protected
+route, peer/config and capacity checks. Do not replace only `.next` or mix old
+source with new dependencies. Automatic rollback was armed during activation;
+no rollback was required or deliberately rehearsed against the live service.
+
+Root-owned receipts remain under
+`/var/lib/asymmetri-vancouver-v04-release-20261030`. Owner storage holds verified
+Linux ZIP/tar artifacts, the older-runtime lossless archive, source/data receipts,
+resource guards, browser metrics and before/after screenshots. Public release
+screenshots include `before-desktop.jpg`, `after-desktop-live.jpg`,
+`after-routes-live.jpg` and `after-drive-live.jpg`; viewport and manual-route
+screenshots are retained separately. They are evidence artifacts, not new site
+assets. Documentation commits after this release do not change the deployed
+source/build identity above.
+
+## V0.5 priorities
+
+1. Physical iPhone and Android testing: simultaneous touch input, backgrounding,
+   context recovery, sustained GPU/frame-time, memory, temperature and battery.
+2. More forgiving manual steering feedback and repeated collision-free trials,
+   including full reverse Village/West traversals and disconnected-pocket recovery.
+3. A source-backed Cambie ground/deck graph, ramps and elevation/camera transitions
+   before any bridge traversal is advertised.
+4. Bounded newer height/roof processing and only then measured westward expansion.
