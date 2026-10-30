@@ -2,6 +2,8 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
+import { populationPlan } from "./population";
+import { missingLocations, missingClues, missingWitnesses } from "./missing";
 import { distance } from "./world";
 import { buildBuildings, footprintShape } from "./buildings";
 import { onSurface, TRANSIT_DECK_HEIGHT } from "./surfaces";
@@ -34,10 +36,12 @@ export function createPeople() {
     const arms = [-.45, .45].map(x => part(geometry.limb, color, x, 1.28, 0));
     [-.18, .18].forEach(x => part(geometry.foot, 0xe0dfcf, x, .12, .065));
     const bag = part(geometry.bag, 0xed8d40, 0, 1.3, -.35); bag.visible = backpack;
-    return { group, bag, animate(pose: Pick<Pose, "x" | "z" | "yaw" | "moving" | "running">, time: number, reduced = false) {
+    return { group, bag, animate(pose: Pick<Pose, "x" | "z" | "yaw" | "moving" | "running">, time: number, reduced = false, activity = "walking") {
       group.position.set(pose.x, pose.moving && !reduced ? Math.abs(Math.sin(time * (pose.running ? 13 : 8))) * .045 : 0, pose.z); group.rotation.y = pose.yaw;
       const swing = pose.moving && !reduced ? Math.sin(time * (pose.running ? 13 : 8)) * (pose.running ? .7 : .4) : 0;
-      legs[0].rotation.x = swing; legs[1].rotation.x = -swing; arms[0].rotation.x = -swing; arms[1].rotation.x = swing;
+      if (activity === "sitting") group.position.y -= .48;
+      group.rotation.y += activity === "looking" && !reduced ? Math.sin(time * .5) * .3 : 0;
+      legs[0].rotation.x = activity === "sitting" ? -1.25 : swing; legs[1].rotation.x = activity === "sitting" ? -1.25 : -swing; arms[0].rotation.x = -swing; arms[1].rotation.x = ["talking", "assisting"].includes(activity) ? -.8 + (reduced ? 0 : Math.sin(time * 2) * .15) : swing;
     } };
   };
 }
@@ -161,7 +165,8 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   const curbEdges = city.curbs.flatMap(line => line.slice(1).map((p, i) => beam(line[i], p, .1, .18, .18)));
   batch(curbEdges, material(0xc5c6b8));
   batch(lampPosts, material(0x34444a));
-  batch(lampHeads, material(0xf0dbb6));
+  const lampMaterial = new THREE.MeshStandardMaterial({ color: 0xf0dbb6, emissive: 0xffcd83, emissiveIntensity: 0 });
+  lampMaterial.userData.cityLamp = true; batch(lampHeads, lampMaterial);
   const signalPosts: THREE.BufferGeometry[] = [],
     signalLights: THREE.BufferGeometry[] = [];
   city.signals.forEach((p) => {
@@ -300,7 +305,7 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   batch(plazaStrips, material(0x9caaa1));
   // Illustrative furniture and parked vehicles are kept away from quest interaction points.
   const seats: THREE.BufferGeometry[] = [], bins: THREE.BufferGeometry[] = [], cars: THREE.BufferGeometry[] = [], tires: THREE.BufferGeometry[] = [];
-  const protectedPoints = [...Object.values(city.anchors), ...Object.values(storyLocations(city, world))];
+  const protectedPoints = [...Object.values(city.anchors), ...Object.values(storyLocations(city, world)), ...Object.values(missingLocations(city, world))];
   for (let i = 0; i < Math.min(trees.length, 100); i += 4) {
     const p = [trees[i][0] + 3, trees[i][1] + 2] as Point;
     if (!world.fits(p) || onSurface(p, city.pavement) || protectedPoints.some(q => distance(q, p) < 9)) continue;
@@ -395,5 +400,46 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   });
   evidenceData.forEach(e => { if (e.id === "watch") return; const p = story[e.id]; const object = mesh(new THREE.BoxGeometry(.7, .2, .55), material(e.id === "paint" ? 0xb5584e : 0xe8d496)); object.position.set(p[0], .22, p[1]); evidence.set(e.id, object); });
   const sceneRing = mesh(new THREE.RingGeometry(2.4, 2.7, 24), new THREE.MeshBasicMaterial({ color: 0xc8a2ed, side: THREE.DoubleSide })); sceneRing.rotation.x = -Math.PI / 2; sceneRing.position.set(story.scene[0], .13, story.scene[1]);
-  return { player, owner, thief, pickpocket, marker, ring, labels, makePerson, you, waypoint, encounter, encounterMarker, evidence, witnessMarkers, closeDetails, staticPeople };
+  const missing = missingLocations(city, world), missingActors = new Map<string, THREE.Group>(), missingMarkers = new Map<string, THREE.Mesh>(), missingObjects = new Map<string, THREE.Mesh>();
+  [{ id: "tess" }, ...missingWitnesses, { id: "riley" }].forEach((actor, i) => {
+    const p = missing[actor.id as keyof typeof missing], person = makePerson([0x557da1, 0xc09155, 0x9c758c, 0x81a570][i]);
+    person.group.position.set(p[0], 0, p[1]); scene.add(person.group); missingActors.set(actor.id, person.group);
+    const marker = mesh(new THREE.OctahedronGeometry(.45), new THREE.MeshBasicMaterial({ color: 0x92e4ad, depthTest: false })); marker.position.set(p[0], 3.3, p[1]); missingMarkers.set(actor.id, marker);
+  });
+  missingClues.forEach(clue => { const p = missing[clue.id as keyof typeof missing]; const object = mesh(new THREE.BoxGeometry(.65, .08, .7), material(0xe7dfb1)); object.position.set(p[0], .18, p[1]); missingObjects.set(clue.id, object); });
+  // Original fictional signs, glass shopfronts, planted entrances and bicycle hoops.
+  // Deterministic clear sites, separate from every mission interaction area.
+  const hoops: THREE.BufferGeometry[] = [], planters: THREE.BufferGeometry[] = [];
+  for (let i = 2; i < trees.length; i += 9) {
+    const p: Point = [trees[i][0] + 2.5, trees[i][1] - 2];
+    if (!world.fits(p) || onSurface(p, city.pavement) || protectedPoints.some(q => distance(q, p) < 10)) continue;
+    for (let j = 0; j < 3; j++) { const hoop = new THREE.TorusGeometry(.55, .065, 4, 10, Math.PI); hoop.translate(p[0] + j * 1.3, .4, p[1]); hoops.push(hoop); }
+    planters.push(box(1.5, .7, 1.5, p[0], .35, p[1] - 3));
+  }
+  const waitingSeats: THREE.BufferGeometry[] = [];
+  populationPlan(city, world, 24).filter((_, i) => i % 4 === 2).forEach(person => {
+    for (const p of person.path) if (protectedPoints.every(q => distance(q, p) > 8)) {
+      waitingSeats.push(box(2, .12, .8, p[0], .57, p[1] - .18), box(.12, .55, .65, p[0] - .8, .28, p[1] - .18), box(.12, .55, .65, p[0] + .8, .28, p[1] - .18));
+    }
+  });
+  batch(waitingSeats, material(0x9f7f53));
+  batch(hoops, material(0x758d91)); batch(planters, material(0x888c79));
+  const shopLights = new THREE.MeshStandardMaterial({ color: 0x9ac3c6, emissive: 0xffdba0, emissiveIntensity: 0, roughness: .2 }); shopLights.userData.cityLamp = true;
+  // Retained Central City podium entrance: original illustrative framing, not a measured doorway.
+  batch([box(10, 3.6, .18, -75, 1.9, 150), box(3, 2.8, .2, -15, 1.4, -159)], shopLights);
+  label("PAPER & PINE · FICTIONAL WORKSHOP", [-75, 150], 4.7, "#f1d5a2", 16);
+  const busDoors = mesh(new THREE.BoxGeometry(.15, 2, 1.7), shopLights); busDoors.position.set(31.5, 1.5, 75);
+  // A quiet marimba performer near the bus loop. Audio is synthesised and muted by default.
+  const performer = makePerson(0x8a70a9); const performerPoint = world.safe([6, 65]); scene.add(performer.group);
+  performer.group.position.set(performerPoint[0], 0, performerPoint[1]);
+  const instrument = mesh(new THREE.BoxGeometry(1.8, .15, .7), material(0x97764f)); instrument.position.set(performerPoint[0], 1.1, performerPoint[1] + .7);
+  const nightMaterials = new Set<THREE.MeshStandardMaterial>();
+  scene.traverse(o => { if (o instanceof THREE.Mesh) for (const m of Array.isArray(o.material) ? o.material : [o.material]) if (m instanceof THREE.MeshStandardMaterial && (m.userData.cityWindow || m.userData.cityLamp)) nightMaterials.add(m); });
+  function living(seconds: number, daylight: number, night: boolean, reduced: boolean) {
+    nightMaterials.forEach(m => { m.emissiveIntensity = (1 - daylight) * (m.userData.cityLamp ? 1.8 : .8); });
+    busDoors.position.z = 75 + (!reduced && seconds % 40 < 12 ? 1.5 : 0);
+    performer.group.visible = instrument.visible = !night;
+    performer.animate({ x: performerPoint[0], z: performerPoint[1], yaw: 0, moving: false, running: false }, seconds, reduced, "talking");
+  }
+  return { living, performerPoint, missingActors, missingMarkers, missingObjects, player, owner, thief, pickpocket, marker, ring, labels, makePerson, you, waypoint, encounter, encounterMarker, evidence, witnessMarkers, closeDetails, staticPeople };
 }

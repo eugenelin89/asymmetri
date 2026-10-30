@@ -41,7 +41,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
-| `/labs/surrey` | Surrey, City of Adventure V0.3: reconstructed streets, clear exploration controls, two cases and migrated local saves |
+| `/labs/surrey` | Surrey, City of Adventure V0.4: a day/night city, three cases, compact phone controls and migrated local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
@@ -246,4 +246,4 @@ deployment. Releases still use the documented SSH candidate/rollback workflow.
 ## Surrey, City of Adventure
 
 A separate playable Labs game with City of Surrey geography, walking, encounters,
-two complete cases, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
+three complete cases, day/night lighting, scheduled pedestrians, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).

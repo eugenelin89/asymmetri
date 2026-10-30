@@ -1,11 +1,11 @@
-# Surrey, City of Adventure V0.3 — City Reconstructed
+# Surrey, City of Adventure V0.4 — Living Surrey
 
 **Survive the streets. Discover the stories.** A fictional third-person adventure
 and aerial city explorer at `/labs/surrey`, using a reconstructed 1.31 × 1.45 km
 City of Surrey geographic snapshot. Every character and incident is invented;
 this is not a real crime map or a statement about neighbourhood safety.
 
-[Play](https://asymmetri.co/labs/surrey) · [V0.3 release record](../../docs/SURREY_V03_RELEASE_2026-10-30.md) · [V0.2 release record](../../docs/SURREY_V02_RELEASE_2026-10-30.md) · [V0.1 release / recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
+[Play](https://asymmetri.co/labs/surrey) · [V0.4 release record](../../docs/SURREY_V04_RELEASE_2026-10-30.md) · [V0.3 release record](../../docs/SURREY_V03_RELEASE_2026-10-30.md) · [V0.2 release record](../../docs/SURREY_V02_RELEASE_2026-10-30.md) · [V0.1 release / recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
 
 ## Play and controls
 
@@ -54,7 +54,7 @@ smoothing. Gentle Streets suppresses threats. Mature Encounters is **off by
 default** and enables only optional, non-explicit adult dialogue about sex work
 and drugs. There are no sexual acts, drug transactions or graphic violence.
 
-## Two complete cases and street stories
+## Three complete cases and street stories
 
 **Welcome to Surrey:** meet Alex, inspect the transit slip, recover the backpack
 through a bounded pursuit or help from Sam and Jo, and return it for $35. Failure
@@ -69,6 +69,16 @@ a corroborated conclusion pays at most $75 total, including any earlier stipend.
 No body is depicted. The fictional cart kiosk is not an actual business allegation.
 The case can be investigated before or after the backpack mission.
 
+**The Missing Person:** Tess asks about adult friend Riley near the station. Choose
+witness comparison (Mo + Eden and one clue) or paper corroboration (notice + receipt
+and one witness). The library notice, campus receipt and Eden's account disprove a
+misleading red-van assumption. Find Riley voluntarily taking a quiet afternoon near
+Holland Park's fountain. Offer a private message ($60) or ask for a consensual reunion
+($75); return to Tess for the ending. Rewards cannot repeat. Journal exposes leads
+as learned; no undiscovered person is exposed from above. Recover can bring you
+back to the station while preserving the return stage. The long path around the
+mall is walkable and is not a shortcut through its footprint.
+
 Six data-driven encounters supplement the original pickpocket: a robbery demand
 (pay/refuse/flee/help/distract), a stolen portfolio with bounded chase or victim/
 witness assistance, optional adult solicitation with decline/question/leave choices,
@@ -77,12 +87,37 @@ charity collection that may be sincere or fraudulent, and a community wallet/
 directions interaction. Cooldowns and a 60-second post-recovery grace period avoid
 immediate repeated threats. Rewards occur once per type. Mature dialogue does not
 make sex workers, homelessness, poverty or substance use automatic danger signals.
-All cast members and the player are fictional adults.
+All cast members and the player are fictional adults. Each event has two authored
+opening variants. Optional adult encounters occur only in evening/night. Jo's trust
+(0–3) increases for first community help, rewarded community/theft help and Case03;
+at trust2 the robbery bus distraction reliably succeeds. No money-farming relationship loop.
+
+## Living city
+
+The saved fictional clock begins at13:00 and advances1,4 or12 game minutes per real
+second. Morning06–12, afternoon12–18, evening18–21 and night21–06 change sun angle,
+sky/fog, fill light, window masks and lamp/shop emission. No per-lamp dynamic lights
+or downloaded audio are required. Stable daylight visibility keeps a clear daytime
+render without changing the clock or schedules. Menus, map/help, dialogue, hidden
+pages and Aerial Explore freeze active simulation. Rest in Menu moves to08:00 or
+21:00 without consuming mission timers; active pursuits block rest.
+
+Fictional commuter, student, office-worker and shopper roles use nearby clear paths
+and time windows. Painted crossing areas supply bounded crossing routes with waits;
+idle phases include waiting, looking, talking gestures and sitting. Threats trigger
+flight, assistance gestures and return to normal activity. Distant actors use coarse
+updates capped to safe collision steps. These are illustrative schedules, not resident
+movement records. Night retains only a small commuter population. Bus doors cycle
+at the stationary bus stop; a procedural marimba performer plays an original four-note
+phrase only when sounds are enabled and the player is nearby during daytime. Mute,
+volume and lifecycle cleanup are explicit. Bus driving/boarding and a citywide traffic
+simulation are not implemented.
+
 
 ## Save and resume
 
 `asymmetri.surrey.save.v2` is a versioned localStorage record, written during play,
-after decisions, on pause/visibility changes and teardown. It preserves both cases,
+after decisions, on pause/visibility changes and teardown. It preserves all three cases,
 clues, inventory, health/stamina/money, safe player position, settings, cooldowns
 and seeded runtime state. No record leaves this browser. Saves are origin-specific:
 apex and www do not share them. New Game asks before replacing a valid save;
@@ -91,17 +126,22 @@ and retained until a new game replaces them. Restricted/quota-full storage shows
 notice and play continues without guaranteed persistence. Restore validates enums,
 allowlisted items, finite ranges and map/version. An explicit migration accepts
 V0.2 records referencing `v0.1-2026-10-30` under the same storage key and upgrades
-only their map identity. Progress, settings, inventory and runtime timers survive;
+their map identity. Schema3 uses the same storage key and explicitly migrates v2
+records to a fresh afternoon clock, unstarted Case03, trust1 only for prior community
+help, stable visibility off and audio muted. New fields validate ranges, enums,
+unique allowlists and reward/ending/evidence consistency. Progress, settings,
+inventory and runtime timers survive;
 only an invalid position is relocated to nearby safe ground. Aerial framing itself resets around the saved player.
 
 ## Architecture and performance
 
 - `data.ts` / `world.ts`: bounded same-origin map contract, full-body clearance,
   sliding collision, movement substeps, safe recovery and bounded A* navigation.
-- `simulation.ts`: pure seeded state, both cases, encounter choices and timers.
+- `simulation.ts`: pure seeded state, three cases, encounter choices and timers.
 - `story.ts` / `encounters.ts`: authored clues, witnesses, verdicts and event data.
 - `save.ts`: versioned serialization boundary, validation and failure-safe storage.
-- `camera.ts`: bounded aerial orbit/pan/zoom/follow mathematics.
+- `camera.ts`: bounded aerial controls plus continuously fitted ground sightlines after smoothing.
+- `time.ts`, `missing.ts`, `audio.ts`: clock/lighting, adult investigation data and opt-in original synthesis.
 - `population.ts`: sidewalk-parallel routes, pauses, separation and threat reactions.
 - `architecture.ts` / `buildings.ts`: deterministic building profiles, varied
   shared facade materials, roof equipment and 128m tiles for nearby detail.
@@ -113,7 +153,7 @@ only an invalid position is relocated to nearby safe ground. Aerial framing itse
   choices, evidence, discovered leads, compass and visible touch controls.
 
 React receives 150 ms snapshots rather than frame updates. Ambient pedestrians are
-bounded to 10 on coarse-pointer devices or 18 otherwise. Distant aerial pedestrians
+bounded to 12 on coarse-pointer devices or 24 otherwise (reducing toward eight under sustained slow frames). Distant aerial pedestrians
 are culled; labels are decluttered and rendered at readable screen size. Environmental
 objects use instancing where applicable, and people share geometry/materials.
 Vancouver supplies only existing geometry predicates. Its renderer, controls,
@@ -121,7 +161,7 @@ vehicle state and snapshots are unchanged. No dependency or network service adde
 
 ## Geography and provenance
 
-Current snapshot: `public/surrey/v0.3-2026-10-30/`. V0.1 remains byte-identical.
+Current geometry: `public/surrey/v0.3-2026-10-30/`. The V0.4 release manifest and fresh terrain review are in `public/surrey/v0.4-2026-10-30/`; no new city file is duplicated. V0.1 and V0.3 remain byte-identical.
 The new manifest pins the parent, exact source URLs, raw and output SHA-256,
 retrieval times, licence, CRS, processing tolerances and known uncertainty.
 Runtime loading is same-origin only; no paid or live geographic API is used.

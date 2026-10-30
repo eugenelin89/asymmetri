@@ -4,6 +4,8 @@ import type { City, Dialogue, Point, Snapshot, Stage } from "./types";
 import { evidence, witnesses, storyLocations, mysteryVerdict } from "./story";
 import { encounters, encounterLocations } from "./encounters";
 import type { SavedGame } from "./save";
+import { newTime, advanceTime, timePhase } from "./time";
+import { newMissing, missingLocations, missingClues, missingWitnesses, missingReady } from "./missing";
 export function seeded(seed: number) {
   const next = () => {
     seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
@@ -24,6 +26,7 @@ export function createSimulation(city: City, seed = 2061030) {
     random = seeded(seed),
     anchor = city.anchors;
   const story = storyLocations(city, world), locations = encounterLocations(city, world);
+  const missingPoints = missingLocations(city, world);
   const cooldowns: Record<string, number> = {};
   let encounterCooldown = 24, encounterPath: Point[] = [], encounterIndex = 1;
   const spawn = world.safe(anchor.spawn),
@@ -40,6 +43,7 @@ export function createSimulation(city: City, seed = 2061030) {
     clock = 0,
     noticeUntil = 0;
   const state: Snapshot = {
+    time: newTime(), missing: newMissing(), trust: 0, stableVisibility: false, volume: 0,
     player: {
       x: spawn[0],
       z: spawn[1],
@@ -100,6 +104,10 @@ export function createSimulation(city: City, seed = 2061030) {
       state.objective = state.investigation.stage === "closed" ? "Both cases closed · explore Surrey" : "The Surrey Central Mystery · follow the journal leads";
       state.marker = state.waypoint?.point ?? anchor.mystery;
     }
+    if (state.missing.stage === "investigating" || state.missing.stage === "return") {
+      state.objective = state.missing.stage === "return" ? "Return to Tess with Riley’s wishes" : missingReady(state.missing) ? "Find Riley at Holland Park" : "The Missing Person · compare the journal leads";
+      state.marker = state.waypoint?.point ?? (state.missing.stage === "return" ? missingPoints.tess : missingReady(state.missing) ? missingPoints.riley : state.missing.approach === "people" ? missingPoints.mo : missingPoints.notice);
+    }
     state.nearby =
       active && near(state.danger.position)
         ? "Call for help"
@@ -123,6 +131,8 @@ export function createSimulation(city: City, seed = 2061030) {
       else if (witness) state.nearby = `Talk to ${witness.name.split(" ·")[0]}`;
     }
     if (state.encounter && near(state.encounter.position, state.encounter.phase === "offer" ? 7 : 5)) state.nearby = state.encounter.phase === "chase" ? "Recover Cleo’s portfolio" : "Respond to street encounter";
+    const missingTarget = nearbyMissing();
+    if (missingTarget) state.nearby = missingTarget === "tess" ? "Talk to Tess" : missingTarget === "riley" ? "Talk to Riley" : missingClues.some(c => c.id === missingTarget) ? "Inspect workshop clue" : `Talk to ${missingTarget === "mo" ? "Mo" : "Eden"}`;
     if (state.mode === "aerial") state.nearby = null;
     state.danger.active = active;
     state.danger.seconds = Math.ceil(dangerTime);
@@ -135,11 +145,12 @@ export function createSimulation(city: City, seed = 2061030) {
       return;
     }
     refresh();
+    if (interactMissing()) { refresh(); return; }
     if (state.encounter && near(state.encounter.position, state.encounter.phase === "offer" ? 7 : 5)) {
       const def = encounters.find(e => e.id === state.encounter!.id)!;
       if (state.encounter.phase === "chase") finishEncounter("You return Cleo’s portfolio. The terrible portrait lives to disappoint another day. +$20", 20);
       else if (state.encounter.phase === "pursuit") { finishEncounter("You call for help. The robber retreats; the street is clear."); }
-      else state.dialogue = { speaker: def.speaker, text: def.text, choices: def.choices, context: `encounter:${def.id}` };
+      else state.dialogue = { speaker: def.speaker, text: `${timePhase(state.time.minutes) === "Night" ? "The evening crowd has thinned. " : ""}${state.encounter.variant ? def.text : def.alternate ?? def.text}${state.trust > 0 && def.id === "community" ? " Jo remembers your help and greets you by name." : ""}`, choices: def.choices, context: `encounter:${def.id}` };
       refresh(); return;
     }
     if (state.investigation.stage !== "available") {
@@ -206,7 +217,7 @@ export function createSimulation(city: City, seed = 2061030) {
       );
     } else if (near(anchor.community)) {
       if (!state.helped) {
-        state.helped = true;
+        state.helped = true; state.trust = Math.min(3, state.trust + 1);
         state.health = Math.min(100, state.health + 15);
       }
       if (state.stage === "chase") {
@@ -230,6 +241,43 @@ export function createSimulation(city: City, seed = 2061030) {
         { id: "leave", label: "Keep investigating" }] };
     }
     refresh();
+  }
+  function nearbyMissing() {
+    const m = state.missing;
+    if (near(missingPoints.tess, 4)) return "tess";
+    if (m.stage === "available" || m.stage === "closed") return null;
+    if (missingReady(m) && near(missingPoints.riley, 5)) return "riley";
+    return [...missingClues.filter(c => !m.clues.includes(c.id)), ...missingWitnesses].find(c => near(missingPoints[c.id as keyof typeof missingPoints], 4))?.id ?? null;
+  }
+  function interactMissing() {
+    const id = nearbyMissing(), m = state.missing;
+    if (!id) return false;
+    if (id === "tess") {
+      if (m.stage === "available") state.dialogue = { speaker: "Tess · The Missing Person", text: "My friend Riley Vale is an adult who organises our art workshop. They missed our usual check-in and their phone is off. Could you help find out if they’re all right? Mo is at the bus loop; the library has our workshop notice. Please respect Riley’s choices.", context: "missing:start", choices: [{ id: "people", label: "Start with people · compare two witnesses" }, { id: "trail", label: "Follow the paper trail · corroborate two clues" }, { id: "leave", label: "Come back later" }] };
+      else if (m.stage === "return") {
+        const reward = m.ending === "reunion" ? 75 : 60;
+        state.money += Math.max(0, reward - m.reward); m.reward = reward; m.stage = "closed"; state.trust = Math.min(3, state.trust + 1); state.waypoint = null;
+        say("Case 03 · The Missing Person · Complete", m.ending === "message" ? "You pass on Riley’s message without sharing their location. Tess is relieved and agrees to wait for their call. Riley keeps the quiet afternoon they asked for. +$60 and Jo’s trust." : "Riley agreed to meet Tess at the next workshop. Tess apologises for jumping to conclusions about the van. A reunion, on Riley’s terms. +$75 and Jo’s trust.");
+        notify(`CASE 03 COMPLETE · ${m.ending === "message" ? "Privacy respected" : "A reunion by consent"} · +$${reward}`);
+      } else if (m.stage === "closed") say("Tess · friend", "Riley has checked in. Thank you for listening to them, and checking the evidence before believing the van story.");
+      else state.dialogue = { speaker: "Tess · compare your leads", text: "Mo’s first impression may be wrong. Talk to Eden about the van; compare the notice and receipt. You can change your investigation approach without losing evidence.", context: "missing:start", choices: [{ id: "people", label: "Use witness accounts" }, { id: "trail", label: "Use the paper trail" }, { id: "leave", label: "Keep investigating" }] };
+    } else if (id === "riley") state.dialogue = { speaker: "Riley · a quiet afternoon", text: "I’m safe. I walked here because I needed space after organising the workshop. That van was Eden’s equipment delivery. I should have left Tess a clearer message. Please let me choose what happens next.", context: "missing:ending", choices: [{ id: "message", label: "Offer to relay a message; keep their location private" }, { id: "reunion", label: "Ask whether they want to arrange a reunion" }, { id: "leave", label: "Give them time" }] };
+    else {
+      const clue = missingClues.find(c => c.id === id), witness = missingWitnesses.find(w => w.id === id);
+      if (clue) { m.clues.push(id); state.inventory.push(clue.name); say("Case 03 · evidence recorded", clue.text); }
+      if (witness) { if (!m.witnesses.includes(id)) m.witnesses.push(id); say(witness.name, witness.text); }
+      if (missingReady(m)) { state.waypoint = null; notify("The accounts agree · find Riley near the Holland Park fountain. Pin the lead in Journal."); }
+    }
+    return true;
+  }
+  function chooseMissing(context: string, id: string) {
+    if (id === "leave") return;
+    const m = state.missing;
+    if (context === "missing:start" && (id === "people" || id === "trail")) { m.stage = "investigating"; m.approach = id; state.waypoint = null; notify("CASE 03 · The Missing Person · new leads in Journal"); }
+    else if (context === "missing:ending" && (id === "message" || id === "reunion")) {
+      m.ending = id; m.stage = "return"; state.waypoint = null;
+      say("Riley · your choice matters", id === "message" ? "Please tell Tess I’m safe and will call tonight. Keep this spot between us. Thank you for asking." : "Yes. Tell Tess I’ll meet them at tomorrow’s workshop. I’d like to reconnect, but first I need this afternoon to myself.");
+    }
   }
   function dismiss() {
     const dialog: Dialogue | null = state.dialogue;
@@ -267,6 +315,7 @@ export function createSimulation(city: City, seed = 2061030) {
     dt = Math.max(0, Math.min(0.1, dt));
     if (state.dialogue || state.mode === "aerial") return;
     clock += dt;
+    state.time = advanceTime(state.time, dt);
     state.elapsed = clock;
     if (state.stamina <= 1) exhausted = true;
     else if (state.stamina >= 25) exhausted = false;
@@ -388,7 +437,7 @@ export function createSimulation(city: City, seed = 2061030) {
   function finishEncounter(message: string, reward = 0) {
     const e = state.encounter;
     if (!e) return;
-    if (!state.resolved.includes(e.id)) { state.money += reward; state.resolved.push(e.id); }
+    if (!state.resolved.includes(e.id)) { state.money += reward; state.resolved.push(e.id); if ((e.id === "community" || e.id === "theft") && reward > 0) state.trust = Math.min(3, state.trust + 1); }
     else message = message.replace(/\s*\+\$\d+/g, "");
     cooldowns[e.id] = 240; encounterCooldown = 55; state.encounter = null; state.dialogue = null;
     notify(message);
@@ -398,7 +447,9 @@ export function createSimulation(city: City, seed = 2061030) {
     const d = state.dialogue;
     if (!d?.choices?.some(c => c.id === id)) return;
     state.dialogue = null;
-    if (d.context === "conclusion") {
+    if (d.context?.startsWith("missing:")) {
+      chooseMissing(d.context, id);
+    } else if (d.context === "conclusion") {
       if (id !== "leave") {
         const result = mysteryVerdict(state.investigation.evidence, state.investigation.witnesses, id);
         state.money += Math.max(0, result.reward - state.investigation.reward);
@@ -412,7 +463,7 @@ export function createSimulation(city: City, seed = 2061030) {
       if (e.id === "robbery") {
         if (id === "pay") { const amount = Math.min(12, state.money); state.money -= amount; finishEncounter(`You hand over $${amount}. The robber leaves. Your missions are unaffected.`); }
         else if (id === "help") finishEncounter("Jo and nearby commuters respond. The robber backs away. Nobody is hurt.");
-        else if (id === "distract" && random() < .65) finishEncounter("They check the bus number. You leave. An unexpectedly effective transit policy.");
+        else if (id === "distract" && (state.trust >= 2 || random() < .65)) finishEncounter("They check the bus number while neighbours make room for you. You leave safely. Jo’s trust makes this distraction reliable at 2 or more.");
         else { e.phase = "pursuit"; e.seconds = 16; notify("Move away or get close and press E to call for help. This pursuit ends after 16 seconds."); }
       } else if (e.id === "theft") {
         if (id === "chase") { e.phase = "chase"; e.seconds = 50; encounterPath = route(world, e.position, world.safe([locations.theft[0] + 30, locations.theft[1] - 30])); encounterIndex = 1; notify("Catch the portfolio runner and press E. They stop at the end of this short route."); }
@@ -434,7 +485,7 @@ export function createSimulation(city: City, seed = 2061030) {
     encounterCooldown -= dt;
     for (const id of Object.keys(cooldowns)) cooldowns[id] -= dt;
     if (!state.encounter && !active && encounterCooldown <= 0 && state.stage !== "chase") {
-      const candidates = encounters.filter(e => (!e.threatening || !state.calm) && (!e.mature || state.mature) && (cooldowns[e.id] ?? 0) <= 0 && near(locations[e.id], 26));
+      const candidates = encounters.filter(e => (!e.threatening || !state.calm) && (!e.mature || state.mature) && (!e.mature || state.time.minutes >= 1080 || state.time.minutes < 360) && (cooldowns[e.id] ?? 0) <= 0 && near(locations[e.id], 26));
       if (candidates.length) {
         const def = candidates[Math.floor(random() * candidates.length)];
         state.encounter = { id: def.id, phase: "offer", position: [...locations[def.id]], seconds: 45, hit: false, variant: random() < .5 };
@@ -460,12 +511,12 @@ export function createSimulation(city: City, seed = 2061030) {
   function mode(value: Snapshot["mode"]) { state.mode = value; state.player.moving = state.player.running = false; refresh(); }
   function mature(value: boolean) { state.mature = value; if (!value && state.encounter && encounters.find(e => e.id === state.encounter!.id)?.mature) { state.encounter = null; state.dialogue = null; encounterCooldown = 60; } refresh(); }
   function serialize(quality: "auto" | "low" = "auto"): SavedGame {
-    return { version: 2, map: city.version, savedAt: Date.now(), quality, state: structuredClone(state),
+    return { version: 3, map: city.version, savedAt: Date.now(), quality, state: structuredClone(state),
       runtime: { thiefIndex, chaseTime, drop, dangerCooldown, dangerTime, active, stolen, caught, exhausted, clock, encounterCooldown, cooldowns: { ...cooldowns }, random: random.getState() } };
   }
   function restore(save: SavedGame) {
     const s = save.state;
-    for (const key of ["health", "stamina", "money", "inventory", "stage", "elapsed", "thief", "calm", "mystery", "helped", "mode", "follow", "mature", "investigation", "encounter", "resolved", "waypoint"] as const) Object.assign(state, { [key]: structuredClone(s[key]) });
+    for (const key of ["time", "missing", "trust", "stableVisibility", "volume", "health", "stamina", "money", "inventory", "stage", "elapsed", "thief", "calm", "mystery", "helped", "mode", "follow", "mature", "investigation", "encounter", "resolved", "waypoint"] as const) Object.assign(state, { [key]: structuredClone(s[key]) });
     const p = world.safe([s.player.x, s.player.z]); state.player = { ...state.player, x: p[0], z: p[1], yaw: s.player.yaw };
     state.thief = world.safe(state.thief); state.danger.position = world.safe(s.danger.position);
     ({ thiefIndex, chaseTime, drop, dangerCooldown, dangerTime, active, stolen, caught, exhausted, clock, encounterCooldown } = save.runtime);
@@ -475,6 +526,12 @@ export function createSimulation(city: City, seed = 2061030) {
     state.dialogue = null;
     notify(save.migratedFrom ? (distance(p, [s.player.x, s.player.z]) > .05 ? "City updated. You resumed at the nearest safe point; all story progress is preserved." : "City updated. Your position and story progress are preserved.") : "Story resumed. Your progress stayed in this browser."); refresh();
   }
+  function rest(minutes: 480 | 1260) {
+    if (active || state.encounter?.phase === "pursuit" || state.encounter?.phase === "chase" || state.stage === "chase") { notify("Finish the pursuit before resting."); return; }
+    if (state.time.minutes >= minutes) state.time.day = Math.min(1000000, state.time.day + 1);
+    state.time.minutes = minutes; state.stamina = 100; state.encounter = null; encounterCooldown = 30;
+    notify("You take a quiet break. Your cases and evidence are preserved."); refresh();
+  }
   refresh();
-  return { state, world, story, locations, tick, interact, dismiss, choose, recover, calm, mode, mature, serialize, restore };
+  return { rest, missingPoints, state, world, story, locations, tick, interact, dismiss, choose, recover, calm, mode, mature, serialize, restore };
 }

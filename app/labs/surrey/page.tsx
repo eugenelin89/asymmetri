@@ -38,7 +38,7 @@ export default function SurreyPage() {
             Enable JavaScript and WebGL2 to play. Walk with WASD or arrows,
             sprint with Shift, interact with E, and recover with R. The mission
             follows a fictional stolen backpack from a commuter near Surrey
-            Central to its return. V toggles aerial exploration; F centres the camera on the player. A second fictional homicide case uses evidence and witness accounts. Progress is saved only in this browser.
+            Central to its return. V toggles aerial exploration; F centres the camera on the player. A second fictional homicide case uses evidence and witness accounts. A third case follows an adult who left voluntarily, with two approaches and decisions that respect their wishes. Progress is saved only in this browser.
           </p>
         </noscript>
         <section className={styles.notes}>
@@ -54,8 +54,9 @@ export default function SurreyPage() {
             <p>
               A compact City Centre slice includes Surrey Central, the bus loop,
               Central City, SFU Surrey, City Hall, Civic Plaza, the library and
-              Holland Park. V0.3 adds source road surfaces, curbs, medians and park
-              paths. Height units are verified as metres and matched to official
+              Holland Park. V0.4 adds a saved day/night clock, scheduled fictional
+              pedestrians, lit windows and a complete missing-person case. It retains
+              the V0.3 source road surfaces, curbs, medians and park paths. Height units are verified as metres and matched to official
               records; measurement dates and methods remain unknown. Architecture
               is an artistic reconstruction. Terrain remains flat because the
               elevation datum could not be verified. No City

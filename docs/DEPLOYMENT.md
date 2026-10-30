@@ -1436,3 +1436,8 @@ Check both cases, migrated V0.2 saves, view controls and compact phone layouts.
 The 192MiB memory and 6GiB disk floors and all protected services/configurations
 remain mandatory. See [V0.3 release receipt](SURREY_V03_RELEASE_2026-10-30.md) for
 measured candidate, activation or exact blocking evidence.
+
+
+## Surrey V0.4 — Living Surrey
+
+Surrey V0.4 must use the existing guarded exact Linux candidate workflow, refreshed approved main and a complete immediate runtime rollback. Do not deploy while Richmond holds the shared window. No OS, network, database or peer-service change is part of this release. Receipt: `SURREY_V04_RELEASE_2026-10-30.md`.

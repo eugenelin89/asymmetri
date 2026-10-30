@@ -367,7 +367,7 @@ test("evidence gate, explicit choices and Mission 1 retry preserve independent e
   assert.ok(sim.state.inventory.includes("Case 02: stopped watch")); assert.equal(sim.state.stage, "clue");
 });
 function trigger(id, seed = 91) {
-  const sim = createSimulation(city, seed); sim.mature(true); if (["dealer", "solicitation", "community"].includes(id)) sim.calm(true);
+  const sim = createSimulation(city, seed); sim.mature(true); sim.state.time.minutes = 1260; if (["dealer", "solicitation", "community"].includes(id)) sim.calm(true);
   sim.state.player = pose(sim.locations[id]);
   for (let i = 0; i < 900 && sim.state.encounter?.id !== id; i++) {
     sim.tick(.1);
@@ -512,4 +512,96 @@ test('architectural profiles are stable, varied and preserve source heights and 
   assert.ok(new Set(profiles.map(p=>p.kind)).size >= 5); assert.ok(profiles.some(p=>p.setback)); assert.ok(profiles.some(p=>p.roof === 'pitched'));
   assert.equal(buildingProfile(city.buildings.find(b=>b.id === '1665')).height, 16, 'combined SFU footprint stays a podium, with the separate source-height tower');
   assert.ok(profiles.every(p=>Number.isFinite(p.height) && p.height > 0));
+});
+
+const { advanceTime, newTime, timePhase, lightLevel, streetlightsOn } = await import('./time.ts');
+const { missingReady } = await import('./missing.ts');
+const { populationPlan, scheduled } = await import('./population.ts');
+const { fitStreetCamera } = await import('./camera.ts');
+test('saved city clock crosses midnight, uses four phases, freezes in dialogue/aerial and keeps stable visibility', () => {
+  assert.deepEqual(advanceTime({ day: 4, minutes: 1439, rate: 4 }, 1), { day: 5, minutes: 3, rate: 4 });
+  assert.deepEqual([480, 780, 1140, 1320].map(timePhase), ['Morning', 'Afternoon', 'Evening', 'Night']);
+  assert.equal(streetlightsOn(780), false); assert.equal(streetlightsOn(1320), true);
+  assert.equal(lightLevel(1320, true), 1); assert.ok(lightLevel(1320) < lightLevel(780));
+  const sim = createSimulation(city); sim.tick(.1); assert.equal(sim.state.time.minutes, 780.1);
+  sim.state.dialogue = { speaker: 'Pause', text: 'Pause' }; sim.tick(.1); assert.equal(sim.state.time.minutes, 780.1);
+  sim.dismiss(); sim.mode('aerial'); sim.tick(.1); assert.equal(sim.state.time.minutes, 780.1);
+  sim.mode('ground'); sim.rest(1260); assert.equal(sim.state.time.minutes, 1260); sim.rest(480); assert.equal(sim.state.time.day, 2);
+});
+function finishMissing(approach, ending) {
+  const sim = createSimulation(city); sim.calm(true);
+  walk(sim, sim.missingPoints.tess); sim.interact(); sim.choose(approach);
+  assert.equal(sim.state.missing.stage, 'investigating');
+  const ids = approach === 'people' ? ['mo', 'notice', 'eden'] : ['notice', 'eden', 'receipt'];
+  for (const id of ids) { walk(sim, sim.missingPoints[id]); sim.interact(); sim.dismiss(); }
+  assert.equal(missingReady(sim.state.missing), true);
+  walk(sim, sim.missingPoints.riley); sim.interact();
+  assert.equal(sim.state.dialogue.context, 'missing:ending'); sim.choose(ending); sim.dismiss();
+  assert.equal(sim.state.missing.stage, 'return');
+  const before = sim.state.money; walk(sim, sim.missingPoints.tess); sim.interact(); sim.dismiss();
+  assert.equal(sim.state.missing.stage, 'closed'); assert.equal(sim.state.money - before, ending === 'message' ? 60 : 75);
+  sim.interact(); sim.dismiss(); assert.equal(sim.state.money - before, ending === 'message' ? 60 : 75);
+  return sim;
+}
+test('Missing Person: witness route walks all legs, corrects a misleading lead and respects privacy', () => {
+  const sim = finishMissing('people', 'message'); assert.equal(sim.state.missing.reward, 60); assert.ok(sim.state.trust > 0);
+  const restored = createSimulation(city); restored.restore(parseSave(JSON.stringify(sim.serialize())));
+  assert.deepEqual(restored.state.missing, sim.state.missing); assert.deepEqual(restored.state.inventory, sim.state.inventory);
+});
+test('Missing Person: evidence route supports a consensual reunion without resetting existing cases', () => {
+  const sim = finishMissing('trail', 'reunion'); assert.equal(sim.state.missing.reward, 75);
+  sim.state.stage = 'completed'; sim.recover(); assert.equal(sim.state.missing.stage, 'closed'); assert.equal(sim.state.stage, 'completed');
+});
+test('new case requires corroboration, explicit choices and no undiscovered Riley location', () => {
+  const sim = createSimulation(city); sim.calm(true);
+  sim.state.player = pose(sim.missingPoints.tess); sim.interact(); sim.dismiss(); assert.equal(sim.state.missing.stage, 'available');
+  sim.choose('people'); sim.state.player = pose(sim.missingPoints.riley); sim.interact(); assert.equal(sim.state.dialogue, null);
+  sim.state.player = pose(sim.missingPoints.mo); sim.interact(); sim.dismiss(); sim.interact(); sim.dismiss();
+  assert.deepEqual(sim.state.missing.witnesses, ['mo']); assert.equal(missingReady(sim.state.missing), false);
+});
+test('v2 saves migrate new fields explicitly while preserving old progress and rejecting malformed v3 records', () => {
+  const sim = createSimulation(city); sim.state.money = 158; sim.state.helped = true; sim.state.stage = 'completed'; sim.state.inventory = ['Yellow transit slip']; sim.mature(true);
+  const legacy = sim.serialize(); legacy.version = 2;
+  for (const key of ['time', 'missing', 'trust', 'stableVisibility', 'volume']) delete legacy.state[key];
+  const migrated = parseSave(JSON.stringify(legacy)); assert.ok(migrated); assert.equal(migrated.version, 3); assert.equal(migrated.state.money, 158); assert.equal(migrated.state.trust, 1); assert.deepEqual(migrated.state.time, newTime());
+  assert.deepEqual(migrated.state.player, legacy.state.player); assert.equal(migrated.state.mature, true);
+  for (const [key, value] of [['time', { day: 0, minutes: 1600, rate: 999 }], ['trust', 1.5], ['volume', 2], ['stableVisibility', 'yes'], ['missing', { ...migrated.state.missing, stage: 'closed', ending: 'reunion', reward: 75 }]]) {
+    const invalid = structuredClone(migrated); invalid.state[key] = value; assert.equal(parseSave(JSON.stringify(invalid)), null, key);
+  }
+});
+test('scheduled populations have reachable destinations, bounded night density, threat recovery and distance updates', () => {
+  const people = populationPlan(city, world, 24); assert.equal(people.length, 24);
+  assert.deepEqual(people, populationPlan(city, world, 24));
+  assert.ok(people.some(p => p.crossing));
+  for (const p of people) { assert.ok(world.fits([p.pose.x, p.pose.z])); assert.ok(world.clear(p.path[0], p.path[1])); }
+  const player = [people[0].pose.x + 4, people[0].pose.z];
+  stepPedestrians(people, player, player, .1, world); assert.equal(people[0].activity, 'fleeing');
+  for (let i = 0; i < 160; i++) stepPedestrians(people, player, null, .1, world);
+  assert.notEqual(people[0].activity, 'fleeing');
+  for (const p of people) assert.ok(world.fits([p.pose.x, p.pose.z]));
+  stepPedestrians(people, player, null, .1, world, 1320); assert.ok(people.filter(p => p.active).length <= 6);
+  assert.equal(scheduled('student', 1320), false); assert.equal(scheduled('student', 600), true);
+  stepPedestrians(people, player, null, .1, world, 780, 8); assert.ok(people.filter(p => p.active).length <= 8);
+});
+test('camera clips a lagged sightline and preserves a clear near plane after a sharp turn', () => {
+  const clear = (a, b) => b[0] < 5;
+  const p = fitStreetCamera([0, 0], [10, 0], clear); assert.ok(p[0] < 5 && p[0] > 4);
+  assert.deepEqual(fitStreetCamera([0, 0], [3, 3], clear), [3, 3]);
+});
+test('mature encounters require both opt-in and evening/night; trust survives recovery', () => {
+  const sim = createSimulation(city); sim.mature(true); sim.calm(true); sim.state.player = pose(sim.locations.solicitation);
+  for (let i = 0; i < 500; i++) sim.tick(.1); assert.equal(sim.state.encounter, null);
+  sim.rest(1260); for (let i = 0; i < 350 && !sim.state.encounter; i++) sim.tick(.1);
+  assert.equal(sim.state.encounter?.id, 'solicitation'); sim.state.trust = 2; sim.recover(); assert.equal(sim.state.trust, 2);
+});
+
+test('scene teardown disposes shared geometry, materials and both color/emission textures exactly once', async () => {
+  const THREE = await import('three'), {disposeScene} = await import('./resources.ts');
+  const scene = new THREE.Scene(), geometry = new THREE.BoxGeometry(), map = new THREE.Texture(), emission = new THREE.Texture();
+  const material = new THREE.MeshStandardMaterial({ map, emissiveMap: emission });
+  scene.add(new THREE.Mesh(geometry, material), new THREE.Mesh(geometry, material));
+  const counts = { geometry:0, material:0, map:0, emission:0, renderer:0, context:0, canvas:0 };
+  for (const [id, object] of [['geometry',geometry],['material',material],['map',map],['emission',emission]]) object.addEventListener('dispose',()=>counts[id]++);
+  disposeScene(scene, {dispose(){counts.renderer++},forceContextLoss(){counts.context++}}, null, {remove(){counts.canvas++}});
+  assert.deepEqual(counts, { geometry:1, material:1, map:1, emission:1, renderer:1, context:1, canvas:1 });
 });

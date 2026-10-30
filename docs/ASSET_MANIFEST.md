@@ -963,3 +963,8 @@ requires a separate HTML alt attribute. Original code remains MIT licensed.
   It is not a public geographic asset or a reconstruction of Cambie Bridge.
 - User-supplied phone screenshots are private diagnostic evidence, not public
   website assets. They are not copied into the repository or redistributed.
+
+
+## Surrey V0.4 — Living Surrey
+
+Surrey V0.4 adds two local JSON provenance assets in `/surrey/v0.4-2026-10-30/` (release manifest and fresh bounded terrain review; City open licence attribution retained). Existing city bytes are unchanged. Original MIT canvas window-emission masks (128×128 per shared facade material), fictional workshop sign, rack/planter/entrance geometry and synthesised four-note marimba motif add no external art/audio. Geometry is illustrative; no real storefront or measured prop-position claim. No AI-generated bitmap asset is used.

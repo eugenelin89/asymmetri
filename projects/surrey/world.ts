@@ -117,7 +117,7 @@ export function route(world: World, from: Point, to: Point): Point[] {
     cost = new Map([[key(first), 0]]),
     prev = new Map<string, Point>();
   let end: Point | undefined;
-  for (let count = 0; open.length && count < 22000; count++) {
+  for (let count = 0; open.length && count < 40000; count++) {
     let best = 0;
     for (let i = 1; i < open.length; i++)
       if (open[i].f < open[best].f) best = i;
@@ -140,7 +140,7 @@ export function route(world: World, from: Point, to: Point): Point[] {
       const p: Point = [cur.p[0] + x, cur.p[1] + z],
         g = cur.g + Math.hypot(x, z) * step;
       if (
-        g > 700 ||
+        g > Math.max(700, distance(start, goal) * 2.5 + 100) ||
         g >= (cost.get(key(p)) ?? Infinity) ||
         !world.clear(pos(cur.p), pos(p))
       )

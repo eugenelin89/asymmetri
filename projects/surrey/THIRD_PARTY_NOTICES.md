@@ -63,3 +63,11 @@ all engineering details. Library ribbons, rooflights, civic canopy, station glaz
 park furniture, windows/materials, setbacks and roof equipment remain original
 procedural interpretations, not copied assets. The facade canvases are 128×128;
 road-name sign canvases are 256×64. No additional runtime dependency is introduced.
+
+## V0.4 original additions
+
+Window-emission masks, small entrance/planter/bicycle-rack geometry, the fictional
+Paper & Pine workshop sign and the four-note synthesised marimba motif are original
+MIT work. No third-party audio, recorded voices or copied photographic textures were
+added. The fresh terrain metadata review links the existing City open-data licence;
+it does not establish a vertical datum or grant official endorsement.

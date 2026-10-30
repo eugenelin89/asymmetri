@@ -1,0 +1,31 @@
+{
+  "release": "V0.4 \u2014 Living Surrey",
+  "version": "v0.4-2026-10-30",
+  "geographicSnapshot": "v0.3-2026-10-30",
+  "cityUrl": "/surrey/v0.3-2026-10-30/city.json",
+  "bytes": 3003834,
+  "sha256": "e4cca4b8f8ace1296201f50f77c9bb1d0093365cbfdabeefabb91709a60cccdf",
+  "bbox": [
+    -122.858,
+    49.182,
+    -122.84,
+    49.195
+  ],
+  "origin": [
+    -122.849,
+    49.1895
+  ],
+  "parentManifest": "/surrey/v0.3-2026-10-30/manifest.json",
+  "parentManifestSha256": "973b8cfbace776f463b76e73f9e3261df90a7b9d65bfd638e6ce3f4deafa5df8",
+  "terrain": {
+    "kind": "flat",
+    "elevation": 0,
+    "verticalDatum": null,
+    "review": "/surrey/v0.4-2026-10-30/terrain-review.json",
+    "reviewSha256": "c780ff874a389af88b586e8ea3ff3164e1c10e96079ae62832bfa2e0b524a664"
+  },
+  "retained": "All published snapshots remain byte-identical. V0.4 reuses V0.3 geometry, origin, bounds, collision, footprints and metre-verified building-height matches.",
+  "proceduralChanges": "Night window masks, emissive lamp/storefront materials, illustrative entrance glass, bicycle hoops, planters and fictional workshop sign. Original MIT geometry; no claim of measured asset positions.",
+  "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  "attribution": "Contains information licensed under the Open Government License \u2013 City of Surrey."
+}

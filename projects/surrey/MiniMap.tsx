@@ -66,6 +66,7 @@ export function MiniMap({
     poi = [
       { p: city.anchors.spawn, name: "Station", color: "#e7ece0" },
       { p: city.anchors.community, name: "Community", color: "#7ddfe1" },
+      { p: [city.anchors.spawn[0] - 12, city.anchors.spawn[1] - 5] as Point, name: "Case 03", color: "#92e4ad" },
       { p: city.anchors.mystery, name: "Case 02", color: "#c8ace5" },
     ];
   return (
@@ -75,7 +76,7 @@ export function MiniMap({
       <svg
         viewBox={`${x} ${z} ${span} ${span}`}
         role="img"
-        aria-label={`North-up map. Player near ${state.street}. Gold diamond: ${state.objective}. White: station. Blue: community. Purple: case 02.`}
+        aria-label={`North-up map. Player near ${state.street}. Gold diamond: ${state.objective}. White: station. Blue: community. Purple: case 02. Green: case 03.`}
       >
         <Geometry city={city} />
         {poi.map(({ p, name, color }) => (

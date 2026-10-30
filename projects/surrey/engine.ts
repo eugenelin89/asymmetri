@@ -2,16 +2,20 @@
 import * as THREE from "three";
 import { surrey } from "@/content/site";
 import { loadCity } from "./data";
-import { createSimulation, seeded } from "./simulation";
+import { createSimulation } from "./simulation";
 import { buildScenery } from "./scenery";
 import { distance } from "./world";
-import { createAerial } from "./camera";
-import { pedestrianRoutes, stepPedestrians } from "./population";
+import { createAerial, fitStreetCamera } from "./camera";
+import { populationPlan, stepPedestrians } from "./population";
 import { writeSave } from "./save";
 import type { SavedGame } from "./save";
 import { landmarks } from "./landmarks";
 import { viewShortcut } from "./viewPolicy";
 import type { City, Game, Input, Snapshot } from "./types";
+import { lightLevel, timePhase } from "./time";
+import { missingReady } from "./missing";
+import { disposeScene } from "./resources";
+import { createCityAudio } from "./audio";
 type Callbacks = {
   map(city: City): void;
   update(state: Snapshot): void;
@@ -54,7 +58,8 @@ export async function createGame(
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xbdd6df);
   scene.fog = new THREE.Fog(0xbdd6df, 260, 1150);
-  scene.add(new THREE.HemisphereLight(0xd1edff, 0x9c9871, 2.4));
+  const fill = new THREE.HemisphereLight(0xd1edff, 0x9c9871, 2.4); scene.add(fill);
+  const audio = createCityAudio();
   const sun = new THREE.DirectionalLight(0xffd7a1, 3);
   sun.position.set(-200, 320, 100);
   sun.castShadow = true;
@@ -89,28 +94,7 @@ export async function createGame(
   let renderHeight = 740;
   renderer.setPixelRatio(pixelRatio);
   function release() {
-    const gs = new Set<THREE.BufferGeometry>(),
-      ms = new Set<THREE.Material>(),
-      ts = new Set<THREE.Texture>();
-    scene.traverse((o) => {
-      if (o instanceof THREE.Mesh || o instanceof THREE.Sprite) {
-        if (o instanceof THREE.Mesh) gs.add(o.geometry);
-        (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) => {
-          ms.add(m);
-          Object.values(m).forEach((t) => {
-            if (t instanceof THREE.Texture) ts.add(t);
-          });
-        });
-      }
-      if (o instanceof THREE.InstancedMesh) o.dispose();
-    });
-    gs.forEach((g) => g.dispose());
-    ms.forEach((m) => m.dispose());
-    ts.forEach((t) => t.dispose());
-    sun.shadow.map?.dispose();
-    renderer.dispose();
-    renderer.forceContextLoss();
-    canvas.remove();
+    disposeScene(scene, renderer, sun.shadow.map, canvas); audio.dispose();
   }
   let scenery: ReturnType<typeof buildScenery>;
   try {
@@ -119,14 +103,13 @@ export async function createGame(
     release();
     throw error;
   }
-  const random = seeded(49189), paths = pedestrianRoutes(city, sim.world);
-  const ambient = Array.from({ length: Math.min(coarse ? 10 : 18, paths.length) }, (_, i) => {
+  let populationBudget = coarse ? 12 : 24;
+  const ambient = populationPlan(city, sim.world, populationBudget).map((person, i) => {
     const model = scenery.makePerson([0x5b8bba, 0xb98b64, 0xb7a0c3, 0x7a9e70, 0xcea764][i % 5]);
     scene.add(model.group);
-    const path = paths[Math.floor(i * paths.length / Math.min(coarse ? 10 : 18, paths.length))];
-    const t = .15 + random() * .6, p = [path[0][0] + (path[1][0] - path[0][0]) * t, path[0][1] + (path[1][1] - path[0][1]) * t];
-    return { model, pose: { x: p[0], z: p[1], yaw: 0, moving: false, running: false, blocked: false }, path, target: 1, pause: i % 3 };
+    return { ...person, model };
   });
+  let lastShadowMinute = -10;
   const keys = new Set<Input>(),
     touch = new Set<Input>();
   const clear = () => {
@@ -137,6 +120,9 @@ export async function createGame(
   const report = () => {
     sim.state.cameraYaw = aerial.state.yaw;
     callbacks.update(structuredClone(sim.state));
+    canvas.dataset.cityTime = sim.state.time.minutes.toFixed(2);
+    canvas.dataset.missing = sim.state.missing.stage;
+    canvas.dataset.population = String(ambient.filter(a => a.active).length);
     canvas.dataset.stage = sim.state.stage;
     canvas.dataset.mode = sim.state.mode;
     canvas.dataset.mystery = sim.state.investigation.stage;
@@ -180,6 +166,16 @@ export async function createGame(
   function render(dt: number) {
     const s = sim.state,
       p = s.player;
+    const daylight = lightLevel(s.time.minutes, s.stableVisibility), night = timePhase(s.time.minutes) === "Night";
+    const sky = new THREE.Color(0x23394f).lerp(new THREE.Color(0xbdd6df), daylight);
+    (scene.background as THREE.Color).copy(sky); (scene.fog as THREE.Fog).color.copy(sky);
+    fill.intensity = 1.25 + daylight * 1.15; sun.intensity = .35 + daylight * 2.65;
+    const angle = (s.stableVisibility ? 780 : s.time.minutes) / 1440 * Math.PI * 2;
+    sun.position.set(Math.cos(angle) * 300, 130 + daylight * 190, Math.sin(angle) * 230);
+    sun.color.set(daylight < .9 ? 0xefb68c : 0xffe7c3);
+    if (Math.abs(s.time.minutes - lastShadowMinute) > 8) { renderer.shadowMap.needsUpdate = true; lastShadowMinute = s.time.minutes; }
+    scenery.living(s.elapsed, daylight, night, reduced || s.stableVisibility);
+    audio.tick(s.elapsed, distance([p.x, p.z], scenery.performerPoint), !paused && s.mode === "ground" && !s.dialogue && !night);
     const showPeople = s.mode === "ground" || aerial.state.distance < 350;
     scenery.player.group.visible = showPeople;
     scenery.staticPeople.forEach(person => { person.visible = showPeople; });
@@ -241,6 +237,7 @@ export async function createGame(
       (scene.fog as THREE.Fog).near = 300; (scene.fog as THREE.Fog).far = 1500;
     }
     camera.position.lerp(desired, reduced ? 1 : 1 - Math.exp(-6 * dt));
+    if (!isAerial) { const fit = fitStreetCamera([p.x, p.z], [camera.position.x, camera.position.z], sim.world.clear); camera.position.x = fit[0]; camera.position.z = fit[1]; }
     camera.lookAt(aim);
     scenery.you.visible = isAerial;
     scenery.you.position.set(p.x, 9, p.z);
@@ -270,7 +267,10 @@ export async function createGame(
     }
     scenery.evidence.forEach((object, id) => { object.visible = s.investigation.stage !== "available" && (!isAerial || s.investigation.evidence.includes(id)); });
     scenery.witnessMarkers.forEach(object => { object.visible = s.investigation.stage !== "available"; if (isAerial) object.scale.setScalar(Math.max(1, pixelScale(object.position) * 12)); else object.scale.setScalar(1); });
-    ambient.forEach(a => { a.model.group.visible = !isAerial || aerial.state.distance < 350; });
+    ambient.forEach(a => { a.model.group.visible = a.active !== false && (!isAerial || aerial.state.distance < 350); });
+    scenery.missingActors.forEach((actor, id) => { actor.visible = showPeople && (id !== "riley" || missingReady(s.missing)); });
+    scenery.missingMarkers.forEach((marker, id) => { marker.visible = id === "tess" || (s.missing.stage !== "available" && s.missing.stage !== "closed" && (id !== "riley" || missingReady(s.missing))); if (isAerial) marker.scale.setScalar(Math.max(1, pixelScale(marker.position) * 12)); else marker.scale.setScalar(1); });
+    scenery.missingObjects.forEach((object, id) => { object.visible = s.missing.stage !== "available" && (!isAerial || s.missing.clues.includes(id)); });
     scenery.closeDetails.forEach(tile => { tile.mesh.visible = (!isAerial || aerial.state.distance < 350) && Math.hypot(camera.position.x - tile.centre[0], camera.position.z - tile.centre[1]) < 280; });
     renderer.render(scene, camera);
     canvas.dataset.drawCalls = String(renderer.info.render.calls);
@@ -284,7 +284,7 @@ export async function createGame(
     last = 0;
     fpsStart = 0;
     frames = 0;
-    clear();
+    clear(); audio.mute();
   }
   function schedule() {
     if (!raf && !disposed && !lost && visible && !document.hidden && !paused)
@@ -308,8 +308,8 @@ export async function createGame(
       if (right || forward) aerial.pan(right * dt * aerial.state.distance * .6, forward * dt * aerial.state.distance * .6);
       sim.state.follow = aerial.state.follow;
     } else if (!sim.state.dialogue) {
-      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world);
-      ambient.forEach(a => a.model.animate(a.pose, sim.state.elapsed, reduced));
+      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world, sim.state.time.minutes, populationBudget);
+      ambient.forEach(a => a.model.animate(a.pose, sim.state.elapsed, reduced, a.activity));
     }
     if (now - lastSave > 5000) { save(); lastSave = now; }
     render(dt);
@@ -327,6 +327,7 @@ export async function createGame(
       if (slow >= 2 && pixelRatio > 0.75) {
         pixelRatio = Math.max(0.75, pixelRatio - 0.2);
         renderer.setPixelRatio(pixelRatio);
+        populationBudget = Math.max(8, populationBudget - 4);
         slow = 0;
       }
       frames = 0;
@@ -350,6 +351,7 @@ export async function createGame(
   function down(e: KeyboardEvent) {
     const target = e.target as HTMLElement;
     if (paused || target.isContentEditable || target.closest("input, textarea, select") || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (sim.state.volume > 0) void audio.volume(sim.state.volume);
     const k = key(e);
     if (keyMap[k]) {
       e.preventDefault();
@@ -381,6 +383,7 @@ export async function createGame(
   const up = (e: KeyboardEvent) => keys.delete(keyMap[key(e)]);
   const pointers = new Map<number, { x: number; y: number; button: number }>();
   const pointerDown = (e: PointerEvent) => {
+    if (sim.state.volume > 0) void audio.volume(sim.state.volume);
     canvas.focus({ preventScroll: true }); canvas.setPointerCapture(e.pointerId);
     pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, button: e.button });
   };
@@ -470,6 +473,10 @@ export async function createGame(
     },
     choose(id) { sim.choose(id); clear(); report(); save(); },
     mode, returnToPlayer, track, save,
+    timeRate(value) { if ([1, 4, 12].includes(value)) sim.state.time.rate = value; report(); save(); },
+    rest(value) { sim.rest(value); report(); save(); render(1); },
+    visibility(value) { sim.state.stableVisibility = value; renderer.shadowMap.needsUpdate = true; report(); save(); render(1); },
+    audio(value) { sim.state.volume = Math.max(0, Math.min(1, value)); void audio.volume(sim.state.volume); report(); save(); },
     follow(value) { aerial.state.follow = value; sim.state.follow = value; if (value) returnToPlayer(); report(); save(); },
     selectPlace(id) { const place = landmarks(city).find(p => p.id === id); if (place) { mode("aerial"); aerial.focus(place.point, false); sim.state.follow = false; track(place.point, place.name); } },
     clearWaypoint() { sim.state.waypoint = null; report(); save(); },
@@ -487,9 +494,9 @@ export async function createGame(
       render(1);
     },
     reset() {
-      const calm = sim.state.calm, mature = sim.state.mature;
+      const { calm, mature, stableVisibility, volume } = sim.state, rate = sim.state.time.rate;
       sim = createSimulation(city);
-      sim.calm(calm); sim.mature(mature); aerial.focus(city.anchors.spawn);
+      sim.calm(calm); sim.mature(mature); Object.assign(sim.state, { stableVisibility, volume }); sim.state.time.rate = rate; aerial.focus(city.anchors.spawn);
       yaw = 0;
       clear();
       snapCamera();

@@ -8,6 +8,8 @@ import { needsViewHelp, rememberViewHelp, viewShortcut } from "./viewPolicy";
 import { readSave, parseSave, SAVE_KEY } from "./save";
 import type { SavedGame } from "./save";
 import { landmarks } from "./landmarks";
+import { clockLabel } from "./time";
+import { missingLocations } from "./missing";
 import { storyLocations } from "./story";
 import { createWorld } from "./world";
 import type { City, Game, Input, Snapshot } from "./types";
@@ -43,6 +45,7 @@ export function SurreyAdventure() {
     [aerialTools, setAerialTools] = useState(false),
     [selectedPlace, setSelectedPlace] = useState("");
   const locations = useMemo(() => city ? storyLocations(city, createWorld(city)) : null, [city]);
+  const missingPoints = useMemo(() => city ? missingLocations(city, createWorld(city)) : null, [city]);
   const saveAvailable = !!validStoredSave && !saveUnavailable;
   const saveText = saveMessage || (savedRaw === "!unavailable" ? "Browser storage is unavailable. Progress will not survive reloads." : savedRaw && !validStoredSave ? "The local save is damaged or incompatible. New Game starts safely; the old save stays until replaced." : saveAvailable ? "Progress saved on this browser only." : "Autosaves stay on this browser only.");
   const ready = status === "ready";
@@ -100,9 +103,9 @@ export function SurreyAdventure() {
     };
   }, [started, attempt]);
   useEffect(() => {
-    engine.current?.pause(paused || inventory);
-    if (!paused && !inventory && ready) engine.current?.focus();
-  }, [paused, inventory, ready]);
+    engine.current?.pause(paused || inventory || wide || viewHelp);
+    if (!paused && !inventory && !wide && !viewHelp && ready) engine.current?.focus();
+  }, [paused, inventory, wide, viewHelp, ready]);
   useEffect(() => {
     engine.current?.quality(lite ? "low" : "auto");
   }, [lite, ready]);
@@ -271,7 +274,7 @@ export function SurreyAdventure() {
                 has a story.
               </h2>
               <p>
-                Two cases. Six street stories.
+                Three cases. A city that changes.
                 <br />Walk the streets. Explore from above.
               </p>
               <div className={styles.startActions}>
@@ -279,7 +282,7 @@ export function SurreyAdventure() {
                 <button className={saveAvailable ? "" : styles.primary} onClick={() => start(false)}>{replaceSave ? "Replace save & start new" : saveAvailable ? "New Game" : "Play Now"} <span>↗</span></button>
                 {replaceSave && <button onClick={() => setReplaceSave(false)}>Keep my save</button>}
               </div>
-              <small>V0.3 · City Reconstructed · No sign-in</small>
+              <small>V0.4 · Living Surrey · No sign-in</small>
               <p className={styles.startModes}>Street Adventure · Aerial Explore<br />Choose either view using the buttons in the game.</p>
               <p className={styles.contentNotice}>Fictional adult cast. Non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs. Gentle Streets and Mature Encounters controls are below.</p>
             </div>
@@ -318,7 +321,7 @@ export function SurreyAdventure() {
             {state.mode === "aerial" && !paused && !inventory && !viewHelp && <AerialTips />}
             <div className={styles.mission}>
               <span className={styles.eyebrow}>
-                {state.investigation.stage === "closed" && state.stage === "completed" ? "BOTH CASES CLOSED" : state.stage === "completed"
+                {state.missing.stage === "investigating" || state.missing.stage === "return" ? "03 / THE MISSING PERSON" : state.investigation.stage === "closed" && state.stage === "completed" ? "FIRST TWO CASES CLOSED" : state.stage === "completed"
                   ? state.investigation.stage === "available" ? "01 / CASE CLOSED" : "02 / THE SURREY CENTRAL MYSTERY"
                   : state.stage === "available" && ["active", "inconclusive"].includes(state.investigation.stage) ? "02 / THE SURREY CENTRAL MYSTERY" : state.stage === "failed"
                     ? "01 / TRY AGAIN"
@@ -366,7 +369,7 @@ export function SurreyAdventure() {
                 <span>Evidence & inventory {state.inventory.length} ↗</span>
               </button>
             </div>
-            {inventory && locations && <Journal state={state} locations={locations} close={() => setInventory(false)} track={(point, name) => { action(g => g.track(point, name)); setInventory(false); }} />}
+            {inventory && locations && missingPoints && <Journal state={state} locations={locations} missingPoints={missingPoints} close={() => setInventory(false)} track={(point, name) => { action(g => g.track(point, name)); setInventory(false); }} />}
             {state.mode === "aerial" && !inventory && !paused && <div className={styles.aerialDock} data-open={aerialTools}>
               <button className={styles.closeAerialTools} onClick={() => { setAerialTools(false); engine.current?.focus(); }}>Close aerial tools ×</button>
               <div className={styles.compass}><span style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span><strong>AERIAL EXPLORE</strong></div>
@@ -381,7 +384,7 @@ export function SurreyAdventure() {
             {state.waypoint && !inventory && <div className={styles.waypoint}><span>◇ {state.waypoint.name}</span><button onClick={() => action(g => g.clearWaypoint())} aria-label="Clear waypoint">×</button></div>}
             {city && <MiniMap city={city} state={state} wide={wide} close={() => { setWide(false); engine.current?.focus(); }} />}
             <div className={styles.location}>
-              <span className={styles.dot} /> {state.street}
+              <span className={styles.dot} /> {state.street} · {clockLabel(state.time)}
             </div>
             {!paused && !dialogue && !inventory && (
               <div className={styles.prompt}>
@@ -493,6 +496,7 @@ export function SurreyAdventure() {
               <div className={`${styles.screen} ${styles.pauseScreen}`} role="dialog" aria-modal="true" aria-label="Game menu">
                 <p className={styles.eyebrow}>TAKE A BREATHER</p>
                 <h2>The story can wait.</h2>
+                <p>{clockLabel(state.time)} · Jo’s trust {state.trust}/3</p>
                 <p className={styles.menuObjective}><strong>{state.objective}</strong><br />Health {Math.round(state.health)} · Stamina {Math.round(state.stamina)} · ${state.money} · {state.inventory.length} inventory items</p>
                 <p>Street Adventure brings you back to your character. Aerial Explore lets you see the whole neighbourhood. Choose a view at the top when you resume.</p>
                 <p>{saveText}. Saves belong to this browser and this site address.</p>
@@ -529,6 +533,13 @@ export function SurreyAdventure() {
                       Exit expanded view
                     </button>
                   )}
+                </div>
+                <div className={styles.citySettings}>
+                  <label>City clock <select value={state.time.rate} onChange={e => action(g => g.timeRate(Number(e.target.value) as 1 | 4 | 12))}><option value="1">1 minute per second</option><option value="4">4 minutes per second</option><option value="12">12 minutes per second</option></select></label>
+                  <div><button onClick={() => action(g => g.rest(480))}>Rest until morning</button><button onClick={() => action(g => g.rest(1260))}>Rest until night</button></div>
+                  <label><input type="checkbox" checked={state.stableVisibility} onChange={e => action(g => g.visibility(e.target.checked))} /> Stable daylight visibility</label>
+                  <label>City sounds <input aria-label="City sounds volume" type="range" min="0" max="1" step="0.1" value={state.volume} onChange={e => action(g => g.audio(Number(e.target.value)))} /><span>{state.volume === 0 ? "Muted" : `${Math.round(state.volume * 100)}%`}</span></label>
+                  <button onClick={() => action(g => g.audio(state.volume ? 0 : .4))}>{state.volume ? "Mute sounds" : "Enable sounds"}</button>
                 </div>
                 <div className={styles.menuSettings}>
                   <label><input type="checkbox" checked={calm} onChange={e => setCalm(e.target.checked)} /> Gentle streets</label>
@@ -612,6 +623,7 @@ export function SurreyAdventure() {
           places a waypoint; it never moves the character. Street activity pauses in Aerial Explore.
         </p>
         <p>
+          Green markers begin The Missing Person: talk to Tess near the station, compare witnesses or follow the paper trail, and respect Riley’s decision. The clock, cases and pedestrians pause in menus, dialogue and Aerial Explore. Menu provides clock speed, rest, stable daylight and optional sound controls.
           Find Alex at the gold marker, accept the case, inspect the transit
           slip, recover the backpack and return it. You can chase the runner or
           speak to Sam and Jo at the blue marker for help. Purple marks a complete

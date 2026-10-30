@@ -680,3 +680,8 @@ independent onboarding storage. Phone HUD panels open on request through Menu,
 with a compact objective and edge controls. `save.ts` migrates V0.2 map identity
 under the same storage key; simulation restore preserves progress and validates
 only positions against current walkability. No new runtime dependency/service.
+
+
+## Surrey V0.4 — Living Surrey
+
+Surrey V0.4 adds pure time/missing-case modules and opt-in procedural WebAudio, retains one renderer and immutable V0.3 geometry, and explicitly migrates saved schema2 to3 under the old local key. Window/lamp emission shares materials; pedestrian schedules and distance updates remain bounded. See `projects/surrey/README.md` and `SURREY_V04_RELEASE_2026-10-30.md`.

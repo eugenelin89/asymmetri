@@ -26,6 +26,8 @@ export function buildBuildings(scene: THREE.Scene, city: City) {
   function facade(kind: typeof styles[number], variant: number) {
     const c = document.createElement("canvas"); c.width = c.height = 128;
     const ctx = c.getContext("2d")!;
+    const mask = document.createElement("canvas"); mask.width = mask.height = 128;
+    const light = mask.getContext("2d")!; light.fillStyle = "black"; light.fillRect(0, 0, 128, 128);
     const glass = kind === "glass" || kind === "civic", residential = kind === "residential" || kind === "apartment";
     ctx.fillStyle = glass ? ["#8badb6", "#739da9", "#99b3b8"][variant] : ["#ebe8db", "#d4cec0", "#e0d7cb"][variant]; ctx.fillRect(0, 0, 128, 128);
     const cell = glass ? 16 : 32;
@@ -33,13 +35,16 @@ export function buildBuildings(scene: THREE.Scene, city: City) {
       for (let x = 0; x < 128; x += cell) {
         ctx.fillStyle = (x / cell + y / 32 + variant) % 7 === 0 ? "#c7d1c1" : ["#547584", "#668992", "#78939a"][((x / cell + y / 32) % 3)];
         ctx.fillRect(x + (glass ? 1 : 6), y + 5, cell - (glass ? 2 : 11), glass ? 25 : 20);
+        if ((x / cell + y / 32 + variant) % 3 === 0) { light.fillStyle = "#ffdc9c"; light.fillRect(x + (glass ? 1 : 6), y + 5, cell - (glass ? 2 : 11), glass ? 25 : 20); }
         if (residential) { ctx.fillStyle = "#b6b6ab"; ctx.fillRect(x + 3, y + 25, cell - 6, 3); ctx.fillStyle = "#767f7c"; ctx.fillRect(x + 4, y + 21, cell - 8, 1); }
         if (kind === "storefront") { ctx.fillStyle = "#9a8270"; ctx.fillRect(x, y + 29, cell, 2); }
       }
       ctx.fillStyle = glass ? "#b0c3c0" : "#bcbcb1"; ctx.fillRect(0, y, 128, glass ? 1 : 2);
     }
     const texture = new THREE.CanvasTexture(c); texture.wrapS = texture.wrapT = THREE.RepeatWrapping; texture.repeat.set(glass ? .065 : .08, .08); texture.colorSpace = THREE.SRGBColorSpace;
-    return new THREE.MeshStandardMaterial({ color: palettes[styles.indexOf(kind)], map: texture, roughness: glass ? .32 : .82, metalness: glass ? .18 : 0 });
+    const emission = new THREE.CanvasTexture(mask); emission.wrapS = emission.wrapT = THREE.RepeatWrapping; emission.repeat.copy(texture.repeat); emission.colorSpace = THREE.SRGBColorSpace;
+    const m = new THREE.MeshStandardMaterial({ emissive: 0xffe8b9, emissiveMap: emission, emissiveIntensity: 0, color: palettes[styles.indexOf(kind)], map: texture, roughness: glass ? .32 : .82, metalness: glass ? .32 : 0 });
+    m.userData.cityWindow = true; return m;
   }
   function extrude(b: City["buildings"][number], height: number, start = 0, scale = 1) {
     const solid = new THREE.ExtrudeGeometry(footprintShape(b.shape), { depth: height, bevelEnabled: false, steps: 1 });

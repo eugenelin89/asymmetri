@@ -717,3 +717,8 @@ Menu/map/aerial-tool close paths, mission/inventory save continuity, representat
 sections of both cases and repeated canvas/resource stability. Check 320/390px,
 tablet, desktop and short landscape viewports. Capture FPS, DPR, draw calls and
 geometry/texture counts with context, and distinguish emulation from hardware.
+
+
+## Surrey V0.4 — Living Surrey
+
+Surrey V0.4 extends `npm run test:surrey` to44 tests, including both missing-person approaches/endings, schedule/clock/light state, migration validation and camera clipping. Browser acceptance must cover new-case completion, old cases, night visibility, compact phones, renderer reuse and reload. Responsive emulation does not satisfy physical-device acceptance.

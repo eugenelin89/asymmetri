@@ -24,3 +24,11 @@ export function createAerial(bounds: City["bounds"], player: Point) {
   }
   return { state, focus, pan, orbit, zoom, pose };
 }
+
+/** Fit a third-person camera continuously along the player's unobstructed sightline. */
+export function fitStreetCamera(origin: Point, desired: Point, clear: (a: Point, b: Point) => boolean): Point {
+  let lo = 0, hi = 1;
+  if (clear(origin, desired)) return desired;
+  for (let i = 0; i < 10; i++) { const t = (lo + hi) / 2, p: Point = [origin[0] + (desired[0] - origin[0]) * t, origin[1] + (desired[1] - origin[1]) * t]; if (clear(origin, p)) lo = t; else hi = t; }
+  return [origin[0] + (desired[0] - origin[0]) * Math.max(0, lo - .04), origin[1] + (desired[1] - origin[1]) * Math.max(0, lo - .04)];
+}

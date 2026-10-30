@@ -691,3 +691,8 @@ height units are verified as metres; all retained values are source-matched, wit
 unknown survey dates/methods. Flat terrain is a documented datum-related fallback.
 The current source link is `/surrey/v0.3-2026-10-30/manifest.json`; never replace
 published V0.1 bytes. Architectural detail is original artistic reconstruction.
+
+
+## Surrey V0.4 — Living Surrey
+
+Surrey is V0.4 — Living Surrey, with three complete fictional cases, a day/night city and explicitly unresolved terrain datum. Keep its renamed public name and GIS Apps route. Do not describe desktop viewport tests as physical iPhone acceptance. Centralized content remains in `content/site.ts`.

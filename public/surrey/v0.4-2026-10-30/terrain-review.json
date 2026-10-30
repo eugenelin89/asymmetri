@@ -1,0 +1,281 @@
+{
+  "reviewed": "2026-10-30",
+  "decision": "flat-fallback",
+  "bbox": [
+    -122.858,
+    49.182,
+    -122.84,
+    49.195
+  ],
+  "verticalDatum": null,
+  "demHorizontalCrs": "EPSG:26910",
+  "sampleLasHorizontalCrs": "EPSG:3157",
+  "resolutionMetres": 0.5,
+  "demVerticalUnitsVerified": false,
+  "sampleLasVerticalUnits": "metres",
+  "accuracy": null,
+  "acquisition": "April 2025 is stated for the contour derivative; exact DEM acquisition window remains unverified.",
+  "coverage": "Game extent lies in NW quadrant; 16 smaller LAS tiles intersect it. Numeric MapServer queries work, but datum and native-equivalence are unverified.",
+  "missing": [
+    "authoritative 2025 DEM vertical datum and realization",
+    "geoid model where relevant",
+    "verified DEM height units and linkage to LAS",
+    "quantified accuracy and acquisition documentation"
+  ],
+  "boundedAccess": {
+    "requests": 26,
+    "bytes": 116418,
+    "fullArchivesDownloaded": false,
+    "pointSamples": [
+      {
+        "lon": -122.849,
+        "lat": 49.187,
+        "serviceValue": 83.019997
+      },
+      {
+        "lon": -122.85,
+        "lat": 49.19,
+        "serviceValue": 83.419998
+      }
+    ],
+    "limitation": "Service pixel values do not establish a datum, accuracy or native raster equivalence."
+  },
+  "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  "attribution": "Contains information licensed under the Open Government License \u2013 City of Surrey.",
+  "sources": [
+    {
+      "file": "services-root.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services?f=json",
+      "status": 200,
+      "bytes": 3623,
+      "sha256": "661cef72b6c0ed4071a8131f6df3c30814473d407838638870d50cb67c4e1bbe",
+      "retrievedUtc": "2026-10-30T21:31:24.476066+00:00",
+      "contentType": "application/json;charset=UTF-8"
+    },
+    {
+      "file": "elevation-service.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/Public/Elevation/MapServer?f=pjson",
+      "status": 200,
+      "bytes": 6101,
+      "sha256": "50cf6ccf4fdc862c3a19793afc4d6b3e4d4b9676ea496789f6963c14274d0f20",
+      "retrievedUtc": "2026-10-30T21:31:23.820675+00:00",
+      "contentType": "text/plain;charset=UTF-8"
+    },
+    {
+      "file": "elevation2025-layer.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/324?f=pjson",
+      "status": 200,
+      "bytes": 2566,
+      "sha256": "685f6fcef1f5745b215a7de7ae25a40895867a547ef6bea86168cd827db2d37a",
+      "retrievedUtc": "2026-10-30T21:31:23.864880+00:00",
+      "contentType": "text/plain;charset=UTF-8"
+    },
+    {
+      "file": "quadrant-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/46783be7fcd841cf913cee5fcdf7bd81?f=pjson",
+      "status": 200,
+      "bytes": 1691,
+      "sha256": "22a269dac4415e8bf48c6670a9fb920e1298109805f718c1a0c0e96fadd67247",
+      "retrievedUtc": "2026-10-30T21:31:23.903122+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "quadrant-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/46783be7fcd841cf913cee5fcdf7bd81/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 8034,
+      "sha256": "6df532354fb4d1a069f74ffa386d9902a4967ea44724852ca8527511c6b3ac04",
+      "retrievedUtc": "2026-10-30T21:31:24.056228+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "dem-app-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/b3dc7589b82b4ff98dbd801159f3fb5b?f=pjson",
+      "status": 200,
+      "bytes": 1453,
+      "sha256": "c2ca6f12c6572400278bf7c53604d8b38dbf63f5f56ace8b6b776175b7af50c3",
+      "retrievedUtc": "2026-10-30T21:31:24.019576+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "dem-app-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/b3dc7589b82b4ff98dbd801159f3fb5b/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 8799,
+      "sha256": "828507446cbd4c0d4a5c5f47a251119199e7f67d407ac48ce6ca0d36a314c8ff",
+      "retrievedUtc": "2026-10-30T21:31:24.275009+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "lidar-index-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/50619c6729d54733a86c0ddfdc272649?f=pjson",
+      "status": 200,
+      "bytes": 1613,
+      "sha256": "d4e86574b7c123e6d0fb0839c248b239a0404055e06ad1ad68e6c0e70197f1aa",
+      "retrievedUtc": "2026-10-30T21:31:24.147603+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "lidar-index-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/50619c6729d54733a86c0ddfdc272649/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 10653,
+      "sha256": "e9124fbb510a4b27557e9b079c29d275ae949b52773e6c2a25360ed0a86d6833",
+      "retrievedUtc": "2026-10-30T21:31:24.375382+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "lidar-app-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/f52d5bbece05419e9717231c493e616d?f=pjson",
+      "status": 200,
+      "bytes": 1553,
+      "sha256": "97a66aeb02d71ea237175ed83068809be72c6fe0291ef2b2fd26abba429961e4",
+      "retrievedUtc": "2026-10-30T21:31:25.270656+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "lidar-app-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/f52d5bbece05419e9717231c493e616d/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 11060,
+      "sha256": "1fb37cbfe43f6f2fd2d8c508cdb98722950ad3293d72e528ea35d73a169ac51d",
+      "retrievedUtc": "2026-10-30T21:31:24.592609+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "contours-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/b810ad1573324d7f92bed23ec05dca9a?f=pjson",
+      "status": 200,
+      "bytes": 3629,
+      "sha256": "98586031372522da157469807d5cdd9576d1e6c66879a4102c6e2f03f238c0e2",
+      "retrievedUtc": "2026-10-30T21:31:24.500031+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "contours-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/b810ad1573324d7f92bed23ec05dca9a/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 12227,
+      "sha256": "76f0b6c6dc94a317bffbc06ce2029ef3041b29b42c8db689ce1a0a74cf02fedc",
+      "retrievedUtc": "2026-10-30T21:31:24.727810+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "profile-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/8052e176864b444e8ce94edb5a4c9c2b?f=pjson",
+      "status": 200,
+      "bytes": 1440,
+      "sha256": "c2d9ed419e9c55d64f0da86c5654a28eae5491c5ffc3e94607d9c8e4a97ef862",
+      "retrievedUtc": "2026-10-30T21:31:24.626448+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "profile-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/8052e176864b444e8ce94edb5a4c9c2b/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 8066,
+      "sha256": "712d928f277ca7e49055050af899d102dc5f712694ca958f3f821d8d64656676",
+      "retrievedUtc": "2026-10-30T21:31:24.831219+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "basemap-item.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/d7cb7dfc7c4b4efc8c463b98fb784483?f=pjson",
+      "status": 200,
+      "bytes": 1375,
+      "sha256": "97efc69aad4adcc8e926e34ba836bd9c0d8cbf59b90f338fba869057afaf5d72",
+      "retrievedUtc": "2026-10-30T21:31:24.762492+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "basemap-metadata.xml",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/d7cb7dfc7c4b4efc8c463b98fb784483/info/metadata/metadata.xml",
+      "status": 200,
+      "bytes": 8173,
+      "sha256": "19e749522d5c6a42edb146ad70c09b78f64c85911cbe89b6c273168c56c608e2",
+      "retrievedUtc": "2026-10-30T21:31:25.097665+00:00",
+      "contentType": "application/xml"
+    },
+    {
+      "file": "profile-data.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/8052e176864b444e8ce94edb5a4c9c2b/data?f=pjson",
+      "status": 200,
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retrievedUtc": "2026-10-30T21:31:24.961049+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "dem-app-data.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/b3dc7589b82b4ff98dbd801159f3fb5b/data?f=pjson",
+      "status": 200,
+      "bytes": 6426,
+      "sha256": "74e8dd4bb1828e7451740fa10d056a10b6f71ab65e69c9b96e7e7a35bba38fff",
+      "retrievedUtc": "2026-10-30T21:31:25.046830+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "lidar-app-data.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/f52d5bbece05419e9717231c493e616d/data?f=pjson",
+      "status": 200,
+      "bytes": 4221,
+      "sha256": "67d2d7c6e6dd2bdc687a462017e61b24eadd943a0cfa53f4f06d3ca6255ce956",
+      "retrievedUtc": "2026-10-30T21:31:25.237894+00:00",
+      "contentType": "text/plain;charset=utf-8"
+    },
+    {
+      "file": "layer-metadata.xml",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/324/metadata",
+      "status": 200,
+      "bytes": 257,
+      "sha256": "788962088c05ce867be2873477b3a5ec6612b47abede397cc2cb86ecd326f314",
+      "retrievedUtc": "2026-10-30T21:33:38.283104+00:00",
+      "contentType": "text/xml;charset=UTF-8"
+    },
+    {
+      "file": "services-public.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/Public?f=json",
+      "status": 200,
+      "bytes": 713,
+      "sha256": "fcec4938953a5bccc383fe0cc736bedc4afa978a78f269eb92abede7946fc027",
+      "retrievedUtc": "2026-10-30T21:33:38.187803+00:00",
+      "contentType": "application/json;charset=UTF-8"
+    },
+    {
+      "file": "profile-page.html",
+      "url": "https://cosmos.surrey.ca/external/tools/profile/",
+      "status": 200,
+      "bytes": 5901,
+      "sha256": "924da69f1e604edc7c4df80b1f11ae51db883d5dbabcbecbea72190b7a85bdf0",
+      "retrievedUtc": "2026-10-30T21:33:38.085523+00:00",
+      "contentType": "text/html"
+    },
+    {
+      "file": "licence-data.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/55089a19491a4fe59a41e059fd8af708/data?f=json",
+      "status": 200,
+      "bytes": 6492,
+      "sha256": "3765c2357f93a57b7034b6950640accbb91a6acf9e35e189bf356ffdc21b5384",
+      "retrievedUtc": "2026-10-30T21:33:38.204068+00:00",
+      "contentType": "application/json;charset=utf-8"
+    },
+    {
+      "file": "elevation-sample-1.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/identify?f=pjson&geometry=-122.849%2C49.187&geometryType=esriGeometryPoint&sr=4326&layers=all%3A324&tolerance=0&mapExtent=-122.858%2C49.182%2C-122.840%2C49.195&imageDisplay=1000%2C1000%2C96&returnGeometry=false",
+      "status": 200,
+      "bytes": 176,
+      "sha256": "def27b4ef4b2b2562aa20a02e52229142fb486fff3fa0703e396e794e08c9370",
+      "retrievedUtc": "2026-10-30T21:33:38.326948+00:00",
+      "contentType": "text/plain;charset=UTF-8"
+    },
+    {
+      "file": "elevation-sample-2.json",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/identify?f=pjson&geometry=-122.85%2C49.19&geometryType=esriGeometryPoint&sr=4326&layers=all%3A324&tolerance=0&mapExtent=-122.858%2C49.182%2C-122.840%2C49.195&imageDisplay=1000%2C1000%2C96&returnGeometry=false",
+      "status": 200,
+      "bytes": 176,
+      "sha256": "117e71f7344ee1b631425ebec1710c6fbc3f83bd5aa6fe7a5bd04c95887be1ad",
+      "retrievedUtc": "2026-10-30T21:33:38.450854+00:00",
+      "contentType": "text/plain;charset=UTF-8"
+    }
+  ]
+}

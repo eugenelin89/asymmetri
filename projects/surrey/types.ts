@@ -68,6 +68,11 @@ export type StreetEncounter = {
   variant: boolean;
 };
 export type Snapshot = {
+  time: import("./time").CityTime;
+  missing: import("./missing").MissingCase;
+  trust: number;
+  stableVisibility: boolean;
+  volume: number;
   player: Pose;
   health: number;
   stamina: number;
@@ -107,6 +112,10 @@ export type Game = {
   track(point: Point, name: string): void;
   clearWaypoint(): void;
   mature(value: boolean): void;
+  timeRate(value: 1 | 4 | 12): void;
+  rest(minutes: 480 | 1260): void;
+  visibility(value: boolean): void;
+  audio(value: number): void;
   save(): boolean;
   pause(value: boolean): void;
   recover(): void;
