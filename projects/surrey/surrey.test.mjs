@@ -563,7 +563,7 @@ test('v2 saves migrate new fields explicitly while preserving old progress and r
   const sim = createSimulation(city); sim.state.money = 158; sim.state.helped = true; sim.state.stage = 'completed'; sim.state.inventory = ['Yellow transit slip']; sim.mature(true);
   const legacy = sim.serialize(); legacy.version = 2;
   for (const key of ['time', 'missing', 'trust', 'stableVisibility', 'volume']) delete legacy.state[key];
-  const migrated = parseSave(JSON.stringify(legacy)); assert.ok(migrated); assert.equal(migrated.version, 3); assert.equal(migrated.state.money, 158); assert.equal(migrated.state.trust, 1); assert.deepEqual(migrated.state.time, newTime());
+  const migrated = parseSave(JSON.stringify(legacy)); assert.ok(migrated); assert.equal(migrated.version, 4); assert.equal(migrated.state.money, 158); assert.equal(migrated.state.trust, 1); assert.deepEqual(migrated.state.time, newTime());
   assert.deepEqual(migrated.state.player, legacy.state.player); assert.equal(migrated.state.mature, true);
   for (const [key, value] of [['time', { day: 0, minutes: 1600, rate: 999 }], ['trust', 1.5], ['volume', 2], ['stableVisibility', 'yes'], ['missing', { ...migrated.state.missing, stage: 'closed', ending: 'reunion', reward: 75 }]]) {
     const invalid = structuredClone(migrated); invalid.state[key] = value; assert.equal(parseSave(JSON.stringify(invalid)), null, key);
@@ -604,4 +604,114 @@ test('scene teardown disposes shared geometry, materials and both color/emission
   for (const [id, object] of [['geometry',geometry],['material',material],['map',map],['emission',emission]]) object.addEventListener('dispose',()=>counts[id]++);
   disposeScene(scene, {dispose(){counts.renderer++},forceContextLoss(){counts.context++}}, null, {remove(){counts.canvas++}});
   assert.deepEqual(counts, { geometry:1, material:1, map:1, emission:1, renderer:1, context:1, canvas:1 });
+});
+
+const vehicle = await import("./vehicle.ts");
+const transport = await import("./transport.ts");
+const transportSource = JSON.parse(readFileSync(new URL("../../public/surrey/v0.5-2026-10-30/transport.json",import.meta.url)));
+const transportWorld = transport.createTransport(city,world);
+const neutral = {throttle:0,steering:0,brake:false};
+function driveInputs(sim, frames=18000) {
+  let progress=0,contacts=0;
+  for(let i=0;i<frames && sim.state.delivery.stage==="accepted";i++) {
+    const car=sim.state.vehicle.car,path=sim.transport.route;
+    // Read-only route guidance drives only W/S/A/D/Space-equivalent inputs.
+    while(progress<path.length && distance([car.x,car.z],[transport.onPath(path,progress).x,transport.onPath(path,progress).z])<6) progress+=.5;
+    const target=transport.onPath(path,Math.min(path.length,progress));
+    const end=path.points.at(-1), endDistance=distance([car.x,car.z],end);
+    const error=Math.atan2(Math.sin(Math.atan2(target.x-car.x,target.z-car.z)-car.yaw),Math.cos(Math.atan2(target.x-car.x,target.z-car.z)-car.yaw));
+    const braking=endDistance<5 && sim.state.delivery.checkpoint>=path.points.length-1;
+    sim.tick(1/60,0,0,false,{throttle:braking?0:car.speed<4?1:0,steering:braking?0:Math.abs(error)>.018?Math.sign(error):0,brake:braking});
+    assert.ok(sim.transport.surface.fits(sim.state.vehicle.car),"Full vehicle stays on validated road");
+    if(sim.state.vehicle.car.blocked) contacts++;
+    if(contacts>8) break;
+  }
+  return contacts;
+}
+test("transport geometry is pinned, excludes closed roads/curbs and supports complete body paths",()=>{
+  assert.equal(transportSource.parentSha256,manifest.sha256);
+  assert.deepEqual(transportSource.roads.map(r=>r.name),["Central Ave","City Parkway","City Parkway"]);
+  assert.deepEqual(transportSource.validation.intersectingClosedSourceIds,[162865,184997]);
+  assert.equal(transportSource.driveSurface.length,1);
+  for(const path of [transportWorld.route,transport.pathMetrics(transport.transportData.trafficPath)]) {
+    for(let d=0;d<=path.length;d+=.1) assert.ok(transportWorld.surface.fits(transport.onPath(path,d)),`Full 4.16×2.04m footprint at ${d}`);
+  }
+  for(const p of [[0,0],city.anchors.spawn,city.anchors.holland??[0,600],[-100,180]]) assert.equal(transportWorld.surface.allowed(p),false,"Pedestrian ground is not a road");
+  assert.equal(transport.transportData.graph.edges.length,transport.transportData.graph.nodes.length-1);
+});
+test("full-body collision detects tiny enclosed holes, crossed boundaries, rotation and swept walls",()=>{
+  const surface=vehicle.createVehicleSurface([[[[-20,-30],[20,-30],[20,30],[-20,30]],[[.3,.3],[.4,.3],[.4,.4],[.3,.4]]]]);
+  assert.equal(surface.fits({x:0,z:0,yaw:0}),false,"Interior hole missed by nine sparse body samples");
+  const wall=vehicle.createVehicleSurface([[[[-8,-20],[8,-20],[8,0],[-8,0]]],[[[-8,.02],[8,.02],[8,20],[-8,20]]]]);
+  const hit=vehicle.stepVehicle({x:0,z:-2.15,yaw:0,speed:13,steer:0,blocked:false},{...neutral,throttle:1},.1,wall.fits);
+  assert.ok(hit.blocked);assert.equal(hit.speed,0);assert.ok(wall.fits(hit));assert.ok(hit.z<-2.08);
+  assert.equal(wall.fits({x:7,z:-8,yaw:Math.PI/2}),false,"Rotated full body cannot cross edge");
+});
+test("driving accelerates, brakes, reverses, recentres and is stable across frame rates",()=>{
+  const start={x:0,z:0,yaw:0,speed:0,steer:0,blocked:false},allowed=()=>true;
+  const run=(hz)=>{let car={...start};for(let i=0;i<hz*3;i++)car=vehicle.stepVehicle(car,{throttle:1,steering:i<hz?0:.4,brake:false},1/hz,allowed);return car;};
+  const a=run(30),b=run(60),c=run(120);assert.ok(a.speed>5);assert.ok(distance([a.x,a.z],[b.x,b.z])<.05);assert.ok(distance([a.x,a.z],[c.x,c.z])<.05);
+  let car=a;for(let i=0;i<120;i++)car=vehicle.stepVehicle(car,{...neutral,throttle:-1},1/60,allowed);assert.ok(car.speed<0);assert.ok(Math.abs(car.steer)<.001);
+  for(let i=0;i<60;i++)car=vehicle.stepVehicle(car,{...neutral,brake:true},1/60,allowed);assert.equal(car.speed,0);
+});
+test("entry requires proximity, exit requires stopping and clear reachable space; free car persists",()=>{
+  const sim=createSimulation(city);const original=structuredClone(sim.state);sim.interact();assert.equal(sim.state.vehicle.occupied,false);
+  walk(sim,[20,-65.3]);sim.interact();assert.ok(sim.state.vehicle.occupied);assert.equal(sim.state.inventory.length,original.inventory.length);
+  for(let i=0;i<60;i++)sim.tick(1/60,0,0,false,{...neutral,throttle:1});
+  sim.interact();assert.ok(sim.state.vehicle.occupied,"Cannot exit while moving");
+  for(let i=0;i<60;i++)sim.tick(1/60,0,0,false,{...neutral,brake:true});
+  const parked=structuredClone(sim.state.vehicle.car);sim.interact();assert.equal(sim.state.vehicle.occupied,false);assert.ok(world.fits([sim.state.player.x,sim.state.player.z]));assert.ok(vehicle.bodyDistance(parked,[sim.state.player.x,sim.state.player.z])>.5);assert.deepEqual(sim.state.vehicle.car,parked);
+  assert.equal(transportWorld.exit(parked,[-1,1].flatMap(side=>[0,-1.5,1.5].map(fore=>({point:[parked.x+side*2*Math.cos(parked.yaw)+fore*Math.sin(parked.yaw),parked.z-side*2*Math.sin(parked.yaw)+fore*Math.cos(parked.yaw)],radius:1})))),null);
+});
+test("delivery completes with real walk and digital drive inputs, parking, handoff and one reward",()=>{
+  const sim=createSimulation(city);sim.calm(true);walk(sim,transport.transportData.giver);sim.interact();assert.equal(sim.state.dialogue.context,"delivery:start");sim.choose("accept");assert.ok(sim.state.inventory.includes(transport.PARCEL));
+  walk(sim,[20,-65.3]);sim.interact();assert.ok(sim.state.vehicle.occupied);
+  const contacts=driveInputs(sim);assert.equal(contacts,0,"Verified route is driveable with ordinary digital inputs");assert.equal(sim.state.delivery.stage,"arrived");
+  const parked=structuredClone(sim.state.vehicle.car);sim.interact();assert.equal(sim.state.vehicle.occupied,false);walk(sim,transport.transportData.recipient);sim.interact();assert.equal(sim.state.delivery.stage,"closed");assert.equal(sim.state.money,75);assert.equal(sim.state.delivery.reward,55);assert.ok(!sim.state.inventory.includes(transport.PARCEL));
+  sim.dismiss();sim.interact();assert.equal(sim.state.money,75);assert.deepEqual(sim.state.vehicle.car,parked);assert.equal(sim.state.stage,"available");assert.equal(sim.state.missing.stage,"available");
+});
+test("car aerial/pause state, recovery and schema3 migration preserve all older progress",()=>{
+  const sim=createSimulation(city);sim.state.money=193;sim.state.trust=2;
+  const legacy=sim.serialize();legacy.version=3;delete legacy.state.vehicle;delete legacy.state.delivery;delete legacy.state.drivingDistance;
+  const migrated=parseSave(JSON.stringify(legacy));assert.ok(migrated);assert.equal(migrated.version,4);assert.equal(migrated.state.money,193);assert.equal(migrated.state.trust,2);assert.deepEqual(migrated.state.time,legacy.state.time);
+  const resumed=createSimulation(city);resumed.restore(migrated);walk(resumed,[20,-65.3]);resumed.interact();resumed.tick(.1,0,0,false,{...neutral,throttle:1});
+  resumed.mode("aerial");const before=resumed.serialize();resumed.tick(.1,0,0,false,{...neutral,throttle:1,steering:1});assert.deepEqual(resumed.serialize().state,before.state);assert.deepEqual(resumed.serialize().runtime,before.runtime);
+  resumed.mode("ground");assert.deepEqual(resumed.state.vehicle.car,before.state.vehicle.car);
+  const saved=resumed.serialize();saved.state.vehicle.car.x=600;saved.state.vehicle.car.z=700;saved.state.delivery.stage="accepted";saved.state.inventory.push(transport.PARCEL);
+  const restored=createSimulation(city);restored.restore(parseSave(JSON.stringify(saved)));assert.ok(restored.transport.surface.fits(restored.state.vehicle.car));assert.equal(restored.state.vehicle.car.speed,0);assert.equal(restored.state.vehicle.occupied,true);assert.equal(restored.state.delivery.stage,"accepted");assert.equal(restored.state.money,193);assert.equal(restored.state.player.x,restored.state.vehicle.car.x);
+  restored.recover();assert.equal(restored.state.delivery.stage,"accepted");assert.equal(restored.state.delivery.checkpoint,0);
+  for(const patch of [{speed:NaN},{steer:2},{x:Infinity}]){const bad=structuredClone(saved);Object.assign(bad.state.vehicle.car,patch);assert.equal(parseSave(JSON.stringify(bad)),null);}
+  const inconsistent=structuredClone(saved);inconsistent.state.delivery.reward=55;assert.equal(parseSave(JSON.stringify(inconsistent)),null);
+});
+test("bounded traffic follows the closed loop, yields to bodies/pedestrians and never crosses curbs",()=>{
+  const network=transport.createTransport(city,world),travel=[0,0,0];
+  for(let i=0;i<1800;i++){const before=network.traffic.map(a=>({...a.pose}));network.tickTraffic(1/60,[-10,-72],[],3);for(const a of network.traffic){assert.ok(network.surface.fits(a.pose));const step=distance([a.pose.x,a.pose.z],[before[a.id].x,before[a.id].z]);assert.ok(step<.06,"No loop-seam teleport");travel[a.id]+=step;}}
+  assert.ok(travel.every(d=>d>50),JSON.stringify(travel));
+  const a=network.traffic[0],stop=[a.pose.x,a.pose.z];network.tickTraffic(.1,stop,[{point:stop,radius:2}],3);for(let i=0;i<30;i++)network.tickTraffic(.1,stop,[{point:stop,radius:2}],3);assert.equal(a.speed,0);
+  assert.equal(vehicle.obstacleFree({x:0,z:0,yaw:0},[{point:[0,2.3],radius:.5}]),false);
+  assert.equal(vehicle.bodiesOverlap({x:0,z:0,yaw:0},{x:1,z:0,yaw:Math.PI/2}),true);
+});
+test("train remains on one joined elevated guideway, dwells and reverses without position jumps",()=>{
+  assert.deepEqual(transportSource.rail.sourceIndices,[6,15,1,19,7]);const path=transportWorld.rail;
+  let last=transport.trainProgress(0,path.length),dwell=0,reverse=false;
+  for(let i=1;i<=3600;i++){const next=transport.trainProgress(i/10,path.length);assert.ok(next>=24&&next<=path.length-24);assert.ok(Math.abs(next-last)<1.3);if(next===last)dwell++;if(next<last)reverse=true;last=next;}
+  assert.ok(dwell>100);assert.ok(reverse);assert.equal(transportSource.rail.deckCentreY,8.2);assert.equal(transportSource.rail.boarding,false);
+});
+
+test('transport models release line and shared car/train GPU resources exactly once', async () => {
+  const THREE=await import('three'), {buildTransport}=await import('./transportScene.ts'), {disposeScene}=await import('./resources.ts');
+  const scene=new THREE.Scene(), sim=createSimulation(city); buildTransport(scene,sim.transport);
+  const resources=new Set(); scene.traverse(o=>{if(o.geometry) resources.add(o.geometry); if(o.material) for(const m of Array.isArray(o.material)?o.material:[o.material]) resources.add(m);});
+  const counts=new Map([...resources].map(r=>[r,0])); for(const r of resources) r.addEventListener('dispose',()=>counts.set(r,counts.get(r)+1));
+  disposeScene(scene,{dispose(){},forceContextLoss(){}},null,{remove(){}});
+  assert.ok(resources.size>15); assert.ok([...counts.values()].every(n=>n===1));
+});
+test('illustrative rail columns have regular separation and stay clear of paved driving roads', async () => {
+  const {railSupports,onSurface}=await import('./surfaces.ts'); const supports=railSupports(city);
+  assert.ok(supports.length>0);
+  for(let i=0;i<supports.length;i++) {
+    assert.equal(onSurface(supports[i],city.pavement),false);
+    assert.ok(supports.slice(i+1).every(q=>distance(supports[i],q)>=24));
+    for(let d=0;d<transportWorld.route.length;d+=.25) assert.ok(vehicle.bodyDistance(transport.onPath(transportWorld.route,d),supports[i])>1.3);
+  }
 });

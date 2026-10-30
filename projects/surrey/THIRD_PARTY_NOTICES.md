@@ -71,3 +71,13 @@ Paper & Pine workshop sign and the four-note synthesised marimba motif are origi
 MIT work. No third-party audio, recorded voices or copied photographic textures were
 added. The fresh terrain metadata review links the existing City open-data licence;
 it does not establish a vertical datum or grant official endorsement.
+
+## V0.5 transport
+
+The new transport JSON derives only from the pinned V0.3 City of Surrey receipts
+under the same Open Government License – City of Surrey. Its manifest records
+lineage, output hash and bounded scope; original snapshots remain untouched.
+Compact cars, wheel/light animation, train bodies/windows/doors, route ribbon,
+side platforms and platform lights are original MIT procedural work. No transit
+logo, proprietary vehicle model or recorded train sound is copied. Guideway height
+and station detail remain illustrative; the train is scenery, not a boarding service.

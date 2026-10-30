@@ -15,7 +15,11 @@ import type { City, Game, Input, Snapshot } from "./types";
 import { lightLevel, timePhase } from "./time";
 import { missingReady } from "./missing";
 import { disposeScene } from "./resources";
+import { buildTransport } from "./transportScene";
+import { bodyDistance } from "./vehicle";
 import { createCityAudio } from "./audio";
+import { railSupports } from "./surfaces";
+import { segmentDistance } from "../vancouver/physics";
 type Callbacks = {
   map(city: City): void;
   update(state: Snapshot): void;
@@ -31,6 +35,7 @@ export async function createGame(
   initial?: SavedGame,
 ): Promise<Game> {
   const city = await loadCity(signal);
+  const supports = railSupports(city);
   signal.throwIfAborted();
   let sim = createSimulation(city);
   if (initial) sim.restore(initial);
@@ -52,7 +57,7 @@ export async function createGame(
   canvas.tabIndex = 0;
   canvas.setAttribute(
     "aria-label",
-    `${surrey.name}. Select Street Adventure to walk or Aerial Explore to see the city. Touch: arrows move, drag looks around, Interact talks, two fingers pan and pinch in Aerial Explore. Menu opens status, map and help. Keyboard: WASD moves, Shift sprints, E interacts, V switches perspective, F finds your character, M opens map, Escape pauses, R recovers. Tab reaches controls.`,
+    `${surrey.name}. Select Street Adventure to walk or Aerial Explore to see the city. Touch: arrows move, drag looks around, Interact talks, two fingers pan and pinch in Aerial Explore. Menu opens status, map and help. Keyboard: WASD moves, Shift sprints, E enters/exits a stopped car or interacts, Space handbrakes, V switches perspective, F finds your character, M opens map, Escape pauses, R recovers the character or car. Tab reaches controls.`,
   );
   host.appendChild(canvas);
   const scene = new THREE.Scene();
@@ -103,6 +108,9 @@ export async function createGame(
     release();
     throw error;
   }
+  const transportScene = buildTransport(scene, sim.transport);
+  let trafficBudget = coarse ? 2 : 3;
+  let drivingOrbit = 0, previousOccupancy = sim.state.vehicle.occupied;
   let populationBudget = coarse ? 12 : 24;
   const ambient = populationPlan(city, sim.world, populationBudget).map((person, i) => {
     const model = scenery.makePerson([0x5b8bba, 0xb98b64, 0xb7a0c3, 0x7a9e70, 0xcea764][i % 5]);
@@ -120,6 +128,12 @@ export async function createGame(
   const report = () => {
     sim.state.cameraYaw = aerial.state.yaw;
     callbacks.update(structuredClone(sim.state));
+    canvas.dataset.vehicle = sim.state.vehicle.occupied ? "driving" : "walking";
+    canvas.dataset.car = `${sim.state.vehicle.car.x.toFixed(2)},${sim.state.vehicle.car.z.toFixed(2)},${sim.state.vehicle.car.yaw.toFixed(3)}`;
+    canvas.dataset.speed = sim.state.vehicle.car.speed.toFixed(2);
+    canvas.dataset.delivery = sim.state.delivery.stage;
+    canvas.dataset.checkpoint = String(sim.state.delivery.checkpoint);
+    canvas.dataset.traffic = String(sim.transport.traffic.filter(a => a.speed > .1).length);
     canvas.dataset.cityTime = sim.state.time.minutes.toFixed(2);
     canvas.dataset.missing = sim.state.missing.stage;
     canvas.dataset.population = String(ambient.filter(a => a.active).length);
@@ -174,10 +188,11 @@ export async function createGame(
     sun.position.set(Math.cos(angle) * 300, 130 + daylight * 190, Math.sin(angle) * 230);
     sun.color.set(daylight < .9 ? 0xefb68c : 0xffe7c3);
     if (Math.abs(s.time.minutes - lastShadowMinute) > 8) { renderer.shadowMap.needsUpdate = true; lastShadowMinute = s.time.minutes; }
+    transportScene.update(s, sim.transport);
     scenery.living(s.elapsed, daylight, night, reduced || s.stableVisibility);
     audio.tick(s.elapsed, distance([p.x, p.z], scenery.performerPoint), !paused && s.mode === "ground" && !s.dialogue && !night);
     const showPeople = s.mode === "ground" || aerial.state.distance < 350;
-    scenery.player.group.visible = showPeople;
+    scenery.player.group.visible = showPeople && !s.vehicle.occupied;
     scenery.staticPeople.forEach(person => { person.visible = showPeople; });
     scenery.player.animate(p, s.elapsed, reduced);
     const thiefMoving =
@@ -230,14 +245,20 @@ export async function createGame(
       aim.lerp(new THREE.Vector3(...view.target), reduced ? 1 : 1 - Math.exp(-6 * dt));
       (scene.fog as THREE.Fog).near = 1300; (scene.fog as THREE.Fog).far = 4200;
     } else {
-      let d = zoom;
-      while (d > 3 && !sim.world.clear([p.x, p.z], [p.x + Math.sin(yaw) * d, p.z + Math.cos(yaw) * d])) d -= .5;
+      if (previousOccupancy !== s.vehicle.occupied) { drivingOrbit = 0; previousOccupancy = s.vehicle.occupied; }
+      if (s.vehicle.occupied) {
+        const target = s.vehicle.car.yaw + Math.PI + drivingOrbit;
+        yaw += Math.atan2(Math.sin(target-yaw),Math.cos(target-yaw)) * (reduced ? 1 : 1-Math.exp(-5*dt));
+      }
+      let d = s.vehicle.occupied ? Math.max(9, zoom+3) : zoom;
+      const clear = (a: [number,number], b: [number,number]) => sim.world.clear(a,b) && supports.every(q=>segmentDistance(q,a,b)>1.3);
+      while (d > 3 && !clear([p.x, p.z], [p.x + Math.sin(yaw) * d, p.z + Math.cos(yaw) * d])) d -= .5;
       desired.set(p.x + Math.sin(yaw) * d, 2.3 + pitch * d, p.z + Math.cos(yaw) * d);
       aim.lerp(new THREE.Vector3(p.x, 1.65, p.z), reduced ? 1 : 1 - Math.exp(-9 * dt));
       (scene.fog as THREE.Fog).near = 300; (scene.fog as THREE.Fog).far = 1500;
     }
     camera.position.lerp(desired, reduced ? 1 : 1 - Math.exp(-6 * dt));
-    if (!isAerial) { const fit = fitStreetCamera([p.x, p.z], [camera.position.x, camera.position.z], sim.world.clear); camera.position.x = fit[0]; camera.position.z = fit[1]; }
+    if (!isAerial) { const fit = fitStreetCamera([p.x, p.z], [camera.position.x, camera.position.z], (a,b)=>sim.world.clear(a,b)&&supports.every(q=>segmentDistance(q,a,b)>1.3)); camera.position.x = fit[0]; camera.position.z = fit[1]; }
     camera.lookAt(aim);
     scenery.you.visible = isAerial;
     scenery.you.position.set(p.x, 9, p.z);
@@ -298,17 +319,19 @@ export async function createGame(
     last = now;
     const forward = Number(pressed("forward")) - Number(pressed("back")),
       right = Number(pressed("right")) - Number(pressed("left"));
+    sim.setPedestrians(ambient.filter(a=>a.active!==false).map(a=>[a.pose.x,a.pose.z]),trafficBudget);
     sim.tick(
       dt,
       -Math.sin(yaw) * forward + Math.cos(yaw) * right,
       -Math.cos(yaw) * forward - Math.sin(yaw) * right,
       pressed("sprint"),
+      { throttle: forward, steering: -right, brake: pressed("handbrake") || pressed("sprint") },
     );
     if (sim.state.mode === "aerial") {
       if (right || forward) aerial.pan(right * dt * aerial.state.distance * .6, forward * dt * aerial.state.distance * .6);
       sim.state.follow = aerial.state.follow;
     } else if (!sim.state.dialogue) {
-      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world, sim.state.time.minutes, populationBudget);
+      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world, sim.state.time.minutes, populationBudget, p=>bodyDistance(sim.state.vehicle.car,p)>.65 && sim.transport.traffic.every(a=>bodyDistance(a.pose,p)>.75));
       ambient.forEach(a => a.model.animate(a.pose, sim.state.elapsed, reduced, a.activity));
     }
     if (now - lastSave > 5000) { save(); lastSave = now; }
@@ -328,6 +351,7 @@ export async function createGame(
         pixelRatio = Math.max(0.75, pixelRatio - 0.2);
         renderer.setPixelRatio(pixelRatio);
         populationBudget = Math.max(8, populationBudget - 4);
+        trafficBudget = Math.max(1, trafficBudget - 1);
         slow = 0;
       }
       frames = 0;
@@ -345,6 +369,7 @@ export async function createGame(
     d: "right",
     ArrowRight: "right",
     Shift: "sprint",
+    " ": "handbrake",
   };
   const key = (e: KeyboardEvent) =>
     e.key.length === 1 ? e.key.toLowerCase() : e.key;
@@ -399,7 +424,7 @@ export async function createGame(
       } else if (prev.button === 2) aerial.pan(-dx * aerial.state.distance / 600, dy * aerial.state.distance / 600);
       else aerial.orbit(dx, dy);
       sim.state.follow = aerial.state.follow;
-    } else if (prev.button === 0) { yaw -= dx * .006; pitch = THREE.MathUtils.clamp(pitch + dy * .003, .15, .85); }
+    } else if (prev.button === 0) { if(sim.state.vehicle.occupied) drivingOrbit -= dx*.006; else yaw -= dx * .006; pitch = THREE.MathUtils.clamp(pitch + dy * .003, .15, .85); }
     pointers.set(e.pointerId, { ...prev, x: e.clientX, y: e.clientY });
     if (paused) render(1);
   };
@@ -517,7 +542,7 @@ export async function createGame(
       render(1); save();
     },
     rotate(value) {
-      if (sim.state.mode === "aerial") aerial.orbit(-value / .006, 0); else yaw += value;
+      if (sim.state.mode === "aerial") aerial.orbit(-value / .006, 0); else if(sim.state.vehicle.occupied) drivingOrbit += value; else yaw += value;
       render(1);
     },
     zoom(value) {

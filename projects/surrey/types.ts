@@ -33,7 +33,7 @@ export type City = {
   walkCells: Record<string, Polygon[]>;
   civic: { name: string | null; centre: Point }[];
 };
-export type Input = "forward" | "back" | "left" | "right" | "sprint";
+export type Input = "forward" | "back" | "left" | "right" | "sprint" | "handbrake";
 export type Pose = {
   x: number;
   z: number;
@@ -68,6 +68,9 @@ export type StreetEncounter = {
   variant: boolean;
 };
 export type Snapshot = {
+  vehicle: import("./transport").VehicleState;
+  delivery: import("./transport").Delivery;
+  drivingDistance: number;
   time: import("./time").CityTime;
   missing: import("./missing").MissingCase;
   trust: number;

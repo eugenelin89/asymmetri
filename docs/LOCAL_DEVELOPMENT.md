@@ -314,3 +314,12 @@ in place or perform acquisition/compilation on the production server.
 Richmond saves use `asymmetri.richmond.save.v1`; browser origins have independent
 saves. Test explicit resets only in your own development game. Report physical
 phone, viewport, pure simulation and browser journey evidence separately.
+
+## Surrey transport iteration
+
+V0.5 uses the existing `npm run test:surrey` / Next / Vinext commands. Its small
+transport JSON is versioned separately from the untouched V0.3 city. Reproduction
+is offline from pinned retained receipts; see `projects/surrey/README.md`.
+Browser acceptance must use normal movement and held pedal controls, with no
+injected saves/poses. Confirm the delivery reward and preserved earlier cases after
+reload. Keep local preview ports separate from concurrent Vancouver/Richmond work.

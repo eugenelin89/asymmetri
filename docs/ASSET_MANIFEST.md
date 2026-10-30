@@ -996,3 +996,19 @@ Surrey V0.4 adds two local JSON provenance assets in `/surrey/v0.4-2026-10-30/` 
   canvas has a keyboard-control accessible description, and the route supplies
   server-rendered controls, coverage, attribution and text explanation. Responsive
   phone controls stay outside the canvas. No external font/image dependency added.
+
+## Surrey V0.5 transport — October 30, 2026
+
+- `public/surrey/v0.5-2026-10-30/transport.json`: 17,135-byte original derivation of
+  retained City road/pavement/curb/median/building/rail data. SHA256
+  `262287b51014c66c617b684f05db0e772a90fe00b2aff029259ea98c05f44627`.
+  Units are local metres, no pixel dimensions/alt text. Adjacent manifest records
+  lineage, source/parent hashes and the City open licence. Role: a conservative
+  driving mask, 218.30m delivery route, 92.27m traffic loop and 811.83m connected rail
+  chain. It is not a navigation/survey product. Earlier snapshots are untouched.
+- `transportScene.ts`: original MIT runtime geometry for four-wheel compact cars,
+  front/rear lights, steering animation, three train cars with doors/windows,
+  route/parking marks and platform lights. No external models, logos, recordings,
+  images or generated bitmap art. Rendered in the existing accessible game canvas;
+  controls, status and map provide textual equivalents. Railway supports are
+  illustrative, spaced and kept off paved roads; boarding is not claimed.

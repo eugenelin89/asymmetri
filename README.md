@@ -248,7 +248,8 @@ deployment. Releases still use the documented SSH candidate/rollback workflow.
 ## Surrey, City of Adventure
 
 A separate playable Labs game with City of Surrey geography, walking, encounters,
-three complete cases, day/night lighting, scheduled pedestrians, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
+four complete cases, a drivable compact car on a validated road slice, bounded traffic, moving train scenery, day/night lighting, scheduled pedestrians, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
+
 ## Richmond Learns to Drive
 
 An independent delivery adventure under GIS Apps at `/labs/richmond`. Drive,

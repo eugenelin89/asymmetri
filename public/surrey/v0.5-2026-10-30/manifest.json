@@ -1,0 +1,36 @@
+{
+  "release": "V0.5 \u2014 On the Move",
+  "version": "v0.5-2026-10-30",
+  "geographicSnapshot": "v0.3-2026-10-30",
+  "cityUrl": "/surrey/v0.3-2026-10-30/city.json",
+  "citySha256": "e4cca4b8f8ace1296201f50f77c9bb1d0093365cbfdabeefabb91709a60cccdf",
+  "parentManifest": "/surrey/v0.4-2026-10-30/manifest.json",
+  "parentManifestSha256": "160098b46c058f402a229d2b34520bc51071f136e6567692d85d212ef9986212",
+  "transport": {
+    "url": "/surrey/v0.5-2026-10-30/transport.json",
+    "bytes": 17135,
+    "sha256": "262287b51014c66c617b684f05db0e772a90fe00b2aff029259ea98c05f44627",
+    "processing": "Offline selected source-road corridors intersected with pavement; subtract buildings, medians, retained non-Open road surfaces and active curbs. Conservative connected component, full-footprint route sampling; runtime boundary and swept checks. Route points form an ordered vehicle graph.",
+    "sourceRoadIndices": [
+      178,
+      36,
+      63
+    ],
+    "extent": "Central Avenue / City Parkway slice only; other rendered streets are not enabled for cars.",
+    "routeLengthM": 218.2977,
+    "trafficLoopLengthM": 92.2725,
+    "railLengthM": 811.8312,
+    "boardable": false
+  },
+  "terrain": {
+    "kind": "flat",
+    "elevation": 0,
+    "verticalDatum": null,
+    "railDeckCentreM": 8.2,
+    "railHeightMethod": "illustrative retained V0.3 separation"
+  },
+  "retained": "All earlier public snapshot bytes and City Centre extent are unchanged. No runtime mapping service.",
+  "originalAssets": "Original MIT compact passenger cars, wheel/light animation, train cars and platform lights; no copied proprietary models, branding or audio.",
+  "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  "attribution": "Contains information licensed under the Open Government License \u2013 City of Surrey."
+}

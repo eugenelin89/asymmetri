@@ -2,11 +2,12 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
+import { transportData } from "./transport";
 import { populationPlan } from "./population";
 import { missingLocations, missingClues, missingWitnesses } from "./missing";
 import { distance } from "./world";
 import { buildBuildings, footprintShape } from "./buildings";
-import { onSurface, TRANSIT_DECK_HEIGHT } from "./surfaces";
+import { onSurface, railSupports, TRANSIT_DECK_HEIGHT } from "./surfaces";
 import { seeded } from "./simulation";
 import { landmarks } from "./landmarks";
 import { storyLocations, witnesses, evidence as evidenceData } from "./story";
@@ -136,9 +137,9 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   for (const line of city.rail)
     for (let i = 1; i < line.length; i++) {
       rails.push(beam(line[i - 1], line[i], TRANSIT_DECK_HEIGHT, 7, 1));
-      if (i % 3 === 0)
-        pillars.push(box(1.3, 8, 1.3, line[i][0], 4, line[i][1]));
     }
+  const supports = railSupports(city);
+  for (const p of supports) pillars.push(box(1.3,8,1.3,p[0],4,p[1]));
   batch(rails, material(0xc4c6bd), true);
   batch(pillars, material(0x9caaa4), true);
   const trees: Point[] = [];
@@ -281,7 +282,7 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     vault.rotateZ(Math.PI / 2); vault.rotateY(Math.PI / 2); vault.translate(-46 + i * 11, 20.5, -123); pale.push(vault);
   }
   // Station platform, transparent-looking glazed hall, stair runs and open canopy.
-  pale.push(box(12, .6, 70, 80, 8.9, 0));
+  pale.push(box(3.2, .6, 70, 71.2, 8.9, 0), box(3.2, .6, 70, 83, 8.9, 0));
   const canopy = new THREE.BufferGeometry(), canopyVertices: number[] = [];
   for (let i = 0; i < 16; i++) {
     const x = -9 + i * 18 / 16, next = x + 18 / 16;
@@ -407,6 +408,10 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     const marker = mesh(new THREE.OctahedronGeometry(.45), new THREE.MeshBasicMaterial({ color: 0x92e4ad, depthTest: false })); marker.position.set(p[0], 3.3, p[1]); missingMarkers.set(actor.id, marker);
   });
   missingClues.forEach(clue => { const p = missing[clue.id as keyof typeof missing]; const object = mesh(new THREE.BoxGeometry(.65, .08, .7), material(0xe7dfb1)); object.position.set(p[0], .18, p[1]); missingObjects.set(clue.id, object); });
+  for (const [i, point] of [transportData.giver,transportData.recipient].entries()) {
+    const person=makePerson(i?0x5f8794:0x62bcb8);person.group.position.set(point[0],0,point[1]);scene.add(person.group);staticPeople.push(person.group);
+    const marker=mesh(new THREE.OctahedronGeometry(.5),new THREE.MeshBasicMaterial({color:0x67d9df}));marker.position.set(point[0],3.4,point[1]);
+  }
   // Original fictional signs, glass shopfronts, planted entrances and bicycle hoops.
   // Deterministic clear sites, separate from every mission interaction area.
   const hoops: THREE.BufferGeometry[] = [], planters: THREE.BufferGeometry[] = [];

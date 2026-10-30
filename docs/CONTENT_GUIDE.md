@@ -714,3 +714,11 @@ airport access or security guidance. Report source footprints separately from
 illustrative heights/façades and original interiors. OSM-derived data is ODbL;
 original code/procedural models are MIT. Physical-phone performance must not be
 claimed from browser viewport emulation.
+
+## Surrey V0.5 copy
+
+`content/site.ts` owns the On the Move status, metadata and manifest link.
+`projects/surrey` owns authored Case04 dialogue and controls. State the bounded
+Central Avenue / City Parkway driving area and unavailable train boarding; do not
+imply citywide routing or measured terrain. Four fictional cases and browser-local
+saves are current capabilities. Physical-phone acceptance remains outstanding.

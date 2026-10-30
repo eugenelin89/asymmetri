@@ -760,3 +760,15 @@ restoring the exact manifest-matching bytes before Retry. Never change live or
 published immutable bytes for fault injection. Pure collision tests additionally
 check that a bumper overlap can separate without allowing cars to pass through
 actors; all eight authored pickup-to-customer road legs use continuous driving.
+
+## Surrey V0.5 — On the Move
+
+`npm run test:surrey` now has 54 tests: existing 44 regressions plus pinned driving
+mask/closed-road/route clearance, small-hole and swept-body collision, 30/60/120Hz
+handling, entry/exit safety, full input-driven delivery, migration/recovery/aerial
+freeze, traffic/pedestrian spacing, continuous train movement, actual transport
+GPU disposal and rail-support clearance. Browser acceptance must independently
+drive the full delivery, exit/reward, reload, and exercise held mobile pedals at
+320/390px and landscape. A renderer-independent driving controller test is not a
+substitute for this browser run. See the V0.5 release record; physical phones remain
+an explicit outstanding acceptance item.

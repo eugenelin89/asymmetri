@@ -49,7 +49,7 @@ export function populationPlan(city: City, world: World, count: number) {
     return { role, crossing, activity: "waiting", active: true, path, target: 1 - i % 2, pause: 1 + i % 5, cooldown: 0, distant: 0, pose: { x: start[0], z: start[1], yaw: 0, moving: false, running: false, blocked: false } };
   });
 }
-export function stepPedestrians(people: Pedestrian[], player: Point, threat: Point | null, dt: number, world: World, minutes = 780, budget = people.length) {
+export function stepPedestrians(people: Pedestrian[], player: Point, threat: Point | null, dt: number, world: World, minutes = 780, budget = people.length, clear: (point:Point)=>boolean = ()=>true) {
   const positions = people.map(p => [p.pose.x, p.pose.z] as Point);
   people.forEach((p, i) => {
     const here = positions[i];
@@ -81,7 +81,9 @@ export function stepPedestrians(people: Pedestrian[], player: Point, threat: Poi
       if (d > .05 && d < 2.2) { dx += (here[0] - q[0]) / d * (2.2 - d); dz += (here[1] - q[1]) / d * (2.2 - d); }
     }
     if (fleeing && threat) { dx += (here[0] - threat[0]) / 5; dz += (here[1] - threat[1]) / 5; }
-    p.pose = move(p.pose, dx, dz, fleeing ? 2.8 : p.role === "commuter" ? 1.4 : 1.15, step, world);
+    const next = move(p.pose, dx, dz, fleeing ? 2.8 : p.role === "commuter" ? 1.4 : 1.15, step, world);
+    if (!clear([next.x,next.z])) { p.pose.moving=false; p.activity="waiting"; p.pause=.25; return; }
+    p.pose = next;
     if (p.pose.blocked) { p.target = 1 - p.target; p.pause = .5 + i % 3 * .2; p.activity = "looking"; }
   });
 }

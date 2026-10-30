@@ -718,3 +718,14 @@ Phone play uses `100dvh`, safe-area insets and a canvas grid row with controls
 outside it. Full status/minimap panels are on demand. A single focused paused
 dialog makes background controls inert. See the project README and handoff for
 geographic coverage, approximation disclosures and measured acceptance limits.
+
+## Surrey V0.5 — On the Move
+
+Surrey-only `vehicle.ts` owns full oriented footprint/boundary and 120Hz swept
+movement; `transport.ts` owns the versioned road mask, ordered route graph, safe
+exit/recovery, traffic and connected train path. `transportScene.ts` adds original
+shared geometry to the existing renderer. Occupancy is a movement state, never a
+third top-level view. Simulation pauses cars/traffic/trains in Aerial Explore.
+Schema4 explicitly migrates old saves and stops cars on reload. `resources.ts`
+now disposes line geometry/materials too. Vancouver/Richmond engines are untouched.
+See the project README and V0.5 release record for bounds and verification.

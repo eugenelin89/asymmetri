@@ -1119,3 +1119,22 @@
   .dialogue { bottom: max(12px, env(safe-area-inset-bottom)); }
   .touchControls button { touch-action: none; user-select: none; -webkit-user-select: none; }
 }
+
+/* V0.5: driving is a movement state within Street Adventure. */
+.driveStatus { position:absolute; right:20px; bottom:28px; z-index:3; display:flex; flex-direction:column; gap:4px; max-width:255px; padding:9px 13px; border-radius:9px; background:#17382edb; color:#f2eddb; pointer-events:none; }
+.driveStatus strong { font-size:1.6rem; line-height:1.2; font-variant-numeric:tabular-nums; }
+.driveStatus small { font-size:.65rem; font-weight:500; }
+.driveStatus > span { font-size:.67rem; }
+.viewport[data-driving="true"][data-mode="ground"] .touchActions { gap:4px; }
+@media (max-width:700px), (pointer:coarse), (max-height:520px) and (orientation:landscape) {
+  .driveStatus { right:max(12px,env(safe-area-inset-right)); bottom:calc(240px + env(safe-area-inset-bottom)); max-width:190px; padding:5px 9px; }
+  .driveStatus strong { font-size:1.1rem; }
+  .driveStatus > span { font-size:.6rem; }
+  .viewport[data-driving="true"] .notice { bottom:calc(300px + env(safe-area-inset-bottom)); }
+  .viewport[data-driving="true"] .dpad button { font-size:.72rem; }
+  .viewport[data-driving="true"][data-mode="aerial"] .driveStatus { bottom:calc(270px + env(safe-area-inset-bottom)); }
+}
+@media (max-height:520px) and (orientation:landscape) {
+  .expanded .driveStatus { bottom:calc(190px + env(safe-area-inset-bottom)); max-width:185px; }
+  .expanded[data-driving="true"] .notice { bottom:42%; left:30%; right:30%; }
+}

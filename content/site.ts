@@ -58,13 +58,13 @@ export const surrey = {
   name: surreyName,
   path: "/labs/surrey",
   tagline: "Survive the streets. Discover the stories.",
-  status: "V0.4 — Living Surrey",
+  status: "V0.5 — On the Move",
   description: "An experimental open-world adventure set in a fictionalized Surrey City Centre.",
   source: { label: "View Surrey source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
   license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/surrey/THIRD_PARTY_NOTICES.md" },
   dataLicence: "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
-  manifest: "/surrey/v0.4-2026-10-30/manifest.json",
-  metadata: { title: `${surreyName} | Asymmetri Labs`, description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve three fictional cases and watch a day/night city change. A free browser adventure with local saves." },
+  manifest: "/surrey/v0.5-2026-10-30/manifest.json",
+  metadata: { title: `${surreyName} | Asymmetri Labs`, description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Walk, drive a compact car on a validated City Centre route, complete four fictional stories and explore a day/night city from above. A free browser adventure with local saves." },
 } as const;
 
 export const richmond = {

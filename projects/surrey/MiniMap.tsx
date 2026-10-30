@@ -1,3 +1,4 @@
+import { transportData } from "./transport";
 import { memo } from "react";
 import type { City, Point, Snapshot } from "./types";
 import styles from "./surrey.module.css";
@@ -76,9 +77,13 @@ export function MiniMap({
       <svg
         viewBox={`${x} ${z} ${span} ${span}`}
         role="img"
-        aria-label={`North-up map. Player near ${state.street}. Gold diamond: ${state.objective}. White: station. Blue: community. Purple: case 02. Green: case 03.`}
+        aria-label={`North-up map. Player near ${state.street}. Gold diamond: ${state.objective}. White: station. Blue: community. Purple: case 02. Green: case 03. Cyan: car and delivery. Pale roads: validated driving area.`}
       >
         <Geometry city={city} />
+        <path d={transportData.polygons.map(p=>p.map(r=>path(r)+"Z").join("")).join("")} fill="#a4b6a0" fillRule="evenodd" opacity=".6" />
+        {(state.delivery.stage === "accepted" || state.vehicle.occupied) && <path d={path(transportData.route)} fill="none" stroke="#67d9df" strokeWidth={2*scale} />}
+        <circle cx={transportData.giver[0]} cy={transportData.giver[1]} r={4*scale} fill="#67d9df" />
+        <rect x={-3*scale} y={-5*scale} width={6*scale} height={10*scale} fill="#67d9df" stroke="#142d28" transform={`translate(${state.vehicle.car.x},${state.vehicle.car.z}) rotate(${-state.vehicle.car.yaw*180/Math.PI})`} />
         {poi.map(({ p, name, color }) => (
           <g key={name}>
             <circle cx={p[0]} cy={p[1]} r={4 * scale} fill={color} />

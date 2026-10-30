@@ -1,5 +1,17 @@
 # Surrey release history
 
+## V0.5 — On the Move
+
+Enterable compact car; bounded acceleration, steering, brake/reverse and full-body
+swept road collision; safe exit/recovery; chase camera; compact held touch pedals
+and km/h display. Complete Jules→car→Quinn projector delivery pays $55 once.
+A validated Central Avenue / City Parkway snapshot powers route guidance and a
+small yielding traffic loop. Original train cars move on one connected elevated
+chain; side platforms and lights improve Surrey Central, without boarding.
+Schema3→4 migration preserves earlier cases and settings; car reload stops safely.
+Browser driving exposed and fixed dense rail-column camera obstruction. GPU teardown
+now includes route/track lines as well as shared meshes. Old snapshots remain intact.
+
 ## V0.4 — Living Surrey
 
 Saved day/night cycle and stable visibility; timed pedestrian roles and activity;

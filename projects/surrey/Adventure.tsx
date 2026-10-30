@@ -194,6 +194,7 @@ export function SurreyAdventure() {
         className={`${styles.viewport} ${expanded ? styles.expanded : ""}`}
         ref={viewport}
         data-mode={state?.mode ?? "ground"}
+        data-driving={state?.vehicle.occupied ?? false}
         onKeyDown={(e) => {
           const target = e.target as HTMLElement;
           if (viewShortcut(e, !ready || paused || inventory || wide || viewHelp || !!dialogue, target.isContentEditable || !!target.closest("input, textarea, select"))) {
@@ -274,15 +275,15 @@ export function SurreyAdventure() {
                 has a story.
               </h2>
               <p>
-                Three cases. A city that changes.
-                <br />Walk the streets. Explore from above.
+                Four stories. A city on the move.
+                <br />Walk. Drive. Explore from above.
               </p>
               <div className={styles.startActions}>
                 {saveAvailable && <button className={styles.primary} onClick={() => start(true)}>Continue Game <span>→</span></button>}
                 <button className={saveAvailable ? "" : styles.primary} onClick={() => start(false)}>{replaceSave ? "Replace save & start new" : saveAvailable ? "New Game" : "Play Now"} <span>↗</span></button>
                 {replaceSave && <button onClick={() => setReplaceSave(false)}>Keep my save</button>}
               </div>
-              <small>V0.4 · Living Surrey · No sign-in</small>
+              <small>V0.5 · On the Move · No sign-in</small>
               <p className={styles.startModes}>Street Adventure · Aerial Explore<br />Choose either view using the buttons in the game.</p>
               <p className={styles.contentNotice}>Fictional adult cast. Non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs. Gentle Streets and Mature Encounters controls are below.</p>
             </div>
@@ -317,11 +318,12 @@ export function SurreyAdventure() {
         {ready && state && (
           <>
             {!paused && !inventory && !dialogue && <button className={styles.compactObjective} onClick={() => setPaused(true)} aria-label={`Mission and player status: ${state.objective}`}><span>◆ {Math.round(Math.hypot(state.marker[0] - state.player.x, state.marker[1] - state.player.z))} m</span><span>{state.objective}</span><span>›</span></button>}
+            {state.vehicle.occupied && !paused && !inventory && !dialogue && !wide && !viewHelp && <div className={styles.driveStatus} aria-label="Driving status"><strong>{Math.round(Math.abs(state.vehicle.car.speed)*3.6)} <small>km/h</small></strong><span>{state.mode === "aerial" ? "Paused in Aerial Explore" : state.vehicle.car.blocked ? "Road edge or actor · brake, reverse or recover" : state.delivery.stage === "accepted" ? `${Math.round(state.drivingDistance)} m · cyan route` : "Central Ave · City Parkway"}</span></div>}
             {viewHelp && !paused && !inventory && !dialogue && <ViewHelp close={closeViewHelp} />}
             {state.mode === "aerial" && !paused && !inventory && !viewHelp && <AerialTips />}
             <div className={styles.mission}>
               <span className={styles.eyebrow}>
-                {state.missing.stage === "investigating" || state.missing.stage === "return" ? "03 / THE MISSING PERSON" : state.investigation.stage === "closed" && state.stage === "completed" ? "FIRST TWO CASES CLOSED" : state.stage === "completed"
+                {state.delivery.stage === "accepted" || state.delivery.stage === "arrived" ? "04 / A RIDE ACROSS SURREY" : state.missing.stage === "investigating" || state.missing.stage === "return" ? "03 / THE MISSING PERSON" : state.investigation.stage === "closed" && state.stage === "completed" ? "FIRST TWO CASES CLOSED" : state.stage === "completed"
                   ? state.investigation.stage === "available" ? "01 / CASE CLOSED" : "02 / THE SURREY CENTRAL MYSTERY"
                   : state.stage === "available" && ["active", "inconclusive"].includes(state.investigation.stage) ? "02 / THE SURREY CENTRAL MYSTERY" : state.stage === "failed"
                     ? "01 / TRY AGAIN"
@@ -386,7 +388,7 @@ export function SurreyAdventure() {
             <div className={styles.location}>
               <span className={styles.dot} /> {state.street} · {clockLabel(state.time)}
             </div>
-            {!paused && !dialogue && !inventory && (
+            {!paused && !dialogue && !inventory && !wide && !viewHelp && (
               <div className={styles.prompt}>
                 {state.mode === "aerial" ? <span>Select Street Adventure to return</span> : state.nearby ? (
                   <button onClick={() => action((g) => g.interact())}>
@@ -394,8 +396,8 @@ export function SurreyAdventure() {
                   </button>
                 ) : (
                   <span>
-                    <span className={styles.keyboardCopy}>{state.player.blocked ? "Path blocked · move around or press R" : "WASD to walk · Shift to sprint"}</span>
-                    <span className={styles.touchCopy}>{state.player.blocked ? "Path blocked · move around or use Recover" : "Hold arrows to walk · hold Sprint to run"}</span>
+                    <span className={styles.keyboardCopy}>{state.vehicle.occupied ? "W accelerate · S brake/reverse · A/D steer · Space handbrake" : state.player.blocked ? "Path blocked · move around or press R" : "WASD to walk · Shift to sprint"}</span>
+                    <span className={styles.touchCopy}>{state.vehicle.occupied ? "Hold pedals and steering · stop to exit" : state.player.blocked ? "Path blocked · move around or use Recover" : "Hold arrows to walk · hold Sprint to run"}</span>
                   </span>
                 )}
               </div>
@@ -408,7 +410,7 @@ export function SurreyAdventure() {
                 {state.message}
               </div>
             )}
-            {!paused && !dialogue && !inventory && (
+            {!paused && !dialogue && !inventory && !wide && !viewHelp && (
               <div
                 className={styles.touchControls}
                 aria-label="Touch movement controls"
@@ -425,7 +427,7 @@ export function SurreyAdventure() {
                     <button
                       key={input}
                       data-direction={input}
-                      aria-label={state.mode === "aerial" ? label.replace("Walk", "Pan") : label}
+                      aria-label={state.mode === "aerial" ? label.replace("Walk", "Pan") : state.vehicle.occupied ? ({forward:"Accelerate",back:"Brake and reverse",left:"Steer left",right:"Steer right"})[input] : label}
                       onPointerDown={(e) => {
                         e.preventDefault();
                         e.currentTarget.setPointerCapture(e.pointerId);
@@ -443,14 +445,14 @@ export function SurreyAdventure() {
                       onKeyUp={() => hold(input, false)}
                       onBlur={() => hold(input, false)}
                     >
-                      {text}
+                      {state.vehicle.occupied && state.mode === "ground" ? ({forward:"Go",back:"Brake",left:"←",right:"→"})[input] : text}
                     </button>
                   ))}
                 </div>
                 <div className={styles.touchActions}>
                   <button
                     disabled={state.mode === "aerial"}
-                    aria-label="Hold to sprint"
+                    aria-label={state.vehicle.occupied ? "Hold handbrake" : "Hold to sprint"}
                     onPointerDown={(e) => {
                       e.preventDefault();
                       e.currentTarget.setPointerCapture(e.pointerId);
@@ -466,14 +468,15 @@ export function SurreyAdventure() {
                     onKeyUp={() => hold("sprint", false)}
                     onBlur={() => hold("sprint", false)}
                   >
-                    Sprint
+                    {state.vehicle.occupied ? "Handbrake" : "Sprint"}
                   </button>
                   <button
                     onClick={() => action((g) => g.interact())}
                     disabled={!state.nearby || state.mode === "aerial"}
                   >
-                    Interact
+                    {state.vehicle.occupied ? "Exit car" : state.nearby === "Enter vehicle" ? "Enter car" : "Interact"}
                   </button>
+                  {state.vehicle.occupied && <button disabled={state.mode === "aerial"} onClick={() => action(g=>g.recover())}>Recover</button>}
                 </div>
               </div>
             )}
@@ -519,7 +522,7 @@ export function SurreyAdventure() {
                       setPaused(false);
                     }}
                   >
-                    Recover at station
+                    {state.vehicle.occupied ? "Recover car on clear road" : "Recover at station"}
                   </button>
                   <button
                     onClick={() => {
@@ -611,7 +614,7 @@ export function SurreyAdventure() {
           How to play <span>Keyboard, mouse & touch</span>
         </summary>
         <p>
-          Walk with WASD or arrow keys. Hold Shift to sprint. Drag the city to
+          Walk with WASD or arrow keys. Hold Shift to sprint. Approach the teal community car and press E to enter. When driving, W accelerates, S brakes and reverses, A/D steer and Space handbrakes. Stop before E exits; R recovers the car. Drive on the marked Central Avenue / City Parkway area. Cyan markers and Journal lead to Jules and the complete projector delivery. All three earlier cases remain available on foot. Drag the city to
           rotate the camera, scroll to change distance. E interacts. M switches
           between local and full maps. Escape pauses; R returns you safely to
           the station. Camera buttons offer a keyboard alternative. On touch

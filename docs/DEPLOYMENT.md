@@ -1447,3 +1447,14 @@ measured candidate, activation or exact blocking evidence.
 ## Surrey V0.4 — Living Surrey
 
 Surrey V0.4 must use the existing guarded exact Linux candidate workflow, refreshed approved main and a complete immediate runtime rollback. Do not deploy while Richmond holds the shared window. No OS, network, database or peer-service change is part of this release. Completed October 30 at 22:26 UTC: runtime `0a73d7c`, Linux build `-btiWXzoBuaN8Yg_3rBIy`; the complete immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v04-20261030`. Private/public checks and peer guards passed. See [V0.4 release receipt](SURREY_V04_RELEASE_2026-10-30.md).
+
+## Surrey V0.5 — On the Move
+
+V0.5 is prepared on `codex/surrey-adventure-v05`. Richmond retains the shared
+main/server window until its explicit handoff; refresh approved main, serving
+source/build, peer identities and complete rollback before any activation.
+Use the existing exact-source Linux candidate workflow and 192MiB available-memory /
+6GiB free-disk floors with continuous guards. Preserve all old geographic bytes,
+Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
+rollback. No OS, DNS, TLS, database or peer-service changes are authorized by this
+release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
