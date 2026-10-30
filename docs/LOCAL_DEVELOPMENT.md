@@ -233,3 +233,12 @@ ASK_CAPABILITY_RUNTIME=receiver node --test receiver/deploy/ask-capability-accep
 ```
 
 They use disposable directories and no model or live authority.
+
+## Vancouver development
+
+See `projects/vancouver/README.md`. Node 24 remains the local runtime. Three.js and
+its type declarations are locked npm dependencies. Optional offline geography
+uses an external Python venv and `projects/vancouver/tools/requirements.txt`; it
+is not required to run the committed snapshot. `npm run test:vancouver` checks
+geometry predicates, bounded driving and dataset provenance/topology.
+The October 30 dependency baseline uses Next.js/eslint-config-next 16.4.3.

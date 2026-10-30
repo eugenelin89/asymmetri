@@ -12,3 +12,5 @@ dist
 coverage
 *.tsbuildinfo
 .wrangler
+
+projects/vancouver/**/__pycache__/

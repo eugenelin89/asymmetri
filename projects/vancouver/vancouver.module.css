@@ -1,0 +1,97 @@
+.page { background: var(--graphite); color: var(--on-dark); min-height: 100vh; }
+.intro { padding: 36px 0 30px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+.breadcrumb { display: flex; gap: 10px; align-items: center; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--on-dark-secondary); margin-bottom: 20px; }
+.breadcrumb a { color: var(--brand-bright); text-decoration: none; }
+.title { font-size: clamp(48px, 7vw, 92px); letter-spacing: -.065em; line-height: .95; margin: 0; font-weight: 600; }
+.tagline { margin: 14px 0 0; color: var(--on-dark-secondary); font-size: clamp(16px, 2vw, 21px); }
+.edition { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; max-width: 290px; font-size: 13px; color: var(--on-dark-secondary); }
+.badge { border: 1px solid var(--line-dark); padding: 8px 12px; border-radius: 4px; color: var(--brand-bright); text-transform: uppercase; font-size: 11px; letter-spacing: .09em; }
+.experience { width: 100%; }
+.viewport { height: min(72vh, 800px); min-height: 460px; position: relative; background: #c5d8dd; color: #173b3c; overflow: hidden; border-radius: 8px 8px 0 0; }
+.viewport:fullscreen { height: 100vh; border-radius: 0; }
+.canvas { position: absolute; inset: 0; }
+.canvas canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.canvas canvas:focus-visible { outline: 3px solid var(--brand-deep); outline-offset: -3px; }
+.toolbar { position: absolute; inset: 18px 18px auto; display: flex; justify-content: space-between; gap: 12px; pointer-events: none; z-index: 2; }
+.modes, .viewActions { display: flex; gap: 4px; pointer-events: auto; }
+.modes { background: #f5f7f5ed; padding: 4px; border-radius: 6px; box-shadow: 0 3px 18px #173b3c14; }
+.toolbar button, .loading button { min-height: 44px; padding: 0 16px; font-size: 13px; font-weight: 600; color: #173b3c; border: 0; border-radius: 4px; background: #f5f7f5ed; cursor: pointer; }
+.modes button { background: transparent; }
+.modes button[aria-pressed="true"] { background: #123c3b; color: #fff; }
+.toolbar button:disabled, .visitButton:disabled { opacity: .45; cursor: default; }
+.locationBadge { position: absolute; top: 88px; left: 22px; display: flex; gap: 8px; align-items: center; font-size: 10px; letter-spacing: .09em; font-weight: 700; pointer-events: none; }
+.locationBadge > span:last-child { color: #34575a; font-weight: 400; margin-left: 8px; }
+.liveDot { width: 6px; height: 6px; background: #006d66; border-radius: 50%; }
+.controlsHint { position: absolute; bottom: 42px; left: 22px; padding: 13px 17px; background: #f5f7f5eb; border-radius: 5px; max-width: calc(100% - 44px); pointer-events: none; }
+.controlsHint strong { display: block; font-size: 15px; margin-bottom: 4px; }
+.controlsHint span { display: block; font-size: 11px; color: #42625e; line-height: 1.65; }
+.controlsHint small { font-size: 12px; font-weight: 400; }
+.controlsHint .arcadeLabel { display: inline; margin-left: 10px; font-size: 9px; letter-spacing: .1em; }
+.sceneNote { position: absolute; bottom: 0; left: 0; right: 0; padding: 7px 20px; background: #edf2eeeb; font-size: 10px; letter-spacing: .02em; text-align: right; }
+.driveControls { position: absolute; right: 20px; bottom: 47px; display: flex; gap: 6px; }
+.driveControls button { width: 48px; height: 48px; border-radius: 7px; border: 1px solid #c2d0c9; color: #173b3c; background: #f5f7f5f0; font-size: 22px; touch-action: none; user-select: none; cursor: pointer; }
+.driveControls button:active { background: var(--brand-primary); }
+.loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 12px; background: #dce6e2; padding: 32px; z-index: 3; }
+.loadingMark { font-size: 64px; font-weight: 600; color: #00766f; letter-spacing: -.08em; }
+.loading h2 { margin: 0; font-size: 24px; letter-spacing: -.03em; }
+.loading p { max-width: 440px; font-size: 14px; line-height: 1.6; margin: 0; }
+.loading a { font-size: 13px; color: #006d66; }
+.discovery { display: grid; grid-template-columns: 1fr 1.25fr; background: var(--light-surface); color: var(--light-ink); border-radius: 0 0 8px 8px; }
+.directory { padding: 30px; border-right: 1px solid var(--light-line); }
+.sectionLabel { display: flex; justify-content: space-between; gap: 16px; color: var(--brand-on-light); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+.sectionLabel span { color: var(--light-secondary); }
+.textToggle { background: transparent; border: 0; font: inherit; color: var(--brand-on-light); cursor: pointer; padding: 0 8px; min-height: 44px; margin: -16px -8px; text-decoration: underline; text-underline-offset: 3px; }
+.search { margin-top: 18px; display: flex; gap: 12px; align-items: center; border: 1px solid var(--light-line); border-radius: 4px; padding: 0 12px; }
+.search input { min-width: 0; width: 100%; min-height: 44px; border: 0; background: transparent; font: inherit; font-size: 14px; color: var(--light-ink); }
+.search input:focus { outline: none; }
+.search:focus-within { outline: 2px solid var(--brand-deep); }
+.placeList { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.placeList button { display: flex; align-items: center; gap: 9px; text-align: left; border: 1px solid transparent; background: transparent; padding: 10px 8px; min-height: 65px; cursor: pointer; border-radius: 4px; font-size: 13px; color: var(--light-ink); }
+.placeList button[aria-pressed="true"] { background: #e3eee8; border-color: #b6d3c9; }
+.placeList button > span:last-child { margin-left: auto; color: var(--brand-on-light); }
+.placeList small { display: block; font-size: 10px; color: var(--light-secondary); margin-top: 3px; }
+.placeNumber { color: #5d7871; font-size: 10px; }
+.detail { padding: 30px 38px; }
+.detail h2 { font-size: clamp(26px, 3vw, 38px); line-height: 1.15; font-weight: 500; letter-spacing: -.035em; margin: 20px 0 14px; }
+.detail p { font-size: 15px; line-height: 1.75; max-width: 590px; margin: 0 0 12px; }
+.detail .detailNote { font-size: 12px; color: var(--light-secondary); }
+.sourceRow { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 11px; color: var(--light-secondary); }
+.sourceRow a { color: var(--brand-on-light); text-underline-offset: 3px; }
+.visitButton { margin-top: 25px; border: 0; background: #123c3b; color: white; min-height: 44px; padding: 12px 18px; font-size: 12px; border-radius: 4px; cursor: pointer; }
+.visitButton span { margin-left: 22px; }
+.notes { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; padding: 35px 0 50px; color: var(--on-dark-secondary); }
+.notes h2 { font-size: 13px; color: var(--on-dark); font-weight: 600; margin: 0 0 10px; }
+.notes p, .notes summary { font-size: 12px; line-height: 1.8; margin: 0 0 10px; }
+.notes a { color: var(--brand-bright); text-underline-offset: 3px; }
+.notes summary { cursor: pointer; }
+.notes ul { padding-left: 18px; font-size: 12px; line-height: 1.8; }
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+@media (max-width: 900px) {
+  .placeList { grid-template-columns: 1fr; }
+  .driveControls { bottom: 150px; }
+  .detail { padding: 28px; }
+}
+@media (max-width: 600px) {
+  .intro { padding: 26px 0 22px; display: block; }
+  .breadcrumb { margin-bottom: 14px; }
+  .edition { align-items: flex-start; text-align: left; margin-top: 18px; max-width: none; }
+  .edition > span:last-child { display: none; }
+  .viewport { height: 66svh; min-height: 420px; border-radius: 5px 5px 0 0; }
+  .toolbar { inset: 10px 10px auto; gap: 4px; }
+  .toolbar button { padding: 0 10px; font-size: 11px; }
+  .viewActions { gap: 3px; }
+  .locationBadge { left: 14px; top: 74px; font-size: 9px; }
+  .locationBadge > span:last-child { display: none; }
+  .controlsHint { left: 10px; bottom: 43px; max-width: calc(100% - 20px); padding: 10px 12px; }
+  .controlsHint span { font-size: 10px; }
+  .controlsHint strong { font-size: 13px; }
+  .sceneNote { padding: 7px 10px; text-align: left; font-size: 9px; }
+  .driveControls { right: 10px; bottom: 148px; }
+  .driveControls button { width: 44px; height: 44px; }
+  .discovery { grid-template-columns: 1fr; }
+  .directory { padding: 22px 18px; border-right: 0; border-bottom: 1px solid var(--light-line); }
+  .placeList { grid-template-columns: 1fr 1fr; }
+  .placeList button { font-size: 11px; padding: 8px 5px; }
+  .detail { padding: 24px 20px; }
+  .notes { grid-template-columns: 1fr; gap: 22px; padding: 28px 0; }
+}

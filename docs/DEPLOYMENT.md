@@ -1309,3 +1309,35 @@ Never combine the fallback's Trade→Investment rewrite with the migration's
 Investment→Trade redirect. The [migration contract](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md)
 records scope and validation; exact commits/builds/manifests belong in the release
 receipt. Do not modify ingress, private receivers or stored records for this move.
+
+## Vancouver V0.1 isolated Linux candidate
+
+The owner explicitly authorized implementation, main push and public experimental
+release on October 30, 2026, including safe resolution of capacity prerequisites.
+The unsupported Ubuntu host remains under the reviewed retained-host exception;
+no OS, Nginx, TLS, DNS or unrelated service change is part of Vancouver. The source
+update remediates the production dependency audit findings without a broad stack
+upgrade. The existing production Node 22 approval continues.
+
+`.github/workflows/website-linux-candidate.yml` builds public source on isolated
+Ubuntu x86_64 with Node 22.23.1, pinned actions and npm 11.6.0. It runs checks,
+Vancouver tests, the production audit and standard Next build; it packages a
+Linux runtime plus source SHA and SHA-256. It has read-only repository permission,
+no production secrets, no SSH access and no automatic deployment. Seven-day CI
+artifact retention is transport only; keep release evidence in owner storage.
+
+Download and verify the successful exact-SHA artifact, create an independent
+application-owned checkout using the existing SSH/Git route, and extract matching
+Linux dependencies/build. Never mix Mac dependencies into production, mutate a
+hard-linked rollback dependency tree, or compile inside the live checkout.
+Retain the 192 MiB production available-memory and 6 GiB free-disk floors through
+preparation, loopback acceptance and activation. Archive only verified older
+inactive website runtimes using the existing lossless retention procedure when
+capacity requires it; keep live and immediate rollback complete on-server.
+
+Validate the candidate on a private loopback port, compare protected route main
+content/assets/canonicals/redirects, then use the complete-directory swap above.
+Preserve the previous release and recheck public HTTPS, services and unrelated
+vhosts. Record exact source/build/artifact/rollback identities and measured
+capacity outside Git. CI success alone is never deployment approval or proof of
+production health; the owner has separately authorized this V0.1 deployment.

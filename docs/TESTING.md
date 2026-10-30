@@ -604,3 +604,20 @@ valuation must not be hidden by the older complete snapshot. Check Vancouver
 times, exact-run evidence links, and the native timeline disclosure on mobile,
 tablet and desktop. No completed turn/request counts or future close times may
 be inferred from citations, heartbeats or an active run label.
+
+## Vancouver V0.1
+
+Run `npm run test:vancouver` for courtyard holes, street distance, bounded
+acceleration/braking/reversing, collision and long-frame anti-tunnelling, geographic
+manifest digest and land/water sanity. Run both Next and Vinext builds, standard
+check, production audit and diff checks. Browser acceptance: scene loads without
+console errors; aerial drag/zoom, landmark selection/search, driving and release
+of held controls, reset, text fallback and pause/resume disposal. Check 320/390,
+768 and desktop widths for overflow and usable controls. Viewport emulation is
+not physical-phone performance validation. Context failures must preserve the
+place list; raw no-JS HTML must include all six summaries/source links.
+
+Ensure unrelated pages request no Vancouver engine/data, and preserve Motion's
+protected routes, tutorial canonical/IDs/images, redirects and BotSquad services.
+The canvas exposes sampled FPS and draw-call counts as read-only DOM data
+attributes for local verification; no measurements are transmitted or stored.

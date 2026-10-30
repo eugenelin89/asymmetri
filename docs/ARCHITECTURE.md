@@ -33,7 +33,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/about` | Company philosophy and origin |
 | `/tutorial` | Protected progressive Motion guide |
 | `/privacy`, `/support` | Protected Motion articles |
-| `/robots.txt`, `/sitemap.xml` | Ten indexable canonical routes, permissive robots |
+| `/robots.txt`, `/sitemap.xml` | Indexable canonical routes, permissive robots |
 | `/sport` | HTTP 308 to `/sports` |
 | `/work` | HTTP 308 to `/labs` |
 | `/story` | HTTP 308 to `/sports#story` |
@@ -82,8 +82,7 @@ response storage and invitation handling remain outside this repository.
 (current/preparing/development/planned); and existing tutorial, utility, concept and
 approved-video records. Sports owns its narrative instead of company-level `site`.
 Labs owns a typed `LabsProject` list with name, description, status, required source
-link and optional detail/license links. The single current entry reuses `botsquad`
-facts. The server page renders a brief hero, generic project articles and a closing
+link and optional detail/license links. Entries reuse `botsquad` and `vancouver` facts. The server page renders a brief hero, generic project articles and a closing
 line; it has no approach/principles section or BotSquad-specific access fields.
 All Labs projects are open source; Sports has no blanket open-source requirement.
 No old `work` content export.
@@ -565,3 +564,25 @@ and the page does not infer private execution health or current risk permission.
 No HQ access, new contract, model call, operational control or fixed daily time is
 added. Existing visibility polling refreshes the server summary when the source
 watermark changes; withdrawals and unavailability continue to hide cached content.
+
+## Vancouver V0.1 (October 30, 2026)
+
+`app/labs/vancouver/page.tsx` frames the independent Labs experiment. Its client
+interface dynamically imports `projects/vancouver/engine.ts`; Three.js 0.186.1
+and geographic data are not imported by other routes. The imperative engine owns
+WebGL2, OrbitControls, merged buildings/roads, instanced trees, original models,
+selection, arcade motion and disposal. React owns search, modes, source panels and
+loading/error/text states. `physics.ts` contains pure tested collision/movement.
+No API, database, accounts, telemetry or external runtime service is added.
+
+The checked-in bounded City snapshot is built offline by the optional Python
+pipeline. Geometry uses projected local metres and a shared precision grid;
+heights/terrain are explicitly illustrative. There are no historical/proposal
+layers or OSM data in V0.1. Source and data licences remain separate. The default
+public-folder revalidation is sufficient for this small initial snapshot; future
+immutable asset caching must be version-scoped and verified in both build paths.
+
+The dependency security update pins Next.js/eslint-config-next 16.4.3 and updates
+fast-uri within its existing compatible major. Sharp's 0.35.5 override and React
+19.2.6 remain. Next dev generated a documented agent-guidance block in AGENTS.md;
+its local packaged component/lazy-loading guidance was reviewed.

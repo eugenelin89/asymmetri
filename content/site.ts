@@ -40,6 +40,17 @@ export const botsquadStructure = {
   ask: { label: 'Ask BotSquad', navLabel: 'Ask BotSquad', href: '/botsquad/ask' },
 } as const;
 
+export const vancouver = {
+  name: "Vancouver",
+  path: "/labs/vancouver",
+  tagline: "Explore the city. See what's changing.",
+  status: "Vancouver V0.1 — Experimental",
+  description: "A small, open-source 3D city experiment. Explore eastern False Creek from the air or try arcade driving on its flat streets.",
+  source: { label: "View Vancouver source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/vancouver" },
+  license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/vancouver/THIRD_PARTY_NOTICES.md" },
+  metadata: { title: "Vancouver — Explore False Creek | Asymmetri Labs", description: "Explore eastern False Creek in an experimental 3D Vancouver. Aerial navigation, arcade driving and source-backed landmarks. An independent Asymmetri Labs project." },
+} as const;
+
 const contactEmail = "info@asymmetri.co";
 
 export const site = {
@@ -75,6 +86,7 @@ export const site = {
         botsquadStructure.research,
         botsquadStructure.investment,
         botsquadStructure.ask,
+        { label: vancouver.name, href: vancouver.path },
       ],
     },
     { label: "About", href: "/about" },
@@ -86,6 +98,7 @@ export const site = {
     { label: divisions.labs.name, href: divisions.labs.path },
     { label: divisions.sports.product.name, href: divisions.sports.product.path },
     { label: divisions.labs.product.name, href: divisions.labs.product.path },
+    { label: vancouver.name, href: vancouver.path },
   ] satisfies NavItem[],
   footerNavigation: [
     { label: "Motion tutorial", href: "/tutorial" },
@@ -1079,6 +1092,14 @@ const labsProjects: readonly LabsProject[] = [
     source: botsquad.source,
     license: { label: "MIT licensed", href: botsquad.licenseUrl },
   },
+  {
+    name: vancouver.name,
+    description: vancouver.description,
+    status: vancouver.status,
+    detail: { label: "Explore Vancouver", href: vancouver.path },
+    source: vancouver.source,
+    license: vancouver.license,
+  },
 ];
 
 export const labs = {
@@ -1086,7 +1107,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and whatever we're curious enough to build next.",
+      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and Vancouver.",
   },
   headline: "A playground for ideas.",
   introduction:

@@ -1,0 +1,34 @@
+{
+  "version": "v0.1-2026-10-30",
+  "asset": "city.json",
+  "bytes": 184020,
+  "sha256": "ebc0faf88bbd59d58f64436d1c1194059ce6fda378f9cc53bd4249f1b0566c4b",
+  "sources": [
+    {
+      "dataset": "parks-polygon-representation",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=parks-polygon-representation&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "170572359e6e46bfcb826df67adc94e87baaeb05f8d903981d9f6f0e84792234",
+      "records": 16
+    },
+    {
+      "dataset": "shoreline-2002",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=shoreline-2002&rows=1000&sort=recordid",
+      "sha256": "c6a4df694cffb2df74e803cfc9881eca3f5e7096f10ed2724084c002334cb2b1",
+      "records": 2
+    },
+    {
+      "dataset": "building-footprints-2015",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=building-footprints-2015&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "08415624c335adfb2d7f699edbd61ca19d4b86438632114c200eb84e4dc53646",
+      "records": 452
+    },
+    {
+      "dataset": "public-streets",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=public-streets&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "2b2cfa15c2a5fa8f3f3056e26f8f81a34c15e4f009568a2893fa03d35a61373e",
+      "records": 299
+    }
+  ],
+  "attribution": "Contains information licensed under the Open Government Licence \u2013 Vancouver.",
+  "licence": "https://opendata.vancouver.ca/pages/licence/"
+}

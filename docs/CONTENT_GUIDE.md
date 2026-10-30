@@ -608,3 +608,14 @@ Keep dated screenshot `source` URLs and immutable archived Markdown/bytes as
 recorded; they remain valid through redirects. API namespaces, image URLs and
 technical investment identifiers are unchanged. See the [migration contract and
 rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
+
+## Vancouver
+
+`content/site.ts` owns Vancouver identity, metadata, Labs card and navigation links.
+`projects/vancouver/places.ts` owns the six original, source-backed place summaries
+and review labels. The route owns experimental notices, dataset attribution and
+no-JavaScript descriptions. Never present illustrative heights, flat terrain, old
+footprints or proposed future features as surveyed/current/implemented facts.
+Refresh the review date only after checking the sources. Do not reuse source-page
+photos or renderings under the code licence. Vancouver is independent of the City
+and political parties. BotSquad's nested hierarchy and Sports remain intact.

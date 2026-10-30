@@ -814,3 +814,22 @@ They are not current navigation.
 - Alt text: “Atlas’s profile on a phone shows responsibilities, work status, conversations and permissions controls.”
 - Rights/privacy: owner-authorized BotSquad documentation, reviewed sample records only; the shared assessment above applies.
 - SHA-256: `1ff7cb41e00f2a5a6513be098622001659d1a5eed9909b597ee384fe4ac33903`.
+
+## Vancouver V0.1 geographic assets — October 30, 2026
+
+- `public/vancouver/v0.1-2026-10-30/city.json`: bounded geometry (436 simplified
+  building polygons, 296 road lines, 18 park polygon parts) for eastern False Creek.
+  Extent [-123.123,49.267,-123.099,49.278]; geographic data, not a raster image.
+  Source: City building-footprints-2015, public-streets, parks-polygon-representation,
+  shoreline-2002. Offline projection, clipping, validity repair, 10 cm topology
+  precision and simplification; illustrative heights. The exact byte count and
+  checksum live in the adjacent manifest. OGL–Vancouver attribution is displayed.
+- `manifest.json`: original provenance metadata and raw-response hashes; source
+  data retains its licence. No private content, credentials or runtime API URL
+  with credentials. No OpenStreetMap input in this release.
+- Dome, stadium roof, trees and vehicle: original procedural models in the MIT
+  project engine. Approximate shapes and dimensions, no external artwork/textures.
+- Canvas accessible label documents controls; readable place list, source panels,
+  pause/resume and no-JavaScript descriptions provide alternative access.
+- Social metadata reuses the existing approved `labs-social.png`; no new social
+  asset or claim of an official City affiliation.

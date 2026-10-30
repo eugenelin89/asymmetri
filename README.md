@@ -8,10 +8,11 @@ Asymmetri.co
 ├── Asymmetri Sports
 │   └── Asymmetri Motion
 └── Asymmetri Labs
-    └── BotSquad
-        ├── BotSquad Research
-        │   └── BotSquad Trade
-        └── Ask BotSquad
+    ├── BotSquad
+    │   ├── BotSquad Research
+    │   │   └── BotSquad Trade
+    │   └── Ask BotSquad
+    └── Vancouver
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -37,6 +38,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
+| `/labs/vancouver` | Vancouver V0.1: experimental False Creek aerial exploration, arcade driving and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
@@ -55,7 +57,7 @@ The root homepage introduces Asymmetri and routes visitors directly to Sports an
 Labs without repeating division or product content. Contact opens the shared mailbox;
 legacy contact URLs still reach the footer email.
 
-The ten main canonical pages are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
+The main canonical pages, including Vancouver, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
@@ -220,3 +222,12 @@ employee decision, published fill and production activation. Ask remains paused.
 The [verified October 14 investment release](docs/INVESTMENT_CLOSE_RELEASE_2026-10-14.md)
 records current website/receiver identities, preserved archive history, portraits
 and closed Ask state.
+
+## Vancouver V0.1
+
+An independent, browser-rendered eastern False Creek experiment with aerial and
+arcade driving modes. [Project setup, data, controls and limits](projects/vancouver/README.md).
+Vancouver-specific code/models are MIT; City data has separate attribution.
+The [Linux candidate workflow](.github/workflows/website-linux-candidate.yml) builds
+public website source on Node 22.23.1 without production credentials or automatic
+deployment. Releases still use the documented SSH candidate/rollback workflow.
