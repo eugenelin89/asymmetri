@@ -3,10 +3,12 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-The [Vancouver V0.4 release receipt](VANCOUVER_V04_RELEASE_2026-10-30.md)
-records the current October 30 exact-source Linux runtime, included GIS Apps
-grouping, preserved Surrey V0.2, public checks and complete preceding-runtime
-rollback. Later documentation commits do not change that deployed identity.
+The [GIS city naming release receipt](GIS_CITY_NAMES_RELEASE_2026-10-30.md)
+records the current October 30 exact-source Linux build and copy-only rollback,
+with unchanged city URLs, assets and dependencies. The preceding
+[Vancouver V0.4 release receipt](VANCOUVER_V04_RELEASE_2026-10-30.md) records the
+GIS Apps grouping, preserved Surrey V0.2 and complete pre-V0.4 runtime.
+Later documentation commits do not change the activated source/build identity.
 
 The [October 22 direct Motion video release receipt](MOTION_VIDEO_RELEASE_2026-10-22.md)
 records the live native player, updated website-media disclosure, verified Linux
