@@ -134,7 +134,7 @@
   .viewport { height: 66svh; min-height: 450px; }
   .expanded { height: 100dvh; min-height: 0; }
   .toolbar { inset: 9px 9px auto; }
-  .toolbar button { min-height: 42px; padding: 0 10px; font-size: 11px; }
+  .toolbar button { min-height: 44px; padding: 0 10px; font-size: 11px; }
   .modes { padding: 3px; }
   .viewActions { gap: 3px; }
   .exploreDock { left: 10px; bottom: 40px; max-width: calc(100% - 20px); width: calc(100% - 20px); padding: 11px; }
@@ -152,3 +152,43 @@
   .sceneNote { font-size: 9px; }
 }
 @media (prefers-reduced-motion: reduce) { .driveControls button:active { transform: none; } }
+/* V0.3: nearby streets, persistent obstruction feedback and optional route guidance. */
+.exploreDock .scenicStart { display: block; width: 100%; margin-top: 10px; text-align: left; background: #174a43; color: white; padding: 10px 12px; }
+.exploreDock .scenicStart small { color: #d2e5dd; margin-top: 3px; }
+.routePanel { position: absolute; left: 20px; bottom: 47px; width: 330px; max-width: calc(100% - 390px); padding: 12px 14px; background: #f4f5edf2; border: 1px solid #c4cfc5; border-radius: 6px; color: #17433d; }
+.routePanel > strong, .routePanel > span, .routePanel > small { display: block; }
+.routePanel > strong { font-size: 12px; margin-bottom: 5px; }
+.routePanel > span { font-size: 12px; line-height: 1.45; }
+.routePanel > small { font-size: 10px; color: #52675a; margin-top: 5px; }
+.routePanel > div { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.routePanel button, .drivingHud button { border: 1px solid #7da395; border-radius: 4px; background: #edf4ee; color: #17433d; font: inherit; font-size: 11px; padding: 6px 10px; min-height: 40px; cursor: pointer; }
+.routePanel > button { margin-top: 8px; }
+.routePanel button:focus-visible, .drivingHud button:focus-visible, .miniMap button:focus-visible { outline: 3px solid #027f75; outline-offset: 2px; }
+.drivingHud button { pointer-events: auto; margin-top: 7px; background: #174a43; color: white; }
+.miniMap { width: 180px; pointer-events: auto; }
+.miniMap button { display: block; width: 100%; min-height: 44px; font-size: 10px; color: #17433d; border: 0; background: #f4f5ed; cursor: pointer; }
+.drivingHud { max-width: calc(100% - 225px); }
+.routeNotice:empty { display: none; }
+@media (max-width: 900px) {
+  .routePanel { top: 235px; bottom: auto; width: 230px; max-width: calc(100% - 40px); }
+  .routePanel > span { font-size: 11px; }
+}
+@media (max-width: 600px) {
+  .miniMap { width: 128px; right: 10px; }
+  .drivingHud { max-width: calc(100% - 153px); padding: 8px; }
+  .drivingHud .gear { margin-left: 4px; width: 21px; }
+  .drivingHud .drivingHint { font-size: 9px; }
+  .routePanel { left: 10px; right: 10px; top: 250px; width: auto; max-width: none; padding: 9px 10px; }
+  .routePanel > strong { font-size: 11px; }
+  .routePanel > div { margin-top: 5px; flex-wrap: nowrap; gap: 4px; }
+  .routePanel button { flex: 1; padding: 5px 7px; font-size: 10px; min-height: 44px; }
+  .routePanel > small { font-size: 9px; }
+  .viewport[data-mode="drive"] { min-height: 580px; }
+  .viewport.expanded[data-mode="drive"] { min-height: 0; }
+  .exploreDock .scenicStart { font-size: 11px; }
+}
+@media (max-height: 550px) and (min-width: 601px) {
+  .expanded .routePanel { top: auto; bottom: 40px; width: 245px; max-width: calc(100% - 380px); }
+  .expanded .routePanel > small { display: none; }
+  .expanded .miniMap { width: 145px; }
+}

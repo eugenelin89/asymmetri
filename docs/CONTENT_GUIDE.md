@@ -622,9 +622,14 @@ Refresh the review date only after checking the sources. Do not reuse source-pag
 photos or renderings under the code licence. Vancouver is independent of the City
 and political parties. BotSquad's nested hierarchy and Sports remain intact.
 
-Vancouver's current status is V0.2 — Experimental. UI controls and help live in
+Vancouver's current status is V0.3 — Experimental. UI controls and help live in
 `Explorer.tsx`; the street HUD uses source street names. New data notices must
 identify illustrative street widths, clearance trims and the decorative
 promenade as well as estimated heights. Expand city view means a full-window
 dialog, without a promise of native browser fullscreen. Preserve the project
 name, source links and “Vancouver in Progress” submenu wording.
+
+V0.3 distinguishes 115 spatially matched 2009 LiDAR heights from 321 illustrative
+heights; neither is described as current survey data. Scenic-loop and roadside
+navigation labels describe only the simulation. Cruise is optional and manual
+input takes over. Bridges are explicitly view-only in the HUD and minimap.

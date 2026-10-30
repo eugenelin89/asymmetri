@@ -605,7 +605,7 @@ times, exact-run evidence links, and the native timeline disclosure on mobile,
 tablet and desktop. No completed turn/request counts or future close times may
 be inferred from citations, heartbeats or an active run label.
 
-## Vancouver V0.2
+## Vancouver V0.3
 
 Run `npm run test:vancouver` for courtyard holes, street distance, bounded
 acceleration/braking/reversing, collision and long-frame anti-tunnelling, geographic
@@ -633,3 +633,13 @@ expansion/Escape/focus, Lite, repeated pause and actual route leave/return. Revi
 FPS/draw calls/DPR and geometry/texture counts from canvas diagnostics. Forced
 WebGL loss and physical-phone checks must be reported as untested unless actually
 executed; code inspection alone does not establish their runtime acceptance.
+
+V0.3 extends the suite to 25 tests: immutable parents, unchanged building geometry,
+pinned conservative historic-height joins, exact pavement/collision tile seams,
+persistent blocked state, nearby recovery, six safe destination paths and a full
+scenic loop plus the next 100 m in both directions at 15/30/60/120 Hz. Browser
+acceptance must include a real multi-minute Cruise session in each direction,
+manual takeover, destination guidance, whole-city/local map toggle and mobile
+portrait/landscape layouts. Record frame rate, rolling frame-time p95, collisions,
+distance, loop count and resource counts with environment and duration. A single
+idle frame or pure simulation is not a substitute for browser performance evidence.

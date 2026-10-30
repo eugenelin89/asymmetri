@@ -854,3 +854,21 @@ They are not current navigation.
   keyboard instructions; six source-backed text summaries remain available
   without 3D. Procedural scene content is described through these alternatives.
   Social metadata continues to reuse the approved Labs image.
+
+## Vancouver V0.3 geographic and procedural assets — October 30, 2026
+
+- `/vancouver/v0.3-2026-10-30/city.json` and adjacent manifest: 471,161-byte
+  local-metre scene (same bounded extent, no pixel dimensions). Preserves 436
+  V0.2 building shapes; four endpoint repairs <0.75 m, 110 illustrative junction
+  aprons and 64 m collision tiles align physics with visible pavement. Includes
+  the 241-node/282-edge local graph and fixed scenic waypoints. Original V0.1/V0.2
+  bytes remain available. Source request URLs and SHA-256 are in the manifest.
+- 115 historic heights from the bounded City `building-footprints-2009` response
+  (915 records, 905,334 bytes) use `hgt_agl`, >=0.8 spatial IoU and 3–150 m bounds.
+  Landmark/stadium exclusions; 321 illustrative heights remain. OGL–Vancouver,
+  displayed attribution and explicit historic/mixed-date limitations. No current
+  survey claim, third-party models, imagery, marks or NRCan data.
+- Gold road arrows and SVG route/map styling are original MIT code-native assets;
+  original bridge visuals now sample level water decks and smooth land approaches.
+  They are illustrative/view-only. Accessible canvas/map labels, visible bridge
+  notice, source panels and six no-JS place descriptions provide alternatives.

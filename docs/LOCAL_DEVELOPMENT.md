@@ -249,3 +249,8 @@ versioning. Run both `npm run build:next -- --webpack` and `npm run build` befor
 release. Test driving with keyboard and held touch buttons, expansion/Escape,
 Lite, pause/resume and route leave/return; never equate viewport checks with a
 physical-device test.
+
+V0.3 adds `build_v03.py --height-source /external/cache/building-footprints-2009.json`.
+Use the pinned bounded request/digest in its manifest; the importer rejects a
+changed upstream response or changed existing output. Node tests need no Python
+or network and drive the complete circuit in both directions at four frame rates.

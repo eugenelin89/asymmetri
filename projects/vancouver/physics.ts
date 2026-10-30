@@ -32,25 +32,26 @@ export function carFits(car: Pick<CarState, "x" | "z" | "yaw">, allowed: (p: Poi
 }
 
 export function stepCar(car: CarState, throttle: number, steering: number, brake: boolean, delta: number, allowed: (p: Point2) => boolean): CarState {
-  const dt = Math.min(Math.max(delta, 0), 0.05);
-  let speed = car.speed;
-  // Opposite pedal first brakes to zero; reverse engages on the next step.
-  const opposing = throttle && speed * throttle < -0.08;
-  if (brake || opposing) {
-    const amount = (brake ? 22 : 14) * dt;
-    speed = Math.sign(speed) * Math.max(0, Math.abs(speed) - amount);
-  } else if (throttle) speed += throttle * (speed < 0 ? 5 : 8) * dt;
-  else speed = Math.sign(speed) * Math.max(0, Math.abs(speed) - (1.3 + Math.abs(speed) * 0.32) * dt);
-  speed = Math.max(-5.5, Math.min(19, speed));
-  const target = steering * 0.58 / (1 + Math.abs(speed) / 14);
-  const steer = (car.steer ?? 0) + (target - (car.steer ?? 0)) * (1 - Math.exp(-10 * dt));
-  const steps = Math.max(1, Math.ceil(Math.abs(speed * dt) / 0.25));
-  let { x, z, yaw } = car;
-  let blocked = false;
-  for (let i = 0; i < steps; i++) {
-    const nextYaw = yaw + speed / 2.65 * Math.tan(steer) * dt / steps;
-    const next = { x: x + Math.sin(nextYaw) * speed * dt / steps, z: z + Math.cos(nextYaw) * speed * dt / steps, yaw: nextYaw };
+  // Integrate at at most 1/120 s so 15/30/60/120 Hz input produces the same
+  // motion. Cap long stalls; each substep moves less than 16 cm at top speed.
+  const elapsed = Math.min(Math.max(delta, 0), .1);
+  const count = Math.max(1, Math.ceil(elapsed * 120)), dt = elapsed / count;
+  let { x, z, yaw, speed } = car, steer = car.steer ?? 0, blocked = !!car.blocked;
+  for (let i = 0; i < count; i++) {
+    const opposing = throttle && speed * throttle < -.08;
+    if (brake || opposing) speed = Math.sign(speed) * Math.max(0, Math.abs(speed) - (brake ? 22 : 14) * dt);
+    else if (throttle) speed += throttle * (speed < 0 ? 5 : 8) * dt;
+    else speed = Math.sign(speed) * Math.max(0, Math.abs(speed) - (1.3 + Math.abs(speed) * .32) * dt);
+    speed = Math.max(-5.5, Math.min(19, speed));
+    // Firm steering gently sheds speed, making a held keyboard turn controllable.
+    const cornerLimit = 19 - Math.min(1, Math.abs(steering)) * 10;
+    if (speed > cornerLimit) speed = Math.max(cornerLimit, speed - 9 * dt);
+    const target = steering * .72 / (1 + Math.abs(speed) / 22);
+    steer += (target - steer) * (1 - Math.exp(-13 * dt));
+    const nextYaw = yaw + speed / 2.65 * Math.tan(steer) * dt;
+    const next = { x: x + Math.sin(nextYaw) * speed * dt, z: z + Math.cos(nextYaw) * speed * dt, yaw: nextYaw };
     if (!carFits(next, allowed)) { speed = 0; blocked = true; break; }
+    if (Math.hypot(next.x - x, next.z - z) > .00001) blocked = false;
     ({ x, z, yaw } = next);
   }
   return { x, z, yaw, speed, steer, blocked };
@@ -75,9 +76,19 @@ export function createDrivingWorld(city: City) {
   const localRoads = bins(segments, (s) => [Math.min(s.a[0], s.b[0]) - s.width, Math.min(s.a[1], s.b[1]) - s.width, Math.max(s.a[0], s.b[0]) + s.width, Math.max(s.a[1], s.b[1]) + s.width]);
   const structures = city.buildings.map((b) => b.shape);
   const localBuildings = bins(structures, (p) => [Math.min(...p[0].map((v) => v[0])), Math.min(...p[0].map((v) => v[1])), Math.max(...p[0].map((v) => v[0])), Math.max(...p[0].map((v) => v[1]))]);
-  const allowed = (p: Point2) => localRoads(p).some((s) => segmentDistance(p, s.a, s.b) < s.width / 2 - 0.15)
-    && city.land.some((land) => inPolygon(p, land)) && !city.water.some((water) => inPolygon(p, water))
-    && !localBuildings(p).some((building) => inPolygon(p, building));
+  const insideSurface = (p: Point2) => city.roadCells
+    ? (city.roadCells[`${Math.floor(p[0] / 64)},${Math.floor(p[1] / 64)}`] ?? []).some((polygon) => inPolygon(p, polygon))
+    : localRoads(p).some((s) => segmentDistance(p, s.a, s.b) < s.width / 2 - .15)
+      && city.land.some((land) => inPolygon(p, land)) && !city.water.some((water) => inPolygon(p, water));
+  const allowed = (p: Point2) => insideSurface(p) && !localBuildings(p).some((building) => inPolygon(p, building));
+  const obstruction = (car: CarState) => {
+    const nose: Point2 = [car.x + Math.sin(car.yaw) * 3 * (car.speed < 0 ? -1 : 1), car.z + Math.cos(car.yaw) * 3 * (car.speed < 0 ? -1 : 1)];
+    if (city.water.some((p) => inPolygon(nose, p))) return "Waterfront edge · reverse or recover";
+    if (!city.land.some((p) => inPolygon(nose, p))) return "End of this model · reverse or recover";
+    if (localBuildings(nose).some((p) => inPolygon(nose, p))) return "Building ahead · reverse or recover";
+    return "Road edge · reverse or recover";
+  };
+  const cameraClear = (p: Point2) => city.land.some((land) => inPolygon(p, land)) && !localBuildings(p).some((building) => inPolygon(p, building));
   const streetAt = (p: Point2) => {
     let best = Infinity, name = "Eastern False Creek";
     for (const s of localRoads(p)) { const distance = segmentDistance(p, s.a, s.b); if (distance < best) { best = distance; name = s.name; } }
@@ -103,5 +114,24 @@ export function createDrivingWorld(city: City) {
     if (!candidate) throw new Error("The city data has no safe driving start. Please use Explore mode.");
     return { x: candidate.x, z: candidate.z, yaw: candidate.yaw, speed: 0, steer: 0 };
   }
-  return { allowed, streetAt, spawnNear, spawnCount: spawns.length };
+  function recoverNear(car: CarState): CarState {
+    const candidates: (CarState & { distance: number })[] = [];
+    for (const segment of localRoads([car.x, car.z])) {
+      const [ax, az] = segment.a, dx = segment.b[0] - ax, dz = segment.b[1] - az;
+      const length = Math.hypot(dx, dz); if (length < 8) continue;
+      const t = Math.max(0, Math.min(1, ((car.x - ax) * dx + (car.z - az) * dz) / (length * length)));
+      for (const direction of [1, -1]) for (const offset of [-8, 0, 8]) {
+        const d = Math.max(3, Math.min(length - 3, t * length + offset));
+        const yaw = Math.atan2(dx, dz) + (direction < 0 ? Math.PI : 0);
+        const pose = { x: ax + dx * d / length, z: az + dz * d / length, yaw, speed: 0, steer: 0 };
+        if ([0, 4, 8].every((ahead) => carFits({ ...pose, x: pose.x + Math.sin(yaw) * ahead, z: pose.z + Math.cos(yaw) * ahead }, allowed))) {
+          const angle = Math.abs(Math.atan2(Math.sin(yaw - car.yaw), Math.cos(yaw - car.yaw)));
+          candidates.push({ ...pose, distance: Math.hypot(pose.x - car.x, pose.z - car.z) + angle * 4 });
+        }
+      }
+    }
+    candidates.sort((a, b) => a.distance - b.distance);
+    return candidates[0] ?? spawnNear([car.x, car.z]);
+  }
+  return { allowed, cameraClear, streetAt, spawnNear, recoverNear, obstruction, spawnCount: spawns.length };
 }

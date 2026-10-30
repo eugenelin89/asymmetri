@@ -1312,7 +1312,8 @@ receipt. Do not modify ingress, private receivers or stored records for this mov
 
 ## Vancouver isolated Linux candidates
 
-The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md) records the current
+The [V0.3 release record](VANCOUVER_V03_RELEASE_2026-10-30.md) records the new
+release gates and, after activation, its identity. The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md) records the preceding
 October 30 production identity, acceptance, rollback and older-runtime retention.
 
 See the [October 30 release record](VANCOUVER_RELEASE_2026-10-30.md) for deployed
@@ -1350,3 +1351,11 @@ production health. The owner separately authorized V0.1 and the autonomous
 V0.2 experimental release. V0.2 uses the same guarded independent candidate and
 whole-directory rollback process, without infrastructure or dependency changes.
 Keep published V0.1 data and the complete preceding V0.1 runtime recoverable.
+
+V0.3 is explicitly authorized under the same floors and independent Linux candidate
+procedure. Preserve both published earlier snapshots and a full immediately prior
+V0.2 runtime. The redundant original V0.1 candidate may be removed only after a
+lossless owner-held archive, SHA-256, gzip check and full remote tar comparison,
+plus rechecking inactivity, clean source/build and absence of configuration refs.
+Keep the final V0.1 rollback and pre-Vancouver runtime as well. No host upgrade,
+configuration change, service change or threshold exception is authorized here.

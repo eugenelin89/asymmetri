@@ -565,7 +565,7 @@ No HQ access, new contract, model call, operational control or fixed daily time 
 added. Existing visibility polling refreshes the server summary when the source
 watermark changes; withdrawals and unavailability continue to hide cached content.
 
-## Vancouver V0.2 (October 30, 2026)
+## Vancouver V0.3 (October 30, 2026)
 
 `app/labs/vancouver/page.tsx` frames the independent Labs experiment. Its client
 interface dynamically imports `projects/vancouver/engine.ts`; Three.js 0.186.1
@@ -581,7 +581,7 @@ full-window dialog with focus trapping/Escape. `MiniMap.tsx` uses the same loade
 city for its SVG map. Only throttled driving telemetry crosses into React.
 `physics.ts` uses a 64-metre spatial index, full-car clearance, movement substeps,
 smoothed steering and validated nearby spawns. Elevated bridge/viaduct lines are
-excluded from ground driving. No API, database, accounts, telemetry or external
+excluded from ground driving. No API, database, accounts, transmitted telemetry or external
 runtime service is added.
 
 The immutable V0.2 snapshot derives from V0.1 in the optional offline Python
@@ -596,3 +596,17 @@ and verified across both build paths.
 
 The V0.1 dependency baseline remains Next.js/eslint-config-next 16.4.3, React
 19.2.6 and Sharp's 0.35.5 override. V0.2 adds no runtime or development dependency.
+
+V0.3 adds `navigation.ts`: a validated local graph, Dijkstra routes, checked corner
+smoothing, route projection and an optional scenic controller that feeds the same
+vehicle physics. Visible pavement and 64 m collision tiles are generated together;
+movement integrates at <=1/120 s with a 0.1 s stall cap. Four endpoint repairs and
+110 turning aprons do not alter retained building or water geometry. A separate
+V0.3 snapshot joins 115 historic 2009 LiDAR heights conservatively to 2015 footprints;
+321 remain illustrative. Original snapshots are untouched. The 2.369 km loop is
+accepted in both directions including its lap seam. All six places have roadside
+routes, but Cruise is offered only on the tested loop. Bridge visuals use sampled
+level water decks and smooth land ramps; elevated driving remains deferred. Route
+arrows add one instanced mesh that is disposed when replaced. Bounded DOM-only
+performance diagnostics record session distance/collisions/FPS and a rolling
+600-frame p95; nothing is transmitted. No dependencies or runtime services added.

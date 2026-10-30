@@ -1,4 +1,4 @@
-# Vancouver V0.2 — rights and attribution
+# Vancouver V0.3 — rights and attribution
 
 ## Original work
 
@@ -15,12 +15,13 @@ Contains information licensed under the Open Government Licence – Vancouver.
 Licence: https://opendata.vancouver.ca/pages/licence/
 
 The City-derived snapshots in public/vancouver/v0.1-2026-10-30/ and
-public/vancouver/v0.2-2026-10-30/ are covered by that licence, not the code MIT licence. Its manifest lists source requests, raw-response
+public/vancouver/v0.2-2026-10-30/ and public/vancouver/v0.3-2026-10-30/ are covered by that licence, not the code MIT licence. Its manifest lists source requests, raw-response
 hashes, output digest and attribution. Source datasets: building-footprints-2015,
 public-streets, parks-polygon-representation and shoreline-2002. Retrieved
-2026-10-30. Building heights, landmark dimensions and trees are illustrative;
+2026-10-30. In V0.1/V0.2 building heights are illustrative; V0.3 adds the
+explicit historic matches described below. Landmark dimensions and trees are illustrative;
 terrain is flat. Government marks, third-party rights and endorsement are not
-licensed by the open-data terms. No OpenStreetMap data is included in either release.
+licensed by the open-data terms. No OpenStreetMap data is included in these releases.
 
 V0.2 derives street-clearance trims, land-clipped pavement/sidewalks and a decorative
 coastal promenade from V0.1. Widths, trimming and promenade are artistic
@@ -34,6 +35,14 @@ and https://vancouver.ca/files/cov/olympic-village-brochure.pdf.
 Linked source documents retain their own rights. Place descriptions are short
 original factual summaries, with source links and review dates in places.ts.
 No source-document photos, logos or architectural renderings are redistributed.
+
+V0.3 additionally uses the same-licence `building-footprints-2009` dataset:
+https://opendata.vancouver.ca/explore/dataset/building-footprints-2009/ .
+115 heights use historic LiDAR-derived `hgt_agl`, spatially matched to retained
+2015 footprints at >=0.8 intersection-over-union; 321 remain illustrative. Per-part
+record IDs/overlap and raw source/output checksums are in the immutable snapshot.
+These are not current measurements. Road turning aprons, lane widths, rendered
+bridge elevation and models remain artistic. No NRCan data was imported.
 
 ## Three.js 0.186.1
 

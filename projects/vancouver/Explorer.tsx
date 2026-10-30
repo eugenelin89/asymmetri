@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { places } from "./places";
 import { MiniMap } from "./MiniMap";
-import type { City, DriveTelemetry, Explorer, Input, Mode } from "./types";
+import type { City, DriveRoute, DriveTelemetry, Explorer, Input, Mode } from "./types";
 import styles from "./vancouver.module.css";
 
 const initialDrive: DriveTelemetry = { speed: 0, reverse: false, street: "Olympic Village", x: 298, z: 89, yaw: 0, blocked: false };
@@ -15,6 +15,7 @@ export function VancouverExplorer() {
   const [selected, setSelected] = useState("science-world"), [query, setQuery] = useState("");
   const [drive, setDrive] = useState(initialDrive), [city, setCity] = useState<City | null>(null);
   const [enabled, setEnabled] = useState(true), [lite, setLite] = useState(false), [expanded, setExpanded] = useState(false);
+  const [route, setRoute] = useState<DriveRoute | null>(null), [reverseLoop, setReverseLoop] = useState(false), [notice, setNotice] = useState("");
   const place = places.find((p) => p.id === selected) ?? places[0];
   const ready = status === "ready" && enabled;
 
@@ -23,7 +24,7 @@ export function VancouverExplorer() {
     const host = mount.current; if (!host || !enabled) return;
     import("./engine").then(({ createExplorer }) => createExplorer(host, {
       select(id) { selectedRef.current = id; setSelected(id); },
-      telemetry: setDrive, map: setCity,
+      telemetry: setDrive, map: setCity, route: setRoute,
       fail(message) { if (!controller.signal.aborted) { setError(message); setStatus("error"); } },
       recover() { if (!controller.signal.aborted) { setStatus("loading"); setMode("aerial"); setAttempt((n) => n + 1); } },
     }, controller.signal)).then((created) => {
@@ -55,6 +56,14 @@ export function VancouverExplorer() {
   function changeMode(next: Mode) { setMode(next); engine.current?.setMode(next); focusCanvas(); }
   function focus(id: string) { selectedRef.current = id; setSelected(id); setMode("aerial"); engine.current?.focus(id); }
   function driveNear() { engine.current?.driveNear(selected); setMode("drive"); viewport.current?.scrollIntoView({ block: "center", behavior: "auto" }); focusCanvas(); }
+  function startScenic(reverse = false) {
+    try { engine.current?.scenic(reverse); setReverseLoop(reverse); setMode("drive"); setNotice(""); viewport.current?.scrollIntoView({ block: "center", behavior: "auto" }); focusCanvas(); }
+    catch { setNotice("The scenic route could not be started. Try a nearby start."); }
+  }
+  function navigateHere() {
+    try { engine.current?.navigate(selected); setMode("drive"); setNotice(""); viewport.current?.scrollIntoView({ block: "center", behavior: "auto" }); focusCanvas(); }
+    catch (reason) { setNotice(reason instanceof Error ? reason.message : "Try a nearby start."); }
+  }
   function restart() { setEnabled(true); setStatus("loading"); setError(""); setMode("aerial"); setAttempt((n) => n + 1); }
   function fullscreen() {
     // A viewport-filling mode also works in embedded browsers and mobile Safari,
@@ -90,11 +99,15 @@ export function VancouverExplorer() {
         <div className={styles.exploreDock}>
           <span>Find your corner of the city.</span>
           <div>{places.filter((p) => ["science-world", "olympic-village", "hinge-park"].includes(p.id)).map((p) => <button type="button" key={p.id} disabled={!ready} aria-pressed={p.id === selected} onClick={() => focus(p.id)}>{p.number} <span>{p.name}</span> ↗</button>)}</div>
+          <button className={styles.scenicStart} type="button" disabled={!ready} onClick={() => startScenic()}>Drive the False Creek loop → <small>2.4 km · about 4 minutes with Cruise</small></button>
           <small>Drag to orbit · scroll / pinch to zoom · two fingers to pan</small>
         </div>
       </> : <>
-        <div className={styles.drivingHud} aria-label="Driving status"><span className={styles.streetName}>{drive.street}</span><div><strong>{drive.speed}</strong> <small>km/h</small><span className={styles.gear}>{drive.reverse ? "R" : "D"}</span></div><span className={styles.drivingHint}>{drive.blocked ? "Edge reached · reverse or reset" : "WASD / arrows · space brakes"}</span></div>
-        {city && <MiniMap city={city} drive={drive} />}
+        <div className={styles.drivingHud} aria-label="Driving status"><span className={styles.streetName}>{drive.street}</span><div><strong>{drive.speed}</strong> <small>km/h</small><span className={styles.gear}>{drive.reverse ? "R" : "D"}</span></div><span className={styles.drivingHint}>{drive.blocked ? drive.blockedReason : drive.navigation?.cruising ? "Cruising · any driving input takes over" : "WASD / arrows · space brakes"}</span>{drive.blocked && <button type="button" onClick={() => { engine.current?.recover(); focusCanvas(); }}>Recover car ↗</button>}</div>
+        {city && <MiniMap city={city} drive={drive} route={route} />}
+        <div className={styles.routePanel} aria-label="Driving directions">
+          {route ? <><strong>{route.title}</strong><span>{drive.navigation?.instruction}</span><small>{drive.navigation?.laps ? `${drive.navigation.laps} loop${drive.navigation.laps === 1 ? "" : "s"} complete · ` : ""}{((drive.navigation?.remaining ?? route.length) / 1000).toFixed(1)} km remaining{!route.loop ? " · roadside stop" : ""}</small><div>{route.loop && <><button type="button" onClick={() => { engine.current?.setCruise(!drive.navigation?.cruising); focusCanvas(); }}>{drive.navigation?.cruising ? "Take the wheel" : "Cruise"}</button><button type="button" onClick={() => startScenic(!reverseLoop)}>Reverse loop</button></>}<button type="button" onClick={() => engine.current?.clearRoute()}>Clear route</button></div></> : <><strong>Find your way around.</strong><span>A connected drive past the Village, Hinge Park and Science World.</span><button type="button" disabled={!ready} onClick={() => startScenic()}>Start scenic loop →</button></>}
+        </div>
         {ready && <div className={styles.driveControls} aria-label="Driving controls">
           {([{ action: "left", label: "Steer left", text: "←" }, { action: "right", label: "Steer right", text: "→" }, { action: "back", label: "Brake and reverse", text: "↓" }, { action: "forward", label: "Accelerate", text: "↑" }, { action: "brake", label: "Brake", text: "■" }] as const).map(({ action, label, text }) => <button type="button" key={action} aria-label={label}
             onPointerDown={(e) => { e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); touch(action, true); }}
@@ -102,7 +115,7 @@ export function VancouverExplorer() {
             onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); touch(action, true); } }} onKeyUp={() => touch(action, false)} onBlur={() => touch(action, false)}>{text}</button>)}
         </div>}
       </>}
-      <div className={styles.sceneNote}>{mode === "drive" ? "Flat streets only · bridges are view-only" : "2015 footprints · illustrative heights & details"}</div>
+      <div className={styles.sceneNote}>{mode === "drive" ? "Flat streets only · bridges are view-only" : "2015 footprints · historic / illustrative heights"}</div>
     </div>
     <div className={styles.discovery} id="vancouver-places">
       <div className={styles.directory}>
@@ -117,7 +130,7 @@ export function VancouverExplorer() {
         <div className={styles.sectionLabel}>{place.category} <span>{place.number} / 06</span></div>
         <h2>{place.name}</h2><p>{place.detail}</p><p className={styles.detailNote}>{place.note}</p>
         <div className={styles.sourceRow}><a href={place.url} target="_blank" rel="noreferrer">{place.source} ↗</a><span>Checked 30 Oct 2026</span></div>
-        <div className={styles.placeActions}><button type="button" className={styles.visitButton} onClick={() => { focus(place.id); viewport.current?.scrollIntoView({ behavior: "auto", block: "center" }); }} disabled={!ready}>Explore here ↗</button><button type="button" className={styles.driveButton} onClick={driveNear} disabled={!ready}>Drive nearby →</button></div>
+        <div className={styles.placeActions}><button type="button" className={styles.visitButton} onClick={() => { focus(place.id); viewport.current?.scrollIntoView({ behavior: "auto", block: "center" }); }} disabled={!ready}>Explore here ↗</button><button type="button" className={styles.driveButton} onClick={driveNear} disabled={!ready}>Start nearby →</button><button type="button" className={styles.driveButton} onClick={navigateHere} disabled={!ready}>Route from car →</button></div><p className={styles.routeNotice} role="status">{notice}</p>
       </article>
     </div>
   </section>;

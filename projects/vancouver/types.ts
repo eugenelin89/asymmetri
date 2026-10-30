@@ -4,6 +4,9 @@ export type Mode = "aerial" | "drive";
 export type Input = "forward" | "back" | "left" | "right" | "brake";
 export type City = {
   version: string;
+  roadCells?: Record<string, Polygon2[]>;
+  graph?: RoadGraph;
+  scenicWaypoints?: number[];
   bounds: Point2[];
   anchors: Record<string, Point2>;
   land: Polygon2[];
@@ -21,8 +24,17 @@ export type Explorer = {
   driveNear(id: string): void;
   setQuality(quality: "auto" | "low"): void;
   reset(): void;
+  recover(): void;
+  scenic(reverse?: boolean): void;
+  navigate(id: string): void;
+  setCruise(enabled: boolean): void;
+  clearRoute(): void;
   setInput(input: Input, pressed: boolean): void;
   dispose(): void;
 };
 
-export type DriveTelemetry = { speed: number; reverse: boolean; street: string; x: number; z: number; yaw: number; blocked: boolean };
+export type DriveTelemetry = { speed: number; reverse: boolean; street: string; x: number; z: number; yaw: number; blocked: boolean; blockedReason?: string; navigation?: NavigationStatus; travelled?: number };
+
+export type RoadGraph = { nodes: Point2[]; edges: { a: number; b: number; points: Point2[]; length: number; name: string }[]; clearance: number };
+export type DriveRoute = { points: Point2[]; distances: number[]; length: number; turns: { at: number; direction: string; street: string }[]; title: string; loop: boolean; destination?: string };
+export type NavigationStatus = { instruction: string; remaining: number; offRoute: boolean; arrived: boolean; cruising: boolean; laps: number; progress: number };

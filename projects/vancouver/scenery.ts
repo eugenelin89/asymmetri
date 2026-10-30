@@ -2,8 +2,9 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { inPolygon, segmentDistance } from "./physics";
+import { pointAt } from "./navigation";
 import { places } from "./places";
-import type { City, Point2, Polygon2 } from "./types";
+import type { City, DriveRoute, Point2, Polygon2 } from "./types";
 
 export function shapeOf(polygon: Polygon2) {
   const shape = new THREE.Shape(polygon[0].map(([x, z]) => new THREE.Vector2(x, -z)));
@@ -111,16 +112,24 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
     if (city.water.some((p) => inPolygon([x, z], p))) return 15;
     let distance = Infinity;
     for (const p of city.water) for (const ring of p) for (let i = 1; i < ring.length; i++) distance = Math.min(distance, segmentDistance([x, z], ring[i - 1], ring[i]));
-    return Math.max(.6, 15 - distance / 7);
+    const t = Math.max(0, 1 - distance / 180);
+    return .7 + 14.3 * t * t * (3 - 2 * t);
   }
   for (const r of city.roads) for (let i = 1; i < r.points.length; i++) {
     const [ax, az] = r.points[i - 1], [bx, bz] = r.points[i], dx = bx - ax, dz = bz - az, length = Math.hypot(dx, dz);
     if (length < 1) continue;
     const nx = dz / length, nz = -dx / length;
     if (r.bridge) {
-      const ay = bridgeHeight(ax, az, r.name), by = bridgeHeight(bx, bz, r.name);
-      bridgeDecks.push(beam(new THREE.Vector3(ax, ay, az), new THREE.Vector3(bx, by, bz), r.width, 1.7));
-      for (const side of [-1, 1]) bridgeRails.push(beam(new THREE.Vector3(ax + nx * r.width * .48 * side, ay + 1.3, az + nz * r.width * .48 * side), new THREE.Vector3(bx + nx * r.width * .48 * side, by + 1.3, bz + nz * r.width * .48 * side), .4, 1.1));
+      // Sample the entire deck so a long water span stays level instead of
+      // interpolating a diagonal from one low approach to the other shore.
+      const slices = Math.ceil(length / 18);
+      for (let j = 0; j < slices; j++) {
+        const x0 = ax + dx * j / slices, z0 = az + dz * j / slices;
+        const x1 = ax + dx * (j + 1) / slices, z1 = az + dz * (j + 1) / slices;
+        const ay = bridgeHeight(x0, z0, r.name), by = bridgeHeight(x1, z1, r.name);
+        bridgeDecks.push(beam(new THREE.Vector3(x0, ay, z0), new THREE.Vector3(x1, by, z1), r.width, 1.7));
+        for (const side of [-1, 1]) bridgeRails.push(beam(new THREE.Vector3(x0 + nx * r.width * .48 * side, ay + 1.3, z0 + nz * r.width * .48 * side), new THREE.Vector3(x1 + nx * r.width * .48 * side, by + 1.3, z1 + nz * r.width * .48 * side), .4, 1.1));
+      }
       for (let t = 25; t < length; t += 60) {
         const x = ax + dx * t / length, z = az + dz * t / length, y = bridgeHeight(x, z, r.name);
         if (city.water.some((p) => inPolygon([x, z], p))) { const g = new THREE.CylinderGeometry(1.4, 2.1, y, 6); g.translate(x, y / 2 - 1, z); piers.push(g); }
@@ -236,5 +245,24 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
   }
   const shadowMaterial = new THREE.MeshBasicMaterial({ color: 0x102724, transparent: true, opacity: .25, depthWrite: false }); materials.push(shadowMaterial);
   const carShadow = mesh(new THREE.CircleGeometry(1, 24), shadowMaterial, car); carShadow.rotation.x = -Math.PI / 2; carShadow.scale.set(1.7, 2.8, 1); carShadow.position.y = .27;
-  return { materials, textures, car, body, wheels, frontWheels, brakeMaterial, markers, pickTargets, labels, numberLabels, highlight, shimmerMaterial };
+  const routeGuide = new THREE.Group(); scene.add(routeGuide);
+  const routeMaterial = new THREE.MeshBasicMaterial({ color: 0xf5c568, side: THREE.DoubleSide }); materials.push(routeMaterial);
+  function setRoute(route: DriveRoute | null) {
+    for (const child of [...routeGuide.children]) {
+      if (child instanceof THREE.InstancedMesh) { child.geometry.dispose(); child.dispose(); }
+      routeGuide.remove(child);
+    }
+    if (!route) return;
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.Float32BufferAttribute([-.7, 0, -.7, 0, 0, 1.2, .7, 0, -.7], 3)); g.computeVertexNormals();
+    const count = Math.ceil(route.length / 14), arrows = new THREE.InstancedMesh(g, routeMaterial, count);
+    const q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0), size = new THREE.Vector3(1, 1, 1);
+    for (let i = 0; i < count; i++) {
+      const p = pointAt(route, i * 14), next = pointAt(route, i * 14 + 1);
+      q.setFromAxisAngle(up, Math.atan2(next[0] - p[0], next[1] - p[1]));
+      matrix.compose(new THREE.Vector3(p[0], .28, p[1]), q, size); arrows.setMatrixAt(i, matrix);
+    }
+    routeGuide.add(arrows);
+  }
+  return { setRoute, materials, textures, car, body, wheels, frontWheels, brakeMaterial, markers, pickTargets, labels, numberLabels, highlight, shimmerMaterial };
 }
