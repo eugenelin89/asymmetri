@@ -1,246 +1,183 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import { inPolygon, segmentDistance, stepCar, type CarState } from "./physics";
-import type { City, Explorer, Input, Mode, Point2, Polygon2 } from "./types";
+import { createDrivingWorld, stepCar } from "./physics";
+import { buildScenery } from "./scenery";
+import type { City, DriveTelemetry, Explorer, Input, Mode } from "./types";
 
-type Callbacks = { select(id: string): void; speed(kmh: number): void; fail(message: string): void };
-const DATA = "/vancouver/v0.1-2026-10-30/city.json";
-
-function shapeOf(polygon: Polygon2) {
-  const result = new THREE.Shape(polygon[0].map(([x, z]) => new THREE.Vector2(x, -z)));
-  result.holes = polygon.slice(1).map((hole) => new THREE.Path(hole.map(([x, z]) => new THREE.Vector2(x, -z))));
-  return result;
-}
+type Callbacks = { select(id: string): void; telemetry(value: DriveTelemetry): void; map(city: City): void; fail(message: string): void; recover(): void };
+const DATA = "/vancouver/v0.2-2026-10-30/city.json";
 
 export async function createExplorer(host: HTMLElement, callbacks: Callbacks, signal: AbortSignal): Promise<Explorer> {
   const response = await fetch(DATA, { signal });
-  if (!response.ok) throw new Error("The city data could not be loaded. Please try again.");
-  const city: City = await response.json();
-  signal.throwIfAborted();
+  if (!response.ok) throw new Error("The city data could not be loaded. Please retry.");
+  const city: City = await response.json(); signal.throwIfAborted();
+  if (city.version !== "v0.2-2026-10-30" || !Array.isArray(city.pavement) || !city.buildings.length) throw new Error("The city data is incomplete. Please retry.");
+  const world = createDrivingWorld(city);
   const coarse = matchMedia("(pointer: coarse)").matches;
-  const renderer = new THREE.WebGLRenderer({ antialias: !coarse, alpha: false, powerPreference: "low-power" });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, coarse ? 1.25 : 1.75));
-  renderer.setClearColor(0xc5d8dd);
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  const canvas = renderer.domElement;
-  canvas.tabIndex = 0;
-  canvas.setAttribute("aria-label", "Interactive False Creek. Drag to orbit, scroll to zoom, arrow keys to pan. In driving mode use arrow keys or W A S D; space brakes; R resets.");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const renderer = new THREE.WebGLRenderer({ antialias: !coarse, powerPreference: "low-power" });
+  renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.12;
+  renderer.setClearColor(0xd3e0e1); renderer.shadowMap.enabled = !coarse; renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true;
+  const canvas = renderer.domElement; canvas.tabIndex = 0;
+  canvas.dataset.version = city.version;
+  canvas.setAttribute("aria-label", "Interactive False Creek. Drag to orbit, scroll to zoom, two fingers to pan. Driving: W A S D or arrows, space brakes, R resets. Focus here for keyboard controls.");
   host.appendChild(canvas);
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xc5d8dd, 1700, 4200);
-  const camera = new THREE.PerspectiveCamera(48, 1, 1, 6500);
+  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(0xd3e0e1, 1900, 4800);
+  const camera = new THREE.PerspectiveCamera(44, 1, .6, 7000);
   const controls = new OrbitControls(camera, canvas);
-  controls.enableDamping = !matchMedia("(prefers-reduced-motion: reduce)").matches;
-  controls.dampingFactor = 0.12;
-  controls.minDistance = 45;
-  controls.maxDistance = 2100;
-  controls.maxPolarAngle = Math.PI * 0.475;
-  controls.screenSpacePanning = false;
-  controls.target.set(50, 0, 0);
-  scene.add(new THREE.HemisphereLight(0xe8f2f5, 0x7e8b78, 2.5));
-  const sun = new THREE.DirectionalLight(0xfff0d8, 3);
-  sun.position.set(-700, 1100, 500);
-  scene.add(sun);
-  const materials: THREE.Material[] = [];
-  const material = (color: number) => {
-    const m = new THREE.MeshLambertMaterial({ color });
-    materials.push(m); return m;
-  };
-  const waterMaterial = material(0x418f9d), landMaterial = material(0xc7c7b7);
-  const parkMaterial = material(0x8aa581), roadMaterial = material(0x687473);
-  const white = material(0xede9da), dark = material(0x273d43), teal = material(0x08ad9e);
-
-  function flat(polys: Polygon2[], mat: THREE.Material, y: number) {
-    const geo = new THREE.ShapeGeometry(polys.map(shapeOf));
-    geo.rotateX(-Math.PI / 2);
-    const mesh = new THREE.Mesh(geo, mat); mesh.position.y = y; scene.add(mesh); return mesh;
-  }
-  flat(city.water, waterMaterial, -0.3);
-  flat(city.land, landMaterial, 0);
-  flat(city.parks.map((p) => p.shape), parkMaterial, 0.18);
-
-  // Merge static building geometry into one draw call with per-building colour.
-  const buildingGeometries: THREE.BufferGeometry[] = [];
-  const edgeGeometries: THREE.BufferGeometry[] = [];
-  const palette = [0xd5dad4, 0xa8babb, 0xe0d8c9, 0xbac6c2, 0xc0c3b6, 0xa2b4b8];
-  city.buildings.forEach((building, index) => {
-    const geometry = new THREE.ExtrudeGeometry(shapeOf(building.shape), { depth: building.height, bevelEnabled: false, steps: 1, curveSegments: 1 });
-    geometry.rotateX(-Math.PI / 2);
-    const count = geometry.getAttribute("position").count;
-    const color = new THREE.Color(palette[index % palette.length]);
-    const colors = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) color.toArray(colors, i * 3);
-    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
-    buildingGeometries.push(geometry);
-    if (!coarse) edgeGeometries.push(new THREE.EdgesGeometry(geometry, 25));
-    // A large stadium footprint gets an original, illustrative pale roof.
-    const bounds = new THREE.Box3().setFromBufferAttribute(geometry.getAttribute("position") as THREE.BufferAttribute);
-    const size = bounds.getSize(new THREE.Vector3());
-    if (size.x > 170 && size.z > 170 && building.height === 24) {
-      const roof = new THREE.Mesh(new THREE.SphereGeometry(1, 32, 12, 0, Math.PI * 2, 0, Math.PI / 2), white);
-      roof.scale.set(size.x * .46, 16, size.z * .46); roof.position.copy(bounds.getCenter(new THREE.Vector3())); roof.position.y = building.height; scene.add(roof);
-    }
-  });
-  const buildingMaterial = new THREE.MeshLambertMaterial({ vertexColors: true });
-  materials.push(buildingMaterial);
-  const merged = mergeGeometries(buildingGeometries);
-  if (merged) scene.add(new THREE.Mesh(merged, buildingMaterial));
-  buildingGeometries.forEach((g) => g.dispose());
-  if (edgeGeometries.length) {
-    const edgeMaterial = new THREE.LineBasicMaterial({ color: 0x718683, transparent: true, opacity: 0.3 });
-    materials.push(edgeMaterial);
-    const edges = mergeGeometries(edgeGeometries);
-    if (edges) scene.add(new THREE.LineSegments(edges, edgeMaterial));
-    edgeGeometries.forEach((g) => g.dispose());
-  }
-
-  // Road geometry is grounded; bridge decks are intentionally visual-only.
-  const roads: THREE.BufferGeometry[] = [];
-  for (const road of city.roads) {
-    for (let i = 1; i < road.points.length; i++) {
-      const [ax, az] = road.points[i - 1], [bx, bz] = road.points[i];
-      const dx = bx - ax, dz = bz - az, length = Math.hypot(dx, dz);
-      const bridge = road.bridge || (road.name.includes("CAMBIE") && city.water.some((p) => inPolygon([(ax + bx) / 2, (az + bz) / 2], p)));
-      const g = new THREE.BoxGeometry(road.width, bridge ? 2 : 0.15, length + 1);
-      g.rotateY(Math.atan2(dx, dz)); g.translate((ax + bx) / 2, bridge ? 13 : 0.25, (az + bz) / 2); roads.push(g);
-    }
-  }
-  const roadMesh = mergeGeometries(roads);
-  if (roadMesh) scene.add(new THREE.Mesh(roadMesh, roadMaterial));
-  roads.forEach((g) => g.dispose());
-
-  const treePositions: Point2[] = [];
-  for (const park of city.parks) {
-    const points = park.shape[0];
-    const xs = points.map((p) => p[0]), zs = points.map((p) => p[1]);
-    for (let x = Math.min(...xs) + 10; x < Math.max(...xs); x += 22) {
-      for (let z = Math.min(...zs) + 10; z < Math.max(...zs); z += 22) {
-        if (inPolygon([x, z], park.shape) && treePositions.length < 900) treePositions.push([x, z]);
+  controls.enableDamping = !reducedMotion; controls.dampingFactor = .1; controls.minDistance = 45; controls.maxDistance = 2450;
+  controls.maxPolarAngle = Math.PI * .475; controls.screenSpacePanning = false;
+  scene.add(new THREE.HemisphereLight(0xd8edf3, 0x8b9776, 1.75));
+  const sun = new THREE.DirectionalLight(0xffe4ba, 3.1); sun.position.set(-650, 1000, 450);
+  sun.castShadow = !coarse; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -1100, right: 1100, top: 1000, bottom: -1000, near: 10, far: 2300 });
+  sun.shadow.bias = -.00015; sun.shadow.normalBias = .8; scene.add(sun);
+  let scenery: ReturnType<typeof buildScenery>;
+  function disposeScene() {
+    const geometries = new Set<THREE.BufferGeometry>(), materials = new Set<THREE.Material>(), textures = new Set<THREE.Texture>();
+    scene.traverse((object) => {
+      if (object instanceof THREE.Mesh || object instanceof THREE.Line || object instanceof THREE.Sprite) {
+        if ("geometry" in object) geometries.add(object.geometry);
+        const list = Array.isArray(object.material) ? object.material : [object.material];
+        list.forEach((m) => { materials.add(m); for (const value of Object.values(m)) if (value instanceof THREE.Texture) textures.add(value); });
       }
-    }
+      if (object instanceof THREE.InstancedMesh) object.dispose();
+    });
+    scenery?.materials.forEach((m) => materials.add(m)); scenery?.textures.forEach((t) => textures.add(t));
+    geometries.forEach((g) => g.dispose()); materials.forEach((m) => m.dispose()); textures.forEach((t) => t.dispose());
+    sun.shadow.map?.dispose(); renderer.dispose(); renderer.forceContextLoss(); canvas.remove();
   }
-  const trees = new THREE.InstancedMesh(new THREE.ConeGeometry(3.7, 12, 5), material(0x4c7763), treePositions.length);
-  const matrix = new THREE.Matrix4();
-  treePositions.forEach(([x, z], i) => { matrix.makeTranslation(x, 6, z); trees.setMatrixAt(i, matrix); });
-  scene.add(trees);
-
-  function boxMesh(w: number, h: number, d: number, mat: THREE.Material, parent: THREE.Object3D, x: number, y: number, z: number) {
-    const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat); mesh.position.set(x, y, z); parent.add(mesh); return mesh;
+  try { scenery = buildScenery(scene, city, coarse); } catch (error) { controls.dispose(); disposeScene(); throw error; }
+  let disposed = false, lost = false, visible = true, mode: Mode = "aerial", quality: "auto" | "low" = "auto";
+  let spawn = world.spawnNear(), car = { ...spawn }, selected = "science-world";
+  let renderHeight = 700;
+  let pixelRatio = Math.min(devicePixelRatio, coarse ? 1.25 : 1.6);
+  renderer.setPixelRatio(pixelRatio);
+  const keyboard = new Set<Input>(), touch = new Set<Input>();
+  const pressed = (action: Input) => keyboard.has(action) || touch.has(action);
+  const clearInput = () => { keyboard.clear(); touch.clear(); };
+  let flight: { from: THREE.Vector3; targetFrom: THREE.Vector3; to: THREE.Vector3; targetTo: THREE.Vector3; progress: number } | null = null;
+  const overviewTarget = new THREE.Vector3(30, 0, -25), overviewPosition = new THREE.Vector3(950, 850, 1050);
+  const aerial = { position: overviewPosition.clone(), target: overviewTarget.clone() };
+  const cameraAim = new THREE.Vector3(); let cameraYaw = car.yaw;
+  function report() { callbacks.telemetry({ speed: Math.round(Math.abs(car.speed) * 3.6), reverse: car.speed < -.1, street: world.streetAt([car.x, car.z]), x: car.x, z: car.z, yaw: car.yaw, blocked: !!car.blocked }); }
+  function select(id: string) {
+    const p = city.anchors[id]; if (!p) return;
+    selected = id; scenery.highlight.position.set(p[0], .35, p[1]);
+    scenery.labels.forEach((label, key) => { label.material.opacity = key === id ? 1 : .78; });
   }
-  const [sx, sz] = city.anchors["science-world"];
-  const science = new THREE.Group(); science.position.set(sx, 0, sz); scene.add(science);
-  const base = new THREE.Mesh(new THREE.CylinderGeometry(28, 30, 8, 32), white); base.position.y = 7; science.add(base);
-  const domeGeometry = new THREE.IcosahedronGeometry(22, 2);
-  const dome = new THREE.Mesh(domeGeometry, material(0xabc9d0)); dome.position.y = 28; science.add(dome);
-  const wireMaterial = new THREE.LineBasicMaterial({ color: 0xf1f1dd }); materials.push(wireMaterial);
-  const wire = new THREE.LineSegments(new THREE.EdgesGeometry(domeGeometry, 1), wireMaterial); wire.position.y = 28; science.add(wire);
-  boxMesh(35, 7, 22, dark, science, 24, 5, 6);
-
-  // Landmark beacons have larger invisible pick targets for touch.
-  const beacons = new THREE.Group(); scene.add(beacons);
-  const pickTargets: THREE.Object3D[] = [];
-  const transparent = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false }); materials.push(transparent);
-  Object.entries(city.anchors).forEach(([id, [x, z]]) => {
-    const height = id === "science-world" ? 68 : 52;
-    const group = new THREE.Group(); group.position.set(x, height, z); beacons.add(group);
-    const marker = new THREE.Mesh(new THREE.OctahedronGeometry(7), teal); group.add(marker);
-    const pick = new THREE.Mesh(new THREE.SphereGeometry(20, 8, 6), transparent); pick.userData.place = id; group.add(pick); pickTargets.push(pick);
-    const line = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, -height + 3, 0), new THREE.Vector3(0, -10, 0)]);
-    group.add(new THREE.Line(line, wireMaterial));
-  });
-  // Original arcade car: no external models, textures, scripts or physics engine.
-  const carModel = new THREE.Group(); scene.add(carModel);
-  boxMesh(1.9, 0.7, 3.8, teal, carModel, 0, 0.85, 0);
-  boxMesh(1.6, 0.65, 1.9, dark, carModel, 0, 1.48, -0.2);
-  for (const x of [-1, 1]) for (const z of [-1.15, 1.15]) boxMesh(0.35, 0.6, 0.7, dark, carModel, x, 0.45, z);
-  boxMesh(1.5, 0.18, 0.12, white, carModel, 0, 0.95, 1.94);
-
-  const buildingBounds = city.buildings.map((b) => ({ shape: b.shape, minX: Math.min(...b.shape[0].map((p) => p[0])), maxX: Math.max(...b.shape[0].map((p) => p[0])), minZ: Math.min(...b.shape[0].map((p) => p[1])), maxZ: Math.max(...b.shape[0].map((p) => p[1])) }));
-  const segments = city.roads.filter((r) => !r.bridge).flatMap((r) => r.points.slice(1).map((b, i) => ({ a: r.points[i], b, width: r.width })));
-  function allowed(p: Point2) {
-    if (!city.land.some((land) => inPolygon(p, land))) return false;
-    if (buildingBounds.some((b) => p[0] >= b.minX && p[0] <= b.maxX && p[1] >= b.minZ && p[1] <= b.maxZ && inPolygon(p, b.shape))) return false;
-    return segments.some((s) => segmentDistance(p, s.a, s.b) < s.width / 2 + 1);
+  function snapDriveCamera() {
+    cameraYaw = car.yaw; camera.position.set(car.x - Math.sin(car.yaw) * 15, 8.5, car.z - Math.cos(car.yaw) * 15);
+    cameraAim.set(car.x + Math.sin(car.yaw) * 4, 1.4, car.z + Math.cos(car.yaw) * 4); camera.lookAt(cameraAim);
   }
-  const spawnRoads = city.roads.filter((r) => r.name.includes("1ST") && !r.bridge);
-  const spawnCandidates = [...spawnRoads, ...city.roads.filter((r) => !r.bridge)];
-  let spawn: CarState | undefined;
-  for (const road of spawnCandidates) {
-    for (let i = 1; i < road.points.length; i++) {
-      const a = road.points[i - 1], b = road.points[i];
-      const p: Point2 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-      if (p[1] > 100 && allowed(p) && allowed([p[0] + 1.5, p[1]]) && allowed([p[0], p[1] + 1.5])) { spawn = { x: p[0], z: p[1], yaw: Math.atan2(b[0] - a[0], b[1] - a[1]), speed: 0 }; break; }
-    }
-    if (spawn) break;
-  }
-  if (!spawn) spawn = { x: 0, z: 350, yaw: 0, speed: 0 };
-  let car = { ...spawn }, mode: Mode = "aerial", disposed = false;
-  const input = new Set<Input>();
   const reset = () => {
-    input.clear(); car = { ...spawn } as CarState;
-    if (mode === "aerial") { controls.target.set(40, 0, 0); camera.position.set(1000, 880, 1100); controls.update(); }
-    else { camera.position.set(car.x - Math.sin(car.yaw) * 14, 8, car.z - Math.cos(car.yaw) * 14); camera.lookAt(car.x, 1, car.z); }
+    clearInput(); flight = null;
+    if (mode === "aerial") { controls.target.copy(overviewTarget); camera.position.copy(overviewPosition); controls.update(); }
+    else { car = { ...spawn }; snapDriveCamera(); report(); }
   };
-  const setMode = (next: Mode) => { mode = next; controls.enabled = mode === "aerial"; carModel.visible = mode === "drive"; beacons.visible = mode === "aerial"; reset(); };
-  setMode("aerial");
-  const keyMap: Record<string, Input> = { ArrowUp: "forward", w: "forward", ArrowDown: "back", s: "back", ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right", " ": "brake" };
-  const keyDown = (event: KeyboardEvent) => { const key = event.key.length === 1 ? event.key.toLowerCase() : event.key; if (keyMap[key]) { event.preventDefault(); input.add(keyMap[key]); } if (key === "r") reset(); };
-  const keyUp = (event: KeyboardEvent) => { const key = event.key.length === 1 ? event.key.toLowerCase() : event.key; if (keyMap[key]) input.delete(keyMap[key]); };
-  const clearInput = () => input.clear();
-  const pointerStart = new THREE.Vector2();
-  const pointerDown = (e: PointerEvent) => { canvas.focus({ preventScroll: true }); pointerStart.set(e.clientX, e.clientY); };
-  const pointerUp = (e: PointerEvent) => {
-    if (mode !== "aerial" || pointerStart.distanceTo(new THREE.Vector2(e.clientX, e.clientY)) > 6) return;
-    const rect = canvas.getBoundingClientRect();
-    const ray = new THREE.Raycaster(); ray.setFromCamera(new THREE.Vector2((e.clientX - rect.left) / rect.width * 2 - 1, -(e.clientY - rect.top) / rect.height * 2 + 1), camera);
-    const hit = ray.intersectObjects(pickTargets, false)[0];
-    if (hit) callbacks.select(hit.object.userData.place);
+  const setMode = (next: Mode) => {
+    if (next === mode) return;
+    clearInput(); flight = null;
+    if (mode === "aerial") { aerial.position.copy(camera.position); aerial.target.copy(controls.target); }
+    mode = next; controls.enabled = mode === "aerial"; scenery.car.visible = mode === "drive"; scenery.markers.visible = mode === "aerial"; scenery.highlight.visible = mode === "aerial";
+    if (mode === "drive") { car.speed = 0; car.steer = 0; snapDriveCamera(); report(); }
+    else { camera.position.copy(aerial.position); controls.target.copy(aerial.target); controls.update(); }
   };
-  const contextLost = (event: Event) => { event.preventDefault(); callbacks.fail("The 3D view paused because graphics memory became unavailable. Reload the scene or explore the places below."); };
-  canvas.addEventListener("keydown", keyDown); window.addEventListener("keyup", keyUp); window.addEventListener("blur", clearInput);
-  canvas.addEventListener("blur", clearInput); document.addEventListener("visibilitychange", clearInput);
-  canvas.addEventListener("pointerdown", pointerDown); canvas.addEventListener("pointerup", pointerUp); canvas.addEventListener("webglcontextlost", contextLost);
-  const resize = new ResizeObserver(() => { const { width, height } = host.getBoundingClientRect(); if (width && height) { renderer.setSize(width, height); camera.aspect = width / height; camera.updateProjectionMatrix(); } }); resize.observe(host);
-  let last = 0, lastSpeed = 0, raf = 0, sampleStart = 0, sampleFrames = 0;
-  function frame(now: number) {
-    if (disposed) return;
-    raf = requestAnimationFrame(frame);
-    const dt = Math.min((now - last) / 1000 || 0.016, 0.05); last = now;
-    if (document.hidden || renderer.getContext().isContextLost()) return;
-    if (mode === "drive") {
-      car = stepCar(car, Number(input.has("forward")) - Number(input.has("back")), Number(input.has("left")) - Number(input.has("right")), input.has("brake"), dt, allowed);
-      carModel.position.set(car.x, 0, car.z); carModel.rotation.y = car.yaw;
-      const next = new THREE.Vector3(car.x - Math.sin(car.yaw) * 13, 7, car.z - Math.cos(car.yaw) * 13);
-      camera.position.lerp(next, 1 - Math.exp(-7 * dt)); camera.lookAt(car.x + Math.sin(car.yaw) * 8, 1.6, car.z + Math.cos(car.yaw) * 8);
-      if (now - lastSpeed > 250) { callbacks.speed(Math.round(Math.abs(car.speed) * 3.6)); lastSpeed = now; }
-    } else {
-      const shift = new THREE.Vector3(Number(input.has("right")) - Number(input.has("left")), 0, Number(input.has("back")) - Number(input.has("forward"))).multiplyScalar(dt * 180);
-      controls.target.add(shift); camera.position.add(shift);
-      const old = controls.target.clone(); controls.target.x = THREE.MathUtils.clamp(old.x, -850, 850); controls.target.z = THREE.MathUtils.clamp(old.z, -550, 550); camera.position.add(controls.target.clone().sub(old));
-      controls.update();
-    }
-    renderer.render(scene, camera);
-    sampleFrames++;
-    if (now - sampleStart >= 1000) {
-      // Read-only DOM diagnostics for release verification; no telemetry.
-      canvas.dataset.fps = String(Math.round(sampleFrames * 1000 / (now - sampleStart)));
-      canvas.dataset.drawCalls = String(renderer.info.render.calls);
-      sampleStart = now; sampleFrames = 0;
-    }
+  scenery.car.visible = false; reset(); select(selected); callbacks.map(city); report();
+  function focus(id: string) {
+    const p = city.anchors[id]; if (!p) return;
+    setMode("aerial"); select(id);
+    const to = new THREE.Vector3(p[0] + 170, 205, p[1] + 230), targetTo = new THREE.Vector3(p[0], 10, p[1]);
+    if (reducedMotion) { camera.position.copy(to); controls.target.copy(targetTo); controls.update(); }
+    else flight = { from: camera.position.clone(), targetFrom: controls.target.clone(), to, targetTo, progress: 0 };
   }
-  raf = requestAnimationFrame(frame);
+  function driveNear(id: string) { const p = city.anchors[id]; if (!p) return; spawn = world.spawnNear(p); car = { ...spawn }; select(id); setMode("drive"); snapDriveCamera(); clearInput(); report(); }
+  const keyMap: Record<string, Input> = { ArrowUp: "forward", w: "forward", ArrowDown: "back", s: "back", ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right", " ": "brake" };
+  const key = (event: KeyboardEvent) => event.key.length === 1 ? event.key.toLowerCase() : event.key;
+  const keyDown = (event: KeyboardEvent) => { if (event.altKey || event.ctrlKey || event.metaKey) return; if (keyMap[key(event)]) { event.preventDefault(); keyboard.add(keyMap[key(event)]); flight = null; } if (key(event) === "r") { event.preventDefault(); reset(); } };
+  const keyUp = (event: KeyboardEvent) => keyboard.delete(keyMap[key(event)]);
+  const pointerStart = new THREE.Vector2();
+  const pointerDown = (event: PointerEvent) => { canvas.focus({ preventScroll: true }); pointerStart.set(event.clientX, event.clientY); flight = null; };
+  const pointerUp = (event: PointerEvent) => {
+    if (mode !== "aerial" || event.button !== 0 || pointerStart.distanceTo(new THREE.Vector2(event.clientX, event.clientY)) > 6) return;
+    const rect = canvas.getBoundingClientRect(), ray = new THREE.Raycaster();
+    ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
+    const hit = ray.intersectObjects(scenery.pickTargets, false)[0];
+    if (hit) { focus(hit.object.userData.place); callbacks.select(hit.object.userData.place); }
+  };
+  let raf = 0, last = 0, lastHud = 0, sampleStart = 0, frames = 0, slowSamples = 0;
+  const schedule = () => { if (!raf && !disposed && !lost && visible && !document.hidden) raf = requestAnimationFrame(frame); };
+  const stop = () => { cancelAnimationFrame(raf); raf = 0; last = 0; sampleStart = 0; frames = 0; };
+  const visibility = () => { clearInput(); if (document.hidden) stop(); else schedule(); };
+  const contextLost = (event: Event) => { event.preventDefault(); lost = true; clearInput(); stop(); callbacks.fail("The graphics connection was interrupted. Your place information is still here. Retry 3D to continue."); };
+  const contextRestored = () => { if (!disposed) callbacks.recover(); };
+  const resize = new ResizeObserver(() => {
+    if (disposed) return;
+    const { width, height } = host.getBoundingClientRect();
+    if (width && height) { renderHeight = height; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); schedule(); }
+  }); resize.observe(host);
+  const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) schedule(); else { clearInput(); stop(); } }); intersection.observe(host);
+  canvas.addEventListener("keydown", keyDown); window.addEventListener("keyup", keyUp); window.addEventListener("blur", clearInput); canvas.addEventListener("blur", clearInput);
+  document.addEventListener("visibilitychange", visibility); canvas.addEventListener("pointerdown", pointerDown); canvas.addEventListener("pointerup", pointerUp);
+  canvas.addEventListener("webglcontextlost", contextLost); canvas.addEventListener("webglcontextrestored", contextRestored);
+  const nextCamera = new THREE.Vector3(), nextAim = new THREE.Vector3();
+  function frame(now: number) {
+    raf = 0; if (disposed || lost || !visible || document.hidden) return;
+    const dt = Math.min(last ? (now - last) / 1000 : 1 / 60, .05); last = now;
+    if (mode === "drive") {
+      car = stepCar(car, Number(pressed("forward")) - Number(pressed("back")), Number(pressed("left")) - Number(pressed("right")), pressed("brake"), dt, world.allowed);
+      scenery.car.position.set(car.x, 0, car.z); scenery.car.rotation.y = car.yaw;
+      scenery.body.rotation.z = -(car.steer ?? 0) * car.speed * .012;
+      scenery.frontWheels.forEach((wheel) => { wheel.rotation.y = car.steer ?? 0; }); scenery.wheels.forEach((wheel) => { wheel.rotation.x += car.speed * dt / .36; });
+      scenery.brakeMaterial.emissiveIntensity = pressed("brake") || (pressed("back") && car.speed > 0) ? 2 : .12;
+      cameraYaw += Math.atan2(Math.sin(car.yaw - cameraYaw), Math.cos(car.yaw - cameraYaw)) * (1 - Math.exp(-7 * dt));
+      let distance = 15 + Math.abs(car.speed) * .18;
+      while (distance > 6 && !world.allowed([car.x - Math.sin(cameraYaw) * distance, car.z - Math.cos(cameraYaw) * distance])) distance -= 1.5;
+      nextCamera.set(car.x - Math.sin(cameraYaw) * distance, 8.5 + Math.abs(car.speed) * .06, car.z - Math.cos(cameraYaw) * distance);
+      camera.position.lerp(nextCamera, 1 - Math.exp(-6 * dt));
+      nextAim.set(car.x + Math.sin(car.yaw) * (4 + car.speed * .25), 1.4, car.z + Math.cos(car.yaw) * (4 + car.speed * .25));
+      cameraAim.lerp(nextAim, 1 - Math.exp(-8 * dt)); camera.lookAt(cameraAim);
+      if (now - lastHud > 200) { report(); lastHud = now; }
+    } else {
+      if (flight) {
+        flight.progress = Math.min(1, flight.progress + dt / .85); const t = flight.progress * flight.progress * (3 - 2 * flight.progress);
+        camera.position.lerpVectors(flight.from, flight.to, t); controls.target.lerpVectors(flight.targetFrom, flight.targetTo, t);
+        if (flight.progress === 1) flight = null;
+      } else {
+        const dx = (Number(pressed("right")) - Number(pressed("left"))) * dt * 180, dz = (Number(pressed("back")) - Number(pressed("forward"))) * dt * 180;
+        const x = THREE.MathUtils.clamp(controls.target.x + dx, -850, 850), z = THREE.MathUtils.clamp(controls.target.z + dz, -550, 550);
+        camera.position.x += x - controls.target.x; camera.position.z += z - controls.target.z; controls.target.x = x; controls.target.z = z;
+      }
+      controls.update();
+      const scaleFor = (position: THREE.Vector3) => camera.position.distanceTo(position) * 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) / renderHeight;
+      scenery.labels.forEach((label, id) => { const size = scaleFor(label.position); label.visible = id === selected; label.scale.set(212 * size, 33 * size, 1); });
+      scenery.numberLabels.forEach((label) => { const size = 30 * scaleFor(label.position); label.scale.set(size, size, 1); });
+    }
+    if (!reducedMotion) scenery.shimmerMaterial.opacity = .18 + Math.sin(now / 1900) * .045;
+    renderer.render(scene, camera); frames++;
+    if (!sampleStart) sampleStart = now;
+    if (now - sampleStart >= 1000) {
+      const fps = Math.round(frames * 1000 / (now - sampleStart));
+      canvas.dataset.fps = String(fps); canvas.dataset.drawCalls = String(renderer.info.render.calls); canvas.dataset.triangles = String(renderer.info.render.triangles);
+      canvas.dataset.geometries = String(renderer.info.memory.geometries); canvas.dataset.textures = String(renderer.info.memory.textures);
+      canvas.dataset.pixelRatio = String(pixelRatio); canvas.dataset.mode = mode;
+      slowSamples = fps < 35 ? slowSamples + 1 : 0;
+      if (quality === "auto" && slowSamples >= 3 && pixelRatio > 1) { pixelRatio = 1; renderer.setPixelRatio(pixelRatio); slowSamples = 0; }
+      sampleStart = now; frames = 0;
+    }
+    schedule();
+  }
+  schedule();
   return {
-    setMode, reset,
-    setInput(action, pressed) { if (pressed) input.add(action); else input.delete(action); },
-    focus(id) { const point = city.anchors[id]; if (!point) return; setMode("aerial"); controls.target.set(point[0], 10, point[1]); camera.position.set(point[0] + 170, 220, point[1] + 240); controls.update(); },
+    setMode, reset, focus, driveNear,
+    setInput(action, held) { if (held) touch.add(action); else touch.delete(action); },
+    setQuality(next) { quality = next; pixelRatio = next === "low" ? Math.min(devicePixelRatio, 1) : Math.min(devicePixelRatio, coarse ? 1.25 : 1.6); renderer.setPixelRatio(pixelRatio); renderer.shadowMap.enabled = next === "auto" && !coarse; renderer.shadowMap.needsUpdate = true; },
     dispose() {
-      disposed = true; cancelAnimationFrame(raf); resize.disconnect(); controls.dispose(); input.clear();
-      canvas.removeEventListener("keydown", keyDown); window.removeEventListener("keyup", keyUp); window.removeEventListener("blur", clearInput); canvas.removeEventListener("blur", clearInput); document.removeEventListener("visibilitychange", clearInput);
-      canvas.removeEventListener("pointerdown", pointerDown); canvas.removeEventListener("pointerup", pointerUp); canvas.removeEventListener("webglcontextlost", contextLost);
-      const geometries = new Set<THREE.BufferGeometry>();
-      scene.traverse((object) => { if (object instanceof THREE.Mesh || object instanceof THREE.Line) geometries.add(object.geometry); if (object instanceof THREE.InstancedMesh) object.dispose(); });
-      geometries.forEach((g) => g.dispose()); materials.forEach((m) => m.dispose()); renderer.dispose(); renderer.forceContextLoss(); canvas.remove();
+      if (disposed) return; disposed = true; stop(); clearInput(); resize.disconnect(); intersection.disconnect(); controls.dispose();
+      canvas.removeEventListener("keydown", keyDown); window.removeEventListener("keyup", keyUp); window.removeEventListener("blur", clearInput); canvas.removeEventListener("blur", clearInput);
+      document.removeEventListener("visibilitychange", visibility); canvas.removeEventListener("pointerdown", pointerDown); canvas.removeEventListener("pointerup", pointerUp);
+      canvas.removeEventListener("webglcontextlost", contextLost); canvas.removeEventListener("webglcontextrestored", contextRestored); disposeScene();
     },
   };
 }

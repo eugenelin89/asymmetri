@@ -565,24 +565,34 @@ No HQ access, new contract, model call, operational control or fixed daily time 
 added. Existing visibility polling refreshes the server summary when the source
 watermark changes; withdrawals and unavailability continue to hide cached content.
 
-## Vancouver V0.1 (October 30, 2026)
+## Vancouver V0.2 (October 30, 2026)
 
 `app/labs/vancouver/page.tsx` frames the independent Labs experiment. Its client
 interface dynamically imports `projects/vancouver/engine.ts`; Three.js 0.186.1
-and geographic data are not imported by other routes. The imperative engine owns
-WebGL2, OrbitControls, merged buildings/roads, instanced trees, original models,
-selection, arcade motion and disposal. React owns search, modes, source panels and
-loading/error/text states. `physics.ts` contains pure tested collision/movement.
-No API, database, accounts, telemetry or external runtime service is added.
+and geographic data are isolated to this route. `scenery.ts` owns merged facades,
+original window textures, instanced vegetation/street furniture and landmark/car
+models. The engine owns WebGL2, OrbitControls, static shadow maps, selection,
+damped cameras, input, visibility suspension and GPU/listener disposal. Auto DPR
+is capped and reduces after sustained low FPS; Lite disables shadows and caps DPR
+at one. Context loss preserves the text interface and retry recreates the engine.
 
-The checked-in bounded City snapshot is built offline by the optional Python
-pipeline. Geometry uses projected local metres and a shared precision grid;
-heights/terrain are explicitly illustrative. There are no historical/proposal
-layers or OSM data in V0.1. Source and data licences remain separate. The default
-public-folder revalidation is sufficient for this small initial snapshot; future
-immutable asset caching must be version-scoped and verified in both build paths.
+React owns search, modes, source panels, loading/error/text states and a portable
+full-window dialog with focus trapping/Escape. `MiniMap.tsx` uses the same loaded
+city for its SVG map. Only throttled driving telemetry crosses into React.
+`physics.ts` uses a 64-metre spatial index, full-car clearance, movement substeps,
+smoothed steering and validated nearby spawns. Elevated bridge/viaduct lines are
+excluded from ground driving. No API, database, accounts, telemetry or external
+runtime service is added.
 
-The dependency security update pins Next.js/eslint-config-next 16.4.3 and updates
-fast-uri within its existing compatible major. Sharp's 0.35.5 override and React
-19.2.6 remain. Next dev generated a documented agent-guidance block in AGENTS.md;
-its local packaged component/lazy-loading guidance was reviewed.
+The immutable V0.2 snapshot derives from V0.1 in the optional offline Python
+pipeline. Source road centrelines and 436 building parts remain; 24 footprints
+are trimmed to make illustrative pavement/sidewalk clearance. Pavement is clipped
+to land; water and extent do not expand. Shared precision is removed before
+buffering overlays to prevent collapsed building parts. Heights, street widths,
+promenade, scenery and flat terrain are explicitly illustrative. No historical,
+proposal or OSM layers. Source/data licences remain separate. Public-folder
+revalidation remains unchanged; any future immutable caching must be versioned
+and verified across both build paths.
+
+The V0.1 dependency baseline remains Next.js/eslint-config-next 16.4.3, React
+19.2.6 and Sharp's 0.35.5 override. V0.2 adds no runtime or development dependency.

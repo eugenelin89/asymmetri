@@ -833,3 +833,24 @@ They are not current navigation.
   pause/resume and no-JavaScript descriptions provide alternative access.
 - Social metadata reuses the existing approved `labs-social.png`; no new social
   asset or claim of an official City affiliation.
+
+## Vancouver V0.2 geographic and procedural assets — October 30, 2026
+
+- `/vancouver/v0.2-2026-10-30/city.json` and adjacent manifest: 276,986-byte
+  bounded City-derived JSON, same extent and 436 building/296 road/18 park parts.
+  Source is immutable V0.1, with parent/output digests and original source hashes
+  in the manifest. Offline Shapely processing trims 24 footprints (1,922.8 m²),
+  derives illustrative pavement/sidewalk widths and a decorative coastal strip,
+  and keeps ground pavement on land. Heights and landmark dimensions remain
+  illustrative. OGL–Vancouver applies; V0.1 remains byte-identical and available.
+- Original runtime assets in `scenery.ts`: a 128×128 canvas window texture,
+  numbered/name sprites, facade/roof variation, road/crossing/lamp details, mixed
+  vegetation, water highlights, landmark geometry and a detailed teal car.
+  Original code-defined shapes/materials under MIT; no imported photos, models,
+  fonts or third-party textures. Dimensions are illustrative. City primary
+  references informed Creekside's green roof and Hinge's wetland, without copying
+  their imagery. See project third-party notices for links.
+- The SVG navigation aid has an accessible car/street label. The canvas has
+  keyboard instructions; six source-backed text summaries remain available
+  without 3D. Procedural scene content is described through these alternatives.
+  Social metadata continues to reuse the approved Labs image.

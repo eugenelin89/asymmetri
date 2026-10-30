@@ -242,3 +242,10 @@ uses an external Python venv and `projects/vancouver/tools/requirements.txt`; it
 is not required to run the committed snapshot. `npm run test:vancouver` checks
 geometry predicates, bounded driving and dataset provenance/topology.
 The October 30 dependency baseline uses Next.js/eslint-config-next 16.4.3.
+
+V0.2 uses `refine_city.py` in that external environment to derive a separate
+snapshot from the immutable V0.1 input. See the project README for commands and
+versioning. Run both `npm run build:next -- --webpack` and `npm run build` before
+release. Test driving with keyboard and held touch buttons, expansion/Escape,
+Lite, pause/resume and route leave/return; never equate viewport checks with a
+physical-device test.

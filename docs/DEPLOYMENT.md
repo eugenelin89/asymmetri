@@ -1310,7 +1310,7 @@ Investment→Trade redirect. The [migration contract](BOTSQUAD_TRADE_URL_MIGRATI
 records scope and validation; exact commits/builds/manifests belong in the release
 receipt. Do not modify ingress, private receivers or stored records for this move.
 
-## Vancouver V0.1 isolated Linux candidate
+## Vancouver isolated Linux candidates
 
 See the [October 30 release record](VANCOUVER_RELEASE_2026-10-30.md) for deployed
 features, verification, runtime identities, recovery and remaining limitations.
@@ -1343,4 +1343,7 @@ content/assets/canonicals/redirects, then use the complete-directory swap above.
 Preserve the previous release and recheck public HTTPS, services and unrelated
 vhosts. Record exact source/build/artifact/rollback identities and measured
 capacity outside Git. CI success alone is never deployment approval or proof of
-production health; the owner has separately authorized this V0.1 deployment.
+production health. The owner separately authorized V0.1 and the autonomous
+V0.2 experimental release. V0.2 uses the same guarded independent candidate and
+whole-directory rollback process, without infrastructure or dependency changes.
+Keep published V0.1 data and the complete preceding V0.1 runtime recoverable.

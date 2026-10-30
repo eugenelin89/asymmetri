@@ -95,3 +95,60 @@
   .detail { padding: 24px 20px; }
   .notes { grid-template-columns: 1fr; gap: 22px; padding: 28px 0; }
 }
+/* V0.2: a quieter cockpit, direct viewpoints and a compact orientation aid. */
+.intro { padding: 25px 0 24px; }
+.title { font-size: clamp(48px, 6vw, 76px); }
+.breadcrumb { margin-bottom: 16px; }
+.viewport { height: min(72svh, 760px); min-height: 480px; background: #d3e0e1; }
+.expanded, .viewport:fullscreen { position: fixed; inset: 0; width: 100%; height: 100dvh; min-height: 0; z-index: 120; border-radius: 0; }
+.toolbar { inset: 16px 16px auto; }
+.toolbar button[aria-pressed="true"] { background: #123c3b; color: white; }
+.toolbar button:focus-visible, .exploreDock button:focus-visible, .driveControls button:focus-visible, .placeActions button:focus-visible { outline: 3px solid #027f75; outline-offset: 3px; }
+.exploreDock { position: absolute; bottom: 44px; left: 20px; max-width: calc(100% - 40px); padding: 14px 16px; background: #f4f5edeb; border: 1px solid #ffffff75; border-radius: 7px; box-shadow: 0 5px 24px #103c3b10; }
+.exploreDock > span { display: block; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+.exploreDock > div { display: flex; gap: 6px; }
+.exploreDock button { min-height: 40px; border-radius: 4px; border: 1px solid #a5bfb6; background: transparent; color: #214b46; font-size: 10px; padding: 8px 10px; cursor: pointer; }
+.exploreDock button span { font-size: 12px; margin: 0 5px; }
+.exploreDock button[aria-pressed="true"] { background: #d5e6da; border-color: #548d7c; }
+.exploreDock button:disabled { opacity: .4; cursor: default; }
+.exploreDock small { display: block; margin-top: 9px; color: #526b61; font-size: 10px; }
+.drivingHud { position: absolute; top: 83px; left: 20px; max-width: calc(100% - 185px); background: #f4f5edee; padding: 12px 15px; border-radius: 6px; pointer-events: none; color: #153d3b; }
+.streetName { font-size: 11px; font-weight: 600; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.drivingHud strong { font-size: 36px; font-weight: 500; line-height: 1.2; font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.drivingHud small { font-size: 11px; }
+.gear { display: inline-flex; justify-content: center; align-items: center; width: 25px; height: 25px; background: #dbe7de; border-radius: 3px; font-size: 12px; margin-left: 12px; }
+.drivingHint { display: block; font-size: 10px; margin-top: 4px; color: #49635a; }
+.driveControls { inset: auto 20px 48px auto; gap: 8px; }
+.driveControls button { width: 54px; height: 54px; box-shadow: 0 3px 12px #103c3b15; }
+.driveControls button:nth-child(3) { margin-left: 16px; }
+.driveControls button:nth-child(4) { background: #174a43; color: white; }
+.driveControls button:active { background: #69c1a5; color: #103c3b; transform: translateY(1px); }
+.miniMap { position: absolute; top: 82px; right: 20px; width: 150px; border: 3px solid #f4f5edee; border-radius: 5px; overflow: hidden; box-shadow: 0 3px 15px #103c3b18; pointer-events: none; background: #d8dfd1; }
+.miniMap svg { display: block; width: 100%; height: auto; }
+.north { position: absolute; top: 4px; right: 5px; background: #f4f5edda; color: #174a43; font-size: 9px; font-weight: 700; padding: 2px 4px; border-radius: 2px; }
+.placeActions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+.placeActions button { margin-top: 0; min-height: 44px; }
+.driveButton { border: 1px solid #89aba0; border-radius: 4px; background: transparent; color: #174a43; padding: 12px 18px; font-size: 12px; cursor: pointer; }
+.driveButton:disabled { opacity: .45; cursor: default; }
+@media (max-width: 600px) {
+  .viewport { height: 66svh; min-height: 450px; }
+  .expanded { height: 100dvh; min-height: 0; }
+  .toolbar { inset: 9px 9px auto; }
+  .toolbar button { min-height: 42px; padding: 0 10px; font-size: 11px; }
+  .modes { padding: 3px; }
+  .viewActions { gap: 3px; }
+  .exploreDock { left: 10px; bottom: 40px; max-width: calc(100% - 20px); width: calc(100% - 20px); padding: 11px; }
+  .exploreDock > div { gap: 4px; }
+  .exploreDock button { flex: 1; min-width: 0; padding: 7px 4px; font-size: 9px; line-height: 1.4; }
+  .exploreDock button span { display: block; font-size: 10px; margin: 2px 0; }
+  .exploreDock small { font-size: 9px; line-height: 1.5; }
+  .drivingHud { top: 72px; left: 10px; padding: 9px 11px; max-width: calc(100% - 138px); }
+  .drivingHud strong { font-size: 29px; }
+  .drivingHint { font-size: 9px; line-height: 1.4; }
+  .miniMap { top: 72px; right: 10px; width: 112px; }
+  .driveControls { left: 10px; right: 10px; bottom: 43px; justify-content: space-between; gap: 6px; }
+  .driveControls button { width: 44px; height: 50px; }
+  .driveControls button:nth-child(3) { margin-left: auto; }
+  .sceneNote { font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) { .driveControls button:active { transform: none; } }

@@ -605,7 +605,7 @@ times, exact-run evidence links, and the native timeline disclosure on mobile,
 tablet and desktop. No completed turn/request counts or future close times may
 be inferred from citations, heartbeats or an active run label.
 
-## Vancouver V0.1
+## Vancouver V0.2
 
 Run `npm run test:vancouver` for courtyard holes, street distance, bounded
 acceleration/braking/reversing, collision and long-frame anti-tunnelling, geographic
@@ -621,3 +621,15 @@ Ensure unrelated pages request no Vancouver engine/data, and preserve Motion's
 protected routes, tutorial canonical/IDs/images, redirects and BotSquad services.
 The canvas exposes sampled FPS and draw-call counts as read-only DOM data
 attributes for local verification; no measurements are transmitted or stored.
+
+V0.2's 13 tests additionally verify the unchanged V0.1 parent digest, all six
+whole-car safe spawns and forward departures, thousands of inland road samples,
+land/water/building exclusions, opposite-pedal braking, steering direction,
+full-body wall clearance, anti-tunnelling and 30/60 Hz consistency. Offline
+refinement asserts bounded trim area, retained building parts and separated
+pavement/buildings/water. Manual checks cover simultaneous steering/acceleration,
+reverse, brake/reset, nearby-place spawns, numbered selection/search, full-window
+expansion/Escape/focus, Lite, repeated pause and actual route leave/return. Review
+FPS/draw calls/DPR and geometry/texture counts from canvas diagnostics. Forced
+WebGL loss and physical-phone checks must be reported as untested unless actually
+executed; code inspection alone does not establish their runtime acceptance.

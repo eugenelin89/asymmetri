@@ -38,7 +38,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
-| `/labs/vancouver` | Vancouver V0.1: experimental False Creek aerial exploration, arcade driving and sourced landmarks |
+| `/labs/vancouver` | Vancouver V0.2: experimental False Creek aerial exploration, arcade driving and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
@@ -223,7 +223,7 @@ The [verified October 14 investment release](docs/INVESTMENT_CLOSE_RELEASE_2026-
 records current website/receiver identities, preserved archive history, portraits
 and closed Ask state.
 
-## Vancouver V0.1
+## Vancouver V0.2
 
 An independent, browser-rendered eastern False Creek experiment with aerial and
 arcade driving modes. [Project setup, data, controls and limits](projects/vancouver/README.md).

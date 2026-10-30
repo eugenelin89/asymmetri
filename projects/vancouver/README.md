@@ -1,66 +1,98 @@
-# Vancouver V0.1 — Experimental
+# Vancouver V0.2 — Experimental
 
 Explore the city. See what's changing.
 
 An independent Asymmetri Labs city experiment at `/labs/vancouver`, covering
-eastern False Creek. Aerial orbit/pan/zoom, bounded arcade driving on flat streets,
-six selectable landmarks, local search, source panels and an accessible text
-alternative. Three.js 0.186.1 / WebGL2, loaded only by this route. No new backend,
-accounts, analytics, external fonts or runtime geographic API requests.
+eastern False Creek. Aerial orbit/pan/zoom, bounded arcade driving, six selectable
+landmarks, local search, source panels and an accessible text alternative.
+Three.js 0.186.1 / WebGL2 loads only on this route. No new backend, accounts,
+analytics, external fonts or runtime geographic API requests.
 
 ## Run
 
 From the website root, follow `.nvmrc`, `npm ci`, then `npm run dev:next`.
-Visit `/labs/vancouver`. `npm run check`, `npm run test:vancouver`,
-`npm run build:next -- --webpack` and `npm run build` validate the integration.
-The repository's Next/Vinext deployment distinction remains unchanged.
+Visit `/labs/vancouver`. Validate with `npm run check`, `npm run test:vancouver`,
+`npm run build:next -- --webpack` and `npm run build`. The existing Next/Vinext
+deployment distinction is unchanged.
 
-## Controls
+## Controls and experience
 
-- Aerial: drag to orbit, scroll/pinch to zoom, right-drag/two fingers to pan.
-  Focus the canvas for arrow-key/WASD panning. Click teal landmark beacons or
-  use the place list. Reset restores the starting view.
-- Drive: arrows/WASD, space to brake, R to reset. On-screen press-and-hold
-  controls support touch and keyboard. Switching modes resets the car.
-- Driving is constrained to flat street corridors, land and building avoidance.
-  Bridge traversal, slopes and realistic physics are absent. Some old footprints
-  and current streets disagree; reset if a road is blocked.
+- Explore: drag to orbit, scroll/pinch to zoom, right-drag/two fingers to pan.
+  Focus the canvas for arrow-key/WASD panning. Select numbered landmarks, quick
+  viewpoints or the searchable place list; Explore here flies to that place.
+- Drive: arrows/WASD, space to brake, R to reset. Hold the on-screen steering
+  and pedal buttons on touch devices. Reverse first brakes forward movement.
+  The HUD gives street, speed and gear; the north-up map shows the car and places.
+- Drive nearby chooses a checked street spawn near the selected place. Reset
+  returns to that spawn; switching modes preserves the car's position.
+- Expand city view fills the browser window. Escape/exit returns to the page.
+  This portable mode does not depend on the native browser fullscreen API.
+- Lite lowers pixel density and disables shadows. Slow sustained frame rates
+  also reduce automatic resolution. Pause 3D releases rendering resources;
+  sources and descriptions remain usable. Retry recreates a failed scene.
 
-## Data and refresh
+Driving uses smoothed arcade steering, a full-car safety footprint, short movement
+substeps and indexed street/building queries. It is constrained to flat ground
+streets, land and building avoidance. Bridge/viaduct traversal, slopes, traffic,
+pedestrians and realistic physics are absent. Narrow curves and imperfect old
+geography can still stop a car; reverse or reset to recover.
 
-The checked-in snapshot is ~184 KB uncompressed. City 2015 footprints,
-public-street centrelines, parks and a simplified 2002 shoreline are transformed
-to WGS84 / UTM zone 10N and local east/south metre coordinates. Heights, trees,
-landmark dimensions and flat terrain are illustrative, not measurements.
-The area is bounded by [-123.123, 49.267, -123.099, 49.278].
+## City and provenance
+
+Original lightweight procedural scenery adds window textures, varied facades,
+roof details, sidewalks, crossings, lamps, mixed trees, water highlights, Science
+World's dome, Creekside's green roof, Hinge wetland, Habitat Island rocks and
+Cambie Bridge supports. These are artistic models, not architectural surveys.
+
+The V0.2 snapshot is 276,986 bytes uncompressed: 436 building parts, 296 road lines
+and 18 park parts in the original extent [-123.123,49.267,-123.099,49.278]. It derives
+from the immutable V0.1 City data without new geographic downloads. Road widths,
+sidewalks and the decorative coastal promenade are illustrative. Street clearance
+trims 24 building parts by a total 1,922.8 square metres, retaining all 436 parts.
+Ground roads and sidewalks are clipped to existing land; water is not expanded.
+Building heights remain illustrative. Source centrelines, extent and original
+raw-response provenance are retained in the versioned manifest.
+
+## Offline data workflow
 
 Use an isolated Python environment outside the repository:
 
 ```sh
 python3 -m venv /path/to/vancouver-tooling
 /path/to/vancouver-tooling/bin/pip install -r projects/vancouver/tools/requirements.txt
-/path/to/vancouver-tooling/bin/python projects/vancouver/tools/build_city.py --cache /path/to/vancouver-source-data
+/path/to/vancouver-tooling/bin/python projects/vancouver/tools/refine_city.py
 ```
 
-The importer fetches four bounded/public datasets once, records exact request URLs
-and raw-response hashes, rejects truncation, fixes geometry and checks water-area
-topology. A common 10 cm precision grid prevents shoreline-boundary gaps. Cached
-responses make regeneration deterministic. For a refresh, use a new cache, update
-the dataset version/retrieval date and engine URL, review output and provenance,
-and release a new immutable version; never silently overwrite published data.
-Raw source records stay outside Git. No full BC download is needed.
+`refine_city.py` verifies the published V0.1 digest and derives V0.2 with Shapely.
+It checks retained parts, a bounded trim budget, and pavement/building/water
+separation. The original `build_city.py --cache /path/to/vancouver-source-data`
+imports four bounded City datasets, records request URLs and raw-response hashes,
+rejects truncation and checks topology. The shared 10 cm precision grid prevents
+shoreline gaps; remove fixed precision before overlay buffering to avoid collapse.
 
-`engine.ts` owns rendering, navigation, input and disposal; `physics.ts` is pure
-bounded movement; `Explorer.tsx` owns React UI; `places.ts` owns reviewed facts.
-The route supplies shared framing, disclaimers, data credits and no-JavaScript
-content. Engine state is not stored in React on every animation frame.
+Published snapshots are immutable. These commands reproduce their specified
+version; for new changes first choose a new output version/date, update engine and
+route URLs, review geometry and provenance, and add regression coverage. Never
+silently replace a published version. Keep raw responses outside Git; no full BC
+download is needed.
+
+## Module boundaries
+
+`engine.ts` owns rendering lifecycle, navigation, camera and input; `scenery.ts`
+owns procedural models/materials; `physics.ts` owns pure collision/movement and
+safe spawns. `Explorer.tsx` owns UI and `MiniMap.tsx` the SVG navigation aid.
+`places.ts` owns reviewed facts. React receives only throttled driving telemetry;
+there is no per-frame React scene update. Context loss preserves readable content;
+retry/restoration creates a new engine. Offscreen/background scenes stop animation,
+and unmount disposes listeners, observers, geometries, materials and textures.
 
 ## Licence and next steps
 
-Original Vancouver code and models are MIT. City-derived data remains under the
-Open Government Licence – Vancouver. See `THIRD_PARTY_NOTICES.md` and the public
-dataset manifest. No OSM data or reference-project source/media was copied.
+Original Vancouver code/models are MIT. City-derived data remains under the Open
+Government Licence – Vancouver; see `THIRD_PARTY_NOTICES.md` and the public
+manifest. No OSM data or reference-project source/media was copied.
 
-V0.2 candidates: better building heights, road/bridge continuity, more informative
-landmark models, physical-phone profiling and western False Creek. Walking,
-traffic, historical/proposal layers, missions and multiplayer are not implemented.
+V0.3 priorities: physical-phone profiling, better road/collision feedback and
+junction continuity, measured heights/current footprints, then independently
+modelled bridge elevations. Historical/proposal layers, walking, missions,
+multiplayer and geographic expansion remain future work.

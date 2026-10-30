@@ -45,7 +45,7 @@ export const vancouver = {
   navLabel: "Vancouver in Progress",
   path: "/labs/vancouver",
   tagline: "Explore the city. See what's changing.",
-  status: "Vancouver V0.1 — Experimental",
+  status: "Vancouver V0.2 — Experimental",
   description: "A small, open-source 3D city experiment. Explore eastern False Creek from the air or try arcade driving on its flat streets.",
   source: { label: "View Vancouver source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/vancouver" },
   license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/vancouver/THIRD_PARTY_NOTICES.md" },
