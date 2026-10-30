@@ -5,6 +5,9 @@ adventure at `/labs/surrey`. The 1.31 × 1.45 km City Centre slice contains actu
 City of Surrey street, sidewalk, building, park and rail geometry. Characters,
 crimes and narrative are authored fiction, unrelated to real incidents or safety.
 
+[Play the public release](https://asymmetri.co/labs/surrey) ·
+[Verified release and recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
+
 ## Play
 
 Run the website with its Node 24 `.nvmrc`, installed lockfile and `npm run dev:next`.

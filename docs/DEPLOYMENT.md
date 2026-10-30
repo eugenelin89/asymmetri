@@ -1362,6 +1362,10 @@ configuration change, service change or threshold exception is authorized here.
 
 ## Surrey Adventure release candidate
 
+The [V0.1 release record](SURREY_RELEASE_2026-10-30.md) records the completed
+production release, exact Linux/source identity, live mission acceptance,
+capacity evidence and complete preceding Vancouver V0.3 recovery.
+
 Surrey adds `/labs/surrey` and a separate static map; use the same isolated Linux
 candidate and whole-directory activation procedure as Vancouver. The user's
 October 30 request authorizes a dedicated feature branch and production release
