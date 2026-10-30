@@ -21,7 +21,8 @@ Motion and the preserved Sports narrative. Update it for:
 Exports `home`, `sports`, `labs`, `about`, `divisions`, `motionFamily` and
 `productStatusLabels` make the umbrella, peer divisions and product states explicit.
 `labs.projects` uses the small `LabsProject` type: name, short description, status,
-required source link, optional detail link and optional established license link.
+optional source/detail links and optional established license link. Actual projects
+retain source links; a category uses its detail link without a fictitious source.
 BotSquad reuses its existing name/status/source/license URL; never assume MIT for
 future entries. Concept captions, videos and URLs stay centralized.
 
@@ -609,11 +610,31 @@ recorded; they remain valid through redirects. API namespaces, image URLs and
 technical investment identifiers are unchanged. See the [migration contract and
 rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
+## GIS Apps
+
+Asymmetri Labs groups Vancouver in Progress and Surrey Adventure under **GIS Apps**.
+`gisApps` in `content/site.ts` owns `/labs/gis`, its metadata, city cards and
+reconstruction explanation. The Labs menu and Labs category card open this hub;
+city cards reuse the existing project names, statuses, descriptions, source and
+licence links. Footer city shortcuts remain available alongside GIS Apps.
+
+This is a navigation grouping, not a URL migration. Keep `/labs/vancouver`,
+`/labs/surrey`, their canonical URLs, hashes, source links and versioned public
+data/asset paths unchanged. No redirects or nested replacement city routes.
+
+Explain public GIS layers, local metre coordinates, pavement construction,
+footprint extrusion, height provenance, original procedural scenery and geometry
+checks. Keep historical/illustrative heights, flat terrain, stylized architecture,
+view-only Vancouver bridges and Surrey fiction visible. The project READMEs and
+source manifests are the evidence; do not imply a current survey, exact replica,
+real-world routing, City affiliation or real crime data. Coordinate shared-copy
+changes with the Greater Vancouver GTA project's Vancouver and Surrey work.
+
 ## Vancouver
 
 `content/site.ts` owns Vancouver identity, metadata, Labs card and navigation links.
-The Labs submenu uses `vancouver.navLabel` ("Vancouver in Progress"); the project name
-and existing `/labs/vancouver` URL remain Vancouver.
+The GIS Apps card uses `vancouver.navLabel` ("Vancouver in Progress"); the project
+name and existing `/labs/vancouver` URL remain Vancouver. The Labs submenu opens GIS Apps.
 `projects/vancouver/places.ts` owns the six original, source-backed place summaries
 and review labels. The route owns experimental notices, dataset attribution and
 no-JavaScript descriptions. Never present illustrative heights, flat terrain, old
@@ -627,7 +648,7 @@ Vancouver's current status is V0.3 — Experimental. UI controls and help live i
 identify illustrative street widths, clearance trims and the decorative
 promenade as well as estimated heights. Expand city view means a full-window
 dialog, without a promise of native browser fullscreen. Preserve the project
-name, source links and “Vancouver in Progress” submenu wording.
+name, source links and “Vancouver in Progress” GIS Apps card wording.
 
 V0.3 distinguishes 115 spatially matched 2009 LiDAR heights from 321 illustrative
 heights; neither is described as current survey data. Scenic-loop and roadside

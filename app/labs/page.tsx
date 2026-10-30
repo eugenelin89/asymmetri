@@ -1,5 +1,6 @@
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { LabsProjectCards } from "@/components/labs-project-cards";
 import { labs } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -21,30 +22,7 @@ export default function LabsPage() {
         <section className="section labs-product" aria-labelledby="labs-projects">
           <div className="shell product-split">
             <h2 id="labs-projects">{labs.projectsHeading}</h2>
-            <div className="labs-projects">
-              {labs.projects.map((project) => (
-                <article className="labs-product__card" key={project.source.href}>
-                  <h3>{project.name}</h3>
-                  <p className="product-lead">{project.description}</p>
-                  <p className="showcase-status">{project.status}</p>
-                  {project.license && (
-                    <a className="text-link" href={project.license.href}>
-                      {project.license.label} ↗
-                    </a>
-                  )}
-                  <div className="button-row">
-                    {project.detail && (
-                      <a className="button button--primary" href={project.detail.href}>
-                        {project.detail.label} →
-                      </a>
-                    )}
-                    <a className="text-link" href={project.source.href}>
-                      {project.source.label} ↗
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <LabsProjectCards projects={labs.projects} />
           </div>
         </section>
         <div className="shell labs-closing">

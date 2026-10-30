@@ -1,0 +1,39 @@
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem .75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--ink-secondary);
+  font-size: .9rem;
+}
+
+.breadcrumb li { display: inline-flex; align-items: center; gap: .75rem; }
+.breadcrumb li + li::before { content: "/"; }
+.breadcrumb a, .breadcrumb span { display: inline-flex; align-items: center; min-height: 44px; }
+.introduction { max-width: 52rem; }
+.introduction > p { margin-top: 1.5rem; }
+.reconstruction h3 { margin-bottom: 1rem; font-size: clamp(1.3rem, 2.5vw, 1.65rem); }
+.reconstruction p { max-width: 65ch; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.5rem clamp(2rem, 5vw, 5rem);
+  padding: 0;
+  margin: 3rem 0 0;
+  list-style: none;
+  counter-reset: reconstruction;
+}
+
+.steps li { border-top: 1px solid var(--line); padding-top: 1.5rem; counter-increment: reconstruction; }
+.steps li::before { content: counter(reconstruction, decimal-leading-zero); display: block; margin-bottom: 1rem; color: var(--brand-bright); }
+.limits { margin-top: clamp(3.5rem, 7vw, 6rem); border-top: 1px solid var(--line); padding-top: 2.5rem; }
+.limitsGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem clamp(2rem, 5vw, 5rem); margin-top: 2rem; }
+.sourcesNote { margin-top: 2rem; color: var(--ink-secondary); }
+
+@media (max-width: 700px) {
+  .steps, .limitsGrid { grid-template-columns: 1fr; }
+}

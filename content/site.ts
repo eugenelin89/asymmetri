@@ -12,7 +12,7 @@ export type LabsProject = {
   description: string;
   status: string;
   detail?: NavItem;
-  source: NavItem;
+  source?: NavItem;
   license?: NavItem;
 };
 
@@ -65,6 +65,71 @@ export const surrey = {
   metadata: { title: "Surrey Adventure — Play the City | Asymmetri Labs", description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve two fictional cases and meet the neighbourhood. A free browser adventure with local saves." },
 } as const;
 
+export const gisApps = {
+  name: "GIS Apps",
+  path: "/labs/gis",
+  description: "Explore real places through open-source maps, city models and playable experiments. Start with Vancouver in Progress and Surrey Adventure.",
+  status: "Experimental city projects",
+  metadata: {
+    title: "GIS Apps | Asymmetri Labs",
+    description: "Explore Vancouver in Progress and Surrey Adventure, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.",
+  },
+  introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
+  projectsHeading: "Explore the cities",
+  projects: [
+    {
+      name: vancouver.navLabel,
+      description: vancouver.description,
+      status: vancouver.status,
+      detail: { label: "Explore Vancouver", href: vancouver.path },
+      source: vancouver.source,
+      license: vancouver.license,
+    },
+    {
+      name: surrey.name,
+      description: surrey.description,
+      status: surrey.status,
+      detail: { label: "Play Surrey Adventure", href: surrey.path },
+      source: surrey.source,
+      license: surrey.license,
+    },
+  ] satisfies readonly LabsProject[],
+  reconstruction: {
+    heading: "How do we reconstruct the streets and buildings?",
+    introduction: "We start with geographic records, then make deliberate modelling choices. The map supplies the layout; the interactive world adds simplified surfaces, building volumes and original scenery.",
+    steps: [
+      {
+        title: "Start with public geography",
+        body: "City open-data sources provide street centre lines, building footprints and other available layers, such as parks, shorelines and sidewalks. We select a small area and record the sources, retrieval dates and licences for each published snapshot.",
+      },
+      {
+        title: "Turn map lines into streets",
+        body: "Geographic coordinates become local positions measured in metres. Street lines gain width to form pavement; sidewalks and junctions are simplified for exploration. We check the movement surfaces against buildings and, where present, water. Widths and clearance adjustments remain modelling choices.",
+      },
+      {
+        title: "Build up from the footprints",
+        body: "A footprint describes a building's outline on the ground. We raise that outline into a simple 3D volume, using source height fields or carefully matched historical LiDAR heights where available, and illustrative heights elsewhere. LiDAR measures distance with laser pulses; matching an old measurement to a footprint does not make it a current survey.",
+      },
+      {
+        title: "Add character and check the result",
+        body: "Original procedural facades, roofs, trees and landmark models make the scene readable. We check geometry, collisions and routes, then publish compact, versioned data with source records and processing notes. Visual detail is an interpretation, not evidence of architectural accuracy.",
+      },
+    ],
+    limitsHeading: "What the models can tell you",
+    limits: [
+      {
+        title: "Vancouver in Progress",
+        body: "The False Creek model combines 2015 building footprints with selected historical height measurements and illustrative heights. Terrain is flat; street widths, some footprint trims and decorative details are approximations. Bridges are view-only. It is an exploration experiment, not a current survey or real-world navigation tool.",
+      },
+      {
+        title: "Surrey Adventure",
+        body: "City of Surrey geography supplies the layout. Source height values guide stylized buildings, but their units and observation dates are not verified. Facades and landmarks are artistic interpretations. The stories and characters are fictional; game access and events do not describe real property access, crime or neighbourhood safety.",
+      },
+    ],
+    sourcesNote: "Each project's source and licence links above explain its datasets, processing and limitations. The city pages retain their own detailed credits.",
+  },
+} as const;
+
 const contactEmail = "info@asymmetri.co";
 
 export const site = {
@@ -100,8 +165,7 @@ export const site = {
         botsquadStructure.research,
         botsquadStructure.investment,
         botsquadStructure.ask,
-        { label: vancouver.navLabel, href: vancouver.path },
-        { label: surrey.name, href: surrey.path },
+        { label: gisApps.name, href: gisApps.path },
       ],
     },
     { label: "About", href: "/about" },
@@ -113,6 +177,7 @@ export const site = {
     { label: divisions.labs.name, href: divisions.labs.path },
     { label: divisions.sports.product.name, href: divisions.sports.product.path },
     { label: divisions.labs.product.name, href: divisions.labs.product.path },
+    { label: gisApps.name, href: gisApps.path },
     { label: vancouver.name, href: vancouver.path },
     { label: surrey.name, href: surrey.path },
   ] satisfies NavItem[],
@@ -1101,8 +1166,10 @@ export const botsquad = {
 
 const labsProjects: readonly LabsProject[] = [
   {
-    name: surrey.name, description: surrey.description, status: surrey.status,
-    detail: { label: "Play Surrey Adventure", href: surrey.path }, source: surrey.source, license: surrey.license,
+    name: gisApps.name,
+    description: gisApps.description,
+    status: gisApps.status,
+    detail: { label: "Explore GIS Apps", href: gisApps.path },
   },
   {
     name: botsquad.name,
@@ -1112,14 +1179,6 @@ const labsProjects: readonly LabsProject[] = [
     source: botsquad.source,
     license: { label: "MIT licensed", href: botsquad.licenseUrl },
   },
-  {
-    name: vancouver.name,
-    description: vancouver.description,
-    status: vancouver.status,
-    detail: { label: "Explore Vancouver", href: vancouver.path },
-    source: vancouver.source,
-    license: vancouver.license,
-  },
 ];
 
 export const labs = {
@@ -1127,7 +1186,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad, Vancouver and Surrey Adventure.",
+      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including Vancouver in Progress and Surrey Adventure.",
   },
   headline: "A playground for ideas.",
   introduction:

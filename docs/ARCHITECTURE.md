@@ -21,6 +21,8 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/` | `app/page.tsx`: concise umbrella gateway with division/product links |
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
+| `/labs/gis` | `app/labs/gis/page.tsx`: GIS Apps category, city cards and reconstruction explanation |
+| `/labs/vancouver`, `/labs/surrey` | Existing independent city applications; unchanged URLs under the GIS Apps category |
 | `/motion` | Current pitching workflow and family roadmap |
 | `/motion/try` | HTTP 307 to the external Google Form in `motion.access.formUrl` |
 | `/botsquad` | Umbrella project overview, software story and area directory |
@@ -81,8 +83,14 @@ response storage and invitation handling remain outside this repository.
 `motionFamily` names, grouping, statuses and entitlements; `productStatusLabels`
 (current/preparing/development/planned); and existing tutorial, utility, concept and
 approved-video records. Sports owns its narrative instead of company-level `site`.
-Labs owns a typed `LabsProject` list with name, description, status, required source
-link and optional detail/license links. Entries reuse `botsquad` and `vancouver` facts. The server page renders a brief hero, generic project articles and a closing
+Labs owns a typed `LabsProject` list with name, description, status and optional
+source/detail/license links. Project entries retain source links; the GIS Apps
+category links to its hub without inventing a separate repository or licence.
+`LabsProjectCards` renders the same server-only cards on Labs and GIS Apps.
+`gisApps` owns category metadata, reconstruction copy and city cards, which reuse
+`vancouver` and `surrey` facts. No city engine/data is imported by the hub.
+The new indexable route adds a sitemap entry without moving any existing page,
+canonical, asset or data URL. The server page renders a brief hero, generic project articles and a closing
 line; it has no approach/principles section or BotSquad-specific access fields.
 All Labs projects are open source; Sports has no blanket open-source requirement.
 No old `work` content export.

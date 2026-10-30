@@ -34,6 +34,8 @@ When routes or shared layout code change, verify:
 
 - `/` (Asymmetri umbrella and peer divisions)
 - `/labs` (open-source playground and project list)
+- `/labs/gis` (GIS Apps cards and street/building reconstruction explanation)
+- `/labs/vancouver`, `/labs/surrey` (original city URLs retained by the GIS grouping)
 - `/sports` (division, founder story, Motion family and anchors)
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/botsquad/trade/guide` (dated technical explanation, noindex, contents,
@@ -153,6 +155,14 @@ Check:
 - Labs introduction/open-source statement, “Currently playing with,” GitHub/detail/
   established-license links and short closing; no Labs approach/principles section
   or stale `/labs#approach` links;
+- Labs menu contains GIS Apps in place of the individual city entries, while
+  BotSquad and its nested links stay intact. Follow Labs → GIS Apps → each original
+  city URL and verify source/licence links, metadata and sitemap entries. Footer
+  city shortcuts and Motion resources remain reachable. The GIS hub must render
+  its cards and reconstruction discussion without JavaScript and must not load
+  either city's engine or datasets. Check mobile/tablet/desktop layout, keyboard
+  disclosure navigation/focus, reduced motion, images and overflow; compare old
+  route, canonical, fragment and versioned asset/data URLs before and after.
 - About origin and BotSquad example/access/current focus;
 - image loading, crops, and alt text;
 - compact mobile navigation;

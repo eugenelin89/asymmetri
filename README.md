@@ -12,8 +12,9 @@ Asymmetri.co
     │   ├── BotSquad Research
     │   │   └── BotSquad Trade
     │   └── Ask BotSquad
-    ├── Vancouver
-    └── Surrey Adventure
+    └── GIS Apps
+        ├── Vancouver in Progress
+        └── Surrey Adventure
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -39,6 +40,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
+| `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
 | `/labs/surrey` | Surrey Adventure V0.2: street adventure, aerial exploration, two cases and local saves |
 | `/labs/vancouver` | Vancouver V0.3: experimental False Creek exploration, a continuous scenic drive and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
@@ -59,7 +61,11 @@ The root homepage introduces Asymmetri and routes visitors directly to Sports an
 Labs without repeating division or product content. Contact opens the shared mailbox;
 legacy contact URLs still reach the footer email.
 
-The main canonical pages, including Vancouver, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
+GIS Apps groups the city projects without moving them: `/labs/vancouver`,
+`/labs/surrey` and all existing data, asset and deep links remain unchanged.
+The Labs menu opens GIS Apps; the category cards open the original city routes.
+
+The main canonical pages, including GIS Apps and both cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
