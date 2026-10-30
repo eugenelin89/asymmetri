@@ -615,7 +615,7 @@ times, exact-run evidence links, and the native timeline disclosure on mobile,
 tablet and desktop. No completed turn/request counts or future close times may
 be inferred from citations, heartbeats or an active run label.
 
-## Vancouver V0.3
+## Vancouver V0.4
 
 Run `npm run test:vancouver` for courtyard holes, street distance, bounded
 acceleration/braking/reversing, collision and long-frame anti-tunnelling, geographic
@@ -653,6 +653,16 @@ manual takeover, destination guidance, whole-city/local map toggle and mobile
 portrait/landscape layouts. Record frame rate, rolling frame-time p95, collisions,
 distance, loop count and resource counts with environment and duration. A single
 idle frame or pure simulation is not a substitute for browser performance evidence.
+
+V0.4 extends the suite to 43 tests, covering source dates/quality/retained geometry,
+rendered collision-cell parity, all three manual-route centre paths in both
+directions, disconnected routes, and independent pointer/key ownership. Geometry
+checks are not manual-driving acceptance: drive the additional routes with real UI
+input, report distances, curb contacts and recoveries, and explicitly identify any
+reverse direction tested only geometrically. Record actual forced WebGL loss,
+restore and Retry behavior using the development-only controls. Check map keyboard
+routing and that blur/background never resumes Cruise or held acceleration.
+Physical multitouch, battery and thermal claims require real device evidence.
 
 ## Surrey Adventure
 

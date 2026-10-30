@@ -182,3 +182,65 @@ test("all six destinations route from the scenic start to safe roadside stops",(
     for(let d=0;d<route.length;d+=2){const p=pointAt(route,d),q=pointAt(route,Math.min(route.length,d+1));assert.ok(carFits({x:p[0],z:p[1],yaw:Math.atan2(q[0]-p[0],q[1]-p[1])},v3World.allowed),id+" "+d);}
   }
 });
+
+const v4Directory = new URL('../../public/vancouver/v0.4-2026-10-30/', import.meta.url);
+const v4Bytes = readFileSync(new URL('city.json',v4Directory));
+const v4 = JSON.parse(v4Bytes), v4Manifest = JSON.parse(readFileSync(new URL('manifest.json',v4Directory)));
+const v4World = createDrivingWorld(v4), v4Nav = createNavigator(v4,p=>carFits(p,v4World.allowed));
+test('V0.4 retains all old footprints/water and pins selective NRCan height evidence',()=>{
+  assert.equal(v4Manifest.parentSha256,v3Manifest.sha256);
+  assert.equal(createHash('sha256').update(v4Bytes).digest('hex'),v4Manifest.sha256);
+  assert.equal(v4Bytes.length,v4Manifest.bytes);assert.ok(v4Bytes.length<600000);
+  assert.deepEqual(v4.buildings.map(b=>b.shape),v3.buildings.map(b=>b.shape));
+  assert.deepEqual(v4.water,v3.water);assert.deepEqual(v4.roads,v3.roads);
+  const matches=v4.buildings.filter(b=>b.heightSource?.dataset==='nrcan-auto-building-opti-2');
+  assert.equal(matches.length,18);
+  for(const b of matches){assert.equal(b.heightSource.acquisitionStart,'20130207');assert.equal(b.heightSource.acquisitionEnd,'20130219');assert.equal(b.heightSource.qualityCode,23);assert.ok(b.heightSource.intersectionOverUnion>=.8);assert.equal(b.height,b.heightSource.heightMaxM);}
+  assert.equal(v4.sources.at(-1).records,372);assert.ok(v4.sources.at(-1).downloadedBytes<16*1024*1024);
+  assert.equal(v4.heightRefinement.counts.illustrative,316);
+  assert.ok(v4.networkAudit.components[0].lengthM>21000);assert.ok(v4.networkAudit.addedPavementM2<4000);
+});
+test('V0.4 visible pavement, cells and exclusions agree throughout the map',()=>{
+  const rendered=Object.values(v4.roadCells).flat();
+  for(let x=-870;x<875;x+=12)for(let z=-615;z<615;z+=12){
+    const p=[x,z],visible=rendered.some(poly=>inPolygon(p,poly));assert.equal(v4World.allowed(p),visible,JSON.stringify(p));
+    if(visible!==v4.pavement.some(poly=>inPolygon(p,poly))) assert.ok(v4.pavement.some(poly=>poly.some(ring=>ring.slice(1).some((b,i)=>segmentDistance(p,ring[i],b)<.02))), 'only sub-centimetre clipping differences');
+    if(visible){assert.ok(!v4.water.some(poly=>inPolygon(p,poly)));assert.ok(!v4.buildings.some(b=>inPolygon(p,b.shape)));}
+  }
+  for(const p of [[-73,0],[-274,100],[-1200,0],[0,900]])assert.equal(v4World.allowed(p),false);
+});
+for(const item of v4.drives)for(const reverse of [false,true])test(`${item.title} ${reverse?'reverse':'forward'} has continuous whole-car clearance beyond the loop`,()=>{
+  const route=v4Nav.drive(item.id,reverse);assert.ok(route.length>650 && route.length<1250);assert.equal(route.loop,false);
+  for(let d=0;d<route.length-1;d+=.75){const p=pointAt(route,d),q=pointAt(route,d+1);assert.ok(carFits({x:p[0],z:p[1],yaw:Math.atan2(q[0]-p[0],q[1]-p[1])},v4World.allowed),`${item.id} ${d}`);}
+  const loop=v4Nav.scenic();let outside=0;
+  for(let d=0;d<route.length;d+=5)if(projectRoute(loop,pointAt(route,d)).distance>20)outside+=5;
+  assert.ok(outside>route.length*.65,`${item.id}: ${outside}m beyond existing loop`);
+});
+for(const reverse of [false,true])for(const hz of [15,30,60,120])test(`V0.4 preserves scenic Cruise ${reverse?'reverse':'forward'} at ${hz}Hz`,()=>{
+  const route=v4Nav.scenic(reverse),a=pointAt(route,0),b=pointAt(route,3);
+  let car={x:a[0],z:a[1],yaw:Math.atan2(b[0]-a[0],b[1]-a[1]),speed:0},progress=0,laps=0;
+  for(let i=0;i<260*hz;i++){
+    const projection=projectRoute(route,[car.x,car.z],progress);progress=projection.progress;
+    if(progress>route.length-.5 && projection.distance<8){progress=0;laps++;}
+    const input=cruiseInput(car,route,progress);car=stepCar(car,input.throttle,input.steering,input.brake,1/hz,v4World.allowed);
+    assert.ok(!car.blocked,JSON.stringify({car,progress}));if(laps && progress>100)break;
+  }
+  assert.equal(laps,1);assert.ok(progress>100);
+});
+test('map routing refuses distant origins, water targets and disconnected streets',()=>{
+  const start=v4Nav.scenic().points[0];
+  assert.throws(()=>v4Nav.navigatePoint([-73,0],start),/connected/);
+  assert.throws(()=>v4Nav.navigatePoint(start,[-73,0]),/ground street/);
+  assert.throws(()=>v4Nav.navigatePoint(start,[-474.2,516.9]),/connected/);
+  for(const id of Object.keys(v4.anchors)){const r=v4Nav.navigate(start,id,id);assert.ok(r.length>0);}
+  const target=pointAt(v4Nav.drive('village-blocks'),400),r=v4Nav.navigatePoint(start,target);assert.ok(r.length>100);assert.equal(r.loop,false);
+});
+test('each finger and keyboard key owns its press until release or reset',async()=>{
+  const {createInputState}=await import('./input.ts');const inputs=createInputState();
+  inputs.set('finger1','forward',true);inputs.set('finger2','left',true);
+  assert.ok(inputs.has('forward')&&inputs.has('left'));
+  inputs.set('finger3','forward',true);inputs.set('finger1','forward',false);assert.ok(inputs.has('forward'));
+  inputs.set('finger2','left',false);assert.equal(inputs.has('left'),false);assert.ok(inputs.has('forward'));
+  inputs.set('key:w','forward',true);inputs.set('finger3','forward',false);assert.ok(inputs.has('forward'));
+  inputs.clear();assert.equal(inputs.has('forward'),false);
+});

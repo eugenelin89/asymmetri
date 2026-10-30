@@ -42,7 +42,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
 | `/labs/surrey` | Surrey Adventure V0.2: street adventure, aerial exploration, two cases and local saves |
-| `/labs/vancouver` | Vancouver V0.3: experimental False Creek exploration, a continuous scenic drive and sourced landmarks |
+| `/labs/vancouver` | Vancouver V0.4: free-roaming False Creek, three manual drives and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
@@ -231,11 +231,13 @@ The [verified October 14 investment release](docs/INVESTMENT_CLOSE_RELEASE_2026-
 records current website/receiver identities, preserved archive history, portraits
 and closed Ask state.
 
-## Vancouver V0.3
+## Vancouver V0.4
 
 An independent, browser-rendered eastern False Creek experiment with aerial and
 arcade driving modes. [Project setup, data, controls and limits](projects/vancouver/README.md).
-Vancouver-specific code/models are MIT; City data has separate attribution.
+Vancouver-specific code/models are MIT; City and NRCan data have separate attribution.
+V0.4 adds three manual routes, map-picked destinations, wider checked junctions,
+relaxed pace and a wide camera. [Release evidence and limits](docs/VANCOUVER_V04_RELEASE_2026-10-30.md).
 The [Linux candidate workflow](.github/workflows/website-linux-candidate.yml) builds
 public website source on Node 22.23.1 without production credentials or automatic
 deployment. Releases still use the documented SSH candidate/rollback workflow.

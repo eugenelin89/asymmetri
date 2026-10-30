@@ -255,6 +255,13 @@ Use the pinned bounded request/digest in its manifest; the importer rejects a
 changed upstream response or changed existing output. Node tests need no Python
 or network and drive the complete circuit in both directions at four frame rates.
 
+V0.4 adds `extract_nrcan.py /external/cache/nrcan-buildings.json` (optional
+`pyarrow==20.0.0`) and `build_v04.py --nrcan-source /external/cache/nrcan-buildings.json`.
+Read the project README for ETag, transfer-cap and immutable-output safeguards.
+Development mode exposes Local graphics recovery test → Interrupt/Restore WebGL;
+production omits these controls. Test actual loss and both restore/retry paths,
+independent held controls and blur/background recovery.
+
 ## Surrey Adventure
 
 `npm run dev:next` serves `/labs/surrey`; choose Play Now to load the map and WebGL2

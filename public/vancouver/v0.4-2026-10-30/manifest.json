@@ -1,0 +1,357 @@
+{
+  "version": "v0.4-2026-10-30",
+  "asset": "city.json",
+  "bytes": 545239,
+  "sha256": "23e80e2e65de63f960d9bd8d00931c9d7f6761fc6fb25bfe47db0df31941d1fa",
+  "parentSha256": "e81feb26bbffa44f1371db0a4f90e35a7888ca59a77fea2499e0bc3e7d950324",
+  "sources": [
+    {
+      "dataset": "parks-polygon-representation",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=parks-polygon-representation&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "170572359e6e46bfcb826df67adc94e87baaeb05f8d903981d9f6f0e84792234",
+      "records": 16
+    },
+    {
+      "dataset": "shoreline-2002",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=shoreline-2002&rows=1000&sort=recordid",
+      "sha256": "c6a4df694cffb2df74e803cfc9881eca3f5e7096f10ed2724084c002334cb2b1",
+      "records": 2
+    },
+    {
+      "dataset": "building-footprints-2015",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=building-footprints-2015&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "08415624c335adfb2d7f699edbd61ca19d4b86438632114c200eb84e4dc53646",
+      "records": 452
+    },
+    {
+      "dataset": "public-streets",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=public-streets&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "2b2cfa15c2a5fa8f3f3056e26f8f81a34c15e4f009568a2893fa03d35a61373e",
+      "records": 299
+    },
+    {
+      "dataset": "building-footprints-2009",
+      "url": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=building-footprints-2009&rows=1000&sort=recordid&geofilter.bbox=49.267%2C-123.123%2C49.278%2C-123.099",
+      "sha256": "b8a7b90b1660e8c147b986586bf58dee6329462bf23af88b51e643006b54334d",
+      "records": 915
+    },
+    {
+      "dataset": "nrcan-auto-building-opti-2",
+      "url": "https://ftp-maps-canada-ca.s3.ca-central-1.amazonaws.com/pub/nrcan_rncan/extraction/auto_building/auto_building_opti_2/auto_building_opti_2.parquet",
+      "catalogue": "https://open.canada.ca/data/dataset/7a5cda52-c7df-427f-9ced-26f19a8a64d6",
+      "sha256": "109bb8e6542a802fb0f97734fecc03985e25b37fba9672d3f90f55cdad9a3784",
+      "records": 372,
+      "retrieved": "2026-10-30",
+      "downloadedBytes": 12211931,
+      "etag": "\"03fa9c6fb8267d43234811779ee1152a-288\"",
+      "licence": "Open Government Licence \u2013 Canada",
+      "acquisitionDates": [
+        "20130207/20130219",
+        "20160620/20160912"
+      ]
+    }
+  ],
+  "networkAudit": {
+    "parentSha256": "e81feb26bbffa44f1371db0a4f90e35a7888ca59a77fea2499e0bc3e7d950324",
+    "junctions": 110,
+    "junctionRadiusM": 10.5,
+    "addedPavementM2": 3621.1,
+    "components": [
+      {
+        "nodes": 217,
+        "lengthM": 21367.5
+      },
+      {
+        "nodes": 18,
+        "lengthM": 1287.4
+      },
+      {
+        "nodes": 2,
+        "lengthM": 125.1
+      },
+      {
+        "nodes": 2,
+        "lengthM": 36.1
+      },
+      {
+        "nodes": 2,
+        "lengthM": 17.3
+      }
+    ],
+    "sourceRoadLines": 283,
+    "sourceCentrelineM": 23111.8,
+    "safeGraphM": 22833.3,
+    "notice": "Entire ground network audited for geometric clearance; three additional routes receive manual browser acceptance. Disconnected shoreline pockets and cropped map edges remain. Widths and turning aprons are illustrative, not measured or legal driving directions."
+  },
+  "heightRefinement": {
+    "nrcanMatches": 18,
+    "counts": {
+      "illustrative": 316,
+      "building-footprints-2009": 102,
+      "nrcan-auto-building-opti-2": 18
+    },
+    "matches": [
+      {
+        "buildingId": "6608346",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "ffd065af-582a-4480-9b36-b8ee6cf88dd7",
+        "intersectionOverUnion": 0.9426,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 4.17,
+        "heightMaxM": 8.15,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6477508",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "ba2d0e71-c3ab-4fad-95a3-e95479e5d1f2",
+        "intersectionOverUnion": 0.8067,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 9.41,
+        "heightMaxM": 11.54,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6593942",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "9c218de2-9c75-4689-ab5e-bdf1ddb68b0e",
+        "intersectionOverUnion": 0.9002,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 4.23,
+        "heightMaxM": 9.06,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6599112",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "b9fd9a06-cbd5-4243-b4de-af2e64af71fa",
+        "intersectionOverUnion": 0.8776,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 5.88,
+        "heightMaxM": 9.27,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6545355",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "599cf585-9444-480a-9c73-9ff46a57b3de",
+        "intersectionOverUnion": 0.9028,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.01,
+        "heightMaxM": 20.18,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6581726",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "ae5a63da-4926-4b8e-88a3-727573076b03",
+        "intersectionOverUnion": 0.8544,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 3.67,
+        "heightMaxM": 9.15,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6484361",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "ed7b328a-1ebe-4c76-8549-623fb178b4c3",
+        "intersectionOverUnion": 0.8295,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 4.2,
+        "heightMaxM": 6.12,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6570674",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "4b45b1c4-96ef-4617-936d-39357125b90c",
+        "intersectionOverUnion": 0.8971,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.02,
+        "heightMaxM": 13.84,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6608347",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "27a0e9f2-05e8-4614-84b7-7fad6cd1dd2e",
+        "intersectionOverUnion": 0.914,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 3.2,
+        "heightMaxM": 11.3,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6611821",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "537df75e-ad95-42d5-8593-e8ec4cb5036e",
+        "intersectionOverUnion": 0.8236,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 3.33,
+        "heightMaxM": 10.28,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6512738",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "913370b8-e26d-4953-b967-e27488eec621",
+        "intersectionOverUnion": 0.9276,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.02,
+        "heightMaxM": 14.74,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6599115",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "f9f5a761-dada-4872-99b5-30deafac6d63",
+        "intersectionOverUnion": 0.8971,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.01,
+        "heightMaxM": 9.23,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6589981",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "4bd4b090-d575-4690-ac95-ce12c19544f8",
+        "intersectionOverUnion": 0.8289,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 5.13,
+        "heightMaxM": 9.9,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6499088",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "a8008415-9a1c-490b-a53f-b0f9827fb569",
+        "intersectionOverUnion": 0.9002,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.01,
+        "heightMaxM": 9.19,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6489627",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "b8afc3d4-b307-489c-a499-783b09062dab",
+        "intersectionOverUnion": 0.8715,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 3.99,
+        "heightMaxM": 7.58,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6619988",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "65c7f43d-8e6e-4cde-974d-f6a9571ce5db",
+        "intersectionOverUnion": 0.8758,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 3.6,
+        "heightMaxM": 6.8,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6483815",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "6439a6d1-822c-4926-9c66-fbf6c450f433",
+        "intersectionOverUnion": 0.8076,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 2.07,
+        "heightMaxM": 8.06,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      },
+      {
+        "buildingId": "6612753",
+        "dataset": "nrcan-auto-building-opti-2",
+        "recordId": "5edc7ea2-1fad-435e-b297-68be0a39e7fd",
+        "intersectionOverUnion": 0.8152,
+        "acquisitionStart": "20130207",
+        "acquisitionEnd": "20130219",
+        "heightMinM": 4.68,
+        "heightMaxM": 18.37,
+        "qualityCode": 23,
+        "sourceId": "AUTO_BUILDING_20181214_VANCOUVE",
+        "horizontalAccuracyM": 2.0,
+        "verticalAccuracyM": 1.0
+      }
+    ],
+    "notice": "NRCan matches use February 2013 LiDAR maximum roof heights, not current measurements or roof geometry. 2016 poor-quality records are rejected. Existing 2009 matches remain elsewhere; all other heights are illustrative. Footprints are retained unchanged."
+  },
+  "attribution": [
+    "Contains information licensed under the Open Government Licence \u2013 Vancouver.",
+    "Contains information licensed under the Open Government Licence \u2013 Canada."
+  ],
+  "licences": [
+    "https://opendata.vancouver.ca/pages/licence/",
+    "https://open.canada.ca/en/open-government-licence-canada"
+  ]
+}

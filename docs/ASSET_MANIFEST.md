@@ -904,3 +904,24 @@ photographs, surveyed dimensions, official logos or public artwork. Fictional
 signs do not identify real businesses as crime locations. Canvas description,
 visible HUD, labels, journal and nearby text provide context; no decorative image
 requires a separate HTML alt attribute. Original code remains MIT licensed.
+
+## Vancouver V0.4 geographic assets — October 30, 2026
+
+- `/vancouver/v0.4-2026-10-30/city.json` and adjacent manifest: 545,239-byte
+  derived geographic asset in the original eastern False Creek extent. Retains
+  all V0.3 building footprints, source road lines, water and land. Published
+  V0.1–V0.3 assets are unchanged; checksums are recorded beside each version.
+- Offline processing widens 110 illustrative junction aprons to 10.5 m radius,
+  clips them around water/buildings and creates matching pavement/collision cells.
+  Three manual-route waypoint lists and a network-component audit are included.
+- 18 NRCan February 2013 LiDAR maximum roof heights are matched at IoU >=0.8;
+  102 City 2009 heights and 316 estimates remain. No NRCan footprint/roof shapes
+  replace the existing geometry. Poor-quality 2016 records are rejected.
+- NRCan optimized GeoParquet was accessed with pinned-ETag verified ranges:
+  12,211,931 bytes transferred, 372 bounded records. Per-record dates, identity,
+  quality and raw/output SHA-256 support reproducibility. OGL–Canada and
+  OGL–Vancouver apply to their respective derived data; code MIT is separate.
+- Public role: free-roam 3D model, street map and text provenance. JSON has no image
+  dimensions/alt text; accessible map labels and the six-place text fallback remain.
+  Original procedural road markings are clipped to pavement. No external raster,
+  logo, photo, sound, font, architectural asset or government endorsement is added.

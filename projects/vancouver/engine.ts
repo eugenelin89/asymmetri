@@ -3,16 +3,17 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { carFits, createDrivingWorld, stepCar } from "./physics";
 import { angleDifference, createNavigator, cruiseInput, pointAt, projectRoute } from "./navigation";
 import { buildScenery } from "./scenery";
+import { createInputState } from "./input";
 import type { City, DriveRoute, DriveTelemetry, Explorer, Input, Mode } from "./types";
 
 type Callbacks = { select(id: string): void; telemetry(value: DriveTelemetry): void; map(city: City): void; route(route: DriveRoute | null): void; fail(message: string): void; recover(): void };
-const DATA = "/vancouver/v0.3-2026-10-30/city.json";
+const DATA = "/vancouver/v0.4-2026-10-30/city.json";
 
 export async function createExplorer(host: HTMLElement, callbacks: Callbacks, signal: AbortSignal): Promise<Explorer> {
   const response = await fetch(DATA, { signal });
   if (!response.ok) throw new Error("The city data could not be loaded. Please retry.");
   const city: City = await response.json(); signal.throwIfAborted();
-  if (city.version !== "v0.3-2026-10-30" || !Array.isArray(city.pavement) || !city.buildings.length || !city.graph || !city.roadCells) throw new Error("The city data is incomplete. Please retry.");
+  if (city.version !== "v0.4-2026-10-30" || !Array.isArray(city.pavement) || !city.buildings.length || !city.graph || !city.roadCells || city.drives?.length !== 3) throw new Error("The city data is incomplete. Please retry.");
   const world = createDrivingWorld(city);
   const navigator = createNavigator(city, (pose) => carFits(pose, world.allowed));
   const coarse = matchMedia("(pointer: coarse)").matches;
@@ -55,13 +56,14 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   let spawn = world.spawnNear(), car = { ...spawn }, selected = "science-world";
   let route: DriveRoute | null = null, progress = 0, cruising = false, laps = 0, travelled = 0;
   let driveSeconds = 0, driveFrames = 0, collisions = 0, minFps = Infinity;
+  let pace: "relaxed" | "normal" = "relaxed", cameraMode: "chase" | "wide" = "chase";
   const frameTimes: number[] = [];
   let renderHeight = 700;
   let pixelRatio = Math.min(devicePixelRatio, coarse ? 1.25 : 1.6);
   renderer.setPixelRatio(pixelRatio);
-  const keyboard = new Set<Input>(), touch = new Set<Input>();
-  const pressed = (action: Input) => keyboard.has(action) || touch.has(action);
-  const clearInput = () => { keyboard.clear(); touch.clear(); };
+  const inputs = createInputState();
+  const pressed = inputs.has;
+  const clearInput = inputs.clear;
   let flight: { from: THREE.Vector3; targetFrom: THREE.Vector3; to: THREE.Vector3; targetTo: THREE.Vector3; progress: number } | null = null;
   const overviewTarget = new THREE.Vector3(30, 0, -25), overviewPosition = new THREE.Vector3(950, 850, 1050);
   const aerial = { position: overviewPosition.clone(), target: overviewTarget.clone() };
@@ -77,13 +79,21 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   }
   function setRoute(next: DriveRoute | null) { route = next; progress = 0; laps = 0; cruising = false; scenery.setRoute(next); callbacks.route(next); report(); }
   function startScenic(reverse = false) {
-    const next = navigator.scenic(reverse), first = next.points[0], ahead = pointAt(next, 3);
+    startRoute(navigator.scenic(reverse));
+  }
+  function startRoute(next: DriveRoute) {
+    const first = next.points[0], ahead = pointAt(next, 3);
     spawn = { x: first[0], z: first[1], yaw: Math.atan2(ahead[0] - first[0], ahead[1] - first[1]), speed: 0, steer: 0 };
     car = { ...spawn }; setMode("drive"); setRoute(next); clearInput(); snapDriveCamera(); report();
   }
   function navigate(id: string) {
     const next = navigator.navigate([car.x, car.z], id, `To ${id.replaceAll("-", " ").replace(/\b\w/g, (c) => c.toUpperCase())}`);
     setMode("drive"); setRoute(next); select(id); clearInput(); report();
+  }
+  const startDrive = (id: string, reverse = false) => startRoute(navigator.drive(id, reverse));
+  function navigatePoint(point: [number, number]) {
+    const next = navigator.navigatePoint([car.x, car.z], point);
+    setMode("drive"); setRoute(next); clearInput(); report();
   }
   function recover() { car = world.recoverNear(car); cruising = false; clearInput(); snapDriveCamera(); if (route) progress = projectRoute(route, [car.x, car.z]).progress; report(); }
 
@@ -93,7 +103,8 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
     scenery.labels.forEach((label, key) => { label.material.opacity = key === id ? 1 : .78; });
   }
   function snapDriveCamera() {
-    cameraYaw = car.yaw; camera.position.set(car.x - Math.sin(car.yaw) * 15, 8.5, car.z - Math.cos(car.yaw) * 15);
+    const distance = cameraMode === "wide" ? 23 : 15;
+    cameraYaw = car.yaw; camera.position.set(car.x - Math.sin(car.yaw) * distance, cameraMode === "wide" ? 15 : 8.5, car.z - Math.cos(car.yaw) * distance);
     cameraAim.set(car.x + Math.sin(car.yaw) * 4, 1.4, car.z + Math.cos(car.yaw) * 4); camera.lookAt(cameraAim);
   }
   const reset = () => {
@@ -120,21 +131,25 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   function driveNear(id: string) { const p = city.anchors[id]; if (!p) return; spawn = world.spawnNear(p); car = { ...spawn }; setRoute(null); select(id); setMode("drive"); snapDriveCamera(); clearInput(); report(); }
   const keyMap: Record<string, Input> = { ArrowUp: "forward", w: "forward", ArrowDown: "back", s: "back", ArrowLeft: "left", a: "left", ArrowRight: "right", d: "right", " ": "brake" };
   const key = (event: KeyboardEvent) => event.key.length === 1 ? event.key.toLowerCase() : event.key;
-  const keyDown = (event: KeyboardEvent) => { if (event.altKey || event.ctrlKey || event.metaKey) return; if (keyMap[key(event)]) { event.preventDefault(); cruising = false; keyboard.add(keyMap[key(event)]); flight = null; } if (key(event) === "r") { event.preventDefault(); reset(); } };
-  const keyUp = (event: KeyboardEvent) => keyboard.delete(keyMap[key(event)]);
+  const keyDown = (event: KeyboardEvent) => { if (event.altKey || event.ctrlKey || event.metaKey) return; if (keyMap[key(event)]) { event.preventDefault(); cruising = false; inputs.set(`key:${key(event)}`, keyMap[key(event)], true); flight = null; } if (key(event) === "r") { event.preventDefault(); reset(); } };
+  const keyUp = (event: KeyboardEvent) => inputs.set(`key:${key(event)}`, keyMap[key(event)], false);
   const pointerStart = new THREE.Vector2();
-  const pointerDown = (event: PointerEvent) => { canvas.focus({ preventScroll: true }); pointerStart.set(event.clientX, event.clientY); flight = null; };
+  const pointers = new Set<number>(); let gesture = false;
+  const pointerDown = (event: PointerEvent) => { pointers.add(event.pointerId); if (pointers.size > 1) gesture = true; else { gesture = false; pointerStart.set(event.clientX, event.clientY); } canvas.focus({ preventScroll: true }); flight = null; };
   const pointerUp = (event: PointerEvent) => {
-    if (mode !== "aerial" || event.button !== 0 || pointerStart.distanceTo(new THREE.Vector2(event.clientX, event.clientY)) > 6) return;
+    pointers.delete(event.pointerId);
+    if (gesture || mode !== "aerial" || event.button !== 0 || pointerStart.distanceTo(new THREE.Vector2(event.clientX, event.clientY)) > 6) return;
     const rect = canvas.getBoundingClientRect(), ray = new THREE.Raycaster();
     ray.setFromCamera(new THREE.Vector2((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1), camera);
     const hit = ray.intersectObjects(scenery.pickTargets, false)[0];
     if (hit) { focus(hit.object.userData.place); callbacks.select(hit.object.userData.place); }
   };
+  const pointerCancel = (event: PointerEvent) => { pointers.delete(event.pointerId); gesture = true; };
   let raf = 0, last = 0, lastHud = 0, sampleStart = 0, frames = 0, slowSamples = 0;
   const schedule = () => { if (!raf && !disposed && !lost && visible && !document.hidden) raf = requestAnimationFrame(frame); };
   const stop = () => { cancelAnimationFrame(raf); raf = 0; last = 0; sampleStart = 0; frames = 0; };
-  const visibility = () => { clearInput(); if (document.hidden) stop(); else schedule(); };
+  const pauseMotion = () => { clearInput(); pointers.clear(); cruising = false; car.speed = 0; car.steer = 0; if (mode === "drive") report(); };
+  const visibility = () => { pauseMotion(); if (document.hidden) stop(); else schedule(); };
   const contextLost = (event: Event) => { event.preventDefault(); lost = true; clearInput(); stop(); callbacks.fail("The graphics connection was interrupted. Your place information is still here. Retry 3D to continue."); };
   const contextRestored = () => { if (!disposed) callbacks.recover(); };
   const resize = new ResizeObserver(() => {
@@ -142,9 +157,10 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
     const { width, height } = host.getBoundingClientRect();
     if (width && height) { renderHeight = height; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); schedule(); }
   }); resize.observe(host);
-  const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) schedule(); else { clearInput(); stop(); } }); intersection.observe(host);
-  canvas.addEventListener("keydown", keyDown); window.addEventListener("keyup", keyUp); window.addEventListener("blur", clearInput); canvas.addEventListener("blur", clearInput);
+  const intersection = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) schedule(); else { pauseMotion(); stop(); } }); intersection.observe(host);
+  canvas.addEventListener("keydown", keyDown); window.addEventListener("keyup", keyUp); window.addEventListener("blur", pauseMotion); canvas.addEventListener("blur", clearInput);
   document.addEventListener("visibilitychange", visibility); canvas.addEventListener("pointerdown", pointerDown); canvas.addEventListener("pointerup", pointerUp);
+  canvas.addEventListener("pointercancel", pointerCancel);
   canvas.addEventListener("webglcontextlost", contextLost); canvas.addEventListener("webglcontextrestored", contextRestored);
   const nextCamera = new THREE.Vector3(), nextAim = new THREE.Vector3();
   function frame(now: number) {
@@ -159,7 +175,11 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
       }
       const automatic = cruising && route ? cruiseInput(car, route, progress) : null;
       const prior = car;
-      car = stepCar(car, automatic?.throttle ?? Number(pressed("forward")) - Number(pressed("back")), automatic?.steering ?? Number(pressed("left")) - Number(pressed("right")), automatic?.brake ?? pressed("brake"), dt, world.allowed);
+      const throttle = automatic?.throttle ?? Number(pressed("forward")) - Number(pressed("back"));
+      // Relaxed pace leaves steering fully manual; it is a speed limiter, not
+      // lane following. Cruise keeps its existing independent speed profile.
+      const limited = !automatic && pace === "relaxed" && car.speed >= 6 && throttle > 0;
+      car = stepCar(car, limited ? 0 : throttle, automatic?.steering ?? Number(pressed("left")) - Number(pressed("right")), automatic?.brake ?? (pressed("brake") || (!automatic && pace === "relaxed" && car.speed > 6.5)), dt, world.allowed);
       travelled += Math.hypot(car.x - prior.x, car.z - prior.z); driveSeconds += rawDt; driveFrames++;
       frameTimes.push(rawDt * 1000); if (frameTimes.length > 600) frameTimes.shift();
       if (car.blocked) { if (!prior.blocked) collisions++; cruising = false; }
@@ -168,9 +188,9 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
       scenery.frontWheels.forEach((wheel) => { wheel.rotation.y = car.steer ?? 0; }); scenery.wheels.forEach((wheel) => { wheel.rotation.x += car.speed * dt / .36; });
       scenery.brakeMaterial.emissiveIntensity = pressed("brake") || (pressed("back") && car.speed > 0) ? 2 : .12;
       cameraYaw += Math.atan2(Math.sin(car.yaw - cameraYaw), Math.cos(car.yaw - cameraYaw)) * (1 - Math.exp(-7 * dt));
-      let distance = 15 + Math.abs(car.speed) * .18;
+      let distance = (cameraMode === "wide" ? 23 : 15) + Math.abs(car.speed) * .18;
       while (distance > 6 && [.35, .7, 1].some((t) => !world.cameraClear([car.x - Math.sin(cameraYaw) * distance * t, car.z - Math.cos(cameraYaw) * distance * t]))) distance -= 1.5;
-      nextCamera.set(car.x - Math.sin(cameraYaw) * distance, 8.5 + Math.abs(car.speed) * .06, car.z - Math.cos(cameraYaw) * distance);
+      nextCamera.set(car.x - Math.sin(cameraYaw) * distance, (cameraMode === "wide" ? 15 : 8.5) + Math.abs(car.speed) * .06, car.z - Math.cos(cameraYaw) * distance);
       camera.position.lerp(nextCamera, 1 - Math.exp(-6 * dt));
       nextAim.set(car.x + Math.sin(car.yaw) * (4 + car.speed * .25), 1.4, car.z + Math.cos(car.yaw) * (4 + car.speed * .25));
       cameraAim.lerp(nextAim, 1 - Math.exp(-8 * dt)); camera.lookAt(cameraAim);
@@ -203,6 +223,8 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
       canvas.dataset.averageDriveFps = driveSeconds ? (driveFrames / driveSeconds).toFixed(1) : "0"; canvas.dataset.minimumDriveFps = Number.isFinite(minFps) ? String(minFps) : "0";
       canvas.dataset.frameP95 = (frameTimes.length ? [...frameTimes].sort((a, b) => a - b)[Math.floor(frameTimes.length * .95)] : 0).toFixed(1);
       canvas.dataset.routeLength = String(route?.length ?? 0); canvas.dataset.progress = progress.toFixed(1); canvas.dataset.laps = String(laps); canvas.dataset.cruising = String(cruising);
+      canvas.dataset.carX = car.x.toFixed(2); canvas.dataset.carZ = car.z.toFixed(2); canvas.dataset.carYaw = car.yaw.toFixed(4); canvas.dataset.carSpeed = car.speed.toFixed(2); canvas.dataset.pace = pace;
+      canvas.dataset.routeId = route?.driveId ?? (route?.loop ? "scenic" : "destination");
       slowSamples = fps < 35 ? slowSamples + 1 : 0;
       if (quality === "auto" && slowSamples >= 3 && pixelRatio > 1) { pixelRatio = 1; renderer.setPixelRatio(pixelRatio); slowSamples = 0; }
       sampleStart = now; frames = 0;
@@ -211,15 +233,19 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   }
   schedule();
   return {
-    setMode, reset, focus, driveNear, recover, navigate, scenic: startScenic,
+    setMode, reset, focus, driveNear, recover, navigate, navigatePoint, startDrive, scenic: startScenic,
     clearRoute() { setRoute(null); },
     setCruise(enabled) { cruising = !!route?.loop && enabled && !car.blocked; clearInput(); report(); },
-    setInput(action, held) { if (held) { cruising = false; touch.add(action); } else touch.delete(action); },
+    setInput(action, held, source = `touch:${action}`) { if (held) cruising = false; inputs.set(source, action, held); },
+    setPace(next) { pace = next; },
+    setCamera(next) { cameraMode = next; },
+    testGraphics(interrupt) { if (process.env.NODE_ENV !== "production") { if (interrupt) renderer.forceContextLoss(); else renderer.forceContextRestore(); } },
     setQuality(next) { quality = next; pixelRatio = next === "low" ? Math.min(devicePixelRatio, 1) : Math.min(devicePixelRatio, coarse ? 1.25 : 1.6); renderer.setPixelRatio(pixelRatio); renderer.shadowMap.enabled = next === "auto" && !coarse; renderer.shadowMap.needsUpdate = true; },
     dispose() {
       if (disposed) return; disposed = true; stop(); clearInput(); resize.disconnect(); intersection.disconnect(); controls.dispose();
-      canvas.removeEventListener("keydown", keyDown); window.removeEventListener("keyup", keyUp); window.removeEventListener("blur", clearInput); canvas.removeEventListener("blur", clearInput);
+      canvas.removeEventListener("keydown", keyDown); window.removeEventListener("keyup", keyUp); window.removeEventListener("blur", pauseMotion); canvas.removeEventListener("blur", clearInput);
       document.removeEventListener("visibilitychange", visibility); canvas.removeEventListener("pointerdown", pointerDown); canvas.removeEventListener("pointerup", pointerUp);
+      canvas.removeEventListener("pointercancel", pointerCancel);
       canvas.removeEventListener("webglcontextlost", contextLost); canvas.removeEventListener("webglcontextrestored", contextRestored); disposeScene();
     },
   };

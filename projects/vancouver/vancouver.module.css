@@ -192,3 +192,34 @@
   .expanded .routePanel > small { display: none; }
   .expanded .miniMap { width: 145px; }
 }
+/* V0.4: free driving, readable settings and independent touch presses. */
+.driveDirectory { display: grid; grid-template-columns: 1.15fr 1fr 1fr 1fr; gap: 22px; padding: 28px; background: #e8eee6; color: #173b3c; border-bottom: 1px solid #c5d2c6; }
+.driveDirectory h2 { font-size: 21px; letter-spacing: -.03em; margin: 10px 0; }
+.driveDirectory h3 { font-size: 14px; margin: 0 0 9px; }
+.driveDirectory p { font-size: 12px; line-height: 1.65; margin: 0 0 12px; }
+.driveDirectory article { display: flex; flex-direction: column; border-left: 1px solid #bfd0c3; padding-left: 20px; }
+.driveDirectory button { margin-top: auto; padding: 8px 10px; min-height: 44px; border: 1px solid #709b87; background: #f4f6ef; color: #173b3c; border-radius: 4px; font-size: 11px; text-align: left; cursor: pointer; }
+.driveDirectory button:focus-visible, .miniMap svg:focus-visible { outline: 3px solid #087b70; outline-offset: -3px; }
+.exploreDock .loopStart { display: block; width: 100%; margin-top: 6px; min-height: 44px; }
+.driveSettings { display: flex; gap: 4px; flex-wrap: wrap; pointer-events: auto; margin-top: 4px; }
+.driveSettings button { margin: 0; min-height: 44px; font-size: 10px; padding: 4px 7px; background: #e1eade; color: #173b3c; }
+.driveSettings button[aria-pressed="true"] { background: #174a43; color: white; }
+.miniMap svg { cursor: crosshair; touch-action: manipulation; }
+.mapNotice { font-size: 11px; line-height: 1.4; margin: 8px 0 0; color: #6b3916; }
+.devDiagnostics { padding: 12px; font-size: 12px; }
+.devDiagnostics button { padding: 10px; margin: 6px; border: 1px solid currentColor; }
+@media (max-width: 1100px) { .driveDirectory { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) {
+  .driveDirectory { grid-template-columns: 1fr; gap: 18px; padding: 22px 18px; }
+  .driveDirectory article { border-left: 0; border-top: 1px solid #bfd0c3; padding: 14px 0 0; }
+  .driveSettings { gap: 3px; }
+  .driveSettings button { font-size: 9px; padding: 3px 5px; }
+  .routePanel { top: 290px; }
+  .viewport[data-mode="drive"] { min-height: 620px; }
+}
+@media (max-height: 550px) and (min-width: 601px) {
+  .expanded .driveSettings { display: flex; }
+  .expanded .drivingHint { max-width: 190px; }
+  .expanded .routePanel { left: 265px; bottom: auto; top: 83px; width: 280px; max-width: calc(100% - 445px); }
+  .expanded .routePanel button { padding: 5px 7px; font-size: 10px; }
+}

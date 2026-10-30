@@ -34,6 +34,21 @@ export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z
   function finish(vertices: Vertex[], title: string, loop: boolean, destination?: string): DriveRoute {
     const raw = vertices.filter((p, i) => !i || distance(p.point, vertices[i - 1].point) > .02);
     if (raw.length < 2) throw new Error("You are already at this roadside stop.");
+    // Survey centrelines sometimes meet the opposite side of an intersection
+    // a few metres apart (Manitoba / 1st). Guide a checked gentle offset through
+    // its pavement instead of demanding two immediate right-angle turns.
+    for (let i = 1; i < raw.length - 2; i++) {
+      const a = raw[i - 1].point, b = raw[i].point, c = raw[i + 1].point, d = raw[i + 2].point;
+      const incoming = Math.atan2(b[0] - a[0], b[1] - a[1]), outgoing = Math.atan2(d[0] - c[0], d[1] - c[1]);
+      const join = distance(b, c), before = distance(a, b), after = distance(c, d);
+      if (join < 1 || join > 18 || before < 25 || after < 25 || Math.abs(angleDifference(incoming, outgoing)) > .25) continue;
+      const enter: Point2 = [b[0] - Math.sin(incoming) * 13, b[1] - Math.cos(incoming) * 13];
+      const exit: Point2 = [c[0] + Math.sin(outgoing) * 13, c[1] + Math.cos(outgoing) * 13];
+      const yaw = Math.atan2(exit[0] - enter[0], exit[1] - enter[1]), steps = Math.ceil(distance(enter, exit));
+      if (Array.from({ length: steps + 1 }, (_, n) => n / steps).every((t) => fits({ x: enter[0] + (exit[0] - enter[0]) * t, z: enter[1] + (exit[1] - enter[1]) * t, yaw }))) {
+        raw[i] = { point: enter, street: raw[i].street }; raw[i + 1] = { point: exit, street: raw[i + 2].street }; i++;
+      }
+    }
     const smooth: Vertex[] = [raw[0]], turnIndices: { index: number; direction: string; street: string }[] = [];
     for (let i = 1; i < raw.length - 1; i++) {
       const a = raw[i - 1].point, b = raw[i].point, c = raw[i + 1].point;
@@ -64,6 +79,18 @@ export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z
     }
     return finish(vertices, reverse ? "False Creek loop · reverse" : "False Creek loop", true);
   }
+  function drive(id: string, reverse = false): DriveRoute {
+    const selected = city.drives?.find((item) => item.id === id);
+    if (!selected) throw new Error("Choose an available drive.");
+    const stops = [...selected.waypoints]; if (reverse) stops.reverse();
+    const vertices: Vertex[] = [];
+    for (let i = 1; i < stops.length; i++) {
+      const leg = shortest(stops[i - 1], stops[i]);
+      if (!leg) throw new Error("These streets are disconnected. Choose another start.");
+      vertices.push(...leg.points);
+    }
+    return { ...finish(vertices, selected.title + (reverse ? " · reverse" : ""), false), driveId: id };
+  }
   function nearest(p: Point2) {
     let best = { edge: 0, segment: 0, t: 0, point: graph.nodes[0], distance: Infinity };
     graph.edges.forEach((edge, e) => edge.points.slice(1).forEach((b, i) => {
@@ -72,8 +99,16 @@ export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z
       if (d < best.distance) best = { edge: e, segment: i, t, point, distance: d };
     })); return best;
   }
-  function navigate(from: Point2, id: string, title: string): DriveRoute {
-    const start = nearest(from), end = nearest(city.anchors[id]);
+  function navigatePoint(from: Point2, target: Point2, title = "Your roadside destination", id?: string): DriveRoute {
+    const start = nearest(from), end = nearest(target);
+    // Do not silently jump a disconnected pocket onto another street through a
+    // building or shoreline. The join from the actual car must fit continuously.
+    const yaw = Math.atan2(start.point[0] - from[0], start.point[1] - from[1]);
+    const steps = Math.max(1, Math.ceil(start.distance));
+    if (start.distance > 12 || Array.from({ length: steps + 1 }, (_, i) => i / steps).some((t) => !fits({ x: from[0] + (start.point[0] - from[0]) * t, z: from[1] + (start.point[1] - from[1]) * t, yaw }))) {
+      throw new Error("This street is outside the connected route network. Recover the car or choose another drive.");
+    }
+    if (!id && end.distance > 35) throw new Error("Choose a ground street on the map. Water, bridges and buildings are not destinations.");
     const startEdge = graph.edges[start.edge], endEdge = graph.edges[end.edge];
     const options: { vertices: Vertex[]; length: number }[] = [];
     const vertex = (points: Point2[], name: string) => points.map((point) => ({ point, street: streetName(name) }));
@@ -94,7 +129,10 @@ export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z
     if (!options.length) throw new Error("No connected ground-street route. Try a nearby start.");
     return finish(options[0].vertices, title, false, id);
   }
-  return { scenic, navigate, shortest };
+  function navigate(from: Point2, id: string, title: string): DriveRoute {
+    return navigatePoint(from, city.anchors[id], title, id);
+  }
+  return { scenic, drive, navigate, navigatePoint, shortest };
 }
 
 export function pointAt(route: DriveRoute, position: number): Point2 {

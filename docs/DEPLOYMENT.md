@@ -1360,6 +1360,15 @@ plus rechecking inactivity, clean source/build and absence of configuration refs
 Keep the final V0.1 rollback and pre-Vancouver runtime as well. No host upgrade,
 configuration change, service change or threshold exception is authorized here.
 
+V0.4 uses the same explicit deployment authorization, exact-SHA Linux candidate,
+192 MiB / 6 GiB floors and whole-directory recovery. See
+[V0.4 release evidence](VANCOUVER_V04_RELEASE_2026-10-30.md). Re-read the currently
+serving identity immediately before preparation; Surrey or another authorized
+website release may have advanced it. Preserve that immediate predecessor in full,
+all older Vancouver datasets, and unrelated source/content. Never assume V0.3 is
+still the preceding runtime. Only independently verified inactive older assets may
+be archived using the established lossless retention procedure.
+
 ## Surrey Adventure release candidate
 
 The [V0.1 release record](SURREY_RELEASE_2026-10-30.md) records the completed

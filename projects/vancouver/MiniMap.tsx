@@ -1,5 +1,5 @@
 import { memo, useMemo, useState } from "react";
-import type { City, DriveRoute, DriveTelemetry } from "./types";
+import type { City, DriveRoute, DriveTelemetry, Point2 } from "./types";
 import styles from "./vancouver.module.css";
 
 const path = (points: [number, number][]) => `M${points.map((p) => p.join(",")).join("L")}`;
@@ -16,19 +16,34 @@ const MapGeometry = memo(function MapGeometry({ city }: { city: City }) {
 const RouteLine = memo(function RouteLine({ route }: { route: DriveRoute }) {
   return <path d={path(route.points)} stroke="#a96512" strokeWidth="11" fill="none" strokeLinejoin="round" />;
 });
-export function MiniMap({ city, drive, route }: { city: City; drive: DriveTelemetry; route: DriveRoute | null }) {
+export function MiniMap({ city, drive, route, onDestination }: { city: City; drive: DriveTelemetry; route: DriveRoute | null; onDestination(point: Point2): void }) {
   const [wide, setWide] = useState(false);
+  const [cursor, setCursor] = useState<Point2 | null>(null);
   const span = wide ? 1800 : 620, height = span * .76;
   const x = wide ? -900 : drive.x - span / 2, z = wide ? -650 : drive.z - height / 2;
   const scale = span / 620;
   return <div className={styles.miniMap}>
     <span className={styles.north}>N ↑</span>
-    <svg viewBox={`${x} ${z} ${span} ${height}`} role="img" aria-label={`Your car near ${drive.street}. North is up. ${route ? "Gold marks your route. " : ""}Dashed bridges are view-only.`}>
+    <svg viewBox={`${x} ${z} ${span} ${height}`} role="button" tabIndex={0} aria-label={`Route map near ${drive.street}. North is up. Tap a ground street for directions. Arrow keys move a target; Enter routes there; Escape clears the target. Dashed bridges are view-only.`}
+      onClick={(event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const point: Point2 = [x + (event.clientX - rect.left) / rect.width * span, z + (event.clientY - rect.top) / rect.height * height];
+        setCursor(point); onDestination(point);
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onDestination(cursor ?? [drive.x, drive.z]); }
+        if (event.key === "Escape") setCursor(null);
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+          event.preventDefault(); const point = cursor ?? [drive.x, drive.z];
+          setCursor([Math.max(x, Math.min(x + span, point[0] + (event.key === "ArrowRight" ? 25 : event.key === "ArrowLeft" ? -25 : 0))), Math.max(z, Math.min(z + height, point[1] + (event.key === "ArrowDown" ? 25 : event.key === "ArrowUp" ? -25 : 0)))]);
+        }
+      }}>
       <MapGeometry city={city} />
       {route && <RouteLine route={route} />}
       {route && !route.loop && <circle cx={route.points.at(-1)![0]} cy={route.points.at(-1)![1]} r="21" stroke="#a96512" strokeWidth="7" fill="white" />}
       <circle cx={drive.x} cy={drive.z} r={27 * scale} fill="#fff" stroke="#153d3d" strokeWidth={4 * scale} />
       <path d="M0 -19L14 13L0 6L-14 13Z" fill="#087b70" transform={`translate(${drive.x} ${drive.z}) rotate(${180 - drive.yaw * 180 / Math.PI}) scale(${scale})`} />
+      {cursor && <g stroke="#723e11" strokeWidth={3 * scale} fill="none"><circle cx={cursor[0]} cy={cursor[1]} r={16 * scale} /><path d={`M${cursor[0] - 24 * scale},${cursor[1]}h${48 * scale}M${cursor[0]},${cursor[1] - 24 * scale}v${48 * scale}`} /></g>}
     </svg>
     <button type="button" onClick={() => setWide((value) => !value)} aria-label={wide ? "Show nearby streets on map" : "Show whole city on map"}>{wide ? "Nearby streets" : "Whole city"} ↗</button>
   </div>;

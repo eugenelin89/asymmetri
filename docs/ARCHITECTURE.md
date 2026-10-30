@@ -573,7 +573,7 @@ No HQ access, new contract, model call, operational control or fixed daily time 
 added. Existing visibility polling refreshes the server summary when the source
 watermark changes; withdrawals and unavailability continue to hide cached content.
 
-## Vancouver V0.3 (October 30, 2026)
+## Vancouver V0.4 (October 30, 2026)
 
 `app/labs/vancouver/page.tsx` frames the independent Labs experiment. Its client
 interface dynamically imports `projects/vancouver/engine.ts`; Three.js 0.186.1
@@ -618,6 +618,20 @@ level water decks and smooth land ramps; elevated driving remains deferred. Rout
 arrows add one instanced mesh that is disposed when replaced. Bounded DOM-only
 performance diagnostics record session distance/collisions/FPS and a rolling
 600-frame p95; nothing is transmitted. No dependencies or runtime services added.
+
+V0.4 adds three waypoint drives and map-selected destinations without extending
+Cruise beyond the scenic circuit. Checked short parallel-road offsets are smoothed
+only if the full car fits. `input.ts` owns independent key/pointer sources, so
+releasing one finger cannot release another. Blur, visibility and offscreen pauses
+clear inputs, Cruise and velocity. Relaxed pace only controls speed; steering stays
+manual. Camera distance is selectable. A development-only WebGL loss/restore UI
+exercises the real renderer lifecycle and is absent from production.
+
+The V0.4 pipeline retains footprint/land/water geometry, widens 110 clipped aprons
+and renders the exact 64 m collision cells. 18 source-reviewed 2013 NRCan heights
+replace 13 older measurements and five estimates; 102 City 2009 heights and 316
+estimates remain. Its external PyArrow extractor uses bounded verified byte ranges;
+no new npm dependency or geographic runtime service is needed.
 
 ## Surrey Adventure V0.2
 

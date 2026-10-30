@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { places } from "./places";
 import { MiniMap } from "./MiniMap";
-import type { City, DriveRoute, DriveTelemetry, Explorer, Input, Mode } from "./types";
+import type { City, DriveRoute, DriveTelemetry, Explorer, Input, Mode, Point2 } from "./types";
 import styles from "./vancouver.module.css";
 
 const initialDrive: DriveTelemetry = { speed: 0, reverse: false, street: "Olympic Village", x: 298, z: 89, yaw: 0, blocked: false };
@@ -16,6 +16,7 @@ export function VancouverExplorer() {
   const [drive, setDrive] = useState(initialDrive), [city, setCity] = useState<City | null>(null);
   const [enabled, setEnabled] = useState(true), [lite, setLite] = useState(false), [expanded, setExpanded] = useState(false);
   const [route, setRoute] = useState<DriveRoute | null>(null), [reverseLoop, setReverseLoop] = useState(false), [notice, setNotice] = useState("");
+  const [pace, setPace] = useState<"relaxed" | "normal">("relaxed"), [camera, setCamera] = useState<"chase" | "wide">("chase");
   const place = places.find((p) => p.id === selected) ?? places[0];
   const ready = status === "ready" && enabled;
 
@@ -38,6 +39,7 @@ export function VancouverExplorer() {
     return () => { controller.abort(); instance?.dispose(); engine.current = null; };
   }, [attempt, enabled]);
   useEffect(() => { engine.current?.setQuality(lite ? "low" : "auto"); }, [lite, status]);
+  useEffect(() => { engine.current?.setPace(pace); engine.current?.setCamera(camera); }, [pace, camera, status]);
   useEffect(() => {
     if (!expanded) return;
     const previous = document.body.style.overflow; document.body.style.overflow = "hidden";
@@ -64,6 +66,14 @@ export function VancouverExplorer() {
     try { engine.current?.navigate(selected); setMode("drive"); setNotice(""); viewport.current?.scrollIntoView({ block: "center", behavior: "auto" }); focusCanvas(); }
     catch (reason) { setNotice(reason instanceof Error ? reason.message : "Try a nearby start."); }
   }
+  function startDrive(id: string, reverse = false) {
+    try { engine.current?.startDrive(id, reverse); setReverseLoop(reverse); setMode("drive"); setNotice(""); viewport.current?.scrollIntoView({ block: "center", behavior: "auto" }); focusCanvas(); }
+    catch (reason) { setNotice(reason instanceof Error ? reason.message : "Choose another drive."); }
+  }
+  function navigatePoint(point: Point2) {
+    try { engine.current?.navigatePoint(point); setNotice(""); focusCanvas(); }
+    catch (reason) { setNotice(reason instanceof Error ? reason.message : "Choose a ground street."); }
+  }
   function restart() { setEnabled(true); setStatus("loading"); setError(""); setMode("aerial"); setAttempt((n) => n + 1); }
   function fullscreen() {
     // A viewport-filling mode also works in embedded browsers and mobile Safari,
@@ -71,7 +81,7 @@ export function VancouverExplorer() {
     setExpanded((value) => !value);
     if (expanded) fullscreenButton.current?.focus(); else focusCanvas();
   }
-  function touch(action: Input, pressed: boolean) { engine.current?.setInput(action, pressed); }
+  function touch(action: Input, pressed: boolean, source: string) { engine.current?.setInput(action, pressed, source); }
 
   return <section className={styles.experience} aria-label="Explore eastern False Creek">
     <div className={`${styles.viewport} ${expanded ? styles.expanded : ""}`} data-mode={mode} ref={viewport} role={expanded ? "dialog" : undefined} aria-modal={expanded || undefined} aria-label={expanded ? "Vancouver city view" : undefined}>
@@ -99,24 +109,31 @@ export function VancouverExplorer() {
         <div className={styles.exploreDock}>
           <span>Find your corner of the city.</span>
           <div>{places.filter((p) => ["science-world", "olympic-village", "hinge-park"].includes(p.id)).map((p) => <button type="button" key={p.id} disabled={!ready} aria-pressed={p.id === selected} onClick={() => focus(p.id)}>{p.number} <span>{p.name}</span> ↗</button>)}</div>
-          <button className={styles.scenicStart} type="button" disabled={!ready} onClick={() => startScenic()}>Drive the False Creek loop → <small>2.4 km · about 4 minutes with Cruise</small></button>
+          <button className={styles.scenicStart} type="button" disabled={!ready} onClick={() => changeMode("drive")}>Take the wheel → <small>Free roam · your next turn is up to you</small></button>
+          <button className={styles.loopStart} type="button" disabled={!ready} onClick={() => startScenic()}>False Creek loop · 2.4 km ↗</button>
           <small>Drag to orbit · scroll / pinch to zoom · two fingers to pan</small>
         </div>
       </> : <>
-        <div className={styles.drivingHud} aria-label="Driving status"><span className={styles.streetName}>{drive.street}</span><div><strong>{drive.speed}</strong> <small>km/h</small><span className={styles.gear}>{drive.reverse ? "R" : "D"}</span></div><span className={styles.drivingHint}>{drive.blocked ? drive.blockedReason : drive.navigation?.cruising ? "Cruising · any driving input takes over" : "WASD / arrows · space brakes"}</span>{drive.blocked && <button type="button" onClick={() => { engine.current?.recover(); focusCanvas(); }}>Recover car ↗</button>}</div>
-        {city && <MiniMap city={city} drive={drive} route={route} />}
+        <div className={styles.drivingHud} aria-label="Driving status"><span className={styles.streetName}>{drive.street}</span><div><strong>{drive.speed}</strong> <small>km/h</small><span className={styles.gear}>{drive.reverse ? "R" : "D"}</span></div><span className={styles.drivingHint}>{drive.blocked ? drive.blockedReason : drive.navigation?.cruising ? "Cruising · any driving input takes over" : "WASD / arrows · space brakes"}</span><div className={styles.driveSettings}><button type="button" aria-label="Relaxed driving pace" aria-pressed={pace === "relaxed"} onClick={() => { setPace(pace === "relaxed" ? "normal" : "relaxed"); focusCanvas(); }}>{pace === "relaxed" ? "Pace: relaxed" : "Pace: normal"}</button><button type="button" aria-label="Wide driving camera" aria-pressed={camera === "wide"} onClick={() => { setCamera(camera === "wide" ? "chase" : "wide"); focusCanvas(); }}>{camera === "wide" ? "Wide view" : "Chase view"}</button></div>{drive.blocked && <button type="button" onClick={() => { engine.current?.recover(); focusCanvas(); }}>Recover car ↗</button>}</div>
+        {city && <MiniMap city={city} drive={drive} route={route} onDestination={navigatePoint} />}
         <div className={styles.routePanel} aria-label="Driving directions">
-          {route ? <><strong>{route.title}</strong><span>{drive.navigation?.instruction}</span><small>{drive.navigation?.laps ? `${drive.navigation.laps} loop${drive.navigation.laps === 1 ? "" : "s"} complete · ` : ""}{((drive.navigation?.remaining ?? route.length) / 1000).toFixed(1)} km remaining{!route.loop ? " · roadside stop" : ""}</small><div>{route.loop && <><button type="button" onClick={() => { engine.current?.setCruise(!drive.navigation?.cruising); focusCanvas(); }}>{drive.navigation?.cruising ? "Take the wheel" : "Cruise"}</button><button type="button" onClick={() => startScenic(!reverseLoop)}>Reverse loop</button></>}<button type="button" onClick={() => engine.current?.clearRoute()}>Clear route</button></div></> : <><strong>Find your way around.</strong><span>A connected drive past the Village, Hinge Park and Science World.</span><button type="button" disabled={!ready} onClick={() => startScenic()}>Start scenic loop →</button></>}
+          {route ? <><strong>{route.title}</strong><span>{drive.navigation?.instruction}</span><small>{drive.navigation?.laps ? `${drive.navigation.laps} loop${drive.navigation.laps === 1 ? "" : "s"} complete · ` : ""}{((drive.navigation?.remaining ?? route.length) / 1000).toFixed(1)} km remaining{!route.loop ? " · roadside stop" : ""}</small><div>{route.loop && <><button type="button" onClick={() => { engine.current?.setCruise(!drive.navigation?.cruising); focusCanvas(); }}>{drive.navigation?.cruising ? "Take the wheel" : "Cruise"}</button><button type="button" onClick={() => startScenic(!reverseLoop)}>Reverse loop</button></>}{route.driveId && <button type="button" onClick={() => startDrive(route.driveId!, !reverseLoop)}>Reverse drive</button>}<button type="button" onClick={() => { engine.current?.clearRoute(); focusCanvas(); }}>Free roam</button></div></> : <><strong>Free roam</strong><span>Take any ground street. Tap a street on the map for directions, or choose a drive below.</span><small>{((drive.travelled ?? 0) / 1000).toFixed(2)} km explored this visit</small><button type="button" disabled={!ready} onClick={() => startScenic()}>Start scenic loop →</button></>}
+          {notice && <p className={styles.mapNotice} role="status">{notice}</p>}
         </div>
         {ready && <div className={styles.driveControls} aria-label="Driving controls">
           {([{ action: "left", label: "Steer left", text: "←" }, { action: "right", label: "Steer right", text: "→" }, { action: "back", label: "Brake and reverse", text: "↓" }, { action: "forward", label: "Accelerate", text: "↑" }, { action: "brake", label: "Brake", text: "■" }] as const).map(({ action, label, text }) => <button type="button" key={action} aria-label={label}
-            onPointerDown={(e) => { e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); touch(action, true); }}
-            onPointerUp={() => touch(action, false)} onPointerCancel={() => touch(action, false)} onLostPointerCapture={() => touch(action, false)}
-            onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); touch(action, true); } }} onKeyUp={() => touch(action, false)} onBlur={() => touch(action, false)}>{text}</button>)}
+            onPointerDown={(e) => { e.preventDefault(); e.currentTarget.setPointerCapture(e.pointerId); touch(action, true, `pointer:${e.pointerId}`); }}
+            onPointerUp={(e) => touch(action, false, `pointer:${e.pointerId}`)} onPointerCancel={(e) => touch(action, false, `pointer:${e.pointerId}`)} onLostPointerCapture={(e) => touch(action, false, `pointer:${e.pointerId}`)}
+            onKeyDown={(e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); touch(action, true, `button:${action}:${e.key}`); } }} onKeyUp={(e) => touch(action, false, `button:${action}:${e.key}`)} onBlur={() => { touch(action, false, `button:${action}: `); touch(action, false, `button:${action}:Enter`); }}>{text}</button>)}
         </div>}
       </>}
-      <div className={styles.sceneNote}>{mode === "drive" ? "Flat streets only · bridges are view-only" : "2015 footprints · historic / illustrative heights"}</div>
+      <div className={styles.sceneNote}>{mode === "drive" ? "Ground streets · bridges are view-only" : "2015 footprints · 2013 / 2009 heights + estimates"}</div>
     </div>
+    <div className={styles.driveDirectory} id="vancouver-drives" aria-label="Choose a manual drive">
+      <div><span className={styles.sectionLabel}>BEYOND THE LOOP</span><h2>Three starts. A city of turns.</h2><p>Follow a route or leave it whenever you like. You steer; relaxed pace gives you time to look around.</p></div>
+      {city?.drives?.map((item) => <article key={item.id}><h3>{item.title}</h3><p>{item.description}</p><button type="button" disabled={!ready} onClick={() => startDrive(item.id)}>Drive {item.title} →</button></article>)}
+    </div>
+    {process.env.NODE_ENV !== "production" && <details className={styles.devDiagnostics}><summary>Local graphics recovery test</summary><button type="button" onClick={() => engine.current?.testGraphics(true)}>Interrupt WebGL</button><button type="button" onClick={() => engine.current?.testGraphics(false)}>Restore WebGL</button></details>}
     <div className={styles.discovery} id="vancouver-places">
       <div className={styles.directory}>
         <div className={styles.sectionLabel}>SIX PLACES TO START <button type="button" className={styles.textToggle} onClick={() => { setEnabled((value) => !value); setStatus("loading"); setMode("aerial"); }}>{enabled ? "Pause 3D" : "Resume 3D"}</button></div>

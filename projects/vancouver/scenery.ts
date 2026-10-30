@@ -1,7 +1,7 @@
 // Original procedural models. Dimensions and architectural details are illustrative.
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
-import { inPolygon, segmentDistance } from "./physics";
+import { createDrivingWorld, inPolygon, segmentDistance } from "./physics";
 import { pointAt } from "./navigation";
 import { places } from "./places";
 import type { City, DriveRoute, Point2, Polygon2 } from "./types";
@@ -48,7 +48,9 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
   flat(city.parks.map((p) => p.shape), material(0x83a986), .08);
   flat(city.promenade, cream, .13);
   flat(city.sidewalks, material(0xd9d5c8), .17);
-  flat(city.pavement, road, .2);
+  // Render the exact preclipped polygons queried by collision. Independently
+  // rounded whole-city edges can differ by millimetres at tile intersections.
+  flat(city.roadCells ? Object.values(city.roadCells).flat() : city.pavement, road, .2);
   const waterMaterial = new THREE.MeshPhongMaterial({ color: 0x267e8a, specular: 0x89b9b8, shininess: 70 }); materials.push(waterMaterial);
   flat(city.water, waterMaterial, -0.5);
   const waterLines: THREE.Vector3[] = [];
@@ -106,6 +108,8 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
   batch(buildings, wallMaterial, !coarse); batch(rooftops, material(0x849b99), !coarse);
 
   const paint: THREE.BufferGeometry[] = [], bridgeDecks: THREE.BufferGeometry[] = [], bridgeRails: THREE.BufferGeometry[] = [], piers: THREE.BufferGeometry[] = [];
+  const drivingWorld = createDrivingWorld(city);
+  const junctions = city.graph?.nodes.filter((_, index) => city.graph!.edges.filter((edge) => edge.a === index || edge.b === index).length >= 3) ?? [];
   const lightPositions: THREE.Vector3[] = [];
   function bridgeHeight(x: number, z: number, name: string) {
     if (!name.includes("CAMBIE")) return 12;
@@ -138,13 +142,13 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
     }
     for (let t = 9; t < length - 7; t += 12) {
       const x = ax + dx * t / length, z = az + dz * t / length;
-      if (!city.land.some((p) => inPolygon([x, z], p))) continue;
+      if (!drivingWorld.allowed([x, z]) || junctions.some((p) => Math.hypot(p[0] - x, p[1] - z) < 11)) continue;
       const g = new THREE.BoxGeometry(.22, .025, 4); g.rotateY(Math.atan2(dx, dz)); g.translate(x, .24, z); paint.push(g);
     }
     // Crosswalks sit back from intersections. All marks are artistic road detail.
     if (length > 55 && !r.name.includes("UNNAMED")) for (const t of [6, length - 6]) for (let k = -3; k <= 3; k++) {
       const x = ax + dx * t / length + nx * k * 1.1, z = az + dz * t / length + nz * k * 1.1;
-      if (city.land.some((p) => inPolygon([x, z], p))) { const g = new THREE.BoxGeometry(.55, .03, 2.8); g.rotateY(Math.atan2(dx, dz)); g.translate(x, .245, z); paint.push(g); }
+      if ([-1.5, 0, 1.5].every((d) => drivingWorld.allowed([x + dx / length * d, z + dz / length * d]))) { const g = new THREE.BoxGeometry(.55, .03, 2.8); g.rotateY(Math.atan2(dx, dz)); g.translate(x, .245, z); paint.push(g); }
     }
     if (!coarse) for (let t = 20; t < length; t += 65) {
       const x = ax + dx * t / length + nx * (r.width / 2 + 1.3), z = az + dz * t / length + nz * (r.width / 2 + 1.3);

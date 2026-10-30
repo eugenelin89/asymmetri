@@ -1,4 +1,4 @@
-# Vancouver V0.3 — Experimental
+# Vancouver V0.4 — Experimental
 
 Explore the city. See what's changing.
 
@@ -25,6 +25,14 @@ deployment distinction is unchanged.
   The HUD gives street, speed, gear and persistent obstruction feedback. Recover car
   finds a checked nearby forward run. The north-up map follows the car; Whole city
   toggles the overview. Gold is the route; dashed bridges are view-only.
+- Free roam is the primary start. Village backstreets (1.121 km), West-side corners
+  (0.738 km) and North shore crescent (0.946 km) offer manual routes and reverse
+  starts. Leave guidance with Free roam. These routes do not offer Cruise.
+- Relaxed pace caps forward speed near 22 km/h without steering for you. Normal
+  retains the existing arcade speed; Wide view provides more turning visibility.
+- Tap a ground street on the map to route there. With map focus, arrows move a
+  target 25 m, Enter/Space routes and Escape clears it. Disconnected streets give
+  a notice; routes cannot jump through buildings or water.
 - Start nearby chooses a checked street spawn near the selected place. Reset
   returns to that spawn; switching modes preserves the car's position.
 - Drive the False Creek loop starts a 2.369 km circuit: Athletes Way, Columbia,
@@ -54,22 +62,25 @@ roof details, sidewalks, crossings, lamps, mixed trees, water highlights, Scienc
 World's dome, Creekside's green roof, Hinge wetland, Habitat Island rocks and
 Cambie Bridge supports. These are artistic models, not architectural surveys.
 
-The V0.3 snapshot is 471,161 bytes: 436 retained building parts, 296 road lines,
-18 park parts, 241 graph nodes and 282 edges in the original extent
-[-123.123,49.267,-123.099,49.278]. V0.1 and V0.2 remain byte-identical. V0.3 repairs
-four sub-metre endpoint gaps and adds 110 illustrative, 8.5 m junction aprons.
-Visible pavement and 64 m collision tiles share one geometry, clipped to land and
-around buildings. Existing V0.2 footprint trims are retained; no further building
-footprints or water polygons change. A 2.6 m clearance graph includes even the
-short 2.6 m Ontario / 1st connector, which is essential to the loop.
+The immutable V0.4 snapshot is 545,239 bytes, preserving all 436 V0.3 building
+footprints, road centrelines, water and land geometry. V0.1–V0.3 remain byte-identical.
+The full ground network contains 23.112 km of source lines; the clearance graph
+contains 22.833 km, with a 21.368 km largest connected component. This is an audit
+of existing coverage, not a claim to have added 21 km of streets. Cropped boundary
+ends and disconnected shoreline pockets remain explicit.
 
-115 heights use the City's **2009 LiDAR-derived `hgt_agl`**, joined only where the
-2009 and retained 2015 footprints have intersection-over-union >= 0.8 and height
-is 3–150 m. Each match records source record ID and overlap. Special landmark
-models and the stadium are excluded. The remaining 321 heights are illustrative;
-these mixed-date approximations are explicitly **not current measurements**.
-Bridge deck sampling keeps water spans level and smooths illustrative land ramps;
-grade-separated approaches, vehicle elevation and bridge collisions are absent.
+110 illustrative junction aprons increase from 8.5 to 10.5 m radius, adding
+3,621.1 square metres of pavement clipped around buildings and water. Rendered
+pavement uses the exact indexed collision-cell polygons. Road markings stop before
+junctions; crossings stay within pavement. Widths are still illustrative.
+
+18 heights use conservatively matched NRCan **February 2013 LiDAR maximum roof
+heights** (IoU >=0.8, good extraction quality, no flags, 3–150 m). 13 replace older
+measurements and five replace estimates. Another 102 retain the City's 2009
+measurements; 316 remain illustrative. Poor-quality 2016 extraction is rejected.
+Each accepted match records source identity, dates, overlap, quality and accuracy.
+No new footprint or roof geometry is imported. These are historical approximations,
+not current survey measurements. Bridges remain view-only.
 
 ## Offline data workflow
 
@@ -95,6 +106,22 @@ output under an existing snapshot name. The raw bounded response is about 905 kB
 no citywide or provincewide import is needed. A changed upstream response needs
 explicit source review and a new snapshot, not a silently changed checksum.
 
+For V0.4, the optional NRCan extractor additionally requires `pyarrow==20.0.0`
+in that external venv. It reads only intersecting GeoParquet row groups and columns,
+pins the object ETag, verifies HTTP byte ranges and enforces a 64 MiB transfer cap.
+The retained extraction used 12,211,931 bytes and 372 local records, not the full
+2.4 GB national object. Source requests/ranges and per-range hashes remain in the
+external raw record; its digest is pinned by the builder.
+
+```sh
+/path/to/vancouver-tooling/bin/python projects/vancouver/tools/extract_nrcan.py /path/to/cache/nrcan-buildings.json
+/path/to/vancouver-tooling/bin/python projects/vancouver/tools/build_v04.py \
+  --nrcan-source /path/to/cache/nrcan-buildings.json
+```
+
+The extractor refuses an existing raw-output path; a changed remote ETag requires
+source review. The builder verifies the immutable V0.3 parent and raw source digest
+and rejects changed output under an existing version name.
 `refine_city.py` verifies the published V0.1 digest and derives V0.2 with Shapely.
 It checks retained parts, a bounded trim budget, and pavement/building/water
 separation. The original `build_city.py --cache /path/to/vancouver-source-data`
@@ -111,7 +138,7 @@ download is needed.
 ## Module boundaries
 
 `engine.ts` owns rendering lifecycle, navigation, camera and input; `scenery.ts`
-owns procedural models/materials; `physics.ts` owns pure collision/movement and
+owns procedural models/materials; `input.ts` tracks each pointer/key independently; `physics.ts` owns pure collision/movement and
 safe spawns. `navigation.ts` owns local Dijkstra routing, checked corner smoothing,
 route projection and the optional pure-pursuit scenic controller. `Explorer.tsx` owns UI and `MiniMap.tsx` the SVG navigation aid.
 `places.ts` owns reviewed facts. React receives only throttled driving telemetry;
@@ -122,9 +149,9 @@ and unmount disposes listeners, observers, geometries, materials and textures.
 ## Licence and next steps
 
 Original Vancouver code/models are MIT. City-derived data remains under the Open
-Government Licence – Vancouver; see `THIRD_PARTY_NOTICES.md` and the public
-manifest. No OSM data or reference-project source/media was copied.
+Government Licence – Vancouver; NRCan heights use the Open Government Licence –
+Canada. See `THIRD_PARTY_NOTICES.md` and the public manifest. No OSM data or reference-project source/media was copied.
 
-V0.4 priorities: physical-phone profiling, broader manual-driving acceptance,
+V0.5 priorities: physical-phone profiling, more forgiving steering feedback,
 current footprint/height matching and independently modelled bridge elevations. Historical/proposal layers, walking, missions,
 multiplayer and geographic expansion remain future work.

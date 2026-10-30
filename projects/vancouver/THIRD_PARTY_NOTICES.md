@@ -1,4 +1,4 @@
-# Vancouver V0.3 — rights and attribution
+# Vancouver V0.4 — rights and attribution
 
 ## Original work
 
@@ -15,7 +15,8 @@ Contains information licensed under the Open Government Licence – Vancouver.
 Licence: https://opendata.vancouver.ca/pages/licence/
 
 The City-derived snapshots in public/vancouver/v0.1-2026-10-30/ and
-public/vancouver/v0.2-2026-10-30/ and public/vancouver/v0.3-2026-10-30/ are covered by that licence, not the code MIT licence. Its manifest lists source requests, raw-response
+public/vancouver/v0.2-2026-10-30/ and public/vancouver/v0.3-2026-10-30/ and the City-derived portions of
+public/vancouver/v0.4-2026-10-30/ are covered by that licence, not the code MIT licence. Its manifest lists source requests, raw-response
 hashes, output digest and attribution. Source datasets: building-footprints-2015,
 public-streets, parks-polygon-representation and shoreline-2002. Retrieved
 2026-10-30. In V0.1/V0.2 building heights are illustrative; V0.3 adds the
@@ -42,8 +43,22 @@ https://opendata.vancouver.ca/explore/dataset/building-footprints-2009/ .
 2015 footprints at >=0.8 intersection-over-union; 321 remain illustrative. Per-part
 record IDs/overlap and raw source/output checksums are in the immutable snapshot.
 These are not current measurements. Road turning aprons, lane widths, rendered
-bridge elevation and models remain artistic. No NRCan data was imported.
+bridge elevation and models remain artistic. No NRCan data was imported in V0.3.
 
+## Natural Resources Canada data (V0.4)
+
+Contains information licensed under the Open Government Licence – Canada.
+Licence: https://open.canada.ca/en/open-government-licence-canada
+Product: https://open.canada.ca/data/dataset/7a5cda52-c7df-427f-9ced-26f19a8a64d6
+Access documentation: https://nrcan.github.io/CanElevation/optimized_building_footprint/
+
+The bounded optimized-footprint extraction was retrieved October 30, 2026. Its
+18 accepted maximum roof heights were acquired February 7–19, 2013 using LiDAR;
+poor-quality 2016 records are not used. V0.4 retains 102 City 2009 heights and 316
+illustrative heights. Source IDs, overlap, dates, quality, raw/output checksums
+and attribution are in the manifest. The retained 2015 footprints are unchanged;
+no roof geometry is redistributed. Neither publication nor retrieval date means
+current acquisition. Government logos/marks and endorsement are not included.
 ## Three.js 0.186.1
 
 https://github.com/mrdoob/three.js
@@ -75,5 +90,6 @@ THE SOFTWARE.
 ## Offline tooling
 
 Shapely (BSD-3-Clause) and pyproj (MIT) are used only by the optional local importer.
+PyArrow (Apache-2.0) is optional for bounded NRCan GeoParquet extraction.
 Their distributions retain their own dependency and licence notices. They are not
 loaded by the browser or production application.
