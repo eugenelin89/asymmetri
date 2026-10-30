@@ -93,7 +93,10 @@ teleport or save injection, verified:
 - Eighty view switches preserve position and progress; geometry/texture counts
   stabilize after the initial warm-up. Typical bounded samples are near 60 fps.
   Final wide aerial character culling yields 62 draw calls in the phone preview
-  sample. Counts vary with view and adaptive DPR; no phone endurance claim.
+  sample. The final additional 80-switch run stabilized at 82 geometries and 29 textures
+  after warm-up, with one canvas and unchanged position/progress. Frame samples
+  during rapid switching ranged roughly 36–60 fps on the shared desktop GPU.
+  Counts vary with view and adaptive DPR; no phone endurance claim.
 
 Reduced-motion CSS and renderer branches were reviewed, not tested by changing
 the user's OS preference. Browser console review excludes unrelated wallet

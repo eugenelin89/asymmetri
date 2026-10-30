@@ -614,7 +614,7 @@
   flex-wrap: wrap;
   margin-top: 0.6rem;
 }
-@media (pointer: coarse), (max-width: 700px) {
+@media (pointer: coarse), (max-width: 700px), (max-height: 520px) and (orientation: landscape) {
   .touchControls {
     display: flex;
     position: absolute;
