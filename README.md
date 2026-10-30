@@ -14,7 +14,8 @@ Asymmetri.co
     │   └── Ask BotSquad
     └── GIS Apps
         ├── Vancouver, City in Progress
-        └── Surrey, City of Adventure
+        ├── Surrey, City of Adventure
+        └── Richmond Learns to Drive
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -40,7 +41,8 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
-| `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
+| `/labs/gis` | GIS Apps: Vancouver, Surrey and Richmond cards, with an explanation of street and building reconstruction |
+| `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
 | `/labs/surrey` | Surrey, City of Adventure V0.4: a day/night city, three cases, compact phone controls and migrated local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
@@ -65,7 +67,7 @@ GIS Apps groups the city projects without moving them: `/labs/vancouver`,
 `/labs/surrey` and all existing data, asset and deep links remain unchanged.
 The Labs menu opens GIS Apps; the category cards open the original city routes.
 
-The main canonical pages, including GIS Apps and both cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
+The main canonical pages, including GIS Apps and all three cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
@@ -247,3 +249,12 @@ deployment. Releases still use the documented SSH candidate/rollback workflow.
 
 A separate playable Labs game with City of Surrey geography, walking, encounters,
 three complete cases, day/night lighting, scheduled pedestrians, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
+## Richmond Learns to Drive
+
+An independent delivery adventure under GIS Apps at `/labs/richmond`. Drive,
+park, walk, collect and deliver food; explore original Richmond Centre and YVR
+interiors; shop and use the fictional Open Airfield. Progress and fictional CAD
+remain in this browser. On phones, controls sit outside the playing view and a
+single paused panel holds the map, orders or details. No runtime dependencies were
+added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
+[Coordination and actual acceptance evidence](docs/RICHMOND_HANDOFF.md).

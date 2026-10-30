@@ -968,3 +968,31 @@ requires a separate HTML alt attribute. Original code remains MIT licensed.
 ## Surrey V0.4 — Living Surrey
 
 Surrey V0.4 adds two local JSON provenance assets in `/surrey/v0.4-2026-10-30/` (release manifest and fresh bounded terrain review; City open licence attribution retained). Existing city bytes are unchanged. Original MIT canvas window-emission masks (128×128 per shared facade material), fictional workshop sign, rack/planter/entrance geometry and synthesised four-note marimba motif add no external art/audio. Geometry is illustrative; no real storefront or measured prop-position claim. No AI-generated bitmap asset is used.
+
+## Richmond V0.1 geography and procedural scenery — October 30, 2026
+
+- `public/richmond/v0.1-2026-10-30/city.json`: 39,126,373 bytes; metric geometry,
+  source-node road topology, water/land/parks, parking/aprons, 33 authored playable
+  destinations and building overview. 34,540 road/path/airfield ways, 59,361 building
+  footprints, 137,093 nodes and 146,604 edges; WGS84 bounds
+  `[-123.235,49.10,-122.94,49.215]`, EPSG:32610, local x east/z south.
+- `tiles/*.json`: 686 original geometry-detail tiles, each covering 512 m, loaded
+  near the player. No photographic dimensions or bitmap assets apply.
+- `manifest.json`, `excluded-road-edges.json`: complete input/output digests,
+  retrieval/source-edit dates, source URLs/counts, processing assumptions and
+  excluded public-road edges. Observation dates are unknown. Large raw OSM XML
+  and normalized caches remain outside Git.
+- Rights: © OpenStreetMap contributors, ODbL for the entire derived database,
+  including authored entrance connectors and fictional airport gate. Original
+  TypeScript/procedural models are separately MIT. See the adjacent manifest and
+  `projects/richmond/THIRD_PARTY_NOTICES.md` for source and licence URLs. No copied
+  municipal imagery, proprietary architectural/airport plans, logos or photos.
+- Heights: 1,038 source-reported, 3,784 inferred from floors, 54,539 illustrative;
+  none newly surveyed. Vehicle-bridge elevation and ramp grades are illustrative.
+- Runtime artwork: original instanced characters, cars, parked aircraft, trees,
+  furniture, signs, façades and original mall/terminal/office/restaurant/lobby
+  interiors. Approximations do not claim exact current architectural accuracy.
+- Public role/alternative: playable Richmond map and fictional delivery adventure;
+  canvas has a keyboard-control accessible description, and the route supplies
+  server-rendered controls, coverage, attribution and text explanation. Responsive
+  phone controls stay outside the canvas. No external font/image dependency added.

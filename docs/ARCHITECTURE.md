@@ -22,7 +22,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/labs/gis` | `app/labs/gis/page.tsx`: GIS Apps category, city cards and reconstruction explanation |
-| `/labs/vancouver`, `/labs/surrey` | Existing independent city applications; unchanged URLs under the GIS Apps category |
+| `/labs/vancouver`, `/labs/surrey`, `/labs/richmond` | Existing independent city applications; unchanged URLs under the GIS Apps category |
 | `/motion` | Current pitching workflow and family roadmap |
 | `/motion/try` | HTTP 307 to the external Google Form in `motion.access.formUrl` |
 | `/botsquad` | Umbrella project overview, software story and area directory |
@@ -685,3 +685,36 @@ only positions against current walkability. No new runtime dependency/service.
 ## Surrey V0.4 — Living Surrey
 
 Surrey V0.4 adds pure time/missing-case modules and opt-in procedural WebAudio, retains one renderer and immutable V0.3 geometry, and explicitly migrates saved schema2 to3 under the old local key. Window/lamp emission shares materials; pedestrian schedules and distance updates remain bounded. See `projects/surrey/README.md` and `SURREY_V04_RELEASE_2026-10-30.md`.
+
+## Richmond V0.1
+
+`app/labs/richmond/page.tsx` owns the server-rendered route, metadata, attribution
+and text alternative. Its client game lazily imports the Three.js engine after
+Start. `content/site.ts` exports the typed `richmond` identity and registers it in
+`gisApps.projects`; existing `LabsProjectCards`, menus and sitemap conventions
+remain in place. Other routes do not import the renderer or geographic snapshot.
+
+`projects/richmond/` separates world spatial indexes, pure simulation/economy,
+interior geometry, population, cameras, scenery, streetscape, persistence and UI.
+It imports only Vancouver's stable pure polygon/distance/car predicates and
+vehicle integrator. Richmond collision radii, data, state and save key remain
+independent. No Vancouver or Surrey implementation or save namespace is changed.
+
+The same-origin ODbL snapshot has a lightweight building overview and 512 m detail
+tiles (at most 16 loaded, two pending). Public source-node road topology is
+separate from pedestrian and airfield surfaces; no projected crossing invents a
+junction. Fictional entrance connectors and the marked airport connection are
+explicit derived-data additions. Original interiors use solid furniture and
+walkable corridor guidance; transitions retain the exterior car and active order.
+
+Versioned, validated `asymmetri.richmond.save.v1` contains the single game economy,
+transaction ledger, inventory, order and settings. Invalid saves are retained
+until explicit reset; unavailable storage leaves a session-only game. There is no
+backend, telemetry, authentication or live GIS request. Menus, shops, hidden tabs
+and aerial surveying pause simulation. Teardown aborts loads and disposes geometry,
+textures, actors, input listeners and animation frames.
+
+Phone play uses `100dvh`, safe-area insets and a canvas grid row with controls
+outside it. Full status/minimap panels are on demand. A single focused paused
+dialog makes background controls inert. See the project README and handoff for
+geographic coverage, approximation disclosures and measured acceptance limits.

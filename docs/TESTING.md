@@ -35,7 +35,7 @@ When routes or shared layout code change, verify:
 - `/` (Asymmetri umbrella and peer divisions)
 - `/labs` (open-source playground and project list)
 - `/labs/gis` (GIS Apps cards and street/building reconstruction explanation)
-- `/labs/vancouver`, `/labs/surrey` (original city URLs retained by the GIS grouping)
+- `/labs/vancouver`, `/labs/surrey`, `/labs/richmond` (original city URLs retained by the GIS grouping)
 - `/sports` (division, founder story, Motion family and anchors)
 - `/botsquad` (experimental, SSH-tunnel access, deferred native mobile)
 - `/botsquad/trade/guide` (dated technical explanation, noindex, contents,
@@ -688,7 +688,7 @@ Run `npm run test:surrey` alongside Vancouver and investment regression tests fo
 city-game changes. It exercises the real snapshot and full mission by movement
 through the collision world, not by teleporting between quest stages. Separate
 unit cases cover stage gating, encounters, frame rates, recovery and asset failure.
-The `prebuild:next` hook runs Surrey tests inside the existing Linux candidate
+The `prebuild:next` hook runs Surrey and Richmond tests inside the existing Linux candidate
 workflow before packaging; the workflow file itself is unchanged.
 Browser acceptance includes the complete backpack quest and reward, camera/input,
 map, pause, recovery/reset, gentle/Lite settings, dialogue focus, responsive
@@ -722,3 +722,41 @@ geometry/texture counts with context, and distinguish emulation from hardware.
 ## Surrey V0.4 — Living Surrey
 
 Surrey V0.4 extends `npm run test:surrey` to44 tests, including both missing-person approaches/endings, schedule/clock/light state, migration validation and camera clipping. Browser acceptance must cover new-case completion, old cases, night visibility, compact phones, renderer reuse and reload. Responsive emulation does not satisfy physical-device acceptance.
+
+## Richmond V0.1
+
+Run `npm run test:richmond`, `npm run check`, Vancouver/Surrey/investment regressions,
+both supported builds, production dependency audit and `git diff --check`.
+Richmond tests verify pinned source hashes, all required anchors, directed routing,
+full-body collision and walking approaches; continuous digital-input journeys
+cross the real bridge network into Steveston, Terra Nova, IKEA, YVR, No. 6 Road,
+Knight Street and Hamilton. Separate tests traverse every included runway and
+walk mall/terminal/office corridors, collect, shop and use both mall entrances.
+Economy tests cover item/state gates, exactly-once payment, save validation,
+corrupt receipts, pause/camera independence, encounters and bounded recovery.
+
+Pure tests cannot establish rendered-browser journey acceptance. In a browser,
+complete drive–park–walk–pickup–deliver, mall purchase/exit, both airport orders and
+runway/taxiway exploration. Record manual recoveries, actual balances, car position,
+reload continuity and any uncompleted journey. Check all four cameras, controls,
+visible moving population, hidden-tab pause, route teardown, error paths and
+accessible fallback. Observe actual frame rate with device, scene and settings.
+
+For the phone obstruction regression, test portrait and short landscape play:
+canvas controls must not overlap the main playing rectangle. Open one map/order/
+settings panel at a time, check background inertness and focus return, then close
+it and verify the same playing area returns. Check 320/390 px, tablet, desktop,
+large text, keyboard, reduced motion and horizontal overflow. Dynamic viewport and
+safe-area CSS do not substitute for physical-iPhone testing. Acceptance evidence
+and outstanding checks belong in `docs/RICHMOND_HANDOFF.md`.
+
+
+The development-only Richmond help button **Developer check: graphics loss**
+forces a real `WEBGL_lose_context` event. It is excluded from production UI.
+Verify the readable recovery message, Retry graphics & map, preserved cash/car/
+order, and one replacement canvas. A missing-map response can be tested only in
+an isolated local checkout by temporarily withholding the local city asset and
+restoring the exact manifest-matching bytes before Retry. Never change live or
+published immutable bytes for fault injection. Pure collision tests additionally
+check that a bumper overlap can separate without allowing cars to pass through
+actors; all eight authored pickup-to-customer road legs use continuous driving.

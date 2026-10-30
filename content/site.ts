@@ -67,14 +67,27 @@ export const surrey = {
   metadata: { title: `${surreyName} | Asymmetri Labs`, description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve three fictional cases and watch a day/night city change. A free browser adventure with local saves." },
 } as const;
 
+export const richmond = {
+  name: "Richmond Learns to Drive",
+  path: "/labs/richmond",
+  tagline: "Deliver food. Explore Richmond. Earn a living. Expect the unexpected.",
+  status: "V0.1 — Playable preview",
+  description: "Drive, walk and deliver food across a stylized Richmond. Visit original mall and airport interiors, shop with fictional CAD and explore a fictional open-airfield sandbox.",
+  source: { label: "View Richmond source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/richmond" },
+  license: { label: "MIT code · OpenStreetMap ODbL data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/richmond/THIRD_PARTY_NOTICES.md" },
+  manifest: "/richmond/v0.1-2026-10-30/manifest.json",
+  guide: "https://github.com/eugenelin89/asymmetri/blob/main/projects/richmond/README.md",
+  metadata: { title: "Richmond Learns to Drive | Asymmetri Labs", description: "Deliver food and explore Richmond in an experimental browser game based on OpenStreetMap geography, with original mall and airport interiors and local saves." },
+} as const;
+
 export const gisApps = {
   name: "GIS Apps",
   path: "/labs/gis",
-  description: `Explore real places through open-source maps, city models and playable experiments. Start with ${vancouver.navLabel} and ${surrey.name}.`,
+  description: `Explore real places through open-source maps, city models and playable experiments. Start with ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}.`,
   status: "Experimental city projects",
   metadata: {
     title: "GIS Apps | Asymmetri Labs",
-    description: `Explore ${vancouver.navLabel} and ${surrey.name}, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.`,
+    description: `Explore ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.`,
   },
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
@@ -95,6 +108,14 @@ export const gisApps = {
       source: surrey.source,
       license: surrey.license,
     },
+    {
+      name: richmond.name,
+      description: richmond.description,
+      status: richmond.status,
+      detail: { label: "Play Richmond", href: richmond.path },
+      source: richmond.source,
+      license: richmond.license,
+    },
   ] satisfies readonly LabsProject[],
   reconstruction: {
     heading: "How do we reconstruct the streets and buildings?",
@@ -102,7 +123,7 @@ export const gisApps = {
     steps: [
       {
         title: "Start with public geography",
-        body: "City open-data sources provide street centre lines, building footprints and other available layers, such as parks, shorelines and sidewalks. We select a small area and record the sources, retrieval dates and licences for each published snapshot.",
+        body: "Public sources, including city open data and OpenStreetMap, provide street centre lines, building footprints and other available layers, such as parks, shorelines and sidewalks. We select a bounded area and record the sources, retrieval dates and licences for each published snapshot.",
       },
       {
         title: "Turn map lines into streets",
@@ -126,6 +147,10 @@ export const gisApps = {
       {
         title: surrey.name,
         body: "City of Surrey road surfaces, curbs, paths and footprints supply the layout. Building-height units are verified as metres and matched to official records; measurement dates and methods remain unknown. Terrain stays flat because the elevation datum is unverified. Facades and landmarks are artistic reconstructions. The stories and characters are fictional; game access and events do not describe real property access, crime or neighbourhood safety.",
+      },
+      {
+        title: richmond.name,
+        body: "OpenStreetMap supplies roads, footprints, water and airport surfaces. Heights, road widths and bridge elevations include approximations. Entrances, interior plans, people and delivery stories are original fiction. The open-airfield game connection does not describe real airport access.",
       },
     ],
     sourcesNote: "Each project's source and licence links above explain its datasets, processing and limitations. The city pages retain their own detailed credits.",
@@ -179,6 +204,7 @@ export const site = {
     { label: gisApps.name, href: gisApps.path },
     { label: vancouver.name, href: vancouver.path },
     { label: surrey.name, href: surrey.path },
+    { label: richmond.name, href: richmond.path },
   ] satisfies NavItem[],
   footerNavigation: [
     { label: "Motion tutorial", href: "/tutorial" },
@@ -1185,7 +1211,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including ${vancouver.navLabel} and ${surrey.name}.`,
+      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}.`,
   },
   headline: "A playground for ideas.",
   introduction:

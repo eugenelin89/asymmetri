@@ -613,12 +613,12 @@ rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
 ## GIS Apps
 
-Asymmetri Labs groups Vancouver, City in Progress and Surrey, City of Adventure under **GIS Apps**.
+Asymmetri Labs groups Vancouver, City in Progress; Surrey, City of Adventure; and Richmond Learns to Drive under **GIS Apps**.
 `gisApps` in `content/site.ts` owns `/labs/gis`, its metadata, city cards and
 reconstruction explanation. The Labs menu and Labs category card open this hub;
 city cards reuse the existing project names, statuses, descriptions, source and
 licence links. Footer city shortcuts remain available alongside GIS Apps.
-Both city display names, GIS descriptions and limitation headings derive from the
+City display names, GIS descriptions and limitation headings derive from the
 shared identity fields. Surrey metadata and game accessibility labels reuse its
 shared name; the shorter Play Surrey action avoids repeating the full title.
 Naming corrections do not change paths, versioned data, save keys or game behavior.
@@ -696,3 +696,21 @@ published V0.1 bytes. Architectural detail is original artistic reconstruction.
 ## Surrey V0.4 — Living Surrey
 
 Surrey is V0.4 — Living Surrey, with three complete fictional cases, a day/night city and explicitly unresolved terrain datum. Keep its renamed public name and GIS Apps route. Do not describe desktop viewport tests as physical iPhone acceptance. Centralized content remains in `content/site.ts`.
+
+## Richmond Learns to Drive
+
+Use the `richmond` identity in `content/site.ts` for names, tagline, status, route,
+source, coverage guide and provenance links. The approved route is `/labs/richmond`,
+listed through `gisApps.projects` on Labs and GIS Apps, with the existing category
+menu and footer shortcut. Preserve the approved Vancouver and Surrey names/URLs.
+V0.1 is a **playable preview**, not a surveyed digital twin or real driving course.
+
+The title concerns the fictional courier learning city driving. Money, people,
+customers, businesses used for interactions, incidents and interiors are fictional.
+Do not associate threats with demographic identity or real neighbourhood safety.
+Traditional Chinese core labels and courtesy lines are authored; longer help is
+English. Open Airfield is an immediately available fictional sandbox, not real
+airport access or security guidance. Report source footprints separately from
+illustrative heights/façades and original interiors. OSM-derived data is ODbL;
+original code/procedural models are MIT. Physical-phone performance must not be
+claimed from browser viewport emulation.

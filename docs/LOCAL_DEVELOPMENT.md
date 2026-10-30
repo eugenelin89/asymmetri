@@ -295,3 +295,22 @@ device performance claims. Offline reproduction now uses
 `projects/surrey/tools/test_reconstruction.py` in the same Shapely 2.0.7 environment.
 Keep original raw receipts: current server serialization/edits may not reproduce
 pinned hashes. `build_city.py` and its original cache remain the V0.1 path.
+
+
+## Richmond Learns to Drive
+
+Run `npm run dev:next -- --port 3015 --hostname 127.0.0.1`, then visit
+`http://127.0.0.1:3015/labs/richmond`. Start lazily loads the local snapshot and
+renderer. `npm run test:richmond` runs pure simulation and continuous movement
+journeys against shipped geographic bytes. Both supported builds use committed
+assets and need no GIS service. `prebuild:next` runs Surrey and Richmond tests.
+
+Use Node from `.nvmrc`; GIS tooling is separately pinned in
+`projects/richmond/tools/requirements.txt`. Keep raw bounded OSM API caches and
+Python environments outside Git. Offline import commands, CRS, hashes and refresh
+rules are in `projects/richmond/README.md`. Do not regenerate an immutable version
+in place or perform acquisition/compilation on the production server.
+
+Richmond saves use `asymmetri.richmond.save.v1`; browser origins have independent
+saves. Test explicit resets only in your own development game. Report physical
+phone, viewport, pure simulation and browser journey evidence separately.
