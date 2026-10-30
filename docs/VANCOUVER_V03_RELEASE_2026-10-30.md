@@ -4,9 +4,8 @@
 
 The owner authorized scoped implementation, main commits/push and guarded public
 release at `https://asymmetri.co/labs/vancouver`. Project name **Vancouver** and Labs
-menu **Vancouver in Progress** remain. This record distinguishes tested source
-from production activation; the release identity and final gates are recorded below
-when activation completes. No dependencies, backend, accounts or tracking added.
+menu **Vancouver in Progress** remain. V0.3 was activated at **09:04 PDT / 16:04 UTC on October 30, 2026**.
+The release identity and final gates are recorded below. No dependencies, backend, accounts or tracking added.
 
 ## Driving and navigation
 
@@ -118,7 +117,7 @@ uncompressed directory removed, recovering 1,023,193,088 bytes. The full current
 V0.2, final V0.1 rollback and pre-Vancouver runtime remain on-server. Archive digest:
 `a3ab660688123094ce659a414585730d87e75ecd6d1ad9acf332d3f4ec68577d`.
 
-The independent exact-SHA Linux candidate must pass guarded checkout/extraction,
+The independent exact-SHA Linux candidate passed guarded checkout/extraction,
 private loopback acceptance, native image optimization and protected route checks
 before activation. Floors remain 192 MiB available memory and 6 GiB free disk.
 The swap stops only the website and retains the entire previous V0.2 runtime;
@@ -135,3 +134,56 @@ traversal. Prioritize physical iOS/Android input, thermal/performance profiling,
 broader manual-drive routes, newer bounded measured geography, then elevated
 bridge approaches. Viewport testing is not physical-phone testing; forced GPU
 context-loss recovery must not be claimed without an actual test.
+
+## Released identity and production acceptance
+
+- Implementation: `6a8aa71` (continuous driving, navigation and geography).
+- Deployed source / development journal: `8d0530e65dabf23266f892cf3aef2b3b55e6733d`.
+- Linux Next build: `Y3ReGxnH5WDkIJA_b0D-G` on Node 22.23.1.
+- [Successful Linux candidate run](https://github.com/eugenelin89/asymmetri/actions/runs/41085398178),
+  artifact `12991522305`, runtime tar SHA-256 `b88941d70b9b2c84565ff0a0ed9ceb0e2a9cc3a81de6777dce0586f60dd2888c`.
+- Public URL: [Vancouver](https://asymmetri.co/labs/vancouver).
+- Previous full runtime: `/var/www/asymmetri-rollback-v02-20261030-7990eab`,
+  source `7990eabe022aed0ed28b477b07bc2d9ad457e1d6`, build
+  `LgdQfEvDuIcwEAl6_yxWS`. Source, build and executable dependencies verified.
+
+Candidate checks: 12 route smoke checks, eight protected host/path combinations,
+all 124 retained tutorial IDs, 24 tutorial assets, existing Motion media/form
+behavior, Ask/Trade main content, six no-JS places, V0.3 graph/height/data identity,
+all three geographic snapshots and native Sharp image optimization (HTTP 200).
+A separate 13-route comparison preserved protected main content/canonicals/links
+and tutorial asset hashes. Public HTTPS repeated that comparison and passed 24
+additional apex/www, legacy redirect and three-version data/manifest hash checks.
+
+The website is enabled and running with zero restarts. Five peer service process
+identities, 55 configuration files, 13 peer vhosts and the Node binary are unchanged.
+No post-activation application errors were found; the deliberate old-process stop
+left the known wrapper exit-143 journal entry. Rollback was **not invoked**.
+
+Minimum sampled available memory across guarded preparation: 238.1 MiB;
+minimum free disk: 6.407 GiB. First post-activation health sample: 328.8
+MiB available and 6.407 GiB free. The mandatory 192 MiB / 6 GiB floors were
+never lowered. Detailed private receipts and screenshots are retained in owner
+storage, not the repository. The archived original V0.1 and complete on-server
+final V0.1/pre-Vancouver runtimes are also retained.
+
+Recovery, if required: verify the active and retained identities, stop only the
+website service, preserve the complete active V0.3 directory under a new unused
+rollback name, rename the complete V0.2 directory to the live location, start the
+website and repeat public/peer health checks. Do not mix individual build or
+node_modules files between releases. Configuration and runtime credentials remain
+in their existing external locations.
+
+An additional optimized local build drive completed one loop plus 845 m: 308.8 s,
+3,211.1 m travelled, zero collisions, 59.9 FPS average, 37 minimum one-second
+sample including startup, 16.8 ms final rolling p95; 85 geometries / 11 textures.
+This separate 1280×900 / DPR 0.8 browser sample complements the earlier two-loop
+acceptance and does not establish physical-phone performance.
+
+Public browser acceptance loaded the V0.3 WebGL scene and verified the unchanged
+Labs menu label. A 72.7-second live drive covered 769.8 m without collision at
+59.9 average FPS (58 minimum sampled FPS; 17.6 ms rolling p95), with 85 geometry /
+11 texture counts and no application console warnings/errors. The live 390×844
+expanded phone layout had no horizontal overflow; keyboard braking and Escape
+worked after capture. Desktop overview/drive and mobile screenshots are retained
+with the private release receipts. These remain browser viewport checks.

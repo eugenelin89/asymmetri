@@ -1313,7 +1313,7 @@ receipt. Do not modify ingress, private receivers or stored records for this mov
 ## Vancouver isolated Linux candidates
 
 The [V0.3 release record](VANCOUVER_V03_RELEASE_2026-10-30.md) records the new
-release gates and, after activation, its identity. The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md) records the preceding
+completed release gates and its active identity. The [V0.2 release record](VANCOUVER_V02_RELEASE_2026-10-30.md) records the preceding
 October 30 production identity, acceptance, rollback and older-runtime retention.
 
 See the [October 30 release record](VANCOUVER_RELEASE_2026-10-30.md) for deployed
