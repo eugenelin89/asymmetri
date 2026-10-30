@@ -275,3 +275,14 @@ case. Continue Game reads this origin's `asymmetri.surrey.save.v2`; New Game rep
 it after confirmation. Separate localhost ports and public hosts have separate
 saves. Storage failures must not block play. Avoid creating debug teleport or
 mission-completion controls for browser acceptance.
+
+V0.3 keeps that save key and explicitly accepts V0.2's old map identity. The view-
+help dismissal uses a separate key and never removes story progress. For phone
+checks, verify expanded play, the compact objective, Menu, on-demand map/aerial
+tools and Return to Player at 320/390px and landscape. The owner supplied physical
+iPhone screenshots of V0.2 occlusion; emulated post-fix checks are not physical-
+device performance claims. Offline reproduction now uses
+`projects/surrey/tools/reconstruct_city.py --cache /path/to/v03-source-cache`; run
+`projects/surrey/tools/test_reconstruction.py` in the same Shapely 2.0.7 environment.
+Keep original raw receipts: current server serialization/edits may not reproduce
+pinned hashes. `build_city.py` and its original cache remain the V0.1 path.

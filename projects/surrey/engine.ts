@@ -10,6 +10,7 @@ import { pedestrianRoutes, stepPedestrians } from "./population";
 import { writeSave } from "./save";
 import type { SavedGame } from "./save";
 import { landmarks } from "./landmarks";
+import { viewShortcut } from "./viewPolicy";
 import type { City, Game, Input, Snapshot } from "./types";
 type Callbacks = {
   map(city: City): void;
@@ -47,7 +48,7 @@ export async function createGame(
   canvas.tabIndex = 0;
   canvas.setAttribute(
     "aria-label",
-    `${surrey.name}. WASD or arrows walk. Shift sprints. Drag camera, wheel zoom. E interacts, M opens map, Escape pauses, R recovers. V toggles aerial view; F returns camera to player. Aerial WASD pans; right drag or two fingers pan. Tab reaches game controls.`,
+    `${surrey.name}. Select Street Adventure to walk or Aerial Explore to see the city. Touch: arrows move, drag looks around, Interact talks, two fingers pan and pinch in Aerial Explore. Menu opens status, map and help. Keyboard: WASD moves, Shift sprints, E interacts, V switches perspective, F finds your character, M opens map, Escape pauses, R recovers. Tab reaches controls.`,
   );
   host.appendChild(canvas);
   const scene = new THREE.Scene();
@@ -165,7 +166,7 @@ export async function createGame(
     return success;
   }
   function mode(value: Snapshot["mode"]) {
-    if (sim.state.dialogue || value === sim.state.mode) return;
+    if (paused || sim.state.dialogue || value === sim.state.mode) return;
     clear(); sim.mode(value);
     if (value === "aerial" && aerial.state.follow) aerial.focus([sim.state.player.x, sim.state.player.z]);
     renderer.shadowMap.enabled = value === "ground" && quality !== "low" && !coarse;
@@ -179,6 +180,9 @@ export async function createGame(
   function render(dt: number) {
     const s = sim.state,
       p = s.player;
+    const showPeople = s.mode === "ground" || aerial.state.distance < 350;
+    scenery.player.group.visible = showPeople;
+    scenery.staticPeople.forEach(person => { person.visible = showPeople; });
     scenery.player.animate(p, s.elapsed, reduced);
     const thiefMoving =
       s.stage === "chase" && distance(s.thief, city.anchors.escape) > 2;
@@ -193,9 +197,9 @@ export async function createGame(
       s.elapsed,
       reduced,
     );
-    scenery.thief.group.visible = s.stage === "chase";
+    scenery.thief.group.visible = showPeople && s.stage === "chase";
     scenery.thief.bag.visible = s.stage === "chase";
-    scenery.pickpocket.group.visible = s.danger.active;
+    scenery.pickpocket.group.visible = showPeople && s.danger.active;
     scenery.pickpocket.animate(
       {
         x: s.danger.position[0],
@@ -248,15 +252,16 @@ export async function createGame(
       label.material.depthTest = !isAerial; label.material.depthWrite = false;
       label.visible = isAerial || camera.position.distanceTo(label.position) < 210;
       if (isAerial) {
-        label.scale.set(155 * scale, 29 * scale, 1);
+        const labelWidth = camera.aspect < .9 ? 112 : 155;
+        label.scale.set(labelWidth * scale, labelWidth * 29 / 155 * scale, 1);
         const projected = label.position.clone().project(camera), x = projected.x * renderHeight * camera.aspect / 2, y = projected.y * renderHeight / 2;
-        label.visible = projected.z < 1 && !occupied.some(p => Math.abs(x - p.x) < 165 && Math.abs(y - p.y) < 36);
+        label.visible = projected.z < 1 && !occupied.some(p => Math.abs(x - p.x) < labelWidth + 10 && Math.abs(y - p.y) < 40);
         if (label.visible) occupied.push({ x, y });
       } else label.scale.set(26, 4.875, 1);
     });
     scenery.waypoint.visible = !!s.waypoint;
     if (s.waypoint) { scenery.waypoint.position.set(s.waypoint.point[0], 6, s.waypoint.point[1]); scenery.waypoint.scale.setScalar(Math.max(1, pixelScale(scenery.waypoint.position) * 14)); }
-    scenery.encounter.group.visible = !!s.encounter;
+    scenery.encounter.group.visible = showPeople && !!s.encounter;
     scenery.encounterMarker.visible = !!s.encounter;
     if (s.encounter) {
       scenery.encounter.animate({ x: s.encounter.position[0], z: s.encounter.position[1], yaw: Math.atan2(p.x - s.encounter.position[0], p.z - s.encounter.position[1]), moving: s.encounter.phase !== "offer", running: false }, s.elapsed, reduced);
@@ -266,6 +271,7 @@ export async function createGame(
     scenery.evidence.forEach((object, id) => { object.visible = s.investigation.stage !== "available" && (!isAerial || s.investigation.evidence.includes(id)); });
     scenery.witnessMarkers.forEach(object => { object.visible = s.investigation.stage !== "available"; if (isAerial) object.scale.setScalar(Math.max(1, pixelScale(object.position) * 12)); else object.scale.setScalar(1); });
     ambient.forEach(a => { a.model.group.visible = !isAerial || aerial.state.distance < 350; });
+    scenery.closeDetails.forEach(tile => { tile.mesh.visible = (!isAerial || aerial.state.distance < 350) && Math.hypot(camera.position.x - tile.centre[0], camera.position.z - tile.centre[1]) < 280; });
     renderer.render(scene, camera);
     canvas.dataset.drawCalls = String(renderer.info.render.calls);
     canvas.dataset.geometries = String(renderer.info.memory.geometries);
@@ -342,7 +348,8 @@ export async function createGame(
   const key = (e: KeyboardEvent) =>
     e.key.length === 1 ? e.key.toLowerCase() : e.key;
   function down(e: KeyboardEvent) {
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement;
+    if (paused || target.isContentEditable || target.closest("input, textarea, select") || e.metaKey || e.ctrlKey || e.altKey) return;
     const k = key(e);
     if (keyMap[k]) {
       e.preventDefault();
@@ -354,7 +361,7 @@ export async function createGame(
         clear();
         report(); save();
       }
-      if (k === "v") { e.preventDefault(); mode(sim.state.mode === "ground" ? "aerial" : "ground"); }
+      if (viewShortcut(e, !!sim.state.dialogue, false)) { e.preventDefault(); mode(sim.state.mode === "ground" ? "aerial" : "ground"); }
       if (k === "f" && sim.state.mode === "aerial") { e.preventDefault(); returnToPlayer(); }
       if (k === "r" && sim.state.mode === "ground") {
         sim.recover();

@@ -925,3 +925,26 @@ requires a separate HTML alt attribute. Original code remains MIT licensed.
   dimensions/alt text; accessible map labels and the six-place text fallback remain.
   Original procedural road markings are clipped to pavement. No external raster,
   logo, photo, sound, font, architectural asset or government endorsement is added.
+
+## Surrey V0.3 reconstructed geography — October 30, 2026
+
+- `public/surrey/v0.3-2026-10-30/city.json` and manifest: 3,003,834-byte City-derived
+  snapshot in the retained 1.31 × 1.45km extent. V0.1 stays byte-identical. Added
+  128 road-surface records, 660 active curb features, 92 active medians and 262
+  active paths. Explicit paired-curb/lane-width fallback fills uncovered corridors.
+  The manifest contains exact URLs, UTC retrieval times, raw/output hashes, CRS,
+  tolerances, classifications and limitations. Current OGL–City of Surrey applies.
+- All 786 retained building parts have metre-verified, source-matched heights; no
+  measurement-date/method claim. No DEM/LiDAR terrain is redistributed. Flat ground
+  remains because the 2025 vertical datum was not verified. Source footprints,
+  story anchors and collision cells remain unchanged.
+- `architecture.ts`, `buildings.ts`, `scenery.ts`: original deterministic facade
+  variants (128×128 canvas textures), setbacks, balconies, entrances, roof equipment,
+  footprint-following library ribbons, civic canopy and station canopy/platform.
+  Road-name signs are 256×64 canvases. All procedural code is MIT; original primary
+  architectural references are cited in project notices. No photos, proprietary
+  meshes, artwork, fonts, logos or new external binary assets were imported.
+- `ViewControls.tsx`: original inline walking/city SVG icons and accessible text;
+  icons are decorative/aria-hidden. Mobile panels open on request. Canvas/map labels
+  and visible mission/help text remain the non-image context. The existing Labs
+  social image is unchanged. JSON has no raster dimensions or image alt text.

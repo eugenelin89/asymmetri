@@ -3,21 +3,15 @@ import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
 import { distance } from "./world";
+import { buildBuildings, footprintShape } from "./buildings";
+import { onSurface, TRANSIT_DECK_HEIGHT } from "./surfaces";
 import { seeded } from "./simulation";
 import { landmarks } from "./landmarks";
 import { storyLocations, witnesses, evidence as evidenceData } from "./story";
 import type { City, Point, Polygon, Pose } from "./types";
 import type { World } from "./world";
 
-function shapeOf(polygon: Polygon) {
-  const s = new THREE.Shape(
-    polygon[0].map(([x, z]) => new THREE.Vector2(x, -z)),
-  );
-  s.holes = polygon
-    .slice(1)
-    .map((r) => new THREE.Path(r.map(([x, z]) => new THREE.Vector2(x, -z))));
-  return s;
-}
+const shapeOf = footprintShape;
 export function createPeople() {
   const geometry = {
     torso: new THREE.CylinderGeometry(.32, .38, .8, 8), head: new THREE.SphereGeometry(.27, 10, 7),
@@ -100,52 +94,10 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   flat(city.plazas, 0xcec6b4, 0.025);
   flat(city.pavement, 0x414f59, 0.04);
   flat(city.sidewalks, 0xddd4bf, 0.065);
-  const windowCanvas = document.createElement("canvas");
-  windowCanvas.width = 128;
-  windowCanvas.height = 128;
-  const ctx = windowCanvas.getContext("2d")!;
-  ctx.fillStyle = "#ebeadf";
-  ctx.fillRect(0, 0, 128, 128);
-  for (let y = 6; y < 128; y += 32)
-    for (let x = 6; x < 128; x += 32) {
-      ctx.fillStyle = (x + y) % 3 ? "#69969f" : "#eedbac";
-      ctx.fillRect(x, y, 19, 21);
-      ctx.fillStyle = "#d0d7cd";
-      ctx.fillRect(x + 9, y, 2, 21);
-    }
-  const windows = new THREE.CanvasTexture(windowCanvas);
-  windows.wrapS = windows.wrapT = THREE.RepeatWrapping;
-  windows.repeat.set(0.13, 0.13);
-  windows.colorSpace = THREE.SRGBColorSpace;
-  const palette = [0xd4d4bf, 0xd4b99b, 0x93b8c3, 0xaebfc6, 0xd3ab93, 0x8faaa5],
-    buildings = palette.map(() => [] as THREE.BufferGeometry[]),
-    roofs: THREE.BufferGeometry[] = [];
-  city.buildings.forEach((b, i) => {
-    const height = String(b.id) === "1665" ? 16 : b.height;
-    const g = new THREE.ExtrudeGeometry(shapeOf(b.shape), {
-      depth: height,
-      bevelEnabled: false,
-      steps: 1,
-    });
-    g.rotateX(-Math.PI / 2);
-    buildings[i % palette.length].push(g);
-    const roof = new THREE.ShapeGeometry(shapeOf(b.shape));
-    roof.rotateX(-Math.PI / 2);
-    roof.translate(0, height + 0.03, 0);
-    roofs.push(roof);
-  });
-  buildings.forEach((gs, i) =>
-    batch(
-      gs,
-      new THREE.MeshStandardMaterial({
-        color: palette[i],
-        map: windows,
-        roughness: 0.7,
-      }),
-      true,
-    ),
-  );
-  batch(roofs, material(0xb1c2bd));
+  flat(city.medians, 0x879a77, 0.085);
+  flat(city.crossings, 0xeae5d6, 0.082);
+  flat(city.markings, 0xe3c777, 0.084);
+  const closeDetails = buildBuildings(scene, city);
   function box(
     w: number,
     h: number,
@@ -173,14 +125,13 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
       Math.atan2(dx, dz),
     );
   }
-  const markings: THREE.BufferGeometry[] = [],
-    rails: THREE.BufferGeometry[] = [],
+  const rails: THREE.BufferGeometry[] = [],
     pillars: THREE.BufferGeometry[] = [],
     lampPosts: THREE.BufferGeometry[] = [],
     lampHeads: THREE.BufferGeometry[] = [];
   for (const line of city.rail)
     for (let i = 1; i < line.length; i++) {
-      rails.push(beam(line[i - 1], line[i], 8.2, 7, 1));
+      rails.push(beam(line[i - 1], line[i], TRANSIT_DECK_HEIGHT, 7, 1));
       if (i % 3 === 0)
         pillars.push(box(1.3, 8, 1.3, line[i][0], 4, line[i][1]));
     }
@@ -194,24 +145,11 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
         len = distance(a, b),
         dx = (b[0] - a[0]) / len,
         dz = (b[1] - a[1]) / len;
-      for (let d = 6; d < len; d += 12)
-        markings.push(
-          beam(
-            [a[0] + dx * d, a[1] + dz * d],
-            [
-              a[0] + dx * Math.min(d + 4, len),
-              a[1] + dz * Math.min(d + 4, len),
-            ],
-            0.08,
-            0.14,
-            0.025,
-          ),
-        );
       for (let d = 12; d < len; d += 36) {
         const x = a[0] + dx * d - dz * (road.width / 2 + 4),
           z = a[1] + dz * d + dx * (road.width / 2 + 4);
         if (
-          !world.fits([x, z]) ||
+          !world.fits([x, z]) || onSurface([x, z], city.pavement) ||
           Object.values(city.anchors).some((p) => distance(p, [x, z]) < 8)
         )
           continue;
@@ -220,20 +158,17 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
         trees.push([x - dz * 3, z + dx * 3]);
       }
     }
-  batch(markings, material(0xe4c571));
+  const curbEdges = city.curbs.flatMap(line => line.slice(1).map((p, i) => beam(line[i], p, .1, .18, .18)));
+  batch(curbEdges, material(0xc5c6b8));
   batch(lampPosts, material(0x34444a));
   batch(lampHeads, material(0xf0dbb6));
-  const crossings: THREE.BufferGeometry[] = [],
-    signalPosts: THREE.BufferGeometry[] = [],
+  const signalPosts: THREE.BufferGeometry[] = [],
     signalLights: THREE.BufferGeometry[] = [];
   city.signals.forEach((p) => {
     signalPosts.push(box(0.2, 4, 0.2, p[0], 2, p[1]));
     signalPosts.push(box(0.45, 1.2, 0.4, p[0], 4, p[1]));
     signalLights.push(box(0.26, 0.26, 0.42, p[0], 4.2, p[1]));
-    for (let i = -4; i <= 4; i++)
-      crossings.push(box(1, 0.02, 3, p[0] + i * 1.8, 0.1, p[1] + 3));
   });
-  batch(crossings, material(0xeee8d8));
   batch(signalPosts, material(0x2f4148));
   batch(signalLights, material(0xeaa65e));
   city.parks.forEach((p) => {
@@ -298,34 +233,77 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   for (const place of landmarks(city)) label(place.name.toUpperCase(), place.point, place.height, "#e6efdf", 28);
   // Original geometric interpretations from cited public architecture references; no footprint edits.
   const glass = new THREE.MeshStandardMaterial({ color: 0x6097a8, roughness: .28, metalness: .25 });
-  const tower = mesh(new THREE.CylinderGeometry(19, 21, 95, 18), glass);
-  tower.scale.set(1, 1, .72); tower.position.set(37, 63.5, 180); tower.castShadow = true;
+  const towerHeight = city.buildings.find(b => b.id === "1665")!.height - 16;
+  const tower = mesh(new THREE.CylinderGeometry(19, 21, towerHeight, 28), glass);
+  tower.scale.set(1, 1, .72); tower.position.set(37, 16 + towerHeight / 2, 180); tower.castShadow = true;
   const pale: THREE.BufferGeometry[] = [], dark: THREE.BufferGeometry[] = [], timber: THREE.BufferGeometry[] = [], blue: THREE.BufferGeometry[] = [];
+  const signGeometry = new THREE.PlaneGeometry(4.4, .85), signedStreets = new Set<string>();
+  for (const road of city.roads) {
+    if (signedStreets.size >= 14 || signedStreets.has(road.name) || /local street/i.test(road.name)) continue;
+    const index = road.points.findIndex((p, i) => i > 0 && distance(road.points[i - 1], p) > 24 && distance(p, city.anchors.spawn) < 650);
+    if (index < 1) continue;
+    const a = road.points[index - 1], b = road.points[index], length = distance(a, b), dx = (b[0] - a[0]) / length, dz = (b[1] - a[1]) / length;
+    const p: Point = [a[0] + dx * 9 - dz * (road.width / 2 + 2), a[1] + dz * 9 + dx * (road.width / 2 + 2)];
+    if (!world.fits(p) || onSurface(p, city.pavement) || Object.values(city.anchors).some(q => distance(p, q) < 9)) continue;
+    const canvas = document.createElement("canvas"); canvas.width = 256; canvas.height = 64;
+    const context = canvas.getContext("2d")!; context.fillStyle = "#275548"; context.fillRect(0, 0, 256, 64); context.strokeStyle = "#e8ecda"; context.lineWidth = 3; context.strokeRect(3, 3, 250, 58);
+    context.fillStyle = "#f5f4e4"; context.textAlign = "center"; context.font = "bold 22px sans-serif"; context.fillText(road.name.toUpperCase(), 128, 40, 238);
+    const texture = new THREE.CanvasTexture(canvas); texture.colorSpace = THREE.SRGBColorSpace;
+    const board = mesh(signGeometry, new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })); board.position.set(p[0], 3.5, p[1]); board.rotation.y = Math.atan2(dx, dz) + Math.PI / 2;
+    closeDetails.push({ mesh: board, centre: p }); dark.push(box(.12, 3.4, .12, p[0], 1.7, p[1])); signedStreets.add(road.name);
+  }
   for (let y = 18; y < 110; y += 4.5) {
     const ring = new THREE.CylinderGeometry(19.2, 19.2, .35, 18); ring.scale(1, 1, .72); ring.translate(37, y, 180); pale.push(ring);
   }
   // Curved glazed atrium on the retained SFU podium, with timber-supported canopy.
-  for (let i = 0; i < 14; i++) {
-    const x = -114 + i * 12, z = 139 + Math.sin(i / 13 * Math.PI) * 8;
-    blue.push(box(11, 12, .5, x, 7, z)); timber.push(box(.5, 13, .55, x, 6.5, z - .6));
-    pale.push(box(12, .5, 6, x, 8, z - 1));
+  // Engineer's facade dimensions: 26.21m tall, 78.03m long, 7.32m lower column spacing.
+  // Position/curvature and podium partition remain artistic within the source footprint.
+  for (let i = 0; i < 11; i++) {
+    const x = -127 + i * 7.32, z = 153 + Math.sin(i / 10 * Math.PI) * 7;
+    blue.push(box(7.1, 26.21, .4, x, 13.105, z)); timber.push(box(.48, 13, .55, x, 6.5, z - .6));
+    for (const offset of [-1.8, 1.8]) timber.push(box(.24, 13, .3, x + offset, 19.6, z - .4));
+    pale.push(box(7.32, .5, 5, x, 13, z - 1));
   }
-  dark.push(box(130, .8, 67, -24, 35.1, -195));
+  for (let x = 20; x <= 54; x += 8.5) pale.push(box(.25, towerHeight, .25, x, 16 + towerHeight / 2, 166.2));
+  dark.push(box(130, .8, 67, -24, 34.8, -195));
   blue.push(box(112, 18, .6, -24, 13, -164.9));
-  for (let y = 5; y < 22; y += 5) pale.push(box(55, .65, 78, -30, y, -128));
-  for (let i = 0; i < 4; i++) { const rooflight = box(7, 2, 28, -45 + i * 10, 21, -123); pale.push(rooflight); }
+  for (let x = -72; x <= 28; x += 10) dark.push(box(.3, 24, .5, x, 12, -164.6));
+  pale.push(box(35, .35, 8, -15, 7, -160), box(.5, 7, .5, -31, 3.5, -157), box(.5, 7, .5, 1, 3.5, -157));
+  // Library ribbons follow the actual angled footprint in buildBuildings.
+  // Vaulted clerestories sit above the roof, distinct from the civic hall canopy.
+  for (let i = 0; i < 4; i++) {
+    const vault = new THREE.CylinderGeometry(3, 3, 22, 10, 1, false, 0, Math.PI);
+    vault.rotateZ(Math.PI / 2); vault.rotateY(Math.PI / 2); vault.translate(-46 + i * 11, 20.5, -123); pale.push(vault);
+  }
   // Station platform, transparent-looking glazed hall, stair runs and open canopy.
   pale.push(box(12, .6, 70, 80, 8.9, 0));
-  blue.push(box(16, .65, 66, 80, 13, 0));
+  const canopy = new THREE.BufferGeometry(), canopyVertices: number[] = [];
+  for (let i = 0; i < 16; i++) {
+    const x = -9 + i * 18 / 16, next = x + 18 / 16;
+    const y = 12.6 + 2 * Math.sqrt(Math.max(0, 1 - (x / 9) ** 2)), ny = 12.6 + 2 * Math.sqrt(Math.max(0, 1 - (next / 9) ** 2));
+    canopyVertices.push(80+x,y,-36,80+next,ny,-36,80+x,y,36,80+next,ny,-36,80+next,ny,36,80+x,y,36);
+  }
+  canopy.setAttribute("position", new THREE.Float32BufferAttribute(canopyVertices, 3)); canopy.computeVertexNormals();
+  const canopyMesh = mesh(canopy, new THREE.MeshStandardMaterial({ color: 0xcbd7d5, side: THREE.DoubleSide, roughness: .6 })); canopyMesh.castShadow = true;
   blue.push(box(.4, 10, 48, 74, 6, 0), box(.4, 10, 48, 86, 6, 0));
   for (let i = 0; i < 16; i++) pale.push(box(4, .55, 1, 70, .4 + i * .52, 20 - i));
   for (const z of [-28, -12, 12, 28]) dark.push(box(.4, 12, .4, 73, 6, z), box(.4, 12, .4, 87, 6, z));
+  for (const z of [-25, 0, 25]) {
+    pale.push(box(1.2, 8.2, 1.2, 80, 4.1, z));
+    dark.push(box(15, .25, .25, 80, 12.8, z));
+  }
+  blue.push(box(18, 6, .3, 80, 3.3, -39), box(.3, 6, 14, 71, 3.3, -32), box(.3, 6, 14, 89, 3.3, -32));
+  pale.push(box(20, .35, 16, 80, 6.5, -32));
+  // Civic Plaza's pedestrian paving is a reconstruction, with clear access to story points.
+  const plazaStrips: THREE.BufferGeometry[] = [];
+  for (let z = -155; z < -60; z += 8) plazaStrips.push(box(23, .018, .18, 19, .079, z));
+  batch(plazaStrips, material(0x9caaa1));
   // Illustrative furniture and parked vehicles are kept away from quest interaction points.
   const seats: THREE.BufferGeometry[] = [], bins: THREE.BufferGeometry[] = [], cars: THREE.BufferGeometry[] = [], tires: THREE.BufferGeometry[] = [];
   const protectedPoints = [...Object.values(city.anchors), ...Object.values(storyLocations(city, world))];
   for (let i = 0; i < Math.min(trees.length, 100); i += 4) {
     const p = [trees[i][0] + 3, trees[i][1] + 2] as Point;
-    if (!world.fits(p) || protectedPoints.some(q => distance(q, p) < 9)) continue;
+    if (!world.fits(p) || onSurface(p, city.pavement) || protectedPoints.some(q => distance(q, p) < 9)) continue;
     seats.push(box(2.2, .15, .65, p[0], .65, p[1]), box(2.2, .75, .14, p[0], 1, p[1] - .3));
     bins.push(box(.65, .9, .65, p[0] + 2, .45, p[1]));
     if (i % 12 === 0) {
@@ -357,6 +335,7 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   [player, owner, thief, sam, jo, pickpocket].forEach((p) =>
     scene.add(p.group),
   );
+  const staticPeople = [owner.group, sam.group, jo.group];
   owner.group.position.set(
     ...([city.anchors.owner[0], 0, city.anchors.owner[1]] as [
       number,
@@ -411,10 +390,10 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   const encounterMarker = mesh(new THREE.OctahedronGeometry(.5), new THREE.MeshBasicMaterial({ color: 0xf69b8c, depthTest: false })); encounterMarker.visible = false;
   const story = storyLocations(city, world), evidence = new Map<string, THREE.Mesh>(), witnessMarkers: THREE.Mesh[] = [];
   witnesses.forEach((w, i) => {
-    const actor = makePerson([0x8e85c7, 0x4c8c8a, 0xd99c62][i]); actor.group.position.set(story[w.id][0], 0, story[w.id][1]); scene.add(actor.group);
+    const actor = makePerson([0x8e85c7, 0x4c8c8a, 0xd99c62][i]); actor.group.position.set(story[w.id][0], 0, story[w.id][1]); scene.add(actor.group); staticPeople.push(actor.group);
     const marker = mesh(new THREE.OctahedronGeometry(.42), new THREE.MeshBasicMaterial({ color: 0xcfadef, depthTest: false })); marker.position.set(story[w.id][0], 3, story[w.id][1]); witnessMarkers.push(marker);
   });
   evidenceData.forEach(e => { if (e.id === "watch") return; const p = story[e.id]; const object = mesh(new THREE.BoxGeometry(.7, .2, .55), material(e.id === "paint" ? 0xb5584e : 0xe8d496)); object.position.set(p[0], .22, p[1]); evidence.set(e.id, object); });
   const sceneRing = mesh(new THREE.RingGeometry(2.4, 2.7, 24), new THREE.MeshBasicMaterial({ color: 0xc8a2ed, side: THREE.DoubleSide })); sceneRing.rotation.x = -Math.PI / 2; sceneRing.position.set(story.scene[0], .13, story.scene[1]);
-  return { player, owner, thief, pickpocket, marker, ring, labels, makePerson, you, waypoint, encounter, encounterMarker, evidence, witnessMarkers };
+  return { player, owner, thief, pickpocket, marker, ring, labels, makePerson, you, waypoint, encounter, encounterMarker, evidence, witnessMarkers, closeDetails, staticPeople };
 }

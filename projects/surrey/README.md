@@ -1,11 +1,11 @@
-# Surrey, City of Adventure V0.2 — Dangerous Streets
+# Surrey, City of Adventure V0.3 — City Reconstructed
 
 **Survive the streets. Discover the stories.** A fictional third-person adventure
-and aerial city explorer at `/labs/surrey`, using the unchanged 1.31 × 1.45 km
+and aerial city explorer at `/labs/surrey`, using a reconstructed 1.31 × 1.45 km
 City of Surrey geographic snapshot. Every character and incident is invented;
 this is not a real crime map or a statement about neighbourhood safety.
 
-[Play](https://asymmetri.co/labs/surrey) · [V0.2 release record](../../docs/SURREY_V02_RELEASE_2026-10-30.md) · [V0.1 release / recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
+[Play](https://asymmetri.co/labs/surrey) · [V0.3 release record](../../docs/SURREY_V03_RELEASE_2026-10-30.md) · [V0.2 release record](../../docs/SURREY_V02_RELEASE_2026-10-30.md) · [V0.1 release / recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
 
 ## Play and controls
 
@@ -13,19 +13,31 @@ Use Node 24 from `.nvmrc`, the installed lockfile and `npm run dev:next`.
 Select **Play Now**, or **Continue Game** when this browser has a valid save.
 WebGL2 is required. No account, backend, paid API, analytics or upload is added.
 
-| Input | Adventure | Aerial Explore |
+| Input | Street Adventure | Aerial Explore |
 | --- | --- | --- |
 | WASD / arrows | Camera-relative walk | Pan city |
 | Shift | Sprint, consuming stamina | — |
 | Drag | Rotate follow camera | Orbit |
 | Right drag / two fingers | — | Pan; pinch zooms |
 | Wheel / zoom buttons | Camera distance | Zoom |
-| V / visible mode button | Switch to aerial | Back to Adventure |
+| Two view buttons / V | Select Aerial Explore | Select Street Adventure |
 | F / Return to Player | — | Centre camera on exact player position |
 | E | Interact | Disabled |
 | M | Toggle mini-map extent | Toggle mini-map extent |
 | Escape | Pause / close overlay | Pause / close overlay |
 | R | Safe station recovery | Disabled |
+
+Both **Street Adventure** and **Aerial Explore** remain visible, with a checkmarked
+Active label and pressed semantics. V also works from non-editable controls, but
+not through dialogue, journal or pause. A short first-use explanation is stored
+separately at `asymmetri.surrey.view-help.v1`; Help / Menu → View help reopens it.
+
+Phones open the expanded game automatically. The default mobile HUD contains the
+two view buttons, Menu, one compact objective line and edge touch controls. Health,
+stamina, money, inventory, settings and full mission details are in Menu. The map
+and aerial tools open on request and have explicit Close buttons. Return to Player
+stays visible in Aerial Explore. This avoids the stacked panels shown in the
+owner's V0.2 iPhone screenshots. Small-screen copy leads with tapping/gestures.
 
 Touch directional controls pan in aerial mode; visible orbit/zoom buttons provide
 alternatives to gestures. Follow Player and Free Explore share one scene, renderer
@@ -77,8 +89,10 @@ apex and www do not share them. New Game asks before replacing a valid save;
 clearing site data also removes progress. Invalid/incompatible records are ignored
 and retained until a new game replaces them. Restricted/quota-full storage shows a
 notice and play continues without guaranteed persistence. Restore validates enums,
-allowlisted items, finite ranges and map/version, then safely relocates invalid
-geometry positions. Aerial framing itself resets around the saved player.
+allowlisted items, finite ranges and map/version. An explicit migration accepts
+V0.2 records referencing `v0.1-2026-10-30` under the same storage key and upgrades
+only their map identity. Progress, settings, inventory and runtime timers survive;
+only an invalid position is relocated to nearby safe ground. Aerial framing itself resets around the saved player.
 
 ## Architecture and performance
 
@@ -89,6 +103,8 @@ geometry positions. Aerial framing itself resets around the saved player.
 - `save.ts`: versioned serialization boundary, validation and failure-safe storage.
 - `camera.ts`: bounded aerial orbit/pan/zoom/follow mathematics.
 - `population.ts`: sidewalk-parallel routes, pauses, separation and threat reactions.
+- `architecture.ts` / `buildings.ts`: deterministic building profiles, varied
+  shared facade materials, roof equipment and 128m tiles for nearby detail.
 - `scenery.ts` / `landmarks.ts`: original procedural landmarks and shared rounded
   person geometry, source-backed labels and reference provenance.
 - `engine.ts`: one Three.js renderer/loop, input, shared scene, camera transitions,
@@ -105,60 +121,89 @@ vehicle state and snapshots are unchanged. No dependency or network service adde
 
 ## Geography and provenance
 
-Snapshot: `public/surrey/v0.1-2026-10-30/`. The manifest records exact queries, raw
-SHA-256s, retrieved counts, output hash/size, bounding box, coordinate transform,
-source metadata dates where available and processing limitations. 786 clipped
-building parts, 199 road lines, 637 sidewalk source features, nine park parts,
-26 source rail features and 35 signals were retrieved October 30, 2026.
+Current snapshot: `public/surrey/v0.3-2026-10-30/`. V0.1 remains byte-identical.
+The new manifest pins the parent, exact source URLs, raw and output SHA-256,
+retrieval times, licence, CRS, processing tolerances and known uncertainty.
+Runtime loading is same-origin only; no paid or live geographic API is used.
 
-Seven bounded City endpoints supply roads, sidewalks, civic names, parks, rails,
-signals and the newer Building Footprints service. A failing optional park-path
-endpoint was excluded rather than silently substituted. No OSM data is imported.
-The source licence permits adaptation and distribution with attribution; no City
-logos, official marks or endorsement claims are used. See `THIRD_PARTY_NOTICES.md`.
+The existing 786 building parts, anchors and collision cells are retained. Actual
+Road Surface polygons (128 records) replace inferred pavement where available.
+Uncovered centreline reaches retain continuous buffered corridors: 131 road
+features have widths derived from paired active curb probes and 68 retain a
+lane-count estimate. Active assets include 660 curb features and 92 medians;
+proposed assets are excluded. Unioned intersections preserve holes and subtract
+medians/buildings. Paint is clipped to asphalt. Sidewalk/asphalt interiors do not
+overlap. A topology-preserving 1cm precision grid prevents tiny invalid polygons
+from reappearing during JSON rounding. Buildings retain 0.4m simplification;
+road lines 0.25m; new curb/path lines 0.2m.
 
-Local x points east and z south; origin [-122.849,49.1895]. Source coordinates are
-WGS84, projected using 111320 m/degree and cos(origin latitude). Feet/grades,
-terrain elevation, legal pedestrian access and real-world navigation are not modeled.
-Road widths derive from lane counts; source sidewalk lines are buffered to a
-minimum 3 m width. A small station apron is illustrative. Building footprints are
-simplified by 0.4 m and road lines by 0.25 m. A 0.55 m building clearance buffer
-plus player-radius checks produces the tiled walkable surface. All remaining flat
-ground is traversable, including plazas, parks and street crossings. This is an
-arcade access model, not a claim that every real property is publicly accessible.
+The working Trails and Paths service adds 262 active source features, including
+Holland Park paths. Source widths are used where present; missing widths use an
+explicit 2m estimate. Existing sidewalks retain their minimum 3m gameplay width.
+Crosswalks derive from signal points and nearby road direction; **their stripes
+are illustrative**, because no authoritative painted-crosswalk outlines were found.
+Closed-to-Traffic pavement and the arcade walkable surface are not legal access
+claims. Decorative objects add no invisible collision barriers.
 
-Source `BUILDING_HEIGHT` values guide stylized massing and are clamped to 4–160 m.
-The source field does not verify units or observation dates, so these are explicitly
-**not surveyed/current building-height claims**. Facades, trees, lamps, crosswalks,
-station canopy and human scale are artistic approximations. Feature/service edit
-dates are recorded separately from the unknown survey dates. The scene is colorful
-and geographically based; it is not an architectural replica.
+Local x points east and z south, origin [-122.849,49.1895], using the existing
+111320m/degree equirectangular frame. Rendered input uses server WGS84 output.
+The hosted and OpenData services' default WGS84 transformations differ by about
+1.283m; this retained alignment uncertainty is documented, not presented as survey
+accuracy. Height matching uses native EPSG:26910 coordinates to avoid that offset.
 
-Reproduce offline, using a cache outside the repository:
+**Building heights:** OpenData layer155 explicitly labels BUILDING_HEIGHT and
+GROUND_ELEVATION in metres. Every retained building part has a FACILITYID join,
+native boundary residual below 0.2m and height agreement below 0.005m. All 786
+are classified `derived-spatial-match`. None is `verified-measured`: measurement
+method, survey date, roof statistic and accuracy remain unknown. The importer
+supports `illustrative-estimate` when no reliable match/value exists; unmatched
+raw records in this query did not survive the retained footprint selection.
+Source heights are no longer clamped to 160m; 3 Civic Plaza retains 164.04m.
+The hosted feed's October 1, 2026 edit date is not a survey date.
+
+**Terrain:** flat fallback remains deliberate. Official 2025 DEM header probes
+confirm 0.5m pixels and EPSG:26910. The bbox lies in the NW download quadrant,
+whose ZIP is 2.38GB. Official contours cite April 2025 LiDAR, but the 2025 DEM/LAS
+vertical datum could not be verified. The full DEM was not downloaded and no
+invented ground heights were introduced. `GROUND_ELEVATION` is not treated as a
+verified terrain grid. All bases/people remain on the same local zero plane;
+SkyTrain guideways retain an illustrative 8.2m deck centre above it.
+
+Reproduce offline using retained raw receipts outside the repository:
 
 ```sh
 python3 -m venv /path/to/surrey-tooling
 /path/to/surrey-tooling/bin/pip install -r projects/surrey/tools/requirements.txt
-/path/to/surrey-tooling/bin/python projects/surrey/tools/build_city.py --cache /path/to/surrey-source-data
+/path/to/surrey-tooling/bin/python projects/surrey/tools/reconstruct_city.py --cache /path/to/v03-source-cache
+/path/to/surrey-tooling/bin/python projects/surrey/tools/test_reconstruction.py
 ```
 
-The importer rejects errors/truncation, checks existing raw-source pins, and refuses
-to replace differing output under an existing snapshot. Changed source needs a new
-reviewed version. Retain raw cache files for deterministic reproduction; upstream
-live queries may change. No network request occurs during tests or normal builds.
+`reconstruct_city.py` checks exact feature counts, truncation/error flags and raw
+hashes, and refuses a different output at an existing version. Its query URLs
+provide bounded replay; retain the original bytes because upstream feeds and JSON
+serialization can change. The untouched `build_city.py` still reproduces V0.1
+with its separate original cache. Normal tests/builds require no geographic network.
 
-## V0.2 architectural interpretation
+## Architectural reconstruction
 
-The immutable geographic snapshot remains authoritative for footprints/roads and
-collision. The combined SFU/Central City footprint now renders as a lower podium,
-curved office tower and glass/timber atrium instead of one tall extrusion. Library
-floor ribbons/skylights, City Hall's oversailing roof, the glazed station entrances,
-Civic Plaza and Holland Park fountain/amphitheatre give readable silhouettes.
-Exact tower placement, dimensions, windows and props are artistic approximations,
-not surveys. Benches, bins, shelters, stationary buses, parked cars, construction
-barriers and fictional signage are decorative, generally without collision.
-Primary architectural references are listed in `landmarks.ts` and
-`THIRD_PARTY_NOTICES.md`; no reference photographs, logos or public artworks are copied.
+Deterministic facility-ID profiles vary glass, residential, apartment, commercial,
+storefront and civic facades. Shared canvas materials use multiple window patterns
+and colours. Nearby doors, canopies and balconies are batched into 128m visibility
+tiles; roofs, setbacks and mechanical equipment remain readable from above. Both
+views share these meshes. Untextured roof caps avoid distant z-fighting and window
+textures on roofs. Source road names orient original street signs along road axes.
+
+Central City/SFU separates mall, lower podium, curved tower and timber/glass atrium.
+StructureCraft's atrium description supports 26.21m height, 78.03m facade length
+and 7.32m lower-column spacing; placement/curvature remain artistic. Library floor
+ribbons follow its actual angled footprint and vaulted rooflights distinguish it
+from City Hall's cantilevered roof and glazed entrance. Surrey Central has a curved
+canopy, elevated platform, columns, stairs and glazed stationhouse. Civic Plaza
+paving and Holland Park fountain/amphitheatre remain illustrative, with sourced
+park paths. Benches, bins, buses, shelters and barriers remain lightweight scenery.
+No proprietary model, photo, logo or public artwork was copied. References are in
+`landmarks.ts` and `THIRD_PARTY_NOTICES.md`; source outlines are not survey-accurate
+architectural replicas.
 
 ## Verification and release
 
@@ -184,4 +229,4 @@ is not physical-phone thermal, battery, gesture or long-session certification.
 
 1. Physical iOS/Android input, frame-time, thermal and long-session acceptance.
 2. Richer recurring-character errands and schedules with more mission choices.
-3. Source-backed terrain, Holland Park paths and transit traversal, before map expansion.
+3. Datum-verified terrain and transit traversal before map expansion.

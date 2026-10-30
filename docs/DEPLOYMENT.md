@@ -1419,3 +1419,14 @@ to stage the candidate. No workflow, proxy, runtime version or service change.
 completed exact-source Linux deployment, public/browser checks, capacity floors
 and complete Surrey V0.1 rollback. Later documentation commits do not change
 the deployed source/build identity.
+
+V0.3 uses `codex/surrey-adventure-v03` and a new static snapshot while retaining
+V0.1 byte-for-byte. Keep the user-confirmed Surrey display name and all concurrent
+GIS/Vancouver/Richmond and Labs-menu commits. Before integration and staging, fetch
+latest main and serialize the release window with the other active GIS work.
+This is a feature/data release: use an independent full Linux runtime and complete
+immediate-predecessor rollback, never the naming release's copy-only exception.
+Check both cases, migrated V0.2 saves, view controls and compact phone layouts.
+The 192MiB memory and 6GiB disk floors and all protected services/configurations
+remain mandatory. See [V0.3 release receipt](SURREY_V03_RELEASE_2026-10-30.md) for
+measured candidate, activation or exact blocking evidence.

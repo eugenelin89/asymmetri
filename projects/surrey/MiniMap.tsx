@@ -19,13 +19,12 @@ const Geometry = memo(function Geometry({ city }: { city: City }) {
           fill="#426f51"
         />
       ))}
-      {city.roads.map((r, i) => (
+      {city.pavement.map((p, i) => (
         <path
           key={`r${i}`}
-          d={path(r.points)}
-          stroke="#7c9291"
-          strokeWidth={r.width}
-          fill="none"
+          d={p.map(r => path(r) + "Z").join("")}
+          fill="#7c9291"
+          fillRule="evenodd"
         />
       ))}
       {city.buildings.map((b, i) => (
@@ -53,10 +52,12 @@ export function MiniMap({
   city,
   state,
   wide,
+  close,
 }: {
   city: City;
   state: Snapshot;
   wide: boolean;
+  close: () => void;
 }) {
   const span = wide ? 1500 : 290,
     x = wide ? city.bounds[0] - 80 : state.player.x - span / 2,
@@ -69,6 +70,7 @@ export function MiniMap({
     ];
   return (
     <div className={`${styles.map} ${wide ? styles.wideMap : ""}`}>
+      {wide && <button className={styles.closeMap} onClick={close}>Close map ×</button>}
       <span className={styles.north}>N ↑</span>
       <svg
         viewBox={`${x} ${z} ${span} ${span}`}

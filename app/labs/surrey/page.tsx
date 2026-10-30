@@ -54,8 +54,11 @@ export default function SurreyPage() {
             <p>
               A compact City Centre slice includes Surrey Central, the bus loop,
               Central City, SFU Surrey, City Hall, Civic Plaza, the library and
-              Holland Park. Architecture, heights and scenery are stylized; the
-              map has mixed and sometimes unspecified survey dates. No City
+              Holland Park. V0.3 adds source road surfaces, curbs, medians and park
+              paths. Height units are verified as metres and matched to official
+              records; measurement dates and methods remain unknown. Architecture
+              is an artistic reconstruction. Terrain remains flat because the
+              elevation datum could not be verified. No City
               endorsement is implied.
             </p>
           </div>
@@ -64,7 +67,7 @@ export default function SurreyPage() {
             <p>
               Contains information licensed under the{" "}
               <a href={surrey.dataLicence}>
-                Open Government Licence – City of Surrey
+                Open Government License – City of Surrey
               </a>
               . Geographic sources were retrieved October 30, 2026. Original
               game code and procedural models are MIT licensed.

@@ -2,9 +2,11 @@
 import type { Snapshot } from "./types";
 import { evidence, witnesses } from "./story";
 import { encounters } from "./encounters";
+import { MAP_VERSION, LEGACY_MAP_VERSION } from "./data";
 export const SAVE_KEY = "asymmetri.surrey.save.v2";
 export type SavedGame = {
   version: 2; map: string; savedAt: number; quality: "auto" | "low"; state: Snapshot;
+  migratedFrom?: string;
   runtime: {
     thiefIndex: number; chaseTime: number; drop: boolean; dangerCooldown: number; dangerTime: number;
     active: boolean; stolen: number; caught: boolean; exhausted: boolean; clock: number;
@@ -17,11 +19,11 @@ const text = (v: unknown, max = 500): v is string => typeof v === "string" && v.
 const strings = (v: unknown, allowed?: readonly string[]): v is string[] => Array.isArray(v) && v.length <= 40 && new Set(v).size === v.length && v.every(x => text(x, 100) && (!allowed || allowed.includes(x)));
 const point = (v: unknown) => Array.isArray(v) && v.length === 2 && v.every(x => number(x, -1e6, 1e6));
 const bool = (v: unknown) => typeof v === "boolean";
-export function parseSave(raw: string | null, map = "v0.1-2026-10-30"): SavedGame | null {
+export function parseSave(raw: string | null, map = MAP_VERSION): SavedGame | null {
   if (!raw || raw.length > 50000) return null;
   try {
     const data: unknown = JSON.parse(raw);
-    if (!record(data) || data.version !== 2 || data.map !== map || !number(data.savedAt, 0, 1e15) || !["auto", "low"].includes(String(data.quality))) return null;
+    if (!record(data) || data.version !== 2 || (data.map !== map && !(map === MAP_VERSION && data.map === LEGACY_MAP_VERSION)) || !number(data.savedAt, 0, 1e15) || !["auto", "low"].includes(String(data.quality))) return null;
     const s = data.state, r = data.runtime;
     if (!record(s) || !record(r) || !record(s.player) || !record(s.danger) || !record(s.investigation)) return null;
     if (!number(s.player.x, -1e6, 1e6) || !number(s.player.z, -1e6, 1e6) || !number(s.player.yaw, -1e6, 1e6)) return null;
@@ -41,7 +43,9 @@ export function parseSave(raw: string | null, map = "v0.1-2026-10-30"): SavedGam
     if (!["drop", "active", "caught", "exhausted"].every(k => bool(r[k])) || !number(r.thiefIndex, 0, 25000) || !Number.isInteger(r.thiefIndex) || !number(r.chaseTime, 0, 200) || !number(r.clock) || !number(r.stolen, 0, 5) || !number(r.random, 0, 4294967295)) return null;
     if (!["dangerCooldown", "dangerTime", "encounterCooldown"].every(k => number(r[k], -1e9, 600)) || !record(r.cooldowns) || Object.keys(r.cooldowns).some(k => !encounters.some(e => e.id === k) || !number((r.cooldowns as Record<string, unknown>)[k], -1e9, 600))) return null;
     // Copy through JSON, then restore only validated gameplay fields. Derived UI and dialogue are never trusted.
-    return data as unknown as SavedGame;
+    // V0.2's schema and storage key remain valid. Upgrade only the map identity;
+    // simulation.restore validates position against the current collision surface.
+    return { ...data, map, ...(data.map === LEGACY_MAP_VERSION && map === MAP_VERSION ? { migratedFrom: LEGACY_MAP_VERSION } : {}) } as unknown as SavedGame;
   } catch { return null; }
 }
 export type SaveStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;

@@ -1,0 +1,267 @@
+{
+  "version": "v0.3-2026-10-30",
+  "retrieved": "2026-10-30",
+  "bbox": [
+    -122.858,
+    49.182,
+    -122.84,
+    49.195
+  ],
+  "origin": [
+    -122.849,
+    49.1895
+  ],
+  "bytes": 3003834,
+  "sha256": "e4cca4b8f8ace1296201f50f77c9bb1d0093365cbfdabeefabb91709a60cccdf",
+  "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  "attribution": "Contains information licensed under the Open Government License \u2013 City of Surrey.",
+  "inheritedSnapshot": {
+    "version": "v0.1-2026-10-30",
+    "sha256": "e40173b2355e695e7117dfeb3fd060417ad14af960408931912fdf3be39bf9ec",
+    "manifestSha256": "70e95366daaa18208c5dc4c57616d9e7543a73b359799939a150c742531f77ee",
+    "retained": "Footprints, anchors, collision cells, centreline paths, parks, rail and signals."
+  },
+  "sources": [
+    {
+      "name": "road-surfaces",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/113/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:19:04.530365+00:00",
+      "sha256": "11282a442026bfb37caa44765cf899b161c050f367d0d026159c235b4bc13a8f",
+      "bytes": 711019,
+      "features": 128,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "curbs",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/123/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:19:04.358124+00:00",
+      "sha256": "c882af4df8110942ba2dc2c99eb2cc4bcbde70d7e8f194eea6863d07f8e84459",
+      "bytes": 631174,
+      "features": 729,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "medians",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/124/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:19:02.812172+00:00",
+      "sha256": "9cc0d9767e1193e9b5c9aa9f4b3348825d539cbd269728c0421e0d37ef74083a",
+      "bytes": 171652,
+      "features": 98,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "paths",
+      "request": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Trails%20and%20Paths/FeatureServer/0/query?f=json&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:18:08.498545+00:00",
+      "sha256": "6c49f18cc01965622868034c7cc69c44ed23e2724eaf1babbb850fed29beaa97",
+      "bytes": 228911,
+      "features": 262,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "hosted-buildings",
+      "request": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:15:43.889865+00:00",
+      "sha256": "e2bfb851d1dc53674de17bdb23be369024011b34e3c359ac1c76c25b39c62388",
+      "bytes": 585602,
+      "features": 799,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "hosted-native",
+      "request": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0/query?f=json&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=26910&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:17:03.013140+00:00",
+      "sha256": "ce8402c751ed64f720cf4a5a01154ab2d886f7e176d52d190789b144a6f16e5e",
+      "bytes": 516953,
+      "features": 799,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "official-native",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155/query?f=json&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=26910&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:17:04.625077+00:00",
+      "sha256": "5ef12b9d32a7181dd4d7a6b507bf38c405d9d218b632eff1e326fc5092ae9b44",
+      "bytes": 552634,
+      "features": 797,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "height-metadata",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155?f=json",
+      "retrieved": "2026-10-30T19:14:26.271236+00:00",
+      "sha256": "28e71386c822ce759e0d24ff04d3471d0c7b3b221d8d4650f360d4b6ec423d3a",
+      "bytes": 31122,
+      "features": null,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "dem-metadata",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/324?f=json",
+      "retrieved": "2026-10-30T19:13:40.445333+00:00",
+      "sha256": "685f6fcef1f5745b215a7de7ae25a40895867a547ef6bea86168cd827db2d37a",
+      "bytes": 2566,
+      "features": null,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "paths-metadata",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/314?f=json",
+      "retrieved": "2026-10-30T19:13:42.380085+00:00",
+      "sha256": "5d47954e7123c719cf12cc19066b7c2dda300386cc3944f8c7f23fc5ad36147a",
+      "bytes": 15062,
+      "features": null,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    },
+    {
+      "name": "licence",
+      "request": "https://www.arcgis.com/sharing/rest/content/items/55089a19491a4fe59a41e059fd8af708/data?f=json",
+      "retrieved": "2026-10-30T19:18:37.723199+00:00",
+      "sha256": "3765c2357f93a57b7034b6950640accbb91a6acf9e35e189bf356ffdc21b5384",
+      "bytes": 6492,
+      "features": null,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    }
+  ],
+  "inheritedSources": [
+    {
+      "name": "roads",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "815b720ae36b5b81d00b8fd4f3e8f0b97a9e130cee2580c27c42685ecdf6cd64",
+      "bytes": 147473,
+      "features": 199,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "sidewalks",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/128",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/128/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "66e343cf92e85da0986ae03777416a697a6a6bf68ebcdc58ee2ef692fb636157",
+      "bytes": 385830,
+      "features": 637,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "civic",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "4fb987459d4ba5245323cf1dfd9e4b90599a206991370cfb660f3d5bf8c5daf7",
+      "bytes": 729798,
+      "features": 799,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "parks",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/256",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/256/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "c47a8476bc82e1eeebd7821f6fcb3b5f7b50d024a0b6198d53d6aa3c4fbf607d",
+      "bytes": 10296,
+      "features": 7,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "rail",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/100",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/100/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "0c411c691a1a3cbfa17be2a57111397628cffe1815c899599db513c3acd57e07",
+      "bytes": 192003,
+      "features": 26,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "signals",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/130",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/130/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "5d198b3fdd57c9d389c17e4b2f64a81aaeccd005e4cc4cc9872c9f8a09d9d076",
+      "bytes": 11850,
+      "features": 35,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "buildings",
+      "url": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0",
+      "request": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "1fc154d33dac216bfaa36d118d7cddfdad80796823cab80458f469ad996c1fe2",
+      "bytes": 788852,
+      "features": 799,
+      "editingInfo": {
+        "lastEditDate": 1790867227608,
+        "schemaLastEditDate": 1790866923951,
+        "dataLastEditDate": 1790867227608
+      },
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    }
+  ],
+  "projection": {
+    "runtime": "Local equirectangular metres: x east, z south; 111320 m/degree; longitude scaled by cos(49.1895\u00b0).",
+    "inputs": "WGS84 EPSG:4326 server output for rendered layers; EPSG:26910 native coordinates for height geometry matching.",
+    "tolerance": "Existing V0.1 frame retained for save/navigation compatibility. ArcGIS hosted/OpenData default WGS84 transformations differ by about 1.283 m. Native matching avoids that offset; rendered mixed-service features retain that documented alignment uncertainty. Not survey-grade."
+  },
+  "heights": {
+    "classifications": {
+      "verified-measured": 0,
+      "derived-spatial-match": 786,
+      "illustrative-estimate": 0
+    },
+    "unit": "m",
+    "unitVerification": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155?f=json",
+    "method": "FACILITYID join, native EPSG:26910 boundary residual <0.2m and height difference <0.005m. No top-height clamp.",
+    "acquisitionDate": null,
+    "measurementMethod": null,
+    "hostedDataLastEditDate": "2026-10-01T15:07:07.608Z",
+    "architecturalSubdivisions": "Illustrative; combined podium/tower footprints are not uniform extrusions."
+  },
+  "terrain": {
+    "status": "flat-fallback",
+    "horizontalCRS": "EPSG:26910",
+    "candidateResolutionM": 0.5,
+    "verticalDatum": null,
+    "verticalUnits": "Metres verified in 2025 LAS header; no vertical units/datum GeoKey in DEM TIFF.",
+    "acquisition": "April 2025 according to official contour item b810ad1573324d7f92bed23ec05dca9a; DEM labelled 2025.",
+    "coverage": "Fixed bbox intersects NW download quadrant; valid-data footprint not proven from header alone.",
+    "url": "https://cosmos.surrey.ca/geo_ref/ArcView/Data/Remote_Sensing/Lidar/2025/DerivedProducts/BareEarth/BareEarth_Quadrants/ELEVATION_GRID_2025_NW.ZIP",
+    "archiveBytes": 2377130919,
+    "reason": "Datum unverified; whole DEM not downloaded. No terrain imported from contours or colour images."
+  },
+  "processing": [
+    "Inherited buildings simplified 0.4m, road lines 0.25m; new curb/path lines 0.2m; coordinates quantized to 0.01m.",
+    "Actual road polygons unioned with uncovered centreline corridors. Paired active curb probes constrain width where supported; lane-count fallback otherwise. Union intersections before triangulation, subtract active medians/buildings, preserve holes.",
+    "Only In Service curbs, medians and paths; proposed/history assets excluded. Sidewalk lines retain inherited minimum 3m gameplay width; paths use source WIDTH or explicit 2m fallback. Sidewalk/asphalt interiors are disjoint.",
+    "Signals and nearest road direction derive illustrative crosswalk stripes; all lane/crossing paint clipped to asphalt. No authoritative stripe layer found.",
+    "Unchanged arcade walkability outside buffered footprints. Decorative curbs/furniture are not invisible colliders. Closed-to-Traffic source pavement does not establish legal public access."
+  ],
+  "limitations": [
+    "No verified measured building heights: units verified, measurement method, accuracy, roof statistic and survey date unknown.",
+    "Road source classifications contain no arterial/collector labels; uncovered reaches retain derived or inferred corridors. Reconstructed widths and intersections remain derived.",
+    "No surveyed curb heights, facade dimensions, material, construction status or legal access guarantee. Original procedural architecture is artistic.",
+    "Flat ground; source GROUND_ELEVATION is not used as a verified terrain datum."
+  ],
+  "qa": {
+    "buildings": 786,
+    "heightClasses": {
+      "verified-measured": 0,
+      "derived-spatial-match": 786,
+      "illustrative-estimate": 0
+    },
+    "sourceRoadFeatures": 128,
+    "activeCurbFeatures": 660,
+    "activeMedianFeatures": 92,
+    "curbDerivedRoads": 131,
+    "laneInferredRoads": 68,
+    "pathFeatures": 262,
+    "minimumCenterlineCoverage": 1.0,
+    "asphaltAreaM2": 401153.28,
+    "actualSurfaceAreaM2": 399194.09,
+    "actualSurfaceRetainedFraction": 1.0,
+    "intersectionUnionValid": true,
+    "sidewalkAsphaltOverlapM2": 0.0,
+    "medianAsphaltOverlapM2": 0.0,
+    "legacyFootprintsUnchanged": true
+  }
+}

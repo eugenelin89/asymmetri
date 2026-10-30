@@ -3,7 +3,13 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { registerHooks } from "node:module";
+import ts from "typescript";
 registerHooks({
+  load(url, context, next) {
+    if (url.endsWith(".module.css")) return { format: "module", source: 'export default new Proxy({}, { get: (_, key) => key });', shortCircuit: true };
+    if (url.endsWith(".tsx")) return { format: "module", source: ts.transpileModule(readFileSync(new URL(url), "utf8"), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText, shortCircuit: true };
+    return next(url, context);
+  },
   resolve(specifier, context, next) {
     try {
       return next(specifier, context);
@@ -18,7 +24,7 @@ const { createWorld, move, route, distance } = await import("./world.ts");
 const { createSimulation, seeded } = await import("./simulation.ts");
 const { validateCity, loadCity, DATA_URL } = await import("./data.ts");
 const directory = new URL(
-    "../../public/surrey/v0.1-2026-10-30/",
+    "../../public/surrey/v0.3-2026-10-30/",
     import.meta.url,
   ),
   bytes = readFileSync(new URL("city.json", directory)),
@@ -62,11 +68,12 @@ test("immutable Surrey snapshot has complete source receipts and bounded indepen
     manifest.sha256,
   );
   assert.equal(bytes.length, manifest.bytes);
-  assert.ok(bytes.length < 3_000_000);
-  assert.equal(manifest.sources.length, 7);
+  assert.ok(bytes.length < 4_000_000);
+  assert.equal(manifest.inheritedSources.length, 7);
+  assert.equal(manifest.sources.length, 11);
   assert.ok(
     manifest.sources.every(
-      (s) => s.features < 2000 && /^[a-f0-9]{64}$/.test(s.sha256),
+      (s) => (s.features === null || s.features < 2000) && /^[a-f0-9]{64}$/.test(s.sha256),
     ),
   );
   assert.equal(city.buildings.length, 786);
@@ -420,4 +427,89 @@ test("pedestrians follow source-parallel clear routes, pause, avoid obstacles an
   for (let i = 0; i < 600; i++) stepPedestrians(people, city.anchors.spawn, null, 1 / 60, world);
   assert.ok(people.every(p => world.fits([p.pose.x, p.pose.z])));
   assert.ok(distance([people[0].pose.x, people[0].pose.z], [people[1].pose.x, people[1].pose.z]) > .6);
+});
+
+const { viewShortcut, needsViewHelp, rememberViewHelp, VIEW_HELP_KEY } = await import('./viewPolicy.ts');
+const { ViewControls, ViewHelp, ViewHint } = await import('./ViewControls.tsx');
+const { renderToStaticMarkup } = await import('react-dom/server');
+const { createElement } = await import('react');
+const { groundHeight, onSurface, TRANSIT_DECK_HEIGHT } = await import('./surfaces.ts');
+const { buildingProfile } = await import('./architecture.ts');
+const legacyBytes = readFileSync(new URL('../../public/surrey/v0.1-2026-10-30/city.json', import.meta.url));
+const legacy = JSON.parse(legacyBytes);
+
+test('both persistent view controls expose selected text, pressed semantics and independent actions', () => {
+  for (const mode of ['ground', 'aerial']) {
+    const selected = [], element = ViewControls({ mode, disabled: false, select: value => selected.push(value) });
+    const html = renderToStaticMarkup(element);
+    assert.match(html, /Street Adventure/); assert.match(html, /Aerial Explore/);
+    assert.equal((html.match(/aria-pressed="true"/g) ?? []).length, 1);
+    assert.equal((html.match(/✓ Active/g) ?? []).length, 1);
+    for (const button of element.props.children) button.props.onClick();
+    assert.deepEqual(selected, ['ground', 'aerial']);
+  }
+  assert.equal((renderToStaticMarkup(createElement(ViewControls, { mode: 'ground', disabled: true, select() {} })).match(/disabled=""/g) ?? []).length, 2);
+  assert.match(renderToStaticMarkup(createElement(ViewHint, { mode: 'ground' })), /select Aerial Explore/);
+  assert.match(renderToStaticMarkup(createElement(ViewHint, { mode: 'aerial' })), /select Street Adventure/);
+  assert.match(renderToStaticMarkup(createElement(ViewHelp, { close() {} })), /Two ways to explore Surrey/);
+});
+test('V shortcut rejects modals, editable fields, modifiers and repeat; tutorial storage is separate from progress', () => {
+  const event = { key: 'V', repeat: false, ctrlKey: false, metaKey: false, altKey: false, defaultPrevented: false };
+  assert.equal(viewShortcut(event, false, false), true);
+  assert.equal(viewShortcut(event, true, false), false); assert.equal(viewShortcut(event, false, true), false);
+  for (const key of ['repeat','ctrlKey','metaKey','altKey','defaultPrevented']) assert.equal(viewShortcut({ ...event, [key]: true }, false, false), false);
+  assert.equal(viewShortcut({ ...event, key: 'f' }, false, false), false);
+  const data = new Map([[SAVE_KEY, 'existing-progress']]), storage = { getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value) };
+  assert.equal(needsViewHelp(storage), true); rememberViewHelp(storage); assert.equal(needsViewHelp(storage), false);
+  assert.equal(data.get(SAVE_KEY), 'existing-progress'); assert.equal(data.get(VIEW_HELP_KEY), 'seen');
+  assert.equal(needsViewHelp({ getItem() { throw Error('blocked'); } }), true);
+  assert.doesNotThrow(() => rememberViewHelp({ setItem() { throw Error('quota'); } }));
+});
+test('V0.2 migration retains every gameplay field and runtime timer, relocating only invalid positions', () => {
+  const sim = createSimulation(city); investigation(sim); sim.choose('mara'); sim.dismiss();
+  sim.state.stage = 'completed'; sim.state.money = 158; sim.state.health = 79; sim.state.stamina = 54;
+  sim.state.resolved = ['community']; sim.state.waypoint = { name: 'Library', point: city.anchors.mystery }; sim.mode('aerial'); sim.mature(true);
+  const old = { ...sim.serialize('low'), map: legacy.version };
+  const migrated = parseSave(JSON.stringify(old)); assert.ok(migrated); assert.equal(migrated.map, city.version); assert.equal(migrated.migratedFrom, legacy.version);
+  assert.deepEqual(migrated.state, old.state); assert.deepEqual(migrated.runtime, old.runtime); assert.equal(migrated.quality, 'low');
+  const restored = createSimulation(city); restored.restore(migrated);
+  for (const key of ['stage','investigation','money','inventory','health','stamina','resolved','waypoint','mode','mature','calm']) assert.deepEqual(restored.state[key], old.state[key], key);
+  assert.equal(restored.state.player.x, old.state.player.x); assert.equal(restored.state.player.z, old.state.player.z);
+  assert.deepEqual(restored.serialize().runtime, old.runtime);
+  migrated.state.player.x = city.bounds[2] + 2; migrated.state.player.z = 0;
+  restored.restore(migrated); assert.ok(world.fits([restored.state.player.x, restored.state.player.z]));
+  assert.ok(Math.hypot(restored.state.player.x - migrated.state.player.x, restored.state.player.z) < 20, 'relocation stays nearby');
+  assert.equal(restored.state.money, 158); assert.deepEqual(restored.state.investigation, old.state.investigation);
+});
+test('immutable prior geometry, metre-verified height joins and explicit terrain fallback are reproducible', () => {
+  assert.equal(createHash('sha256').update(legacyBytes).digest('hex'), 'e40173b2355e695e7117dfeb3fd060417ad14af960408931912fdf3be39bf9ec');
+  assert.equal(manifest.inheritedSnapshot.sha256, createHash('sha256').update(legacyBytes).digest('hex'));
+  assert.deepEqual(city.anchors, legacy.anchors); assert.deepEqual(city.walkCells, legacy.walkCells);
+  assert.deepEqual(city.buildings.map(b=>b.shape), legacy.buildings.map(b=>b.shape));
+  assert.ok(city.buildings.every(b => b.heightMethod === 'derived-spatial-match' && b.heightProvenance.unitVerified && b.heightProvenance.nativeMatchResidualM < .2 && b.heightProvenance.surveyDate === null && b.heightProvenance.measurementMethod === null));
+  assert.equal(city.buildings.find(b=>b.name === 'KPU (CIVIC PLAZA)').height, 164.04, 'source height is no longer clamped to 160');
+  for (const p of Object.values(city.anchors)) { assert.equal(groundHeight(city, p), 0); assert.ok(TRANSIT_DECK_HEIGHT - .5 - groundHeight(city, p) > 7); }
+  assert.ok(city.buildings.every(b=>b.baseElevation === 0)); assert.equal(city.terrain.verticalDatum, null);
+  assert.match(city.terrain.reason, /unverified/); assert.equal(manifest.terrain.status, 'flat-fallback');
+});
+test('reconstructed road intersections, active medians, painted crossings and park paths have bounded coherent surfaces', () => {
+  assert.equal(manifest.qa.minimumCenterlineCoverage, 1); assert.equal(manifest.qa.intersectionUnionValid, true);
+  assert.equal(manifest.qa.sidewalkAsphaltOverlapM2, 0); assert.equal(manifest.qa.medianAsphaltOverlapM2, 0);
+  assert.equal(manifest.qa.sourceRoadFeatures, 128); assert.equal(manifest.qa.activeCurbFeatures, 660); assert.equal(manifest.qa.activeMedianFeatures, 92);
+  assert.ok(city.roads.some(r=>r.widthMethod === 'derived-paired-curbs')); assert.ok(city.roads.some(r=>r.widthMethod === 'inferred-lane-count'));
+  assert.ok(city.paths.length >= 262); assert.ok(city.crossings.length > 150); assert.ok(city.markings.length > 500);
+  let painted = 0;
+  for (const polygon of city.crossings) {
+    const ring = polygon[0].slice(0,-1), centre = [ring.reduce((n,p)=>n+p[0],0)/ring.length, ring.reduce((n,p)=>n+p[1],0)/ring.length];
+    if (onSurface(centre, city.pavement)) painted++;
+  }
+  assert.ok(painted / city.crossings.length > .97, 'clipped crossing paint lies on roads');
+  assert.deepEqual(city.bounds, legacy.bounds);
+});
+test('architectural profiles are stable, varied and preserve source heights and important outlines', () => {
+  const profiles = city.buildings.map(buildingProfile);
+  assert.deepEqual(profiles, city.buildings.map(buildingProfile));
+  assert.ok(new Set(profiles.map(p=>p.kind)).size >= 5); assert.ok(profiles.some(p=>p.setback)); assert.ok(profiles.some(p=>p.roof === 'pitched'));
+  assert.equal(buildingProfile(city.buildings.find(b=>b.id === '1665')).height, 16, 'combined SFU footprint stays a podium, with the separate source-height tower');
+  assert.ok(profiles.every(p=>Number.isFinite(p.height) && p.height > 0));
 });

@@ -3,6 +3,8 @@ import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "reac
 import { surrey } from "@/content/site";
 import { MiniMap } from "./MiniMap";
 import { Journal } from "./Journal";
+import { ViewControls, ViewHint, ViewHelp, AerialTips } from "./ViewControls";
+import { needsViewHelp, rememberViewHelp, viewShortcut } from "./viewPolicy";
 import { readSave, parseSave, SAVE_KEY } from "./save";
 import type { SavedGame } from "./save";
 import { landmarks } from "./landmarks";
@@ -37,6 +39,8 @@ export function SurreyAdventure() {
     [saveUnavailable, setSaveUnavailable] = useState(false),
     [replaceSave, setReplaceSave] = useState(false),
     [saveMessage, setSaveMessage] = useState(""),
+    [viewHelp, setViewHelp] = useState(false),
+    [aerialTools, setAerialTools] = useState(false),
     [selectedPlace, setSelectedPlace] = useState("");
   const locations = useMemo(() => city ? storyLocations(city, createWorld(city)) : null, [city]);
   const saveAvailable = !!validStoredSave && !saveUnavailable;
@@ -154,9 +158,11 @@ export function SurreyAdventure() {
       loaded.current = undefined;
     }
     setReplaceSave(false);
+    try { setViewHelp(needsViewHelp(localStorage)); } catch { setViewHelp(true); }
     setStatus("loading");
     setStarted(true);
     setPaused(false);
+    if (matchMedia("(pointer: coarse), (max-width: 700px)").matches) setExpanded(true);
   }
   function retry() {
     try { loaded.current = readSave(localStorage).save ?? undefined; } catch { loaded.current = undefined; }
@@ -174,6 +180,11 @@ export function SurreyAdventure() {
   function hold(input: Input, pressed: boolean) {
     engine.current?.input(input, pressed);
   }
+  function closeViewHelp() {
+    setViewHelp(false);
+    try { rememberViewHelp(localStorage); } catch { /* Storage can be unavailable. */ }
+    engine.current?.focus();
+  }
   return (
     <section className={styles.experience} aria-label={`${surrey.name} game`}>
       <div
@@ -181,6 +192,11 @@ export function SurreyAdventure() {
         ref={viewport}
         data-mode={state?.mode ?? "ground"}
         onKeyDown={(e) => {
+          const target = e.target as HTMLElement;
+          if (viewShortcut(e, !ready || paused || inventory || !!dialogue, target.isContentEditable || !!target.closest("input, textarea, select"))) {
+            e.preventDefault();
+            action(g => g.mode(state?.mode === "aerial" ? "ground" : "aerial"));
+          }
           if (e.key === "Escape" && !e.defaultPrevented) {
             e.preventDefault();
             if (inventory) setInventory(false); else setPaused((v) => !v);
@@ -190,8 +206,8 @@ export function SurreyAdventure() {
               paused ? `.${styles.screen}` : inventory ? `.${styles.journal}` : `.${styles.dialogue}`,
             );
             const buttons = [
-              ...(overlay?.querySelectorAll<HTMLButtonElement>("button") ?? []),
-            ];
+              ...(overlay?.querySelectorAll<HTMLElement>("button:not(:disabled), input, select") ?? []),
+            ].filter(el => el.getClientRects().length);
             if (!buttons.length) return;
             const first = buttons[0],
               last = buttons[buttons.length - 1];
@@ -211,12 +227,10 @@ export function SurreyAdventure() {
         <div className={styles.canvas} ref={host} />
         {started && (
           <div className={styles.toolbar}>
-            <span className={styles.worldLabel}>
-              SURREY <span>ADVENTURE</span>
-            </span>
-            <div>
-              <button disabled={!ready || !!dialogue || inventory} onClick={() => action(g => g.mode(state?.mode === "aerial" ? "ground" : "aerial"))}>{state?.mode === "aerial" ? "Back to Adventure" : "Aerial View"} <kbd>V</kbd></button>
-              <button disabled={!ready || !!dialogue} onClick={() => setInventory(v => !v)}>Journal</button>
+            <ViewControls mode={state?.mode ?? "ground"} disabled={!ready || paused || !!dialogue || inventory} select={mode => action(g => g.mode(mode))} />
+            <button className={styles.mobileMenu} disabled={!ready} aria-label="Open game menu" onClick={() => setPaused(true)}>Menu</button>
+            <div className={styles.utilityControls}>
+              <button disabled={!ready || !!dialogue || paused} onClick={() => setInventory(v => !v)}>Journal</button>
               <button
                 onClick={() => setWide((v) => !v)}
                 disabled={!ready}
@@ -227,6 +241,7 @@ export function SurreyAdventure() {
               <button onClick={() => setPaused((v) => !v)} disabled={!ready}>
                 {paused ? "Resume" : "Pause"}
               </button>
+              <button disabled={!ready || !!dialogue || inventory || paused} aria-expanded={viewHelp} aria-label="Help with Street Adventure and Aerial Explore" onClick={() => setViewHelp(v => !v)}>Help</button>
               <button
                 onClick={() => setExpanded((v) => !v)}
                 aria-label={expanded ? "Exit expanded view" : "Expand game"}
@@ -234,6 +249,7 @@ export function SurreyAdventure() {
                 {expanded ? "↙" : "↗"}
               </button>
             </div>
+            <ViewHint mode={state?.mode ?? "ground"} />
           </div>
         )}
         {!started && (
@@ -256,14 +272,15 @@ export function SurreyAdventure() {
               </h2>
               <p>
                 Two cases. Six street stories.
-                <br />A whole new perspective.
+                <br />Walk the streets. Explore from above.
               </p>
               <div className={styles.startActions}>
                 {saveAvailable && <button className={styles.primary} onClick={() => start(true)}>Continue Game <span>→</span></button>}
                 <button className={saveAvailable ? "" : styles.primary} onClick={() => start(false)}>{replaceSave ? "Replace save & start new" : saveAvailable ? "New Game" : "Play Now"} <span>↗</span></button>
                 {replaceSave && <button onClick={() => setReplaceSave(false)}>Keep my save</button>}
               </div>
-              <small>V0.2 · Dangerous Streets · No sign-in</small>
+              <small>V0.3 · City Reconstructed · No sign-in</small>
+              <p className={styles.startModes}>Street Adventure · Aerial Explore<br />Choose either view using the buttons in the game.</p>
               <p className={styles.contentNotice}>Fictional adult cast. Non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs. Gentle Streets and Mature Encounters controls are below.</p>
             </div>
             <div className={styles.startTag}>
@@ -276,7 +293,7 @@ export function SurreyAdventure() {
         )}
         {started && !ready && (
           <div className={styles.screen} role="status">
-            <p className={styles.eyebrow}>SURREY ADVENTURE</p>
+            <p className={styles.eyebrow}>{surrey.name}</p>
             <h2>
               {status === "loading"
                 ? "Next stop: Surrey Central."
@@ -296,6 +313,9 @@ export function SurreyAdventure() {
         )}
         {ready && state && (
           <>
+            {!paused && !inventory && !dialogue && <button className={styles.compactObjective} onClick={() => setPaused(true)} aria-label={`Mission and player status: ${state.objective}`}><span>◆ {Math.round(Math.hypot(state.marker[0] - state.player.x, state.marker[1] - state.player.z))} m</span><span>{state.objective}</span><span>›</span></button>}
+            {viewHelp && !paused && !inventory && !dialogue && <ViewHelp close={closeViewHelp} />}
+            {state.mode === "aerial" && !paused && !inventory && !viewHelp && <AerialTips />}
             <div className={styles.mission}>
               <span className={styles.eyebrow}>
                 {state.investigation.stage === "closed" && state.stage === "completed" ? "BOTH CASES CLOSED" : state.stage === "completed"
@@ -347,31 +367,32 @@ export function SurreyAdventure() {
               </button>
             </div>
             {inventory && locations && <Journal state={state} locations={locations} close={() => setInventory(false)} track={(point, name) => { action(g => g.track(point, name)); setInventory(false); }} />}
-            {state.mode === "aerial" && !inventory && !paused && <div className={styles.aerialDock}>
-              <div className={styles.compass}><span style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span><strong>EXPLORE SURREY</strong></div>
+            {state.mode === "aerial" && !inventory && !paused && <div className={styles.aerialDock} data-open={aerialTools}>
+              <button className={styles.closeAerialTools} onClick={() => { setAerialTools(false); engine.current?.focus(); }}>Close aerial tools ×</button>
+              <div className={styles.compass}><span style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span><strong>AERIAL EXPLORE</strong></div>
               <p>Street activity paused. Your character stays at the YOU marker.</p>
               <div><button aria-pressed={state.follow} onClick={() => action(g => g.follow(true))}>Follow Player</button><button aria-pressed={!state.follow} onClick={() => action(g => g.follow(false))}>Free Explore</button></div>
-              <button onClick={() => action(g => g.returnToPlayer())}>Return to Player <kbd>F</kbd></button>
-              <label>Landmark<select value={selectedPlace} onChange={e => { setSelectedPlace(e.target.value); action(g => g.selectPlace(e.target.value)); }}><option value="">Choose a viewpoint</option>{city && landmarks(city).map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
+              <button className={styles.returnPlayer} onClick={() => action(g => g.returnToPlayer())}>Return to Player <kbd className={styles.keyboardCopy}>F</kbd></button>
+              <label>Landmark<select value={selectedPlace} onChange={e => { setSelectedPlace(e.target.value); action(g => g.selectPlace(e.target.value)); setAerialTools(false); }}><option value="">Choose a viewpoint</option>{city && landmarks(city).map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
               <div><button aria-label="Aerial rotate left" onClick={() => action(g => g.rotate(.3))}>↶</button><button aria-label="Aerial rotate right" onClick={() => action(g => g.rotate(-.3))}>↷</button><button aria-label="Aerial zoom in" onClick={() => action(g => g.zoom(-2))}>＋</button><button aria-label="Aerial zoom out" onClick={() => action(g => g.zoom(2))}>−</button></div>
-              <small>Drag: orbit · right drag / two fingers: pan · wheel / pinch: zoom · WASD: pan</small>
+              <small><span className={styles.keyboardCopy}>Drag to orbit · right drag to pan · scroll to zoom · WASD to move</span><span className={styles.touchCopy}>Drag to orbit · two fingers to pan and pinch · use the arrows to move</span></small>
             </div>}
+            {state.mode === "aerial" && !inventory && !paused && <div className={styles.mobileAerialActions}><button onClick={() => action(g => g.returnToPlayer())}>Return to Player</button><button aria-expanded={aerialTools} onClick={() => { setAerialTools(v => !v); setWide(false); }}><span className={styles.mobileCompass} style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span>Aerial tools</button></div>}
             {state.waypoint && !inventory && <div className={styles.waypoint}><span>◇ {state.waypoint.name}</span><button onClick={() => action(g => g.clearWaypoint())} aria-label="Clear waypoint">×</button></div>}
-            {city && <MiniMap city={city} state={state} wide={wide} />}
+            {city && <MiniMap city={city} state={state} wide={wide} close={() => { setWide(false); engine.current?.focus(); }} />}
             <div className={styles.location}>
               <span className={styles.dot} /> {state.street}
             </div>
             {!paused && !dialogue && !inventory && (
               <div className={styles.prompt}>
-                {state.mode === "aerial" ? <span>V · Back to Adventure</span> : state.nearby ? (
+                {state.mode === "aerial" ? <span>Select Street Adventure to return</span> : state.nearby ? (
                   <button onClick={() => action((g) => g.interact())}>
                     <kbd>E</kbd> {state.nearby}
                   </button>
                 ) : (
                   <span>
-                    {state.player.blocked
-                      ? "Path blocked · move around or press R"
-                      : "WASD to walk · Shift to sprint"}
+                    <span className={styles.keyboardCopy}>{state.player.blocked ? "Path blocked · move around or press R" : "WASD to walk · Shift to sprint"}</span>
+                    <span className={styles.touchCopy}>{state.player.blocked ? "Path blocked · move around or use Recover" : "Hold arrows to walk · hold Sprint to run"}</span>
                   </span>
                 )}
               </div>
@@ -448,7 +469,7 @@ export function SurreyAdventure() {
                     onClick={() => action((g) => g.interact())}
                     disabled={!state.nearby || state.mode === "aerial"}
                   >
-                    E
+                    Interact
                   </button>
                 </div>
               </div>
@@ -469,9 +490,11 @@ export function SurreyAdventure() {
               </div>
             )}
             {paused && (
-              <div className={styles.screen}>
+              <div className={`${styles.screen} ${styles.pauseScreen}`} role="dialog" aria-modal="true" aria-label="Game menu">
                 <p className={styles.eyebrow}>TAKE A BREATHER</p>
                 <h2>The story can wait.</h2>
+                <p className={styles.menuObjective}><strong>{state.objective}</strong><br />Health {Math.round(state.health)} · Stamina {Math.round(state.stamina)} · ${state.money} · {state.inventory.length} inventory items</p>
+                <p>Street Adventure brings you back to your character. Aerial Explore lets you see the whole neighbourhood. Choose a view at the top when you resume.</p>
                 <p>{saveText}. Saves belong to this browser and this site address.</p>
                 <button
                   ref={startButton}
@@ -481,6 +504,10 @@ export function SurreyAdventure() {
                   Back to the city →
                 </button>
                 <div className={styles.menuActions}>
+                  <button onClick={() => { setPaused(false); setInventory(true); setWide(false); setAerialTools(false); }}>Journal & inventory</button>
+                  <button onClick={() => { setPaused(false); setWide(true); setAerialTools(false); setViewHelp(false); }}>Open map</button>
+                  <button onClick={() => { setPaused(false); setViewHelp(true); setWide(false); setAerialTools(false); }}>View help</button>
+                  {!expanded && <button onClick={() => setExpanded(true)}>Expand game</button>}
                   <button
                     disabled={state.mode === "aerial"}
                     onClick={() => {
@@ -502,6 +529,11 @@ export function SurreyAdventure() {
                       Exit expanded view
                     </button>
                   )}
+                </div>
+                <div className={styles.menuSettings}>
+                  <label><input type="checkbox" checked={calm} onChange={e => setCalm(e.target.checked)} /> Gentle streets</label>
+                  <label><input type="checkbox" checked={mature} onChange={e => setMature(e.target.checked)} /> Mature encounters</label>
+                  <label><input type="checkbox" checked={lite} onChange={e => setLite(e.target.checked)} /> Lite graphics</label>
                 </div>
               </div>
             )}
@@ -573,10 +605,11 @@ export function SurreyAdventure() {
           between local and full maps. Escape pauses; R returns you safely to
           the station. Camera buttons offer a keyboard alternative. On touch
           screens, hold the direction pad and Sprint, drag the city to look
-          around, and tap E to interact. V switches to aerial mode; F returns the
-          camera to your character. Aerial WASD / the touch pad pans; drag orbits,
+          around, and tap Interact. Select Street Adventure or Aerial Explore at the top
+          to change perspective. V is the keyboard shortcut; Return to Player or F finds
+          your character in Aerial Explore. Aerial WASD / the touch pad pans; drag orbits,
           right drag or two fingers pan, wheel or pinch zooms. Selecting a landmark
-          places a waypoint; it never moves the character. Street activity pauses in aerial mode.
+          places a waypoint; it never moves the character. Street activity pauses in Aerial Explore.
         </p>
         <p>
           Find Alex at the gold marker, accept the case, inspect the transit

@@ -41,7 +41,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
-| `/labs/surrey` | Surrey, City of Adventure V0.2: street adventure, aerial exploration, two cases and local saves |
+| `/labs/surrey` | Surrey, City of Adventure V0.3: reconstructed streets, clear exploration controls, two cases and migrated local saves |
 | `/labs/vancouver` | Vancouver V0.4: free-roaming False Creek, three manual drives and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |

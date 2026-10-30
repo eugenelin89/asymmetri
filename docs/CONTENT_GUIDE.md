@@ -674,3 +674,14 @@ and encounter data live in `story.ts` and `encounters.ts`. All cast members are
 fictional adults. Mature dialogue is optional and off by default; do not imply
 sexual acts, drug transactions, real crime data or actual business wrongdoing.
 Keep browser-local save/no-upload and stylized architecture disclosures visible.
+
+Surrey V0.3 is **City Reconstructed**, retaining **Surrey, City of Adventure**.
+Use **Street Adventure** and **Aerial Explore** consistently. Both buttons remain
+visible; mobile Menu reveals status, map, journal, settings and help. Keep touch
+guidance primary on phones, with a short first-use explanation that does not reset
+progress. Describe source road polygons, active curbs/medians and park paths, but
+retain explicit inferred corridors and illustrative crossing stripes. Building
+height units are verified as metres; all retained values are source-matched, with
+unknown survey dates/methods. Flat terrain is a documented datum-related fallback.
+The current source link is `/surrey/v0.3-2026-10-30/manifest.json`; never replace
+published V0.1 bytes. Architectural detail is original artistic reconstruction.

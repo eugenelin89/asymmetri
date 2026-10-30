@@ -684,3 +684,18 @@ new encounters, mature opt-in, journal focus, reload/Continue/New Game and corru
 or unavailable storage. Pure tests cover all six types and collision walks through
 five clues/three witnesses. Verify responsive controls at 320/390, 768 and desktop
 widths plus landscape. Do not label viewport emulation as real touch-device testing.
+
+V0.3 adds rendered control/pressed-state checks, blocked/editable/repeated shortcut
+cases, separate tutorial persistence, explicit V0.2 migration, source-height
+classification, retained collision/footprint hashes, flat-ground/transit clearance,
+road/paint/path contracts and deterministic architecture. The optional offline
+`test_reconstruction.py` independently checks actual exported topology, disjoint
+surface interiors, centreline coverage, paint containment and coordinate controls.
+Reproduce the new snapshot twice and compare bytes; V0.1 must stay unchanged.
+
+Browser gates include both visible mode buttons, tap/keyboard switching, help
+reopening/dismissal, no shortcut through a select or modal, compact phone HUD,
+Menu/map/aerial-tool close paths, mission/inventory save continuity, representative
+sections of both cases and repeated canvas/resource stability. Check 320/390px,
+tablet, desktop and short landscape viewports. Capture FPS, DPR, draw calls and
+geometry/texture counts with context, and distinguish emulation from hardware.

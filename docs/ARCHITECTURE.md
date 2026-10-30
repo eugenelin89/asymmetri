@@ -633,7 +633,7 @@ replace 13 older measurements and five estimates; 102 City 2009 heights and 316
 estimates remain. Its external PyArrow extractor uses bounded verified byte ranges;
 no new npm dependency or geographic runtime service is needed.
 
-## Surrey, City of Adventure V0.2
+## Surrey, City of Adventure V0.3
 
 `app/labs/surrey` owns the isolated game route. `projects/surrey` separates pure
 collision, seeded simulation, authored story/encounter data, validated local saves,
@@ -641,8 +641,26 @@ aerial camera and bounded pedestrians from Three.js and React. One scene/rendere
 loop serves both modes; aerial freezes gameplay time, NPCs and threats. React gets
 150 ms snapshots. Teardown releases GPU resources, listeners and observers.
 
-Only existing Vancouver geometry predicates are reused. Vancouver files and both
+Only existing Vancouver geometry predicates are reused. Vancouver files and published earlier
 geographic snapshots stay unchanged. `save.ts` validates the versioned per-origin
 localStorage record; no backend, account, upload, telemetry or dependency is added.
 `content/site.ts` owns public metadata/status; route-local text discloses fictional
 adult content. The project README describes all controls, cases and limitations.
+
+### Surrey V0.3 reconstruction
+
+The V0.3 snapshot retains V0.1 footprints, anchors and collision cells, replaces
+pavement with unioned source/derived surfaces, and adds active curbs, medians and
+paths. FACILITYID/native-CRS joins verify metre units and source agreement; unknown
+survey method/date prevents a verified-measured classification. Terrain explicitly
+remains flat. `reconstruct_city.py` pins input/output hashes and uses 1cm topology-
+preserving precision. `test_reconstruction.py` independently checks exported meshes.
+
+`architecture.ts` assigns deterministic building profiles; `buildings.ts` batches
+shared facade materials, roof caps/equipment and 128m nearby-detail tiles. One
+scene/renderer still serves both perspectives. `ViewControls.tsx` and `viewPolicy.ts`
+provide persistent labelled buttons, active semantics, guarded V shortcuts and
+independent onboarding storage. Phone HUD panels open on request through Menu,
+with a compact objective and edge controls. `save.ts` migrates V0.2 map identity
+under the same storage key; simulation restore preserves progress and validates
+only positions against current walkability. No new runtime dependency/service.

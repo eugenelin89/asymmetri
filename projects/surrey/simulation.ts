@@ -472,7 +472,8 @@ export function createSimulation(city: City, seed = 2061030) {
     thiefIndex = Math.min(thiefIndex, thiefPath.length); random.setState(save.runtime.random);
     Object.assign(cooldowns, save.runtime.cooldowns);
     if (state.encounter) { state.encounter.position = world.safe(state.encounter.position); if (state.encounter.phase === "chase") encounterPath = route(world, state.encounter.position, world.safe([locations.theft[0] + 30, locations.theft[1] - 30])); encounterIndex = 1; }
-    state.dialogue = null; notify("Story resumed. Your progress stayed in this browser."); refresh();
+    state.dialogue = null;
+    notify(save.migratedFrom ? (distance(p, [s.player.x, s.player.z]) > .05 ? "City updated. You resumed at the nearest safe point; all story progress is preserved." : "City updated. Your position and story progress are preserved.") : "Story resumed. Your progress stayed in this browser."); refresh();
   }
   refresh();
   return { state, world, story, locations, tick, interact, dismiss, choose, recover, calm, mode, mature, serialize, restore };

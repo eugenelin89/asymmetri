@@ -58,12 +58,12 @@ export const surrey = {
   name: surreyName,
   path: "/labs/surrey",
   tagline: "Survive the streets. Discover the stories.",
-  status: "V0.2 — Dangerous Streets",
+  status: "V0.3 — City Reconstructed",
   description: "An experimental open-world adventure set in a fictionalized Surrey City Centre.",
   source: { label: "View Surrey source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
   license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/surrey/THIRD_PARTY_NOTICES.md" },
-  dataLicence: "https://www.surrey.ca/sites/default/files/media/documents/BulkGISDataRequestFormSecured.pdf",
-  manifest: "/surrey/v0.1-2026-10-30/manifest.json",
+  dataLicence: "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  manifest: "/surrey/v0.3-2026-10-30/manifest.json",
   metadata: { title: `${surreyName} | Asymmetri Labs`, description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve two fictional cases and meet the neighbourhood. A free browser adventure with local saves." },
 } as const;
 
@@ -125,7 +125,7 @@ export const gisApps = {
       },
       {
         title: surrey.name,
-        body: "City of Surrey geography supplies the layout. Source height values guide stylized buildings, but their units and observation dates are not verified. Facades and landmarks are artistic interpretations. The stories and characters are fictional; game access and events do not describe real property access, crime or neighbourhood safety.",
+        body: "City of Surrey road surfaces, curbs, paths and footprints supply the layout. Building-height units are verified as metres and matched to official records; measurement dates and methods remain unknown. Terrain stays flat because the elevation datum is unverified. Facades and landmarks are artistic reconstructions. The stories and characters are fictional; game access and events do not describe real property access, crime or neighbourhood safety.",
       },
     ],
     sourcesNote: "Each project's source and licence links above explain its datasets, processing and limitations. The city pages retain their own detailed credits.",
