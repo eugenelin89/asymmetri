@@ -1,5 +1,11 @@
 # Richmond Learns to Drive — coordination and implementation
 
+**Released October 30 at 23:02:00 UTC:** [Play Richmond](https://asymmetri.co/labs/richmond).
+Runtime source `be6fc3b`, Linux build `gIRztyRG7Pdh1DR3AAHQR`.
+See [the verified release receipt](RICHMOND_RELEASE_2026-10-30.md) for the complete
+rollback, live phone checks and final integration handoff. Historical checkpoints
+below preserve what was known at each stage.
+
 Initial baseline: `313dba357ecc00f1de28b8db5d2c326ec9d1125e` (Vancouver V0.4 + GIS Apps,
 2026-10-30), clean main observed before isolated checkout. Subsequently fast-forwarded
 GIS naming and Surrey V0.3 main through `37d33110f95b31ad99dd1e2c6d616dcc3fada53b`, then Vancouver V0.5
@@ -72,7 +78,7 @@ before any shared edit. Approved names are **Vancouver, City in Progress** and
 need full independent runtime rollback, not the naming-only copy exception.
 
 
-### Current coordination window
+### Earlier coordination window
 
 Surrey V0.3 completed its release and main push through `37d3311`. Vancouver then
 requested the next main/server window and journals 137/138; Richmond explicitly
@@ -187,16 +193,14 @@ Physical-phone multitouch, battery and thermal performance remain unverified.
 
 ## Release status
 
-The implementation is prepared for the two-commit integration workflow; exact
-commit identities and final CI status are recorded in journal 142 and the task
-handoff. No Richmond deployment has occurred. AGENTS requires an explicit publication request;
-the brief permits established release authority, but standing SSH access and the
-Node 22 runtime exception alone do not establish a new Richmond publish request.
-The candidate uses the existing isolated Linux workflow, with no deployment
-secrets or automatic activation. A future authorized release must re-read the
-current live baseline, retain its complete runtime, meet the 6 GiB disk / 192 MiB
-available-memory floors, pass private loopback acceptance and verify protected
-routes/peer services after activation. No infrastructure change is proposed.
+Implementation `be6fc3b` and journal `6dfc765` were pushed to main. The owner then
+explicitly authorized deployment with “deploy when ready”; the locked phone was
+left untouched. Exact-source Linux run 41140933816 passed, followed by independent
+runtime/hash verification, private acceptance and guarded activation. The complete
+preceding Surrey V0.4 runtime remains the immediate rollback. Public routes,
+protected content, 52 additional checks and live portrait/landscape controls passed.
+All peer service/configuration identities stayed unchanged. The release receipt
+and journal 143 record final identities; no infrastructure change was needed.
 
 
 ### Historical local build/check checkpoint

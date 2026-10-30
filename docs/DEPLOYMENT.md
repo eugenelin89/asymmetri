@@ -3,6 +3,12 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Richmond V0.1 release receipt](RICHMOND_RELEASE_2026-10-30.md) records the
+current October 30 runtime: Richmond delivery/mall/YVR gameplay and unobstructed
+phone controls, exact-source Linux build, private/public acceptance and complete
+Surrey V0.4 rollback. Its deployed identity supersedes the earlier receipts below;
+later documentation commits do not change the running build.
+
 The [Vancouver V0.5 release receipt](VANCOUVER_V05_RELEASE_2026-10-30.md) records
 the October 30 compact phone view, experimental manual controls, exact-source
 Linux build, preserved Surrey V0.3, verified older-runtime archival and complete
