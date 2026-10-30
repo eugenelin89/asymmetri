@@ -3,6 +3,12 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Vancouver V0.5 release receipt](VANCOUVER_V05_RELEASE_2026-10-30.md) records
+the October 30 compact phone view, experimental manual controls, exact-source
+Linux build, preserved Surrey V0.3, verified older-runtime archival and complete
+immediately preceding rollback. Its deployment identity supersedes earlier
+October 30 runtime receipts; subsequent documentation commits do not change it.
+
 The [Labs menu release receipt](LABS_MENU_RELEASE_2026-10-30.md) records the current
 October 30 exact-source Linux build, simplified global menu and retained BotSquad
 area links. The preceding [city naming receipt](GIS_CITY_NAMES_RELEASE_2026-10-30.md)

@@ -1,9 +1,9 @@
 # Vancouver V0.5 — experimental release validation
 
-Public route: https://asymmetri.co/labs/vancouver. This implementation is prepared
-for the owner's authorized release; activation identity and final production
-health are recorded separately after the guarded deployment. No deployment is
-implied by this pre-release report.
+Public route: https://asymmetri.co/labs/vancouver. **V0.5 is deployed.** Guarded
+activation completed October 30, 2026 at 21:23:49 UTC (14:23 Vancouver time).
+Public acceptance passed on apex and www. The source/build identity and complete
+immediately preceding rollback are recorded below.
 
 ## Delivered behavior
 
@@ -129,8 +129,8 @@ artwork was imported. The original synthetic 480 m proof is not Cambie geometry.
 - TypeScript/ESLint pass with the existing unrelated tutorial-reader warning.
 - Production dependency audit: zero vulnerabilities.
 - Both integrated local production build paths passed (Next webpack and Vinext).
-  The exact-SHA Linux candidate, capacity/rollback and public health checks must
-  pass before activation and are recorded in the deployment receipt.
+  The exact-SHA Linux candidate and all capacity/rollback/public health checks
+  passed as recorded below.
 - The production bundles omit Local elevation proof and Local graphics recovery
   test controls. No external telemetry or server state was added.
 
@@ -143,3 +143,81 @@ terrain/deck data in one verified datum, complete both approaches, build curved
 surface topology and test both directions/underpasses. Do not expose the synthetic
 proof as a geographic bridge. Traffic, pedestrians, missions, multiplayer and a
 new backend remain outside this release.
+
+
+## Production deployment receipt
+
+- Implementation: `53fe7545ba05ffde8df5c5509a477729839a380e`.
+- Implementation journal 137 / deployed source:
+  `44654b31afc61a17667c3fff48f88bc5094a2a3d`.
+- Linux build: `em5HpR-sbeh857iO3MUWB`, Node `v22.23.1`, Ubuntu 24.04 GitHub runner.
+- [Successful Linux workflow](https://github.com/eugenelin89/asymmetri/actions/runs/41129619738),
+  artifact `13012781269`, 254,148,462-byte runtime tar, 896,283,503 uncompressed bytes.
+- Runtime tar SHA-256:
+  `16c313d147523793a53a0d1f428c5e1577b5502b0843cf248895699353eb4ba2`.
+  Artifact ZIP SHA-256:
+  `02225639ce435636ce0509673d87fc32ede186c65fc2daa31292235a3a9dde3c`.
+
+The Linux job passed check, Vancouver tests, production audit and Next webpack
+build (including the Surrey prebuild tests). The downloaded ZIP, tar, source SHA,
+Node version and build ID were checked before transfer. The remote streamed tar
+hash matched; source checkout and dependencies were independent and application
+owned. No build or dependency install touched the live tree. The activation moved
+whole runtimes, changing only `asymmetri.service`. No OS, Nginx, DNS, TLS, receiver,
+peer application or production dependency update was performed.
+
+The private candidate passed 15 routes, eight protected host/path checks, 124
+legacy tutorial IDs, 24 original tutorial assets, Motion video/TestFlight behavior,
+Ask/Trade and unchanged Surrey main content. Every Vancouver V0.1–V0.4 data file
+and Surrey V0.1/V0.3 file matched committed bytes. Native Sharp optimization
+returned a valid PNG with HTTP 200. Development-only test panels were absent.
+
+Public apex and www each passed 14 routes, protected main-content/link/canonical
+comparisons and tutorial assets. An additional 38 route, redirect and immutable
+data checks passed. GIS Apps displayed Vancouver V0.5 and Surrey City Reconstructed.
+Local integrated Surrey Street/Aerial modes rendered with no error log. The live
+Vancouver browser check at actual CSS 390×844 had no horizontal overflow, clear
+play, active acceleration and Menu pause; closing Menu retained 0 km/h, with no
+application console errors. This desktop viewport is not physical-phone evidence.
+A short live sample averaged 59.5 fps at DPR 0.8; it is not a hardware benchmark.
+Keyboard focus wrapping, search/landmark selection and staged Escape were also
+verified on the integrated local build.
+
+Five preparation guards passed. The lowest measured available memory was
+**217.2 MiB**, and minimum preparation free disk **6.3586 GiB**, above the
+192 MiB / 6 GiB floors. Six activation-monitor samples had no violation. Final
+health at 21:24:51 UTC showed 368.96 MiB available and 6.3505 GiB free, an active,
+running, enabled website with zero restarts and zero post-activation errors.
+The expected old-process shutdown exit 143 is recorded separately. Five peer
+services, 55 configuration fingerprints, 13 unrelated virtual-host responses and
+the Node executable remained unchanged.
+
+### Retention and rollback
+
+An older inactive runtime, source `e909c8da9121f9f9179dfb3d71d78e0621805a85`, build
+`At28nruWgLtaH0vOlV-pM`, was losslessly archived to owner storage before retirement.
+The 275,773,440-byte archive passed matching SHA-256, gzip integrity and a full
+remote tar comparison:
+`e807ca4c77d0d9e621c2548bcfbb7bd4eeb426089f615fd36eb8a334ad933c5e`.
+Only that inactive, unreferenced directory was removed, recovering 1,023,537,152
+bytes. Current and immediately preceding runtimes stayed intact throughout.
+
+The complete immediately preceding production runtime is retained at
+**`/var/www/asymmetri-rollback-before-vancouver-v05-20261030`**:
+source `248c0a5c382abeba98c601081f2624064dd43a30`, build
+`VnQohiF4lOLKTwiRVOpzn`, with executable Linux dependencies and clean source.
+The pre-Surrey-V0.3, pre-V0.4 and original pre-Vancouver runtimes also remain.
+Automatic rollback was armed and not needed; no deliberate live rollback drill
+was performed.
+
+To recover, recheck source/build, clean trees, dependencies, capacity and peers;
+stop only `asymmetri.service`, retain the current tree at a fresh failure location,
+move the verified preceding whole runtime to `/var/www/asymmetri`, restart that
+service and repeat protected/public/peer checks. Never overwrite retained trees
+or reset their source in place.
+
+Remote evidence: `/var/lib/asymmetri-vancouver-v05-release-20261030`. Owner-held
+checksums, archives, screenshots, JSON and logs are retained outside Git in the
+Vancouver V0.5 deployment-retention directory. GitHub artifact expiry is transport
+retention only. Subsequent receipt/journal commits change documentation only;
+the deployed source/build identity above remains exact.
