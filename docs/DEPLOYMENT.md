@@ -3,9 +3,11 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-The [GIS city naming release receipt](GIS_CITY_NAMES_RELEASE_2026-10-30.md)
-records the current October 30 exact-source Linux build and copy-only rollback,
-with unchanged city URLs, assets and dependencies. The preceding
+The [Labs menu release receipt](LABS_MENU_RELEASE_2026-10-30.md) records the current
+October 30 exact-source Linux build, simplified global menu and retained BotSquad
+area links. The preceding [city naming receipt](GIS_CITY_NAMES_RELEASE_2026-10-30.md)
+records the city display-name corrections. Both use the documented copy-only path
+with unchanged routes, assets and dependencies. The earlier
 [Vancouver V0.4 release receipt](VANCOUVER_V04_RELEASE_2026-10-30.md) records the
 GIS Apps grouping, preserved Surrey V0.2 and complete pre-V0.4 runtime.
 Later documentation commits do not change the activated source/build identity.

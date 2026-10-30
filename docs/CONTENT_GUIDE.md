@@ -593,7 +593,7 @@ proof. See the [October 14 packet](INVESTMENT_CLOSE_RECOVERY_2026-10-14.md).
 ## BotSquad Trade naming
 
 Use **BotSquad Trade** for the project and **Live Trading Desk** for its desk
-heading. `botsquadStructure` supplies the global and local navigation labels;
+heading. `botsquadStructure` supplies BotSquad's area navigation and breadcrumb labels;
 `investmentShowcase.deskTitle` supplies the exact desk heading. Use trade/trading
 in website-authored descriptions and accessible labels. Preserve existing
 `/botsquad/investment` URLs and technical identifiers. Do not rewrite immutable
