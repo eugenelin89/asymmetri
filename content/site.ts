@@ -42,7 +42,7 @@ export const botsquadStructure = {
 
 export const vancouver = {
   name: "Vancouver",
-  navLabel: "Drive Vancouver",
+  navLabel: "City in Progress",
   path: "/labs/vancouver",
   tagline: "Explore the city. See what's changing.",
   status: "Vancouver V0.1 — Experimental",
