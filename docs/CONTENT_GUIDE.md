@@ -612,6 +612,8 @@ rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 ## Vancouver
 
 `content/site.ts` owns Vancouver identity, metadata, Labs card and navigation links.
+The Labs submenu uses `vancouver.navLabel` ("Drive Vancouver"); the project name
+and existing `/labs/vancouver` URL remain Vancouver.
 `projects/vancouver/places.ts` owns the six original, source-backed place summaries
 and review labels. The route owns experimental notices, dataset attribution and
 no-JavaScript descriptions. Never present illustrative heights, flat terrain, old
