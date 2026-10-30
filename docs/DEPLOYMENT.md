@@ -1440,4 +1440,4 @@ measured candidate, activation or exact blocking evidence.
 
 ## Surrey V0.4 — Living Surrey
 
-Surrey V0.4 must use the existing guarded exact Linux candidate workflow, refreshed approved main and a complete immediate runtime rollback. Do not deploy while Richmond holds the shared window. No OS, network, database or peer-service change is part of this release. Receipt: `SURREY_V04_RELEASE_2026-10-30.md`.
+Surrey V0.4 must use the existing guarded exact Linux candidate workflow, refreshed approved main and a complete immediate runtime rollback. Do not deploy while Richmond holds the shared window. No OS, network, database or peer-service change is part of this release. Completed October 30 at 22:26 UTC: runtime `0a73d7c`, Linux build `-btiWXzoBuaN8Yg_3rBIy`; the complete immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v04-20261030`. Private/public checks and peer guards passed. See [V0.4 release receipt](SURREY_V04_RELEASE_2026-10-30.md).
