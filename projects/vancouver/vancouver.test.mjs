@@ -244,3 +244,105 @@ test('each finger and keyboard key owns its press until release or reset',async(
   inputs.set('key:w','forward',true);inputs.set('finger3','forward',false);assert.ok(inputs.has('forward'));
   inputs.clear();assert.equal(inputs.has('forward'),false);
 });
+
+const {createManualDriver,clearanceAhead}=await import('./handling.ts');
+test('V0.5 manual taps turn less abruptly and release recentres without route assistance',()=>{
+ const allowed=()=>true,driver=createManualDriver(stepCar);
+ let manual={x:0,z:0,yaw:0,speed:6,steer:0},legacy={...manual};
+ for(let i=0;i<15;i++){
+  manual=driver.step(manual,{throttle:1,steering:1,brake:false},'relaxed',1/60,allowed);
+  legacy=stepCar(legacy,legacy.speed>=6?0:1,1,false,1/60,allowed);
+ }
+ assert.ok(manual.yaw>0 && manual.yaw<legacy.yaw*.6,{manual,legacy});
+ const releaseYaw=manual.yaw;
+ for(let i=0;i<20;i++)manual=driver.step(manual,{throttle:1,steering:0,brake:false},'relaxed',1/60,allowed);
+ assert.ok(Math.abs(manual.steer)<.001);
+ assert.ok(manual.yaw-releaseYaw<.04,'letting go must stop the turn promptly');
+});
+test('V0.5 normal pace retains speed while held steering becomes gentler at speed',()=>{
+ const open=()=>true,driver=createManualDriver(stepCar);
+ let car={x:0,z:0,yaw:0,speed:0};
+ for(let i=0;i<360;i++)car=driver.step(car,{throttle:1,steering:0,brake:false},'normal',1/60,open);
+ assert.ok(car.speed>18 && car.speed<=19);assert.equal(car.yaw,0);
+ const fast=createManualDriver(stepCar),slow=createManualDriver(stepCar);
+ let a={x:0,z:0,yaw:0,speed:18},b={...a,speed:3};
+ for(let i=0;i<40;i++){
+  a=fast.step(a,{throttle:1,steering:1,brake:false},'normal',1/60,open);
+  b=slow.step(b,{throttle:0,steering:1,brake:false},'normal',1/60,open);
+ }
+ assert.ok(Math.abs(a.steer)<Math.abs(b.steer)*.7);
+});
+test('V0.5 manual handling remains equivalent across frame rates and caps stalls',()=>{
+ function run(hz){const driver=createManualDriver(stepCar);let car={x:0,z:0,yaw:0,speed:0};for(let i=0;i<hz*3;i++)car=driver.step(car,{throttle:1,steering:.7,brake:false},'relaxed',1/hz,()=>true);return car;}
+ const reference=run(120);
+ for(const hz of [15,30,60]){const car=run(hz);assert.ok(Math.hypot(car.x-reference.x,car.z-reference.z)<.02);assert.ok(Math.abs(car.yaw-reference.yaw)<.005);}
+ const stalled=createManualDriver(stepCar).step({x:0,z:0,yaw:0,speed:19},{throttle:1,steering:0,brake:false},'normal',10,()=>true);
+ assert.ok(stalled.z<=1.91);
+});
+test('V0.5 input shaping keeps full-body collision, braking and reverse escape',()=>{
+ const allowed=([x,z])=>Math.abs(x)<6&&z<20,driver=createManualDriver(stepCar);
+ let car={x:0,z:0,yaw:0,speed:0};
+ for(let i=0;i<500;i++)car=driver.step(car,{throttle:1,steering:0,brake:false},'relaxed',1/60,allowed);
+ assert.ok(car.blocked&&car.z<18&&carFits(car,allowed));
+ const stopped=car.z;
+ for(let i=0;i<80;i++)car=driver.step(car,{throttle:-1,steering:0,brake:false},'relaxed',1/60,allowed);
+ assert.ok(!car.blocked&&car.z<stopped-1&&car.speed<0);
+ car=driver.step(car,{throttle:0,steering:0,brake:true},'relaxed',.1,allowed);
+ assert.ok(car.speed>-3);
+});
+test('V0.5 road-edge preview warns without changing pose or permitting obstacles',()=>{
+ const car={x:0,z:12,yaw:0,speed:6,steer:0},original={...car};
+ const ahead=clearanceAhead(car,p=>carFits(p,([x,z])=>Math.abs(x)<6&&z<20));
+ assert.ok(ahead>5 && ahead<7);assert.deepEqual(car,original);
+ assert.equal(clearanceAhead({...car,z:0},()=>true),10);
+});
+
+const {createElevatedWorld,elevationFixture,fixtureGround,surfaceSample,elevatedCameraTarget}=await import('./elevation.ts');
+const elevated=createElevatedWorld(elevationFixture,fixtureGround);
+for(const reverse of [false,true])for(const hz of [15,60,120])test(`isolated elevation proof crosses ramps/deck ${reverse?'reverse':'forward'} at ${hz}Hz`,()=>{
+ let car={x:0,z:reverse?470:10,y:0,yaw:reverse?Math.PI:0,speed:0,pitch:0,surface:reverse?'north':'south'};
+ let highest=0,maxStep=0,visited=new Set();
+ for(let i=0;i<40*hz;i++){
+  const before=car;car=elevated.step(stepCar,car,1,0,false,1/hz);visited.add(car.surface);highest=Math.max(highest,car.y);maxStep=Math.max(maxStep,Math.abs(car.y-before.y));
+  assert.ok(!car.blocked,JSON.stringify(car));
+  assert.ok(car.y>=0&&car.y<=8);
+  assert.equal(elevatedCameraTarget(car).y,car.y+9);
+  if(reverse?car.z<12:car.z>468)break;
+ }
+ assert.ok(reverse?car.z<12:car.z>468);assert.equal(highest,8);assert.ok(maxStep<.13);
+ assert.equal(visited.size,5);assert.ok(Math.abs(car.pitch)<.0001);
+});
+test('elevation graph distinguishes an underpass from the deck above it',()=>{
+ assert.deepEqual(elevated.route('south','north'),['south','up','deck','down','north']);
+ assert.equal(elevated.route('south','underpass'),null);
+ assert.equal(elevated.sample([0,190],'deck').y,8);
+ assert.equal(elevated.sample([0,190],'underpass').y,0);
+ const illegal={x:0,z:190,y:0,yaw:0,speed:5,pitch:0,surface:'deck'};
+ assert.ok(elevated.step(stepCar,illegal,1,0,false,.1).blocked);
+});
+test('elevated road boundaries retain a full-car footprint and never admit water below',()=>{
+ let car={x:0,z:240,y:8,yaw:Math.PI/2,speed:0,pitch:0,surface:'deck'};
+ for(let i=0;i<200;i++)car=elevated.step(stepCar,car,1,0,false,1/60);
+ assert.ok(car.blocked&&car.x<4&&car.y===8);
+ assert.equal(elevated.sample([8,240],'deck'),null);
+ assert.equal(elevated.sample([0,240],'underpass'),null);
+});
+test('elevation joins reject discontinuous heights and ramps meet decks at zero grade',()=>{
+ for(const surface of elevationFixture){assert.ok(Math.abs(surfaceSample(surface,[surface.from.x,surface.from.z]).grade)<1e-12);assert.ok(Math.abs(surfaceSample(surface,[surface.to.x,surface.to.z]).grade)<1e-12);}
+ assert.throws(()=>createElevatedWorld(elevationFixture.map(s=>s.id==='deck'?{...s,from:{...s.from,y:9}}:s),fixtureGround),/endpoints/);
+});
+
+const { fitDrivingCamera } = await import('./camera.ts');
+test('camera sight line cannot pass through a facade even when the endpoint is clear',()=>{
+ const fit=fitDrivingCamera([0,0],[0,-20],([x,z])=>!(Math.abs(x)<3&&z<-3&&z>-7));
+ assert.ok(fit.z>=-3&&fit.z<=0&&fit.fraction<1);
+ const close=fitDrivingCamera([0,0],[0,-8],([,z])=>z>=-.5);
+ assert.equal(close.z,0);
+});
+test('camera follows a clear street and constrains a lagged position inside a corner',()=>{
+ const clear=([x,z])=>x<2||z>2;
+ const target=fitDrivingCamera([0,5],[0,-18],clear);
+ assert.equal(target.fraction,1);
+ const lagged=fitDrivingCamera([0,5],[8,-5],clear);
+ assert.ok(lagged.fraction<1&&clear([lagged.x,lagged.z]));
+});

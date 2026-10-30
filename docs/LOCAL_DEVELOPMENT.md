@@ -262,6 +262,15 @@ Development mode exposes Local graphics recovery test → Interrupt/Restore WebG
 production omits these controls. Test actual loss and both restore/retry paths,
 independent held controls and blur/background recovery.
 
+V0.5 also exposes Local elevation proof in development. Expand it to lazily mount
+the separate synthetic ramp/deck/underpass scene; use its South, North and
+Underpass starts with ordinary keyboard controls. It is not geographic Cambie
+acceptance and must not appear in either production build. Compact layouts use
+Menu to pause motion while opening places/routes/map/settings. Test both a narrow
+portrait viewport and a short landscape viewport, including safe-area spacing,
+focus/Escape and released controls after closing. Simulator Safari results must be
+reported separately from physical iOS/Android hardware.
+
 ## Surrey, City of Adventure
 
 `npm run dev:next` serves `/labs/surrey`; choose Play Now to load the map and WebGL2

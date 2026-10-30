@@ -1,4 +1,4 @@
-# Vancouver V0.4 — rights and attribution
+# Vancouver V0.5 — rights and attribution
 
 ## Original work
 
@@ -59,6 +59,15 @@ illustrative heights. Source IDs, overlap, dates, quality, raw/output checksums
 and attribution are in the manifest. The retained 2015 footprints are unchanged;
 no roof geometry is redistributed. Neither publication nor retrieval date means
 current acquisition. Government logos/marks and endorsement are not included.
+## V0.5 research and synthetic proof
+
+V0.5 preserves all published geographic assets unchanged. The development-only
+elevation corridor is original synthetic geometry under the project MIT licence;
+it does not reproduce Cambie Bridge. City 2022 LiDAR metadata and bridge documents
+were researched, but no point cloud, survey, photograph, drawing or third-party
+model was imported or redistributed. Their source links and limitations are in
+`docs/VANCOUVER_V05_ELEVATION_2026-10-30.md`.
+
 ## Three.js 0.186.1
 
 https://github.com/mrdoob/three.js

@@ -155,7 +155,24 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
       if (city.land.some((p) => inPolygon([x, z], p)) && !isBuilding([x, z])) lightPositions.push(new THREE.Vector3(x, 3.5, z));
     }
   }
-  batch(paint, material(0xe3ddbc)); batch(bridgeDecks, material(0x7e8c89), !coarse); batch(bridgeRails, trim); batch(piers, material(0xb4b9ae));
+  batch(paint, material(0xe3ddbc));
+  const bridgeMaterials = [material(0x7e8c89).clone(), trim.clone()];
+  bridgeMaterials.forEach((m) => { m.transparent = true; materials.push(m); });
+  const bridgeObjects = [batch(bridgeDecks, bridgeMaterials[0], !coarse), batch(bridgeRails, bridgeMaterials[1])].filter((object) => object !== undefined);
+  batch(piers, material(0xb4b9ae));
+  const bridgeSight = new THREE.Raycaster(), sightDirection = new THREE.Vector3();
+  function revealCar(cameraPosition: THREE.Vector3, target: THREE.Vector3 | null) {
+    let obstructed = false;
+    if (target) {
+      sightDirection.copy(target).sub(cameraPosition);
+      bridgeSight.far = sightDirection.length();
+      bridgeSight.set(cameraPosition, sightDirection.normalize());
+      obstructed = bridgeSight.intersectObjects(bridgeObjects, false).length > 0;
+    }
+    // These decks are illustrative, view-only scenery. Fade only when they
+    // obscure the ground-level driver; this does not change driving surfaces.
+    bridgeMaterials.forEach((m) => { m.opacity = obstructed ? .18 : 1; m.depthWrite = !obstructed; });
+  }
   const matrix = new THREE.Matrix4();
   function instances(g: THREE.BufferGeometry, m: THREE.Material, positions: THREE.Vector3[], scale?: (i: number) => THREE.Vector3) {
     const object = new THREE.InstancedMesh(g, m, positions.length); object.castShadow = !coarse; object.receiveShadow = true;
@@ -268,5 +285,5 @@ export function buildScenery(scene: THREE.Scene, city: City, coarse: boolean) {
     }
     routeGuide.add(arrows);
   }
-  return { setRoute, materials, textures, car, body, wheels, frontWheels, brakeMaterial, markers, pickTargets, labels, numberLabels, highlight, shimmerMaterial };
+  return { setRoute, revealCar, materials, textures, car, body, wheels, frontWheels, brakeMaterial, markers, pickTargets, labels, numberLabels, highlight, shimmerMaterial };
 }

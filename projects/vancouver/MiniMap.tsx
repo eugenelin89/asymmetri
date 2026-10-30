@@ -10,6 +10,7 @@ const MapGeometry = memo(function MapGeometry({ city }: { city: City }) {
     {city.water.map((p, i) => <path key={i} d={p.map((ring) => `${path(ring)}Z`).join("")} fill="#5c929c" fillRule="evenodd" />)}
     {city.roads.filter((r) => r.bridge).map((r, i) => <path key={`bridge${i}`} d={path(r.points)} stroke="#84989a" strokeWidth="9" strokeDasharray="13 9" fill="none" />)}
     {roads.map((d, i) => <path key={i} d={d} stroke="#f8f6e9" strokeWidth="10" fill="none" />)}
+    <path d={`${path(city.bounds)}Z`} fill="none" stroke="#466b60" strokeWidth="9" strokeDasharray="24 16"><title>Boundary of the modelled False Creek area</title></path>
     {Object.entries(city.anchors).map(([id, p], i) => <g key={id}><circle cx={p[0]} cy={p[1]} r="17" fill="#17665f" /><text x={p[0]} y={p[1] + 8} textAnchor="middle" fill="white" fontSize="24" fontWeight="700">{i + 1}</text></g>)}
   </>;
 });
@@ -45,6 +46,7 @@ export function MiniMap({ city, drive, route, onDestination }: { city: City; dri
       <path d="M0 -19L14 13L0 6L-14 13Z" fill="#087b70" transform={`translate(${drive.x} ${drive.z}) rotate(${180 - drive.yaw * 180 / Math.PI}) scale(${scale})`} />
       {cursor && <g stroke="#723e11" strokeWidth={3 * scale} fill="none"><circle cx={cursor[0]} cy={cursor[1]} r={16 * scale} /><path d={`M${cursor[0] - 24 * scale},${cursor[1]}h${48 * scale}M${cursor[0]},${cursor[1] - 24 * scale}v${48 * scale}`} /></g>}
     </svg>
-    <button type="button" onClick={() => setWide((value) => !value)} aria-label={wide ? "Show nearby streets on map" : "Show whole city on map"}>{wide ? "Nearby streets" : "Whole city"} ↗</button>
+    <p className={styles.mapCaption}>{wide ? "False Creek coverage" : "Your nearby streets"} · north up</p>
+    <button type="button" onClick={() => setWide((value) => !value)} aria-label={wide ? "Show nearby streets on map" : "Show playable False Creek area on map"}>{wide ? "Nearby streets" : "Playable area"} ↗</button>
   </div>;
 }

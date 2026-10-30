@@ -21,6 +21,7 @@ export type City = {
 };
 export type Explorer = {
   setMode(mode: Mode): void;
+  setPaused(paused: boolean): void;
   focus(id: string): void;
   driveNear(id: string): void;
   setQuality(quality: "auto" | "low"): void;
@@ -39,7 +40,7 @@ export type Explorer = {
   dispose(): void;
 };
 
-export type DriveTelemetry = { speed: number; reverse: boolean; street: string; x: number; z: number; yaw: number; blocked: boolean; blockedReason?: string; navigation?: NavigationStatus; travelled?: number };
+export type DriveTelemetry = { speed: number; reverse: boolean; street: string; x: number; z: number; yaw: number; blocked: boolean; blockedReason?: string; navigation?: NavigationStatus; travelled?: number; steering?: number; clearance?: number };
 
 export type RoadGraph = { nodes: Point2[]; edges: { a: number; b: number; points: Point2[]; length: number; name: string }[]; clearance: number };
 export type DriveRoute = { points: Point2[]; distances: number[]; length: number; turns: { at: number; direction: string; street: string }[]; title: string; loop: boolean; destination?: string; driveId?: string };

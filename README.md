@@ -42,7 +42,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver and Surrey cards, with an explanation of street and building reconstruction |
 | `/labs/surrey` | Surrey, City of Adventure V0.3: reconstructed streets, clear exploration controls, two cases and migrated local saves |
-| `/labs/vancouver` | Vancouver V0.4: free-roaming False Creek, three manual drives and sourced landmarks |
+| `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
 | `/botsquad` | Persistent AI-team experiment, current capabilities, reference team, Asymmetri uses, setup and roadmap |
@@ -231,13 +231,14 @@ The [verified October 14 investment release](docs/INVESTMENT_CLOSE_RELEASE_2026-
 records current website/receiver identities, preserved archive history, portraits
 and closed Ask state.
 
-## Vancouver V0.4
+## Vancouver V0.5
 
 An independent, browser-rendered eastern False Creek experiment with aerial and
 arcade driving modes. [Project setup, data, controls and limits](projects/vancouver/README.md).
 Vancouver-specific code/models are MIT; City and NRCan data have separate attribution.
-V0.4 adds three manual routes, map-picked destinations, wider checked junctions,
-relaxed pace and a wide camera. [Release evidence and limits](docs/VANCOUVER_V04_RELEASE_2026-10-30.md).
+V0.5 adds progressive manual input, clearer compact controls, camera obstruction
+handling and an isolated synthetic elevation proof. Geographic coverage and data
+remain V0.4. [Release evidence and limits](docs/VANCOUVER_V05_RELEASE_2026-10-30.md).
 The [Linux candidate workflow](.github/workflows/website-linux-candidate.yml) builds
 public website source on Node 22.23.1 without production credentials or automatic
 deployment. Releases still use the documented SSH candidate/rollback workflow.

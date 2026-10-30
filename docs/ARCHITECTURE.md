@@ -573,7 +573,7 @@ No HQ access, new contract, model call, operational control or fixed daily time 
 added. Existing visibility polling refreshes the server summary when the source
 watermark changes; withdrawals and unavailability continue to hide cached content.
 
-## Vancouver V0.4 (October 30, 2026)
+## Vancouver V0.5 (October 30, 2026)
 
 `app/labs/vancouver/page.tsx` frames the independent Labs experiment. Its client
 interface dynamically imports `projects/vancouver/engine.ts`; Three.js 0.186.1
@@ -632,6 +632,22 @@ and renders the exact 64 m collision cells. 18 source-reviewed 2013 NRCan height
 replace 13 older measurements and five estimates; 102 City 2009 heights and 316
 estimates remain. Its external PyArrow extractor uses bounded verified byte ranges;
 no new npm dependency or geographic runtime service is needed.
+
+V0.5 adds `handling.ts`, an injected wrapper around the unchanged shared collision
+integrator. It shapes manual taps/holds, speed-sensitive wheel limits and release
+at 120 Hz without using road headings or route guidance. `camera.ts` tests the
+whole horizontal sight line, including interpolation through a corner. View-only
+bridge materials fade on camera-to-car ray intersection; driving geometry remains
+unchanged. `DriveControls.tsx` owns captured pointers and sliding steering.
+
+Compact screens use one explicit Menu panel and a paused engine state, safe-area
+insets and automatic expanded driving. The map labels its bounded False Creek
+coverage. DOM diagnostics add per-run distance, time, moving time, contacts,
+recoveries and resets. Nothing is transmitted. The existing V0.4 snapshot remains
+byte-identical. `elevation.ts` and a development-only lazy `ElevationLab.tsx` test
+an original synthetic XYZ road graph, continuous ramps, full-car deck support and
+a disconnected underpass. They do not enable public bridge driving. No dependency,
+backend or common cross-city engine is introduced.
 
 ## Surrey, City of Adventure V0.3
 

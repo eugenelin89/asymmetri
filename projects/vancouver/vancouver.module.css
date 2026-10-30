@@ -223,3 +223,84 @@
   .expanded .routePanel { left: 265px; bottom: auto; top: 83px; width: 280px; max-width: calc(100% - 445px); }
   .expanded .routePanel button { padding: 5px 7px; font-size: 10px; }
 }
+
+/* V0.5: visible held inputs and a steering cue; no automatic alignment. */
+.driveControls button[data-active="true"] { background: #69c1a5; color: #103c3b; box-shadow: inset 0 0 0 3px #174a43; }
+.driveControls { touch-action: none; user-select: none; -webkit-user-select: none; }
+.steeringMeter { display: block; width: 70px; height: 5px; margin: 7px 0; border-radius: 4px; background: linear-gradient(90deg,#abc2b5 49%,#174a43 49%,#174a43 51%,#abc2b5 51%); }
+.steeringMeter > span { display: block; width: 8px; height: 5px; margin-left: 31px; background: #174a43; border-radius: 3px; }
+@media (max-width: 600px) {
+  .driveControls button { width: 48px; height: 54px; }
+  .driveControls button:nth-child(3) { margin-left: auto; }
+  .driveSettings button { min-height: 44px; }
+  .routePanel { top: 310px; }
+}
+
+/* One mobile panel at a time; the road and horizon stay clear during play. */
+.routePanel > .mobileRouteChoices, .mobileMenu, .mobilePanelTabs, .mobileSettings, .mobileDriveStart, .mobileGuidance, .mapPanel > p { display: none; }
+@media (max-width: 900px), (max-height: 550px) {
+  .viewport, .viewport[data-mode="drive"] { height: 70svh; min-height: 380px; }
+  .viewport.expanded, .viewport.expanded[data-mode="drive"] { height: 100dvh; min-height: 0; }
+  .toolbar { inset: max(8px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) auto max(8px, env(safe-area-inset-left)); gap: 5px; }
+  .toolbar button { min-height: 44px; padding: 0 12px; font-size: 12px; }
+  .modes { padding: 2px; gap: 0; }
+  .viewActions { gap: 4px; }
+  .toolbar .desktopAction { display: none; }
+  .toolbar .mobileMenu { display: block; }
+  .drivingHud { top: calc(max(8px, env(safe-area-inset-top)) + 57px); left: max(8px, env(safe-area-inset-left)); right: max(8px, env(safe-area-inset-right)); max-width: none; padding: 5px 9px; display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; background: #f4f5edeb; }
+  .drivingHud > .streetName { flex: 1; font-size: 11px; min-width: 0; }
+  .drivingHud strong { font-size: 22px; }
+  .drivingHud .gear { font-size: 10px; width: 20px; height: 20px; margin-left: 5px; }
+  .drivingHud .driveSettings, .drivingHud .steeringMeter, .drivingHud .drivingHint { display: none; }
+  .drivingHud[data-warning="true"] .drivingHint { display: block; flex-basis: 100%; font-size: 10px; }
+  .drivingHud > button { min-height: 44px; margin: 4px 0 0; }
+  .mobileGuidance { display: block; position: absolute; left: 12px; top: calc(max(8px, env(safe-area-inset-top)) + 99px); max-width: calc(100% - 24px); padding: 5px 9px; border-radius: 4px; background: #f4f5eddd; color: #173b3c; font-size: 11px; pointer-events: none; }
+  .drivingHud[data-warning="true"] ~ .mobileGuidance { display: none; }
+  .viewport [data-game-panel] { display: none; }
+  .viewport[data-panel="places"] [data-game-panel="places"], .viewport[data-panel="routes"] [data-game-panel="routes"], .viewport[data-panel="map"] [data-game-panel="map"], .viewport[data-panel="settings"] [data-game-panel="settings"] { display: block; }
+  .viewport [data-game-panel] { position: absolute; inset: calc(max(8px, env(safe-area-inset-top)) + 110px) max(8px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(8px, env(safe-area-inset-left)); width: auto; max-width: none; padding: 16px; margin: 0; overflow: auto; overscroll-behavior: contain; border: 1px solid #c4cfc5; border-radius: 7px; background: #f4f5edf5; color: #173b3c; z-index: 2; }
+  .mobilePanelTabs:not([hidden]) { position: absolute; inset: calc(max(8px, env(safe-area-inset-top)) + 58px) max(8px, env(safe-area-inset-right)) auto max(8px, env(safe-area-inset-left)); display: flex; align-items: center; gap: 4px; z-index: 2; }
+  .mobilePanelTabs button, .mobileSettings button { min-height: 44px; padding: 8px 12px; border: 1px solid #7da395; border-radius: 4px; background: #f4f5ed; color: #173b3c; font: inherit; font-size: 12px; cursor: pointer; }
+  .mobilePanelTabs button[aria-pressed="true"] { background: #174a43; color: white; }
+  .mobilePanelTabs > span { font-size: 10px; margin-left: auto; padding: 4px; background: #f4f5ed; border-radius: 3px; }
+  .mobileSettings h3 { margin: 0 0 14px; font-size: 17px; }
+  .mobileSettings button { display: block; width: 100%; text-align: left; margin-bottom: 8px; }
+  .mobileSettings p, .mapPanel > p { display: block; font-size: 12px; line-height: 1.6; }
+  .mapPanel .miniMap { position: relative; inset: auto; width: min(100%, 420px); margin: 0 auto; }
+  .mapPanel .miniMap svg { max-height: 42svh; }
+  .viewport:not([data-panel="none"]) .drivingHud, .viewport:not([data-panel="none"]) .mobileGuidance, .viewport:not([data-panel="none"]) .locationBadge, .viewport:not([data-panel="none"]) .mobileDriveStart { display: none; }
+  .mobileDriveStart { display: block; position: absolute; bottom: 38px; left: 12px; min-height: 44px; border: 0; border-radius: 5px; padding: 10px 18px; background: #174a43; color: white; font-size: 13px; cursor: pointer; }
+  .locationBadge { left: 12px; top: 70px; font-size: 9px; }
+  .driveControls { left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); gap: 6px; justify-content: space-between; }
+  .driveControls button { width: 50px; height: 56px; }
+  .driveControls button:nth-child(3) { margin-left: auto; }
+  .sceneNote { font-size: 9px; padding: 5px 12px; pointer-events: none; }
+  .viewport[data-mode="drive"] .sceneNote { display: none; }
+  .routePanel > strong { font-size: 16px; margin-bottom: 12px; }
+  .routePanel > span { font-size: 14px; line-height: 1.6; }
+  .routePanel > small { font-size: 12px; margin: 12px 0; }
+  .routePanel > div { flex-wrap: wrap; }
+  .routePanel button { min-height: 44px; font-size: 12px; padding: 8px 12px; }
+  .mobilePanelTabs button:focus-visible, .mobileSettings button:focus-visible, .mobileDriveStart:focus-visible { outline: 3px solid #027f75; outline-offset: 2px; }
+}
+@media (max-height: 550px) and (min-width: 601px) {
+  .viewport.expanded .drivingHud { top: max(8px, env(safe-area-inset-top)); left: 180px; right: 165px; padding: 6px 9px; }
+  .expanded .mobileGuidance { top: 60px; left: 180px; }
+  .viewport [data-game-panel] { padding: 12px; }
+  .expanded .driveControls button { width: 58px; height: 54px; }
+}
+
+@media (max-width: 900px), (max-height: 550px) {
+  .routePanel > .mobileRouteChoices { display: flex; flex-direction: column; align-items: stretch; gap: 8px; margin-top: 24px; }
+  .mobileRouteChoices > strong { font-size: 12px; }
+  .mobileRouteChoices button { text-align: left; }
+}
+
+.elevationLab { color: #173b3c; background: #edf2e9; padding: 20px; }
+.elevationLab p { max-width: 760px; line-height: 1.6; }
+.elevationLab output { display: block; padding-top: 12px; font-variant-numeric: tabular-nums; }
+.elevationViewport { height: 460px; width: 100%; background: #d3e0e1; }
+.elevationViewport canvas { display: block; width: 100%; height: 100%; }
+.elevationViewport canvas:focus-visible { outline: 3px solid #087b70; outline-offset: -3px; }
+
+.mapCaption { margin: 0; padding: 5px 3px; background: #f4f5ed; color: #17433d; font-size: 9px; line-height: 1.4; text-align: center; }

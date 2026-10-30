@@ -648,7 +648,7 @@ Refresh the review date only after checking the sources. Do not reuse source-pag
 photos or renderings under the code licence. Vancouver is independent of the City
 and political parties. BotSquad's nested hierarchy and Sports remain intact.
 
-Vancouver's current status is V0.4 — Experimental. UI controls and help live in
+Vancouver's current status is V0.5 — Experimental. UI controls and help live in
 `Explorer.tsx`; the street HUD uses source street names. New data notices must
 identify illustrative street widths, clearance trims and the decorative
 promenade as well as estimated heights. Expand city view means a full-window
@@ -661,6 +661,12 @@ data; retained footprints are from 2015. Free roam is the primary start, three
 additional routes require manual steering, and relaxed pace does not steer.
 Scenic-loop and roadside navigation labels describe only the simulation. Cruise is optional and manual
 input takes over. Bridges are explicitly view-only in the HUD and minimap.
+
+V0.5 phone copy describes Menu as the place for map/routes/settings; opening it
+pauses the car. Pace labels disclose Relaxed 22 km/h and Normal 68 km/h. Playable
+area means the bounded False Creek model, not all Vancouver. The elevation proof
+is development-only and synthetic. Do not advertise Cambie traversal, physical
+mobile acceptance or a measured reduction in curb contacts without evidence.
 
 ## Surrey, City of Adventure
 

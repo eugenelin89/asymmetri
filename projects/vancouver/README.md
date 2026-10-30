@@ -1,4 +1,4 @@
-# Vancouver V0.4 — Experimental
+# Vancouver V0.5 — Experimental
 
 Explore the city. See what's changing.
 
@@ -23,13 +23,13 @@ deployment distinction is unchanged.
 - Drive: arrows/WASD, space to brake, R to reset. Hold the on-screen steering
   and pedal buttons on touch devices. Reverse first brakes forward movement.
   The HUD gives street, speed, gear and persistent obstruction feedback. Recover car
-  finds a checked nearby forward run. The north-up map follows the car; Whole city
-  toggles the overview. Gold is the route; dashed bridges are view-only.
+  finds a checked nearby forward run. The north-up map follows the car; Playable area
+  toggles the bounded False Creek overview. Gold is the route; dashed bridges are view-only.
 - Free roam is the primary start. Village backstreets (1.121 km), West-side corners
   (0.738 km) and North shore crescent (0.946 km) offer manual routes and reverse
   starts. Leave guidance with Free roam. These routes do not offer Cruise.
 - Relaxed pace caps forward speed near 22 km/h without steering for you. Normal
-  retains the existing arcade speed; Wide view provides more turning visibility.
+  reaches about 68 km/h; Wide view provides more turning visibility.
 - Tap a ground street on the map to route there. With map focus, arrows move a
   target 25 m, Enter/Space routes and Escape clears it. Disconnected streets give
   a notice; routes cannot jump through buildings or water.
@@ -43,13 +43,21 @@ deployment distinction is unchanged.
 - Route from car highlights a local street route to the selected place's nearest
   safe roadside stop. Waterfront landmarks may require stopping short; this is
   simulation wayfinding, not real-world directions.
+- On compact screens, Drive automatically expands the city. A compact speed/street
+  strip and pedals leave the playing view clear. Menu pauses motion and opens one
+  panel at a time: places, routes, map or settings. Close resumes with released
+  inputs. Steering buttons accept continuous slides between left and right; each
+  pointer owns its input independently. This is not a physical multitouch claim.
 - Expand city view fills the browser window. Escape/exit returns to the page.
   This portable mode does not depend on the native browser fullscreen API.
 - Lite lowers pixel density and disables shadows. Slow sustained frame rates
   also reduce automatic resolution. Pause 3D releases rendering resources;
   sources and descriptions remain usable. Retry recreates a failed scene.
 
-Driving uses smoothed arcade steering, a full-car safety footprint, short movement
+Driving uses progressive held-key steering, gentler short taps, speed-dependent
+turning limits and prompt return to centre. A road-edge preview warns without
+steering for the driver. Camera sight lines avoid building facades, and illustrative
+bridge decks fade while they obscure the ground-level car. Driving retains a full-car safety footprint, short movement
 substeps and indexed street/building queries. It is constrained to flat ground
 streets, land and building avoidance. Bridge/viaduct traversal, slopes, traffic,
 pedestrians and realistic physics are absent. Unvalidated corners and imperfect old
@@ -139,7 +147,9 @@ download is needed.
 
 `engine.ts` owns rendering lifecycle, navigation, camera and input; `scenery.ts`
 owns procedural models/materials; `input.ts` tracks each pointer/key independently; `physics.ts` owns pure collision/movement and
-safe spawns. `navigation.ts` owns local Dijkstra routing, checked corner smoothing,
+safe spawns. Its shared signatures remain unchanged. `handling.ts` shapes manual
+input without consulting roads/routes; `camera.ts` constrains the chase sight line.
+`DriveControls.tsx` handles pointer capture, slides and release. `navigation.ts` owns local Dijkstra routing, checked corner smoothing,
 route projection and the optional pure-pursuit scenic controller. `Explorer.tsx` owns UI and `MiniMap.tsx` the SVG navigation aid.
 `places.ts` owns reviewed facts. React receives only throttled driving telemetry;
 there is no per-frame React scene update. Context loss preserves readable content;
@@ -152,6 +162,13 @@ Original Vancouver code/models are MIT. City-derived data remains under the Open
 Government Licence – Vancouver; NRCan heights use the Open Government Licence –
 Canada. See `THIRD_PARTY_NOTICES.md` and the public manifest. No OSM data or reference-project source/media was copied.
 
-V0.5 priorities: physical-phone profiling, more forgiving steering feedback,
-current footprint/height matching and independently modelled bridge elevations. Historical/proposal layers, walking, missions,
+V0.5 reuses the immutable V0.4 dataset; no geographic snapshot changed.
+The development-only Local elevation proof mounts `ElevationLab.tsx` on demand.
+`elevation.ts` supplies explicit XYZ connections, smooth ramps, deck-aware full-car
+clearance, height/pitch and separate underpass routing for an original synthetic
+480 m corridor. It is not Cambie Bridge and is excluded from production UI.
+See [bridge research and release conditions](../../docs/VANCOUVER_V05_ELEVATION_2026-10-30.md).
+
+V0.6 priorities: physical-phone profiling, independent human driving feedback,
+current footprint/height matching and verified bridge elevations. Historical/proposal layers, walking, missions,
 multiplayer and geographic expansion remain future work.

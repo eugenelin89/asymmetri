@@ -948,3 +948,18 @@ requires a separate HTML alt attribute. Original code remains MIT licensed.
   icons are decorative/aria-hidden. Mobile panels open on request. Canvas/map labels
   and visible mission/help text remain the non-image context. The existing Labs
   social image is unchanged. JSON has no raster dimensions or image alt text.
+
+## Vancouver V0.5 procedural updates — October 30, 2026
+
+- No geographic, raster, audio, logo, font or external model asset is added or
+  replaced. All V0.1–V0.4 dataset URLs and bytes remain unchanged, including the
+  V0.4 545,239-byte city. Existing City/NRCan attribution continues to apply.
+- Original procedural bridge materials temporarily fade when they obscure the
+  ground-level car. Bridge geometry stays illustrative and view-only; no elevation
+  survey is implied. Interactive canvas dimensions remain responsive; the existing
+  accessible canvas label and six-place text alternative remain available.
+- The separate development-only elevation lab is original MIT code/geometry: a
+  synthetic 480 m corridor with an 8 m deck and a disconnected ground underpass.
+  It is not a public geographic asset or a reconstruction of Cambie Bridge.
+- User-supplied phone screenshots are private diagnostic evidence, not public
+  website assets. They are not copied into the repository or redistributed.

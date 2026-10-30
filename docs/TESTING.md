@@ -615,7 +615,7 @@ times, exact-run evidence links, and the native timeline disclosure on mobile,
 tablet and desktop. No completed turn/request counts or future close times may
 be inferred from citations, heartbeats or an active run label.
 
-## Vancouver V0.4
+## Vancouver V0.5
 
 Run `npm run test:vancouver` for courtyard holes, street distance, bounded
 acceleration/braking/reversing, collision and long-frame anti-tunnelling, geographic
@@ -663,6 +663,24 @@ reverse direction tested only geometrically. Record actual forced WebGL loss,
 restore and Retry behavior using the development-only controls. Check map keyboard
 routing and that blur/background never resumes Cruise or held acceleration.
 Physical multitouch, battery and thermal claims require real device evidence.
+
+V0.5 has 59 tests, adding manual input response, pace/steering limits, frame-rate
+consistency, collision-preserving reverse/braking, non-mutating road-edge preview,
+camera sight-line constraints, and synthetic elevation traversal/grade separation.
+Keep manual keyboard runs distinct from Cruise or generated route following.
+Per-run DOM counters report actual distance, drive-mode seconds (including stops),
+moving seconds, contacts, Recover actions and resets. FPS/minimum are session-wide;
+p95 covers the latest 600 frames. Do not silently treat these as per-route minima.
+Record failed tuning attempts separately rather than discarding them.
+
+On compact screens verify that the default playing view has no persistent map,
+route card or settings pane; only one Menu panel can open, and it stops the car.
+Test closing/Escape, focus trapping, mode switching, pointer cancellation and
+background release. Verify the camera remains useful beside buildings and under
+view-only bridges. Repeated pause/resume and route changes must retain bounded
+renderer resources. Inspect both production builds for absence of local elevation
+and graphics-test controls. Bridge proof results never count as real Cambie
+acceptance. The release report distinguishes simulator, viewport and hardware.
 
 ## Surrey, City of Adventure
 
