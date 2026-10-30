@@ -1,9 +1,9 @@
 # Surrey, City of Adventure V0.3 — City Reconstructed
 
-Candidate for [the existing Surrey route](https://asymmetri.co/labs/surrey).
+Live at [the existing Surrey route](https://asymmetri.co/labs/surrey). Guarded
+activation completed **October 30, 2026 at 20:28:29 UTC / 13:28 PDT**.
 Implementation is on `codex/surrey-adventure-v03`, integrated with shared main
-`1727292`. The recent public name and Labs menu are preserved. Production
-activation is recorded below only after the exact Linux candidate passes.
+`1727292`. The recent public name and Labs menu are preserved.
 
 ## Player-visible changes
 
@@ -104,18 +104,77 @@ extension warnings. Local development's 127.0.0.1 HMR origin restriction was han
 by using the production preview, without weakening development-origin settings.
 Screenshots, source receipts and logs are retained outside Git in owner storage.
 
-## Release status and safeguards
+## Verified Linux release
 
-Latest observed live baseline: source `17a24b4bc2568a40973de2fd2a8fdd497d7a9ea2`,
-build `Njs40iFKI-ZTrJ7cLD-h9`. A full independent Linux runtime is required;
-the prior menu-only build-copy exception does not apply to this feature release.
-The current live runtime and immediately preceding feature runtime remain
-recoverable. Capacity must remain above 192 MiB available memory and 6 GiB disk
-free through staging and activation. Any older-runtime retirement requires a
-verified owner-held lossless archive and inactivity/configuration checks first.
+[Workflow run 41122339319](https://github.com/eugenelin89/asymmetri/actions/runs/41122339319)
+passed for exact source `248c0a5c382abeba98c601081f2624064dd43a30`.
+Artifact `13008089612` contains Node 22.23.1, Next 16.4.3 and Three 0.186.1;
+Next build ID **`VnQohiF4lOLKTwiRVOpzn`**. ZIP digest, inner tar checksum, source
+identity, archive paths and links were verified before staging. The retained tar
+is 254,138,167 compressed bytes / 896,255,828 uncompressed file bytes, SHA-256
+`fe101264a87b5de2abcfeea9ac7484e314127ce4f3e928338a80d0f74947e9e7`.
 
-Production receipt, exact Linux source/build identity, protected-route checks,
-peer-service/configuration checks and rollback location are pending activation.
+The full independent Linux runtime was staged outside the live tree and activated
+with a whole-directory swap. No live dependency install/build, peer service,
+configuration, database, receiver, DNS or TLS change occurred. The final release
+record and journal are documentation-only commits after the tested runtime source.
+
+## Production acceptance
+
+- Private candidate: 15 routes, eight protected host/path checks, 124 tutorial IDs,
+  24 tutorial assets, Motion video/access behavior, Ask/Trade and unchanged
+  Vancouver main content. Surrey V0.1 remains byte-identical; the new city and
+  manifest match committed bytes. All eight published Vancouver data files match.
+- Native Sharp image optimization returned HTTP 200 and a valid PNG.
+- Public apex and www: 14 routes each returned HTTP 200 and protected content,
+  links, canonicals and tutorial assets matched the pre-release baseline.
+  A further 38 data/redirect/route checks passed, including the new and legacy
+  Surrey snapshots on both hosts and existing Vancouver snapshots.
+- Live browser: Continue restored the prior V0.2-origin save at `25.80,29.43`,
+  $20 and the available first case, with explicit migration confirmation.
+  Phone play expanded, help dismissed, Menu showed full status, Return to Player
+  recentered exactly, and Street/Aerial switching preserved position/progress.
+  The actual 390×844 CSS viewport had no horizontal overflow and the game error
+  log was empty. One sampled aerial view rendered 58 draw calls near 59 fps at
+  adaptive DPR 0.75. Desktop browser emulation is not a physical phone after-test.
+- Five preparation guards passed. Minimum available memory was **261.9 MiB**;
+  minimum free disk was **6.3886 GiB**, above the 192 MiB / 6 GiB floors.
+  Continuous activation monitoring sampled six times with no violations.
+- Final health: website active/running/enabled, zero restarts and zero
+  post-activation error entries. The old process's expected shutdown exit-143
+  entry is accounted for separately. Five peer services, 55 configuration hashes,
+  13 unrelated virtual-host responses and the Node executable were unchanged.
+  Final available memory was 371.3 MiB and free disk 6.3886 GiB.
+
+## Retention and recovery
+
+Before staging, an older inactive Surrey V0.1 runtime was streamed losslessly to
+owner storage, checksum/gzip verified and fully compared against its remote tar.
+Its source is `883ebfe5d81a191b9d73e6fd183ec2d589d88be6`, build
+`Ph1NW42c_br8k4AmOXJQ4`; archive size 277,667,840 bytes, SHA-256
+`a1d0d0aa288902f009836a00fda04e9ce05139065cf6ecf8c78a450740abcf00`.
+Only that inactive, unreferenced directory was retired after validation, freeing
+1,028,407,296 bytes. The live runtime and immediate prior feature runtime stayed
+intact throughout. The pre-V04 runtime remains at
+`/var/www/asymmetri-rollback-before-v04-20261030`.
+
+The complete immediately preceding live runtime, source
+`17a24b4bc2568a40973de2fd2a8fdd497d7a9ea2`, build `Njs40iFKI-ZTrJ7cLD-h9`,
+is retained at **`/var/www/asymmetri-rollback-before-surrey-v03-20261030`**.
+It includes executable Linux dependencies. Automatic rollback was armed and not
+needed; no deliberate production rollback drill was performed.
+
+For rollback, verify source/build, clean trees, executable dependencies, resource
+floors and peer/configuration fingerprints. Stop only `asymmetri.service`, move the
+current whole runtime to a new retained failure location, move the verified prior
+runtime to `/var/www/asymmetri`, start that service and repeat protected/public/peer
+checks. Never overwrite retained runtimes or reset their source in place.
+
+Remote receipts: `/var/lib/asymmetri-surrey-v03-release-20261030`. Owner-held
+artifact, older-runtime archive, source cache, screenshots and logs are retained
+outside Git under `deployment-retention/2026-10-30/surrey-v03/`. Artifact expiry on
+GitHub is transport retention only. The feature branch and main were pushed
+normally without force; Vancouver and Richmond integration windows were serialized.
 
 ## Remaining limits
 
