@@ -1,0 +1,103 @@
+{
+  "version": "v0.1-2026-10-30",
+  "retrieved": "2026-10-30",
+  "bbox": [
+    -122.858,
+    49.182,
+    -122.84,
+    49.195
+  ],
+  "origin": [
+    -122.849,
+    49.1895
+  ],
+  "projection": "Local equirectangular metres: x east, z south; 111320 metres/degree, longitude scaled by cos(origin latitude).",
+  "bytes": 2224370,
+  "sha256": "e40173b2355e695e7117dfeb3fd060417ad14af960408931912fdf3be39bf9ec",
+  "attribution": "Contains information licensed under the Open Government Licence \u2013 City of Surrey.",
+  "licence": "https://www.surrey.ca/sites/default/files/media/documents/BulkGISDataRequestFormSecured.pdf",
+  "sources": [
+    {
+      "name": "roads",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "815b720ae36b5b81d00b8fd4f3e8f0b97a9e130cee2580c27c42685ecdf6cd64",
+      "bytes": 147473,
+      "features": 199,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "sidewalks",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/128",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/128/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "66e343cf92e85da0986ae03777416a697a6a6bf68ebcdc58ee2ef692fb636157",
+      "bytes": 385830,
+      "features": 637,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "civic",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/155/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "4fb987459d4ba5245323cf1dfd9e4b90599a206991370cfb660f3d5bf8c5daf7",
+      "bytes": 729798,
+      "features": 799,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "parks",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/256",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/256/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "c47a8476bc82e1eeebd7821f6fcb3b5f7b50d024a0b6198d53d6aa3c4fbf607d",
+      "bytes": 10296,
+      "features": 7,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "rail",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/100",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/100/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "0c411c691a1a3cbfa17be2a57111397628cffe1815c899599db513c3acd57e07",
+      "bytes": 192003,
+      "features": 26,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "signals",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/130",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/130/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "5d198b3fdd57c9d389c17e4b2f64a81aaeccd005e4cc4cc9872c9f8a09d9d076",
+      "bytes": 11850,
+      "features": 35,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "buildings",
+      "url": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0",
+      "request": "https://services5.arcgis.com/YRpe0VKTJytZSSIB/arcgis/rest/services/Building%20Footprnts/FeatureServer/0/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "1fc154d33dac216bfaa36d118d7cddfdad80796823cab80458f469ad996c1fe2",
+      "bytes": 788852,
+      "features": 799,
+      "editingInfo": {
+        "lastEditDate": 1790867227608,
+        "schemaLastEditDate": 1790866923951,
+        "dataLastEditDate": 1790867227608
+      },
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    }
+  ],
+  "processing": [
+    "Bounded WGS84 queries; reject truncated responses. Clip to extent; simplify buildings 0.4 m and roads 0.25 m.",
+    "Sidewalk/path lines buffered to at least 3 m width for gameplay. Road widths inferred from lane counts.",
+    "Source BUILDING_HEIGHT is interpreted as metres and clamped to 4\u2013160 m for stylized massing; units and observation dates are unverified. Facades, trees, street furniture, crosswalks and station apron are illustrative.",
+    "Flat ground is walkable outside 0.55 m buffered building footprints. No terrain, interiors or legal access model.",
+    "Fictional story positions snapped to source sidewalks; no crime data imported."
+  ],
+  "currency": "Retrieval date is not an observation date. Layers have mixed/unspecified survey dates; metadata editingInfo recorded where supplied."
+}

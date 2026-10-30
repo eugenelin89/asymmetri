@@ -633,3 +633,12 @@ V0.3 distinguishes 115 spatially matched 2009 LiDAR heights from 321 illustrativ
 heights; neither is described as current survey data. Scenic-loop and roadside
 navigation labels describe only the simulation. Cruise is optional and manual
 input takes over. Bridges are explicitly view-only in the HUD and minimap.
+
+## Surrey Adventure
+
+`surrey` in `content/site.ts` owns the Labs project entry, label, route, release
+status, metadata and source/licence links. Route-specific fiction disclosure stays
+visible below the prominent game. Quest dialogue belongs to the pure Surrey
+simulation. All incidents/characters are fictional; do not use real crime claims,
+attach wrongdoing to actual businesses or treat homelessness as a threat signal.
+The sealed-case clue is explicitly a future chapter, not a completed second mission.

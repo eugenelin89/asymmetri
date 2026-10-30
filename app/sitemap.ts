@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { botsquadStructure, motion, site, tutorial, vancouver } from "@/content/site";
+import { botsquadStructure, motion, site, tutorial, vancouver, surrey } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9,
     },
-    ...["/sports", "/labs", vancouver.path, "/botsquad", botsquadStructure.research.href, "/about"].map((path) => ({
+    ...["/sports", "/labs", vancouver.path, surrey.path, "/botsquad", botsquadStructure.research.href, "/about"].map((path) => ({
       url: `${site.company.siteUrl}${path}`,
       changeFrequency: "monthly" as const,
       priority: 0.8,

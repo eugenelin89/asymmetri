@@ -17,7 +17,9 @@
     "receiver:build": "npm --prefix receiver run build",
     "receiver:start": "npm --prefix receiver start",
     "test:investment": "node --test tests/investment.test.mjs",
-    "showcase:preview": "npm run receiver:build && node receiver/dist/test/showcase-preview.js"
+    "showcase:preview": "npm run receiver:build && node receiver/dist/test/showcase-preview.js",
+    "test:surrey": "node --test projects/surrey/surrey.test.mjs",
+    "prebuild:next": "npm run test:surrey"
   },
   "dependencies": {
     "ajv": "8.20.0",

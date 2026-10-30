@@ -52,6 +52,19 @@ export const vancouver = {
   metadata: { title: "Vancouver — Explore False Creek | Asymmetri Labs", description: "Explore eastern False Creek in an experimental 3D Vancouver. Aerial navigation, arcade driving and source-backed landmarks. An independent Asymmetri Labs project." },
 } as const;
 
+export const surrey = {
+  name: "Surrey Adventure",
+  path: "/labs/surrey",
+  tagline: "Survive the streets. Discover the stories.",
+  status: "V0.1 — Playable Prototype",
+  description: "An experimental open-world adventure set in a fictionalized Surrey City Centre.",
+  source: { label: "View Surrey Adventure source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
+  license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/surrey/THIRD_PARTY_NOTICES.md" },
+  dataLicence: "https://www.surrey.ca/sites/default/files/media/documents/BulkGISDataRequestFormSecured.pdf",
+  manifest: "/surrey/v0.1-2026-10-30/manifest.json",
+  metadata: { title: "Surrey Adventure — Play the City | Asymmetri Labs", description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets, meet neighbours and recover a missing backpack. Free browser prototype." },
+} as const;
+
 const contactEmail = "info@asymmetri.co";
 
 export const site = {
@@ -88,6 +101,7 @@ export const site = {
         botsquadStructure.investment,
         botsquadStructure.ask,
         { label: vancouver.navLabel, href: vancouver.path },
+        { label: surrey.name, href: surrey.path },
       ],
     },
     { label: "About", href: "/about" },
@@ -100,6 +114,7 @@ export const site = {
     { label: divisions.sports.product.name, href: divisions.sports.product.path },
     { label: divisions.labs.product.name, href: divisions.labs.product.path },
     { label: vancouver.name, href: vancouver.path },
+    { label: surrey.name, href: surrey.path },
   ] satisfies NavItem[],
   footerNavigation: [
     { label: "Motion tutorial", href: "/tutorial" },
@@ -1086,6 +1101,10 @@ export const botsquad = {
 
 const labsProjects: readonly LabsProject[] = [
   {
+    name: surrey.name, description: surrey.description, status: surrey.status,
+    detail: { label: "Play Surrey Adventure", href: surrey.path }, source: surrey.source, license: surrey.license,
+  },
+  {
     name: botsquad.name,
     description: "An open-source project for persistent AI teams, and home to BotSquad Research.",
     status: botsquad.status,
@@ -1108,7 +1127,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and Vancouver.",
+      "Asymmetri Labs is our playground for open-source experiments. Explore BotSquad, Vancouver and Surrey Adventure.",
   },
   headline: "A playground for ideas.",
   introduction:

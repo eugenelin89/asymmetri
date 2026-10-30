@@ -12,7 +12,8 @@ Asymmetri.co
     │   ├── BotSquad Research
     │   │   └── BotSquad Trade
     │   └── Ask BotSquad
-    └── Vancouver
+    ├── Vancouver
+    └── Surrey Adventure
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -38,6 +39,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to Sports, Labs and their products |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
+| `/labs/surrey` | Surrey Adventure V0.1: a fictional third-person city adventure with a complete backpack mission |
 | `/labs/vancouver` | Vancouver V0.3: experimental False Creek exploration, a continuous scenic drive and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
@@ -231,3 +233,8 @@ Vancouver-specific code/models are MIT; City data has separate attribution.
 The [Linux candidate workflow](.github/workflows/website-linux-candidate.yml) builds
 public website source on Node 22.23.1 without production credentials or automatic
 deployment. Releases still use the documented SSH candidate/rollback workflow.
+
+## Surrey Adventure
+
+A separate playable Labs game with City of Surrey geography, walking, encounters
+and an introductory quest. [Controls, architecture, sources and limits](projects/surrey/README.md).

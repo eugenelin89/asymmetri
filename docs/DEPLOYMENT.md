@@ -1359,3 +1359,15 @@ lossless owner-held archive, SHA-256, gzip check and full remote tar comparison,
 plus rechecking inactivity, clean source/build and absence of configuration refs.
 Keep the final V0.1 rollback and pre-Vancouver runtime as well. No host upgrade,
 configuration change, service change or threshold exception is authorized here.
+
+## Surrey Adventure release candidate
+
+Surrey adds `/labs/surrey` and a separate static map; use the same isolated Linux
+candidate and whole-directory activation procedure as Vancouver. The user's
+October 30 request authorizes a dedicated feature branch and production release
+only after existing safeguards pass. The `prebuild:next` hook includes Surrey tests in the exact-SHA
+Linux build. Preserve Vancouver snapshots and the complete immediately preceding
+runtime. The 192 MiB memory and 6 GiB disk floors, Node 22, existing proxy/services,
+protected routes and rollback rules remain unchanged. Do not activate from a Mac
+build or bypass a capacity guard. If blocked, retain the tested feature candidate
+and report the measured blocker; CI does not automatically deploy the website.

@@ -254,3 +254,11 @@ V0.3 adds `build_v03.py --height-source /external/cache/building-footprints-2009
 Use the pinned bounded request/digest in its manifest; the importer rejects a
 changed upstream response or changed existing output. Node tests need no Python
 or network and drive the complete circuit in both directions at four frame rates.
+
+## Surrey Adventure
+
+`npm run dev:next` serves `/labs/surrey`; choose Play Now to load the map and WebGL2
+runtime. Run `npm run test:surrey` for deterministic gameplay/geometry tests.
+The optional offline importer uses its own Python environment and external cache;
+normal development, testing and builds use committed assets without geographic
+network calls. See `projects/surrey/README.md` for controls and reproducibility.

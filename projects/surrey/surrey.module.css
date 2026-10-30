@@ -1,0 +1,898 @@
+.page {
+  background: var(--surface, #0c1111);
+  color: var(--ink, #edf2e8);
+}
+.intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.3rem 0 1.6rem;
+}
+.breadcrumb {
+  display: flex;
+  gap: 0.7rem;
+  font-size: 0.73rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: #a8bdb4;
+  margin-bottom: 0.9rem;
+}
+.title {
+  font-size: clamp(2.1rem, 4.7vw, 4.7rem);
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+  font-weight: 650;
+  margin: 0;
+}
+.title span {
+  color: #86c6ad;
+}
+.tagline {
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  margin: 0.8rem 0 0;
+  color: #bac9c3;
+}
+.edition {
+  max-width: 17rem;
+  font-size: 0.8rem;
+  color: #a6b7ae;
+  line-height: 1.6;
+}
+.badge {
+  display: inline-block;
+  border: 1px solid #426354;
+  border-radius: 2rem;
+  padding: 0.3rem 0.75rem;
+  margin-bottom: 0.6rem;
+  color: #bbe1ca;
+  font-size: 0.67rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.experience {
+  border: 1px solid #3e5049;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #142421;
+}
+.viewport {
+  height: min(72vw, 740px);
+  min-height: 560px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #233d38;
+  color: #f2f2e7;
+}
+.expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  height: 100dvh;
+  min-height: 0;
+  border-radius: 0;
+}
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+.canvas canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+  outline-offset: -4px;
+}
+.experience button {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  min-height: 40px;
+  border: 1px solid #6e8277;
+  background: #203a34;
+  border-radius: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  transition: background 0.15s;
+}
+.experience button:hover {
+  background: #385b4c;
+}
+.experience button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+.experience button:focus-visible,
+.experience input:focus-visible,
+.instructions summary:focus-visible {
+  outline: 3px solid #ffd17d;
+  outline-offset: 3px;
+}
+.experience kbd {
+  font: inherit;
+  font-size: 0.72rem;
+  border: 1px solid #81958a;
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.25rem;
+  margin-left: 0.25rem;
+}
+.experience .primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-width: 200px;
+  background: #f0c477;
+  color: #1c3029;
+  border: 0;
+  font-weight: 700;
+  padding: 0.8rem 1.1rem;
+}
+.experience .primary:hover {
+  background: #ffda98;
+}
+.toolbar {
+  position: absolute;
+  z-index: 3;
+  inset: 16px 18px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toolbar > div {
+  display: flex;
+  gap: 0.4rem;
+}
+.toolbar button {
+  background: #142e29ed;
+  font-size: 0.72rem;
+}
+.worldLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  text-shadow: 0 1px 6px #152c24;
+}
+.worldLabel span {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+}
+.startScreen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #163b32 15%, #2e5c50 55%, #75a696);
+  overflow: hidden;
+}
+.startCopy {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2rem, 6vw, 6rem);
+  max-width: 620px;
+}
+.eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #c8dbcb;
+}
+.startCopy h2 {
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  font-weight: 600;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  margin: 1.1rem 0;
+}
+.startCopy > p:not(.eyebrow) {
+  color: #d1ddd1;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 1.2rem 0 2rem;
+}
+.startCopy small {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.7rem;
+  color: #c4d4c7;
+}
+.startTag {
+  position: absolute;
+  right: 5%;
+  bottom: 15%;
+  transform: rotate(-6deg);
+  padding: 1.3rem 1.7rem;
+  background: #e7d9ae;
+  color: #173e35;
+  border: 5px solid #d6c696;
+  border-radius: 0.6rem;
+  box-shadow: 0 20px 40px #163d3444;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+.startTag strong {
+  display: block;
+  font-size: 3rem;
+  letter-spacing: -0.04em;
+}
+.startTag span {
+  font-size: 0.5rem;
+}
+.coverCity {
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+}
+.coverCity:after {
+  content: "";
+  position: absolute;
+  bottom: -25%;
+  left: 35%;
+  width: 60%;
+  height: 70%;
+  background: #22463f;
+  transform: rotate(-25deg);
+  border: 16px solid #a6b5a033;
+}
+.coverCity span {
+  position: absolute;
+  bottom: 10%;
+  width: 8%;
+  height: 45%;
+  left: 55%;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 15px, #8cb8ac66 16px 18px),
+    #29554f;
+  transform: skewY(-13deg);
+  border-right: 22px solid #20433e;
+}
+.coverCity span:nth-child(2) {
+  left: 67%;
+  height: 70%;
+  width: 11%;
+}
+.coverCity span:nth-child(3) {
+  left: 84%;
+  height: 40%;
+  width: 13%;
+}
+.coverCity span:nth-child(4) {
+  left: 45%;
+  height: 30%;
+}
+.coverCity span:nth-child(5) {
+  left: 94%;
+  height: 64%;
+}
+.coverCity span:nth-child(6) {
+  left: 76%;
+  height: 20%;
+  width: 17%;
+}
+.coverCity span:nth-child(7) {
+  left: 28%;
+  height: 12%;
+  width: 25%;
+}
+.screen {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: #112b27f5;
+}
+.screen h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+}
+.screen p {
+  max-width: 34rem;
+  color: #c0d2c4;
+  font-size: 0.95rem;
+}
+.menuActions {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+.mission {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  max-width: 340px;
+  padding: 1rem 1.2rem;
+  background: #132e2bef;
+  border-left: 3px solid #f0c477;
+  border-radius: 0 0.5rem 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  box-shadow: 0 3px 20px #0a221b26;
+}
+.mission strong {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+.mission > span:last-child {
+  font-size: 0.75rem;
+  color: #ffd17d;
+}
+.muted {
+  color: #b6c8be;
+}
+.vitals {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  width: 200px;
+  padding: 0.8rem 1rem;
+  background: #17322bef;
+  border-radius: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+}
+.vitals > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.vitals span {
+  width: 57px;
+}
+.vitals meter {
+  width: 80px;
+  height: 0.6rem;
+  accent-color: #b2d7a0;
+}
+.vitals b {
+  font-weight: 400;
+  width: 20px;
+  text-align: right;
+}
+.vitals > button {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #496254;
+  border-radius: 0;
+  padding: 0.5rem 0 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+.vitals > button span {
+  width: auto;
+  font-size: 0.65rem;
+}
+.inventory {
+  position: absolute;
+  right: 20px;
+  top: 210px;
+  max-width: 240px;
+  padding: 1rem;
+  background: #17332cf5;
+  z-index: 4;
+  font-size: 0.8rem;
+  border: 1px solid #698270;
+  border-radius: 0.4rem;
+}
+.inventory ul {
+  padding: 1rem;
+  list-style: disc;
+}
+.inventory p {
+  padding: 0.7rem 0;
+}
+.map {
+  position: absolute;
+  bottom: 44px;
+  left: 20px;
+  width: 180px;
+  height: 180px;
+  background: #223d3a;
+  border: 2px solid #d2ddc67a;
+  border-radius: 0.65rem;
+  box-shadow: 0 4px 20px #132a3055;
+  overflow: hidden;
+  pointer-events: none;
+}
+.map svg {
+  width: 100%;
+  height: 100%;
+}
+.north {
+  position: absolute;
+  z-index: 1;
+  top: 0.45rem;
+  left: 0.5rem;
+  background: #15362bda;
+  padding: 0.15rem 0.3rem;
+  font-size: 0.65rem;
+}
+.mapCaption {
+  position: absolute;
+  bottom: 0.3rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  background: #17372ad0;
+  padding: 0.2rem;
+}
+.wideMap {
+  width: min(470px, 70%);
+  height: auto;
+  aspect-ratio: 1;
+  z-index: 5;
+  bottom: 44px;
+}
+.location {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  font-size: 0.65rem;
+  background: #132f2bdd;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+}
+.dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: #c0dba9;
+  border-radius: 50%;
+  margin-right: 0.3rem;
+}
+.prompt {
+  position: absolute;
+  bottom: 35px;
+  left: 220px;
+  right: 220px;
+  text-align: center;
+  font-size: 0.75rem;
+}
+.prompt > span {
+  display: inline-block;
+  padding: 0.5rem 0.75rem;
+  background: #15382be5;
+  border-radius: 0.35rem;
+}
+.prompt button {
+  background: #173329ed;
+}
+.prompt kbd {
+  margin: 0 0.5rem 0 0;
+  color: #ffd27f;
+}
+.notice {
+  position: absolute;
+  top: 230px;
+  left: 20px;
+  max-width: 340px;
+  line-height: 1.5;
+  padding: 0.75rem 1rem;
+  background: #234b3ded;
+  border: 1px solid #80a18d;
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+}
+.danger {
+  background: #592d2ced;
+  border-color: #e0aa7b;
+  color: #ffddba;
+}
+.dialogue {
+  position: absolute;
+  z-index: 6;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(570px, calc(100% - 32px));
+  background: #152e27fa;
+  border: 1px solid #8aa084;
+  border-top: 3px solid #f0c477;
+  border-radius: 0.6rem;
+  padding: 1.5rem 1.7rem;
+  box-shadow: 0 8px 40px #10282070;
+}
+.dialogue h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+.dialogue p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: #dbe3d3;
+  margin: 0.7rem 0 1.2rem;
+}
+.dialogue .primary {
+  margin-left: auto;
+  font-size: 0.8rem;
+  min-width: 160px;
+}
+.touchControls {
+  display: none;
+}
+.settings {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1.1rem;
+  border-top: 1px solid #445f50;
+  font-size: 0.7rem;
+  color: #c7d6cb;
+}
+.settings > div {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.settings label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  cursor: pointer;
+}
+.settings input {
+  accent-color: #b7d3a2;
+  width: 17px;
+  height: 17px;
+}
+.settings label span {
+  color: #96ad9f;
+  font-size: 0.65rem;
+}
+.settings button {
+  font-size: 0.68rem;
+  padding: 0.25rem 0.5rem;
+}
+.instructions {
+  padding: 0.9rem 1.1rem;
+  border-top: 1px solid #354e40;
+  font-size: 0.8rem;
+  color: #bacfc0;
+}
+.instructions summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.instructions summary span {
+  font-weight: 400;
+  color: #9db3a4;
+  font-size: 0.7rem;
+  margin-left: 0.7rem;
+}
+.instructions p {
+  line-height: 1.7;
+  margin: 0.8rem 0;
+  max-width: 70rem;
+}
+.notes {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  margin: 2.3rem 0 3rem;
+  font-size: 0.78rem;
+  color: #acbdb2;
+  line-height: 1.7;
+}
+.notes h2 {
+  font-size: 0.85rem;
+  color: #e1e8de;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+.notes a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #c4d9b8;
+}
+.notes p + p {
+  margin-top: 0.7rem;
+}
+.links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+@media (pointer: coarse), (max-width: 700px) {
+  .touchControls {
+    display: flex;
+    position: absolute;
+    bottom: 55px;
+    left: 20px;
+    right: 20px;
+    justify-content: space-between;
+    align-items: end;
+    pointer-events: none;
+  }
+  .touchControls button {
+    pointer-events: auto;
+    touch-action: none;
+    user-select: none;
+    background: #1b3e31df;
+    min-width: 46px;
+    min-height: 46px;
+    font-size: 1.2rem;
+  }
+  .dpad {
+    display: grid;
+    grid-template-columns: repeat(3, 46px);
+    grid-template-rows: repeat(2, 46px);
+    gap: 4px;
+  }
+  .dpad button[data-direction="forward"] {
+    grid-column: 2;
+  }
+  .dpad button[data-direction="left"] {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .dpad button[data-direction="back"] {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .dpad button[data-direction="right"] {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .touchActions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: end;
+  }
+  .touchActions button:first-child {
+    font-size: 0.7rem;
+  }
+  .map {
+    bottom: 180px;
+    width: 140px;
+    height: 140px;
+  }
+  .wideMap {
+    width: min(450px, 70%);
+    height: auto;
+  }
+  .prompt {
+    bottom: 12px;
+    left: 20px;
+    right: 20px;
+  }
+  .location {
+    bottom: 159px;
+  }
+  .notice {
+    top: 205px;
+  }
+}
+@media (max-width: 700px) {
+  .intro {
+    display: block;
+    padding: 1.6rem 0 1.2rem;
+  }
+  .edition {
+    max-width: none;
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .edition p {
+    display: none;
+  }
+  .badge {
+    margin: 0;
+  }
+  .viewport {
+    height: 740px;
+    min-height: 0;
+  }
+  .startCopy {
+    padding: 2rem;
+  }
+  .startCopy h2 {
+    font-size: 3.2rem;
+  }
+  .startTag {
+    right: 8%;
+    bottom: 7%;
+  }
+  .coverCity span {
+    bottom: 3%;
+  }
+  .toolbar {
+    inset: 12px 12px auto;
+  }
+  .toolbar button {
+    padding: 0.3rem 0.5rem;
+  }
+  .toolbar kbd {
+    display: none;
+  }
+  .mission {
+    top: 70px;
+    left: 12px;
+    max-width: calc(100% - 24px);
+    right: 12px;
+    padding: 0.7rem 0.85rem;
+  }
+  .mission strong {
+    font-size: 0.85rem;
+  }
+  .mission .eyebrow {
+    font-size: 0.55rem;
+  }
+  .vitals {
+    top: 187px;
+    right: 12px;
+    width: 150px;
+    padding: 0.6rem 0.7rem;
+  }
+  .vitals meter {
+    width: 45px;
+  }
+  .vitals span {
+    font-size: 0.52rem;
+    width: 48px;
+  }
+  .vitals b {
+    font-size: 0.5rem;
+  }
+  .vitals > button {
+    font-size: 0.8rem;
+  }
+  .vitals > button span {
+    font-size: 0.55rem;
+  }
+  .map {
+    left: 12px;
+    bottom: 50px;
+    width: 140px;
+    height: 140px;
+  }
+  .wideMap {
+    width: calc(100% - 24px);
+    height: auto;
+    bottom: 50px;
+  }
+  .location {
+    left: 12px;
+    font-size: 0.58rem;
+  }
+  .prompt {
+    bottom: 15px;
+    left: 155px;
+    right: 12px;
+    font-size: 0.6rem;
+  }
+  .notice {
+    left: 12px;
+    top: 300px;
+    right: 12px;
+    max-width: none;
+    font-size: 0.7rem;
+  }
+  .dialogue {
+    bottom: 20px;
+    padding: 1rem 1.2rem;
+  }
+  .dialogue p {
+    font-size: 0.85rem;
+  }
+  .inventory {
+    top: 295px;
+    right: 12px;
+  }
+  .settings {
+    padding: 0.7rem;
+  }
+  .settings label span {
+    display: none;
+  }
+  .notes {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .expanded {
+    height: 100dvh;
+  }
+  .screen {
+    padding: 1.3rem;
+  }
+  .menuActions {
+    font-size: 0.72rem;
+  }
+}
+@media (max-width: 700px) {
+  .map {
+    bottom: 178px;
+    width: 130px;
+    height: 130px;
+  }
+  .wideMap {
+    width: calc(100% - 24px);
+    height: auto;
+    bottom: 175px;
+  }
+  .prompt {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+  }
+  .location {
+    bottom: 152px;
+  }
+  .touchControls {
+    left: 12px;
+    right: 12px;
+    bottom: 46px;
+  }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .expanded .mission {
+    top: 65px;
+    max-width: 265px;
+  }
+  .expanded .vitals {
+    top: 65px;
+  }
+  .expanded .map {
+    width: 115px;
+    height: 115px;
+    bottom: 45px;
+    left: auto;
+    right: 20px;
+  }
+  .expanded .wideMap {
+    width: 310px;
+    height: 310px;
+  }
+  .expanded .notice {
+    top: 170px;
+    max-width: 265px;
+  }
+  .expanded .dialogue {
+    bottom: 12px;
+    max-height: 85vh;
+    overflow: auto;
+  }
+  .expanded .touchControls {
+    bottom: 35px;
+    right: 160px;
+  }
+  .expanded .location {
+    bottom: 12px;
+  }
+  .expanded .prompt {
+    bottom: 12px;
+    left: 200px;
+    right: 160px;
+  }
+  .expanded .mission strong {
+    font-size: 0.8rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience button {
+    transition: none;
+  }
+}

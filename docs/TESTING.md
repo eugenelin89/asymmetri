@@ -643,3 +643,16 @@ manual takeover, destination guidance, whole-city/local map toggle and mobile
 portrait/landscape layouts. Record frame rate, rolling frame-time p95, collisions,
 distance, loop count and resource counts with environment and duration. A single
 idle frame or pure simulation is not a substitute for browser performance evidence.
+
+## Surrey Adventure
+
+Run `npm run test:surrey` alongside Vancouver and investment regression tests for
+city-game changes. It exercises the real snapshot and full mission by movement
+through the collision world, not by teleporting between quest stages. Separate
+unit cases cover stage gating, encounters, frame rates, recovery and asset failure.
+The `prebuild:next` hook runs Surrey tests inside the existing Linux candidate
+workflow before packaging; the workflow file itself is unchanged.
+Browser acceptance includes the complete backpack quest and reward, camera/input,
+map, pause, recovery/reset, gentle/Lite settings, dialogue focus, responsive
+controls, overflow, console errors and cleanup on route exit. Record physical
+mobile tests separately from viewport emulation. See the project README for limits.

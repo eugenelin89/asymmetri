@@ -872,3 +872,21 @@ They are not current navigation.
   original bridge visuals now sample level water decks and smooth land approaches.
   They are illustrative/view-only. Accessible canvas/map labels, visible bridge
   notice, source panels and six no-JS place descriptions provide alternatives.
+
+## Surrey Adventure V0.1 — October 30, 2026
+
+- `public/surrey/v0.1-2026-10-30/city.json`: 2,224,370 bytes of bounded City of Surrey
+  derived geography, 786 building parts plus road/sidewalk/park/rail/signal layers.
+  Source queries, raw/output digests, extent, metadata dates and transformations
+  are recorded in the adjacent `manifest.json`. OGL–City of Surrey attribution is
+  visible on the game page; no City mark, OSM or crime dataset was imported.
+- `projects/surrey/scenery.ts`: original runtime-generated character meshes,
+  low-poly trees, building facades, lamps, rail structures and signs. Window
+  texture is 128×128; sign textures are 512×96. Artistic details/heights are
+  explicitly illustrative. MIT scope is documented in the project licence.
+- `projects/surrey/surrey.module.css`: original code-native skyline start screen;
+  no downloaded photo or generated bitmap. It introduces the game, with visible
+  text equivalents and decorative shapes hidden from assistive technology.
+- North-up SVG map shares the loaded geographic asset; accessible labels report
+  player location, objective and marker meanings. No exported map image.
+- The existing Labs social image is reused without changing its bytes or rights.
