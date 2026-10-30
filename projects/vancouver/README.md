@@ -169,6 +169,15 @@ clearance, height/pitch and separate underpass routing for an original synthetic
 480 m corridor. It is not Cambie Bridge and is excluded from production UI.
 See [bridge research and release conditions](../../docs/VANCOUVER_V05_ELEVATION_2026-10-30.md).
 
-V0.6 priorities: physical-phone profiling, independent human driving feedback,
-current footprint/height matching and verified bridge elevations. Historical/proposal layers, walking, missions,
-multiplayer and geographic expansion remain future work.
+V0.6 research failed manual release acceptance, so V0.5 remains public. Development
+adds a baseline/candidate switch, local driving evidence and a real-data Cambie lab;
+all default to stable handling and are excluded from production UI. Candidate D
+improves an isolated high-speed input response but regresses fresh North manual
+acceptance. Cambie now uses a bounded City alignment plus 2025 provincial DSM/DEM,
+with explicit height/grade separation, and remains disconnected from public roads.
+See [V0.6 results and limitations](../../docs/VANCOUVER_V06_RESEARCH_2026-10-30.md)
+and [sources/reproduction](../../docs/VANCOUVER_V06_ELEVATION_2026-10-30.md).
+
+V0.7 priorities: matched human driving tests, curb separation, camera occlusion,
+verified Cambie lanes/terrain connections and authorized physical-device profiling.
+Historical/proposal layers, walking, missions and geographic expansion remain future work.

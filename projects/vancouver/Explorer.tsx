@@ -8,6 +8,7 @@ import type { City, DriveRoute, DriveTelemetry, Explorer, Input, Mode, Point2 } 
 import styles from "./vancouver.module.css";
 
 const ElevationLab = process.env.NODE_ENV !== "production" ? lazy(() => import("./ElevationLab")) : null;
+const CambieLab = process.env.NODE_ENV !== "production" ? lazy(() => import("./development/CambieLab")) : null;
 const initialDrive: DriveTelemetry = { speed: 0, reverse: false, street: "Olympic Village", x: 298, z: 89, yaw: 0, blocked: false };
 export function VancouverExplorer() {
   const mount = useRef<HTMLDivElement>(null), viewport = useRef<HTMLDivElement>(null), fullscreenButton = useRef<HTMLButtonElement>(null);
@@ -21,6 +22,7 @@ export function VancouverExplorer() {
   const [pace, setPace] = useState<"relaxed" | "normal">("relaxed"), [camera, setCamera] = useState<"chase" | "wide">("chase");
   const [panel, setPanel] = useState<"places" | "routes" | "map" | "settings" | null>(null);
   const [compact, setCompact] = useState(false), [showElevation, setShowElevation] = useState(false);
+  const [showCambie, setShowCambie] = useState(false);
   const place = places.find((p) => p.id === selected) ?? places[0];
   const ready = status === "ready" && enabled;
   const focusCanvas = () => mount.current?.querySelector("canvas")?.focus({ preventScroll: true });
@@ -156,7 +158,9 @@ export function VancouverExplorer() {
       {city?.drives?.map((item) => <article key={item.id}><h3>{item.title}</h3><p>{item.description}</p><button type="button" disabled={!ready} onClick={() => startDrive(item.id)}>Drive {item.title} →</button></article>)}
     </div>
     {process.env.NODE_ENV !== "production" && <details className={styles.devDiagnostics}><summary>Local graphics recovery test</summary><button type="button" onClick={() => engine.current?.testGraphics(true)}>Interrupt WebGL</button><button type="button" onClick={() => engine.current?.testGraphics(false)}>Restore WebGL</button></details>}
+    {process.env.NODE_ENV !== "production" && <details className={styles.devDiagnostics}><summary>Local handling comparison</summary><p>V0.5 is the default. The V0.6 research candidate has not passed manual acceptance. Select a model, then restart the same route. Use the same pace and camera; steer manually. Switching stops the car and clears run measurements.</p><button type="button" onClick={() => engine.current?.compareHandling?.(true)}>Use V0.5 baseline</button><button type="button" onClick={() => engine.current?.compareHandling?.(false)}>Use V0.6 candidate</button></details>}
     {ElevationLab && <details className={styles.devDiagnostics} onToggle={(event) => setShowElevation(event.currentTarget.open)}><summary>Local elevation proof</summary>{showElevation && <Suspense fallback={<p>Preparing isolated model…</p>}><ElevationLab /></Suspense>}</details>}
+    {CambieLab && <details className={styles.devDiagnostics} onToggle={(event) => setShowCambie(event.currentTarget.open)}><summary>Local Cambie research candidate</summary>{showCambie && <Suspense fallback={<p>Preparing Cambie candidate…</p>}><CambieLab /></Suspense>}</details>}
     <div className={styles.discovery} id="vancouver-places">
       <div className={styles.directory}>
         <div className={styles.sectionLabel}>SIX PLACES TO START <button type="button" className={styles.textToggle} onClick={() => { setEnabled((value) => !value); setStatus("loading"); setMode("aerial"); }}>{enabled ? "Pause 3D" : "Resume 3D"}</button></div>

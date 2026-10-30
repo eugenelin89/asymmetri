@@ -1012,3 +1012,16 @@ Surrey V0.4 adds two local JSON provenance assets in `/surrey/v0.4-2026-10-30/` 
   images or generated bitmap art. Rendered in the existing accessible game canvas;
   controls, status and map provide textual equivalents. Railway supports are
   illustrative, spaced and kept off paved roads; boarding is not claimed.
+
+## Vancouver V0.6 research data — October 30, 2026
+
+No public image or production geographic asset changes. The source-repository-only
+`projects/vancouver/development/cambie-research-v06-2026-10-30.json` is a 28,668-byte
+City-alignment/provincial-DSM/DEM derivative, excluded from production bundles.
+SHA256 `7ea36275bfd34834efa7e404efe5a5ce6379503919b4064efc4636990b0928d8`.
+Source acquisition/retrieval, transformations, exact inputs and Open Government
+Licence–BC/Vancouver attribution are in [the elevation report](VANCOUVER_V06_ELEVATION_2026-10-30.md).
+Widths/cross-sections are illustrative; no survey or public bridge-driving claim.
+Dimensions/alt text are not applicable to structured data. Test screenshots and
+source PDFs remain in private evidence retention; no third-party imagery or owner
+phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immutable.

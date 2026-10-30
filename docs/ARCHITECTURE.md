@@ -729,3 +729,7 @@ third top-level view. Simulation pauses cars/traffic/trains in Aerial Explore.
 Schema4 explicitly migrates old saves and stops cars on reload. `resources.ts`
 now disposes line geometry/materials too. Vancouver/Richmond engines are untouched.
 See the project README and V0.5 release record for bounds and verification.
+
+## Vancouver V0.6 research boundary
+
+V0.5 remains public after failed manual candidate acceptance. `projects/vancouver/development/` contains the explicitly selected handling/camera comparison, bounded in-memory evidence and real-data Cambie lab; production conditional imports omit these modules. Stable physics/handling/camera and published data are unchanged. `elevation.ts` extends the isolated proof with curved profiles and explicit connected surfaces. See [the decision and evidence](VANCOUVER_V06_RESEARCH_2026-10-30.md).

@@ -346,3 +346,114 @@ test('camera follows a clear street and constrains a lagged position inside a co
  const lagged=fitDrivingCamera([0,5],[8,-5],clear);
  assert.ok(lagged.fraction<1&&clear([lagged.x,lagged.z]));
 });
+
+const {createCameraClearance,fitSpatialCamera}=await import('./development/camera-v06.ts');
+const {createManualDriver:createCandidateDriver}=await import('./development/handling-v06.ts');
+test('spatial camera permits open water and low roofs but rejects tall facades across index seams',()=>{
+ const clear=createCameraClearance([{id:'wall',height:10,heightMethod:'fixture',shape:[[[62,-8],[68,-8],[68,8],[62,8],[62,-8]]]}],inPolygon);
+ assert.equal(clear({x:63,y:8,z:0}),false);assert.equal(clear({x:65,y:8,z:0}),false);
+ assert.equal(clear({x:65,y:14,z:0}),true);assert.equal(clear({x:0,y:10,z:0}),true);
+ const origin={x:60,y:1.4,z:0},desired={x:75,y:22,z:0};
+ const fit=fitSpatialCamera(origin,desired,clear);assert.ok(fit.x<desired.x);assert.equal(fit.y,22);assert.ok(clear(fit));
+});
+test('spatial camera protects a near-plane side missed by diagonal-only clearance',()=>{
+ const origin={x:0,y:1.4,z:0},desired={x:0,y:10,z:-15};
+ const clear=p=>!(p.x>.6&&p.z<-10);
+ const fit=fitSpatialCamera(origin,desired,clear,1.2);
+ assert.ok(fit.z>-10);assert.equal(fit.y,10);
+ assert.deepEqual(fitSpatialCamera(origin,desired,()=>true),desired);
+});
+test('manual heading response remains bounded at speed without sacrificing a low-speed turn',()=>{
+ const run=(speed,hold)=>{const driver=createCandidateDriver(stepCar);let car={x:0,z:0,yaw:0,speed,steer:0};for(let i=0;i<(hold+.4)*120;i++)car=driver.step({...car,speed},{throttle:1,steering:i<hold*120?1:0,brake:false},'normal',1/120,()=>true);return car.yaw;};
+ // Short presses remain useful at low speed; holding longer is more nearly
+ // proportional. Faster travel must never amplify the heading response.
+ assert.ok(run(19,.3)<run(6,.3));
+ assert.ok(run(6,2)>1.6&&run(6,2)<2);
+ assert.ok(run(19,2)<1.7);
+});
+test('candidate handling preserves the V0.5 Relaxed response, including release and reverse',async()=>{
+ const legacy=createManualDriver(stepCar),candidate=createCandidateDriver(stepCar);
+ let a={x:0,z:0,yaw:0,speed:0,steer:0},b={...a};
+ for(let i=0;i<1800;i++){
+   const input={throttle:i<1200?1:-1,steering:i%180<80?1:i%180<130?-1:0,brake:i%400>380};
+   a=legacy.step(a,input,'relaxed',1/120,()=>true);b=candidate.step(b,input,'relaxed',1/120,()=>true);
+   assert.deepEqual(b,a);
+ }
+});
+const {createDrivingEvidence}=await import('./development/driving-evidence.ts');
+test('driving evidence distinguishes presses, rapid reversals, release rotation and pauses',()=>{
+ const evidence=createDrivingEvidence(),start={x:0,z:0,yaw:0,speed:6},turned={...start,yaw:.05};
+ evidence.step(start,turned,1,.1,16);evidence.step(turned,{...turned,yaw:.06},0,.1,17);
+ evidence.step(turned,turned,-1,.1,18);const before=evidence.read();evidence.step(start,turned,1,0,1000);
+ assert.deepEqual(evidence.read(),before);assert.equal(before.steeringPresses,2);assert.equal(before.rapidOppositePresses,1);
+ assert.ok(before.maxReleaseDegrees>.5&&before.maxReleaseDegrees<.6);assert.equal(before.frameP95Ms,18);
+});
+
+const cambie=JSON.parse(readFileSync(new URL('./development/cambie-research-v06-2026-10-30.json',import.meta.url),'utf8'));
+const cambieGround=p=>!cambie.water.some(polygon=>inPolygon(p,polygon));
+const cambieWorld=createElevatedWorld(cambie.surfaces,cambieGround);
+const {createProfileSampler}=await import('./elevation.ts');
+test('Cambie research data has immutable identity, one datum, real source dates and explicit limits',()=>{
+ assert.equal(createHash('sha256').update(readFileSync(new URL('./development/cambie-research-v06-2026-10-30.json',import.meta.url))).digest('hex'),'7ea36275bfd34834efa7e404efe5a5ce6379503919b4064efc4636990b0928d8');
+ assert.equal(cambie.publicDriving,false);assert.equal(cambie.lidarAcquiredAt,'2025-08-26');assert.match(cambie.verticalCrs,/CGVD2013/);assert.match(cambie.notice,/not surveyed/);
+ const deck=cambie.surfaces.find(s=>s.id==='main-deck');assert.ok(Math.max(...deck.profile.map(p=>p.y))>18);assert.ok(Math.max(...deck.profile.map(p=>p.y))<18.2);
+ assert.equal(cambieWorld.route('north-ground','south-ground').length,6);assert.equal(cambieWorld.route('main-deck','marinaside-underpass'),null);
+});
+test('curved profile heights are continuous, bounded and preserve every explicit seam',()=>{
+ for(const s of cambie.surfaces){
+  const sample=createProfileSampler(s);
+  for(let i=0;i<s.profile.length-1;i++){
+   const a=s.profile[i],b=s.profile[i+1];
+   for(let j=0;j<=10;j++){
+    const p=sample([a.x+(b.x-a.x)*j/10,a.z+(b.z-a.z)*j/10]);assert.ok(p);
+    assert.ok(p.y>=Math.min(a.y,b.y)-.001&&p.y<=Math.max(a.y,b.y)+.001);
+    assert.ok(Math.abs(p.grade)<.12);
+   }
+  }
+  assert.equal(sample([s.from.x,s.from.z]).y,s.from.y);assert.equal(sample([s.to.x,s.to.z]).y,s.to.y);
+ }
+ const first=cambie.surfaces[0];assert.throws(()=>createElevatedWorld([{...first,profile:[{...first.from,y:0},first.to]}],()=>true),/Profile endpoints/);
+});
+function researchPath(reverse=false){
+ let points=cambie.surfaces.slice(0,6).flatMap((s,i)=>i?s.profile.slice(1):s.profile);
+ if(reverse)points=points.toReversed();
+ const stations=[0];for(let i=1;i<points.length;i++)stations.push(stations.at(-1)+Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z));
+ const at=d=>{let i=1;while(i<stations.length-1&&stations[i]<d)i++;const t=Math.max(0,Math.min(1,(d-stations[i-1])/(stations[i]-stations[i-1]))),a=points[i-1],b=points[i];return {x:a.x+(b.x-a.x)*t,z:a.z+(b.z-a.z)*t};};
+ const nearest=car=>{let best=Infinity,distance=0;for(let i=1;i<points.length;i++){const a=points[i-1],b=points[i],dx=b.x-a.x,dz=b.z-a.z,t=Math.max(0,Math.min(1,((car.x-a.x)*dx+(car.z-a.z)*dz)/(dx*dx+dz*dz))),dist=Math.hypot(car.x-a.x-t*dx,car.z-a.z-t*dz);if(dist<best){best=dist;distance=stations[i-1]+t*(stations[i]-stations[i-1]);}}return distance;};
+ return {at,nearest,length:stations.at(-1)};
+}
+// Scripted path tracking is a physics/geometry regression test, NEVER a manual
+// driving acceptance result. UI driving is recorded separately in the report.
+for(const reverse of [false,true])for(const hz of [15,60,120])test(`real Cambie corridor automated full-car traversal ${reverse?'northbound':'southbound'} ${hz}Hz`,()=>{
+ const path=researchPath(reverse),start=path.at(8),aim=path.at(9),surface=reverse?'south-ground':'north-ground';
+ let car={...start,y:cambieWorld.sample([start.x,start.z],surface).y,yaw:Math.atan2(aim.x-start.x,aim.z-start.z),speed:0,steer:0,pitch:0,surface},progress=8,maxHeight=0,visited=new Set();
+ for(let i=0;i<260*hz&&progress<path.length-9;i++){
+  progress=path.nearest(car);const target=path.at(progress+7),error=Math.atan2(Math.sin(Math.atan2(target.x-car.x,target.z-car.z)-car.yaw),Math.cos(Math.atan2(target.x-car.x,target.z-car.z)-car.yaw));
+  const wheel=Math.atan2(2*2.65*Math.sin(error),7),steering=wheel*(1+Math.abs(car.speed)/22)/.72,before=car;
+  car=cambieWorld.step(stepCar,car,car.speed<6?.65:0,steering,false,1/hz);visited.add(car.surface);maxHeight=Math.max(maxHeight,car.y);
+  assert.ok(!car.blocked,JSON.stringify({car,progress,hz,reverse}));assert.ok(Math.abs(car.y-before.y)<.1);assert.ok(Math.abs(car.pitch)<.13);
+  assert.equal(elevatedCameraTarget(car).y,car.y+9);
+ }
+ assert.ok(progress>path.length-10);assert.equal(visited.size,6);assert.ok(maxHeight>18);
+});
+test('Cambie deck cannot fall to an intersecting underpass or leave support over water',()=>{
+ const deck=cambie.surfaces.find(s=>s.id==='main-deck'),p=deck.profile[Math.floor(deck.profile.length/2)],sample=cambieWorld.sample([p.x,p.z],deck.id);
+ assert.equal(cambieGround([p.x,p.z]),false);
+ let car={...p,y:sample.y,yaw:Math.PI/2,speed:0,pitch:0,surface:deck.id};
+ for(let i=0;i<180;i++)car=cambieWorld.step(stepCar,car,1,0,false,1/60);
+ assert.ok(car.blocked);assert.ok(car.y>17);assert.equal(cambieWorld.sample([car.x+15,car.z],deck.id),null);
+ const wrong={...car,y:0};assert.ok(cambieWorld.step(stepCar,wrong,1,0,false,.1).blocked);
+});
+
+// Research cue annotations must never alter the stable route or public cues.
+test('optional bend cues preserve public navigation and every route point',()=>{
+ const research=createNavigator(v4,p=>carFits(p,v4World.allowed),true);
+ let bends=0;
+ for(const [stable,candidate] of [[v4Nav.scenic(),research.scenic()],[v4Nav.scenic(true),research.scenic(true)],...v4.drives.map(d=>[v4Nav.drive(d.id),research.drive(d.id)])]){
+  assert.deepEqual(candidate.points,stable.points);assert.equal(candidate.length,stable.length);
+  assert.ok(!stable.turns.some(t=>t.direction.startsWith('Bear')));
+  assert.deepEqual(candidate.turns.filter(t=>!t.direction.startsWith('Bear')),stable.turns);
+  bends+=candidate.turns.filter(t=>t.direction.startsWith('Bear')).length;
+ }
+ assert.ok(bends>0);
+});

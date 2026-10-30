@@ -68,6 +68,24 @@ were researched, but no point cloud, survey, photograph, drawing or third-party
 model was imported or redistributed. Their source links and limitations are in
 `docs/VANCOUVER_V05_ELEVATION_2026-10-30.md`.
 
+## V0.6 isolated real-data research
+
+Contains information licensed under the Open Government Licence – British Columbia
+and the Open Government Licence – Vancouver. The development-only Cambie JSON
+combines bounded City public-streets alignment with provincial 1 m DSM/DEM acquired
+August 26, 2025 and retrieved October 30, 2026. Its data is not covered by the code
+MIT licence. Raster-derived profiles are estimates; widths and cross-sections are
+illustrative. It is neither a survey nor publicly drivable.
+
+Provincial data licence:
+https://www2.gov.bc.ca/gov/content/data/policy-standards/data-policies/open-data/open-government-licence-bc
+The source catalogue, exact requests, acquisition/retrieval dates, transformations,
+checksums and uncertainties are in `docs/VANCOUVER_V06_ELEVATION_2026-10-30.md`.
+No source PDF imagery, photos or government marks are redistributed. All public
+V0.1–V0.4 snapshots remain unchanged. Offline rasterio (BSD-3-Clause) and NumPy
+(BSD-3-Clause) supplement the existing optional Shapely/pyproj importer; they are
+not browser or production dependencies.
+
 ## Three.js 0.186.1
 
 https://github.com/mrdoob/three.js

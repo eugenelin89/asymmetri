@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { carFits, createDrivingWorld, stepCar } from "./physics";
+import { carFits, createDrivingWorld, inPolygon, stepCar } from "./physics";
 import { angleDifference, createNavigator, cruiseInput, pointAt, projectRoute } from "./navigation";
 import { buildScenery } from "./scenery";
 import { createInputState } from "./input";
@@ -15,9 +15,12 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   const response = await fetch(DATA, { signal });
   if (!response.ok) throw new Error("The city data could not be loaded. Please retry.");
   const city: City = await response.json(); signal.throwIfAborted();
+  const research = process.env.NODE_ENV !== "production" ? await import("./development/driving-v06") : null;
+  signal.throwIfAborted();
   if (city.version !== "v0.4-2026-10-30" || !Array.isArray(city.pavement) || !city.buildings.length || !city.graph || !city.roadCells || city.drives?.length !== 3) throw new Error("The city data is incomplete. Please retry.");
   const world = createDrivingWorld(city);
-  const navigator = createNavigator(city, (pose) => carFits(pose, world.allowed));
+  const cameraClear = research?.createCameraClearance(city.buildings, inPolygon);
+  const navigator = createNavigator(city, (pose) => carFits(pose, world.allowed), !!research);
   const coarse = matchMedia("(pointer: coarse)").matches;
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const renderer = new THREE.WebGLRenderer({ antialias: !coarse, powerPreference: "low-power" });
@@ -68,10 +71,11 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
   let pixelRatio = Math.min(devicePixelRatio, coarse ? 1.25 : 1.6);
   renderer.setPixelRatio(pixelRatio);
   const inputs = createInputState();
-  const manualDriver = createManualDriver(stepCar);
+  const baselineDriver = createManualDriver(stepCar), candidateDriver = research?.createManualDriver(stepCar);
+  let baseline = true, manualDriver = baselineDriver, evidence = research?.createDrivingEvidence();
   const pressed = inputs.has;
   const clearInput = () => { inputs.clear(); manualDriver.clear(); };
-  const beginRun = () => { runStart = { distance: travelled, seconds: driveSeconds, collisions, recoveries, resets, movingSeconds }; };
+  const beginRun = () => { runStart = { distance: travelled, seconds: driveSeconds, collisions, recoveries, resets, movingSeconds }; evidence = research?.createDrivingEvidence(); };
   let flight: { from: THREE.Vector3; targetFrom: THREE.Vector3; to: THREE.Vector3; targetTo: THREE.Vector3; progress: number } | null = null;
   const overviewTarget = new THREE.Vector3(30, 0, -25), overviewPosition = new THREE.Vector3(950, 850, 1050);
   const aerial = { position: overviewPosition.clone(), target: overviewTarget.clone() };
@@ -80,8 +84,9 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
     Object.assign(canvas.dataset, { distance: travelled.toFixed(1), collisions: String(collisions), recoveries: String(recoveries), resets: String(resets),
       runDistance: (travelled - runStart.distance).toFixed(1), runSeconds: (driveSeconds - runStart.seconds).toFixed(1), runMovingSeconds: (movingSeconds - runStart.movingSeconds).toFixed(1),
       runContacts: String(collisions - runStart.collisions), runRecoveries: String(recoveries - runStart.recoveries), runResets: String(resets - runStart.resets),
-      carX: car.x.toFixed(2), carZ: car.z.toFixed(2), carYaw: car.yaw.toFixed(4), carSpeed: car.speed.toFixed(2), cruising: String(cruising), pace });
-    const nextTurn = route?.turns.find((turn) => turn.at > progress - 6);
+      carX: car.x.toFixed(2), carZ: car.z.toFixed(2), carYaw: car.yaw.toFixed(4), carSpeed: car.speed.toFixed(2), cruising: String(cruising), pace,
+      handling: baseline ? "v0.5-baseline" : "v0.6-candidate-d", camera: cameraMode, ...(evidence ? { drivingEvidence: JSON.stringify(evidence.read()) } : {}) });
+    const nextTurn = route?.turns.find((turn) => turn.at > progress - 6 && !(baseline && turn.direction.startsWith("Bear")));
     const turnDistance = nextTurn ? Math.max(0, nextTurn.at - progress) : 0;
     const turnCue = turnDistance < 6 ? "at this junction" : `${Math.round(turnDistance / (turnDistance < 40 ? 5 : 10)) * (turnDistance < 40 ? 5 : 10)} m`;
     const projection = route ? projectRoute(route, [car.x, car.z], progress) : null;
@@ -118,8 +123,9 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
     scenery.labels.forEach((label, key) => { label.material.opacity = key === id ? 1 : .78; });
   }
   function snapDriveCamera() {
-    const distance = cameraMode === "wide" ? 23 : 15;
-    cameraYaw = car.yaw; camera.position.set(car.x - Math.sin(car.yaw) * distance, cameraMode === "wide" ? 15 : 8.5, car.z - Math.cos(car.yaw) * distance);
+    const distance = cameraMode === "wide" ? (baseline ? 23 : 24) : 15;
+    const height = cameraMode === "wide" ? (baseline ? 15 : 17) : (baseline ? 8.5 : 10);
+    cameraYaw = car.yaw; camera.position.set(car.x - Math.sin(car.yaw) * distance, height, car.z - Math.cos(car.yaw) * distance);
     cameraAim.set(car.x + Math.sin(car.yaw) * 4, 1.4, car.z + Math.cos(car.yaw) * 4); camera.lookAt(cameraAim);
   }
   const reset = () => {
@@ -195,15 +201,18 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
       car = automatic
         ? stepCar(car, automatic.throttle, automatic.steering, automatic.brake, dt, world.allowed)
         : manualDriver.step(car, { throttle, steering: Number(pressed("left")) - Number(pressed("right")), brake: pressed("brake") }, pace, dt, world.allowed);
+      if (!automatic) evidence?.step(prior, car, Number(pressed("left")) - Number(pressed("right")), dt, rawDt * 1000);
       travelled += Math.hypot(car.x - prior.x, car.z - prior.z); if (!paused) { driveSeconds += rawDt; driveFrames++; }
       if (Math.abs(car.speed) > .1) movingSeconds += dt;
       frameTimes.push(rawDt * 1000); if (frameTimes.length > 600) frameTimes.shift();
       if (car.blocked) { if (!prior.blocked) collisions++; cruising = false; }
       scenery.car.position.set(car.x, 0, car.z); scenery.car.rotation.y = car.yaw;
-      scenery.body.rotation.z = -(car.steer ?? 0) * car.speed * .012;
+      scenery.body.rotation.z = !baseline && reducedMotion ? 0 : -(car.steer ?? 0) * car.speed * .012;
       scenery.frontWheels.forEach((wheel) => { wheel.rotation.y = car.steer ?? 0; }); scenery.wheels.forEach((wheel) => { wheel.rotation.x += car.speed * dt / .36; });
       scenery.brakeMaterial.emissiveIntensity = pressed("brake") || (pressed("back") && car.speed > 0) ? 2 : .12;
-      cameraYaw += Math.atan2(Math.sin(car.yaw - cameraYaw), Math.cos(car.yaw - cameraYaw)) * (1 - Math.exp(-11 * dt));
+      const anticipation = baseline || reducedMotion ? 0 : THREE.MathUtils.clamp((car.steer ?? 0) * car.speed * .045, -.10, .10);
+      cameraYaw += angleDifference(car.yaw + anticipation, cameraYaw) * (1 - Math.exp(-11 * dt));
+      if (baseline || !research || !cameraClear) {
       const distance = (cameraMode === "wide" ? 23 : 15) + Math.abs(car.speed) * .18;
       const safe = fitDrivingCamera([car.x, car.z], [car.x - Math.sin(cameraYaw) * distance, car.z - Math.cos(cameraYaw) * distance], world.cameraClear);
       nextCamera.set(safe.x, (cameraMode === "wide" ? 15 : 8.5) + Math.abs(car.speed) * .06 + (1 - safe.fraction) * 5, safe.z);
@@ -213,6 +222,18 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
       if (lagged.fraction < 1) { camera.position.x = lagged.x; camera.position.z = lagged.z; camera.position.y = Math.max(camera.position.y, nextCamera.y); }
       nextAim.set(car.x + Math.sin(car.yaw) * (4 + car.speed * .25), 1.4, car.z + Math.cos(car.yaw) * (4 + car.speed * .25));
       cameraAim.lerp(nextAim, 1 - Math.exp(-8 * dt)); camera.lookAt(cameraAim);
+      } else {
+        const distance = (cameraMode === "wide" ? 24 : 15) + Math.abs(car.speed) * .12;
+        const height = (cameraMode === "wide" ? 17 : 10) + Math.abs(car.speed) * .06;
+        const origin = { x: car.x, y: 1.4, z: car.z };
+        const margin = Math.max(.8, camera.near * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * Math.sqrt(1 + camera.aspect ** 2));
+        const safe = research.fitSpatialCamera(origin, { x: car.x - Math.sin(cameraYaw) * distance, y: height, z: car.z - Math.cos(cameraYaw) * distance }, cameraClear, margin);
+        nextCamera.set(safe.x, safe.y, safe.z); camera.position.lerp(nextCamera, 1 - Math.exp(-9 * dt));
+        const lagged = research.fitSpatialCamera(origin, camera.position, cameraClear, margin);
+        camera.position.set(lagged.x, lagged.y, lagged.z);
+        nextAim.set(car.x + Math.sin(car.yaw + anticipation) * (5 + Math.max(0, car.speed) * .25), 1.4, car.z + Math.cos(car.yaw + anticipation) * (5 + Math.max(0, car.speed) * .25));
+        cameraAim.lerp(nextAim, 1 - Math.exp(-10 * dt)); camera.lookAt(cameraAim);
+      }
       if (now - lastHud > 200) { report(); lastHud = now; }
     } else {
       if (flight) {
@@ -263,6 +284,7 @@ export async function createExplorer(host: HTMLElement, callbacks: Callbacks, si
     setInput(action, held, source = `touch:${action}`) { if (held && paused) return; if (held) cruising = false; inputs.set(source, action, held); },
     setPace(next) { pace = next; },
     setCamera(next) { cameraMode = next; },
+    compareHandling(next) { if (candidateDriver) { clearInput(); car.speed = 0; baseline = next; manualDriver = next ? baselineDriver : candidateDriver; manualDriver.clear(); beginRun(); report(); } },
     testGraphics(interrupt) { if (process.env.NODE_ENV !== "production") { if (interrupt) renderer.forceContextLoss(); else renderer.forceContextRestore(); } },
     setQuality(next) { quality = next; pixelRatio = next === "low" ? Math.min(devicePixelRatio, 1) : Math.min(devicePixelRatio, coarse ? 1.25 : 1.6); renderer.setPixelRatio(pixelRatio); renderer.shadowMap.enabled = next === "auto" && !coarse; renderer.shadowMap.needsUpdate = true; },
     dispose() {

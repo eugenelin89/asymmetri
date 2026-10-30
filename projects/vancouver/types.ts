@@ -37,6 +37,7 @@ export type Explorer = {
   setPace(pace: "relaxed" | "normal"): void;
   setCamera(camera: "chase" | "wide"): void;
   testGraphics(lost: boolean): void;
+  compareHandling?(baseline: boolean): void;
   dispose(): void;
 };
 

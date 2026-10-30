@@ -772,3 +772,7 @@ drive the full delivery, exit/reward, reload, and exercise held mobile pedals at
 320/390px and landscape. A renderer-independent driving controller test is not a
 substitute for this browser run. See the V0.5 release record; physical phones remain
 an explicit outstanding acceptance item.
+
+## Vancouver V0.6 research acceptance
+
+Run `npm run test:vancouver`, peer suites, check, Next webpack and Vinext builds. New tests cover high-speed input pulses with exact retained Relaxed response, optional cues preserving route geometry, spatial camera constraints, immutable Cambie identity, continuous curved profiles, full-car traversals in both directions at 15/60/120 Hz and grade-separated/water rejection. Automated route following is not manual acceptance. V0.6 failed fresh North manual comparison and remains development-only; see [all completed/failed runs, environment limits and outstanding tests](VANCOUVER_V06_RESEARCH_2026-10-30.md). Verify production bundles omit the research lab/data and keep public V0.5.

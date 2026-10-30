@@ -7,7 +7,7 @@ export const angleDifference = (a: number, b: number) => Math.atan2(Math.sin(a -
 export const streetName = (name: string) => name.replace(/^\d+(?:-\d+)?\s+/, "").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bAv\b/g, "Ave");
 type Vertex = { point: Point2; street: string };
 
-export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z" | "yaw">) => boolean) {
+export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z" | "yaw">) => boolean, includeBendCues = false) {
   if (!city.graph) throw new Error("The local street graph is unavailable.");
   const graph: RoadGraph = city.graph;
   const adjacent = graph.nodes.map(() => [] as { to: number; edge: number }[]);
@@ -63,7 +63,10 @@ export function createNavigator(city: City, fits: (pose: Pick<CarState, "x" | "z
         curve.push({ point: [x, z], street: t < .5 ? raw[i].street : raw[i + 1].street });
       }
       const clear = curve.every((p, n) => { const next = curve[Math.min(n + 1, curve.length - 1)].point; return fits({ x: p.point[0], z: p.point[1], yaw: Math.atan2(next[0] - p.point[0], next[1] - p.point[1]) }); });
-      if (Math.abs(angle) > .5) turnIndices.push({ index: smooth.length + (clear ? 6 : 0), direction: Math.abs(angle) > 2.5 ? "Turn around" : angle > 0 ? "Left" : "Right", street: raw[i + 1].street });
+      if (Math.abs(angle) > .5 || (includeBendCues && Math.abs(angle) > .16 && before > 12 && after > 12)) {
+        const direction = Math.abs(angle) > 2.5 ? "Turn around" : Math.abs(angle) <= .5 ? (angle > 0 ? "Bear left" : "Bear right") : angle > 0 ? "Left" : "Right";
+        turnIndices.push({ index: smooth.length + (clear ? 6 : 0), direction, street: raw[i + 1].street });
+      }
       smooth.push(...(clear && Math.abs(angle) > .05 ? curve : [raw[i]]));
     }
     smooth.push(raw[raw.length - 1]);
