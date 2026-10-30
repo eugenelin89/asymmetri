@@ -4,6 +4,16 @@ Current dependency status is recorded in the [October 7 security review](DEPENDE
 The dependency findings in the dated publication records below describe their
 original lockfiles; they are not the current security baseline.
 
+## Surrey Adventure local saves — October 30, 2026
+
+V0.2 adds only `asymmetri.surrey.save.v2` localStorage for fictional gameplay,
+settings and a save timestamp. No account, identifier for tracking, cookie, upload,
+backend or analytics is introduced. The start/game UI discloses browser-local
+storage; New Game replaces it after confirmation, and browser site-data deletion
+removes it. Apex/www saves are separate. Corrupt or unavailable storage fails safely.
+This supersedes the historical no-localStorage finding for this game only; Motion
+policy, app records, media timing and support processing remain unchanged.
+
 ## Direct Motion player — October 22, 2026
 
 The owner requested that `/motion` display the video instead of the custom Load

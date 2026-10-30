@@ -896,3 +896,87 @@
     transition: none;
   }
 }
+
+/* V0.2: the notebook and aerial controls share one live viewport. */
+.startActions { display: flex; flex-wrap: wrap; gap: .65rem; align-items: center; }
+.startCopy .contentNotice { max-width: 30rem; font-size: .74rem; line-height: 1.5; margin-top: 1.2rem; color: #e1eadd; }
+.saveStatus { padding: .3rem 1.1rem .7rem; font-size: .7rem; color: #bacfc2; }
+.choices { display: flex; flex-wrap: wrap; gap: .5rem; }
+.choices button { flex: 1 1 190px; text-align: left; font-size: .8rem; }
+.dialogue { max-height: calc(100% - 85px); overflow-y: auto; }
+.journal { position: absolute; inset: 70px 18px 18px; z-index: 8; overflow: auto; background: #142d28fa; border: 1px solid #8aa084; border-top: 3px solid #d3b7ef; border-radius: .7rem; padding: 1.4rem; box-shadow: 0 15px 60px #071a1466; }
+.journalHeading { display: flex; justify-content: space-between; align-items: start; gap: 1rem; position: sticky; top: -1.4rem; background: #142d28; padding: .3rem 0 .8rem; z-index: 2; }
+.journal h2 { font-size: 1.45rem; letter-spacing: -.03em; }
+.journal h3 { color: #f4d298; margin: 1.1rem 0 .5rem; font-size: 1rem; }
+.journal h4 { margin: .8rem 0 .4rem; }
+.journal p, .journal li { font-size: .82rem; line-height: 1.65; color: #d6dfd3; }
+.journal ul { padding-left: 1.1rem; list-style: disc; }
+.journal .journalNote { color: #aec3b8; font-size: .75rem; }
+.journalColumns { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.lead { border-bottom: 1px solid #527161; padding: .8rem 0; }
+.lead strong { font-size: .85rem; }
+.lead p { margin: .35rem 0; }
+.lead button { font-size: .75rem; }
+.aerialDock { position: absolute; right: 18px; bottom: 25px; z-index: 3; width: 265px; border: 1px solid #75948a; border-radius: .65rem; background: #142e2aec; padding: .8rem; font-size: .72rem; }
+.aerialDock .compass { display: flex; gap: .8rem; align-items: center; margin-bottom: .6rem; }
+.compass > span { display: inline-block; font-weight: bold; color: #f5d38c; }
+.aerialDock p { color: #ccdbd0; line-height: 1.5; margin: .4rem 0; }
+.aerialDock > div { display: flex; gap: .4rem; }
+.aerialDock button { font-size: .68rem; padding: .4rem .5rem; min-height: 36px; margin-bottom: .4rem; }
+.aerialDock button[aria-pressed="true"] { color: #172c27; background: #b8d6bf; }
+.aerialDock label { display: block; color: #d7e0d2; }
+.aerialDock select { display: block; width: 100%; margin: .3rem 0 .6rem; padding: .5rem; border: 1px solid #8ca79a; border-radius: .35rem; color: #f1f4e8; background: #1f3f35; font: inherit; }
+.aerialDock select:focus-visible { outline: 3px solid #ffd17d; }
+.aerialDock small { display: block; color: #c4d4c8; font-size: .65rem; line-height: 1.5; }
+.waypoint { position: absolute; left: 20px; top: 190px; z-index: 2; max-width: 300px; display: flex; align-items: center; gap: .5rem; padding: .3rem .5rem; border-radius: .3rem; background: #163638eb; color: #b8eff0; font-size: .7rem; }
+.waypoint button { padding: .1rem .4rem; min-height: 30px; }
+.viewport[data-mode="aerial"] .vitals { opacity: .9; }
+@media (max-width: 900px) {
+  .toolbar > div { flex-wrap: wrap; justify-content: flex-end; }
+  .toolbar .worldLabel { display: none; }
+  .toolbar { justify-content: flex-end; }
+  .toolbar button { min-height: 36px; font-size: .64rem; }
+}
+@media (max-width: 700px) {
+  .startCopy { padding: 1.5rem; }
+  .startCopy h2 { font-size: 2.7rem; }
+  .startCopy .contentNotice { max-width: 23rem; font-size: .7rem; }
+  .startTag { bottom: 4%; transform: scale(.8); transform-origin: right bottom; }
+  .toolbar { inset: 8px 8px auto; }
+  .toolbar > div { gap: .25rem; }
+  .toolbar button { font-size: .61rem; padding: .25rem .35rem; }
+  .mission { top: 93px; }
+  .vitals { top: 210px; }
+  .waypoint { top: 211px; left: 12px; max-width: calc(100% - 180px); font-size: .63rem; }
+  .journal { inset: 85px 8px 8px; padding: 1rem; }
+  .journalHeading { top: -1rem; }
+  .journalColumns { grid-template-columns: 1fr; gap: .7rem; }
+  .journal h2 { font-size: 1.15rem; }
+  .aerialDock { width: 165px; right: 10px; bottom: 145px; padding: .5rem; }
+  .aerialDock small, .aerialDock p, .aerialDock .compass strong { display: none; }
+  .aerialDock > div { flex-wrap: wrap; }
+  .aerialDock button { font-size: .63rem; min-height: 34px; margin-bottom: .2rem; }
+  .aerialDock label { font-size: .63rem; }
+  .viewport[data-mode="aerial"] .map { width: 112px; height: 112px; bottom: 170px; }
+  .viewport[data-mode="aerial"] .wideMap { width: calc(100% - 20px); height: auto; bottom: 295px; }
+  .viewport[data-mode="aerial"] .prompt { bottom: 115px; font-size: .63rem; }
+  .choices button { flex-basis: 100%; min-height: 38px; }
+  .dialogue { bottom: 12px; max-height: calc(100% - 105px); padding: 1rem; }
+  .dialogue p { font-size: .8rem; line-height: 1.5; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .expanded .aerialDock { bottom: 15px; width: 205px; }
+  .expanded .aerialDock p, .expanded .aerialDock small { display: none; }
+  .expanded .journal { inset: 60px 12px 10px; }
+  .expanded .dialogue { max-height: calc(100% - 70px); }
+  .expanded .choices button { flex-basis: 40%; }
+}
+
+@media (max-width: 400px) {
+  .aerialDock { width: 150px; }
+  .viewport[data-mode="aerial"] .map { width: 96px; height: 96px; }
+  .viewport[data-mode="aerial"] .wideMap { width: calc(100% - 20px); height: auto; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .expanded[data-mode="aerial"] .vitals { display: none; }
+}

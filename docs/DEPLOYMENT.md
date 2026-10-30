@@ -1375,3 +1375,10 @@ runtime. The 192 MiB memory and 6 GiB disk floors, Node 22, existing proxy/servi
 protected routes and rollback rules remain unchanged. Do not activate from a Mac
 build or bypass a capacity guard. If blocked, retain the tested feature candidate
 and report the measured blocker; CI does not automatically deploy the website.
+
+V0.2 uses `codex/surrey-adventure-v02`, preserves the V0.1 geographic snapshot and
+keeps the complete live Surrey V0.1 runtime for immediate rollback. Validate both
+cases, aerial controls and local saves as well as existing routes. Archive an
+older inactive runtime only after full off-server hash/gzip/tar comparison and
+reference/activity checks; never sacrifice the immediately preceding live runtime
+to stage the candidate. No workflow, proxy, runtime version or service change.

@@ -641,4 +641,8 @@ status, metadata and source/licence links. Route-specific fiction disclosure sta
 visible below the prominent game. Quest dialogue belongs to the pure Surrey
 simulation. All incidents/characters are fictional; do not use real crime claims,
 attach wrongdoing to actual businesses or treat homelessness as a threat signal.
-The sealed-case clue is explicitly a future chapter, not a completed second mission.
+V0.2 completes the sealed-case mystery and preserves the backpack mission. Story
+and encounter data live in `story.ts` and `encounters.ts`. All cast members are
+fictional adults. Mature dialogue is optional and off by default; do not imply
+sexual acts, drug transactions, real crime data or actual business wrongdoing.
+Keep browser-local save/no-upload and stylized architecture disclosures visible.

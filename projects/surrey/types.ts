@@ -40,7 +40,24 @@ export type Stage =
   | "return"
   | "completed"
   | "failed";
-export type Dialogue = { speaker: string; text: string; action?: string };
+export type Mode = "ground" | "aerial";
+export type Choice = { id: string; label: string };
+export type Dialogue = { speaker: string; text: string; action?: string; choices?: Choice[]; context?: string };
+export type Investigation = {
+  stage: "available" | "active" | "closed" | "inconclusive";
+  evidence: string[];
+  witnesses: string[];
+  conclusion: string;
+  reward: number;
+};
+export type StreetEncounter = {
+  id: string;
+  phase: "offer" | "pursuit" | "chase";
+  position: Point;
+  seconds: number;
+  hit: boolean;
+  variant: boolean;
+};
 export type Snapshot = {
   player: Pose;
   health: number;
@@ -60,11 +77,28 @@ export type Snapshot = {
   mystery: boolean;
   helped: boolean;
   street: string;
+  mode: Mode;
+  follow: boolean;
+  cameraYaw: number;
+  mature: boolean;
+  investigation: Investigation;
+  encounter: StreetEncounter | null;
+  resolved: string[];
+  waypoint: { name: string; point: Point } | null;
 };
 export type Game = {
   input(action: Input, pressed: boolean): void;
   interact(): void;
   dismiss(): void;
+  choose(id: string): void;
+  mode(value: Mode): void;
+  follow(value: boolean): void;
+  returnToPlayer(): void;
+  selectPlace(id: string): void;
+  track(point: Point, name: string): void;
+  clearWaypoint(): void;
+  mature(value: boolean): void;
+  save(): boolean;
   pause(value: boolean): void;
   recover(): void;
   reset(): void;

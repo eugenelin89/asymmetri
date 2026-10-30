@@ -38,7 +38,7 @@ export default function SurreyPage() {
             Enable JavaScript and WebGL2 to play. Walk with WASD or arrows,
             sprint with Shift, interact with E, and recover with R. The mission
             follows a fictional stolen backpack from a commuter near Surrey
-            Central to its return.
+            Central to its return. V toggles aerial exploration; F centres the camera on the player. A second fictional homicide case uses evidence and witness accounts. Progress is saved only in this browser.
           </p>
         </noscript>
         <section className={styles.notes}>
@@ -49,7 +49,7 @@ export default function SurreyPage() {
               claim about the safety of Surrey neighbourhoods, real-world
               navigation or public-safety advice. People experiencing
               homelessness are neighbours with their own stories, not a danger
-              category. No graphic violence.
+              category. The cast and player are fictional adults. The stories include non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs; no sexual acts, purchases or graphic violence are depicted. Mature Encounters is off by default, and Gentle Streets suppresses threats.
             </p>
             <p>
               A compact City Centre slice includes Surrey Central, the bus loop,

@@ -611,18 +611,16 @@ arrows add one instanced mesh that is disposed when replaced. Bounded DOM-only
 performance diagnostics record session distance/collisions/FPS and a rolling
 600-frame p95; nothing is transmitted. No dependencies or runtime services added.
 
-## Surrey Adventure V0.1
+## Surrey Adventure V0.2
 
-`app/labs/surrey` adds an isolated third-person browser adventure. `projects/surrey`
-separates pure collision/navigation and seeded quest simulation from Three.js and
-React. It reuses only Vancouver's geometry predicates without editing Vancouver.
-The static versioned City of Surrey snapshot is separate from all Vancouver data.
-A same-origin bounded fetch starts only after Play Now; no backend or tracking.
-React receives 150 ms snapshots, while movement, AI and camera remain outside its
-render loop. Scene teardown disposes GPU resources, event handlers and observers.
+`app/labs/surrey` owns the isolated game route. `projects/surrey` separates pure
+collision, seeded simulation, authored story/encounter data, validated local saves,
+aerial camera and bounded pedestrians from Three.js and React. One scene/renderer/
+loop serves both modes; aerial freezes gameplay time, NPCs and threats. React gets
+150 ms snapshots. Teardown releases GPU resources, listeners and observers.
 
-`content/site.ts` owns Surrey metadata, project facts, navigation and licence URLs;
-the sitemap and generic Labs listing include the new route. The complete backpack
-mission, optional gentle mode, collision-checked NPC path, failure/recovery and
-future mystery hook are detailed in `projects/surrey/README.md`. No dependency,
-Motion/BotSquad route, infrastructure or existing data mutation is required.
+Only existing Vancouver geometry predicates are reused. Vancouver files and both
+geographic snapshots stay unchanged. `save.ts` validates the versioned per-origin
+localStorage record; no backend, account, upload, telemetry or dependency is added.
+`content/site.ts` owns public metadata/status; route-local text discloses fictional
+adult content. The project README describes all controls, cases and limitations.

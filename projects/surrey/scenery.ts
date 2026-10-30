@@ -4,6 +4,8 @@ import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
 import { distance } from "./world";
 import { seeded } from "./simulation";
+import { landmarks } from "./landmarks";
+import { storyLocations, witnesses, evidence as evidenceData } from "./story";
 import type { City, Point, Polygon, Pose } from "./types";
 import type { World } from "./world";
 
@@ -16,81 +18,37 @@ function shapeOf(polygon: Polygon) {
     .map((r) => new THREE.Path(r.map(([x, z]) => new THREE.Vector2(x, -z))));
   return s;
 }
-export function person(color: number, backpack = false) {
-  const group = new THREE.Group(),
-    cloth = new THREE.MeshStandardMaterial({ color, roughness: 0.8 }),
-    skin = new THREE.MeshStandardMaterial({ color: 0xc89673 }),
-    dark = new THREE.MeshStandardMaterial({ color: 0x23353e }),
-    white = new THREE.MeshStandardMaterial({ color: 0xe9e8db });
-  function part(
-    w: number,
-    h: number,
-    d: number,
-    m: THREE.Material,
-    x: number,
-    y: number,
-    z: number,
-  ) {
-    const p = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
-    p.position.set(x, y, z);
-    p.castShadow = true;
-    group.add(p);
-    return p;
-  }
-  part(0.7, 0.85, 0.4, cloth, 0, 1.4, 0);
-  part(0.48, 0.48, 0.46, skin, 0, 2.08, 0);
-  part(0.53, 0.13, 0.5, dark, 0, 2.34, 0);
-  part(0.1, 0.08, 0.02, dark, -0.13, 2.12, 0.241);
-  part(0.1, 0.08, 0.02, dark, 0.13, 2.12, 0.241);
-  const legs = [
-    part(0.26, 0.75, 0.3, dark, -0.21, 0.56, 0),
-    part(0.26, 0.75, 0.3, dark, 0.21, 0.56, 0),
-  ];
-  const arms = [
-    part(0.22, 0.76, 0.24, cloth, -0.49, 1.4, 0),
-    part(0.22, 0.76, 0.24, cloth, 0.49, 1.4, 0),
-  ];
-  part(0.3, 0.16, 0.46, white, -0.21, 0.12, 0.07);
-  part(0.3, 0.16, 0.46, white, 0.21, 0.12, 0.07);
-  const bag = part(
-    0.64,
-    0.75,
-    0.32,
-    new THREE.MeshStandardMaterial({ color: 0xf58b39 }),
-    0,
-    1.4,
-    -0.34,
-  );
-  bag.visible = backpack;
-  return {
-    group,
-    bag,
-    animate(
-      pose: Pick<Pose, "x" | "z" | "yaw" | "moving" | "running">,
-      time: number,
-      reduced = false,
-    ) {
-      group.position.set(
-        pose.x,
-        pose.moving && !reduced
-          ? Math.abs(Math.sin(time * (pose.running ? 13 : 8))) * 0.07
-          : 0,
-        pose.z,
-      );
-      group.rotation.y = pose.yaw;
-      const swing =
-        pose.moving && !reduced
-          ? Math.sin(time * (pose.running ? 13 : 8)) *
-            (pose.running ? 0.75 : 0.45)
-          : 0;
-      legs[0].rotation.x = swing;
-      legs[1].rotation.x = -swing;
-      arms[0].rotation.x = -swing;
-      arms[1].rotation.x = swing;
-    },
+export function createPeople() {
+  const geometry = {
+    torso: new THREE.CylinderGeometry(.32, .38, .8, 8), head: new THREE.SphereGeometry(.27, 10, 7),
+    hair: new THREE.SphereGeometry(.285, 8, 5, 0, Math.PI * 2, 0, Math.PI / 2),
+    limb: new THREE.CapsuleGeometry(.105, .5, 3, 6), foot: new THREE.BoxGeometry(.25, .14, .4),
+    bag: new THREE.BoxGeometry(.56, .63, .28), eye: new THREE.BoxGeometry(.07, .055, .025),
+  };
+  const materials = new Map<number, THREE.MeshStandardMaterial>();
+  const material = (color: number) => { if (!materials.has(color)) materials.set(color, new THREE.MeshStandardMaterial({ color, roughness: .8 })); return materials.get(color)!; };
+  return function person(color: number, backpack = false) {
+    const group = new THREE.Group();
+    function part(g: THREE.BufferGeometry, color: number, x: number, y: number, z: number) {
+      const p = new THREE.Mesh(g, material(color)); p.position.set(x, y, z); p.castShadow = true; group.add(p); return p;
+    }
+    const skin = [0xc89673, 0x966948, 0xe1b99c, 0x714e3a][color % 4];
+    part(geometry.torso, color, 0, 1.3, 0);
+    part(geometry.head, skin, 0, 1.98, .015); part(geometry.hair, 0x273135, 0, 2.03, .01);
+    part(geometry.eye, 0x253132, -.10, 2.02, .268); part(geometry.eye, 0x253132, .10, 2.02, .268);
+    const legs = [-.18, .18].map(x => part(geometry.limb, 0x2d3c4b, x, .53, 0));
+    const arms = [-.45, .45].map(x => part(geometry.limb, color, x, 1.28, 0));
+    [-.18, .18].forEach(x => part(geometry.foot, 0xe0dfcf, x, .12, .065));
+    const bag = part(geometry.bag, 0xed8d40, 0, 1.3, -.35); bag.visible = backpack;
+    return { group, bag, animate(pose: Pick<Pose, "x" | "z" | "yaw" | "moving" | "running">, time: number, reduced = false) {
+      group.position.set(pose.x, pose.moving && !reduced ? Math.abs(Math.sin(time * (pose.running ? 13 : 8))) * .045 : 0, pose.z); group.rotation.y = pose.yaw;
+      const swing = pose.moving && !reduced ? Math.sin(time * (pose.running ? 13 : 8)) * (pose.running ? .7 : .4) : 0;
+      legs[0].rotation.x = swing; legs[1].rotation.x = -swing; arms[0].rotation.x = -swing; arms[1].rotation.x = swing;
+    } };
   };
 }
 export function buildScenery(scene: THREE.Scene, city: City, world: World) {
+  const makePerson = createPeople();
   const rand = seeded(713),
     materials = new Map<number, THREE.MeshStandardMaterial>();
   const material = (color: number) => {
@@ -163,8 +121,9 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     buildings = palette.map(() => [] as THREE.BufferGeometry[]),
     roofs: THREE.BufferGeometry[] = [];
   city.buildings.forEach((b, i) => {
+    const height = String(b.id) === "1665" ? 16 : b.height;
     const g = new THREE.ExtrudeGeometry(shapeOf(b.shape), {
-      depth: b.height,
+      depth: height,
       bevelEnabled: false,
       steps: 1,
     });
@@ -172,7 +131,7 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     buildings[i % palette.length].push(g);
     const roof = new THREE.ShapeGeometry(shapeOf(b.shape));
     roof.rotateX(-Math.PI / 2);
-    roof.translate(0, b.height + 0.03, 0);
+    roof.translate(0, height + 0.03, 0);
     roofs.push(roof);
   });
   buildings.forEach((gs, i) =>
@@ -336,37 +295,65 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     scene.add(o);
     labels.push(o);
   }
-  label("SURREY CENTRAL", [80, 0], 12, "#ffd07d", 30);
-  label("BUS LOOP", [38, 66], 5, "#a9decb", 18);
-  for (const c of city.civic) {
-    const names: Record<string, string> = {
-      "CITY CENTRE LIBRARY": "CITY CENTRE LIBRARY",
-      "SURREY CITY HALL": "CITY HALL",
-      "CENTRAL CITY": "CENTRAL CITY",
-      SFU: "SFU SURREY",
-      "KPU (CIVIC PLAZA)": "CIVIC PLAZA",
-    };
-    if (c.name && names[c.name])
-      label(
-        names[c.name],
-        c.centre,
-        c.name === "SFU" ? 114 : c.name.includes("CIVIC") ? 140 : 20,
-      );
+  for (const place of landmarks(city)) label(place.name.toUpperCase(), place.point, place.height, "#e6efdf", 28);
+  // Original geometric interpretations from cited public architecture references; no footprint edits.
+  const glass = new THREE.MeshStandardMaterial({ color: 0x6097a8, roughness: .28, metalness: .25 });
+  const tower = mesh(new THREE.CylinderGeometry(19, 21, 95, 18), glass);
+  tower.scale.set(1, 1, .72); tower.position.set(37, 63.5, 180); tower.castShadow = true;
+  const pale: THREE.BufferGeometry[] = [], dark: THREE.BufferGeometry[] = [], timber: THREE.BufferGeometry[] = [], blue: THREE.BufferGeometry[] = [];
+  for (let y = 18; y < 110; y += 4.5) {
+    const ring = new THREE.CylinderGeometry(19.2, 19.2, .35, 18); ring.scale(1, 1, .72); ring.translate(37, y, 180); pale.push(ring);
   }
-  label("104 AVENUE", [-155, -220], 6, "#e2ead3", 22);
-  label("KING GEORGE BOULEVARD", [240, -30], 6, "#e2ead3", 34);
-  const stationRoof = mesh(
-    new THREE.BoxGeometry(15, 0.6, 50),
-    material(0x568b9b),
-  );
-  stationRoof.position.set(80, 12, 0);
-  stationRoof.castShadow = true;
-  const player = person(0x2eaaa0),
-    owner = person(0xe5bc56),
-    thief = person(0x8d599a, true),
-    sam = person(0x9d7595),
-    jo = person(0x4b96b0),
-    pickpocket = person(0xb96352);
+  // Curved glazed atrium on the retained SFU podium, with timber-supported canopy.
+  for (let i = 0; i < 14; i++) {
+    const x = -114 + i * 12, z = 139 + Math.sin(i / 13 * Math.PI) * 8;
+    blue.push(box(11, 12, .5, x, 7, z)); timber.push(box(.5, 13, .55, x, 6.5, z - .6));
+    pale.push(box(12, .5, 6, x, 8, z - 1));
+  }
+  dark.push(box(130, .8, 67, -24, 35.1, -195));
+  blue.push(box(112, 18, .6, -24, 13, -164.9));
+  for (let y = 5; y < 22; y += 5) pale.push(box(55, .65, 78, -30, y, -128));
+  for (let i = 0; i < 4; i++) { const rooflight = box(7, 2, 28, -45 + i * 10, 21, -123); pale.push(rooflight); }
+  // Station platform, transparent-looking glazed hall, stair runs and open canopy.
+  pale.push(box(12, .6, 70, 80, 8.9, 0));
+  blue.push(box(16, .65, 66, 80, 13, 0));
+  blue.push(box(.4, 10, 48, 74, 6, 0), box(.4, 10, 48, 86, 6, 0));
+  for (let i = 0; i < 16; i++) pale.push(box(4, .55, 1, 70, .4 + i * .52, 20 - i));
+  for (const z of [-28, -12, 12, 28]) dark.push(box(.4, 12, .4, 73, 6, z), box(.4, 12, .4, 87, 6, z));
+  // Illustrative furniture and parked vehicles are kept away from quest interaction points.
+  const seats: THREE.BufferGeometry[] = [], bins: THREE.BufferGeometry[] = [], cars: THREE.BufferGeometry[] = [], tires: THREE.BufferGeometry[] = [];
+  const protectedPoints = [...Object.values(city.anchors), ...Object.values(storyLocations(city, world))];
+  for (let i = 0; i < Math.min(trees.length, 100); i += 4) {
+    const p = [trees[i][0] + 3, trees[i][1] + 2] as Point;
+    if (!world.fits(p) || protectedPoints.some(q => distance(q, p) < 9)) continue;
+    seats.push(box(2.2, .15, .65, p[0], .65, p[1]), box(2.2, .75, .14, p[0], 1, p[1] - .3));
+    bins.push(box(.65, .9, .65, p[0] + 2, .45, p[1]));
+    if (i % 12 === 0) {
+      cars.push(box(1.8, .7, 4, p[0] - 6, .8, p[1]), box(1.6, .65, 2, p[0] - 6, 1.4, p[1]));
+      for (const x of [-.9, .9]) for (const z of [-1.3, 1.3]) tires.push(box(.25, .6, .6, p[0] - 6 + x, .4, p[1] + z));
+    }
+  }
+  // Bus loop: stationary generic buses and shelters, not branded replicas.
+  for (const x of [30, 50]) {
+    pale.push(box(2.8, 2.7, 11, x, 1.7, 72)); blue.push(box(2.85, 1, 8, x, 2.3, 72));
+    dark.push(box(5, .3, 2.3, x, 3.3, 86), box(.12, 3, .12, x - 2, 1.5, 86), box(.12, 3, .12, x + 2, 1.5, 86));
+  }
+  label("BUS LOOP", [38, 76], 6, "#b8e7d3", 18);
+  label("C17 · FICTIONAL EXHIBITION", [-75, 130], 7, "#f5cb83", 23);
+  const holland = landmarks(city).find(p => p.id === "holland")!.point;
+  const fountain = mesh(new THREE.CylinderGeometry(13, 14, .6, 24), material(0xbbbdae)); fountain.position.set(holland[0], .35, holland[1]);
+  const water = mesh(new THREE.CircleGeometry(11.5, 24), material(0x65afbe)); water.rotation.x = -Math.PI / 2; water.position.set(holland[0], .67, holland[1]);
+  for (let i = 0; i < 3; i++) { const ring = new THREE.TorusGeometry(19 + i * 3, .7, 4, 28, Math.PI); ring.rotateX(Math.PI / 2); ring.translate(holland[0], 1 + i * .35, holland[1] + 12); pale.push(ring); }
+  const barriers: THREE.BufferGeometry[] = [];
+  for (let i = 0; i < 7; i++) barriers.push(box(2.5, 1, .35, -160 + i * 3.1, .6, -240));
+  batch(pale, material(0xdadbd0), true); batch(dark, material(0x304950)); batch(timber, material(0xb18c5c)); batch(blue, glass, true);
+  batch(seats, material(0x9f7f53)); batch(bins, material(0x405750)); batch(cars, material(0xb87e5e), true); batch(tires, material(0x263238)); batch(barriers, material(0xef9d52));
+  const player = makePerson(0x2eaaa0),
+    owner = makePerson(0xe5bc56),
+    thief = makePerson(0x8d599a, true),
+    sam = makePerson(0x9d7595),
+    jo = makePerson(0x4b96b0),
+    pickpocket = makePerson(0xb96352);
   [player, owner, thief, sam, jo, pickpocket].forEach((p) =>
     scene.add(p.group),
   );
@@ -413,5 +400,21 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     material(0x4e6579),
   );
   mystery.position.set(city.anchors.mystery[0], 0.4, city.anchors.mystery[1]);
-  return { player, owner, thief, pickpocket, marker, ring, labels };
+  const youCanvas = document.createElement("canvas"); youCanvas.width = youCanvas.height = 128;
+  const youContext = youCanvas.getContext("2d")!; youContext.fillStyle = "#f8f4db"; youContext.beginPath(); youContext.arc(64, 64, 58, 0, Math.PI * 2); youContext.fill();
+  youContext.fillStyle = "#186c87"; youContext.beginPath(); youContext.arc(64, 64, 48, 0, Math.PI * 2); youContext.fill();
+  youContext.fillStyle = "white"; youContext.font = "bold 29px sans-serif"; youContext.textAlign = "center"; youContext.fillText("YOU", 64, 74);
+  const youTexture = new THREE.CanvasTexture(youCanvas); youTexture.colorSpace = THREE.SRGBColorSpace;
+  const you = new THREE.Sprite(new THREE.SpriteMaterial({ map: youTexture, depthTest: false, depthWrite: false })); you.renderOrder = 10; scene.add(you);
+  const waypoint = mesh(new THREE.OctahedronGeometry(.7), new THREE.MeshBasicMaterial({ color: 0x78e3ef, depthTest: false })); waypoint.visible = false;
+  const encounter = makePerson(0xce8a72, true); scene.add(encounter.group); encounter.group.visible = false;
+  const encounterMarker = mesh(new THREE.OctahedronGeometry(.5), new THREE.MeshBasicMaterial({ color: 0xf69b8c, depthTest: false })); encounterMarker.visible = false;
+  const story = storyLocations(city, world), evidence = new Map<string, THREE.Mesh>(), witnessMarkers: THREE.Mesh[] = [];
+  witnesses.forEach((w, i) => {
+    const actor = makePerson([0x8e85c7, 0x4c8c8a, 0xd99c62][i]); actor.group.position.set(story[w.id][0], 0, story[w.id][1]); scene.add(actor.group);
+    const marker = mesh(new THREE.OctahedronGeometry(.42), new THREE.MeshBasicMaterial({ color: 0xcfadef, depthTest: false })); marker.position.set(story[w.id][0], 3, story[w.id][1]); witnessMarkers.push(marker);
+  });
+  evidenceData.forEach(e => { if (e.id === "watch") return; const p = story[e.id]; const object = mesh(new THREE.BoxGeometry(.7, .2, .55), material(e.id === "paint" ? 0xb5584e : 0xe8d496)); object.position.set(p[0], .22, p[1]); evidence.set(e.id, object); });
+  const sceneRing = mesh(new THREE.RingGeometry(2.4, 2.7, 24), new THREE.MeshBasicMaterial({ color: 0xc8a2ed, side: THREE.DoubleSide })); sceneRing.rotation.x = -Math.PI / 2; sceneRing.position.set(story.scene[0], .13, story.scene[1]);
+  return { player, owner, thief, pickpocket, marker, ring, labels, makePerson, you, waypoint, encounter, encounterMarker, evidence, witnessMarkers };
 }

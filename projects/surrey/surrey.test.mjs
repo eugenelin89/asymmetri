@@ -41,7 +41,8 @@ function walk(sim, target) {
   );
   assert.ok(path.length > 1, "Reachable destination " + target);
   for (const dest of path.slice(1)) {
-    for (let i = 0; i < 2000; i++) {
+    const maxFrames = Math.ceil(distance([sim.state.player.x, sim.state.player.z], dest) / 3.6 * 60) + 120;
+    for (let i = 0; i < maxFrames; i++) {
       const p = sim.state.player,
         dx = dest[0] - p.x,
         dz = dest[1] - p.z;
@@ -51,7 +52,7 @@ function walk(sim, target) {
     }
     assert.ok(
       distance([sim.state.player.x, sim.state.player.z], dest) < 0.3,
-      "Arrived via collision movement",
+      `Arrived via collision movement target=${dest} position=${sim.state.player.x},${sim.state.player.z} dialogue=${JSON.stringify(sim.state.dialogue)}`,
     );
   }
 }
@@ -237,11 +238,13 @@ test("dialogue pauses mission clock, movement and stamina; exhaustion recovers",
   for (let i = 0; i < 100; i++) sim.tick(0.1);
   assert.equal(sim.state.stamina, 100);
 });
-test("second mystery is an explicitly future hook and collects just one clue", () => {
+test("mystery discovery opens a playable investigation and deduplicates its watch", () => {
   const sim = createSimulation(city);
   sim.state.player = pose(city.anchors.mystery);
   sim.interact();
-  assert.ok(sim.state.dialogue.text.includes("future chapter"));
+  assert.equal(sim.state.investigation.stage, "active");
+  assert.match(sim.state.objective, /Surrey Central Mystery/);
+  assert.ok(sim.state.dialogue.text.includes("Nina"));
   sim.dismiss();
   sim.interact();
   assert.equal(sim.state.inventory.length, 1);
@@ -297,4 +300,124 @@ test("render frame rates preserve walking distance", () => {
       (p) => distance([p.x, p.z], [samples[0].x, samples[0].z]) < 0.02,
     ),
   );
+});
+
+const { createAerial } = await import("./camera.ts");
+const { encounters } = await import("./encounters.ts");
+const { parseSave, readSave, writeSave, SAVE_KEY } = await import("./save.ts");
+const { pedestrianRoutes, stepPedestrians } = await import("./population.ts");
+
+test("aerial orbit, pan, bounds, zoom and return-to-player preserve an independent camera target", () => {
+  const player = [...city.anchors.spawn], a = createAerial(city.bounds, player), before = a.pose();
+  a.orbit(80, -30); assert.notDeepEqual(a.pose().position, before.position); assert.deepEqual(a.state.target, player);
+  a.pan(160, 40); assert.equal(a.state.follow, false); assert.notDeepEqual(a.state.target, player);
+  a.pan(1e7, 1e7); assert.ok(a.state.target[0] >= city.bounds[0] && a.state.target[0] <= city.bounds[2]);
+  for (let i = 0; i < 20; i++) a.zoom(-1000); assert.equal(a.state.distance, 65);
+  for (let i = 0; i < 20; i++) a.zoom(1000); assert.equal(a.state.distance, 1700);
+  a.orbit(0, 1e5); assert.equal(a.state.pitch, 1.42);
+  a.focus(player); assert.equal(a.state.follow, true); assert.deepEqual(a.state.target, player); assert.deepEqual(player, city.anchors.spawn);
+});
+
+test("repeated aerial switches freeze character, mission, danger, encounter clocks and RNG", () => {
+  const sim = createSimulation(city, 42); sim.state.stage = "chase";
+  sim.state.encounter = { id: "robbery", phase: "pursuit", position: [...city.anchors.spawn], seconds: 12, hit: false, variant: false };
+  for (let cycle = 0; cycle < 30; cycle++) {
+    sim.mode("aerial"); const before = sim.serialize();
+    for (let i = 0; i < 100; i++) sim.tick(.1, 1, 1, true);
+    const after = sim.serialize(); assert.deepEqual(after.state, before.state); assert.deepEqual(after.runtime, before.runtime);
+    sim.mode("ground"); assert.deepEqual([sim.state.player.x, sim.state.player.z], city.anchors.spawn);
+  }
+  sim.tick(.1); assert.ok(sim.state.elapsed > 0); assert.ok(sim.state.encounter.seconds < 12);
+});
+
+function investigation(sim) {
+  sim.calm(true);
+  walk(sim, sim.story.scene); sim.interact(); sim.dismiss();
+  for (const id of ["tag", "nina", "idris", "receipt", "rowan", "paint", "clock"]) {
+    walk(sim, sim.story[id]); sim.interact();
+    assert.ok(sim.state.dialogue, id + " has a reachable interaction"); sim.dismiss();
+  }
+  walk(sim, sim.story.scene); sim.interact();
+}
+test("complete the mystery through collision movement, five clues, three witnesses and a reasoned conclusion", () => {
+  const sim = createSimulation(city); investigation(sim);
+  assert.equal(sim.state.investigation.evidence.length, 5); assert.equal(sim.state.investigation.witnesses.length, 3);
+  const before = sim.state.money; assert.equal(sim.state.dialogue.context, "conclusion"); sim.choose("mara");
+  assert.equal(sim.state.investigation.stage, "closed"); assert.equal(sim.state.money, before + 75);
+  sim.dismiss(); sim.interact(); sim.dismiss(); sim.choose("mara"); assert.equal(sim.state.money, before + 75);
+});
+test("misleading paint and weak accusation lead to an inconclusive outcome; resubmission cannot farm rewards", () => {
+  const sim = createSimulation(city); investigation(sim); const before = sim.state.money;
+  sim.choose("rowan"); assert.equal(sim.state.investigation.stage, "inconclusive"); assert.equal(sim.state.money, before + 10);
+  sim.dismiss(); sim.interact(); sim.choose("rowan"); assert.equal(sim.state.money, before + 10);
+  sim.dismiss(); sim.interact(); sim.choose("mara"); assert.equal(sim.state.investigation.stage, "closed"); assert.equal(sim.state.money, before + 75);
+});
+test("evidence gate, explicit choices and Mission 1 retry preserve independent evidence", () => {
+  const sim = createSimulation(city); sim.state.player = pose(sim.story.scene); sim.interact(); sim.dismiss(); sim.interact();
+  assert.deepEqual(sim.state.dialogue.choices.map(c => c.id), ["leave"]);
+  sim.choose("mara"); assert.equal(sim.state.investigation.stage, "active"); sim.dismiss(); assert.ok(sim.state.dialogue, "E cannot choose an accusation");
+  sim.choose("leave"); sim.state.player = pose(city.anchors.owner); sim.interact(); sim.dismiss();
+  assert.ok(sim.state.inventory.includes("Case 02: stopped watch")); assert.equal(sim.state.stage, "clue");
+});
+function trigger(id, seed = 91) {
+  const sim = createSimulation(city, seed); sim.mature(true); if (["dealer", "solicitation", "community"].includes(id)) sim.calm(true);
+  sim.state.player = pose(sim.locations[id]);
+  for (let i = 0; i < 900 && sim.state.encounter?.id !== id; i++) {
+    sim.tick(.1);
+    if (sim.state.danger.active) sim.interact();
+  }
+  assert.equal(sim.state.encounter?.id, id); sim.interact(); assert.ok(sim.state.dialogue?.choices?.length >= 3); return sim;
+}
+test("all six authored encounter types have seeded playable choices and outcomes", () => {
+  for (const [id, choice] of [["robbery", "help"], ["theft", "witness"], ["solicitation", "question"], ["dealer", "report"], ["scam", "question"], ["community", "directions"]]) {
+    const a = trigger(id), b = trigger(id); assert.deepEqual(a.state, b.state);
+    a.choose(choice); assert.equal(a.state.encounter, null); assert.ok(a.state.resolved.includes(id)); assert.ok(a.state.dialogue.text.length > 35);
+  }
+});
+test("robbery choices support bounded loss, escape, single damage and recovery protection", () => {
+  const pay = trigger("robbery"); pay.choose("pay"); assert.equal(pay.state.money, 8);
+  const run = trigger("robbery"); run.choose("refuse"); assert.equal(run.state.encounter.phase, "pursuit");
+  for (let i = 0; i < 80; i++) run.tick(.1); assert.equal(run.state.health, 94);
+  run.recover(); for (let i = 0; i < 300; i++) run.tick(.1); assert.equal(run.state.encounter, null); assert.equal(run.state.health, 100);
+});
+test("theft pursuit is reachable, bounded, recoverable and pays once", () => {
+  const sim = trigger("theft"); sim.choose("chase"); assert.equal(sim.state.encounter.phase, "chase");
+  for (let i = 0; i < 150; i++) sim.tick(.1);
+  walk(sim, sim.state.encounter.position); sim.interact(); assert.equal(sim.state.encounter, null); assert.equal(sim.state.money, 40);
+});
+test("Gentle Streets and mature reduction suppress only their relevant encounters", () => {
+  const sim = createSimulation(city); sim.calm(true);
+  for (const def of encounters.filter(e => e.threatening || e.mature)) {
+    sim.state.player = pose(sim.locations[def.id]); for (let i = 0; i < 700; i++) sim.tick(.1);
+    assert.ok(!sim.state.encounter || !encounters.find(e => e.id === sim.state.encounter.id).threatening && !encounters.find(e => e.id === sim.state.encounter.id).mature);
+  }
+  const mature = trigger("solicitation"); mature.mature(false); assert.equal(mature.state.encounter, null); assert.equal(mature.state.dialogue, null);
+});
+test("versioned save restores missions, evidence, settings, seeded timers and safe positions without trusting UI dialogue", () => {
+  const sim = createSimulation(city); investigation(sim); sim.choose("mara"); sim.dismiss(); sim.mature(true); sim.mode("aerial");
+  sim.state.stage = "completed"; sim.state.money = 140; sim.state.health = 78; sim.state.stamina = 42;
+  const value = sim.serialize("low"), parsed = parseSave(JSON.stringify(value)); assert.ok(parsed);
+  const restored = createSimulation(city); restored.restore(parsed);
+  for (const key of ["stage", "money", "health", "stamina", "inventory", "investigation", "calm", "mature", "mode"]) assert.deepEqual(restored.state[key], sim.state[key], key);
+  assert.equal(restored.state.dialogue, null); assert.deepEqual(restored.serialize().runtime, sim.serialize().runtime);
+  value.state.player.x = 99999; value.state.player.z = -99999;
+  restored.restore(parseSave(JSON.stringify(value))); assert.ok(world.fits([restored.state.player.x, restored.state.player.z]));
+});
+test("save storage and corrupt, incompatible or malicious fields fail safely", () => {
+  const valid = createSimulation(city).serialize(), encoded = JSON.stringify(valid), memory = new Map();
+  const storage = { getItem: k => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v), removeItem: k => memory.delete(k) };
+  assert.ok(writeSave(storage, valid)); assert.ok(readSave(storage).save); assert.equal(memory.has(SAVE_KEY), true);
+  for (const raw of ["{", "null", JSON.stringify({ ...valid, version: 1 }), JSON.stringify({ ...valid, map: "other" }), encoded.replace('"money":20', '"money":-5'), encoded.replace('"stage":"available"', '"stage":"invented"'), "x".repeat(50001)]) assert.equal(parseSave(raw), null);
+  const blocked = { getItem() { throw Error("blocked"); }, setItem() { throw Error("quota"); }, removeItem() {} };
+  assert.equal(readSave(blocked).save, null); assert.equal(writeSave(blocked, valid), false);
+  memory.set(SAVE_KEY, "broken"); assert.equal(readSave(storage).save, null); assert.equal(memory.get(SAVE_KEY), "broken", "Invalid save is not silently erased");
+});
+test("pedestrians follow source-parallel clear routes, pause, avoid obstacles and separate", () => {
+  const paths = pedestrianRoutes(city, world); assert.ok(paths.length > 15);
+  for (const path of paths) assert.ok(world.clear(...path));
+  const path = paths[0], p = path[0];
+  const people = [{ pose: pose(p), path, target: 1, pause: 0 }, { pose: pose([p[0] + .2, p[1] + .2]), path, target: 1, pause: 0 }];
+  for (let i = 0; i < 600; i++) stepPedestrians(people, city.anchors.spawn, null, 1 / 60, world);
+  assert.ok(people.every(p => world.fits([p.pose.x, p.pose.z])));
+  assert.ok(distance([people[0].pose.x, people[0].pose.z], [people[1].pose.x, people[1].pose.z]) > .6);
 });

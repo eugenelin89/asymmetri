@@ -262,3 +262,9 @@ runtime. Run `npm run test:surrey` for deterministic gameplay/geometry tests.
 The optional offline importer uses its own Python environment and external cache;
 normal development, testing and builds use committed assets without geographic
 network calls. See `projects/surrey/README.md` for controls and reproducibility.
+
+V0.2 adds V/F aerial controls, a journal, six street stories and a complete second
+case. Continue Game reads this origin's `asymmetri.surrey.save.v2`; New Game replaces
+it after confirmation. Separate localhost ports and public hosts have separate
+saves. Storage failures must not block play. Avoid creating debug teleport or
+mission-completion controls for browser acceptance.

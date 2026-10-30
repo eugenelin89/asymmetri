@@ -1,14 +1,25 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { MiniMap } from "./MiniMap";
+import { Journal } from "./Journal";
+import { readSave, parseSave, SAVE_KEY } from "./save";
+import type { SavedGame } from "./save";
+import { landmarks } from "./landmarks";
+import { storyLocations } from "./story";
+import { createWorld } from "./world";
 import type { City, Game, Input, Snapshot } from "./types";
 import styles from "./surrey.module.css";
+const subscribeSave = (notify: () => void) => { window.addEventListener("storage", notify); return () => window.removeEventListener("storage", notify); };
+const saveSnapshot = () => { try { return localStorage.getItem(SAVE_KEY); } catch { return "!unavailable"; } };
 export function SurreyAdventure() {
+  const savedRaw = useSyncExternalStore(subscribeSave, saveSnapshot, () => null);
+  const validStoredSave = useMemo(() => parseSave(savedRaw), [savedRaw]);
   const host = useRef<HTMLDivElement>(null),
     viewport = useRef<HTMLDivElement>(null),
     engine = useRef<Game | null>(null),
     dialogueButton = useRef<HTMLButtonElement>(null),
-    startButton = useRef<HTMLButtonElement>(null);
+    startButton = useRef<HTMLButtonElement>(null),
+    loaded = useRef<SavedGame | undefined>(undefined);
   const [status, setStatus] = useState("idle"),
     [error, setError] = useState(""),
     [attempt, setAttempt] = useState(0),
@@ -20,7 +31,15 @@ export function SurreyAdventure() {
     [lite, setLite] = useState(false),
     [calm, setCalm] = useState(false),
     [expanded, setExpanded] = useState(false),
-    [inventory, setInventory] = useState(false);
+    [inventory, setInventory] = useState(false),
+    [mature, setMature] = useState(false),
+    [saveUnavailable, setSaveUnavailable] = useState(false),
+    [replaceSave, setReplaceSave] = useState(false),
+    [saveMessage, setSaveMessage] = useState(""),
+    [selectedPlace, setSelectedPlace] = useState("");
+  const locations = useMemo(() => city ? storyLocations(city, createWorld(city)) : null, [city]);
+  const saveAvailable = !!validStoredSave && !saveUnavailable;
+  const saveText = saveMessage || (savedRaw === "!unavailable" ? "Browser storage is unavailable. Progress will not survive reloads." : savedRaw && !validStoredSave ? "The local save is damaged or incompatible. New Game starts safely; the old save stays until replaced." : saveAvailable ? "Progress saved on this browser only." : "Autosaves stay on this browser only.");
   const ready = status === "ready";
   useEffect(() => {
     if (!started || !host.current) return;
@@ -32,6 +51,7 @@ export function SurreyAdventure() {
           host.current!,
           {
             map: setCity,
+            saved(success) { setSaveMessage(success ? "Saved on this browser · no account or upload" : "Saving unavailable · keep this page open to retain progress"); },
             update: setState,
             fail(message) {
               setError(message);
@@ -45,6 +65,7 @@ export function SurreyAdventure() {
             },
           },
           abort.signal,
+          loaded.current,
         ),
       )
       .then((game) => {
@@ -74,15 +95,16 @@ export function SurreyAdventure() {
     };
   }, [started, attempt]);
   useEffect(() => {
-    engine.current?.pause(paused);
-    if (!paused && ready) engine.current?.focus();
-  }, [paused, ready]);
+    engine.current?.pause(paused || inventory);
+    if (!paused && !inventory && ready) engine.current?.focus();
+  }, [paused, inventory, ready]);
   useEffect(() => {
     engine.current?.quality(lite ? "low" : "auto");
   }, [lite, ready]);
   useEffect(() => {
     engine.current?.calm(calm);
   }, [calm, ready]);
+  useEffect(() => { engine.current?.mature(mature); }, [mature, ready]);
   const dialogue = state?.dialogue,
     dialogueSpeaker = dialogue?.speaker,
     dialogueText = dialogue?.text;
@@ -100,7 +122,7 @@ export function SurreyAdventure() {
       if (e.key !== "Tab") return;
       const items = [
         ...(viewport.current?.querySelectorAll<HTMLElement>(
-          'button:not(:disabled),canvas[tabindex="0"],input',
+          'button:not(:disabled),canvas[tabindex="0"],input,select',
         ) ?? []),
       ].filter((el) => el.getClientRects().length);
       const first = items[0],
@@ -120,12 +142,23 @@ export function SurreyAdventure() {
       document.removeEventListener("keydown", trap);
     };
   }, [expanded]);
-  function start() {
+  function start(continuing = false) {
+    if (continuing) {
+      let save: SavedGame | null = null;
+      try { save = readSave(localStorage).save; } catch { /* An unavailable save never prevents a new game. */ }
+      if (!save) { setSaveUnavailable(true); setSaveMessage("The save could not be read. New Game is available."); return; }
+      loaded.current = save; setCalm(save.state.calm); setMature(save.state.mature); setLite(save.quality === "low");
+    } else {
+      if (saveAvailable && !replaceSave) { setReplaceSave(true); return; }
+      loaded.current = undefined;
+    }
+    setReplaceSave(false);
     setStatus("loading");
     setStarted(true);
     setPaused(false);
   }
   function retry() {
+    try { loaded.current = readSave(localStorage).save ?? undefined; } catch { loaded.current = undefined; }
     setStatus("loading");
     setError("");
     setPaused(false);
@@ -145,14 +178,15 @@ export function SurreyAdventure() {
       <div
         className={`${styles.viewport} ${expanded ? styles.expanded : ""}`}
         ref={viewport}
+        data-mode={state?.mode ?? "ground"}
         onKeyDown={(e) => {
           if (e.key === "Escape" && !e.defaultPrevented) {
             e.preventDefault();
-            setPaused((v) => !v);
+            if (inventory) setInventory(false); else setPaused((v) => !v);
           }
-          if (e.key === "Tab" && (paused || dialogue)) {
+          if (e.key === "Tab" && (paused || dialogue || inventory)) {
             const overlay = viewport.current?.querySelector<HTMLElement>(
-              paused ? `.${styles.screen}` : `.${styles.dialogue}`,
+              paused ? `.${styles.screen}` : inventory ? `.${styles.journal}` : `.${styles.dialogue}`,
             );
             const buttons = [
               ...(overlay?.querySelectorAll<HTMLButtonElement>("button") ?? []),
@@ -180,6 +214,8 @@ export function SurreyAdventure() {
               SURREY <span>ADVENTURE</span>
             </span>
             <div>
+              <button disabled={!ready || !!dialogue || inventory} onClick={() => action(g => g.mode(state?.mode === "aerial" ? "ground" : "aerial"))}>{state?.mode === "aerial" ? "Back to Adventure" : "Aerial View"} <kbd>V</kbd></button>
+              <button disabled={!ready || !!dialogue} onClick={() => setInventory(v => !v)}>Journal</button>
               <button
                 onClick={() => setWide((v) => !v)}
                 disabled={!ready}
@@ -218,13 +254,16 @@ export function SurreyAdventure() {
                 has a story.
               </h2>
               <p>
-                One missing backpack.
-                <br />A city full of unexpected turns.
+                Two cases. Six street stories.
+                <br />A whole new perspective.
               </p>
-              <button className={styles.primary} onClick={start}>
-                Play Now <span>↗</span>
-              </button>
-              <small>V0.1 · Free to explore · No sign-in</small>
+              <div className={styles.startActions}>
+                {saveAvailable && <button className={styles.primary} onClick={() => start(true)}>Continue Game <span>→</span></button>}
+                <button className={saveAvailable ? "" : styles.primary} onClick={() => start(false)}>{replaceSave ? "Replace save & start new" : saveAvailable ? "New Game" : "Play Now"} <span>↗</span></button>
+                {replaceSave && <button onClick={() => setReplaceSave(false)}>Keep my save</button>}
+              </div>
+              <small>V0.2 · Dangerous Streets · No sign-in</small>
+              <p className={styles.contentNotice}>Fictional adult cast. Non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs. Gentle Streets and Mature Encounters controls are below.</p>
             </div>
             <div className={styles.startTag}>
               WELCOME TO
@@ -258,9 +297,9 @@ export function SurreyAdventure() {
           <>
             <div className={styles.mission}>
               <span className={styles.eyebrow}>
-                {state.stage === "completed"
-                  ? "01 / CASE CLOSED"
-                  : state.stage === "failed"
+                {state.investigation.stage === "closed" && state.stage === "completed" ? "BOTH CASES CLOSED" : state.stage === "completed"
+                  ? state.investigation.stage === "available" ? "01 / CASE CLOSED" : "02 / THE SURREY CENTRAL MYSTERY"
+                  : state.stage === "available" && ["active", "inconclusive"].includes(state.investigation.stage) ? "02 / THE SURREY CENTRAL MYSTERY" : state.stage === "failed"
                     ? "01 / TRY AGAIN"
                     : "01 / WELCOME TO SURREY"}
               </span>
@@ -298,35 +337,32 @@ export function SurreyAdventure() {
                 <b>{Math.round(state.stamina)}</b>
               </div>
               <button
+                disabled={!!dialogue}
                 onClick={() => setInventory((v) => !v)}
                 aria-expanded={inventory}
               >
                 $ {state.money}{" "}
-                <span>Inventory {state.inventory.length} ↗</span>
+                <span>Evidence & inventory {state.inventory.length} ↗</span>
               </button>
             </div>
-            {inventory && (
-              <div className={styles.inventory}>
-                <strong>In your pockets</strong>
-                {state.inventory.length ? (
-                  <ul>
-                    {state.inventory.map((i) => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>Room for a story.</p>
-                )}
-                <button onClick={() => setInventory(false)}>Close</button>
-              </div>
-            )}
+            {inventory && locations && <Journal state={state} locations={locations} close={() => setInventory(false)} track={(point, name) => { action(g => g.track(point, name)); setInventory(false); }} />}
+            {state.mode === "aerial" && !inventory && !paused && <div className={styles.aerialDock}>
+              <div className={styles.compass}><span style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span><strong>EXPLORE SURREY</strong></div>
+              <p>Street activity paused. Your character stays at the YOU marker.</p>
+              <div><button aria-pressed={state.follow} onClick={() => action(g => g.follow(true))}>Follow Player</button><button aria-pressed={!state.follow} onClick={() => action(g => g.follow(false))}>Free Explore</button></div>
+              <button onClick={() => action(g => g.returnToPlayer())}>Return to Player <kbd>F</kbd></button>
+              <label>Landmark<select value={selectedPlace} onChange={e => { setSelectedPlace(e.target.value); action(g => g.selectPlace(e.target.value)); }}><option value="">Choose a viewpoint</option>{city && landmarks(city).map(p => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
+              <div><button aria-label="Aerial rotate left" onClick={() => action(g => g.rotate(.3))}>↶</button><button aria-label="Aerial rotate right" onClick={() => action(g => g.rotate(-.3))}>↷</button><button aria-label="Aerial zoom in" onClick={() => action(g => g.zoom(-2))}>＋</button><button aria-label="Aerial zoom out" onClick={() => action(g => g.zoom(2))}>−</button></div>
+              <small>Drag: orbit · right drag / two fingers: pan · wheel / pinch: zoom · WASD: pan</small>
+            </div>}
+            {state.waypoint && !inventory && <div className={styles.waypoint}><span>◇ {state.waypoint.name}</span><button onClick={() => action(g => g.clearWaypoint())} aria-label="Clear waypoint">×</button></div>}
             {city && <MiniMap city={city} state={state} wide={wide} />}
             <div className={styles.location}>
               <span className={styles.dot} /> {state.street}
             </div>
-            {!paused && !dialogue && (
+            {!paused && !dialogue && !inventory && (
               <div className={styles.prompt}>
-                {state.nearby ? (
+                {state.mode === "aerial" ? <span>V · Back to Adventure</span> : state.nearby ? (
                   <button onClick={() => action((g) => g.interact())}>
                     <kbd>E</kbd> {state.nearby}
                   </button>
@@ -339,15 +375,15 @@ export function SurreyAdventure() {
                 )}
               </div>
             )}
-            {state.message && !dialogue && !paused && (
+            {state.message && !dialogue && !paused && !inventory && state.mode === "ground" && (
               <div
-                className={`${styles.notice} ${state.danger.active ? styles.danger : ""}`}
+                className={`${styles.notice} ${(state.danger.active || state.encounter) ? styles.danger : ""}`}
                 role="status"
               >
                 {state.message}
               </div>
             )}
-            {!paused && !dialogue && (
+            {!paused && !dialogue && !inventory && (
               <div
                 className={styles.touchControls}
                 aria-label="Touch movement controls"
@@ -364,7 +400,7 @@ export function SurreyAdventure() {
                     <button
                       key={input}
                       data-direction={input}
-                      aria-label={label}
+                      aria-label={state.mode === "aerial" ? label.replace("Walk", "Pan") : label}
                       onPointerDown={(e) => {
                         e.preventDefault();
                         e.currentTarget.setPointerCapture(e.pointerId);
@@ -388,6 +424,7 @@ export function SurreyAdventure() {
                 </div>
                 <div className={styles.touchActions}>
                   <button
+                    disabled={state.mode === "aerial"}
                     aria-label="Hold to sprint"
                     onPointerDown={(e) => {
                       e.preventDefault();
@@ -408,7 +445,7 @@ export function SurreyAdventure() {
                   </button>
                   <button
                     onClick={() => action((g) => g.interact())}
-                    disabled={!state.nearby}
+                    disabled={!state.nearby || state.mode === "aerial"}
                   >
                     E
                   </button>
@@ -425,20 +462,16 @@ export function SurreyAdventure() {
                 <span className={styles.eyebrow}>A SURREY STORY</span>
                 <h3>{dialogue.speaker}</h3>
                 <p>{dialogue.text}</p>
-                <button
-                  ref={dialogueButton}
-                  className={styles.primary}
-                  onClick={() => action((g) => g.dismiss())}
-                >
-                  {dialogue.action ?? "Continue"} <span>→</span>
-                </button>
+                <div className={styles.choices}>
+                  {dialogue.choices ? dialogue.choices.map((choice, i) => <button key={choice.id} ref={i === 0 ? dialogueButton : undefined} onClick={() => action(g => g.choose(choice.id))}>{choice.label} →</button>) : <button ref={dialogueButton} className={styles.primary} onClick={() => action(g => g.dismiss())}>{dialogue.action ?? "Continue"} <span>→</span></button>}
+                </div>
               </div>
             )}
             {paused && (
               <div className={styles.screen}>
                 <p className={styles.eyebrow}>TAKE A BREATHER</p>
                 <h2>The story can wait.</h2>
-                <p>Your progress stays here while this page is open.</p>
+                <p>{saveText}. Saves belong to this browser and this site address.</p>
                 <button
                   ref={startButton}
                   className={styles.primary}
@@ -448,6 +481,7 @@ export function SurreyAdventure() {
                 </button>
                 <div className={styles.menuActions}>
                   <button
+                    disabled={state.mode === "aerial"}
                     onClick={() => {
                       action((g) => g.recover());
                       setPaused(false);
@@ -457,11 +491,10 @@ export function SurreyAdventure() {
                   </button>
                   <button
                     onClick={() => {
-                      action((g) => g.reset());
-                      setPaused(false);
+                      if (replaceSave) { action((g) => { g.reset(); g.save(); }); setPaused(false); setReplaceSave(false); } else setReplaceSave(true);
                     }}
                   >
-                    Restart story
+                    {replaceSave ? "Confirm new game · replace save" : "New Game"}
                   </button>
                   {expanded && (
                     <button onClick={() => setExpanded(false)}>
@@ -484,6 +517,7 @@ export function SurreyAdventure() {
             />{" "}
             Gentle streets <span>no random threats</span>
           </label>
+          <label><input type="checkbox" checked={mature} onChange={e => setMature(e.target.checked)} /> Mature encounters <span>optional adult dialogue</span></label>
           <label>
             <input
               type="checkbox"
@@ -522,11 +556,12 @@ export function SurreyAdventure() {
           >
             −
           </button>
-          <button disabled={!ready} onClick={() => action((g) => g.recover())}>
+          <button disabled={!ready || state?.mode === "aerial"} onClick={() => action((g) => g.recover())}>
             Recover <kbd>R</kbd>
           </button>
         </div>
       </div>
+      <p className={styles.saveStatus} role="status">{saveText}</p>
       <details className={styles.instructions}>
         <summary>
           How to play <span>Keyboard, mouse & touch</span>
@@ -537,15 +572,21 @@ export function SurreyAdventure() {
           between local and full maps. Escape pauses; R returns you safely to
           the station. Camera buttons offer a keyboard alternative. On touch
           screens, hold the direction pad and Sprint, drag the city to look
-          around, and tap E to interact.
+          around, and tap E to interact. V switches to aerial mode; F returns the
+          camera to your character. Aerial WASD / the touch pad pans; drag orbits,
+          right drag or two fingers pan, wheel or pinch zooms. Selecting a landmark
+          places a waypoint; it never moves the character. Street activity pauses in aerial mode.
         </p>
         <p>
           Find Alex at the gold marker, accept the case, inspect the transit
           slip, recover the backpack and return it. You can chase the runner or
-          speak to Sam and Jo at the blue marker for help. Purple marks a future
-          mystery. Dialogue pauses the action. Gentle streets removes optional
-          pickpocket encounters. The story resets when you reload; no progress
-          is stored or transmitted.
+          speak to Sam and Jo at the blue marker for help. Purple marks a complete
+          fictional homicide investigation. Read the Journal, talk to witnesses, inspect
+          nearby clues with E and compare their accounts. Dialogue and Journal pause
+          the action. Gentle Streets suppresses threats; Mature Encounters enables
+          optional non-explicit adult dialogue. Progress and settings autosave locally
+          every five seconds and after decisions. Nothing in the save is uploaded;
+          clearing browser site data removes it. Use New Game to replace it.
         </p>
       </details>
     </section>

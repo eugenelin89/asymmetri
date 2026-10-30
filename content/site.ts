@@ -56,13 +56,13 @@ export const surrey = {
   name: "Surrey Adventure",
   path: "/labs/surrey",
   tagline: "Survive the streets. Discover the stories.",
-  status: "V0.1 — Playable Prototype",
+  status: "V0.2 — Dangerous Streets",
   description: "An experimental open-world adventure set in a fictionalized Surrey City Centre.",
   source: { label: "View Surrey Adventure source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/surrey" },
   license: { label: "MIT code · City open data", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/surrey/THIRD_PARTY_NOTICES.md" },
   dataLicence: "https://www.surrey.ca/sites/default/files/media/documents/BulkGISDataRequestFormSecured.pdf",
   manifest: "/surrey/v0.1-2026-10-30/manifest.json",
-  metadata: { title: "Surrey Adventure — Play the City | Asymmetri Labs", description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets, meet neighbours and recover a missing backpack. Free browser prototype." },
+  metadata: { title: "Surrey Adventure — Play the City | Asymmetri Labs", description: "Play an experimental 3D adventure in a fictionalized Surrey City Centre. Explore real streets from above, solve two fictional cases and meet the neighbourhood. A free browser adventure with local saves." },
 } as const;
 
 const contactEmail = "info@asymmetri.co";

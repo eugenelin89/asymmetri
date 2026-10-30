@@ -1,73 +1,107 @@
-# Surrey Adventure V0.1 — Playable Prototype
+# Surrey Adventure V0.2 — Dangerous Streets
 
-**Survive the streets. Discover the stories.** An independent Asymmetri Labs browser
-adventure at `/labs/surrey`. The 1.31 × 1.45 km City Centre slice contains actual
-City of Surrey street, sidewalk, building, park and rail geometry. Characters,
-crimes and narrative are authored fiction, unrelated to real incidents or safety.
+**Survive the streets. Discover the stories.** A fictional third-person adventure
+and aerial city explorer at `/labs/surrey`, using the unchanged 1.31 × 1.45 km
+City of Surrey geographic snapshot. Every character and incident is invented;
+this is not a real crime map or a statement about neighbourhood safety.
 
-[Play the public release](https://asymmetri.co/labs/surrey) ·
-[Verified release and recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
+[Play](https://asymmetri.co/labs/surrey) · [V0.2 release record](../../docs/SURREY_V02_RELEASE_2026-10-30.md) · [V0.1 release / recovery record](../../docs/SURREY_RELEASE_2026-10-30.md)
 
-## Play
+## Play and controls
 
-Run the website with its Node 24 `.nvmrc`, installed lockfile and `npm run dev:next`.
-Visit `/labs/surrey` and select **Play Now**. WebGL2 is required. No account, paid
-map API, backend, save file, analytics or external runtime requests are added.
+Use Node 24 from `.nvmrc`, the installed lockfile and `npm run dev:next`.
+Select **Play Now**, or **Continue Game** when this browser has a valid save.
+WebGL2 is required. No account, backend, paid API, analytics or upload is added.
 
-| Input | Action |
-| --- | --- |
-| WASD / arrows | Camera-relative walking |
-| Shift | Sprint; recover stamina by walking or resting |
-| Drag / wheel | Rotate camera / change distance |
-| E | Interact; dialogue has a keyboard-focusable Continue button |
-| M | Local / whole-neighbourhood map |
-| Escape | Pause / resume |
-| R | Safe station recovery, keeping quest progress |
+| Input | Adventure | Aerial Explore |
+| --- | --- | --- |
+| WASD / arrows | Camera-relative walk | Pan city |
+| Shift | Sprint, consuming stamina | — |
+| Drag | Rotate follow camera | Orbit |
+| Right drag / two fingers | — | Pan; pinch zooms |
+| Wheel / zoom buttons | Camera distance | Zoom |
+| V / visible mode button | Switch to aerial | Back to Adventure |
+| F / Return to Player | — | Centre camera on exact player position |
+| E | Interact | Disabled |
+| M | Toggle mini-map extent | Toggle mini-map extent |
+| Escape | Pause / close overlay | Pause / close overlay |
+| R | Safe station recovery | Disabled |
 
-Touch devices have held directional and sprint controls plus E. Camera buttons
-provide a keyboard/touch alternative. The expanded view has a focus boundary;
-dialogue/menu buttons keep keyboard focus inside the active panel. Reduced-motion
-preferences suppress procedural bob/swing and camera smoothing. Gentle streets
-disables optional threats; Lite lowers rendering resolution and removes shadows.
-Hidden/offscreen/inactive scenes suspend animation. Reloading starts a fresh story.
+Touch directional controls pan in aerial mode; visible orbit/zoom buttons provide
+alternatives to gestures. Follow Player and Free Explore share one scene, renderer
+and animation loop. Aerial mode freezes walking, mission/encounter clocks and NPC
+activity. A distinctive YOU marker uses the actual player position. Landmark
+selection and journal pins set waypoints, never teleport the player. Undiscovered
+evidence is not revealed from the air. Camera transitions interpolate unless
+reduced motion is requested. Hidden/offscreen/inactive scenes stop rendering.
 
-## What is playable
+Expanded view, menus, dialogue and journal have focus boundaries. Choices require
+explicit button selection; E does not silently choose an outcome. Lite reduces
+pixel ratio and disables shadows. Reduced motion suppresses bob/swing and camera
+smoothing. Gentle Streets suppresses threats. Mature Encounters is **off by
+default** and enables only optional, non-explicit adult dialogue about sex work
+and drugs. There are no sexual acts, drug transactions or graphic violence.
 
-**Welcome to Surrey**: walk from the station entrance area to Alex at the gold
-marker, accept the case, inspect the yellow transit slip, catch a fictional runner
-or get Sam and Jo to help, recover the orange backpack, and return it for $35.
-The runner drops the bag at the end of a bounded escape route. The three-minute
-chase deadline offers a retry through Alex without a monetary penalty. No combat.
+## Two complete cases and street stories
 
-An optional seeded pickpocket encounter warns the player near a fictional trigger,
-approaches at walking pace, can be escaped or dismissed by calling for help, and
-has a cooldown. A contact can cost at most $5 and 8 health once per encounter.
-Gentle mode removes the event and restores any money intercepted by that event.
-Sam, a neighbour staying in a shelter, and Jo, an outreach worker, provide a
-conversation, water/health and help with the quest; they are never threat actors.
-The purple marker collects one stopped-watch clue and clearly introduces a
-**future**, fictional, non-graphic homicide mystery. It is not a second full mission.
+**Welcome to Surrey:** meet Alex, inspect the transit slip, recover the backpack
+through a bounded pursuit or help from Sam and Jo, and return it for $35. Failure
+allows retry; recovery preserves quest progress. The V0.1 pickpocket remains.
 
-## Architecture and Vancouver boundary
+**The Surrey Central Mystery:** inspect the sealed scene, gather five clues and
+interview Nina, Idris and Rowan. Compare the unreliable watch, clock log and C17
+paperwork; the red paint is misleading. The journal records evidence and discovered
+leads. Return to the scene to submit a theory after at least three clues and two
+witnesses. An inconclusive/unsupported report pays $10 and permits further inquiry;
+a corroborated conclusion pays at most $75 total, including any earlier stipend.
+No body is depicted. The fictional cart kiosk is not an actual business allegation.
+The case can be investigated before or after the backpack mission.
 
-- `data.ts`: bounded same-origin versioned fetch, aborts and map contract checks.
-- `world.ts`: full-body clearance, sliding collision, <=15 cm movement substeps,
-  safe recovery and bounded A* NPC routes using the same walkable geometry.
-  Reuses Vancouver's tested `inPolygon`/`segmentDistance` predicates by import.
-- `simulation.ts`: renderer-independent, seeded quest/status/inventory/encounter
-  logic. Stages cover available, active clue/chase/return, completed and failed.
-- `scenery.ts`: original procedural people, building extrusion/window textures,
-  batched streets, trees, lights, crosswalks, signs and elevated rail structures.
-- `engine.ts`: Three.js, input, camera clearance, ambient movement, disposal and
-  rendering suspension; 150 ms snapshots cross into React, never per-frame state.
-- `Adventure.tsx`, `MiniMap.tsx`, CSS: start/menu/dialogue, HUD, responsive controls,
-  north-oriented SVG geography, inventory and accessibility/text instructions.
+Six data-driven encounters supplement the original pickpocket: a robbery demand
+(pay/refuse/flee/help/distract), a stolen portfolio with bounded chase or victim/
+witness assistance, optional adult solicitation with decline/question/leave choices,
+an optional dealer proposition with refusal/report/inquiry choices, a seeded
+charity collection that may be sincere or fraudulent, and a community wallet/
+directions interaction. Cooldowns and a 60-second post-recovery grace period avoid
+immediate repeated threats. Rewards occur once per type. Mature dialogue does not
+make sex workers, homelessness, poverty or substance use automatic danger signals.
+All cast members and the player are fictional adults.
 
-No Vancouver file or snapshot changes. Surrey does not import Vancouver map data,
-places, renderer or vehicle state. Rendering conventions and offline preprocessing
-follow Vancouver; a separate player simulation avoids a risky shared-engine refactor.
-Future transport modes can replace locomotion while retaining quest state and map.
-No runtime/development dependency was added; only the offline Python tool uses Shapely.
+## Save and resume
+
+`asymmetri.surrey.save.v2` is a versioned localStorage record, written during play,
+after decisions, on pause/visibility changes and teardown. It preserves both cases,
+clues, inventory, health/stamina/money, safe player position, settings, cooldowns
+and seeded runtime state. No record leaves this browser. Saves are origin-specific:
+apex and www do not share them. New Game asks before replacing a valid save;
+clearing site data also removes progress. Invalid/incompatible records are ignored
+and retained until a new game replaces them. Restricted/quota-full storage shows a
+notice and play continues without guaranteed persistence. Restore validates enums,
+allowlisted items, finite ranges and map/version, then safely relocates invalid
+geometry positions. Aerial framing itself resets around the saved player.
+
+## Architecture and performance
+
+- `data.ts` / `world.ts`: bounded same-origin map contract, full-body clearance,
+  sliding collision, movement substeps, safe recovery and bounded A* navigation.
+- `simulation.ts`: pure seeded state, both cases, encounter choices and timers.
+- `story.ts` / `encounters.ts`: authored clues, witnesses, verdicts and event data.
+- `save.ts`: versioned serialization boundary, validation and failure-safe storage.
+- `camera.ts`: bounded aerial orbit/pan/zoom/follow mathematics.
+- `population.ts`: sidewalk-parallel routes, pauses, separation and threat reactions.
+- `scenery.ts` / `landmarks.ts`: original procedural landmarks and shared rounded
+  person geometry, source-backed labels and reference provenance.
+- `engine.ts`: one Three.js renderer/loop, input, shared scene, camera transitions,
+  visibility suspension, adaptive DPR, autosave and complete GPU/event disposal.
+- `Adventure.tsx`, `Journal.tsx`, `MiniMap.tsx`, CSS: responsive HUD, explicit
+  choices, evidence, discovered leads, compass and visible touch controls.
+
+React receives 150 ms snapshots rather than frame updates. Ambient pedestrians are
+bounded to 10 on coarse-pointer devices or 18 otherwise. Distant aerial pedestrians
+are culled; labels are decluttered and rendered at readable screen size. Environmental
+objects use instancing where applicable, and people share geometry/materials.
+Vancouver supplies only existing geometry predicates. Its renderer, controls,
+vehicle state and snapshots are unchanged. No dependency or network service added.
 
 ## Geography and provenance
 
@@ -113,39 +147,41 @@ to replace differing output under an existing snapshot. Changed source needs a n
 reviewed version. Retain raw cache files for deterministic reproduction; upstream
 live queries may change. No network request occurs during tests or normal builds.
 
-## Verification
+## V0.2 architectural interpretation
 
-`npm run test:surrey` covers source integrity, safe spawn, full-body building and
-boundary collision, normalized movement, long stalls, frame-rate independence,
-all quest paths through actual collision movement, pursuit and community solutions,
-stage gating, one-time rewards, failure/retry/recovery, deterministic danger,
-cooldowns, empty-wallet damage limits, gentle mode, dialogue pause, stamina,
-future clue deduplication and failing/cancelled asset loads.
+The immutable geographic snapshot remains authoritative for footprints/roads and
+collision. The combined SFU/Central City footprint now renders as a lower podium,
+curved office tower and glass/timber atrium instead of one tall extrusion. Library
+floor ribbons/skylights, City Hall's oversailing roof, the glazed station entrances,
+Civic Plaza and Holland Park fountain/amphitheatre give readable silhouettes.
+Exact tower placement, dimensions, windows and props are artistic approximations,
+not surveys. Benches, bins, shelters, stationary buses, parked cars, construction
+barriers and fictional signage are decorative, generally without collision.
+Primary architectural references are listed in `landmarks.ts` and
+`THIRD_PARTY_NOTICES.md`; no reference photographs, logos or public artworks are copied.
 
-Release checks also include `npm run check`, `npm run test:vancouver`,
-`npm run test:investment`, `npm audit --omit=dev`, `npm run build:next`,
-`npm run build`, and `git diff --check`. The `prebuild:next` hook runs Surrey tests in the existing
-exact-source Node 22 candidate workflow without changing workflow permissions. Deployment uses `docs/DEPLOYMENT.md` and
-its production-owner, capacity, independent-build and complete-rollback guards.
+## Verification and release
 
-## Limits and roadmap
+`npm run test:surrey` covers immutable map/source integrity, real collision walks
+through both backpack solutions and mystery outcomes, evidence/reward gates,
+seeded encounters/choices, cooldowns, gentle/mature settings, pursuit/recovery,
+aerial camera bounds and return, repeated mode/timer/RNG preservation, validated
+save/restore, storage failure, pedestrian separation and failed/cancelled loading.
+Run `npm run check`, Vancouver/investment regression tests, `npm audit --omit=dev`,
+`npm run build:next`, `npm run build` and `git diff --check` before release.
+The existing `prebuild:next` hook includes Surrey tests in the exact-source Linux
+Node 22 workflow. Deployment follows `docs/DEPLOYMENT.md`: capacity floors,
+independent candidate, protected routes/services and whole previous runtime rollback.
+Browser acceptance is recorded separately from automated simulation coverage.
 
-V0.1 has one complete mission, one danger type and simple ambient pedestrians.
-No interiors, vehicles, traffic simulation, violence/combat, terrain, saved
-progress, full crime investigation, NPC schedules or transit boarding. Some
-street furniture is decorative rather than collidable. Physical phone thermal,
-battery and long-session performance still need testing; desktop viewport
-emulation is not a physical-device claim.
+## Limits and next steps
 
-1. **V0.2 — Dangerous Streets:** more authored encounters, meaningful dialogue,
-   a complete mystery, stronger pedestrian avoidance and pursuit animation.
-2. **V0.3 — Living Surrey:** better source-backed landmark massing, day/evening,
-   neighbourhood services, schedules and optional local save/resume.
-3. **V0.4 — Beyond City Centre:** validate a wider connected pedestrian network
-   toward Gateway and King George; improve Holland Park paths and terrain.
-4. **V0.5 — Vehicles and Transit:** add separate cycling/driving modes and verified
-   elevated transit traversal with safe boarding and collision boundaries.
-5. **V1.0:** connected story arcs, persistent progression and a larger city.
+No interiors, drivable vehicles, transit boarding, combat, terrain or autonomous
+NPC agent service. Community tasks are short authored branches, not full delivery
+quests. The mystery uses fixed authored clues; encounter selection/outcomes are
+seeded. Saves are browser-local and can be cleared by the browser. Viewport testing
+is not physical-phone thermal, battery, gesture or long-session certification.
 
-The next three highest-impact improvements are a richer landmark/street scene,
-physical-phone input/performance acceptance, and a second complete investigation.
+1. Physical iOS/Android input, frame-time, thermal and long-session acceptance.
+2. Richer recurring-character errands and schedules with more mission choices.
+3. Source-backed terrain, Holland Park paths and transit traversal, before map expansion.

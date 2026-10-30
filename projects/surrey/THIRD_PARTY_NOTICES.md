@@ -33,3 +33,17 @@ Three.js is MIT licensed; React is MIT licensed; Next.js is MIT licensed.
 They remain the website's existing pinned dependencies. Procedural textures and
 3D characters are original; there are no external model, font or image downloads.
 The offline-only Shapely dependency retains its BSD licence and is not bundled.
+
+## V0.2 architecture references (reviewed October 30, 2026)
+
+These primary public references informed original, stylized procedural geometry.
+No photographs, logos, artworks or source meshes are redistributed. Locations use
+the unchanged City snapshot; added massing/dimensions are illustrative, not surveyed.
+
+- [Surrey Central Station — Office of McFarlane Biggar](https://officemb.ca/projects/surrey-central-skytrain-station/): glazed stationhouse and entrances.
+- [SFU at Central City](https://www.sfu.ca/surrey/about/our-locations/sfu-at-central-city.html): mall/university/tower composition.
+- [Central City atrium — StructureCraft](https://structurecraft.com/projects/central-city-atrium-facade): sweeping glazing and timber columns.
+- [City Hall — Kasian](https://kasian.com/project/surrey-city-hall-and-civic-centre/): projecting roof and glazed atrium.
+- [City Centre Library — Revery](https://reveryarchitecture.com/projects/surrey-city-centre-library/): angled walls, floor bands and skylights.
+- [Civic Plaza — City of Surrey](https://www.surrey.ca/news-events/events/surrey-civic-plaza): civic outdoor space.
+- [Holland Park — City of Surrey](https://www.surrey.ca/parks-recreation/parks/holland-park): gardens, fountain and amphitheatre.

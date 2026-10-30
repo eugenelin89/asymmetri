@@ -93,6 +93,8 @@ export function MiniMap({
           stroke="#1c2d2c"
           strokeWidth="2"
         />
+        {state.waypoint && <g><circle cx={state.waypoint.point[0]} cy={state.waypoint.point[1]} r={9 * scale} fill="none" stroke="#78e3ef" strokeWidth={2 * scale} /><path d="M-5 0H5M0 -5V5" transform={`translate(${state.waypoint.point[0]},${state.waypoint.point[1]}) scale(${scale})`} stroke="#78e3ef" strokeWidth="2" /></g>}
+        {state.encounter && <circle cx={state.encounter.position[0]} cy={state.encounter.position[1]} r={5 * scale} fill="#f49c8d" />}
         {state.danger.active && (
           <circle
             cx={state.danger.position[0]}

@@ -890,3 +890,17 @@ They are not current navigation.
 - North-up SVG map shares the loaded geographic asset; accessible labels report
   player location, objective and marker meanings. No exported map image.
 - The existing Labs social image is reused without changing its bytes or rights.
+
+## Surrey Adventure V0.2 — October 30, 2026
+
+No geographic snapshot or external binary/image asset is added or replaced.
+`scenery.ts` extends original MIT procedural code with shared rounded people,
+curved Central City tower/podium/atrium, civic/station/library detailing, park
+fountain/amphitheatre and decorative buses, cars, shelters, benches, bins and
+barriers. Geometry is in scene metres, textures generated at runtime; no raster
+export dimensions apply. `landmarks.ts` records seven primary architectural
+references; see project third-party notices. These are visual cues, not copied
+photographs, surveyed dimensions, official logos or public artwork. Fictional
+signs do not identify real businesses as crime locations. Canvas description,
+visible HUD, labels, journal and nearby text provide context; no decorative image
+requires a separate HTML alt attribute. Original code remains MIT licensed.

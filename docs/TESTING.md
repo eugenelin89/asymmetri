@@ -656,3 +656,11 @@ Browser acceptance includes the complete backpack quest and reward, camera/input
 map, pause, recovery/reset, gentle/Lite settings, dialogue focus, responsive
 controls, overflow, console errors and cleanup on route exit. Record physical
 mobile tests separately from viewport emulation. See the project README for limits.
+
+V0.2 acceptance additionally covers aerial orbit/pan/zoom, exact player marker,
+follow/free/return, preserved positions and paused clocks, repeated mode switches
+with stable canvas/resource counts, both investigation outcomes, three or more
+new encounters, mature opt-in, journal focus, reload/Continue/New Game and corrupt
+or unavailable storage. Pure tests cover all six types and collision walks through
+five clues/three witnesses. Verify responsive controls at 320/390, 768 and desktop
+widths plus landscape. Do not label viewport emulation as real touch-device testing.
