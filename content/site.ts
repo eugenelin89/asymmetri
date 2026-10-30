@@ -164,9 +164,6 @@ export const site = {
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
         { label: divisions.labs.product.name, href: divisions.labs.product.path },
-        botsquadStructure.research,
-        botsquadStructure.investment,
-        botsquadStructure.ask,
         { label: gisApps.name, href: gisApps.path },
       ],
     },

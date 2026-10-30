@@ -565,9 +565,10 @@ or contextual questions. `botsquadStructure` centralizes area labels and URLs;
 `botsquadResearch` and `botsquadDirectory` own hub and overview copy. Add future
 areas only when the owner defines them; do not invent placeholder projects.
 
-The Labs card primarily opens BotSquad. Its area directory opens Research and Ask;
-Research opens Trade. Shared breadcrumbs, area links and the global Labs menu
-allow direct movement between them. Retain investment record URLs, exact-run links
+The Labs card and global Labs menu open BotSquad. The menu contains Asymmetri Labs,
+BotSquad and GIS Apps; Research, Trade and Ask are reached within BotSquad.
+Its area directory opens Research and Ask; Research opens Trade. Shared BotSquad
+breadcrumbs and area links allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified
 worker activity or financial results; existing archive truth states still apply.
 

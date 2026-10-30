@@ -22,7 +22,9 @@ Labs primarily links to the BotSquad overview. Its early area directory introduc
 Research and Ask, with a direct Trade link nested in the Research card.
 The new Research hub introduces the current Trade project. A shared server
 component provides ancestor breadcrumbs and direct Overview/Research/Trade/Ask
-links on all related pages. The global Labs menu exposes those destinations too.
+links on all related pages. Following the October 30 menu simplification, the
+global Labs menu opens BotSquad; Research, Trade and Ask remain in BotSquad’s own
+directory, breadcrumbs and area navigation. Their URLs and hierarchy are unchanged.
 
 As of the owner-approved October15 migration, Trade and its methodology, run,
 record, artifact, guide and read pages use `/botsquad/trade`. Every prior
