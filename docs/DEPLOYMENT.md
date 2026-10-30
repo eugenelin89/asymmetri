@@ -1312,6 +1312,9 @@ receipt. Do not modify ingress, private receivers or stored records for this mov
 
 ## Vancouver V0.1 isolated Linux candidate
 
+See the [October 30 release record](VANCOUVER_RELEASE_2026-10-30.md) for deployed
+features, verification, runtime identities, recovery and remaining limitations.
+
 The owner explicitly authorized implementation, main push and public experimental
 release on October 30, 2026, including safe resolution of capacity prerequisites.
 The unsupported Ubuntu host remains under the reviewed retained-host exception;
