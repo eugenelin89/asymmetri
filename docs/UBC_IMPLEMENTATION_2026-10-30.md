@@ -9,6 +9,10 @@ found and resolved entrance, Nest-envelope, guide-proximity and field-shadow iss
 Twenty-five real browser/scene captures are retained. Physical-device testing and
 architectural-fidelity acceptance remain outstanding. No production deployment was performed.
 
+Subsequent release: [UBC V0.2 Orchard Commons](UBC_ORCHARD_RELEASE_2026-10-31.md)
+was deployed and publicly verified October 31, including this earlier campus work.
+The no-deployment statement above describes the October 30 milestone.
+
 ## A. Project implementation
 
 Repository: `https://github.com/eugenelin89/asymmetri`, independent local checkout

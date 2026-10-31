@@ -183,20 +183,26 @@ No local development server remains running after this validation pass.
 
 Rendering observations: one desktop Auto exterior sample reported 60 FPS,
 886 draw calls and 2,441,929 triangles; a rainy-night lounge sample reported
-60 FPS, 285 draw calls and 1,262,715 triangles. These are short UI observations,
+60 FPS, 285 draw calls and 1,262,715 triangles with reduced motion enabled.
+These are short UI observations,
 not sustained benchmarks or 60/30 FPS device certification. Physical iPhone and
 Android testing is outstanding. Browser viewport screenshots exhibit tool-side
 scaling/padding; clean scene PNG exports are retained separately.
 
 ## Release status
 
-Version: **0.2.0 · Orchard Commons open house**. Public target:
-`https://asymmetri.co/labs/ubc`. Production activation is a separate gate from
-these local results. Use the exact-SHA Linux candidate and complete-directory
-rollback procedure in `DEPLOYMENT.md`; a successful local build is not a deployment.
-The final production receipt must record source/build/artifact identities,
-protected-route and peer checks, measured headroom, browser verification and the
-complete immediate predecessor. No OS, DNS, TLS or unrelated service changes.
+Version: **0.2.0 · Orchard Commons open house**, live at
+[asymmetri.co/labs/ubc](https://asymmetri.co/labs/ubc), also verified on `www`.
+Activated October 31 at 08:16:08 UTC from source `32f7295`, Linux build
+`uSdetjZWMH8Rh69FKnc5J`. The [production receipt](UBC_ORCHARD_RELEASE_2026-10-31.md)
+records artifact identity, safeguarded activation, public/browser acceptance,
+protected-route regressions, measured capacity and the complete immediate rollback.
+The gallery contains 18 local and four production captures. Live checks repeated
+bedroom/bathroom entry, sourced student dialogue, phone follow-up, lift travel,
+normal exit and camera switching. Vancouver, Surrey and Richmond also passed live
+launch/movement checks. No OS, DNS, TLS or unrelated service changes were made.
+The local development server is stopped; later documentation commits do not change
+the deployed runtime identity.
 
 ## Five next priorities
 

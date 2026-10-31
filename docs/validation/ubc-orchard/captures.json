@@ -162,6 +162,50 @@
       "bytes": 1759275,
       "sha256": "fd08825dfd973d1a29e0f50d88bf9dafa900286fb397a1a5564c1b0cf17a0af5",
       "source": "Actual browser canvas export"
+    },
+    {
+      "path": "19-production-bathroom.jpg",
+      "description": "Live Room H bathroom, finished floor and exit",
+      "width": 1280,
+      "height": 720,
+      "bytes": 64035,
+      "sha256": "d572e516536eb439972c8291476445079d771153c8dc89355a682ce8d01b229f",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "20-production-student.jpg",
+      "description": "Live Maya conversation with reconstruction disclosure",
+      "width": 1280,
+      "height": 720,
+      "bytes": 65930,
+      "sha256": "bb500f980e0d63aa92e36ee9ee4511a54713240c9f0c964377337b4ec364d089",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "21-production-phone.jpg",
+      "description": "Live phone-width bathroom follow-up and source links",
+      "width": 390,
+      "height": 844,
+      "bytes": 40375,
+      "sha256": "2554d1765052092ee5b618d8181a5ef5699d162c105bee5d838b0d1ca9c07f94",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "22-production-aerial.png",
+      "description": "Live Orchard Commons aerial view",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1737590,
+      "sha256": "a049e12f6aefb39cc8a45a5fa15e06bdf7c6c23fd53064ca46bc4e00f7eb4e3c",
+      "source": "Actual production browser canvas export",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
     }
   ]
 }

@@ -1066,7 +1066,9 @@ phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immut
   No photographic textures, copied models or UBC logo assets.
 - `ResidenceGuide.tsx`: original SVG schematic of the fictional floor, named
   “Representative residence floor plan, courtyard at the bottom”.
-- `docs/validation/ubc-orchard/`: actual local scene PNG exports and browser JPEGs.
+- `docs/validation/ubc-orchard/`: 18 actual local scene/browser captures and four
+  production captures (19–22), including the live bathroom finish, sourced dialogue,
+  phone follow-up and aerial model. PNG exports and browser JPEGs are unmodified.
   Dimensions, hashes and descriptive labels are in `captures.json`. They show
   the independent reconstruction, not real students or campus photographs.
   UI captures retain tool-side scaling/padding. No editing or AI generation.

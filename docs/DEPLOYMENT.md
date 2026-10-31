@@ -3,8 +3,18 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [UBC V0.2 Orchard release receipt](UBC_ORCHARD_RELEASE_2026-10-31.md) records
+the current October 31 runtime: five UBC interior reconstructions, including one
+Orchard Commons demonstration floor with eight rooms, while all three city apps
+remain intact. Source `32f7295`, Linux build `uSdetjZWMH8Rh69FKnc5J`, activated at
+08:16:08 UTC. The complete immediately preceding runtime is retained at
+`/var/www/asymmetri-rollback-before-ubc-orchard-v02-20261031`. Private/public/browser,
+protected-route and peer checks passed. The initial private memory-guard stop and
+successful bounded-heap repeat are documented; safeguard floors were unchanged.
+Later documentation commits do not change the runtime.
+
 The [Surrey V0.5 release receipt](SURREY_V05_RELEASE_2026-10-30.md) records the
-current October 30 runtime: playable driving, a complete delivery, bounded traffic
+preceding October 30 runtime: playable driving, a complete delivery, bounded traffic
 and moving train scenery, with Richmond and Vancouver preserved. Runtime source
 `fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. The complete
 immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v05-20261030`.
