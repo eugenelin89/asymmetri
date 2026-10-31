@@ -153,3 +153,8 @@ computes route progress; `CampusMap.tsx` owns map selection and accessible actio
 ## V0.3 campus life and community
 
 See [the V0.3 report](../../docs/UBC_CAMPUS_LIFE_V03.md) for current architecture, seven interiors, partial faculty coverage, varsity seasons, transport sources and limitations. Public profiles require Node and a private persistent `UBC_PROFILE_DIR`; the Cloudflare build alone does not provision this filesystem service. See [community operations](../../docs/UBC_COMMUNITY_OPERATIONS.md).
+
+The [encounter refinements](../../docs/UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md)
+are [verified live](../../docs/UBC_ENCOUNTER_RELEASE_2026-10-31.md): action-and-response
+dialogue, dispersed pedestrians, grouped building entries and immediate movement
+focus after travel. The release adds no new geographic coverage.

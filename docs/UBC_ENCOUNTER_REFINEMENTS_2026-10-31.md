@@ -51,7 +51,7 @@ Vinext and Next webpack builds pass. Vancouver 74, Surrey 54 and Richmond 27
 regression tests also pass: **208 tests in total**.
 
 [Four actual browser captures](validation/ubc-conversations/README.md) show the
-corrected directory, desktop/phone conversation and Rose pedestrian path. Browser
+corrected directory, desktop/phone conversation and baseball-precinct path. Browser
 acceptance verified identity discovery, waves, operations-research/healthcare
 follow-up, management science, unsupported personal-opinion questions, goodbye,
 reopening history, new-tab source attributes and focus after location jumps.
@@ -65,4 +65,6 @@ screen-reader audit were not performed. Passing checks do not establish
 photorealism or a universally accurate campus reconstruction. The crowd remains a
 bounded procedural simulation, not a live population or schedule.
 
-Deployment is a separate gated step; see the release receipt once activated.
+Deployed and verified on October 31; see the
+[production receipt](UBC_ENCOUNTER_RELEASE_2026-10-31.md) for exact source/build,
+public checks, recovery and remaining validation limits.

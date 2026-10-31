@@ -1113,13 +1113,14 @@ imagery; no recovery credentials are visible.
 
 ## UBC encounter refinement evidence — 2026-10-31
 
-Four unretouched PNG browser captures in `docs/validation/ubc-conversations/`,
-for engineering evidence only (not new site assets). Source: actual local UBC app;
+Four unretouched JPEG browser captures in `docs/validation/ubc-conversations/`,
+for engineering evidence only (not new site assets). Source: actual UBC app,
+directory from production and remaining captures local;
 original procedural figures/architecture and retained licensed GIS geography.
 No real portrait, new logo, private profile or external model is included.
 The gallery labels provide descriptive link text/alt context.
 
-- `directory-crescent-west.png`: 65536×4292542531; directory crescent west.
-- `rose-path-spacing.png`: 65536×4292542531; rose path spacing.
-- `werker-wave-desktop.png`: 65536×4292542531; werker wave desktop.
-- `werker-wave-phone.png`: 65536×4292542531; werker wave phone.
+- `directory-crescent-west.jpg`: 1280×720; directory crescent west.
+- `rose-path-spacing.jpg`: 1280×720; baseball precinct path spacing.
+- `werker-wave-desktop.jpg`: 1280×720; werker wave desktop.
+- `werker-wave-phone.jpg`: 390×844; werker wave phone.
