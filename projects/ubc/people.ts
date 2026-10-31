@@ -3,8 +3,9 @@ import * as THREE from "three";
 import type { Appearance } from "./appearance";
 import type { Anchors, CampusData, Point, Character } from "./types";
 import { characters } from "./registry";
-import { global } from "./spatial";
+import { global, segmentDistance } from "./spatial";
 import { random } from "./scenery";
+import type { Gesture } from "./conversation";
 export type Actor = {
   id: string;
   group: THREE.Group;
@@ -14,7 +15,9 @@ export type Actor = {
   speed: number;
   legs: THREE.Group[];
   arms: THREE.Group[];
+  head: THREE.Group;
   named: boolean;
+  waiting?: number;
 };
 export function person(
   id: string,
@@ -96,23 +99,26 @@ export function person(
     mesh(new THREE.SphereGeometry(0.2, 10, 8), shirt, g, 0, 1.38, -0.08);
   if (appearance?.outfit === "Jacket")
     mesh(new THREE.BoxGeometry(0.018, 0.5, 0.015), pants, g, 0, 1.12, 0.222);
-  mesh(new THREE.SphereGeometry(0.145, 10, 8), skin, g, 0, 1.63, 0);
+  const head = new THREE.Group();
+  head.position.y = 1.63;
+  g.add(head);
+  mesh(new THREE.SphereGeometry(0.145, 10, 8), skin, head, 0, 0, 0);
   if (appearance?.hairstyle !== "Bald")
     mesh(
       new THREE.SphereGeometry(0.149, 10, 7, 0, Math.PI * 2, 0, 1.4),
       hairMaterial,
-      g,
+      head,
       0,
-      1.66,
+      0.03,
       0,
     );
   if (appearance?.hairstyle === "Long")
     mesh(
       new THREE.CapsuleGeometry(0.14, 0.28, 3, 9),
       hairMaterial,
-      g,
+      head,
       0,
-      1.48,
+      -0.15,
       -0.09,
     );
   if (appearance?.hairstyle === "Curly")
@@ -120,9 +126,9 @@ export function person(
       mesh(
         new THREE.SphereGeometry(0.07, 6, 5),
         hairMaterial,
-        g,
+        head,
         Math.cos(i * 2.4) * 0.13,
-        1.71 + Math.sin(i * 1.7) * 0.055,
+        0.08 + Math.sin(i * 1.7) * 0.055,
         Math.sin(i * 2.4) * 0.13,
       );
   const legs: THREE.Group[] = [],
@@ -171,7 +177,7 @@ export function person(
       0.225,
     );
   }
-  return { group: g, legs, arms };
+  return { group: g, legs, arms, head };
 }
 export function createPeople(
   data: CampusData,
@@ -286,10 +292,10 @@ export function createPeople(
     if (c.uniform) uniform(model, c.uniform, c.color, c.jerseyNumber);
     if (c.beard)
       sphere(
-        model.group,
+        model.head,
         material(0x553e2e),
         0,
-        1.56,
+        -0.07,
         0.085,
         0.112,
         [1, 0.7, 0.75],
@@ -326,16 +332,35 @@ export function createPeople(
     const r = routes[Math.floor(random(i + 11) * routes.length)],
       route = r.points.filter((p) => !isBlocked(p, 0));
     if (route.length < 2) continue;
+    const segment = Math.floor(random(i + 89) * (route.length - 1));
+    const fraction = 0.15 + random(i + 132) * 0.7;
+    const start: Point = [
+      route[segment][0] +
+        (route[segment + 1][0] - route[segment][0]) * fraction,
+      route[segment][1] +
+        (route[segment + 1][1] - route[segment][1]) * fraction,
+    ];
+    if (
+      isBlocked(start, 0) ||
+      actors.some(
+        (a) =>
+          Math.hypot(
+            a.group.position.x - start[0],
+            a.group.position.z - start[1],
+          ) < 4,
+      )
+    )
+      continue;
     const model = person(`visitor-${i}`, i, false);
     delete model.group.userData.info;
-    model.group.position.set(route[0][0], 0, route[0][1]);
+    model.group.position.set(start[0], 0, start[1]);
     group.add(model.group);
     actors.push({
       id: `visitor-${i}`,
       ...model,
       route,
-      target: 1,
-      pause: random(i) * 4,
+      target: segment + 1,
+      pause: random(i) * 2,
       speed: i % 5 === 0 ? 2.7 : 0.95 + random(i + 2) * 0.5,
       named: false,
     });
@@ -377,6 +402,12 @@ export function createPeople(
     }
   }
   let streamTimer = 0;
+  const reactions = new Map<string, { gesture: Gesture; elapsed: number }>();
+  function react(id: string, gesture: Gesture) {
+    if (!actors.some((a) => a.id === id && a.named)) return false;
+    reactions.set(id, { gesture, elapsed: 0 });
+    return true;
+  }
   function update(
     dt: number,
     time: number,
@@ -385,6 +416,7 @@ export function createPeople(
     population: boolean,
     active: string | null,
     reduced: boolean,
+    reactionDt = dt,
   ) {
     streamTimer -= dt;
     if (streamTimer <= 0) {
@@ -395,26 +427,51 @@ export function createPeople(
           d: Math.hypot(s.route[0][0] - focus[0], s.route[0][1] - focus[1]),
         }))
         .filter((x) => x.d < 125)
-        .sort((a, b) => a.d - b.d)
-        .slice(0, 18);
-      const keep = new Set(nearby.map((x) => x.s.c.id));
-      if (active) keep.add(active);
+        .sort((a, b) => a.d - b.d);
+      const streamedIds = new Set(streamed.map((s) => s.c.id));
+      // Keep already encountered actors stable; do not replace the nearest crowd every tick.
       for (const actor of [...actors])
         if (
-          streamed.some((s) => s.c.id === actor.id) &&
-          !keep.has(actor.id) &&
+          streamedIds.has(actor.id) &&
+          actor.id !== active &&
           Math.hypot(
             actor.group.position.x - focus[0],
             actor.group.position.z - focus[1],
-          ) > 15
+          ) > 180
         )
           release(actor);
-      for (const { s } of nearby)
+      let count = actors.filter((a) => streamedIds.has(a.id)).length;
+      for (const { s, d } of nearby) {
+        if (count >= 12) break;
+        if (d < 9 || actors.some((a) => a.id === s.c.id)) continue;
+        const start = s.route[0];
+        const neighbours = actors.filter(
+          (a) => Math.abs(a.group.position.y - (s.c.floor || 0)) < 1,
+        );
+        // Natural spacing along verified paths, rather than a row of nearest roster entries.
         if (
-          !actors.some((a) => a.id === s.c.id) &&
-          actors.filter((a) => a.named).length < 26
+          neighbours.some(
+            (a) =>
+              Math.hypot(
+                a.group.position.x - start[0],
+                a.group.position.z - start[1],
+              ) < 8,
+          )
         )
-          addCharacter(s.c, hash(s.c.id), s.route);
+          continue;
+        if (
+          neighbours.filter(
+            (a) =>
+              Math.hypot(
+                a.group.position.x - start[0],
+                a.group.position.z - start[1],
+              ) < 18,
+          ).length >= 2
+        )
+          continue;
+        addCharacter(s.c, hash(s.c.id), s.route);
+        count++;
+      }
     }
     for (const a of actors) {
       const p = a.group.position;
@@ -424,17 +481,30 @@ export function createPeople(
         (population &&
           dist < 220 &&
           ((hour > 6 && hour < 22) || Number(a.id.split("-")[1]) % 5 === 0));
-      if (!a.group.visible || active === a.id || reduced) continue;
-      if (a.named && dist < 6) {
-        a.group.rotation.y = Math.atan2(focus[0] - p.x, focus[1] - p.z);
-        a.legs.forEach((limb) => (limb.rotation.x = 0));
-        a.arms.forEach((limb) => (limb.rotation.x = 0));
-        if (a.id.startsWith("student-")) {
-          a.arms[0].rotation.x = -0.22 + Math.sin(time * 1.2) * 0.1;
-          a.group.children[1].rotation.z = Math.sin(time * 0.7) * 0.025;
+      const reaction = reactions.get(a.id);
+      if (reaction || active === a.id) {
+        a.legs.forEach((limb) => limb.rotation.set(0, 0, 0));
+        a.arms.forEach((limb) => limb.rotation.set(0, 0, 0));
+        a.head.rotation.set(0, 0, 0);
+        if (active !== a.id || reduced || !a.group.visible)
+          reactions.delete(a.id);
+        if (active === a.id) {
+          a.group.rotation.y = Math.atan2(focus[0] - p.x, focus[1] - p.z);
+          if (reaction && !reduced) {
+            reaction.elapsed += Math.max(0, Math.min(reactionDt, 0.1));
+            const t = reaction.elapsed;
+            const fade = Math.min(1, t * 5, Math.max(0, (2.4 - t) * 5));
+            if (reaction.gesture === "wave")
+              a.arms[0].rotation.z = (-2.15 + Math.sin(t * 11) * 0.22) * fade;
+            else if (reaction.gesture === "nod")
+              a.head.rotation.x = Math.sin(t * 7) * 0.15 * fade;
+            else a.arms[1].rotation.x = (-0.3 + Math.sin(t * 5) * 0.12) * fade;
+            if (t >= 2.4) reactions.delete(a.id);
+          }
+          continue;
         }
-        continue;
       }
+      if (!a.group.visible || reduced) continue;
       if (a.pause > 0) {
         a.pause -= dt;
         continue;
@@ -445,27 +515,54 @@ export function createPeople(
         d = Math.hypot(dx, dz);
       if (d < 0.5) {
         a.target = (a.target + 1) % a.route.length;
-        a.pause = a.named ? 3 : random(a.target) * 2;
+        a.pause = 0.25 + random(hash(a.id) + a.target) * 0.9;
         continue;
       }
-      const next: Point = [
-        p.x + (dx / d) * dt * a.speed,
-        p.z + (dz / d) * dt * a.speed,
+      const step = Math.min(d, dt * a.speed),
+        ux = dx / d,
+        uz = dz / d;
+      const clearStep = (point: Point) =>
+        !isBlocked(point, p.y) &&
+        (Math.hypot(point[0] - focus[0], point[1] - focus[1]) >= 1.1 ||
+          Math.hypot(point[0] - focus[0], point[1] - focus[1]) > dist) &&
+        !actors.some(
+          (b) =>
+            b !== a &&
+            b.group.visible &&
+            Math.abs(b.group.position.y - p.y) < 1 &&
+            Math.hypot(
+              b.group.position.x - point[0],
+              b.group.position.z - point[1],
+            ) < 0.85,
+        );
+      const forward: Point = [p.x + ux * step, p.z + uz * step];
+      const candidates: Point[] = [
+        forward,
+        [
+          p.x + (ux * 0.55 + uz * 0.83) * step,
+          p.z + (uz * 0.55 - ux * 0.83) * step,
+        ],
+        [p.x + uz * step, p.z - ux * step],
+        [
+          p.x + (ux * 0.55 - uz * 0.83) * step,
+          p.z + (uz * 0.55 + ux * 0.83) * step,
+        ],
+        [p.x - uz * step, p.z + ux * step],
       ];
-      const crowd = actors.some(
-        (b) =>
-          b !== a &&
-          b.group.visible &&
-          Math.abs(b.group.position.y - p.y) < 1 &&
-          Math.hypot(
-            b.group.position.x - next[0],
-            b.group.position.z - next[1],
-          ) < 0.7,
+      const next = candidates.find(
+        (point, i) =>
+          clearStep(point) &&
+          (i === 0 ||
+            a.route.some(
+              (v, n) =>
+                n > 0 && segmentDistance(point, a.route[n - 1], v) <= 0.8,
+            )),
       );
-      if (!isBlocked(next, p.y) && !crowd) {
+      if (next) {
+        a.waiting = 0;
+        a.group.rotation.y = Math.atan2(next[0] - p.x, next[1] - p.z);
         p.x = next[0];
         p.z = next[1];
-        a.group.rotation.y = Math.atan2(dx, dz);
         a.legs.forEach(
           (l, i) =>
             (l.rotation.x =
@@ -479,8 +576,14 @@ export function createPeople(
               (a.speed > 2 ? 0.5 : 0.22)),
         );
       } else {
-        a.target = (a.target + 1) % a.route.length;
-        a.pause = 0.5;
+        a.legs.forEach((limb) => (limb.rotation.x = 0));
+        a.arms.forEach((limb) => (limb.rotation.x = 0));
+        a.waiting = (a.waiting || 0) + dt;
+        if (a.waiting > 1.5) {
+          a.target = (a.target + 1) % a.route.length;
+          a.waiting = 0;
+          a.pause = 0.2 + random(hash(a.id)) * 0.5;
+        }
       }
     }
   }
@@ -507,5 +610,5 @@ export function createPeople(
     );
     streamTimer = 0;
   }
-  return { group, actors, update, setCommunity };
+  return { group, actors, update, setCommunity, react };
 }

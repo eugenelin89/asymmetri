@@ -1371,7 +1371,60 @@
   min-height: 75px;
 }
 
-.appearanceField { display: grid; gap: .45rem; margin: 1rem 0; }
-.appearanceField select { width: 100%; min-height: 44px; }
-.appearancePreview { display: flex; gap: .5rem; }
-.appearancePreview span { display: grid; place-content: end center; width: 25%; height: 64px; border-radius: 8px; color: white; text-shadow: 0 1px 3px black, 0 0 5px black; font-size: .75rem; padding: .4rem; }
+.appearanceField {
+  display: grid;
+  gap: 0.45rem;
+  margin: 1rem 0;
+}
+.appearanceField select {
+  width: 100%;
+  min-height: 44px;
+}
+.appearancePreview {
+  display: flex;
+  gap: 0.5rem;
+}
+.appearancePreview span {
+  display: grid;
+  place-content: end center;
+  width: 25%;
+  height: 64px;
+  border-radius: 8px;
+  color: white;
+  text-shadow:
+    0 1px 3px black,
+    0 0 5px black;
+  font-size: 0.75rem;
+  padding: 0.4rem;
+}
+
+/* Conversations leave the person and campus visible above a compact choice dock. */
+.conversationScrim {
+  background: linear-gradient(transparent 15%, #10251c35);
+  backdrop-filter: none;
+}
+.conversing .topbar,
+.conversing .location,
+.conversing .tools {
+  visibility: hidden;
+}
+.panel.conversationPanel {
+  top: auto;
+  right: 50%;
+  bottom: 16px;
+  transform: translateX(50%);
+  width: min(740px, calc(100% - 32px));
+  max-height: 72%;
+  padding: 18px 22px;
+  border: 1px solid #ccd5c5;
+  border-radius: 18px;
+  box-shadow: 0 10px 70px #081e1b55;
+}
+@media (max-width: 600px) {
+  .panel.conversationPanel {
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: calc(100% - 16px);
+    max-height: 72%;
+    padding: 14px;
+  }
+}

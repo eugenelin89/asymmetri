@@ -796,3 +796,20 @@ The owner explicitly requested public opt-in profiles and immediate publication.
 CSRF/body/rate boundaries, reporting and manual hide/restore are in
 `projects/ubc/community`; [operations](UBC_COMMUNITY_OPERATIONS.md) documents the
 persistent location and rollback. Motion and BotSquad policies/storage are unchanged.
+
+### UBC encounter and directory refinements — October 31
+
+`ConversationPanel.tsx` replaces the biography-first dialog with social actions,
+reviewed answers, follow-ups and an optional question field. `conversation.ts` is a
+pure bounded session reducer; it reuses the existing source registry and refuses
+unsupported claims. `people.ts` supplies original gestures while the selected
+actor faces the visitor. Other pedestrians continue moving, with source-route
+spawn spacing, local density caps and collision-checked passing.
+
+`building-directory.ts` groups the importer's `-partN` footprints by original source
+ID. The 605 footprints remain untouched; 425 source groups replace repeated
+directory entries, including all 63 multipart groups. Curated destination
+exclusions apply to the whole group. Addresses and part counts clarify results.
+A deliberate scene-focus return after location jumps prevents modal focus
+restoration from stealing WASD input; ordinary dialog dismissal still restores
+the opener. See [acceptance](UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md).

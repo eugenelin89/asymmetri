@@ -842,3 +842,14 @@ The release gallery and receipt distinguish measured observations from device/FP
 certification. Previous Motion/city regression and exact-source Linux gates remain.
 
 V0.3 corrected production checks include the ordinary-site `/labs/ubc/community-api/` family on both public hostnames. Test anonymous ownership with a valid draft; malformed edits validate first. Repeated invalid creates intentionally count toward the shared per-IP creation limit. Verify public recovery POST and private owner GET, not only loopback GET. See the [release receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md).
+
+### UBC encounter refinements — October 31
+
+The UBC suite has 53 passing tests. New coverage exercises curated actions and
+follow-ups, unsupported/stale questions, participant-written replies, bounded
+history, gesture/reduced-motion behavior, selected-partner-only pauses, head-on
+passing, spawn spacing across four zones and source-ID directory grouping.
+Browser acceptance additionally checks immediate WASD after directory/map travel,
+phone/tablet/desktop dialogue, identity discovery, wave response, follow-up
+questions, source-link attributes, return-to-scene focus and session history.
+[Evidence and limits](UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md).

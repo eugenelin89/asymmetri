@@ -7,8 +7,9 @@ const { createTraffic, alongPath, transit } = await import("./traffic.ts");
 const { createActivities, arcPoint } = await import("./activities.ts");
 const { createPeople } = await import("./people.ts");
 const { extendGeography } = await import("./extensions.ts");
-const { normalizeAppearance, defaultAppearance } =
-  await import("./appearance.ts");
+const { normalizeAppearance, defaultAppearance } = await import(
+  "./appearance.ts"
+);
 const { createVisitor } = await import("./follow-camera.ts");
 const data = extendGeography(
   JSON.parse(
@@ -136,4 +137,37 @@ test("untrusted saved appearance normalizes safely and replacement preserves vis
   v.appearance({ ...defaultAppearance, hairstyle: "Long", footwear: "Boots" });
   assert.deepEqual(v.group.position, pose);
   dispose(v.group);
+});
+
+test("streamed people arrive with personal space across campus zones, not a nearest-neighbour cluster", () => {
+  for (const zone of [
+    "stadium",
+    "hennings",
+    "war-memorial",
+    "computer-science",
+  ]) {
+    const p = createPeople(data, anchors, () => false),
+      a = anchors[zone];
+    const original = new Set(p.actors.map((a) => a.id));
+    p.update(0, 0, [a.x, a.z], 12, true, null, false);
+    const arrivals = p.actors.filter((a) => !original.has(a.id));
+    assert.ok(arrivals.length >= 3 && arrivals.length <= 12, zone);
+    for (const person of arrivals) {
+      for (const other of p.actors) {
+        if (
+          person === other ||
+          Math.abs(person.group.position.y - other.group.position.y) >= 1
+        )
+          continue;
+        assert.ok(
+          Math.hypot(
+            person.group.position.x - other.group.position.x,
+            person.group.position.z - other.group.position.z,
+          ) >= 7.99,
+          zone + " spawn spacing",
+        );
+      }
+    }
+    dispose(p.group);
+  }
 });

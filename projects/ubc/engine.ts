@@ -49,6 +49,7 @@ export type Marker = {
   distance: number;
 };
 export type CampusAPI = {
+  react: (id: string, gesture: import("./conversation").Gesture) => void;
   setMode: (mode: Mode) => void;
   community: (characters: Character[]) => void;
   appearance: (value: Appearance) => void;
@@ -477,6 +478,8 @@ export function createCampus(
     if (w && h) {
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
+      if (activeCharacter) camera.setViewOffset(w, h, 0, h * 0.28, w, h);
+      else camera.clearViewOffset();
       camera.updateProjectionMatrix();
     }
   }
@@ -819,13 +822,14 @@ export function createCampus(
       settings.reducedMotion,
     );
     population.update(
-      paused ? 0 : dt,
+      paused && !activeCharacter ? 0 : dt,
       now / 1000,
       [pose.x, pose.z],
       settings.hour,
       settings.population,
       activeCharacter,
       settings.reducedMotion,
+      dt,
     );
     const inResidence =
       (Math.abs(residenceLocal[0]) < 18 && Math.abs(residenceLocal[1]) < 9) ||
@@ -1006,10 +1010,26 @@ export function createCampus(
       else inputs.delete(`touch:${source}`);
     },
     pause: (value, character) => {
+      if (value && character && character !== activeCharacter) {
+        const actor = population.actors.find((a) => a.id === character);
+        if (actor && canMeet(character)) {
+          const dx = actor.group.position.x - pose.x,
+            dz = actor.group.position.z - pose.z;
+          pose.yaw = Math.atan2(-dx, -dz);
+          pose.pitch = Math.atan2(
+            actor.group.position.y + 1.4 - pose.y - 1.68,
+            Math.max(0.5, Math.hypot(dx, dz)),
+          );
+        }
+      }
       paused = value;
       activeCharacter = character || null;
+      resize();
       clear();
       if (value) document.exitPointerLock?.();
+    },
+    react: (id, gesture) => {
+      if (activeCharacter === id && canMeet(id)) population.react(id, gesture);
     },
     visit,
     route,

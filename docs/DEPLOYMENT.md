@@ -1539,3 +1539,12 @@ configuration untouched. Verify public GET and write boundaries after activation
 a loopback candidate check alone does not validate shared ingress routing.
 
 The corrected V0.3 deployment is verified live. The [production receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records exact artifact identity, the initial rollback, corrected public profile recovery, resource safeguards and retained recovery runtime.
+
+### UBC encounter refinements
+
+Verified live October 31 at 16:51 UTC: source `526213d`, Linux build
+`ujW5iepUV_ni0g_OH7ONo`. The [release receipt](UBC_ENCOUNTER_RELEASE_2026-10-31.md)
+records private/public/browser acceptance, unchanged shared services and profile
+storage, exact artifact hashes, the complete immediate predecessor, and lossless
+archival of two older inactive runtimes to retain the existing capacity floors.
+Follow the same exact-source independent-runtime process for subsequent releases.
