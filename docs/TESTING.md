@@ -955,3 +955,5 @@ Browser acceptance must check no recording before entry, active play, hidden/off
 ## Stanford regression and browser coverage
 
 Run `npm run test:stanford` after relevant changes. It checks source/model cache provenance, all landmark entrances against complete-campus collision, architecture/stairs, outdoor seating, residence doors/lift, population routes, source URL boundaries, holiday dates, pursuit, audio proximity and community ownership/security. `docs/validation/stanford/README.md` records desktop/tablet/mobile checks, focus restoration, PNG capture, reduced motion and audio telemetry. Run TypeScript/ESLint and both supported builds for framework integration. Source/model changes require cache regeneration, not manual provenance hash edits.
+
+The [initial Stanford production receipt](STANFORD_RELEASE_2026-10-31.md) records exact-source Linux CI 533 tests, both-host preservation, profile lifecycle and live desktop/mobile acceptance. Shared review/analytics tests do not imply Stanford frontend activation until its separate follow-up is released.

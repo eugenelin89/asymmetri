@@ -1,6 +1,6 @@
 # Stanford Virtual Campus — implementation and evidence
 
-Independent local preview at `/labs/stanford`, built on the UBC/CWRU interaction model. This document records the implemented scope; it does not claim deployment, photorealism, measured interiors or real-time whereabouts.
+Independent campus at `/labs/stanford`, built on the UBC/CWRU interaction model. The [initial release is live and verified](STANFORD_RELEASE_2026-10-31.md). This document records the implemented scope without claiming photorealism, measured interiors or real-time whereabouts.
 
 ## Campus and architectural references
 
@@ -40,7 +40,7 @@ Frame rate on the shared test host was variable and low under contention. After 
 
 ## Operational boundary
 
-No dependencies were added. Stanford source, geographic assets and validation evidence are separate from concurrent UBC/CWRU changes. Publishing is a separate authorized operation under `AGENTS.md`; this work does not activate the route on production. Shared public review and private analytics components are being developed by the UBC owner. After their source is committed, this Stanford workstream owns its own component integration, testing and follow-up deployment; they are excluded from the initial campus artifact.
+No dependencies were added. Stanford source, geographic assets and validation evidence are separate from concurrent UBC/CWRU changes. The separately authorized initial production activation and live acceptance are recorded in the release receipt. Shared public review and private analytics components are being developed by the UBC owner. After their source is committed, this Stanford workstream owns its own component integration, testing and follow-up deployment; they are excluded from the initial campus artifact.
 
 ## Shared analytics integration handoff
 
