@@ -189,6 +189,12 @@ export type Snapshot = {
     distance: number;
     seed: number;
     nearby: unknown[];
+    lastContact: {
+      kind: string;
+      elapsed: number;
+      car: State["car"];
+      nearby: unknown[];
+    } | null;
   };
 };
 export type Game = {

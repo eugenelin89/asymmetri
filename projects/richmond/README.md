@@ -51,6 +51,9 @@ Operations Office, use the marked **fictional airfield connection**, and explore
 the runways, taxiways and aprons. The public vehicle graph does not route through
 the airfield. This does not describe real airport access, permission or security.
 Aircraft are parked decorative models; no moving aircraft are simulated.
+The map opens on **Nearby streets**; **Richmond region** provides the wider view.
+Shaded aprons and the gold connection show the existing office-to-airfield access.
+From office parking, enter the apron and turn west toward the marked taxiways.
 
 ## Controls and accessible menus
 

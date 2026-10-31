@@ -6,11 +6,13 @@ export function RichmondMap({
   city,
   snapshot,
   wide = false,
+  localSpan = 900,
   onSelect,
 }: {
   city: City;
   snapshot: Snapshot;
   wide?: boolean;
+  localSpan?: number;
   onSelect?: (id: string) => void;
 }) {
   const s = snapshot.state,
@@ -48,10 +50,10 @@ export function RichmondMap({
           city.bounds[3] - city.bounds[1],
         ]
       : [
-          Math.floor(s.player.x / 50) * 50 - 450,
-          Math.floor(s.player.z / 50) * 50 - 450,
-          900,
-          900,
+          Math.floor(s.player.x / 50) * 50 - localSpan / 2,
+          Math.floor(s.player.z / 50) * 50 - localSpan / 2,
+          localSpan,
+          localSpan,
         ];
   const scale = l ? 1 : wide ? 28 : 6;
   const [x, z, w, h] = bounds;
@@ -106,6 +108,39 @@ export function RichmondMap({
         )),
     [city, x, z, w, h],
   );
+  const aprons = useMemo(
+    () =>
+      city.lots
+        .filter((lot) => {
+          if (!lot.airfield) return false;
+          const xs = lot.shape[0].map((p) => p[0]);
+          const zs = lot.shape[0].map((p) => p[1]);
+          return (
+            Math.min(...xs) < x + w &&
+            Math.max(...xs) > x &&
+            Math.min(...zs) < z + h &&
+            Math.max(...zs) > z
+          );
+        })
+        .map((lot) => (
+          <path
+            key={lot.id}
+            d={lot.shape
+              .map(
+                (ring) =>
+                  ring
+                    .map((p, i) => `${i ? "L" : "M"}${p.join(",")}`)
+                    .join(" ") + "Z",
+              )
+              .join(" ")}
+            fill="#b1b2a4"
+            fillRule="evenodd"
+            stroke="#6c7971"
+            strokeWidth={scale * 0.3}
+          />
+        )),
+    [city, x, z, w, h, scale],
+  );
   return (
     <svg
       viewBox={bounds.join(" ")}
@@ -155,6 +190,25 @@ export function RichmondMap({
       ) : (
         <>
           {water}
+          {aprons}
+          <path
+            d={city.airportGate.shape
+              .map(
+                (ring) =>
+                  ring
+                    .map((p, i) => `${i ? "L" : "M"}${p.join(",")}`)
+                    .join(" ") + "Z",
+              )
+              .join(" ")}
+            fill="#e7a13e"
+            fillOpacity={0.65}
+            stroke="#70501e"
+            strokeWidth={scale * 0.3}
+          >
+            <title>
+              Fictional airfield connection from office parking to the apron
+            </title>
+          </path>
           {streets}
         </>
       )}
@@ -201,7 +255,7 @@ export function RichmondMap({
           />
           <text
             x={s.car.x + scale * 2}
-            y={s.car.z}
+            y={s.car.z + scale * 5}
             fontSize={scale * 2.4}
             fill="#102c2b"
           >
@@ -221,7 +275,7 @@ export function RichmondMap({
           />
           <text
             x={snapshot.target[0] + scale * 2}
-            y={snapshot.target[1]}
+            y={snapshot.target[1] - scale * 6}
             fontSize={scale * 2.4}
             fill="#163b38"
           >
@@ -239,7 +293,7 @@ export function RichmondMap({
       />
       <text
         x={s.player.x + scale * 2}
-        y={s.player.z - scale}
+        y={s.player.z - scale * 2}
         fontSize={scale * 2.5}
         fill="#182f2e"
       >

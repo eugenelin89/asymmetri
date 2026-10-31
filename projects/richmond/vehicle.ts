@@ -16,15 +16,23 @@ export function driveCar(
   const count = Math.max(1, Math.ceil(Math.min(0.1, Math.max(0, delta)) * 120)),
     dt = Math.min(0.1, Math.max(0, delta)) / count;
   for (let i = 0; i < count; i++) {
+    let rejectedSupport: string | null = null;
     const candidate = {
       ...next,
       ...stepCar(
-        next,
+        // A prior contact is not a new surface rejection while resting/braking.
+        // The shared integrator sets this again if this attempted motion fails.
+        { ...next, blocked: false },
         Number(held.has("forward")) - Number(held.has("back")),
         Number(held.has("left")) - Number(held.has("right")),
         held.has("brake"),
         dt,
-        (p) => world.support(p, next.y, airfield) !== null,
+        (p) => {
+          const supported = world.support(p, next.y, airfield) !== null;
+          if (!supported)
+            rejectedSupport = `${p.map((v) => v.toFixed(3)).join(",")},y=${next.y.toFixed(3)}`;
+          return supported;
+        },
       ),
     };
     candidate.y =
@@ -41,7 +49,9 @@ export function driveCar(
       !world.fits(candidate, airfield)
     ) {
       contact =
-        world.rejection(candidate, airfield) ?? "surface/elevation sweep";
+        world.rejection(middle, airfield) ??
+        world.rejection(candidate, airfield) ??
+        `surface/elevation sweep${rejectedSupport ? `@${rejectedSupport}` : ""}`;
       next = { ...next, speed: 0, steer: candidate.steer, blocked: true };
       break;
     }

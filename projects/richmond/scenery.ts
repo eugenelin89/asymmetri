@@ -87,7 +87,7 @@ export function resources() {
     c.lineWidth = 5;
     c.strokeRect(3, 3, 762, 114);
     c.fillStyle = color;
-    c.font = "600 36px system-ui, sans-serif";
+    c.font = "600 56px system-ui, sans-serif";
     c.textAlign = "center";
     c.textBaseline = "middle";
     c.fillText(text, 384, 60, 730);
@@ -96,6 +96,8 @@ export function resources() {
     textures.add(texture);
     const m = new THREE.SpriteMaterial({ map: texture, depthTest: true });
     const sprite = new THREE.Sprite(m);
+    // Keep the entire billboard above its ground anchor when aerial labels grow.
+    sprite.center.set(0.5, 0);
     sprite.position.set(p[0], y, p[1]);
     sprite.scale.set(scale, scale / 6.4, 1);
     sprite.userData.label = true;
@@ -275,6 +277,11 @@ export function buildOverview(city: City, r: Resources) {
       12,
     );
     sign.name = place.id;
+    sign.userData.streetHeight = sign.position.y;
+    sign.userData.surveyHeight = Math.max(
+      sign.position.y,
+      (city.buildingIndex.find((b) => b.id === place.building)?.height ?? 0) + 6,
+    );
     if (place.interior)
       for (const entry of place.entrances ?? [{ point: place.entrance }]) {
         const [x, z] = entry.point;
@@ -326,7 +333,7 @@ export function buildOverview(city: City, r: Resources) {
         "OPEN AIRFIELD · " + rd.name,
         [a[0] + (b[0] - a[0]) * 0.08, a[1] + (b[1] - a[1]) * 0.08],
         4,
-        65,
+        24,
       );
       for (let d = 20; d < len; d += 130) {
         const m = r.box(
@@ -342,7 +349,7 @@ export function buildOverview(city: City, r: Resources) {
         m.rotation.y = angle;
       }
     });
-  r.label(group, "FICTIONAL AIRFIELD CONNECTION", city.airportGate.road, 8, 40);
+  r.label(group, "AIRFIELD · FICTIONAL", city.airportGate.apron, 6, 14);
   return { group, far, labels, dispose: () => edge.material.dispose() };
 }
 export function buildTile(buildings: Building[], r: Resources) {

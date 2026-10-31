@@ -1148,7 +1148,7 @@
     border-radius: 0;
     border-top: 1px solid #69827855;
     border-bottom: 1px solid #69827855;
-    min-height: 36px;
+    min-height: 44px;
     padding: 0.35rem 0.65rem;
     text-align: left;
     font-size: 0.7em;
@@ -1274,7 +1274,8 @@
     display: none;
   }
   .playing .bottomBar > div:last-child button {
-    width: 30px;
+    width: 44px;
+    min-width: 44px;
   }
   .playing .status {
     display: block;

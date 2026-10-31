@@ -21,7 +21,7 @@ export function createCamera(city: City) {
         view.aerialDistance = clamp(
           view.aerialDistance * Math.exp(d * 0.0015),
           45,
-          23000,
+          45000,
         );
       else view.distance = clamp(view.distance * Math.exp(d * 0.0015), 5, 160);
     },

@@ -130,6 +130,21 @@ export function createGame(
     recoveries = 0,
     contacts = 0,
     drivenDistance = 0;
+  let lastContact: NonNullable<Snapshot["diagnostics"]>["lastContact"] = null;
+  function nearbyActors() {
+    return [...pop.traffic, ...pop.pedestrians]
+      .filter((a) => distance(point(a), point(sim.state.car)) < 10)
+      .map((a) => ({
+        id: a.id,
+        vehicle: a.vehicle,
+        x: a.x,
+        z: a.z,
+        y: a.y,
+        yaw: a.yaw,
+        speed: a.speed,
+        edge: a.edge,
+      }));
+  }
   let playCamera: CameraMode =
     sim.state.camera === "aerial" ? "third" : sim.state.camera;
   let playView = {
@@ -138,6 +153,7 @@ export function createGame(
     distance: cam.view.distance,
   };
   function setCamera(mode: CameraMode) {
+    const leavingSurvey = sim.state.camera === "aerial" && mode !== "aerial";
     if (mode === "aerial" && sim.state.camera !== "aerial") {
       playCamera = sim.state.camera;
       playView = {
@@ -148,6 +164,7 @@ export function createGame(
       cam.view.pitch = 0.8;
     }
     sim.camera(mode);
+    if (leavingSurvey) sim.say("Back with your courier. " + sim.prompt());
     cam.view.follow = true;
     input.clear();
     if (mode === "first") cam.view.pitch = 0.5;
@@ -155,8 +172,10 @@ export function createGame(
   }
   function returnToPlayer() {
     mutate(() => {
-      setCamera(playCamera);
-      Object.assign(cam.view, playView);
+      if (sim.state.camera === "aerial") {
+        setCamera(playCamera);
+        Object.assign(cam.view, playView);
+      } else cam.view.follow = true;
     });
   }
   const input = new Map<string, Input>(),
@@ -210,17 +229,8 @@ export function createGame(
               contacts,
               distance: drivenDistance,
               seed: sim.state.rng,
-              nearby: pop.traffic
-                .filter((a) => distance(point(a), point(sim.state.car)) < 10)
-                .map((a) => ({
-                  id: a.id,
-                  x: a.x,
-                  z: a.z,
-                  y: a.y,
-                  yaw: a.yaw,
-                  speed: a.speed,
-                  edge: a.edge,
-                })),
+              nearby: nearbyActors(),
+              lastContact,
             },
           }
         : {}),
@@ -408,6 +418,21 @@ export function createGame(
     }
     camera.position.copy(position);
     camera.lookAt(target);
+    // Street-level clipping wastes almost all depth precision at city scale,
+    // making the centimetre-separated road/land layers flicker through each other.
+    const near =
+      s.camera === "aerial"
+        ? Math.max(0.1, (cam.view.aerialDistance - 100) * 0.2)
+        : 0.1;
+    const far =
+      s.camera === "aerial"
+        ? Math.max(40000, cam.view.aerialDistance + 30000)
+        : 40000;
+    if (camera.near !== near || camera.far !== far) {
+      camera.near = near;
+      camera.far = far;
+      camera.updateProjectionMatrix();
+    }
     scene.fog =
       s.camera === "aerial"
         ? null
@@ -447,7 +472,16 @@ export function createGame(
       );
       if (s.locomotion === "drive") {
         drivenDistance += distance(point(before), point(s.car));
-        if (s.car.blocked && !before.blocked) contacts++;
+        if (s.car.blocked && !before.blocked) {
+          contacts++;
+          if (process.env.NODE_ENV === "development")
+            lastContact = {
+              kind: sim.contact,
+              elapsed: s.elapsed,
+              car: { ...s.car },
+              nearby: nearbyActors(),
+            };
+        }
       }
     }
     updateInterior();
@@ -555,6 +589,10 @@ export function createGame(
       pin.scale.set(scale, scale / 6.4, 1);
     }
     overview.labels.children.forEach((o) => {
+      o.position.y =
+        s.camera === "aerial"
+          ? o.userData.surveyHeight
+          : o.userData.streetHeight;
       o.visible =
         s.camera === "aerial"
           ? cam.view.aerialDistance < 2000 ||
@@ -771,11 +809,14 @@ export function createGame(
           (city.bounds[1] + city.bounds[3]) / 2,
         ]);
         cam.view.aerialDistance =
-          Math.max(
-            city.bounds[2] - city.bounds[0],
+          (Math.max(
+            (city.bounds[2] - city.bounds[0]) / camera.aspect,
             city.bounds[3] - city.bounds[1],
-          ) * 1.05;
-        cam.view.pitch = 1.2;
+          ) /
+            (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)))) *
+          1.2;
+        cam.view.pitch = 1.3;
+        cam.view.yaw = 0;
       } else {
         const p = sim.places.get(target);
         if (p) {

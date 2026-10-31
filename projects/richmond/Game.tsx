@@ -21,6 +21,7 @@ export function RichmondGame() {
     [snapshot, setSnapshot] = useState<Snapshot | null>(null),
     [error, setError] = useState(""),
     [loading, setLoading] = useState(false),
+    [regionalMap, setRegionalMap] = useState(false),
     [panel, setPanel] = useState<
       "orders" | "map" | "settings" | "bag" | "help" | "shift" | null
     >(null),
@@ -140,6 +141,7 @@ export function RichmondGame() {
     else if (started && !panel) canvas.current?.focus();
   }, [snapshot?.state.shopping, started, panel]);
   function open(value: typeof panel) {
+    if (value && (!game.current || loading || error)) return;
     game.current?.pause(value !== null);
     setPanel((p) => (p === value ? null : value));
   }
@@ -369,25 +371,36 @@ export function RichmondGame() {
                   <option value="knight">Knight Street Bridge</option>
                 </select>
               ) : (
-                <button onClick={() => open("orders")}>
+                <button
+                  disabled={loading || !!error || !snapshot}
+                  onClick={() => open("orders")}
+                >
                   {zh ? "接單" : "Orders"} <span>↗</span>
                 </button>
               )}
-              <button onClick={() => open("map")}>{zh ? "地圖" : "Map"}</button>
+              <button
+                disabled={loading || !!error || !snapshot}
+                onClick={() => open("map")}
+              >
+                {zh ? "地圖" : "Map"}
+              </button>
               <button
                 className={styles.secondaryTool}
+                disabled={loading || !!error || !snapshot}
                 onClick={() => open("bag")}
               >
                 {zh ? "背包" : "Bag"}
               </button>
               <button
                 className={styles.secondaryTool}
+                disabled={loading || !!error || !snapshot}
                 onClick={() => open("settings")}
               >
                 {zh ? "設定" : "Settings"}
               </button>
               <button
                 aria-label="Pause and controls"
+                disabled={loading || !!error || !snapshot}
                 onClick={() => open("help")}
               >
                 Menu
@@ -568,13 +581,16 @@ export function RichmondGame() {
                     {state!.camera === "aerial"
                       ? "Aerial surveying · shift paused"
                       : "Shift paused"}
+                    {state!.airfield && " · fictional airfield"}
                   </div>
                 )}
-                {state!.airfield && (
-                  <div className={styles.airfieldTag}>
-                    OPEN AIRFIELD · FICTIONAL SANDBOX
-                  </div>
-                )}
+                {state!.airfield &&
+                  state!.camera !== "aerial" &&
+                  !snapshot.paused && (
+                    <div className={styles.airfieldTag}>
+                      OPEN AIRFIELD · FICTIONAL SANDBOX
+                    </div>
+                  )}
                 <div
                   className={styles.touch}
                   inert={!!panel || !!state?.shopping}
@@ -791,11 +807,28 @@ export function RichmondGame() {
                         survey it or set a route. An active order keeps its own
                         route until you complete or cancel it.
                       </p>
+                      {!state?.interior && (
+                        <div className={styles.mapTools} aria-label="Map area">
+                          <button
+                            aria-pressed={!regionalMap}
+                            onClick={() => setRegionalMap(false)}
+                          >
+                            Nearby streets
+                          </button>
+                          <button
+                            aria-pressed={regionalMap}
+                            onClick={() => setRegionalMap(true)}
+                          >
+                            Richmond region
+                          </button>
+                        </div>
+                      )}
                       <div className={styles.cityMap}>
                         <RichmondMap
                           city={city}
                           snapshot={snapshot}
-                          wide
+                          wide={regionalMap}
+                          localSpan={300}
                           onSelect={(id) => {
                             game.current?.focus(id);
                             setPanel(null);
@@ -880,7 +913,9 @@ export function RichmondGame() {
                       <p>
                         Open Airfield is available immediately. Follow the route
                         to Airport Operations Office and use the marked
-                        fictional connection to runways. No real-world access or
+                        fictional connection to runways. The gold connection leads
+                        from office parking onto the shaded apron; turn west to
+                        join the marked taxiways. No real-world access or
                         security procedure is represented.
                       </p>
                     </>

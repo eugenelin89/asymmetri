@@ -546,6 +546,49 @@ test("whole-body contacts include small people and preserve grade separation", a
   assert.equal(contactAllows(car, { ...car, z: 0.1 }, actor), false);
   assert.equal(contactAllows(car, { ...car, z: -0.1 }, actor), true);
 });
+test("braking after an actor contact does not invent a surface rejection", async () => {
+  const { driveCar } = await import("./vehicle.ts");
+  const runway = city.roads.find((r) => r.class === "runway"),
+    a = runway.points[0],
+    b = runway.points[1],
+    car = {
+      x: (a[0] + b[0]) / 2,
+      z: (a[1] + b[1]) / 2,
+      y: 0,
+      yaw: 0,
+      speed: 0,
+      steer: 0,
+    },
+    actor = { ...car, id: 55, vehicle: true, z: car.z + 3.8 };
+  const hit = driveCar(car, new Set(["forward"]), 1 / 60, world, true, [actor]);
+  assert.equal(hit.contact, "traffic:55");
+  assert.equal(hit.car.blocked, true);
+  const resting = driveCar(hit.car, new Set(["brake"]), 1 / 60, world, true, [actor]);
+  assert.equal(resting.contact, "none");
+  assert.equal(resting.car.blocked, false);
+  assert.deepEqual(point(resting.car), point(hit.car));
+  const reverse = driveCar(resting.car, new Set(["back"]), 0.1, world, true, [actor]);
+  assert.equal(reverse.contact, "none");
+  assert.ok(reverse.car.z < resting.car.z);
+});
+test("bridge guidance ignores the car-to-road projection but retains real turns", async () => {
+  const { navigationFor, advanceTurn } = await import("./navigation.ts");
+  const s = createSimulation(city);
+  Object.assign(s.state.car, {
+    x: 113.53354972917091,
+    z: -2924.54636948975,
+    y: 8,
+    yaw: 3.992,
+  });
+  s.state.player = { ...s.state.car };
+  s.state.locomotion = "drive";
+  const n = navigationFor(s.state, world, s.places.get("yvr"), null);
+  assert.deepEqual(n.route[0], point(s.state.car), "displayed route still reaches the car");
+  assert.ok(distance(n.route[0], n.route[1]) > 1);
+  assert.equal(n.instruction, "Continue to the marked stopping place");
+  assert.equal(advanceTurn([[0, 0], [20, 0], [20, 30]]), "In 20 m, turn right");
+  assert.equal(advanceTurn([[0, 0], [10, 0], [10, -30]]), "Turn left");
+});
 test("navigation separates walking to pickup, returning to the car, and driving to parking", async () => {
   const { navigationFor } = await import("./navigation.ts");
   const s = createSimulation(city);

@@ -15,6 +15,7 @@ export function navigationFor(
   indoorTarget: Point | null,
 ): Navigation {
   let route: Point[] = [],
+    omitProjectionTurn = false,
     target: Point | null = null,
     leg = "Explore Richmond";
   if (s.interior) {
@@ -56,6 +57,10 @@ export function navigationFor(
         distance(point(s.car), target) < 8
           ? [point(s.car), target]
           : world.route(point(s.car), destination.roadNode);
+      // The graph starts with car -> nearest road projection. This is a
+      // positioning segment, not a junction; keep it on the map, not in turn cues.
+      omitProjectionTurn =
+        route.length > 2 && distance(route[0], route[1]) > 0.05;
       if (route.length) route.push(target);
       leg = "Drive to a stopping place";
     } else {
@@ -69,7 +74,10 @@ export function navigationFor(
     route,
     target,
     leg,
-    instruction: s.locomotion === "drive" ? advanceTurn(route) : leg,
+    instruction:
+      s.locomotion === "drive"
+        ? advanceTurn(omitProjectionTurn ? route.slice(1) : route)
+        : leg,
   };
 }
 export function advanceTurn(route: Point[]) {
