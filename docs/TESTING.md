@@ -868,3 +868,10 @@ removed meta-only questions are available as optional simulation information.
 Browser acceptance covers the reply panel, optional metadata, phone/tablet/desktop
 layouts, typed questions and return-to-scene focus. See
 [scope and evidence](UBC_NATURAL_DIALOGUE_2026-10-31.md).
+
+The exact Linux natural-dialogue release passed UBC 56, Vancouver 74, Surrey 69
+and Richmond 27 tests (226 total). Private smoke, both-host protected routes and
+read-only profile checks passed. Fresh production browser acceptance verified
+button/typed identity, a facility answer, optional metadata, thanks, goodbye and
+scene focus with an empty warning/error log; desktop and phone captures are live.
+See the [release receipt](UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md).

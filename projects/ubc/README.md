@@ -162,6 +162,6 @@ are [verified live](../../docs/UBC_ENCOUNTER_RELEASE_2026-10-31.md): action-and-
 dialogue, dispersed pedestrians, grouped building entries and immediate movement
 focus after travel. The release adds no new geographic coverage.
 
-See [natural dialogue](../../docs/UBC_NATURAL_DIALOGUE_2026-10-31.md) for the next
-refinement: concise introductions and conversational answers across the registry,
+See [natural dialogue](../../docs/UBC_NATURAL_DIALOGUE_2026-10-31.md) for the
+[verified live refinement](../../docs/UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md): concise introductions and conversational answers across the registry,
 with source/reconstruction notes outside the spoken response.

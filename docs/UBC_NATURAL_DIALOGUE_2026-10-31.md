@@ -60,7 +60,7 @@ follow-up choices, brief uncertainty, thanks, goodbye and optional metadata.
 Phone (390×844), tablet (768×1024) and desktop (1280×720) viewports had no horizontal
 overflow. Keyboard focus stayed inside the conversation, safe source links retained
 new-tab security attributes, and the compiled preview logged no warnings/errors.
-[Actual compiled-preview screenshots](validation/ubc-natural-dialogue/README.md)
+[Actual production screenshots](validation/ubc-natural-dialogue/README.md)
 show the new introduction. No physical-device or sustained performance test is claimed.
 
 On Node 24.10.0, TypeScript/ESLint, Vinext and Next webpack builds passed; the
@@ -73,5 +73,10 @@ geography, population, asset dependency or profile-storage format is introduced.
 
 The completed Surrey handoff was integrated from main `bba7a13` without conflicts;
 its delta changes only Surrey guidance/tests and documentation, with no UBC or
-shared runtime edits. Production publication is pending this change’s exact-source
-Linux build and guarded acceptance. Source or local preview alone is not a deployment.
+shared runtime edits. The exact-source Linux candidate passed all 226 tests
+(UBC 56, Vancouver 74, Surrey 69, Richmond 27) and was activated October 31 at
+18:31:51 UTC (11:31 PDT). Fresh production browser checks verified introductions,
+typed identity questions, facility follow-ups, optional metadata, thanks, goodbye
+and focus returning to the scene. Desktop and phone screenshots were refreshed
+from production; no browser warnings/errors were recorded. See the
+[release and recovery receipt](UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md).

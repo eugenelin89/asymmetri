@@ -1145,8 +1145,8 @@ The gallery labels provide descriptive link text/alt context.
 ## UBC natural dialogue evidence — 2026-10-31
 
 Two unretouched JPEG captures in `docs/validation/ubc-natural-dialogue/` are
-engineering evidence from the compiled local application, not new public site
-assets. Original procedural character/campus output; no external portrait, logo,
+engineering evidence refreshed from the live production application after the
+October 31 natural-dialogue release, not new public site assets. Original procedural character/campus output; no external portrait, logo,
 private profile data or user-supplied screenshot is included. No processing beyond
 browser capture. Existing GIS provenance remains unchanged.
 
