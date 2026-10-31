@@ -1519,3 +1519,5 @@ use `/labs/ubc/community-api/` through the ordinary website backend. Keep the ra
 router, investment/Ask authority, Nginx `/api/` denial, peer services and all prior
 configuration untouched. Verify public GET and write boundaries after activation;
 a loopback candidate check alone does not validate shared ingress routing.
+
+The corrected V0.3 deployment is verified live. The [production receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records exact artifact identity, the initial rollback, corrected public profile recovery, resource safeguards and retained recovery runtime.

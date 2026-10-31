@@ -822,3 +822,5 @@ mobile/tablet controls, links, overflow and reduced motion. Use disposable local
 profiles, remove them after checks, and keep recovery codes out of captures/logs.
 The release gallery and receipt distinguish measured observations from device/FPS
 certification. Previous Motion/city regression and exact-source Linux gates remain.
+
+V0.3 corrected production checks include the ordinary-site `/labs/ubc/community-api/` family on both public hostnames. Test anonymous ownership with a valid draft; malformed edits validate first. Repeated invalid creates intentionally count toward the shared per-IP creation limit. Verify public recovery POST and private owner GET, not only loopback GET. See the [release receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md).

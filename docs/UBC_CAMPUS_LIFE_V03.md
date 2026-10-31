@@ -3,7 +3,8 @@
 This release is a functional research preview, not a completed campus digital twin.
 Its original procedural models remain visibly stylized. It does not meet the
 master specification's photorealistic flagship benchmark, and no such claim is made.
-Production identity and activation evidence belong in the separate release receipt.
+Production is live; the [release receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md)
+records the exact source, corrected activation, public checks and rollback.
 
 ## Implementation and geography
 
@@ -157,7 +158,7 @@ asset manifest for reference URLs and terms.
 
 ## Validation and remaining work
 
-The [validation gallery](validation/ubc-navigation/README.md) records 20 actual browser captures and observations. All 44 UBC automated tests pass; Vancouver 74, Surrey 54 and Richmond 27 tests also pass. TypeScript/ESLint pass (one existing tutorial lint warning), Vinext and Next webpack production builds pass, and the production dependency audit reports zero vulnerabilities. Automated
+The [validation gallery](validation/ubc-navigation/README.md) records 22 actual browser captures and observations. All 44 UBC automated tests pass; Vancouver 74, Surrey 54 and Richmond 27 tests also pass. TypeScript/ESLint pass (one existing tutorial lint warning), Vinext and Next webpack production builds pass, and the production dependency audit reports zero vulnerabilities. Automated
 checks cover collision traversal, source routes/entrances, stairs/doors/lift, all
 Orchard rooms, four Rose cages, new classrooms/gym, upper-floor fair access, camera
 clearance, GPS, avatar normalization, bounded actors, sports trajectories, traffic

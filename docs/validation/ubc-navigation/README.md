@@ -1,8 +1,9 @@
 # V0.3 browser validation — 2026-10-31
 
 Actual captures from running local production/development builds and the public
-website, using the in-app browser. Capture 20 shows the first V0.3 activation before
-the profile route correction; that release was rolled back after the API check failed.
+website, using the in-app browser. Captures 20–22 show the corrected public release
+after the profile route fix. Capture 20 replaces a paused-background-tab capture
+from the rejected activation; the current image visibly renders the live scene.
 Models are original procedural reference reconstructions, not reference photographs.
 Desktop: 1280×720. Phone: 390×844 and 844×390. Tablet: 768×1024.
 Physical-device testing has not been performed.
@@ -55,11 +56,18 @@ encountered in browser; bounded movement/source coverage also has automated test
 - [15 tablet public profile](15-tablet-public-profile.png)
 - [16 baseball precinct traffic](16-baseball-precinct-traffic.png)
 - [17 baseball practice](17-baseball-practice.png)
-
 - [18 snowfall campus](18-snowfall-campus.png)
 - [19 rainy winter night](19-rainy-winter-night.png)
-- [20 first public V0.3 third person](20-live-v03-third-person.png)
+- [20 corrected public V0.3 third person](20-live-v03-third-person.png)
+
+- [21 live public profile form](21-live-profile-form.png)
+- [22 live walking guide](22-live-walking-guide.png)
 
 Snowfall and rainy-night controls worked without console errors. Bespoke roof and
 field snow coverage remains incomplete; these captures do not imply universal
 seasonal material coverage.
+
+The final public pass also verified safe map travel and zero console errors/warnings.
+Profile recovery and ownership were tested over actual HTTPS on both hostnames;
+the gallery contains no recovery code or owner cookie. See the
+[production receipt](../../UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md).

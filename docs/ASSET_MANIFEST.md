@@ -1102,7 +1102,11 @@ assets. Full campus/faculty completeness is not asserted.
 with capture details and limitations in that directory's README. No generated
 marketing image stands in for a working scene; recovery credentials are excluded.
 
-V0.3 validation gallery: `docs/validation/ubc-navigation/` contains 20 actual
-browser captures (19 local and one initial public-release capture) (1280×720 desktop, 390×844 phone, 768×1024 tablet), documented in its
-README. Original application output; no external portraits, logos, or reference
-photographs embedded. These are engineering evidence, not public marketing imagery.
+V0.3 validation gallery: `docs/validation/ubc-navigation/` contains 22 actual
+browser captures: 19 local and three corrected public-release captures. Desktop
+1280×720, phone 390×844, tablet 768×1024; capture 20 was replaced with a visibly
+rendered final release scene. Captures 21/22 show the live profile form and walking
+guide. Original application output, no processing beyond PNG capture, no external
+portraits/logos/reference photographs embedded. Link captions in the gallery README
+provide descriptive labels. These are engineering evidence, not public marketing
+imagery; no recovery credentials are visible.
