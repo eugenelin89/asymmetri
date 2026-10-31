@@ -3,8 +3,14 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [homepage division-link receipt](HOME_DIVISION_LINKS_RELEASE_2026-10-31.md)
+records the current October 31 source/build and copy-only rollback. Homepage cards
+open Sports and Labs; all city, UBC, BotSquad and Motion routes remain intact.
+The preceding [UBC V0.3 receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records
+campus life and the community-profile routing configuration, which are unchanged.
+
 The [UBC V0.2 Orchard release receipt](UBC_ORCHARD_RELEASE_2026-10-31.md) records
-the current October 31 runtime: five UBC interior reconstructions, including one
+an earlier October 31 runtime: five UBC interior reconstructions, including one
 Orchard Commons demonstration floor with eight rooms, while all three city apps
 remain intact. Source `32f7295`, Linux build `uSdetjZWMH8Rh69FKnc5J`, activated at
 08:16:08 UTC. The complete immediately preceding runtime is retained at
