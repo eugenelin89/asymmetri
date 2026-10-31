@@ -1,5 +1,7 @@
 import { createHalloweenSky } from "./halloween-sky";
 import { createHalloween } from "./halloween";
+import { createHalloweenChase } from "./halloween-chase";
+import { createHalloweenHeroes } from "./halloween-heroes";
 import { createAthletics } from "./athletics";
 import { athleticsAnchors } from "./athletics-layout";
 import { applyGatewayAnchors, gatewayAnchor, initialGatewayPose } from "./gateway-layout";
@@ -87,6 +89,7 @@ export function createCampus(
   onRoute: (p: Point[] | null) => void,
   onError: (message: string) => void,
   orchardGeography: OrchardGeography,
+  onSound: (settings: Settings, pose: Pose, ghosts: readonly { point: Point; y?: number }[]) => void = () => {},
 ): CampusAPI {
   let settings = { ...defaults },
     mode: Mode = "walk",
@@ -341,6 +344,13 @@ export function createCampus(
     routes = createRoutes(data, collision.blocked);
   const halloween = createHalloween(data, anchors, interiors, collision.blocked);
   scene.add(halloween.group);
+  const halloweenHeroes = createHalloweenHeroes(halloween.monsters, interiors, collision.blocked);
+  scene.add(halloweenHeroes.group);
+  const halloweenChase = createHalloweenChase(data, interiors, collision, routes);
+  scene.add(halloweenChase.group);
+  const seasonalPeers = [...halloween.monsters, ...halloweenHeroes.actors];
+  const indoorGhosts = halloween.decorations.map((d) => ({ point: d.point, y: d.y }));
+  const outdoorGhosts = halloween.monsters.filter((m) => m.kind === "ghost");
   let campusCharacters = characters;
   const population = createPeople(data, anchors, collision.blocked);
   scene.add(population.group);
@@ -857,7 +867,8 @@ export function createCampus(
       settings.reducedMotion,
     );
     halloweenSky.update(dt, settings, camera.position);
-    halloween.update(dt, settings, pose);
+    halloween.update(dt, settings, pose, halloweenHeroes.actors);
+    halloweenHeroes.update(dt, settings, pose);
     athletics.update(dt, settings, pose);
     activities.update(
       dt,
@@ -897,6 +908,7 @@ export function createCampus(
         Math.abs(p[1]) < l.anchor.depth / 2
       );
     });
+    halloweenChase.update(dt, settings, pose, { paused, mode, indoor: !!indoor || inResidence, cameraPosition: camera.position, peers: seasonalPeers });
     if (precipitation.visible && !settings.reducedMotion) {
       for (let i = 0; i < 900; i++) {
         rainPositions[i * 3 + 1] -=
@@ -1036,6 +1048,9 @@ export function createCampus(
         routeDistance,
         guidance,
       });
+      onSound(settings, pose, onFoot(mode) && !paused
+        ? settings.population ? [...indoorGhosts, ...outdoorGhosts] : indoorGhosts
+        : []);
     }
     if (mode !== "map") {
       renderer.render(scene, camera);
@@ -1121,6 +1136,7 @@ export function createCampus(
       document.exitPointerLock?.();
       rainGeo.dispose();
       precipitation.material.dispose();
+      halloweenHeroes.dispose();
       disposeScene(scene, renderer, sun.shadow.map, renderer.domElement);
     },
   };

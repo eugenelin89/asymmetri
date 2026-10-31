@@ -1428,3 +1428,185 @@
     padding: 14px;
   }
 }
+
+/* Seasonal welcome art stays in the lightweight shell; Three loads on entry. */
+.halloweenWelcomeHost {
+  height: min(940px, 94dvh);
+  min-height: 850px;
+}
+.welcome.halloweenWelcome {
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 110px;
+  background: radial-gradient(ellipse at 77% 27%, #344344 0, #17292d 37%, #102025 73%);
+  color: #f5eedc;
+}
+.halloweenWelcome::after {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid #ddba7930;
+  pointer-events: none;
+}
+.halloweenWelcome .welcomeCopy {
+  width: 54%;
+  max-width: 570px;
+}
+.halloweenWelcome .eyebrow {
+  color: #a9b7b3;
+  font-size: 10px;
+  letter-spacing: .22em;
+}
+.halloweenBadge {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 38px;
+  color: #e6b574;
+  font-size: 11px;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+.halloweenBadge > span {
+  font-size: 22px;
+  line-height: 1;
+}
+.halloweenWelcome h2 {
+  font-size: clamp(54px, 5.9vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -.045em;
+  margin: 19px 0 23px;
+  text-wrap: balance;
+}
+.halloweenWelcome h2 em {
+  color: #e7b778;
+  font-weight: 400;
+}
+.halloweenWelcome p {
+  max-width: 345px;
+  color: #c0cbc5;
+  line-height: 1.8;
+}
+.halloweenWelcome .halloweenDetails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: none;
+  font-size: 10px;
+  color: #c8b897;
+  letter-spacing: .04em;
+  margin-top: 19px;
+}
+.halloweenWelcome .primary {
+  background: #e7b778 !important;
+  color: #17272a !important;
+  margin-top: 25px;
+  min-width: 245px;
+  border-radius: 2px;
+  transition: background .2s, transform .2s;
+}
+.halloweenWelcome .primary:hover {
+  background: #f2cb91 !important;
+  transform: translateY(-2px);
+}
+.experience .editionSwitch {
+  display: block;
+  border: 0;
+  background: transparent;
+  padding: 10px 0;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #c2cac0;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  min-height: 44px;
+  text-align: left;
+}
+.experience .editionSwitch:hover {
+  color: #f2ce94;
+  background: transparent;
+}
+.welcomeChase {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  color: #dfc59e;
+  min-height: 44px;
+  cursor: pointer;
+}
+.welcomeChase input {
+  width: 17px;
+  height: 17px;
+  accent-color: #e7b778;
+  margin: 0;
+}
+.welcomeChase span {
+  color: #aab9b4;
+  font-size: 10px;
+}
+.halloweenWelcome .quiet {
+  margin-top: 8px;
+  font-size: 10px !important;
+}
+.halloweenWelcome .welcomeFoot {
+  z-index: 2;
+  bottom: 32px;
+  color: #a9b7b3;
+  border-color: #d2b38430;
+  letter-spacing: .1em;
+  font-size: 9px;
+}
+.halloweenWelcome .welcomeFoot > span:last-child {
+  max-width: 340px;
+  text-align: right;
+}
+.halloweenArt {
+  position: absolute;
+  width: 62%;
+  height: 96%;
+  right: -3%;
+  bottom: 50px;
+  pointer-events: none;
+  overflow: visible;
+}
+.welcomeGhost { animation: welcome-float 7s ease-in-out infinite; }
+.welcomeMist { animation: welcome-drift 18s ease-in-out infinite alternate; }
+.welcomeBats { animation: welcome-drift 12s ease-in-out infinite alternate-reverse; }
+@keyframes welcome-float {
+  0%, 100% { translate: 0 0; opacity: .65; }
+  50% { translate: 0 -14px; opacity: 1; }
+}
+@keyframes welcome-drift {
+  from { translate: -9px 0; }
+  to { translate: 12px 4px; }
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  .halloweenWelcome .welcomeCopy { width: 60%; }
+  .halloweenArt { right: -12%; width: 67%; opacity: .85; }
+  .halloweenWelcome h2 { font-size: 64px; }
+  .halloweenWelcome .welcomeFoot { font-size: 8px; }
+}
+@media (max-width: 700px) {
+  .experience.halloweenWelcomeHost { height: 1200px; min-height: 1200px; }
+  .welcome.halloweenWelcome { display: block; padding: 35px 25px 90px; }
+  .halloweenWelcome::after { inset: 10px; }
+  .halloweenWelcome .welcomeCopy { width: 100%; max-width: 430px; }
+  .halloweenWelcome .eyebrow { font-size: 9px; }
+  .halloweenBadge { margin-top: 27px; font-size: 10px; }
+  .halloweenWelcome h2 { font-size: clamp(48px, 12vw, 68px); margin: 17px 0 18px; }
+  .halloweenWelcome p { font-size: 14px; max-width: 310px; }
+  .halloweenWelcome .halloweenDetails { font-size: 9px; gap: 6px; }
+  .halloweenWelcome .primary { min-width: 0; width: 100%; max-width: 310px; margin-top: 20px; }
+  .welcomeChase { max-width: 310px; }
+  .welcomeChase span { flex-basis: 100%; padding-left: 24px; }
+  .halloweenArt { width: 112%; height: 480px; right: -8%; bottom: 60px; }
+  .halloweenWelcome .welcomeFoot { bottom: 27px; font-size: 8px; }
+  .halloweenWelcome .welcomeFoot > span:last-child { text-align: left; margin-top: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .welcomeGhost, .welcomeMist, .welcomeBats { animation: none; }
+  .halloweenWelcome .primary:hover { transform: none; }
+}

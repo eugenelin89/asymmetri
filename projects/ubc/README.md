@@ -20,7 +20,8 @@ npm run build:next -- --webpack
 npm run build
 ```
 
-Open `http://127.0.0.1:3026/labs/ubc` and select Start exploring. The renderer and
+Open `http://127.0.0.1:3026/labs/ubc` and select Start exploring (Enter if you dare
+in the Halloween edition). The renderer and
 committed GIS snapshot load on demand. Production compilation does not fetch GIS
 services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md) and [original campus report](../../docs/UBC_IMPLEMENTATION_2026-10-30.md).
 
@@ -223,16 +224,16 @@ and current reconstruction limits. Nine supported building interiors are separat
 from those five outdoor venues. [Local browser evidence](../../docs/validation/ubc-landmarks-halloween/README.md)
 includes the gateway, Beaty, Irving, athletics and responsive Halloween controls.
 The report records 99 passing UBC tests and the observed development-rendering
-performance limitation. The final Next build and production availability are
-pending; earlier release receipts cover their own versions.
+performance limitation. Its [production receipt](../../docs/UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md)
+records the deployed source and build; later follow-ups require their own validation.
 
 **Halloween campus** is available in Atmosphere throughout the year. With no
-current-year manual choice, the automatic default is on October 31–November 6, 2026
-inclusive in `America/Vancouver`, returning to normal on November 7. Later years
-currently use an October 25–November 1 seasonal default. An explicit device-local
+current-year manual choice, the automatic default is October 24–November 7
+inclusive every year in `America/Vancouver`, returning to normal on November 8. An explicit device-local
 on/off choice overrides the date for that calendar year; it expires for the next
-year. Initialization occurs on Start exploring, avoiding date-dependent server
-rendering.
+year. The current welcome resolves this preference after hydration, before entry,
+with a guarded initialization fallback on Start exploring. The initial server and
+client renders remain deterministic.
 
 The edition uses autumn, overcast weather and 19:30, with an original full moon,
 cloud canopy and seasonal decoration. Turn it off to restore the previous season,
@@ -242,11 +243,47 @@ disabled while Halloween is on, and photo mode also has an off action. The moon 
 artistic, not an assertion of the real lunar phase. No account or live weather
 service is involved; only the edition choice is saved on this device.
 
-`halloween.ts` supplies 29 dispersed pumpkin/ghost/cobweb sets across nine interiors,
-including supported upper and lower levels, plus two gateway pumpkins and friendly
-creatures along clear source paths. The additive overlay
-uses six instanced batches, adds no solid collision, and creates no dialogue or
-required activity. Reduced motion freezes its animation; population off hides and
-stops outdoor creatures while retaining décor. Turning the edition off hides the
-entire overlay. Existing scene disposal owns its original shared geometry and
-materials.
+`halloween.ts` supplies dispersed pumpkin/ghost/cobweb sets across nine interiors,
+including supported upper and lower levels, plus gateway pumpkins and creatures
+along clear source paths. The additive overlay uses instanced geometry, adds no
+solid collision, and creates no dialogue or required activity. Reduced motion
+freezes its animation; population off hides and stops outdoor creatures while
+retaining décor. Turning the edition off hides the entire overlay. Existing scene
+disposal owns its original shared geometry and materials.
+
+## After Dark follow-up — local checks passed
+
+The [After Dark notes](../../docs/UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md) describe
+the current seasonal welcome, with original SVG campus artwork, a regular-campus
+switch and an independent **Masked pursuer** checkbox. The same edition preference
+drives the welcome and the world. CSS honors the operating system's reduced-motion
+setting; the illustration requires no Three.js scene or external image download.
+
+The roaming population adds six original creature designs: werewolf, lizard,
+jiangshi, zombie, vampire and ghost, with shared near/far geometry and varied
+movement. The complete source fixture places 84 figures, 14 of each kind. Quality
+caps range from 24 on Low to 84 on Ultra, subject to safe routes and distance.
+The separate masked figure follows outdoors, stops short of the
+visitor, waits outside buildings and can be outrun with Shift or touch Run. Turn
+it off independently in the welcome or Atmosphere. It carries a prop knife but
+has no attack or damage system. Population off hides it and reduced motion freezes
+it. Original eerie music, wind, wolf howls and nearby ghost cries/screams begin
+after entry, with mute and volume controls. Six source-grounded alumni visitors
+add encounter-only conversations about their studies. The report records the
+local validation checkpoints, browser evidence and exact release acceptance;
+implementation notes alone are not a deployment receipt.
+
+The follow-up also includes 24 comic, manga and original robot costume visitors
+from `halloween-heroes.ts`. They roam eligible campus paths with reciprocal crowd
+yielding and nearby fictional labels, without directory listings. These are
+decorative visitors; existing educational-guide conversations remain separate.
+Nearest-first quality limits allow every costume to be encountered at every
+quality level. Batched costume resources have their own explicit disposal.
+
+Calendar initialization selects the matching Vancouver meteorological season
+for the regular campus; winter starts overcast without automatic snow. December
+1–31 is reserved for a future Christmas edition in the seasonal registry, which
+is explicitly unavailable until its visuals and behavior are implemented.
+
+Closing an in-scene panel returns keyboard control to walking without another
+canvas click. Search/input fields retain normal typing while the panel is open.

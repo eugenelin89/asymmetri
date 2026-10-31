@@ -1229,7 +1229,9 @@ plus two gateway pumpkins. Outdoor creatures use
 existing source pedestrian segments; they are fictional and have no personal
 identity, dialogue or real occupancy implication.
 
-Six instanced batches serve the whole overlay, with distance limits by quality.
+In the initial landmarks release, six instanced batches served the whole overlay,
+with distance limits by quality. The After Dark entry below supersedes its roaming
+creature designs and batch count.
 Decorations have no solid collision and do not alter normal campus geometry.
 Reduced motion freezes animation, population off hides/stops only the roaming
 creatures, and disabling the edition hides/freezes the whole overlay. Repeated
@@ -1273,3 +1275,89 @@ Phone/tablet sizes identify browser viewports, not physical-device provenance.
 - Rights: original application rendering under the repository's MIT terms;
   reference reconstructions remain unofficial. No identifiable visitor or private
   profile information is shown.
+
+## UBC After Dark welcome and figures — current implementation, 2026-10-31
+
+- Welcome source: `projects/ubc/HalloweenWelcome.tsx`, an original inline SVG with
+  a 760 × 780 viewBox. `campus.module.css` supplies responsive sizing, the dark
+  palette and animated mist, bats and ghost. No raster source or export is used.
+  Public role: decorative seasonal welcome before the Three.js experience loads.
+  The stylized campus facade is illustrative rather than measured architecture.
+  Accessibility: `aria-hidden="true"`, non-focusable and pointer-transparent; the
+  adjacent text and controls communicate the edition. OS reduced motion disables
+  its CSS animation. No alt text is necessary for the decorative SVG.
+- Roaming figures: `projects/ubc/halloween.ts` generates six original, human-scale
+  fantasy designs from primitives and custom geometry: werewolf, lizard, jiangshi,
+  zombie, vampire and ghost. Approximate figure scale varies by silhouette; these
+  are design dimensions, not measurements of real people. Vertex colours and
+  shared near/far instanced geometry provide surfaces and detail. The complete
+  source fixture yields 84 figures, 14 of each kind, alongside the retained 29
+  interior decoration sets and two gateway pumpkins. The updated overlay uses 20
+  instanced batches including three retained decoration batches. Public role:
+  optional outdoor campus atmosphere; source pedestrian paths determine placement.
+  No image, external rig, portrait, copied character texture or audio is imported.
+  Population and reduced-motion controls govern their visibility and movement.
+- Pursuer: `projects/ubc/halloween-chase.ts` generates one approximately 1.95 m
+  costume figure and silver prop knife using original procedural geometry and
+  materials. Its pale perforated mask and workwear are fictional design elements.
+  Public role: separately switchable outdoor following behavior; it has no attack
+  or damage system. The checkbox and control description communicate the feature;
+  it carries no essential campus information. Reduced motion freezes its pose.
+- Rights and processing: all new artwork and geometry are authored in source
+  under the repository's MIT terms. No external model, reference photograph,
+  scan, film asset, logo, likeness, voice or generated marketing raster is shipped.
+  These are stylized seasonal assets, not an official UBC installation or event.
+  The existing GIS provenance is unchanged. No public profile field or package
+  dependency is added for these assets.
+
+The [implementation notes](UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md) distinguish
+configured quality limits from visible creature counts and records the passed
+isolated local checks. Local browser acceptance is described in the report; production availability
+requires the separate release receipt.
+
+### Comic, manga and robot costume visitors
+
+- Source: `projects/ubc/halloween-heroes.ts`; 24 original procedural costume
+  meshes with near/far geometry, instanced legs and boots, and a reusable nearby
+  640 × 96 canvas label. Human-scale silhouettes include smaller Astro Boy and
+  service robot forms and a larger Hulk/mecha. No downloaded image or model.
+- Role: seasonal roaming fictional visitors. Names appear only near an encounter
+  when markers are enabled; the label reads “Fictional visitor.” These figures
+  have no claims about real UBC occupants or events.
+- Rights: geometry/code are newly authored; established comic/manga character
+  names and identities remain their respective owners’ properties. The fan-costume
+  presentation claims no endorsement, licence transfer or ownership of those
+  identities. Atlas, Rivet and Pip are original robot designs. No actor likeness,
+  copied portrait, external texture, recording or additional dependency is used.
+- Accessibility/quality: population and Halloween toggles hide the figures;
+  reduced motion freezes animation. A nearest-first cap and distance detail
+  reduce rendering while retaining access to the complete roster.
+
+### Original Halloween audio and public education visitors
+
+- `projects/ubc/halloween-audio.ts`: original procedural Web Audio compositions
+  and effects; no audio files, external recordings, real voices or music licences
+  are imported. Use: optional Halloween ambience and proximity cues, starting
+  on entry with mute/volume controls. Browser restrictions are respected.
+- Six `public-education-characters.ts` visitors reuse the original generic
+  stylized campus model. No portrait, likeness texture, LinkedIn media or voice
+  is copied. Public factual education summaries and exact source URLs are in
+  the [implementation report](UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md). The posts
+  are self-reports; source checking does not verify credentials independently.
+
+- Local proof: `docs/validation/ubc-after-dark/local-gateway-cast.jpg`, original
+  1280 × 720 JPEG browser capture during cast validation. It predates the sound
+  UI/calendar follow-up and is not production evidence. Alt: “The masked
+  pursuer beside the Halloween UBC gateway, with a Spider-Man costume nearby.”
+  Original application rendering, unretouched; no private visitor information.
+
+### Final local After Dark controls
+
+- `local-welcome-desktop.jpg`: 1280 × 1758, final local Next production preview; responsive welcome.
+- `local-welcome-mobile.jpg`: 390 × 2643, final local Next production preview; responsive welcome.
+- `local-sound-mobile.jpg`: 390 × 844, final local Next production preview; mobile sound settings and keyboard-adjusted 36% volume.
+
+Original unretouched application browser captures; no external imagery or private
+visitor data. Documentation evidence, not public scene assets or physical-device
+measurements. Alternative descriptions: Halloween welcome with optional pursuit
+and sound controls; mobile Atmosphere panel with mute and volume settings.

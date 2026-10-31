@@ -12,6 +12,9 @@ export type Settings = {
   population: boolean;
   reducedMotion: boolean;
   halloween: boolean;
+  halloweenChase: boolean;
+  halloweenAudio: boolean;
+  halloweenVolume: number;
 };
 export type Building = {
   id: string;

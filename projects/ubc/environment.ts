@@ -8,27 +8,49 @@ export const defaults: Settings = {
   population: true,
   reducedMotion: false,
   halloween: false,
+  halloweenChase: true,
+  halloweenAudio: true,
+  halloweenVolume: 0.35,
 };
 export type Atmosphere = Pick<Settings, "season" | "weather" | "hour">;
 export const halloweenAtmosphere: Atmosphere = {
   season: "autumn", weather: "overcast", hour: 19.5,
 };
 export const halloweenStorageKey = "ubc-halloween-preference-v1";
-/** The owner requested this release to run for the next seven Vancouver dates.
- * Subsequent years have a small recurring seasonal window; manual choice wins.
+export const campusTimeZone = "America/Vancouver";
+/** Calendar eligibility is separate from availability. Christmas is reserved
+ * for a future implementation and currently cannot activate an edition.
+ */
+export const seasonalEditionRegistry = {
+  halloween: { available: true, annual: { start: [10, 24], end: [11, 7] } },
+  christmas: { available: false, annual: { start: [12, 1], end: [12, 31] } },
+} as const;
+/** One week before Halloween through one week after, inclusive every year.
+ * An explicit current-year manual choice continues to override this default.
  */
 export const halloweenSchedule = {
-  timeZone: "America/Vancouver",
-  release: { year: 2026, start: [10, 31], end: [11, 6] },
-  annual: { start: [10, 25], end: [11, 1] },
+  timeZone: campusTimeZone,
+  annual: seasonalEditionRegistry.halloween.annual,
 } as const;
 function vancouverDate(date: Date) {
   if (!Number.isFinite(date.getTime())) return undefined;
   const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone: halloweenSchedule.timeZone, year: "numeric", month: "numeric", day: "numeric",
+    timeZone: campusTimeZone, year: "numeric", month: "numeric", day: "numeric",
   }).formatToParts(date);
   const value = (type: Intl.DateTimeFormatPartTypes) => Number(parts.find((part) => part.type === type)?.value);
   return { year: value("year"), month: value("month"), day: value("day") };
+}
+/** Call once when initializing a visit. Static defaults remain deterministic for
+ * SSR; this pure helper never changes an already selected visitor atmosphere.
+ */
+export function dateDefaults(date: Date): Settings {
+  const calendar = vancouverDate(date);
+  if (!calendar) return { ...defaults };
+  const month = calendar.month;
+  const season: Season = month >= 3 && month <= 5 ? "spring"
+    : month >= 6 && month <= 8 ? "summer"
+      : month >= 9 && month <= 11 ? "autumn" : "winter";
+  return { ...defaults, season, weather: season === "winter" ? "overcast" : defaults.weather };
 }
 export function parseHalloweenPreference(stored: unknown): { year: number; enabled: boolean } | null {
   if (typeof stored === "string") {
@@ -44,7 +66,7 @@ export function initialHalloweenPreference(date: Date, stored?: unknown) {
   if (!calendar) return false;
   const preference = parseHalloweenPreference(stored);
   if (preference?.year === calendar.year) return preference.enabled;
-  const window = calendar.year === halloweenSchedule.release.year ? halloweenSchedule.release : halloweenSchedule.annual;
+  const window = halloweenSchedule.annual;
   const day = calendar.month * 100 + calendar.day;
   return day >= window.start[0] * 100 + window.start[1] && day <= window.end[0] * 100 + window.end[1];
 }
@@ -133,6 +155,7 @@ export function normalizeSettings(s: Settings): Settings {
   const atmosphere = s.halloween ? { ...s, ...halloweenAtmosphere } : s;
   return {
     ...atmosphere,
+    halloweenVolume: Number.isFinite(atmosphere.halloweenVolume) ? Math.max(0, Math.min(1, atmosphere.halloweenVolume)) : defaults.halloweenVolume,
     hour: Math.max(0, Math.min(23.99, atmosphere.hour)),
     weather:
       atmosphere.weather === "snow" && atmosphere.season !== "winter" ? "clear" : atmosphere.weather,

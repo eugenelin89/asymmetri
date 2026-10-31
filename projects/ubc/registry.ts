@@ -1,5 +1,9 @@
 import { athleticsSources } from "./athletics-layout";
 import { expandedCharacters } from "./character-expansion";
+import {
+  isPublicEducationSourceUrl,
+  publicEducationCharacters,
+} from "./public-education-characters";
 import type { Character, Link, Place, Topic } from "./types";
 import {
   orchardPlace,
@@ -594,9 +598,10 @@ export const characters: Character[] = [
     status: "Available in the virtual academic core",
   },
 ];
-characters.push(...residenceStudents, ...expandedCharacters);
+characters.push(...residenceStudents, ...expandedCharacters, ...publicEducationCharacters);
 
 export function safeExternalUrl(value: string): string | null {
+  if (isPublicEducationSourceUrl(value)) return value;
   try {
     const u = new URL(value);
     return u.protocol === "https:" &&
