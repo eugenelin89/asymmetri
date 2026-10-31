@@ -11,6 +11,7 @@ export type Settings = {
   markers: boolean;
   population: boolean;
   reducedMotion: boolean;
+  halloween: boolean;
 };
 export type Building = {
   id: string;

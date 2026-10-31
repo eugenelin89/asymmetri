@@ -1154,3 +1154,108 @@ browser capture. Existing GIS provenance remains unchanged.
   UBC Baseball coach, with conversational follow-up choices.”
 - `mitch-introduction-phone.jpg`, 390×844. Alt: “The phone conversation shows Mitch's
   brief introduction, with source and simulation notes in optional sections.”
+
+## UBC gateway, museum and library procedural assets — 2026-10-31
+
+- `projects/ubc/gateway-model.ts`: original extruded U/B/C outlines, metal supports
+  and concrete plinth, with a generated 64 × 64 roughness map. Model dimensions
+  are estimates: letters approximately 2.5 m high and 0.45 m deep. No external
+  font or logo asset. Public role: the visitor's arrival landmark. Accessible
+  place name: “UBC Entrance Letters · Gateway Sign”.
+- `projects/ubc/gateway-layout.ts`: additive source-island anchor and spawn on
+  pinned PDDL pedestrian record `LSHARD_TYPE-642-0`; exact sign placement remains
+  photographic interpretation. The immutable campus snapshot is retained.
+- `projects/ubc/beaty-layout.ts`, `beaty.ts` and `whale-model.ts`: source-part
+  placement of the Main Mall glass pavilion, original ramp/atrium/gallery geometry,
+  representative collection fixtures and an approximately 26 m procedural whale
+  skeleton with separate anatomical parts. The lower floor at −3.4 m and pavilion
+  roof at 5.8 m are modelling estimates. Public role: exterior whale viewing and
+  navigable public museum spaces. Accessible names include “Beaty Biodiversity
+  Museum”, “Meet Big Blue” and “Biodiversity collections”.
+- `projects/ubc/irving.ts`: original granite heritage façade, arched openings,
+  roof/timber structure, glazed wings, study furniture, four public floor levels
+  and stairs including the Ridington spiral. GIS provides the envelope/orientation;
+  0/5/10/15 m floor elevations and furniture geometry are interpreted. Public role:
+  enterable library/learning spaces, labelled “Irving K. Barber Learning Centre”.
+
+All models are original MIT procedural assets using existing Three.js geometry
+and materials; exterior UBC source GIS remains PDDL. No new raster illustration,
+reference photograph, portrait, university logo, artwork, floor-plan image or
+third-party model is shipped. Reference sources, rights distinctions and exclusions
+are recorded in [UBC third-party notices](../projects/ubc/THIRD_PARTY_NOTICES.md).
+These entries describe implementation assets, not evidence of production release.
+
+`projects/ubc/athletics-layout.ts` and `athletics.ts` add original MIT procedural
+outdoor geometry for Ken Woods, Harry Warren and South Turf soccer fields, Rashpal
+Dhillon Track and the existing Thunderbird Stadium. Public role: explorable
+athletics venues and fictional practice/jogging activity. Each venue's plain name
+provides its accessible place label. PDDL source polygons supply placement and
+bounds; the published Ken Woods/Harry Warren playing sizes and stadium surface
+size are distinct from interpreted seating, lights, fences and fixture positions.
+The 400 m track uses modelled curve/lane dimensions, and South Turf uses estimated
+105 × 68 m markings. Goal nets, lane/field paint, grandstand seating, roofs,
+embankment and equipment are generated geometry. Text is browser-system-font canvas
+output; people/uniforms reuse the existing original figure and bird emblem. No
+new external font, UBC logo, carved artwork, athlete image or source map/photograph
+is redistributed. Refer to the athletics section of the UBC third-party notices
+for source links and measurement limits.
+
+## UBC Halloween atmosphere and preference — 2026-10-31
+
+`projects/ubc/halloween-sky.ts` is an original MIT procedural seasonal asset: a
+128 × 128 generated RGBA lunar texture on a sphere, a noise-based cloud shader
+and a moonlight source. It uses no downloaded lunar photograph, HDRI, skybox,
+third-party texture, external font or model. Its public role is optional Halloween
+atmosphere; it is not a reconstruction of the real lunar phase or current weather.
+The accessible control is labelled “Halloween campus” with a plain description.
+Reduced motion freezes cloud drift. The existing scene lifecycle owns GPU cleanup.
+
+`environment.ts` and `Campus.tsx` store only the device-local, year-scoped edition
+preference. The October 31–November 6 2026 Vancouver default window, configurable
+future-year window and reversible 19:30/autumn/overcast preset are original
+configuration, not a live weather/calendar service. They add no public binary asset
+or server profile field. The toggle preserves the visit's prior atmosphere for
+restoration; the whole prior atmosphere is not persisted between visits.
+
+These entries describe candidate assets and configuration, not release evidence.
+
+`projects/ubc/halloween.ts` adds original lobed pumpkins with stems/faces,
+translucent rounded ghosts, radial polygonal cobwebs and friendly roaming
+pumpkin/ghost/moss creatures. All are generated geometry with vertex colours;
+there are no external images, models, audio, commercial character designs or
+copied seasonal illustrations. Public role: optional campus decoration, with 29
+dispersed, collision-cleared sets across nine interiors and their supported levels,
+plus two gateway pumpkins. Outdoor creatures use
+existing source pedestrian segments; they are fictional and have no personal
+identity, dialogue or real occupancy implication.
+
+Six instanced batches serve the whole overlay, with distance limits by quality.
+Decorations have no solid collision and do not alter normal campus geometry.
+Reduced motion freezes animation, population off hides/stops only the roaming
+creatures, and disabling the edition hides/freezes the whole overlay. Repeated
+toggles reuse existing render objects; shared scene disposal owns geometry and
+material cleanup. The controls' accessible description conveys the seasonal
+scene; individual decorative meshes do not carry essential information. No new
+public raster download or physical replica is introduced.
+
+## UBC landmarks and Halloween validation captures — 2026-10-31
+
+`docs/validation/ubc-landmarks-halloween/` contains eight original, unretouched JPEG
+screenshots captured from the local development browser at `/labs/ubc` during
+October 31 validation. Their role is documentation and visual QA, not an external
+reference library, runtime texture or claim of production deployment. They contain
+the application's rendered geometry and interface; existing procedural-asset,
+website and UBC GIS notices continue to apply. No reference photograph, scanned
+plan, portrait or generated marketing image was substituted into these captures.
+
+- `halloween-gateway.jpg` — 1280 × 720, entrance letters and seasonal opening scene.
+- `beaty-whale-exterior.jpg` — 1280 × 720, whale through the Main Mall pavilion glazing.
+- `irving-chapman-level3.jpg` — 1280 × 720, reconstructed Chapman public study space.
+- `athletics-aerial.jpg` — 1280 × 720, final athletics overview after the paint fix.
+- `thunderbird-grandstand.jpg` — 1280 × 720, interpreted covered spectator seating.
+- `rose-halloween-interior.jpg` — 1280 × 720, original seasonal interior decorations.
+- `halloween-controls-phone.jpg` — 390 × 844, responsive Halloween controls.
+- `halloween-controls-tablet.jpg` — 820 × 1180, responsive controls and reduced motion.
+
+Captions and evidence limits are in the [gallery](validation/ubc-landmarks-halloween/README.md).
+Phone/tablet sizes identify browser viewports, not physical-device provenance.

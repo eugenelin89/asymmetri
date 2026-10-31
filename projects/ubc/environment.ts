@@ -7,7 +7,68 @@ export const defaults: Settings = {
   markers: true,
   population: true,
   reducedMotion: false,
+  halloween: false,
 };
+export type Atmosphere = Pick<Settings, "season" | "weather" | "hour">;
+export const halloweenAtmosphere: Atmosphere = {
+  season: "autumn", weather: "overcast", hour: 19.5,
+};
+export const halloweenStorageKey = "ubc-halloween-preference-v1";
+/** The owner requested this release to run for the next seven Vancouver dates.
+ * Subsequent years have a small recurring seasonal window; manual choice wins.
+ */
+export const halloweenSchedule = {
+  timeZone: "America/Vancouver",
+  release: { year: 2026, start: [10, 31], end: [11, 6] },
+  annual: { start: [10, 25], end: [11, 1] },
+} as const;
+function vancouverDate(date: Date) {
+  if (!Number.isFinite(date.getTime())) return undefined;
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: halloweenSchedule.timeZone, year: "numeric", month: "numeric", day: "numeric",
+  }).formatToParts(date);
+  const value = (type: Intl.DateTimeFormatPartTypes) => Number(parts.find((part) => part.type === type)?.value);
+  return { year: value("year"), month: value("month"), day: value("day") };
+}
+export function parseHalloweenPreference(stored: unknown): { year: number; enabled: boolean } | null {
+  if (typeof stored === "string") {
+    try { return parseHalloweenPreference(JSON.parse(stored)); } catch { return null; }
+  }
+  if (!stored || typeof stored !== "object" || Array.isArray(stored)) return null;
+  const record = stored as Record<string, unknown>;
+  return typeof record.year === "number" && Number.isInteger(record.year) && record.year >= 2026 && record.year <= 9999 && typeof record.enabled === "boolean"
+    ? { year: record.year, enabled: record.enabled } : null;
+}
+export function initialHalloweenPreference(date: Date, stored?: unknown) {
+  const calendar = vancouverDate(date);
+  if (!calendar) return false;
+  const preference = parseHalloweenPreference(stored);
+  if (preference?.year === calendar.year) return preference.enabled;
+  const window = calendar.year === halloweenSchedule.release.year ? halloweenSchedule.release : halloweenSchedule.annual;
+  const day = calendar.month * 100 + calendar.day;
+  return day >= window.start[0] * 100 + window.start[1] && day <= window.end[0] * 100 + window.end[1];
+}
+export function serializeHalloweenPreference(date: Date, enabled: boolean) {
+  const calendar = vancouverDate(date);
+  if (!calendar) return null;
+  return JSON.stringify({ year: calendar.year, enabled });
+}
+/** Pure transition keeps the previous atmosphere separate from the edition,
+ * and carries quality, accessibility and population choices through unchanged.
+ */
+export function setHalloween(s: Settings, enabled: boolean, previous: Atmosphere | null = null): { settings: Settings; previous: Atmosphere | null } {
+  if (enabled) return {
+    settings: normalizeSettings({ ...s, halloween: true }),
+    previous: s.halloween
+      ? previous || { season: defaults.season, weather: defaults.weather, hour: defaults.hour }
+      : { season: s.season, weather: s.weather, hour: s.hour },
+  };
+  const atmosphere = s.halloween ? previous || { season: defaults.season, weather: defaults.weather, hour: defaults.hour } : {};
+  return { settings: normalizeSettings({ ...s, ...atmosphere, halloween: false }), previous: null };
+}
+export function toggleHalloween(s: Settings, previous: Atmosphere | null = null) {
+  return setHalloween(s, !s.halloween, previous);
+}
 const dates: Record<Season, [number, number, number]> = {
   spring: [3, 21, -7],
   summer: [7, 15, -7],
@@ -69,11 +130,12 @@ export function solarPosition(
   };
 }
 export function normalizeSettings(s: Settings): Settings {
+  const atmosphere = s.halloween ? { ...s, ...halloweenAtmosphere } : s;
   return {
-    ...s,
-    hour: Math.max(0, Math.min(23.99, s.hour)),
+    ...atmosphere,
+    hour: Math.max(0, Math.min(23.99, atmosphere.hour)),
     weather:
-      s.weather === "snow" && s.season !== "winter" ? "clear" : s.weather,
+      atmosphere.weather === "snow" && atmosphere.season !== "winter" ? "clear" : atmosphere.weather,
   };
 }
 export const clock = (h: number) =>

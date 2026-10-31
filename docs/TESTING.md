@@ -875,3 +875,58 @@ read-only profile checks passed. Fresh production browser acceptance verified
 button/typed identity, a facility answer, optional metadata, thanks, goodbye and
 scene focus with an empty warning/error log; desktop and phone captures are live.
 See the [release receipt](UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md).
+
+### UBC landmarks and Halloween — October 31
+
+Run `npm run test:ubc` after the combined implementation settles. The new landmark
+suites exercise actual movement and source geometry:
+
+- `gateway.test.mjs`: pedestrian-island placement clear of roads/buildings, a
+  starting view that frames the letters at a portrait-phone aspect, letter
+  collision with walk-around access, and source-route connections to the existing
+  main interiors and stadium.
+- `beaty.test.mjs`: the correct thin Main Mall pavilion, northern entrance,
+  finite approximately 26 m skeleton geometry, whale visibility through glazing
+  from sourced Main Mall paving, continuous descent/ascent through both ramps,
+  traversable lower atrium/gallery, ramp-column clearance and removal of terrain
+  that would otherwise seal the below-grade space.
+- `irving.test.mjs` and `irving-source.test.mjs`: entrance through the actual
+  East Mall offset, all four public levels, Chapman access, west heritage steps,
+  Ridington spiral/mezzanine and normal exits. Adjacent source buildings remain
+  solid. Ray/geometry checks catch a floor slab incorrectly capping the reading
+  room and visible rails left across staircase openings; head clearance is tested
+  along the spiral, not inferred from collision alone.
+- `athletics.test.mjs`: three fields contained in their real turf, documented
+  playing sizes, track straights/arcs within source paving including holes,
+  source-connected gates, traversable stadium stands/concourse/grass bank,
+  fictional activity spacing/animation/yielding, population/reduced-motion
+  controls and finite batched geometry with distant athlete LOD.
+
+`halloween-settings.test.mjs` exercises the October 31/November 7 Vancouver
+midnight boundaries, inclusive November 6 end, current-year manual override,
+malformed/stale storage, reusable future-year schedule and reversible atmosphere
+changes, including the daylight-saving boundary and deterministic server defaults.
+It checks season/time/weather restoration while retaining changed quality, markers,
+population and reduced-motion choices.
+
+`halloween.test.mjs` exercises all nine generated interior placements and both
+gateway pumpkins against actual collision/standing surfaces, dispersed source-path
+creatures, movement/visitor yielding, dynamic obstruction, off/reduced-motion/
+population behaviour, and six finite instanced batches. Repeated toggles retain
+object counts and leave source geometry/collision unchanged. Rendered acceptance
+must also verify that disabling the edition removes every seasonal group/light, repeated toggles do not accumulate GPU resources, reduced
+motion freezes decorative motion, and exits/paths remain unobstructed.
+
+The private candidate browser plan requires ordinary-control entry and exit at
+Beaty and Irving, both stair directions, exterior whale visibility, the five
+sports venues, gateway framing, Halloween on/off, mobile/keyboard controls,
+existing dialogue, focus after travel and canvas lifecycle. Capture unretouched
+application output at desktop, tablet and phone sizes, record browser warnings and
+errors, and check readability at Halloween night settings. Keep reference photos
+and profile secrets out of captures. Responsive emulation is not physical-device
+acceptance; one frame-rate sample is not a sustained performance result.
+
+Final integrated tests, builds, browser checks and production availability remain
+pending until recorded against the exact candidate. See
+[implementation scope and limits](UBC_LANDMARKS_HALLOWEEN_2026-10-31.md). Do not
+reuse earlier UBC release evidence as validation of these new scenes.

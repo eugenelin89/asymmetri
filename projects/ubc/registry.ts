@@ -1,3 +1,4 @@
+import { athleticsSources } from "./athletics-layout";
 import { expandedCharacters } from "./character-expansion";
 import type { Character, Link, Place, Topic } from "./types";
 import {
@@ -60,6 +61,33 @@ const reconstruction =
   "Level B · reference-based reconstruction. Public descriptions and historical plans inform this original model; dimensions, facade details and furnishings are not an as-built survey.";
 export const places: Place[] = [
   orchardPlace,
+  ...[
+    ["ken-woods", "Ken Woods Field", "A soccer pitch beside the baseball precinct with source-aligned turf, full field markings, goals, netting and an ambient practice group."],
+    ["harry-warren", "Harry Warren Field", "Explore the soccer field, marked playing surface, goal nets and sidelines, with simulated players practising."],
+    ["south-turf", "South Turf Soccer Field", "A source-aligned soccer pitch with goals, corner flags, field markings, fencing and an ambient practice group."],
+    ["dhillon-track", "Rashpal Dhillon Track & Field Oval", "An eight-lane, 400-metre running oval with straightaways, curved bends, lane markings, field-event fixtures and a small grandstand. Fictional students jog continuously in the lanes."],
+    ["thunderbird-stadium", "Thunderbird Stadium", "Explore the existing stadium’s field, covered concrete grandstand and grass embankment. Canadian football and soccer markings, floodlights and interpreted spectator details follow the current facility, not a future replacement proposal."],
+  ].map(([id, name, description]): Place => ({
+    id, name, description, category: "Athletics", address: "Thunderbird Park · UBC Vancouver",
+    interior: "C", verified: "2026-10-31",
+    reconstruction: "Detailed outdoor reference reconstruction using official field geometry. Structures, seating, equipment and activity are interpreted; this is not an as-built survey or live facility information.",
+    links: [link("Official Thunderbird Park facilities", athleticsSources.park),
+      ...(id === "thunderbird-stadium" ? [link("Thunderbird Stadium", athleticsSources.stadium)] : [])],
+  })),
+  {
+    id: "entrance-letters",
+    name: "UBC Entrance Letters · Gateway Sign",
+    category: "Landmarks",
+    address: "University Boulevard at Wesbrook Mall",
+    description: "The large silver UBC letters mark the eastern campus entrance. Your visit begins on the pedestrian island in front of the sign, with University Boulevard leading into campus.",
+    interior: "C",
+    reconstruction: "Original 3D reference reconstruction on the official pedestrian island. Letter dimensions, finish and exact placement are interpreted from public photographs; not a measured survey.",
+    links: [
+      link("UBC entrance letters", "https://blogs.ubc.ca/anthropocenemanifesto/mapping/ubc-letters/"),
+      sources.map,
+    ],
+    verified: "2026-10-31",
+  },
   {
     id: "west-tenth",
     name: "West 10th Avenue · approach context",
@@ -221,11 +249,15 @@ export const places: Place[] = [
     category: "Museums",
     address: "2212 Main Mall",
     description:
-      "Explore biodiversity through the museum’s collections and public exhibits. Museum interiors are not yet modelled in this preview.",
-    interior: "C",
-    reconstruction: "GIS exterior only.",
-    links: [link("Beaty Biodiversity Museum", "https://beatymuseum.ubc.ca/")],
-    verified: checked,
+      "See the 26-metre blue whale skeleton through the Main Mall glass pavilion, enter the upper atrium, and follow the ramp to the lower atrium and a reconstructed public collection gallery.",
+    interior: "B",
+    reconstruction: "Level B · the pavilion footprint follows official GIS. Patkau's public plans and museum photographs inform the glass envelope, north entrance, descending ramp and suspended whale. Floor heights, bone geometry and exhibit fixtures are reference interpretations, not a specimen scan or complete measured museum layout.",
+    links: [
+      link("Beaty Biodiversity Museum", "https://beatymuseum.ubc.ca/"),
+      link("Meet Big Blue", "https://beatymuseum.ubc.ca/exhibitions/permanent-exhibitions/blue-whale-display/blue-whale-project/"),
+      link("Museum visitor guide", "https://explore.beatymuseum.ubc.ca/map/"),
+    ],
+    verified: "2026-10-31",
   },
   {
     id: "koerner",
@@ -245,11 +277,15 @@ export const places: Place[] = [
     category: "Libraries",
     address: "1961 East Mall",
     description:
-      "Learning and library spaces in the academic core. This version includes its geographic exterior context.",
-    interior: "C",
-    reconstruction: "GIS exterior only.",
-    links: [link("Irving K. Barber Learning Centre", "https://ikblc.ubc.ca/")],
-    verified: checked,
+      "Explore the historic Main Library core and modern learning-centre wings, with public study spaces, the Chapman Learning Commons and reading-room reconstructions connected by stairs.",
+    interior: "B",
+    reconstruction: "Level B · official footprint, public floor maps and architectural photographs inform the heritage stone facade, glass wings and public spaces. Grade, floor heights, furnishings and details are interpreted. Restricted collections and staff rooms are not reconstructed.",
+    links: [
+      link("Irving K. Barber Learning Centre", "https://ikblc.ubc.ca/"),
+      link("Building history and highlights", "https://ikblc.ubc.ca/spaces/building-history-and-highlights/"),
+      link("Official interior maps", "https://ikblc.ubc.ca/spaces/wayfinding/"),
+    ],
+    verified: "2026-10-31",
   },
 ];
 export const displays: Record<
@@ -257,6 +293,30 @@ export const displays: Record<
   { name: string; description: string; links: Link[]; building: string }
 > = {
   ...residenceDisplays,
+  "irving-study": {
+    name: "Study at Irving",
+    description: "Find individual and group study spaces in Irving K. Barber Learning Centre. Explore the public floors here, then use UBC Library’s visitor guide for current facilities, accessibility and room information.",
+    building: "irving",
+    links: [link("IKB wayfinding", "https://ikblc.ubc.ca/spaces/wayfinding/"), link("Study spaces", "https://ikblc.ubc.ca/spaces/book-a-study-space/")],
+  },
+  "irving-chapman": {
+    name: "Chapman Learning Commons",
+    description: "The historic Main Library reading room is part of today’s Irving K. Barber Learning Centre. Its tall windows, timber roof and study areas are interpreted in this reconstruction. Learn about the building’s history and its public learning spaces.",
+    building: "irving",
+    links: [link("Building history and highlights", "https://ikblc.ubc.ca/spaces/building-history-and-highlights/"), link("IKB visitor guide", "https://ikblc.ubc.ca/spaces/wayfinding/")],
+  },
+  "beaty-whale": {
+    name: "Meet Big Blue",
+    description: "The museum's blue whale skeleton is approximately 26 metres long. Recovered from Prince Edward Island, it is suspended in a lunge-feeding pose. This original virtual model interprets the bones and posture; it is not a scientific scan.",
+    building: "beaty",
+    links: [link("Big Blue's story", "https://beatymuseum.ubc.ca/exhibitions/permanent-exhibitions/blue-whale-display/blue-whale-project/")],
+  },
+  "beaty-collections": {
+    name: "Biodiversity collections",
+    description: "Explore plants, insects, fishes, birds, fossils and marine life. The virtual cases are representative educational fixtures; discover the museum's real specimens, exhibitions and visitor information on its official website.",
+    building: "beaty",
+    links: [link("Explore Beaty", "https://beatymuseum.ubc.ca/")],
+  },
   "rose-info": {
     name: "Train at the Rose",
     description:

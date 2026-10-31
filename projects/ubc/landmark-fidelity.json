@@ -80,14 +80,14 @@
       "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
     },
     {
-      "id": "ikb",
+      "id": "irving",
       "name": "Irving K. Barber Learning Centre",
-      "status": "gis-context",
-      "implementedCoverage": "Source footprint exterior only; bespoke architecture and interior remain future work.",
-      "interiorClassification": "C",
-      "referenceUrl": null,
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Source VBL10080 envelope with granite heritage core and glazed wings; four connected public levels, Chapman hall and Ridington reading room/mezzanine with spiral stair. Restricted collections and staff rooms are not reconstructed.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://ikblc.ubc.ca/spaces/building-history-and-highlights/",
       "auditDate": "2026-10-31",
-      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "measurementConfidence": "Source envelope/orientation and public 2019 map; 0/5/10/15 m floor heights, roof profiles, fixtures and west-entry exterior steps are interpreted. Real campus grade is not reproduced.",
       "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
     },
     {
@@ -104,13 +104,101 @@
     {
       "id": "entrance-letters",
       "name": "UBC entrance letters",
-      "status": "not-implemented",
-      "implementedCoverage": "Bespoke geographically verified entrance landmark remains future work.",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Original silver extruded letters, supports and plinth on source pedestrian island LSHARD_TYPE-642-0 at University Boulevard/Wesbrook; visitor starts on the island facing the sign.",
       "interiorClassification": "C",
-      "referenceUrl": null,
+      "referenceUrl": "https://www.publicarchitecture.ca/projects/ubc-gateway",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Pedestrian island and intersection source-supported; exact sign placement, orientation, 2.5 m letter height and other dimensions are reference estimates, not a survey.",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "status": "reference-reconstruction",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "id": "hennings",
+      "name": "Hennings Building",
+      "implementedCoverage": "Exterior and enterable public learning-space interpretation inspired by HENN 200.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://learningspaces.ubc.ca/classrooms/henn-200/"
+    },
+    {
+      "status": "reference-reconstruction",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Published hall length and ceiling inform the model; seating, circulation and architectural details remain reference interpretations.",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "id": "war-memorial",
+      "name": "War Memorial Gymnasium",
+      "implementedCoverage": "Public lobby, hardwood court and blue spectator seating with fictional basketball practice.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://sportfacilities.ubc.ca/wmg/"
+    },
+    {
+      "status": "reference-reconstruction",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Source pavilion footprint and public architectural plan/section inform the model. Lower floor at -3.4 m, roof height, bone shapes and gallery fixtures are interpreted, not specimen-scan/as-built verified.",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "id": "beaty",
+      "name": "Beaty Biodiversity Museum",
+      "implementedCoverage": "Runtime anchor corrected to VBL10086 Main Mall pavilion; glass exterior with visible original whale skeleton, north entrance, descending ramps, lower atrium and representative public collection gallery.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://www.patkau.ca/projects/ubc-beaty-biodiversity-centre"
+    },
+    {
+      "status": "reference-reconstruction",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/thunderbird-park/",
+      "auditDate": "2026-10-31",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery, UBC logo or stadium artwork redistributed",
+      "id": "ken-woods",
+      "name": "Ken Woods Field",
+      "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
+      "measurementConfidence": "Published 120 by 75 yard playing dimensions; source landscape LSSOFT_TYPE-4161-0. Seating and fixtures interpreted."
+    },
+    {
+      "status": "reference-reconstruction",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/thunderbird-park/",
+      "auditDate": "2026-10-31",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery, UBC logo or stadium artwork redistributed",
+      "id": "harry-warren",
+      "name": "Harry Warren Field",
+      "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
+      "measurementConfidence": "Published 110 by 71 yard playing dimensions; source landscape LSSOFT_TYPE-4171-0. Fixtures interpreted."
+    },
+    {
+      "status": "reference-reconstruction",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/thunderbird-park/",
+      "auditDate": "2026-10-31",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery, UBC logo or stadium artwork redistributed",
+      "id": "south-turf",
+      "name": "South Turf Soccer Field",
+      "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
+      "measurementConfidence": "Source landscape LSSOFT_TYPE-4167-0; 105 by 68 m markings and fixture geometry are estimates, not measured field dimensions."
+    },
+    {
+      "status": "reference-reconstruction",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/thunderbird-park/",
+      "auditDate": "2026-10-31",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery, UBC logo or stadium artwork redistributed",
+      "id": "dhillon-track",
+      "name": "Rashpal Dhillon Track and Field Oval",
+      "implementedCoverage": "Outdoor eight-lane running track, infield, representative event fixtures, bleachers and fictional joggers.",
+      "measurementConfidence": "Documented eight-lane 400 m track on source LSHARD_TYPE-969-0/infield LSSOFT_TYPE-886-0; 36.5 m inner radius, 1.22 m lane widths and event-fixture locations are interpreted."
+    },
+    {
+      "status": "reference-reconstruction",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/thunderbird-stadium/",
+      "auditDate": "2026-10-31",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery, UBC logo or stadium artwork redistributed",
+      "id": "thunderbird-stadium",
+      "name": "Thunderbird Stadium",
+      "implementedCoverage": "Existing outdoor stadium with football/soccer markings, reconstructed grandstand and traversable grass embankment; future replacement is not modelled.",
+      "measurementConfidence": "Published 150 by 74.5 m surface and source VBL10214 grandstand placement; Canadian-football markings follow 2025 rules. Roof, seating, embankment and fixture geometry are reference interpretations."
     }
   ]
 }

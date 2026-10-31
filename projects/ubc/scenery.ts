@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { CampusData, Settings, Point, Building } from "./types";
+import { subtractGroundOpenings } from "./ground-openings";
 export function shape(rings: Point[][]) {
   const s = new THREE.Shape(
     rings[0].map((p) => new THREE.Vector2(p[0], -p[1])),
@@ -31,7 +32,11 @@ function noiseTexture() {
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
 }
-export function buildLandscape(data: CampusData, excluded: Set<string>) {
+export function buildLandscape(
+  data: CampusData,
+  excluded: Set<string>,
+  groundOpenings: Point[][] = [],
+) {
   const group = new THREE.Group(),
     chunks: THREE.Group[] = [],
     buildingMeshes: THREE.Object3D[] = [];
@@ -40,9 +45,18 @@ export function buildLandscape(data: CampusData, excluded: Set<string>) {
     roughness: 1,
     map: noiseTexture(),
   });
-  const base = new THREE.Mesh(new THREE.PlaneGeometry(7500, 5500), ground);
-  base.rotation.x = -Math.PI / 2;
-  base.position.y = -0.065;
+  // Clip only the interpreted below-grade interior footprint. Nearby source
+  // paving and lawns retain their measured shapes; no GIS records are edited.
+  const cutGround = (geometry: THREE.BufferGeometry) => {
+    if (!groundOpenings.length) return geometry;
+    const cut = subtractGroundOpenings(geometry, groundOpenings);
+    geometry.dispose();
+    return cut;
+  };
+  const baseGeometry = new THREE.PlaneGeometry(7500, 5500);
+  baseGeometry.rotateX(-Math.PI / 2);
+  baseGeometry.translate(0, -0.065, 0);
+  const base = new THREE.Mesh(cutGround(baseGeometry), ground);
   base.receiveShadow = true;
   group.add(base);
   const lawn = new THREE.MeshStandardMaterial({
@@ -79,7 +93,7 @@ export function buildLandscape(data: CampusData, excluded: Set<string>) {
     const g = new THREE.ShapeGeometry(shape(s.rings));
     g.rotateX(-Math.PI / 2);
     g.translate(0, m === road ? 0.002 : m === path ? 0.012 : 0.006, 0);
-    surfaces.set(m, [...(surfaces.get(m) || []), g]);
+    surfaces.set(m, [...(surfaces.get(m) || []), cutGround(g)]);
   }
   for (const [m, geos] of surfaces) {
     const g = mergeGeometries(geos);

@@ -1,3 +1,10 @@
+import { createHalloweenSky } from "./halloween-sky";
+import { createHalloween } from "./halloween";
+import { createAthletics } from "./athletics";
+import { athleticsAnchors } from "./athletics-layout";
+import { applyGatewayAnchors, gatewayAnchor, initialGatewayPose } from "./gateway-layout";
+import { buildGatewayLetters } from "./gateway-model";
+import { beatyAnchor, beatyGroundOpening, inBeaty } from "./beaty-layout";
 import { createActivities } from "./activities";
 import { createTraffic } from "./traffic";
 import expansionAnchors from "./data/expansion-anchors.json" with { type: "json" };
@@ -117,6 +124,8 @@ export function createCampus(
   sky.material.uniforms.turbidity.value = 3;
   sky.material.uniforms.rayleigh.value = 1.5;
   scene.add(sky);
+  const halloweenSky = createHalloweenSky();
+  scene.add(halloweenSky.group);
   const hemi = new THREE.HemisphereLight(0xd9e8ed, 0x726954, 2.1);
   scene.add(hemi);
   const sun = new THREE.DirectionalLight(0xffe7c4, 3.4);
@@ -143,6 +152,10 @@ export function createCampus(
   const excluded = new Set<string>();
   Object.assign(anchors, structuredClone(expansionAnchors));
   anchors.orchard = { ...orchardAnchor };
+  Object.assign(anchors, applyGatewayAnchors(anchors));
+  anchors.beaty = { ...beatyAnchor };
+  Object.assign(anchors, structuredClone(athleticsAnchors));
+  excluded.add("VBL10214");
   orchardGeography.footprintParts.forEach((part) => excluded.add(part.id));
   const kinds = [
     "rose",
@@ -151,11 +164,14 @@ export function createCampus(
     "sauder",
     "hennings",
     "war-memorial",
+    "beaty",
+    "irving",
   ] as const;
   for (const key of kinds) {
     anchors[key] = architectureEnvelope(key, anchors[key]);
     if (anchors[key]?.buildingId) excluded.add(anchors[key].buildingId!);
   }
+  const irvingFootprint = data.buildings.find((b) => b.id === anchors.irving.buildingId);
   const landscape = buildLandscape(
     {
       ...data,
@@ -177,6 +193,7 @@ export function createCampus(
       ),
     },
     excluded,
+    [beatyGroundOpening],
   );
   scene.add(landscape.group);
   targets.push(...landscape.buildingMeshes);
@@ -202,7 +219,7 @@ export function createCampus(
     infoPoints.set(kind, { x: entry[0], y: 1.6, z: entry[1] });
     const pg = source
       ? new THREE.ExtrudeGeometry(shape(source.rings), {
-          depth: source.height || 15,
+          depth: kind === "beaty" ? 5.8 : source.height || 15,
           bevelEnabled: false,
         })
       : new THREE.BoxGeometry(a.width, 15, a.depth);
@@ -304,8 +321,26 @@ export function createCampus(
     const world = global(p, orchardAnchor);
     infoPoints.set(id, { x: world[0], y, z: world[1] });
   }
+  const gateway = buildGatewayLetters();
+  gateway.group.position.set(gatewayAnchor.x, 0.035, gatewayAnchor.z);
+  gateway.group.rotation.y = gatewayAnchor.yaw;
+  gateway.group.userData.info = gatewayAnchor.id;
+  scene.add(gateway.group);
+  targets.push(gateway.group);
+  interiors.push({ anchor: gatewayAnchor, colliders: gateway.colliders, floors: [], ramps: [], entry: [0, 0] });
+  infoPoints.set(gatewayAnchor.id, { x: gatewayAnchor.x, y: 1.5, z: gatewayAnchor.z });
+  const athletics = createAthletics(data, anchors, (p, y) => collision.blocked(p, y));
+  scene.add(athletics.group);
+  targets.push(athletics.group);
+  interiors.push(...athletics.interiors);
+  for (const venue of athletics.venues) {
+    const a = anchors[venue.id], entry = a.entry || [a.x, a.z];
+    infoPoints.set(venue.id, { x: entry[0], y: 1.6, z: entry[1] });
+  }
   const collision = createCollision(data, interiors, excluded),
     routes = createRoutes(data, collision.blocked);
+  const halloween = createHalloween(data, anchors, interiors, collision.blocked);
+  scene.add(halloween.group);
   let campusCharacters = characters;
   const population = createPeople(data, anchors, collision.blocked);
   scene.add(population.group);
@@ -316,7 +351,9 @@ export function createCampus(
   scene.add(visitor.group);
   const followCamera = createFollowCamera([
     landscape.group,
+    gateway.group,
     stadium.group,
+    athletics.group,
     residenceGroup,
     ...landmarks.map((l) => l.group),
   ]);
@@ -326,17 +363,7 @@ export function createCampus(
     if (a && !infoPoints.has(p.id))
       infoPoints.set(p.id, { x: a.x, y: 2, z: a.z });
   }
-  const spawn = anchors.spawn || {
-    x: stadiumEntry[0] + 35,
-    z: stadiumEntry[1] + 25,
-  };
-  let pose: Pose = {
-    x: spawn.x,
-    y: 0,
-    z: spawn.z,
-    yaw: Math.atan2(-(stadiumAnchor.x - spawn.x), -(stadiumAnchor.z - spawn.z)),
-    pitch: 0,
-  };
+  let pose: Pose = initialGatewayPose();
   const inputs = new Map<string, string>(),
     listeners: (() => void)[] = [];
   let routeLine: THREE.Line | null = null,
@@ -449,17 +476,22 @@ export function createCampus(
     sun.target.position.set(pose.x, 0, pose.z);
     sun.intensity = day * 3.2 * cloud;
     sun.color.set(alt < 0.3 ? 0xffcf94 : 0xffedda);
-    hemi.intensity = 0.32 + day * 1.8;
-    renderer.toneMappingExposure = 0.8 + day * 0.25;
+    hemi.intensity = settings.halloween ? 0.9 : 0.32 + day * 1.8;
+    hemi.color.setHex(settings.halloween ? 0xa0abc6 : 0xd9e8ed);
+    renderer.toneMappingExposure = settings.halloween ? 1 : 0.8 + day * 0.25;
     sky.material.uniforms.sunPosition.value.copy(dir);
     sky.material.uniforms.turbidity.value =
       settings.weather === "clear" ? 3 : 8;
-    sky.visible = day > 0.05 && settings.weather !== "fog";
-    const fogColor = new THREE.Color().setHSL(0.55, 0.12, 0.08 + day * 0.65);
+    sky.visible = !settings.halloween && day > 0.05 && settings.weather !== "fog";
+    const fogColor = settings.halloween
+      ? new THREE.Color(0x141b2b)
+      : new THREE.Color().setHSL(0.55, 0.12, 0.08 + day * 0.65);
     scene.background = fogColor;
     scene.fog = new THREE.FogExp2(
       fogColor,
-      settings.weather === "fog"
+      settings.halloween
+        ? 0.0009
+        : settings.weather === "fog"
         ? 0.009
         : settings.weather === "rain"
           ? 0.0018
@@ -659,6 +691,12 @@ export function createCampus(
     renderer.domElement.removeEventListener("webglcontextlost", contextLost),
   );
   function visit(id: string) {
+    if (id === gatewayAnchor.id) {
+      pose = initialGatewayPose();
+      setMode(footMode);
+      updateEnvironment();
+      return;
+    }
     // People are encountered in the world, never fast-travel destinations.
     if (campusCharacters.some((c) => c.id === id)) return;
     const a =
@@ -673,6 +711,16 @@ export function createCampus(
       }
     }
     if (!target) return;
+    if (athleticsAnchors[id]?.entry) {
+      const entry = athleticsAnchors[id].entry!;
+      if (!collision.blocked(entry, 0)) {
+        pose = { x: entry[0], z: entry[1], y: 0, pitch: 0,
+          yaw: Math.atan2(-(a.x - entry[0]), -(a.z - entry[1])) };
+        setMode(footMode);
+        updateEnvironment();
+        return;
+      }
+    }
     let safe: Point | undefined;
     const interior = interiors.find((i) => i.anchor === a);
     // Start on the exterior side of the modelled entrance, facing the door.
@@ -808,6 +856,9 @@ export function createCampus(
       mode === "third" && cameraClearance > 2.15,
       settings.reducedMotion,
     );
+    halloweenSky.update(dt, settings, camera.position);
+    halloween.update(dt, settings, pose);
+    athletics.update(dt, settings, pose);
     activities.update(
       dt,
       [pose.x, pose.z],
@@ -838,6 +889,9 @@ export function createCampus(
         residenceLocal[1] < 12);
     const indoor = landmarks.find((l) => {
       const p = local([pose.x, pose.z], l.anchor);
+      if (l.id === "beaty") return inBeaty(p, pose.y);
+      if (l.id === "irving" && irvingFootprint)
+        return inPolygon([pose.x, pose.z], irvingFootprint.rings);
       return (
         Math.abs(p[0]) < l.anchor.width / 2 &&
         Math.abs(p[1]) < l.anchor.depth / 2
@@ -945,10 +999,18 @@ export function createCampus(
             : Infinity,
         }))
         .sort((a, b) => a.d - b.d)[0];
+      const sportsArea = athletics.venues.find((venue) => {
+        const a = anchors[venue.id], p = local([pose.x, pose.z], a);
+        return Math.abs(p[0]) < a.width / 2 && Math.abs(p[1]) < a.depth / 2;
+      });
       const location = inResidence
         ? residence.location(residenceLocal, pose.y)
         : indoor
-          ? `${places.find((p) => p.id === indoor.id)?.name} · Level ${Math.round(pose.y / 5) + 1} · Reconstructed`
+          ? indoor.id === "beaty"
+            ? `Beaty Biodiversity Museum · ${pose.y < -1 ? "Lower atrium & collections" : "Upper atrium"} · Reconstructed`
+            : `${places.find((p) => p.id === indoor.id)?.name} · Level ${Math.round(pose.y / 5) + 1} · Reconstructed`
+          : sportsArea
+            ? places.find((p) => p.id === sportsArea.id)!.name
           : closest?.d < 150
             ? closest.p.name
             : "UBC Vancouver · outdoor campus";

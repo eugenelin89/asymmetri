@@ -5,9 +5,11 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { Anchor } from "./types";
+import { beaty } from "./beaty";
+import { irving } from "./irving";
 
 export type ArchitectureKind =
-  "rose" | "bookstore" | "nest" | "sauder" | "hennings" | "war-memorial";
+  "rose" | "bookstore" | "nest" | "sauder" | "hennings" | "war-memorial" | "beaty" | "irving";
 export function architectureEnvelope(
   kind: ArchitectureKind,
   source: Anchor,
@@ -112,7 +114,7 @@ function grainTexture(kind: "timber" | "stone" | "turf") {
 }
 
 /** One merged mesh per material keeps detailed furniture inexpensive to draw. */
-class Builder {
+export class Builder {
   readonly group = new THREE.Group();
   readonly colliders: ArchitectureCollider[] = [];
   readonly floors: ArchitectureFloor[] = [];
@@ -1381,7 +1383,7 @@ export function buildArchitecture(
   if (
     !Number.isFinite(width) ||
     !Number.isFinite(depth) ||
-    width < 14 ||
+    width < (kind === "beaty" ? 10 : 14) ||
     depth < 20
   )
     throw new Error(
@@ -1395,7 +1397,7 @@ export function buildArchitecture(
       ? sourceHeight
       : undefined;
   const b = new Builder(width, depth, height);
-  ({ rose, bookstore, nest, sauder, hennings, "war-memorial": warMemorial })[
+  ({ rose, bookstore, nest, sauder, hennings, "war-memorial": warMemorial, beaty, irving })[
     kind
   ](b);
   return b.finish(kind);

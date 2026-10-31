@@ -43,7 +43,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver, Surrey, Richmond and UBC cards, with an explanation of street and building reconstruction |
-| `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview, seven reconstructed walkable interiors, first/third-person exploration, encounter-only educational characters and opt-in public profiles |
+| `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview; current source adds nine reconstructed walkable interiors, first/third-person exploration, encounter-only educational characters, opt-in public profiles and optional Halloween atmosphere |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
 | `/labs/surrey` | Surrey, City of Adventure: day/night city, fictional cases, driving, compact phone controls and local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
@@ -64,6 +64,11 @@ current evidence, engineering limits and the illustrative Motion workflow.
 UBC V0.3 is [verified live](docs/UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md). See its
 [implementation and remaining coverage](docs/UBC_CAMPUS_LIFE_V03.md) and
 [actual browser gallery](docs/validation/ubc-navigation/README.md).
+The newer [landmarks and Halloween candidate](docs/UBC_LANDMARKS_HALLOWEEN_2026-10-31.md)
+adds the gateway arrival, Beaty/Irving interiors and athletics detail. Its
+[local browser gallery](docs/validation/ubc-landmarks-halloween/README.md) records
+actual development views and responsive controls; production activation remains
+pending and the earlier live receipt does not cover these additions.
 
 The root homepage introduces Asymmetri and routes visitors directly to Sports and
 Labs without repeating division or product content. Contact opens the shared mailbox;

@@ -787,3 +787,33 @@ About this simulation with sources/dates. Preserve athlete roster years and user
 authored profile answers; never infer a community member’s university appointment
 from an optional interest area. Complete typed greetings/identity questions share
 the button actions; unsupported personal claims receive a short honest response.
+
+## UBC gateway, Beaty and Irving coverage
+
+Describe the current supported coverage as nine building interiors, all Level B:
+Rose, Bookstore, Nest, Sauder, Hennings, War Memorial Gym, Orchard, Beaty and Irving.
+Keep outdoor sports venues separate from this count. The new start is the
+University Boulevard/Wesbrook pedestrian island by the silver UBC letters.
+`gateway-layout.ts` records its source island and the limits of the interpreted
+letter placement; do not describe the model dimensions as surveyed measurements.
+
+Beaty information distinguishes the real approximately 26 m specimen from the
+original virtual skeleton. The glass pavilion, north doorway, descending ramps
+and lower public gallery are supported; collection cases and bone geometry are
+representative. Its runtime anchor follows the pavilion source part, not the
+adjacent research wing. Do not imply a complete museum inventory or research-lab
+access. Irving copy may describe the public atrium, Chapman hall and Ridington
+reading room/mezzanine, with four connected levels. Its 2019 map is reference
+material, not confirmation of current room names, assignments or access. Floor
+heights, exterior steps and campus grade remain approximate in both additions.
+Keep official visitor links and reconstruction notes in `registry.ts`; source
+photographs and artworks remain references, not redistributable scene assets.
+
+The outdoor athletics scope is Ken Woods, Harry Warren and South Turf soccer,
+Rashpal Dhillon Track and the existing Thunderbird Stadium. Do not describe other
+nearby venues as newly detailed. Keep published field measurements separate from
+South Turf's estimated markings and reconstructed track/stand fixtures. Practice
+players and joggers are fictional; venue information does not indicate live
+occupancy, an event schedule or real access. Distinguish the existing stadium from
+replacement proposals, and use plain names/original geometry without copied marks
+or stadium artwork.

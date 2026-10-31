@@ -786,8 +786,8 @@ Identity, simulation disclaimers and grounded questions appear after interaction
 
 `projects/ubc` now includes collision-aware third-person navigation, appearance,
 map travel/wayfinding, streamed sourced educational characters, original sports/
-wildlife/bicycle scenes and source-based traffic. Seven reference interiors are
-supported; the science-fair Great Hall extends the Nest's second level. See
+wildlife/bicycle scenes and source-based traffic. That release introduced seven
+reference interiors; the science-fair Great Hall extends the Nest's second level. See
 [the implementation report](UBC_CAMPUS_LIFE_V03.md).
 
 The owner explicitly requested public opt-in profiles and immediate publication.
@@ -821,3 +821,27 @@ same actions as buttons. The panel keeps gestures separate from speech and moves
 biography/permissions/behavior detail into About. Community introductions are
 derived at presentation time without changing persisted profile data or rewriting
 participant answers. [Dialogue refinement](UBC_NATURAL_DIALOGUE_2026-10-31.md).
+
+### UBC gateway and public museum/library spaces
+
+The current implementation supports nine building interiors: Rose, Bookstore,
+Nest, Sauder, Hennings, War Memorial Gym, Orchard, Beaty and Irving K. Barber.
+Outdoor sports venues are separate. `gateway-layout.ts` supplies one additive
+arrival anchor for the renderer and map, on the source pedestrian island at
+University Boulevard/Wesbrook; `gateway-model.ts` builds the original letters.
+The source snapshot is unchanged.
+
+`beaty-layout.ts` corrects the runtime anchor to VBL10086's Main Mall pavilion
+part. `beaty.ts` uses the shared architecture builder, with `whale-model.ts` for
+the original skeleton and a lower public collection gallery. Local ground cutouts
+and floor/ramp support permit below-grade navigation. `irving.ts` uses the same
+builder for its heritage core, modern wings and four public levels; floor openings,
+walk surfaces and guards share the geometry's circulation layout. Both are Level B
+reconstructions, with approximate heights and furnishings. No new renderer,
+server service, reference-image asset or external model dependency is introduced.
+
+`athletics-layout.ts` adds source-aligned anchors for three soccer fields, Rashpal
+Dhillon Track and the existing Thunderbird Stadium. `athletics.ts` batches original
+venue geometry, supplies floors/ramps/colliders for walkable structures, and updates
+fictional practice groups and joggers with population, distance and reduced-motion
+settings. These outdoor venues are separate from the nine building interiors.

@@ -1,4 +1,7 @@
 "use client";
+import { applyGatewayAnchors } from "./gateway-layout";
+import { beatyAnchor } from "./beaty-layout";
+import { athleticsAnchors } from "./athletics-layout";
 import { extendGeography } from "./extensions";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -15,6 +18,11 @@ import {
   defaults,
   normalizeSettings,
   solarPosition,
+  halloweenStorageKey,
+  initialHalloweenPreference,
+  serializeHalloweenPreference,
+  setHalloween,
+  type Atmosphere,
 } from "./environment";
 import type {
   Anchors,
@@ -78,6 +86,7 @@ export function Campus() {
     panelRef = useRef<HTMLElement>(null),
     opener = useRef<HTMLElement | null>(null),
     resumeSceneFocus = useRef(false);
+  const previousAtmosphere = useRef<Atmosphere | null>(null);
   const focusScene = useCallback(() => {
     host.current?.querySelector("canvas")?.focus({ preventScroll: true });
   }, []);
@@ -183,6 +192,9 @@ export function Campus() {
         setData(expandedWorld);
         Object.assign(locations, structuredClone(expansionAnchors));
         locations.orchard = { ...orchardAnchor };
+        Object.assign(locations, applyGatewayAnchors(locations));
+        locations.beaty = { ...beatyAnchor };
+        Object.assign(locations, structuredClone(athleticsAnchors));
         setAnchors(locations);
         engine = module.createCampus(
           host.current,
@@ -288,6 +300,17 @@ export function Campus() {
   };
   const update = (patch: Partial<Settings>) =>
     setSettings((s) => normalizeSettings({ ...s, ...patch }));
+  const changeHalloween = (enabled: boolean) => {
+    const next = setHalloween(settings, enabled, previousAtmosphere.current);
+    previousAtmosphere.current = next.previous;
+    setSettings(next.settings);
+    try {
+      const saved = serializeHalloweenPreference(new Date(), enabled);
+      if (saved) localStorage.setItem(halloweenStorageKey, saved);
+    } catch {
+      setNotice("Halloween changed for this visit; device storage is unavailable.");
+    }
+  };
   const visit = (id: string) => {
     api.current?.visit(id);
     resumeSceneFocus.current = true;
@@ -410,13 +433,15 @@ export function Campus() {
               find your future.
             </h2>
             <p>
-              Walk from Thunderbird Park to the heart of campus. Step inside,
+              Begin at the UBC entrance letters. Step inside,
               meet a virtual guide, and take your time.
             </p>
             <button
               className={styles.primary}
               onClick={() => {
+                let halloweenPreference: string | null = null;
                 try {
+                  halloweenPreference = localStorage.getItem(halloweenStorageKey);
                   setAppearance(
                     normalizeAppearance(
                       JSON.parse(
@@ -425,6 +450,9 @@ export function Campus() {
                     ),
                   );
                 } catch {}
+                const edition = setHalloween(settings, initialHalloweenPreference(new Date(), halloweenPreference), previousAtmosphere.current);
+                previousAtmosphere.current = edition.previous;
+                setSettings(edition.settings);
                 setStarted(true);
                 setExpanded(true);
               }}
@@ -491,12 +519,13 @@ export function Campus() {
               <div className={styles.location}>
                 <span className={styles.dot} />
                 <div>
-                  <strong>{telemetry?.location || "West 16th Avenue"}</strong>
+                  <strong>{telemetry?.location || "UBC Entrance Letters"}</strong>
                   <span>
                     {clock(settings.hour)} · {settings.season} ·{" "}
                     {settings.weather === "cloudy"
                       ? "Partly cloudy"
                       : settings.weather}
+                    {settings.halloween && " · Halloween"}
                   </span>
                 </div>
               </div>
@@ -520,10 +549,10 @@ export function Campus() {
                   ⌕ <span>Explore campus</span>
                 </button>
                 <button
-                  aria-label="Change season, weather and time"
+                  aria-label="Change atmosphere and Halloween edition"
                   onClick={() => openPanel("settings")}
                 >
-                  ☼ <span>Atmosphere</span>
+                  {settings.halloween ? "☾" : "☼"} <span>Atmosphere</span>
                 </button>
                 <button
                   onClick={() => {
@@ -709,12 +738,14 @@ export function Campus() {
                   max="23.75"
                   step=".25"
                   value={settings.hour}
+                  disabled={settings.halloween}
                   onChange={(e) => update({ hour: Number(e.target.value) })}
                 />
               </label>
               <select
                 aria-label="Photo season"
                 value={settings.season}
+                disabled={settings.halloween}
                 onChange={(e) =>
                   update({ season: e.target.value as Settings["season"] })
                 }
@@ -726,6 +757,7 @@ export function Campus() {
               <select
                 aria-label="Photo weather"
                 value={settings.weather}
+                disabled={settings.halloween}
                 onChange={(e) =>
                   update({ weather: e.target.value as Settings["weather"] })
                 }
@@ -741,6 +773,9 @@ export function Campus() {
                   <option key={w}>{w}</option>
                 ))}
               </select>
+              {settings.halloween && (
+                <button onClick={() => changeHalloween(false)}>Turn off Halloween</button>
+              )}
               <select
                 aria-label="Photo camera"
                 value={mode}
@@ -891,6 +926,7 @@ export function Campus() {
                     "Student life",
                     "Retail",
                     "Gardens",
+                    "Landmarks",
                     "Museums",
                     "Libraries",
                     "Other buildings",
@@ -924,6 +960,24 @@ export function Campus() {
                   conditions.
                 </p>
                 <fieldset>
+                  <legend>Halloween edition</legend>
+                  <label className={styles.check}>
+                    <input
+                      type="checkbox"
+                      checked={settings.halloween}
+                      aria-describedby="ubc-halloween-description"
+                      onChange={(e) => changeHalloween(e.target.checked)}
+                    />
+                    Halloween campus
+                  </label>
+                  <p id="ubc-halloween-description">
+                    {settings.halloween
+                      ? "An autumn evening with a full moon, dark clouds and haunted campus decorations. Turn it off to restore your season, weather and time."
+                      : "Explore an autumn evening with a full moon, dark clouds and haunted campus decorations."}
+                  </p>
+                  <small>Available all year. Your choice is remembered on this device for the current year.</small>
+                </fieldset>
+                <fieldset disabled={settings.halloween}>
                   <legend>Season</legend>
                   <div className={styles.options}>
                     {(["spring", "summer", "autumn", "winter"] as const).map(
@@ -947,14 +1001,15 @@ export function Campus() {
                     max="23.75"
                     step=".25"
                     value={settings.hour}
+                    disabled={settings.halloween}
                     onChange={(e) => update({ hour: Number(e.target.value) })}
                   />
                 </label>
                 <small>
-                  {sp.date} · Vancouver local time
-                  <br />
-                  Approximate sunrise {clock(sp.sunrise)} · sunset{" "}
-                  {clock(sp.sunset)}
+                  {settings.halloween ? "Halloween evening · Moonlit seasonal scene" : <>
+                    {sp.date} · Vancouver local time<br />
+                    Approximate sunrise {clock(sp.sunrise)} · sunset {clock(sp.sunset)}
+                  </>}
                 </small>
                 <div className={styles.presets}>
                   {[
@@ -963,7 +1018,7 @@ export function Campus() {
                     ["Golden hour", sp.sunset - 0.7],
                     ["Night", 22],
                   ].map(([s, h]) => (
-                    <button key={s} onClick={() => update({ hour: Number(h) })}>
+                    <button key={s} disabled={settings.halloween} onClick={() => update({ hour: Number(h) })}>
                       {s}
                     </button>
                   ))}
@@ -972,6 +1027,7 @@ export function Campus() {
                   Weather
                   <select
                     value={settings.weather}
+                    disabled={settings.halloween}
                     onChange={(e) =>
                       update({ weather: e.target.value as Settings["weather"] })
                     }
@@ -1229,8 +1285,8 @@ export function Campus() {
                 >
                   Enable mouse-look lock
                 </button>
-                <button onClick={() => visit("stadium")}>
-                  Return to the stadium approach
+                <button onClick={() => visit("entrance-letters")}>
+                  Return to the entrance letters
                 </button>
               </>
             ) : (
@@ -1247,8 +1303,12 @@ export function Campus() {
                   Official campus footprints, landscape surfaces and trees
                   provide the setting. Original procedural reconstructions focus
                   on the baseball precinct, Rose training hall, Sauder lobby,
-                  Bookstore, Nest, Hennings, War Memorial Gym and Orchard
-                  Commons. The Nest includes Blue Chip and a retrospective GVRSF
+                  Bookstore, Nest, Hennings, War Memorial Gym, Orchard Commons,
+                  Beaty Biodiversity Museum and Irving K. Barber Learning Centre.
+                  At Beaty, see the suspended blue whale and descend to the
+                  lower atrium and collection gallery. Irving includes public
+                  study spaces, Chapman Learning Commons and reading rooms.
+                  The Nest includes Blue Chip and a retrospective GVRSF
                   fair in a Level 2 Great Hall reconstruction. Orchard includes
                   a lobby, one demonstration floor, eight fictional bedrooms,
                   five shared bathrooms and three fictional student guides.
@@ -1256,8 +1316,9 @@ export function Campus() {
                 </p>
                 <h3>What remains approximate</h3>
                 <p>
-                  Terrain is flat. Roofs, facades, field markings, interior
-                  layouts and furnishings are reconstructed. The upper Nest
+                  Campus terrain uses a flat datum; Beaty’s lower level and
+                  interior stairs use interpreted heights. Roofs, facades, field
+                  markings, interior layouts and furnishings are reconstructed. The upper Nest
                   galleries represent selected public spaces; the entire
                   five-level building is not reproduced. Orchard’s upper storeys
                   are exterior only; the open-house floor is representative, not

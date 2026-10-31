@@ -90,7 +90,9 @@ function inBox(
   );
 }
 export function floorAt(p: Point, y: number, interiors: Interior[]) {
-  let target = 0;
+  // Ground is the fallback, not a competing floor: a documented lower-level
+  // floor must remain reachable after descending its ramp below campus grade.
+  let target: number | undefined;
   for (const i of interiors) {
     const q = local(p, i.anchor);
     for (const ramp of i.ramps) {
@@ -105,9 +107,14 @@ export function floorAt(p: Point, y: number, interiors: Interior[]) {
       }
     }
     for (const f of i.floors)
-      if (inBox(q, f) && f.y <= y + 0.38 && f.y > target) target = f.y;
+      if (
+        inBox(q, f) &&
+        f.y <= y + 0.38 &&
+        (target === undefined || f.y > target)
+      )
+        target = f.y;
   }
-  return target;
+  return target ?? 0;
 }
 export function createCollision(
   data: CampusData,

@@ -31,14 +31,17 @@ export default function UbcPage() {
           <section>
             <div className={styles.statLine}>
               <span>FIRST PERSON · THIRD PERSON · AERIAL · MAP</span>
-              <span>7 ENTERABLE RECONSTRUCTIONS</span>
+              <span>9 ENTERABLE RECONSTRUCTIONS</span>
             </div>
             <h2>A university, open to your imagination.</h2>
             <p>
-              Begin beside West 16th Avenue near Thunderbird Park. Walk onto the
-              virtual baseball field, explore the Rose training hall, browse the
-              Bookstore and visit the Student Nest. Meet people naturally as you
-              explore and start a conversation to learn who they are. At Orchard Commons,
+              Begin at the UBC entrance letters on University Boulevard and
+              Wesbrook Mall. Walk onto the virtual baseball field, explore the
+              Rose training hall, browse the Bookstore and visit the Student Nest.
+              See Beaty’s suspended blue whale, descend to its collection gallery,
+              and explore the study spaces at Irving K. Barber Learning Centre.
+              Meet people naturally as you explore and start a conversation to
+              learn who they are. At Orchard Commons,
               explore eight fictional demonstration bedrooms, shared bathrooms,
               a lounge and study area.
             </p>
@@ -51,9 +54,10 @@ export default function UbcPage() {
             <h2>Real geography. An evolving reconstruction.</h2>
             <p>
               This independent preview combines official UBC GIS data with
-              original procedural architecture. Terrain remains flat and
-              interiors are reference-based interpretations. Virtual access does
-              not grant real-world access. This is not an official UBC project.
+              original procedural architecture. Campus terrain uses a flat datum;
+              interior heights and layouts are reference-based interpretations.
+              Virtual access does not grant real-world access. This is not an
+              official UBC project.
             </p>
             <details>
               <summary>

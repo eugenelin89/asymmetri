@@ -26,6 +26,9 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 
 ## Visitor experience
 
+- Arrival: start on the source-mapped pedestrian island beside the silver UBC
+  entrance letters at University Boulevard and Wesbrook Mall, facing the sign.
+  The earlier West 16th Avenue start remains available through campus exploration.
 - First person / Third person: WASD moves (A/D strafe); left/right arrows turn,
   up/down arrows move. Click-hold and drag to turn/look; E interacts; V switches
   first/third person. The third-person visitor uses the existing original figure model.
@@ -41,7 +44,11 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   have walls and fixture collision. Orchard adds a lobby and one representative floor
   with eight bedrooms, five bathrooms, sixteen working doors, lounge/study, stairs
   and a continuous platform lift. The Nest has ground/5 m/10 m public galleries,
-  two stair flights and a suspended lounge. Only these supported spaces are enterable.
+  two stair flights and a suspended lounge. Beaty adds a glass whale pavilion,
+  descending ramps and a lower public collection gallery. Irving K. Barber adds
+  four supported public levels, the Chapman hall and Ridington reading room with
+  a mezzanine and spiral stair. These are **nine supported building interiors**;
+  outdoor sports venues are counted separately.
 - Conversations: encounter people in the world; approach and press E or tap **Talk**
   to begin a choice-based conversation. Say hello, wave, ask who they are, choose a reviewed question and follow-ups, or say goodbye. The character faces you and performs an original wave/nod/talking gesture. No character roster, location markers, name labels,
   Find actions or routes to people are exposed, even after meeting someone.
@@ -53,6 +60,12 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   answers use conversational language; full simulation/source/model notes are in
   About this simulation. Typed greetings and identity questions share the button flow.
 - Pedestrians: source-route arrivals have spacing and local density limits. Walkers yield and pass each other; only the selected conversation partner stops for a conversation. Other nearby people keep walking.
+- Outdoor athletics: Ken Woods, Harry Warren and South Turf have reconstructed
+  soccer markings, goals, fences, benches and fictional practice groups. Rashpal
+  Dhillon Track has an eight-lane running loop with fictional joggers. The existing
+  Thunderbird Stadium has Canadian-football/soccer markings, spectator structures
+  and a traversable grandstand/grass embankment. These are simulated activities,
+  not real matches, training schedules or occupancy.
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
   Winter snow is optional; evergreen and deciduous trees are separate materials.
@@ -76,25 +89,61 @@ procedural assets. Asset material batching and geographic tree groups reduce dra
 calls. Detailed architecture switches to source-outline proxies at distance;
 quality presets control pixel density, vegetation range and shadows.
 
+`gateway-layout.ts` shares the arrival pose and additive place anchor between the
+renderer and map; `gateway-model.ts` builds original extruded letters. `beaty-layout.ts`
+selects the Main Mall pavilion part of VBL10086 at runtime, correcting the older
+anchor on the research wing without changing the published GIS snapshot.
+`beaty.ts` and `whale-model.ts` build the public museum reconstruction and original
+skeletal interpretation. Ground openings and below-grade floor support allow the
+visitor to descend beneath the exterior terrain. `irving.ts` uses the shared
+architecture builder for its varied wings, heritage core and connected public
+floors. Its main entrance follows the source East Mall doorway offset.
+`athletics-layout.ts` records source-aligned sports anchors and separates published
+dimensions from estimates. `athletics.ts` batches original venue geometry and
+updates distance-limited practice groups/joggers, with shared collision surfaces.
+
 This is separate from Surrey/Richmond gameplay: it has no combat, health, missions,
 scores, money, inventory or live tracking. Shared improvements can be extracted
 later after browser acceptance; no broad existing-project refactor was necessary.
 
 ## Accuracy and permissions
 
-All seven supported building interiors are **Level B reference reconstructions**, not verified
+All nine supported building interiors are **Level B reference reconstructions**, not verified
 as-built layouts. Public historic Bookstore plans and the AMS amenities map support
 research but do not prove today's fixture arrangement. Other buildings are **Level C
 exterior-only**. No Level A interior is claimed. Orchard bedrooms are fictional demonstrations, not current private rooms or assignments.
 
 The source footprint establishes geography; oriented architectural envelopes,
 facades, roof forms, furnishings and stadium components remain interpretations.
-Ground elevation is flat, so this is not a terrain survey or real-world accessible
-route planner. The Sauder expansion is described as construction expected to finish
+General campus ground elevation is flat; local museum ramps and building stairs
+do not constitute a terrain survey or real-world accessible route planner.
+Beaty's lower level is interpreted at −3.4 m. Irving's four levels use 0/5/10/15 m;
+exterior steps reach the west heritage entrance because Main Mall's actual higher
+grade is not modelled. The Sauder expansion is described as construction expected to finish
 in 2027, not rendered as a completed future building.
 The Nest's supported central envelope is narrowed to 76 m to avoid overlap with the
-Alumni Centre. Ten source trees inside model envelopes are excluded from rendering;
-source records and mapped footprints remain unchanged.
+Alumni Centre. Source trees whose canopies intersect supported model envelopes are
+excluded from rendering; source records and mapped footprints remain unchanged.
+
+The entrance island is identified by the pinned landscape record
+`LSHARD_TYPE-642-0`. The sign's dimensions, exact position and orientation within
+that island remain reference interpretations. Beaty's whale is an original
+approximately 26 m skeletal model, not a scientific specimen scan. Its head faces
+south-southeast, as in the architect's public plan. Collection cases are representative
+educational fixtures; private research rooms are not included. Irving's 2019
+visitor map informs public circulation, while photographs inform materials and
+room character. No current room assignments, complete floor-plan accuracy or
+access to its restricted collections is claimed.
+
+The outdoor additions are Ken Woods Field, Harry Warren Field, South Turf,
+Rashpal Dhillon Track and the existing Thunderbird Stadium. Other sports facilities
+retain their previous context geometry; this is not a complete Thunderbird Park
+architectural reconstruction. Ken Woods and Harry Warren field dimensions follow
+published facility measurements. South Turf's 105 × 68 m markings, track curve/lane
+geometry, fences, seating, lights and event-fixture positions are interpretations.
+The stadium uses the published 150 × 74.5 m playing surface with Canadian-football
+markings; its grandstand detail is reconstructed. Future stadium proposals are
+not presented as completed structures.
 
 Greg Werker's current faculty profile says “Senior Associate Dean, Student Experience”.
 The older leadership-directory wording “Students” is recorded as a source conflict.
@@ -155,7 +204,7 @@ computes route progress; `CampusMap.tsx` owns map selection and accessible actio
 
 ## V0.3 campus life and community
 
-See [the V0.3 report](../../docs/UBC_CAMPUS_LIFE_V03.md) for current architecture, seven interiors, partial faculty coverage, varsity seasons, transport sources and limitations. Public profiles require Node and a private persistent `UBC_PROFILE_DIR`; the Cloudflare build alone does not provision this filesystem service. See [community operations](../../docs/UBC_COMMUNITY_OPERATIONS.md).
+See [the V0.3 report](../../docs/UBC_CAMPUS_LIFE_V03.md) for that release's seven interiors, partial faculty coverage, varsity seasons, transport sources and limitations. The current implementation adds Beaty and Irving as described above. Public profiles require Node and a private persistent `UBC_PROFILE_DIR`; the Cloudflare build alone does not provision this filesystem service. See [community operations](../../docs/UBC_COMMUNITY_OPERATIONS.md).
 
 The [encounter refinements](../../docs/UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md)
 are [verified live](../../docs/UBC_ENCOUNTER_RELEASE_2026-10-31.md): action-and-response
@@ -165,3 +214,39 @@ focus after travel. The release adds no new geographic coverage.
 See [natural dialogue](../../docs/UBC_NATURAL_DIALOGUE_2026-10-31.md) for the
 [verified live refinement](../../docs/UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md): concise introductions and conversational answers across the registry,
 with source/reconstruction notes outside the spoken response.
+
+## Landmark and Halloween candidate — October 31
+
+See the [implementation report](../../docs/UBC_LANDMARKS_HALLOWEEN_2026-10-31.md)
+for the gateway start, Beaty and Irving additions, five outdoor athletics venues
+and current reconstruction limits. Nine supported building interiors are separate
+from those five outdoor venues. [Local browser evidence](../../docs/validation/ubc-landmarks-halloween/README.md)
+includes the gateway, Beaty, Irving, athletics and responsive Halloween controls.
+The report records 99 passing UBC tests and the observed development-rendering
+performance limitation. The final Next build and production availability are
+pending; earlier release receipts cover their own versions.
+
+**Halloween campus** is available in Atmosphere throughout the year. With no
+current-year manual choice, the automatic default is on October 31–November 6, 2026
+inclusive in `America/Vancouver`, returning to normal on November 7. Later years
+currently use an October 25–November 1 seasonal default. An explicit device-local
+on/off choice overrides the date for that calendar year; it expires for the next
+year. Initialization occurs on Start exploring, avoiding date-dependent server
+rendering.
+
+The edition uses autumn, overcast weather and 19:30, with an original full moon,
+cloud canopy and seasonal decoration. Turn it off to restore the previous season,
+weather and time from the same visit. Quality, population, markers and reduced
+motion remain independent. The normal season/weather/time controls are temporarily
+disabled while Halloween is on, and photo mode also has an off action. The moon is
+artistic, not an assertion of the real lunar phase. No account or live weather
+service is involved; only the edition choice is saved on this device.
+
+`halloween.ts` supplies 29 dispersed pumpkin/ghost/cobweb sets across nine interiors,
+including supported upper and lower levels, plus two gateway pumpkins and friendly
+creatures along clear source paths. The additive overlay
+uses six instanced batches, adds no solid collision, and creates no dialogue or
+required activity. Reduced motion freezes its animation; population off hides and
+stops outdoor creatures while retaining décor. Turning the edition off hides the
+entire overlay. Existing scene disposal owns its original shared geometry and
+materials.
