@@ -16,7 +16,7 @@ export function HomeCapability() {
                 </a>
               </h2>
               <p>{division.description}</p>
-              <a className="text-link" href={division.product.path}>{division.product.name} →</a>
+              <a className="text-link" href={division.path}>{division.actionLabel} <span aria-hidden="true">→</span></a>
             </div>
           </li>
         ))}

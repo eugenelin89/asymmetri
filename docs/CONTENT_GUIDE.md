@@ -238,8 +238,10 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 ## Routes and navigation
 
-Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs links,
-direct Motion/BotSquad links and “Why Asymmetri” to About. `home` owns the hero and
+Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs division
+cards and “Why Asymmetri” to About. Each card's heading and action open its division
+page; the cards do not single out Motion or BotSquad. Product access remains in the
+shared navigation/footer and division pages. `home` owns the hero and
 division heading; the shared About origin label remains in use. Do not restore
 product previews, philosophy, common-thread or contact sections here. Contact uses
 the centralized mailbox; legacy `/#contact` reaches the footer email. Link to `/`
@@ -418,7 +420,10 @@ retention, scientific or privacy commitments or the October 6 policy date.
 ## Division presentation
 
 `divisions.*.label` provides the short Sports/Labs heading under the shared
-Asymmetri name. Full names, direct product links and statuses retain their
+Asymmetri name. `divisions.*.actionLabel` supplies the homepage's Explore Sports /
+Explore Labs actions, each using `divisions.*.path`. Homepage metadata describes
+both divisions without presenting one project as their complete portfolio.
+Full names, direct product links elsewhere and statuses retain their
 authority. Do not encode release status only in color. Sports and Labs share
 the Graphite + Teal umbrella palette in CSS; Motion retains its product identity.
 `site.metadata.themeColor` mirrors the graphite canvas for browser chrome.

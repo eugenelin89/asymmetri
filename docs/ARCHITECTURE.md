@@ -18,7 +18,7 @@ Ask intake remains disabled and no Ask service authority is active.
 
 | URL | Source / result |
 | --- | --- |
-| `/` | `app/page.tsx`: concise umbrella gateway with division/product links |
+| `/` | `app/page.tsx`: concise umbrella gateway with Sports and Labs division links |
 | `/sports` | `app/sports/page.tsx`: sports, origin and Motion family |
 | `/labs` | `app/labs/page.tsx`: experiments and current project list |
 | `/labs/gis` | `app/labs/gis/page.tsx`: GIS Apps category, city cards and reconstruction explanation |

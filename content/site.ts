@@ -21,6 +21,7 @@ export const divisions = {
     label: "Sports",
     name: "Asymmetri Sports",
     path: "/sports",
+    actionLabel: "Explore Sports",
     description: "Technology for athletes, coaches and teams.",
     product: { name: "Asymmetri Motion", path: "/motion" },
   },
@@ -28,6 +29,7 @@ export const divisions = {
     label: "Labs",
     name: "Asymmetri Labs",
     path: "/labs",
+    actionLabel: "Explore Labs",
     description: "A playground for open-source experiments.",
     product: { name: "BotSquad", path: "/botsquad" },
   },
@@ -1028,7 +1030,7 @@ export const tutorial = {
 export const home = {
   metadata: {
     "title": "Asymmetri | Build an Asymmetric Advantage",
-    "description": "Technology for outsized capability. Explore Asymmetri Sports and Motion, and Asymmetri Labs and its experimental open-source project BotSquad.",
+    "description": "Technology for outsized capability. Explore Asymmetri Sports and Asymmetri Labs, our two divisions for sports technology and open-source experiments.",
     "socialHeadline": "Build an asymmetric advantage.",
     "socialSupport": "Technology for individuals and small teams."
   },

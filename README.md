@@ -39,7 +39,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Concise umbrella gateway to Sports, Labs and their products |
+| `/` | Concise umbrella gateway to the Sports and Labs divisions |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver, Surrey, Richmond and UBC cards, with an explanation of street and building reconstruction |
