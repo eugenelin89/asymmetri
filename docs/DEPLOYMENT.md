@@ -1574,3 +1574,13 @@ records private/public/browser acceptance, unchanged shared services and profile
 storage, exact artifact hashes, the complete immediate predecessor, and lossless
 archival of two older inactive runtimes to retain the existing capacity floors.
 Follow the same exact-source independent-runtime process for subsequent releases.
+
+### UBC After Dark release
+
+Verified live October 31 at 21:52:48 UTC: source `f106770b`, Linux build
+`Al8RacnJ4uunt6U1i9VTC`. The [release receipt](UBC_AFTER_DARK_RELEASE_2026-10-31.md)
+records exact-source CI, guarded independent staging, public/browser acceptance,
+unchanged protected content/services/profile storage and complete rollback.
+All six older server archives remain; the selected older bbf runtime has verified
+owner-only archive custody under the documented capacity procedure. Preserve that
+archive and its receipts. The 192 MiB RAM and 6 GiB disk floors remain unchanged.

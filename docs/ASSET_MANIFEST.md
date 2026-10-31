@@ -1361,3 +1361,13 @@ Original unretouched application browser captures; no external imagery or privat
 visitor data. Documentation evidence, not public scene assets or physical-device
 measurements. Alternative descriptions: Halloween welcome with optional pursuit
 and sound controls; mobile Atmosphere panel with mute and volume settings.
+
+## UBC After Dark production evidence — October 31, 2026
+
+- `docs/validation/ubc-after-dark/live-welcome-desktop.jpg`: original 1280 × 1758 JPEG browser capture of the verified public Halloween welcome. Alt: “UBC After Dark welcome with moonlit campus illustration and optional pursuit and sound controls.”
+- `docs/validation/ubc-after-dark/live-sound-mobile.jpg`: original 390 × 844 JPEG browser capture of live mobile Atmosphere settings. Alt: “Halloween settings with pursuit, sound and volume controls on a phone-sized viewport.”
+
+Unretouched application captures from source `f106770b`, build
+`Al8RacnJ4uunt6U1i9VTC`; no external imagery or private visitor data. Documentation
+evidence only. Emulated viewport and audio-control checks are not physical-device
+listening or performance certification. See the [release receipt](UBC_AFTER_DARK_RELEASE_2026-10-31.md).

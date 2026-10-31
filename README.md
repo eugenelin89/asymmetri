@@ -69,7 +69,7 @@ controls and remaining coverage/performance limits. The
 distinguishes local development views and responsive checks from live acceptance.
 Existing campus-life, character conversations and opt-in public profiles remain
 available.
-The [After Dark follow-up](docs/UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md) adds a seasonal welcome, varied monsters and optional pursuit; its separate release acceptance is in progress.
+The [After Dark follow-up](docs/UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md) adds a seasonal welcome, monsters, costumes, optional pursuit and sound. Its [production acceptance](docs/UBC_AFTER_DARK_RELEASE_2026-10-31.md) verifies the live release and immediate movement after closing panels.
 
 The root homepage introduces Asymmetri and routes visitors directly to Sports and
 Labs without repeating division or product content. Contact opens the shared mailbox;

@@ -251,3 +251,20 @@ the subjective quality of a sound mix on a visitor's headphones or speakers.
 Build notices include aged Browserslist data, Vinext's existing route-classification
 limitation and its client chunk above the 500 kB advisory threshold. No unrelated
 dependency update is bundled into this follow-up.
+
+## Production acceptance — October 31, 2026
+
+The pending production status earlier in these implementation notes is superseded
+by the [verified After Dark release](UBC_AFTER_DARK_RELEASE_2026-10-31.md). Exact
+source `f106770b8c6fff7db2e812c53d8623f871f61b99`, Linux build
+`Al8RacnJ4uunt6U1i9VTC`, was activated at 21:52:48 UTC / 14:52:48 Vancouver.
+All 304 exact-source CI tests passed. Both public hosts, 70 extended public checks,
+four read-only profile checks and final health passed. Live browser acceptance
+verified entry/cast, immediate movement after closing Explore campus, sound
+mute/resume, edition toggling and mobile overflow.
+
+The [gallery](validation/ubc-after-dark/README.md) identifies two new live captures.
+Observed 19–23 FPS on the shared machine under load is not a sustained benchmark
+or a 60 FPS claim. Physical-device audio listening remains untested. CWRU and
+Stanford changes were excluded; their focus requirement and acceptance remain
+within their separate workstreams.
