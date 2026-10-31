@@ -102,9 +102,13 @@ archive is committed. No branch, worktree or PR created; no unrelated edits.
 
 - `3ef17580435b1a0acc25db59b058068b7b90c1ee` — Add Orchard Commons residence open house with eight walkable rooms.
 
+- `ea3527e1ba8ef39f4ca089eedf8b80dfaca7da80` — Ignore unavailable residence controls before boarding; repeated type/lint and all 26 UBC tests pass.
+
 ## Archive commit
 
-`Document Orchard Commons MVR implementation and validation`
+Initial: `Document Orchard Commons MVR implementation and validation`
+
+Follow-up: `Record residence control validation before production`
 
 The first unpublished commit pair was replaced locally after GitHub rejected a
 workflow-file update because the existing credential lacks workflow scope. The
@@ -122,3 +126,8 @@ each other. Separate historic design evidence from current measured geometry.
 
 Obtain licensed current dimensions, improve materials/facades/vegetation, measure
 physical-device performance, and expand one sourced residence floor at a time.
+
+A final pre-release review added a guard for ray-picked lift controls while the
+visitor is outside the cabin. The physical placard now does nothing until its
+boarding action is available, rather than opening an empty information panel.
+The Linux candidate must use this later source, not the preceding successful build.
