@@ -28,7 +28,7 @@ export function projectPath(points: Point[], p: Point) {
   return best;
 }
 /** Reject impossible sharp corners rather than drawing a route through them. */
-export function roundRoad(points: Point[], fits: (p: Body) => boolean): Point[] | null {
+function prepareRoad(points: Point[], fits: (p: Body) => boolean): { clean: Point[]; smooth: Point[] } | null {
   const clean = points.filter((p, i) => !i || distance(points[i - 1], p) > .03).map(p => [...p] as Point);
   const segmentFits = (a: Point, b: Point) => {
     const len = distance(a, b), yaw = bearing(a, b), count = Math.max(1, Math.ceil(len / .2));
@@ -47,7 +47,7 @@ export function roundRoad(points: Point[], fits: (p: Body) => boolean): Point[] 
       }
     }
   }
-  if (clean.length < 2) return clean;
+  if (clean.length < 2) return { clean, smooth: clean };
   const out: Point[] = [clean[0]];
   for (let i = 1; i < clean.length - 1; i++) {
     const a=clean[i-1],b=clean[i],c=clean[i+1],la=distance(a,b),lb=distance(b,c);
@@ -76,7 +76,11 @@ export function roundRoad(points: Point[], fits: (p: Body) => boolean): Point[] 
   }
   out.push(clean.at(-1)!);
   // Check the straight joins as well as the curved samples.
-  return out.every((p,i)=>!i||segmentFits(out[i-1],p))?out:null;
+  return out.every((p,i)=>!i||segmentFits(out[i-1],p))?{ clean, smooth: out }:null;
+}
+
+export function roundRoad(points: Point[], fits: (p: Body) => boolean): Point[] | null {
+  return prepareRoad(points, fits)?.smooth ?? null;
 }
 
 export function createNavigator(network: RoadNetwork, fits: (p: Body) => boolean) {
@@ -109,14 +113,14 @@ export function createNavigator(network: RoadNetwork, fits: (p: Body) => boolean
     return network.edges.filter(e => !blocked.has(e.id)).map(edge => ({ edge, ...projectPath(edge.points, p) })).sort((a, b) => a.distance - b.distance);
   }
   function finish(points: Point[], edges: RoadEdge[]): DriveRoute | null {
-    const smooth = roundRoad(points, fits);
-    if (!smooth || smooth.length < 2) return null;
+    const prepared = prepareRoad(points, fits);
+    if (!prepared || prepared.smooth.length < 2) return null;
+    const { smooth, clean: guidancePoints } = prepared;
     const distances = [0];
     for (let i = 1; i < smooth.length; i++) distances.push(distances[i - 1] + distance(smooth[i - 1], smooth[i]));
     const routeTurns: DriveRoute["turns"] = [];
-    // Adjacent source edges repeat their shared endpoint. A zero-length leg has
-    // no bearing; treating it as north invented turns and named the incoming road.
-    const guidancePoints = points.filter((p, i) => !i || distance(points[i - 1], p) > .03);
+    // Use the same cleaned vertices as the accepted curve. Raw shared endpoints
+    // and tiny lattice kinks have no meaningful turn, even when traversed backwards.
     for (let i = 1; i < guidancePoints.length - 1; i++) {
       const delta = angle(bearing(guidancePoints[i], guidancePoints[i + 1]), bearing(guidancePoints[i - 1], guidancePoints[i]));
       if (Math.abs(delta) > .5) {

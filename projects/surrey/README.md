@@ -1,6 +1,6 @@
 # Surrey, City of Adventure V0.6 — Open Roads
 
-Candidate on `codex/surrey-adventure-v06`; production remains V0.5 until rendered-browser acceptance and guarded deployment pass. See [V0.6 acceptance and release gate](../../docs/SURREY_V06_ACCEPTANCE_2026-10-30.md).
+V0.6 is live. See the [release and recovery receipt](../../docs/SURREY_V06_RELEASE_2026-10-31.md) and [local acceptance evidence](../../docs/SURREY_V06_ACCEPTANCE_2026-10-30.md). Physical iPhone multitouch remains unverified.
 
 **Survive the streets. Discover the stories.** A fictional third-person adventure
 and aerial city explorer at `/labs/surrey`, using a reconstructed 1.31 × 1.45 km

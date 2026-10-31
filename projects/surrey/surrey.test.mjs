@@ -792,6 +792,14 @@ test('detour GPS names the outgoing streets and ignores repeated source endpoint
   assert.ok(Math.abs(route.length-transport.roadReport.detour.alternateM)<.001,'Guidance labels must not change the validated route');
   assert.ok(route.turns.at(-1).at<route.length-100,'A duplicate roadside endpoint must not invent an arrival turn');
 });
+test('reverse City Parkway guidance ignores a lattice kink and names the left turn onto Central Avenue',()=>{
+  const route=transportWorld.navigator.calculate({x:94.54,z:-24.2,yaw:.012},'central');
+  assert.deepEqual(route.turns.map(({direction,street})=>[direction,street]),[
+    ['left','Central Ave'],['left','University Dr'],['left','Old Yale Rd'],
+  ]);
+  assert.ok(Math.abs(route.length-875.8905295002417)<.001,'Instruction cleanup must preserve the accepted reverse route');
+  assert.ok(route.turns[0].at>25&&route.turns[0].at<45,'The first instruction belongs to the nearby junction');
+});
 function driveDetour(sim){
   const path=transport.pathMetrics(sim.state.navigation.route.points);let contacts=0;
   for(let i=0;i<60000&&sim.state.detour.stage==='accepted';i++){
@@ -811,7 +819,10 @@ test('Case05 completes through ordinary movement inputs, park/exit/handoff, save
   walk(sim,[20,-65.3]);sim.interact();assert.ok(sim.state.vehicle.occupied);
   const resumed=createSimulation(city);resumed.restore(parseSave(JSON.stringify(sim.serialize())));assert.equal(resumed.state.detour.stage,'accepted');assert.equal(resumed.state.navigation.destination,'central');
   assert.equal(driveDetour(resumed),0);assert.equal(resumed.state.detour.stage,'arrived');assert.equal(resumed.state.navigation.status,'arrived');assert.ok(resumed.state.detour.driven>1100);assert.ok(resumed.state.detour.roads.length>=7);
-  const parked=structuredClone(resumed.state.vehicle.car);resumed.mode('aerial');const frozen=resumed.serialize();resumed.tick(.1,0,0,false,{throttle:1,steering:1,brake:false});assert.deepEqual(resumed.serialize(),frozen);resumed.mode('ground');
+  const parked=structuredClone(resumed.state.vehicle.car);resumed.mode('aerial');const frozen=resumed.serialize();resumed.tick(.1,0,0,false,{throttle:1,steering:1,brake:false});
+  // Export time may advance by a millisecond; every game/runtime field, including
+  // the simulated clock and random state, must remain identical while aerial.
+  assert.deepEqual({...resumed.serialize(),savedAt:frozen.savedAt},frozen);resumed.mode('ground');
   resumed.interact();assert.equal(resumed.state.vehicle.occupied,false);walk(resumed,transport.detourMission.recipient);resumed.interact();assert.equal(resumed.state.detour.stage,'closed');assert.equal(resumed.state.money,105);assert.equal(resumed.workZoneActive(),false);assert.ok(!resumed.state.inventory.includes(transport.PACKAGE));assert.deepEqual(resumed.state.vehicle.car,parked);
   resumed.dismiss();resumed.interact();assert.equal(resumed.state.money,105);
   const saved=parseSave(JSON.stringify(resumed.serialize()));assert.ok(saved);assert.equal(saved.state.detour.reward,85);assert.equal(saved.state.navigation.route,null);

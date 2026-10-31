@@ -779,7 +779,7 @@ Run `npm run test:vancouver`, peer suites, check, Next webpack and Vinext builds
 
 ## Surrey V0.6 candidate acceptance
 
-Surrey's 68 tests include all older case paths, schema2/3/4 migration, full-body
+Surrey's 69 tests include all older case paths, schema2/3/4 migration, full-body
 road containment, directed graph reachability, all eight destination routes and
 returns, rejected turns, closure avoidance, GPS rerouting/clear/stopped arrival,
 non-repeating unreachable searches, Case05 walk/drive/exit/handoff/save/reward,

@@ -1,11 +1,11 @@
 # Surrey V0.6 — Open Roads: candidate acceptance
 
-**Implemented candidate; not deployed.** Work is isolated on
-`codex/surrey-adventure-v06`, refreshed through approved main `60574c8` on
-October 31. Production remains Surrey V0.5; the later UBC/homepage releases are
-preserved in the candidate. The October 31 ordinary-control mission drive is
-complete, and the final compact-layout checks pass. Release checks are separate;
-the older October 30 browser blocker is historical evidence.
+**V0.6 is live as of October 31.** The [release receipt](SURREY_V06_RELEASE_2026-10-31.md)
+records exact source/build identity, guarded activation, public checks and recovery.
+The dedicated branch preserved approved main through `60574c8`, including later
+UBC/homepage work. The ordinary-control mission drive and compact-layout checks
+pass. The October 30 blocker and interrupted early October 31 run below are
+historical evidence, not the final release status.
 
 ## Implemented scope
 
@@ -196,9 +196,38 @@ release evidence; they are not public geographic assets.
 Main refresh merges preserve the approved UBC and homepage code. The original
 Surrey journal 149 is retained as journal 159 to avoid UBC's independently assigned
 149; the historical observations were preserved. UBC journals 157/158 remain intact.
-Its October 31 handoff reports live source `526213d283cba5e70b192cc295e8ccdd3271467c`,
+Its October 31 pre-Surrey handoff reported live source `526213d283cba5e70b192cc295e8ccdd3271467c`,
 build `ujW5iepUV_ni0g_OH7ONo`; read `UBC_ENCOUNTER_RELEASE_2026-10-31.md` before any
-later release. No Surrey main push or production mutation has occurred.
+later release. At the end of these local checks no Surrey main push or production
+mutation had occurred. Subsequent integration/activation is recorded separately
+in the release receipt linked above.
+
+## October 31 live-guidance follow-up
+
+The initial V0.6 runtime passed protected/public preservation checks and a fresh
+live save/drive/turn/exit/re-entry/aerial pass. At the live pose 94.54,-24.20,
+heading .012, a reverse route to Central City incorrectly instructed a right onto
+City Parkway. Its visible route correctly went north then left onto Central
+Avenue. An offline reproduction confirmed that a sub-metre lattice kink in the
+raw polyline was counted before the real junction turn.
+
+Guidance now consumes the same collision-checked, cleaned vertices used to round
+the accepted road path. This removes the misleading kink without changing any
+route coordinates or collision rules. A fixed real-position regression expects
+left onto Central Avenue, left onto University Drive and left onto Old Yale Road;
+the accepted length remains exactly 875.8905295002417 m. The original detour's four
+turn directions also pass. Exact-runtime validation again reproduces the pinned
+network and report bytes. Follow-up build/browser/release evidence is recorded in
+the release receipt; the new code is not assumed live merely because it is tested.
+
+The corrected local Next build `8dsjjVRnAM7huIqnmH2s-` passes check, both builds
+and 69 Surrey regressions (230 combined with the preserved peer suites). A fresh
+ordinary-control browser run walked to the car, entered, drove Central Avenue
+and turned onto City Parkway. At 94.40,-22.55, heading -.009, after six moving
+reroutes, the visible instruction correctly read “Left onto Central Ave”. No
+Recover or hidden state injection was used. The car was paused at zero speed;
+its screenshot, DOM telemetry and console receipt are retained with the correction
+evidence. This is a local rendered check, not yet a follow-up production claim.
 
 ## October 30 production preservation and next release step
 

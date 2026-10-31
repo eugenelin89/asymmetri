@@ -1486,13 +1486,17 @@ Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
 rollback. No OS, DNS, TLS, database or peer-service changes are authorized by this
 release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
 
-## Surrey V0.6 release gate
+## Surrey V0.6 release and recovery
 
-V0.6 has passed the October 31 local ordinary-control detour journey, moving
+V0.6 is live from exact Linux source `f6fb80a5394cbc8deb88af81cb8c584918ea06f9`,
+build `CM8fyU1dZ-i0htGXG2LZB`. The complete previous UBC runtime is retained at
+`/var/www/asymmetri-rollback-before-surrey-v06-20261031`. Read
+`SURREY_V06_RELEASE_2026-10-31.md` for activation, preservation checks and older
+runtime archive recovery; do not assume old expanded rollback paths still exist.
+V0.6 passed the October 31 local ordinary-control detour journey, moving
 reroute, parked-car/save continuity and rendered responsive checks documented in
-`SURREY_V06_ACCEPTANCE_2026-10-30.md`. This is not itself a production release.
-Keep V0.5 serving until the remaining guarded release checks pass.
-Refresh approved main, coordinate the shared window, build an exact-source
+`SURREY_V06_ACCEPTANCE_2026-10-30.md`. For future releases, refresh actual live
+identity and approved main, coordinate the shared window, build an exact-source
 Linux candidate and preserve the complete immediate runtime rollback. Existing
 capacity guards, peer/protected-route checks and artifact/source/BUILD_ID checks
 remain unchanged. Repeat browser acceptance on the live release. This candidate

@@ -4,13 +4,17 @@
 
 - Correct GPS street names and remove false turns at repeated road endpoints,
   preserving the validated path and geometry. Add a real-detour regression.
+- Use the same collision-checked cleanup for turn instructions and road curves.
+  Reverse travel through City Parkway no longer mistakes a tiny source kink for
+  a right turn; the next instruction correctly names the left onto Central Avenue.
 - Keep compact portrait and landscape views open: one 44 px objective/GPS strip,
   explicit help and no redundant aerial/driving panels.
 - Refresh the isolated candidate through approved UBC/homepage releases. Complete
   the ordinary-control detour, moving reroute, handoff, reload and car continuity.
-  Guarded production deployment and its live browser checks remain separate gates.
+  Deploy the exact-source Linux candidate with a complete immediate runtime rollback;
+  record live acceptance and device limitations in the release receipt.
 
-## V0.6 — Open Roads (candidate)
+## V0.6 — Open Roads
 
 17.0 km of connected source-supported road paths, eight roadside destinations,
 A* GPS with rerouting/arrival/clear route, complete Case05 archive detour,
@@ -18,8 +22,8 @@ expanded bounded traffic and fictional signals, safe stop rejoining, schema5
 migration and independent simultaneous touch/keyboard holds. Compact mobile HUD
 retained; map navigation is an explicit scrollable overlay. One verified compact
 and animated rail remain; extra vehicle footprints and boarding are deferred.
-Rendered-browser acceptance has resumed successfully; this candidate is not yet
-a deployed release. See the acceptance record for scope and device limitations.
+Released October 31, 2026. See the acceptance and release records for source
+identity, verification scope, rollback and device limitations.
 
 ## V0.5 — On the Move
 
