@@ -35,7 +35,7 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 - Aerial: orbit, pan and zoom with Three's OrbitControls. Returning to either on-foot view retains
   the visitor's coordinates. Map is north-up source geometry with selectable destinations.
 - Search: priority destinations and imported building names. People are never listed.
-  Visit entrance is explicit virtual fast travel. Walking route uses the official
+  Multipart source buildings share one directory entry, with addresses and footprint counts; all source geometry remains on the map. Visit entrance is explicit virtual fast travel and returns keyboard focus to the scene, as do map travel and on-foot camera controls. Walking route uses the official
   source route graph, and refuses disconnected results instead of drawing a shortcut.
 - Interiors: physically walk through entrance gaps. Rose, Bookstore, Nest, Sauder, Hennings and War Memorial Gym
   have walls and fixture collision. Orchard adds a lobby and one representative floor
@@ -43,12 +43,13 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   and a continuous platform lift. The Nest has ground/5 m/10 m public galleries,
   two stair flights and a suspended lounge. Only these supported spaces are enterable.
 - Conversations: encounter people in the world; approach and press E or tap **Talk**
-  to reveal their identity. No character roster, location markers, name labels,
+  to begin a choice-based conversation. Say hello, wave, ask who they are, choose a reviewed question and follow-ups, or say goodbye. The character faces you and performs an original wave/nod/talking gesture. No character roster, location markers, name labels,
   Find actions or routes to people are exposed, even after meeting someone.
   The underlying registry includes the original guides, sourced faculty/roster/alumni records, historical guests and optional participant profiles,
   curated questions, follow-ups, session-only
   history and keyword lookup. Unsupported private opinions, promises and whereabouts
   produce a source-linked refusal. No external AI service or voice imitation. Optional public profiles use the explicitly requested server persistence.
+- Pedestrians: source-route arrivals have spacing and local density limits. Walkers yield and pass each other; only the selected conversation partner stops for a conversation. Other nearby people keep walking.
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
   Winter snow is optional; evergreen and deciduous trees are separate materials.
@@ -58,7 +59,7 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 ## Architecture and reuse
 
 `Campus.tsx` owns the accessible React shell, directory, information dialogs and
-map. `engine.ts` owns Three.js lifecycle, cameras, inputs, selection, scene LOD and
+map. `ConversationPanel.tsx` renders action/response choices; `conversation.ts` owns bounded session dialogue and reviewed follow-ups. `building-directory.ts` groups importer-generated multipart IDs without merging unrelated same-named records. `engine.ts` owns Three.js lifecycle, cameras, inputs, selection, scene LOD and
 telemetry. It directly reuses Surrey's `disposeScene`, already covered by its
 resource-disposal regression test. Existing city engines and their immutable
 snapshots are not modified.

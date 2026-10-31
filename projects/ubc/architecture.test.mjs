@@ -203,13 +203,13 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
         [before.x, before.z + 3],
         12,
         true,
-        null,
+        actor.id,
         false,
       );
     assert.equal(
       actor.group.position.distanceTo(before),
       0,
-      "Nearby guides wait for conversation",
+      "The selected conversation partner stays in place",
     );
   }
 });

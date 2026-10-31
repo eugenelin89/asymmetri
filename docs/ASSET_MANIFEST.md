@@ -1110,3 +1110,16 @@ guide. Original application output, no processing beyond PNG capture, no externa
 portraits/logos/reference photographs embedded. Link captions in the gallery README
 provide descriptive labels. These are engineering evidence, not public marketing
 imagery; no recovery credentials are visible.
+
+## UBC encounter refinement evidence — 2026-10-31
+
+Four unretouched PNG browser captures in `docs/validation/ubc-conversations/`,
+for engineering evidence only (not new site assets). Source: actual local UBC app;
+original procedural figures/architecture and retained licensed GIS geography.
+No real portrait, new logo, private profile or external model is included.
+The gallery labels provide descriptive link text/alt context.
+
+- `directory-crescent-west.png`: 65536×4292542531; directory crescent west.
+- `rose-path-spacing.png`: 65536×4292542531; rose path spacing.
+- `werker-wave-desktop.png`: 65536×4292542531; werker wave desktop.
+- `werker-wave-phone.png`: 65536×4292542531; werker wave phone.

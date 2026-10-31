@@ -6,7 +6,6 @@ import {
   characters,
   places,
   displays,
-  answerQuestion,
   safeExternalUrl,
   unofficial,
   sources,
@@ -25,7 +24,6 @@ import type {
   Point,
   Settings,
   Telemetry,
-  Topic,
 } from "./types";
 import type { CampusAPI, Marker } from "./engine";
 import type { OrchardGeography } from "./residence-exterior";
@@ -42,8 +40,12 @@ import {
   appearanceStorageKey,
   type Appearance,
 } from "./appearance";
-import { ProfilePanel, ReportProfile } from "./community/ProfilePanel";
+import { ProfilePanel } from "./community/ProfilePanel";
 import { profileCharacter, type PublicProfile } from "./community/model";
+
+import { Conversation } from "./ConversationPanel";
+import { emptyConversation, type ConversationState } from "./conversation";
+import { groupBuildings, sourceBuildingId } from "./building-directory";
 
 const version = "/ubc/v0.1-2026-10-30";
 function Links({ links }: { links: Link[] }) {
@@ -70,18 +72,15 @@ const titleOf = (id: string) =>
   places.find((p) => p.id === id)?.name ||
   displays[id]?.name ||
   id;
-type Message = {
-  question: string;
-  answer: string;
-  sources: Link[];
-  followups?: string[];
-};
 export function Campus() {
   const host = useRef<HTMLDivElement>(null),
     api = useRef<CampusAPI | null>(null),
     panelRef = useRef<HTMLElement>(null),
-    dialogueRef = useRef<HTMLDivElement>(null),
-    opener = useRef<HTMLElement | null>(null);
+    opener = useRef<HTMLElement | null>(null),
+    resumeSceneFocus = useRef(false);
+  const focusScene = useCallback(() => {
+    host.current?.querySelector("canvas")?.focus({ preventScroll: true });
+  }, []);
   const [started, setStarted] = useState(false),
     [ready, setReady] = useState(false),
     [error, setError] = useState(""),
@@ -100,8 +99,7 @@ export function Campus() {
   const [telemetry, setTelemetry] = useState<Telemetry | null>(null),
     [markers, setMarkers] = useState<Marker[]>([]),
     [route, setRoute] = useState<Point[] | null>(null),
-    [histories, setHistories] = useState<Record<string, Message[]>>({}),
-    [question, setQuestion] = useState("");
+    [histories, setHistories] = useState<Record<string, ConversationState>>({});
   const [appearance, setAppearance] = useState<Appearance>(defaultAppearance);
   useEffect(() => {
     if (ready) api.current?.appearance(appearance);
@@ -144,9 +142,6 @@ export function Campus() {
   useEffect(() => {
     if (ready) api.current?.community(communityCharacters);
   }, [ready, communityCharacters]);
-  useEffect(() => {
-    dialogueRef.current?.lastElementChild?.scrollIntoView({ block: "start" });
-  }, [histories]);
   const openPanel = useCallback(
     (id: string) => {
       opener.current = document.activeElement as HTMLElement;
@@ -155,7 +150,6 @@ export function Campus() {
           ? "orchard"
           : Object.values(anchors).find((a) => a.buildingId === id)?.id || id,
       );
-      setQuestion("");
     },
     [anchors],
   );
@@ -236,7 +230,13 @@ export function Campus() {
       !!panel,
       allCharacters.some((c) => c.id === panel) ? panel! : undefined,
     );
-    if (!panel) return;
+    if (!panel) {
+      if (resumeSceneFocus.current) {
+        resumeSceneFocus.current = false;
+        focusScene();
+      }
+      return;
+    }
     const previous = document.activeElement as HTMLElement;
     panelRef.current?.focus();
     const key = (e: KeyboardEvent) => {
@@ -245,9 +245,11 @@ export function Campus() {
         return;
       }
       if (e.key === "Tab") {
-        const nodes = panelRef.current?.querySelectorAll<HTMLElement>(
-          'button,a,input,select,textarea,[tabindex="0"]',
-        );
+        const nodes = [
+          ...(panelRef.current?.querySelectorAll<HTMLElement>(
+            'button:not(:disabled),a,input:not(:disabled),select:not(:disabled),textarea:not(:disabled),summary,[tabindex="0"]',
+          ) || []),
+        ].filter((node) => node.getClientRects().length > 0);
         if (!nodes?.length) return;
         const first = nodes[0],
           last = nodes[nodes.length - 1];
@@ -267,9 +269,9 @@ export function Campus() {
     window.addEventListener("keydown", key);
     return () => {
       window.removeEventListener("keydown", key);
-      (opener.current || previous)?.focus?.();
+      if (!resumeSceneFocus.current) (opener.current || previous)?.focus?.();
     };
-  }, [panel, ready, allCharacters]);
+  }, [panel, ready, allCharacters, focusScene]);
   useEffect(() => {
     if (!expanded) return;
     const before = document.body.style.overflow;
@@ -282,11 +284,13 @@ export function Campus() {
     setMode(m);
     setNotice("");
     api.current?.setMode(m);
+    if (onFoot(m)) focusScene();
   };
   const update = (patch: Partial<Settings>) =>
     setSettings((s) => normalizeSettings({ ...s, ...patch }));
   const visit = (id: string) => {
     api.current?.visit(id);
+    resumeSceneFocus.current = true;
     setPanel(null);
     setNotice(`Visiting the virtual ${titleOf(id)} area.`);
   };
@@ -300,37 +304,18 @@ export function Campus() {
     setPanel(null);
     if (found) changeMode("map");
   };
+  const buildingGroups = useMemo(
+    () => groupBuildings(data?.buildings || []),
+    [data],
+  );
   const selectedPlace = places.find((p) => p.id === panel),
     character = allCharacters.find((c) => c.id === panel),
     display = panel ? displays[panel] : null,
-    building = data?.buildings.find((b) => b.id === panel);
-  const sp = solarPosition(settings.season, settings.hour),
-    history = character ? histories[character.id] || [] : [];
-  const ask = (t: Topic | null, q: string) => {
-    if (!character) return;
-    const message: Message = t
-      ? {
-          question: q,
-          answer: t.answer,
-          sources: t.sources,
-          followups: t.followups,
-        }
-      : {
-          question: q,
-          answer:
-            character.category === "community"
-              ? "This participant has not supplied an answer to that question. Choose one of their written topics. This is not a live conversation."
-              : character.category === "fictional"
-                ? "This fictional student guide has no verified answer to that question. It cannot provide real testimonials, live room availability, housing guarantees or individual advice. Try a reviewed topic or open the official Housing sources."
-                : "This curated educational guide does not have a verified answer to that question. It cannot speak for the real person or provide personal opinions, live whereabouts or admissions promises. Try a topic below or open the official sources.",
-          sources: character.sources,
-        };
-    setHistories((h) => ({
-      ...h,
-      [character.id]: [...(h[character.id] || []), message],
-    }));
-    setQuestion("");
-  };
+    buildingGroup = buildingGroups.find((g) =>
+      g.parts.some((b) => b.id === panel),
+    ),
+    building = buildingGroup?.building;
+  const sp = solarPosition(settings.season, settings.hour);
   const directory = [
     ...places.map((p) => ({
       id: p.id,
@@ -341,20 +326,23 @@ export function Campus() {
           ? "Enterable · reference reconstruction"
           : "Exterior context",
     })),
-    ...(data?.buildings
+    ...buildingGroups
       .filter(
-        (b, index, buildings) =>
+        ({ building: b }) =>
           b.name &&
-          b.id !== "VBL10013" &&
-          buildings.findIndex((part) => part.id === b.id) === index &&
-          !Object.values(anchors).some((a) => a.buildingId === b.id),
+          sourceBuildingId(b.id) !== "VBL10013" &&
+          !Object.values(anchors).some(
+            (a) =>
+              a.buildingId &&
+              sourceBuildingId(a.buildingId) === sourceBuildingId(b.id),
+          ),
       )
-      .map((b) => ({
+      .map(({ building: b, parts }) => ({
         id: b.id,
         name: b.name,
         category: "Other buildings",
-        detail: "GIS exterior · no interior",
-      })) || []),
+        detail: `${b.address ? `${b.address} · ` : ""}${parts.length > 1 ? `${parts.length} building footprints · ` : ""}GIS exterior · no interior`,
+      })),
   ].filter(
     (p) =>
       (category === "All" ||
@@ -394,7 +382,7 @@ export function Campus() {
   );
   return (
     <section
-      className={`${styles.experience} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""}`}
+      className={`${styles.experience} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
       aria-label="UBC Virtual Campus explorer"
     >
       <div className={styles.canvas} ref={host} />
@@ -690,11 +678,15 @@ export function Campus() {
               onTravel={(p) => {
                 if (!api.current?.travelTo(p))
                   setNotice("No safe outdoor path was found near that spot.");
-                else setNotice("Moved to the selected outdoor path.");
+                else {
+                  focusScene();
+                  setNotice("Moved to the selected outdoor path.");
+                }
               }}
               onGuide={(p, name) => {
                 if (api.current?.guideTo(p, name)) {
                   api.current.resumeWalk();
+                  focusScene();
                   setNotice(
                     "Follow the walking guide and highlighted path. This is virtual campus guidance.",
                   );
@@ -816,9 +808,12 @@ export function Campus() {
         </div>
       )}
       {panel && (
-        <div className={styles.scrim} onClick={() => setPanel(null)}>
+        <div
+          className={`${styles.scrim} ${character ? styles.conversationScrim : ""}`}
+          onClick={() => setPanel(null)}
+        >
           <aside
-            className={styles.panel}
+            className={`${styles.panel} ${character ? styles.conversationPanel : ""}`}
             ref={panelRef}
             tabIndex={-1}
             role="dialog"
@@ -828,19 +823,21 @@ export function Campus() {
                 ? "Campus directory"
                 : panel === "settings"
                   ? "Atmosphere settings"
-                  : allCharacters.find((c) => c.id === panel)?.name ||
+                  : (character ? "Campus conversation" : null) ||
                     (panel === "appearance"
                       ? "Your appearance"
                       : titleOf(panel))
             }
             onClick={(e) => e.stopPropagation()}
           >
-            <div className={styles.panelTop}>
-              <span>YOUR CAMPUS FIELD GUIDE</span>
-              <button aria-label="Close panel" onClick={() => setPanel(null)}>
-                ×
-              </button>
-            </div>
+            {!character && (
+              <div className={styles.panelTop}>
+                <span>YOUR CAMPUS FIELD GUIDE</span>
+                <button aria-label="Close panel" onClick={() => setPanel(null)}>
+                  ×
+                </button>
+              </div>
+            )}
             {panel === "orchard-floor" ? (
               <ResidenceGuide
                 pose={telemetry?.pose}
@@ -1049,102 +1046,22 @@ export function Campus() {
                 </details>
               </>
             ) : character ? (
-              <>
-                <span className={styles.badge}>
-                  {character.category === "community"
-                    ? "PLAYER-WRITTEN PUBLIC PROFILE"
-                    : character.category === "fictional"
-                      ? "FICTIONAL STUDENT GUIDE"
-                      : "EDUCATIONAL SIMULATION"}
-                </span>
-                <h2>{character.name}</h2>
-                <p className={styles.lead}>{character.title}</p>
-                <p>{character.biography}</p>
-                <p className={styles.disclaimer}>
-                  {character.disclaimer} This character’s location is simulated.
-                </p>
-                <h3>Let’s explore a question.</h3>
-                <p>
-                  {character.category === "community"
-                    ? "Answers below were written by this participant. They are not independently verified."
-                    : character.category === "fictional"
-                      ? "Curated residence information, not a real student's testimonial."
-                      : "Responses are curated educational summaries, not the person’s words."}
-                </p>
-                <div
-                  className={styles.dialogue}
-                  ref={dialogueRef}
-                  aria-live="polite"
-                >
-                  {history.map((m, i) => (
-                    <article key={i}>
-                      <strong>You · {m.question}</strong>
-                      <p>
-                        <small>
-                          {character.category === "community"
-                            ? "PARTICIPANT’S WRITTEN ANSWER"
-                            : "EDUCATIONAL GUIDE"}
-                        </small>
-                        {m.answer}
-                      </p>
-                      <Links links={m.sources} />
-                      {m.followups && (
-                        <div className={styles.followups}>
-                          {m.followups.map((id) => {
-                            const t = character.topics.find((t) => t.id === id);
-                            return t ? (
-                              <button
-                                key={id}
-                                onClick={() => ask(t, t.question)}
-                              >
-                                {t.question}
-                              </button>
-                            ) : null;
-                          })}
-                        </div>
-                      )}
-                    </article>
-                  ))}
-                </div>
-                <div className={styles.questions}>
-                  {character.topics.map((t) => (
-                    <button key={t.id} onClick={() => ask(t, t.question)}>
-                      {t.question}
-                      <span>↗</span>
-                    </button>
-                  ))}
-                </div>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    if (question.trim())
-                      ask(answerQuestion(character, question), question);
-                  }}
-                >
-                  <label>
-                    Ask a question
-                    <input
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                      maxLength={240}
-                      placeholder="Ask about an educational topic"
-                    />
-                  </label>
-                  <button type="submit">Ask the curated guide</button>
-                </form>
-                <Links links={character.sources} />
-                {character.category === "community" && (
-                  <ReportProfile
-                    key={character.id}
-                    id={character.id.slice("community-".length)}
-                  />
-                )}
-                <small>
-                  {character.category === "community" ? "Updated" : "Verified"}{" "}
-                  {character.verified} · Original stylized character; no
-                  likeness or voice imitation.
-                </small>
-              </>
+              <Conversation
+                key={character.id}
+                character={character}
+                state={histories[character.id] || emptyConversation()}
+                onChange={(state) =>
+                  setHistories((history) => ({
+                    ...history,
+                    [character.id]: state,
+                  }))
+                }
+                onReact={(gesture) => api.current?.react(character.id, gesture)}
+                onClose={() => {
+                  resumeSceneFocus.current = true;
+                  setPanel(null);
+                }}
+              />
             ) : selectedPlace ? (
               <>
                 <span className={styles.badge}>{selectedPlace.category}</span>
@@ -1158,7 +1075,8 @@ export function Campus() {
                     onClick={() => visit(selectedPlace.id)}
                   >
                     Visit{" "}
-                    {selectedPlace.interior === "B" ? "entrance" : "location"} ↗
+                    {selectedPlace.interior === "B" ? "entrance" : "location"}{" "}
+                    ↗
                   </button>
                   <button
                     disabled={!ready}
@@ -1231,6 +1149,14 @@ export function Campus() {
                   GIS BUILDING · EXTERIOR ONLY
                 </span>
                 <h2>{building.name}</h2>
+                {building.address && <p>{building.address}</p>}
+                {buildingGroup && buildingGroup.parts.length > 1 && (
+                  <p>
+                    {buildingGroup.parts.length} separate footprints belong to
+                    this source building group. They share one directory entry;
+                    each remains visible on the campus map.
+                  </p>
+                )}
                 <p>
                   Source footprint from UBC’s open geospatial records. This
                   background building uses simplified geometry and an

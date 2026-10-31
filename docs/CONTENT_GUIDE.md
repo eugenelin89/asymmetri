@@ -759,3 +759,11 @@ source dates and simulation disclosures. Do not describe partial faculty coverag
 as all UBC personnel, roster entries as live eligibility, or a reconstructed Nest
 fair as the announced 2027 event. Do not copy portraits, logos, student work or
 private-room information. [Scope and sources](UBC_CAMPUS_LIFE_V03.md).
+
+UBC conversations now begin with choices, rather than a biography page. Identity
+is revealed through the introduction action; biographies, permissions and source
+links remain available inside the encounter. Original social scripts are labelled
+as simulations, while factual answers remain the reviewed registry text. Public
+profile topics remain participant-written and are never represented as live chat.
+Multipart building names are grouped by source ID, never by name alone; directory
+addresses and footprint counts distinguish legitimate complexes.
