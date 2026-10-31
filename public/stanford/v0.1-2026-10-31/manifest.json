@@ -1,0 +1,160 @@
+{
+  "version": "v0.1-2026-10-31",
+  "campus": "Stanford University \u00b7 main campus and Redwood City boathouse",
+  "retrieved": "2026-10-31",
+  "origin": [
+    -122.17,
+    37.4275
+  ],
+  "bbox": [
+    37.418,
+    -122.195,
+    37.444,
+    -122.15
+  ],
+  "source": {
+    "name": "OpenStreetMap contributors",
+    "url": "https://api.openstreetmap.org/api/0.6/map",
+    "requests": [
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.19,37.418,-122.17,37.431",
+        "sha256": "30fe12ee33f7eb0644d89a6f203f430fd6c4f701ae9dce242e64998497cc3315",
+        "bytes": 5768660,
+        "bbox": [
+          -122.19,
+          37.418,
+          -122.17,
+          37.431
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.17,37.418,-122.15,37.431",
+        "sha256": "e6a939092f53796bed50315708f9c4ad1db7f509ac4cf6026e17b8b67027b009",
+        "bytes": 8124111,
+        "bbox": [
+          -122.17,
+          37.418,
+          -122.15,
+          37.431
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.19,37.431,-122.17,37.444",
+        "sha256": "23cc389da053ed0ababae41aac1d00222a32a9771c229f1515292d7af1f28d9d",
+        "bytes": 9907552,
+        "bbox": [
+          -122.19,
+          37.431,
+          -122.17,
+          37.444
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.17,37.431,-122.15,37.444",
+        "sha256": "8ab5695a842f5ba5fdeba886e740900cd3f34c45e86c653d0b4d26289c47553a",
+        "bytes": 8355847,
+        "bbox": [
+          -122.17,
+          37.431,
+          -122.15,
+          37.444
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.195,37.423,-122.19,37.431",
+        "sha256": "15e7f41264c99345e70fa5853b890232e9681cf3909dd88402c4f44d039efeae",
+        "bytes": 2656319,
+        "bbox": [
+          -122.195,
+          37.423,
+          -122.19,
+          37.431
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-122.221,37.502,-122.215,37.508",
+        "sha256": "27149d29a7613273d1add2396ac510ad6b8ee27c28ffc358359a548816f81e46",
+        "bytes": 383188,
+        "bbox": [
+          -122.221,
+          37.502,
+          -122.215,
+          37.508
+        ]
+      }
+    ],
+    "sha256": "78d3de8ff1df3611591ad9675e129837030ed5dc4cd651ac54e23fc8077eeecf",
+    "bytes": 35195682,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "license": "Open Database License (ODbL) 1.0",
+    "licenseUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": "Local equirectangular, spherical radius 6371008.8 m; x east, z south. Approximate local geography, not survey-grade coordinates.",
+  "counts": {
+    "buildings": 4581,
+    "surfaces": 29635,
+    "trees": 7144,
+    "routes": 3291,
+    "entrances": 156,
+    "roads": 3398
+  },
+  "limitations": [
+    "Flat terrain; no terrain survey.",
+    "Footprints and path centre lines are OSM volunteer mapping, not university-certified as-built records.",
+    "Height tags are unverified; missing heights use tagged floor count \u00d7 3.5 m or an explicitly labeled illustrative fallback.",
+    "Road/path paving is buffered from actual source centre lines; widths default to representative values when absent.",
+    "Only source trees are included; missing tree heights default to 9 m.",
+    "Route topology preserves source vertices and excludes explicit no/private/indoor paths. Unknown access is not verified physical permission.",
+    "Paths outside the extent are trimmed at source vertices. No disjoint route components are joined.",
+    "Names identify buildings, not current occupancy. No people, emails, or residential room assignments are collected."
+  ],
+  "anchors": {
+    "count": 47,
+    "method": "Minimum-area oriented source-footprint rectangles. Entrance-facing near mapped pedestrian vertex, with Memorial Church aligned to its documented Quad facade. Actual mapped doors retained separately.",
+    "limitations": "Footprint bounds are not literal architectural rectangles. Virtual entrances are explicitly interpreted. Shared venues have alias anchors and must be modelled once."
+  },
+  "mainCampusBbox": [
+    37.418,
+    -122.195,
+    37.444,
+    -122.15
+  ],
+  "remoteVenueBbox": [
+    37.502,
+    -122.221,
+    37.508,
+    -122.215
+  ],
+  "remoteVenue": {
+    "name": "Arrillaga Family Rowing and Sailing Center",
+    "address": "300 Cardinal Way, Redwood City, CA 94063",
+    "url": "https://gostanford.com/facilities/arrillaga-family-rowing-and-sailing-center",
+    "note": "Off-campus geography remains at its actual coordinates. No route across the unmapped gap is synthesized."
+  },
+  "referenceMaps": [
+    "https://campus-map.stanford.edu/",
+    "https://visit.stanford.edu/pdf/explore-campus/general_campus_self-guided_tour_map.pdf",
+    "https://visit.stanford.edu/pdf/explore-campus/self-guided_tour_-_stanford_athletics_district.pdf"
+  ],
+  "anchorCorrections": [
+    {
+      "id": "burnham",
+      "sourceId": "osm-way-232805670",
+      "connectedBuildingIds": [
+        "osm-way-232805658"
+      ],
+      "reference": "https://maps.stanford.edu/ada/pdf/ADAMAP08-200.pdf",
+      "note": "Select the main gymnasium as the interior envelope; preserve the smaller south entrance wing as a connected source part. The original source dataset is unchanged."
+    },
+    {
+      "id": "sunken-diamond",
+      "fieldSourceId": "osm-way-26250575",
+      "method": "Align the model to mapped backstop and center-field fence; infer home plate from the official 400 ft center-field distance. Preserve source OBB in sourceEnvelope."
+    },
+    {
+      "id": "softball",
+      "fieldSourceId": "osm-way-26250566",
+      "method": "Align the model to mapped pitch backstop and center-field fence using the model 220 ft convention. Older source footprint is not a verified 2026 as-built seating plan."
+    }
+  ]
+}

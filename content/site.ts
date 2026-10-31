@@ -1,3 +1,6 @@
+import { stanford } from "./stanford";
+export { stanford } from "./stanford";
+
 export type SiteImage = {
   src: string;
   alt: string;
@@ -116,6 +119,8 @@ export const gisApps = {
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
   projects: [
+    { name: stanford.name, description: stanford.description, status: stanford.status,
+      detail: { label: "Explore Stanford", href: stanford.path }, source: stanford.source, license: stanford.license },
     { name: cwru.name, description: cwru.description, status: cwru.status,
       detail: { label: "Explore Case Western", href: cwru.path }, source: cwru.source, license: cwru.license },
     {

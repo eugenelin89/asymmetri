@@ -1,0 +1,867 @@
+{
+  "checked": "2026-10-31",
+  "limitations": [
+    "No model is a measured as-built digital twin.",
+    "Source footprints establish geography. Selected interior cores and architectural envelopes are interpretations.",
+    "No downloaded photograph, copyrighted collection image or third-party 3D mesh is shipped as an asset.",
+    "Not every facade or room has photographic coverage. Described research features and original inferred details are distinguished below."
+  ],
+  "photoReferences": [
+    {
+      "url": "https://www.loc.gov/item/2013634782/",
+      "image": "https://tile.loc.gov/image-services/iiif/service%3Apnp%3Ahighsm%3A25300%3A25336/full/pct%3A50/0/default.jpg",
+      "reviewed": "Visual inspection of facade photo: three round portals, mosaics, central arched window and triangular pediment."
+    },
+    {
+      "url": "https://maps.stanford.edu/ada/building-ada.cfm?FACIL_ID=03-200",
+      "image": "https://campus-map.stanford.edu/images_repo/bldg/03-200/03-200-1.jpg",
+      "reviewed": "Visual inspection: three monumental arches, terracotta eaves, clerestory, fountain plaza."
+    },
+    {
+      "url": "https://www.nagata-i.com/portfolio/bing-concert-hall/",
+      "image": "https://www.nagata-i.com/wp-content/uploads/2015/07/R1023015-scaled.jpg",
+      "reviewed": "Visual inspection: central stage, terraced red seating, suspended cream acoustic sails and timber cloud."
+    },
+    {
+      "url": "https://www.ramsa.com/projects/project/gates-computer-science-building",
+      "reviewed": "Direct visual inspection of architect photo: rusticated tall arch, green recessed glazing, carved name plaque, terracotta tile roof and eave details."
+    },
+    {
+      "url": "https://hai.stanford.edu/news/through-ai-and-text-analysis-social-media-shows-our-community-well-being",
+      "reviewed": "Direct visual inspection of official atrium photo: timber bleacher steps, two flanking stairs, glass rails, gray floor, large glazed entrance."
+    },
+    {
+      "url": "https://arts.stanford.edu/anderson-collection-at-stanford-university-to-be-displayed-in-an-elegant-new-home-2/",
+      "reviewed": "Official architectural rendering used only to corroborate pavilion massing; not proof of current furnishings."
+    },
+    {
+      "id": "sunken-diamond-field-photo",
+      "url": "https://commons.wikimedia.org/wiki/File:Klein_Field_at_Sunken_Diamond_2022.jpg",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/Klein_Field_at_Sunken_Diamond_2022.jpg",
+      "inspected": "2026-10-31",
+      "observedFeatures": [
+        "Grass infield surrounded by dirt basepaths",
+        "Green outfield fence with 375 and 400 foot distance indicators",
+        "Separate Klein Field center-field sign and offset Stanford scoreboard",
+        "Tall floodlights and tree backdrop"
+      ],
+      "usage": "Reference inspection only; no photograph pixels or external textures shipped."
+    }
+  ],
+  "landmarks": [
+    {
+      "id": "memorial-church",
+      "name": "Memorial Church",
+      "category": "Landmarks",
+      "address": "450 Jane Stanford Way \u00b7 Building 500",
+      "description": "Romanesque entrance arches, an original mosaic interpretation, timber roof trusses, pews, organ pipes, a central aisle and sanctuary.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://orsl.stanford.edu/memorial-church"
+        }
+      ],
+      "observedFeatures": [
+        "Three entrance arches",
+        "Mosaic-covered triangular facade",
+        "Stained glass, sandstone columns, wooden nave ceiling"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Official notice: closed to visitors for maintenance June 15\u2013October 31, 2026. Virtual access is independent."
+    },
+    {
+      "id": "main-quad",
+      "name": "Main Quad \u00b7 Historic Learning Spaces",
+      "category": "Landmarks",
+      "address": "Main Quad",
+      "description": "Walk through a furnished academic wing and the sandstone arcades around the mapped courtyard.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://mainquad.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Connected sandstone arcades",
+        "Clay tile roof forms",
+        "Courtyard openings"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "hoover-tower",
+      "name": "Hoover Tower",
+      "category": "Landmarks",
+      "address": "550 Jane Stanford Way",
+      "description": "Enter exhibition galleries and climb an interpreted continuous stair route to the campus observation deck, beneath the octagonal carillon and tiled dome.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://community.stanford.edu/opportunities/hoover-tower"
+        }
+      ],
+      "observedFeatures": [
+        "Tall plain sandstone-colored shaft",
+        "Octagonal upper carillon",
+        "Red tiled dome"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Official page says the observation deck is closed until January 25, 2027. The virtual deck remains explorable.",
+      "interiorProgram": [
+        "Exhibition galleries",
+        "Interpreted stair route through 18 levels",
+        "Observation deck at 75.6 m"
+      ]
+    },
+    {
+      "id": "green-library",
+      "name": "Cecil H. Green Library \u00b7 East Wing",
+      "category": "Libraries",
+      "address": "557 Escondido Mall",
+      "description": "Explore a Hohbach Hall interpretation, study desks, computing stations, stacks and upper reading areas.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://library.stanford.edu/libraries/cecil-h-green-library"
+        }
+      ],
+      "observedFeatures": [
+        "Hohbach Hall on the first floor",
+        "Humanities and social sciences collections",
+        "Public study and reference areas"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "interiorProgram": [
+        "Hohbach Hall and reference",
+        "Study floor",
+        "Quiet reading"
+      ]
+    },
+    {
+      "id": "bing-wing",
+      "name": "Green Library \u00b7 Bing Wing",
+      "category": "Libraries",
+      "address": "459 Lasuen Mall",
+      "description": "Explore five connected public-floor interpretations, including the Lane Reading Room, Rumsey Map Center and Bender Room.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://maps.stanford.edu/ada/building-ada.cfm?FACIL_ID=03-200"
+        }
+      ],
+      "observedFeatures": [
+        "Three tall arched windows",
+        "Stone entry portico",
+        "Terracotta roof and upper clerestory"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Real library entry has identification and registration requirements; virtual access does not grant real access.",
+      "interiorProgram": [
+        "Jonsson reading room",
+        "Lane Reading Room",
+        "History seminar room",
+        "Rumsey Map Center",
+        "Bender reading room"
+      ]
+    },
+    {
+      "id": "cantor",
+      "name": "Cantor Arts Center",
+      "category": "Arts",
+      "address": "328 Lomita Drive",
+      "description": "A columned museum entrance leads to two floors of galleries, benches, study sculptures and original abstract exhibits.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://museum.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Classical columned entrance",
+        "Sandstone-colored museum wings",
+        "Sculpture courtyard"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "anderson",
+      "name": "Anderson Collection",
+      "category": "Arts",
+      "address": "314 Lomita Drive",
+      "description": "Explore a glass entrance pavilion and upper galleries lit by a clerestory-inspired roof.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://anderson.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Two-storey rectangular pavilion",
+        "Glazed lower entrance",
+        "Upper galleries and clerestory"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "bing-concert",
+      "name": "Bing Concert Hall",
+      "category": "Arts",
+      "address": "327 Lasuen Street",
+      "description": "Walk into the glazed lobby and oval hall, with a central stage, red vineyard seating terraces and suspended acoustic sails.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://maps.stanford.edu/ada/building-ada.cfm?FACIL_ID=08-650"
+        }
+      ],
+      "observedFeatures": [
+        "Oval performance room",
+        "Vineyard seating around the stage",
+        "Large suspended acoustic sails"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "memorial-auditorium",
+      "name": "Memorial Auditorium",
+      "category": "Lecture halls",
+      "address": "551 Jane Stanford Way",
+      "description": "Explore the entrance arcade, public foyer, stepped seating aisles, proscenium stage and theatrical lighting.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://taps.stanford.edu/space/"
+        }
+      ],
+      "observedFeatures": [
+        "Large proscenium theatre",
+        "Public performance and lecture use",
+        "Seating and stage"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "gates",
+      "name": "Gates Computer Science Building",
+      "category": "Faculties",
+      "address": "353 Jane Stanford Way",
+      "description": "Enter the tall arched entrance, computing-history exhibit cases, learning spaces and upper study areas.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://www.cs.stanford.edu/about/gates-computer-science-building"
+        }
+      ],
+      "observedFeatures": [
+        "Buff stone and clay tile roofs",
+        "Tall arched entrance",
+        "Computing history exhibits"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "huang",
+      "name": "Jen-Hsun Huang Engineering Center",
+      "category": "Faculties",
+      "address": "475 Via Ortega",
+      "description": "Explore the engineering commons, octagonal entrance rotunda, diagonal structural braces and timber bleacher seating.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://engineering.stanford.edu/about/visit/location"
+        }
+      ],
+      "observedFeatures": [
+        "Octagonal rotunda",
+        "Sandstone-colored academic exterior",
+        "Timber bleacher commons and diagonal braces"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "packard",
+      "name": "David Packard Electrical Engineering",
+      "category": "Faculties",
+      "address": "350 Jane Stanford Way",
+      "description": "A detailed academic lobby connects to three public teaching and study floors, with electrical-engineering displays.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://maps.stanford.edu/ada/building-ada.cfm?FACIL_ID=04-030"
+        }
+      ],
+      "observedFeatures": [
+        "Electrical engineering hub",
+        "Classrooms on lower public floors",
+        "Bytes Cafe and courtyard"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "hewlett",
+      "name": "William R. Hewlett Teaching Center",
+      "category": "Lecture halls",
+      "address": "370 Jane Stanford Way",
+      "description": "Enter a teaching-center reconstruction with lecture seating, presentation boards and connected upper learning spaces.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://campus-map.stanford.edu/?srch=Hewlett+Teaching+Center+201"
+        }
+      ],
+      "observedFeatures": [
+        "University teaching center",
+        "Lecture halls and classrooms"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "clark",
+      "name": "James H. Clark Center",
+      "category": "Faculties",
+      "address": "318 Campus Drive",
+      "description": "Explore an academic public wing with glazing, projecting sunshades, shared study areas and seminar rooms.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://biox.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Interdisciplinary research center",
+        "Open modern courtyard wings",
+        "Glazing and exterior sunshades"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "peterson",
+      "name": "Peterson Laboratory \u00b7 d.school",
+      "category": "Faculties",
+      "address": "416 Escondido Mall \u00b7 Building 550",
+      "description": "Explore design studios with movable whiteboards, sticky-note studies, worktables and collaborative seating.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://lifedesignlab.stanford.edu/studio-agenda"
+        }
+      ],
+      "observedFeatures": [
+        "Peterson Building 550",
+        "Design studios and collaborative teaching"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "knight",
+      "name": "Knight Management Center \u00b7 Bass Center",
+      "category": "Faculties",
+      "address": "655 Knight Way",
+      "description": "Enter a Bass Center interpretation with business-school study spaces, case-discussion rooms and common seating.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://www.gsb.stanford.edu/stanford-community/plan-event/venues/town-square"
+        }
+      ],
+      "observedFeatures": [
+        "Campus arranged around courtyards",
+        "Buff facades and tiled roofs",
+        "Bass Center and Town Square"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "law",
+      "name": "Stanford Law School",
+      "category": "Faculties",
+      "address": "559 Nathan Abbott Way",
+      "description": "Explore a public academic lobby, reconstructed seminar spaces and a moot-court-inspired teaching room.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://law.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Academic and legal teaching spaces",
+        "Campus courtyard setting"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "tresidder",
+      "name": "Tresidder Memorial Union",
+      "category": "Student life",
+      "address": "459 Lagunita Drive",
+      "description": "Walk through dining commons, counters, tables and connected student meeting and lounge spaces.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://tresidder.stanford.edu/tresidder-memorial-union"
+        }
+      ],
+      "observedFeatures": [
+        "Dining options",
+        "Patio seating",
+        "Student meeting spaces"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "old-union",
+      "name": "Old Union",
+      "category": "Student life",
+      "address": "520 Lasuen Mall",
+      "description": "Explore a sandstone arcade, common room, cafe interpretation and upper meeting spaces near White Plaza.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://campuscenter.stanford.edu/faqs"
+        }
+      ],
+      "observedFeatures": [
+        "Ongoing study and social gathering use",
+        "Historic campus-center setting"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Campus Center redevelopment is planned; this model represents the existing buildings rather than future proposals."
+    },
+    {
+      "id": "bookstore",
+      "name": "Stanford Bookstore",
+      "category": "Student life",
+      "address": "519 Lasuen Mall",
+      "description": "Browse two walkable levels of books, supplies, apparel rails and service counters.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://campuscenter.stanford.edu/faqs"
+        }
+      ],
+      "observedFeatures": [
+        "Existing bookstore building",
+        "Books and campus merchandise",
+        "Current campus-center setting"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "The university says bookstore construction closure is projected for late 2027; the proposed Commons is not modeled as completed."
+    },
+    {
+      "id": "toyon",
+      "name": "Toyon Hall",
+      "category": "Residences",
+      "address": "455 Arguello Way",
+      "description": "Enter a common lounge and two demonstration residence floors with beds, desks and furniture.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://rde.stanford.edu/studenthousing/Undergraduate-Housing-Options"
+        }
+      ],
+      "observedFeatures": [
+        "Historic residence hall",
+        "Shared residential community spaces"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Bedrooms are illustrative demonstrations, not real room layouts or assignments.",
+      "interiorProgram": [
+        "Common room",
+        "Demonstration residence rooms",
+        "Demonstration residence rooms"
+      ]
+    },
+    {
+      "id": "branner",
+      "name": "Branner Hall",
+      "category": "Residences",
+      "address": "655 Escondido Road",
+      "description": "Explore the common room, stairs and an original residence demonstrator with five working room doors, a shared bathroom and a two-stop glass lift. Rooms A\u2013C demonstrate doubles; D\u2013E demonstrate singles.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://resed.stanford.edu/houses/branner-hall-houses"
+        }
+      ],
+      "observedFeatures": [
+        "Historic residence on the east campus",
+        "Connected residential wings"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced.",
+        "The demonstration room plan, letter labels, fixtures and lift position are original educational gameplay features, not actual Branner room assignments or a surveyed elevator layout."
+      ],
+      "accessNote": "Bedrooms are illustrative demonstrations, not real room layouts or assignments.",
+      "interiorProgram": [
+        "Lobby and common room",
+        "Interactive residence demonstration \u00b7 five rooms, shared bathroom and lift",
+        "Additional interpreted residence rooms"
+      ]
+    },
+    {
+      "id": "roble",
+      "name": "Roble Hall",
+      "category": "Residences",
+      "address": "374 Santa Teresa Street",
+      "description": "Enter the columned Beaux-Arts residence lobby, a common lounge and representative upper rooms.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://rde.stanford.edu/studenthousing/roble-hall"
+        }
+      ],
+      "observedFeatures": [
+        "Three-storey Beaux-Arts residence",
+        "Carved entrance columns",
+        "Historic interior and exterior features"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "Bedrooms are illustrative demonstrations, not real room layouts or assignments.",
+      "interiorProgram": [
+        "Common room",
+        "Demonstration residence rooms",
+        "Demonstration residence rooms"
+      ]
+    },
+    {
+      "id": "encina",
+      "name": "Encina Hall",
+      "category": "Faculties",
+      "address": "616 Jane Stanford Way",
+      "description": "Explore the historic sandstone entrance, common reading area and upper international-studies seminar spaces.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://fsi.stanford.edu/"
+        }
+      ],
+      "observedFeatures": [
+        "Historic sandstone academic building",
+        "Romanesque arches and tiled roofs",
+        "International studies use"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "interiorProgram": [
+        "Historic lobby and reading",
+        "International studies seminars",
+        "Public study"
+      ]
+    },
+    {
+      "id": "maples",
+      "name": "Maples Pavilion",
+      "category": "Athletics",
+      "address": "655 Campus Drive",
+      "description": "Explore the hardwood basketball court, hoops, lower bowl seating, central scoreboard and saddle-shaped roof interpretation.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://gostanford.com/facilities/maples-pavilion"
+        }
+      ],
+      "observedFeatures": [
+        "Lower and upper seating bowls",
+        "Central suspended scoreboard",
+        "Distinctive long-span roof"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "mcmurtry",
+      "name": "McMurtry Building",
+      "category": "Arts",
+      "address": "355 Roth Way",
+      "description": "Explore gallery arcades, art studios, a library interpretation and a walkable rooftop garden.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://art.stanford.edu/about/academic-facilities/mcmurtry-building"
+        }
+      ],
+      "observedFeatures": [
+        "Art and art-history programs",
+        "Gallery arcade",
+        "Rooftop garden and library"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "interiorProgram": [
+        "Gallery arcade",
+        "Art practice studios",
+        "Art & architecture library",
+        "Rooftop garden"
+      ]
+    },
+    {
+      "id": "windhover",
+      "name": "Windhover Contemplative Center",
+      "category": "Arts",
+      "address": "370 Santa Teresa Street",
+      "description": "Enter an intimate interpretation with earth-colored walls, timber ceiling beams, benches and original abstract panels.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://orsl.stanford.edu/windhover-contemplative-center"
+        }
+      ],
+      "observedFeatures": [
+        "Earth-toned walls",
+        "Timber and glazing",
+        "Contemplative interior"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "The real interior requires Stanford ID. Model panels are original abstract studies, not copies of Nathan Oliveira paintings."
+    },
+    {
+      "id": "dinkelspiel",
+      "name": "Dinkelspiel Auditorium",
+      "category": "Lecture halls",
+      "address": "471 Lagunita Drive",
+      "description": "Enter the glazed foyer and walk the stepped central aisle to a stage inspired by the documented curved, non-proscenium performance space.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://music.stanford.edu/venues-facilities/venues/dinkelspiel-auditorium"
+        }
+      ],
+      "observedFeatures": [
+        "15 stepped seating rows",
+        "Non-proscenium stage",
+        "Red stage curtain"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "mausoleum",
+      "name": "Stanford Mausoleum",
+      "category": "Landmarks",
+      "address": "Stanford Arboretum",
+      "description": "Explore the stone entrance and a small, explicitly interpreted memorial chamber in the arboretum.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://visit.stanford.edu/pdf/self-guided_tour_map.pdf"
+        }
+      ],
+      "observedFeatures": [
+        "Stone mausoleum in the arboretum",
+        "Stanford family memorial"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ],
+      "accessNote": "The chamber is a virtual interpretation; no claim of real public interior access is made."
+    },
+    {
+      "id": "burnham",
+      "name": "Burnham Pavilion",
+      "category": "Athletics",
+      "address": "615 Jane Stanford Way",
+      "description": "Explore a reconstructed gymnastics and wrestling pavilion with mats, apparatus and spectator benches.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://gostanford.com/facilities/burnham-pavilion-and-ford-center"
+        }
+      ],
+      "observedFeatures": [
+        "Historic indoor sports pavilion",
+        "Gymnastics and wrestling activities"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "ford",
+      "name": "Ford Center",
+      "category": "Athletics",
+      "address": "615 Jane Stanford Way",
+      "description": "Walk through an interpreted training hall with gymnastic apparatus, mats and a high structural roof.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://gostanford.com/facilities/burnham-pavilion-and-ford-center"
+        }
+      ],
+      "observedFeatures": [
+        "Gymnastics training facility",
+        "Apparatus and high indoor hall"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    },
+    {
+      "id": "squash",
+      "name": "Arrillaga Center \u00b7 Squash and Fencing",
+      "category": "Athletics",
+      "address": "341 Galvez Street",
+      "description": "Explore glass-sided squash-court interpretations with floor markings, viewing space and a recreation lobby.",
+      "links": [
+        {
+          "label": "Official Stanford information",
+          "url": "https://gostanford.com/facilities/arrillaga-center-for-sports-and-recreation"
+        }
+      ],
+      "observedFeatures": [
+        "Squash and fencing venue",
+        "Indoor recreation courts"
+      ],
+      "interpreted": [
+        "Interior dimensions, furniture locations and circulation are original reference interpretations.",
+        "Public spaces are selected; private offices, laboratories and current room assignments are not reproduced."
+      ]
+    }
+  ],
+  "outdoorReferences": [
+    {
+      "id": "stanford-stadium",
+      "url": "https://gostanford.com/facilities/stanford-stadium",
+      "modeled": "US football field, cardinal spectator bowl, pressbox, scoreboard, floodlights and climbable south aisle. Seat count and fixtures interpreted."
+    },
+    {
+      "id": "sunken-diamond",
+      "url": "https://gostanford.com/facilities/klein-field-at-sunken-diamond",
+      "modeled": "90-foot basepaths, grass infield, green outfield fence with 335/375/400-foot labels, separate Klein Field sign and Stanford scoreboard, dugouts, spectator tiers and floodlights. Published 335/400/335-foot distances determine fence endpoints and center; connecting curve, ground depression and landscape grades are interpreted.",
+      "dimensionSource": "https://storage.googleapis.com/stanford-prod/2025/03/06/XyXtfm8Fz5PmvsRze6lFEd1H3ioBl9PoK7qP233h.pdf",
+      "alignment": "Home plate and center-field axis are inferred from mapped backstop/field points plus official center-field distance; not surveyed field coordinates."
+    },
+    {
+      "id": "cobb-track",
+      "url": "https://gostanford.com/facilities/cobb-track-and-angell-field",
+      "modeled": "Nine-lane running oval, straight sections, linework, infield and stands. Exact source curve radii are reconstructed."
+    },
+    {
+      "id": "sand-volleyball",
+      "url": "https://gostanford.com/facilities/beach-volleyball-stadium",
+      "modeled": "Four sand courts, nets and public spectator area. Court arrangement interpreted within the mapped venue."
+    },
+    {
+      "id": "avery",
+      "url": "https://gostanford.com/facilities/avery-aquatic-center",
+      "modeled": "37\u00d720m main competition pool, lane ropes, starting blocks, grandstands and interpreted dive tower with 1/3/5/7.5/10 m platforms. Other training pools retain source geometry."
+    },
+    {
+      "id": "softball",
+      "url": "https://gostanford.com/stanford-softball-stadium",
+      "modeled": "2026 stadium reference with 60-foot diamond, 200/220/200-foot outfield dimensions, walkable upper deck, party terraces and expanded seating interpretation, dugouts, scoreboard and floodlights; exact new grandstand and room plans are not recreated.",
+      "dimensionSource": "https://storage.googleapis.com/stanford-prod/2026/04/28/5cD7OYm1KmNOtClfaqqsXVhUBZFknF3qOG13bL9m.pdf",
+      "alignment": "Home plate and center-field axis are inferred from mapped backstop/field points plus official center-field distance; not surveyed field coordinates."
+    },
+    {
+      "id": "taube",
+      "url": "https://gostanford.com/taube-family-tennis-center",
+      "modeled": "Six featured courts with tennis dimensions and markings, nets, lighting and fencing; entire 17-court complex is not rebuilt."
+    },
+    {
+      "id": "rowing",
+      "url": "https://gostanford.com/facilities/arrillaga-family-rowing-and-sailing-center",
+      "modeled": "Source-placed Redwood City boathouse with enterable racks and original rowing-shell interpretations. Real waterfront routes are separate from main campus."
+    },
+    {
+      "id": "cagan",
+      "url": "https://gostanford.com/facilities/maloney-field-at-laird-q-cagan-stadium",
+      "modeled": "Soccer pitch with field markings, goals, benches, spectator tiers and floodlights. Lacrosse shares the same source venue; separate lacrosse markings are not shown."
+    },
+    {
+      "id": "field-hockey",
+      "url": "https://gostanford.com/facilities/varsity-field-hockey-turf",
+      "modeled": "91.4\u00d755 m pitch with shooting arcs, goals, benches, floodlights and public stands. Synthetic surface and spectator fixtures interpreted."
+    },
+    {
+      "id": "golf",
+      "url": "https://gostanford.com/facilities/stanford-golf-course",
+      "modeled": "Enterable golf shop interpretation at the source clubhouse; course terrain and greens use source map surfaces."
+    },
+    {
+      "id": "frost",
+      "url": "https://arts.stanford.edu/for-visitors/venues-and-facilities/",
+      "modeled": "Grass amphitheater terraces with a supported central aisle, stage canopy and structural posts. Landscape grades and stage dimensions interpreted."
+    }
+  ]
+}

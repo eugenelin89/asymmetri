@@ -1,0 +1,960 @@
+{
+  "memorial-church": {
+    "id": "memorial-church",
+    "x": -40.75,
+    "z": 65.57,
+    "width": 51.4,
+    "depth": 60.03,
+    "yaw": 2.8474915,
+    "entry": [
+      -31.47,
+      34.92
+    ],
+    "sourceName": "Memorial Church",
+    "sourceId": "osm-way-836474103",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-836474103"
+  },
+  "main-quad": {
+    "id": "main-quad",
+    "x": -22.07,
+    "z": -3.25,
+    "width": 283.78,
+    "depth": 245.59,
+    "yaw": 2.8808615,
+    "entry": [
+      10.1,
+      -123.83
+    ],
+    "sourceName": "Main Quad",
+    "sourceId": "osm-relation-35820",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-relation-35820"
+  },
+  "hoover-tower": {
+    "id": "hoover-tower",
+    "x": 265.98,
+    "z": -15.2,
+    "width": 37.39,
+    "depth": 41.82,
+    "yaw": 2.8870361,
+    "entry": [
+      271.75,
+      -37.37
+    ],
+    "sourceName": "Hoover Tower",
+    "sourceId": "osm-way-232805688",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805688",
+    "sourceEntranceId": "osm-node-6477408381",
+    "mappedDoor": [
+      271.57,
+      -35.34
+    ]
+  },
+  "green-library": {
+    "id": "green-library",
+    "x": 277.87,
+    "z": 97.15,
+    "width": 82.12,
+    "depth": 66.39,
+    "yaw": 1.31492,
+    "entry": [
+      311.92,
+      106.06
+    ],
+    "sourceName": "East Wing",
+    "sourceId": "osm-way-232805660",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805660",
+    "sourceEntranceId": "osm-node-5555811989",
+    "mappedDoor": [
+      250.97,
+      99.46
+    ]
+  },
+  "bing-wing": {
+    "id": "bing-wing",
+    "x": 211.58,
+    "z": 68.26,
+    "width": 66.18,
+    "depth": 81.92,
+    "yaw": 4.456384,
+    "entry": [
+      170.02,
+      57.39
+    ],
+    "sourceName": "Bing Wing",
+    "sourceId": "osm-way-232805680",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805680",
+    "sourceEntranceId": "osm-node-5555812022",
+    "mappedDoor": [
+      172.81,
+      54.66
+    ]
+  },
+  "cantor": {
+    "id": "cantor",
+    "x": -80.08,
+    "z": -616.21,
+    "width": 103.91,
+    "depth": 71.39,
+    "yaw": 1.3097587,
+    "entry": [
+      -43.66,
+      -606.48
+    ],
+    "sourceName": "Cantor Arts Center",
+    "sourceId": "osm-relation-12236339",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-relation-12236339",
+    "sourceEntranceId": "osm-node-6332444289",
+    "mappedDoor": [
+      -87.21,
+      -567.27
+    ]
+  },
+  "anderson": {
+    "id": "anderson",
+    "x": -70.5,
+    "z": -698.43,
+    "width": 61.06,
+    "depth": 34.08,
+    "yaw": -0.267998,
+    "entry": [
+      -75.54,
+      -680.07
+    ],
+    "sourceName": "Anderson Collection at Stanford University",
+    "sourceId": "osm-way-493811440",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-493811440",
+    "sourceEntranceId": "osm-node-6477408364",
+    "mappedDoor": [
+      -43.79,
+      -685.6
+    ]
+  },
+  "bing-concert": {
+    "id": "bing-concert",
+    "x": 346.47,
+    "z": -506.07,
+    "width": 93.44,
+    "depth": 77.15,
+    "yaw": -0.2606024,
+    "entry": [
+      336.01,
+      -466.86
+    ],
+    "sourceName": "Bing Concert Hall",
+    "sourceId": "osm-way-205182889",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-205182889",
+    "sourceEntranceId": "osm-node-6527974142",
+    "mappedDoor": [
+      300.86,
+      -516.28
+    ]
+  },
+  "memorial-auditorium": {
+    "id": "memorial-auditorium",
+    "x": 308.48,
+    "z": -167.14,
+    "width": 67.59,
+    "depth": 81.01,
+    "yaw": -0.2673094,
+    "entry": [
+      297.26,
+      -126.14
+    ],
+    "sourceName": "Memorial Hall",
+    "sourceId": "osm-way-232805722",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805722",
+    "sourceEntranceId": "osm-node-6524008692",
+    "mappedDoor": [
+      295.6,
+      -128.67
+    ]
+  },
+  "gates": {
+    "id": "gates",
+    "x": -305.6,
+    "z": -299.99,
+    "width": 62.17,
+    "depth": 77.37,
+    "yaw": 7.6002487,
+    "entry": [
+      -266.22,
+      -289.77
+    ],
+    "sourceName": "Gates Computer Science",
+    "sourceId": "osm-way-232841885",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232841885",
+    "sourceEntranceId": "osm-node-2411555794",
+    "mappedDoor": [
+      -272.99,
+      -271.65
+    ]
+  },
+  "huang": {
+    "id": "huang",
+    "x": -381.24,
+    "z": -51.7,
+    "width": 67.46,
+    "depth": 71.41,
+    "yaw": 4.4511731,
+    "entry": [
+      -417.66,
+      -61.43
+    ],
+    "sourceName": "Huang Engineering Center",
+    "sourceId": "osm-way-81794792",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-81794792",
+    "sourceEntranceId": "osm-node-6334292319",
+    "mappedDoor": [
+      -365.58,
+      -44.41
+    ]
+  },
+  "packard": {
+    "id": "packard",
+    "x": -337.36,
+    "z": -197.08,
+    "width": 77.81,
+    "depth": 46.55,
+    "yaw": 2.8788732,
+    "entry": [
+      -330.79,
+      -221.49
+    ],
+    "sourceName": "Packard",
+    "sourceId": "osm-way-232841933",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232841933",
+    "sourceEntranceId": "osm-node-6527889818",
+    "mappedDoor": [
+      -316.26,
+      -215.36
+    ]
+  },
+  "hewlett": {
+    "id": "hewlett",
+    "x": -253.77,
+    "z": -171.03,
+    "width": 41.23,
+    "depth": 53.73,
+    "yaw": 7.6050137,
+    "entry": [
+      -225.79,
+      -163.92
+    ],
+    "sourceName": "Hewlett Teaching Center",
+    "sourceId": "osm-way-232841892",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232841892"
+  },
+  "clark": {
+    "id": "clark",
+    "x": -386.67,
+    "z": -431.58,
+    "width": 135.91,
+    "depth": 71.17,
+    "yaw": 1.3105168,
+    "entry": [
+      -350.35,
+      -421.91
+    ],
+    "sourceName": "James H. Clark Center",
+    "sourceId": "osm-way-158630340",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-158630340"
+  },
+  "peterson": {
+    "id": "peterson",
+    "x": -166.41,
+    "z": 133.6,
+    "width": 55.92,
+    "depth": 42.34,
+    "yaw": 6.0237697,
+    "entry": [
+      -172.35,
+      156.0
+    ],
+    "sourceName": "Peterson Laboratory",
+    "sourceId": "osm-way-232841924",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232841924"
+  },
+  "knight": {
+    "id": "knight",
+    "x": 687.13,
+    "z": -115.5,
+    "width": 24.28,
+    "depth": 51.96,
+    "yaw": 6.0186307,
+    "entry": [
+      679.82,
+      -88.49
+    ],
+    "sourceName": "Anne T. & Robert M. Bass Center",
+    "sourceId": "osm-way-131641541",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-131641541"
+  },
+  "law": {
+    "id": "law",
+    "x": 193.68,
+    "z": 382.13,
+    "width": 117.47,
+    "depth": 56.06,
+    "yaw": 2.8800866,
+    "entry": [
+      201.44,
+      353.12
+    ],
+    "sourceName": "School of Law",
+    "sourceId": "osm-way-232805735",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805735",
+    "sourceEntranceId": "osm-node-5555785603",
+    "mappedDoor": [
+      179.97,
+      368.81
+    ]
+  },
+  "tresidder": {
+    "id": "tresidder",
+    "x": -83.55,
+    "z": 365.33,
+    "width": 114.63,
+    "depth": 66.65,
+    "yaw": 1.6379404,
+    "entry": [
+      -48.3,
+      362.96
+    ],
+    "sourceName": "Tresidder Memorial Union",
+    "sourceId": "osm-way-26252222",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-26252222",
+    "sourceEntranceId": "osm-node-13719792939",
+    "mappedDoor": [
+      -61.3,
+      380.91
+    ]
+  },
+  "old-union": {
+    "id": "old-union",
+    "x": -44.87,
+    "z": 255.03,
+    "width": 58.14,
+    "depth": 54.76,
+    "yaw": 1.3105558,
+    "entry": [
+      -16.47,
+      262.59
+    ],
+    "sourceName": "Old Union",
+    "sourceId": "osm-way-30775809",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-30775809"
+  },
+  "bookstore": {
+    "id": "bookstore",
+    "x": 115.18,
+    "z": 296.99,
+    "width": 55.45,
+    "depth": 64.78,
+    "yaw": 1.3189717,
+    "entry": [
+      148.49,
+      305.56
+    ],
+    "sourceName": "Stanford Bookstore",
+    "sourceId": "osm-way-232805686",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805686",
+    "sourceEntranceId": "osm-node-6408446843",
+    "mappedDoor": [
+      83.36,
+      290.69
+    ]
+  },
+  "toyon": {
+    "id": "toyon",
+    "x": 570.42,
+    "z": 160.49,
+    "width": 63.12,
+    "depth": 117.23,
+    "yaw": 2.8891167,
+    "entry": [
+      585.56,
+      101.79
+    ],
+    "sourceName": "Toyon Hall",
+    "sourceId": "osm-way-160447376",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-160447376"
+  },
+  "branner": {
+    "id": "branner",
+    "x": 633.92,
+    "z": 218.3,
+    "width": 102.46,
+    "depth": 100.08,
+    "yaw": 6.0152749,
+    "entry": [
+      620.15,
+      268.48
+    ],
+    "sourceName": "Branner Hall",
+    "sourceId": "osm-way-232805657",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805657"
+  },
+  "roble": {
+    "id": "roble",
+    "x": -405.72,
+    "z": 358.2,
+    "width": 106.51,
+    "depth": 45.2,
+    "yaw": 2.6300365,
+    "entry": [
+      -393.67,
+      336.74
+    ],
+    "sourceName": "Roble Hall",
+    "sourceId": "osm-way-232805733",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805733",
+    "sourceEntranceId": "osm-node-6461239753",
+    "mappedDoor": [
+      -390.73,
+      358.6
+    ]
+  },
+  "encina": {
+    "id": "encina",
+    "x": 465.8,
+    "z": 26.7,
+    "width": 60.8,
+    "depth": 42.75,
+    "yaw": 2.8790719,
+    "entry": [
+      471.87,
+      4.13
+    ],
+    "sourceName": "Encina Hall Center",
+    "sourceId": "osm-way-232841915",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232841915"
+  },
+  "maples": {
+    "id": "maples",
+    "x": 835.85,
+    "z": -229.28,
+    "width": 80.82,
+    "depth": 101.77,
+    "yaw": 3.8748531,
+    "entry": [
+      800.45,
+      -268.58
+    ],
+    "sourceName": "Maples Pavilion",
+    "sourceId": "osm-way-232715640",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232715640"
+  },
+  "mcmurtry": {
+    "id": "mcmurtry",
+    "x": -152.88,
+    "z": -566.83,
+    "width": 79.45,
+    "depth": 48.45,
+    "yaw": 4.4837231,
+    "entry": [
+      -178.42,
+      -572.77
+    ],
+    "sourceName": "McMurtry Art",
+    "sourceId": "osm-relation-8530450",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-relation-8530450"
+  },
+  "windhover": {
+    "id": "windhover",
+    "x": -386.5,
+    "z": 278.58,
+    "width": 13.97,
+    "depth": 64.25,
+    "yaw": 2.9114109,
+    "entry": [
+      -378.71,
+      245.36
+    ],
+    "sourceName": "Windhover",
+    "sourceId": "osm-way-518906031",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-518906031"
+  },
+  "dinkelspiel": {
+    "id": "dinkelspiel",
+    "x": 8.56,
+    "z": 382.24,
+    "width": 38.94,
+    "depth": 49.29,
+    "yaw": 1.6363555,
+    "entry": [
+      35.15,
+      380.49
+    ],
+    "sourceName": "Dinkelspiel Memorial Music Auditorium",
+    "sourceId": "osm-way-232805665",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805665"
+  },
+  "mausoleum": {
+    "id": "mausoleum",
+    "x": 5.0,
+    "z": -1002.18,
+    "width": 7.69,
+    "depth": 14.36,
+    "yaw": 0.7283698,
+    "entry": [
+      11.11,
+      -995.33
+    ],
+    "sourceName": "Stanford Mausoleum",
+    "sourceId": "osm-way-232715721",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232715721"
+  },
+  "stanford-stadium": {
+    "id": "stanford-stadium",
+    "x": 784.21,
+    "z": -778.09,
+    "width": 200.95,
+    "depth": 178.44,
+    "yaw": 5.4453754,
+    "entry": [
+      716.41,
+      -717.05
+    ],
+    "sourceName": "Stanford Stadium",
+    "sourceId": "osm-relation-18564360",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-relation-18564360"
+  },
+  "sunken-diamond": {
+    "id": "sunken-diamond",
+    "x": 990.6,
+    "z": -481.03,
+    "width": 122.22,
+    "depth": 123.72,
+    "yaw": 3.1200061,
+    "entry": [
+      985.41,
+      -568.83
+    ],
+    "sourceName": "Sunken Diamond",
+    "sourceId": "osm-way-26250575",
+    "verified": "2026-10-31",
+    "provenance": "Model reference frame aligned from mapped backstop toward mapped center-field fence, with home plate inferred using the model center-field distance. The original OSM oriented bounds remain in sourceEnvelope. Neither the inferred plate nor reconstructed fixture coordinates are surveyed.",
+    "entryProvenance": "Existing OSM pedestrian vertex nearest the behind-home-plate approach; virtual access and exact admission gate position are interpreted.",
+    "sourceEnvelope": {
+      "x": 988.45,
+      "z": -463.44,
+      "width": 122.22,
+      "depth": 123.72,
+      "yaw": 5.4307333
+    },
+    "homePlate": [
+      991.512,
+      -523.082
+    ],
+    "centerField": [
+      988.88,
+      -401.19
+    ],
+    "fieldSourceId": "osm-way-26250575",
+    "modelCenterFieldDistance": 121.92,
+    "officialSource": "https://gostanford.com/facilities/klein-field-at-sunken-diamond",
+    "fieldAlignmentNote": "Sunken Diamond uses the officially published 400 ft center-field distance. Softball uses the model 220 ft center-field convention against an older mapped pitch; reconstructed 2026 seating extends beyond the older stadium outline. Source polygon bytes are preserved."
+  },
+  "cobb-track": {
+    "id": "cobb-track",
+    "x": 657.44,
+    "z": -486.6,
+    "width": 95.38,
+    "depth": 180.95,
+    "yaw": 5.4949218,
+    "entry": [
+      591.87,
+      -421.39
+    ],
+    "sourceName": "Cobb Track",
+    "sourceId": "osm-relation-5293506",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "cagan": {
+    "id": "cagan",
+    "x": 1055.14,
+    "z": -621.13,
+    "width": 106.37,
+    "depth": 68.48,
+    "yaw": -0.8533194,
+    "entry": [
+      1027.83,
+      -597.3
+    ],
+    "sourceName": "Maloney Field",
+    "sourceId": "osm-way-442933287",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "avery": {
+    "id": "avery",
+    "x": 797.41,
+    "z": -408.1,
+    "width": 73.76,
+    "depth": 65.01,
+    "yaw": 2.3071133,
+    "entry": [
+      822.98,
+      -431.27
+    ],
+    "sourceName": "Avery Competition Pool",
+    "sourceId": "osm-way-232715573",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232715573"
+  },
+  "taube": {
+    "id": "taube",
+    "x": 671.87,
+    "z": -348.58,
+    "width": 85.8,
+    "depth": 64.55,
+    "yaw": 5.4488947,
+    "entry": [
+      646.48,
+      -325.56
+    ],
+    "sourceName": "Taube Tennis Center",
+    "sourceId": "osm-way-31712230",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "sand-volleyball": {
+    "id": "sand-volleyball",
+    "x": 1125.9,
+    "z": -278.05,
+    "width": 59.77,
+    "depth": 102.45,
+    "yaw": 5.4386017,
+    "entry": [
+      1086.1,
+      -242.71
+    ],
+    "sourceName": "Stanford Beach Volleyball Stadium",
+    "sourceId": "osm-way-487928489",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "golf": {
+    "id": "golf",
+    "x": -1025.66,
+    "z": 514.24,
+    "width": 26.06,
+    "depth": 10.87,
+    "yaw": 4.9372605,
+    "entry": [
+      -1032.91,
+      515.9
+    ],
+    "sourceName": "Arrillaga Golf Shop",
+    "sourceId": "osm-way-28592989",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-28592989"
+  },
+  "frost": {
+    "id": "frost",
+    "x": 360.55,
+    "z": -355.51,
+    "width": 123.52,
+    "depth": 83.58,
+    "yaw": 4.7844178,
+    "entry": [
+      316.87,
+      -352.36
+    ],
+    "sourceName": "Frost Amphitheatre",
+    "sourceId": "osm-way-26250717",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "oval": {
+    "id": "oval",
+    "x": 53.08,
+    "z": -284.95,
+    "width": 101.55,
+    "depth": 213.92,
+    "yaw": -0.2447226,
+    "entry": [
+      26.68,
+      -179.23
+    ],
+    "sourceName": "The Oval",
+    "sourceId": "osm-way-71183079",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "field-hockey": {
+    "id": "field-hockey",
+    "x": 1061.08,
+    "z": -338.18,
+    "width": 113.78,
+    "depth": 84.69,
+    "yaw": 2.2979861,
+    "entry": [
+      1094.21,
+      -367.66
+    ],
+    "sourceName": "Varsity Field Hockey Turf",
+    "sourceId": "osm-way-26250569",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway."
+  },
+  "softball": {
+    "id": "softball",
+    "x": 1133.43,
+    "z": -396.63,
+    "width": 80.59,
+    "depth": 80.39,
+    "yaw": -3.1056275,
+    "entry": [
+      1134.7,
+      -465.66
+    ],
+    "sourceName": "Boyd & Jill Smith Family Stadium",
+    "sourceId": "osm-way-442934843",
+    "verified": "2026-10-31",
+    "provenance": "Model reference frame aligned from mapped backstop toward mapped center-field fence, with home plate inferred using the model center-field distance. The original OSM oriented bounds remain in sourceEnvelope. Neither the inferred plate nor reconstructed fixture coordinates are surveyed.",
+    "entryProvenance": "Existing OSM pedestrian vertex nearest the behind-home-plate approach; virtual access and exact admission gate position are interpreted.",
+    "sourceEnvelope": {
+      "x": 1130.26,
+      "z": -393.37,
+      "width": 80.59,
+      "depth": 80.39,
+      "yaw": 5.4146459
+    },
+    "homePlate": [
+      1132.449,
+      -423.943
+    ],
+    "centerField": [
+      1134.86,
+      -356.93
+    ],
+    "fieldSourceId": "osm-way-26250566",
+    "modelCenterFieldDistance": 67.056,
+    "officialSource": "https://gostanford.com/stanford-softball-stadium-1",
+    "fieldAlignmentNote": "Sunken Diamond uses the officially published 400 ft center-field distance. Softball uses the model 220 ft center-field convention against an older mapped pitch; reconstructed 2026 seating extends beyond the older stadium outline. Source polygon bytes are preserved."
+  },
+  "burnham": {
+    "id": "burnham",
+    "x": 499.13,
+    "z": -111.72,
+    "width": 55.67,
+    "depth": 34.28,
+    "yaw": -0.2628147,
+    "entry": [
+      494.16,
+      -93.23
+    ],
+    "sourceName": "Burnham Pavilion",
+    "sourceId": "osm-way-232805670",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted south-facing main-hall entrance aligned toward the connected entrance wing and Jane Stanford Way, supported by Stanford ADA map 08-200. Exact reconstructed doorway position is not surveyed.",
+    "buildingId": "osm-way-232805670",
+    "connectedBuildingIds": [
+      "osm-way-232805658"
+    ],
+    "officialSource": "https://maps.stanford.edu/ada/building-ada.cfm?FACIL_ID=08-200",
+    "sourceIdentityNote": "The main gym uses OSM way 232805670. The connected southern entrance wing is way 232805658; both mapped parts are retained in the source data. Stanford ADA map 08-200 identifies the connected complex and the main entrance from Jane Stanford Way."
+  },
+  "ford": {
+    "id": "ford",
+    "x": 505.72,
+    "z": -156.36,
+    "width": 97.45,
+    "depth": 55.17,
+    "yaw": 2.8841747,
+    "entry": [
+      513.25,
+      -184.97
+    ],
+    "sourceName": "Ford Center For Sports & Recreation",
+    "sourceId": "osm-way-232805671",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805671"
+  },
+  "squash": {
+    "id": "squash",
+    "x": 547.61,
+    "z": -275.76,
+    "width": 60.27,
+    "depth": 60.43,
+    "yaw": 4.4512846,
+    "entry": [
+      516.49,
+      -284.08
+    ],
+    "sourceName": "Arrillaga Center for Sports and Recreation",
+    "sourceId": "osm-way-232805668",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-232805668"
+  },
+  "rowing": {
+    "id": "rowing",
+    "x": -4236.33,
+    "z": -8590.05,
+    "width": 31.6,
+    "depth": 37.54,
+    "yaw": -1.4303607,
+    "entry": [
+      -4256.9,
+      -8587.14
+    ],
+    "sourceName": "",
+    "sourceId": "osm-way-239446599",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-239446599",
+    "sourceIdentityNote": "OSM maps this footprint at the photographed Stanford boathouse location but carries an older 100 Cardinal Way address; the current official athletics facility page lists 300 Cardinal Way. Name/identity use the official source; outline uses OSM.",
+    "officialSource": "https://gostanford.com/facilities/arrillaga-family-rowing-and-sailing-center",
+    "district": "Redwood City waterfront",
+    "sharedVenue": "rowing"
+  },
+  "sailing": {
+    "id": "sailing",
+    "x": -4236.33,
+    "z": -8590.05,
+    "width": 31.6,
+    "depth": 37.54,
+    "yaw": -1.4303607,
+    "entry": [
+      -4256.9,
+      -8587.14
+    ],
+    "sourceName": "",
+    "sourceId": "osm-way-239446599",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "buildingId": "osm-way-239446599",
+    "sourceIdentityNote": "OSM maps this footprint at the photographed Stanford boathouse location but carries an older 100 Cardinal Way address; the current official athletics facility page lists 300 Cardinal Way. Name/identity use the official source; outline uses OSM.",
+    "officialSource": "https://gostanford.com/facilities/arrillaga-family-rowing-and-sailing-center",
+    "district": "Redwood City waterfront",
+    "sharedVenue": "rowing"
+  },
+  "maloney": {
+    "id": "maloney",
+    "x": 1055.14,
+    "z": -621.13,
+    "width": 106.37,
+    "depth": 68.48,
+    "yaw": -0.8533194,
+    "entry": [
+      1027.83,
+      -597.3
+    ],
+    "sourceName": "Maloney Field",
+    "sourceId": "osm-way-442933287",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on source envelope face near a mapped pedestrian vertex. Memorial Church faces north into the Main Quad. Not a verified physical doorway.",
+    "sharedVenue": "cagan"
+  }
+}

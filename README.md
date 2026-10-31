@@ -276,3 +276,7 @@ added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
 ## Case Western Reserve Virtual Campus
 
 The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence.
+
+## Stanford Virtual Campus
+
+`/labs/stanford` adds an independent Stanford explorer with 32 enterable landmark reconstructions, 12 outdoor venue groups, source-linked faculty/students/athletes, personal public characters, and calendar-based base/Halloween editions with original spatial sound. See [implementation and evidence](docs/STANFORD_CAMPUS_2026-10-31.md), [project guide](projects/stanford/README.md), and [local screenshots](docs/validation/stanford/README.md). Run `npm run test:stanford` for the campus suite. Local implementation does not imply production activation.
