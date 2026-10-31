@@ -1,3 +1,5 @@
+import { buildStudentCharacters } from "./student-characters";
+import { isStudentExternalSourceUrl } from "./student-import";
 import { athleticsSources } from "./athletics-layout";
 import { expandedCharacters } from "./character-expansion";
 import {
@@ -599,9 +601,22 @@ export const characters: Character[] = [
   },
 ];
 characters.push(...residenceStudents, ...expandedCharacters, ...publicEducationCharacters);
+const studentImport = buildStudentCharacters(characters);
+characters.push(...studentImport.characters);
+// A student who is already an athlete remains one person, with both sets of topics.
+for (const { existingId, student } of studentImport.existingStudyUpdates) {
+  const existing = characters.find((character) => character.id === existingId)!;
+  const studyTopics = student.topics.filter((topic) => ["studies", "study-profile", "completion"].includes(topic.id));
+  existing.topics = [...existing.topics.filter((topic) => !studyTopics.some((study) => study.id === topic.id)), ...studyTopics];
+  existing.sources = [...existing.sources, ...student.sources.filter((source) => !existing.sources.some((old) => old.url === source.url))];
+  if (!existing.biography.includes(student.biography)) existing.biography += ` ${student.biography}`;
+  existing.sourceVerificationLabel = student.sourceVerificationLabel;
+}
+export const studentImportReport = studentImport.report;
+
 
 export function safeExternalUrl(value: string): string | null {
-  if (isPublicEducationSourceUrl(value)) return value;
+  if (isPublicEducationSourceUrl(value) || isStudentExternalSourceUrl(value)) return value;
   try {
     const u = new URL(value);
     return u.protocol === "https:" &&

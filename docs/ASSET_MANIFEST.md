@@ -1394,6 +1394,10 @@ The CWRU student import retains only names, study fields, expected class years w
 
 `docs/validation/cwru/live-welcome.jpg` (1280×1608), `live-phone-sound.jpg` (390×844) and `live-library-interior.jpg` (1280×720) are original, unretouched JPEG browser captures from the production route on October 31. They document the automatic Halloween welcome, phone sound/touch controls and actual Kelvin Smith Library Level 1 entry. They are documentation evidence rather than promotional assets; the rendered avatars and architecture are original procedural reconstructions, not photographs of real people or a survey. Browser emulation is not physical-device or subjective audio certification. No real participant profile or private credential appears. The [release receipt](CWRU_RELEASE_2026-10-31.md) gives validation context.
 
+## Campus community validation captures — October 31, 2026
+
+`docs/validation/ubc-community/student-conversation.jpg` (1280×720), `reviews-desktop.jpg` (1280×720), `reviews-mobile-form.jpg` (390×844) and `privacy-mobile.jpg` (390×844) are original, unedited browser screenshots of the local Asymmetri implementation. They document a sourced student conversation, synthetic local review fixtures/form and the production-build privacy controls respectively. They are documentation evidence, not public promotional assets or live-deployment proof. No external photo, portrait, logo or real visitor IP appears. Alt descriptions and environment limitations are in the validation README.
+
 ## Stanford campus assets — 2026-10-31
 
 | Asset group | Source, processing and dimensions | Role / accessible description | Rights and limits |

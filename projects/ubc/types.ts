@@ -98,6 +98,7 @@ export type Character = {
   biography: string;
   sources: Link[];
   verified: string;
+  sourceVerificationLabel?: "Source reviewed" | "Indexed source reviewed" | "Research supplied";
   permissions: string;
   disclaimer: string;
   status: string;

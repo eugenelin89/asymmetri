@@ -1,3 +1,4 @@
+import { createStudentDepartmentAnchors, planStudentRoutes, orderStudentEncounters } from "./student-departments";
 import { uniform, sphere, material } from "./props";
 import * as THREE from "three";
 import type { Appearance } from "./appearance";
@@ -191,12 +192,16 @@ export function createPeople(
     for (const ch of value) n = Math.imul(n ^ ch.charCodeAt(0), 16777619);
     return n >>> 0;
   }
+  const actorAnchors = { ...anchors, ...createStudentDepartmentAnchors(data) };
+  const studentRoutes = planStudentRoutes(characters.filter((c) => c.model === "original-stylized-student"), data, actorAnchors, isBlocked);
   const routeCache = new Map<
     string,
     { a: Point; b: Point; distance: number }[]
   >();
   function networkRoute(c: Character): Point[] {
-    const a = anchors[c.zone];
+    const planned = studentRoutes.get(c.id);
+    if (planned) return planned;
+    const a = actorAnchors[c.zone];
     if (!a) return [];
     const segments = routeCache.get(c.zone) || [];
     if (!routeCache.has(c.zone)) {
@@ -264,7 +269,7 @@ export function createPeople(
     actors.splice(actors.indexOf(actor), 1);
   }
   function addCharacter(c: Character, index: number, prepared?: Point[]) {
-    const a = anchors[c.zone];
+    const a = actorAnchors[c.zone];
     if (!a) return;
     const entry = a.entry || global([0, a.depth / 2 + 3], a);
     const floor = c.floor || 0;
@@ -402,6 +407,9 @@ export function createPeople(
     }
   }
   let streamTimer = 0;
+  const lastEncounter = new Map<string, number>();
+  const viewFrustum = new THREE.Frustum(), viewMatrix = new THREE.Matrix4();
+  const actorBounds = new THREE.Sphere(new THREE.Vector3(), 2);
   const reactions = new Map<string, { gesture: Gesture; elapsed: number }>();
   function react(id: string, gesture: Gesture) {
     if (!actors.some((a) => a.id === id && a.named)) return false;
@@ -417,31 +425,39 @@ export function createPeople(
     active: string | null,
     reduced: boolean,
     reactionDt = dt,
+    viewCamera?: THREE.Camera,
   ) {
     streamTimer -= dt;
     if (streamTimer <= 0) {
       streamTimer = 0.6;
-      const nearby = streamed
+      const nearbyCandidates = streamed
         .map((s) => ({
           s,
-          d: Math.hypot(s.route[0][0] - focus[0], s.route[0][1] - focus[1]),
+          id: s.c.id,
+          distance: Math.hypot(s.route[0][0] - focus[0], s.route[0][1] - focus[1]),
         }))
-        .filter((x) => x.d < 125)
-        .sort((a, b) => a.d - b.d);
+        .filter((x) => x.distance < 125);
+      const nearby = orderStudentEncounters(nearbyCandidates, lastEncounter);
+      if (viewCamera) {
+        viewCamera.updateMatrixWorld();
+        viewFrustum.setFromProjectionMatrix(viewMatrix.multiplyMatrices(viewCamera.projectionMatrix, viewCamera.matrixWorldInverse));
+      }
       const streamedIds = new Set(streamed.map((s) => s.c.id));
-      // Keep already encountered actors stable; do not replace the nearest crowd every tick.
-      for (const actor of [...actors])
-        if (
-          streamedIds.has(actor.id) &&
-          actor.id !== active &&
-          Math.hypot(
-            actor.group.position.x - focus[0],
-            actor.group.position.z - focus[1],
-          ) > 180
-        )
-          release(actor);
+      const activeIds = new Set(actors.map((actor) => actor.id));
+      const oldestWaiting = nearby.reduce((oldest, candidate) => activeIds.has(candidate.id)
+        ? oldest : Math.min(oldest, lastEncounter.get(candidate.id) ?? -Infinity), Infinity);
+      // Keep nearby conversations stable. Long-lived actors rotate only outside
+      // the actual camera frustum, so dense departments do not starve the roster.
+      for (const actor of [...actors]) {
+        if (!streamedIds.has(actor.id) || actor.id === active) continue;
+        const distance = Math.hypot(actor.group.position.x - focus[0], actor.group.position.z - focus[1]);
+        actorBounds.center.copy(actor.group.position).y += 1;
+        const unseen = viewCamera && !viewFrustum.intersectsSphere(actorBounds);
+        const waiting = oldestWaiting < (lastEncounter.get(actor.id) ?? -Infinity);
+        if (distance > 180 || (distance > 35 && unseen && waiting && time - (lastEncounter.get(actor.id) ?? time) > 90)) release(actor);
+      }
       let count = actors.filter((a) => streamedIds.has(a.id)).length;
-      for (const { s, d } of nearby) {
+      for (const { s, distance: d } of nearby) {
         if (count >= 12) break;
         if (d < 9 || actors.some((a) => a.id === s.c.id)) continue;
         const start = s.route[0];
@@ -470,6 +486,7 @@ export function createPeople(
         )
           continue;
         addCharacter(s.c, hash(s.c.id), s.route);
+        lastEncounter.set(s.c.id, time);
         count++;
       }
     }

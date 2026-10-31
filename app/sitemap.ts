@@ -20,6 +20,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
+    {
+      url: `${site.company.siteUrl}/labs/campus-privacy`,
+      changeFrequency: "monthly",
+      priority: 0.3,
+    },
     ...site.footerNavigation.map((item) => ({
       url:
         item.href === tutorial.path

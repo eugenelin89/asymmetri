@@ -297,7 +297,7 @@ export function Conversation({
               <p>{character.behaviour}</p>
               <References links={character.sources} />
               <small>
-                {character.category === "community" ? "Updated" : "Sources checked"}{" "}
+                {character.category === "community" ? "Updated" : character.sourceVerificationLabel || "Sources checked"}{" "}
                 {character.verified}
               </small>
             </>

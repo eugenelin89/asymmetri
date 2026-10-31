@@ -1,4 +1,5 @@
 "use client";
+import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
 import { applyGatewayAnchors } from "./gateway-layout";
 import { beatyAnchor } from "./beaty-layout";
 import { athleticsAnchors } from "./athletics-layout";
@@ -84,6 +85,7 @@ const titleOf = (id: string) =>
   displays[id]?.name ||
   id;
 export function Campus() {
+  const playRegion = useRef<HTMLElement>(null);
   const host = useRef<HTMLDivElement>(null),
     api = useRef<CampusAPI | null>(null),
     panelRef = useRef<HTMLElement>(null),
@@ -447,8 +449,10 @@ export function Campus() {
   return (
     <section
       className={`${styles.experience} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
+      ref={playRegion}
       aria-label="UBC Virtual Campus explorer"
     >
+      <PlaySession campus="ubc" playing={started && ready && !error} regionRef={playRegion} />
       <div className={styles.canvas} ref={host} />
       {!started && (
         <div className={`${styles.welcome} ${settings.halloween ? styles.halloweenWelcome : ""}`} data-edition={settings.halloween ? "halloween" : "regular"}>
@@ -1442,6 +1446,7 @@ export function Campus() {
                   preferences stay in this browser. No real whereabouts or live
                   occupancy are collected.
                 </p>
+                <CampusPrivacyPreferences compact />
               </>
             )}
           </aside>

@@ -89,7 +89,7 @@ export const ubc = {
   name: "UBC Virtual Campus",
   path: "/labs/ubc",
   tagline: "Explore the University of British Columbia, virtually.",
-  status: "V0.4 — Landmarks & Halloween",
+  status: "V0.5 — Campus community",
   description: "Explore a campus built from official UBC geography, nine reconstructed interiors and educational guides. Visit Beaty’s whale display, Irving’s study spaces and an optional Halloween edition. Independent and unofficial.",
   source: { label: "View UBC source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/ubc" },
   license: { label: "MIT code · UBC public-domain GIS", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/ubc/THIRD_PARTY_NOTICES.md" },

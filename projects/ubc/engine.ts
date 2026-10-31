@@ -892,6 +892,7 @@ export function createCampus(
       activeCharacter,
       settings.reducedMotion,
       dt,
+      camera,
     );
     const inResidence =
       (Math.abs(residenceLocal[0]) < 18 && Math.abs(residenceLocal[1]) < 9) ||

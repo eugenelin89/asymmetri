@@ -116,8 +116,10 @@ records remain available through the cancellation record.
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind
-Nginx and systemd on a DigitalOcean Ubuntu Droplet. The website adds no analytics, form
-backend or application-owned visitor tracking. A separate, default-disabled
+Nginx and systemd on a DigitalOcean Ubuntu Droplet. The owner-requested campus
+community modules provide public reviews and private play reporting with visible
+privacy controls; their persistent stores are separate from public profiles.
+Deployment status is documented in the campus release receipts. A separate, default-disabled
 investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
 the installed receiver now accepts the exact finite HQ publisher scope and serves the initial configured portfolio. The investment
@@ -276,6 +278,10 @@ added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
 ## Case Western Reserve Virtual Campus
 
 The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence.
+
+## Campus community services
+
+Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. This release integrates UBC; each other campus thread owns its integration, testing and rollout. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
 
 ## Stanford Virtual Campus
 

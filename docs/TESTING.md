@@ -946,6 +946,12 @@ checks remain limitations; these release checks do not certify the 60 FPS target
 
 CWRU expanded roster validation adds 500-record coverage, five existing-record deduplications, contact-column exclusion in the Python importer, roster-source fallback attribution, source-linked study replies, fictional appearance variation and bounded multi-district crowds. The CWRU suite has 89 tests. `prebuild:next` includes `test:cwru`, so the Linux candidate validates the campus before packaging.
 
+## Shared campus community checks
+
+`npm run test:campus-reviews` covers browser ownership, campus isolation, sanitization, atomic concurrent writers, reporting/moderation and hidden/removed records. `npm run test:campus-analytics` covers cookie-only bootstrap, bounded duration and sequence handling, retention, private reports, removal, browser privacy signals, visibility/idle gating, request failures and cross-tab locks. Both run in `prebuild:next`.
+
+Browser acceptance must check no recording before entry, active play, hidden/off-screen pause, opt-out across same-origin campuses, browser-owned deletion, a retained game position when opening privacy links, and phone/tablet/desktop layout. Report unique browsers honestly; a test is not evidence of physical-device compatibility or human identity. Do not create public production reviews for acceptance. UBC student tests additionally exercise all 498 planned routes and actual Three.js population caps/encounter rotation.
+
 ## Stanford regression and browser coverage
 
 Run `npm run test:stanford` after relevant changes. It checks source/model cache provenance, all landmark entrances against complete-campus collision, architecture/stairs, outdoor seating, residence doors/lift, population routes, source URL boundaries, holiday dates, pursuit, audio proximity and community ownership/security. `docs/validation/stanford/README.md` records desktop/tablet/mobile checks, focus restoration, PNG capture, reduced motion and audio telemetry. Run TypeScript/ESLint and both supported builds for framework integration. Source/model changes require cache regeneration, not manual provenance hash edits.

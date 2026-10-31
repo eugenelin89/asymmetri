@@ -1,0 +1,4008 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-10-31",
+  "provenance": "User-supplied public student research. Student status and study fields are attributed to linked public profiles; this is not registrar-confirmed enrollment. Only a documented sample was independently reviewed during import.",
+  "fields": "Names, study fields, explicitly supplied expected completion years and source URLs only. No contact details, portraits, likenesses or other biographical attributes.",
+  "records": [
+    {
+      "id": "student-syed-kaushin-aaron-ocnyh4",
+      "name": "Syed-Kaushin Aaron",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4402",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hayfaa-abou-ibrahim-f8vfd9",
+      "name": "Hayfaa Abou Ibrahim",
+      "program": "Planning",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/abou-ibrahim-hayfaa",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bruno-esposito-acosta-pwmi33",
+      "name": "Bruno Esposito Acosta",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/bruno-esposito-acosta/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sarah-adair-iu348f",
+      "name": "Sarah Adair",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/adair-sarah",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-anton-afanassiev-1bld4ss",
+      "name": "Anton Afanassiev",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3054",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-marziyeh-aghaei-iab6x9",
+      "name": "Marziyeh Aghaei",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/marziyeh-aghaei/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-valerie-ah-yen-ojipmh",
+      "name": "Valerie Ah-Yen",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ah-yen-valerie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bolakale-akanbi-ai5aww",
+      "name": "Bolakale Akanbi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4266",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emmanuel-akhalu-19roklv",
+      "name": "Emmanuel Akhalu",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4285",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-andrew-alexander-hurtk1",
+      "name": "Andrew Alexander",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3783",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jessica-alexandor-33imot",
+      "name": "Jessica Alexandor",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/alexandor-jessica",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jupiter-algorta-j8sziv",
+      "name": "Jupiter Algorta",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3796",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cassandra-andrew-1y0v244",
+      "name": "Cassandra Andrew",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/andrew-cassandra",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-heather-hezy-anholt-43crst",
+      "name": "Heather (Hezy) Anholt",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/anholt-heather-hezy",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-atul-aravindakshan-16m7yei",
+      "name": "Atul Aravindakshan",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/aravindakshan-atul",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-araujo-z1adrv",
+      "name": "Daniel Araújo",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/daniel-araujo-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alison-ariss-173w4ih",
+      "name": "Alison Ariss",
+      "program": "Art History",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ariss-alison",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sooraj-arjun-padmanabhan-obzodj",
+      "name": "Sooraj Arjun Padmanabhan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4498",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ethan-armitage-1sd1i51",
+      "name": "Ethan Armitage",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2915",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-morgan-arnold-1oopx8u",
+      "name": "Morgan Arnold",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4471",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jose-arteta-1ldisy5",
+      "name": "José Arteta",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/jose-arteta/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-raha-atashpa-1sgm07r",
+      "name": "Raha AtashPa",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/atashpa-raha",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hein-thant-aung-cg2irp",
+      "name": "Hein Thant Aung",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4261",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-eloisa-avila-1pvlexf",
+      "name": "Eloisa Avila",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/eloisa-avila/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ashling-ayekun-1hgkf3p",
+      "name": "Ashling Ayekun",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/ashling-ayekun/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alexis-bahl-1hili0e",
+      "name": "Alexis Bahl",
+      "program": "Oceanography",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bahl-alexis",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sharada-balaji-1fhq10w",
+      "name": "Sharada Balaji",
+      "program": "Physics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/balaji-sharada",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-razieh-sadat-banijamali-1jusj44",
+      "name": "Razieh Sadat Banijamali",
+      "program": "Pathology and Laboratory Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/banijamali-razieh-sadat",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-angela-barrera-bello-15u1te7",
+      "name": "Angela Barrera-Bello",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/barrera-bello-angela",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maria-eugenia-guerrero-barreto-1c1dv1b",
+      "name": "Maria Eugenia Guerrero Barreto",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/maria-eugenia-guerrero-barreto/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mathias-barreto-19hoyww",
+      "name": "Mathias Barreto",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4284",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-armando-henrique-barros-a7e6gg",
+      "name": "Armando Henrique Barros",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/armando-barros/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-francis-barss-1d609rg",
+      "name": "Francis Barss",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/barss-francis",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-dennis-belotserkovskiy-1p8p4ms",
+      "name": "Dennis Belotserkovskiy",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4477",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-michele-mary-bernadine-10xt5fy",
+      "name": "Michele Mary Bernadine",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/michele-bernardine/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-george-berry-17f0hvp",
+      "name": "George Berry",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3800",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-anne-bertrand-1wxzt0j",
+      "name": "Anne Bertrand",
+      "program": "Linguistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bertrand-anne",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maricela-best-mckay-1ip01zm",
+      "name": "Maricela Best McKay",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2639",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kyle-bierly-at80b4",
+      "name": "Kyle Bierly",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4297",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicolas-campos-bijit-1hx1gse",
+      "name": "Nicolás Campos Bijit",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/nicolas-campos-bijit/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jordan-bird-1846akq",
+      "name": "Jordan Bird",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bird-jordan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-riley-bizzotto-17xbzc9",
+      "name": "Riley Bizzotto",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bizzotto-riley",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emily-black-nzw9tu",
+      "name": "Emily Black",
+      "program": "Zoology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/black-emily",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maya-bodnar-bmehw3",
+      "name": "Maya Bodnar",
+      "program": "Applied Animal Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bodnar-maya",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-fernando-boffi-1xjnyp0",
+      "name": "Fernando Boffi",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/fernando-boffi/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-victoria-bolitho-1jetecr",
+      "name": "Victoria Bolitho",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/victoria-bolitho/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-bondi-1j91gny",
+      "name": "Daniel Bondi",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bondi-daniel",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-celeste-bouchaud-17yvfp",
+      "name": "Celeste Bouchaud",
+      "program": "Human Nutrition",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bouchaud-celeste",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maria-clara-brandao-15y55bx",
+      "name": "Maria Clara Brandão",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/maria-brandao/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-katherine-breen-1lho8n0",
+      "name": "Katherine Breen",
+      "program": "Computer Science",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/breen-katherine",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-logan-breen-1i53wua",
+      "name": "Logan Breen",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/breen-logan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-rachel-bricker-1dwo0wx",
+      "name": "Rachel Bricker",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4272",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brianna-bristow-4a5fu4",
+      "name": "Brianna Bristow",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/bristow-brianna",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-natalie-brown-1vavuow",
+      "name": "Natalie Brown",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/natalie-brown/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-gaea-louise-buenaventura-11ytlgl",
+      "name": "Gaea Louise Buenaventura",
+      "program": "Pathology and Laboratory Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/buenaventura-gaea-louise",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jen-burrell-1u0h15u",
+      "name": "Jen Burrell",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/burrell-jen",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-melanie-butt-1dygc2y",
+      "name": "Melanie Butt",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/melanie-butt/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-katya-benard-1aaeq1b",
+      "name": "Katya Bénard",
+      "program": "Interdisciplinary Oncology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/benard-katya",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ariene-cabantog-1vg9hjy",
+      "name": "Ariene Cabantog",
+      "program": "Interdisciplinary Oncology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cabantog-ariene",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cecilia-cancellara-v3ehs5",
+      "name": "Cecilia Cancellara",
+      "program": "Chemical and Biological Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cancellara-cecilia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-marsya-paramita-candradewi-x83fn0",
+      "name": "Marsya Paramita Candradewi",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/marsya-paramita-candradewi/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chenyue-cao-15pelr1",
+      "name": "Chenyue Cao",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/chenyue-cao/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ginevra-casini-zo67zm",
+      "name": "Ginevra Casini",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/ginevra-casini/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-virginie-chalifoux-1jrz1mb",
+      "name": "Virginie Chalifoux",
+      "program": "Applied Animal Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/chalifoux-virginie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hody-chang-1e197f3",
+      "name": "Hody Chang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3767",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-james-chau-blmsg6",
+      "name": "James Chau",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3984",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-dylan-chaussoy-f7hmgt",
+      "name": "Dylan Chaussoy",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3989",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bo-yu-chen-1qxj4l5",
+      "name": "Bo-Yu Chen",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/bo-yu-chen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-keqin-chen-w40v05",
+      "name": "Keqin Chen",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/keqin-chen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yiyan-chen-sbrrp0",
+      "name": "Yiyan Chen",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/yiyan-chen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuting-chen-1pd4xx5",
+      "name": "Yuting Chen",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/yuting-chen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zihan-gabriella-chen-1oeqbjv",
+      "name": "Zihan Gabriella Chen",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4472",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-melody-cheng-80pwse",
+      "name": "Melody Cheng",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cheng-melody",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mandelena-chetty-1p7559v",
+      "name": "Mandelena Chetty",
+      "program": "Audiology and Speech Sciences, Sub-Specialization in Speech-Language Pathology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/chetty-mandelena",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kai-choi-o202ok",
+      "name": "Kai Choi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4499",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maggie-chong-9z3s8a",
+      "name": "Maggie Chong",
+      "program": "Materials Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/chong-maggie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chun-pang-chow-1clnqvh",
+      "name": "Chun Pang Chow",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/chun-pang-chow/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jennifer-chu-w5frna",
+      "name": "Jennifer Chu",
+      "program": "Doctor of Musical Arts in Orchestral Instrument (DMA)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/chu-jennifer",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-khai-qing-chua-1807tig",
+      "name": "Khai Qing Chua",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/khai-qing-chua/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-stanley-combes-1o4qpuw",
+      "name": "Stanley Combes",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4473",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isabella-corbet-17757o1",
+      "name": "Isabella Corbet",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/corbet-isabella",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cynthia-cui-e0lkjw",
+      "name": "Cynthia Cui",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cui-cynthia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuze-cui-1av97n4",
+      "name": "Yuze Cui",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3977",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nance-cunningham-15vz01k",
+      "name": "Nance Cunningham",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cunningham-nance",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sarah-cushnie-x7fyax",
+      "name": "Sarah Cushnie",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/cushnie-sarah",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sawyer-d-entremont-1xlueng",
+      "name": "Sawyer d'Entremont",
+      "program": "Chemical and Biological Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/dentremont-sawyer",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-saif-dababneh-1pibawz",
+      "name": "Saif Dababneh",
+      "program": "Doctor of Medicine and Doctor of Philosophy (MDPhD)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/dababneh-saif",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jiyuan-dai-1evb5zz",
+      "name": "Jiyuan Dai",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3770",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicole-davies-h2rvyf",
+      "name": "Nicole Davies",
+      "program": "Integrated Studies in Land and Food Systems",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/davies-nicole",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-eric-davis-hk3ixr",
+      "name": "Eric Davis",
+      "program": "Mechanical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/davis-eric",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jeffrey-dawson-1f0mfot",
+      "name": "Jeffrey Dawson",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4276",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-francesco-de-alberti-1lr5kg2",
+      "name": "Francesco De Alberti",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/francesco-de-alberti/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-manuel-de-faria-cwghre",
+      "name": "Manuel De Faria",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/manuel-de-faria/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-huub-de-jong-iytdtw",
+      "name": "Huub de Jong",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3797",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-diego-delic-1rsgev2",
+      "name": "Diego Delic",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/diego-delic/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-diego-gabriel-delic-1rcz951",
+      "name": "Diego Gabriel Delic",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/delic-diego-gabriel",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-obleo-demandre-1moialw",
+      "name": "Obleo Demandre",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/obleo-demandre/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-james-dickson-1911bew",
+      "name": "James Dickson",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/dickson-james",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-gian-carlo-diluvi-f7vgkc",
+      "name": "Gian Carlo Diluvi",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/gian-carlo-diluvi",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-andrew-dissanayake-1ooch89",
+      "name": "Andrew Dissanayake",
+      "program": "Doctor of Medicine and Doctor of Philosophy (MDPhD)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/dissanayake-andrew",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-aislinn-dressler-1vkk5jt",
+      "name": "Aislinn Dressler",
+      "program": "Civil Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/dressler-aislinn",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-william-duan-sluaqi",
+      "name": "William Duan",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/people/?type=graduate_student",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-fanny-dupont-1e74wek",
+      "name": "Fanny DUPONT",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/fanny-dupont",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-angel-espinoza-e-1msm9pp",
+      "name": "Angel Espinoza E",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/angel-espinoza-escobar/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-enge-1b5ml2q",
+      "name": "Daniel Enge",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4282",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zoe-esseiva-1vdbu2v",
+      "name": "Zoë Esseiva",
+      "program": "Nursing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/esseiva-zoe",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lea-farah-k35d0x",
+      "name": "Lea Farah",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/farah-lea",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-colleen-farrell-eycdrx",
+      "name": "Colleen Farrell",
+      "program": "Human Nutrition",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/farrell-colleen",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ali-fele-paranj-16kyjat",
+      "name": "Ali Fele-Paranj",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3813",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ekaterina-filatov-1prfabc",
+      "name": "Ekaterina Filatov",
+      "program": "Cell and Developmental Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/filatov-ekaterina",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-danielle-fitzpatrick-wa4k85",
+      "name": "Danielle Fitzpatrick",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/danielle-fitzpatrick/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-erin-fitzpatrick-1s188gh",
+      "name": "Erin Fitzpatrick",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/erin-fitzpatrick/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jorge-emilio-melendez-flores-mz5378",
+      "name": "Jorge Emilio Melendez Flores",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/jorge-emilio-melendez-flores/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-madeline-forbes-ezvb8z",
+      "name": "Madeline Forbes",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4502",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-leilani-forby-1h8ny4i",
+      "name": "Leilani Forby",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/leilani-forby/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-serena-formenti-1h9nvmr",
+      "name": "Serena Formenti",
+      "program": "Geological Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/formenti-serena",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-lipshutz-forrest-1d5ag5n",
+      "name": "Daniel Lipshutz Forrest",
+      "program": "Resources, Environment and Sustainability",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/forrest-daniel-lipshutz",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brandon-forys-kv3e5d",
+      "name": "Brandon Forys",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/brandon-forys/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shaul-francus-1eqmtzu",
+      "name": "Shaul Francus",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4277",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-justin-fraser-pmfpw1",
+      "name": "Justin Fraser",
+      "program": "Curriculum Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/fraser-justin",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emilio-freire-raymond-s0afne",
+      "name": "Emilio Freire Raymond",
+      "program": "Sociology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/freire-raymond-emilio",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-catie-futhey-kvagpm",
+      "name": "Catie Futhey",
+      "program": "Doctor of Medicine and Doctor of Philosophy (MDPhD)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/futhey-catie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-renata-gabuzyan-1dznxgf",
+      "name": "Renata Gabuzyan",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/gabuzyan-renata",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nitya-gadhiwala-dr1a9v",
+      "name": "Nitya Gadhiwala",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3068",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-javier-gallardo-saenz-lu394s",
+      "name": "Javier Gallardo Saenz",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4491",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sihaoyu-gao-wal4mb",
+      "name": "Sihaoyu Gao",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/sihaoyu-gao",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sabrina-ge-1gen1tk",
+      "name": "Sabrina Ge",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/sabrina-ge/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jaiden-george-7jswyx",
+      "name": "Jaiden George",
+      "program": "Art History",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/george-jaiden",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alan-getz-1c6ildy",
+      "name": "Alan Getz",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3096",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-paniz-ghavimi-19anyc2",
+      "name": "Paniz Ghavimi",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ghavimi-paniz",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cole-gigliotti-1ebbym1",
+      "name": "Cole Gigliotti",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3776",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-miranda-gilbert-e48c5s",
+      "name": "Miranda Gilbert",
+      "program": "Zoology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/gilbert-miranda",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-evan-glasgow-mnywpq",
+      "name": "Evan Glasgow",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4488",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hunter-golemon-gxvolr",
+      "name": "Hunter Golemon",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4533",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sam-good-ftlnwe",
+      "name": "Sam Good",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/sam-good/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-danielle-gordon-d1z3gy",
+      "name": "Danielle Gordon",
+      "program": "Microbiology and Immunology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/gordon-danielle",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-callum-goulet-kilgour-13tk73n",
+      "name": "Callum Goulet-Kilgour",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/callum-goulet-kilgour/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sadie-graves-1v2zgzv",
+      "name": "Sadie Graves",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/graves-sadie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vincent-guan-1wjq4n5",
+      "name": "Vincent Guan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2986",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lucina-rodriguez-guillen-1tmz747",
+      "name": "Lucina Rodriguez Guillen",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/lucina-rodriguez-guillen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isaac-guld-116u0jw",
+      "name": "Isaac Guld",
+      "program": "Civil Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/guld-isaac",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sara-gunderson-5navjp",
+      "name": "Sara Gunderson",
+      "program": "Medical Genetics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/gunderson-sara",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-margot-gunning-1fc2zyi",
+      "name": "Margot Gunning",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/gunning-margot-0",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bridget-guo-vaujt",
+      "name": "Bridget Guo",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/guo-bridget",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yangyilin-guo-1cjj0sl",
+      "name": "Yangyilin Guo",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/yangyilin-guo/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-leopoldo-gutierre-queive",
+      "name": "Leopoldo Gutierre",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/leopoldo-gutierre/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-guzman-12f7uuq",
+      "name": "Daniel Guzmán",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/daniel-guzman/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alex-haagaard-1hjpyb8",
+      "name": "Alex Haagaard",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/haagaard-alex",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-daniel-hadley-i28g46",
+      "name": "Daniel Hadley",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/daniel-hadley",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alex-hagler-5z6yw0",
+      "name": "Alex Hagler",
+      "program": "Classics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hagler-alex",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sahi-hajirawala-fq8c16",
+      "name": "Sahi Hajirawala",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hajirawala-sahi",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cameron-hall-xtnmpu",
+      "name": "Cameron Hall",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/cameron-hall/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-luke-han-1dcotiz",
+      "name": "Luke Han",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4270",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-michelle-han-3940zr",
+      "name": "Michelle Han",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/michelle-han/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-noureldein-hanafi-bw3bdr",
+      "name": "Noureldein Hanafi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4263",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emma-hancock-dfung0",
+      "name": "Emma Hancock",
+      "program": "Botany",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hancock-emma",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ridley-handley-j0v8i9",
+      "name": "Ridley Handley",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/handley-ridley",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emma-hansen-su6wuo",
+      "name": "Emma Hansen",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2949",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matias-harari-1rqjcc3",
+      "name": "Matias Harari",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/matias-harari/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-rawley-harrison-1mgt3p2",
+      "name": "Rawley Harrison",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4479",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jacqueline-heitzner-ipygp7",
+      "name": "Jacqueline Heitzner",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/heitzner-jacqueline",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jorden-hendry-1jdjzoz",
+      "name": "Jorden Hendry",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hendry-jorden",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zofia-herbermann-3sdk3k",
+      "name": "Zofia Herbermann",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3546",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jonah-heyl-rdbh3d",
+      "name": "Jonah Heyl",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/jonah-heyl/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cheuk-hin-ho-75i74f",
+      "name": "Cheuk Hin Ho",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3598",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-quan-hong-11pk5w2",
+      "name": "Quan Hong",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hong-quan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-seonwoo-hong-1brh44c",
+      "name": "Seonwoo Hong",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/seonwoo-hong/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kisho-hoshi-vprhin",
+      "name": "Kisho Hoshi",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/kisho-hoshi-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mark-howard-ago1r5",
+      "name": "Mark Howard",
+      "program": "Law",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/howard-mark",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bernie-hsu-1j0ywem",
+      "name": "Bernie Hsu",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3755",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alexi-hu-1uug2vv",
+      "name": "Alexi Hu",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hu-alexi",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lauren-huang-5j61zp",
+      "name": "Lauren Huang",
+      "program": "Civil Engineering",
+      "expectedCompletion": "2027",
+      "sourceUrl": "https://ca.linkedin.com/in/lauren-huang",
+      "sourceKind": "self-report"
+    },
+    {
+      "id": "student-will-huang-pq0ucd",
+      "name": "Will Huang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4467",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yin-huang-cpl782",
+      "name": "Yin Huang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3980",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yixian-huang-1d2p7u0",
+      "name": "Yixian Huang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4271",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vivian-hughes-ealf8y",
+      "name": "Vivian Hughes",
+      "program": "Medical Physics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hughes-vivian",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-edwin-huras-1psoc0q",
+      "name": "Edwin Huras",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4475",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hebah-hussaina-xfk09r",
+      "name": "Hebah Hussaina",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/hussaina-hebah",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-gabrielle-ibasco-1msszkk",
+      "name": "Gabrielle Ibasco",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/gabrielle-ibasco/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-declan-isaak-1xbtj67",
+      "name": "Declan Isaak",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/isaak-declan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-aika-ishige-avxzvi",
+      "name": "Aika Ishige",
+      "program": "Language and Literacy Education",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ishige-aika",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brooke-isrow-1keioyu",
+      "name": "Brooke Isrow",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/brooke-isrow/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kelvin-j-ch5mgy",
+      "name": "Kelvin J.",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4291",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hammad-jabr-yrbrgu",
+      "name": "Hammad Jabr",
+      "program": "Geography",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/jabr-hammad",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-faith-jabs-1i29pqc",
+      "name": "Faith Jabs",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/faith-jabs/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kai-jacobsen-x4p01n",
+      "name": "Kai Jacobsen",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/jacobsen-kai",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-pranjal-jain-bm3pos",
+      "name": "Pranjal Jain",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4262",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-prakhar-jaiswal-b24iau",
+      "name": "Prakhar Jaiswal",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4264",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-deaglan-jakob-bon93y",
+      "name": "Deaglan Jakob",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/deaglan-jakob/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chaojie-ji-9df0o7",
+      "name": "Chaojie Ji",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3590",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-juan-miguel-jimenez-crml6f",
+      "name": "Juan Miguel Jimenez",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/juan-miguel-jimenez/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yash-joshi-1iocdoi",
+      "name": "Yash Joshi",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/yash-joshi/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicole-nikki-kaechele-9m6672",
+      "name": "Nicole (Nikki) Kaechele",
+      "program": "Resources, Environment and Sustainability",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kaechele-nicole-nikki",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lia-kale-1bqy7gf",
+      "name": "Lia Kale",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/lia-lorena-kale-ribeiro-braga/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-anahita-karandikar-1uve1fb",
+      "name": "Anahita Karandikar",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/anahita-karandikar/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vasileia-karasavva-18p8tzg",
+      "name": "Vasileia Karasavva",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/vasileia-karasavva/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hesam-karimi-6v1umy",
+      "name": "Hesam Karimi",
+      "program": "Pathology and Laboratory Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/karimi-hesam",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alex-karlson-jw2vs0",
+      "name": "Alex Karlson",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4482",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-dashleen-kaur-9vidnj",
+      "name": "Dashleen Kaur",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/dashleen-kaur-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-akash-kav-6ifcv6",
+      "name": "Akash Kav",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4303",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cathryn-kelly-1egn8av",
+      "name": "Cathryn Kelly",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4274",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-frances-kenston-14vm7jv",
+      "name": "Frances Kenston",
+      "program": "Educational Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kenston-frances",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-phillip-kirwin-azfi0h",
+      "name": "Phillip Kirwin",
+      "program": "Electrical and Computer Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kirwin-phillip",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-michael-kishchuk-1ma5376",
+      "name": "Michael Kishchuk",
+      "program": "History",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kishchuk-michael",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ariel-ko-1w5modm",
+      "name": "Ariel Ko",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ko-ariel",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-valeria-kolesova-qyymcb",
+      "name": "Valeria Kolesova",
+      "program": "Master of Journalism (MJ)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kolesova-valeria",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-halen-kovacs-y10y6g",
+      "name": "Halen Kovacs",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kovacs-halen",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-prerna-kundu-160nl3k",
+      "name": "Prerna Kundu",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/prerna-kundu/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-grace-i-chih-kuo-1rluy41",
+      "name": "Grace (I-Chih) Kuo",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/kuo-grace-i-chih",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-rachel-kwan-la41qu",
+      "name": "Rachel Kwan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4497",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-guillermo-sanchez-laguardia-1stejm",
+      "name": "Guillermo Sanchez Laguardia",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/guillermo-sanchez-laguardia/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kevin-lam-e46xln",
+      "name": "Kevin Lam",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/kevin-lam",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cesar-landin-1dvfzrh",
+      "name": "César Landín",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/cesar-landin/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isidora-lara-1uhzzhw",
+      "name": "Isidora Lara",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/isidora-lara/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-etienne-latulippe-1lnoav4",
+      "name": "Étienne Latulippe",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/etienne-latulippe-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jennifer-lavalley-19oya5s",
+      "name": "Jennifer Lavalley",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lavalley-jennifer",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-justin-lawrence-1f16ejo",
+      "name": "Justin Lawrence",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3946",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emily-lawson-fzv5nd",
+      "name": "Emily Lawson",
+      "program": "Philosophy",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lawson-emily",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-rory-lawson-1dw95c2",
+      "name": "Rory Lawson",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/35398/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-carson-leach-1l2wkcw",
+      "name": "Carson Leach",
+      "program": "Women+ and Children's Health Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/leach-carson",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jessalyn-leblanc-yawod9",
+      "name": "Jessalyn LeBlanc",
+      "program": "Creative Writing, Distance Education",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/leblanc-jessalyn",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jenna-ji-soo-lee-tbift3",
+      "name": "Jenna (Ji Soo) Lee",
+      "program": "Counselling Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lee-jenna-ji-soo",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jessica-lee-q6z564",
+      "name": "Jessica Lee",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/jessica-lee/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-juhyeong-lee-1mqspe1",
+      "name": "Juhyeong Lee",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4478",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-seungyeon-lee-171ke1q",
+      "name": "Seungyeon Lee",
+      "program": "Zoology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lee-seungyeon",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-uyseok-lee-howmcp",
+      "name": "Uyseok Lee",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/uyseok-lee/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zelyn-lee-1m23cyl",
+      "name": "Zelyn Lee",
+      "program": "Women+ and Children's Health Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lee-zelyn",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nikou-lei-1abnrzt",
+      "name": "Nikou Lei",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4287",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matteo-lepur-bq3boy",
+      "name": "Matteo Lepur",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/matteo-lepur",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bonnie-leung-fnrijv",
+      "name": "Bonnie Leung",
+      "program": "Nursing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/leung-bonnie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-crystal-leung-8shab8",
+      "name": "Crystal Leung",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/leung-crystal",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cynthia-li-cxsj0",
+      "name": "Cynthia Li",
+      "program": "Women+ and Children's Health Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/li-cynthia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-haoling-li-1dmof7y",
+      "name": "Haoling Li",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4273",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-su-liang-e0xqgv",
+      "name": "Su Liang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3073",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jeffrey-lin-1jtpsor",
+      "name": "Jeffrey Lin",
+      "program": "Cell and Developmental Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lin-jeffrey",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-joseph-lin-71tfni",
+      "name": "Joseph Lin",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4369",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-young-lin-lk3nft",
+      "name": "Young Lin",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4496",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-evan-lindsay-9den19",
+      "name": "Evan Lindsay",
+      "program": "Master of Architecture (MARCH)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lindsay-evan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jiaping-olivia-liu-10j36bw",
+      "name": "Jiaping(Olivia) Liu",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/jiapingolivia-liu",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zhe-liu-1go2qq0",
+      "name": "Zhe Liu",
+      "program": "Computer Science",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/liu-zhe",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ragul-loganathan-s7x6yf",
+      "name": "Ragul Loganathan",
+      "program": "Audiology and Speech Sciences, Sub-Specialization in Audiology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/loganathan-ragul",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-miranda-long-rzuiz8",
+      "name": "Miranda Long",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/miranda-long/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-danny-lu-1v5j3hm",
+      "name": "Danny Lu",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/danny-lu/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-michelle-lu-15lq0zb",
+      "name": "Michelle Lu",
+      "program": "Occupational and Environmental Hygiene",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/lu-michelle",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-qixia-luo-b37m03",
+      "name": "Qixia Luo",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4296",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brayan-alexis-condori-luque-1th6leu",
+      "name": "Brayan Alexis Condori Luque",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/brayan-alexis-condori-luque/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-helen-ma-d7zp3u",
+      "name": "Helen Ma",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/helen-ma/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jeffrey-ma-1hd0zzg",
+      "name": "Jeffrey Ma",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/jeffrey-ma/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jintao-ma-hrrc6p",
+      "name": "Jintao Ma",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4508",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sophie-rose-macdonald-16b233t",
+      "name": "Sophie (Rose) MacDonald",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3804",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-claire-macdonell-1qfla6s",
+      "name": "Claire MacDonell",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/macdonell-claire",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-raymond-macneil-17visq7",
+      "name": "Raymond MacNeil",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/raymond-macneil/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alia-mahrez-10p9gwc",
+      "name": "Alia Mahrez",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/alia-mahrez/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-karina-makarova-1dspf7d",
+      "name": "Karina Makarova",
+      "program": "Medical Genetics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/makarova-karina",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-claudia-makhanko-tang-4g25rp",
+      "name": "Claudia Makhanko-Tang",
+      "program": "Women+ and Children's Health Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/makhanko-tang-claudia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vika-makovetski-ywvv2s",
+      "name": "Vika Makovetski",
+      "program": "Plant Science",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/makovetski-vika",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mayur-mallya-slst2t",
+      "name": "Mayur Mallya",
+      "program": "Bioinformatics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mallya-mayur",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-thomas-bernhard-malthouse-17pae9y",
+      "name": "Thomas Bernhard Malthouse",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/thomas-bernhard-malthouse/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-takamitsu-mamashita-1qvadpt",
+      "name": "Takamitsu Mamashita",
+      "program": "Language and Literacy Education",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mamashita-takamitsu",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-behnam-maneshgar-1ww99h6",
+      "name": "Behnam Maneshgar",
+      "program": "Bioinformatics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/maneshgar-behnam",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-david-manuel-nl7euq",
+      "name": "David Manuel",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/david-manuel/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-qiangqiang-mao-iqawuw",
+      "name": "Qiangqiang Mao",
+      "program": "Chemical and Biological Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mao-qiangqiang",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-olivia-maracle-pqxbzq",
+      "name": "Olivia Maracle",
+      "program": "Nursing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/maracle-olivia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-giovanni-marzenta-ep2g0q",
+      "name": "Giovanni Marzenta",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4299",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-neshat-mashreghi-mohammadi-1md013e",
+      "name": "Neshat Mashreghi Mohammadi",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mashreghi-mohammadi-neshat",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vasiliki-mavrogeorgou-68fr67",
+      "name": "Vasiliki Mavrogeorgou",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4300",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-erica-mcadam-1azibgi",
+      "name": "Erica McAdam",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mcadam-erica",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isaac-mcallister-gnsxet",
+      "name": "Isaac McAllister",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4504",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-tighe-mcasey-1q2nxpp",
+      "name": "Tighe McAsey",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4474",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yasmine-mcdonough-13dtf2t",
+      "name": "Yasmine McDonough",
+      "program": "Zoology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mcdonough-yasmine",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-leo-mchegg-1x513ja",
+      "name": "Leo McHegg",
+      "program": "Counselling Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mchegg-leo",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kayla-mcintyre-157ek56",
+      "name": "Kayla McIntyre",
+      "program": "Theatre",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mcintyre-kayla",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kyra-mckinnon-hnzdnv",
+      "name": "Kyra McKinnon",
+      "program": "Kinesiology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mckinnon-kyra",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-scott-mcneil-zwkh2c",
+      "name": "Scott McNeil",
+      "program": "Chemistry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mcneil-scott",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jakob-meckes-9f47r8",
+      "name": "Jakob Meckes",
+      "program": "Chemistry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/meckes-jakob",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jeenat-mehareen-14m18cj",
+      "name": "Jeenat Mehareen",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mehareen-jeenat",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yihan-mei-1kd9m6d",
+      "name": "Yihan Mei",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/yihan-mei/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sebastian-melo-martin-1m3i3zp",
+      "name": "Sebastian Melo-Martin",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/sebastian-melo-martin-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-louis-meunier-kg235y",
+      "name": "Louis Meunier",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4480",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-filip-milidrag-epvpk0",
+      "name": "Filip Milidrag",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4503",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-caroline-miller-d2ynco",
+      "name": "Caroline Miller",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/caroline-miller/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-karina-miller-1cjakl1",
+      "name": "Karina Miller",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/karina-miller/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-natalia-modzelik-1iv22qc",
+      "name": "Natalia Modzelik",
+      "program": "Special Education",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/modzelik-natalia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-tatiana-mojica-13bu6ok",
+      "name": "Tatiana Mojica",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/tatiana-mojica/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-elahe-mollaheydar-czksx1",
+      "name": "Elahe Mollaheydar",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3981",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-andres-montiel-4audtu",
+      "name": "Andrés Montiel",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/andresmontiel/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-joanne-monique-moore-161h84d",
+      "name": "Joanne Monique Moore",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/joanne-monique-moore/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuveshen-mooroogen-1gmfdzh",
+      "name": "Yuveshen Mooroogen",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3088",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-natalia-mora-cuellar-1d3jsxj",
+      "name": "Natalia Mora Cuellar",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4289",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicolas-morales-preciado-c64b57",
+      "name": "Nicolas Morales Preciado",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3600",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-meriwether-morris-1fyp9kd",
+      "name": "Meriwether Morris",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/morris-meriwether",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-talia-morstead-vmnb2i",
+      "name": "Talia Morstead",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/talia-morstead/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mahara-mtawali-c7vyd4",
+      "name": "Mahara Mtawali",
+      "program": "Botany",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mtawali-mahara",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ana-mucalica-ey9gde",
+      "name": "Ana Mucalica",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3908",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-atonu-mukherjee-16v1ahr",
+      "name": "Atonu Mukherjee",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3802",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-benjamin-mulchinock-nb8dxe",
+      "name": "Benjamin Mulchinock",
+      "program": "Philosophy",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/mulchinock-benjamin",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-liam-murdock-1aba119",
+      "name": "Liam Murdock",
+      "program": "Mechanical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/murdock-liam",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-adrian-murillo-jimenez-rlk3p9",
+      "name": "Adrian Murillo Jimenez",
+      "program": "Gender, Race, Sexuality and Social Justice",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/murillo-jimenez-adrian",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-talha-naeem-1ml9c7h",
+      "name": "Talha Naeem",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/talha-naeem/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sarvagnya-narayan-bc43zt",
+      "name": "Sarvagnya Narayan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4265",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-erick-navarro-delgado-v0p7n",
+      "name": "Erick Navarro-Delgado",
+      "program": "Bioinformatics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/navarro-delgado-erick",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-marisa-nelson-12sp6kx",
+      "name": "Marisa Nelson",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/nelson-marisa",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chinekwu-nwagwu-spj97g",
+      "name": "Chinekwu Nwagwu",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/nwagwu-chinekwu",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vicente-francisco-guerra-ochoa-isqglb",
+      "name": "Vicente Francisco Guerra Ochoa",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/vicente-francisco-guerra-ochoa/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-danny-ofek-1i9lkjr",
+      "name": "Danny Ofek",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3002",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ananya-ogiral-x3u6pf",
+      "name": "Ananya Ogiral",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ogiral-ananya",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-olaitan-ogunnote-1w6ar3q",
+      "name": "Olaitan Ogunnote",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/olaitan-ogunnote/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shiho-ogura-1dfxx5g",
+      "name": "Shiho Ogura",
+      "program": "Music, Emphasis Ethnomusicology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ogura-shiho",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-neslihan-oguz-1e5cvjx",
+      "name": "Neslihan Oguz",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/neslihan-oguz/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chrysogonus-okwenna-1hiwv5y",
+      "name": "Chrysogonus Okwenna",
+      "program": "Philosophy",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/okwenna-chrysogonus",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-abby-oldford-6zrrwf",
+      "name": "Abby Oldford",
+      "program": "Kinesiology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/oldford-abby",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-conor-olive-exl69t",
+      "name": "Conor Olive",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3992",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-annabelle-olivier-1wb71kp",
+      "name": "Annabelle Olivier",
+      "program": "Political Science",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/olivier-annabelle",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lucas-olmstead-1oypixt",
+      "name": "Lucas Olmstead",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4470",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ayodele-oloko-g50682",
+      "name": "Ayodele Oloko",
+      "program": "Oceans and Fisheries",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/oloko-ayodele",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lydia-ong-77zpzb",
+      "name": "Lydia Ong",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/lydia-ong/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ekaterina-ossetchkina-1ivvmd7",
+      "name": "Ekaterina Ossetchkina",
+      "program": "Geological Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/ossetchkina-ekaterina",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kendra-oudyk-3xtyby",
+      "name": "Kendra Oudyk",
+      "program": "Master of Library and Information Studies (MLIS)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/oudyk-kendra",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hao-ouyang-cfllj3",
+      "name": "Hao Ouyang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3983",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-beatriz-palos-reynoso-g3tq0v",
+      "name": "Beatriz Palos Reynoso",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4506",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-arthur-paluszkiewicz-magner-1ne1hx5",
+      "name": "Arthur Paluszkiewicz-Magner",
+      "program": "LLM - Master of Laws",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/paluszkiewicz-magner-arthur",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicolas-paris-1a93cl3",
+      "name": "Nicolas Paris",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/nicolas-paris/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lucia-parrilla-3ldx4s",
+      "name": "Lucia Parrilla",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/lucia-parrilla/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jackson-partridge-3xt59m",
+      "name": "Jackson Partridge",
+      "program": "Geological Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/partridge-jackson",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-juan-patino-pyye3a",
+      "name": "Juan Patino",
+      "program": "Philosophy",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/patino-juan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-aadrita-paul-l04g1v",
+      "name": "Aadrita Paul",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4494",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-braedon-pauze-kpuu1b",
+      "name": "Braedon Pauzé",
+      "program": "Germanic Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/pauze-braedon",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matteo-paventi-vei77e",
+      "name": "Matteo Paventi",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/paventi-matteo",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-clement-pdf-1cpzto9",
+      "name": "Clement PDF",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3026",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-max-ponce-de-leon-perez-n4mjek",
+      "name": "Max Ponce de Leon Perez",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/max-ponce-de-leon-perez/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-john-perrier-1750mqb",
+      "name": "John Perrier",
+      "program": "Pathology and Laboratory Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/perrier-john",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-marni-phillipson-c6hqoe",
+      "name": "Marni Phillipson",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4228",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-edwina-picon-1gpfbl7",
+      "name": "Edwina Picon",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/edwina-picon/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-parham-pishrobat-1cp1ws3",
+      "name": "Parham Pishrobat",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/parham-pishrobat",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-oscar-poitras-kq4ucw",
+      "name": "Oscar Poitras",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4495",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-letitia-pokiak-1nkzkk",
+      "name": "Letitia Pokiak",
+      "program": "Educational Leadership and Policy",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/pokiak-letitia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ana-polgar-4fk9bq",
+      "name": "Ana Polgar",
+      "program": "Planning",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/polgar-ana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-tetiana-poliakova-1y9rh6b",
+      "name": "Tetiana Poliakova",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/poliakova-tetiana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-samara-polwatta-lekamlage-17l8w94",
+      "name": "Samara Polwatta Lekamlage",
+      "program": "Oceans and Fisheries",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/polwatta-lekamlage-samara",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-himani-prajapati-1361aed",
+      "name": "Himani Prajapati",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/prajapati-himani",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lydia-puetz-xw4dm4",
+      "name": "Lydia Puetz",
+      "program": "Women+ and Children's Health Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/puetz-lydia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-xiomara-pulido-12qgyak",
+      "name": "Xiomara Pulido",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/xiomara-pulido-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-simran-purewal-1dfppjv",
+      "name": "Simran Purewal",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/purewal-simran",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isaac-qi-1frjvrq",
+      "name": "Isaac Qi",
+      "program": "Applied Animal Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/qi-isaac",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-romina-sofia-quagliotti-1g7qk1j",
+      "name": "Romina Sofia Quagliotti",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/romina-sofia-quagliotti/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mingyu-quan-1ctk78k",
+      "name": "Mingyu Quan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4288",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-julian-quigg-qvfu4x",
+      "name": "Julian Quigg",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/quigg-julian",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-liam-quinn-1o4jtc7",
+      "name": "Liam Quinn",
+      "program": "Counselling Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/quinn-liam",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-dayna-rachkowski-3yqn1u",
+      "name": "Dayna Rachkowski",
+      "program": "Resources, Environment and Sustainability",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rachkowski-dayna",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-amir-rad-h41ez9",
+      "name": "Amir Rad",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rad-amir",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jade-radke-kmh35v",
+      "name": "Jade Radke",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/jade-radke/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sudarshan-ramanujam-ujcoov",
+      "name": "Sudarshan Ramanujam",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/sudarshan-ramanujam-sriram-aittreya/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isaac-rankin-1gq4mmh",
+      "name": "Isaac Rankin",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rankin-isaac",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-keetley-rate-ftu4bw",
+      "name": "Keetley Rate",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4507",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-meghna-sinha-ray-9xkur",
+      "name": "Meghna Sinha Ray",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/meghna-sinha-ray/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sebastian-rodriguez-raza-11m5nit",
+      "name": "Sebastian Rodriguez Raza",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/sebastian-rodriguez-raza/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vedran-juraj-razmilic-1k9xaqn",
+      "name": "Vedran Juraj Razmilic",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/vedran-juraj-razmilic/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-solana-redway-ziola-11zegob",
+      "name": "Solana Redway-Ziola",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/redway-ziola-solana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shivani-regan-k62hgz",
+      "name": "Shivani Regan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4483",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-masoud-rezaeian-1c2quyo",
+      "name": "Masoud Rezaeian",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3700",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ramin-rezaeianzadeh-6c0wzd",
+      "name": "Ramin Rezaeianzadeh",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rezaeianzadeh-ramin",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ratzanyel-rincon-ztoquj",
+      "name": "Ratzanyel Rincón",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/ratzanyel-rincon-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-david-roberts-lk0hxu",
+      "name": "David Roberts",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4484",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-serene-rodrigues-1cn0xqh",
+      "name": "Serene Rodrigues",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rodrigues-serene",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ignacio-rojas-aravena-1bfm6rp",
+      "name": "Ignacio Rojas Aravena",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4283",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-aidan-romanow-bear-1iw3n20",
+      "name": "Aidan Romanow-Bear",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/aidan-romanow-bear/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kimberly-rondeau-591img",
+      "name": "Kimberly Rondeau",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rondeau-kimberly",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-renata-rovelo-on3xj3",
+      "name": "Renata Rovelo",
+      "program": "Resources, Environment and Sustainability",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/rovelo-renata",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-abha-roy-simpson-rvhnax",
+      "name": "Abha Roy Simpson",
+      "program": "Educational Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/roy-simpson-abha",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mitchell-ryan-cfzd9q",
+      "name": "Mitchell Ryan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4259",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-dorsa-sadeghi-1ddsry9",
+      "name": "Dorsa Sadeghi",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sadeghi-dorsa",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-omran-safi-3i1u7c",
+      "name": "Omran Safi",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/omran-safi/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-fatemeh-saghafifar-1mnemto",
+      "name": "Fatemeh Saghafifar",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3296",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sakshi-sahakari-1rcsnd5",
+      "name": "Sakshi Sahakari",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/sakshi-sahakari/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isa-samad-1sans6e",
+      "name": "Isa Samad",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/samad-isa",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-simran-samra-j0vnif",
+      "name": "Simran Samra",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/samra-simran",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-priya-samuel-esb3m3",
+      "name": "Priya Samuel",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/samuel-priya",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maria-eliude-santos-1p8epbq",
+      "name": "Maria Eliude Santos",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/maria-eliude-santos/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shereein-saraf-it7vaj",
+      "name": "Shereein Saraf",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/shereein-saraf/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shayden-schofield-lewis-mqbl44",
+      "name": "Shayden Schofield-Lewis",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/shayden-schofield-lewis/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shoshana-schwebel-25mt4p",
+      "name": "Shoshana Schwebel",
+      "program": "Germanic Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/schwebel-shoshana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matthew-scott-dh1okw",
+      "name": "Matthew Scott",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3069",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matias-gomez-seeber-rgt1y5",
+      "name": "Matías Gómez Seeber",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/matias-gomez-seeber/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-pardis-semnani-1qz3ho6",
+      "name": "Pardis Semnani",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2910",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sophie-seppanen-1ificc1",
+      "name": "Sophie Seppanen",
+      "program": "Kinesiology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/seppanen-sophie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-felipe-sepulveda-fd72ad",
+      "name": "Felipe Sepulveda",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/felipe-sepulveda/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ava-sergio-1pk803u",
+      "name": "Ava Sergio",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sergio-ava",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-negin-shadgar-ggwyl5",
+      "name": "Negin Shadgar",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3798",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-pamela-shah-hcw4ai",
+      "name": "Pamela Shah",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3067",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-farhad-shahryarpoor-1ekyveh",
+      "name": "Farhad Shahryarpoor",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/farhad-shahryarpoor/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hannah-shariati-1vr976g",
+      "name": "Hannah Shariati",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/shariati-hannah",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-khushi-sharma-818qg0",
+      "name": "Khushi Sharma",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/khushi-sharma/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alexandria-shaw-1giysq7",
+      "name": "Alexandria Shaw",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/shaw-alexandria",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nathan-shen-mcmm17",
+      "name": "Nathan Shen",
+      "program": "Sociology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/shen-nathan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-simon-sheppard-1ipxfkl",
+      "name": "Simon Sheppard",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/simon-sheppard/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jingrong-shi-1f9ggl",
+      "name": "Jingrong Shi",
+      "program": "Medical Genetics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/shi-jingrong",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuliang-shi-dgyj2x",
+      "name": "Yuliang Shi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3075",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ariana-shivji-rpazcu",
+      "name": "Ariana Shivji",
+      "program": "Chemistry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/shivji-ariana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-claire-sie-srl2s",
+      "name": "Claire Sie",
+      "program": "Microbiology and Immunology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sie-claire",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-isidora-silva-valderrama-v6np7t",
+      "name": "Isidora Silva-Valderrama",
+      "program": "Botany",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/silva-valderrama-isidora",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ashley-smith-2dgz9u",
+      "name": "Ashley Smith",
+      "program": "English",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/smith-ashley",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-martin-smith-1wxpffc",
+      "name": "Martin Smith",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/martin-smith/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-morgan-smith-1b4rzz7",
+      "name": "Morgan Smith",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4278",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sol-snir-shaool-1jxl8l8",
+      "name": "Sol Snir Shaool",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/snir-shaool-sol",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jacob-sol-6gj8hi",
+      "name": "Jacob Sol",
+      "program": "Civil Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sol-jacob",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-james-sousa-m04zpa",
+      "name": "James Sousa",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sousa-james",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-carla-srebot-6kngea",
+      "name": "Carla Srebot",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/carla-srebot-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sabina-staempfli-1schi0m",
+      "name": "Sabina Staempfli",
+      "program": "Nursing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/staempfli-sabina",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-rachel-n-stern-19xi55r",
+      "name": "Rachel N. Stern",
+      "program": "Geography",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/stern-rachel-n",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jacob-stockton-xa6uy6",
+      "name": "Jacob Stockton",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2925",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-colton-strong-1hxarqv",
+      "name": "Colton Strong",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/strong-colton",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nicole-stuart-1irzoe7",
+      "name": "Nicole Stuart",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/nicole-stuart/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shakthisree-subramani-1ihrvva",
+      "name": "Shakthisree Subramani",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/shakthisree-subramani/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-harjeev-sudan-1sk0ys5",
+      "name": "Harjeev Sudan",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sudan-harjeev",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hanwei-sudderuddin-1z34ro",
+      "name": "Hanwei Sudderuddin",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/sudderuddin-hanwei",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jaye-sudweeks-icompz",
+      "name": "Jaye Sudweeks",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2618",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kiara-sun-1m74meo",
+      "name": "Kiara Sun",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/kiara-sun/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mahfida-tahniat-vwz3fa",
+      "name": "Mahfida Tahniat",
+      "program": "Educational Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tahniat-mahfida",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-joao-takayanagi-zww465",
+      "name": "Joao Takayanagi",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/joao-takayanagi/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jinjie-tan-1r4bcj",
+      "name": "Jinjie Tan",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/jinjie-tan/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zhenhao-tan-4jtxr5",
+      "name": "Zhenhao Tan",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/zhenhao-tan/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-niklas-tappauf-je66bw",
+      "name": "Niklas Tappauf",
+      "program": "Experimental Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tappauf-niklas",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-mahder-teffera-1indxp1",
+      "name": "Mahder Teffera",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/teffera-mahder",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-katelyn-teng-1hgt0n1",
+      "name": "Katelyn Teng",
+      "program": "Neuroscience",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/teng-katelyn",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kelly-thomas-vg9hms",
+      "name": "Kelly Thomas",
+      "program": "Anthropology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/thomas-kelly",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sophie-thomas-71gd2d",
+      "name": "Sophie Thomas",
+      "program": "Anthropology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/thomas-sophie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emilie-theberge-14hi430",
+      "name": "Emilie Théberge",
+      "program": "Medical Genetics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/theberge-emilie",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-trevor-tidy-bx6f30",
+      "name": "Trevor Tidy",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4293",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-samuel-tobias-1w6bg22",
+      "name": "Samuel Tobias",
+      "program": "Population and Public Health",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tobias-samuel",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-matija-tomic-1avmzdr",
+      "name": "Matija Tomic",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4281",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-oliver-tong-1l1z5j9",
+      "name": "Oliver Tong",
+      "program": "Physics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tong-oliver-0",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-vincent-tong-yl4lau",
+      "name": "Vincent Tong",
+      "program": "History",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tong-vincent",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-tina-torabi-8tfta9",
+      "name": "Tina Torabi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3596",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-francesco-tosello-13etqh3",
+      "name": "Francesco Tosello",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4025",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-steven-townsend-1mjnn4w",
+      "name": "Steven Townsend",
+      "program": "Anthropology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/townsend-steven",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-morgan-towriss-a5vhri",
+      "name": "Morgan Towriss",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/towriss-morgan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jess-tran-1kas631",
+      "name": "Jess Tran",
+      "program": "Mechanical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/tran-jess",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-tung-tran-l01ajw",
+      "name": "Tung Tran",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4486",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-quaila-lee-trang-17oylc7",
+      "name": "Quaila-lee Trang",
+      "program": "Kinesiology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/trang-quaila-lee",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-maria-trejos-1yajvtq",
+      "name": "Maria Trejos",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/maria-trejos/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jenea-mei-trousil-mo227p",
+      "name": "Jenea Mei Trousil",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4492",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-kin-ming-tsang-89glwb",
+      "name": "Kin Ming Tsang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3594",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-victoria-valeeva-1d2sdbz",
+      "name": "Victoria Valeeva",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4209",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nancy-van-groll-1v3di70",
+      "name": "Nancy van Groll",
+      "program": "Language and Literacy Education",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/van-groll-nancy",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jana-van-heeswyk-ssnlk1",
+      "name": "Jana van Heeswyk",
+      "program": "Bioinformatics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/van-heeswyk-jana",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-erin-vosters-cgtrs9",
+      "name": "Erin Vosters",
+      "program": "Creative Writing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/vosters-erin",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-nile-waldal-1w4w3ks",
+      "name": "Nile Waldal",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4198",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alannah-wallace-1sq6mhm",
+      "name": "Alannah Wallace",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/alannah-wallace/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-chenjian-wang-ieu6fy",
+      "name": "Chenjian Wang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3791",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-hanqi-wang-1r5f0r8",
+      "name": "Hanqi Wang",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/hanqi-wang-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-xue-qi-amy-wang-6izvj3",
+      "name": "Xue Qi (Amy) Wang",
+      "program": "Doctor of Medicine and Doctor of Philosophy (MDPhD)",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/wang-xue-qi-amy",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ziyuan-wang-mtyk0q",
+      "name": "Ziyuan Wang",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/ziyuan-wang/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-victoria-wardell-w77fc4",
+      "name": "Victoria Wardell",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/victoria-wardell/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-satish-wasti-1axbayx",
+      "name": "Satish Wasti",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/satish-wasti/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-lindsay-watson-7k6gzz",
+      "name": "Lindsay Watson",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/watson-lindsay",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alexandra-weber-1l7sh7u",
+      "name": "Alexandra Weber",
+      "program": "Zoology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/weber-alexandra",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sih-yu-wei-d3wo31",
+      "name": "Sih-Yu Wei",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/sih-yu-wei/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brandon-weigand-18uqzuq",
+      "name": "Brandon Weigand",
+      "program": "Forestry",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/weigand-brandon",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ying-qi-wen-1alndos",
+      "name": "Ying Qi Wen",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4280",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-eloise-west-v3rjwe",
+      "name": "Eloise West",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/eloise-west/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-benjamin-wild-1pioqbr",
+      "name": "Benjamin Wild",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4476",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-elaine-williamson-alb50i",
+      "name": "Elaine Williamson",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/williamson-elaine",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-joey-oi-yee-wong-qeisci",
+      "name": "Joey Oi Yee Wong",
+      "program": "Nursing",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/wong-joey-oi-yee",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-christie-wu-14gys74",
+      "name": "Christie Wu",
+      "program": "Chemical Engineering",
+      "expectedCompletion": "2027",
+      "sourceUrl": "https://ca.linkedin.com/in/christiewu03",
+      "sourceKind": "self-report"
+    },
+    {
+      "id": "student-peilin-wu-1cmq2cm",
+      "name": "Peilin Wu",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3702",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-raymond-wu-10dgthw",
+      "name": "Raymond Wu",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/raymond-wu/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shiming-wu-ay38j3",
+      "name": "Shiming Wu",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://econ.cms.arts.ubc.ca/profile/shiming-wu-2/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-quanhan-xi-1dpg1ac",
+      "name": "Quanhan Xi",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/quanhan-johnny-xi",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuan-xia-1ts1i91",
+      "name": "Yuan Xia",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/yuan-xia",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-elaine-xiao-16zp7z2",
+      "name": "Elaine Xiao",
+      "program": "Pharmaceutical Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/xiao-elaine",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-xunzi-xie-1f1391p",
+      "name": "Xunzi Xie",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3978",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zuheng-david-xu-4yv3xb",
+      "name": "Zuheng (David) Xu",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/zuheng-david-xu",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ying-xue-1e6nmlw",
+      "name": "Ying Xue",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4275",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-robin-yadav-132s67m",
+      "name": "Robin Yadav",
+      "program": "Computer Science",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/yadav-robin",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-bing-yan-nlarxb",
+      "name": "Bing Yan",
+      "program": "Anthropology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/yan-bing",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-michelle-yang-11aq0oh",
+      "name": "Michelle Yang",
+      "program": "Rehabilitation Sciences",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/yang-michelle",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-sheng-hao-yang-b1nl28",
+      "name": "Sheng-Hao Yang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3986",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-fatima-yaseen-1ormhsq",
+      "name": "Fatima Yaseen",
+      "program": "Pathology and Laboratory Medicine",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/yaseen-fatima",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-alireza-yazdani-1cqky9v",
+      "name": "Alireza Yazdani",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3086",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-emily-yeh-12s36e7",
+      "name": "Emily Yeh",
+      "program": "Biochemistry and Molecular Biology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/yeh-emily",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-liam-yih-1t70b7y",
+      "name": "Liam Yih",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2918",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-cindy-yu-1iiu8f5",
+      "name": "Cindy Yu",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/cindy-yu/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-huar-yu-dc7i4w",
+      "name": "Huar Yu",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2660",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-james-yu-sb5qzn",
+      "name": "James Yu",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/james-yu/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-ming-yuan-1g19yw",
+      "name": "Ming Yuan",
+      "program": "Statistics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.stat.ubc.ca/users/ming-yuan",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-xudong-yuan-bbn6r7",
+      "name": "Xudong Yuan",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3987",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-francis-yuen-1gdfrd5",
+      "name": "Francis Yuen",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/francis-yuen/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-andre-zamani-1qvbbpc",
+      "name": "Andre Zamani",
+      "program": "Psychology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://psych.ubc.ca/profile/andre-zamani/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-brinnley-zanewich-1qsq77n",
+      "name": "Brinnley Zanewich",
+      "program": "Interdisciplinary Oncology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/zanewich-brinnley",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-roomina-zendehboodi-1vpo629",
+      "name": "Roomina Zendehboodi",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/2991",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-xiaoyang-zhang-1rhs8wz",
+      "name": "Xiaoyang Zhang",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/xiaoyang-zhang/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yao-zhang-c93ocm",
+      "name": "Yao Zhang",
+      "program": "Biomedical Engineering",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/zhang-yao",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yuxiu-zhang-14ujuk",
+      "name": "Yuxiu Zhang",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4073",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-david-zhao-1t04x3c",
+      "name": "David Zhao",
+      "program": "Computer Science",
+      "expectedCompletion": "2027",
+      "sourceUrl": "https://dykzhao.com/",
+      "sourceKind": "self-report"
+    },
+    {
+      "id": "student-jason-zhao-enzcbh",
+      "name": "Jason Zhao",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4269",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-yong-zhao-1we5x3w",
+      "name": "Yong Zhao",
+      "program": "Interdisciplinary Studies",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/zhao-yong",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-jingjing-zheng-1612heu",
+      "name": "Jingjing Zheng",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/3805",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zhengyang-zhou-bwbfsk",
+      "name": "Zhengyang Zhou",
+      "program": "Economics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://economics.ubc.ca/profile/zhengyang-zhou/",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-shuailong-zhu-1a1o6au",
+      "name": "Shuailong Zhu",
+      "program": "Mathematics",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.math.ubc.ca/user/4286",
+      "sourceKind": "university-profile"
+    },
+    {
+      "id": "student-zoe-zias-1m3k77c",
+      "name": "Zoe Zias",
+      "program": "Anthropology",
+      "expectedCompletion": null,
+      "sourceUrl": "https://www.grad.ubc.ca/campus-community/meet-our-students/zias-zoe",
+      "sourceKind": "university-profile"
+    }
+  ]
+}

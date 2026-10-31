@@ -287,3 +287,9 @@ is explicitly unavailable until its visuals and behavior are implemented.
 
 Closing an in-scene panel returns keyboard control to walking without another
 canvas click. Search/input fields retain normal typing while the panel is open.
+
+## Campus community follow-up
+
+The [community update](../../docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md) adds 500 supplied student identities without duplicating two existing rowers, department-based walking encounters, public visitor reviews and private active-play reporting. Current source and validation status are recorded there; deployment requires its separate acceptance receipt. Student names remain encounter-only. Detailed import provenance and limitations are in the [student source report](../../docs/UBC_STUDENT_IMPORT_2026-10-31.md).
+
+Public reviews use the shared `projects/campus-reviews` module, independent of the optional character-profile store. Play statistics use `projects/campus-analytics`, with an on-page privacy control and `/labs/campus-privacy`. Operator data must remain outside the checkout and every release directory. Never seed synthetic review or play fixtures into production.
