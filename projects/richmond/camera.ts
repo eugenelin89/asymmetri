@@ -33,6 +33,8 @@ export function createCamera(city: City) {
       view.follow = false;
     },
     pan(dx: number, dz: number) {
+      if (!dx && !dz) return;
+      view.follow = false;
       view.target[0] = clamp(
         view.target[0] + dx,
         city.bounds[0],
@@ -49,11 +51,11 @@ export function createCamera(city: City) {
       let target: [number, number, number] = [p.x, p.y + 1.6, p.z],
         position: [number, number, number];
       if (state.camera === "aerial") {
-        const t = view.follow ? [p.x, p.z] : view.target,
-          d = state.interior
-            ? Math.min(200, view.aerialDistance)
-            : view.aerialDistance,
+        const me = state.interior ? state.interior.entrance : [p.x, p.z],
+          t = view.follow ? me : view.target,
+          d = view.aerialDistance,
           pitch = clamp(view.pitch, 0.35, 1.4);
+        if (view.follow) view.target = [me[0], me[1]];
         target = [t[0], 0, t[1]];
         position = [
           t[0] + Math.sin(view.yaw) * Math.cos(pitch) * d,

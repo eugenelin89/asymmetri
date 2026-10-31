@@ -1,6 +1,13 @@
 // SPDX-License-Identifier: MIT
-import { inPolygon, segmentDistance, carFits } from "../vancouver/physics";
+import { inPolygon, segmentDistance } from "../vancouver/physics";
 import type { City, Place, Point, Polygon, Pose, Road } from "./types";
+import {
+  bodyCorners,
+  bodyLocal,
+  halfWidth,
+  halfLength,
+  segmentsCross,
+} from "./collision";
 export const distance = (a: Point, b: Point) =>
   Math.hypot(a[0] - b[0], a[1] - b[1]);
 export const point = (p: Pose): Point => [p.x, p.z];
@@ -152,8 +159,50 @@ function buildWorld(city: City) {
           true,
         ) !== null,
     );
+  function rejection(pose: Pose, airfield: boolean): string | null {
+    const corners = bodyCorners(pose);
+    const samples: Point[] = [[pose.x, pose.z]];
+    for (let i = 0; i < 4; i++) {
+      const a = corners[i],
+        b = corners[(i + 1) % 4],
+        n = Math.ceil(distance(a, b) / 0.3);
+      for (let j = 0; j <= n; j++)
+        samples.push([
+          a[0] + ((b[0] - a[0]) * j) / n,
+          a[1] + ((b[1] - a[1]) * j) / n,
+        ]);
+    }
+    for (const p of samples)
+      if (support(p, pose.y, airfield) === null) {
+        const b = localBuildings(p).find(
+          (b) => pose.y < b.height && inPolygon(p, b.shape),
+        );
+        return b
+          ? `building:${b.id}`
+          : `${inside(p) ? (water(p) ? "water" : "surface/elevation") : "bounds"}@${p.map((v) => v.toFixed(2)).join(",")},y=${pose.y.toFixed(2)}`;
+      }
+    // Also catch a small footprint entirely between sample points, or an edge
+    // crossing the body. Checking only nine points can miss either case.
+    const nearby = new Set(samples.flatMap(localBuildings));
+    for (const b of nearby) {
+      if (pose.y >= b.height) continue;
+      for (const ring of b.shape)
+        for (let i = 0; i < ring.length; i++) {
+          const a = ring[i],
+            c = ring[(i + 1) % ring.length],
+            local = bodyLocal(pose, a);
+          if (
+            (Math.abs(local[0]) < halfWidth &&
+              Math.abs(local[1]) < halfLength) ||
+            corners.some((p, j) => segmentsCross(p, corners[(j + 1) % 4], a, c))
+          )
+            return `building:${b.id}`;
+        }
+    }
+    return null;
+  }
   const fits = (pose: Pose, airfield: boolean) =>
-    carFits(pose, (p) => support(p, pose.y, airfield) !== null);
+    rejection(pose, airfield) === null;
   function clear(a: Point, b: Point, y = 0, airfield = false, walking = true) {
     const n = Math.max(1, Math.ceil(distance(a, b) / 0.45));
     for (let i = 0; i <= n; i++) {
@@ -357,6 +406,7 @@ function buildWorld(city: City) {
     support,
     walkFits,
     fits,
+    rejection,
     clear,
     nearest,
     poseNear,

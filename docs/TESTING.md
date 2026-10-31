@@ -725,6 +725,14 @@ Surrey V0.4 extends `npm run test:surrey` to44 tests, including both missing-per
 
 ## Richmond V0.1
 
+V0.2 candidate acceptance is tracked separately in `RICHMOND_V02_ACCEPTANCE.md`.
+The journey suite now uses Richmond's actual checked vehicle wrapper. Additional
+cases cover junction traffic rotating into the player, overlap separation at
+15/30/60/120 Hz, small-person contacts, elevation, navigation legs, aerial survey
+from interiors, stable nearby population and camera clearance above furniture.
+These do not replace normal-control A–F browser journeys or actual touch-device
+evidence. Keep any interrupted run in the record; do not relabel it a clean pass.
+
 Run `npm run test:richmond`, `npm run check`, Vancouver/Surrey/investment regressions,
 both supported builds, production dependency audit and `git diff --check`.
 Richmond tests verify pinned source hashes, all required anchors, directed routing,

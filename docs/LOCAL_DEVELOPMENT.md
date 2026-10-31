@@ -299,6 +299,14 @@ pinned hashes. `build_city.py` and its original cache remain the V0.1 path.
 
 ## Richmond Learns to Drive
 
+For V0.2 comparisons, use a separate port and the development opening screen's
+**Developer journeys · isolated initial fixtures**. Choose A–F or the recorded
+clear-road pose before starting. Fixtures use seed 18273, Lite, density 1 and
+Gentle Streets, and disable career storage. They expose no mid-journey mutation.
+Drive with normal controls and record incidents, reversing and Recover/reset
+counts separately from automated route results. `docs/RICHMOND_V02_ACCEPTANCE.md`
+records the frozen baseline, actual interrupted play and remaining gates.
+
 Run `npm run dev:next -- --port 3015 --hostname 127.0.0.1`, then visit
 `http://127.0.0.1:3015/labs/richmond`. Start lazily loads the local snapshot and
 renderer. `npm run test:richmond` runs pure simulation and continuous movement

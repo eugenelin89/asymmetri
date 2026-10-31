@@ -688,6 +688,15 @@ Surrey V0.4 adds pure time/missing-case modules and opt-in procedural WebAudio, 
 
 ## Richmond V0.1
 
+The isolated V0.2 candidate adds Richmond-owned full-body contact/sweep checks and
+activity-specific navigation around the unchanged shared integrator. It retains
+v1 saves and immutable V0.1 geography. Aerial survey uses the existing camera with
+an exterior entrance target for indoor players and restores their play context.
+The opening flow validates an existing save before offering Continue and reuses
+the loaded map. Development fixtures only initialize isolated unsaved sessions;
+production contains no fixture controls. See `RICHMOND_V02_ACCEPTANCE.md` for
+uncompleted browser gates; these changes are not a production release claim.
+
 `app/labs/richmond/page.tsx` owns the server-rendered route, metadata, attribution
 and text alternative. Its client game lazily imports the Three.js engine after
 Start. `content/site.ts` exports the typed `richmond` identity and registers it in

@@ -14,28 +14,46 @@ import {
   actorMeshes,
   aircraft,
 } from "./scenery";
-import { interiorFor, interiorFits, interiorRoute } from "./interiors";
+import { interiorFor, interiorFits, interiorCameraBlocked } from "./interiors";
 import { readSave, writeSave } from "./save";
 import { distance, point } from "./world";
-import type { City, Game, Input, Point, Snapshot, Building } from "./types";
+import { navigationFor } from "./navigation";
+import type {
+  City,
+  Game,
+  Input,
+  Point,
+  Snapshot,
+  Building,
+  State,
+  CameraMode,
+} from "./types";
 export function createGame(
   canvas: HTMLCanvasElement,
   city: City,
   onSnapshot: (s: Snapshot) => void,
   onError: (text: string) => void,
+  fixture?: State,
 ): Game {
-  const sim = createSimulation(city);
+  const sim = createSimulation(
+    city,
+    process.env.NODE_ENV === "development" ? fixture : undefined,
+  );
   let storage: Storage | null = null,
     saveAllowed = true,
     saveNotice = "Local progress · fictional game money";
   try {
-    storage = localStorage;
+    storage =
+      fixture && process.env.NODE_ENV === "development" ? null : localStorage;
+    if (!storage) throw Error("Isolated check: career saving disabled");
     const loaded = readSave(storage, city);
     if (loaded.state) sim.restore(loaded.state);
     saveNotice = loaded.message;
     saveAllowed = !loaded.invalid;
   } catch {
-    saveNotice = "Storage unavailable. Progress may not survive reload.";
+    saveNotice = fixture
+      ? "Isolated check · career save untouched"
+      : "Storage unavailable. Progress may not survive reload.";
   }
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -43,7 +61,9 @@ export function createGame(
     alpha: false,
     powerPreference: "high-performance",
   });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setPixelRatio(
+    sim.state.settings.lite ? 1 : Math.min(devicePixelRatio, 1.5),
+  );
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.setClearColor(0xa5d2d3);
   renderer.shadowMap.enabled = false;
@@ -85,6 +105,8 @@ export function createGame(
     r.material(0xf5bd59, true),
   );
   scene.add(beacon);
+  const surveyMe = r.label(scene, "YOU", [0, 0], 6, 18);
+  const surveyCar = r.label(scene, "YOUR CAR", [0, 0], 6, 16, "#bfe9ef");
   let interior: THREE.Group | null = null,
     interiorId: string | null = null,
     disposed = false,
@@ -101,13 +123,52 @@ export function createGame(
     fps = 60,
     navigation: string | null = null,
     route: Point[] = [],
+    navTarget: Point | null = null,
+    guidance = "",
     lastTarget = "",
-    adaptive = 1.5;
+    adaptive = 1.5,
+    recoveries = 0,
+    contacts = 0,
+    drivenDistance = 0;
+  let playCamera: CameraMode =
+    sim.state.camera === "aerial" ? "third" : sim.state.camera;
+  let playView = {
+    yaw: cam.view.yaw,
+    pitch: cam.view.pitch,
+    distance: cam.view.distance,
+  };
+  function setCamera(mode: CameraMode) {
+    if (mode === "aerial" && sim.state.camera !== "aerial") {
+      playCamera = sim.state.camera;
+      playView = {
+        yaw: cam.view.yaw,
+        pitch: cam.view.pitch,
+        distance: cam.view.distance,
+      };
+      cam.view.pitch = 0.8;
+    }
+    sim.camera(mode);
+    cam.view.follow = true;
+    input.clear();
+    if (mode === "first") cam.view.pitch = 0.5;
+    tileTime = -10;
+  }
+  function returnToPlayer() {
+    mutate(() => {
+      setCamera(playCamera);
+      Object.assign(cam.view, playView);
+    });
+  }
   const input = new Map<string, Input>(),
     pending = new Map<string, AbortController>(),
     tiles = new Map<string, THREE.Group>(),
     farIndices = new Map(city.buildingIndex.map((b, i) => [b.id, i]));
   const setInput = (action: Input, pressed: boolean, source: string) => {
+    if (
+      pressed &&
+      (disposed || pausedByUi || sim.state.shopping || document.hidden || lost)
+    )
+      return;
     if (pressed) input.set(source, action);
     else input.delete(source);
   };
@@ -121,11 +182,7 @@ export function createGame(
   }
   function emit() {
     if (disposed) return;
-    const target =
-      sim.target() ??
-      (!sim.state.interior && navigation
-        ? (sim.places.get(navigation)?.entrance ?? null)
-        : null);
+    const target = navTarget;
     onSnapshot({
       state: structuredClone(sim.state),
       message: sim.message,
@@ -136,18 +193,45 @@ export function createGame(
       route,
       target,
       objective: sim.objective(),
+      navigation: guidance,
       paused: sim.paused,
       fps: Math.round(fps),
       pedestrians: pop.pedestrians.length,
       traffic: pop.traffic.length,
       saveNotice,
       distance: target ? distance(point(sim.state.player), target) : 0,
+      ...(process.env.NODE_ENV === "development"
+        ? {
+            diagnostics: {
+              input: [...input.values()],
+              contact: sim.contact,
+              elapsed: sim.state.elapsed,
+              recoveries,
+              contacts,
+              distance: drivenDistance,
+              seed: sim.state.rng,
+              nearby: pop.traffic
+                .filter((a) => distance(point(a), point(sim.state.car)) < 10)
+                .map((a) => ({
+                  id: a.id,
+                  x: a.x,
+                  z: a.z,
+                  y: a.y,
+                  yaw: a.yaw,
+                  speed: a.speed,
+                  edge: a.edge,
+                })),
+            },
+          }
+        : {}),
     });
   }
   function mutate(fn: () => void) {
     fn();
     input.clear();
-    routeTime = 0;
+    routeTime = -100;
+    nav();
+    drawRoute();
     save();
     emit();
   }
@@ -221,7 +305,7 @@ export function createGame(
         ? cam.view.target
         : point(sim.state.player);
     const candidates =
-      sim.state.interior ||
+      (sim.state.interior && sim.state.camera !== "aerial") ||
       (sim.state.camera === "aerial" && cam.view.aerialDistance > 3500)
         ? []
         : city.tiles
@@ -250,31 +334,16 @@ export function createGame(
         void loadTile(t);
   }
   function nav() {
-    const t =
-      sim.targetPlace() ?? (navigation ? sim.places.get(navigation) : null);
-    if (sim.state.interior) {
-      route = sim.target()
-        ? interiorRoute(
-            point(sim.state.player),
-            sim.target()!,
-            interiorFor(sim.places.get(sim.state.interior.place)!),
-          )
-        : [];
-      return;
-    }
-    if (!t) {
-      route = [];
-      return;
-    }
-    if (sim.state.locomotion === "walk") {
-      route = sim.world.entranceRoute(sim.state.player, t, sim.state.airfield);
-    } else {
-      route =
-        distance(point(sim.state.car), t.parking) < 8
-          ? [point(sim.state.car), t.parking]
-          : sim.world.route(point(sim.state.car), t.roadNode);
-      if (route.length) route.push(t.parking, t.entrance);
-    }
+    const result = navigationFor(
+      sim.state,
+      sim.world,
+      sim.targetPlace() ??
+        (navigation ? (sim.places.get(navigation) ?? null) : null),
+      sim.target(),
+    );
+    route = result.route;
+    navTarget = result.target;
+    guidance = result.instruction;
   }
   const pathMaterial = new THREE.LineBasicMaterial({
     color: 0xf5c767,
@@ -287,6 +356,7 @@ export function createGame(
     if (pathLine) {
       scene.remove(pathLine);
       pathLine.geometry.dispose();
+      pathLine = null;
     }
     if (route.length < 2) return;
     const positions = route.map(
@@ -317,10 +387,9 @@ export function createGame(
       for (let d = 1; d < length; d += 0.35) {
         const p = target.clone().addScaledVector(delta, d / length);
         const blocked = s.interior
-          ? !interiorFits(
-              [p.x, p.z],
+          ? interiorCameraBlocked(
+              [p.x, p.y, p.z],
               interiorFor(sim.places.get(s.interior.place)!),
-              0.2,
             )
           : sim.world.building([p.x, p.z], p.y);
         if (blocked) {
@@ -349,7 +418,8 @@ export function createGame(
   function tick(time: number) {
     if (disposed) return;
     frame = requestAnimationFrame(tick);
-    const dt = Math.min(0.1, (time - last) / 1000 || 0);
+    const frameMs = time - last;
+    const dt = Math.min(0.1, frameMs / 1000 || 0);
     last = time;
     if (document.hidden || !visible || lost) return;
     elapsed += dt;
@@ -364,6 +434,7 @@ export function createGame(
         ((held.has("back") ? 1 : 0) - (held.has("forward") ? 1 : 0)) * rate,
       );
     } else {
+      const before = { ...s.car };
       sim.obstacles([...pop.traffic, ...pop.pedestrians]);
       sim.step(
         dt,
@@ -374,8 +445,16 @@ export function createGame(
             : s.player.yaw
           : cam.view.yaw,
       );
+      if (s.locomotion === "drive") {
+        drivenDistance += distance(point(before), point(s.car));
+        if (s.car.blocked && !before.blocked) contacts++;
+      }
     }
     updateInterior();
+    const survey = s.camera === "aerial";
+    outside.visible = !s.interior || survey;
+    if (interior) interior.visible = !survey;
+    crowds.group.visible = !survey || !s.interior;
     const l = s.interior
       ? interiorFor(sim.places.get(s.interior.place)!)
       : null;
@@ -414,11 +493,15 @@ export function createGame(
     );
     hero.position.set(s.player.x, s.player.y, s.player.z);
     hero.rotation.y = s.player.yaw;
-    hero.visible = s.locomotion === "walk" && s.camera !== "first";
+    hero.visible =
+      s.locomotion === "walk" &&
+      s.camera !== "first" &&
+      !(survey && s.interior);
     car.position.set(s.car.x, s.car.y, s.car.z);
     car.rotation.y = s.car.yaw;
     car.visible =
-      !s.interior && !(s.camera === "first" && s.locomotion === "drive");
+      (!s.interior || survey) &&
+      !(s.camera === "first" && s.locomotion === "drive");
     if (!s.interior) furniture.update(point(s.player), s.elapsed);
     crowds.update(pop.pedestrians, s.elapsed, s.settings.reducedMotion);
     trafficModels.forEach((m, i) => {
@@ -429,10 +512,9 @@ export function createGame(
         m.rotation.y = a.yaw;
       }
     });
-    const target =
-      sim.target() ??
-      (!s.interior && navigation ? sim.places.get(navigation)?.entrance : null);
-    marker.visible = beacon.visible = !!target;
+    const target = navTarget;
+    marker.visible = beacon.visible = !!target && !survey;
+    if (pathLine) pathLine.visible = !survey;
     if (target) {
       const y = s.interior
         ? 0
@@ -450,7 +532,9 @@ export function createGame(
       ":" +
       s.interior?.place +
       ":" +
-      s.active?.stage;
+      s.active?.stage +
+      ":" +
+      s.locomotion;
     if (targetId !== lastTarget || elapsed - routeTime > 4) {
       nav();
       drawRoute();
@@ -458,6 +542,18 @@ export function createGame(
       routeTime = elapsed;
     }
     cameraFrame();
+    const me = s.interior ? s.interior.entrance : point(s.player);
+    surveyMe.visible = survey;
+    surveyCar.visible = survey && s.locomotion !== "drive";
+    surveyMe.position.set(me[0], s.interior ? 6 : s.player.y + 6, me[1]);
+    surveyCar.position.set(s.car.x, s.car.y + 4, s.car.z);
+    for (const pin of [surveyMe, surveyCar]) {
+      const scale = Math.max(
+        7,
+        camera.position.distanceTo(pin.position) * 0.12,
+      );
+      pin.scale.set(scale, scale / 6.4, 1);
+    }
     overview.labels.children.forEach((o) => {
       o.visible =
         s.camera === "aerial"
@@ -477,6 +573,15 @@ export function createGame(
     });
     renderer.render(scene, camera);
     if (elapsed - snapshotTime > 0.18) {
+      canvas.dataset.drawCalls = String(renderer.info.render.calls);
+      canvas.dataset.geometries = String(renderer.info.memory.geometries);
+      canvas.dataset.textures = String(renderer.info.memory.textures);
+      canvas.dataset.resolution = `${canvas.width}x${canvas.height}`;
+      canvas.dataset.dpr = String(renderer.getPixelRatio());
+      canvas.dataset.tiles = String(tiles.size);
+      canvas.dataset.people = String(pop.pedestrians.length);
+      canvas.dataset.traffic = String(pop.traffic.length);
+      canvas.dataset.frameMs = frameMs.toFixed(2);
       emit();
       snapshotTime = elapsed;
     }
@@ -538,7 +643,10 @@ export function createGame(
     }
     if (e.code === "KeyR") {
       e.preventDefault();
-      mutate(() => sim.recover());
+      mutate(() => {
+        recoveries++;
+        sim.recover();
+      });
     }
     if (
       e.code === "Digit1" ||
@@ -547,7 +655,7 @@ export function createGame(
       e.code === "Digit4"
     ) {
       mutate(() =>
-        sim.camera(
+        setCamera(
           (["third", "first", "top", "aerial"] as const)[
             Number(e.code.slice(-1)) - 1
           ],
@@ -567,6 +675,9 @@ export function createGame(
   }
   function blur() {
     input.clear();
+    if (pointer && canvas.hasPointerCapture(pointer.id))
+      canvas.releasePointerCapture(pointer.id);
+    pointer = null;
     save();
   }
   function visibility() {
@@ -577,6 +688,7 @@ export function createGame(
   let pointer: { id: number; x: number; y: number; button: number } | null =
     null;
   const down = (e: PointerEvent) => {
+    if (pointer || pausedByUi || sim.state.shopping) return;
     canvas.focus();
     pointer = { id: e.pointerId, x: e.clientX, y: e.clientY, button: e.button };
     canvas.setPointerCapture(e.pointerId);
@@ -597,8 +709,8 @@ export function createGame(
     else cam.look(dx, dy);
     pointer = { ...pointer, x: e.clientX, y: e.clientY };
   };
-  const up = () => {
-    pointer = null;
+  const up = (e: PointerEvent) => {
+    if (pointer?.id === e.pointerId) pointer = null;
   };
   const wheel = (e: WheelEvent) => {
     e.preventDefault();
@@ -619,11 +731,15 @@ export function createGame(
   canvas.addEventListener("pointermove", move);
   canvas.addEventListener("pointerup", up);
   canvas.addEventListener("pointercancel", up);
+  canvas.addEventListener("lostpointercapture", up);
+  canvas.addEventListener("blur", blur);
   canvas.addEventListener("wheel", wheel, { passive: false });
   canvas.addEventListener("contextmenu", context);
   window.addEventListener("keydown", keydown);
   window.addEventListener("keyup", keyup);
   window.addEventListener("blur", blur);
+  window.addEventListener("orientationchange", blur);
+  screen.orientation?.addEventListener("change", blur);
   document.addEventListener("visibilitychange", visibility);
   resize();
   updateInterior();
@@ -638,40 +754,50 @@ export function createGame(
     cancel: () => mutate(() => sim.cancel()),
     buy: (id) => mutate(() => sim.buy(id)),
     use: (id) => mutate(() => sim.use(id)),
-    camera: (mode) =>
-      mutate(() => {
-        sim.camera(mode);
-        cam.view.follow = true;
-        if (mode === "first") cam.view.pitch = 0.5;
-      }),
+    camera: (mode) => mutate(() => setCamera(mode)),
+    returnToPlayer,
     focus: (target) => {
       const s = sim.state;
+      setCamera("aerial");
       if (target === "player") {
         cam.view.follow = true;
+        cam.view.aerialDistance = 350;
       } else if (target === "car") {
-        if (s.interior) {
-          sim.say(
-            "Your car is parked outside. Leave the building to view its position.",
-          );
-          emit();
-          return;
-        }
         cam.focus(point(s.car));
+        cam.view.aerialDistance = 220;
+      } else if (target === "city") {
+        cam.focus([
+          (city.bounds[0] + city.bounds[2]) / 2,
+          (city.bounds[1] + city.bounds[3]) / 2,
+        ]);
+        cam.view.aerialDistance =
+          Math.max(
+            city.bounds[2] - city.bounds[0],
+            city.bounds[3] - city.bounds[1],
+          ) * 1.05;
+        cam.view.pitch = 1.2;
       } else {
         const p = sim.places.get(target);
         if (p) {
-          if (s.interior) {
-            sim.say("Leave this interior to survey the outdoor city.");
-            emit();
-            return;
-          }
           cam.focus(p.entrance);
+          cam.view.aerialDistance = target === "yvr" ? 1100 : 650;
         }
       }
-      sim.camera("aerial");
+      sim.say(
+        s.interior
+          ? `Surveying outside. You remain inside ${sim.places.get(s.interior.place)!.name}; Find Me marks its entrance. Return to Player resumes there.`
+          : "Aerial surveying. Your courier, car and delivery clock are paused.",
+      );
       emit();
     },
     navigate: (id) => {
+      if (sim.state.active) {
+        sim.say(
+          "Your current delivery keeps its route. Finish or cancel it before choosing a free-roam destination.",
+        );
+        emit();
+        return;
+      }
       navigation = id;
       routeTime = -100;
       lastTarget = "";
@@ -710,7 +836,11 @@ export function createGame(
       save();
       emit();
     },
-    recover: () => mutate(() => sim.recover()),
+    recover: () =>
+      mutate(() => {
+        recoveries++;
+        sim.recover();
+      }),
     save: () => {
       save();
       emit();
@@ -736,11 +866,15 @@ export function createGame(
       canvas.removeEventListener("pointermove", move);
       canvas.removeEventListener("pointerup", up);
       canvas.removeEventListener("pointercancel", up);
+      canvas.removeEventListener("lostpointercapture", up);
+      canvas.removeEventListener("blur", blur);
       canvas.removeEventListener("wheel", wheel);
       canvas.removeEventListener("contextmenu", context);
       window.removeEventListener("keydown", keydown);
       window.removeEventListener("keyup", keyup);
       window.removeEventListener("blur", blur);
+      window.removeEventListener("orientationchange", blur);
+      screen.orientation?.removeEventListener("change", blur);
       document.removeEventListener("visibilitychange", visibility);
       scene.traverse((o) => {
         if (o instanceof THREE.InstancedMesh) o.dispose();

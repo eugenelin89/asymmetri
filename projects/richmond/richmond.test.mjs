@@ -467,3 +467,158 @@ test("bumper overlap can separate without allowing vehicles to pass through acto
     else assert.ok(moved < 5, "stops before a vehicle ahead");
   }
 });
+
+test("junction traffic cannot rotate into an otherwise stationary full car", async () => {
+  const { createPopulation } = await import("./population.ts");
+  const { penetration } = await import("./collision.ts");
+  const pop = createPopulation(city, world);
+  pop.configure([-1319.23, -1495.8], 1, null);
+  const actor = pop.traffic.find((a) => a.id === 202);
+  assert.ok(actor, "reproduction actor exists");
+  Object.assign(actor, {
+    x: -1220.6462771456866,
+    z: -1542.2977497142633,
+    y: 0,
+    yaw: 1.1096178485787758,
+    t: 0.999,
+    direction: 1,
+    edge: 32759,
+    wait: 0,
+    speed: 7,
+  });
+  const car = {
+    x: -1220.8986660542064,
+    z: -1546.4541395020624,
+    y: 0,
+    yaw: Math.PI * 0.75,
+  };
+  assert.equal(penetration(car, actor), 0);
+  for (let i = 0; i < 60; i++) {
+    pop.step(1 / 60, i / 60, car, car);
+    assert.equal(penetration(car, actor), 0);
+  }
+});
+test("turning out of an existing actor overlap never deepens contact at 15/30/60/120 Hz", async () => {
+  const { penetration } = await import("./collision.ts");
+  const r = city.roads.find((r) => r.class === "runway"),
+    a = r.points[0],
+    b = r.points[1];
+  const origin = { x: (a[0] + b[0]) / 2, z: (a[1] + b[1]) / 2, y: 0, yaw: 0 };
+  for (const hz of [15, 30, 60, 120]) {
+    const s = createSimulation(city);
+    Object.assign(s.state.car, origin, { speed: 1, steer: 0.3 });
+    s.state.player = { ...s.state.car };
+    s.state.airfield = true;
+    s.state.locomotion = "drive";
+    s.state.settings.gentle = true;
+    const actor = {
+      x: origin.x + 2.75,
+      z: origin.z - 0.5,
+      y: 0,
+      yaw: (Math.PI * 7) / 8,
+      vehicle: true,
+    };
+    s.obstacles([actor]);
+    let prior = penetration(s.state.car, actor);
+    for (let i = 0; i < hz; i++) {
+      s.step(1 / hz, new Set(["forward", "left"]), 0);
+      const next = penetration(s.state.car, actor);
+      assert.ok(next <= prior + 1e-6, `${hz}Hz overlap deepened`);
+      prior = next;
+    }
+    // Reverse can separate; no teleport, disappearance, or condition reset.
+    const p = point(s.state.car),
+      cash = s.state.cash;
+    for (let i = 0; i < hz * 3; i++) s.step(1 / hz, new Set(["back"]), 0);
+    assert.ok(distance(p, point(s.state.car)) > 2);
+    assert.equal(s.state.cash, cash);
+  }
+});
+test("whole-body contacts include small people and preserve grade separation", async () => {
+  const { penetration, contactAllows } = await import("./collision.ts");
+  const car = { x: 0, z: 0, y: 0, yaw: 0 };
+  assert.ok(penetration(car, { x: 0.55, z: 1.1, y: 0, yaw: 0 }) > 0);
+  assert.equal(
+    penetration(car, { x: 0, z: 0, y: 8, yaw: 0, vehicle: true }),
+    0,
+  );
+  const actor = { x: 0, z: 3.8, y: 0, yaw: 0, vehicle: true };
+  assert.equal(contactAllows(car, { ...car, z: 0.1 }, actor), false);
+  assert.equal(contactAllows(car, { ...car, z: -0.1 }, actor), true);
+});
+test("navigation separates walking to pickup, returning to the car, and driving to parking", async () => {
+  const { navigationFor } = await import("./navigation.ts");
+  const s = createSimulation(city);
+  s.accept("first-day");
+  let n = navigationFor(s.state, world, s.targetPlace(), s.target());
+  assert.equal(n.leg, "Walk to the entrance / meeting point");
+  pickup(s);
+  s.state.interior = null;
+  s.state.player = pos(s.places.get("brighouse").entrance);
+  n = navigationFor(s.state, world, s.targetPlace(), s.target());
+  assert.equal(n.leg, "Return to your parked car");
+  assert.ok(distance(n.target, point(s.state.car)) < 5);
+  s.state.locomotion = "drive";
+  s.state.player = { ...s.state.car };
+  n = navigationFor(s.state, world, s.targetPlace(), s.target());
+  assert.deepEqual(n.route.at(-1), s.targetPlace().parking);
+});
+test("aerial exterior survey from an interior preserves career and pans after follow", () => {
+  const s = createSimulation(city);
+  indoor(s, "richmond-centre", [0, 48]);
+  s.accept("mall-break");
+  const before = structuredClone(s.state),
+    cam = createCamera(city);
+  s.camera("aerial");
+  const pose = cam.pose(s.state);
+  assert.deepEqual([pose.target[0], pose.target[2]], s.state.interior.entrance);
+  cam.pan(0, 0);
+  assert.equal(cam.view.follow, true, "idle aerial frames retain Find Me");
+  cam.pan(100, -100);
+  assert.equal(cam.view.follow, false);
+  assert.notDeepEqual(cam.pose(s.state).target, pose.target);
+  cam.focus(city.places.find((p) => p.id === "yvr").entrance);
+  for (let i = 0; i < 60; i++) s.step(1 / 60, new Set(["forward"]), 0);
+  assert.deepEqual(s.state.player, before.player);
+  assert.deepEqual(s.state.car, before.car);
+  assert.deepEqual(s.state.active, before.active);
+  assert.deepEqual(s.state.interior, before.interior);
+});
+
+test("district refresh retains nearby actors and keeps entrances clear", async () => {
+  const { createPopulation } = await import("./population.ts");
+  const pop = createPopulation(city, world),
+    p = city.places.find((p) => p.id === "richmond-centre").parking;
+  pop.configure(p, 1, null);
+  assert.ok(pop.pedestrians.length > 20);
+  for (const actor of pop.pedestrians)
+    assert.ok(
+      city.places.every((place) => distance(place.entrance, point(actor)) >= 4),
+    );
+  const next = [p[0] + 135, p[1]],
+    keep = pop.traffic.filter((a) => distance(point(a), next) < 85);
+  pop.configure(next, 1, null);
+  for (const actor of keep)
+    assert.ok(
+      pop.traffic.includes(actor),
+      "keeps the same nearby actor object/pose",
+    );
+  assert.ok(pop.traffic.length <= 31);
+  assert.ok(pop.pedestrians.length <= 106);
+});
+test("interior camera respects furniture height and solid walls", async () => {
+  const { interiorCameraBlocked } = await import("./interiors.ts");
+  for (const id of ["richmond-centre", "yvr", "airport-office"]) {
+    const l = interiorFor(city.places.find((p) => p.id === id)),
+      [a, b, c, d] = l.obstacles[0];
+    assert.equal(
+      interiorCameraBlocked([(a + c) / 2, 1.7, (b + d) / 2], l),
+      true,
+    );
+    assert.equal(
+      interiorCameraBlocked([(a + c) / 2, 6, (b + d) / 2], l),
+      false,
+    );
+    assert.equal(interiorCameraBlocked([l.width / 2, 2, 0], l), true);
+  }
+});

@@ -5,6 +5,24 @@ Asymmetri Labs → GIS Apps. **V0.1 playable preview**: a geographically grounde
 stylized world with original fictional people, businesses and interiors.
 The title refers to the fictional courier learning city driving.
 
+**V0.2 candidate, not released:** the isolated driving/exploration revision and
+its incomplete browser gates are recorded in
+[V0.2 acceptance](../../docs/RICHMOND_V02_ACCEPTANCE.md). The changes described
+below apply to that candidate; the public release remains V0.1.
+
+The opening screen offers **Continue** for a validated save, **Start Delivery
+Shift** (opens the order board without resetting progress), **Explore Richmond**
+(paused aerial survey), and **Open Airfield** (enables the fictional permission
+and surveys the office connection). None relocates the courier. Replacing a
+career requires the explicit Settings confirmation.
+
+While surveying, use **Find Me**, **Find My Car**, **Whole City**, the landmark
+selector, or **Return to Player**. Drag to orbit, right-drag or WASD/arrows to
+pan, and wheel or +/− to zoom. Find Me follows the exterior entrance while the
+courier is indoors; Return to Player restores that interior and the prior play
+camera. Clock, orders, health, cash and actors remain paused. Free-roam routes
+cannot replace an active delivery. Top down remains a playable overhead view.
+
 ## Play
 
 Start with a compact car, $20 fictional CAD, full health/stamina and a delivery
@@ -184,8 +202,11 @@ Do not run acquisition or GIS compilation on the constrained production host.
 ## Architecture and persistence
 
 - `types`, `data`, `world`: stable IDs, validation, projection/topology and spatial
-  indexes. Only pure Vancouver `inPolygon`, `segmentDistance`, `carFits` and
-  `stepCar` helpers are reused; no other game's state/data is imported.
+  indexes. Only pure Vancouver `inPolygon`, `segmentDistance` and `stepCar`
+  helpers are reused; no other game's state/data is imported. Richmond's
+  `collision`/`vehicle` wrapper checks the rotated car body and intermediate
+  poses, including grade-separated actors and non-deepening overlap separation.
+  `navigation` separates parking, entrance, interior and return-to-car legs.
 - `simulation`, `story`, `interiors`: renderer-independent movement, orders,
   shopping, fictional encounters, economy and original interior geometry.
 - `population`, `streetscape`: bounded local actors and instanced street detail;
@@ -193,8 +214,10 @@ Do not run acquisition or GIS compilation on the constrained production host.
   Clothing, skin tones and stature are visual variety and never threat variables.
 - `scenery`, `camera`, `engine`: procedural models, independent four-camera state,
   one renderer/loop, tiled details, LOD, capped resolution, input and cleanup.
-- `Game`, `Map`: accessible menus and on-demand maps. Renderer/data load only after
-  starting this route, not on unrelated website pages.
+- `Game`, `Map`: accessible menus and on-demand maps. The renderer loads after
+  starting. Returning visitors with a save load the local map to validate Continue;
+  that result is reused on start. New visitors load it on start. Unrelated website
+  pages load neither renderer nor geographic snapshot.
 - `save`: `asymmetri.richmond.save.v1`, with finite values, versions, enums,
   inventory/ledger consistency and safe position repair. Other games' keys are
   never accessed. Invalid data is retained until explicit reset; storage failure

@@ -180,6 +180,35 @@ export function interiorFixtures(
   fixtureCache.set(interior, fixtures);
   return fixtures;
 }
+/** Open roofs permit a camera above furniture. Heights mirror buildInterior. */
+export function interiorCameraBlocked(
+  p: [number, number, number],
+  layout: Interior,
+) {
+  const [x, y, z] = p;
+  if (y < 0.15) return true;
+  if (
+    y < 5.2 &&
+    (Math.abs(x) > layout.width / 2 - 0.4 ||
+      Math.abs(z) > layout.depth / 2 - 0.4)
+  )
+    return true;
+  if (
+    y < 3.4 &&
+    layout.obstacles.some(
+      ([a, b, c, d]) =>
+        x > a - 0.2 && x < c + 0.2 && z > b - 0.2 && z < d + 0.2,
+    )
+  )
+    return true;
+  return (
+    y < 2.4 &&
+    layout.shops.some(
+      ({ point: [a, b] }) =>
+        Math.abs(x - a) < 5.35 && Math.abs(z - (b - 1.8)) < 1.2,
+    )
+  );
+}
 export function interiorFits(p: Point, interior: Interior, r = 0.45) {
   return (
     Math.abs(p[0]) < interior.width / 2 - r &&

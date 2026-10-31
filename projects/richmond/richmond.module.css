@@ -98,6 +98,48 @@
 .primary span {
   margin-left: 2em;
 }
+.entryActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+.entryActions button {
+  min-width: 0;
+  min-height: 48px;
+}
+.toolbarButtons select {
+  min-width: 0;
+  max-width: 190px;
+  background: #25483f;
+  color: #f5f3e4;
+  border: 1px solid #698278;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 0.8em;
+  padding: 0.4rem;
+}
+.survey .stats,
+.survey .objective,
+.survey .mapCorner {
+  display: none;
+}
+.survey .actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  max-width: 300px;
+}
+.survey .actions button {
+  min-height: 44px;
+}
+.survey .actions button:first-child {
+  grid-column: auto;
+}
+.touch button {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
 .eyebrow {
   font-size: 0.64em;
   letter-spacing: 0.14em;
@@ -1088,6 +1130,11 @@
     min-height: 44px;
     padding: 0.45rem;
   }
+  .playing .toolbarButtons select {
+    font-size: 0.75rem;
+    min-height: 44px;
+    max-width: 100%;
+  }
   .playing .doneButton {
     display: block !important;
     background: transparent;
@@ -1197,6 +1244,12 @@
   }
   .playing .actions button:first-child {
     grid-column: 1/-1;
+  }
+  .playing.survey .actions button:first-child {
+    grid-column: auto;
+  }
+  .playing.survey .actions {
+    max-width: 180px;
   }
   .playing .bottomBar {
     flex: none;

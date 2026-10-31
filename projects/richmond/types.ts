@@ -173,12 +173,23 @@ export type Snapshot = {
   route: Point[];
   target: Point | null;
   objective: string;
+  navigation?: string;
   paused: boolean;
   fps: number;
   pedestrians: number;
   traffic: number;
   saveNotice: string;
   distance: number;
+  diagnostics?: {
+    input: string[];
+    contact: string;
+    elapsed: number;
+    recoveries: number;
+    contacts: number;
+    distance: number;
+    seed: number;
+    nearby: unknown[];
+  };
 };
 export type Game = {
   input(action: Input, pressed: boolean, source: string): void;
@@ -201,5 +212,6 @@ export type Game = {
   recover(): void;
   save(): void;
   reset(): void;
+  returnToPlayer(): void;
   dispose(): void;
 };

@@ -13,7 +13,7 @@ registerHooks({
   },
 });
 const { createWorld, distance, projection } = await import("./world.ts");
-const { stepCar } = await import("../vancouver/physics.ts");
+const { driveCar } = await import("./vehicle.ts");
 const { createSimulation } = await import("./simulation.ts");
 const { missions } = await import("./story.ts");
 const { interiorFor, interiorFits, interiorRoute } = await import(
@@ -41,6 +41,8 @@ function drive(route, airfield = false) {
     yaw: Math.atan2(route[1][0] - route[0][0], route[1][1] - route[0][1]),
     speed: 0,
     steer: 0,
+    blocked: false,
+    condition: 100,
   };
   let index = 0,
     stuck = 0,
@@ -79,16 +81,13 @@ function drive(route, airfield = false) {
       err = Math.atan2(Math.sin(yaw - car.yaw), Math.cos(yaw - car.yaw));
     const steering = err > 0.06 ? 1 : err < -0.06 ? -1 : 0,
       speed = Math.abs(err) > 0.15 || left < 12 ? 3 : 6;
-    const next = stepCar(
-      car,
-      car.speed < speed ? 1 : 0,
-      steering,
-      car.speed > speed + 1,
-      0.05,
-      (p) => world.support(p, car.y, airfield) !== null,
-    );
-    car = { ...car, ...next };
-    car.y = world.support([car.x, car.z], car.y, airfield) ?? car.y;
+    const held = new Set();
+    if (car.speed < speed) held.add("forward");
+    if (steering > 0) held.add("left");
+    if (steering < 0) held.add("right");
+    if (car.speed > speed + 1) held.add("brake");
+    const next = driveCar(car, held, 0.05, world, airfield, []).car;
+    car = next;
     stuck = next.blocked ? stuck + 1 : 0;
     assert.ok(stuck <= 20, `Blocked at ${car.x},${car.z}; segment ${index}`);
     if (

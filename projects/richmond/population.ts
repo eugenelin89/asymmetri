@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT — bounded local actors, independent of demographic identity.
 import type { City, Point, Pose } from "./types";
 import { distance, point, type World } from "./world";
+import { penetration } from "./collision";
 export type Actor = Pose & {
   id: number;
   color: number;
@@ -26,7 +27,8 @@ export function createPopulation(city: City, world: World) {
     traffic: Actor[] = [],
     centre: Point = [Infinity, Infinity],
     interiorId: string | null = null,
-    lastDensity = 0;
+    lastDensity = 0,
+    generation = -1;
   const adj = city.nodes.map(() => [] as { edge: number; direction: number }[]);
   city.edges.forEach((e, i) => {
     if (city.roads[e.road].kind !== "road") return;
@@ -79,11 +81,19 @@ export function createPopulation(city: City, world: World) {
       lastDensity === density
     )
       return;
+    const retain = !interior && interiorId === null && lastDensity === density;
+    const retainedPeople = retain
+      ? pedestrians.filter((a) => distance(point(a), p) < 85)
+      : [];
+    const retainedTraffic = retain
+      ? traffic.filter((a) => distance(point(a), p) < 85)
+      : [];
+    generation++;
     centre = [...p];
     lastDensity = density;
     interiorId = interior?.id ?? null;
-    pedestrians = [];
-    traffic = [];
+    pedestrians = retainedPeople;
+    traffic = retainedTraffic;
     const place = city.places.reduce((a, b) =>
       distance(a.entrance, p) < distance(b.entrance, p) ? a : b,
     );
@@ -154,9 +164,13 @@ export function createPopulation(city: City, world: World) {
         Math.min(distance(s.a, p), distance(s.b, p)) < 330 &&
         distance(s.a, s.b) > 12,
     );
-    for (let i = 0; i < count && near.length; i++) {
+    for (
+      let i = 0;
+      pedestrians.length < count && i < count && near.length;
+      i++
+    ) {
       const s = near[i % near.length],
-        a = base(i),
+        a = base(i + generation * 1000),
         dx = s.b[0] - s.a[0],
         dz = s.b[1] - s.a[1],
         length = Math.hypot(dx, dz),
@@ -172,7 +186,12 @@ export function createPopulation(city: City, world: World) {
       ];
       a.x = a.a[0] + (a.b[0] - a.a[0]) * a.t;
       a.z = a.a[1] + (a.b[1] - a.a[1]) * a.t;
-      if (world.walkFits(point(a), 0, false)) {
+      if (
+        world.walkFits(point(a), 0, false) &&
+        distance(point(a), p) > (retain && retainedPeople.length ? 85 : 8) &&
+        !city.places.some((place) => distance(place.entrance, point(a)) < 4) &&
+        !pedestrians.some((b) => distance(point(a), point(b)) < 1.2)
+      ) {
         a.y = 0;
         pedestrians.push(a);
       }
@@ -187,11 +206,13 @@ export function createPopulation(city: City, world: World) {
       );
     for (
       let i = 0;
-      i < Math.round(28 * density * activityDensity) && edges.length;
+      traffic.length < Math.round(28 * density * activityDensity) &&
+      i < Math.round(28 * density * activityDensity) &&
+      edges.length;
       i++
     ) {
       const { e, i: edge } = edges[(i * 7) % edges.length],
-        a = base(i + 200);
+        a = base(i + 200 + generation * 1000);
       a.vehicle = true;
       a.edge = edge;
       a.direction = e.direction < 0 ? -1 : 1;
@@ -199,7 +220,12 @@ export function createPopulation(city: City, world: World) {
       // Park at a usable curb on wide streets; never block a narrow access lane.
       a.wait = i % 5 === 0 && city.roads[e.road].width >= 8 ? 999 : 0;
       positionCar(a);
-      if (world.fits(a, false) && distance(point(a), p) > 12) traffic.push(a);
+      if (
+        world.fits(a, false) &&
+        distance(point(a), p) > (retain && retainedTraffic.length ? 85 : 12) &&
+        !traffic.some((b) => penetration(a, b) > 0)
+      )
+        traffic.push(a);
     }
   }
   function positionCar(a: Actor) {
@@ -265,6 +291,7 @@ export function createPopulation(city: City, world: World) {
     const retired = new Set<number>();
     for (const a of traffic) {
       if (a.wait > 20) continue;
+      const old = { ...a };
       const e = city.edges[a.edge],
         nearEnd = (1 - a.t) * e.length < 15;
       const signal =
@@ -276,13 +303,15 @@ export function createPopulation(city: City, world: World) {
         a.z + Math.cos(a.yaw) * 7,
       ];
       const obstacle =
-        distance(nose, point(car)) < 7 ||
-        distance(nose, point(hero)) < 5 ||
+        (Math.abs(a.y - car.y) < 2 && distance(nose, point(car)) < 7) ||
+        (Math.abs(a.y - hero.y) < 2 && distance(nose, point(hero)) < 5) ||
         traffic.some(
           (b) =>
             b !== a && Math.abs(b.y - a.y) < 2 && distance(nose, point(b)) < 5,
         ) ||
-        pedestrians.some((b) => distance(nose, point(b)) < 3);
+        pedestrians.some(
+          (b) => Math.abs(b.y - a.y) < 2 && distance(nose, point(b)) < 3,
+        );
       a.speed = signal || obstacle ? 0 : 7;
       a.wait = a.speed ? 0 : a.wait + dt;
       if (a.wait > 15 && !signal) {
@@ -292,6 +321,7 @@ export function createPopulation(city: City, world: World) {
         a.wait = 0;
         continue;
       }
+      if (a.speed === 0) continue;
       a.t += (a.speed * dt) / e.length;
       if (a.t >= 1) {
         const node = a.direction > 0 ? e.b : e.a,
@@ -309,12 +339,41 @@ export function createPopulation(city: City, world: World) {
           a.speed = 0;
         }
       }
-      const old = { ...a };
       positionCar(a);
-      if (!world.fits(a, false)) {
+      const yawDelta = Math.atan2(
+        Math.sin(a.yaw - old.yaw),
+        Math.cos(a.yaw - old.yaw),
+      );
+      const steps = Math.max(
+        1,
+        Math.ceil(distance(point(old), point(a)) / 0.15),
+        Math.ceil(Math.abs(yawDelta) / 0.04),
+      );
+      let blocked = false;
+      for (let i = 1; i <= steps; i++) {
+        const t = i / steps,
+          pose = {
+            x: old.x + (a.x - old.x) * t,
+            z: old.z + (a.z - old.z) * t,
+            y: old.y + (a.y - old.y) * t,
+            yaw: old.yaw + yawDelta * t,
+          };
+        if (
+          !world.fits(pose, false) ||
+          penetration(pose, { ...car, vehicle: true }) > 0 ||
+          penetration(pose, { ...hero, vehicle: false }) > 0 ||
+          traffic.some((b) => b !== a && penetration(pose, b) > 0) ||
+          pedestrians.some((b) => penetration(pose, b) > 0)
+        ) {
+          blocked = true;
+          break;
+        }
+      }
+      if (blocked) {
         Object.assign(a, old);
         a.speed = 0;
-        retired.add(a.id);
+        a.wait += dt;
+        if (distance(point(a), point(hero)) > 80) retired.add(a.id);
       }
     }
     traffic = traffic.filter((a) => !retired.has(a.id));

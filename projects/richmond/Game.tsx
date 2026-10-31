@@ -6,6 +6,8 @@ import { createSimulation } from "./simulation";
 import { catalogue } from "./interiors";
 import { RichmondMap } from "./Map";
 import styles from "./richmond.module.css";
+import { scenarios, scenarioState } from "./qa";
+import { readSave, SAVE_KEY } from "./save";
 const cameras: { id: CameraMode; label: string; zh: string; key: string }[] = [
   { id: "third", label: "Third person", zh: "第三人稱", key: "1" },
   { id: "first", label: "First person", zh: "第一人稱", key: "2" },
@@ -22,8 +24,17 @@ export function RichmondGame() {
     [panel, setPanel] = useState<
       "orders" | "map" | "settings" | "bag" | "help" | "shift" | null
     >(null),
-    [resetConfirm, setResetConfirm] = useState(false);
+    [resetConfirm, setResetConfirm] = useState(false),
+    [qa, setQa] = useState(""),
+    [qaChoice, setQaChoice] = useState("core");
+  const [saveStatus, setSaveStatus] = useState<
+    "checking" | "valid" | "empty" | "invalid"
+  >("checking");
+  const entry = useRef<"continue" | "shift" | "explore" | "airfield">(
+    "continue",
+  );
   const canvas = useRef<HTMLCanvasElement>(null),
+    loadedCity = useRef<City | null>(null),
     game = useRef<Game | null>(null),
     dialog = useRef<HTMLDivElement>(null),
     panelRef = useRef(panel);
@@ -32,17 +43,62 @@ export function RichmondGame() {
   }, [panel]);
   const update = useCallback((s: Snapshot) => setSnapshot(s), []);
   useEffect(() => {
+    if (started) return;
+    const abort = new AbortController();
+    void Promise.resolve().then(async () => {
+      try {
+        if (!localStorage.getItem(SAVE_KEY)) {
+          if (!abort.signal.aborted) setSaveStatus("empty");
+          return;
+        }
+        const data = await loadCity(abort.signal);
+        if (abort.signal.aborted) return;
+        loadedCity.current = data;
+        setCity(data);
+        const saved = readSave(localStorage, data);
+        setSaveStatus(
+          saved.state ? "valid" : saved.invalid ? "invalid" : "empty",
+        );
+      } catch {
+        if (!abort.signal.aborted) setSaveStatus("empty");
+      }
+    });
+    return () => abort.abort();
+  }, [started]);
+  useEffect(() => {
     if (!started || !canvas.current) return;
     const abort = new AbortController();
     let owned: Game | null = null;
     setLoading(true);
     setError("");
-    void Promise.all([loadCity(abort.signal), import("./engine")])
+    void Promise.all([
+      loadedCity.current ?? loadCity(abort.signal),
+      import("./engine"),
+    ])
       .then(([data, module]) => {
         if (abort.signal.aborted || !canvas.current) return;
+        loadedCity.current = data;
         setCity(data);
-        owned = module.createGame(canvas.current, data, update, setError);
+        owned = module.createGame(
+          canvas.current,
+          data,
+          update,
+          setError,
+          process.env.NODE_ENV === "development" && qa
+            ? scenarioState(data, qa)
+            : undefined,
+        );
         game.current = owned;
+        if (!qa && entry.current === "explore") owned.focus("city");
+        if (!qa && entry.current === "airfield") {
+          owned.airfield(true);
+          owned.focus("airport-office");
+          owned.navigate("airport-office");
+        }
+        if (!qa && entry.current === "shift") {
+          setPanel("orders");
+          panelRef.current = "orders";
+        }
         owned.pause(!!panelRef.current);
         setLoading(false);
         canvas.current.focus();
@@ -60,7 +116,7 @@ export function RichmondGame() {
       owned?.dispose();
       if (game.current === owned) game.current = null;
     };
-  }, [started, revision, update]);
+  }, [started, revision, update, qa]);
   useEffect(() => {
     game.current?.pause(!!panel);
     if (panel) dialog.current?.focus();
@@ -84,6 +140,7 @@ export function RichmondGame() {
     else if (started && !panel) canvas.current?.focus();
   }, [snapshot?.state.shopping, started, panel]);
   function open(value: typeof panel) {
+    game.current?.pause(value !== null);
     setPanel((p) => (p === value ? null : value));
   }
   function invoke(fn: (g: Game) => void) {
@@ -109,6 +166,30 @@ export function RichmondGame() {
         onLostPointerCapture={(e) =>
           game.current?.input(action, false, "touch:" + e.pointerId)
         }
+        onKeyDown={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            game.current?.input(
+              action,
+              true,
+              "button:" + action + ":" + e.code,
+            );
+          }
+        }}
+        onKeyUp={(e) => {
+          if (e.key === " " || e.key === "Enter") {
+            e.preventDefault();
+            game.current?.input(
+              action,
+              false,
+              "button:" + action + ":" + e.code,
+            );
+          }
+        }}
+        onBlur={() => {
+          for (const code of ["Space", "Enter"])
+            game.current?.input(action, false, "button:" + action + ":" + code);
+        }}
       >
         {label}
       </button>
@@ -145,7 +226,7 @@ export function RichmondGame() {
   }
   return (
     <section
-      className={`${styles.game} ${started ? styles.playing : ""}`}
+      className={`${styles.game} ${started ? styles.playing : ""} ${state?.camera === "aerial" ? styles.survey : ""}`}
       aria-label="Richmond Learns to Drive"
       style={{ fontSize: `${state?.settings.textScale ?? 1}em` }}
     >
@@ -172,15 +253,91 @@ export function RichmondGame() {
               Steveston and Sea Island. Park, step inside and meet the
               neighbourhood.
             </p>
-            <button className={styles.primary} onClick={() => setStarted(true)}>
-              Start / continue your shift <span>↗</span>
-            </button>
+            <div className={styles.entryActions}>
+              {saveStatus === "valid" && (
+                <button
+                  className={styles.primary}
+                  onClick={() => {
+                    setQa("");
+                    entry.current = "continue";
+                    setStarted(true);
+                  }}
+                >
+                  Continue
+                </button>
+              )}
+              <button
+                className={saveStatus === "valid" ? "" : styles.primary}
+                onClick={() => {
+                  setQa("");
+                  entry.current = "shift";
+                  setStarted(true);
+                }}
+              >
+                Start Delivery Shift
+              </button>
+              <button
+                onClick={() => {
+                  setQa("");
+                  entry.current = "explore";
+                  setStarted(true);
+                }}
+              >
+                Explore Richmond
+              </button>
+              <button
+                onClick={() => {
+                  setQa("");
+                  entry.current = "airfield";
+                  setStarted(true);
+                }}
+              >
+                Open Airfield
+              </button>
+            </div>
+            {saveStatus === "invalid" && (
+              <p role="status">
+                Your saved data needs attention. It stays untouched until you
+                explicitly choose a new career in Settings.
+              </p>
+            )}
             <p className={styles.small}>
               A compact car · $20 fictional CAD · a delivery bag
               <br />
-              Progress saves only in this browser. No account required.
+              Continue, shifts and exploration preserve your career. Progress
+              saves only in this browser.
             </p>
             <a href="#richmond-controls">Controls & accessibility ↓</a>
+            {process.env.NODE_ENV === "development" && (
+              <details>
+                <summary>
+                  Developer journeys · isolated initial fixtures
+                </summary>
+                <p>
+                  Fresh start only. No career reads or writes. Lite, density 1,
+                  Gentle Streets, fixed seed 18273. Normal controls throughout.
+                </p>
+                <select
+                  aria-label="Initial journey fixture"
+                  value={qaChoice}
+                  onChange={(e) => setQaChoice(e.target.value)}
+                >
+                  {scenarios.map(([id, label]) => (
+                    <option key={id} value={id}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  onClick={() => {
+                    setQa(qaChoice);
+                    setStarted(true);
+                  }}
+                >
+                  Begin isolated check
+                </button>
+              </details>
+            )}
           </div>
           <div className={styles.startFooter}>
             <b>RICHMOND LEARNS TO DRIVE</b>
@@ -195,9 +352,27 @@ export function RichmondGame() {
               {snapshot?.street ?? "Preparing your shift…"}
             </div>
             <div className={styles.toolbarButtons}>
-              <button onClick={() => open("orders")}>
-                {zh ? "接單" : "Orders"} <span>↗</span>
-              </button>
+              {state?.camera === "aerial" ? (
+                <select
+                  aria-label="Survey a landmark"
+                  defaultValue=""
+                  onChange={(e) => invoke((g) => g.focus(e.target.value))}
+                >
+                  <option value="" disabled>
+                    Landmarks
+                  </option>
+                  <option value="richmond-centre">Richmond Centre</option>
+                  <option value="steveston">Steveston</option>
+                  <option value="terra-nova">Terra Nova</option>
+                  <option value="ikea">IKEA / Bridgeport</option>
+                  <option value="yvr">YVR</option>
+                  <option value="knight">Knight Street Bridge</option>
+                </select>
+              ) : (
+                <button onClick={() => open("orders")}>
+                  {zh ? "接單" : "Orders"} <span>↗</span>
+                </button>
+              )}
               <button onClick={() => open("map")}>{zh ? "地圖" : "Map"}</button>
               <button
                 className={styles.secondaryTool}
@@ -261,6 +436,11 @@ export function RichmondGame() {
               data-speed={state?.car.speed.toFixed(2)}
               data-fps={snapshot?.fps}
               data-goal={snapshot?.target?.join(",")}
+              data-diagnostics={
+                snapshot?.diagnostics
+                  ? JSON.stringify(snapshot.diagnostics)
+                  : undefined
+              }
               className={styles.canvas}
               tabIndex={0}
               aria-label="Richmond game. WASD or arrows move, Shift sprints, Space brakes, F enters or exits your car, E interacts. Drag to look. Keys 1 to 4 change camera. R recovers. Tab reaches controls."
@@ -368,8 +548,12 @@ export function RichmondGame() {
                   </span>
                 </div>
                 <div className={styles.prompt}>
-                  {snapshot.prompt}
-                  {snapshot.distance > 5 && (
+                  {state!.camera === "aerial"
+                    ? "Drag to orbit · arrows / right-drag to pan · +/− or wheel to zoom"
+                    : state!.locomotion === "drive"
+                      ? snapshot.navigation
+                      : snapshot.prompt}
+                  {state!.camera !== "aerial" && snapshot.distance > 5 && (
                     <span>
                       {snapshot.distance >= 1000
                         ? (snapshot.distance / 1000).toFixed(1) + " km"
@@ -402,16 +586,39 @@ export function RichmondGame() {
                     {touch("back", "↓")}
                   </div>
                   <div className={styles.actions}>
-                    {touch(
-                      state!.locomotion === "drive" ? "brake" : "sprint",
-                      state!.locomotion === "drive" ? "Brake" : "Sprint",
+                    {state!.camera === "aerial" ? (
+                      <>
+                        <button
+                          onClick={() => invoke((g) => g.returnToPlayer())}
+                        >
+                          Return to Player
+                        </button>
+                        <button
+                          onClick={() => invoke((g) => g.focus("player"))}
+                        >
+                          Find Me
+                        </button>
+                        <button onClick={() => invoke((g) => g.focus("car"))}>
+                          Find My Car
+                        </button>
+                        <button onClick={() => invoke((g) => g.focus("city"))}>
+                          Whole City
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {touch(
+                          state!.locomotion === "drive" ? "brake" : "sprint",
+                          state!.locomotion === "drive" ? "Brake" : "Sprint",
+                        )}
+                        <button onClick={() => invoke((g) => g.vehicle())}>
+                          F · {state!.locomotion === "drive" ? "Exit" : "Car"}
+                        </button>
+                        <button onClick={() => invoke((g) => g.interact())}>
+                          E · {zh ? "互動" : "Interact"}
+                        </button>
+                      </>
                     )}
-                    <button onClick={() => invoke((g) => g.vehicle())}>
-                      F · {state!.locomotion === "drive" ? "Exit" : "Car"}
-                    </button>
-                    <button onClick={() => invoke((g) => g.interact())}>
-                      E · {zh ? "互動" : "Interact"}
-                    </button>
                   </div>
                 </div>
                 {state!.encounter && (
@@ -614,11 +821,19 @@ export function RichmondGame() {
                         </button>
                         <button
                           onClick={() => {
-                            game.current?.camera("third");
+                            game.current?.returnToPlayer();
                             setPanel(null);
                           }}
                         >
                           Return to player
+                        </button>
+                        <button
+                          onClick={() => {
+                            game.current?.focus("city");
+                            setPanel(null);
+                          }}
+                        >
+                          Whole City
                         </button>
                         <button
                           onClick={() => {
@@ -799,7 +1014,7 @@ export function RichmondGame() {
                         Save now
                       </button>{" "}
                       <button onClick={() => setResetConfirm(true)}>
-                        Start a new shift
+                        Start a new career
                       </button>
                       {resetConfirm && (
                         <div className={styles.activeOrder}>

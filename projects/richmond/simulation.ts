@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT — deterministic, renderer-independent game state.
-import { stepCar, carFits } from "../vancouver/physics";
+import { driveCar } from "./vehicle";
 import { createWorld, clamp, distance, point } from "./world";
 import { interiorFor, interiorFits, catalogue } from "./interiors";
 import { missions, encounterText, community } from "./story";
@@ -61,7 +61,8 @@ export function createSimulation(city: City, saved?: State) {
     message =
       "Welcome to Richmond. Take First Day in Richmond from the order board, or explore at your own pace.",
     paused = false,
-    impactCooldown = 0;
+    impactCooldown = 0,
+    contact = "none";
   type Obstacle = {
     x: number;
     z: number;
@@ -347,6 +348,7 @@ export function createSimulation(city: City, saved?: State) {
     if (state.interior)
       return say("Leave the building before returning to your car.");
     if (state.locomotion === "drive") {
+      contact = "none";
       if (Math.abs(state.car.speed) > 0.5)
         return say("Brake to a stop before getting out.");
       const exit = world.exit(state.car, state.airfield, (p) =>
@@ -475,53 +477,17 @@ export function createSimulation(city: City, saved?: State) {
     state.cooldown = Math.max(0, state.cooldown - dt);
     if (state.locomotion === "drive") {
       const oldSpeed = state.car.speed;
-      // A moving actor can overlap a bumper between ticks. Permit separation
-      // along the outward contact normal, while rejecting deeper penetration.
-      // Nearby actors are still solid; distance alone never disables collision.
-      const nearby = obstacles.filter(
-        (o) =>
-          Math.abs(o.y - state.car.y) <= 2 &&
-          Math.hypot(o.x - state.car.x, o.z - state.car.z) < 8,
-      );
-      const escape = nearby.map((o) => {
-        if (carFits(state.car, (p) => !obstructs(p, o, 0.15))) return null;
-        const dx = state.car.x - o.x,
-          dz = state.car.z - o.z,
-          length = Math.hypot(dx, dz),
-          nx = length ? dx / length : Math.sin(state.car.yaw),
-          nz = length ? dz / length : Math.cos(state.car.yaw),
-          sin = Math.sin(state.car.yaw),
-          cos = Math.cos(state.car.yaw);
-        return {
-          nx,
-          nz,
-          minimum:
-            dx * nx +
-            dz * nz -
-            Math.abs(nx * cos - nz * sin) * 1.02 -
-            Math.abs(nx * sin + nz * cos) * 2.08,
-        };
-      });
-      const next = stepCar(
+      const result = driveCar(
         state.car,
-        (held.has("forward") ? 1 : 0) - (held.has("back") ? 1 : 0),
-        (held.has("left") ? 1 : 0) - (held.has("right") ? 1 : 0),
-        held.has("brake"),
+        held,
         dt,
-        (p) =>
-          world.support(p, state.car.y, state.airfield) !== null &&
-          !nearby.some(
-            (o, i) =>
-              obstructs(p, o, 0.15) &&
-              (!escape[i] ||
-                (p[0] - o.x) * escape[i]!.nx + (p[1] - o.z) * escape[i]!.nz <
-                  escape[i]!.minimum - 1e-7),
-          ),
+        world,
+        state.airfield,
+        obstacles.map((o) => ({ ...o, yaw: o.yaw ?? 0 })),
       );
-      state.car = { ...state.car, ...next };
-      state.car.y =
-        world.support(point(state.car), state.car.y, state.airfield) ??
-        state.car.y;
+      const next = result.car;
+      contact = result.contact;
+      state.car = next;
       state.player = { ...state.car };
       if (next.blocked && Math.abs(oldSpeed) > 3 && impactCooldown === 0) {
         state.car.condition = Math.max(
@@ -711,6 +677,9 @@ export function createSimulation(city: City, saved?: State) {
   }
   if (saved) restore(saved);
   return {
+    get contact() {
+      return contact;
+    },
     world,
     places,
     obstacles(value: Obstacle[]) {
