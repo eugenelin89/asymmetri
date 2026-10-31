@@ -1,6 +1,7 @@
-# Prompt 148: Richmond driving and exploration candidate
+# Prompt 173: Richmond driving and exploration candidate
 
 - Date: 2026-10-30
+- Journal relocation: originally branch-only148; moved to173 on2026-10-31 to preserve upstream UBC148. Historical content and verification status below are unchanged.
 - Scope: platform
 - Goal: Improve Richmond driving, aerial access and phone input while preserving career and geography, with controlled gameplay gates before release.
 
