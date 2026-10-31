@@ -1510,3 +1510,12 @@ Check public GET projection, ownership isolation, CSRF rejection and no-store
 headers in addition to protected Motion/city routes and immutable asset digests.
 No profile data, private recovery codes or local test fixtures belong in Git or
 public deployment artifacts.
+
+### V0.3 profile route correction
+
+Public verification found that the shared raw ingress intentionally rejects unknown
+`/api/` families, although the private candidate can serve them. UBC profiles must
+use `/labs/ubc/community-api/` through the ordinary website backend. Keep the raw
+router, investment/Ask authority, Nginx `/api/` denial, peer services and all prior
+configuration untouched. Verify public GET and write boundaries after activation;
+a loopback candidate check alone does not validate shared ingress routing.

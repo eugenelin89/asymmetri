@@ -34,7 +34,7 @@ export function response(
   };
   if (ownerToken !== undefined)
     headers["Set-Cookie"] =
-      `${COOKIE}=${ownerToken}; Path=/api/ubc; HttpOnly; SameSite=Strict; Max-Age=${ownerToken ? 31536000 : 0}${process.env.NODE_ENV !== "development" ? "; Secure" : ""}`;
+      `${COOKIE}=${ownerToken}; Path=/labs/ubc/community-api; HttpOnly; SameSite=Strict; Max-Age=${ownerToken ? 31536000 : 0}${process.env.NODE_ENV !== "development" ? "; Secure" : ""}`;
   return Response.json(value, { status, headers });
 }
 export function failure(error: unknown) {

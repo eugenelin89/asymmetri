@@ -779,7 +779,7 @@ supported; the science-fair Great Hall extends the Nest's second level. See
 [the implementation report](UBC_CAMPUS_LIFE_V03.md).
 
 The owner explicitly requested public opt-in profiles and immediate publication.
-`app/api/ubc` is an isolated Node route family backed by the private absolute
+`app/labs/ubc/community-api` is an isolated Node route family backed by the private absolute
 `UBC_PROFILE_DIR`. It is not a general site account system. Ownership capability,
 CSRF/body/rate boundaries, reporting and manual hide/restore are in
 `projects/ubc/community`; [operations](UBC_COMMUNITY_OPERATIONS.md) documents the

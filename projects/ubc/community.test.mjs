@@ -89,7 +89,7 @@ test("profile validation rejects markup, contacts, malformed enums and missing o
 });
 test("profile HTTP boundary enforces origin, body limit, rate limit and secure private cookie", async () => {
   const req = (origin = "https://asymmetri.co", more = {}) =>
-    new Request("https://asymmetri.co/api/ubc/profile", {
+    new Request("https://asymmetri.co/labs/ubc/community-api/profile", {
       method: "POST",
       headers: { origin, "x-real-ip": "test-rate-identity", ...more },
     });
@@ -134,5 +134,6 @@ test("profile HTTP boundary enforces origin, body limit, rate limit and secure p
   assert.match(cookie, /HttpOnly/);
   assert.match(cookie, /SameSite=Strict/);
   assert.match(cookie, /Secure/);
+  assert.ok(cookie.includes("Path=/labs/ubc/community-api;"));
   assert.equal(response({}).headers.get("cache-control"), "no-store");
 });

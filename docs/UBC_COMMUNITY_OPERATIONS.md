@@ -21,7 +21,10 @@ Environment=UBC_PROFILE_DIR=/var/lib/asymmetri-ubc-community
 ```
 
 Its activation/verification is recorded in the release receipt. No separate server,
-port, database package, account provider or proxy route is needed. The existing
+port, database package, account provider or proxy route is needed. Profile endpoints
+use `/labs/ubc/community-api/` through ordinary website ingress. The shared `/api/`
+namespace is reserved for separate investment/Ask services and rejects unknown
+prefixes; do not weaken that routing boundary for UBC. The existing
 Asymmetri proxy was inspected and overwrites `X-Real-IP` with `$remote_addr`; this
 is required for source-specific limits. Never expose the Node listener directly.
 Cloudflare/Vinext build compatibility does not provision Node filesystem storage.

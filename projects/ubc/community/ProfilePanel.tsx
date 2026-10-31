@@ -19,13 +19,15 @@ const blank: ProfileDraft = {
   color: "teal",
 };
 async function request(path: string, method = "GET", value?: unknown) {
-  const response = await fetch(`/api/ubc/${path}`, {
+  const response = await fetch(`/labs/ubc/community-api/${path}`, {
     method,
     cache: "no-store",
     headers: value ? { "Content-Type": "application/json" } : undefined,
     body: value ? JSON.stringify(value) : undefined,
   });
-  const data = await response.json();
+  const data = await response.json().catch(() => {
+    throw new Error("Profiles are temporarily unavailable. Please try again.");
+  });
   if (!response.ok)
     throw new Error(data.error || "The request could not be completed.");
   return data;

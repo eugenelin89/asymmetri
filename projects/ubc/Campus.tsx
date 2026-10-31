@@ -126,7 +126,7 @@ export function Campus() {
     [communityCharacters],
   );
   const refreshCommunity = useCallback(() => {
-    void fetch("/api/ubc/community", { cache: "no-store" })
+    void fetch("/labs/ubc/community-api/community", { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : null))
       .then((v) => {
         if (v?.profiles) setCommunity(v.profiles);

@@ -115,8 +115,8 @@ information use the centralized registry, HTTPS host validation and
 
 ## Public opt-in profiles
 
-The requested Node backend exposes `/api/ubc/community`, `/api/ubc/profile`,
-`/api/ubc/profile/recover` and `/api/ubc/reports`. Publish is immediate, as requested.
+The requested Node backend exposes `/labs/ubc/community-api/community`, `/labs/ubc/community-api/profile`,
+`/labs/ubc/community-api/profile/recover` and `/labs/ubc/community-api/reports`. Publish is immediate, as requested.
 Profiles contain only participant-written public fields and a selected virtual zone.
 Identity/affiliation are unverified and the character is asynchronous, not live chat.
 
@@ -157,7 +157,7 @@ asset manifest for reference URLs and terms.
 
 ## Validation and remaining work
 
-The [validation gallery](validation/ubc-navigation/README.md) records 17 actual browser captures and observations. All 44 UBC automated tests pass; Vancouver 74, Surrey 54 and Richmond 27 tests also pass. TypeScript/ESLint pass (one existing tutorial lint warning), Vinext and Next webpack production builds pass, and the production dependency audit reports zero vulnerabilities. Automated
+The [validation gallery](validation/ubc-navigation/README.md) records 20 actual browser captures and observations. All 44 UBC automated tests pass; Vancouver 74, Surrey 54 and Richmond 27 tests also pass. TypeScript/ESLint pass (one existing tutorial lint warning), Vinext and Next webpack production builds pass, and the production dependency audit reports zero vulnerabilities. Automated
 checks cover collision traversal, source routes/entrances, stairs/doors/lift, all
 Orchard rooms, four Rose cages, new classrooms/gym, upper-floor fair access, camera
 clearance, GPS, avatar normalization, bounded actors, sports trajectories, traffic

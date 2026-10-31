@@ -1,6 +1,8 @@
 # V0.3 browser validation — 2026-10-31
 
-Actual captures from the local running application, using the in-app browser.
+Actual captures from running local production/development builds and the public
+website, using the in-app browser. Capture 20 shows the first V0.3 activation before
+the profile route correction; that release was rolled back after the API check failed.
 Models are original procedural reference reconstructions, not reference photographs.
 Desktop: 1280×720. Phone: 390×844 and 844×390. Tablet: 768×1024.
 Physical-device testing has not been performed.
@@ -53,3 +55,11 @@ encountered in browser; bounded movement/source coverage also has automated test
 - [15 tablet public profile](15-tablet-public-profile.png)
 - [16 baseball precinct traffic](16-baseball-precinct-traffic.png)
 - [17 baseball practice](17-baseball-practice.png)
+
+- [18 snowfall campus](18-snowfall-campus.png)
+- [19 rainy winter night](19-rainy-winter-night.png)
+- [20 first public V0.3 third person](20-live-v03-third-person.png)
+
+Snowfall and rainy-night controls worked without console errors. Bespoke roof and
+field snow coverage remains incomplete; these captures do not imply universal
+seasonal material coverage.
