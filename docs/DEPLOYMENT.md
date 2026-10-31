@@ -3,14 +3,18 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Campus and City menu receipt](CAMPUS_CITY_MENU_RELEASE_2026-10-31.md)
+records the latest runtime: source `4f57af9`, build `9fGY4CtfRyxjVywNp8Hqf`,
+activated October 31 at 22:07:44 UTC. Only the Labs submenu label changed;
+`/labs/gis`, its page/card/footer name and all existing URLs are preserved.
+The immediate copy-only rollback is the prior `Al8RacnJ4uunt6U1i9VTC` build at
+`/var/tmp/asymmetri-campus-city-menu-20261031/previous.next`, source `f106770b`.
+
+The preceding [UBC After Dark receipt](UBC_AFTER_DARK_RELEASE_2026-10-31.md)
+records the unchanged campus behavior and current historical archive custody.
 The [UBC landmarks and Halloween receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md)
-records the latest runtime: source `8eba0e9`, build `rtOqqaM__deGCW7i5raQm`,
-activated October 31 at 19:57:52 UTC. Both public hosts, protected routes, existing
-profiles and the live seasonal controls passed acceptance. The complete immediate
-rollback is `/var/www/asymmetri-rollback-before-ubc-v04-landmarks-20261031`,
-source `f3e5a9f`, build `UvDOiPq9Ko5YmOkq4aC66`. Six older runtimes are retained as
-verified archives; the older expanded `bbf194c` rollback also remains. Consult the
-receipt for exact identities, hashes and recovery.
+records an earlier runtime and its then-current recovery paths. Use the latest
+receipts and actual live identity before staging or restoring a release.
 
 The [UBC natural dialogue receipt](UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md)
 records the preceding conversation release. Its source/build and then-immediate
