@@ -277,11 +277,11 @@ added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
 
 ## Case Western Reserve Virtual Campus
 
-The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence.
+The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence. The [community follow-up](docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md) adds reviews and play-privacy controls with separate local and live acceptance.
 
 ## Campus community services
 
-Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. This release integrates UBC; each other campus thread owns its integration, testing and rollout. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
+Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. Each campus workstream owns its integration, testing and rollout; its release receipt identifies the live behavior. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
 
 ## Stanford Virtual Campus
 

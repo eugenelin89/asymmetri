@@ -1,4 +1,5 @@
 "use client";
+import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
 import { applyCampusAnchors } from "./layout";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -75,6 +76,7 @@ const titleOf = (id: string) =>
   displays[id]?.name ||
   id;
 export function Campus() {
+  const playRegion = useRef<HTMLElement>(null);
   const host = useRef<HTMLDivElement>(null),
     api = useRef<CampusAPI | null>(null),
     panelRef = useRef<HTMLElement>(null),
@@ -428,8 +430,10 @@ export function Campus() {
   return (
     <section
       className={`${styles.experience} ${!started ? styles.welcomeHost : ""} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
+      ref={playRegion}
       aria-label="CWRU Virtual Campus explorer"
     >
+      <PlaySession campus="cwru" playing={started && ready && !error} regionRef={playRegion} />
       <div className={styles.canvas} ref={host} />
       {!started && (
         <div className={`${styles.welcome} ${settings.halloween ? styles.halloweenWelcome : ""}`}>
@@ -1323,7 +1327,8 @@ export function Campus() {
                 >
                   Data provenance, hashes and reconstruction notes ↗
                 </a>
-                <p>All walking paths, dialogue and appearances are simulated. Research characters support only the facts cited in each encounter. Optional community characters publish the information participants submit about themselves, with owner editing, recovery and removal. LinkedIn student affiliations come from public search excerpts and may be stale. No real whereabouts or private information are collected.</p>
+                <p>All walking paths, dialogue and appearances are simulated. Research characters support only the facts cited in each encounter. Optional community characters publish the information participants submit about themselves, with owner editing, recovery and removal. LinkedIn student affiliations come from public search excerpts and may be stale. No real whereabouts are tracked; play-data collection is described below.</p>
+                <CampusPrivacyPreferences compact />
               </>
             )}
           </aside>
