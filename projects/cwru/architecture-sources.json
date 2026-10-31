@@ -1,0 +1,182 @@
+{
+  "verified": "2026-10-31",
+  "modelStatus": "Original reference-based, non-survey reconstructions. All dimensions, floor elevations and furniture placements are interpreted unless a measured source is explicitly listed. Public floor plans inform room relationships, not current room assignments. No occupied bedroom, private office, live access or real occupancy is claimed. Detailed public cores are conservative rectangles inside pinned source polygons; surrounding source-outline wings are rendered separately. An enterable core does not imply every floor or wing is accessible.",
+  "assetRights": "Procedural geometry and generated material textures are original MIT-licensed work. Third-party photographs and plans were consulted as references only and are not redistributed or used as textures.",
+  "buildings": [
+    {
+      "id": "kelvin-smith",
+      "sources": [
+        "https://case.edu/library/spaces/interactive-map",
+        "https://case.stackmap.com/map/?floor=5",
+        "https://case.stackmap.com/map/?floor=6",
+        "https://case.stackmap.com/map/?floor=7",
+        "https://case.stackmap.com/map/?floor=9",
+        "https://www.hartmancox.com/kelvin-smith-library-1",
+        "https://case.edu/library/about-ksl/visit-us"
+      ],
+      "sourceFacts": [
+        "Architect describes two rectangular blocks and a curved entrance wing, two atriums, circulation bridge, Indiana limestone cladding, three above-grade storeys and one below.",
+        "Official floor maps show service center, commons and cafe on first; Dampeer Room, classroom 215 and research commons on second; stacks and quiet reading room on third."
+      ],
+      "implemented": "Limestone window bays and curved entrance colonnade; three connected walkable levels; service counter, original book stacks, study furniture, cafe counter and representative classroom.",
+      "limits": "The reference footprint's curved wing is interpreted using a colonnade around the rectangular supported envelope. Basement, exact atrium/bridge layout and private offices are not reproduced. Floor heights are approximate."
+    },
+    {
+      "id": "tinkham-veale",
+      "sources": [
+        "https://perkinswill.com/project/tinkham-veale-university-center/",
+        "https://case.edu/universitycenter/sites/default/files/2024-06/Tinkham%20Veale%20University%20Center%20%289%29.pdf",
+        "https://engineering.case.edu/sites/default/files/tesconf_2019_information_printing_final.pdf"
+      ],
+      "sourceFacts": [
+        "Architect documents transparent double-skin glass, sloping green roof, and entrances responding to campus paths.",
+        "Published plans show two levels, media wall, commons, dining, grand staircase, and upstairs grand ballroom."
+      ],
+      "implemented": "Glazed exterior, planted sloping roof, dining counter, commons, media wall and upstairs event room reached by a working stair.",
+      "limits": "Public circulation is condensed into a rectangular envelope. Dining vendors are not asserted current. No measured roof mesh or exact grand-stair dimensions. The current 44 MB map was located; the 2019 document supplied readable room references."
+    },
+    {
+      "id": "peter-lewis",
+      "sources": [
+        "https://case.edu/weatherhead/about/facilities/peter-b-lewis-building",
+        "https://case.edu/news/10-things-every-cwru-student-should-know-discover-week-edition"
+      ],
+      "sourceFacts": [
+        "Official Weatherhead page identifies Frank Gehry, sculptural form, stainless steel siding and angled massing.",
+        "University visitor story describes curved interior stairs."
+      ],
+      "implemented": "Original curved metallic roof ribbons with panel seams above red masonry, glazed bays, three supported floors, seminar rooms and lounge seating.",
+      "limits": "Sculptural ribbons evoke the building's documented character but are not a traced Gehry envelope. Interior stair is a straight accessible simulation connection, not the exact curved original."
+    },
+    {
+      "id": "adelbert",
+      "sources": [
+        "https://case.edu/its/archives/Buildings/adlmai.htm",
+        "https://npgallery.nps.gov/AssetDetail/NRIS/73001405",
+        "https://www.architectureofcleveland.com/material/cleve_architecture_guide.pdf"
+      ],
+      "sourceFacts": [
+        "University archive describes buff sandstone and a historic four-storey building.",
+        "Historic architecture guide describes red sandstone banding, central tower, dormers, entrance porch and restored central atrium."
+      ],
+      "implemented": "Banded stone facade, pitched roof, dormers, square tower and entrance porch, three connected public gallery levels.",
+      "limits": "Historic facts do not establish today's office layout. Reconstructed public galleries omit private administration rooms; central atrium and original branching staircase remain incomplete."
+    },
+    {
+      "id": "amasa-stone",
+      "sources": [
+        "https://case.edu/artsci/music/about/facilities/music-facilities-policies-and-procedures/weddings/history-amasa-stone-chapel",
+        "https://case.edu/its/archives/Buildings/stocha.htm",
+        "https://case.edu/ech/articles/a/amasa-stone-chapel",
+        "https://case.edu/news/amasa-stone-chapel-open-house",
+        "https://case.edu/news/haunted-history-amasa-stone-chapel-0"
+      ],
+      "sourceFacts": [
+        "University references document English Gothic style, nave, side aisles, clerestory, stained glass, carved wood and a 545-person capacity.",
+        "Archive dimensions: length 145 feet, height 52 feet, tower footprint 25 by 25 feet, tower height 121 feet.",
+        "University hosted historical Halloween chapel tours in 2023; no 2026 event schedule is asserted."
+      ],
+      "implemented": "Stone tower approximately 36.9 m to pinnacles, roof approximately 15.85 m, pointed arches, timber roof ribs, side aisles, pews, chancel and original colored-glass study.",
+      "limits": "Pew count, ornament, orientation, glazing artwork and exact structural profiles remain interpreted. Original art is not copied."
+    },
+    {
+      "id": "thinkbox",
+      "sources": [
+        "https://case.edu/thinkbox/about"
+      ],
+      "sourceFacts": [
+        "Seven stories, approximately 50,000 square feet, in the current facility since 2015.",
+        "Published floor themes ascend from Community to Collaboration, Prototyping, Fabrication, Project Space, Entrepreneurship and Incubator."
+      ],
+      "implemented": "Seven connected supported levels, masonry tower, floor signs, whiteboards, worktables, original 3D-printer and fabrication-equipment interpretations.",
+      "limits": "Equipment placement, interior subdivision and dimensions are illustrative. Virtual models do not train visitors to operate actual equipment."
+    },
+    {
+      "id": "strosacker",
+      "sources": [
+        "https://case.edu/utech/departments/client-experience/mediavision/technology-enhanced-classroom-tec/list-classrooms/strosacker-auditorium",
+        "https://case.edu/masterplan/documents/cwru-master-plan-march18edits.pdf",
+        "https://films.case.edu/pricesloc.php"
+      ],
+      "sourceFacts": [
+        "Official classroom page identifies theater seating, chalkboard, carpet and dual projectors.",
+        "2018 master plan describes a two-storey auditorium adjoining Rockefeller and AW Smith, with Case Quad entry, balcony and concessions."
+      ],
+      "implemented": "Tiered theater seating, supported central aisle and rear return, dual projection screens, chalkboard and lectern; open entrance.",
+      "limits": "Seat count and interior scale are approximate. Balcony, connectors to neighboring buildings and below-grade tunnel are not reconstructed."
+    },
+    {
+      "id": "veale",
+      "sources": [
+        "https://athletics.case.edu/facilities/horsburgh-gymnasium/7",
+        "https://athletics.case.edu/facilities/veale-convocation-recreation-and-athletic-center/1",
+        "https://case.edu/facilities/projects/adelbert-gym-renovation"
+      ],
+      "sourceFacts": [
+        "Horsburgh is within Veale, with a playing court, spectator seating, press area and overlooking lounge.",
+        "Veale also has courts, indoor running track, exercise facilities and pools.",
+        "Adelbert Gym renovation is scheduled March 2026 to August 2027 and is not a completed replacement in this snapshot."
+      ],
+      "implemented": "Representative Horsburgh basketball hall with hardwood court, markings, hoops, blue bleachers and roof trusses.",
+      "limits": "This models a public gym interpretation within the supported Veale envelope, not the full recreation center, natatorium or indoor track."
+    },
+    {
+      "id": "clarke",
+      "sources": [
+        "https://case.edu/housing/facilities/first-year-buildings/clarke-tower",
+        "https://case.edu/housing/sites/default/files/2019-05/clarke1.jpg",
+        "https://case.edu/housing/sites/default/files/2019-05/clarke2e.jpg"
+      ],
+      "sourceFacts": [
+        "Eleven floors with eight-person suites; official floor plan shows suites around a common central core.",
+        "Published average rooms: double 9 feet 4 inches by 19 feet 6 inches; single 9 feet 4 inches by 10 feet 4 inches.",
+        "Published shared features include first-floor piano and game tables, basement kitchen and laundry, common upper lounges."
+      ],
+      "implemented": "Eleven-storey exterior, enterable lobby with piano and table-tennis interpretation, stair to a representative eight-person suite with three double bedrooms, two singles, a shared washroom and upper corridor.",
+      "limits": "Only lobby and one demonstration floor are supported. Bedroom geometry is representative rather than an exact suite tracing. No current room assignments or occupants are displayed. The supported public core is narrower than the full source footprint; surrounding wings retain the exterior outline."
+    },
+    {
+      "id": "village",
+      "sources": [
+        "https://case.edu/housing/facilities/upperclass-buildings/village-115-complex",
+        "https://athletics.case.edu/facilities/disanto-field/4"
+      ],
+      "sourceFacts": [
+        "Seven residential houses surround DiSanto Field in a horseshoe arrangement.",
+        "Official housing page describes a clock tower, common great rooms with fireplace, study space and apartments with living/dining area, full kitchen and private bedrooms."
+      ],
+      "implemented": "Source-aligned House 4 with masonry and pitched roof, enterable great room, and furnished apartment demonstration upstairs.",
+      "limits": "Does not reconstruct all seven houses or assign actual apartments. The clock tower belongs to another part of the complex and is not added to House 4."
+    },
+    {
+      "ids": [
+        "mather-house",
+        "law",
+        "nursing",
+        "medicine",
+        "dental",
+        "mandel"
+      ],
+      "sources": [
+        "https://case.edu/facilities/departments/facilities-services/facilities-maintenance",
+        "https://hec.case.edu/about-campus",
+        "https://hec.case.edu/sites/default/files/2024-03/Samson-First-Floor-0423.pdf"
+      ],
+      "implemented": "Individual source-location exteriors and public lobby/seminar-space interpretations with supported second floors.",
+      "limits": "These academic room layouts are generic illustrations, not plan-verified rooms. Nursing education uses the shared Health Education Campus; the Dental Clinic is a separate building. No clinical operations or research rooms are simulated. Shallow Mather House and Mandel public cores have a single supported interior level."
+    },
+    {
+      "id": "village-clocktower",
+      "sources": [
+        "https://case.edu/housing/facilities/upperclass-buildings/village-house-3a",
+        "https://case.edu/housing/sites/default/files/2019-05/IMG_20190507_134602749_HDR_0.jpg"
+      ],
+      "sourceFacts": [
+        "Official House3A page names the clock tower in its exterior photo and places Starbucks and a dance practice room on the first floor.",
+        "Pinned OSM House3A footprint and Starbucks node place the cafe in the western wing."
+      ],
+      "implemented": "Brick tower interpretation in the source-matched western House3A wing, pale vertical framing, four round clockfaces and flat corner piers; enterable cafe commons.",
+      "limits": "The cafe source node is not a surveyed tower center. Tower dimensions, precise offset, height and public lobby are photo interpretations. Clock hands are decorative; exact historical time and cafe furnishings are not reproduced."
+    }
+  ]
+}

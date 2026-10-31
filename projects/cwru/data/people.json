@@ -1,0 +1,633 @@
+[
+  {
+    "id": "susan-hagness",
+    "name": "Susan Hagness",
+    "title": "Charles H. Phipps Dean; Professor of Electrical, Computer, and Systems Engineering",
+    "department": "Case School of Engineering",
+    "kind": "faculty",
+    "zone": "strosacker",
+    "introduction": "Hello, I'm Susan Hagness. I'm the dean of the Case School of Engineering and a professor of electrical, computer, and systems engineering.",
+    "biography": "The public faculty directory lists Susan Hagness as Charles H. Phipps Dean and professor. Her research includes applied electromagnetics and biomedical diagnostic and therapeutic technologies.",
+    "sources": [
+      {
+        "label": "CWRU faculty profile",
+        "url": "https://case.edu/engineering/about/faculty-and-staff-directory/susan-hagness"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker engineering-zone route is fictional and does not indicate an office, schedule or whereabouts."
+  },
+  {
+    "id": "horst-von-recum",
+    "name": "Horst A. von Recum",
+    "title": "Professor of Biomedical Engineering",
+    "department": "Biomedical Engineering · Case School of Engineering",
+    "kind": "faculty",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Horst von Recum. I'm a biomedical engineering professor, and my research includes drug delivery and tissue engineering.",
+    "biography": "The public faculty profile lists Horst A. von Recum as a professor of biomedical engineering. His laboratory studies molecular and cellular delivery, including affinity-based drug delivery and stem-cell differentiation.",
+    "sources": [
+      {
+        "label": "CWRU faculty profile",
+        "url": "https://case.edu/engineering/about/faculty-and-staff-directory/horst-von-recum"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker engineering-zone route is fictional; the source lists Wickenden Building and does not support this character's movements."
+  },
+  {
+    "id": "roger-quinn",
+    "name": "Roger Quinn",
+    "title": "Distinguished University Professor; Arthur P. Armington Professor of Engineering",
+    "department": "Mechanical and Aerospace Engineering · Case School of Engineering",
+    "kind": "faculty",
+    "zone": "strosacker",
+    "introduction": "Hello, I'm Roger Quinn. I work in mechanical and aerospace engineering, studying robots inspired by the way animals move.",
+    "biography": "CWRU's directory lists Roger Quinn as a Distinguished University Professor, Arthur P. Armington Professor of Engineering and director of Biologically Inspired Robotics. His research includes animal-inspired robotic systems and control.",
+    "sources": [
+      {
+        "label": "CWRU faculty profile",
+        "url": "https://case.edu/engineering/about/faculty-and-staff-directory/roger-quinn"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker engineering-zone route is fictional; the source lists Glennan and does not establish any walking route."
+  },
+  {
+    "id": "harsh-mathur",
+    "name": "Harsh Mathur",
+    "title": "Professor of Physics; Associate Dean for Academic Affairs, Graduate Students and Postdoctoral Fellows",
+    "department": "Physics · College of Arts and Sciences",
+    "kind": "faculty",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Harsh Mathur. I'm a physics professor, and my research includes condensed matter theory and cosmology.",
+    "biography": "The Physics faculty profile lists Harsh Mathur as professor and associate dean for academic affairs, graduate students and postdoctoral fellows. It describes research in condensed matter theory, particle astrophysics and cosmology.",
+    "sources": [
+      {
+        "label": "CWRU Physics faculty profile",
+        "url": "https://physics.case.edu/faculty/harsh-mathur/"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker physics-zone route is fictional; the source lists Rockefeller and Crawford, not this person's real movements."
+  },
+  {
+    "id": "divita-mathur",
+    "name": "Divita Mathur",
+    "title": "Frank Hovorka Assistant Professor of Chemistry",
+    "department": "Chemistry · College of Arts and Sciences",
+    "kind": "faculty",
+    "zone": "strosacker",
+    "introduction": "Hello, I'm Divita Mathur. I'm a chemistry professor working on synthetic DNA nanostructures and molecular delivery.",
+    "biography": "The Chemistry faculty profile identifies Divita Mathur as Frank Hovorka Assistant Professor of Chemistry. Her laboratory studies programmable DNA nanostructures, nucleic-acid delivery and nanoscale materials assembly.",
+    "sources": [
+      {
+        "label": "CWRU Chemistry faculty profile",
+        "url": "https://chemistry.case.edu/faculty/divita-mathur/"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker science-zone route is fictional; the source lists Millis Hall and does not establish any walking route."
+  },
+  {
+    "id": "hillel-chiel",
+    "name": "Hillel Chiel",
+    "title": "Professor of Biology; Distinguished University Professor",
+    "department": "Biology · College of Arts and Sciences",
+    "kind": "faculty",
+    "zone": "mather-house",
+    "introduction": "Hi, I'm Hillel Chiel. I'm a biology professor, and I study how the brain and body work together to produce adaptive behavior.",
+    "biography": "CWRU's public faculty page describes Hillel Chiel's research in neural and biomechanical mechanisms of adaptive behavior. The Biology department announced his Distinguished University Professor designation in 2024.",
+    "sources": [
+      {
+        "label": "CWRU faculty profile",
+        "url": "https://artsci.case.edu/faculty/hillel-chiel/"
+      },
+      {
+        "label": "CWRU Distinguished University Professor announcement",
+        "url": "https://biology.case.edu/2024/05/14/biology-professor-dr-hillel-chiel-named-as-distinguished-university-professor/"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile-and-university-announcement",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Mather House arts-and-sciences route is fictional; the source lists DeGrace Hall and does not establish any walking route."
+  },
+  {
+    "id": "andrew-medvedev",
+    "name": "Andrew Medvedev",
+    "title": "Dean; Professor of Banking and Finance",
+    "department": "Weatherhead School of Management",
+    "kind": "faculty",
+    "zone": "peter-lewis",
+    "introduction": "Hello, I'm Andrew Medvedev. I'm dean of the Weatherhead School of Management and a professor of banking and finance.",
+    "biography": "Weatherhead's faculty profile lists Andrew Medvedev as dean, professor of banking and finance, and holder of the Albert J. Weatherhead III Professorship of Management. The directory associates him with the Peter B. Lewis Building.",
+    "sources": [
+      {
+        "label": "Weatherhead faculty profile",
+        "url": "https://case.edu/weatherhead/about/faculty-and-staff-directory/andrew-medvedev"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The academic building association is sourced; the walking route and encounter are fictional, not an office-hours or whereabouts claim."
+  },
+  {
+    "id": "michael-goldberg",
+    "name": "Michael Goldberg",
+    "title": "Professor of Design and Innovation; Executive Director and Associate Vice President, Veale Institute for Entrepreneurship",
+    "department": "Weatherhead School of Management · Veale Institute for Entrepreneurship",
+    "kind": "faculty",
+    "zone": "peter-lewis",
+    "introduction": "Hi, I'm Michael Goldberg. I teach entrepreneurship and early-stage finance and lead the Veale Institute for Entrepreneurship.",
+    "biography": "The Veale Institute profile identifies Michael Goldberg as its executive director and associate vice president, and a professor of Design and Innovation at Weatherhead. His teaching includes entrepreneurship and entrepreneurial finance.",
+    "sources": [
+      {
+        "label": "CWRU public faculty profile",
+        "url": "https://case.edu/entrepreneurship/about/our-team/michael-goldberg-0"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Weatherhead walking zone is a fictional assignment based on academic affiliation, not an office, schedule or whereabouts claim."
+  },
+  {
+    "id": "ronald-hickman",
+    "name": "Ronald L. Hickman, Jr.",
+    "title": "Dean; Ruth M. Anderson Professor of Nursing",
+    "department": "Frances Payne Bolton School of Nursing",
+    "kind": "faculty",
+    "zone": "nursing",
+    "introduction": "Hello, I'm Ronald Hickman. I'm dean of the Frances Payne Bolton School of Nursing and the Ruth M. Anderson Professor.",
+    "biography": "The Nursing faculty directory lists Ronald L. Hickman, Jr. as dean, professor and Ruth M. Anderson Professor. His research interests include decision-making under uncertainty and patient- and family-centered critical care.",
+    "sources": [
+      {
+        "label": "CWRU Nursing faculty profile",
+        "url": "https://case.edu/nursing/about/fpb-directories/faculty-directory/ronald-l-hickman-jr"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The nursing-zone route is fictional and does not indicate an office, schedule or whereabouts."
+  },
+  {
+    "id": "stanton-gerson",
+    "name": "Stanton L. Gerson",
+    "title": "Dean of Medicine; Senior Vice President for Medical Affairs",
+    "department": "School of Medicine",
+    "kind": "faculty",
+    "zone": "medicine",
+    "introduction": "Hi, I'm Stanton Gerson. I'm dean of the School of Medicine, and my research includes DNA repair and stem-cell therapy.",
+    "biography": "The public Medicine profile lists Stanton L. Gerson as dean, senior vice president for medical affairs, professor of Medicine and Environmental Health Sciences, and director of the National Center for Regenerative Medicine. It describes research in DNA repair and stem-cell therapy.",
+    "sources": [
+      {
+        "label": "CWRU Medicine faculty profile",
+        "url": "https://case.edu/medicine/pathology/faculty/stanton-l-gerson"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The medicine-zone route is fictional; the source lists the Biomedical Research Building but provides no real movements or availability."
+  },
+  {
+    "id": "paul-rose",
+    "name": "Paul Rose",
+    "title": "Dean of the School of Law",
+    "department": "School of Law",
+    "kind": "faculty",
+    "zone": "law",
+    "introduction": "Hello, I'm Paul Rose. I'm dean of the law school, and I write and teach about corporate governance, finance and securities regulation.",
+    "biography": "The Law faculty directory identifies Paul Rose as dean. His teaching and scholarship concern business associations, corporate governance, corporate finance, sovereign wealth funds, investment management law and securities regulation.",
+    "sources": [
+      {
+        "label": "CWRU Law faculty profile",
+        "url": "https://case.edu/law/about/faculty-directory/paul-rose"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The law-zone route is fictional and does not indicate an office, schedule or whereabouts."
+  },
+  {
+    "id": "dale-baur",
+    "name": "Dale A. Baur",
+    "title": "Interim Dean; Professor and Chair of Oral and Maxillofacial Surgery",
+    "department": "School of Dental Medicine",
+    "kind": "faculty",
+    "zone": "dental",
+    "introduction": "Hi, I'm Dale Baur. I'm interim dean of the School of Dental Medicine and a professor of oral and maxillofacial surgery.",
+    "biography": "The public Dental Medicine directory lists Dale A. Baur as interim dean and professor and chair of Oral and Maxillofacial Surgery. His clinical interests include head and neck tumor and reconstructive surgery.",
+    "sources": [
+      {
+        "label": "CWRU Dental Medicine faculty profile",
+        "url": "https://case.edu/dental/departments-programs/directory/dale-baur"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The dental-zone route is fictional and does not indicate an office, schedule or whereabouts."
+  },
+  {
+    "id": "dexter-voisin",
+    "name": "Dexter R. Voisin",
+    "title": "Jack, Joseph and Morton Mandel Dean in Applied Social Sciences",
+    "department": "Mandel School of Applied Social Sciences",
+    "kind": "faculty",
+    "zone": "mandel",
+    "introduction": "Hello, I'm Dexter Voisin. I'm dean of the Mandel School, and my research interests include social and health disparities.",
+    "biography": "The Mandel School's public faculty directory identifies Dexter R. Voisin as its dean. It lists specialties in social disparities, health disparities and violence, and associates him with the Mandel School building.",
+    "sources": [
+      {
+        "label": "CWRU Mandel School faculty profile",
+        "url": "https://case.edu/socialwork/about/directory-faculty-and-staff/dexter-r-voisin"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-profile",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The academic building association is sourced; the walking route and encounter are fictional, not an office-hours or whereabouts claim."
+  },
+  {
+    "id": "jeffrey-meschede",
+    "name": "Jeffrey Meschede",
+    "title": "2026 Spartans Football · Fullback · Electrical Engineering",
+    "department": "Electrical Engineering · Case School of Engineering",
+    "kind": "athlete",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Jeffrey Meschede. The 2026 football roster lists me as a fullback studying electrical engineering.",
+    "biography": "The official 2026 CWRU football profile lists Jeffrey Meschede as a junior fullback, number 0, with an Electrical Engineering major.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 football profile",
+        "url": "https://athletics.case.edu/sports/football/roster/jeffrey-meschede/10171"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Strosacker engineering-zone route is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "tyler-fikis",
+    "name": "Tyler Fikis",
+    "title": "2026 Spartans Football · Defensive Back · Engineering",
+    "department": "Engineering · Case School of Engineering",
+    "kind": "athlete",
+    "zone": "strosacker",
+    "introduction": "Hello, I'm Tyler Fikis. The 2026 football roster lists me as a defensive back studying engineering.",
+    "biography": "The official 2026 CWRU football profile lists Tyler Fikis as a senior defensive back, number 1, with an Engineering major. The profile does not specify an engineering discipline.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 football profile",
+        "url": "https://athletics.case.edu/sports/football/roster/tyler-fikis/10146"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Strosacker engineering-zone route is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "ellie-palaian",
+    "name": "Ellie Palaian",
+    "title": "2026 Spartans Women's Soccer · Goalkeeper · Business Management",
+    "department": "Business Management · Weatherhead School of Management",
+    "kind": "athlete",
+    "zone": "peter-lewis",
+    "introduction": "Hi, I'm Ellie Palaian. The 2026 women's soccer roster lists me as a goalkeeper studying business management.",
+    "biography": "The official 2026 CWRU women's soccer profile lists Ellie Palaian as a junior goalkeeper, number 0, with a Business Management major.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 women's soccer profile",
+        "url": "https://athletics.case.edu/sports/womens-soccer/roster/ellie-palaian/10343"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Weatherhead walking zone is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "talia-ciralsky",
+    "name": "Talia Ciralsky",
+    "title": "2026 Spartans Women's Soccer · Midfielder · Biology",
+    "department": "Biology (Pre-Med) · College of Arts and Sciences",
+    "kind": "athlete",
+    "zone": "mather-house",
+    "introduction": "Hello, I'm Talia Ciralsky. The 2026 women's soccer roster lists me as a midfielder studying biology on a pre-med track.",
+    "biography": "The official 2026 CWRU women's soccer profile lists Talia Ciralsky as a senior midfielder, number 2. Its academic field is Biology (Pre-Med).",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 women's soccer profile",
+        "url": "https://athletics.case.edu/sports/womens-soccer/roster/talia-ciralsky/10330"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Mather House arts-and-sciences route is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "avery-basinger",
+    "name": "Avery Basinger",
+    "title": "2026 Spartans Volleyball · Setter · Accounting",
+    "department": "Accounting · Weatherhead School of Management",
+    "kind": "athlete",
+    "zone": "peter-lewis",
+    "introduction": "Hi, I'm Avery Basinger. The 2026 volleyball roster lists me as a setter studying accounting.",
+    "biography": "The official 2026 CWRU volleyball profile lists Avery Basinger as a junior setter, number 1, with an Accounting major.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 volleyball profile",
+        "url": "https://athletics.case.edu/sports/womens-volleyball/roster/avery-basinger/10305"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Weatherhead walking zone is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "emily-goodpaster",
+    "name": "Emily Goodpaster",
+    "title": "2026 Spartans Volleyball · Outside Hitter · Biochemistry",
+    "department": "Biochemistry",
+    "kind": "athlete",
+    "zone": "medicine",
+    "introduction": "Hello, I'm Emily Goodpaster. The 2026 volleyball roster lists me as an outside hitter studying biochemistry.",
+    "biography": "The official 2026 CWRU volleyball profile lists Emily Goodpaster as a senior outside hitter, number 4, with a Biochemistry major. Historical statistics are omitted because the profile contains duplicate year headings.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 volleyball profile",
+        "url": "https://athletics.case.edu/sports/womens-volleyball/roster/emily-goodpaster/10309"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The medicine/biochemistry walking zone is a fictional academic assignment based on the published major; it does not indicate a medical degree, attendance, training or whereabouts."
+  },
+  {
+    "id": "philip-vlastaris",
+    "name": "Philip Vlastaris",
+    "title": "2026 Spartans Men's Soccer · Defender · Finance",
+    "department": "Finance · Weatherhead School of Management",
+    "kind": "athlete",
+    "zone": "peter-lewis",
+    "introduction": "Hi, I'm Philip Vlastaris. The 2026 men's soccer roster lists me as a defender studying finance.",
+    "biography": "The official 2026 CWRU men's soccer profile lists Philip Vlastaris as a senior defender, number 3, with a Finance major.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 men's soccer profile",
+        "url": "https://athletics.case.edu/sports/mens-soccer/roster/philip-vlastaris/10303"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Weatherhead walking zone is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "cormac-apostolides",
+    "name": "Cormac Apostolides",
+    "title": "2026 Spartans Men's Soccer · Defender · Finance",
+    "department": "Finance · Weatherhead School of Management",
+    "kind": "athlete",
+    "zone": "peter-lewis",
+    "introduction": "Hello, I'm Cormac Apostolides. The 2026 men's soccer roster lists me as a defender studying finance.",
+    "biography": "The official 2026 CWRU men's soccer profile lists Cormac Apostolides as a senior defender, number 4, with a Finance major.",
+    "sources": [
+      {
+        "label": "CWRU Athletics · 2026 men's soccer profile",
+        "url": "https://athletics.case.edu/sports/mens-soccer/roster/cormac-apostolides/10284"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-official-2026-roster",
+    "disclaimer": "Original simulated character and authored dialogue, not the real athlete or a quotation. The Weatherhead walking zone is fictional and based only on the published major; it does not indicate attendance, training or whereabouts."
+  },
+  {
+    "id": "asha-kartha",
+    "name": "Asha Kartha",
+    "title": "Public profile · Civil Engineering",
+    "department": "Civil Engineering · Case School of Engineering",
+    "kind": "student",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Asha Kartha. My public profile describes civil engineering studies at Case Western Reserve.",
+    "biography": "A publicly indexed LinkedIn About excerpt describes Asha Kartha as a BSE and BA student studying Civil Engineering at CWRU. Its education section lists 2021–2027. The search index was crawled approximately two months before this review. Direct access failed; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/ashakartha"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker engineering-zone route is fictional and based only on the self-published field of study; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "mahika-krishnamoorthi",
+    "name": "Mahika Krishnamoorthi",
+    "title": "Public profile · Biology",
+    "department": "Biology · College of Arts and Sciences",
+    "kind": "student",
+    "zone": "mather-house",
+    "introduction": "Hello, I'm Mahika Krishnamoorthi. My public profile describes biology studies at Case Western Reserve.",
+    "biography": "A publicly indexed LinkedIn About excerpt describes Mahika Krishnamoorthi as a CWRU student majoring in Biology. Its education section lists 2023–2027. The search index was crawled approximately four weeks before this review. Direct access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/mahika-krishnamoorthi"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Mather House arts-and-sciences route is fictional and based only on the self-published field of study; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "lindsey-wang",
+    "name": "Lindsey Wang",
+    "title": "Public profile · Computer Science",
+    "department": "Computer Science · Case School of Engineering",
+    "kind": "student",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Lindsey Wang. My public profile describes computer science studies on a pre-medicine track at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About and education text describe Lindsey Wang as pursuing a BS in Computer Science at CWRU on a pre-medicine track, with education dates 2023–2027. The index was crawled approximately two months before this review. Direct access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/lindsey-wang-b61741247"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The Strosacker engineering-zone route is fictional and based only on the self-published field of study; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "kathleen-white",
+    "name": "Kathleen White",
+    "title": "Public profile · Aerospace and Mechanical Engineering",
+    "department": "Aerospace and Mechanical Engineering · Case School of Engineering",
+    "kind": "student",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Kathleen White. My public profile describes aerospace and mechanical engineering studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes Aerospace and Mechanical Engineering studies at Case Western Reserve University. The education section lists 2023–2027. The public search index was crawled approximately five months before this review. Direct profile access returned HTTP 429; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/kwhite27"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "dhruv-amin",
+    "name": "Dhruv Amin",
+    "title": "Public profile · Aerospace and Mechanical Engineering",
+    "department": "Aerospace and Mechanical Engineering · Case School of Engineering",
+    "kind": "student",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Dhruv Amin. My public profile describes aerospace and mechanical engineering studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes an integrated BS/MS program in Aerospace and Mechanical Engineering at CWRU. The education section lists 2023–2027 and 2026–2028. The public search index was crawled approximately two months before this review. Direct profile access returned HTTP 429; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/dhruvamin-engr"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "muhammad-haroon",
+    "name": "Muhammad Haroon",
+    "title": "Public profile · Chemical and Biomolecular Engineering",
+    "department": "Chemical and Biomolecular Engineering · Case School of Engineering",
+    "kind": "student",
+    "zone": "strosacker",
+    "introduction": "Hi, I'm Muhammad Haroon. My public profile describes chemical and biomolecular engineering studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes PhD studies in Chemical and Biomolecular Engineering at Case Western Reserve University. The education section lists 2023–2027. The public search index was crawled approximately two months before this review. Direct profile access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/haroon1m"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "alexander-bergendorf",
+    "name": "Alexander Bergendorf",
+    "title": "Public profile · Systems Biology and Bioinformatics",
+    "department": "Systems Biology and Bioinformatics · School of Medicine",
+    "kind": "student",
+    "zone": "medicine",
+    "introduction": "Hi, I'm Alexander Bergendorf. My public profile describes systems biology and bioinformatics studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes a Systems Biology and Bioinformatics PhD candidacy at Case Western Reserve University. The School of Medicine education entry lists 2024–2028 and the Biomedical Sciences Training Program. The public search index was crawled approximately two months before this review. Direct profile access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/alexander-bergendorf"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "grace-goodwin",
+    "name": "Grace Goodwin",
+    "title": "Public profile · Nursing",
+    "department": "Frances Payne Bolton School of Nursing",
+    "kind": "student",
+    "zone": "nursing",
+    "introduction": "Hi, I'm Grace Goodwin. My public profile describes nursing studies at Case Western Reserve.",
+    "biography": "The publicly indexed LinkedIn education section lists Frances Payne Bolton School of Nursing at Case Western Reserve University for 2023–2027. The retrieved excerpt does not establish a specific nursing degree. The public search index was crawled approximately three months before this review. Direct profile access returned HTTP 429; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/grace-goodwin-25200935b"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "rickie-allen",
+    "name": "Rickie Allen",
+    "title": "Public profile · Finance",
+    "department": "Finance · Weatherhead School of Management",
+    "kind": "student",
+    "zone": "peter-lewis",
+    "introduction": "Hi, I'm Rickie Allen. My public profile describes finance studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes finance studies at CWRU Weatherhead. The education section describes the integrated Master of Finance program, with 2025–2027 and 2023–2027 entries and an expected May 2027 completion. The public search index was crawled approximately three months before this review. Direct profile access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/rickieallen"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "grace-staggs",
+    "name": "Grace Staggs",
+    "title": "Public profile · Law",
+    "department": "School of Law",
+    "kind": "student",
+    "zone": "law",
+    "introduction": "Hi, I'm Grace Staggs. My public profile describes law studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes a JD candidacy at Case Western Reserve University School of Law, class of 2027. The education section lists 2024–2027. The public search index was crawled approximately three months before this review. Direct profile access returned robots.txt denial; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/grace-staggs-650a27211"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "rebecca-chin",
+    "name": "Rebecca Chin",
+    "title": "Public profile · Statistics and Psychology",
+    "department": "Statistics and Psychology · College of Arts and Sciences",
+    "kind": "student",
+    "zone": "mather-house",
+    "introduction": "Hi, I'm Rebecca Chin. My public profile describes statistics and psychology studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes Statistics and Psychology studies at Case Western Reserve University. The education section lists 2023–2027. The public search index was crawled approximately two months before this review. Direct profile access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/rebecca-chin-6ba54a302"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  },
+  {
+    "id": "isabella-kim",
+    "name": "Isabella Kim",
+    "title": "Public profile · Psychology",
+    "department": "Psychology · College of Arts and Sciences",
+    "kind": "student",
+    "zone": "mather-house",
+    "introduction": "Hi, I'm Isabella Kim. My public profile describes psychology studies at Case Western Reserve.",
+    "biography": "Publicly indexed LinkedIn About text describes a Psychology major and Marketing minor at Case Western Reserve University. The education section lists 2023–2027. The public search index was crawled approximately two months before this review. Direct profile access returned HTTP 999; current enrollment and completion status are not independently verified.",
+    "sources": [
+      {
+        "label": "LinkedIn public profile · indexed excerpt",
+        "url": "https://www.linkedin.com/in/isabellakiim333"
+      }
+    ],
+    "verified": "2026-10-31",
+    "sourceAccess": "public-search-excerpt; direct profile inaccessible; status not independently verified",
+    "disclaimer": "Original simulated character and authored dialogue, not the real person or a quotation. The walking zone is fictional and based only on the self-published academic field; it does not indicate current enrollment, class attendance, a schedule or whereabouts."
+  }
+]

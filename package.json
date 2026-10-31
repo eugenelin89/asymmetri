@@ -20,8 +20,9 @@
     "showcase:preview": "npm run receiver:build && node receiver/dist/test/showcase-preview.js",
     "test:richmond": "node --test projects/richmond/*.test.mjs",
     "test:surrey": "node --test projects/surrey/surrey.test.mjs",
-    "prebuild:next": "npm run test:surrey && npm run test:richmond && npm run test:ubc",
-    "test:ubc": "node --test projects/ubc/*.test.mjs"
+    "prebuild:next": "npm run test:surrey && npm run test:richmond && npm run test:ubc && npm run test:cwru",
+    "test:ubc": "node --test projects/ubc/*.test.mjs",
+    "test:cwru": "node --test projects/cwru/*.test.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",

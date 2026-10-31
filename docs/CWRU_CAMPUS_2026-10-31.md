@@ -1,0 +1,45 @@
+# CWRU campus implementation — October 31, 2026
+
+## Delivered behavior
+
+The independent `/labs/cwru` route adapts the UBC explorer controls and architecture to Case Western Reserve University. It includes walking/running, first and third person, aerial view, keyboard/touch map, entrance travel, source-graph guidance, conversations, appearance, photo mode, atmosphere, accessibility settings and player-created public characters.
+
+The pinned OpenStreetMap snapshot supplies 1,068 building footprints, 3,916 trees, 2,145 pedestrian ways, 431 entrances and 1,039 roads. Seventeen named buildings have furnished supported interiors, plus DiSanto Field with bleachers. Source outline wings remain around the detailed interior cores. The detailed landmarks include Kelvin Smith Library, Tinkham Veale, Peter B. Lewis, Adelbert, Amasa Stone Chapel, think[box], Strosacker, Veale, Clarke, Village House 4 and the actual House 3A clocktower. Selected academic buildings complete the coverage. Clarke has six operable doors, stairs and a two-stop platform lift with matching floor openings, plus an accessible suite guide.
+
+The roster contains 528 named public-source people: 13 faculty, eight retained athlete records and 507 student records, plus one fictional guide and generic ambient avatars. The 500-row owner-provided student research enriches five existing people and adds 495 distinct entries; the original 12 public LinkedIn excerpt records remain represented. All 500 supplied names were corroborated on university pages, including 66 through current team rosters when individual-page requests failed; 434 study fields were found in the source pages. A field appearing on a directory page does not establish an individual degree or current enrollment. The other 66 fields retain explicit attribution to supplied research. The sanitized importer excludes contact columns and stores page hashes/status rather than raw pages. At most ten university characters and two player profiles render at once; movement, spacing and rotating admissions keep the large roster bounded. Direct LinkedIn access was blocked; indexed education claims are self-reports, not independent enrollment checks. Appearance, dialogue and movement are simulations. No real schedules, room assignments, contact details, scraped portraits or voice likenesses are included.
+
+The explicitly requested profile lifecycle lets visitors publish their own bounded text and avatar appearance, choose a simulated meeting district, edit/delete, recover ownership, and report public profiles. CWRU endpoints, cookie and private filesystem store are separate from UBC. The feature is locally validated; production persistence has not been provisioned. See [operations](CWRU_COMMUNITY_OPERATIONS.md).
+
+## Halloween and later holidays
+
+Automatic chooses Halloween October 24–November 7 inclusive, using Cleveland dates annually, including an already open session. Regular and Halloween manual selections remain until changed. Turning Halloween off restores the prior season, weather and hour. December 1–31 is reserved for Christmas; the regular campus remains active until that future edition is implemented.
+
+Sixteen original costume/creature types roam mapped outdoor paths: werewolves, lizard creatures, jiangshi, zombies, vampires, ghosts, skeletons, witches, mummies, pumpkin knights, comic heroes, masked vigilantes, manga ninjas, manga swordsmen, robots and mecha. There are 128 distributed actors with quality-dependent visible caps and shared instancing. Animated gaits, hops, crowd yielding and reduced-motion behavior differ by type. Interior pumpkins, ghosts and cobwebs reach supported floors.
+
+An optional Friday-the-13th-inspired hockey-masked pursuer carries a prop knife, follows connected paths, can be outrun, stops short of the visitor and waits outside buildings. It causes no attacks or damage. These are original procedural fan/genre interpretations, not copied film or game assets.
+
+The optional original Web Audio score combines low drones and an eerie motif with distant wolf howls. Nearby ghosts cry and occasionally scream at close range, with stereo direction, distance attenuation and bounded cue cooldowns. User entry or an explicit sound gesture unlocks playback. Mute/volume preferences persist; disabling Halloween, hiding the tab or disposing the scene stops scheduled sounds. A preview button plays a howl. No recordings, third-party soundtrack, real voice or microphone permission is involved.
+
+## Validation
+
+- Node 24.10.0 matches the repository's Node 24 requirement; nvm is unavailable on this machine.
+- An isolated export containing the CWRU changes passed `npm run check`: TypeScript clean, ESLint clean except the existing tutorial navigation warning.
+- `npm run test:cwru`: all 89 tests passed after the expanded roster import. The audio lifecycle test verifies gesture-gated construction and stopping scheduled voices for mute, regular mode, hidden tabs and disposal.
+- New roster tests verify all 500 records, deduplication, source fallback attribution, importer contact exclusion, natural study replies, varied fictional appearance and bounded crowd spacing through multiple campus districts.
+- Tests cover all 17 entrances and source-wing passages, supported stairs in both directions, spawning, disconnected-route handling, source allowlists and private-question boundaries; profile lifecycle/cookie isolation/character propagation; doors/lift/swept collision; Halloween dates, restoration, costumes, budgets, movement, yielding and pursuit.
+- Live local HTTP profile validation exercised create/read/edit/recovery/delete and rejected a cross-site change. Disposable synthetic fixtures were removed. No real profile was submitted.
+- Browser checks used 390 × 844 phone, 820 × 1180 tablet and 1440 × 900 desktop emulation. Verified welcome/start, keyboard walking, actual library and Peter B. Lewis interior entry, third person, map/aerial, residence guide, profile form, automatic/manual themes, sound preview, mute, keyboard volume and reduced motion controls. Phone document width was 390 px with no horizontal overflow. The viewport override was reset and the task-owned preview server stopped after validation.
+- The browser reported `Audio: running` after entry and preview, and no console errors in the final check. This verifies the Web Audio runtime, not an independent recording or subjective listening assessment of the sound design.
+- `npm audit --omit=dev`: zero vulnerabilities. `git diff --check`: passed.
+- Closing a directory/panel with the close button or Escape returns focus to the canvas in walking modes; typed search text remains in the input while open. Browser verification confirmed `CANVAS` focus after both dismissal paths and a new nearby-entry prompt after holding W with no extra scene click. The previous dialog-cleanup opener restoration was removed; map dismissal retains its opener.
+- Final `next build --webpack` and `npm run build` (Vinext/Cloudflare packaging) passed again with the expanded 500-record import, including the CWRU page and all four community API routes. Browser traversal of the populated Case Quad reported no console errors; the expanded-roster screenshot records this local check. The final focus change also passed scoped ESLint. The ordinary Next script’s broad unrelated prebuild tests were stopped during local machine contention; the direct Next build and complete CWRU suite were then run successfully. No unrelated regression-suite pass is claimed.
+
+A root-checkout check encountered an unrelated concurrently edited Stanford memoization lint error. The scoped isolated export passed; that other project's source was not changed. The validation export used the pinned baseline UBC source, not uncommitted work from other chats.
+
+## Evidence and limits
+
+Local screenshots are retained in [validation/cwru](validation/cwru): [soundscape](validation/cwru/halloween-soundscape.png), [phone controls](validation/cwru/phone-sound-control.png), [Peter B. Lewis interior](validation/cwru/tablet-peter-lewis-interior.png), and [residence guide](validation/cwru/clarke-residence-guide.png). These are original, unretouched local UI captures; they do not establish production deployment or physical-device performance.
+
+This is a source-informed procedural reconstruction, not photogrammetry or a surveyed digital twin. Landmark silhouettes, source footprints and public room functions are informed by linked maps/photos/plans, but many heights, materials, room layouts and circulation details are interpretations. Terrain is flat, some academic interiors are generic, and source-context wings and higher Clarke storeys are exterior-only. Source-disconnected paths deliberately return unavailable guidance. Low quality and reduced population help slower devices; no frame-rate guarantee is made.
+
+No public deployment, release, hosted preview, production profile directory or real-person profile creation is part of this change. Existing protected Motion URLs and other projects are preserved.

@@ -93,6 +93,17 @@ export const ubc = {
   metadata: { title: "UBC Virtual Campus | Asymmetri Labs", description: "Explore the University of British Columbia, virtually. An independent 3D campus research preview with walkable reconstructed interiors and educational guides." },
 } as const;
 
+export const cwru = {
+  name: "Case Western Reserve Virtual Campus",
+  path: "/labs/cwru",
+  tagline: "Explore Case Western Reserve University, virtually.",
+  status: "V0.1 — Campus & Halloween",
+  description: "Walk through University Circle, explore reconstructed landmark interiors, and meet source-linked academic characters. Includes an optional Halloween edition. Independent and unofficial.",
+  source: { label: "View CWRU source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/cwru" },
+  license: { label: "MIT code · ODbL geography", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/cwru/THIRD_PARTY_NOTICES.md" },
+  metadata: { title: "Case Western Reserve Virtual Campus | Asymmetri Labs", description: "Explore an independent 3D reconstruction of Case Western Reserve University, with walk-through landmarks, academic encounters and a Halloween edition." },
+} as const;
+
 export const gisApps = {
   name: "GIS Apps",
   path: "/labs/gis",
@@ -105,6 +116,8 @@ export const gisApps = {
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
   projects: [
+    { name: cwru.name, description: cwru.description, status: cwru.status,
+      detail: { label: "Explore Case Western", href: cwru.path }, source: cwru.source, license: cwru.license },
     {
       name: ubc.name,
       description: ubc.description,

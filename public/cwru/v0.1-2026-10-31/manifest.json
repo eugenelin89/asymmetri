@@ -1,0 +1,94 @@
+{
+  "version": "v0.1-2026-10-31",
+  "campus": "Case Western Reserve University \u00b7 University Circle context",
+  "retrieved": "2026-10-31",
+  "origin": [
+    -81.608,
+    41.504
+  ],
+  "bbox": [
+    41.495,
+    -81.627,
+    41.516,
+    -81.595
+  ],
+  "source": {
+    "name": "OpenStreetMap contributors",
+    "url": "https://api.openstreetmap.org/api/0.6/map",
+    "requests": [
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-81.614,41.499,-81.602,41.512",
+        "sha256": "7fca45a6e8ab74b53ab421b56d1762985fc216898e14e1428883c3a2b68bbffd",
+        "bytes": 7167886,
+        "bbox": [
+          -81.614,
+          41.499,
+          -81.602,
+          41.512
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-81.615,41.511,-81.598,41.516",
+        "sha256": "10bf08e2f01c53b1a8a16c7240004cf1dd579f27fe1863e0591d4d59eb619065",
+        "bytes": 3355462,
+        "bbox": [
+          -81.615,
+          41.511,
+          -81.598,
+          41.516
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-81.618,41.495,-81.595,41.499",
+        "sha256": "ee4cb74fdf9efea3906c20d80607e31f976b3496f09ddaf25054aeb773274b3c",
+        "bytes": 1825569,
+        "bbox": [
+          -81.618,
+          41.495,
+          -81.595,
+          41.499
+        ]
+      },
+      {
+        "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-81.627,41.5,-81.613,41.507",
+        "sha256": "8b5edc8cdeb9ccf28bea5df61ba4d678f5d10daa7193b145d0e27ce93e8440d6",
+        "bytes": 3234034,
+        "bbox": [
+          -81.627,
+          41.5,
+          -81.613,
+          41.507
+        ]
+      }
+    ],
+    "sha256": "a5d73dec71cb6721770229cafab008b5fddbd9a163130e75e2e143b280793f94",
+    "bytes": 15582954,
+    "attribution": "\u00a9 OpenStreetMap contributors",
+    "license": "Open Database License (ODbL) 1.0",
+    "licenseUrl": "https://www.openstreetmap.org/copyright"
+  },
+  "projection": "Local equirectangular, spherical radius 6371008.8 m; x east, z south. Approximate local geography, not survey-grade coordinates.",
+  "counts": {
+    "buildings": 1068,
+    "surfaces": 20154,
+    "trees": 3916,
+    "routes": 2145,
+    "entrances": 431,
+    "roads": 1039
+  },
+  "limitations": [
+    "Flat terrain; no terrain survey.",
+    "Footprints and path centre lines are OSM volunteer mapping, not university-certified as-built records.",
+    "Height tags are unverified; missing heights use tagged floor count \u00d7 3.5 m or an explicitly labeled illustrative fallback.",
+    "Road/path paving is buffered from actual source centre lines; widths default to representative values when absent.",
+    "Only source trees are included; missing tree heights default to 9 m.",
+    "Route topology preserves source vertices and excludes explicit no/private/indoor paths. Unknown access is not verified physical permission.",
+    "Paths outside the extent are trimmed at source vertices. No disjoint route components are joined.",
+    "Names identify buildings, not current occupancy. No people, emails, or residential room assignments are collected."
+  ],
+  "anchors": {
+    "count": 18,
+    "method": "Minimum-area oriented source-footprint rectangles; face orientation follows mapped entrance when available, otherwise nearest source pedestrian vertex.",
+    "limitations": "Footprint bounds are not literal architectural rectangles. Interpreted virtual entrances are explicitly labeled per anchor."
+  }
+}

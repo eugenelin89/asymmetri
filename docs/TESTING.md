@@ -939,3 +939,9 @@ See the [production receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md) and
 [implementation scope and limits](UBC_LANDMARKS_HALLOWEEN_2026-10-31.md).
 The observed development interior performance and outstanding physical-device
 checks remain limitations; these release checks do not certify the 60 FPS target.
+
+## CWRU campus acceptance
+
+`npm run test:cwru` covers profile creation/edit/recovery/deletion/reporting, CWRU cookie isolation, profile-to-walking-character propagation, sound attenuation/cooldowns, calendar boundaries, Clarke doors and lift, source footprints, all 17 entrances and their source-outline passages, supported stairs in both directions, spawn clearance, safe source links, private-question boundaries, Cleveland Halloween dates and restoration, floor decorations, disconnected routing,16 roaming costume types, path clearance, movement/yielding, reduced motion, population toggles, instanced geometry budgets and pursuit behavior. Check `/labs/cwru` at phone, tablet and desktop widths with ordinary controls; include interior entry, directory navigation, map/third person, public profile controls, Halloween, audible preview/mute/theme-off behavior and console errors. Responsive browser emulation does not establish physical-device acceptance. See [implementation report](CWRU_CAMPUS_2026-10-31.md).
+
+CWRU expanded roster validation adds 500-record coverage, five existing-record deduplications, contact-column exclusion in the Python importer, roster-source fallback attribution, source-linked study replies, fictional appearance variation and bounded multi-district crowds. The CWRU suite has 89 tests. `prebuild:next` includes `test:cwru`, so the Linux candidate validates the campus before packaging.

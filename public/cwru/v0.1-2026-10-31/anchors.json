@@ -1,0 +1,355 @@
+{
+  "kelvin-smith": {
+    "id": "kelvin-smith",
+    "x": -130.97,
+    "z": -374.35,
+    "width": 69.94,
+    "depth": 74.8,
+    "yaw": 1.6325156,
+    "entry": [
+      -114.54,
+      -362.41
+    ],
+    "sourceName": "Kelvin Smith Library",
+    "sourceId": "osm-way-108400840",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108400840",
+    "sourceEntranceId": "osm-node-1243939479"
+  },
+  "tinkham-veale": {
+    "id": "tinkham-veale",
+    "x": -94.71,
+    "z": -453.71,
+    "width": 123.22,
+    "depth": 138.73,
+    "yaw": 1.8265388,
+    "entry": [
+      -44.29,
+      -528.8
+    ],
+    "sourceName": "Tinkham Veale University Center",
+    "sourceId": "osm-relation-13244243",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-relation-13244243",
+    "sourceEntranceId": "osm-node-4386146761"
+  },
+  "peter-lewis": {
+    "id": "peter-lewis",
+    "x": -0.41,
+    "z": -664.51,
+    "width": 88.41,
+    "depth": 60.77,
+    "yaw": 0.8794594,
+    "entry": [
+      1.84,
+      -620.9
+    ],
+    "sourceName": "Peter B. Lewis Building",
+    "sourceId": "osm-way-108349160",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108349160",
+    "sourceEntranceId": "osm-node-9095900892"
+  },
+  "adelbert": {
+    "id": "adelbert",
+    "x": -24.35,
+    "z": -90.05,
+    "width": 44.98,
+    "depth": 31.72,
+    "yaw": 5.5289436,
+    "entry": [
+      -33.36,
+      -81.17
+    ],
+    "sourceName": "Adelbert Hall",
+    "sourceId": "osm-relation-16162840",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-relation-16162840",
+    "sourceEntranceId": "osm-node-11091614402"
+  },
+  "amasa-stone": {
+    "id": "amasa-stone",
+    "x": -88.88,
+    "z": -104.63,
+    "width": 46.46,
+    "depth": 25.26,
+    "yaw": 2.4051285,
+    "entry": [
+      -67.28,
+      -101.74
+    ],
+    "sourceName": "Amasa Stone Chapel",
+    "sourceId": "osm-way-108445644",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108445644",
+    "sourceEntranceId": "osm-node-1244305819"
+  },
+  "thinkbox": {
+    "id": "thinkbox",
+    "x": 193.32,
+    "z": 370.03,
+    "width": 26.57,
+    "depth": 64.64,
+    "yaw": 2.6814253,
+    "entry": [
+      208.56,
+      339.28
+    ],
+    "sourceName": "Sears think[box]",
+    "sourceId": "osm-relation-13212834",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on envelope face nearest a mapped pedestrian vertex. Not a verified physical doorway.",
+    "buildingId": "osm-relation-13212834"
+  },
+  "strosacker": {
+    "id": "strosacker",
+    "x": 41.54,
+    "z": 67.14,
+    "width": 44.16,
+    "depth": 29.22,
+    "yaw": -0.7639947,
+    "entry": [
+      42.41,
+      88.21
+    ],
+    "sourceName": "Strosacker Auditorium",
+    "sourceId": "osm-way-108526427",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108526427",
+    "sourceEntranceId": "osm-node-9095868444"
+  },
+  "veale": {
+    "id": "veale",
+    "x": 157.33,
+    "z": 296.31,
+    "width": 120.98,
+    "depth": 179.58,
+    "yaw": 2.2598876,
+    "entry": [
+      237.31,
+      258.52
+    ],
+    "sourceName": "Veale Convocation and Recreation Center",
+    "sourceId": "osm-way-108481330",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108481330",
+    "sourceEntranceId": "osm-node-13869304469"
+  },
+  "clarke": {
+    "id": "clarke",
+    "x": 199.99,
+    "z": -1172.65,
+    "width": 23.81,
+    "depth": 24.79,
+    "yaw": 2.4329664,
+    "entry": [
+      206.16,
+      -1180.8
+    ],
+    "sourceName": "Clarke Tower",
+    "sourceId": "osm-way-108349147",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108349147",
+    "sourceEntranceId": "osm-node-1243441996"
+  },
+  "mather-house": {
+    "id": "mather-house",
+    "x": 8.7,
+    "z": -436.72,
+    "width": 45.52,
+    "depth": 11.37,
+    "yaw": 2.3628077,
+    "entry": [
+      12.2,
+      -441.24
+    ],
+    "sourceName": "Mather House",
+    "sourceId": "osm-way-108358034",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108358034",
+    "sourceEntranceId": "osm-node-4386146494"
+  },
+  "law": {
+    "id": "law",
+    "x": -61.06,
+    "z": -697.96,
+    "width": 95.07,
+    "depth": 61.07,
+    "yaw": 3.9485432,
+    "entry": [
+      -54.69,
+      -705.8
+    ],
+    "sourceName": "Gund School of Law",
+    "sourceId": "osm-way-108349143",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108349143",
+    "sourceEntranceId": "osm-node-5158934768"
+  },
+  "nursing": {
+    "id": "nursing",
+    "x": -1004.83,
+    "z": -63.13,
+    "width": 161.21,
+    "depth": 101.13,
+    "yaw": 1.5753418,
+    "entry": [
+      -954.62,
+      9.38
+    ],
+    "sourceName": "Samson Pavilion",
+    "sourceId": "osm-relation-13244265",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-relation-13244265",
+    "sourceEntranceId": "osm-node-12238682059"
+  },
+  "medicine": {
+    "id": "medicine",
+    "x": 306.4,
+    "z": -104.92,
+    "width": 43.29,
+    "depth": 71.9,
+    "yaw": 7.0976357,
+    "entry": [
+      335.07,
+      -83.36
+    ],
+    "sourceName": "Richard F. Celeste Biomedical Research Building",
+    "sourceId": "osm-way-108821912",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108821912",
+    "sourceEntranceId": "osm-node-1247667763"
+  },
+  "dental": {
+    "id": "dental",
+    "x": -1047.11,
+    "z": -229.17,
+    "width": 50.41,
+    "depth": 76.5,
+    "yaw": 1.5747333,
+    "entry": [
+      -1009.87,
+      -250.3
+    ],
+    "sourceName": "CWRU Dental Clinic",
+    "sourceId": "osm-way-905478624",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-905478624",
+    "sourceEntranceId": "osm-node-13061140812"
+  },
+  "mandel": {
+    "id": "mandel",
+    "x": 61.63,
+    "z": -740.61,
+    "width": 42.95,
+    "depth": 41.54,
+    "yaw": 5.4920502,
+    "entry": [
+      59.3,
+      -720.8
+    ],
+    "sourceName": "Mandel School of Applied Social Science",
+    "sourceId": "osm-way-108349153",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108349153",
+    "sourceEntranceId": "osm-node-9095900894"
+  },
+  "disanto": {
+    "id": "disanto",
+    "x": 366.25,
+    "z": -1049.78,
+    "width": 114.65,
+    "depth": 71.67,
+    "yaw": -1.5583829,
+    "entry": [
+      328.42,
+      -1049.31
+    ],
+    "sourceName": "DiSanto Field",
+    "sourceId": "osm-way-107937221",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Interpreted virtual entrance on envelope face nearest a mapped pedestrian vertex. Not a verified physical doorway."
+  },
+  "village": {
+    "id": "village",
+    "x": 304.44,
+    "z": -977.97,
+    "width": 56.63,
+    "depth": 34.17,
+    "yaw": 1.6399324,
+    "entry": [
+      310.89,
+      -965.52
+    ],
+    "sourceName": "House 4",
+    "sourceId": "osm-way-108286405",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108286405",
+    "sourceEntranceId": "osm-node-1237530618"
+  },
+  "village-clocktower": {
+    "id": "village-clocktower",
+    "x": 316.39,
+    "z": -946.79,
+    "width": 67.47,
+    "depth": 26.2,
+    "yaw": -2.8868079,
+    "entry": [
+      297.95,
+      -949.75
+    ],
+    "sourceName": "House 3A",
+    "sourceId": "osm-way-108283703",
+    "verified": "2026-10-31",
+    "provenance": "Minimum-area oriented rectangle around OSM footprint. A modelling envelope, not a measured rectangular floor plan.",
+    "entryProvenance": "Mapped OSM entrance node; current accessibility unverified.",
+    "buildingId": "osm-way-108283703",
+    "sourceEntranceId": "osm-node-9112170688",
+    "landmarkReference": {
+      "url": "https://case.edu/housing/facilities/upperclass-buildings/village-house-3a",
+      "description": "Official Housing page identifies House 3A as the clock tower building and lists Starbucks on its first floor.",
+      "cafeSourceId": "osm-node-1237543710",
+      "cafePoint": [
+        290.11,
+        -936.27
+      ],
+      "cafeWgs84": [
+        -81.6045163,
+        41.5124201
+      ],
+      "placementLimitation": "The clock tower is in the western cafe wing. The OSM cafe point is a location hint, not a surveyed tower center. Tower dimensions, height and offset within this House 3A footprint remain photographic interpretations."
+    }
+  }
+}

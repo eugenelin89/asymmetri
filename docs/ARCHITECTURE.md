@@ -845,3 +845,7 @@ Dhillon Track and the existing Thunderbird Stadium. `athletics.ts` batches origi
 venue geometry, supplies floors/ramps/colliders for walkable structures, and updates
 fictional practice groups and joggers with population, distance and reduced-motion
 settings. These outdoor venues are separate from the nine building interiors.
+
+## CWRU campus
+
+`app/labs/cwru` loads the independent `projects/cwru` explorer, adapted from UBC without changing its runtime. Versioned OSM geography lives in `public/cwru`; original models preserve source outlines around furnished interior cores. Static source-linked people use simulated district walks and bounded dialogue. Seasonal meshes, path actors, pursuit and original Web Audio are additive client layers. `editions.ts` selects the Cleveland calendar default and preserves manual choices. The explicitly requested public-profile lifecycle adapts the UBC store with separate `/labs/cwru/community-api` endpoints, `cwru_profile_owner` cookie and `CWRU_PROFILE_DIR`. Profiles include sanitized text and normalized avatar appearance; rendering updates from a 60-second public feed. The store is unavailable until a host configures a private persistent directory. No dependency is added. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). See [project guide](../projects/cwru/README.md).

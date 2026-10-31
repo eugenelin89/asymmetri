@@ -362,3 +362,7 @@ Without it, profile APIs return an explicit unconfigured 503; ordinary explorati
 still works. Never store recovery codes or profile state in Git/public assets.
 Source-directory research parsers need a separate BeautifulSoup environment, not
 an application dependency installation. See the [V0.3 report](UBC_CAMPUS_LIFE_V03.md).
+
+## Case Western Reserve campus
+
+Use Node24 and `npm run dev:next -- --webpack --port 3031`, then open `/labs/cwru`. Run `npm run test:cwru`, `npm run check`, `npm run build` and the production dependency audit. In a concurrently edited checkout, use an isolated exported validation directory with its own build output; do not share `.next` with another running server. Stop the task-owned server after validation. To exercise public profiles, set `CWRU_PROFILE_DIR` to a disposable absolute directory outside the checkout, for example `/private/tmp/cwru-community-validation`. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). Atmosphere selects Halloween automatically October 24–November 7 in Cleveland, with manual overrides. Audio starts after entry or an explicit sound gesture; the preview button tests a howl. Muting, regular mode and hidden-tab behavior must stop playback. December remains Regular until Christmas assets are available.
