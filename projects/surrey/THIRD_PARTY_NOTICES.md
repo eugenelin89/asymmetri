@@ -81,3 +81,13 @@ Compact cars, wheel/light animation, train bodies/windows/doors, route ribbon,
 side platforms and platform lights are original MIT procedural work. No transit
 logo, proprietary vehicle model or recorded train sound is copied. Guideway height
 and station detail remain illustrative; the train is scenery, not a boarding service.
+
+## V0.6 transport derivation
+
+`/surrey/v0.6-2026-10-30/manifest.json` pins the unchanged City road-centreline
+receipt and the V0.3 road-surface receipt, plus the inherited curb/median/building
+exclusions. The 17.0 km path graph is an original derivation of that City data,
+with the same attribution and licence. Source survey dates and legal access are
+not asserted. Fictional archive dialogue, workzone, signal phases, GPS UI and
+procedural barrier/train-door detail are original MIT work. No additional map
+provider, paid service, third-party model, bitmap, audio or font is imported.

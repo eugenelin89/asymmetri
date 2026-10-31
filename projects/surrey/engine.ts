@@ -20,6 +20,7 @@ import { bodyDistance } from "./vehicle";
 import { createCityAudio } from "./audio";
 import { railSupports } from "./surfaces";
 import { segmentDistance } from "../vancouver/physics";
+import { createInputState } from "./input";
 type Callbacks = {
   map(city: City): void;
   update(state: Snapshot): void;
@@ -109,7 +110,7 @@ export async function createGame(
     throw error;
   }
   const transportScene = buildTransport(scene, sim.transport);
-  let trafficBudget = coarse ? 2 : 3;
+  let trafficBudget = coarse ? 3 : 6;
   let drivingOrbit = 0, previousOccupancy = sim.state.vehicle.occupied;
   let populationBudget = coarse ? 12 : 24;
   const ambient = populationPlan(city, sim.world, populationBudget).map((person, i) => {
@@ -118,13 +119,11 @@ export async function createGame(
     return { ...person, model };
   });
   let lastShadowMinute = -10;
-  const keys = new Set<Input>(),
-    touch = new Set<Input>();
+  const held = createInputState();
   const clear = () => {
-    keys.clear();
-    touch.clear();
+    held.clear();
   };
-  const pressed = (i: Input) => keys.has(i) || touch.has(i);
+  const pressed = (i: Input) => held.has(i);
   const report = () => {
     sim.state.cameraYaw = aerial.state.yaw;
     callbacks.update(structuredClone(sim.state));
@@ -133,6 +132,11 @@ export async function createGame(
     canvas.dataset.speed = sim.state.vehicle.car.speed.toFixed(2);
     canvas.dataset.delivery = sim.state.delivery.stage;
     canvas.dataset.checkpoint = String(sim.state.delivery.checkpoint);
+    canvas.dataset.detour = sim.state.detour.stage;
+    canvas.dataset.detourDistance = sim.state.detour.driven.toFixed(1);
+    canvas.dataset.navigation = sim.state.navigation.destination ?? "none";
+    canvas.dataset.navigationStatus = sim.state.navigation.status;
+    canvas.dataset.reroutes = String(sim.state.navigation.reroutes);
     canvas.dataset.traffic = String(sim.transport.traffic.filter(a => a.speed > .1).length);
     canvas.dataset.cityTime = sim.state.time.minutes.toFixed(2);
     canvas.dataset.missing = sim.state.missing.stage;
@@ -331,7 +335,7 @@ export async function createGame(
       if (right || forward) aerial.pan(right * dt * aerial.state.distance * .6, forward * dt * aerial.state.distance * .6);
       sim.state.follow = aerial.state.follow;
     } else if (!sim.state.dialogue) {
-      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world, sim.state.time.minutes, populationBudget, p=>bodyDistance(sim.state.vehicle.car,p)>.65 && sim.transport.traffic.every(a=>bodyDistance(a.pose,p)>.75));
+      stepPedestrians(ambient, [sim.state.player.x, sim.state.player.z], sim.state.danger.active ? sim.state.danger.position : sim.state.encounter?.phase === "pursuit" ? sim.state.encounter.position : null, dt, sim.world, sim.state.time.minutes, populationBudget, p=>bodyDistance(sim.state.vehicle.car,p)>.65 && sim.transport.traffic.every(a=>bodyDistance(a.pose,p)>.75), sim.state.elapsed);
       ambient.forEach(a => a.model.animate(a.pose, sim.state.elapsed, reduced, a.activity));
     }
     if (now - lastSave > 5000) { save(); lastSave = now; }
@@ -380,7 +384,7 @@ export async function createGame(
     const k = key(e);
     if (keyMap[k]) {
       e.preventDefault();
-      keys.add(keyMap[k]);
+      held.set(`key:${k}`, keyMap[k], true);
     } else if (!e.repeat) {
       if (k === "e") {
         e.preventDefault();
@@ -405,7 +409,7 @@ export async function createGame(
       }
     }
   }
-  const up = (e: KeyboardEvent) => keys.delete(keyMap[key(e)]);
+  const up = (e: KeyboardEvent) => held.set(`key:${key(e)}`, keyMap[key(e)], false);
   const pointers = new Map<number, { x: number; y: number; button: number }>();
   const pointerDown = (e: PointerEvent) => {
     if (sim.state.volume > 0) void audio.volume(sim.state.volume);
@@ -483,9 +487,8 @@ export async function createGame(
   renderer.shadowMap.needsUpdate = true;
   render(1);
   return {
-    input(i, value) {
-      if (value) touch.add(i);
-      else touch.delete(i);
+    input(i, value, source = `touch:${i}`) {
+      if (!value || (!paused && !document.hidden && !sim.state.dialogue)) held.set(source, i, value);
     },
     interact() {
       sim.interact();
@@ -505,6 +508,8 @@ export async function createGame(
     follow(value) { aerial.state.follow = value; sim.state.follow = value; if (value) returnToPlayer(); report(); save(); },
     selectPlace(id) { const place = landmarks(city).find(p => p.id === id); if (place) { mode("aerial"); aerial.focus(place.point, false); sim.state.follow = false; track(place.point, place.name); } },
     clearWaypoint() { sim.state.waypoint = null; report(); save(); },
+    navigate(destination) { clear(); sim.navigate(destination); report(); save(); render(1); },
+    trafficDensity(value) { sim.state.trafficDensity=value; report(); save(); },
     mature(value) { sim.mature(value); report(); save(); },
     pause(value) {
       paused = value;

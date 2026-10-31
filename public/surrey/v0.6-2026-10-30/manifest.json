@@ -1,0 +1,85 @@
+{
+  "version": "v0.6-2026-10-30",
+  "title": "Surrey, City of Adventure V0.6 — Open Roads",
+  "status": "candidate; rendered-browser acceptance required before release",
+  "retrieved": "2026-10-30",
+  "parentSnapshot": "/surrey/v0.3-2026-10-30/manifest.json",
+  "parentSha256": "e4cca4b8f8ace1296201f50f77c9bb1d0093365cbfdabeefabb91709a60cccdf",
+  "preservedTransport": "/surrey/v0.5-2026-10-30/manifest.json",
+  "bytes": 380826,
+  "sha256": "53842626ecff589ef802e5d79a51862a6ee0697ddb296b2aa83aaff53ab1bc52",
+  "connectivityReport": {
+    "path": "connectivity-report.json",
+    "bytes": 9071,
+    "sha256": "71c8263dc5bc86c5440e487834b8c728059f4fc1bf6e484b34d79384d1f39b22"
+  },
+  "sourceReceipts": [
+    {
+      "name": "roads",
+      "url": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/126/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326&outFields=%2A&returnGeometry=true&resultRecordCount=2000",
+      "sha256": "815b720ae36b5b81d00b8fd4f3e8f0b97a9e130cee2580c27c42685ecdf6cd64",
+      "bytes": 147473,
+      "features": 199,
+      "editingInfo": null,
+      "currency": "Snapshot retrieved 2026-10-30; feature survey dates are not guaranteed current."
+    },
+    {
+      "name": "road-surfaces",
+      "request": "https://gisservices.surrey.ca/arcgis/rest/services/OpenData/MapServer/113/query?f=geojson&where=1%3D1&geometry=-122.858%2C49.182%2C-122.84%2C49.195&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=%2A&outSR=4326&returnGeometry=true&resultRecordCount=2000",
+      "retrieved": "2026-10-30T19:19:04.530365+00:00",
+      "sha256": "11282a442026bfb37caa44765cf899b161c050f367d0d026159c235b4bc13a8f",
+      "bytes": 711019,
+      "features": 128,
+      "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708"
+    }
+  ],
+  "inheritedGeometry": [
+    "road surfaces",
+    "curbs",
+    "medians",
+    "building footprints",
+    "walk cells"
+  ],
+  "projection": "Local equirectangular metres, x east and z south; inherited unchanged from the V0.3 snapshot.",
+  "attribution": "Contains information licensed under the Open Government License – City of Surrey.",
+  "licence": "https://opendata-surrey.hub.arcgis.com/pages/55089a19491a4fe59a41e059fd8af708",
+  "processing": [
+    "Verify raw checksums, complete feature counts and correspondence of all 199 source road coordinates.",
+    "Intersect named road corridors with source pavement; subtract buildings, medians, non-Open surfaces, 0.15 m curb buffers and a 0.03 m boundary inset. Use a 2.35 m all-orientation inset for a 4.16 × 2.04 m compact.",
+    "Keep the original-car component. Derive source-associated lattice paths at 0.5 m, using 0.25 m on the narrow original Central Avenue connector. Retain raw and filleted paths; minimum offline radius 4.2 m.",
+    "Clip the final drive surface to accepted source corridors plus 18 m source junction neighbourhoods; this never adds pavement. Retain only the resulting polygon connected to the original car; remove detached clipping fragments.",
+    "Validate full footprints and directed inter-edge turns with exact runtime geometry at 0.15 m spacing. Reject unsupported transitions; A* state includes incoming edge.",
+    "Compute unique length with geometric unions, excluding duplicate paths and repeated routes.",
+    "Validate all eight stops, safe foot exit, all outward routes and seven return routes to Surrey Central; require supported stop rejoining.",
+    "Validate one closed 695.405 m traffic circuit; a second candidate circuit was rejected.",
+    "Fictional University Drive workzone requires a connected 1,192.607 m alternative instead of the 761.217 m direct route."
+  ],
+  "tools": {
+    "python": "Shapely 2.0.7; offline only",
+    "node": "24; exact runtime geometry and routing modules",
+    "derive": "projects/surrey/tools/derive_network.py",
+    "validate": "projects/surrey/tools/validate_transport.mjs",
+    "clip": "projects/surrey/tools/clip_network.py"
+  },
+  "summary": {
+    "uniqueSourceRoadLengthM": 17154,
+    "uniqueEdgePathLengthM": 17009,
+    "sourceJunctions": 57,
+    "drivableIntersections": 56,
+    "componentNodes": 116,
+    "componentEdges": 133,
+    "acceptedTurns": 478,
+    "reachableDirectedLegs": 204
+  },
+  "limitations": [
+    "Road widths are inferred; retrieval date is not a survey date. This is game navigation, not real-world road access or legal parking advice.",
+    "No private-lane shortcuts, invented pavement, bridge elevation or terrain datum assumptions.",
+    "Source junction positions can be adjusted within 15 m on supported pavement. King George paths choose one consistent source-supported carriageway; not every physical lane or U-turn is represented.",
+    "Only the compact footprint is supported. Curve sampling is geometric acceptance; ordinary-control browser acceptance remains required.",
+    "Stops are on roads near landmarks, not necessarily pedestrian entrances; actual exit is checked again against nearby actors.",
+    "Signals share a fictional 68-second cycle and traffic is bounded to selected routes.",
+    "Terrain is flat. Existing SkyTrain is moving scenery; boarding remains unavailable.",
+    "V0.3 geography and V0.5 transport are immutable; all changes are in this separately versioned snapshot."
+  ]
+}

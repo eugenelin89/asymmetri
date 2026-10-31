@@ -5,10 +5,11 @@ import { encounters } from "./encounters";
 import { MAP_VERSION, LEGACY_MAP_VERSION } from "./data";
 import { newTime } from "./time";
 import { newMissing, missingClues, missingWitnesses } from "./missing";
-import { newVehicle, newDelivery, PARCEL, transportData } from "./transport";
+import { newVehicle, newDelivery, PARCEL, transportData, newDetour, PACKAGE, roadNetwork, roadVersion } from "./transport";
+import { newNavigation } from "./navigation";
 export const SAVE_KEY = "asymmetri.surrey.save.v2";
 export type SavedGame = {
-  version: 4; map: string; savedAt: number; quality: "auto" | "low"; state: Snapshot;
+  version: 5; map: string; savedAt: number; quality: "auto" | "low"; state: Snapshot;
   migratedFrom?: string;
   runtime: {
     thiefIndex: number; chaseTime: number; drop: boolean; dangerCooldown: number; dangerTime: number;
@@ -26,14 +27,14 @@ export function parseSave(raw: string | null, map = MAP_VERSION): SavedGame | nu
   if (!raw || raw.length > 50000) return null;
   try {
     const data: unknown = JSON.parse(raw);
-    if (!record(data) || ![2, 3, 4].includes(data.version as number) || (data.map !== map && !(map === MAP_VERSION && data.map === LEGACY_MAP_VERSION)) || !number(data.savedAt, 0, 1e15) || !["auto", "low"].includes(data.quality as string)) return null;
+    if (!record(data) || ![2, 3, 4, 5].includes(data.version as number) || (data.map !== map && !(map === MAP_VERSION && data.map === LEGACY_MAP_VERSION)) || !number(data.savedAt, 0, 1e15) || !["auto", "low"].includes(data.quality as string)) return null;
     const s = data.state, r = data.runtime;
     if (!record(s) || !record(r) || !record(s.player) || !record(s.danger) || !record(s.investigation)) return null;
     if (!number(s.player.x, -1e6, 1e6) || !number(s.player.z, -1e6, 1e6) || !number(s.player.yaw, -1e6, 1e6)) return null;
     if (!number(s.health, 0, 100) || !number(s.stamina, 0, 100) || !number(s.money, 0, 1e6) || !Number.isInteger(s.money)) return null;
     if (!["available", "clue", "chase", "return", "completed", "failed"].includes(s.stage as string) || !["ground", "aerial"].includes(s.mode as string)) return null;
     if (!["calm", "mystery", "helped", "follow", "mature"].every(k => bool(s[k])) || !number(s.elapsed) || !point(s.thief) || !point(s.danger.position)) return null;
-    const inventory = ["Yellow transit slip", "Alex’s backpack", "Case 02: stopped watch", ...evidence.map(e => e.name), ...missingClues.map(e => e.name), PARCEL];
+    const inventory = ["Yellow transit slip", "Alex’s backpack", "Case 02: stopped watch", ...evidence.map(e => e.name), ...missingClues.map(e => e.name), PARCEL, PACKAGE];
     if (!strings(s.inventory, inventory) || !strings(s.resolved, encounters.map(e => e.id))) return null;
     const m = s.investigation;
     if (!["available", "active", "closed", "inconclusive"].includes(m.stage as string) || !strings(m.evidence, evidence.map(e => e.id)) || !strings(m.witnesses, witnesses.map(w => w.id)) || !text(m.conclusion, 1200) || (!number(m.reward, 0, 75) || ![0, 10, 75].includes(m.reward))) return null;
@@ -61,7 +62,7 @@ export function parseSave(raw: string | null, map = MAP_VERSION): SavedGame | nu
       const clues = missing.clues, items = s.inventory;
       if (missingClues.some(c => clues.includes(c.id) !== items.includes(c.name))) return null;
     }
-    if (data.version !== 4) {
+    if ((data.version as number) < 4) {
       if (s.inventory.includes(PARCEL)) return null;
       Object.assign(s, { vehicle: newVehicle(), delivery: newDelivery(), drivingDistance: 0 });
     } else {
@@ -72,8 +73,23 @@ export function parseSave(raw: string | null, map = MAP_VERSION): SavedGame | nu
       if (!["available","accepted","arrived","closed"].includes(d.stage as string) || !number(d.checkpoint,0,transportData.route.length) || !Number.isInteger(d.checkpoint) || ![0,55].includes(d.reward as number)) return null;
       if ((d.stage === "closed") !== (d.reward === 55) || ((d.stage === "accepted" || d.stage === "arrived") !== s.inventory.includes(PARCEL)) || (d.stage === "available" && d.checkpoint !== 0) || (["arrived","closed"].includes(d.stage as string) && d.checkpoint !== transportData.route.length)) return null;
     }
+    if(data.version!==5){
+      if(s.inventory.includes(PACKAGE))return null;
+      Object.assign(s,{navigation:newNavigation(),detour:newDetour(),transportVersion:roadVersion,trafficDensity:"normal"});
+    }else{
+      const n=s.navigation,d=s.detour;
+      if(s.transportVersion!==roadVersion||!["low","normal"].includes(s.trafficDensity as string)||!record(n)||!record(d))return null;
+      if(n.destination!==null&&!roadNetwork.destinations.some(stop=>stop.id===n.destination))return null;
+      if(!number(n.reroutes,0,1e7)||!Number.isInteger(n.reroutes))return null;
+      if(!["available","accepted","arrived","closed"].includes(d.stage as string)||![0,85].includes(d.reward as number)||!number(d.driven,0,1e8)||!strings(d.roads,roadNetwork.edges.map(e=>e.id)))return null;
+      if((d.stage==="closed")!==(d.reward===85)||(["accepted","arrived"].includes(d.stage as string)!==s.inventory.includes(PACKAGE)))return null;
+      if(d.stage==="available"&&(d.driven!==0||d.roads.length!==0))return null;
+      if(["arrived","closed"].includes(d.stage as string)&&(d.driven<350||d.roads.length<4))return null;
+      // Ignore saved presentation/route bytes; rebuild them from the pinned graph.
+      s.navigation={...newNavigation(),destination:n.destination,reroutes:n.reroutes};
+    }
     // Restore copies only validated gameplay fields; UI/dialogue remain derived.
-    return { ...data, version: 4, map, ...(data.map === LEGACY_MAP_VERSION && map === MAP_VERSION ? { migratedFrom: LEGACY_MAP_VERSION } : {}) } as unknown as SavedGame;
+    return { ...data, version: 5, map, ...(data.map === LEGACY_MAP_VERSION && map === MAP_VERSION ? { migratedFrom: LEGACY_MAP_VERSION } : {}) } as unknown as SavedGame;
   } catch { return null; }
 }
 export type SaveStorage = Pick<Storage, "getItem" | "setItem" | "removeItem">;

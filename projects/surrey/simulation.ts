@@ -6,7 +6,8 @@ import { encounters, encounterLocations } from "./encounters";
 import type { SavedGame } from "./save";
 import { newTime, advanceTime, timePhase } from "./time";
 import { newMissing, missingLocations, missingClues, missingWitnesses, missingReady } from "./missing";
-import { createTransport, newVehicle, newDelivery, PARCEL } from "./transport";
+import { createTransport, newVehicle, newDelivery, PARCEL, newDetour, PACKAGE, detourMission, roadNetwork, roadVersion, roadworks, closureOverlaps } from "./transport";
+import { newNavigation } from "./navigation";
 import { stepVehicle, obstacleFree, bodyDistance, type DriveInput, type Obstacle } from "./vehicle";
 export function seeded(seed: number) {
   const next = () => {
@@ -30,8 +31,8 @@ export function createSimulation(city: City, seed = 2061030) {
   const story = storyLocations(city, world), locations = encounterLocations(city, world);
   const missingPoints = missingLocations(city, world);
   const transport = createTransport(city, world);
-  let pedestrians: Point[] = [], trafficBudget = 3;
-  const staticPeople = [anchor.owner, anchor.community, ...Object.values(story), ...Object.values(missingPoints), transport.data.giver, transport.data.recipient];
+  let pedestrians: Point[] = [], trafficBudget = 6;
+  const staticPeople = [anchor.owner, anchor.community, ...Object.values(story), ...Object.values(missingPoints), transport.data.giver, transport.data.recipient, detourMission.giver, detourMission.recipient];
   const peopleObstacles = ():Obstacle[] => [...staticPeople, ...pedestrians].map(point => ({ point, radius: .55 }));
   const obstacles = ():Obstacle[] => [...peopleObstacles(), ...transport.traffic.map(a => ({ car:a.pose }))];
   const cooldowns: Record<string, number> = {};
@@ -50,6 +51,7 @@ export function createSimulation(city: City, seed = 2061030) {
     clock = 0,
     noticeUntil = 0;
   const state: Snapshot = {
+    navigation: newNavigation(), detour: newDetour(), transportVersion: roadVersion, trafficDensity: "normal",
     vehicle: newVehicle(), delivery: newDelivery(), drivingDistance: 0,
     time: newTime(), missing: newMissing(), trust: 0, stableVisibility: false, volume: 0,
     player: {
@@ -148,10 +150,17 @@ export function createSimulation(city: City, seed = 2061030) {
       state.objective = delivery.stage === "arrived" ? state.vehicle.occupied ? "Park, stop and exit · deliver the projector" : "Deliver the projector to Quinn" : state.vehicle.occupied ? "A Ride Across Surrey · follow the cyan road ribbon" : "Bring the projector to the teal car";
     }
     state.drivingDistance = transport.remaining(delivery.checkpoint, car);
+    if (state.detour.stage === "accepted" || state.detour.stage === "arrived") {
+      const stop = roadNetwork.destinations.find(d=>d.id===detourMission.destination)!;
+      state.marker = state.vehicle.occupied ? stop.point : state.detour.stage === "arrived" ? detourMission.recipient : [car.x,car.z];
+      state.objective = state.detour.stage === "arrived" ? state.vehicle.occupied ? "Park and exit · bring the package to Mina" : "Deliver the community archive to Mina" : state.vehicle.occupied ? "The Long Way Around · avoid the fictional work zone" : "Bring Nora’s package to the community car";
+    }
     if (state.vehicle.occupied) state.nearby = Math.abs(car.speed) < .05 && transport.exit(car, obstacles()) ? "Exit vehicle" : null;
     else if (near(transport.data.giver, 4)) state.nearby = "Talk to Jules · A Ride Across Surrey";
     else if (delivery.stage === "arrived" && near(transport.data.recipient, 4)) state.nearby = "Deliver projector to Quinn";
     else if (canEnter()) state.nearby = "Enter vehicle";
+    if (!state.vehicle.occupied && near(detourMission.giver, 4)) state.nearby = "Talk to Nora · The Long Way Around";
+    else if (!state.vehicle.occupied && state.detour.stage === "arrived" && near(detourMission.recipient, 4)) state.nearby = "Deliver community archive to Mina";
     if (state.mode === "aerial") state.nearby = null;
     state.danger.active = active;
     state.danger.seconds = Math.ceil(dangerTime);
@@ -279,6 +288,19 @@ export function createSimulation(city: City, seed = 2061030) {
       state.player = { ...state.player, x: point[0], z: point[1], moving: false, running: false, blocked: false };
       notify("Parked. Your car stays here; you can return and enter it again."); return true;
     }
+    if (near(detourMission.giver, 4)) {
+      if (state.detour.stage === "available") state.dialogue = { speaker: "Nora · The Long Way Around", text: "Our community archive has the only recording of a wonderful, very off-key neighbourhood choir. Mina needs it near Central City. In this fictional story, a short University Drive work zone blocks the direct road. Pick another connected route, park at the roadside stop and bring her the package on foot. The city map can help; the choice of streets is yours.", context: "detour:start", choices: [{id:"accept",label:"Take the archive · plan a detour"},{id:"leave",label:"Another time"}] };
+      else say("Nora · community archive", state.detour.stage === "closed" ? "Mina has the recording. Nobody can agree whether to restore the choir or leave it wonderfully out of tune. Thank you. The work zone is gone; enjoy the open roads." : "Mina is waiting at the Old Yale Road stop near Central City. The orange work zone is fictional. Pick any connected alternative; Map can recalculate or clear your route. Recovery keeps the archive safe.");
+      return true;
+    }
+    if (state.detour.stage === "arrived" && near(detourMission.recipient, 4)) {
+      const stop=roadNetwork.destinations.find(d=>d.id===detourMission.destination)!;
+      if(distance([vehicle.car.x,vehicle.car.z],stop.point)>9){say("Mina · community archive","Bring the car back to the roadside stop; the recording is in its boot.");return true;}
+      state.detour.stage="closed";state.detour.reward=85;state.money+=85;state.inventory=state.inventory.filter(i=>i!==PACKAGE);
+      if(state.navigation.destination)navigate(state.navigation.destination);
+      say("Case 05 · The Long Way Around · Complete","Mina checks the archive: the choir’s heroic wrong note survived the journey. The community will hear it together again. +$85. The fictional work zone has cleared; keep the car and choose your next destination.");
+      notify("CASE 05 COMPLETE · The Long Way Around · +$85");return true;
+    }
     if (near(transport.data.giver, 4)) {
       if (d.stage === "available") state.dialogue = { speaker: "Jules · A Ride Across Surrey", text: "Our neighbourhood film night is missing its projector. The teal community car is available nearby. Could you drive it along Central Avenue and City Parkway, park at the marked drop-off, then hand the projector to Quinn? The film is a documentary about a very stubborn umbrella.", context: "delivery:start", choices: [{ id: "accept", label: "Take the projector · start the drive" }, { id: "leave", label: "Maybe later" }] };
       else say("Jules · film night", d.stage === "closed" ? "Quinn says the projector works beautifully. The umbrella finally gets its close-up. The community car is still yours to explore in." : "Follow the cyan road ribbon. Brake before the turn, park at the end, then get out and meet Quinn. Recovery keeps the projector and all your cases safe.");
@@ -351,9 +373,10 @@ export function createSimulation(city: City, seed = 2061030) {
   }
   function recover() {
     if (state.vehicle.occupied) {
-      const car = transport.recover(state.vehicle.car, obstacles());
+      const car = transport.recover(state.vehicle.car, obstacles(), workZoneActive());
       if (!car) { notify("Recovery space is occupied. Wait for traffic to clear and try again."); return; }
       state.vehicle.car = car; syncDriver(); state.dialogue = null;
+      if(state.navigation.destination)navigate(state.navigation.destination);
       notify("Car recovered to clear road. Delivery checkpoints, inventory and cases are preserved."); refresh(); return;
     }
     const p = world.safe(anchor.spawn);
@@ -387,8 +410,18 @@ export function createSimulation(city: City, seed = 2061030) {
     const vehicle = state.vehicle;
     if (vehicle.occupied) {
       const before = vehicle.car;
-      vehicle.car = stepVehicle(before, drive, dt, pose => transport.surface.fits(pose) && obstacleFree(pose, obstacles()));
+      vehicle.car = stepVehicle(before, drive, dt, pose => transport.surface.fits(pose) && (!workZoneActive() || !closureOverlaps(pose)) && obstacleFree(pose, obstacles()));
       syncDriver();
+      const moved=distance([before.x,before.z],[vehicle.car.x,vehicle.car.z]);
+      if(state.detour.stage==="accepted"&&moved>.0001){
+        state.detour.driven+=moved;
+        const edge=transport.edgeAt(playerPoint());
+        if(edge&&edge.distance<16&&!state.detour.roads.includes(edge.edge.id)&&state.detour.roads.length<32)state.detour.roads.push(edge.edge.id);
+      }
+      const stop=roadNetwork.destinations.find(d=>d.id===detourMission.destination)!;
+      if(state.detour.stage==="accepted"&&state.detour.driven>=detourMission.minimumDrivenM&&state.detour.roads.length>=detourMission.minimumRoads&&distance(playerPoint(),stop.point)<7&&Math.abs(vehicle.car.speed)<.05){
+        state.detour.stage="arrived";notify("ARRIVED · Park, exit and hand the community archive to Mina.");
+      }
       const delivery = state.delivery;
       if (delivery.stage === "accepted" && distance([before.x,before.z],[vehicle.car.x,vehicle.car.z]) > .0001) {
         while (delivery.checkpoint < transport.data.route.length && distance(playerPoint(), transport.data.route[delivery.checkpoint]) < 7) delivery.checkpoint++;
@@ -397,10 +430,11 @@ export function createSimulation(city: City, seed = 2061030) {
       // An arrival while braking to a complete stop also counts; a recovery alone does not.
       if (delivery.stage === "accepted" && delivery.checkpoint === transport.data.route.length && distance(playerPoint(), transport.data.route.at(-1)!) < 8 && Math.abs(vehicle.car.speed) < .05) { delivery.stage = "arrived"; notify("ARRIVED · Park, exit and meet Quinn."); }
     } else {
-      const walking = { ...world, fits: (p:Point) => world.fits(p) && bodyDistance(vehicle.car,p) > .5 && transport.traffic.every(a=>bodyDistance(a.pose,p)>.6) };
+      const walking = { ...world, fits: (p:Point) => world.fits(p) && bodyDistance(vehicle.car,p) > .5 && transport.traffic.every(a=>bodyDistance(a.pose,p)>.9) };
       state.player = move(state.player, dx, dz, running ? 6.8 : 3.6, dt, walking);
     }
-    transport.tickTraffic(dt,playerPoint(),[...peopleObstacles(),{car:vehicle.car},...(!vehicle.occupied?[{point:playerPoint(),radius:.65}]:[])],trafficBudget);
+    transport.guidance.tick(state.navigation,vehicle.car,dt,closedRoads());
+    transport.tickTraffic(dt,playerPoint(),[...peopleObstacles(),{car:vehicle.car},...(!vehicle.occupied?[{point:playerPoint(),radius:.65}]:[])],Math.min(trafficBudget,state.trafficDensity==="low"?3:6),state.elapsed);
     state.stamina = Math.max(
       0,
       Math.min(
@@ -527,7 +561,11 @@ export function createSimulation(city: City, seed = 2061030) {
     const d = state.dialogue;
     if (!d?.choices?.some(c => c.id === id)) return;
     state.dialogue = null;
-    if (d.context === "delivery:start" && id === "accept" && state.delivery.stage === "available") {
+    if(d.context==="detour:start"&&id==="accept"&&state.detour.stage==="available") {
+      if(closureOverlaps(state.vehicle.car)){notify("Move the parked car away from the marked University Drive work zone before taking this delivery.");refresh();return;}
+      state.detour.stage="accepted";state.inventory.push(PACKAGE);navigate(detourMission.destination);
+      notify("CASE 05 · The Long Way Around · take the archive to Mina. Orange roadwork is fictional; choose a connected detour.");
+    } else if (d.context === "delivery:start" && id === "accept" && state.delivery.stage === "available") {
       state.delivery.stage = "accepted"; state.delivery.checkpoint = 0; state.inventory.push(PARCEL); state.waypoint = null;
       notify("CASE 04 · A Ride Across Surrey · find the teal car, then follow the cyan road ribbon.");
     } else if (d.context?.startsWith("missing:")) {
@@ -592,17 +630,23 @@ export function createSimulation(city: City, seed = 2061030) {
     }
   }
   function mode(value: Snapshot["mode"]) { state.mode = value; state.player.moving = state.player.running = false; refresh(); }
+  function workZoneActive(){return state.detour.stage==="accepted"||state.detour.stage==="arrived";}
+  function closedRoads(){return new Set(workZoneActive()?[roadworks.edgeId]:[]);}
+  function navigate(destination:string|null){transport.guidance.select(state.navigation,state.vehicle.car,destination,closedRoads());refresh();}
   function mature(value: boolean) { state.mature = value; if (!value && state.encounter && encounters.find(e => e.id === state.encounter!.id)?.mature) { state.encounter = null; state.dialogue = null; encounterCooldown = 60; } refresh(); }
   function serialize(quality: "auto" | "low" = "auto"): SavedGame {
-    return { version: 4, map: city.version, savedAt: Date.now(), quality, state: structuredClone(state),
+    const savedState=structuredClone(state);
+    // Navigation geometry is reproducible; only its selection belongs in a save.
+    savedState.navigation.route=null;
+    return { version: 5, map: city.version, savedAt: Date.now(), quality, state: savedState,
       runtime: { thiefIndex, chaseTime, drop, dangerCooldown, dangerTime, active, stolen, caught, exhausted, clock, encounterCooldown, cooldowns: { ...cooldowns }, random: random.getState() } };
   }
   function restore(save: SavedGame) {
     const s = save.state;
-    for (const key of ["vehicle", "delivery", "time", "missing", "trust", "stableVisibility", "volume", "health", "stamina", "money", "inventory", "stage", "elapsed", "thief", "calm", "mystery", "helped", "mode", "follow", "mature", "investigation", "encounter", "resolved", "waypoint"] as const) Object.assign(state, { [key]: structuredClone(s[key]) });
+    for (const key of ["navigation", "detour", "transportVersion", "trafficDensity", "vehicle", "delivery", "time", "missing", "trust", "stableVisibility", "volume", "health", "stamina", "money", "inventory", "stage", "elapsed", "thief", "calm", "mystery", "helped", "mode", "follow", "mature", "investigation", "encounter", "resolved", "waypoint"] as const) Object.assign(state, { [key]: structuredClone(s[key]) });
     const p = world.safe([s.player.x, s.player.z]); state.player = { ...state.player, x: p[0], z: p[1], yaw: s.player.yaw };
     state.vehicle.car.speed = 0; state.vehicle.car.steer = 0; state.vehicle.car.blocked = false;
-    if (!transport.surface.fits(state.vehicle.car)) state.vehicle.car = transport.recover(state.vehicle.car) ?? newVehicle().car;
+    if (!transport.surface.fits(state.vehicle.car)||(workZoneActive()&&closureOverlaps(state.vehicle.car))) state.vehicle.car = transport.recover(state.vehicle.car,peopleObstacles(),workZoneActive()) ?? newVehicle().car;
     if (state.vehicle.occupied) syncDriver();
     state.thief = world.safe(state.thief); state.danger.position = world.safe(s.danger.position);
     ({ thiefIndex, chaseTime, drop, dangerCooldown, dangerTime, active, stolen, caught, exhausted, clock, encounterCooldown } = save.runtime);
@@ -610,6 +654,8 @@ export function createSimulation(city: City, seed = 2061030) {
     Object.assign(cooldowns, save.runtime.cooldowns);
     if (state.encounter) { state.encounter.position = world.safe(state.encounter.position); if (state.encounter.phase === "chase") encounterPath = route(world, state.encounter.position, world.safe([locations.theft[0] + 30, locations.theft[1] - 30])); encounterIndex = 1; }
     state.dialogue = null;
+    transport.placeTraffic([...peopleObstacles(),{car:state.vehicle.car}]);
+    if(state.navigation.destination)navigate(state.navigation.destination);
     notify(save.migratedFrom ? (distance(p, [s.player.x, s.player.z]) > .05 ? "City updated. You resumed at the nearest safe point; all story progress is preserved." : "City updated. Your position and story progress are preserved.") : "Story resumed. Your progress stayed in this browser."); refresh();
   }
   function rest(minutes: 480 | 1260) {
@@ -619,5 +665,6 @@ export function createSimulation(city: City, seed = 2061030) {
     notify("You take a quiet break. Your cases and evidence are preserved."); refresh();
   }
   refresh();
-  return { transport, setPedestrians(points:Point[], budget=3) { pedestrians=points; trafficBudget=budget; }, rest, missingPoints, state, world, story, locations, tick, interact, dismiss, choose, recover, calm, mode, mature, serialize, restore };
+  transport.placeTraffic([...peopleObstacles(),{car:state.vehicle.car}]);
+  return { transport, navigate, workZoneActive, setPedestrians(points:Point[], budget=6) { pedestrians=points; trafficBudget=budget; }, rest, missingPoints, state, world, story, locations, tick, interact, dismiss, choose, recover, calm, mode, mature, serialize, restore };
 }

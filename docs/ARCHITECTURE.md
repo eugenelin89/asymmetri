@@ -733,3 +733,15 @@ See the project README and V0.5 release record for bounds and verification.
 ## Vancouver V0.6 research boundary
 
 V0.5 remains public after failed manual candidate acceptance. `projects/vancouver/development/` contains the explicitly selected handling/camera comparison, bounded in-memory evidence and real-data Cambie lab; production conditional imports omit these modules. Stable physics/handling/camera and published data are unchanged. `elevation.ts` extends the isolated proof with curved profiles and explicit connected surfaces. See [the decision and evidence](VANCOUVER_V06_RESEARCH_2026-10-30.md).
+
+## Surrey V0.6 candidate
+
+Surrey adds a separately versioned transport graph derived from immutable V0.3
+geography. `navigation.ts` searches directed incoming-edge states so rejected
+junction turns cannot return through A*. `vehicle.ts` accelerates polygon ray
+queries with north/south edge bands while retaining full-body boundary/hole and
+swept collision checks. `signals.ts` supplies one fictional phase shared by
+visible lights, traffic and crossing pedestrians; `input.ts` tracks independent
+pointer/key ownership. Schema5 retains the existing browser-local storage key.
+GPS buffers are replaced/disposed on route revision; no renderer or global state
+is added. Public runtime remains V0.5 until the V0.6 acceptance gate passes.

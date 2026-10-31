@@ -722,3 +722,14 @@ claimed from browser viewport emulation.
 Central Avenue / City Parkway driving area and unavailable train boarding; do not
 imply citywide routing or measured terrain. Four fictional cases and browser-local
 saves are current capabilities. Physical-phone acceptance remains outstanding.
+
+## Surrey V0.6 candidate copy
+
+Open Roads is candidate copy on the isolated feature branch. V0.5 remains public
+until acceptance/deployment. Keep **Surrey, City of Adventure**, `/labs/surrey`
+and the GIS Apps grouping. The candidate implements 17.0 km of unique connected
+road paths, eight roadside destinations and five fictional cases. Describe
+roadside stops accurately, with no promise of legal parking or direct landmark
+entrance access. Workzones and signal timing are fictional; terrain stays flat,
+only one compact footprint is accepted, and train boarding remains unavailable.
+The source link points to `/surrey/v0.6-2026-10-30/manifest.json` in this candidate.

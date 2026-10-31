@@ -38,7 +38,7 @@ export default function SurreyPage() {
             Enable JavaScript and WebGL2 to play. Walk with WASD or arrows,
             sprint with Shift, interact with E, and recover with R. The mission
             follows a fictional stolen backpack from a commuter near Surrey
-            Central to its return. V toggles aerial exploration; F centres the camera on the player. A second fictional homicide case uses evidence and witness accounts. A third case follows an adult who left voluntarily, with two approaches and decisions that respect their wishes. A fourth story delivers a community projector by car on Central Avenue and City Parkway. Progress is saved only in this browser.
+            Central to its return. V toggles aerial exploration; F centres the camera on the player. A second fictional homicide case uses evidence and witness accounts. A third case follows an adult who left voluntarily, with two approaches and decisions that respect their wishes. A fourth story delivers a community projector by car on Central Avenue and City Parkway. A fifth story follows GPS around fictional roadwork to deliver a community archive. Progress is saved only in this browser.
           </p>
         </noscript>
         <section className={styles.notes}>
@@ -54,10 +54,12 @@ export default function SurreyPage() {
             <p>
               A compact City Centre slice includes Surrey Central, the bus loop,
               Central City, SFU Surrey, City Hall, Civic Plaza, the library and
-              Holland Park. V0.5 adds an enterable compact car, a complete projector delivery,
-              bounded traffic and moving elevated train scenery. Driving is limited to a validated
-              Central Avenue / City Parkway slice; train boarding is not available.
-              Day/night lighting, pedestrians and all three earlier cases remain. It retains
+              Holland Park. V0.6 opens 17.0 km of connected road paths to the compact car,
+              with eight roadside destinations, GPS and a delivery around fictional roadwork.
+              Bounded traffic follows a longer circuit and signals use a simplified fictional cycle.
+              Roadside stops are near landmarks, not necessarily at their entrances.
+              Moving elevated trains remain scenery; boarding is not available.
+              Day/night lighting, pedestrians and all four earlier cases remain. It retains
               the V0.3 source road surfaces, curbs, medians and park paths. Height units are verified as metres and matched to official
               records; measurement dates and methods remain unknown. Architecture
               is an artistic reconstruction. Terrain remains flat because the

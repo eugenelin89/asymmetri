@@ -1025,3 +1025,20 @@ Widths/cross-sections are illustrative; no survey or public bridge-driving claim
 Dimensions/alt text are not applicable to structured data. Test screenshots and
 source PDFs remain in private evidence retention; no third-party imagery or owner
 phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immutable.
+
+## Surrey V0.6 candidate transport — October 30, 2026
+
+- `public/surrey/v0.6-2026-10-30/network.json`: 380,826 bytes, SHA-256
+  `53842626ecff589ef802e5d79a51862a6ee0697ddb296b2aa83aaff53ab1bc52`.
+  City-derived vector geometry: 133 connected road segments, accepted turn
+  transitions, eight roadside stops, one traffic circuit and fictional closure.
+  Exact source requests, raw/output checksums and processing are in its manifest;
+  the connectivity report records exclusions and reachable outward/return routes.
+  OGL–City of Surrey attribution retained. No raster dimensions apply.
+- Original MIT procedural workzone barriers, Nora/Mina characters, animated train
+  door panels, GPS route line and batched signal bulbs extend existing shared
+  geometry/materials. Illustrative gameplay assets, not measured street furniture.
+- The map has a north-up accessible description and an explicitly labelled
+  destination select; the game canvas retains control instructions. No third-party
+  photo, model, font, AI bitmap or private identity is added. V0.3 and V0.5 bytes
+  remain unchanged. This candidate awaits rendered-browser acceptance.

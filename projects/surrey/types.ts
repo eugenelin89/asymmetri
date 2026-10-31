@@ -68,6 +68,10 @@ export type StreetEncounter = {
   variant: boolean;
 };
 export type Snapshot = {
+  navigation: import("./navigation").Navigation;
+  detour: import("./transport").Detour;
+  transportVersion: string;
+  trafficDensity: "low" | "normal";
   vehicle: import("./transport").VehicleState;
   delivery: import("./transport").Delivery;
   drivingDistance: number;
@@ -104,7 +108,7 @@ export type Snapshot = {
   waypoint: { name: string; point: Point } | null;
 };
 export type Game = {
-  input(action: Input, pressed: boolean): void;
+  input(action: Input, pressed: boolean, source?: string): void;
   interact(): void;
   dismiss(): void;
   choose(id: string): void;
@@ -114,6 +118,8 @@ export type Game = {
   selectPlace(id: string): void;
   track(point: Point, name: string): void;
   clearWaypoint(): void;
+  navigate(destination: string | null): void;
+  trafficDensity(value: "low" | "normal"): void;
   mature(value: boolean): void;
   timeRate(value: 1 | 4 | 12): void;
   rest(minutes: 480 | 1260): void;

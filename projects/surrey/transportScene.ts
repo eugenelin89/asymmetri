@@ -2,7 +2,7 @@
 import * as THREE from "three";
 import type { Snapshot } from "./types";
 import type { createTransport } from "./transport";
-import { onPath, trainProgress } from "./transport";
+import { onPath, trainProgress, roadNetwork, roadworks, railStationDistance } from "./transport";
 import { TRANSIT_DECK_HEIGHT } from "./surfaces";
 import type { Car } from "./vehicle";
 export function buildTransport(scene:THREE.Scene, transport:ReturnType<typeof createTransport>) {
@@ -25,14 +25,24 @@ export function buildTransport(scene:THREE.Scene, transport:ReturnType<typeof cr
     for(const x of [-.89,.89]) for(const z of [-1.3,1.3]) {const pivot=new THREE.Group(),tire=new THREE.Mesh(wheel,mat(0x222b30));pivot.position.set(x,.37,z);pivot.add(tire);group.add(pivot);wheels.push({pivot,tire,front:z>0});}
     return {group,update(p:Car,seconds:number){group.position.set(p.x,.04,p.z);group.rotation.y=p.yaw;for(const w of wheels){w.pivot.rotation.y=w.front?p.steer:0;w.tire.rotation.x=seconds*p.speed/.32;}}};
   }
-  const player=car(0x39a79d),traffic=transport.traffic.map((_,i)=>car([0xe7b961,0xa46e5a,0xa3afb8][i]));
+  const player=car(0x39a79d),traffic=transport.traffic.map((_,i)=>car([0xe7b961,0xa46e5a,0xa3afb8][i%3]));
   const ribbon=new THREE.Line(new THREE.BufferGeometry().setFromPoints(transport.data.route.map(p=>new THREE.Vector3(p[0],.16,p[1]))),new THREE.LineDashedMaterial({color:0x67d9df,dashSize:3,gapSize:2,depthWrite:false}));ribbon.computeLineDistances();scene.add(ribbon);
   const destination=transport.data.route.at(-1)!;
   const parking=new THREE.Mesh(new THREE.RingGeometry(3.5,3.8,36),new THREE.MeshBasicMaterial({color:0x67d9df,side:THREE.DoubleSide}));parking.rotation.x=-Math.PI/2;parking.position.set(destination[0],.17,destination[1]);scene.add(parking);
+  const gps=new THREE.Line(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0xf4d07e,depthWrite:false}));scene.add(gps);
+  let routeRevision=-1;
+  const workZone=new THREE.Group();workZone.position.set(roadworks.point[0],0,roadworks.point[1]);workZone.rotation.y=roadworks.yaw;scene.add(workZone);
+  for(let x=-roadworks.widthM/2;x<=roadworks.widthM/2;x+=2){
+    part(workZone,0xeaa66a,1.7,.48,.24,x,1,0);part(workZone,0xeae4cc,.5,.48,.26,x,1,0);
+    part(workZone,0x384a48,.13,1.2,.2,x-.65,.6,0);part(workZone,0x384a48,.13,1.2,.2,x+.65,.6,0);
+  }
+  const trainDoors: {mesh:THREE.Mesh;z:number;sign:number}[]=[];
   const trains=Array.from({length:3},()=>{
     const group=new THREE.Group();scene.add(group);
     part(group,0xcbd4ce,2.5,2.15,8.1,0,1.45,0);part(group,0x466e83,2.55,.77,7.1,0,1.7,0);part(group,0xd3b762,2.57,.16,8.0,0,1.05,0);part(group,0x637c82,2.55,.23,8.2,0,2.65,0);
-    for(const z of [-2.5,2.5]) part(group,0xb9c6c1,2.58,1.78,.64,0,1.3,z);
+    for(const z of [-2.5,2.5]) for(const sign of [-1,1]) {
+      const mesh=part(group,0xb9c6c1,2.58,1.78,.31,0,1.3,z+sign*.16);trainDoors.push({mesh,z:z+sign*.16,sign});
+    }
     for(const z of [-3.9,3.9]) {part(group,0x315264,1.95,.78,.07,0,1.8,z);part(group,headlights,1.1,.12,.08,0,.8,z);}
     return group;
   });
@@ -46,11 +56,21 @@ export function buildTransport(scene:THREE.Scene, transport:ReturnType<typeof cr
   for(const z of [-25,-12,0,12,25]) part(platform,headlights,.7,.1,1,83,12.45,z);
   function update(state:Snapshot, network=transport) {
     player.update(state.vehicle.car,state.elapsed);
-    traffic.forEach((model,i)=>{const actor=network.traffic[i];model.update({...actor.pose,speed:actor.speed,steer:0,blocked:false},state.elapsed);});
-    ribbon.visible=state.delivery.stage==="accepted" || state.vehicle.occupied;
-    parking.visible=state.delivery.stage==="accepted"||state.delivery.stage==="arrived"||state.vehicle.occupied;
+    traffic.forEach((model,i)=>{const actor=network.traffic[i];model.update({...actor.pose,speed:actor.speed,steer:0,blocked:false},state.elapsed);model.group.visible=state.mode==="aerial"||Math.hypot(actor.pose.x-state.player.x,actor.pose.z-state.player.z)<260;});
+    ribbon.visible=state.delivery.stage==="accepted" && !state.navigation.destination;
+    parking.visible=state.delivery.stage==="accepted"||state.delivery.stage==="arrived"||!!state.navigation.destination;
+    const stop=roadNetwork.destinations.find(s=>s.id===state.navigation.destination);
+    const target=stop?.point??destination;parking.position.set(target[0],.17,target[1]);
+    if(routeRevision!==state.navigation.revision){
+      routeRevision=state.navigation.revision;gps.geometry.dispose();
+      gps.geometry=new THREE.BufferGeometry().setFromPoints((state.navigation.route?.points??[]).map(p=>new THREE.Vector3(p[0],.19,p[1])));
+    }
+    gps.visible=!!state.navigation.route&&state.navigation.status!=="idle";
+    workZone.visible=state.detour.stage==="accepted"||state.detour.stage==="arrived";
     const progress=trainProgress(state.elapsed,transport.rail.length);
+    const doorsOpen=Math.abs(progress-railStationDistance)<.05&&Math.abs(trainProgress(state.elapsed+.1,transport.rail.length)-progress)<.01;
+    trainDoors.forEach(d=>{d.mesh.position.z=d.z+(doorsOpen?d.sign*.42:0);});
     trains.forEach((train,i)=>{const p=onPath(transport.rail,progress+(i-1)*8.8);train.position.set(p.x,TRANSIT_DECK_HEIGHT+.62,p.z);train.rotation.y=p.yaw;});
   }
-  return {update,player,traffic,ribbon,parking,trains};
+  return {update,player,traffic,ribbon,parking,trains,gps,workZone};
 }

@@ -2,7 +2,7 @@
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
-import { transportData } from "./transport";
+import { transportData, detourMission } from "./transport";
 import { populationPlan } from "./population";
 import { missingLocations, missingClues, missingWitnesses } from "./missing";
 import { distance } from "./world";
@@ -13,6 +13,7 @@ import { landmarks } from "./landmarks";
 import { storyLocations, witnesses, evidence as evidenceData } from "./story";
 import type { City, Point, Polygon, Pose } from "./types";
 import type { World } from "./world";
+import { signalState, type SignalPhase } from "./signals";
 
 const shapeOf = footprintShape;
 export function createPeople() {
@@ -168,15 +169,20 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   batch(lampPosts, material(0x34444a));
   const lampMaterial = new THREE.MeshStandardMaterial({ color: 0xf0dbb6, emissive: 0xffcd83, emissiveIntensity: 0 });
   lampMaterial.userData.cityLamp = true; batch(lampHeads, lampMaterial);
-  const signalPosts: THREE.BufferGeometry[] = [],
-    signalLights: THREE.BufferGeometry[] = [];
+  const signalPosts: THREE.BufferGeometry[] = [];
+  const signalLights: Record<SignalPhase, THREE.BufferGeometry[]> = { red: [], yellow: [], green: [] };
+  const signalMaterials = {
+    red: new THREE.MeshStandardMaterial({color:0xd45043, emissive:0xee493b}),
+    yellow: new THREE.MeshStandardMaterial({color:0xeab958, emissive:0xffbf52}),
+    green: new THREE.MeshStandardMaterial({color:0x62be8d, emissive:0x60e99b}),
+  };
   city.signals.forEach((p) => {
     signalPosts.push(box(0.2, 4, 0.2, p[0], 2, p[1]));
     signalPosts.push(box(0.45, 1.2, 0.4, p[0], 4, p[1]));
-    signalLights.push(box(0.26, 0.26, 0.42, p[0], 4.2, p[1]));
+    (["red", "yellow", "green"] as const).forEach((phase, i) => signalLights[phase].push(box(0.26, 0.26, 0.42, p[0], 4.35 - i * .35, p[1])));
   });
   batch(signalPosts, material(0x2f4148));
-  batch(signalLights, material(0xeaa65e));
+  for (const phase of ["red", "yellow", "green"] as const) batch(signalLights[phase], signalMaterials[phase]);
   city.parks.forEach((p) => {
     const r = p.shape[0];
     for (let i = 0; i < r.length; i += 3)
@@ -306,7 +312,7 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   batch(plazaStrips, material(0x9caaa1));
   // Illustrative furniture and parked vehicles are kept away from quest interaction points.
   const seats: THREE.BufferGeometry[] = [], bins: THREE.BufferGeometry[] = [], cars: THREE.BufferGeometry[] = [], tires: THREE.BufferGeometry[] = [];
-  const protectedPoints = [...Object.values(city.anchors), ...Object.values(storyLocations(city, world)), ...Object.values(missingLocations(city, world))];
+  const protectedPoints = [transportData.giver, transportData.recipient, detourMission.giver, detourMission.recipient, ...Object.values(city.anchors), ...Object.values(storyLocations(city, world)), ...Object.values(missingLocations(city, world))];
   for (let i = 0; i < Math.min(trees.length, 100); i += 4) {
     const p = [trees[i][0] + 3, trees[i][1] + 2] as Point;
     if (!world.fits(p) || onSurface(p, city.pavement) || protectedPoints.some(q => distance(q, p) < 9)) continue;
@@ -412,6 +418,10 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
     const person=makePerson(i?0x5f8794:0x62bcb8);person.group.position.set(point[0],0,point[1]);scene.add(person.group);staticPeople.push(person.group);
     const marker=mesh(new THREE.OctahedronGeometry(.5),new THREE.MeshBasicMaterial({color:0x67d9df}));marker.position.set(point[0],3.4,point[1]);
   }
+  for(const [i,point] of [detourMission.giver,detourMission.recipient].entries()){
+    const person=makePerson(i?0xb67f65:0xbca25e);person.group.position.set(point[0],0,point[1]);scene.add(person.group);staticPeople.push(person.group);
+    const marker=mesh(new THREE.OctahedronGeometry(.48),new THREE.MeshBasicMaterial({color:0xf4cf7e}));marker.position.set(point[0],3.4,point[1]);
+  }
   // Original fictional signs, glass shopfronts, planted entrances and bicycle hoops.
   // Deterministic clear sites, separate from every mission interaction area.
   const hoops: THREE.BufferGeometry[] = [], planters: THREE.BufferGeometry[] = [];
@@ -441,6 +451,11 @@ export function buildScenery(scene: THREE.Scene, city: City, world: World) {
   const nightMaterials = new Set<THREE.MeshStandardMaterial>();
   scene.traverse(o => { if (o instanceof THREE.Mesh) for (const m of Array.isArray(o.material) ? o.material : [o.material]) if (m instanceof THREE.MeshStandardMaterial && (m.userData.cityWindow || m.userData.cityLamp)) nightMaterials.add(m); });
   function living(seconds: number, daylight: number, night: boolean, reduced: boolean) {
+    const phase = signalState(seconds).phase;
+    for (const name of ["red", "yellow", "green"] as const) {
+      signalMaterials[name].emissiveIntensity = phase === name ? 1.7 : 0;
+      signalMaterials[name].color.setScalar(phase === name ? .65 : .12);
+    }
     nightMaterials.forEach(m => { m.emissiveIntensity = (1 - daylight) * (m.userData.cityLamp ? 1.8 : .8); });
     busDoors.position.z = 75 + (!reduced && seconds % 40 < 12 ? 1.5 : 0);
     performer.group.visible = instrument.visible = !night;

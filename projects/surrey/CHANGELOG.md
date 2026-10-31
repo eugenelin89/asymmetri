@@ -1,5 +1,15 @@
 # Surrey release history
 
+## V0.6 — Open Roads (candidate)
+
+17.0 km of connected source-supported road paths, eight roadside destinations,
+A* GPS with rerouting/arrival/clear route, complete Case05 archive detour,
+expanded bounded traffic and fictional signals, safe stop rejoining, schema5
+migration and independent simultaneous touch/keyboard holds. Compact mobile HUD
+retained; map navigation is an explicit scrollable overlay. One verified compact
+and animated rail remain; extra vehicle footprints and boarding are deferred.
+Rendered-browser acceptance is blocked; this candidate is not a deployed release.
+
 ## V0.5 — On the Move
 
 Enterable compact car; bounded acceleration, steering, brake/reverse and full-body

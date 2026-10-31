@@ -1,4 +1,6 @@
-# Surrey, City of Adventure V0.5 — On the Move
+# Surrey, City of Adventure V0.6 — Open Roads
+
+Candidate on `codex/surrey-adventure-v06`; production remains V0.5 until rendered-browser acceptance and guarded deployment pass. See [V0.6 acceptance and release gate](../../docs/SURREY_V06_ACCEPTANCE_2026-10-30.md).
 
 **Survive the streets. Discover the stories.** A fictional third-person adventure
 and aerial city explorer at `/labs/surrey`, using a reconstructed 1.31 × 1.45 km
@@ -54,7 +56,7 @@ smoothing. Gentle Streets suppresses threats. Mature Encounters is **off by
 default** and enables only optional, non-explicit adult dialogue about sex work
 and drugs. There are no sexual acts, drug transactions or graphic violence.
 
-## Four complete cases and street stories
+## Five complete cases and street stories
 
 **Welcome to Surrey:** meet Alex, inspect the transit slip, recover the backpack
 through a bounded pursuit or help from Sam and Jo, and return it for $35. Failure
@@ -99,6 +101,14 @@ in the destination ring, exit beside the car and meet Quinn. The ordered route
 checkpoints require actual driving. Completion removes the projector and pays
 $55 once. The car remains available afterward; old cases stay independent.
 
+**The Long Way Around:** meet Nora near the station on foot and accept the
+community archive. A fictional University Drive workzone closes one road. The
+761.217 m direct route becomes a 1,192.607 m alternative across seven segments.
+Drive a connected alternative, stop at the Central City roadside destination,
+exit and hand the package to Mina for $85 once. The workzone then clears. Cargo,
+actual driven distance, visited roads and completion survive reload/recovery.
+All four earlier cases remain independent. Accepting this job is optional.
+
 ## Driving and transit
 
 Driving is a movement state within Street Adventure. E enters only beside the
@@ -116,23 +126,41 @@ buildings are excluded. Acceleration, reverse, braking, steering return and
 speed-dependent turning are bounded. Collision stops without damage or bounce.
 A smooth chase camera retains drag/zoom controls; walking keeps its own view.
 
-Only the validated **Central Avenue / City Parkway slice** is drivable. Other
-rendered roads remain walking/scenery areas. A 218.30m connected route and ordered
-graph are derived from retained V0.3 road corridors 178/36/63 intersected with
-source pavement, minus obstacles and non-Open surfaces. A 92.27m west-Central
-Avenue traffic circuit has three original compact cars (two on coarse-pointer
-starts, one active under sustained low frame rate). Nearby traffic moves at
-2–3m/s, slows near source signals and waits for vehicles or pedestrians in its
-lookahead/footprint. Distant actors update less often or park in place. Crossing
-pedestrians also wait before stepping into a vehicle. There is no citywide route
-planner or simulated traffic-light phase network; unsupported navigation stops.
+V0.6 provides **17,009 m of unique connected road paths** (17,154 m of unique
+source centrelines), 133 accepted source road segments and eight roadside stops.
+The source includes Central Avenue, City Parkway, University Drive, 104 Avenue,
+Old Yale Road, King George Boulevard and the Holland Park perimeter. Driving
+remains within validated source pavement, excluding curbs, medians, buildings,
+non-open surfaces, unnamed access lanes and disconnected/unsupported turns.
+Road widths are inferred; this is a game network, not real navigation or legal
+parking advice. Stops require a supported rejoin and safe foot exit; they do not
+promise direct access to pedestrian-only landmark entrances.
+
+**Map & GPS** selects Surrey Central, Civic Plaza, City Hall, the library, Central
+City, SFU Surrey, Holland Park or King George Station. A* includes incoming road
+direction and accepted turn transitions. Gold guidance shows route length,
+remaining distance, the next turn and stopped arrival. A sustained deviation
+recalculates from the current car; no position is changed. Clear Route returns
+to free driving. Aerial and reload preserve selection; reload rebuilds geometry.
+The old 218.30 m cyan projector route remains independent and appears only during
+that mission when GPS is cleared.
+
+Six bounded compact NPCs use a 695.405 m validated circuit through Central Avenue,
+City Parkway, 104 Avenue and University Drive. Low targets three distant actors;
+Normal targets six, with coarse devices capped at three and sustained low frame
+rate reducing the budget. Nearby cars remain present instead of disappearing.
+Distant actors update coarsely and may park in place. Full-body movement, saved-car
+spawn avoidance, lookahead yielding and pedestrian clearance remain enforced.
+Signals use a shared fictional 68-second cycle: green 32 s, yellow 4 s, red 32 s.
+Crossing pedestrians start only with enough red time and finish across if the
+phase changes. This is a bounded traffic simulation, not actual signal timing.
 
 Three original train cars shuttle smoothly over one connected 811.83m elevated
 rail chain, dwell at Surrey Central and at conservative endpoints, then reverse
 travel without jumping tracks. Side platforms, entrance/glazing/stairs, lights,
 track lines and spaced supports are illustrative. Columns avoid paved roads.
 The retained 8.2m deck-centre height is not surveyed elevation. **Train boarding
-is unavailable**; safe multi-station access/boarding is deferred beyond V0.5.
+is unavailable**; safe multi-station access/boarding is deferred beyond V0.6. King George Station lies within the map, but a complete safe vertical boarding path has not been verified. Train doors open illustratively during the Surrey Central dwell.
 
 Reproduce the transport snapshot offline from the retained V0.3 receipt cache:
 
@@ -143,6 +171,21 @@ Reproduce the transport snapshot offline from the retained V0.3 receipt cache:
 The script checks pinned input hashes and refuses to replace different existing
 transport bytes. The versioned manifest records source URLs, licence, geometry
 limits and output hashes; no runtime geographic service is added.
+
+V0.6 derivation uses the same pinned City receipts. With Python/Shapely 2.0.7:
+
+```sh
+/path/to/python projects/surrey/tools/derive_network.py --repo . --cache /path/to/v03-source-cache --roads /path/to/roads.json --out /path/to/draft
+node projects/surrey/tools/validate_transport.mjs --input /path/to/draft/network-draft.json --out /path/to/output --python /path/to/python
+```
+
+Both steps reject different existing output bytes. The first verifies hashes,
+feature counts and all 199 source-road coordinate correspondences. The second
+uses the exact runtime footprint and routing code, clips to accepted corridors,
+checks every advertised transition and all outward/return destination routes,
+and produces the network plus connectivity report. Unique lengths are geometric
+unions, never sums of repeated trips. See the V0.6 manifest for source requests,
+hashes, tolerances, rejected segments and geographic limitations.
 
 ## Living city
 
@@ -169,7 +212,7 @@ simulation are not implemented.
 ## Save and resume
 
 `asymmetri.surrey.save.v2` is a versioned localStorage record, written during play,
-after decisions, on pause/visibility changes and teardown. It preserves all four cases,
+after decisions, on pause/visibility changes and teardown. It preserves all five cases,
 clues, inventory, health/stamina/money, safe player position, settings, cooldowns
 and seeded runtime state. No record leaves this browser. Saves are origin-specific:
 apex and www do not share them. New Game asks before replacing a valid save;
@@ -191,14 +234,24 @@ range, cargo and reward consistency. Reload restores an occupied car stopped;
 an invalid car location moves to a clear validated route pose without resetting
 mission progress. Parked location, money, all earlier clues and settings survive.
 
+Schema5 retains the same storage key and migrates schema2/3/4. V0.5 car positions
+and all case progress survive when valid; invalid poses recover to a clear body-
+checked road with a foot exit. New defaults are free drive, unstarted Case05 and
+Normal traffic. Save validation checks the transport version, destination/road
+allowlists, cargo, distance and reward consistency. Route geometry is rebuilt,
+not stored. Input ownership is per pointer or keyboard key; releasing one finger
+cannot cancel another held control. Pause, blur, visibility and teardown clear
+all held input.
+
 ## Architecture and performance
 
 - `data.ts` / `world.ts`: bounded same-origin map contract, full-body clearance,
   sliding collision, movement substeps, safe recovery and bounded A* navigation.
-- `simulation.ts`: pure seeded state, four cases, encounter choices and timers.
+- `simulation.ts`: pure seeded state, five cases, encounter choices and timers.
 - `story.ts` / `encounters.ts`: authored clues, witnesses, verdicts and event data.
 - `vehicle.ts`, `transport.ts`: oriented swept collision, validated road/rail paths, traffic, safe recovery and delivery state.
-- `transportScene.ts`: shared original car/train meshes, route ribbon and platform lights.
+- `navigation.ts`, `input.ts`, `signals.ts`: validated A*, local guidance, independent held controls and simplified traffic phases.
+- `transportScene.ts`: shared original car/train meshes, disposable GPS line, workzone and platform lights.
 - `save.ts`: versioned serialization boundary, validation and failure-safe storage.
 - `camera.ts`: bounded aerial controls plus continuously fitted ground sightlines after smoothing.
 - `time.ts`, `missing.ts`, `audio.ts`: clock/lighting, adult investigation data and opt-in original synthesis.
@@ -221,7 +274,7 @@ vehicle state and snapshots are unchanged. No dependency or network service adde
 
 ## Geography and provenance
 
-Current geometry: `public/surrey/v0.3-2026-10-30/`. The V0.4 release manifest and fresh terrain review are in `public/surrey/v0.4-2026-10-30/`; no new city file is duplicated. V0.1 and V0.3 remain byte-identical.
+Current geography: `public/surrey/v0.3-2026-10-30/`; transport: `public/surrey/v0.6-2026-10-30/`. V0.5 transport bytes remain unchanged. The V0.4 release manifest and fresh terrain review are in `public/surrey/v0.4-2026-10-30/`; no new city file is duplicated. V0.1 and V0.3 remain byte-identical.
 The new manifest pins the parent, exact source URLs, raw and output SHA-256,
 retrieval times, licence, CRS, processing tolerances and known uncertainty.
 Runtime loading is same-origin only; no paid or live geographic API is used.

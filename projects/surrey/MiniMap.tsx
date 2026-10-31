@@ -1,5 +1,5 @@
-import { transportData } from "./transport";
-import { memo } from "react";
+import { transportData, roadNetwork, roadworks, detourMission, roadReport } from "./transport";
+import { memo, useRef } from "react";
 import type { City, Point, Snapshot } from "./types";
 import styles from "./surrey.module.css";
 const path = (p: Point[]) => `M${p.map((v) => v.join(",")).join("L")}`;
@@ -54,12 +54,15 @@ export function MiniMap({
   state,
   wide,
   close,
+  navigate,
 }: {
   city: City;
   state: Snapshot;
   wide: boolean;
   close: () => void;
+  navigate: (destination: string | null) => void;
 }) {
+  const destinationSelect = useRef<HTMLSelectElement>(null);
   const span = wide ? 1500 : 290,
     x = wide ? city.bounds[0] - 80 : state.player.x - span / 2,
     z = wide ? city.bounds[1] : state.player.z - span / 2;
@@ -71,17 +74,21 @@ export function MiniMap({
       { p: city.anchors.mystery, name: "Case 02", color: "#c8ace5" },
     ];
   return (
-    <div className={`${styles.map} ${wide ? styles.wideMap : ""}`}>
+    <div className={`${styles.map} ${wide ? styles.wideMap : ""}`} role={wide?"dialog":undefined} aria-modal={wide||undefined} aria-label={wide?"City map and driving navigation":undefined}>
       {wide && <button autoFocus className={styles.closeMap} onClick={close}>Close map ×</button>}
       <span className={styles.north}>N ↑</span>
       <svg
         viewBox={`${x} ${z} ${span} ${span}`}
         role="img"
-        aria-label={`North-up map. Player near ${state.street}. Gold diamond: ${state.objective}. White: station. Blue: community. Purple: case 02. Green: case 03. Cyan: car and delivery. Pale roads: validated driving area.`}
+        aria-label={`North-up map. Player near ${state.street}. Gold line: selected driving route. Gold diamond: ${state.objective}. Cyan: car and projector delivery. Pale roads: validated driving area. Orange: fictional mission roadwork. Choose a roadside stop below the map.`}
       >
         <Geometry city={city} />
         <path d={transportData.polygons.map(p=>p.map(r=>path(r)+"Z").join("")).join("")} fill="#a4b6a0" fillRule="evenodd" opacity=".6" />
-        {(state.delivery.stage === "accepted" || state.vehicle.occupied) && <path d={path(transportData.route)} fill="none" stroke="#67d9df" strokeWidth={2*scale} />}
+        {state.delivery.stage === "accepted" && !state.navigation.destination && <path d={path(transportData.route)} fill="none" stroke="#67d9df" strokeWidth={2*scale} />}
+        {state.navigation.route && <path d={path(state.navigation.route.points)} fill="none" stroke="#ffce70" strokeWidth={3*scale} />}
+        {wide && roadNetwork.destinations.map(stop=><g key={stop.id}><circle cx={stop.point[0]} cy={stop.point[1]} r={5*scale} fill={state.navigation.destination===stop.id?"#ffce70":"#e5e5c7"}/><title>{stop.name} · {stop.roadName} roadside stop</title></g>)}
+        {(state.detour.stage==="accepted"||state.detour.stage==="arrived")&&<g transform={`translate(${roadworks.point[0]},${roadworks.point[1]})`}><path d={`M${-9*scale} ${-9*scale}L${9*scale} ${9*scale}M${-9*scale} ${9*scale}L${9*scale} ${-9*scale}`} stroke="#f39d72" strokeWidth={4*scale}/><title>Fictional mission roadwork · University Drive</title></g>}
+        <circle cx={detourMission.giver[0]} cy={detourMission.giver[1]} r={4*scale} fill="#ffce70" />
         <circle cx={transportData.giver[0]} cy={transportData.giver[1]} r={4*scale} fill="#67d9df" />
         <rect x={-3*scale} y={-5*scale} width={6*scale} height={10*scale} fill="#67d9df" stroke="#142d28" transform={`translate(${state.vehicle.car.x},${state.vehicle.car.z}) rotate(${-state.vehicle.car.yaw*180/Math.PI})`} />
         {poi.map(({ p, name, color }) => (
@@ -124,8 +131,13 @@ export function MiniMap({
         />
       </svg>
       <span className={styles.mapCaption}>
-        {wide ? "CITY CENTRE · 1.4 KM" : "SURREY CENTRAL"}
+        {wide ? `${(roadReport.uniqueEdgePathLengthM/1000).toFixed(1)} KM OF CONNECTED ROAD PATHS` : "SURREY CENTRAL"}
       </span>
+      {wide&&<div className={styles.mapNavigation}>
+        <label>Drive to a roadside stop<select ref={destinationSelect} aria-label="Driving destination" value={state.navigation.destination??""} onChange={e=>navigate(e.target.value||null)}><option value="">Free drive · no route</option>{roadNetwork.destinations.map(stop=><option key={stop.id} value={stop.id}>{stop.name} · {stop.roadName}</option>)}</select></label>
+        {state.navigation.destination&&<><p role="status">{state.navigation.instruction}{state.navigation.route?` · ${(state.navigation.route.length/1000).toFixed(2)} km planned · ${Math.round(state.navigation.remaining)} m remaining`:""}</p><button onClick={()=>{navigate(null);destinationSelect.current?.focus();}}>Clear Route</button></>}
+        <small>Stops are on roads near landmarks. Park only where you can exit safely, then continue on foot. Orange roadwork is fictional.</small>
+      </div>}
     </div>
   );
 }

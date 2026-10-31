@@ -1469,3 +1469,15 @@ Use the existing exact-source Linux candidate workflow and 192MiB available-memo
 Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
 rollback. No OS, DNS, TLS, database or peer-service changes are authorized by this
 release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
+
+## Surrey V0.6 release gate
+
+V0.6 is an isolated candidate; no activation is authorized by passing automated
+checks alone. The requested ordinary-control rendered-browser acceptance is
+currently blocked by frozen browser animation and mouse/screenshot timeouts.
+Keep V0.5 serving until the gate in `SURREY_V06_ACCEPTANCE_2026-10-30.md` passes.
+Then refresh approved main, coordinate the shared window, build an exact-source
+Linux candidate and preserve the complete immediate runtime rollback. Existing
+capacity guards, peer/protected-route checks and artifact/source/BUILD_ID checks
+remain unchanged. Repeat browser acceptance on the live release. This candidate
+makes no OS, DNS, TLS, database, service-policy or deployment-helper changes.

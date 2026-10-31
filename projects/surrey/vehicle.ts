@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT — Surrey-only arcade integration, in metres/seconds.
 // Bicycle model and 120Hz substeps follow Vancouver's tested principles. Its code is unchanged.
 import type { Point, Polygon } from "./types";
-import { inPolygon, segmentDistance } from "../vancouver/physics";
+import { segmentDistance } from "../vancouver/physics";
 export type Car = { x: number; z: number; yaw: number; speed: number; steer: number; blocked: boolean };
 export type Body = Pick<Car, "x" | "z" | "yaw">;
 export type DriveInput = { throttle: number; steering: number; brake: boolean };
@@ -35,16 +35,30 @@ export const obstacleFree = (car: Body, obstacles: Obstacle[]) => obstacles.ever
 export function createVehicleSurface(polygons: Polygon[]) {
   type Edge = { a: Point; b: Point };
   const cells = new Map<string,{ polygons: Polygon[]; edges: Edge[] }>();
+  const rows = new Map<Polygon, Map<number, Edge[]>>();
   const cell = (x:number,z:number) => { const key=`${x},${z}`; if(!cells.has(key)) cells.set(key,{polygons:[],edges:[]}); return cells.get(key)!; };
   for(const poly of polygons) {
+    const bands = new Map<number, Edge[]>(); rows.set(poly, bands);
     const xs=poly[0].map(p=>p[0]), zs=poly[0].map(p=>p[1]);
     for(let x=Math.floor(Math.min(...xs)/32);x<=Math.floor(Math.max(...xs)/32);x++) for(let z=Math.floor(Math.min(...zs)/32);z<=Math.floor(Math.max(...zs)/32);z++) cell(x,z).polygons.push(poly);
     for(const ring of poly) for(let i=0;i<ring.length;i++) {
       const a=ring[i],b=ring[(i+1)%ring.length]; if(a[0]===b[0]&&a[1]===b[1]) continue;
+      // Ray tests only inspect edges crossing this north/south band. A citywide
+      // connected polygon otherwise scans every road boundary for every wheel.
+      if (a[1] !== b[1]) for (let z = Math.floor(Math.min(a[1], b[1]) / 8); z <= Math.floor(Math.max(a[1], b[1]) / 8); z++) {
+        if (!bands.has(z)) bands.set(z, []);
+        bands.get(z)!.push({ a, b });
+      }
       for(let x=Math.floor(Math.min(a[0],b[0])/32);x<=Math.floor(Math.max(a[0],b[0])/32);x++) for(let z=Math.floor(Math.min(a[1],b[1])/32);z<=Math.floor(Math.max(a[1],b[1])/32);z++) cell(x,z).edges.push({a,b});
     }
   }
-  const allowed=(p:Point)=>(cells.get(`${Math.floor(p[0]/32)},${Math.floor(p[1]/32)}`)?.polygons??[]).some(poly=>inPolygon(p,poly));
+  const allowed=(p:Point)=>(cells.get(`${Math.floor(p[0]/32)},${Math.floor(p[1]/32)}`)?.polygons??[]).some(poly => {
+    let inside = false;
+    for (const {a, b} of rows.get(poly)!.get(Math.floor(p[1] / 8)) ?? []) {
+      if ((a[1] > p[1]) !== (b[1] > p[1]) && p[0] < (b[0] - a[0]) * (p[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+    }
+    return inside;
+  });
   function fits(car:Body) {
     const ring=corners(car);
     if(!allowed([car.x,car.z]) || !ring.every(allowed)) return false;

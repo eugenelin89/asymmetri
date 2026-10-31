@@ -1,0 +1,469 @@
+{
+  "footprintM": [
+    4.16,
+    2.04
+  ],
+  "allOrientationInsetM": 2.35,
+  "edgeSampleSpacingM": 0.2,
+  "minimumFilletRadiusM": 4.2,
+  "uniqueSourceRoadLengthM": 17154,
+  "uniqueEdgePathLengthM": 17009,
+  "sourceJunctions": 57,
+  "componentNodes": 116,
+  "componentEdges": 133,
+  "surfaceAreaM2": 206976.66,
+  "exclusions": [
+    "buildings",
+    "medians",
+    "non-Open source road surfaces",
+    "0.15m curb buffers",
+    "0.03m boundary inset",
+    "unnamed access lanes",
+    "disconnected source segments"
+  ],
+  "junctionValidation": "All advertised directed transitions use runtime full-body curve checks; rejected turns excluded from A*.",
+  "disconnectedSurfaceAreaM2": 66.67,
+  "drivableIntersections": 56,
+  "finalSampleSpacingM": 0.15,
+  "rejectedSegments": [
+    {
+      "road": 2,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 7,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 12,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 20,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 22,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 23,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 47,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 51,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 75,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 83,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 111,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 114,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 126,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 144,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 153,
+      "reason": "No inset endpoint"
+    },
+    {
+      "road": 167,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 190,
+      "reason": "No source-corridor inset connection"
+    },
+    {
+      "road": 189,
+      "reason": "Disconnected from original car"
+    },
+    {
+      "road": 5,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 6,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 13,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 21,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 29,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 30,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 42,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 52,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 56,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 61,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 62,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 66,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 78,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 84,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 86,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 87,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 105,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 112,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 116,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 117,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 119,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 120,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 125,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 128,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 132,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 136,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 138,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 146,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 148,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 152,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 155,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 160,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 161,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 164,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 165,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 166,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 171,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 180,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 186,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 194,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 195,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 196,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 197,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 198,
+      "reason": "Unnamed access lane excluded"
+    },
+    {
+      "road": 89,
+      "reason": "No turn with supported full-body clearance from the car component"
+    },
+    {
+      "road": 106,
+      "reason": "No turn with supported full-body clearance from the car component"
+    },
+    {
+      "road": 173,
+      "reason": "No turn with supported full-body clearance from the car component"
+    },
+    {
+      "road": 176,
+      "reason": "No turn with supported full-body clearance from the car component"
+    }
+  ],
+  "acceptedTurns": 478,
+  "rejectedTurns": [
+    "r10:1>r177:0",
+    "r16:0>r76:0",
+    "r36:1>r177:1",
+    "r69:0>r123:0",
+    "r70:0>r192:1",
+    "r72:1>r89:1",
+    "r76:1>r16:1",
+    "r89:0>r72:0",
+    "r95:1>r172:1",
+    "r100:0>r185:1",
+    "r106:1>r129:0",
+    "r123:1>r69:1",
+    "r129:1>r106:0",
+    "r139:1>r176:1",
+    "r142:1>r192:1",
+    "r145:0>r154:1",
+    "r154:0>r145:1",
+    "r172:0>r95:0",
+    "r173:0>r191:0",
+    "r176:0>r139:0",
+    "r176:0>r188:1",
+    "r177:0>r36:0",
+    "r177:1>r10:0",
+    "r185:0>r100:1",
+    "r185:0>r192:0",
+    "r188:0>r176:1",
+    "r191:1>r173:1",
+    "r192:0>r70:1",
+    "r192:0>r142:0",
+    "r192:1>r185:1"
+  ],
+  "reachableDirectedLegs": 204,
+  "reachableDestinations": [
+    {
+      "id": "station",
+      "lengthM": 138.461,
+      "edges": [
+        "r178",
+        "r63"
+      ],
+      "returnToStationM": 0
+    },
+    {
+      "id": "civic",
+      "lengthM": 320.026,
+      "edges": [
+        "r178",
+        "r36",
+        "r27"
+      ],
+      "returnToStationM": 311.625
+    },
+    {
+      "id": "king-george",
+      "lengthM": 1044.202,
+      "edges": [
+        "r178",
+        "r63",
+        "r183",
+        "r35",
+        "r69",
+        "r191",
+        "r94"
+      ],
+      "returnToStationM": 905.756
+    },
+    {
+      "id": "hall",
+      "lengthM": 357.341,
+      "edges": [
+        "r178",
+        "r36",
+        "r27"
+      ],
+      "returnToStationM": 348.94
+    },
+    {
+      "id": "library",
+      "lengthM": 122.798,
+      "edges": [
+        "r178",
+        "r109"
+      ],
+      "returnToStationM": 261.259
+    },
+    {
+      "id": "central",
+      "lengthM": 761.217,
+      "edges": [
+        "r178",
+        "r82",
+        "r55",
+        "r140"
+      ],
+      "returnToStationM": 899.679
+    },
+    {
+      "id": "sfu",
+      "lengthM": 305.169,
+      "edges": [
+        "r178",
+        "r82",
+        "r55"
+      ],
+      "returnToStationM": 443.631
+    },
+    {
+      "id": "holland",
+      "lengthM": 2179.683,
+      "edges": [
+        "r178",
+        "r109",
+        "r168",
+        "r150",
+        "r142",
+        "r70",
+        "r104",
+        "r33",
+        "r1",
+        "r64",
+        "r122",
+        "r46",
+        "r81",
+        "r91",
+        "r99",
+        "r121"
+      ],
+      "returnToStationM": 2318.144
+    }
+  ],
+  "traffic": [
+    {
+      "lengthM": 695.405,
+      "edgeIds": [
+        "r178",
+        "r36",
+        "r27",
+        "r168",
+        "r109"
+      ],
+      "offsetM": 1
+    }
+  ],
+  "trafficRejected": [
+    {
+      "edgeIds": [
+        "r177",
+        "r10",
+        "r39",
+        "r36"
+      ],
+      "reason": "Inter-edge turn or loop seam failed footprint acceptance"
+    }
+  ],
+  "detour": {
+    "directM": 761.217,
+    "alternateM": 1192.607,
+    "directEdges": [
+      "r178",
+      "r82",
+      "r55",
+      "r140"
+    ],
+    "alternateEdges": [
+      "r178",
+      "r63",
+      "r183",
+      "r35",
+      "r69",
+      "r182",
+      "r140"
+    ]
+  }
+}

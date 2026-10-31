@@ -180,8 +180,11 @@ export function SurreyAdventure() {
       if (!paused && !inventory && !wide && !viewHelp) engine.current.focus();
     }
   }
-  function hold(input: Input, pressed: boolean) {
-    engine.current?.input(input, pressed);
+  function openMenu() {
+    setInventory(false); setWide(false); setViewHelp(false); setAerialTools(false); setPaused(true);
+  }
+  function hold(input: Input, pressed: boolean, source: string) {
+    engine.current?.input(input, pressed, source);
   }
   function closeViewHelp() {
     setViewHelp(false);
@@ -232,20 +235,20 @@ export function SurreyAdventure() {
         {started && (
           <div className={styles.toolbar}>
             <ViewControls mode={state?.mode ?? "ground"} disabled={!ready || paused || !!dialogue || inventory || wide || viewHelp} select={mode => action(g => g.mode(mode))} />
-            <button className={styles.mobileMenu} disabled={!ready} aria-label="Open game menu" onClick={() => setPaused(true)}>Menu</button>
+            <button className={styles.mobileMenu} disabled={!ready || !!dialogue} aria-label="Open game menu" onClick={openMenu}>Menu</button>
             <div className={styles.utilityControls}>
-              <button disabled={!ready || !!dialogue || paused} onClick={() => setInventory(v => !v)}>Journal</button>
+              <button disabled={!ready || !!dialogue || paused || wide || viewHelp} onClick={() => setInventory(v => !v)}>Journal</button>
               <button
                 onClick={() => setWide((v) => !v)}
-                disabled={!ready}
+                disabled={!ready || !!dialogue || paused || inventory || viewHelp}
                 aria-pressed={wide}
               >
                 Map <kbd>M</kbd>
               </button>
-              <button onClick={() => setPaused((v) => !v)} disabled={!ready}>
+              <button onClick={() => paused ? setPaused(false) : openMenu()} disabled={!ready || !!dialogue}>
                 {paused ? "Resume" : "Pause"}
               </button>
-              <button disabled={!ready || !!dialogue || inventory || paused} aria-expanded={viewHelp} aria-label="Help with Street Adventure and Aerial Explore" onClick={() => setViewHelp(v => !v)}>Help</button>
+              <button disabled={!ready || !!dialogue || inventory || paused || wide} aria-expanded={viewHelp} aria-label="Help with Street Adventure and Aerial Explore" onClick={() => setViewHelp(v => !v)}>Help</button>
               <button
                 onClick={() => setExpanded((v) => !v)}
                 aria-label={expanded ? "Exit expanded view" : "Expand game"}
@@ -275,7 +278,7 @@ export function SurreyAdventure() {
                 has a story.
               </h2>
               <p>
-                Four stories. A city on the move.
+                Five stories. Open roads.
                 <br />Walk. Drive. Explore from above.
               </p>
               <div className={styles.startActions}>
@@ -283,7 +286,7 @@ export function SurreyAdventure() {
                 <button className={saveAvailable ? "" : styles.primary} onClick={() => start(false)}>{replaceSave ? "Replace save & start new" : saveAvailable ? "New Game" : "Play Now"} <span>↗</span></button>
                 {replaceSave && <button onClick={() => setReplaceSave(false)}>Keep my save</button>}
               </div>
-              <small>V0.5 · On the Move · No sign-in</small>
+              <small>V0.6 · Open Roads · No sign-in</small>
               <p className={styles.startModes}>Street Adventure · Aerial Explore<br />Choose either view using the buttons in the game.</p>
               <p className={styles.contentNotice}>Fictional adult cast. Non-graphic homicide, theft and scams. Optional mature dialogue mentions sex work and drugs. Gentle Streets and Mature Encounters controls are below.</p>
             </div>
@@ -317,13 +320,13 @@ export function SurreyAdventure() {
         )}
         {ready && state && (
           <>
-            {!paused && !inventory && !dialogue && <button className={styles.compactObjective} onClick={() => setPaused(true)} aria-label={`Mission and player status: ${state.objective}`}><span>◆ {Math.round(Math.hypot(state.marker[0] - state.player.x, state.marker[1] - state.player.z))} m</span><span>{state.objective}</span><span>›</span></button>}
-            {state.vehicle.occupied && !paused && !inventory && !dialogue && !wide && !viewHelp && <div className={styles.driveStatus} aria-label="Driving status"><strong>{Math.round(Math.abs(state.vehicle.car.speed)*3.6)} <small>km/h</small></strong><span>{state.mode === "aerial" ? "Paused in Aerial Explore" : state.vehicle.car.blocked ? "Road edge or actor · brake, reverse or recover" : state.delivery.stage === "accepted" ? `${Math.round(state.drivingDistance)} m · cyan route` : "Central Ave · City Parkway"}</span></div>}
+            {!paused && !inventory && !dialogue && !wide && !viewHelp && <button className={styles.compactObjective} onClick={() => state.navigation.destination?setWide(true):setPaused(true)} aria-label={state.navigation.destination?`Navigation: ${state.navigation.instruction}`:`Mission and player status: ${state.objective}`}><span>{state.navigation.destination?`${state.navigation.arrow} ${Math.round(state.navigation.remaining)} m`:`◆ ${Math.round(Math.hypot(state.marker[0]-state.player.x,state.marker[1]-state.player.z))} m`}</span><span>{state.navigation.destination?state.navigation.instruction:state.objective}</span><span>›</span></button>}
+            {state.vehicle.occupied && !paused && !inventory && !dialogue && !wide && !viewHelp && <button className={styles.driveStatus} data-navigation={!!state.navigation.destination} aria-label="Driving status · open Map and GPS" onClick={()=>setWide(true)}><strong>{Math.round(Math.abs(state.vehicle.car.speed)*3.6)} <small>km/h</small></strong><span>{state.mode === "aerial" ? "Paused in Aerial Explore" : state.vehicle.car.blocked ? "Blocked · brake, reverse or recover" : state.navigation.destination ? `${state.navigation.arrow} ${state.navigation.instruction} · ${Math.round(state.navigation.remaining)} m` : state.delivery.stage === "accepted" ? `${Math.round(state.drivingDistance)} m · cyan route` : state.street}</span><small>Map & GPS ↗</small></button>}
             {viewHelp && !paused && !inventory && !dialogue && <ViewHelp close={closeViewHelp} />}
             {state.mode === "aerial" && !paused && !inventory && !viewHelp && <AerialTips />}
             <div className={styles.mission}>
               <span className={styles.eyebrow}>
-                {state.delivery.stage === "accepted" || state.delivery.stage === "arrived" ? "04 / A RIDE ACROSS SURREY" : state.missing.stage === "investigating" || state.missing.stage === "return" ? "03 / THE MISSING PERSON" : state.investigation.stage === "closed" && state.stage === "completed" ? "FIRST TWO CASES CLOSED" : state.stage === "completed"
+                {state.detour.stage === "accepted" || state.detour.stage === "arrived" ? "05 / THE LONG WAY AROUND" : state.delivery.stage === "accepted" || state.delivery.stage === "arrived" ? "04 / A RIDE ACROSS SURREY" : state.missing.stage === "investigating" || state.missing.stage === "return" ? "03 / THE MISSING PERSON" : state.investigation.stage === "closed" && state.stage === "completed" ? "FIRST TWO CASES CLOSED" : state.stage === "completed"
                   ? state.investigation.stage === "available" ? "01 / CASE CLOSED" : "02 / THE SURREY CENTRAL MYSTERY"
                   : state.stage === "available" && ["active", "inconclusive"].includes(state.investigation.stage) ? "02 / THE SURREY CENTRAL MYSTERY" : state.stage === "failed"
                     ? "01 / TRY AGAIN"
@@ -363,7 +366,7 @@ export function SurreyAdventure() {
                 <b>{Math.round(state.stamina)}</b>
               </div>
               <button
-                disabled={!!dialogue}
+                disabled={!!dialogue || paused || wide || viewHelp}
                 onClick={() => setInventory((v) => !v)}
                 aria-expanded={inventory}
               >
@@ -372,7 +375,7 @@ export function SurreyAdventure() {
               </button>
             </div>
             {inventory && locations && missingPoints && <Journal state={state} locations={locations} missingPoints={missingPoints} close={() => setInventory(false)} track={(point, name) => { action(g => g.track(point, name)); setInventory(false); }} />}
-            {state.mode === "aerial" && !inventory && !paused && <div className={styles.aerialDock} data-open={aerialTools}>
+            {state.mode === "aerial" && !inventory && !paused && !wide && !viewHelp && <div className={styles.aerialDock} data-open={aerialTools}>
               <button className={styles.closeAerialTools} onClick={() => { setAerialTools(false); engine.current?.focus(); }}>Close aerial tools ×</button>
               <div className={styles.compass}><span style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span><strong>AERIAL EXPLORE</strong></div>
               <p>Street activity paused. Your character stays at the YOU marker.</p>
@@ -382,9 +385,9 @@ export function SurreyAdventure() {
               <div><button aria-label="Aerial rotate left" onClick={() => action(g => g.rotate(.3))}>↶</button><button aria-label="Aerial rotate right" onClick={() => action(g => g.rotate(-.3))}>↷</button><button aria-label="Aerial zoom in" onClick={() => action(g => g.zoom(-2))}>＋</button><button aria-label="Aerial zoom out" onClick={() => action(g => g.zoom(2))}>−</button></div>
               <small><span className={styles.keyboardCopy}>Drag to orbit · right drag to pan · scroll to zoom · WASD to move</span><span className={styles.touchCopy}>Drag to orbit · two fingers to pan and pinch · use the arrows to move</span></small>
             </div>}
-            {state.mode === "aerial" && !inventory && !paused && <div className={styles.mobileAerialActions}><button onClick={() => action(g => g.returnToPlayer())}>Return to Player</button><button aria-expanded={aerialTools} onClick={() => { setAerialTools(v => !v); setWide(false); }}><span className={styles.mobileCompass} style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span>Aerial tools</button></div>}
+            {state.mode === "aerial" && !inventory && !paused && !wide && !viewHelp && <div className={styles.mobileAerialActions}><button onClick={() => action(g => g.returnToPlayer())}>Return to Player</button><button aria-expanded={aerialTools} onClick={() => { setAerialTools(v => !v); setWide(false); }}><span className={styles.mobileCompass} style={{ transform: `rotate(${-(state.cameraYaw ?? 0) * 180 / Math.PI}deg)` }}>N ↑</span>Aerial tools</button></div>}
             {state.waypoint && !inventory && <div className={styles.waypoint}><span>◇ {state.waypoint.name}</span><button onClick={() => action(g => g.clearWaypoint())} aria-label="Clear waypoint">×</button></div>}
-            {city && <MiniMap city={city} state={state} wide={wide} close={() => { setWide(false); engine.current?.focus(); }} />}
+            {city && !inventory && !paused && !viewHelp && !dialogue && <MiniMap city={city} state={state} wide={wide} navigate={id=>action(g=>g.navigate(id))} close={() => { setWide(false); engine.current?.focus(); }} />}
             <div className={styles.location}>
               <span className={styles.dot} /> {state.street} · {clockLabel(state.time)}
             </div>
@@ -431,19 +434,19 @@ export function SurreyAdventure() {
                       onPointerDown={(e) => {
                         e.preventDefault();
                         e.currentTarget.setPointerCapture(e.pointerId);
-                        hold(input, true);
+                        hold(input, true, `pointer:${e.pointerId}`);
                       }}
-                      onPointerUp={() => hold(input, false)}
-                      onPointerCancel={() => hold(input, false)}
-                      onLostPointerCapture={() => hold(input, false)}
+                      onPointerUp={(e) => hold(input, false, `pointer:${e.pointerId}`)}
+                      onPointerCancel={(e) => hold(input, false, `pointer:${e.pointerId}`)}
+                      onLostPointerCapture={(e) => hold(input, false, `pointer:${e.pointerId}`)}
                       onKeyDown={(e) => {
                         if (e.key === " " || e.key === "Enter") {
                           e.preventDefault();
-                          hold(input, true);
+                          hold(input, true, `button:${input}:${e.key}`);
                         }
                       }}
-                      onKeyUp={() => hold(input, false)}
-                      onBlur={() => hold(input, false)}
+                      onKeyUp={(e) => hold(input, false, `button:${input}:${e.key}`)}
+                      onBlur={() => { hold(input, false, `button:${input}: `); hold(input, false, `button:${input}:Enter`); }}
                     >
                       {state.vehicle.occupied && state.mode === "ground" ? ({forward:"Go",back:"Brake",left:"←",right:"→"})[input] : text}
                     </button>
@@ -456,17 +459,19 @@ export function SurreyAdventure() {
                     onPointerDown={(e) => {
                       e.preventDefault();
                       e.currentTarget.setPointerCapture(e.pointerId);
-                      hold("sprint", true);
+                      hold("sprint", true, `pointer:${e.pointerId}`);
                     }}
-                    onPointerUp={() => hold("sprint", false)}
-                    onPointerCancel={() => hold("sprint", false)}
-                    onLostPointerCapture={() => hold("sprint", false)}
+                    onPointerUp={(e) => hold("sprint", false, `pointer:${e.pointerId}`)}
+                    onPointerCancel={(e) => hold("sprint", false, `pointer:${e.pointerId}`)}
+                    onLostPointerCapture={(e) => hold("sprint", false, `pointer:${e.pointerId}`)}
                     onKeyDown={(e) => {
-                      if (e.key === " " || e.key === "Enter")
-                        hold("sprint", true);
+                      if (e.key === " " || e.key === "Enter") {
+                        e.preventDefault();
+                        hold("sprint", true, `button:sprint:${e.key}`);
+                      }
                     }}
-                    onKeyUp={() => hold("sprint", false)}
-                    onBlur={() => hold("sprint", false)}
+                    onKeyUp={(e) => hold("sprint", false, `button:sprint:${e.key}`)}
+                    onBlur={() => { hold("sprint", false, "button:sprint: "); hold("sprint", false, "button:sprint:Enter"); }}
                   >
                     {state.vehicle.occupied ? "Handbrake" : "Sprint"}
                   </button>
@@ -538,6 +543,7 @@ export function SurreyAdventure() {
                   )}
                 </div>
                 <div className={styles.citySettings}>
+                  <label>Traffic <select value={state.trafficDensity} onChange={e=>action(g=>g.trafficDensity(e.target.value as "low"|"normal"))}><option value="low">Low Traffic</option><option value="normal">Normal Traffic</option></select></label>
                   <label>City clock <select value={state.time.rate} onChange={e => action(g => g.timeRate(Number(e.target.value) as 1 | 4 | 12))}><option value="1">1 minute per second</option><option value="4">4 minutes per second</option><option value="12">12 minutes per second</option></select></label>
                   <div><button onClick={() => action(g => g.rest(480))}>Rest until morning</button><button onClick={() => action(g => g.rest(1260))}>Rest until night</button></div>
                   <label><input type="checkbox" checked={state.stableVisibility} onChange={e => action(g => g.visibility(e.target.checked))} /> Stable daylight visibility</label>

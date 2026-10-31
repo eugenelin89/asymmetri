@@ -2,6 +2,7 @@
 import type { City, Point, Pose } from "./types";
 import type { World } from "./world";
 import { distance, move } from "./world";
+import { signalState } from "./signals";
 export function pedestrianRoutes(city: City, world: World) {
   const paths: Point[][] = [];
   for (const road of city.roads) for (let i = 1; i < road.points.length; i++) {
@@ -49,7 +50,7 @@ export function populationPlan(city: City, world: World, count: number) {
     return { role, crossing, activity: "waiting", active: true, path, target: 1 - i % 2, pause: 1 + i % 5, cooldown: 0, distant: 0, pose: { x: start[0], z: start[1], yaw: 0, moving: false, running: false, blocked: false } };
   });
 }
-export function stepPedestrians(people: Pedestrian[], player: Point, threat: Point | null, dt: number, world: World, minutes = 780, budget = people.length, clear: (point:Point)=>boolean = ()=>true) {
+export function stepPedestrians(people: Pedestrian[], player: Point, threat: Point | null, dt: number, world: World, minutes = 780, budget = people.length, clear: (point:Point)=>boolean = ()=>true, signalSeconds?: number) {
   const positions = people.map(p => [p.pose.x, p.pose.z] as Point);
   people.forEach((p, i) => {
     const here = positions[i];
@@ -67,6 +68,12 @@ export function stepPedestrians(people: Pedestrian[], player: Point, threat: Poi
     p.pause = Math.max(0, p.pause - step);
     if (p.pause > 0) { p.pose.moving = p.pose.running = false; return; }
     const dest = p.path[p.target];
+    // Only start a crossing with enough all-red time to reach its other end.
+    // Once crossing, finish safely; traffic still yields to the actual pedestrian.
+    if (p.crossing && signalSeconds !== undefined && !fleeing && distance(here, p.path[1 - p.target]) < 1.5) {
+      const phase = signalState(signalSeconds), duration = distance(here, dest) / (p.role === "commuter" ? 1.4 : 1.15) + 1;
+      if (!phase.pedestrians || phase.remaining < duration) { p.pose.moving = false; p.activity = "waiting"; return; }
+    }
     if (distance(here, dest) < 1 && !fleeing) {
       p.target = 1 - p.target;
       const idle: Activity[] = ["waiting", "talking", "sitting", "looking"];

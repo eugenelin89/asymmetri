@@ -43,7 +43,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver, Surrey and Richmond cards, with an explanation of street and building reconstruction |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
-| `/labs/surrey` | Surrey, City of Adventure V0.4: a day/night city, three cases, compact phone controls and migrated local saves |
+| `/labs/surrey` | Surrey, City of Adventure: day/night city, fictional cases, driving, compact phone controls and local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
 | `/motion` | Measure, track, compare and learn: pitching history, recorded performance context, evidence and family |
 | `/motion/try` | Temporary HTTP 307 redirect to the external TestFlight access request form |
@@ -248,7 +248,7 @@ deployment. Releases still use the documented SSH candidate/rollback workflow.
 ## Surrey, City of Adventure
 
 A separate playable Labs game with City of Surrey geography, walking, encounters,
-four complete cases, a drivable compact car on a validated road slice, bounded traffic, moving train scenery, day/night lighting, scheduled pedestrians, aerial exploration and browser-local saves. [Controls, architecture, sources and limits](projects/surrey/README.md).
+five implemented cases, 17.0 km of connected driving paths, eight GPS destinations, bounded traffic, moving train scenery, day/night lighting, aerial exploration and browser-local saves. V0.6 remains an isolated candidate pending rendered-browser acceptance; V0.5 is live. [Controls, architecture, sources and limits](projects/surrey/README.md).
 
 ## Richmond Learns to Drive
 

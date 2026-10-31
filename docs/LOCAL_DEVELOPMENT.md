@@ -327,3 +327,14 @@ reload. Keep local preview ports separate from concurrent Vancouver/Richmond wor
 ## Vancouver V0.6 research
 
 The local Vancouver page defaults to V0.5. Expand Local handling comparison to select the unaccepted V0.6 candidate, then restart the same route for manual measurement. Local Cambie research candidate mounts a separate lab; widths and public connections remain unverified. Offline reproduction uses an external venv and `projects/vancouver/tools/requirements-elevation.txt`, with pinned bounded inputs; see [the elevation workflow](VANCOUVER_V06_ELEVATION_2026-10-30.md). No production dependency or public data URL changes.
+
+## Surrey V0.6 offline transport
+
+Use Node24 and the existing lockfile. `projects/surrey/README.md` documents the
+Shapely2.0.7 offline derivation and exact-runtime validation commands. Raw City
+receipts stay outside Git; pass their paths explicitly. Source checksums/counts
+and coordinate correspondence are mandatory; both generators reject different
+existing output. The runtime imports only the versioned snapshot, never a live
+GIS/routing API. Test with `npm run test:surrey`; the V0.6 candidate acceptance
+record lists the unresolved rendered-browser gate. Do not infer browser or
+physical-iPhone acceptance from unit tests or DOM-only viewport measurements.

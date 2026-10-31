@@ -776,3 +776,21 @@ an explicit outstanding acceptance item.
 ## Vancouver V0.6 research acceptance
 
 Run `npm run test:vancouver`, peer suites, check, Next webpack and Vinext builds. New tests cover high-speed input pulses with exact retained Relaxed response, optional cues preserving route geometry, spatial camera constraints, immutable Cambie identity, continuous curved profiles, full-car traversals in both directions at 15/60/120 Hz and grade-separated/water rejection. Automated route following is not manual acceptance. V0.6 failed fresh North manual comparison and remains development-only; see [all completed/failed runs, environment limits and outstanding tests](VANCOUVER_V06_RESEARCH_2026-10-30.md). Verify production bundles omit the research lab/data and keep public V0.5.
+
+## Surrey V0.6 candidate acceptance
+
+Surrey's 67 tests include all older case paths, schema2/3/4 migration, full-body
+road containment, directed graph reachability, all eight destination routes and
+returns, rejected turns, closure avoidance, GPS rerouting/clear/stopped arrival,
+non-repeating unreachable searches, Case05 walk/drive/exit/handoff/save/reward,
+traffic placement/signals, crossing waits, independent held inputs and GPS GPU
+replacement/cleanup. Walking test drivers navigate around stopped traffic using
+ordinary movement inputs; they never remove actors or bypass collision. Case04
+and Case05 driving tests likewise use throttle/steering/brake inputs.
+
+The offline pipeline checks each edge/accepted turn at 0.15 m, geometric-union
+lengths and reproducible output. These tests do not substitute for ordinary-
+control rendered-browser acceptance. Follow `SURREY_V06_ACCEPTANCE_2026-10-30.md`
+for the required desktop/mobile route, reroute, park/exit, case, save, aerial,
+focus/lifecycle and live post-deployment checks. Physical iPhone/multitouch
+remains separate from responsive DOM testing.
