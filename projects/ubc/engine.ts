@@ -458,6 +458,9 @@ export function createCampus(
   }
   function interact(id: string) {
     const action = residence.interactions().find((a) => a.id === id);
+    // Physical controls can be ray-picked before their proximity action is
+    // available (for example the ride placard while outside the lift).
+    if (!action && (id.startsWith("door-") || id.startsWith("lift-"))) return;
     if (action) {
       const p = local([pose.x, pose.z], orchardAnchor);
       if (

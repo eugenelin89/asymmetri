@@ -116,7 +116,8 @@ Sixteen hinged doors can open and close from either side. Collision follows the
 leaf angle; opening or closing pauses when the visitor occupies its sweep. The
 prompt says “step clear”. There is no automatic closing, forced teleport or push.
 The lift waits for a clear threshold before departure, arrives at an occupied
-landing, and offers Ride only after boarding. The floor guide explains both.
+landing, and offers Ride only after boarding. The floor guide explains both. Clicking the ride placard before boarding is ignored;
+it cannot open an empty information panel.
 
 Three moving, stylized **fictional** students reuse the existing conversation
 registry and session history:
