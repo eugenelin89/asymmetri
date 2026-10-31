@@ -489,6 +489,29 @@
   color: #40543f;
   margin: 20px 0 8px;
 }
+.panel .playPrivacy label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 13px;
+  min-height: 44px;
+}
+.panel .playPrivacy p {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.panel .playPrivacy small {
+  font-size: 11px;
+}
+.panel .playPrivacy button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  min-height: 44px;
+  font-size: 11px;
+}
 .panel input:not([type="checkbox"]),
 .panel select {
   display: block;

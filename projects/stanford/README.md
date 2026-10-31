@@ -56,3 +56,7 @@ npm audit --omit=dev
 Open `http://127.0.0.1:3037/labs/stanford`. Use a private absolute directory for `STANFORD_PROFILE_DIR`; development storage must not be put under `public/` or committed. Production activation requires a persistent Node filesystem directory, owner permissions and backups. The profile backend inherits the UBC capability-cookie, recovery, ownership, same-origin, rate-limit, moderation and atomic-file safeguards. The route family is `/labs/stanford/community-api/`. A Workers-only deployment needs a separate storage adapter; the existing DigitalOcean Node deployment supports this design.
 
 Keep concurrent campus work in separate validation exports/build directories, not a shared `.next`. Local implementation does not authorize deployment. See `AGENTS.md`, the implementation report and `docs/STANFORD_COMMUNITY_OPERATIONS.md`.
+
+## Shared reviews and play privacy
+
+The follow-up frontend uses committed shared components: a privacy notice before entry, full privacy/deletion controls in Project information, a ready-game session tracker scoped to the explorer, and visitor reviews above the footer. No profile or character identity is sent to the tracker. See [integration and validation](../../docs/STANFORD_COMMUNITY_INTEGRATION_2026-10-31.md); initial campus deployment and this follow-up activation are separate.

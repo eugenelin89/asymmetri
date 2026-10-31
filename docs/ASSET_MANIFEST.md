@@ -1411,6 +1411,8 @@ The CWRU student import retains only names, study fields, expected class years w
 
 Stanford initial-production proof: `docs/validation/stanford/live-{welcome-desktop,church-interior}.jpg` (1280×720) and `live-profile-mobile.jpg` (390×844), unretouched public browser captures of the original application on 2026-10-31. Verification-only; no private profile data or real-world photographs. Descriptions and alt context are in the validation gallery.
 
+Stanford shared-feature preview proof: `docs/validation/stanford/followup-privacy-desktop.jpg` (1280×720), `followup-review-mobile.jpg` and `followup-history-removal-mobile.jpg` (390×844), unretouched local production-preview captures on 2026-10-31. They document the before-entry notice, empty review form with visible keyboard focus, and deletion/opt-out confirmation. No participant identity, private telemetry, or seeded public review is shown; original application UI, verification-only.
+
 ## CWRU community integration captures — October 31, 2026
 
 `docs/validation/cwru-community/reviews-mobile.jpg` (390×844), `privacy-in-game.jpg` (1280×720) and `privacy-mobile.jpg` (390×844) are original, unretouched local browser JPEG captures. They document the empty visitor-review form, in-game private-play disclosure and opt-out controls. They contain no real review, private telemetry or credential. The UI and background are original application reconstructions; no external imagery is used. These documentation assets do not establish production deployment or physical-device performance. Descriptions and limitations are in the [validation gallery](validation/cwru-community/README.md).

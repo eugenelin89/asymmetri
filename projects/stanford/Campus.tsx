@@ -1,4 +1,5 @@
 "use client";
+import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
 import Image from "next/image";
 import { createCampusSound, type CampusSound } from "./sound";
 import { applyCampusAnchors } from "./layout";
@@ -76,6 +77,7 @@ const titleOf = (id: string) =>
   displays[id]?.name ||
   id;
 export function Campus() {
+  const playRegion = useRef<HTMLElement>(null);
   const host = useRef<HTMLDivElement>(null),
     api = useRef<CampusAPI | null>(null),
     panelRef = useRef<HTMLElement>(null),
@@ -405,9 +407,11 @@ export function Campus() {
   );
   return (
     <section
+      ref={playRegion}
       className={`${styles.experience} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
       aria-label="Stanford Virtual Campus explorer"
     >
+      <PlaySession campus="stanford" playing={started && ready && !error} regionRef={playRegion} />
       <div className={styles.canvas} ref={host} />
       {!started && (
         <div className={`${styles.welcome} ${settings.halloween ? styles.halloweenWelcome : ""}`}>
@@ -1274,6 +1278,7 @@ export function Campus() {
                   Data provenance, hashes and reconstruction notes ↗
                 </a>
                 <p>All walking paths, dialogue and appearances are simulated. Public profiles support only the facts cited in each encounter. No real whereabouts are tracked. Optional community profiles publish only the text participants submit about themselves. Create, edit, recover, report or remove a character through the same controls as UBC.</p>
+                <div className={styles.playPrivacy}><CampusPrivacyPreferences /></div>
               </>
             )}
           </aside>
