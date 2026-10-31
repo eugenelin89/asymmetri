@@ -1,172 +1,130 @@
-# Prompt 149: Surrey V0.6 connected roads and transport freedom
+# Prompt 149: UBC browser validation and walkthrough repairs
 
 - Date: 2026-10-30
 - Scope: platform
-- Goal: Expand Surrey from a short driving demonstration into a connected free-driving city, with GPS, traffic and a complete detour mission.
+- Goal: Resume real browser acceptance of UBC Virtual Campus, fix observed defects and preserve reviewable evidence.
 
 ## Original user request
 
-> CODEX — SURREY, CITY OF ADVENTURE V0.6: OPEN ROADS & TRANSPORT FREEDOM
->
-> Implement the strongest connected driving experience that the actual geographic data can safely support.
->
-> Do not stop at a proposal. Inspect the current code, implement the features, test the gameplay using ordinary controls, preserve existing work and deploy through the established safe release process.
+> Browser is now available
 
-The detailed attached brief requested the largest validated connected road
-component, aiming for at least3–5km where real data supports it; unique length and
-connectivity reporting; actual full-car surface/turn clearance; branching A* and
-eight possible roadside destinations; free driving, rerouting, clear route and
-safe parking/exit/re-entry; bounded traffic and simplified signals; a complete
-new driving story with a meaningful alternate route; preservation of all four
-old stories, saves, day/night state and aerial modes; and compact simultaneous
-phone controls. Extra compact/sedan/SUV variety and full safe transit boarding
-were optional after the core network. V0.3 and V0.5 data must remain immutable.
-The owner required coordinated isolated work, all regression/build/audit checks,
-ordinary-control desktop/mobile browser acceptance, guarded exact-source Linux
-deployment or an exact blocker, complete rollback and live browser verification.
-Earlier instructions retain the public name **Surrey, City of Adventure** and
-address the iPhone problem of multiple panels covering gameplay.
+This resumed the browser work previously blocked during the UBC Virtual Campus
+master request, summarized in journal 148. The earlier reply was:
+
+> I’m away from computer. Will enable when I get home
 
 ## Scope
 
-Surrey-owned runtime, controls, story, offline transport derivation, versioned
-snapshot, scoped Surrey page/content and affected documentation. Existing main
-was advanced from fec321b to approved ac677c4 without altering Vancouver or
-Richmond code. No dependencies, shared physics/input, old snapshots, routes,
-service configuration or deployment workflow changed.
+Exercised the local application in the in-app browser at desktop, tablet and
+mobile widths. Fixed observed rendering, interaction and circulation defects.
+Retained actual scene exports and browser screenshots. No deployment, hosted
+preview, production configuration, dependency change or unrelated city edit.
 
 ## Decisions
 
-- Derive133 source-connected segments with17,009m unique path geometry and17,154m
-  unique source centrelines. Count geometric unions, not repeated trips. Validate
- 478 directed transitions and56 branching intersections; exclude30 turns and66
-  source segments. Remove the detached fragment left by corridor clipping.
-- Validate stops for supported road rejoining as well as parked-body/foot-exit
-  clearance. A return-route test exposed a King George stop that only fit while
-  parked; the stricter inset corrected it. All outward and return routes pass.
-- Preserve the compact's handling and dimensions. Its body receives accelerated
-  polygon queries without weakening boundary/hole/sweep checks. Do not introduce
-  larger vehicles without their own accepted footprints.
-- Keep free drive as default. Route selection/recalculation never moves the car.
-  Unreachable guidance retries only after repositioning, avoiding repeated work
-  while a stopped player reads the message. Arrival requires stopping.
-- Use a695.405m bounded traffic circuit with Low/Normal budgets and one clearly
-  fictional signal cycle. Correct circuit direction to avoid opposing traffic
-  trapping the original car route; maintain collision with people and vehicles.
-- Add Nora's archive delivery, a fictional University Drive workzone and the
- 1,192.607m alternate route instead of761.217m direct. Require actual driving,
-  stopping, exiting and foot handoff; pay$85 once. Preserve old case independence.
-- Keep map/status/details explicit on phones. Independent pointer/key ownership
-  supports steering plus throttle. Clear Route retains focus; Menu replaces
-  other overlays instead of stacking over Map.
-- Preserve rail scenery and illustrative doors. Defer boarding because a full
-  safe second-station access path is not verified. Terrain remains flat.
-- Leave this candidate isolated and undeployed: the required rendered-browser
-  acceptance could not be completed. This is a recorded blocker, not a passed
-  manual check or a request for renewed deployment permission.
+- Reset the computer-use connection after the changed setting; used the available
+  in-app browser instead of treating the stale disabled response as a new blocker.
+- Kept immutable source geometry intact. Reduced the interpreted Nest central
+  envelope to 76 m because its full bounding rectangle overlapped the Alumni Centre.
+  Omitted ten trees from rendering inside reconstructed model envelopes; retained
+  their source records and disclosed the discrepancy.
+- Placed interior arrival points on the model-local exterior side. Nearby named
+  guides pause and face visitors, making proximity activation reliable.
+- Corrected field surface normals and disabled shadow casting on layered turf/clay
+  while retaining received shadows. Other stadium structures still cast shadows.
+- Made photo capture produce a visible PNG preview and explicit Save PNG link.
+  Actual preview generation is verified; native browser download handling is not certified.
+- Retained the research-preview classification. Measured samples, procedural visual
+  limitations, partial manual coverage and untested physical devices remain explicit.
 
 ## Implementation
 
-Versioned road graph, polygon mask, source receipts and connectivity report;
-directed A*, compact GPS map/HUD and route lifecycle; Case05 and schema5 migration;
-expanded traffic, shared signal phases, input ownership and overlay fixes.
-V0.3 geography and V0.5 transport are byte-identical. All saves remain local under
-the existing key. The candidate contains no new external runtime data service.
+The walkthrough exercised Rose and Bookstore entrance/interior/exit routes, Nest
+stairs to both upper galleries, the Sauder lobby, stadium field and grandstand,
+both named guides, sourced answers, unsupported-question handling, directory,
+map routing, information displays, four seasons, rain/snow, night and photo mode.
+Twenty-five captures and their hashes/dimensions are committed with an evidence guide.
+
+Additional repairs deduplicate directory records and facade signs, scroll new
+dialogue answers into view, expose controls at narrow widths and remove a deprecated
+Three.js shadow-mode warning. Visitor biographies retain factual summaries while
+research caveats remain in the source documentation.
 
 ## Engineering impact
 
-Routing validates incoming-edge turns instead of assuming centreline joins are
-drivable. The offline pipeline checks exact source coordinate correspondence,
-full compact footprints at0.15m, advertised routes/returns and geometric unions.
-The runtime rechecks collisions and actual exits against nearby actors. GPU
-route buffers dispose on replacement and share the existing scene/renderer.
-Final snapshot is380,826bytes, SHA256
-`53842626ecff589ef802e5d79a51862a6ee0697ddb296b2aa83aaff53ab1bc52`.
+Changes remain UBC-owned and reuse the existing runtime. No new service, tracking,
+portrait, voice or third-party asset was added. Collision tests use the actual Nest
+envelope and neighbouring GIS buildings. Added assertions protect exterior arrival,
+stair access, nearby guide pauses and upward turf normals. The original source
+payload and other GIS project engines are unchanged.
 
 ## Files changed
 
-- Surrey simulation, vehicle/transport, navigation/input/signals, save boundary,
-  population/scenery and transport rendering.
-- Adventure, map, journal and CSS; only Surrey fields in shared site content.
-- Three offline derivation/validation tools and the new V0.6 snapshot/report/manifest.
-- Surrey regressions and project/source/release documentation.
+- UBC engine, architecture, stadium and population modules repair scene behaviour.
+- Campus UI, styles and registry improve photo capture, dialogue and discoverability.
+- Existing architecture tests gain integrated regressions for observed defects.
+- Validation directory adds 25 real captures, a manifest and evidence guide.
+- Project and repository reports record results, source distinctions and remaining gaps.
 
 ## Documentation updated
 
-README, Surrey README/changelog/notices, architecture, local development,
-content, assets, testing and deployment docs reflect implemented capability and
-its limits. `SURREY_V06_ACCEPTANCE_2026-10-30.md` records the browser blocker,
-automated evidence, unchanged production identity and exact remaining gate.
+Updated the comprehensive A–I implementation report, project README, testing guide
+and asset manifest. Added the browser gallery and capture provenance. Journal 148
+remains unchanged as a historical record of the earlier browser blocker.
 
 ## Git diff summary
 
-Implementation:36files changed,1,927insertions and147deletions. Most additions
-are source-derived connectivity evidence, the offline pipeline, local routing,
-regressions and documentation. No generated build output or raw private cache
-was committed.
+Implementation: 39 files changed, 603 insertions and 72 deletions, including 25
+binary captures. Changes are scoped to UBC source, regression assertions and
+acceptance documentation.
 
 ## Verification
 
-- 67Surrey +74Vancouver +27Richmond +7investment tests pass:175total. All four
-  old stories and the new archive story complete with movement inputs. Walking
-  test drivers route around stopped traffic without disabling collision or
-  moving actors. Case05's saved/reloaded alternate drive has zero contacts.
-- `npm run check` passes with one existing tutorial navigation lint warning;
-  production audit reports zero vulnerabilities. Vinext and Next webpack builds
-  pass. The Next prebuild repeats Surrey/Richmond suites.
-- Both offline steps reproduce their output. Source count/hash/coordinate checks,
-  inward/return routing, snapshot hashes, full-body clearance, closure avoidance,
-  saves, signals, input ownership and resource disposal pass.
-- 21local production route/asset checks returnHTTP200 with matching served
-  dataset digests, GIS peer names and the protected tutorial canonical. Diff and
-  added-content privacy scans pass. All old Surrey data and peer code unchanged.
-- Browser UI handlers support keyboard start, destination selection, save/reload,
-  aerial/ground switch and clearing. DOM map bounds fit390×844,844×390,820×1180
-  and1280×720 without horizontal overflow. The phone Menu→Map→Menu sequence
-  leaves one Menu dialog and zero maps; Clear Route preserves selector focus.
-- Rendered manual acceptance remains blocked: mouse dispatch and screenshot
-  capture repeatedly time out; held walking leaves the canvas at25.80,33.21 and
-  elapsed0.00. Peer projects independently reported the same browser limitation.
-  Manual driving, moving reroute, visual/lifecycle acceptance, real multitouch,
-  physical iPhone and live post-release checks remain incomplete. No hidden
-  state mutation or teleported mission completion was used as browser evidence.
-- Temporary browser overrides were reset, owned tabs and local servers closed.
-  Final source and receipts are retained in the owner's deployment-retention
-  area. No server mutation or Linux activation occurred.
+- Seventeen UBC Node tests and five Python source-integrity tests pass.
+- Existing city regression suites pass; the final Next prebuild also passed
+  Surrey's 54 and Richmond's 27 tests.
+- TypeScript and lint pass with the pre-existing tutorial navigation warning.
+- Final Next and Vinext production builds pass, preserving the existing routes.
+  Existing bundle-size and Browserslist-data warnings remain disclosed.
+- Production dependency audit reports zero vulnerabilities; dependencies did not change.
+- Final browser warning/error list is empty. Capture hashes and sizes all verify.
+- Desktop 1440 × 900, tablet 767 × 1024 and mobile 390 × 844 CSS-pixel layouts have
+  no horizontal overflow. Keyboard dismissal/focus and on-screen movement were exercised.
+- Final Auto observation near Sauder: 60 FPS, 513 draw calls, 1,740,385 triangles.
+  A Low transition sample read 31 FPS, 304 calls, 712,531 triangles. These are
+  instantaneous observations with a panel open, not sustained performance certification.
+- External link safety attributes and destination research are verified. The in-app
+  browser did not expose the new destination tab, so ordinary-browser new-tab flow
+  remains pending. Physical phones and screen readers were not tested.
+- Manual Nest descent/exit and close-up mound/dugout/bullpen journeys remain pending;
+  those paths have automated continuous-collision coverage.
+- `git diff --check` passes. The local preview was stopped and its browser tab closed.
 
 ## Repository state after implementation commit
 
-Branch`codex/surrey-adventure-v06`, based on approved main
-`ac677c480cd8c4d2b966911688f5ad26ae344dbb`. Implementation commit below; clean
-working tree before this journal. Vancouver cleared journal149 after147;
-Richmond reserved/committed148 only on its isolated branch. No integration or
-production window held. The two commits will be pushed to this feature branch.
-
-Production was observed still serving source
-`fcd2b900b512652a94af07571b841e823c61d2de`, build`VaAKfIoEAK5LbGri4K8V8`, active.
-The V0.5 complete rollback remains unchanged. V0.5's subsequent live browser
-acceptance in journal146 supersedes the brief's earlier failure statement.
+Branch main, clean after implementation, one commit ahead of origin/main. Main
+was fast-forward synchronized before edits. No deployment or production change.
 
 ## Implementation commits
 
-- `a710517b3e21ef43d1f8b56f8175c2707c09c1eb` — Implement Surrey V0.6 connected roads and GPS candidate.
+- `bc2c127eb8b295fbb9981f1a9fdcef2faa08c069` — Fix UBC walkthrough issues and record browser validation evidence.
 
 ## Archive commit
 
-`Document Surrey V0.6 implementation and blocked browser acceptance`
+Document UBC browser validation and remaining acceptance gaps in journal 149.
 
 ## Lessons learned
 
-A parked vehicle fitting a polygon does not prove it can rejoin a road. Validate
-return trips. Expanded traffic also changes walking test paths: preserve bodies
-and navigate around them. Unique geometry and directed turn acceptance support
-honest network claims; passing those checks is still distinct from rendered
-human-control acceptance. Keep the known-good release serving when that gate
-cannot be observed.
+Passing isolated collision tests does not detect all overlaps with neighbouring
+GIS assets. Browser navigation exposed issues in arrival orientation, visual
+shadowing and interaction timing that source review did not establish. Preserve
+separate claims for automated geometry, manual walkthroughs, visual fidelity and
+physical-device performance. A source building's bounding rectangle is not its
+architectural footprint.
 
 ## Follow-up ideas
 
-Complete ordinary-control desktop/mobile and physical-phone acceptance when
-browser operation returns, then coordinate refreshed main, exact-source Linux
-build, complete rollback and live verification. Additional vehicle footprints
-and safe multi-station boarding remain optional future work.
+Complete the remaining manual/device checks and sustained benchmarks, then improve
+terrain, footprint-conforming landmark architecture, documented public layouts,
+vegetation/crowds and real asset streaming. The current preview is not the finished
+flagship V2, and code integration does not authorize a production release.

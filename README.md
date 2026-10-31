@@ -15,7 +15,8 @@ Asymmetri.co
     └── GIS Apps
         ├── Vancouver, City in Progress
         ├── Surrey, City of Adventure
-        └── Richmond Learns to Drive
+        ├── Richmond Learns to Drive
+        └── UBC Virtual Campus
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -38,10 +39,11 @@ current evidence, engineering limits and the illustrative Motion workflow.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Concise umbrella gateway to Sports, Labs and their products |
+| `/` | Concise umbrella gateway to the Sports and Labs divisions |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
-| `/labs/gis` | GIS Apps: Vancouver, Surrey and Richmond cards, with an explanation of street and building reconstruction |
+| `/labs/gis` | GIS Apps: Vancouver, Surrey, Richmond and UBC cards, with an explanation of street and building reconstruction |
+| `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview, seven reconstructed walkable interiors, first/third-person exploration, encounter-only educational characters and opt-in public profiles |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
 | `/labs/surrey` | Surrey, City of Adventure: day/night city, fictional cases, driving, compact phone controls and local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |
@@ -59,6 +61,10 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
 
+UBC V0.3 is [verified live](docs/UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md). See its
+[implementation and remaining coverage](docs/UBC_CAMPUS_LIFE_V03.md) and
+[actual browser gallery](docs/validation/ubc-navigation/README.md).
+
 The root homepage introduces Asymmetri and routes visitors directly to Sports and
 Labs without repeating division or product content. Contact opens the shared mailbox;
 legacy contact URLs still reach the footer email.
@@ -67,7 +73,7 @@ GIS Apps groups the city projects without moving them: `/labs/vancouver`,
 `/labs/surrey` and all existing data, asset and deep links remain unchanged.
 The Labs menu opens GIS Apps; the category cards open the original city routes.
 
-The main canonical pages, including GIS Apps and all three cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
+The main canonical pages, including GIS Apps, UBC and all three cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).

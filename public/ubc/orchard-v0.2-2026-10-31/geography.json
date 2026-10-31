@@ -1,0 +1,1219 @@
+{
+  "checked": "2026-10-31",
+  "source": {
+    "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/geojson/ubcv_subbuildings.geojson",
+    "commit": "885732d332a20a59143f655c83fb15e1367ebe4d",
+    "fileBytes": 174816,
+    "sha256": "5357f845de44b31392d088fe1c0f01f1cd0e28bd756f3e09ae20305eb62288ed",
+    "licence": "https://opendatacommons.org/licenses/pddl/1-0/",
+    "licenceEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/README.md",
+    "coordinateDerivation": "Existing pinned compiler.project and compiler.polygons tolerance0.16m; same UTMGRS80 projection and local origin as immutable scene. Privacy allowlist excludes author identities."
+  },
+  "projection": {
+    "origin": [
+      -123.245,
+      49.26
+    ],
+    "originUtm": [
+      482173.55031541624,
+      5456388.2797025135
+    ],
+    "description": "EPSG:26910; WGS84 positions treated as NAD83 without an epoch shift"
+  },
+  "recommendedAnchor": {
+    "id": "orchard",
+    "x": -450.5443912079143,
+    "z": -43.99321172379285,
+    "yaw": -1.0821463267948965,
+    "width": 40,
+    "depth": 24,
+    "buildingId": "VBL10013-part1",
+    "sourceParentId": "VBL10013",
+    "wgs84": [
+      -123.251194059,
+      49.260382428
+    ],
+    "entry": [
+      -461.14,
+      -38.36
+    ],
+    "entryLocal": [
+      0,
+      12
+    ],
+    "entryWgs84": [
+      -123.251339423,
+      49.26033144
+    ],
+    "note": "A 36 x 18 m furnished demonstration floor fits the Bartlett source footprint. The vestibule extends to the recorded courtyard entrance. Anchor width/depth are broad-phase bounds, not surveyed dimensions or room assignments."
+  },
+  "entrance": {
+    "id": "{05735B81-F14A-4C57-9377-4E083CFF6BCF}",
+    "buildingId": "VBL10013",
+    "x": -461.14,
+    "z": -38.36,
+    "type": "Tertiary",
+    "accessible": true
+  },
+  "approach": {
+    "sourceRouteId": "route-5747",
+    "sourcePoints": [
+      [
+        -464.09,
+        -36.8
+      ],
+      [
+        -461.14,
+        -38.36
+      ]
+    ],
+    "sourceSurface": "LSHARD_TYPE-692-8",
+    "surfaceKind": "Pedestrian",
+    "note": "Path endpoints join source route5744 and5357. No invented approach or geography shortcut necessary."
+  },
+  "footprintParts": [
+    {
+      "id": "VBL10013",
+      "name": "Orchard Commons - Vantage College, Bartlett/Braeburn House",
+      "rings": [
+        [
+          [
+            -472.38,
+            -113.24
+          ],
+          [
+            -471.86,
+            -113.54
+          ],
+          [
+            -475.86,
+            -121.07
+          ],
+          [
+            -505.6,
+            -105.25
+          ],
+          [
+            -506.06,
+            -106.11
+          ],
+          [
+            -535.48,
+            -90.51
+          ],
+          [
+            -529.35,
+            -79.03
+          ],
+          [
+            -526.92,
+            -80.33
+          ],
+          [
+            -524.3,
+            -75.28
+          ],
+          [
+            -526.66,
+            -74.03
+          ],
+          [
+            -523.17,
+            -67.43
+          ],
+          [
+            -467.07,
+            -97.19
+          ],
+          [
+            -468.33,
+            -99.53
+          ],
+          [
+            -465.81,
+            -100.89
+          ],
+          [
+            -472.38,
+            -113.24
+          ]
+        ]
+      ],
+      "height": 30.51,
+      "heightSource": "UBC BLDG_HEIGHT field; measurement method/date unspecified",
+      "address": "6363 Agronomy Road",
+      "ringsLocal": [
+        [
+          [
+            -71.393041,
+            -13.226688
+          ],
+          [
+            -71.413825,
+            -13.826661
+          ],
+          [
+            -79.940307,
+            -13.829632
+          ],
+          [
+            -79.932739,
+            19.85627
+          ],
+          [
+            -80.908031,
+            19.858721
+          ],
+          [
+            -80.944497,
+            53.158797
+          ],
+          [
+            -67.930398,
+            53.135313
+          ],
+          [
+            -67.937531,
+            50.379438
+          ],
+          [
+            -62.248627,
+            50.436706
+          ],
+          [
+            -62.252783,
+            53.107302
+          ],
+          [
+            -54.786873,
+            53.124012
+          ],
+          [
+            -54.728718,
+            -10.380824
+          ],
+          [
+            -57.386349,
+            -10.366761
+          ],
+          [
+            -57.40421,
+            -13.23027
+          ],
+          [
+            -71.393041,
+            -13.226688
+          ]
+        ]
+      ]
+    },
+    {
+      "id": "VBL10013-part1",
+      "name": "Orchard Commons - Vantage College, Bartlett/Braeburn House",
+      "rings": [
+        [
+          [
+            -459.53,
+            -91.22
+          ],
+          [
+            -481.83,
+            -79.3
+          ],
+          [
+            -482.1,
+            -79.81
+          ],
+          [
+            -484.34,
+            -78.63
+          ],
+          [
+            -482.75,
+            -75.64
+          ],
+          [
+            -481.42,
+            -76.34
+          ],
+          [
+            -451.72,
+            -20.44
+          ],
+          [
+            -486.5,
+            -2.04
+          ],
+          [
+            -476.86,
+            16.09
+          ],
+          [
+            -443.26,
+            -1.93
+          ],
+          [
+            -444.1,
+            -3.46
+          ],
+          [
+            -433.69,
+            -8.99
+          ],
+          [
+            -432.56,
+            -6.86
+          ],
+          [
+            -425.93,
+            -10.42
+          ],
+          [
+            -426.87,
+            -12.21
+          ],
+          [
+            -422.3,
+            -14.66
+          ],
+          [
+            -421.4,
+            -12.98
+          ],
+          [
+            -382.99,
+            -33.33
+          ],
+          [
+            -390.2,
+            -46.91
+          ],
+          [
+            -391.95,
+            -45.99
+          ],
+          [
+            -392.4,
+            -46.81
+          ],
+          [
+            -391.8,
+            -47.13
+          ],
+          [
+            -394.09,
+            -51.43
+          ],
+          [
+            -401.19,
+            -47.69
+          ],
+          [
+            -400.85,
+            -47.04
+          ],
+          [
+            -404.12,
+            -45.3
+          ],
+          [
+            -404.49,
+            -45.99
+          ],
+          [
+            -419.4,
+            -38.03
+          ],
+          [
+            -419.11,
+            -37.48
+          ],
+          [
+            -421.28,
+            -36.32
+          ],
+          [
+            -424.38,
+            -42.2
+          ],
+          [
+            -431.24,
+            -38.48
+          ],
+          [
+            -459.53,
+            -91.22
+          ]
+        ]
+      ],
+      "height": 30.51,
+      "heightSource": "UBC BLDG_HEIGHT field; measurement method/date unspecified",
+      "address": "6363 Agronomy Road",
+      "ringsLocal": [
+        [
+          [
+            -45.917867,
+            -14.235875
+          ],
+          [
+            -45.861281,
+            11.049955
+          ],
+          [
+            -46.438342,
+            11.048945
+          ],
+          [
+            -46.447973,
+            13.580724
+          ],
+          [
+            -43.0615,
+            13.580414
+          ],
+          [
+            -43.05523,
+            12.077464
+          ],
+          [
+            20.244847,
+            12.09471
+          ],
+          [
+            20.164522,
+            51.441907
+          ],
+          [
+            40.698068,
+            51.440946
+          ],
+          [
+            40.559988,
+            13.314035
+          ],
+          [
+            38.814723,
+            13.337493
+          ],
+          [
+            38.818724,
+            1.549831
+          ],
+          [
+            41.229906,
+            1.551973
+          ],
+          [
+            41.198891,
+            -5.973288
+          ],
+          [
+            39.177111,
+            -5.983586
+          ],
+          [
+            39.159156,
+            -11.168861
+          ],
+          [
+            41.065032,
+            -11.174882
+          ],
+          [
+            41.127617,
+            -54.642648
+          ],
+          [
+            25.752299,
+            -54.651371
+          ],
+          [
+            25.743119,
+            -52.674298
+          ],
+          [
+            24.80784,
+            -52.661899
+          ],
+          [
+            24.806951,
+            -53.341898
+          ],
+          [
+            19.935187,
+            -53.338471
+          ],
+          [
+            19.904501,
+            -45.313718
+          ],
+          [
+            20.638038,
+            -45.308794
+          ],
+          [
+            20.639351,
+            -41.604675
+          ],
+          [
+            19.856412,
+            -41.601887
+          ],
+          [
+            19.885567,
+            -24.700146
+          ],
+          [
+            20.507335,
+            -24.698018
+          ],
+          [
+            20.512905,
+            -22.237435
+          ],
+          [
+            13.86581,
+            -22.260509
+          ],
+          [
+            13.93013,
+            -14.457057
+          ],
+          [
+            -45.917867,
+            -14.235875
+          ]
+        ]
+      ]
+    }
+  ],
+  "subbuildings": [
+    {
+      "id": "VSBL10036",
+      "objectId": 3,
+      "parentId": "VBL10013",
+      "name": "Vantage College",
+      "sourceKind": "Section",
+      "usage": "Academic",
+      "ringsWorld": [
+        [
+          [
+            -402.71,
+            -22.81
+          ],
+          [
+            -412.77,
+            -41.57
+          ],
+          [
+            -419.4,
+            -38.03
+          ],
+          [
+            -419.11,
+            -37.48
+          ],
+          [
+            -486.5,
+            -2.04
+          ],
+          [
+            -476.86,
+            16.09
+          ],
+          [
+            -443.26,
+            -1.93
+          ],
+          [
+            -444.1,
+            -3.46
+          ],
+          [
+            -433.69,
+            -8.99
+          ],
+          [
+            -432.56,
+            -6.86
+          ],
+          [
+            -425.93,
+            -10.42
+          ],
+          [
+            -426.87,
+            -12.21
+          ],
+          [
+            -422.3,
+            -14.66
+          ],
+          [
+            -421.4,
+            -12.98
+          ],
+          [
+            -402.71,
+            -22.81
+          ]
+        ]
+      ],
+      "ringsLocal": [
+        [
+          [
+            41.15919,
+            -32.292082
+          ],
+          [
+            19.872212,
+            -32.216017
+          ],
+          [
+            19.885567,
+            -24.700146
+          ],
+          [
+            20.507335,
+            -24.698018
+          ],
+          [
+            20.164522,
+            51.441907
+          ],
+          [
+            40.698068,
+            51.440946
+          ],
+          [
+            40.559988,
+            13.314035
+          ],
+          [
+            38.814723,
+            13.337493
+          ],
+          [
+            38.818724,
+            1.549831
+          ],
+          [
+            41.229906,
+            1.551973
+          ],
+          [
+            41.198891,
+            -5.973288
+          ],
+          [
+            39.177111,
+            -5.983586
+          ],
+          [
+            39.159156,
+            -11.168861
+          ],
+          [
+            41.065032,
+            -11.174882
+          ],
+          [
+            41.15919,
+            -32.292082
+          ]
+        ]
+      ],
+      "sourceHeightM": null,
+      "heightNote": "The source subbuilding layer contains no height field. Occupant/section polygons are not verified upper-tower roof outlines.",
+      "areaM2": 1687.557550000001,
+      "orientedBoundingRectangle": {
+        "x": -444.6517395289958,
+        "z": -12.467973350503087,
+        "width": 83.73188105480034,
+        "depth": 21.28943904317117,
+        "yaw": -2.65085319488062
+      }
+    },
+    {
+      "id": "VSBL10038",
+      "objectId": 83,
+      "parentId": "VBL10013",
+      "name": "Open Kitchen",
+      "sourceKind": "Occupant",
+      "usage": "Commercial",
+      "ringsWorld": [
+        [
+          [
+            -486.5,
+            -86.84
+          ],
+          [
+            -467.07,
+            -97.19
+          ],
+          [
+            -468.33,
+            -99.53
+          ],
+          [
+            -465.81,
+            -100.89
+          ],
+          [
+            -472.38,
+            -113.24
+          ],
+          [
+            -471.86,
+            -113.54
+          ],
+          [
+            -475.86,
+            -121.07
+          ],
+          [
+            -498.36,
+            -109.1
+          ],
+          [
+            -486.5,
+            -86.84
+          ]
+        ]
+      ],
+      "ringsLocal": [
+        [
+          [
+            -54.711114,
+            11.633878
+          ],
+          [
+            -54.728718,
+            -10.380824
+          ],
+          [
+            -57.386349,
+            -10.366761
+          ],
+          [
+            -57.40421,
+            -13.23027
+          ],
+          [
+            -71.393041,
+            -13.226688
+          ],
+          [
+            -71.413825,
+            -13.826661
+          ],
+          [
+            -79.940307,
+            -13.829632
+          ],
+          [
+            -79.933459,
+            11.656263
+          ],
+          [
+            -54.711114,
+            11.633878
+          ]
+        ]
+      ],
+      "sourceHeightM": null,
+      "heightNote": "The source subbuilding layer contains no height field. Occupant/section polygons are not verified upper-tower roof outlines.",
+      "areaM2": 624.7154999999984,
+      "orientedBoundingRectangle": {
+        "x": -481.18688997244016,
+        "z": -103.9513345346619,
+        "width": 25.485896099607714,
+        "depth": 25.22235033399096,
+        "yaw": 0.4889186893193586
+      }
+    },
+    {
+      "id": "VSBL10100",
+      "objectId": 48,
+      "parentId": "VBL10013",
+      "name": "Orchard Commons - Bartlett House",
+      "sourceKind": "Section",
+      "usage": "StudentHousing",
+      "ringsWorld": [
+        [
+          [
+            -473.39,
+            -83.92
+          ],
+          [
+            -481.83,
+            -79.3
+          ],
+          [
+            -482.1,
+            -79.81
+          ],
+          [
+            -484.34,
+            -78.63
+          ],
+          [
+            -482.75,
+            -75.64
+          ],
+          [
+            -481.42,
+            -76.34
+          ],
+          [
+            -451.72,
+            -20.44
+          ],
+          [
+            -421.28,
+            -36.32
+          ],
+          [
+            -424.38,
+            -42.2
+          ],
+          [
+            -431.27,
+            -38.57
+          ],
+          [
+            -459.53,
+            -91.22
+          ],
+          [
+            -473.39,
+            -83.92
+          ]
+        ]
+      ],
+      "ringsLocal": [
+        [
+          [
+            -45.978565,
+            1.428923
+          ],
+          [
+            -45.861281,
+            11.049955
+          ],
+          [
+            -46.438342,
+            11.048945
+          ],
+          [
+            -46.447973,
+            13.580724
+          ],
+          [
+            -43.0615,
+            13.580414
+          ],
+          [
+            -43.05523,
+            12.077464
+          ],
+          [
+            20.244847,
+            12.09471
+          ],
+          [
+            20.512905,
+            -22.237435
+          ],
+          [
+            13.86581,
+            -22.260509
+          ],
+          [
+            13.83658,
+            -14.472817
+          ],
+          [
+            -45.917867,
+            -14.235875
+          ],
+          [
+            -45.978565,
+            1.428923
+          ]
+        ]
+      ],
+      "sourceHeightM": null,
+      "heightNote": "The source subbuilding layer contains no height field. Occupant/section polygons are not verified upper-tower roof outlines.",
+      "areaM2": 1810.5510500000019,
+      "orientedBoundingRectangle": {
+        "x": -452.76646732317,
+        "z": -57.49947135800787,
+        "width": 67.78281262206303,
+        "depth": 34.495427438926754,
+        "yaw": 2.0829105111914883
+      }
+    },
+    {
+      "id": "VSBL10079",
+      "objectId": 44,
+      "parentId": "VBL10013",
+      "name": "Orchard Commons - Braeburn House",
+      "sourceKind": "Section",
+      "usage": "StudentHousing",
+      "ringsWorld": [
+        [
+          [
+            -498.36,
+            -109.1
+          ],
+          [
+            -505.6,
+            -105.25
+          ],
+          [
+            -506.06,
+            -106.11
+          ],
+          [
+            -535.48,
+            -90.51
+          ],
+          [
+            -529.35,
+            -79.03
+          ],
+          [
+            -526.92,
+            -80.33
+          ],
+          [
+            -524.19,
+            -75.32
+          ],
+          [
+            -526.7,
+            -74.1
+          ],
+          [
+            -523.17,
+            -67.54
+          ],
+          [
+            -486.5,
+            -86.84
+          ],
+          [
+            -498.36,
+            -109.1
+          ]
+        ]
+      ],
+      "ringsLocal": [
+        [
+          [
+            -79.933459,
+            11.656263
+          ],
+          [
+            -79.932739,
+            19.85627
+          ],
+          [
+            -80.908031,
+            19.858721
+          ],
+          [
+            -80.944497,
+            53.158797
+          ],
+          [
+            -67.930398,
+            53.135313
+          ],
+          [
+            -67.937531,
+            50.379438
+          ],
+          [
+            -62.232308,
+            50.320802
+          ],
+          [
+            -62.333368,
+            53.10976
+          ],
+          [
+            -54.883999,
+            53.072375
+          ],
+          [
+            -54.711114,
+            11.633878
+          ],
+          [
+            -79.933459,
+            11.656263
+          ]
+        ]
+      ],
+      "sourceHeightM": null,
+      "heightNote": "The source subbuilding layer contains no height field. Occupant/section polygons are not verified upper-tower roof outlines.",
+      "areaM2": 1060.0096500000109,
+      "orientedBoundingRectangle": {
+        "x": -510.99,
+        "z": -88.67500000000001,
+        "width": 41.553621827775544,
+        "depth": 26.187894397874288,
+        "yaw": 0.48755492847316123
+      }
+    },
+    {
+      "id": "VSBL10037",
+      "objectId": 82,
+      "parentId": "VBL10013",
+      "name": "Hummingbird",
+      "sourceKind": "Occupant",
+      "usage": "Services",
+      "ringsWorld": [
+        [
+          [
+            -392.4,
+            -46.81
+          ],
+          [
+            -391.8,
+            -47.13
+          ],
+          [
+            -394.09,
+            -51.43
+          ],
+          [
+            -401.19,
+            -47.69
+          ],
+          [
+            -400.85,
+            -47.1
+          ],
+          [
+            -404.21,
+            -45.39
+          ],
+          [
+            -404.49,
+            -45.99
+          ],
+          [
+            -412.77,
+            -41.57
+          ],
+          [
+            -402.71,
+            -22.81
+          ],
+          [
+            -382.99,
+            -33.33
+          ],
+          [
+            -390.2,
+            -46.91
+          ],
+          [
+            -391.95,
+            -45.99
+          ],
+          [
+            -392.4,
+            -46.81
+          ]
+        ]
+      ],
+      "ringsLocal": [
+        [
+          [
+            24.80784,
+            -52.661899
+          ],
+          [
+            24.806951,
+            -53.341898
+          ],
+          [
+            19.935187,
+            -53.338471
+          ],
+          [
+            19.904501,
+            -45.313718
+          ],
+          [
+            20.585059,
+            -45.33696
+          ],
+          [
+            20.517634,
+            -41.567457
+          ],
+          [
+            19.856412,
+            -41.601887
+          ],
+          [
+            19.872212,
+            -32.216017
+          ],
+          [
+            41.15919,
+            -32.292082
+          ],
+          [
+            41.127617,
+            -54.642648
+          ],
+          [
+            25.752299,
+            -54.651371
+          ],
+          [
+            25.743119,
+            -52.674298
+          ],
+          [
+            24.80784,
+            -52.661899
+          ]
+        ]
+      ],
+      "sourceHeightM": null,
+      "heightNote": "The source subbuilding layer contains no height field. Occupant/section polygons are not verified upper-tower roof outlines.",
+      "areaM2": 465.16659999999956,
+      "orientedBoundingRectangle": {
+        "x": -397.8671684688263,
+        "z": -37.458285380727574,
+        "width": 22.42702482571906,
+        "depth": 21.289605103629498,
+        "yaw": -2.65153005309706
+      }
+    }
+  ],
+  "envelopeChecks": [
+    {
+      "width": 36,
+      "depth": 18,
+      "localBounds": [
+        -18.0,
+        -9.0,
+        18.0,
+        9.0
+      ],
+      "worldCorners": [
+        [
+          -451.04750219953934,
+          -64.11153370476596
+        ],
+        [
+          -434.14786702816076,
+          -32.324707328509
+        ],
+        [
+          -450.0412802162893,
+          -23.874889742819732
+        ],
+        [
+          -466.94091538766787,
+          -55.661716119076694
+        ]
+      ],
+      "cornerInside": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "properBoundaryIntersections": 0,
+      "gridPoints": 1681,
+      "gridPointsOutside": 0,
+      "minimumCornerBoundaryClearanceM": 3.0842899674770443,
+      "footprintId": "VBL10013-part1"
+    },
+    {
+      "width": 40,
+      "depth": 20,
+      "localBounds": [
+        -20.0,
+        -10.0,
+        20.0,
+        10.0
+      ],
+      "worldCorners": [
+        [
+          -451.10340342083106,
+          -66.34690281376298
+        ],
+        [
+          -432.3260310081882,
+          -31.02820684014413
+        ],
+        [
+          -449.9853789949976,
+          -21.63952063382272
+        ],
+        [
+          -468.76275140764045,
+          -56.958216607441564
+        ]
+      ],
+      "cornerInside": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "properBoundaryIntersections": 0,
+      "gridPoints": 1681,
+      "gridPointsOutside": 0,
+      "minimumCornerBoundaryClearanceM": 2.0837451020726214,
+      "footprintId": "VBL10013-part1"
+    }
+  ],
+  "heightEvidence": {
+    "aggregateSnapshotM": 30.51,
+    "aggregateRawFieldM": 30.50868,
+    "rawMaxFloors": 20,
+    "rawHasSubbuildings": true,
+    "warning": "The aggregate height is unsuitable as a uniform height for all multipart footprints. The subbuilding source provides no heights. Distinct upper massing is a labelled reconstruction.",
+    "historical2014Elevations": {
+      "url": "https://planning.ubc.ca/sites/default/files/2019-12/DP13034-Elev_0.pdf",
+      "groundDatumM": 86.0,
+      "northRoofDatumM": 140.55,
+      "southRoofDatumM": 143.2,
+      "northRoofAboveGroundM": 54.55,
+      "southRoofAboveGroundM": 57.2,
+      "northPenthouseAboveGroundM": 58.87,
+      "southPenthouseAboveGroundM": 61.52,
+      "status": "Historical public design elevations, inspected 2026-10-31; not a current as-built measurement."
+    }
+  },
+  "visualPlanEvidence": {
+    "url": "https://planning.ubc.ca/sites/default/files/2019-12/DP13034-Plans_0.pdf",
+    "pagesInspected": [
+      1,
+      4
+    ],
+    "dateOnDrawing": "2014-05-14",
+    "sheetIds": [
+      "DP-101",
+      "DP-104"
+    ],
+    "findings": [
+      "Actual residential floor has a central corridor and rooms both sides.",
+      "Upper tower footprints are narrower than aggregategroundfloor sections;do notextrude alloccupiedsubbuildingpolygons to towerheight.",
+      "Shared public dining occupies low connectedcommons area;academicwing is distinct."
+    ],
+    "licence": "Public reference,copyrightPerkins+Will. Do not redistribute drawings or traced textures.Original model geometry remains a reference-based reconstruction."
+  },
+  "interpretation": "Ground footprints and entrance are sourced. Upper tower envelopes, facade modules, podium levels and demonstration rooms are reference reconstructions. Historical design heights are not as-built survey measurements."
+}

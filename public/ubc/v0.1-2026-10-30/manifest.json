@@ -1,0 +1,145 @@
+{
+  "version": "v0.1-2026-10-30",
+  "retrieved": "2026-10-30",
+  "upstreamCommit": "885732d332a20a59143f655c83fb15e1367ebe4d",
+  "attribution": "Contains UBC Campus + Community Planning open geospatial data, PDDL 1.0. No UBC endorsement.",
+  "sources": [
+    {
+      "file": "ubcv_buildings.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/geojson/ubcv_buildings.geojson",
+      "sha256": "57433e92b67bf4b6bac7841963d388c6ad2559373155eae07f6287316c011d2e",
+      "bytes": 1030631,
+      "features": 449,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/README.md"
+    },
+    {
+      "file": "ubcv_building_entraces.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/geojson/ubcv_building_entraces.geojson",
+      "sha256": "02f7ae55c2a72665954e3de60f63b472f7cab3aa0f04d811ee2733327853bf07",
+      "bytes": 650930,
+      "features": 1474,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/README.md"
+    },
+    {
+      "file": "ubcv_landscape_hard.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/geojson/ubcv_landscape_hard.geojson",
+      "sha256": "4f9312601e20cfbf5cbf802010aebb01ab0b357ac4157e58bd705dac026fa22e",
+      "bytes": 3652653,
+      "features": 861,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/README.md"
+    },
+    {
+      "file": "ubcv_landscape_soft.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/geojson/ubcv_landscape_soft.geojson",
+      "sha256": "7f3636554460a23801b7b5b09b2b5d50f66b68566f59a782b747bd894640c764",
+      "bytes": 7184842,
+      "features": 4884,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/README.md"
+    },
+    {
+      "file": "ubcv_campus_trees.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/geojson/ubcv_campus_trees.geojson",
+      "sha256": "c12c5b3dfdf57bc8c4013310cd78974baf1a6a514d6d2b8ad9d1411c9e4a25c0",
+      "bytes": 6181085,
+      "features": 9324,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/landscape/README.md"
+    },
+    {
+      "file": "ubcv_routes.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/transportation/geojson/ubcv_routes.geojson",
+      "sha256": "b782fabf6f10ad3b13a781c0ee15c4beb3b362f6b2f0af08ba3b9d5780e58fb9",
+      "bytes": 4962013,
+      "features": 7678,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/transportation/README.md"
+    },
+    {
+      "file": "ubcv_roads_simple.geojson",
+      "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/transportation/geojson/ubcv_roads_simple.geojson",
+      "sha256": "1fcc92e7b5d721375d0d347eec5207671e3bad9d0f1d62b94f3cdd78c4a46308",
+      "bytes": 186619,
+      "features": 221,
+      "license": "https://opendatacommons.org/licenses/pddl/1-0/",
+      "licenseEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/transportation/README.md"
+    }
+  ],
+  "projection": {
+    "source": "EPSG:4326",
+    "target": "EPSG:26910 local metres; x east, z south",
+    "origin": [
+      -123.245,
+      49.26
+    ],
+    "originUtm": [
+      482173.55031541624,
+      5456388.2797025135
+    ],
+    "method": "Snyder transverse Mercator series, GRS80, UTM zone 10N; WGS84 treated as NAD83, no epoch/datum shift",
+    "roundingMetres": 0.01
+  },
+  "boundsWgs84": [
+    -123.263,
+    49.244,
+    -123.224,
+    49.277
+  ],
+  "counts": {
+    "buildings": 605,
+    "surfaces": 6070,
+    "trees": 9324,
+    "routes": 6103,
+    "entrances": 1450,
+    "roads": 213
+  },
+  "surfaceKinds": {
+    "Driveway": 159,
+    "Parking": 56,
+    "Pedestrian": 596,
+    "Road": 5,
+    "Concrete": 83,
+    "OSPlantingBed": 211,
+    "Lawn": 1950,
+    "PlantingBed": 2863,
+    "Wild": 76,
+    "Garden": 9,
+    "Field": 21,
+    "Farm": 41
+  },
+  "processing": {
+    "polygons": "RDP 0.16 m buildings / 0.20 m landscape per ring, every hole retained. Features selected by source vertex inside bounds; full boundary features retained, not clipped.",
+    "routes": "Source pedestrian-allowed or unknown-access lines, RDP 0.08 m; Bldg_Inside lines excluded to avoid routing through unsupported interiors. No invented connections.",
+    "buildings": "Completed source buildings only; original multipart geometry split with stable suffixes; BLDG_HEIGHT field where available, floor-count estimate otherwise.",
+    "trees": "GPS positions and recorded species; THEIGHT when present and plausible, illustrative size otherwise. Evergreen classes and known conifer taxa remain evergreen.",
+    "privacy": "Only allowlisted visitor geometry/attributes retained. No staff/editor identities or email metadata.",
+    "terrain": "Flat datum. No DTM, terrain heights, entrance floor elevations, or tree terrain offsets available in this snapshot.",
+    "anchors": "Minimum-area footprint rectangles oriented toward a recorded primary entrance where available. Not exact architectural facade or interior outlines."
+  },
+  "limitations": [
+    "Data observation dates and precision vary; retrieval date does not imply a current survey.",
+    "Footprint heights are maxima, not verified roof structures. ArcGIS time-slider layer not incorporated.",
+    "Stadium home plate/orientation inferred from official clay-circle and mound polygons, not independently survey-verified.",
+    "Spawn source sidewalk near W16 verified in GIS; current physical access has not been field-surveyed.",
+    "No live construction or occupancy data; future/proposed building status excluded.",
+    "WGS84/NAD83 epoch shift not modeled; horizontal datum difference can be around metres."
+  ],
+  "outputs": {
+    "data.json": {
+      "bytes": 5361740,
+      "sha256": "7d065c162c3ae553be2c84a518370469ce9419b25c584e5a60270c227ba961fd"
+    },
+    "anchors.json": {
+      "bytes": 3502,
+      "sha256": "e5f43383a85c0f4a923e02aba352eeaa28a1cb43a125e3ce37f59c9d75781f8b"
+    }
+  },
+  "fieldMetadata": {
+    "url": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/metadata/ubcv_buildings_fields.csv",
+    "BLDG_HEIGHT": "Metres from grade to highest roof point, per UBC data dictionary",
+    "MAX_FLOORS": "Total floors above and below grade; fallback height is illustrative and may overestimate"
+  }
+}

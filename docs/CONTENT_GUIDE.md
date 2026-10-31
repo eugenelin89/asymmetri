@@ -238,8 +238,10 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 ## Routes and navigation
 
-Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs links,
-direct Motion/BotSquad links and “Why Asymmetri” to About. `home` owns the hero and
+Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs division
+cards and “Why Asymmetri” to About. Each card's heading and action open its division
+page; the cards do not single out Motion or BotSquad. Product access remains in the
+shared navigation/footer and division pages. `home` owns the hero and
 division heading; the shared About origin label remains in use. Do not restore
 product previews, philosophy, common-thread or contact sections here. Contact uses
 the centralized mailbox; legacy `/#contact` reaches the footer email. Link to `/`
@@ -418,7 +420,10 @@ retention, scientific or privacy commitments or the October 6 policy date.
 ## Division presentation
 
 `divisions.*.label` provides the short Sports/Labs heading under the shared
-Asymmetri name. Full names, direct product links and statuses retain their
+Asymmetri name. `divisions.*.actionLabel` supplies the homepage's Explore Sports /
+Explore Labs actions, each using `divisions.*.path`. Homepage metadata describes
+both divisions without presenting one project as their complete portfolio.
+Full names, direct product links elsewhere and statuses retain their
 authority. Do not encode release status only in color. Sports and Labs share
 the Graphite + Teal umbrella palette in CSS; Motion retains its product identity.
 `site.metadata.themeColor` mirrors the graphite canvas for browser chrome.
@@ -733,3 +738,35 @@ roadside stops accurately, with no promise of legal parking or direct landmark
 entrance access. Workzones and signal timing are fictional; terrain stays flat,
 only one compact footprint is accepted, and train boarding remains unavailable.
 The source link points to `/surrey/v0.6-2026-10-30/manifest.json` in this candidate.
+
+## UBC campus information
+
+Shared project identity and the GIS card live in `content/site.ts`. Reviewed UBC
+places, displays, biographies, official URLs, verification dates and conversation
+topics live in `projects/ubc/registry.ts`. Never duplicate these claims in scene
+geometry. Named figures are educational simulations, not quotes, endorsements or
+real-time positions. Keep Level B reconstruction and exterior-only coverage labels
+visible. Public photographic references are not redistributed assets.
+
+Orchard Housing facts and fictional student dialogue live in
+`projects/ubc/residence-content.ts`, imported by the registry. Keep sourced facts
+distinct from illustrative rooms. Maya, Leo and Ari are fictional guides, not real
+residents, testimonials or live representatives. Refresh official sources/dates
+together. The courtyard entry is geographically sourced, not the measured main
+front-desk entrance. No live prices, availability, assignments or booking.
+
+## UBC character discovery
+
+Do not publish a character roster in campus search, maps, floor guides or landing
+copy. People introduce themselves in a proximity-triggered conversation. Keep
+identity/source records and simulation disclaimers inside that conversation,
+with no Find or route-to-person action. This supersedes the earlier named-directory
+requirement; historical release reports remain evidence of their original builds.
+
+UBC V0.3 distinguishes professional-source summaries, season-specific roster entries,
+historical/alumni guests and participant-written self profiles. People are never
+listed in the destination directory or map. Preserve encounter-only identity,
+source dates and simulation disclosures. Do not describe partial faculty coverage
+as all UBC personnel, roster entries as live eligibility, or a reconstructed Nest
+fair as the announced 2027 event. Do not copy portraits, logos, student work or
+private-room information. [Scope and sources](UBC_CAMPUS_LIFE_V03.md).

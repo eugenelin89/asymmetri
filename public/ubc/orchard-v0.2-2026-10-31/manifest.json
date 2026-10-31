@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "checked": "2026-10-31",
+  "parent": "/ubc/v0.1-2026-10-30/manifest.json",
+  "outputs": [
+    {
+      "path": "geography.json",
+      "bytes": 24715,
+      "sha256": "e5c4f230eb954579aa2b6d6299cc9b524bbfbde6cef1df4a56e99cc8cabe2e0a"
+    }
+  ],
+  "source": {
+    "url": "https://raw.githubusercontent.com/UBCGeodata/ubc-geospatial-opendata/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/geojson/ubcv_subbuildings.geojson",
+    "commit": "885732d332a20a59143f655c83fb15e1367ebe4d",
+    "fileBytes": 174816,
+    "sha256": "5357f845de44b31392d088fe1c0f01f1cd0e28bd756f3e09ae20305eb62288ed",
+    "licence": "https://opendatacommons.org/licenses/pddl/1-0/",
+    "licenceEvidence": "https://github.com/UBCGeodata/ubc-geospatial-opendata/blob/885732d332a20a59143f655c83fb15e1367ebe4d/ubcv/locations/README.md",
+    "coordinateDerivation": "Existing pinned compiler.project and compiler.polygons tolerance0.16m; same UTMGRS80 projection and local origin as immutable scene. Privacy allowlist excludes author identities."
+  },
+  "originalSnapshotChanged": false,
+  "coordinateSystem": {
+    "origin": [
+      -123.245,
+      49.26
+    ],
+    "originUtm": [
+      482173.55031541624,
+      5456388.2797025135
+    ],
+    "description": "EPSG:26910; WGS84 positions treated as NAD83 without an epoch shift"
+  },
+  "entryStatus": "Recorded accessible tertiary courtyard entrance; not a claim to reproduce the main front desk entrance.",
+  "architectureStatus": "Level B representative reconstruction, one floor only. Roof heights follow historic 2014 design elevations; current measured upper geometry unverified.",
+  "assets": "Original procedural geometry and deterministic textures: MIT. GIS derivative: PDDL 1.0. Public architectural photos and drawings are research references only and are not distributed."
+}

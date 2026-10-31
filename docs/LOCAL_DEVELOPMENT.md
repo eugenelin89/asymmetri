@@ -338,3 +338,27 @@ existing output. The runtime imports only the versioned snapshot, never a live
 GIS/routing API. Test with `npm run test:surrey`; the V0.6 candidate acceptance
 record lists the unresolved rendered-browser gate. Do not infer browser or
 physical-iPhone acceptance from unit tests or DOM-only viewport measurements.
+
+## UBC Virtual Campus
+
+Use `npm run dev:next -- --port 3026 --hostname 127.0.0.1` and open `/labs/ubc`.
+The separate port avoids other GIS workstreams. `npm run test:ubc` validates
+continuous interior movement, stairs, collision, source registry and environmental
+logic. Browser use was disabled during initial implementation; real visual and
+physical-device acceptance remains pending. No production deployment is implied.
+
+Orchard V0.2 uses the same UBC port/start flow. Search Orchard Commons, Visit
+entrance, walk inside and use Residence guide. Doors support E/tap; step clear
+of a moving leaf. Call the lift, board fully and use Ride. No room teleport is
+needed. Stop the task-owned local server when validation finishes.
+
+UBC V0.3 adds First person / Third person (V), Shift to run, and left/right arrows
+to turn. Map selections offer Go here or Guide me. Test against local `/labs/ubc`;
+use ordinary controls and visible map/floor-guide positions for browser acceptance.
+
+For UBC V0.3 optional profiles, launch Next with a disposable absolute private
+`UBC_PROFILE_DIR` as described in [community operations](UBC_COMMUNITY_OPERATIONS.md).
+Without it, profile APIs return an explicit unconfigured 503; ordinary exploration
+still works. Never store recovery codes or profile state in Git/public assets.
+Source-directory research parsers need a separate BeautifulSoup environment, not
+an application dependency installation. See the [V0.3 report](UBC_CAMPUS_LIFE_V03.md).

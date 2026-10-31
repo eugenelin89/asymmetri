@@ -1,0 +1,211 @@
+{
+  "checked": "2026-10-31",
+  "captures": [
+    {
+      "path": "01-exterior.png",
+      "description": "exterior",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 1194320,
+      "sha256": "82d1b68e2613c1958680e5fc3ba2eb1717b37ce4d50a1df6129a0b5fb8ee87a7",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "02-entrance.png",
+      "description": "entrance",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 1488344,
+      "sha256": "578e9c1a15e33627039c2e5da1e14537d788e0f7f764e29998bbb1ff640f82ed",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "03-lobby.png",
+      "description": "lobby",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 1113208,
+      "sha256": "2c6f2448372cfc2e29d50b598adcc2fea49119b8587e4a48a3c3f614a1d47ec0",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "04-corridor.png",
+      "description": "corridor",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 861454,
+      "sha256": "63eb1fe384586ae7fae569887dd9e1ff256104953d1234acb037c34ef85c1e23",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "05-connected-single.png",
+      "description": "connected single",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 1616274,
+      "sha256": "32f3b7d9e5d43202cd7418df42b1a8735f0e6a2b6d3af6f3d9241ee5c6559e31",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "06-shared-bathroom.png",
+      "description": "shared bathroom",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 940749,
+      "sha256": "bdde20c1ecde56ec310ddf1b9852367b6e450023eb6795e789c2def70be7de6e",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "07-shared-double.png",
+      "description": "shared double",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 1642475,
+      "sha256": "60b14b73fdff56db33b2f18c67475f2d8ea3c52c637bcb75b3f2fb20f887992c",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "08-lounge.png",
+      "description": "lounge",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 1952580,
+      "sha256": "952c3289d8d34fd06556dd07961d9a1309e2d7342d75e9f35d25f46649186632",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "09-study-area.png",
+      "description": "study area",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 1853182,
+      "sha256": "c69bba3ef0cef2a9571dd4239a734c86da2d7e01245d441d089dbe49519d2d69",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "10-student-ari.jpg",
+      "description": "student ari",
+      "width": 1440,
+      "height": 900,
+      "bytes": 51264,
+      "sha256": "21af58129e61acde8965384a5a49c01b338f47530ccca0ca2c224d0dce171338",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "11-aerial.png",
+      "description": "aerial",
+      "width": 1728,
+      "height": 1080,
+      "bytes": 2092969,
+      "sha256": "abaaa6f2ce90364336d089368c1f38af4bf332c2c40334154ac60f02e1b6d63c",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "12-campus-map.jpg",
+      "description": "campus map",
+      "width": 1440,
+      "height": 900,
+      "bytes": 56910,
+      "sha256": "672a3eedfa7bd24f049b05fcc8967763e120932e75fe834e20fccaa19399725b",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "13-student-leo.jpg",
+      "description": "student leo",
+      "width": 1440,
+      "height": 900,
+      "bytes": 50254,
+      "sha256": "d4224fc2ad8da5fa8e41d721ba2d70c2a17ce2179fbfb8c274d8456c4dcd950b",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "14-student-maya.jpg",
+      "description": "student maya",
+      "width": 1440,
+      "height": 900,
+      "bytes": 57948,
+      "sha256": "a59e37aeb54dba01f1419840e2872b23066ccd7441dff8b118cb26f64a792482",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "15-lift-lobby.jpg",
+      "description": "lift lobby",
+      "width": 1440,
+      "height": 900,
+      "bytes": 60464,
+      "sha256": "6748f0d6fceefa9f8ccd86a57abc8fe4ed637f6a40bf1b375f79b3035dadde63",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "16-winter-night.png",
+      "description": "winter night",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 435416,
+      "sha256": "881acb9501e40442e85943d2989a05ac2b2be0f71668970b770ba9fc15333c99",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "17-phone-guide.jpg",
+      "description": "phone guide",
+      "width": 390,
+      "height": 844,
+      "bytes": 32898,
+      "sha256": "331929016d7818a788b5e95951b218a6722c70580f87c85c105c34bf869ef9e8",
+      "source": "Actual browser viewport capture"
+    },
+    {
+      "path": "18-lounge-rainy-night.png",
+      "description": "lounge rainy night",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 1759275,
+      "sha256": "fd08825dfd973d1a29e0f50d88bf9dafa900286fb397a1a5564c1b0cf17a0af5",
+      "source": "Actual browser canvas export"
+    },
+    {
+      "path": "19-production-bathroom.jpg",
+      "description": "Live Room H bathroom, finished floor and exit",
+      "width": 1280,
+      "height": 720,
+      "bytes": 64035,
+      "sha256": "d572e516536eb439972c8291476445079d771153c8dc89355a682ce8d01b229f",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "20-production-student.jpg",
+      "description": "Live Maya conversation with reconstruction disclosure",
+      "width": 1280,
+      "height": 720,
+      "bytes": 65930,
+      "sha256": "bb500f980e0d63aa92e36ee9ee4511a54713240c9f0c964377337b4ec364d089",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "21-production-phone.jpg",
+      "description": "Live phone-width bathroom follow-up and source links",
+      "width": 390,
+      "height": 844,
+      "bytes": 40375,
+      "sha256": "2554d1765052092ee5b618d8181a5ef5699d162c105bee5d838b0d1ca9c07f94",
+      "source": "Actual production browser UI",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    },
+    {
+      "path": "22-production-aerial.png",
+      "description": "Live Orchard Commons aerial view",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1737590,
+      "sha256": "a049e12f6aefb39cc8a45a5fa15e06bdf7c6c23fd53064ca46bc4e00f7eb4e3c",
+      "source": "Actual production browser canvas export",
+      "url": "https://asymmetri.co/labs/ubc",
+      "runtimeSource": "32f72951135c45b6cfb44281cda9dc1e029d15a2"
+    }
+  ]
+}

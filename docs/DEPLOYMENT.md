@@ -3,8 +3,24 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [homepage division-link receipt](HOME_DIVISION_LINKS_RELEASE_2026-10-31.md)
+records the current October 31 source/build and copy-only rollback. Homepage cards
+open Sports and Labs; all city, UBC, BotSquad and Motion routes remain intact.
+The preceding [UBC V0.3 receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records
+campus life and the community-profile routing configuration, which are unchanged.
+
+The [UBC V0.2 Orchard release receipt](UBC_ORCHARD_RELEASE_2026-10-31.md) records
+an earlier October 31 runtime: five UBC interior reconstructions, including one
+Orchard Commons demonstration floor with eight rooms, while all three city apps
+remain intact. Source `32f7295`, Linux build `uSdetjZWMH8Rh69FKnc5J`, activated at
+08:16:08 UTC. The complete immediately preceding runtime is retained at
+`/var/www/asymmetri-rollback-before-ubc-orchard-v02-20261031`. Private/public/browser,
+protected-route and peer checks passed. The initial private memory-guard stop and
+successful bounded-heap repeat are documented; safeguard floors were unchanged.
+Later documentation commits do not change the runtime.
+
 The [Surrey V0.5 release receipt](SURREY_V05_RELEASE_2026-10-30.md) records the
-current October 30 runtime: playable driving, a complete delivery, bounded traffic
+preceding October 30 runtime: playable driving, a complete delivery, bounded traffic
 and moving train scenery, with Richmond and Vancouver preserved. Runtime source
 `fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. The complete
 immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v05-20261030`.
@@ -1481,3 +1497,45 @@ Linux candidate and preserve the complete immediate runtime rollback. Existing
 capacity guards, peer/protected-route checks and artifact/source/BUILD_ID checks
 remain unchanged. Repeat browser acceptance on the live release. This candidate
 makes no OS, DNS, TLS, database, service-policy or deployment-helper changes.
+
+## UBC Orchard Commons V0.2
+
+The October 31 user instruction explicitly authorizes automatic production release
+after validation. Use the unchanged exact-SHA Linux workflow. Its existing build command now
+includes UBC through `prebuild:next`, alongside Surrey/Richmond; Vancouver remains
+an independent workflow check. Preserve Node 22,
+the retained-host OS exception, continuous 192 MiB available-memory / 6 GiB free-disk
+floors, peer/configuration fingerprints, protected routes and the complete immediate
+predecessor. No new hosting, OS, DNS, TLS or unrelated service change is in scope.
+
+`UBC_ORCHARD_MVR_2026-10-31.md` records local acceptance and release status. Verify
+actual live source/build before staging; documentation or CI success alone is not
+deployment. Preserve all published UBC and city datasets.
+
+## UBC campus life V0.3
+
+The [V0.3 implementation](UBC_CAMPUS_LIFE_V03.md) adds two public-space interiors,
+visitor navigation, ambient activity and an explicitly requested opt-in profile
+backend. Build/test the exact reviewed source through the existing Linux candidate
+workflow. Use a new independent candidate and retain the complete V0.2 runtime.
+Production activation must be recorded separately after verification; source push
+alone is not a deployment.
+
+Follow [profile operations](UBC_COMMUNITY_OPERATIONS.md): provision the private
+persistent store outside every release directory, preserve its data on rollback,
+and compare all prior configuration hashes plus the one expected systemd drop-in.
+Check public GET projection, ownership isolation, CSRF rejection and no-store
+headers in addition to protected Motion/city routes and immutable asset digests.
+No profile data, private recovery codes or local test fixtures belong in Git or
+public deployment artifacts.
+
+### V0.3 profile route correction
+
+Public verification found that the shared raw ingress intentionally rejects unknown
+`/api/` families, although the private candidate can serve them. UBC profiles must
+use `/labs/ubc/community-api/` through the ordinary website backend. Keep the raw
+router, investment/Ask authority, Nginx `/api/` denial, peer services and all prior
+configuration untouched. Verify public GET and write boundaries after activation;
+a loopback candidate check alone does not validate shared ingress routing.
+
+The corrected V0.3 deployment is verified live. The [production receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records exact artifact identity, the initial rollback, corrected public profile recovery, resource safeguards and retained recovery runtime.

@@ -1042,3 +1042,88 @@ phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immut
   destination select; the game canvas retains control instructions. No third-party
   photo, model, font, AI bitmap or private identity is added. V0.3 and V0.5 bytes
   remain unchanged. This candidate awaits rendered-browser acceptance.
+
+## UBC Virtual Campus — 2026-10-30
+
+- `public/ubc/v0.1-2026-10-30/`: compact transformed UBC Campus + Community Planning
+  GIS snapshot. Pinned source files, hashes, bounds, processing, units and licences
+  are in its `manifest.json`; original layers use PDDL 1.0. No staff/editor metadata
+  is needed in the visitor payload.
+- `projects/ubc/architecture.ts`: original procedural timber, concrete, glass, nets,
+  shelves, apparel, furniture, stairs and public-space models. Level B research
+  reconstructions; no as-built accuracy or private-space access is asserted.
+- `projects/ubc/stadium.ts`: original field, dugout, bullpen, grandstand, fence,
+  signage and lighting geometry. Markings and architectural measurements remain
+  approximate pending visual acceptance.
+- `projects/ubc/scenery.ts` and `people.ts`: source-position trees, original facades,
+  procedural textures and stylized simulated people. No copied portraits or voices.
+- No photographic textures, UBC logos, third-party model downloads, externally
+  hosted images or generated bitmap assets were added. Photographs/plans were
+  used only for research and remain linked to their copyright owners.
+- `docs/validation/ubc/`: 25 real local browser/scene captures. PNGs are unmodified
+  WebGL photo-mode exports; JPEGs document UI interactions and may retain the in-app
+  viewport padding/development indicator. Per-file dimensions, hashes and capture
+  provenance are in `manifest.json`. These are original application reconstructions,
+  not photographs of UBC, official architectural assets or real-person likenesses.
+  They are documentation evidence, not new production page imagery.
+
+- `public/ubc/preview-map.svg`: 288 KiB original vector welcome illustration,
+  derived from the same sourced building polygons and road lines. Decorative alt
+  text is empty because the adjacent text supplies its purpose. GIS PDDL applies;
+  this is explicitly a vector map, not a browser screenshot.
+
+## Orchard Commons MVR — 2026-10-31
+
+- `public/ubc/orchard-v0.2-2026-10-31/`: five transformed UBC subbuilding sections,
+  both unchanged parent footprint rings, entrance/route provenance, historical
+  height evidence and interpretation notes. Raw/output hashes and byte sizes are
+  in its manifest. PDDL 1.0; source author metadata excluded.
+- `projects/ubc/residence*.ts`, `doors.ts`: original MIT facade, furniture, door,
+  bathroom, kitchenette, lift and deterministic 128 × 128 grain/fabric textures.
+  No photographic textures, copied models or UBC logo assets.
+- `ResidenceGuide.tsx`: original SVG schematic of the fictional floor, named
+  “Representative residence floor plan, courtyard at the bottom”.
+- `docs/validation/ubc-orchard/`: 18 actual local scene/browser captures and four
+  production captures (19–22), including the live bathroom finish, sourced dialogue,
+  phone follow-up and aerial model. PNG exports and browser JPEGs are unmodified.
+  Dimensions, hashes and descriptive labels are in `captures.json`. They show
+  the independent reconstruction, not real students or campus photographs.
+  UI captures retain tool-side scaling/padding. No editing or AI generation.
+  Public drawings and reference photos remain outside Git.
+
+## UBC V0.3 navigation — 2026-10-31
+
+The third-person visitor reuses the original MIT procedural figure in `people.ts`,
+with deterministic clothing/backpack and distance-driven limb animation. No external
+model, portrait, texture, voice or new licence is introduced. `CampusMap.tsx` retains
+the original PDDL-backed GIS rendering; selection pins and the GPS arrow are original
+SVG/CSS UI. They do not represent live people or device location.
+
+## UBC V0.3 original procedural assets and research facts
+
+`projects/ubc/{props,traffic,activities,appearance,architecture,people}.ts` adds
+original meshes for sport kits, a small geometric bird mark, seated bus passengers,
+vehicles, wildlife/bicycles/sports equipment, customizable visitors, Rose cladding,
+Hennings classroom, War Memorial Gym and Nest café/fair fixtures. MIT; dimensions
+are stated or reconstructed, not licensed third-party mesh copies. No portrait,
+real person's voice, university/operator logo, source photograph or pupil project
+is shipped. Source references/terms: `projects/ubc/THIRD_PARTY_NOTICES.md`.
+
+`projects/ubc/data/{athletes,faculty,transit,expansion-anchors,west-tenth}.json`
+contains factual professional/season extracts, source UBC PDDL anchors, TransLink
+route geometry and Vancouver Open Government Licence street geometry. Source URLs,
+verification dates and raw digests are retained. They are data, not public-photo
+assets. Full campus/faculty completeness is not asserted.
+
+`docs/validation/ubc-navigation/*.png` are actual application/browser captures,
+with capture details and limitations in that directory's README. No generated
+marketing image stands in for a working scene; recovery credentials are excluded.
+
+V0.3 validation gallery: `docs/validation/ubc-navigation/` contains 22 actual
+browser captures: 19 local and three corrected public-release captures. Desktop
+1280×720, phone 390×844, tablet 768×1024; capture 20 was replaced with a visibly
+rendered final release scene. Captures 21/22 show the live profile form and walking
+guide. Original application output, no processing beyond PNG capture, no external
+portraits/logos/reference photographs embedded. Link captions in the gallery README
+provide descriptive labels. These are engineering evidence, not public marketing
+imagery; no recovery credentials are visible.

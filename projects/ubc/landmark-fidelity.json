@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "purpose": "Implementation fidelity audit; do not infer visual completion from geographic coverage.",
+  "landmarks": [
+    {
+      "id": "orchard",
+      "name": "Orchard Commons",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Two source podium outlines; interpreted towers; lobby and one demonstration floor with eight bedrooms.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://vancouver.housing.ubc.ca/residences/orchard-commons/",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "stadium",
+      "name": "Tourmaline West Baseball Stadium",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Source-aligned field, grandstand, dugouts and bullpens; details and dimensions interpreted.",
+      "interiorClassification": "C",
+      "referenceUrl": "https://sportfacilities.ubc.ca/construction-news/completed-projects/baseball-stadium/",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "rose",
+      "name": "Rose Indoor Training Centre",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Exterior and navigable four-cage training hall.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://sportfacilities.ubc.ca/baseball-tc/",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "sauder",
+      "name": "Henry Angus / Sauder",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Exterior and selected public lobby; additional academic interiors remain future work.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://www.sauder.ubc.ca/",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "bookstore",
+      "name": "UBC Bookstore",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Exterior and navigable representative retail fixtures.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://bookstore.ubc.ca/pages/locations/vancouver",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "nest",
+      "name": "AMS Student Nest",
+      "status": "reference-reconstruction",
+      "implementedCoverage": "Atrium, stairs and two supported galleries; not all public floors.",
+      "interiorClassification": "B",
+      "referenceUrl": "https://www.ams.ubc.ca/your-building/",
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "koerner",
+      "name": "Walter C. Koerner Library",
+      "status": "gis-context",
+      "implementedCoverage": "Source footprint exterior only; bespoke architecture and interior remain future work.",
+      "interiorClassification": "C",
+      "referenceUrl": null,
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "ikb",
+      "name": "Irving K. Barber Learning Centre",
+      "status": "gis-context",
+      "implementedCoverage": "Source footprint exterior only; bespoke architecture and interior remain future work.",
+      "interiorClassification": "C",
+      "referenceUrl": null,
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "ladner-clock",
+      "name": "Ladner Clock Tower",
+      "status": "not-implemented",
+      "implementedCoverage": "Recognizable tower and working clock are future consolidated-spec work.",
+      "interiorClassification": "C",
+      "referenceUrl": null,
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    },
+    {
+      "id": "entrance-letters",
+      "name": "UBC entrance letters",
+      "status": "not-implemented",
+      "implementedCoverage": "Bespoke geographically verified entrance landmark remains future work.",
+      "interiorClassification": "C",
+      "referenceUrl": null,
+      "auditDate": "2026-10-31",
+      "measurementConfidence": "Reference geometry; not survey/as-built verified",
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+    }
+  ]
+}

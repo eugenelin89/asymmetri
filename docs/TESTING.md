@@ -794,3 +794,51 @@ control rendered-browser acceptance. Follow `SURREY_V06_ACCEPTANCE_2026-10-30.md
 for the required desktop/mobile route, reroute, park/exit, case, save, aerial,
 focus/lifecycle and live post-deployment checks. Physical iPhone/multitouch
 remains separate from responsive DOM testing.
+
+## UBC acceptance
+
+Run `npm run test:ubc`, `npm run check`, both supported builds and the production
+dependency audit. The UBC suite exercises collision movement through real generated
+interiors and Nest stairs, rather than asserting only mesh existence. Existing
+Vancouver/Surrey/Richmond suites protect shared behavior. Complete the browser
+walkthrough and screenshot checklist in `UBC_IMPLEMENTATION_2026-10-30.md` before
+claiming visual acceptance or production readiness. Viewport emulation and actual
+phone measurements must be reported separately.
+
+The October 30 UBC browser pass and 25 captures are recorded in
+`validation/ubc/README.md`. It found and fixed rotated-door arrival, the Nest/Alumni
+Centre overlap, guide proximity, dialogue scrolling and stadium shadow striping.
+Automated coverage includes the shipped Nest's stairs against neighbouring GIS
+geometry and field-normal regression checks. Desktop samples are observations, not
+sustained frame-time or physical-mobile acceptance.
+
+### Orchard MVR acceptance
+
+The 26-test UBC suite includes both unchanged source polygons, entrance approach,
+continuous stairs/corridor/all eight rooms/five bathrooms, both lift directions,
+occupied-landing boarding through the actual collision loop, swept/reduced-motion
+doors, student routes, wall-occluded prompts and room unload/reload. The existing
+`prebuild:next` hook now also runs `npm run test:ubc` in local and Linux builds. See the V0.2 report and
+`validation/ubc-orchard/README.md` for browser evidence. Reproduce the derivative
+with `python3 projects/ubc/tools/verify_orchard.py PATH_TO_PINNED_SUBBUILDINGS`.
+Physical-phone testing remains separate.
+
+### UBC V0.3 navigation acceptance
+
+The UBC suite now has 34 tests. New checks cover run speed across frame rates,
+diagonal normalization, turning, thin-wall collision, camera wall/ceiling and moving
+door clearance, avatar floors/reduced motion, safe map destinations and GPS progress,
+turns, off-route/arrival/indoor states. Browser acceptance additionally checks both
+views, actual run/turn controls, map Go here/Guide me, preserved pose, route progress,
+phone layouts and residence transitions. Physical-device performance remains separate.
+
+UBC V0.3 adds navigation, wayfinding, campus-life and community lifecycle tests to
+`npm run test:ubc`. Required manual checks include first/third-person turning and
+running; map selection/travel/GPS; avatar persistence; anonymous encounters;
+Rose/Hennings/Gym/Nest walking; public profile publish/edit/recovery/report/removal;
+mobile/tablet controls, links, overflow and reduced motion. Use disposable local
+profiles, remove them after checks, and keep recovery codes out of captures/logs.
+The release gallery and receipt distinguish measured observations from device/FPS
+certification. Previous Motion/city regression and exact-source Linux gates remain.
+
+V0.3 corrected production checks include the ordinary-site `/labs/ubc/community-api/` family on both public hostnames. Test anonymous ownership with a valid draft; malformed edits validate first. Repeated invalid creates intentionally count toward the shared per-IP creation limit. Verify public recovery POST and private owner GET, not only loopback GET. See the [release receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md).

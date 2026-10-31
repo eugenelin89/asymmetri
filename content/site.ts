@@ -21,6 +21,7 @@ export const divisions = {
     label: "Sports",
     name: "Asymmetri Sports",
     path: "/sports",
+    actionLabel: "Explore Sports",
     description: "Technology for athletes, coaches and teams.",
     product: { name: "Asymmetri Motion", path: "/motion" },
   },
@@ -28,6 +29,7 @@ export const divisions = {
     label: "Labs",
     name: "Asymmetri Labs",
     path: "/labs",
+    actionLabel: "Explore Labs",
     description: "A playground for open-source experiments.",
     product: { name: "BotSquad", path: "/botsquad" },
   },
@@ -80,6 +82,17 @@ export const richmond = {
   metadata: { title: "Richmond Learns to Drive | Asymmetri Labs", description: "Deliver food and explore Richmond in an experimental browser game based on OpenStreetMap geography, with original mall and airport interiors and local saves." },
 } as const;
 
+export const ubc = {
+  name: "UBC Virtual Campus",
+  path: "/labs/ubc",
+  tagline: "Explore the University of British Columbia, virtually.",
+  status: "V0.3 — Explore your way",
+  description: "Explore a campus built from official UBC geography, seven reconstructed interiors and educational guides. Visit eight fictional residence rooms at Orchard Commons. Independent and unofficial.",
+  source: { label: "View UBC source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/ubc" },
+  license: { label: "MIT code · UBC public-domain GIS", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/ubc/THIRD_PARTY_NOTICES.md" },
+  metadata: { title: "UBC Virtual Campus | Asymmetri Labs", description: "Explore the University of British Columbia, virtually. An independent 3D campus research preview with walkable reconstructed interiors and educational guides." },
+} as const;
+
 export const gisApps = {
   name: "GIS Apps",
   path: "/labs/gis",
@@ -92,6 +105,14 @@ export const gisApps = {
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
   projects: [
+    {
+      name: ubc.name,
+      description: ubc.description,
+      status: ubc.status,
+      detail: { label: "Explore UBC", href: ubc.path },
+      source: ubc.source,
+      license: ubc.license,
+    },
     {
       name: vancouver.navLabel,
       description: vancouver.description,
@@ -1009,7 +1030,7 @@ export const tutorial = {
 export const home = {
   metadata: {
     "title": "Asymmetri | Build an Asymmetric Advantage",
-    "description": "Technology for outsized capability. Explore Asymmetri Sports and Motion, and Asymmetri Labs and its experimental open-source project BotSquad.",
+    "description": "Technology for outsized capability. Explore Asymmetri Sports and Asymmetri Labs, our two divisions for sports technology and open-source experiments.",
     "socialHeadline": "Build an asymmetric advantage.",
     "socialSupport": "Technology for individuals and small teams."
   },

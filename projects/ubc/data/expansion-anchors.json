@@ -1,0 +1,293 @@
+{
+  "hennings": {
+    "id": "hennings",
+    "x": -520.78,
+    "z": -717.57,
+    "width": 46.79,
+    "depth": 83.2,
+    "yaw": 2.0608598,
+    "buildingId": "VBL10359",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.252190278,
+      49.266439219
+    ],
+    "entry": [
+      -480.85,
+      -728.08
+    ],
+    "sourceEntranceId": "{930E7A88-B168-4D11-A6DC-E1CD2BECC1E2}"
+  },
+  "war-memorial": {
+    "id": "war-memorial",
+    "x": -193.55,
+    "z": -751.94,
+    "width": 55.34,
+    "depth": 76.88,
+    "yaw": -4.2216375,
+    "buildingId": "VBL10161",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.247693963,
+      49.266758126
+    ],
+    "entry": [
+      -170.71,
+      -785.69
+    ],
+    "sourceEntranceId": "{8821051A-93BE-4872-B3D0-B9FAA3C1886C}"
+  },
+  "aquatic": {
+    "id": "aquatic",
+    "x": -257.1,
+    "z": -865.61,
+    "width": 74.06,
+    "depth": 90.47,
+    "yaw": 5.2010993,
+    "buildingId": "VBL10071",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.248572619,
+      49.267778742
+    ],
+    "entry": [
+      -278.02,
+      -815.92
+    ],
+    "sourceEntranceId": "{17888AFC-7FF5-4C85-A9B2-CA89366FB8DB}"
+  },
+  "sports-centre": {
+    "id": "sports-centre",
+    "x": 220.55,
+    "z": -43.19,
+    "width": 163.46,
+    "depth": 103.38,
+    "yaw": 2.0589687,
+    "buildingId": "VBL10307",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.241970814,
+      49.260394862
+    ],
+    "entry": [
+      266.85,
+      -58.49
+    ],
+    "sourceEntranceId": "{A59493FC-97E2-401E-9826-5DDABCD9834B}"
+  },
+  "computer-science": {
+    "id": "computer-science",
+    "x": -277.29,
+    "z": -130.34,
+    "width": 73.67,
+    "depth": 67.45,
+    "yaw": -1.0832345,
+    "buildingId": "VBL10078",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.248816781,
+      49.261164254
+    ],
+    "entry": [
+      -310.98,
+      -123.06
+    ],
+    "sourceEntranceId": "{63E02242-9C33-436F-98F9-0E07E723850B}"
+  },
+  "arts": {
+    "id": "arts",
+    "x": -662.04,
+    "z": -1008.55,
+    "width": 71.35,
+    "depth": 79.45,
+    "yaw": -1.0804457,
+    "buildingId": "VBL10323",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.254145374,
+      49.269052358
+    ],
+    "entry": [
+      -717.83,
+      -923.22
+    ],
+    "sourceEntranceId": "{8081379E-8C88-4695-892D-B8CED3C53180}"
+  },
+  "education": {
+    "id": "education",
+    "x": -586.03,
+    "z": -440.0,
+    "width": 102.31,
+    "depth": 79.81,
+    "yaw": 2.0600408,
+    "buildingId": "VBL10095",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.253074371,
+      49.263940472
+    ],
+    "entry": [
+      -574.85,
+      -462.25
+    ],
+    "sourceEntranceId": "{86A3AB61-1AE5-4D79-850E-ED0511CD3A25}"
+  },
+  "law": {
+    "id": "law",
+    "x": -601.44,
+    "z": -1119.7,
+    "width": 62.9,
+    "depth": 64.76,
+    "yaw": -1.0814685,
+    "buildingId": "VBL10104",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.253317492,
+      49.270054037
+    ],
+    "entry": [
+      -625.4,
+      -1095.88
+    ],
+    "sourceEntranceId": "{0EA3985B-5446-4D2D-B730-37312BE36EC4}"
+  },
+  "landfood": {
+    "id": "landfood",
+    "x": -416.42,
+    "z": -117.91,
+    "width": 80.65,
+    "depth": 81.17,
+    "yaw": -1.0827409,
+    "buildingId": "VBL10060",
+    "source": "Minimum-area rectangle from immutable UBC PDDL building footprint; orientation toward recorded accessible/main entry. Interior envelope is reconstructed.",
+    "wgs84": [
+      -123.250728412,
+      49.261048361
+    ],
+    "entry": [
+      -423.83,
+      -97.74
+    ],
+    "sourceEntranceId": "{15575600-1868-4C47-A817-097E53A5B30E}"
+  },
+  "engineering": {
+    "id": "engineering",
+    "x": -366.16,
+    "z": -266.71,
+    "width": 84.95,
+    "depth": 42.15,
+    "yaw": 2.0590847951006666,
+    "buildingId": "VBL10085",
+    "entry": [
+      -398.08,
+      -280.58
+    ],
+    "wgs84": [
+      -123.250044461,
+      49.262388308
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "forestry": {
+    "id": "forestry",
+    "x": -202.61,
+    "z": -68.25,
+    "width": 161.28,
+    "depth": 64.44,
+    "yaw": 0.49062617337134123,
+    "buildingId": "VBL10119",
+    "entry": [
+      -199.03,
+      -106.75
+    ],
+    "wgs84": [
+      -123.247787661,
+      49.260608015
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "pharmacy": {
+    "id": "pharmacy",
+    "x": 121.8,
+    "z": -252.5,
+    "width": 105.29,
+    "depth": 41.04,
+    "yaw": 0.48922530287032223,
+    "buildingId": "VBL10110",
+    "entry": [
+      84.67,
+      -240.39
+    ],
+    "wgs84": [
+      -123.243337167,
+      49.262274779
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "medicine": {
+    "id": "medicine",
+    "x": -131.79,
+    "z": -542.99,
+    "width": 74.67,
+    "depth": 77.2,
+    "yaw": 2.0597035541524944,
+    "buildingId": "VBL10102",
+    "entry": [
+      -131.89,
+      -552.07
+    ],
+    "wgs84": [
+      -123.246835606,
+      49.264880401
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "dentistry": {
+    "id": "dentistry",
+    "x": -88.75,
+    "z": -590.72,
+    "width": 31.66,
+    "depth": 88.25,
+    "yaw": 2.0595758867910225,
+    "buildingId": "VBL10120",
+    "entry": [
+      -74.41,
+      -598.7
+    ],
+    "wgs84": [
+      -123.246246137,
+      49.265310961
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "graduate": {
+    "id": "graduate",
+    "x": -932.39,
+    "z": -941.76,
+    "width": 42.42,
+    "depth": 53.17,
+    "yaw": 2.059283546299794,
+    "buildingId": "VBL10249",
+    "entry": [
+      -930.27,
+      -941.58
+    ],
+    "wgs84": [
+      -123.257858389,
+      49.26844335
+    ],
+    "source": "UBC PDDL source footprint; simulated public faculty-area discovery point, not a real office or schedule."
+  },
+  "west-tenth": {
+    "id": "west-tenth",
+    "x": 2392.18,
+    "z": -423.71,
+    "width": 10,
+    "depth": 10,
+    "yaw": 0,
+    "entry": [
+      2392.18,
+      -416.71
+    ]
+  }
+}
