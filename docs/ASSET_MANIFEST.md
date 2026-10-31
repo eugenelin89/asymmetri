@@ -1073,3 +1073,36 @@ phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immut
   the independent reconstruction, not real students or campus photographs.
   UI captures retain tool-side scaling/padding. No editing or AI generation.
   Public drawings and reference photos remain outside Git.
+
+## UBC V0.3 navigation — 2026-10-31
+
+The third-person visitor reuses the original MIT procedural figure in `people.ts`,
+with deterministic clothing/backpack and distance-driven limb animation. No external
+model, portrait, texture, voice or new licence is introduced. `CampusMap.tsx` retains
+the original PDDL-backed GIS rendering; selection pins and the GPS arrow are original
+SVG/CSS UI. They do not represent live people or device location.
+
+## UBC V0.3 original procedural assets and research facts
+
+`projects/ubc/{props,traffic,activities,appearance,architecture,people}.ts` adds
+original meshes for sport kits, a small geometric bird mark, seated bus passengers,
+vehicles, wildlife/bicycles/sports equipment, customizable visitors, Rose cladding,
+Hennings classroom, War Memorial Gym and Nest café/fair fixtures. MIT; dimensions
+are stated or reconstructed, not licensed third-party mesh copies. No portrait,
+real person's voice, university/operator logo, source photograph or pupil project
+is shipped. Source references/terms: `projects/ubc/THIRD_PARTY_NOTICES.md`.
+
+`projects/ubc/data/{athletes,faculty,transit,expansion-anchors,west-tenth}.json`
+contains factual professional/season extracts, source UBC PDDL anchors, TransLink
+route geometry and Vancouver Open Government Licence street geometry. Source URLs,
+verification dates and raw digests are retained. They are data, not public-photo
+assets. Full campus/faculty completeness is not asserted.
+
+`docs/validation/ubc-navigation/*.png` are actual application/browser captures,
+with capture details and limitations in that directory's README. No generated
+marketing image stands in for a working scene; recovery credentials are excluded.
+
+V0.3 validation gallery: `docs/validation/ubc-navigation/` contains 17 actual local
+browser captures (1280×720 desktop, 390×844 phone, 768×1024 tablet), documented in its
+README. Original application output; no external portraits, logos, or reference
+photographs embedded. These are engineering evidence, not public marketing imagery.

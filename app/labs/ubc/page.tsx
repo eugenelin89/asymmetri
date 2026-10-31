@@ -30,17 +30,17 @@ export default function UbcPage() {
         <div className={styles.notes}>
           <section>
             <div className={styles.statLine}>
-              <span>WALK · AERIAL · MAP</span>
-              <span>5 ENTERABLE RECONSTRUCTIONS</span>
+              <span>FIRST PERSON · THIRD PERSON · AERIAL · MAP</span>
+              <span>7 ENTERABLE RECONSTRUCTIONS</span>
             </div>
             <h2>A university, open to your imagination.</h2>
             <p>
               Begin beside West 16th Avenue near Thunderbird Park. Walk onto the
               virtual baseball field, explore the Rose training hall, browse the
-              Bookstore and visit the Student Nest. At Sauder, meet an
-              educational simulation of Dr. Greg Werker. At Orchard Commons,
+              Bookstore and visit the Student Nest. Meet people naturally as you
+              explore and start a conversation to learn who they are. At Orchard Commons,
               explore eight fictional demonstration bedrooms, shared bathrooms,
-              a lounge and study area, and meet three fictional student guides.
+              a lounge and study area.
             </p>
             <p>
               UBC Vancouver is on the traditional, ancestral and unceded

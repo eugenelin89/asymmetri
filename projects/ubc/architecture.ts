@@ -6,7 +6,8 @@ import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import type { Anchor } from "./types";
 
-export type ArchitectureKind = "rose" | "bookstore" | "nest" | "sauder";
+export type ArchitectureKind =
+  "rose" | "bookstore" | "nest" | "sauder" | "hennings" | "war-memorial";
 export function architectureEnvelope(
   kind: ArchitectureKind,
   source: Anchor,
@@ -117,6 +118,7 @@ class Builder {
   readonly floors: ArchitectureFloor[] = [];
   readonly ramps: ArchitectureRamp[] = [];
   readonly displays: ArchitectureDisplay[] = [];
+  entryX = 0;
   readonly materials: Record<MaterialName, THREE.MeshStandardMaterial>;
   private readonly buckets = new Map<MaterialName, THREE.BufferGeometry[]>();
   private readonly unitBox = new THREE.BoxGeometry(1, 1, 1);
@@ -418,7 +420,7 @@ class Builder {
       floors: this.floors,
       ramps: this.ramps,
       displays: this.displays,
-      entry: [0, this.depth / 2 + 2],
+      entry: [this.entryX, this.depth / 2 + 2],
       interiorBounds: { width: this.width, depth: this.depth },
     };
   }
@@ -512,27 +514,187 @@ function rose(b: Builder) {
   const w = b.width,
     d = b.depth,
     h = b.sourceHeight ?? 8.8;
-  shell(b, h, "timber");
-  b.box("turf", 0, 0.025, -1.8, w - 0.8, 0.05, d - 4.4);
-  b.box("roof", 0, h + 0.2, 0, w + 0.8, 0.4, d + 0.8);
-  // The public photos show a dark hall and a timber-clad entrance volume.
-  for (const side of [-1, 1]) {
-    b.box("roof", side * (w / 2 + 0.18), h / 2, -d * 0.13, 0.1, h, d * 0.73);
-    for (let z = -d / 2 + 0.2; z < d * 0.22; z += 0.5)
-      b.box("metal", side * (w / 2 + 0.25), h / 2, z, 0.08, h, 0.06);
-  }
-  for (let x = -w / 2 + 0.3; x < w / 2; x += 0.38)
-    b.box("darkWood", x, 6.5, d / 2 + 0.18, 0.075, 3.5, 0.08);
-  b.box("white", 0, 4.25, d / 2 + 0.22, w, 0.7, 0.12);
-  b.sign(
-    "ROSE INDOOR TRAINING CENTRE",
-    0,
-    4.24,
-    d / 2 + 0.3,
-    Math.min(w - 1, 15),
-    0.6,
+  // Photo comparison: UBC Sport Facilities bitc.jpg and MGA (2015).
+  // Asymmetric timber corner/lower white wing beside the tall ribbed hall.
+  const entrance = w * 0.34,
+    wing = w * 0.36,
+    split = w / 2 - wing;
+  b.entryX = entrance;
+  b.materials.roof.color.setHex(0x262b2d);
+  b.materials.timber.color.setHex(0xa9987e);
+  b.materials.darkWood.color.setHex(0x786a55);
+  b.floor(-w / 2, w / 2, -d / 2, d / 2);
+  b.floor(entrance - 3.2, entrance + 3.2, d / 2, d / 2 + 4, 0, "concrete");
+  b.box("turf", 0, 0.025, -2.5, w - 0.8, 0.05, d - 5.5);
+  // Solid timber inner walls; original siding sits outside these boundaries.
+  b.box("timber", 0, h / 2, -d / 2, w, h, 0.28, true);
+  b.box("timber", -w / 2, h / 2, 0, 0.28, h, d, true);
+  b.box("roof", -w / 2 - 0.18, h / 2, 0, 0.1, h, d);
+  b.box("roof", (split - w / 2) / 2, h + 0.1, 0, w - wing + 0.5, 0.25, d + 0.4);
+  // Tall metal front occupies the left half; weathered timber box projects at right.
+  const cornerStart = -w * 0.1,
+    cornerWidth = w / 2 - cornerStart;
+  b.box(
+    "timber",
+    (cornerStart - w / 2) / 2,
+    h / 2,
+    d / 2,
+    cornerStart + w / 2,
+    h,
+    0.28,
+    true,
   );
-  b.box("glass", w * 0.22, 6.4, d / 2 + 0.25, w * 0.34, 2.5, 0.1);
+  b.box(
+    "roof",
+    (cornerStart - w / 2) / 2,
+    h / 2,
+    d / 2 + 0.16,
+    cornerStart + w / 2,
+    h,
+    0.1,
+  );
+  for (let x = -w / 2; x < cornerStart; x += 0.16)
+    b.box("metal", x, h / 2, d / 2 + 0.23, 0.027, h, 0.045);
+  for (let z = -d / 2; z < d / 2; z += 0.18)
+    b.box("metal", -w / 2 - 0.24, h / 2, z, 0.045, h, 0.025);
+  // Lower white frontage and a recessed, genuinely open entrance at the GIS entry side.
+  const gap = 2.6;
+  for (const [left, right] of [
+    [cornerStart, entrance - gap / 2],
+    [entrance + gap / 2, w / 2],
+  ]) {
+    b.box(
+      left < 0 ? "white" : "glass",
+      (left + right) / 2,
+      1.5,
+      d / 2,
+      right - left,
+      3,
+      0.17,
+      true,
+    );
+    for (let x = left; x < right; x += 1.3)
+      b.box("white", x, 1.5, d / 2 + 0.12, 0.065, 3, 0.07);
+  }
+  b.box("white", entrance, 3.05, d / 2, gap, 0.18, 0.3, true);
+  for (const x of [entrance - gap / 2, entrance + gap / 2]) {
+    b.box("white", x, 1.5, d / 2, 0.09, 3, 0.2, true);
+    b.box("glass", x, 1.45, d / 2 - 0.6, 0.05, 2.9, 1.2);
+    b.box("metal", x, 1.05, d / 2 - 0.1, 0.035, 0.65, 0.035);
+  }
+  b.box(
+    "timber",
+    cornerStart + cornerWidth / 2,
+    3.65,
+    d / 2 + 0.3,
+    cornerWidth + 0.6,
+    1.1,
+    0.38,
+  );
+  b.box(
+    "timber",
+    cornerStart + cornerWidth / 2,
+    h - 0.45,
+    d / 2 + 0.3,
+    cornerWidth + 0.6,
+    0.9,
+    0.38,
+  );
+  b.box(
+    "glass",
+    cornerStart + cornerWidth / 2,
+    (h + 4.2) / 2,
+    d / 2 + 0.22,
+    cornerWidth,
+    h - 5.1,
+    0.12,
+    true,
+  );
+  for (let x = cornerStart - 0.25; x < w / 2 + 0.3; x += 0.16) {
+    // Leave a broad framed window at the left of the projecting corner.
+    if (x < cornerStart + 0.8 || x > cornerStart + 3.5)
+      b.box("timber", x, (h + 4.2) / 2, d / 2 + 0.38, 0.065, h - 5.1, 0.12);
+    b.box("darkWood", x, 3.65, d / 2 + 0.52, 0.055, 1.1, 0.06);
+    b.box("darkWood", x, h - 0.45, d / 2 + 0.52, 0.055, 0.9, 0.06);
+  }
+  b.box(
+    "metal",
+    cornerStart + 2.15,
+    (h + 4.2) / 2,
+    d / 2 + 0.43,
+    3,
+    0.08,
+    0.08,
+  );
+  // Long lower wing: curtain glazing below the continuous timber band.
+  for (let z = -d / 2 + 1; z < d / 2; z += 2.5) {
+    b.box("glass", w / 2, 1.55, z, 0.15, 3.1, 2.45, true);
+    b.box("white", w / 2 + 0.08, 1.55, z - 1.22, 0.12, 3.1, 0.07);
+  }
+  b.box("timber", w / 2 + 0.15, 3.8, 0, 0.3, 1.4, d + 0.5);
+  for (let z = -d / 2; z < d / 2; z += 0.16)
+    b.box("darkWood", w / 2 + 0.33, 3.8, z, 0.07, 1.4, 0.055);
+  b.box("roof", w / 2 - wing / 2, 4.55, -4.8, wing, 0.2, d - 9.6);
+  b.box("glass", w / 2, (h + 4.5) / 2, d / 2 - 4.7, 0.15, h - 4.5, 9.4, true);
+  for (let z = d / 2 - 9.4; z < d / 2; z += 1.4)
+    b.box("metal", w / 2 + 0.13, (h + 4.5) / 2, z, 0.08, h - 4.5, 0.065);
+  b.box(
+    "roof",
+    cornerStart + cornerWidth / 2,
+    h + 0.12,
+    d / 2 - 4.7,
+    cornerWidth + 0.7,
+    0.25,
+    10,
+  );
+  b.box(
+    "white",
+    (cornerStart - w / 2) / 2,
+    h - 2,
+    d / 2 + 0.28,
+    cornerStart + w / 2,
+    1.7,
+    0.1,
+  );
+  b.sign(
+    "UBC BASEBALL",
+    (cornerStart - w / 2) / 2,
+    h - 1.9,
+    d / 2 + 0.36,
+    cornerStart + w / 2 - 0.3,
+    0.8,
+  );
+  b.sign(
+    "INDOOR TRAINING CENTRE",
+    (cornerStart - w / 2) / 2,
+    h - 2.55,
+    d / 2 + 0.36,
+    cornerStart + w / 2 - 0.3,
+    0.4,
+  );
+  // Low concrete seatwall and bike hoops follow the photographed entrance plaza.
+  b.box("concrete", w / 2 + 1.7, 0.37, d / 2 - 3, 0.6, 0.74, 8, true);
+  for (let i = 0; i < 5; i++) {
+    const x = -w / 2 + 1.1 + i * 1.1;
+    b.beam(
+      "metal",
+      new THREE.Vector3(x, 0, d / 2 + 2),
+      new THREE.Vector3(x, 0.8, d / 2 + 2),
+      0.055,
+    );
+    b.beam(
+      "metal",
+      new THREE.Vector3(x, 0.8, d / 2 + 2),
+      new THREE.Vector3(x + 0.6, 0.8, d / 2 + 2),
+      0.055,
+    );
+    b.beam(
+      "metal",
+      new THREE.Vector3(x + 0.6, 0.8, d / 2 + 2),
+      new THREE.Vector3(x + 0.6, 0, d / 2 + 2),
+      0.055,
+    );
+  }
   for (let z = -d / 2 + 3; z < d / 2 - 1; z += 6) {
     for (const x of [-w / 2 + 0.4, w / 2 - 0.4])
       b.box("timber", x, h / 2, z, 0.32, h, 0.44);
@@ -580,7 +742,7 @@ function rose(b: Builder) {
     b.box("blue", x - 1.5, 1, z - 1, 0.08, 2, 0.08);
     b.box("blue", x - 0.5, 1.9, z - 1, 2, 0.08, 0.08);
   }
-  b.display("rose-info", "BASEBALL TRAINING", 2.8, d / 2 - 2.1);
+  b.display("rose-info", "BASEBALL TRAINING", 2.8, d / 2 - 1.5);
   b.bench(-w / 2 + 3, d / 2 - 1.2, 3);
   b.light(-w * 0.22, h - 1.2, -d * 0.23, 500);
   b.light(w * 0.22, h - 1.2, d * 0.2, 500);
@@ -847,6 +1009,10 @@ function nest(b: Builder) {
     b.box("timber", 0, h - 0.25, z, w - 1, 0.45, 0.25);
     b.box("glass", 0, h + 0.45, z - d / bays / 2, w - 1, 0.6, 0.08);
   }
+  const hallLeft = -w / 2 + 0.4,
+    hallRight = Math.min(-10, hallLeft + 26),
+    hallBack = -3,
+    hallFront = d / 2 - 0.4;
   const band = Math.min(6.2, w * 0.18),
     frontBand = Math.min(6, d * 0.18);
   const left = -w / 2 + band,
@@ -877,10 +1043,9 @@ function nest(b: Builder) {
       } else b.floor(minX, maxX, -d / 2 + 0.3, d / 2 - 0.3, y);
     }
     b.rail(left, back, right, back, y);
-    b.rail(left, front, right, front, y);
+    b.rail(y === 5 ? hallRight : left, front, right, front, y);
     if (y === 5 && hasPod) {
-      b.rail(left, back, left, -1.4, y);
-      b.rail(left, 1.4, left, front, y);
+      b.rail(left, back, left, hallBack, y);
     } else b.rail(left, back, left, front, y);
     b.rail(right, back, right, front, y);
     for (const x of [-w * 0.2, w * 0.2]) {
@@ -895,8 +1060,8 @@ function nest(b: Builder) {
     // This original interpretation is accessible by a bridge from level 2.
     b.floor(-4, 4, -3.2, 3.2, 5, "timber");
     b.floor(left, -4, -1.4, 1.4, 5, "timber");
-    b.rail(left, -1.4, -4, -1.4, 5);
-    b.rail(left, 1.4, -4, 1.4, 5);
+    b.rail(hallRight, -1.4, -4, -1.4, 5);
+    b.rail(hallRight, 1.4, -4, 1.4, 5);
     b.rail(-4, -3.2, 4, -3.2, 5);
     b.rail(-4, 3.2, 4, 3.2, 5);
     b.rail(4, -3.2, 4, 3.2, 5);
@@ -968,7 +1133,26 @@ function nest(b: Builder) {
     true,
   );
   b.box("white", w * 0.2, 1.14, -d / 2 + 2, Math.min(9.2, w * 0.31), 0.08, 1.9);
-  b.sign("FOOD & COMMUNITY", w * 0.2, 2.7, -d / 2 + 0.25, Math.min(8, w * 0.3));
+  b.sign("BLUE CHIP CAFÉ", w * 0.2, 2.7, -d / 2 + 0.25, Math.min(8, w * 0.3));
+  // Main-floor west-side cafe; fixtures interpreted from public descriptions.
+  b.box("metal", w * 0.2 - 2.4, 1.5, -d / 2 + 1.9, 1.25, 0.7, 0.7);
+  for (const x of [-2.7, -2.25])
+    b.cylinder("metal", w * 0.2 + x, 1.85, -d / 2 + 1.7, 0.13, 0.22);
+  b.box("glass", w * 0.2 + 1.5, 1.51, -d / 2 + 2, 3, 0.65, 1.1);
+  for (let i = 0; i < 10; i++)
+    b.cylinder(
+      "goldBook",
+      w * 0.2 + 0.4 + (i % 5) * 0.48,
+      1.2 + Math.floor(i / 5) * 0.25,
+      -d / 2 + 2,
+      0.13,
+      0.035,
+    );
+  for (const x of [-0.7, -0.35, 0])
+    b.cylinder("white", w * 0.2 + x, 1.3, -d / 2 + 1.8, 0.065, 0.15);
+  b.sign("COFFEE · COOKIES · COMMUNITY", w * 0.2, 2.1, -d / 2 + 0.26, 6, 0.4);
+  b.table(w * 0.2 - 4, -d / 2 + 6);
+  b.table(w * 0.2 + 4, -d / 2 + 6);
   // Representative climbing feature in a perimeter bay, not a private room.
   b.box(
     "stone",
@@ -990,9 +1174,130 @@ function nest(b: Builder) {
       0.12,
       0.14,
     );
+  // Great Hall 2404, Level 2: southeast end on the published AMS directory.
+  // Original room reconstruction and fictional exhibits; no real pupil projects.
+  if (hallRight - hallLeft > 15) {
+    b.floor(hallLeft, hallRight, hallBack, hallFront, 5, "timber");
+    b.box(
+      "concrete",
+      (hallLeft + hallRight) / 2,
+      9.8,
+      (hallBack + hallFront) / 2,
+      hallRight - hallLeft,
+      0.25,
+      hallFront - hallBack,
+    );
+    for (const [min, max] of [
+      [hallBack, -1.7],
+      [1.7, hallFront],
+    ])
+      b.box(
+        "white",
+        hallRight,
+        7.3,
+        (min + max) / 2,
+        0.2,
+        4.6,
+        max - min,
+        true,
+      );
+    for (const [min, max] of [[hallLeft + 6, hallRight]])
+      b.box("white", (min + max) / 2, 7.3, hallBack, max - min, 4.6, 0.2, true);
+    b.sign(
+      "GREAT HALL 2404 · GVRSF",
+      hallLeft + 10,
+      7.1,
+      hallBack - 0.14,
+      10,
+      0.65,
+      Math.PI,
+    );
+    b.sign(
+      "GVRSF · A RETROSPECTIVE SCIENCE FAIR",
+      (hallLeft + hallRight) / 2,
+      8.5,
+      hallFront - 0.2,
+      hallRight - hallLeft - 2,
+      0.8,
+      Math.PI,
+    );
+    const titles = [
+      "SOLAR ENERGY",
+      "CLEAN WATER",
+      "BRIDGE DESIGN",
+      "BIODIVERSITY",
+    ];
+    for (let row = 0; row < 3; row++)
+      for (let col = 0; col < 3; col++) {
+        const x = hallLeft + 10 + col * 5,
+          z = 3 + row * 7,
+          index = (row + col) % 4;
+        b.table(x, z, 5, false);
+        b.box("white", x, 6.35, z - 0.3, 1.65, 1.15, 0.055, true);
+        b.box("blueBook", x - 0.8, 6.35, z - 0.1, 0.04, 1.15, 0.4);
+        b.box("blueBook", x + 0.8, 6.35, z - 0.1, 0.04, 1.15, 0.4);
+        b.sign(titles[index], x, 6.65, z - 0.26, 1.5, 0.26);
+        b.sign("FICTIONAL EXHIBIT", x, 6.2, z - 0.26, 1.4, 0.19);
+        if (index === 0) {
+          b.box("blueBook", x, 5.86, z + 0.15, 0.65, 0.035, 0.4);
+          for (let k = 0; k < 4; k++)
+            b.box(
+              "white",
+              x - 0.25 + k * 0.16,
+              5.89,
+              z + 0.15,
+              0.012,
+              0.012,
+              0.4,
+            );
+        }
+        if (index === 1)
+          for (let k = 0; k < 3; k++)
+            b.cylinder("glass", x - 0.45 + k * 0.4, 5.98, z + 0.2, 0.11, 0.4);
+        if (index === 2) {
+          b.box("timber", x, 5.9, z + 0.2, 1.2, 0.07, 0.35);
+          for (const side of [-1, 1])
+            b.beam(
+              "darkWood",
+              new THREE.Vector3(x + side * 0.5, 5.9, z + 0.2),
+              new THREE.Vector3(x, 6.15, z + 0.2),
+              0.035,
+            );
+        }
+        if (index === 3)
+          for (let k = 0; k < 5; k++)
+            b.cylinder(
+              "greenBook",
+              x - 0.5 + k * 0.2,
+              5.9 + (k % 2) * 0.08,
+              z + 0.2,
+              0.07,
+              0.18,
+            );
+      }
+    for (let i = 0; i < 4; i++)
+      b.display(
+        `fair-${i}`,
+        titles[i],
+        hallLeft + 7 + i * 4.2,
+        hallFront - 2,
+        5,
+      );
+    b.display("gvrsf-info", "ABOUT GVRSF", hallLeft + 7, 1.8, 5);
+    b.light(hallLeft + 8, 9.3, 8, 65);
+    b.light(hallRight - 5, 9.3, 20, 65);
+    b.sign(
+      "LEVEL 2 · GREAT HALL / SCIENCE FAIR",
+      leftStair,
+      2.3,
+      stairMax + 0.1,
+      4,
+      0.35,
+    );
+  }
   b.display("nest-study", "STUDY AT THE NEST", -3.8, d / 2 - 4);
   b.display("nest-clubs", "FIND YOUR COMMUNITY", 3.8, d / 2 - 4);
-  b.display("nest-food", "FOOD & SERVICES", w * 0.2, -d / 2 + 4.5);
+  b.display("nest-blue-chip", "BLUE CHIP CAFÉ", w * 0.2, -d / 2 + 4.5);
   for (const x of [-w * 0.22, w * 0.22])
     for (const z of [-d * 0.23, d * 0.23]) b.light(x, 12.8, z, 850);
 }
@@ -1090,6 +1395,262 @@ export function buildArchitecture(
       ? sourceHeight
       : undefined;
   const b = new Builder(width, depth, height);
-  ({ rose, bookstore, nest, sauder })[kind](b);
+  ({ rose, bookstore, nest, sauder, hennings, "war-memorial": warMemorial })[
+    kind
+  ](b);
   return b.finish(kind);
+}
+
+/** Public lobby and HENN 200-inspired teaching space; no private offices/labs. */
+function hennings(b: Builder) {
+  const w = b.width,
+    d = b.depth,
+    h = b.sourceHeight ?? 17.3;
+  shell(b, 6.2, "stone");
+  // Low teaching block and four-storey concrete academic mass, GIS-aligned.
+  b.box("roof", 0, 6.4, 0, w + 0.4, 0.35, d + 0.4);
+  const upperDepth = d * 0.42;
+  b.box(
+    "stone",
+    0,
+    (h + 6.5) / 2,
+    -d / 2 + upperDepth / 2,
+    w,
+    h - 6.5,
+    upperDepth,
+  );
+  for (const y of [8.1, 11.5, 14.9]) {
+    for (let x = -w / 2 + 1.2; x < w / 2 - 1; x += 2.8) {
+      b.box("glass", x, y, -d / 2 - 0.17, 2.1, 1.9, 0.08);
+      b.box("glass", x, y, -d / 2 + upperDepth + 0.17, 2.1, 1.9, 0.08);
+    }
+    b.box("concrete", 0, y - 1.2, -d / 2 + upperDepth + 0.22, w, 0.35, 0.2);
+  }
+  for (let z = -d / 2 + 2; z < d / 2 - 1; z += 3)
+    for (const side of [-1, 1])
+      b.box("glass", side * (w / 2 + 0.17), 3.2, z, 0.08, 2.4, 2.1);
+  b.sign("HENNINGS · PHYSICS & ASTRONOMY", 0, 4.6, d / 2 + 0.23, 16, 0.8);
+  b.sign("PUBLIC LEARNING SPACE · RECONSTRUCTED", 0, 2.7, 14, 13, 0.6);
+  b.box("stone", -w / 4 - 1.5, 2.5, 12, w / 2 - 3, 5, 0.25, true);
+  b.box("stone", w / 4 + 1.5, 2.5, 12, w / 2 - 3, 5, 0.25, true);
+  b.box("timber", 0, 5.5, 12, w, 1, 0.3);
+  // Forty-five four-person tables, with a clear centre circulation aisle.
+  const columns = [-17, -13.5, -10, -6.5, 5.5, 9, 12.5, 16, 19.5];
+  for (let row = 0; row < 5; row++) {
+    const z = -3 - row * 5.5,
+      y = row * 0.16;
+    b.floor(-w / 2 + 1, -1.5, z - 2.75, z + 2.75, y, "timber");
+    b.floor(1.5, w / 2 - 1, z - 2.75, z + 2.75, y, "timber");
+    for (const x of columns) {
+      b.table(x, z, y);
+      b.chair(x - 1.15, z, y, Math.PI / 2);
+      b.chair(x + 1.15, z, y, -Math.PI / 2);
+    }
+  }
+  b.ramps.push({
+    minX: -1.5,
+    maxX: 1.5,
+    minZ: -27.75,
+    maxZ: -0.25,
+    fromY: 0.8,
+    toY: 0,
+    axis: "z",
+  });
+  // A continuous gently sloped aisle supports accessible virtual circulation.
+  for (let i = 0; i < 55; i++)
+    b.box(
+      "timber",
+      0,
+      0.8 * (1 - i / 55) - 0.04,
+      -27.5 + i * 0.5,
+      3,
+      0.08,
+      0.51,
+    );
+  for (const x of [-9, 9]) {
+    b.box("white", x, 3.2, 10.9, 6, 3, 0.1);
+    b.box("metal", x, 1.2, 10.85, 6, 0.6, 0.08);
+  }
+  b.box("darkWood", 0, 2.3, 10.8, 6, 2.4, 0.1);
+  b.table(0, 7, 0, false);
+  b.display("hennings-info", "PHYSICS & ASTRONOMY", 4, d / 2 - 5);
+  for (const x of [-w * 0.3, w * 0.3]) {
+    b.bench(x, d / 2 - 5, 4);
+    for (const z of [-20, 2, 27]) b.light(x, 5.4, z, 65);
+  }
+}
+
+/** Original mesh reconstruction from UBC dimensions and public interior photos. */
+function warMemorial(b: Builder) {
+  const w = b.width,
+    d = b.depth,
+    h = 9.6012,
+    centre = -10;
+  shell(b, h, "white");
+  b.materials.timber.color.setHex(0xc69861);
+  b.materials.timber.roughness = 0.28;
+  b.materials.blue.color.setHex(0x174f91);
+  b.box("roof", 0, h + 0.18, 0, w + 3.5, 0.36, d + 3.5);
+  // Long clerestory glazing and concrete piers frame the historic gym volume.
+  for (const side of [-1, 1]) {
+    for (let z = -d / 2 + 2; z < d / 2 - 3; z += 3.6) {
+      b.box("glass", side * (w / 2 + 0.17), 7.9, z, 0.12, 2, 3.1);
+      b.box("concrete", side * (w / 2 + 0.22), 4.8, z - 1.7, 0.3, 9.6, 0.38);
+    }
+  }
+  // Broad gridded glazing, pale structural frame and cantilevered roof from
+  // UBC's published heritage statement (2016); present-day geometry unmeasured.
+  b.box("glass", 0, 7.1, d / 2 + 0.22, w - 0.7, 4.2, 0.12);
+  for (let x = -w / 2 + 1; x < w / 2; x += 4) {
+    b.box("white", x, 7.1, d / 2 + 0.34, 0.18, 4.6, 0.16);
+    if (Math.abs(x) > 4) b.box("glass", x, 2.8, d / 2 + 0.24, 2.1, 1.5, 0.1);
+  }
+  for (const y of [5.1, 6.1, 7.1, 8.1, 9.1])
+    b.box("metal", 0, y, d / 2 + 0.33, w - 0.5, 0.045, 0.08);
+  for (const side of [-1, 1])
+    b.beam(
+      "white",
+      new THREE.Vector3(side * 8, 5.1, d / 2 + 0.4),
+      new THREE.Vector3(side * 18, 9.1, d / 2 + 0.4),
+      0.1,
+    );
+  b.sign("WAR MEMORIAL GYMNASIUM", 0, 5.3, d / 2 + 0.23, 20, 1.1);
+  b.box("concrete", 0, 4.1, d / 2 + 1.6, 26, 0.35, 3.5);
+  // Lobby connects physically to the 160-foot playing hall through an open portal.
+  const hallFront = 13;
+  for (const side of [-1, 1])
+    b.box(
+      "white",
+      side * (w / 4 + 1.8),
+      3.4,
+      hallFront,
+      w / 2 - 3.6,
+      6.8,
+      0.28,
+      true,
+    );
+  b.box("white", 0, 8.2, hallFront, w, 2.8, 0.28);
+  b.floor(-24.384, 24.384, centre - 14.3256, centre + 14.3256, 0.015, "timber");
+  // Visible hardwood plank seams, with subtle grain and restrained gloss.
+  for (let z = centre - 14.3; z < centre + 14.3; z += 0.21)
+    b.box("darkWood", 0, 0.02, z, 48.7, 0.003, 0.006);
+  for (let x = -24; x < 24; x += 2.4)
+    for (let z = centre - 14; z < centre + 14; z += 0.84)
+      b.box(
+        "darkWood",
+        x + (Math.round(z * 10) % 2) * 0.7,
+        0.022,
+        z,
+        0.008,
+        0.003,
+        0.21,
+      );
+  const line = (x: number, z: number, width: number, depth: number) =>
+    b.box("white", x, 0.032, z + centre, width, 0.008, depth);
+  for (const x of [-14, 14]) line(x, 0, 0.06, 15);
+  for (const z of [-7.5, 7.5]) line(0, z, 28, 0.06);
+  line(0, 0, 0.06, 15);
+  const arc = (
+    cx: number,
+    cz: number,
+    radius: number,
+    start = 0,
+    end = Math.PI * 2,
+  ) => {
+    for (let i = 0; i < 64; i++) {
+      const a = start + ((end - start) * i) / 64,
+        c = start + ((end - start) * (i + 1)) / 64;
+      b.beam(
+        "white",
+        new THREE.Vector3(
+          cx + Math.cos(a) * radius,
+          0.04,
+          centre + cz + Math.sin(a) * radius,
+        ),
+        new THREE.Vector3(
+          cx + Math.cos(c) * radius,
+          0.04,
+          centre + cz + Math.sin(c) * radius,
+        ),
+        0.055,
+      );
+    }
+  };
+  arc(0, 0, 1.8);
+  for (const side of [-1, 1]) {
+    b.box("blue", side * 11.1, 0.027, centre, 5.8, 0.008, 4.9);
+    line(side * 8.2, 0, 0.06, 4.9);
+    for (const z of [-2.45, 2.45]) line(side * 11.1, z, 5.8, 0.06);
+    arc(side * 8.2, 0, 1.8);
+    arc(
+      side * 12.425,
+      0,
+      6.75,
+      side < 0 ? -Math.PI / 2 : Math.PI / 2,
+      side < 0 ? Math.PI / 2 : Math.PI * 1.5,
+    );
+    // Glass backboards, padded mobile supports, orange rim and white nets.
+    b.box("blue", side * 16, 0.65, centre, 1.8, 1.3, 1.5, true);
+    b.beam(
+      "white",
+      new THREE.Vector3(side * 16, 1, centre),
+      new THREE.Vector3(side * 12.8, 3.6, centre),
+      0.16,
+    );
+    b.box("glass", side * 12.8, 3.7, centre, 0.09, 1.05, 1.8);
+    b.box("white", side * 12.75, 3.7, centre, 0.04, 0.05, 1.8);
+    const rim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.225, 0.02, 6, 28),
+      new THREE.MeshStandardMaterial({ color: 0xcf6536 }),
+    );
+    rim.rotation.x = Math.PI / 2;
+    rim.position.set(side * 12.425, 3.05, centre);
+    b.group.add(rim);
+    for (let i = 0; i < 12; i++) {
+      const a = (i * Math.PI) / 6;
+      b.beam(
+        "white",
+        new THREE.Vector3(
+          side * 12.425 + Math.cos(a) * 0.22,
+          3.05,
+          centre + Math.sin(a) * 0.22,
+        ),
+        new THREE.Vector3(
+          side * 12.425 + Math.cos(a + 0.25) * 0.13,
+          2.65,
+          centre + Math.sin(a + 0.25) * 0.13,
+        ),
+        0.012,
+      );
+    }
+    // Banked blue seats along both long sides, generous end circulation.
+    for (let row = 0; row < 8; row++) {
+      const z = centre + side * (10.8 + row * 0.78),
+        y = 1.2 + row * 0.42;
+      b.box("concrete", 0, y / 2, z, 39, y, 0.8, true);
+      for (let seat = -18; seat <= 18; seat += 0.62) {
+        if (Math.abs(seat) < 1.6) continue;
+        b.box("blue", seat, y + 0.13, z, 0.51, 0.13, 0.48);
+        b.box("blue", seat, y + 0.4, z + side * 0.23, 0.51, 0.5, 0.07);
+      }
+    }
+    b.rail(-19.5, centre + side * 10.3, 19.5, centre + side * 10.3, 1.2);
+  }
+  b.sign("WAR MEMORIAL GYM", 0, 2.2, d / 2 - 2.2, 10, 0.7, Math.PI);
+  b.sign(
+    "BASKETBALL · SIMULATED PRACTICE",
+    -w / 2 + 0.3,
+    6.5,
+    centre,
+    9,
+    1.4,
+    Math.PI / 2,
+  );
+  for (const x of [-18, -6, 6, 18])
+    for (const z of [centre - 7, centre + 7]) b.light(x, h - 0.55, z, 50);
+  for (const x of [-12, 12]) {
+    b.bench(x, d / 2 - 5, 5);
+    b.light(x, 4.8, 26, 38);
+  }
+  b.display("gym-info", "A LIVING MEMORIAL", 4, d / 2 - 5);
 }

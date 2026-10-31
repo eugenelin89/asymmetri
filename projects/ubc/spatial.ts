@@ -134,7 +134,8 @@ export function createCollision(
       }
   }
   function blocked(p: Point, y: number) {
-    if (Math.abs(p[0]) > 1800 || Math.abs(p[1]) > 2000) return true;
+    // Eastward road context includes sourced West 10th Avenue.
+    if (p[0] < -1800 || p[0] > 3500 || Math.abs(p[1]) > 2000) return true;
     for (const b of cells.get(
       `${Math.floor(p[0] / 64)},${Math.floor(p[1] / 64)}`,
     ) || []) {

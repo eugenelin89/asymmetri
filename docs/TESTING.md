@@ -804,3 +804,21 @@ doors, student routes, wall-occluded prompts and room unload/reload. The existin
 `validation/ubc-orchard/README.md` for browser evidence. Reproduce the derivative
 with `python3 projects/ubc/tools/verify_orchard.py PATH_TO_PINNED_SUBBUILDINGS`.
 Physical-phone testing remains separate.
+
+### UBC V0.3 navigation acceptance
+
+The UBC suite now has 34 tests. New checks cover run speed across frame rates,
+diagonal normalization, turning, thin-wall collision, camera wall/ceiling and moving
+door clearance, avatar floors/reduced motion, safe map destinations and GPS progress,
+turns, off-route/arrival/indoor states. Browser acceptance additionally checks both
+views, actual run/turn controls, map Go here/Guide me, preserved pose, route progress,
+phone layouts and residence transitions. Physical-device performance remains separate.
+
+UBC V0.3 adds navigation, wayfinding, campus-life and community lifecycle tests to
+`npm run test:ubc`. Required manual checks include first/third-person turning and
+running; map selection/travel/GPS; avatar persistence; anonymous encounters;
+Rose/Hennings/Gym/Nest walking; public profile publish/edit/recovery/report/removal;
+mobile/tablet controls, links, overflow and reduced motion. Use disposable local
+profiles, remove them after checks, and keep recovery codes out of captures/logs.
+The release gallery and receipt distinguish measured observations from device/FPS
+certification. Previous Motion/city regression and exact-source Linux gates remain.

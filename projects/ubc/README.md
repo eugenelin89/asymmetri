@@ -26,23 +26,29 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 
 ## Visitor experience
 
-- Walk: WASD/arrows, drag to look, Shift for faster walking, E for nearby information.
+- First person / Third person: WASD moves (A/D strafe); left/right arrows turn,
+  up/down arrows move. Click-hold and drag to turn/look; E interacts; V switches
+  first/third person. The third-person visitor uses the existing original figure model.
   Optional mouse lock is in Help; Escape releases it. Natural speed is 1.45 m/s;
-  faster walking is 3 m/s. Touch controls maintain independent pointer ownership.
-- Aerial: orbit, pan and zoom with Three's OrbitControls. Returning to Walk retains
+  running is 5.5 m/s with Shift or the held Run touch control. Touch controls
+  maintain independent pointer ownership; ↶/↷ turn.
+- Aerial: orbit, pan and zoom with Three's OrbitControls. Returning to either on-foot view retains
   the visitor's coordinates. Map is north-up source geometry with selectable destinations.
-- Search: priority destinations, named educational guides and imported building names.
+- Search: priority destinations and imported building names. People are never listed.
   Visit entrance is explicit virtual fast travel. Walking route uses the official
   source route graph, and refuses disconnected results instead of drawing a shortcut.
-- Interiors: physically walk through entrance gaps. Rose, Bookstore, Nest and Sauder
+- Interiors: physically walk through entrance gaps. Rose, Bookstore, Nest, Sauder, Hennings and War Memorial Gym
   have walls and fixture collision. Orchard adds a lobby and one representative floor
   with eight bedrooms, five bathrooms, sixteen working doors, lounge/study, stairs
   and a continuous platform lift. The Nest has ground/5 m/10 m public galleries,
   two stair flights and a suspended lounge. Only these supported spaces are enterable.
-- Conversations: two named guides and three fictional residence students,
+- Conversations: encounter people in the world; approach and press E or tap **Talk**
+  to reveal their identity. No character roster, location markers, name labels,
+  Find actions or routes to people are exposed, even after meeting someone.
+  The underlying registry includes the original guides, sourced faculty/roster/alumni records, historical guests and optional participant profiles,
   curated questions, follow-ups, session-only
   history and keyword lookup. Unsupported private opinions, promises and whereabouts
-  produce a source-linked refusal. No external AI service, accounts, voice or persistence.
+  produce a source-linked refusal. No external AI service or voice imitation. Optional public profiles use the explicitly requested server persistence.
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
   Winter snow is optional; evergreen and deciduous trees are separate materials.
@@ -72,7 +78,7 @@ later after browser acceptance; no broad existing-project refactor was necessary
 
 ## Accuracy and permissions
 
-All five supported building interiors are **Level B reference reconstructions**, not verified
+All seven supported building interiors are **Level B reference reconstructions**, not verified
 as-built layouts. Public historic Bookstore plans and the AMS amenities map support
 research but do not prove today's fixture arrangement. Other buildings are **Level C
 exterior-only**. No Level A interior is claimed. Orchard bedrooms are fictional demonstrations, not current private rooms or assignments.
@@ -122,3 +128,27 @@ Refresh Housing claims in `residence-content.ts`, verify official pages, update
 the date and run UBC tests. Do not replace a published snapshot in place.
 The latest user instruction authorizes guarded production release after validation.
 See the V0.2 report for actual release status and remaining fidelity limits.
+
+## V0.3 map travel and walking guide
+
+Click/tap any map spot or named landmark. **Go here** immediately moves to a safe
+outdoor source-path vertex within 120 m; the selected pin shows the resolved point.
+**Guide me** keeps the current position and opens GPS-style guidance in the last
+on-foot view. The arrow turns with the visitor, remaining distance follows the
+route, and arrival/off-route/exit-building states are explicit. Recalculate and
+Stop controls remain available. Disconnected paths report failure without inventing
+a route through buildings. Guidance is a virtual-campus aid, not real-world GPS.
+
+Map keyboard: focus the map, use arrows to move a pin, Enter to mark the centre
+or current selection; Tab reaches Go here/Guide me. Existing building information
+is available through Place info. The map and guide collect no device location.
+
+`navigation.ts` centralizes controls/speeds; `follow-camera.ts` reuses the original
+visitor mesh and fits the camera with five clearance rays against visible scenery,
+including loaded room furniture and moving doors. It hides the visitor when close
+clearance would obscure the view. `wayfinding.ts` resolves safe map points and
+computes route progress; `CampusMap.tsx` owns map selection and accessible actions.
+
+## V0.3 campus life and community
+
+See [the V0.3 report](../../docs/UBC_CAMPUS_LIFE_V03.md) for current architecture, seven interiors, partial faculty coverage, varsity seasons, transport sources and limitations. Public profiles require Node and a private persistent `UBC_PROFILE_DIR`; the Cloudflare build alone does not provision this filesystem service. See [community operations](../../docs/UBC_COMMUNITY_OPERATIONS.md).

@@ -1,3 +1,7 @@
+import { createActivities } from "./activities";
+import { createTraffic } from "./traffic";
+import expansionAnchors from "./data/expansion-anchors.json" with { type: "json" };
+import { normalizeAppearance, type Appearance } from "./appearance";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Sky } from "three/addons/objects/Sky.js";
@@ -14,6 +18,9 @@ import {
   type Interior,
 } from "./spatial";
 import { createPeople } from "./people";
+import { footInput, onFoot } from "./navigation";
+import { resolveMapDestination, walkingGuidance } from "./wayfinding";
+import { createFollowCamera, createVisitor } from "./follow-camera";
 import { defaults, normalizeSettings, solarPosition } from "./environment";
 import { places, displays, characters } from "./registry";
 import { buildResidence } from "./residence";
@@ -26,6 +33,7 @@ import type {
   Anchor,
   Anchors,
   CampusData,
+  Character,
   Mode,
   Point,
   Pose,
@@ -42,12 +50,19 @@ export type Marker = {
 };
 export type CampusAPI = {
   setMode: (mode: Mode) => void;
+  community: (characters: Character[]) => void;
+  appearance: (value: Appearance) => void;
   settings: (settings: Settings) => void;
   input: (key: string, pressed: boolean, source?: string) => void;
   pause: (paused: boolean, character?: string) => void;
   visit: (id: string) => void;
   route: (id: string) => boolean;
   clearRoute: () => void;
+  mapPoint: (point: Point) => Point | null;
+  travelTo: (point: Point) => boolean;
+  guideTo: (point: Point, label?: string) => boolean;
+  resumeWalk: () => void;
+  recalculate: () => boolean;
   lock: () => void;
   capture: () => string;
   dispose: () => void;
@@ -67,6 +82,7 @@ export function createCampus(
 ): CampusAPI {
   let settings = { ...defaults },
     mode: Mode = "walk",
+    footMode: "walk" | "third" = "walk",
     paused = false,
     activeCharacter: string | null = null,
     disposed = false;
@@ -84,7 +100,7 @@ export function createCampus(
   renderer.domElement.tabIndex = 0;
   renderer.domElement.setAttribute(
     "aria-label",
-    "Interactive 3D campus. WASD to walk, drag to look, E to interact, M for map.",
+    "Interactive 3D campus. WASD to move, Shift to run, drag or left/right arrows to turn, V to switch first/third person, E to interact, M for map.",
   );
   host.appendChild(renderer.domElement);
   const camera = new THREE.PerspectiveCamera(62, 1, 0.08, 6500),
@@ -124,9 +140,17 @@ export function createCampus(
     targets: THREE.Object3D[] = [],
     infoPoints = new Map<string, { x: number; y: number; z: number }>();
   const excluded = new Set<string>();
+  Object.assign(anchors, structuredClone(expansionAnchors));
   anchors.orchard = { ...orchardAnchor };
   orchardGeography.footprintParts.forEach((part) => excluded.add(part.id));
-  const kinds = ["rose", "bookstore", "nest", "sauder"] as const;
+  const kinds = [
+    "rose",
+    "bookstore",
+    "nest",
+    "sauder",
+    "hennings",
+    "war-memorial",
+  ] as const;
   for (const key of kinds) {
     anchors[key] = architectureEnvelope(key, anchors[key]);
     if (anchors[key]?.buildingId) excluded.add(anchors[key].buildingId!);
@@ -142,10 +166,11 @@ export function createCampus(
           ) &&
           !kinds.some((kind) => {
             const a = anchors[kind],
-              p = local([tree.x, tree.z], a);
+              p = local([tree.x, tree.z], a),
+              canopy = Math.max(1, Math.min(25, tree.height || 10) * 0.36);
             return (
-              Math.abs(p[0]) < a.width / 2 + 1 &&
-              Math.abs(p[1]) < a.depth / 2 + 1
+              Math.abs(p[0]) < a.width / 2 + canopy &&
+              Math.abs(p[1]) < a.depth / 2 + canopy
             );
           }),
       ),
@@ -154,7 +179,7 @@ export function createCampus(
   );
   scene.add(landscape.group);
   targets.push(...landscape.buildingMeshes);
-  for (const kind of ["rose", "bookstore", "nest", "sauder"] as const) {
+  for (const kind of kinds) {
     const a = anchors[kind];
     if (!a) continue;
     const source = data.buildings.find((b) => b.id === a.buildingId);
@@ -280,11 +305,21 @@ export function createCampus(
   }
   const collision = createCollision(data, interiors, excluded),
     routes = createRoutes(data, collision.blocked);
+  let campusCharacters = characters;
   const population = createPeople(data, anchors, collision.blocked);
   scene.add(population.group);
-  population.actors
-    .filter((a) => a.named)
-    .forEach((a) => targets.push(a.group));
+  const activities = createActivities(data, anchors, collision.blocked);
+  const traffic = createTraffic(data);
+  scene.add(activities.group, traffic.group);
+  const visitor = createVisitor();
+  scene.add(visitor.group);
+  const followCamera = createFollowCamera([
+    landscape.group,
+    stadium.group,
+    residenceGroup,
+    ...landmarks.map((l) => l.group),
+  ]);
+  targets.push(population.group);
   for (const p of places) {
     const a = anchors[p.id];
     if (a && !infoPoints.has(p.id))
@@ -305,6 +340,8 @@ export function createCampus(
     listeners: (() => void)[] = [];
   let routeLine: THREE.Line | null = null,
     routePoints: Point[] | null = null,
+    routeLabel = "Selected map spot",
+    routeTarget: Point | null = null,
     nearby: string | null = null,
     lastTime = performance.now(),
     lastTelemetry = 0,
@@ -312,7 +349,13 @@ export function createCampus(
     frames = 0,
     frameSeconds = 0,
     raf = 0,
-    down: { x: number; y: number; id: number } | null = null,
+    down: {
+      x: number;
+      y: number;
+      lastX: number;
+      lastY: number;
+      id: number;
+    } | null = null,
     dragged = false;
   const rainGeo = new THREE.BufferGeometry(),
     rainPositions = new Float32Array(900 * 3);
@@ -347,8 +390,13 @@ export function createCampus(
     down = null;
   }
   function setMode(next: Mode) {
+    // Aerial distances need a larger near plane to preserve depth precision
+    // between the centimetre-separated GIS surfaces and field markings.
+    camera.near = next === "aerial" ? 2 : 0.08;
+    camera.updateProjectionMatrix();
     clear();
     mode = next;
+    if (next === "walk" || next === "third") footMode = next;
     document.exitPointerLock?.();
     orbit.enabled = next === "aerial";
     if (next === "aerial") {
@@ -356,7 +404,7 @@ export function createCampus(
       orbit.target.set(pose.x, pose.y, pose.z);
       orbit.update();
     }
-    if (next === "walk") renderer.domElement.focus({ preventScroll: true });
+    if (onFoot(next)) renderer.domElement.focus({ preventScroll: true });
   }
   function applySettings(next: Settings) {
     settings = normalizeSettings(next);
@@ -456,7 +504,28 @@ export function createCampus(
     }
     return null;
   }
+  function canMeet(id: string) {
+    const actor = population.actors.find((a) => a.id === id && a.named);
+    if (!actor || !onFoot(mode) || !actor.group.visible) return false;
+    const p = actor.group.position;
+    const distance = Math.hypot(p.x - pose.x, p.z - pose.z);
+    if (distance >= 5 || Math.abs(p.y - pose.y) > 1.1) return false;
+    // Use the same physical boundaries as walking, including closed doors.
+    const steps = Math.max(1, Math.ceil(distance / 0.2));
+    for (let i = 1; i < steps; i++) {
+      const t = i / steps;
+      if (
+        collision.blocked(
+          [pose.x + (p.x - pose.x) * t, pose.z + (p.z - pose.z) * t],
+          pose.y,
+        )
+      )
+        return false;
+    }
+    return true;
+  }
   function interact(id: string) {
+    if (campusCharacters.some((c) => c.id === id) && !canMeet(id)) return;
     const action = residence.interactions().find((a) => a.id === id);
     // Physical controls can be ray-picked before their proximity action is
     // available (for example the ride placard while outside the lift).
@@ -464,7 +533,7 @@ export function createCampus(
     if (action) {
       const p = local([pose.x, pose.z], orchardAnchor);
       if (
-        mode === "walk" &&
+        onFoot(mode) &&
         Math.hypot(p[0] - action.x, p[1] - action.z) < 2.8 &&
         Math.abs(pose.y + 1.1 - action.y) < 1.3
       )
@@ -475,32 +544,44 @@ export function createCampus(
   }
   const pointerdown = (e: PointerEvent) => {
     if (paused || e.button !== 0) return;
-    down = { x: e.clientX, y: e.clientY, id: e.pointerId };
+    if (down) return;
+    down = {
+      x: e.clientX,
+      y: e.clientY,
+      lastX: e.clientX,
+      lastY: e.clientY,
+      id: e.pointerId,
+    };
     dragged = false;
     renderer.domElement.setPointerCapture(e.pointerId);
     renderer.domElement.focus({ preventScroll: true });
   };
   const pointermove = (e: PointerEvent) => {
-    if (paused) return;
+    if (paused || (down && down.id !== e.pointerId)) return;
     if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4)
       dragged = true;
     if (
-      mode === "walk" &&
+      onFoot(mode) &&
       (document.pointerLockElement === renderer.domElement || down)
     ) {
       if (down && Math.hypot(e.clientX - down.x, e.clientY - down.y) > 4)
         dragged = true;
-      pose.yaw -= e.movementX * 0.003;
-      pose.pitch = Math.max(
-        -1.3,
-        Math.min(1.3, pose.pitch - e.movementY * 0.003),
-      );
+      const locked = document.pointerLockElement === renderer.domElement;
+      const dx = locked ? e.movementX : e.clientX - down!.lastX;
+      const dy = locked ? e.movementY : e.clientY - down!.lastY;
+      if (down) {
+        down.lastX = e.clientX;
+        down.lastY = e.clientY;
+      }
+      pose.yaw -= dx * 0.003;
+      pose.pitch = Math.max(-1.3, Math.min(1.3, pose.pitch - dy * 0.003));
     } else if (!down)
       renderer.domElement.style.cursor = pick(e.clientX, e.clientY)
         ? "pointer"
         : "grab";
   };
   const pointerup = (e: PointerEvent) => {
+    if (down && down.id !== e.pointerId) return;
     if (down && !dragged) {
       const id = pick(e.clientX, e.clientY);
       if (id) interact(id);
@@ -543,8 +624,10 @@ export function createCampus(
     }
     if (key === "e" && nearby && !e.repeat) interact(nearby);
     if (key === "m") {
-      setMode(mode === "map" ? "walk" : "map");
+      setMode(mode === "map" ? footMode : "map");
     }
+    if (key === "v" && !e.repeat)
+      setMode(footMode === "walk" ? "third" : "walk");
     if (key === "escape") {
       clear();
       document.exitPointerLock?.();
@@ -573,15 +656,11 @@ export function createCampus(
     renderer.domElement.removeEventListener("webglcontextlost", contextLost),
   );
   function visit(id: string) {
-    // Finding a fictional indoor guide goes to the residence entrance; climb or use the lift.
-    const guide = characters.find((c) => c.id === id);
-    if (guide?.routeSpace === "interior") id = guide.zone;
-    const actor = population.actors.find((a) => a.id === id);
+    // People are encountered in the world, never fast-travel destinations.
+    if (campusCharacters.some((c) => c.id === id)) return;
     const a =
       anchors[id] || anchors[data.buildings.find((b) => b.id === id)?.id || ""];
-    let target: Point | undefined = actor
-      ? [actor.group.position.x, actor.group.position.z]
-      : a?.entry || (a && [a.x, a.z]);
+    let target: Point | undefined = a?.entry || (a && [a.x, a.z]);
     if (!target) {
       const b = data.buildings.find((b) => b.id === id);
       if (b) {
@@ -626,7 +705,7 @@ export function createCampus(
       pitch: 0,
       yaw: Math.atan2(-(target[0] - safe[0]), -(target[1] - safe[1])),
     };
-    setMode("walk");
+    setMode(footMode);
     updateEnvironment();
   }
   function clearRoute() {
@@ -637,26 +716,49 @@ export function createCampus(
       routeLine = null;
     }
     routePoints = null;
+    routeTarget = null;
     onRoute(null);
   }
   function route(id: string) {
     clearRoute();
-    const guide = characters.find((c) => c.id === id);
-    if (guide?.routeSpace === "interior") id = guide.zone;
-    const actor = population.actors.find((a) => a.id === id),
-      a = anchors[id];
-    const target: Point | undefined = actor
-      ? [actor.group.position.x, actor.group.position.z]
-      : a?.entry || (a && [a.x, a.z]);
+    if (campusCharacters.some((c) => c.id === id)) return false;
+    const a = anchors[id];
+    const target: Point | undefined = a?.entry || (a && [a.x, a.z]);
     if (!target) return false;
+    return guideTo(
+      target,
+      places.find((p) => p.id === id)?.name || "Campus destination",
+    );
+  }
+  function mapPoint(point: Point) {
+    return resolveMapDestination(
+      point,
+      routes.nodes,
+      (p) =>
+        !collision.blocked(p, 0) &&
+        !data.buildings.some((b) => inPolygon(p, b.rings)),
+    );
+  }
+  function travelTo(point: Point) {
+    const safe = mapPoint(point);
+    if (!safe) return false;
+    clearRoute();
+    pose = { ...pose, x: safe[0], z: safe[1], y: 0, pitch: 0 };
+    setMode(footMode);
+    return true;
+  }
+  function guideTo(target: Point, name = "Selected map spot") {
     const points = routes.find([pose.x, pose.z], target);
     if (!points) return false;
+    clearRoute();
+    routeLabel = name;
+    routeTarget = [...target];
     routePoints = points;
     routeLine = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(
         points.map((p) => new THREE.Vector3(p[0], 0.16, p[1])),
       ),
-      new THREE.LineBasicMaterial({ color: 0xf5d594, depthTest: false }),
+      new THREE.LineBasicMaterial({ color: 0xf5d594, depthTest: true }),
     );
     routeLine.renderOrder = 5;
     scene.add(routeLine);
@@ -672,34 +774,50 @@ export function createCampus(
     if (document.hidden) return;
     const residenceLocal = local([pose.x, pose.z], orchardAnchor);
     pose.y += residence.update(
-      paused || mode !== "walk" ? 0 : dt,
+      paused || !onFoot(mode) ? 0 : dt,
       residenceLocal,
       pose.y,
       settings,
     );
-    const keys = [...inputs.values()],
-      held = (...q: string[]) => q.some((k) => keys.includes(k));
-    if (!paused && mode === "walk") {
-      const forward =
-          Number(held("w", "arrowup")) - Number(held("s", "arrowdown")),
-        right =
-          Number(held("d", "arrowright")) - Number(held("a", "arrowleft")),
-        len = Math.hypot(forward, right) || 1,
-        speed = held("shift") ? 3 : 1.45;
-      pose = collision.move(
+    const beforeX = pose.x,
+      beforeZ = pose.z;
+    if (!paused && onFoot(mode)) {
+      const movement = footInput(
         pose,
-        ((-Math.sin(pose.yaw) * forward + Math.cos(pose.yaw) * right) / len) *
-          dt *
-          speed,
-        ((-Math.cos(pose.yaw) * forward - Math.sin(pose.yaw) * right) / len) *
-          dt *
-          speed,
+        [...inputs.values()],
+        Math.min(0.1, elapsed),
+      );
+      pose = collision.move(
+        { ...pose, yaw: movement.yaw },
+        movement.dx,
+        movement.dz,
       );
     }
+    let cameraClearance = 0;
     if (mode === "walk") {
       camera.position.set(pose.x, pose.y + 1.68, pose.z);
       camera.rotation.set(pose.pitch, pose.yaw, 0, "YXZ");
-    } else orbit.update();
+    } else if (mode === "third") cameraClearance = followCamera(camera, pose);
+    else orbit.update();
+    visitor.update(
+      pose,
+      Math.hypot(pose.x - beforeX, pose.z - beforeZ),
+      mode === "third" && cameraClearance > 2.15,
+      settings.reducedMotion,
+    );
+    activities.update(
+      dt,
+      [pose.x, pose.z],
+      settings.population,
+      settings.reducedMotion,
+    );
+    traffic.update(
+      dt,
+      [pose.x, pose.z],
+      settings.hour,
+      settings.population,
+      settings.reducedMotion,
+    );
     population.update(
       paused ? 0 : dt,
       now / 1000,
@@ -764,9 +882,13 @@ export function createCampus(
       for (const [id, p] of all) {
         const d = Math.hypot(p.x - pose.x, p.z - pose.z);
         const action = residenceActions.find((a) => a.id === id);
+        const character = campusCharacters.some((c) => c.id === id);
+        if (character && !canMeet(id)) continue;
         if (
           (action ||
-            characters.some((c) => c.id === id && c.zone === "orchard")) &&
+            campusCharacters.some(
+              (c) => c.id === id && c.zone === "orchard",
+            )) &&
           !residence.canSee(
             residenceLocal,
             local([p.x, p.z], orchardAnchor),
@@ -791,6 +913,7 @@ export function createCampus(
         }
         if (
           !action &&
+          !character &&
           settings.markers &&
           d < 80 &&
           Math.abs(p.y - pose.y - 1.6) < 2.1
@@ -800,7 +923,6 @@ export function createCampus(
             markers.push({
               id,
               name:
-                characters.find((c) => c.id === id)?.label ||
                 places.find((p) => p.id === id)?.name ||
                 displays[id]?.name ||
                 id,
@@ -826,18 +948,15 @@ export function createCampus(
           : closest?.d < 150
             ? closest.p.name
             : "UBC Vancouver · outdoor campus";
-      const routeDistance =
-        routePoints?.reduce(
-          (s, p, i) =>
-            i
-              ? s +
-                Math.hypot(
-                  p[0] - routePoints![i - 1][0],
-                  p[1] - routePoints![i - 1][1],
-                )
-              : s,
-          0,
-        ) ?? null;
+      const guidance = routePoints
+        ? walkingGuidance(
+            pose,
+            routePoints,
+            routeLabel,
+            !!indoor || inResidence,
+          )
+        : null;
+      const routeDistance = guidance?.distance ?? null;
       onTelemetry({
         pose: { ...pose },
         mode,
@@ -849,6 +968,7 @@ export function createCampus(
         triangles: renderer.info.render.triangles,
         loaded: landmarks.filter((l) => l.group.visible).length,
         routeDistance,
+        guidance,
       });
     }
     if (mode !== "map") {
@@ -875,6 +995,11 @@ export function createCampus(
   raf = requestAnimationFrame(tick);
   return {
     setMode,
+    appearance: (value) => visitor.appearance(normalizeAppearance(value)),
+    community: (values) => {
+      campusCharacters = [...characters, ...values];
+      population.setCommunity(values);
+    },
     settings: applySettings,
     input: (key, pressed, source = key) => {
       if (pressed) inputs.set(`touch:${source}`, key);
@@ -889,9 +1014,15 @@ export function createCampus(
     visit,
     route,
     clearRoute,
+    mapPoint,
+    travelTo,
+    guideTo,
+    resumeWalk: () => setMode(footMode),
+    recalculate: () => (routeTarget ? guideTo(routeTarget, routeLabel) : false),
     position: () => ({ ...pose }),
     interact,
     lock: () => {
+      if (!onFoot(mode)) setMode(footMode);
       renderer.domElement.requestPointerLock?.();
     },
     capture: () => {

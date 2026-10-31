@@ -40,7 +40,7 @@ export function buildLandscape(data: CampusData, excluded: Set<string>) {
     roughness: 1,
     map: noiseTexture(),
   });
-  const base = new THREE.Mesh(new THREE.PlaneGeometry(5500, 5500), ground);
+  const base = new THREE.Mesh(new THREE.PlaneGeometry(7500, 5500), ground);
   base.rotation.x = -Math.PI / 2;
   base.position.y = -0.065;
   base.receiveShadow = true;

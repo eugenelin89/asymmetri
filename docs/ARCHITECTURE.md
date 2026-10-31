@@ -754,3 +754,33 @@ occlusion. Bedroom meshes load near the floor and unload beyond 90 m while
 deterministic collision stays resident. `ResidenceGuide` is a visitor schematic.
 Original GIS bytes remain unchanged; source sections/anchor provenance use a
 separate snapshot. See `UBC_ORCHARD_MVR_2026-10-31.md` for acceptance limits.
+
+### UBC V0.3 navigation
+
+`navigation.ts` owns shared on-foot mode/input and speed rules. `follow-camera.ts`
+fits the trailing camera against visible scene geometry and reuses the original
+procedural person. Both views use identical visitor collision, stairs and lift logic.
+`CampusMap.tsx` separates map selection/travel actions from the explorer shell;
+`wayfinding.ts` resolves checked source-path destinations and live route progress.
+No dependency, geolocation permission, map service or server state was introduced.
+
+People are discovered by proximity in either on-foot camera. Character records stay
+internal to conversations/population; directories and maps contain places only.
+Unnamed Talk prompts respect distance, floor and physical occlusion. Interactions
+are rejected from map/aerial or out of reach, including direct scene picking.
+Identity, simulation disclaimers and grounded questions appear after interaction.
+
+### UBC V0.3 campus life and optional profiles
+
+`projects/ubc` now includes collision-aware third-person navigation, appearance,
+map travel/wayfinding, streamed sourced educational characters, original sports/
+wildlife/bicycle scenes and source-based traffic. Seven reference interiors are
+supported; the science-fair Great Hall extends the Nest's second level. See
+[the implementation report](UBC_CAMPUS_LIFE_V03.md).
+
+The owner explicitly requested public opt-in profiles and immediate publication.
+`app/api/ubc` is an isolated Node route family backed by the private absolute
+`UBC_PROFILE_DIR`. It is not a general site account system. Ownership capability,
+CSRF/body/rate boundaries, reporting and manual hide/restore are in
+`projects/ubc/community`; [operations](UBC_COMMUNITY_OPERATIONS.md) documents the
+persistent location and rollback. Motion and BotSquad policies/storage are unchanged.

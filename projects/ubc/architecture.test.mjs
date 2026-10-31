@@ -86,7 +86,20 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
       new URL("../../public/ubc/v0.1-2026-10-30/anchors.json", import.meta.url),
     ),
   );
-  const kinds = ["rose", "bookstore", "nest", "sauder"];
+  Object.assign(
+    anchors,
+    JSON.parse(
+      readFileSync(new URL("./data/expansion-anchors.json", import.meta.url)),
+    ),
+  );
+  const kinds = [
+    "rose",
+    "bookstore",
+    "nest",
+    "sauder",
+    "hennings",
+    "war-memorial",
+  ];
   const interiors = kinds.map((kind) => {
     anchors[kind] = architectureEnvelope(kind, anchors[kind]);
     const a = anchors[kind],
@@ -138,7 +151,7 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
         collision,
         pose: { x: a.entry[0], z: a.entry[1], y: 0, yaw: 0, pitch: 0 },
       };
-      walkTo(f, [0, a.depth / 2 - 2]);
+      walkTo(f, [f.architecture.entry[0], a.depth / 2 - 1]);
       walkTo(f, f.architecture.entry);
       if (kind === "nest") {
         const ramp = f.architecture.ramps[0],
@@ -153,11 +166,23 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
   }
   const population = createPeople(data, anchors, collision.blocked),
     named = population.actors.filter((a) => a.named);
-  assert.deepEqual(named.map((a) => a.id).sort(), ["bacon", "werker"]);
+  assert.deepEqual(named.map((a) => a.id).sort(), [
+    "bacon",
+    "coach-mitch-hodge",
+    "werker",
+  ]);
   const positions = named.map((a) => a.group.position.clone());
   let travelled = 0;
   for (let i = 0; i < 600; i++) {
-    population.update(1 / 30, i / 30, spawn, 12, true, null, false);
+    population.update(
+      1 / 30,
+      i / 30,
+      [anchors.sauder.x, anchors.sauder.z],
+      12,
+      true,
+      null,
+      false,
+    );
     for (const a of named)
       assert.equal(
         collision.blocked([a.group.position.x, a.group.position.z], 0),
@@ -217,7 +242,8 @@ function fixture(kind, width, depth, yaw = 0.46) {
 
 test("Rose: all four batting cages can be reached on foot and exited", () => {
   const f = fixture("rose", 56.48, 21.44);
-  walkTo(f, [0, 8.72]);
+  walkTo(f, [f.architecture.entry[0], 9.8]);
+  walkGroundRoute(f, [0, 8.72]);
   for (const target of [
     [-14, -4.7],
     [-14, 4.7],
@@ -225,7 +251,7 @@ test("Rose: all four batting cages can be reached on foot and exited", () => {
     [11, 4.7],
   ])
     walkGroundRoute(f, target);
-  walkGroundRoute(f, [0, 9.5]);
+  walkGroundRoute(f, [f.architecture.entry[0], 9.8]);
   walkTo(f, f.architecture.entry);
 });
 
@@ -327,8 +353,8 @@ for (const [kind, width, depth] of [
   test(`${kind}: enter, reach public information and leave using continuous collision movement`, () => {
     const f = fixture(kind, width, depth);
     assert.equal(f.collision.blocked([f.pose.x, f.pose.z], 0), false);
-    walkTo(f, [0, depth / 2 - 2]);
-    for (const display of f.architecture.displays) {
+    walkTo(f, [f.architecture.entry[0], depth / 2 - 0.8]);
+    for (const display of f.architecture.displays.filter((d) => d.y < 3)) {
       walkGroundRoute(f, [display.x, display.z + 1.25]);
       const relative = local([f.pose.x, f.pose.z], f.anchor);
       assert.ok(
@@ -336,7 +362,7 @@ for (const [kind, width, depth] of [
         "A visitor can stand close enough to use a display",
       );
     }
-    walkGroundRoute(f, [0, depth / 2 - 1]);
+    walkGroundRoute(f, [f.architecture.entry[0], depth / 2 - 0.8]);
     walkTo(f, f.architecture.entry);
     const wall = global([width / 2, depth / 2 - 1], f.anchor);
     assert.ok(f.collision.blocked(wall, 0), "Exterior walls stop a visitor");
@@ -387,4 +413,61 @@ test("Nest: walk from entrance to both upper floors, around galleries, down stai
   walkGroundRoute(f, [0, 35]);
   walkTo(f, f.architecture.entry, 0);
   assert.equal(floorAt([f.pose.x, f.pose.z], 0, [f.interior]), 0);
+});
+
+for (const [kind, width, depth] of [
+  ["hennings", 46.79, 83.2],
+  ["war-memorial", 55.34, 76.88],
+]) {
+  test(`${kind}: enter, traverse public teaching or sports hall and leave`, () => {
+    const f = fixture(kind, width, depth, 0);
+    walkTo(f, [0, depth / 2 - 1]);
+    walkGroundRoute(f, [0, 15]);
+    if (kind === "hennings") {
+      walkTo(f, [0, 10]);
+      walkTo(f, [-3, 10]);
+      walkTo(f, [-3, 3]);
+      walkTo(f, [0, 2]);
+      walkTo(f, [0, -20], 0.8 * (19.75 / 27.5));
+      walkTo(f, [0, 2], 0);
+      walkTo(f, [-3, 3]);
+      walkTo(f, [-3, 10]);
+      walkTo(f, [0, 10]);
+      walkTo(f, [0, 15]);
+    } else {
+      // Enter around the end of the bleachers and walk onto the court.
+      walkGroundRoute(f, [22, 8]);
+      walkGroundRoute(f, [22, -10]);
+      walkGroundRoute(f, [0, -10]);
+      walkGroundRoute(f, [-10, -14]);
+      walkGroundRoute(f, [22, -10]);
+      walkGroundRoute(f, [22, 8]);
+    }
+    walkGroundRoute(f, [0, depth / 2 - 1]);
+    walkTo(f, f.architecture.entry, 0);
+  });
+}
+test("Nest: reach all science-fair displays in the shipped Great Hall on level two", () => {
+  const f = fixture("nest", 76, 55.53, 0),
+    r = f.architecture.ramps[0],
+    x = (r.minX + r.maxX) / 2;
+  walkTo(f, [0, 25]);
+  walkGroundRoute(f, [x, r.maxZ + 1.2]);
+  walkTo(f, [x, r.minZ - 0.35], 5);
+  walkTo(f, [x, -23.5], 5);
+  walkTo(f, [x - 2.3, -23.5], 5);
+  walkTo(f, [x - 2.3, 0], 5);
+  walkTo(f, [-34, 0], 5);
+  walkTo(f, [-34, 23], 5);
+  for (const display of f.architecture.displays.filter((d) =>
+    d.id.startsWith("fair-"),
+  )) {
+    walkTo(f, [display.x, 23], 5);
+    assert.ok(
+      Math.hypot(
+        f.pose.x - global([display.x, display.z], f.anchor)[0],
+        f.pose.z - global([display.x, display.z], f.anchor)[1],
+      ) < 6,
+    );
+  }
 });

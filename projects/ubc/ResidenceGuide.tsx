@@ -132,8 +132,8 @@ export function ResidenceGuide({
           Ride lift.
         </li>
         <li>
-          Maya is by the study tables; Leo is in the lounge; Ari welcomes
-          visitors in the lobby.
+          Meet people while exploring. Approach and press E or tap Talk to
+          introduce yourself and ask questions.
         </li>
         <li>
           Exit: return down the stairs or lift and follow the courtyard sign.

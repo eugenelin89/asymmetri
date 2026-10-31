@@ -1,0 +1,79 @@
+{
+  "source": "https://opendata.vancouver.ca/api/records/1.0/search/?dataset=public-streets&rows=1000&geofilter.bbox=49.259%2C-123.226%2C49.267%2C-123.200",
+  "license": "https://opendata.vancouver.ca/pages/licence/",
+  "sha256": "263bc6b35efcd2c53d2acab73634cad7fa5876e6dbaab6bccd904e4558cc2ff4",
+  "verified": "2026-10-31",
+  "notes": "Contains information licensed under the Open Government Licence \u2013 Vancouver. West 10th 4200\u20134600 blocks: source street centreline; 9 m rendered pavement width is an approximation. Outside detailed campus coverage, with no surveyed sidewalk connection or GPS route claimed.",
+  "roads": [
+    {
+      "id": "vancouver-085c445f726dfbe16b03d9619c59afd31d58e833",
+      "name": "West 10th Avenue",
+      "points": [
+        [
+          2834.38,
+          -411.88
+        ],
+        [
+          2613.32,
+          -417.85
+        ]
+      ]
+    },
+    {
+      "id": "vancouver-2b17d89fa8a413c62870720be4df0eb28de783b6",
+      "name": "West 10th Avenue",
+      "points": [
+        [
+          2613.32,
+          -417.85
+        ],
+        [
+          2392.18,
+          -423.71
+        ]
+      ]
+    },
+    {
+      "id": "vancouver-d9758c7c553f1afe5793e834704dabae25620d0f",
+      "name": "West 10th Avenue",
+      "points": [
+        [
+          3055.46,
+          -405.99
+        ],
+        [
+          2834.38,
+          -411.88
+        ]
+      ]
+    },
+    {
+      "id": "vancouver-c2b512a4c4cf3808c321b7dbabf601d309fe0759",
+      "name": "West 10th Avenue",
+      "points": [
+        [
+          2392.18,
+          -423.71
+        ],
+        [
+          2168.68,
+          -429.66
+        ]
+      ]
+    },
+    {
+      "id": "vancouver-0c8327d41271522d47119bc955dd43b5fe5b13f9",
+      "name": "West 10th Avenue",
+      "points": [
+        [
+          3276.64,
+          -400.37
+        ],
+        [
+          3055.46,
+          -405.99
+        ]
+      ]
+    }
+  ]
+}

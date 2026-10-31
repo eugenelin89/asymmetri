@@ -1,3 +1,4 @@
+import { expandedCharacters } from "./character-expansion";
 import type { Character, Link, Place, Topic } from "./types";
 import {
   orchardPlace,
@@ -60,6 +61,61 @@ const reconstruction =
 export const places: Place[] = [
   orchardPlace,
   {
+    id: "west-tenth",
+    name: "West 10th Avenue · approach context",
+    category: "Campus approaches",
+    address: "West 10th Avenue, 4200–4600 blocks",
+    interior: "C",
+    description:
+      "Traffic on sourced Vancouver street geometry east of campus. This area is exterior road context; the intervening neighbourhood and pedestrian route are not reconstructed.",
+    reconstruction:
+      "City street centreline; representative pavement width and original vehicles. No connected campus GPS route is available here.",
+    links: [
+      link(
+        "City of Vancouver street data",
+        "https://opendata.vancouver.ca/explore/dataset/public-streets/",
+      ),
+    ],
+    verified: "2026-10-31",
+  },
+  {
+    id: "hennings",
+    name: "Hennings · Physics & Astronomy",
+    category: "Faculties",
+    address: "6224 Agricultural Road",
+    interior: "B",
+    verified: "2026-10-31",
+    description:
+      "Physics and Astronomy, with an explorable public learning-space reconstruction inspired by HENN 200.",
+    reconstruction,
+    links: [
+      link("Physics & Astronomy", "https://phas.ubc.ca/contact-us"),
+      link(
+        "HENN 200 teaching space",
+        "https://learningspaces.ubc.ca/classrooms/henn-200/",
+      ),
+    ],
+  },
+  {
+    id: "war-memorial",
+    name: "War Memorial Gymnasium",
+    category: "Athletics",
+    address: "6081 University Boulevard",
+    interior: "B",
+    verified: "2026-10-31",
+    description:
+      "A living memorial opened in 1951. Explore the public lobby, hardwood basketball court and blue spectator seating, with an ambient practice game.",
+    reconstruction:
+      reconstruction +
+      " Hall dimensions follow UBC’s published 160 ft length and 31.5 ft ceiling. Seating and circulation are representative, not a seat-by-seat survey.",
+    links: [
+      link(
+        "War Memorial Gym · official facility",
+        "https://sportfacilities.ubc.ca/wmg/",
+      ),
+    ],
+  },
+  {
     id: "stadium",
     name: "Tourmaline West Baseball Stadium",
     category: "Athletics",
@@ -96,7 +152,7 @@ export const places: Place[] = [
     category: "Faculties",
     address: "2053 Main Mall",
     description:
-      "Explore the public-lobby reconstruction and meet the educational simulation of Dr. Greg Werker. The adjacent Sauder Powerhouse expansion remains a construction project, with completion expected in 2027.",
+      "Explore the public-lobby reconstruction and learn about business study. The adjacent Sauder Powerhouse expansion remains a construction project, with completion expected in 2027.",
     interior: "B",
     reconstruction,
     links: [
@@ -129,7 +185,7 @@ export const places: Place[] = [
   },
   {
     id: "nest",
-    name: "AMS Student Nest",
+    name: "AMS Student Nest · Blue Chip & Great Hall",
     category: "Student life",
     address: "6133 University Boulevard",
     description:
@@ -476,7 +532,7 @@ export const characters: Character[] = [
     status: "Available in the virtual academic core",
   },
 ];
-characters.push(...residenceStudents);
+characters.push(...residenceStudents, ...expandedCharacters);
 
 export function safeExternalUrl(value: string): string | null {
   try {
@@ -488,7 +544,19 @@ export function safeExternalUrl(value: string): string | null {
         u.hostname.endsWith(".ubc.ca") ||
         u.hostname === "www.ams.ubc.ca" ||
         u.hostname === "github.com" ||
-        u.hostname === "www.mbtw.com")
+        u.hostname === "www.mbtw.com" ||
+        [
+          "gothunderbirds.ca",
+          "opendata.vancouver.ca",
+          "www.nobelprize.org",
+          "www.ias.edu",
+          "gvrsf.ca",
+          "sciencefairs.ca",
+          "www.translink.ca",
+          "translink.ca",
+          "ubcproperties.com",
+          "mg-architecture.ca",
+        ].includes(u.hostname))
       ? u.href
       : null;
   } catch {
@@ -521,3 +589,79 @@ export function answerQuestion(
       .find((x) => x.score > 0)?.t ?? null
   );
 }
+
+Object.assign(displays, {
+  "hennings-info": {
+    building: "hennings",
+    name: "Physics & Astronomy",
+    description:
+      "Public teaching-space reconstruction. HENN 200 is documented as a 180-seat active-learning theatre. The tables, circulation and adjoining lobby here are interpreted, not an exact floor plan.",
+    links: [
+      link("HENN 200", "https://learningspaces.ubc.ca/classrooms/henn-200/"),
+    ],
+  },
+  "gym-info": {
+    building: "war-memorial",
+    name: "War Memorial Gym · A living memorial",
+    description:
+      "Opened in 1951 as a memorial to those who died in the World Wars. UBC’s current facility page lists 2,176 spectators. This basketball practice is fictional and is not a live game or schedule.",
+    links: [
+      link(
+        "Official facility and history",
+        "https://sportfacilities.ubc.ca/wmg/",
+      ),
+    ],
+  },
+});
+
+displays["nest-blue-chip"] = {
+  building: "nest",
+  name: "Blue Chip Café · Main floor, AMS Nest",
+  description:
+    "AMS-owned Blue Chip serves coffee, tea, cookies, baked goods and sandwiches. Its main-floor location is documented by AMS; the counter and fixtures here are reconstructed. Open the official page for current hours and menu information. No live menu, prices or ordering.",
+  links: [
+    link(
+      "Blue Chip · official hours and information",
+      "https://www.ams.ubc.ca/business/blue-chip-cafe/",
+    ),
+    link("UBC Food · Blue Chip", "https://food.ubc.ca/places/blue-chip-cafe/"),
+  ],
+};
+
+const fairLinks = [
+  link("GVRSF · previous Nest venue", "https://gvrsf.ca/students/faq/"),
+  link("GVRSF · current event information", "https://gvrsf.ca/"),
+];
+displays["gvrsf-info"] = {
+  building: "nest",
+  name: "GVRSF · Great Hall retrospective",
+  description:
+    "GVRSF’s published FAQ names the Great Hall at the AMS Nest as its venue, and AMS identifies the room as 2404 on Level 2. This original virtual fair recalls the Nest years, with fictional exhibits and participants. It is not a live event or an endorsed recreation. The organizer has announced the Life Sciences Institute for April 8–10, 2027; consult its website for current details.",
+  links: fairLinks,
+};
+[
+  [
+    "Solar energy",
+    "Fictional exhibit: compare the electrical output of identical solar cells at different angles while keeping light intensity and temperature as constant as possible. Repeat measurements and report variability. These are suggested experimental questions, not a real pupil’s project or measured findings.",
+  ],
+  [
+    "Clean water",
+    "Fictional exhibit: compare how different filter media change water clarity. Clear water is not necessarily safe to drink; this display does not test biological or chemical safety. Use repeated observations and distinguish appearance from water quality.",
+  ],
+  [
+    "Bridge design",
+    "Fictional exhibit: compare paper bridge shapes under gradually applied weights. Keep paper mass and span constant, repeat trials and record the load at deformation. The model shows an experimental idea, not a certified structural design.",
+  ],
+  [
+    "Biodiversity",
+    "Fictional exhibit: compare plant observations in equally sized sample plots. Record sampling effort, season and uncertainty. A larger count can reflect more observation rather than greater diversity; consistent methods make comparisons more useful.",
+  ],
+].forEach(
+  ([name, description], i) =>
+    (displays[`fair-${i}`] = {
+      building: "nest",
+      name,
+      description,
+      links: fairLinks,
+    }),
+);

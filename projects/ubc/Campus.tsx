@@ -1,4 +1,5 @@
 "use client";
+import { extendGeography } from "./extensions";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import {
@@ -31,6 +32,18 @@ import type { OrchardGeography } from "./residence-exterior";
 import { orchardAnchor, residenceVersion } from "./residence-layout";
 import { ResidenceGuide } from "./ResidenceGuide";
 import styles from "./campus.module.css";
+import { cameraModes, onFoot } from "./navigation";
+import { CampusMap } from "./CampusMap";
+import expansionAnchors from "./data/expansion-anchors.json" with { type: "json" };
+import { AppearancePanel } from "./AppearancePanel";
+import {
+  defaultAppearance,
+  normalizeAppearance,
+  appearanceStorageKey,
+  type Appearance,
+} from "./appearance";
+import { ProfilePanel, ReportProfile } from "./community/ProfilePanel";
+import { profileCharacter, type PublicProfile } from "./community/model";
 
 const version = "/ubc/v0.1-2026-10-30";
 function Links({ links }: { links: Link[] }) {
@@ -89,6 +102,48 @@ export function Campus() {
     [route, setRoute] = useState<Point[] | null>(null),
     [histories, setHistories] = useState<Record<string, Message[]>>({}),
     [question, setQuestion] = useState("");
+  const [appearance, setAppearance] = useState<Appearance>(defaultAppearance);
+  useEffect(() => {
+    if (ready) api.current?.appearance(appearance);
+  }, [ready, appearance]);
+  const updateAppearance = (value: Appearance) => {
+    setAppearance(value);
+    try {
+      localStorage.setItem(appearanceStorageKey, JSON.stringify(value));
+    } catch {
+      setNotice(
+        "Appearance changed for this visit; device storage is unavailable.",
+      );
+    }
+  };
+  const [community, setCommunity] = useState<PublicProfile[]>([]);
+  const communityCharacters = useMemo(
+    () => community.map(profileCharacter),
+    [community],
+  );
+  const allCharacters = useMemo(
+    () => [...characters, ...communityCharacters],
+    [communityCharacters],
+  );
+  const refreshCommunity = useCallback(() => {
+    void fetch("/api/ubc/community", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((v) => {
+        if (v?.profiles) setCommunity(v.profiles);
+      })
+      .catch(() => {
+        /* The campus remains usable if profiles are unavailable. */
+      });
+  }, []);
+  useEffect(() => {
+    if (!started) return;
+    refreshCommunity();
+    const timer = setInterval(refreshCommunity, 60000);
+    return () => clearInterval(timer);
+  }, [started, refreshCommunity]);
+  useEffect(() => {
+    if (ready) api.current?.community(communityCharacters);
+  }, [ready, communityCharacters]);
   useEffect(() => {
     dialogueRef.current?.lastElementChild?.scrollIntoView({ block: "start" });
   }, [histories]);
@@ -130,12 +185,14 @@ export function Campus() {
     ])
       .then(([module, world, locations, residence]) => {
         if (cancelled || !host.current) return;
-        setData(world);
+        const expandedWorld = extendGeography(world);
+        setData(expandedWorld);
+        Object.assign(locations, structuredClone(expansionAnchors));
         locations.orchard = { ...orchardAnchor };
         setAnchors(locations);
         engine = module.createCampus(
           host.current,
-          world,
+          expandedWorld,
           locations,
           (t) => {
             setTelemetry(t);
@@ -177,7 +234,7 @@ export function Campus() {
   useEffect(() => {
     api.current?.pause(
       !!panel,
-      characters.some((c) => c.id === panel) ? panel! : undefined,
+      allCharacters.some((c) => c.id === panel) ? panel! : undefined,
     );
     if (!panel) return;
     const previous = document.activeElement as HTMLElement;
@@ -212,7 +269,7 @@ export function Campus() {
       window.removeEventListener("keydown", key);
       (opener.current || previous)?.focus?.();
     };
-  }, [panel, ready]);
+  }, [panel, ready, allCharacters]);
   useEffect(() => {
     if (!expanded) return;
     const before = document.body.style.overflow;
@@ -223,13 +280,13 @@ export function Campus() {
   }, [expanded]);
   const changeMode = (m: Mode) => {
     setMode(m);
+    setNotice("");
     api.current?.setMode(m);
   };
   const update = (patch: Partial<Settings>) =>
     setSettings((s) => normalizeSettings({ ...s, ...patch }));
   const visit = (id: string) => {
     api.current?.visit(id);
-    setMode("walk");
     setPanel(null);
     setNotice(`Visiting the virtual ${titleOf(id)} area.`);
   };
@@ -244,7 +301,7 @@ export function Campus() {
     if (found) changeMode("map");
   };
   const selectedPlace = places.find((p) => p.id === panel),
-    character = characters.find((c) => c.id === panel),
+    character = allCharacters.find((c) => c.id === panel),
     display = panel ? displays[panel] : null,
     building = data?.buildings.find((b) => b.id === panel);
   const sp = solarPosition(settings.season, settings.hour),
@@ -261,9 +318,11 @@ export function Campus() {
       : {
           question: q,
           answer:
-            character.category === "fictional"
-              ? "This fictional student guide has no verified answer to that question. It cannot provide real testimonials, live room availability, housing guarantees or individual advice. Try a reviewed topic or open the official Housing sources."
-              : "This curated educational guide does not have a verified answer to that question. It cannot speak for the real person or provide personal opinions, live whereabouts or admissions promises. Try a topic below or open the official sources.",
+            character.category === "community"
+              ? "This participant has not supplied an answer to that question. Choose one of their written topics. This is not a live conversation."
+              : character.category === "fictional"
+                ? "This fictional student guide has no verified answer to that question. It cannot provide real testimonials, live room availability, housing guarantees or individual advice. Try a reviewed topic or open the official Housing sources."
+                : "This curated educational guide does not have a verified answer to that question. It cannot speak for the real person or provide personal opinions, live whereabouts or admissions promises. Try a topic below or open the official sources.",
           sources: character.sources,
         };
     setHistories((h) => ({
@@ -273,15 +332,6 @@ export function Campus() {
     setQuestion("");
   };
   const directory = [
-    ...characters.map((c) => ({
-      id: c.id,
-      name: c.name,
-      category:
-        c.category === "fictional"
-          ? "Fictional students"
-          : "Interactive professors",
-      detail: c.title,
-    })),
     ...places.map((p) => ({
       id: p.id,
       name: p.name,
@@ -317,7 +367,15 @@ export function Campus() {
   );
   const hold = (key: string, label: string) => (
     <button
-      aria-label={label}
+      aria-label={
+        key === "arrowleft"
+          ? "Turn left"
+          : key === "arrowright"
+            ? "Turn right"
+            : key === "shift"
+              ? "Run (hold while moving)"
+              : label
+      }
       onPointerDown={(e) => {
         e.preventDefault();
         e.currentTarget.setPointerCapture(e.pointerId);
@@ -370,6 +428,15 @@ export function Campus() {
             <button
               className={styles.primary}
               onClick={() => {
+                try {
+                  setAppearance(
+                    normalizeAppearance(
+                      JSON.parse(
+                        localStorage.getItem(appearanceStorageKey) || "null",
+                      ),
+                    ),
+                  );
+                } catch {}
                 setStarted(true);
                 setExpanded(true);
               }}
@@ -488,22 +555,20 @@ export function Campus() {
                     style={{ left: `${m.x}%`, top: `${m.y}%` }}
                     onClick={() => openPanel(m.id)}
                   >
-                    <span>
-                      {characters.some((c) => c.id === m.id) ? "◎" : "i"}
-                    </span>
+                    <span>i</span>
                     <strong>{m.name}</strong>
                   </button>
                 ))}
               <div className={styles.dock}>
                 <div role="group" aria-label="Camera mode">
-                  {(["walk", "aerial", "map"] as const).map((m, i) => (
+                  {cameraModes.map(({ id: m, label, icon }) => (
                     <button
                       key={m}
                       aria-pressed={mode === m}
                       onClick={() => changeMode(m)}
                     >
-                      <span aria-hidden="true">{["↟", "⌁", "▧"][i]}</span>
-                      {m[0].toUpperCase() + m.slice(1)}
+                      <span aria-hidden="true">{icon}</span>
+                      {label}
                     </button>
                   ))}
                 </div>
@@ -516,15 +581,62 @@ export function Campus() {
               </div>
               <div className={styles.status}>
                 <span>
-                  {mode === "walk"
-                    ? "WASD to walk · Drag to look · E to interact"
+                  {onFoot(mode)
+                    ? "WASD move · Shift run · Drag or ←/→ turn · V change view"
                     : mode === "aerial"
                       ? "Drag to orbit · Right-drag to pan · Scroll to zoom"
                       : "North up · Select a campus destination"}
                 </span>
                 <span>Unofficial · Reference reconstructions</span>
               </div>
-              {mode === "walk" && (
+              {onFoot(mode) && telemetry?.guidance && (
+                <section className={styles.gps} aria-label="Walking guide">
+                  <span
+                    className={styles.gpsArrow}
+                    aria-hidden="true"
+                    style={{
+                      transform: `rotate(${telemetry.guidance.turn}deg)`,
+                    }}
+                  >
+                    ↑
+                  </span>
+                  <div>
+                    <strong>{telemetry.guidance.label}</strong>
+                    <span>
+                      {telemetry.guidance.status === "arrived"
+                        ? "You’ve arrived"
+                        : `${Math.round(telemetry.guidance.distance)} m remaining`}
+                    </span>
+                    <small>
+                      {telemetry.guidance.status === "exit-building"
+                        ? "Exit the building to follow the outdoor path"
+                        : telemetry.guidance.status === "off-route"
+                          ? "Off route · follow the arrow back to the path"
+                          : telemetry.guidance.status === "arrived"
+                            ? "Explore freely or choose another destination"
+                            : "Follow the highlighted walking path"}
+                    </small>
+                  </div>
+                  <button
+                    aria-label="Recalculate walking route"
+                    onClick={() => {
+                      if (!api.current?.recalculate())
+                        setNotice(
+                          "No connected route from here. Return to the highlighted path.",
+                        );
+                    }}
+                  >
+                    ↻
+                  </button>
+                  <button
+                    aria-label="Stop walking guide"
+                    onClick={() => api.current?.clearRoute()}
+                  >
+                    ×
+                  </button>
+                </section>
+              )}
+              {onFoot(mode) && (
                 <>
                   <span className={styles.reticle} aria-hidden="true">
                     ·
@@ -532,12 +644,12 @@ export function Campus() {
                   <div className={styles.touch}>
                     <div className={styles.dpad}>
                       {hold("w", "↑")}
-                      {hold("a", "←")}
+                      {hold("arrowleft", "↶")}
                       {hold("s", "↓")}
-                      {hold("d", "→")}
+                      {hold("arrowright", "↷")}
                     </div>
                     <div>
-                      {hold("shift", "Faster")}
+                      {hold("shift", "Run")}
                       <button
                         onClick={() =>
                           telemetry?.nearby &&
@@ -556,10 +668,9 @@ export function Campus() {
                       E &nbsp;{" "}
                       {telemetry.nearbyLabel || (
                         <>
-                          {characters.some((c) => c.id === telemetry.nearby)
-                            ? "Talk to"
-                            : "Explore"}{" "}
-                          {titleOf(telemetry.nearby)}
+                          {allCharacters.some((c) => c.id === telemetry.nearby)
+                            ? "Talk"
+                            : `Explore ${titleOf(telemetry.nearby)}`}
                         </>
                       )}
                     </button>
@@ -575,6 +686,23 @@ export function Campus() {
               pose={telemetry ? [telemetry.pose.x, telemetry.pose.z] : [0, 0]}
               route={route}
               onSelect={openPanel}
+              resolve={(p) => api.current?.mapPoint(p) || null}
+              onTravel={(p) => {
+                if (!api.current?.travelTo(p))
+                  setNotice("No safe outdoor path was found near that spot.");
+                else setNotice("Moved to the selected outdoor path.");
+              }}
+              onGuide={(p, name) => {
+                if (api.current?.guideTo(p, name)) {
+                  api.current.resumeWalk();
+                  setNotice(
+                    "Follow the walking guide and highlighted path. This is virtual campus guidance.",
+                  );
+                } else
+                  setNotice(
+                    "No connected walking route was found. Choose a closer path or use Go here.",
+                  );
+              }}
             />
           )}
           {photo && (
@@ -626,9 +754,13 @@ export function Campus() {
                 value={mode}
                 onChange={(e) => changeMode(e.target.value as Mode)}
               >
-                {["walk", "aerial"].map((m) => (
-                  <option key={m}>{m}</option>
-                ))}
+                {cameraModes
+                  .filter((m) => m.id !== "map")
+                  .map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.label}
+                    </option>
+                  ))}
               </select>
               <button
                 onClick={() => setCaptured(api.current?.capture() || null)}
@@ -673,7 +805,10 @@ export function Campus() {
         </>
       )}
       {notice && !panel && !photo && (
-        <div className={styles.notice} role="status">
+        <div
+          className={`${styles.notice} ${mode === "map" ? styles.mapNotice : ""}`}
+          role="status"
+        >
           {notice}
           <button aria-label="Dismiss notice" onClick={() => setNotice("")}>
             ×
@@ -693,7 +828,10 @@ export function Campus() {
                 ? "Campus directory"
                 : panel === "settings"
                   ? "Atmosphere settings"
-                  : titleOf(panel)
+                  : allCharacters.find((c) => c.id === panel)?.name ||
+                    (panel === "appearance"
+                      ? "Your appearance"
+                      : titleOf(panel))
             }
             onClick={(e) => e.stopPropagation()}
           >
@@ -708,18 +846,36 @@ export function Campus() {
                 pose={telemetry?.pose}
                 close={() => setPanel(null)}
               />
+            ) : panel === "appearance" ? (
+              <AppearancePanel
+                value={appearance}
+                onChange={updateAppearance}
+                onPreview={() => {
+                  changeMode("third");
+                  setPanel(null);
+                }}
+              />
+            ) : panel === "profile" ? (
+              <ProfilePanel onChange={refreshCommunity} />
             ) : panel === "directory" ? (
               <>
                 <h2>Find your place.</h2>
+                <button onClick={() => setPanel("appearance")}>
+                  Customize my appearance
+                </button>
+                <button onClick={() => setPanel("profile")}>
+                  Create or manage my character
+                </button>
                 <p>
-                  Search the campus, enterable buildings and educational guides.
+                  Search campus places and enterable buildings. Meet people as
+                  you explore.
                 </p>
                 <label className={styles.search}>
                   Search campus
                   <input
                     autoFocus
                     type="search"
-                    placeholder="Try Bookstore or Greg Werker"
+                    placeholder="Try Bookstore or Orchard Commons"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                   />
@@ -732,8 +888,6 @@ export function Campus() {
                   {[
                     "All",
                     "Enterable buildings",
-                    "Interactive professors",
-                    "Fictional students",
                     "Residences",
                     "Athletics",
                     "Faculties",
@@ -897,9 +1051,11 @@ export function Campus() {
             ) : character ? (
               <>
                 <span className={styles.badge}>
-                  {character.category === "fictional"
-                    ? "FICTIONAL STUDENT GUIDE"
-                    : "EDUCATIONAL SIMULATION"}
+                  {character.category === "community"
+                    ? "PLAYER-WRITTEN PUBLIC PROFILE"
+                    : character.category === "fictional"
+                      ? "FICTIONAL STUDENT GUIDE"
+                      : "EDUCATIONAL SIMULATION"}
                 </span>
                 <h2>{character.name}</h2>
                 <p className={styles.lead}>{character.title}</p>
@@ -907,19 +1063,13 @@ export function Campus() {
                 <p className={styles.disclaimer}>
                   {character.disclaimer} This character’s location is simulated.
                 </p>
-                <div className={styles.actions}>
-                  <button onClick={() => visit(character.id)}>
-                    Find {character.name}
-                  </button>
-                  <button onClick={() => directions(character.id)}>
-                    Show route
-                  </button>
-                </div>
                 <h3>Let’s explore a question.</h3>
                 <p>
-                  {character.category === "fictional"
-                    ? "Curated residence information, not a real student's testimonial."
-                    : "Responses are curated educational summaries, not the person’s words."}
+                  {character.category === "community"
+                    ? "Answers below were written by this participant. They are not independently verified."
+                    : character.category === "fictional"
+                      ? "Curated residence information, not a real student's testimonial."
+                      : "Responses are curated educational summaries, not the person’s words."}
                 </p>
                 <div
                   className={styles.dialogue}
@@ -930,7 +1080,11 @@ export function Campus() {
                     <article key={i}>
                       <strong>You · {m.question}</strong>
                       <p>
-                        <small>EDUCATIONAL GUIDE</small>
+                        <small>
+                          {character.category === "community"
+                            ? "PARTICIPANT’S WRITTEN ANSWER"
+                            : "EDUCATIONAL GUIDE"}
+                        </small>
                         {m.answer}
                       </p>
                       <Links links={m.sources} />
@@ -979,9 +1133,16 @@ export function Campus() {
                   <button type="submit">Ask the curated guide</button>
                 </form>
                 <Links links={character.sources} />
+                {character.category === "community" && (
+                  <ReportProfile
+                    key={character.id}
+                    id={character.id.slice("community-".length)}
+                  />
+                )}
                 <small>
-                  Verified {character.verified} · Original stylized character;
-                  no likeness or voice imitation.
+                  {character.category === "community" ? "Updated" : "Verified"}{" "}
+                  {character.verified} · Original stylized character; no
+                  likeness or voice imitation.
                 </small>
               </>
             ) : selectedPlace ? (
@@ -1090,9 +1251,24 @@ export function Campus() {
                 </p>
                 <dl className={styles.help}>
                   <dt>Move</dt>
-                  <dd>WASD or arrow keys. Hold Shift for faster walking.</dd>
-                  <dt>Look</dt>
-                  <dd>Drag the scene, or use mouse-look lock.</dd>
+                  <dd>
+                    W/S move forward/back; A/D move sideways. Hold Shift to run
+                    (5.5 m/s).
+                  </dd>
+                  <dt>Turn and look</dt>
+                  <dd>
+                    Click and hold the scene, then drag left/right to turn or
+                    up/down to look. Left/right arrow keys also turn; up/down
+                    arrows move. Mouse-look lock lets you turn without holding a
+                    button.
+                  </dd>
+                  <dt>First / third person</dt>
+                  <dd>
+                    Select a labelled camera button or press V. Third person
+                    follows your visible visitor; the camera moves closer and
+                    hides the visitor in tight spaces. Your position stays the
+                    same.
+                  </dd>
                   <dt>Interact</dt>
                   <dd>
                     Press E near an information point or guide; click a building
@@ -1100,15 +1276,20 @@ export function Campus() {
                   </dd>
                   <dt>Map</dt>
                   <dd>
-                    Press M or select Map. Switching views preserves your
-                    walking position.
+                    Press M or select Map. Click or tap a spot, then Go here for
+                    immediate travel or Guide me for a walking route. Map arrow
+                    keys move a selection; Enter marks it. Switching views
+                    preserves your walking position.
                   </dd>
                   <dt>Aerial</dt>
                   <dd>
                     Drag to orbit, right-drag to pan, scroll or pinch to zoom.
                   </dd>
                   <dt>Touch</dt>
-                  <dd>Hold the arrow controls and drag the scene to look.</dd>
+                  <dd>
+                    Hold ↑/↓ to move, ↶/↷ to turn, and Run while moving to run.
+                    You can also drag the scene to look.
+                  </dd>
                   <dt>Release</dt>
                   <dd>
                     Esc releases the pointer or closes an information panel.
@@ -1140,10 +1321,12 @@ export function Campus() {
                   Official campus footprints, landscape surfaces and trees
                   provide the setting. Original procedural reconstructions focus
                   on the baseball precinct, Rose training hall, Sauder lobby,
-                  Bookstore, Nest and Orchard Commons. Orchard includes a lobby,
-                  one demonstration floor, eight fictional bedrooms, five shared
-                  bathrooms and three fictional student guides. Other buildings
-                  are simplified exterior context.
+                  Bookstore, Nest, Hennings, War Memorial Gym and Orchard
+                  Commons. The Nest includes Blue Chip and a retrospective GVRSF
+                  fair in a Level 2 Great Hall reconstruction. Orchard includes
+                  a lobby, one demonstration floor, eight fictional bedrooms,
+                  five shared bathrooms and three fictional student guides.
+                  Other buildings are simplified exterior context.
                 </p>
                 <h3>What remains approximate</h3>
                 <p>
@@ -1164,6 +1347,22 @@ export function Campus() {
                   included.
                 </p>
                 <Links links={[sources.geo, sources.map]} />
+                <h3>Transit and road attribution</h3>
+                <p>
+                  Route and arrival data used in this product or service is
+                  provided by permission of TransLink. TransLink assumes no
+                  responsibility for the accuracy or currency of the Data used
+                  in this product or service.
+                </p>
+                <p>
+                  Buses use published 25, 33 and 49 route geometry and
+                  destination numbers; movement and passengers are simulated,
+                  with no timetable or live positions. Original vehicle meshes
+                  use representative colours, without operator logos. West 10th
+                  road geometry contains information licensed under the Open
+                  Government Licence – Vancouver; pavement width and surrounding
+                  scenery are approximate.
+                </p>
                 <a
                   href={`${version}/manifest.json`}
                   target="_blank"
@@ -1172,9 +1371,12 @@ export function Campus() {
                   Data provenance, hashes and reconstruction notes ↗
                 </a>
                 <p>
-                  All characters and population patterns are simulated. No
-                  personal information, live faculty whereabouts or live
-                  occupancy is collected.
+                  All character positions and population patterns are simulated.
+                  Optional community profiles publish only the information
+                  participants submit about themselves. Their profile form
+                  explains storage, reporting and removal. Appearance
+                  preferences stay in this browser. No real whereabouts or live
+                  occupancy are collected.
                 </p>
               </>
             )}
@@ -1182,159 +1384,5 @@ export function Campus() {
         </div>
       )}
     </section>
-  );
-}
-function CampusMap({
-  data,
-  anchors,
-  pose,
-  route,
-  onSelect,
-}: {
-  data: CampusData;
-  anchors: Anchors;
-  pose: Point;
-  route: Point[] | null;
-  onSelect: (id: string) => void;
-}) {
-  const [zoom, setZoom] = useState(1),
-    [center, setCenter] = useState<Point>([0, -150]);
-  const w = 2800 / zoom,
-    h = 3300 / zoom;
-  const geometry = useMemo(() => {
-    const path = (rings: Point[][]) =>
-      rings.map((r) => `M${r.map((p) => p.join(",")).join("L")}Z`).join("");
-    return (
-      <>
-        {data.surfaces.map((s) => (
-          <path
-            key={s.id}
-            d={path(s.rings)}
-            fill={
-              /road|parking|drive/i.test(s.kind)
-                ? "#babdb5"
-                : /lawn|grass|plant|forest|wild|garden|farm/i.test(s.kind)
-                  ? "#bfcbb0"
-                  : "#d7d9cd"
-            }
-            fillRule="evenodd"
-          />
-        ))}
-        {data.buildings.map((b) => (
-          <path
-            key={b.id}
-            d={path(b.rings)}
-            fill="#9ca9a3"
-            stroke="#eef0e5"
-            strokeWidth="1"
-            fillRule="evenodd"
-            onClick={() => onSelect(b.id)}
-          >
-            <title>{b.name}</title>
-          </path>
-        ))}
-      </>
-    );
-  }, [data, onSelect]);
-  return (
-    <div className={styles.map}>
-      <div className={styles.mapLegend}>
-        <strong>Campus atlas</strong>
-        <span>↑ NORTH</span>
-        <small>● Enterable reconstruction &nbsp; ○ Exterior context</small>
-      </div>
-      <svg
-        aria-label="Geographic campus map"
-        role="img"
-        viewBox={`${center[0] - w / 2} ${center[1] - h / 2} ${w} ${h}`}
-      >
-        <rect x="-2500" y="-2500" width="5000" height="5000" fill="#e3e7db" />
-        {geometry}
-        {route && (
-          <polyline
-            points={route.map((p) => p.join(",")).join(" ")}
-            stroke="#ad6e22"
-            strokeWidth="5"
-            fill="none"
-          />
-        )}
-        {places.map((p) => {
-          const a = anchors[p.id];
-          return a ? (
-            <g
-              key={p.id}
-              role="button"
-              tabIndex={0}
-              aria-label={p.name}
-              onClick={() => onSelect(p.id)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  onSelect(p.id);
-                }
-              }}
-            >
-              <circle
-                cx={a.x}
-                cy={a.z}
-                r={15 / zoom}
-                fill={p.interior === "B" ? "#174c46" : "#f1f2e8"}
-                stroke="#174c46"
-                strokeWidth="3"
-              />
-              <text
-                x={a.x + 24 / zoom}
-                y={a.z + 5 / zoom}
-                fontSize={19 / zoom}
-                fill="#203a34"
-              >
-                {p.name.replace("UBC ", "")}
-              </text>
-              <title>{p.name}</title>
-            </g>
-          ) : null;
-        })}
-        <circle
-          cx={pose[0]}
-          cy={pose[1]}
-          r={11 / zoom}
-          fill="#d08235"
-          stroke="white"
-          strokeWidth="5"
-        />
-        <text
-          x={pose[0]}
-          y={pose[1] - 22 / zoom}
-          textAnchor="middle"
-          fontSize={20 / zoom}
-          fill="#684019"
-        >
-          You are here
-        </text>
-      </svg>
-      <div className={styles.mapControls}>
-        <button
-          aria-label="Zoom in map"
-          onClick={() => setZoom((z) => Math.min(4, z * 1.4))}
-        >
-          +
-        </button>
-        <button
-          aria-label="Zoom out map"
-          onClick={() => setZoom((z) => Math.max(0.7, z / 1.4))}
-        >
-          −
-        </button>
-        <button onClick={() => setCenter(pose)}>Find me</button>
-        <button
-          onClick={() => {
-            setCenter([0, -150]);
-            setZoom(1);
-          }}
-        >
-          Campus
-        </button>
-      </div>
-    </div>
   );
 }

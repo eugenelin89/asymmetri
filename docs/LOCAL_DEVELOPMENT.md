@@ -340,3 +340,14 @@ Orchard V0.2 uses the same UBC port/start flow. Search Orchard Commons, Visit
 entrance, walk inside and use Residence guide. Doors support E/tap; step clear
 of a moving leaf. Call the lift, board fully and use Ride. No room teleport is
 needed. Stop the task-owned local server when validation finishes.
+
+UBC V0.3 adds First person / Third person (V), Shift to run, and left/right arrows
+to turn. Map selections offer Go here or Guide me. Test against local `/labs/ubc`;
+use ordinary controls and visible map/floor-guide positions for browser acceptance.
+
+For UBC V0.3 optional profiles, launch Next with a disposable absolute private
+`UBC_PROFILE_DIR` as described in [community operations](UBC_COMMUNITY_OPERATIONS.md).
+Without it, profile APIs return an explicit unconfigured 503; ordinary exploration
+still works. Never store recovery codes or profile state in Git/public assets.
+Source-directory research parsers need a separate BeautifulSoup environment, not
+an application dependency installation. See the [V0.3 report](UBC_CAMPUS_LIFE_V03.md).

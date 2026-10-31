@@ -738,3 +738,19 @@ distinct from illustrative rooms. Maya, Leo and Ari are fictional guides, not re
 residents, testimonials or live representatives. Refresh official sources/dates
 together. The courtyard entry is geographically sourced, not the measured main
 front-desk entrance. No live prices, availability, assignments or booking.
+
+## UBC character discovery
+
+Do not publish a character roster in campus search, maps, floor guides or landing
+copy. People introduce themselves in a proximity-triggered conversation. Keep
+identity/source records and simulation disclaimers inside that conversation,
+with no Find or route-to-person action. This supersedes the earlier named-directory
+requirement; historical release reports remain evidence of their original builds.
+
+UBC V0.3 distinguishes professional-source summaries, season-specific roster entries,
+historical/alumni guests and participant-written self profiles. People are never
+listed in the destination directory or map. Preserve encounter-only identity,
+source dates and simulation disclosures. Do not describe partial faculty coverage
+as all UBC personnel, roster entries as live eligibility, or a reconstructed Nest
+fair as the announced 2027 event. Do not copy portraits, logos, student work or
+private-room information. [Scope and sources](UBC_CAMPUS_LIFE_V03.md).

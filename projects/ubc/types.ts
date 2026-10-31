@@ -1,5 +1,5 @@
 export type Point = [number, number];
-export type Mode = "walk" | "aerial" | "map";
+export type Mode = "walk" | "third" | "aerial" | "map";
 export type Season = "spring" | "summer" | "autumn" | "winter";
 export type Weather = "clear" | "cloudy" | "overcast" | "rain" | "fog" | "snow";
 export type Quality = "auto" | "ultra" | "high" | "medium" | "low";
@@ -74,11 +74,18 @@ export type Character = {
   department: string;
   institution: string;
   label: string;
-  category: "named" | "fictional";
+  category: "named" | "fictional" | "community";
+  color?: string;
+  uniform?: string;
+  jerseyNumber?: string;
+  height?: number;
+  appearance?: import("./appearance").Appearance;
+  beard?: boolean;
+  kind?: "athlete" | "faculty" | "alumni" | "historical" | "coach";
   model: string;
   zone: string;
   route: Point[];
-  routeSpace?: "interior";
+  routeSpace?: "interior" | "network";
   floor?: number;
   behaviour: string;
   topics: Topic[];
@@ -107,4 +114,10 @@ export type Telemetry = {
   triangles: number;
   loaded: number;
   routeDistance: number | null;
+  guidance: {
+    label: string;
+    distance: number;
+    turn: number;
+    status: "following" | "off-route" | "arrived" | "exit-building";
+  } | null;
 };

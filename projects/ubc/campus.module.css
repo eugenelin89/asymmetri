@@ -798,6 +798,104 @@
   color: #2b4d36;
   border-color: #a4b295;
 }
+.mapInstructions {
+  position: absolute;
+  left: 25px;
+  bottom: 85px;
+  max-width: calc(100% - 50px);
+  margin: 0;
+  font-size: 11px;
+  background: #f4f6eeed;
+  padding: 7px 10px;
+  pointer-events: none;
+}
+.mapDestination {
+  position: absolute;
+  left: 25px;
+  bottom: 130px;
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  width: min(390px, calc(100% - 50px));
+  background: #f4f6eef5;
+  border: 1px solid #a4b295;
+  border-radius: 8px;
+}
+.mapDestination small {
+  font-size: 11px;
+}
+.mapDestination > div {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mapDestination button {
+  background: #234b40;
+  color: white;
+  font-size: 12px;
+}
+.mapDestination button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.gps {
+  position: absolute;
+  z-index: 6;
+  top: 165px;
+  left: 25px;
+  max-width: min(460px, calc(100% - 50px));
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f1f2e8;
+  background: #183c35ed;
+  border: 1px solid #c9d1b766;
+  border-radius: 8px;
+}
+.gpsArrow {
+  font-size: 30px;
+  flex-shrink: 0;
+}
+.gps > div {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+.gps strong {
+  font-size: 12px;
+}
+.gps span:not(.gpsArrow),
+.gps small {
+  font-size: 11px;
+}
+.gps button {
+  padding: 5px 9px;
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .gps {
+    top: 184px;
+    left: 12px;
+    max-width: calc(100% - 24px);
+    gap: 7px;
+  }
+  .mapDestination {
+    bottom: 183px;
+    left: 12px;
+    width: calc(100% - 24px);
+  }
+  .mapInstructions {
+    left: 12px;
+    bottom: 103px;
+    max-width: calc(100% - 24px);
+    font-size: 9px;
+  }
+  .mapControls {
+    bottom: 145px;
+    right: 12px;
+  }
+}
 .panel details {
   font-size: 11px;
   margin-top: 30px;
@@ -1023,11 +1121,23 @@
   }
   .dock {
     bottom: 45px;
+    width: calc(100% - 24px);
+    gap: 6px;
+  }
+  .dock > div {
+    flex: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.8fr 0.65fr;
+  }
+  .dock button > span {
+    display: none;
   }
   .dock button {
-    min-width: 70px;
+    min-width: 0;
     font-size: 11px;
-    padding: 8px;
+    padding: 5px;
+    min-height: 44px;
   }
   .dock > button {
     min-width: 38px;
@@ -1186,3 +1296,82 @@
   background: #f4f1e6;
   border-radius: 0.6rem;
 }
+
+.notice.mapNotice {
+  top: 285px;
+  bottom: auto;
+}
+@media (max-height: 520px) {
+  .mapLegend {
+    display: none;
+  }
+  .mapDestination {
+    bottom: 90px;
+    max-width: 360px;
+  }
+  .mapInstructions {
+    display: none;
+  }
+  .notice.mapNotice {
+    top: 115px;
+    left: auto;
+    right: 12px;
+    width: 280px;
+  }
+  .gps {
+    top: 115px;
+    max-width: 400px;
+  }
+}
+
+.profileForm fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.profileForm label {
+  display: grid;
+  gap: 7px;
+  margin: 14px 0;
+  font-size: 13px;
+}
+.profileForm input:not([type="checkbox"]),
+.profileForm textarea,
+.profileForm select,
+.recovery textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px;
+  border: 1px solid #9baca2;
+  background: #fffdf6;
+  color: #183c35;
+  border-radius: 4px;
+  font: inherit;
+}
+.profileForm textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.profileForm .check {
+  display: flex;
+  align-items: flex-start;
+}
+.profileForm .check input {
+  margin-top: 3px;
+  flex: 0 0 auto;
+}
+.recovery {
+  padding: 15px;
+  background: #ece2bc;
+  border-radius: 6px;
+}
+.recovery textarea {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  min-height: 75px;
+}
+
+.appearanceField { display: grid; gap: .45rem; margin: 1rem 0; }
+.appearanceField select { width: 100%; min-height: 44px; }
+.appearancePreview { display: flex; gap: .5rem; }
+.appearancePreview span { display: grid; place-content: end center; width: 25%; height: 64px; border-radius: 8px; color: white; text-shadow: 0 1px 3px black, 0 0 5px black; font-size: .75rem; padding: .4rem; }

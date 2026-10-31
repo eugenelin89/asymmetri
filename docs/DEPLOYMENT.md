@@ -1493,3 +1493,20 @@ predecessor. No new hosting, OS, DNS, TLS or unrelated service change is in scop
 `UBC_ORCHARD_MVR_2026-10-31.md` records local acceptance and release status. Verify
 actual live source/build before staging; documentation or CI success alone is not
 deployment. Preserve all published UBC and city datasets.
+
+## UBC campus life V0.3
+
+The [V0.3 implementation](UBC_CAMPUS_LIFE_V03.md) adds two public-space interiors,
+visitor navigation, ambient activity and an explicitly requested opt-in profile
+backend. Build/test the exact reviewed source through the existing Linux candidate
+workflow. Use a new independent candidate and retain the complete V0.2 runtime.
+Production activation must be recorded separately after verification; source push
+alone is not a deployment.
+
+Follow [profile operations](UBC_COMMUNITY_OPERATIONS.md): provision the private
+persistent store outside every release directory, preserve its data on rollback,
+and compare all prior configuration hashes plus the one expected systemd drop-in.
+Check public GET projection, ownership isolation, CSRF rejection and no-store
+headers in addition to protected Motion/city routes and immutable asset digests.
+No profile data, private recovery codes or local test fixtures belong in Git or
+public deployment artifacts.

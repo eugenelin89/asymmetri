@@ -1,5 +1,7 @@
+import { uniform, sphere, material } from "./props";
 import * as THREE from "three";
-import type { Anchors, CampusData, Point } from "./types";
+import type { Appearance } from "./appearance";
+import type { Anchors, CampusData, Point, Character } from "./types";
 import { characters } from "./registry";
 import { global } from "./spatial";
 import { random } from "./scenery";
@@ -14,34 +16,45 @@ export type Actor = {
   arms: THREE.Group[];
   named: boolean;
 };
-function person(id: string, n: number, named: boolean) {
+export function person(
+  id: string,
+  n: number,
+  named: boolean,
+  color?: string,
+  appearance?: Appearance,
+) {
   const student = id.startsWith("student-");
   const g = new THREE.Group();
   g.userData.info = id;
   const skin = new THREE.MeshStandardMaterial({
-    color: new THREE.Color().setHSL(0.065, 0.24, 0.35 + random(n + 2) * 0.4),
+    color:
+      appearance?.skin ||
+      new THREE.Color().setHSL(0.065, 0.24, 0.35 + random(n + 2) * 0.4),
     roughness: 0.9,
   });
   const shirt = new THREE.MeshStandardMaterial({
-    color: student
-      ? {
-          "student-science": 0x507d7b,
-          "student-engineering": 0xb18b51,
-          "student-business": 0x985f4d,
-        }[id] || 0x537574
-      : named
-        ? id === "werker"
-          ? 0x49545f
-          : 0x243e4e
-        : new THREE.Color().setHSL(
-            random(n) * 0.9,
-            0.22,
-            0.24 + random(n + 3) * 0.28,
-          ),
+    color:
+      appearance?.shirt ||
+      color ||
+      (student
+        ? {
+            "student-science": 0x507d7b,
+            "student-engineering": 0xb18b51,
+            "student-business": 0x985f4d,
+          }[id] || 0x537574
+        : named
+          ? id === "werker"
+            ? 0x49545f
+            : 0x243e4e
+          : new THREE.Color().setHSL(
+              random(n) * 0.9,
+              0.22,
+              0.24 + random(n + 3) * 0.28,
+            )),
     roughness: 0.9,
   });
   const pants = new THREE.MeshStandardMaterial({
-    color: 0x333e43,
+    color: appearance?.trousers || 0x333e43,
     roughness: 0.95,
   });
   function mesh(
@@ -58,25 +71,78 @@ function person(id: string, n: number, named: boolean) {
     parent.add(m);
     return m;
   }
-  mesh(new THREE.CapsuleGeometry(0.22, 0.44, 3, 7), shirt, g, 0, 1.12, 0);
-  mesh(new THREE.SphereGeometry(0.145, 10, 8), skin, g, 0, 1.63, 0);
-  mesh(
-    new THREE.SphereGeometry(0.149, 10, 7, 0, Math.PI * 2, 0, 1.4),
-    new THREE.MeshStandardMaterial({
-      color: named && !student ? 0x7d7a70 : 0x3f352f,
-    }),
+  const torso = mesh(
+    new THREE.CapsuleGeometry(0.22, 0.44, 3, 7),
+    shirt,
     g,
     0,
-    1.66,
+    1.12,
     0,
   );
+  torso.scale.x =
+    appearance?.presentation === "Feminine"
+      ? 0.86
+      : appearance?.presentation === "Masculine"
+        ? 1.08
+        : 1;
+  const shoeMaterial = new THREE.MeshStandardMaterial({
+    color: appearance?.shoes || 0x273039,
+    roughness: 0.8,
+  });
+  const hairMaterial = new THREE.MeshStandardMaterial({
+    color: appearance?.hair || (named && !student ? 0x7d7a70 : 0x3f352f),
+  });
+  if (appearance?.outfit === "Hoodie")
+    mesh(new THREE.SphereGeometry(0.2, 10, 8), shirt, g, 0, 1.38, -0.08);
+  if (appearance?.outfit === "Jacket")
+    mesh(new THREE.BoxGeometry(0.018, 0.5, 0.015), pants, g, 0, 1.12, 0.222);
+  mesh(new THREE.SphereGeometry(0.145, 10, 8), skin, g, 0, 1.63, 0);
+  if (appearance?.hairstyle !== "Bald")
+    mesh(
+      new THREE.SphereGeometry(0.149, 10, 7, 0, Math.PI * 2, 0, 1.4),
+      hairMaterial,
+      g,
+      0,
+      1.66,
+      0,
+    );
+  if (appearance?.hairstyle === "Long")
+    mesh(
+      new THREE.CapsuleGeometry(0.14, 0.28, 3, 9),
+      hairMaterial,
+      g,
+      0,
+      1.48,
+      -0.09,
+    );
+  if (appearance?.hairstyle === "Curly")
+    for (let i = 0; i < 10; i++)
+      mesh(
+        new THREE.SphereGeometry(0.07, 6, 5),
+        hairMaterial,
+        g,
+        Math.cos(i * 2.4) * 0.13,
+        1.71 + Math.sin(i * 1.7) * 0.055,
+        Math.sin(i * 2.4) * 0.13,
+      );
   const legs: THREE.Group[] = [],
     arms: THREE.Group[] = [];
   for (const x of [-0.115, 0.115]) {
     const leg = new THREE.Group();
     leg.position.set(x, 0.83, 0);
     mesh(new THREE.CapsuleGeometry(0.075, 0.6, 2, 6), pants, leg, 0, -0.32, 0);
-    mesh(new THREE.BoxGeometry(0.16, 0.09, 0.27), pants, leg, 0, -0.76, 0.04);
+    mesh(
+      new THREE.BoxGeometry(
+        0.16,
+        appearance?.footwear === "Boots" ? 0.18 : 0.09,
+        0.27,
+      ),
+      shoeMaterial,
+      leg,
+      0,
+      appearance?.footwear === "Boots" ? -0.71 : -0.76,
+      0.04,
+    );
     g.add(leg);
     legs.push(leg);
     const arm = new THREE.Group();
@@ -86,7 +152,7 @@ function person(id: string, n: number, named: boolean) {
     g.add(arm);
     arms.push(arm);
   }
-  if (!named || student)
+  if ((!named || student) && !appearance)
     mesh(
       new THREE.BoxGeometry(0.3, 0.42, 0.17),
       new THREE.MeshStandardMaterial({ color: 0x897660 }),
@@ -114,28 +180,124 @@ export function createPeople(
 ) {
   const group = new THREE.Group(),
     actors: Actor[] = [];
-  for (const c of characters) {
+  function hash(value: string) {
+    let n = 2166136261;
+    for (const ch of value) n = Math.imul(n ^ ch.charCodeAt(0), 16777619);
+    return n >>> 0;
+  }
+  const routeCache = new Map<
+    string,
+    { a: Point; b: Point; distance: number }[]
+  >();
+  function networkRoute(c: Character): Point[] {
     const a = anchors[c.zone];
-    if (!a) continue;
+    if (!a) return [];
+    const segments = routeCache.get(c.zone) || [];
+    if (!routeCache.has(c.zone)) {
+      for (const r of data.routes)
+        for (let i = 1; i < r.points.length; i++) {
+          const p = r.points[i - 1],
+            q = r.points[i],
+            distance = Math.hypot(
+              (p[0] + q[0]) / 2 - a.x,
+              (p[1] + q[1]) / 2 - a.z,
+            );
+          if (
+            distance < 175 &&
+            Math.hypot(p[0] - q[0], p[1] - q[1]) > 5 &&
+            !isBlocked(p, 0) &&
+            !isBlocked(q, 0)
+          ) {
+            let clear = true;
+            const length = Math.hypot(p[0] - q[0], p[1] - q[1]);
+            for (let t = 0; t <= 1; t += Math.min(1, 1 / length))
+              if (
+                isBlocked(
+                  [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t],
+                  0,
+                )
+              ) {
+                clear = false;
+                break;
+              }
+            if (clear) segments.push({ a: p, b: q, distance });
+          }
+        }
+      segments.sort((a, b) => a.distance - b.distance);
+      routeCache.set(c.zone, segments);
+    }
+    if (!segments.length) return [];
+    const seed = hash(c.id),
+      segment = segments[seed % Math.min(60, segments.length)],
+      t = 0.1 + ((seed % 1009) / 1009) * 0.8;
+    const start: Point = [
+      segment.a[0] + (segment.b[0] - segment.a[0]) * t,
+      segment.a[1] + (segment.b[1] - segment.a[1]) * t,
+    ];
+    return [start, segment.b, segment.a];
+  }
+  let streamed = characters
+    .filter((c) => c.routeSpace === "network")
+    .map((c) => ({ c, route: networkRoute(c) }))
+    .filter((c) => c.route.length);
+  function release(actor: Actor) {
+    group.remove(actor.group);
+    const materials = new Set<THREE.Material>();
+    actor.group.traverse((o) => {
+      if (o instanceof THREE.Mesh) {
+        o.geometry.dispose();
+        (Array.isArray(o.material) ? o.material : [o.material]).forEach((m) =>
+          materials.add(m),
+        );
+      }
+    });
+    materials.forEach((m) => {
+      if (m instanceof THREE.MeshStandardMaterial) m.map?.dispose();
+      m.dispose();
+    });
+    actors.splice(actors.indexOf(actor), 1);
+  }
+  function addCharacter(c: Character, index: number, prepared?: Point[]) {
+    const a = anchors[c.zone];
+    if (!a) return;
     const entry = a.entry || global([0, a.depth / 2 + 3], a);
     const floor = c.floor || 0;
-    let route = c.route
-      .map((p) =>
-        c.routeSpace === "interior"
-          ? global(p, a)
-          : ([entry[0] + p[0], entry[1] + p[1]] as Point),
-      )
-      .filter((p) => !isBlocked(p, floor));
+    let route =
+      prepared ||
+      c.route
+        .map((p) =>
+          c.routeSpace === "interior"
+            ? global(p, a)
+            : ([entry[0] + p[0], entry[1] + p[1]] as Point),
+        )
+        .filter((p) => !isBlocked(p, floor));
     if (!route.length) route = [entry];
     const model = person(
       c.id,
       c.id === "werker"
         ? 22
         : c.category === "fictional"
-          ? 80 + characters.indexOf(c) * 17
+          ? 80 + index * 17
           : 51,
       true,
+      c.color,
+      c.appearance,
     );
+    if (c.uniform) uniform(model, c.uniform, c.color, c.jerseyNumber);
+    if (c.beard)
+      sphere(
+        model.group,
+        material(0x553e2e),
+        0,
+        1.56,
+        0.085,
+        0.112,
+        [1, 0.7, 0.75],
+      );
+    if (c.height) {
+      const bounds = new THREE.Box3().setFromObject(model.group);
+      model.group.scale.setScalar(c.height / (bounds.max.y - bounds.min.y));
+    }
     model.group.position.set(route[0][0], floor, route[0][1]);
     group.add(model.group);
     actors.push({
@@ -148,6 +310,9 @@ export function createPeople(
       named: true,
     });
   }
+  characters
+    .filter((c) => c.routeSpace !== "network")
+    .forEach((c, i) => addCharacter(c, i));
   // Source route segments are used directly; segments crossing collision stop the actor.
   const routes = data.routes.filter(
     (r) =>
@@ -162,6 +327,7 @@ export function createPeople(
       route = r.points.filter((p) => !isBlocked(p, 0));
     if (route.length < 2) continue;
     const model = person(`visitor-${i}`, i, false);
+    delete model.group.userData.info;
     model.group.position.set(route[0][0], 0, route[0][1]);
     group.add(model.group);
     actors.push({
@@ -170,7 +336,7 @@ export function createPeople(
       route,
       target: 1,
       pause: random(i) * 4,
-      speed: 0.95 + random(i + 2) * 0.5,
+      speed: i % 5 === 0 ? 2.7 : 0.95 + random(i + 2) * 0.5,
       named: false,
     });
   }
@@ -196,6 +362,7 @@ export function createPeople(
       if (route.length < 2) continue;
       const id = `visitor-${60 + actors.length}`,
         model = person(id, n + 25, false);
+      delete model.group.userData.info;
       model.group.position.set(route[0][0], 0, route[0][1]);
       group.add(model.group);
       actors.push({
@@ -209,6 +376,7 @@ export function createPeople(
       });
     }
   }
+  let streamTimer = 0;
   function update(
     dt: number,
     time: number,
@@ -218,11 +386,41 @@ export function createPeople(
     active: string | null,
     reduced: boolean,
   ) {
+    streamTimer -= dt;
+    if (streamTimer <= 0) {
+      streamTimer = 0.6;
+      const nearby = streamed
+        .map((s) => ({
+          s,
+          d: Math.hypot(s.route[0][0] - focus[0], s.route[0][1] - focus[1]),
+        }))
+        .filter((x) => x.d < 125)
+        .sort((a, b) => a.d - b.d)
+        .slice(0, 18);
+      const keep = new Set(nearby.map((x) => x.s.c.id));
+      if (active) keep.add(active);
+      for (const actor of [...actors])
+        if (
+          streamed.some((s) => s.c.id === actor.id) &&
+          !keep.has(actor.id) &&
+          Math.hypot(
+            actor.group.position.x - focus[0],
+            actor.group.position.z - focus[1],
+          ) > 15
+        )
+          release(actor);
+      for (const { s } of nearby)
+        if (
+          !actors.some((a) => a.id === s.c.id) &&
+          actors.filter((a) => a.named).length < 26
+        )
+          addCharacter(s.c, hash(s.c.id), s.route);
+    }
     for (const a of actors) {
       const p = a.group.position;
       const dist = Math.hypot(p.x - focus[0], p.z - focus[1]);
       a.group.visible =
-        a.named ||
+        (a.named && dist < 160) ||
         (population &&
           dist < 220 &&
           ((hour > 6 && hour < 22) || Number(a.id.split("-")[1]) % 5 === 0));
@@ -269,10 +467,16 @@ export function createPeople(
         p.z = next[1];
         a.group.rotation.y = Math.atan2(dx, dz);
         a.legs.forEach(
-          (l, i) => (l.rotation.x = Math.sin(time * 5 + i * Math.PI) * 0.35),
+          (l, i) =>
+            (l.rotation.x =
+              Math.sin(time * (a.speed > 2 ? 9 : 5) + i * Math.PI) *
+              (a.speed > 2 ? 0.65 : 0.35)),
         );
         a.arms.forEach(
-          (l, i) => (l.rotation.x = -Math.sin(time * 5 + i * Math.PI) * 0.22),
+          (l, i) =>
+            (l.rotation.x =
+              -Math.sin(time * (a.speed > 2 ? 9 : 5) + i * Math.PI) *
+              (a.speed > 2 ? 0.5 : 0.22)),
         );
       } else {
         a.target = (a.target + 1) % a.route.length;
@@ -280,5 +484,28 @@ export function createPeople(
       }
     }
   }
-  return { group, actors, update };
+  function setCommunity(values: Character[]) {
+    // Update only changed/deleted profiles; unchanged actors keep position and animation.
+    const prior = new Map(
+      streamed
+        .filter((s) => s.c.category === "community")
+        .map((s) => [s.c.id, JSON.stringify(s.c)]),
+    );
+    for (const actor of [...actors])
+      if (
+        actor.id.startsWith("community-") &&
+        (!values.some((c) => c.id === actor.id) ||
+          JSON.stringify(values.find((c) => c.id === actor.id)) !==
+            prior.get(actor.id))
+      )
+        release(actor);
+    streamed = streamed.filter((s) => s.c.category !== "community");
+    streamed.push(
+      ...values
+        .map((c) => ({ c, route: networkRoute(c) }))
+        .filter((s) => s.route.length),
+    );
+    streamTimer = 0;
+  }
+  return { group, actors, update, setCommunity };
 }
