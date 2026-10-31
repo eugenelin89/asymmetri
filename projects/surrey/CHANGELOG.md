@@ -4,8 +4,11 @@
 
 - Correct GPS street names and remove false turns at repeated road endpoints,
   preserving the validated path and geometry. Add a real-detour regression.
-- Refresh the isolated candidate through approved UBC/homepage releases. Browser
-  driving acceptance resumed partially; full acceptance and deployment remain pending.
+- Keep compact portrait and landscape views open: one 44 px objective/GPS strip,
+  explicit help and no redundant aerial/driving panels.
+- Refresh the isolated candidate through approved UBC/homepage releases. Complete
+  the ordinary-control detour, moving reroute, handoff, reload and car continuity.
+  Guarded production deployment and its live browser checks remain separate gates.
 
 ## V0.6 — Open Roads (candidate)
 
@@ -15,7 +18,8 @@ expanded bounded traffic and fictional signals, safe stop rejoining, schema5
 migration and independent simultaneous touch/keyboard holds. Compact mobile HUD
 retained; map navigation is an explicit scrollable overlay. One verified compact
 and animated rail remain; extra vehicle footprints and boarding are deferred.
-Rendered-browser acceptance is blocked; this candidate is not a deployed release.
+Rendered-browser acceptance has resumed successfully; this candidate is not yet
+a deployed release. See the acceptance record for scope and device limitations.
 
 ## V0.5 — On the Move
 

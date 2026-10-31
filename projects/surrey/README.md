@@ -40,6 +40,9 @@ stamina, money, inventory, settings and full mission details are in Menu. The ma
 and aerial tools open on request and have explicit Close buttons. Return to Player
 stays visible in Aerial Explore. This avoids the stacked panels shown in the
 owner's V0.2 iPhone screenshots. Small-screen copy leads with tapping/gestures.
+The compact objective/GPS strip has a 44 px target immediately below the view
+selector. Phone landscape also hides redundant help and duplicate route text;
+Menu → View help keeps instructions available without covering the city.
 
 Touch directional controls pan in aerial mode; visible orbit/zoom buttons provide
 alternatives to gestures. Follow Player and Free Explore share one scene, renderer

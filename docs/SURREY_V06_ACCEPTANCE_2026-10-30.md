@@ -3,8 +3,9 @@
 **Implemented candidate; not deployed.** Work is isolated on
 `codex/surrey-adventure-v06`, refreshed through approved main `60574c8` on
 October 31. Production remains Surrey V0.5; the later UBC/homepage releases are
-preserved in the candidate. Required ordinary-control rendered-browser acceptance
-is incomplete. See the October 31 follow-up below for partial resumed evidence.
+preserved in the candidate. The October 31 ordinary-control mission drive is
+complete, and the final compact-layout checks pass. Release checks are separate;
+the older October 30 browser blocker is historical evidence.
 
 ## Implemented scope
 
@@ -142,10 +143,55 @@ Browser control disconnected mid-drive, resetting the tool session. The Brave
 extension temporarily disappeared; native capture showed no usable page content.
 The same browser subsequently reconnected. Shared-browser checks are serialized
 with Richmond so focus and viewport overrides do not invalidate either run.
-The combined candidate is being rebuilt before continuing the saved drive.
-Moving reroute, complete delivery/handoff, final save/park/exit/aerial checks,
-phone screenshots, console/lifecycle checks and live post-release acceptance
-remain outstanding. Physical iPhone/multitouch testing remains separately pending.
+The refreshed build `rdiVKG8g8p__6nmERqJYf`, including the GPS correction and
+approved main through `60574c8`, restored the saved car at 206.49,186.39, heading
+1.564, with 463.9 m already driven, the archive and accepted mission intact.
+The same ordinary-control journey then continued through 102 Avenue, King George
+Boulevard and Old Yale Road. A deliberately contrary station destination rerouted
+while driving (one recalculation). Clear Route allowed continued free driving;
+selecting Central City again retained the mission.
+
+Case05 completed after **1,238.3 m actual driving**. The car stopped at
+-27.64,471.09, heading -2.117; GPS and mission both reported arrival. E exited onto
+reachable ground, ordinary walking reached Mina, and E delivered the archive for
+the single $85 reward. Money changed from $20 to $105, inventory from one to zero,
+and the fictional closure cleared. Reload/Continue retained the completed case,
+money, destination and exact parked pose. E re-entered that same car. Aerial view
+preserved the occupied vehicle and selected destination; repeated observations
+showed identical elapsed time and city clock while paused. No recovery, injected
+save, position mutation, hidden-state access or collision bypass completed this
+journey. Several median/edge contacts required ordinary reverse and realignment;
+this is a completed playable drive, not a zero-contact manual run.
+
+Rendered captures at CSS 390×844 show the compact driving HUD, explicit map and
+aerial view. The phone map measured 366×581.875 px inside the viewport with one
+map dialog and no menu underneath. Clear Route returned focus to the destination
+select. The CSS 844×390 inspection exposed redundant central aerial help and a
+duplicated driving guidance line. The follow-up hides those on compact screens,
+keeps help in Menu, places the single objective/GPS strip below the view controls,
+and gives it a 44 px target. Final build `C5Eo9f6hB2o2YBhTUDAqQ` passes rendered
+checks at CSS 390×844, 844×390, 320×567 and 820×1180. The objective is at y64 and
+44 px high; neither landscape view has the redundant centre help card. The
+smallest map is 296×467.5 px, landscape 680×274.25 and tablet 790×534.63, all
+inside their viewports with no horizontal overflow. Visible focus, Clear Route
+focus restoration, Escape and explicit close controls work. W+Escape opens Menu
+and clears acceleration; after resume the car remained stationary. Repeated
+reloads retained one canvas and the completed save. Low/Normal settings both work.
+The fresh tab reported no application console errors/warnings; the only warnings
+originated from an installed browser extension. Physical iPhone/multitouch and
+live post-release acceptance remain separately pending. Actual app backgrounding,
+pointer cancellation and sustained phone performance are not certified by these
+desktop observations; input ownership/clearing and renderer cleanup have automated
+coverage. Opening an extra background test tab did not establish a hidden-page
+state, so it is not counted as a successful suspension test.
+
+The final check, Vinext and Next webpack builds pass; Next repeats 68 Surrey,
+27 Richmond and 53 UBC regressions. Combined with the main-refresh 74 Vancouver
+and 7 investment checks, 229 regressions pass. The audit remains zero production
+vulnerabilities. Seven rebuilt affected/protected route checks supplement the
+24-route/asset integrated smoke and exact offline reproduction. Final responsive
+screenshots and operation logs are retained privately under the October 31 Surrey
+release evidence; they are not public geographic assets.
 
 Main refresh merges preserve the approved UBC and homepage code. The original
 Surrey journal 149 is retained as journal 159 to avoid UBC's independently assigned
