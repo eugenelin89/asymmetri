@@ -926,7 +926,16 @@ errors, and check readability at Halloween night settings. Keep reference photos
 and profile secrets out of captures. Responsive emulation is not physical-device
 acceptance; one frame-rate sample is not a sustained performance result.
 
-Final integrated tests, builds, browser checks and production availability remain
-pending until recorded against the exact candidate. See
-[implementation scope and limits](UBC_LANDMARKS_HALLOWEEN_2026-10-31.md). Do not
-reuse earlier UBC release evidence as validation of these new scenes.
+Integrated validation passed 269 tests (UBC 99, Vancouver 74, Surrey 69 and
+Richmond 27), TypeScript/ESLint, Next and Vinext builds, and the recorded local
+browser checks. The exact Linux candidate `8eba0e9`, build `rtOqqaM__deGCW7i5raQm`,
+was activated October 31 at 19:57:52 UTC. Both public hosts passed 17-route and
+24-tutorial-asset checks; 70 additional public checks and four read-only profile
+checks passed, with no test profiles created. A fresh live Start enabled
+Halloween at the gateway with autumn/overcast 19:30; keyboard Space turned it off
+and restored clear 15:00, then restored the seasonal preset when enabled again.
+No console warnings/errors were observed in that live acceptance session.
+See the [production receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md) and
+[implementation scope and limits](UBC_LANDMARKS_HALLOWEEN_2026-10-31.md).
+The observed development interior performance and outstanding physical-device
+checks remain limitations; these release checks do not certify the 60 FPS target.

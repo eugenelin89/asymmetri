@@ -3,12 +3,19 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [UBC landmarks and Halloween receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md)
+records the latest runtime: source `8eba0e9`, build `rtOqqaM__deGCW7i5raQm`,
+activated October 31 at 19:57:52 UTC. Both public hosts, protected routes, existing
+profiles and the live seasonal controls passed acceptance. The complete immediate
+rollback is `/var/www/asymmetri-rollback-before-ubc-v04-landmarks-20261031`,
+source `f3e5a9f`, build `UvDOiPq9Ko5YmOkq4aC66`. Six older runtimes are retained as
+verified archives; the older expanded `bbf194c` rollback also remains. Consult the
+receipt for exact identities, hashes and recovery.
+
 The [UBC natural dialogue receipt](UBC_NATURAL_DIALOGUE_RELEASE_2026-10-31.md)
-records the latest runtime: source `f3e5a9f`, build `UvDOiPq9Ko5YmOkq4aC66`,
-activated October 31 at 18:31:51 UTC. It preserves the completed Surrey guidance,
-all city apps and existing player profiles. The complete immediate rollback is
-`/var/www/asymmetri-rollback-before-ubc-v033-dialogue-20261031`. Its older V0.3.1
-rollback tree is now a verified archive; consult the receipt for recovery.
+records the preceding conversation release. Its source/build and then-immediate
+rollback are historical; use the latest receipt and refresh actual live identity
+before staging another release.
 
 The [Surrey V0.6 release receipt](SURREY_V06_RELEASE_2026-10-31.md) records the
 preceding Open Roads runtime, guidance follow-up, complete immediate rollback and

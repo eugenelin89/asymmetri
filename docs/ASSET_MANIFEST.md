@@ -1259,3 +1259,17 @@ plan, portrait or generated marketing image was substituted into these captures.
 
 Captions and evidence limits are in the [gallery](validation/ubc-landmarks-halloween/README.md).
 Phone/tablet sizes identify browser viewports, not physical-device provenance.
+
+## UBC Halloween production capture — 2026-10-31
+
+- Asset: `docs/validation/ubc-landmarks-halloween/live-halloween-gateway.jpg`,
+  1280 × 720 JPEG; original, unretouched in-app browser screenshot of the deployed
+  `/labs/ubc` application at source `8eba0e9`, build `rtOqqaM__deGCW7i5raQm`.
+- Processing: original screenshot bytes retained. No external photograph, user
+  attachment, composite, generated marketing image or embedded private metadata.
+- Role: production visual verification, separate from the eight local captures.
+- Alt: “The live Halloween campus starts facing the UBC letters, with pumpkins,
+  a roaming ghost and the full moon.”
+- Rights: original application rendering under the repository's MIT terms;
+  reference reconstructions remain unofficial. No identifiable visitor or private
+  profile information is shown.

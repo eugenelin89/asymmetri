@@ -65,3 +65,14 @@ fit without horizontal overflow. The panel scrolls vertically for further option
 Responsive browser viewport check with the reduced-motion checkbox selected.
 Automated tests verify that the overlay and cloud animation freeze. No physical
 phone/tablet testing or sustained device-performance result is claimed.
+
+## Production arrival — October 31, 2026
+
+![The live Halloween campus starts facing the UBC letters, with pumpkins, a roaming ghost and the full moon](live-halloween-gateway.jpg)
+
+This ninth image is an unretouched **production** browser capture at 1280 × 720,
+after activation of source `8eba0e9`, Linux build `rtOqqaM__deGCW7i5raQm`.
+A fresh Start exploring action selected the scheduled 19:30 autumn/overcast
+Halloween atmosphere. Keyboard Space switched it off to 15:00/clear and back on.
+No console errors or warnings were observed. See the
+[production receipt](../../UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md).

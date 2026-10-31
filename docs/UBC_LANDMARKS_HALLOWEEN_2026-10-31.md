@@ -3,7 +3,10 @@
 This implementation adds a new arrival at the UBC entrance letters, enterable
 Beaty Biodiversity Museum and Irving K. Barber Learning Centre reconstructions,
 five improved outdoor athletics venues, and an optional Halloween atmosphere.
-It is an implementation report, **not a production-release receipt**. Local integrated validation passed; public deployment is pending.
+Local integrated validation passed, and these additions are now live. The separate
+[production receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md) records the exact
+Linux source/build, activation, public acceptance and complete runtime recovery;
+this report describes implementation, sourcing and remaining fidelity limits.
 
 ## Geography and arrival
 
@@ -196,8 +199,9 @@ Actual browser checks on the local development application at **1280 × 720** co
 
 The **390 × 844 phone viewport** and **820 × 1180 tablet viewport** exercised the
 Halloween controls without horizontal overflow. These were browser viewport
-checks, not physical phone or tablet tests. The [eight-image browser gallery](validation/ubc-landmarks-halloween/README.md)
-contains actual local screenshots; earlier galleries document earlier versions.
+checks, not physical phone or tablet tests. The [browser gallery](validation/ubc-landmarks-halloween/README.md)
+labels the eight local screenshots separately from live acceptance captures;
+earlier galleries document earlier versions.
 
 Performance remains a material limitation: an Irving development-view observation
 showed approximately **12 FPS, 559 draw calls and 1.817 million triangles**. This is
@@ -209,9 +213,15 @@ A fresh-origin production-mode preview starts with Halloween enabled, as schedul
 Keyboard Space toggles the edition and restores the previous normal atmosphere;
 the preview produced no console errors or warnings. The public UBC badge and GIS
 Apps card now describe V0.4 and nine interiors.
-Production activation remains pending. These local checks
-do not establish production availability or a complete walkthrough of every space.
+Production source `8eba0e9`, Linux build `rtOqqaM__deGCW7i5raQm`, was activated
+October 31 at 19:57:52 UTC. Both hosts passed protected-route/tutorial comparisons,
+70 additional public checks and four read-only profile checks. A fresh live Start
+at the gateway enabled autumn/overcast 19:30; keyboard Space disabled Halloween
+and restored clear 15:00, then restored the seasonal preset when enabled again.
+No console warnings/errors were observed in that live acceptance session.
 
-A future deployment receipt must separately record exact source/build identities,
-Linux artifact checks, protected-site/profile continuity, activation, public health
-and the complete immediate rollback. This report contains none of those claims.
+The [production receipt](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md) separately
+records artifact identity, activation, public/profile continuity and the complete
+immediate rollback. Local scene walkthroughs and responsive screenshots remain
+local evidence; the live acceptance above does not claim a production walkthrough
+of every space or physical-device/performance certification.
