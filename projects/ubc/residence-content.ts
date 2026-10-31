@@ -87,7 +87,7 @@ const scienceTopics = [
   topic(
     "reslife",
     "What is first-year residence life like?",
-    "This is a fictional student guide, so the tour is not a personal testimonial. UBC describes Orchard as a first-year community with shared living, dining and study spaces. Residence Advisors and Residence Life Managers support residents and connect them with campus resources.",
+    "There are lots of shared spaces to meet people, eat together and study. Orchard is a first-year community, and Residence Advisors can help you settle in and find support when you need it.",
     [housingSources.orchard, housingSources.team],
     ["first-year", "first year", "residence life"],
     ["bathroom", "study"],
@@ -95,7 +95,7 @@ const scienceTopics = [
   topic(
     "size",
     "How big is your room?",
-    "The rooms here are representative, not measured replicas of an assigned room. Public 2014 Orchard drawings label many single bedroom areas around 13.17 square metres. Actual room sizes and configurations vary; use the official tours to compare. This open-house layout adds circulation space and should not be used to measure a future room.",
+    "Many single rooms in Orchard’s published design plans are about 13 square metres, but sizes and layouts vary. Have a look at UBC’s room tours to compare the different options.",
     [
       housingSources.tours,
       link(
@@ -109,7 +109,7 @@ const scienceTopics = [
   topic(
     "bathroom",
     "Do you share a bathroom?",
-    "Connected singles are individual bedrooms linked through a semi-private bathroom shared by two residents. In this tour A connects with B, C with D, and E with F. Each shared double has two beds and its own shared private bathroom. These letters identify fictional demonstration rooms.",
+    "Yes, connected singles share a bathroom between two bedrooms. You can see how that works here: A connects to B, C to D, and E to F. The doubles have two beds and a bathroom shared by those roommates.",
     [housingSources.orchard, housingSources.rooms],
     ["bathroom", "connected", "single", "double"],
     ["packing"],
@@ -117,7 +117,7 @@ const scienceTopics = [
   topic(
     "study",
     "How do you study?",
-    "Try a quiet place for focused work and a shared table for discussion. Orchard documents both group and private study spaces; campus libraries provide more options. A schedule that leaves time for meals, sleep and breaks can help you settle into university routines.",
+    "A quiet spot is great when you need to focus, and the shared tables work well for studying together. Orchard has both kinds of study space, and there are campus libraries to try too. Leave yourself time for meals, sleep and breaks!",
     [housingSources.orchard],
     ["study", "studying", "first year student"],
     ["reslife"],
@@ -125,7 +125,7 @@ const scienceTopics = [
   topic(
     "packing",
     "What should I bring for my room?",
-    "Check UBC’s current packing list. Bedding, a pillow, towels, toiletries, laundry supplies and rain-ready clothing are useful starting points. Coordinate shared cleaning supplies and bathroom essentials with your roommate; avoid buying large items before checking your room and residence rules.",
+    "Start with bedding, a pillow, towels, toiletries and laundry supplies—and something for the rain. Talk with your roommate about shared bathroom and cleaning supplies. UBC’s packing list is handy before you buy anything big.",
     [housingSources.packing],
     ["bring", "pack", "bedding"],
     ["bathroom"],
@@ -135,7 +135,7 @@ const engineeringTopics = [
   topic(
     "noise",
     "How noisy is residence?",
-    "Noise varies by time and neighbours; this fictional guide cannot promise a particular experience. UBC publishes quiet hours and residence standards. Discuss noise respectfully with roommates and contact your Residence Advisor when you need help. Check current rules, especially around exams.",
+    "It depends on the time of day and your neighbours. There are quiet hours, and it helps to talk with your roommates about what works for everyone. If noise becomes a problem, your Residence Advisor can help.",
     [housingSources.roommates, housingSources.team],
     ["noisy", "noise", "quiet"],
     ["friends", "study"],
@@ -143,7 +143,7 @@ const engineeringTopics = [
   topic(
     "friends",
     "Is it easy to make friends?",
-    "Shared lounges and residence activities provide opportunities to meet people, though everyone settles in differently. Residence Advisors help build community. Starting a conversation in a common space or joining an activity can be a practical first step; this is general guidance, not a real student's testimonial.",
+    "Everyone settles in at their own pace. The lounges and residence activities are good places to start a conversation. You can also ask your Residence Advisor about ways to get involved.",
     [housingSources.team],
     ["friends", "meet people", "social"],
     ["balance"],
@@ -151,7 +151,7 @@ const engineeringTopics = [
   topic(
     "study",
     "Where do you study?",
-    "Orchard includes group and private study spaces. The demonstration study area opposite this lounge shows one possible shared arrangement. Choose a library or other campus study space when you need a change of environment; no live occupancy is represented here.",
+    "There’s a study area just opposite this lounge. Orchard has spaces for studying alone or with a group, and a campus library is another option when you want a change of scene.",
     [housingSources.orchard],
     ["study", "studying"],
     ["facilities"],
@@ -159,7 +159,7 @@ const engineeringTopics = [
   topic(
     "balance",
     "How do you balance school and social life?",
-    "There is no single schedule that suits everyone. Make space for study, meals, rest and social activities, and review it when courses become demanding. Residence support staff can help connect students with advice and campus services.",
+    "Give yourself time for studying, seeing friends, eating and resting. You might need to adjust things when courses get busy—that’s normal. If you’re finding it hard to manage, the residence team can help you find support.",
     [housingSources.team],
     ["balance", "school", "routine"],
     ["noise"],
@@ -167,7 +167,7 @@ const engineeringTopics = [
   topic(
     "facilities",
     "What facilities are available?",
-    "Official Orchard information lists interconnected lounges with snack kitchens, study areas, laundry, fitness, music and games spaces, and dining. This release models the lobby, one residential floor, lounge/snack kitchen and a study area. The remaining facilities are information only.",
+    "Orchard has lounges, snack kitchens, study areas, laundry, fitness, music and games spaces, and dining. On this walk, you can explore the lounge, snack kitchen and study area upstairs.",
     [housingSources.orchard],
     ["facilities", "kitchen", "laundry", "lounge"],
     ["study"],
@@ -177,7 +177,7 @@ const businessTopics = [
   topic(
     "moving",
     "What is it like moving to Vancouver?",
-    "This is a fictional international-student guide, not a real moving experience. UBC’s arrival and packing information can help you plan essentials, weather-appropriate clothing and your first days in residence. Seek official guidance for your own travel and arrival circumstances.",
+    "There’s a lot to organize at first, so take it one step at a time. Start with your arrival plans, room essentials and clothes for Vancouver’s rain. UBC’s arrival information and packing list can help you prepare.",
     [housingSources.packing, housingSources.team],
     ["moving", "vancouver", "international", "arriv"],
     ["packing", "support"],
@@ -185,7 +185,7 @@ const businessTopics = [
   topic(
     "support",
     "How does residence help new students?",
-    "Residents have a Residence Advisor and Residence Life Manager. They support community activities, referrals and residence standards. Ask the residence team about current services and help finding the right campus resource.",
+    "Your Residence Advisor is a good person to talk to when you’re settling in. The residence team can help you meet people, answer questions and find the right campus support.",
     [housingSources.team],
     ["support", "help", "new students", "advisor"],
     ["apply"],
@@ -193,7 +193,7 @@ const businessTopics = [
   topic(
     "packing",
     "What should students bring?",
-    "Start with UBC’s current packing checklist: bedding, towels, toiletries, laundry supplies and suitable clothing. Coordinate shared items with roommates. This tour’s books, laptops and decorations are fictional examples, not an official list of included furnishings.",
+    "Bedding, towels, toiletries, laundry supplies and clothes for the weather are a good start. Check what your room includes before buying extras, and talk with your roommate about anything you could share. UBC has a packing checklist you can use.",
     [housingSources.packing],
     ["bring", "pack", "furnish"],
     ["moving"],
@@ -201,7 +201,7 @@ const businessTopics = [
   topic(
     "meals",
     "What are meal plans like?",
-    "Orchard residents have a required All Access Dining plan. Unlimited entry applies to Feast, Gather and Open Kitchen; Flex Dollars cover purchases at other participating locations. Check the official page for current terms, dietary information and costs. This tour does not display live prices or balances.",
+    "Orchard residents use the required All Access Dining plan, with unlimited entry to Feast, Gather and Open Kitchen. Flex Dollars can be used at other participating places. The dining page has the latest costs and dietary information.",
     [housingSources.meals],
     ["meal", "dining", "food", "cost", "price"],
     ["apply"],
@@ -209,7 +209,7 @@ const businessTopics = [
   topic(
     "apply",
     "How do you apply for student housing?",
-    "Follow UBC Housing’s current application process and deadlines. You may express preferences, but applying does not itself guarantee an offer, Orchard Commons or a particular room type. Use the official eligibility, application and room-assignment pages for your situation.",
+    "Start with the UBC Housing application page and check the deadlines. You can list your preferences, but an application doesn’t guarantee a place at Orchard or a particular room type. The room-assignment page explains how offers work.",
     [housingSources.apply, housingSources.assignments],
     ["apply", "application", "housing", "deadline", "guarantee"],
     ["support", "meals"],
@@ -218,11 +218,12 @@ const businessTopics = [
 export const residenceStudents: Character[] = [
   {
     id: "student-science",
-    name: "Maya · fictional Science student",
+    name: "Maya",
+    introduction: "I’m Maya. I’m a first-year Science student.",
     title: "First-year Science · Fictional student guide",
     department: "Science",
     institution: "Illustrative UBC campus community",
-    label: "Maya · Fictional Science student",
+    label: "Maya",
     category: "fictional",
     model: "original-student-teal",
     zone: "orchard",
@@ -247,11 +248,12 @@ export const residenceStudents: Character[] = [
   },
   {
     id: "student-engineering",
-    name: "Leo · fictional Engineering student",
+    name: "Leo",
+    introduction: "I’m Leo. I study Engineering.",
     title: "Engineering · Fictional student guide",
     department: "Engineering",
     institution: "Illustrative UBC campus community",
-    label: "Leo · Fictional Engineering student",
+    label: "Leo",
     category: "fictional",
     model: "original-student-ochre",
     zone: "orchard",
@@ -277,11 +279,12 @@ export const residenceStudents: Character[] = [
   },
   {
     id: "student-business",
-    name: "Ari · fictional international Business student",
+    name: "Ari",
+    introduction: "I’m Ari. I’m an international student studying Business.",
     title: "International Business student · Fictional guide",
     department: "Business",
     institution: "Illustrative UBC campus community",
-    label: "Ari · Fictional Business student",
+    label: "Ari",
     category: "fictional",
     model: "original-student-rust",
     zone: "orchard",

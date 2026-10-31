@@ -70,6 +70,8 @@ export type Topic = {
 export type Character = {
   id: string;
   name: string;
+  /** Short spoken introduction; provenance and reconstruction notes belong in biography. */
+  introduction: string;
   title: string;
   department: string;
   institution: string;

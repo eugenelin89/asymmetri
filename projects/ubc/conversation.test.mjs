@@ -6,6 +6,7 @@ const { emptyConversation, respond, suggestedTopics } = await import(
   "./conversation.ts"
 );
 const { createPeople, person } = await import("./people.ts");
+const { profileCharacter } = await import("./community/model.ts");
 const guide = characters.find((c) => c.id === "werker");
 
 test("encounter choices reveal identity, answer a selected question and offer its grounded follow-up", () => {
@@ -16,8 +17,8 @@ test("encounter choices reveal identity, answer a selected question and offer it
   assert.equal(original.turns.length, 0);
   const intro = respond(guide, hello, { kind: "introduce" });
   assert.equal(intro.introduced, true);
-  assert.ok(intro.turns.at(-1).answer.includes(guide.name));
-  assert.ok(intro.turns.at(-1).answer.includes(guide.biography));
+  assert.match(intro.turns.at(-1).answer, /^I’m Greg Werker\./);
+  assert.ok(!intro.turns.at(-1).answer.includes(guide.biography));
   const topic = guide.topics.find((t) => t.followups?.length);
   const answer = respond(guide, intro, { kind: "topic", id: topic.id });
   assert.equal(answer.turns.at(-1).answer, topic.answer);
@@ -40,7 +41,7 @@ test("unsupported questions remain honest and stale or empty choices cannot manu
     kind: "question",
     text: "What is your private opinion?",
   }).turns.at(-1);
-  assert.match(unsupported.answer, /don’t have a verified answer/);
+  assert.match(unsupported.answer, /not sure about that/);
   assert.equal(unsupported.topicId, undefined);
   const known = respond(guide, state, {
     kind: "question",
@@ -83,8 +84,57 @@ test("participant-written answers are preserved and do not invent new participan
       kind: "question",
       text: "Unrelated 991",
     }).turns.at(-1).answer,
-    /hasn’t written an answer/,
+    /isn’t a written reply/,
   );
+});
+
+test("every character has a short spoken introduction separate from biography and audit notes", () => {
+  for (const character of characters) {
+    const state = respond(character, emptyConversation(), { kind: "introduce" });
+    const answer = state.turns.at(-1).answer;
+    assert.ok(answer?.length > 8 && answer.length < 400, character.id);
+    assert.match(answer, /^I[’']m /, character.id);
+    assert.doesNotMatch(answer, /virtual character|educational simulation|not a confirmation|verification|by the project owner|no endorsement|unverified|fictional/i, character.id);
+    assert.ok(character.disclaimer && character.sources.length, character.id);
+  }
+  const mitch = characters.find(c => c.id === "coach-mitch-hodge");
+  assert.equal(respond(mitch, emptyConversation(), { kind: "introduce" }).turns.at(-1).answer,
+    "I’m Mitch Hodge. I’m a coach with UBC Baseball.");
+  assert.match(mitch.biography, /profile|assignment/i);
+});
+
+test("typed social phrases use the same encounter flow without swallowing unrelated questions", () => {
+  const mitch = characters.find(c => c.id === "coach-mitch-hodge");
+  for (const text of ["Who are you?", "What's your name?", "Can you introduce yourself?", "Hi, who are you?", "Who are you, please?"]) {
+    const state = respond(mitch, emptyConversation(), { kind: "question", text });
+    assert.equal(state.introduced, true);
+    assert.equal(state.turns.at(-1).answer, mitch.introduction);
+    assert.equal(state.turns.at(-1).said, text);
+    assert.equal(state.turns.at(-1).action, "introduce");
+  }
+  const hello = respond(mitch, emptyConversation(), { kind: "question", text: "Hello!" });
+  assert.equal(hello.introduced, false);
+  assert.equal(hello.turns.at(-1).gesture, "wave");
+  const again = respond(mitch, hello, { kind: "hello" });
+  assert.match(again.turns.at(-1).answer, /again/);
+  assert.equal(respond(mitch, again, { kind: "question", text: "Thank you" }).turns.at(-1).action, "thanks");
+  assert.equal(respond(mitch, again, { kind: "question", text: "Goodbye" }).turns.at(-1).action, "goodbye");
+  const unsupported = respond(mitch, emptyConversation(), { kind: "question", text: "Who are you and what is your private opinion?" });
+  assert.equal(unsupported.introduced, false);
+  assert.equal(unsupported.turns.at(-1).topicId, undefined);
+  const einstein = characters.find(c => c.id === "historical-einstein");
+  const identity = respond(einstein, emptyConversation(), {kind:"topic", id:"identity"});
+  assert.equal(identity.introduced, true);
+  assert.equal(identity.turns.at(-1).answer, einstein.introduction);
+});
+
+test("profile introductions use only supplied identity and leave participant answers untouched", () => {
+  const p = profileCharacter({id:"example", name:"Sample Visitor", affiliation:"Student", department:"Engineering Physics", about:"I enjoy learning here.", interests:"I build things.", advice:"Ask lots of questions.", zone:"hennings", color:"teal", updated:"2026-10-31"});
+  assert.equal(respond(p, emptyConversation(), {kind:"introduce"}).turns.at(-1).answer,
+    "I’m Sample Visitor. I’m a student.");
+  assert.doesNotMatch(p.introduction, /UBC|Engineering Physics/);
+  assert.equal(respond(p, emptyConversation(), {kind:"topic", id:"about"}).turns.at(-1).answer, "I enjoy learning here.");
+  assert.match(p.disclaimer, /not verified/);
 });
 
 test("active conversation gestures animate while walking is paused, remain in place and respect reduced motion", () => {

@@ -96,9 +96,18 @@ export function validateProfile(value: unknown): ProfileDraft {
   };
 }
 export function profileCharacter(p: PublicProfile): Character {
+  const role = {
+    Visitor: "I’m visiting campus.",
+    "Prospective student": "I’m thinking about coming here to study.",
+    Student: "I’m a student.",
+    "Alumnus / alumna": "I’m an alum.",
+    Faculty: "I’m a faculty member.",
+    Staff: "I’m a staff member.",
+  }[p.affiliation];
   return {
     id: `community-${p.id}`,
     name: p.name,
+    introduction: `I’m ${p.name}. ${role}`,
     title: `${p.affiliation} · Self-described${p.department ? ` · ${p.department}` : ""}`,
     department: p.department,
     institution: "Community participant; affiliation unverified",

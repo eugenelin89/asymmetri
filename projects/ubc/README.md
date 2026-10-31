@@ -49,6 +49,9 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   curated questions, follow-ups, session-only
   history and keyword lookup. Unsupported private opinions, promises and whereabouts
   produce a source-linked refusal. No external AI service or voice imitation. Optional public profiles use the explicitly requested server persistence.
+  Each record has a short spoken introduction separate from its biography. Routine
+  answers use conversational language; full simulation/source/model notes are in
+  About this simulation. Typed greetings and identity questions share the button flow.
 - Pedestrians: source-route arrivals have spacing and local density limits. Walkers yield and pass each other; only the selected conversation partner stops for a conversation. Other nearby people keep walking.
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
@@ -158,3 +161,7 @@ The [encounter refinements](../../docs/UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md)
 are [verified live](../../docs/UBC_ENCOUNTER_RELEASE_2026-10-31.md): action-and-response
 dialogue, dispersed pedestrians, grouped building entries and immediate movement
 focus after travel. The release adds no new geographic coverage.
+
+See [natural dialogue](../../docs/UBC_NATURAL_DIALOGUE_2026-10-31.md) for the next
+refinement: concise introductions and conversational answers across the registry,
+with source/reconstruction notes outside the spoken response.

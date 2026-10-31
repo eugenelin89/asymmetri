@@ -813,3 +813,11 @@ exclusions apply to the whole group. Addresses and part counts clarify results.
 A deliberate scene-focus return after location jumps prevents modal focus
 restoration from stealing WASD input; ordinary dialog dismissal still restores
 the opener. See [acceptance](UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md).
+
+`Character.introduction` separates concise spoken identity from detailed source
+metadata. Registry constructors author natural replies; the conversation reducer
+normalizes bounded typed social phrases and identity-topic selections into the
+same actions as buttons. The panel keeps gestures separate from speech and moves
+biography/permissions/behavior detail into About. Community introductions are
+derived at presentation time without changing persisted profile data or rewriting
+participant answers. [Dialogue refinement](UBC_NATURAL_DIALOGUE_2026-10-31.md).

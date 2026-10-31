@@ -20,6 +20,7 @@ function record(
   biography: string,
   sources: Link[],
   kind: Character["kind"],
+  introduction: string,
 ): Character {
   return {
     id,
@@ -37,6 +38,7 @@ function record(
     behaviour:
       "Simulated walking on checked nearby campus paths. No real schedule or location tracking.",
     biography,
+    introduction,
     sources,
     verified: checked,
     permissions:
@@ -47,12 +49,43 @@ function record(
   };
 }
 export const expandedCharacters: Character[] = [];
+function facultyRole(title: string, department: string) {
+  const onLeave = title.includes("(On Leave)");
+  const interim = title.includes("(Interim)");
+  let role = title
+    .replace(/ \((?:On Leave|Interim|Continuing)\)/g, "")
+    .replace("Associate Professor - Teaching", "Associate Professor of Teaching")
+    .replace(" - Receptionist", " and Receptionist")
+    .replace(/ - Masters? of Data Science/, " for the Master of Data Science program")
+    .replace("Software Developer - Skin Simulation", "Software Developer working on Skin Simulation")
+    .replace("Program and Project Manager - AML-TN/PLAI", "Program and Project Manager for AML-TN and PLAI")
+    .replace("Systems Admin - Systopia Lab", "Systems Administrator with the Systopia Lab")
+    .replace(/\s*&\s*|\//g, " and ")
+    .replace(/\b[A-Z][a-z]+\b/g, (word) =>
+      ["Warren", "Systopia"].includes(word) ? word : word.toLowerCase(),
+    );
+  if (interim) role = `interim ${role}`;
+  const unit = /^(Computer Science|Physics & Astronomy)$/.test(department)
+    ? `${department} department`
+    : department;
+  const context = /^dean\b/i.test(role)
+    ? `of UBC’s ${unit}`
+    : `in UBC’s ${unit}`;
+  const leave = onLeave ? " I’m currently on leave." : "";
+  if (/^(administrative support|systems administration)$/i.test(role))
+    return `I work in ${role} ${context}.${leave}`;
+  const article = /^dean\b/i.test(role)
+    ? "the"
+    : /^(?:[aeiou]|honorary)/i.test(role) ? "an" : "a";
+  return `I’m ${article} ${role} ${context}.${leave}`;
+}
 for (const p of faculty.people) {
   const sources = [
       { label: "Official professional profile", url: p.url },
       { label: "Department directory", url: p.source },
     ],
-    bio = `${p.name} is listed by UBC ${p.department} as ${p.title}.`;
+    bio = `${p.name} is listed by UBC ${p.department} as ${p.title}.`,
+    role = facultyRole(p.title, p.department);
   const c = record(
     p.id,
     p.name,
@@ -62,12 +95,13 @@ for (const p of faculty.people) {
     bio,
     sources,
     "faculty",
+    `I’m ${p.name}. ${role}`,
   );
   c.topics = [
     topic(
       "role",
       "What is your university role?",
-      bio,
+      role,
       sources,
       ["role", "teach", "job", "who"],
       ["field"],
@@ -76,8 +110,8 @@ for (const p of faculty.people) {
       "field",
       "What areas does your work involve?",
       p.research
-        ? `The department lists these research areas: ${p.research}. Follow the professional profile for details.`
-        : `The directory verifies the role above. This simulation does not infer a research specialty or teaching assignment; the linked department is the reliable place to learn more.`,
+        ? `My work includes ${p.research.replace(/\s*,\s*/g, ", ").replace(/\s*&\s*/g, " and ")}. You can read more on my profile.`
+        : `I work with UBC’s ${p.department}. My professional profile has more about my role; would you like to explore the department?`,
       sources,
       ["research", "subject", "work", "field"],
       ["study"],
@@ -85,21 +119,14 @@ for (const p of faculty.people) {
     topic(
       "study",
       "How can I explore this department?",
-      `Visit the official ${p.department} website to explore its courses, programs and student resources. This character cannot make admissions promises or advise on individual eligibility.`,
+      `A good place to start is the ${p.department} website. You can explore courses, compare programs and find student resources there.`,
       [{ label: "Department", url: new URL(p.source).origin }],
       ["study", "program", "courses", "apply"],
     ),
     topic(
-      "location",
-      "Is this where you are in real life?",
-      "No. This is a simulated educational character on a virtual walking route, not a real person’s whereabouts, office appointment or timetable.",
-      sources,
-      ["where", "today", "location", "schedule"],
-    ),
-    topic(
       "more",
       "Where can I learn more?",
-      "Open the official professional profile and department directory below. Roles can change after the verification date.",
+      "Take a look at my professional profile or the department directory below. They’re good starting points for learning more.",
       sources,
       ["more", "profile", "contact", "website"],
     ),
@@ -117,6 +144,8 @@ function sportZone(s: string) {
         : "stadium";
 }
 for (const p of athletes.people) {
+  const season = p.season.match(/\d{4}[-–]\d{2,4}/)?.[0] || p.season;
+  const team = `UBC’s ${season} ${p.sport.toLowerCase()} team`;
   const sources = [
       { label: "Official athlete profile", url: p.url },
       { label: p.season, url: p.rosterUrl },
@@ -131,43 +160,46 @@ for (const p of athletes.people) {
     bio,
     sources,
     "athlete",
+    `I’m ${p.name}, from ${team}.`,
   );
   c.uniform = p.sport;
   c.jerseyNumber = p.number;
+  c.permissions +=
+    " The original bird drawing is not the UBC Thunderbird mark; the kit is a stylized reconstruction, not official merchandise.";
   c.topics = [
     topic(
       "sport",
       "Which sport do you play?",
-      bio,
+      `I’m here with ${team}. You can find the rest of the team on our roster.`,
       sources,
       ["sport", "play", "who", "team"],
       ["season"],
     ),
     topic(
       "season",
-      "Which roster is this based on?",
-      `This character is based on the official ${p.season}, checked ${checked}. Historical season entries are retained with their season label; no current enrollment or eligibility is inferred.`,
+      "Which season is your team from?",
+      `The ${season} season. The roster below has the team lineup for that year.`,
       sources,
       ["season", "roster", "current"],
     ),
     topic(
       "practice",
-      "Is this a real practice or game?",
-      "No. All movement and sports activity here are fictional ambient scenes. These positions do not show any athlete’s real location or training schedule.",
+      "Where can I find games and results?",
+      "Check the team’s UBC Athletics page for fixtures, results and news. It’s the best place to follow along.",
       sources,
       ["practice", "game", "schedule", "where"],
     ),
     topic(
       "uniform",
       "What is the bird on your uniform?",
-      "An original bird drawing created for this independent campus experience. It is not the UBC Thunderbird mark. The sport-specific kit is a stylized reconstruction, not official merchandise.",
+      "It’s a bird design made for this campus experience. A little nod to the teams you’ll meet around here!",
       sources,
       ["bird", "uniform", "clothing"],
     ),
     topic(
       "more",
       "Where can I follow UBC athletics?",
-      "Use the official profile and roster links below for published team information, results and schedules. This character does not speak for the real athlete.",
+      "You can follow the team on UBC Athletics’ website. Try the profile and roster links below for more about the players and the season.",
       sources,
       ["more", "website", "results", "follow"],
     ),
@@ -178,13 +210,16 @@ const alumniSource: Link = {
   label: "UBC Magazine · alumni profiles (2026)",
   url: "https://magazine.alumni.ubc.ca/2026/most-famous-alum/bracket-business-politics-and-community-leadership-round-1",
 };
-for (const [id, name, title, zone, bio] of [
+for (const [id, name, title, zone, bio, introduction, story, connection] of [
   [
     "kim-campbell",
     "Kim Campbell",
     "UBC alumna · BA, LLB",
     "law",
     "Kim Campbell became Canada’s first woman prime minister in 1993. She studied arts and law at UBC.",
+    "I’m Kim Campbell. I studied arts and law at UBC and went on to become Canada’s first woman prime minister.",
+    "I became Canada’s first woman prime minister in 1993. Before my political career, I studied arts and law here at UBC.",
+    "I studied arts and law at UBC, earning a BA and an LLB.",
   ],
   [
     "justin-trudeau",
@@ -192,6 +227,9 @@ for (const [id, name, title, zone, bio] of [
     "UBC alumnus · BEd",
     "education",
     "Justin Trudeau earned a Bachelor of Education at UBC and served as Canada’s prime minister from 2015 to 2025.",
+    "I’m Justin Trudeau. I studied education at UBC and served as Canada’s prime minister from 2015 to 2025.",
+    "I served as Canada’s prime minister from 2015 to 2025. My UBC connection is through education—I earned my Bachelor of Education here.",
+    "I earned a Bachelor of Education at UBC.",
   ],
   [
     "jody-wilson-raybould",
@@ -199,6 +237,9 @@ for (const [id, name, title, zone, bio] of [
     "UBC alumna · LLB",
     "law",
     "Jody Wilson-Raybould is a UBC law graduate and a former federal Minister of Justice and Attorney General of Canada.",
+    "I’m Jody Wilson-Raybould. I’m a UBC law graduate and a former Minister of Justice and Attorney General of Canada.",
+    "I served as Canada’s Minister of Justice and Attorney General. My path included studying law here at UBC.",
+    "I graduated from UBC with an LLB, a law degree.",
   ],
   [
     "robert-mundell",
@@ -206,6 +247,9 @@ for (const [id, name, title, zone, bio] of [
     "Historical UBC alumnus · economist",
     "sauder",
     "Robert Mundell was a UBC arts graduate and Nobel laureate in economics, known for international monetary theory and optimal currency areas.",
+    "I’m Robert Mundell, an economist and UBC alumnus. My work explored currencies and international monetary policy.",
+    "I received the Nobel Prize in economics. My work explored international monetary theory, including when it makes sense for different economies to share a currency.",
+    "I was an arts student at UBC before continuing my work in economics.",
   ],
 ]) {
   const c = record(
@@ -217,12 +261,13 @@ for (const [id, name, title, zone, bio] of [
     bio,
     [alumniSource],
     "alumni",
+    introduction,
   );
   c.topics = [
     topic(
       "known",
       "Why are you well known?",
-      bio,
+      story,
       [alumniSource],
       ["famous", "known", "why", "who"],
       ["connection"],
@@ -230,29 +275,21 @@ for (const [id, name, title, zone, bio] of [
     topic(
       "connection",
       "What is your UBC connection?",
-      title +
-        ". The university’s alumni publication documents this connection.",
+      connection,
       [alumniSource],
       ["degree", "ubc", "connection"],
     ),
     topic(
-      "history",
-      "Is this a visit by the real person?",
-      "No. This is a historical or illustrative alumni encounter. It does not imply a real campus visit, endorsement or current whereabouts.",
-      [alumniSource],
-      ["visit", "real", "today"],
-    ),
-    topic(
       "learn",
       "What can I learn from this story?",
-      "Alumni pursue many different paths after university. Read the linked profile for this person’s documented public work, rather than treating this simulation as personal advice.",
+      "A degree can lead in many directions. Exploring alumni stories is one way to see how people connect their studies with work beyond university.",
       [alumniSource],
       ["learn", "advice"],
     ),
     topic(
       "more",
       "Where can I read more?",
-      "The source below is UBC’s public alumni profile collection.",
+      "You’ll find more of my story in UBC Magazine. The link below is a good place to start.",
       [alumniSource],
       ["more", "source", "website"],
     ),
@@ -278,6 +315,7 @@ const einstein = record(
   "A historical educational guest near the virtual Physics building. Einstein was an Institute for Advanced Study faculty member from 1933 to 1955; this character does not present him as UBC faculty or an alumnus.",
   einsteinSources,
   "historical",
+  "I’m Albert Einstein, a theoretical physicist. You may know my work on relativity and the photoelectric effect.",
 );
 einstein.institution = "Historical guest; not affiliated with UBC";
 einstein.appearance = {
@@ -291,22 +329,30 @@ einstein.topics = [
   topic(
     "identity",
     "Who are you?",
-    einstein.biography,
+    einstein.introduction,
     einsteinSources,
-    ["who", "ubc", "here"],
+    ["who", "identity"],
     ["nobel"],
   ),
   topic(
+    "ubc",
+    "Did you teach at UBC?",
+    "No. I was a faculty member at the Institute for Advanced Study from 1933 to 1955.",
+    einsteinSources,
+    ["ubc", "teach", "worked", "faculty"],
+    ["relativity"],
+  ),
+  topic(
     "nobel",
-    "What was Einstein’s Nobel Prize for?",
-    "The 1921 physics prize recognized his work in theoretical physics, especially the law of the photoelectric effect. It was not awarded specifically for relativity.",
+    "What was your Nobel Prize for?",
+    "I received the 1921 Nobel Prize in Physics for work in theoretical physics, especially the law of the photoelectric effect. The prize wasn’t specifically for relativity.",
     einsteinSources,
     ["nobel", "prize"],
   ),
   topic(
     "light",
     "What is the photoelectric effect?",
-    "Light can transfer energy to electrons in a material. Einstein’s light-quanta explanation connects each packet’s energy with its frequency; below a threshold frequency, increasing intensity alone cannot eject electrons from the material.",
+    "Light can give energy to electrons in a material. I described light as arriving in little packets of energy, with each packet’s energy tied to its frequency. If the frequency is too low, simply making the light brighter won’t free the electrons.",
     einsteinSources,
     ["light", "photoelectric", "electron"],
   ),
@@ -325,7 +371,7 @@ einstein.topics = [
   topic(
     "more",
     "Where can I learn more?",
-    "Read the historical biography and Nobel Prize resources below. These are original educational summaries, not Einstein quotations or an imitation of his voice.",
+    "The Institute for Advanced Study has a biography of my life and work. The Nobel Prize website explains the award, too—both links are below.",
     einsteinSources,
     ["more", "source", "website"],
   ),
@@ -350,6 +396,7 @@ const mitch = record(
   "The linked UBC Athletics profile lists Mitch Hodge as Assistant Coach. Its staff selector is not a confirmation of his current assignment, so this simulation preserves the profile attribution without claiming current staff membership.",
   mitchSources,
   "coach",
+  "I’m Mitch Hodge. I’m a coach with UBC Baseball.",
 );
 mitch.height = 1.8796;
 mitch.uniform = "baseball coach";
@@ -374,7 +421,7 @@ mitch.topics = [
   topic(
     "role",
     "What is your baseball role?",
-    mitch.biography,
+    "I’m an assistant coach with UBC Baseball.",
     mitchSources,
     ["who", "role", "coach"],
     ["facility"],
@@ -382,30 +429,25 @@ mitch.topics = [
   topic(
     "facility",
     "What is inside Rose Training Centre?",
-    "UBC documents four batting cages, pitching machines and a designated pitching area with two mounds. This virtual interior reconstructs the public training space.",
+    "There are four batting cages, pitching machines and a pitching area with two mounds. Take a look around—you can walk through the training hall.",
     mitchSources,
     ["facility", "rose", "inside", "cages"],
   ),
   topic(
     "practice",
     "What are the players practicing?",
-    "The fictional baseball scene demonstrates a pitched ball, a bat swing and fielding a fly ball. It is an ambient illustration, not a coaching plan or a real team practice.",
+    "They’re working on batting and fielding fly balls. Watch the pitch, the swing and how the fielder gets underneath the ball.",
     mitchSources,
     ["practice", "players", "batting", "catch"],
   ),
   topic(
-    "model",
-    "Is this your actual appearance and schedule?",
-    "This is an original stylized model, approximately 6 feet 2 inches tall by the project owner’s request. That model height is not a verified personal measurement. The walking route and all dialogue are simulated.",
-    mitchSources,
-    ["height", "appearance", "schedule", "real"],
-  ),
-  topic(
     "more",
     "Where can I learn more?",
-    "Use the official coach profile and facility page below for published information. No participation or endorsement by Mitch Hodge is implied.",
+    "Take a look at my UBC Athletics profile or the Rose Training Centre page below. You’ll find more about the coaching role and the facility there.",
     mitchSources,
     ["more", "website", "source"],
   ),
 ];
+mitch.permissions +=
+  " The approximately 6-foot-2 model height was requested by the project owner and is not a verified personal measurement. The walking route and dialogue are simulated.";
 expandedCharacters.push(mitch);

@@ -347,8 +347,8 @@ const topic = (
 const werkerTopics: Topic[] = [
   topic(
     "teaching",
-    "What does Dr. Werker teach?",
-    "His UBC faculty profile lists Operations and Climate for 2026–2027. His public professional biography also describes teaching in quantitative decision-making, statistics, supply-chain analytics and operations. Those teaching areas do not establish the current timetable.",
+    "What do you teach?",
+    "I teach in areas such as quantitative decision-making, statistics, supply-chain analytics and operations. My faculty profile lists Operations and Climate for 2026–2027. Are you interested in how mathematics helps people make decisions?",
     ["teach", "course", "quantitative"],
     [sources.werker, sources.health],
     ["or", "statistics"],
@@ -372,7 +372,7 @@ const werkerTopics: Topic[] = [
   topic(
     "study",
     "What can students study at Sauder?",
-    "Sauder provides undergraduate and graduate business education. Programs, prerequisites and admissions requirements vary. Use the official program pages to compare current options; this guide cannot promise admission.",
+    "You can explore undergraduate and graduate business programs at Sauder. The program pages are a good place to compare what you’ll study and the requirements for each option.",
     ["study", "sauder", "program", "admission"],
     [sources.sauder],
     ["teaching"],
@@ -396,7 +396,7 @@ const werkerTopics: Topic[] = [
   topic(
     "health",
     "What are examples of healthcare optimization?",
-    "Examples include planning staffing, scheduling appointments and modelling patient flow. Dr. Werker’s public biography describes healthcare planning and resource-allocation research. These are educational examples, not medical advice or claims about a particular hospital’s current operations.",
+    "Think about scheduling appointments, planning staff coverage or helping patients move through a hospital with less waiting. My research includes healthcare planning and resource allocation. The challenge is making good use of limited resources while considering people’s needs.",
     ["healthcare optimization", "healthcare", "health", "hospital", "patient"],
     [sources.health],
     ["or"],
@@ -412,7 +412,7 @@ const werkerTopics: Topic[] = [
   topic(
     "facilities",
     "Where are Sauder student facilities?",
-    "You are near Henry Angus at 2053 Main Mall. This preview reconstructs part of the public lobby. Consult UBC’s official maps and Sauder resources for real classrooms, accessibility and current construction changes.",
+    "Henry Angus is at 2053 Main Mall, and you can explore the lobby here. If you’re looking for a particular classroom or accessible entrance, UBC’s campus map and Sauder’s website can help.",
     ["classroom", "facility", "facilities", "where"],
     [sources.sauder, sources.map],
     ["study"],
@@ -420,7 +420,7 @@ const werkerTopics: Topic[] = [
   topic(
     "more",
     "Where can I learn more?",
-    "Start with Dr. Werker’s official faculty profile and the Centre for Advancing Health Outcomes biography. These describe his public professional work. This educational guide was not written or endorsed by Dr. Werker.",
+    "My faculty profile is a good place to start. You can also read about my healthcare research at the Centre for Advancing Health Outcomes. Both links are below.",
     ["more", "profile", "biography"],
     [sources.werker, sources.health],
   ),
@@ -428,8 +428,8 @@ const werkerTopics: Topic[] = [
 const baconTopics: Topic[] = [
   topic(
     "welcome",
-    "Welcome to UBC?",
-    "Welcome to this independent virtual visit. UBC’s Vancouver campus is on the traditional, ancestral and unceded territory of the Musqueam people. Begin with the baseball precinct or explore the academic core and student spaces.",
+    "I’m new here. Where should I begin?",
+    "Welcome to UBC! This campus is on the traditional, ancestral and unceded territory of the Musqueam people. You could start with Main Mall, then stop by the Student Nest to explore student life.",
     ["hello", "welcome"],
     [sources.about],
     ["explore", "life"],
@@ -437,14 +437,14 @@ const baconTopics: Topic[] = [
   topic(
     "known",
     "What is UBC known for?",
-    "UBC is a public research university with Vancouver and Okanagan campuses. Teaching, research and community engagement span a broad range of disciplines. The official university overview provides current facts and research information.",
+    "UBC brings together teaching and research across a wide range of subjects, with campuses in Vancouver and the Okanagan. There’s a lot to discover, from science and engineering to the arts and business.",
     ["known", "special", "research"],
     [sources.about],
   ),
   topic(
     "international",
     "What can international students study?",
-    "Prospective international students can explore programs through UBC’s admissions website. Requirements depend on the program, campus and educational background. Check the official pages for current eligibility and deadlines.",
+    "There are many programs to explore. UBC’s admissions website lets you compare them by campus and subject, then check the requirements for your educational background. It also has the application deadlines.",
     ["international", "study", "admission", "program"],
     [sources.admissions],
     ["life"],
@@ -452,7 +452,7 @@ const baconTopics: Topic[] = [
   topic(
     "life",
     "What is student life like?",
-    "Campus life includes learning, student organizations, recreation and places to gather. The AMS Student Nest is one place to discover clubs, food and study spaces. This simulated population is illustrative, not live occupancy.",
+    "There’s plenty beyond classes: clubs, recreation, places to study and spaces to meet people. The Student Nest is a great starting point—you’ll find food, study areas and information about student organizations there.",
     ["student", "life", "clubs"],
     [sources.nest, sources.clubs],
     ["explore"],
@@ -460,7 +460,7 @@ const baconTopics: Topic[] = [
   topic(
     "explore",
     "Where should I explore next?",
-    "Try the Rose training centre beside the baseball stadium, then use the directory to visit the Bookstore, AMS Nest and Sauder. Follow the campus map for geographic context. Virtual walking routes are not real-world access advice.",
+    "Try the Rose training centre beside the baseball stadium, or head to the Bookstore, Student Nest or Sauder. You can choose a place on the campus map and use Guide me to find your way.",
     ["explore", "next", "visit", "where"],
     [sources.map],
   ),
@@ -469,6 +469,7 @@ export const characters: Character[] = [
   {
     id: "werker",
     name: "Dr. Greg Werker",
+    introduction: "I’m Greg Werker. I teach operations and logistics at UBC Sauder, where I’m also Senior Associate Dean for Student Experience.",
     title:
       "Senior Associate Dean, Student Experience; Lecturer, Operations and Logistics",
     department: "UBC Sauder School of Business",
@@ -499,6 +500,7 @@ export const characters: Character[] = [
   {
     id: "bacon",
     name: "Dr. Benoit-Antoine Bacon",
+    introduction: "I’m Benoit-Antoine Bacon, President and Vice-Chancellor of UBC. Welcome to campus!",
     title: "17th President and Vice-Chancellor of UBC",
     department: "Office of the President",
     institution: "University of British Columbia",

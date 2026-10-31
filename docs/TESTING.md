@@ -855,3 +855,16 @@ Browser acceptance additionally checks immediate WASD after directory/map travel
 phone/tablet/desktop dialogue, identity discovery, wave response, follow-up
 questions, source-link attributes, return-to-scene focus and session history.
 [Evidence and limits](UBC_ENCOUNTER_REFINEMENTS_2026-10-31.md).
+
+### UBC natural dialogue — October 31
+
+The updated UBC suite passes 56 tests. It checks every static introduction for
+concise spoken copy without audit boilerplate, including Mitch's requested reply;
+typed identity questions with greeting/polite wrappers; identity topics opening the
+same discovery state; repeated greetings and goodbye; and participant text without
+inferred university affiliations. Existing source/season/follow-up and privacy
+checks remain. Named records require at least three substantive sourced topics;
+removed meta-only questions are available as optional simulation information.
+Browser acceptance covers the reply panel, optional metadata, phone/tablet/desktop
+layouts, typed questions and return-to-scene focus. See
+[scope and evidence](UBC_NATURAL_DIALOGUE_2026-10-31.md).

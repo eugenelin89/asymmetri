@@ -24,12 +24,39 @@ export const emptyConversation = (): ConversationState => ({
   turns: [],
 });
 
+/** Recognize only complete social phrases; never swallow an unsupported follow-up. */
+function socialAction(text: string): ConversationAction | null {
+  const q = text.toLowerCase().replace(/[’']/g, "'").replace(/[.!?,]+$/g, "").trim();
+  const identity = q
+    .replace(/^(?:hi|hello|hey)(?: there)?[,!.\s]+/, "")
+    .replace(/^please\s+/, "")
+    .replace(/,?\s+please$/, "");
+  if (/^(who are you|what's your name|what is your name|introduce yourself|can you introduce yourself|tell me your name|can you tell me your name)$/.test(identity))
+    return { kind: "introduce" };
+  if (/^(hi|hello|hey|hi there|hello there)$/.test(q))
+    return { kind: "hello" };
+  if (/^(thanks|thank you|thanks for chatting|thank you for your help)$/.test(q))
+    return { kind: "thanks" };
+  if (/^(bye|goodbye|see you|see you around)$/.test(q))
+    return { kind: "goodbye" };
+  return null;
+}
+
 /** Original scripted social actions; factual answers remain the reviewed registry text. */
 export function respond(
   character: Character,
   state: ConversationState,
   action: ConversationAction,
 ): ConversationState {
+  const typed = action.kind === "question" ? action.text.trim().slice(0, 240) : null;
+  if (typed === "") return state;
+  if (typed) action = socialAction(typed) || action;
+  if (action.kind === "topic") {
+    const topicId = action.id;
+    const topic = character.topics.find((t) => t.id === topicId);
+    if (topic && socialAction(topic.question)?.kind === "introduce")
+      action = { kind: "introduce" };
+  }
   let turn: ConversationTurn;
   const base = {
     action: action.kind,
@@ -51,8 +78,8 @@ export function respond(
       answer:
         topic?.answer ||
         (character.category === "community"
-          ? "This participant hasn’t written an answer to that question. Try one of their available topics; they are not answering live."
-          : "I don’t have a verified answer to that. Try one of the available questions or check the sources. This simulated guide cannot speak for the real person, give private opinions, track whereabouts or make promises."),
+          ? "There isn’t a written reply to that yet. Try asking about one of the topics below."
+          : "I’m not sure about that. Would you like to talk about one of these topics instead?"),
       gesture: "talk",
       sources: topic?.sources || character.sources,
       topicId: topic?.id,
@@ -65,27 +92,29 @@ export function respond(
     const responses = {
       hello: {
         said: "Hello!",
-        answer: "Hello! Take a moment to chat. What would you like to ask?",
+        answer: state.turns.length
+          ? "Hi again! What would you like to talk about?"
+          : "Hi! Nice to meet you. What would you like to talk about?",
         gesture: "wave",
       },
       introduce: {
         said: "Who are you?",
-        answer: `${character.name} — ${character.title}. ${character.biography}`,
+        answer: character.introduction,
         gesture: "talk",
       },
       wave: {
         said: "Wave hello",
-        answer: "They smile and wave back, ready to chat.",
+        answer: state.introduced ? "Hi again! Nice to see you." : "Hi there!",
         gesture: "wave",
       },
       thanks: {
         said: "Thanks for chatting.",
-        answer: "You’re welcome. Anything else you’d like to explore?",
+        answer: "You’re welcome! Anything else you’d like to ask?",
         gesture: "nod",
       },
       goodbye: {
         said: "See you around!",
-        answer: "They wave goodbye. Enjoy the rest of your campus visit!",
+        answer: "See you around! Enjoy the rest of your visit.",
         gesture: "wave",
       },
     } satisfies Record<
@@ -95,6 +124,7 @@ export function respond(
     turn = {
       ...base,
       ...responses[action.kind],
+      said: typed || responses[action.kind].said,
       sources: action.kind === "introduce" ? character.sources : [],
     };
   }

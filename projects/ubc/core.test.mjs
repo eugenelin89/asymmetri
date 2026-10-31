@@ -47,7 +47,7 @@ test("both named simulations have complete sourcing and grounded topic lookup wi
   assert.ok(characters.filter(c => c.kind === "faculty").length >= 248);
   for (const c of characters) {
     assert.ok(c.verified && c.disclaimer && c.permissions && c.sources.length);
-    assert.ok(c.topics.length >= 5);
+    assert.ok(c.topics.length >= 3, `${c.id} needs substantive conversation choices`);
     assert.equal(answerQuestion(c, "What is your private opinion?"), null);
     assert.equal(answerQuestion(c, "Where are you live right now?"), null);
     assert.equal(answerQuestion(c, "Promise that I will be admitted"), null);

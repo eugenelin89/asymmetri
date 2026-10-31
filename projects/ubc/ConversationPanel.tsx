@@ -81,10 +81,8 @@ export function Conversation({
       </header>
       <p className={styles.context}>
         {character.category === "community"
-          ? "Virtual character · participant-written topics · not live chat"
-          : character.category === "fictional"
-            ? "Fictional guide · scripted conversation"
-            : "Educational simulation · scripted responses, not the real person"}
+          ? "Participant-written replies"
+          : "Scripted conversation"}
       </p>
 
       <div
@@ -102,8 +100,8 @@ export function Conversation({
               {participantAnswer
                 ? "Their written answer"
                 : state.introduced
-                  ? `${character.name} · virtual character`
-                  : "Virtual character"}
+                  ? character.name
+                  : "Someone nearby"}
             </span>
             <p>{turn.answer}</p>
             <span className={styles.reaction}>
@@ -111,7 +109,7 @@ export function Conversation({
                 ? "Waves back"
                 : turn.gesture === "nod"
                   ? "Nods"
-                  : "Turns toward you and responds"}
+                  : "Chats with you"}
             </span>
           </>
         ) : (
@@ -120,7 +118,9 @@ export function Conversation({
               {state.introduced ? "You meet again" : "A chance encounter"}
             </span>
             <p>
-              They pause and turn toward you. What would you like to say or do?
+              {state.introduced
+                ? "You catch up again. What would you like to say?"
+                : "They turn to greet you. What would you like to say?"}
             </p>
           </>
         )}
@@ -259,8 +259,7 @@ export function Conversation({
                 </button>
               </div>
               <small>
-                Uses reviewed topics. Unsupported questions get an honest “I
-                don’t know.”
+                Ask about the topics in this conversation.
               </small>
             </form>
           </details>
@@ -293,6 +292,9 @@ export function Conversation({
           {state.introduced && (
             <>
               <p>{character.title}</p>
+              <p>{character.biography}</p>
+              <p>{character.permissions}</p>
+              <p>{character.behaviour}</p>
               <References links={character.sources} />
               <small>
                 {character.category === "community" ? "Updated" : "Verified"}{" "}

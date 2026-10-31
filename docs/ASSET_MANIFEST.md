@@ -1141,3 +1141,16 @@ The gallery labels provide descriptive link text/alt context.
 - `rose-path-spacing.jpg`: 1280×720; baseball precinct path spacing.
 - `werker-wave-desktop.jpg`: 1280×720; werker wave desktop.
 - `werker-wave-phone.jpg`: 390×844; werker wave phone.
+
+## UBC natural dialogue evidence — 2026-10-31
+
+Two unretouched JPEG captures in `docs/validation/ubc-natural-dialogue/` are
+engineering evidence from the compiled local application, not new public site
+assets. Original procedural character/campus output; no external portrait, logo,
+private profile data or user-supplied screenshot is included. No processing beyond
+browser capture. Existing GIS provenance remains unchanged.
+
+- `mitch-introduction-desktop.jpg`, 1280×720. Alt: “Mitch introduces himself as a
+  UBC Baseball coach, with conversational follow-up choices.”
+- `mitch-introduction-phone.jpg`, 390×844. Alt: “The phone conversation shows Mitch's
+  brief introduction, with source and simulation notes in optional sections.”

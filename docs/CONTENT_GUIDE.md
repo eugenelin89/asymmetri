@@ -778,3 +778,12 @@ as simulations, while factual answers remain the reviewed registry text. Public
 profile topics remain participant-written and are never represented as live chat.
 Multipart building names are grouped by source ID, never by name alone; directory
 addresses and footprint counts distinguish legitimate complexes.
+
+Character `introduction` is spoken copy, separate from `title`, `biography`,
+`permissions` and `disclaimer`. Use brief first-person factual paraphrases and
+natural social replies; these remain explicitly scripted, never authentic quotes.
+Do not concatenate provenance or implementation notes into speech. Keep those in
+About this simulation with sources/dates. Preserve athlete roster years and user-
+authored profile answers; never infer a community member’s university appointment
+from an optional interest area. Complete typed greetings/identity questions share
+the button actions; unsupported personal claims receive a short honest response.
