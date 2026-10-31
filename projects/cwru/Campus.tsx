@@ -405,9 +405,10 @@ export function Campus() {
           : key === "arrowright"
             ? "Turn right"
             : key === "shift"
-              ? "Run (hold while moving)"
+              ? "Run: hold this button and a movement arrow together"
               : label
       }
+      className={key === "shift" ? styles.runButton : undefined}
       onPointerDown={(e) => {
         e.preventDefault();
         e.currentTarget.setPointerCapture(e.pointerId);
@@ -421,12 +422,12 @@ export function Campus() {
         api.current?.input(key, false, String(e.pointerId))
       }
     >
-      {label}
+      {key === "shift" ? <><span>Hold to</span><strong>RUN</strong></> : label}
     </button>
   );
   return (
     <section
-      className={`${styles.experience} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
+      className={`${styles.experience} ${!started ? styles.welcomeHost : ""} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
       aria-label="CWRU Virtual Campus explorer"
     >
       <div className={styles.canvas} ref={host} />
@@ -475,12 +476,17 @@ export function Campus() {
             >
               Start exploring <span>↗</span>
             </button>
+            <div className={styles.runInstructions}>
+              <strong>Want to move faster?</strong>
+              <span><kbd>Shift</kbd> + <kbd>W A S D</kbd> <b>Hold to run</b></span>
+              <small>On touch: hold <b>Run</b> and a movement arrow together.</small>
+            </div>
             <button className={styles.editionSwitch} onClick={() => changeHalloween(!settings.halloween)}>
               {settings.halloween ? "Prefer daylight? Explore the regular campus" : "Explore the Halloween edition"}
             </button>
             {settings.halloween && <label className={styles.welcomeChase}>
               <input type="checkbox" checked={settings.halloweenChase} onChange={e=>update({halloweenChase:e.target.checked})} />
-              Hockey-masked pursuer <span>Shift to run · switch off anytime</span>
+              Hockey-masked pursuer <span>Run to get away · switch off anytime</span>
             </label>}
             <p className={styles.quiet}>
               Desktop & touch · No account required
@@ -611,9 +617,9 @@ export function Campus() {
                 </button>
               </div>
               <div className={styles.status}>
-                <span>
+                <span className={onFoot(mode) ? styles.movementHint : undefined}>
                   {onFoot(mode)
-                    ? "WASD move · Shift run · Drag or ←/→ turn · V change view"
+                    ? <><span><kbd>W A S D</kbd> Walk</span><strong>Hold <kbd>Shift</kbd> to run</strong><span>Drag or ←/→ to turn</span></>
                     : mode === "aerial"
                       ? "Drag to orbit · Right-drag to pan · Scroll to zoom"
                       : "North up · Select a campus destination"}
@@ -1243,9 +1249,10 @@ export function Campus() {
                 <dl className={styles.help}>
                   <dt>Move</dt>
                   <dd>
-                    W/S move forward/back; A/D move sideways. Hold Shift to run
-                    (5.5 m/s).
+                    W/S move forward/back; A/D move sideways.
                   </dd>
+                  <dt>Run</dt>
+                  <dd><strong>Hold Shift while moving with WASD.</strong> Release Shift to walk again. On touch, hold Run and a movement arrow together.</dd>
                   <dt>Turn and look</dt>
                   <dd>
                     Click and hold the scene, then drag left/right to turn or

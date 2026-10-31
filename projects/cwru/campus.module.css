@@ -84,6 +84,7 @@
   );
   padding: 72px 7%;
 }
+.welcomeHost { min-height: 760px; }
 .welcomeCopy {
   position: relative;
   z-index: 1;
@@ -117,6 +118,39 @@
 .quiet {
   font-size: 12px !important;
   color: #a4b5a7 !important;
+}
+.runInstructions {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 8px;
+  padding: 13px 15px;
+  max-width: 390px;
+  background: #0d201ed9;
+  border-left: 3px solid #e7b778;
+  border-radius: 3px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: #f5eedc;
+}
+.runInstructions > span {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.runInstructions small {
+  font-size: 13px;
+  color: #c5cfc1;
+}
+.runInstructions kbd,
+.movementHint kbd {
+  display: inline-block;
+  padding: 1px 6px;
+  border: 1px solid #dedbc866;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font: inherit;
+  white-space: nowrap;
 }
 .welcomeMap {
   position: absolute;
@@ -270,7 +304,7 @@
 .dock {
   position: absolute;
   z-index: 8;
-  bottom: 48px;
+  bottom: 66px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -314,9 +348,25 @@
   letter-spacing: 0.035em;
   color: #e9eee1;
   text-shadow: 0 1px 5px #000;
-  background: #142e2955;
-  padding: 4px 8px;
+  background: #142e29ed;
+  padding: 6px 10px;
   border-radius: 4px;
+  align-items: center;
+  gap: 16px;
+}
+.movementHint {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.movementHint strong {
+  font-size: 17px;
+  color: #ffe0a8;
+}
+@media (max-width: 1000px) {
+  .status > span:last-child { display: none; }
 }
 .marker {
   position: absolute;
@@ -357,7 +407,7 @@
 .interact {
   position: absolute;
   z-index: 7;
-  bottom: 115px;
+  bottom: 140px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 12px !important;
@@ -975,6 +1025,7 @@
   letter-spacing: 0.1em;
 }
 @media (pointer: coarse), (max-width: 700px) {
+  .dock { bottom: 48px; }
   .touch {
     position: absolute;
     z-index: 7;
@@ -1014,9 +1065,23 @@
     font-size: 10px;
     width: 65px;
   }
+  .touch > div:last-child button.runButton {
+    width: 88px;
+    background: #dce6cf;
+    color: #193d31;
+    border-color: #dce6cf;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.2;
+  }
+  .runButton span { font-size: 12px; }
+  .runButton strong { font-size: 18px; }
   .status > span:first-child {
     display: none;
   }
+  .status { display: none; }
   .interact {
     bottom: 160px;
     max-width: 45%;
@@ -1433,7 +1498,7 @@
 /* Seasonal welcome art stays in the lightweight shell; Three loads on entry. */
 .halloweenWelcomeHost {
   height: min(820px, 90dvh);
-  min-height: 700px;
+  min-height: 820px;
 }
 .welcome.halloweenWelcome {
   display: flex;
