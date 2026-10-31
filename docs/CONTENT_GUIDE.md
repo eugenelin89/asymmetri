@@ -571,7 +571,7 @@ or contextual questions. `botsquadStructure` centralizes area labels and URLs;
 areas only when the owner defines them; do not invent placeholder projects.
 
 The Labs card and global Labs menu open BotSquad. The menu contains Asymmetri Labs,
-BotSquad and GIS Apps; Research, Trade and Ask are reached within BotSquad.
+BotSquad and Campus and City; Research, Trade and Ask are reached within BotSquad.
 Its area directory opens Research and Ask; Research opens Trade. Shared BotSquad
 breadcrumbs and area links allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified
@@ -620,7 +620,9 @@ rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
 Asymmetri Labs groups Vancouver, City in Progress; Surrey, City of Adventure; and Richmond Learns to Drive under **GIS Apps**.
 `gisApps` in `content/site.ts` owns `/labs/gis`, its metadata, city cards and
-reconstruction explanation. The Labs menu and Labs category card open this hub;
+reconstruction explanation. The Labs submenu uses **Campus and City** for the
+unchanged `/labs/gis` destination. The hub title, Labs category card and footer
+retain **GIS Apps**. The Labs menu and Labs category card open this hub;
 city cards reuse the existing project names, statuses, descriptions, source and
 licence links. Footer city shortcuts remain available alongside GIS Apps.
 City display names, GIS descriptions and limitation headings derive from the

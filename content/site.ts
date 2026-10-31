@@ -210,7 +210,7 @@ export const site = {
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
         { label: divisions.labs.product.name, href: divisions.labs.product.path },
-        { label: gisApps.name, href: gisApps.path },
+        { label: "Campus and City", href: gisApps.path },
       ],
     },
     { label: "About", href: "/about" },
