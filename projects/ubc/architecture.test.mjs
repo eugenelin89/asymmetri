@@ -32,7 +32,8 @@ registerHooks({
   },
 });
 
-const { buildArchitecture } = await import("./architecture.ts");
+const { architectureEnvelope, buildArchitecture } =
+  await import("./architecture.ts");
 const { createCollision, floorAt, global, local } =
   await import("./spatial.ts");
 const { createRoutes } = await import("./spatial.ts");
@@ -57,6 +58,20 @@ test("stadium: walk field, mound, dugout, bullpen and grandstand, then exit", ()
       width: 170,
       depth: 150,
     };
+  const turf = architecture.group.children.find(
+    (mesh) => mesh.material?.color?.getHex() === 0x447957,
+  );
+  assert.ok(turf, "Rendered turf exists");
+  for (let i = 0; i < turf.geometry.attributes.normal.count; i++)
+    assert.ok(
+      turf.geometry.attributes.normal.getY(i) > 0.99,
+      "Field surfaces face upward for lighting",
+    );
+  assert.equal(
+    turf.castShadow,
+    false,
+    "Layered turf avoids self-shadow striping",
+  );
   const collision = createCollision(
       empty,
       [{ anchor, ...architecture }],
@@ -102,6 +117,7 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
   );
   const kinds = ["rose", "bookstore", "nest", "sauder"];
   const interiors = kinds.map((kind) => {
+    anchors[kind] = architectureEnvelope(kind, anchors[kind]);
     const a = anchors[kind],
       height = data.buildings.find((b) => b.id === a.buildingId).height;
     const asset = buildArchitecture(kind, a.width, a.depth, height);
@@ -139,6 +155,12 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
     }
     assert.equal(collision.blocked(a.entry, 0), false, `${kind} approach`);
     if (kind !== "stadium") {
+      const approach = global([0, a.depth / 2 + 6], a);
+      assert.equal(
+        collision.blocked(approach, 0),
+        false,
+        `${kind} exterior arrival`,
+      );
       const f = {
         anchor: a,
         architecture: interiors.find((i) => i.anchor.id === kind),
@@ -147,6 +169,15 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
       };
       walkTo(f, [0, a.depth / 2 - 2]);
       walkTo(f, f.architecture.entry);
+      if (kind === "nest") {
+        const ramp = f.architecture.ramps[0],
+          x = (ramp.minX + ramp.maxX) / 2;
+        walkTo(f, [0, a.depth / 2 - 10]);
+        walkTo(f, [x, a.depth / 2 - 10]);
+        walkTo(f, [x, ramp.maxZ + 0.8]);
+        walkTo(f, [x, ramp.minZ - 0.5], 5);
+        walkTo(f, [x, ramp.maxZ + 0.8], 0);
+      }
     }
   }
   const population = createPeople(data, anchors, collision.blocked),
@@ -167,6 +198,24 @@ test("shipped campus: spawn, connected source routes, real entrances and moving 
     (a, i) => (travelled += a.group.position.distanceTo(positions[i])),
   );
   assert.ok(travelled > 1, "Named simulations move on their virtual routes");
+  for (const actor of named) {
+    const before = actor.group.position.clone();
+    for (let i = 0; i < 300; i++)
+      population.update(
+        1 / 30,
+        i / 30,
+        [before.x, before.z + 3],
+        12,
+        true,
+        null,
+        false,
+      );
+    assert.equal(
+      actor.group.position.distanceTo(before),
+      0,
+      "Nearby guides wait for conversation",
+    );
+  }
 });
 
 function fixture(kind, width, depth, yaw = 0.46) {

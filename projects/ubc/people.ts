@@ -205,6 +205,12 @@ export function createPeople(
           dist < 220 &&
           ((hour > 6 && hour < 22) || Number(a.id.split("-")[1]) % 5 === 0));
       if (!a.group.visible || active === a.id || reduced) continue;
+      if (a.named && dist < 6) {
+        a.group.rotation.y = Math.atan2(focus[0] - p.x, focus[1] - p.z);
+        a.legs.forEach((limb) => (limb.rotation.x = 0));
+        a.arms.forEach((limb) => (limb.rotation.x = 0));
+        continue;
+      }
       if (a.pause > 0) {
         a.pause -= dt;
         continue;

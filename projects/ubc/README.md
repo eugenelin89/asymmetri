@@ -43,8 +43,8 @@ services. See [the implementation and acceptance report](../../docs/UBC_IMPLEMEN
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
   Winter snow is optional; evergreen and deciduous trees are separate materials.
-- Photo: hides normal UI and exports a fresh canvas PNG. This is not a substitute
-  for the outstanding browser screenshot acceptance work.
+- Photo: hides normal UI and shows a fresh canvas PNG preview with a Save PNG link.
+  The browser validation gallery retains real scene exports and interaction captures.
 
 ## Architecture and reuse
 
@@ -79,6 +79,9 @@ facades, roof forms, furnishings and stadium components remain interpretations.
 Ground elevation is flat, so this is not a terrain survey or real-world accessible
 route planner. The Sauder expansion is described as construction expected to finish
 in 2027, not rendered as a completed future building.
+The Nest's supported central envelope is narrowed to 76 m to avoid overlap with the
+Alumni Centre. Ten source trees inside model envelopes are excluded from rendering;
+source records and mapped footprints remain unchanged.
 
 Greg Werker's current faculty profile says “Senior Associate Dean, Student Experience”.
 The older leadership-directory wording “Students” is recorded as a source conflict.
@@ -86,8 +89,9 @@ Bacon's official biography and September 2026 welcome support his presidential r
 Virtual routes do not represent either person's actual movements.
 
 Read [third-party notices](THIRD_PARTY_NOTICES.md), the data manifest and the full
-acceptance report before publishing. Physical-device testing, visual comparisons,
-screenshots and real browser frame-rate measurements remain separate acceptance gates.
+acceptance report before publishing. Browser walkthroughs and 25 real captures now
+exist; physical-device testing, reference comparisons and sustained frame-time
+measurements remain separate acceptance gates. See the [evidence gallery](../../docs/validation/ubc/README.md).
 
 ## Updating information
 

@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { Sky } from "three/addons/objects/Sky.js";
 import { disposeScene } from "../surrey/resources";
-import { buildArchitecture } from "./architecture";
+import { architectureEnvelope, buildArchitecture } from "./architecture";
 import { buildStadium, label } from "./stadium";
 import { buildLandscape, buildingCenter, shape } from "./scenery";
 import {
@@ -42,7 +42,7 @@ export type CampusAPI = {
   route: (id: string) => boolean;
   clearRoute: () => void;
   lock: () => void;
-  capture: () => void;
+  capture: () => string;
   dispose: () => void;
   position: () => Pose;
 };
@@ -71,7 +71,7 @@ export function createCampus(
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.domElement.tabIndex = 0;
   renderer.domElement.setAttribute(
     "aria-label",
@@ -115,9 +115,28 @@ export function createCampus(
     targets: THREE.Object3D[] = [],
     infoPoints = new Map<string, { x: number; y: number; z: number }>();
   const excluded = new Set<string>();
-  for (const key of ["rose", "bookstore", "nest", "sauder"])
+  const kinds = ["rose", "bookstore", "nest", "sauder"] as const;
+  for (const key of kinds) {
+    anchors[key] = architectureEnvelope(key, anchors[key]);
     if (anchors[key]?.buildingId) excluded.add(anchors[key].buildingId!);
-  const landscape = buildLandscape(data, excluded);
+  }
+  const landscape = buildLandscape(
+    {
+      ...data,
+      trees: data.trees.filter(
+        (tree) =>
+          !kinds.some((kind) => {
+            const a = anchors[kind],
+              p = local([tree.x, tree.z], a);
+            return (
+              Math.abs(p[0]) < a.width / 2 + 1 &&
+              Math.abs(p[1]) < a.depth / 2 + 1
+            );
+          }),
+      ),
+    },
+    excluded,
+  );
   scene.add(landscape.group);
   targets.push(...landscape.buildingMeshes);
   for (const kind of ["rose", "bookstore", "nest", "sauder"] as const) {
@@ -171,14 +190,6 @@ export function createCampus(
       asset.group.add(board);
       targets.push(board);
     }
-    const sign = label(
-      places.find((p) => p.id === kind)!.name.toUpperCase(),
-      900,
-      110,
-    );
-    sign.position.set(0, 3, a.depth / 2 + 0.2);
-    sign.scale.set(Math.min(a.width * 0.65, 18), 1.2, 1);
-    asset.group.add(sign);
   }
   const stadium = buildStadium(),
     stadiumAnchor = anchors.stadium;
@@ -496,13 +507,28 @@ export function createCampus(
     }
     if (!target) return;
     let safe: Point | undefined;
+    const interior = interiors.find((i) => i.anchor === a);
+    // Start on the exterior side of the modelled entrance, facing the door.
+    // A world-axis offset can fall inside a rotated building.
+    if (interior) {
+      for (let distance = 4; distance <= 24 && !safe; distance += 2) {
+        const p = global(
+          [interior.entry[0], interior.entry[1] + distance],
+          interior.anchor,
+        );
+        if (!collision.blocked(p, 0)) safe = p;
+      }
+    }
     for (let r = 3; r <= 25 && !safe; r += 2)
       for (let i = 0; i < 16; i++) {
         const p: Point = [
           target[0] + Math.sin((i * Math.PI) / 8) * r,
           target[1] + Math.cos((i * Math.PI) / 8) * r,
         ];
-        if (!collision.blocked(p, 0)) {
+        if (
+          !collision.blocked(p, 0) &&
+          (!interior || local(p, interior.anchor)[1] > interior.entry[1])
+        ) {
           safe = p;
           break;
         }
@@ -727,10 +753,7 @@ export function createCampus(
     },
     capture: () => {
       renderer.render(scene, camera);
-      const a = document.createElement("a");
-      a.download = `ubc-${settings.season}-${settings.weather}.png`;
-      a.href = renderer.domElement.toDataURL("image/png");
-      a.click();
+      return renderer.domElement.toDataURL("image/png");
     },
     dispose: () => {
       disposed = true;

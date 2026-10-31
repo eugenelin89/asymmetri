@@ -8,6 +8,16 @@ export function buildStadium() {
     floors: Floor[] = [],
     ramps: Ramp[] = [];
   const batches = new Map<THREE.Material, THREE.BufferGeometry[]>();
+  const upward = (geometry: THREE.BufferGeometry) => {
+    geometry.rotateX(Math.PI / 2);
+    const indices = geometry.index!;
+    for (let i = 0; i < indices.count; i += 3) {
+      const first = indices.getX(i);
+      indices.setX(i, indices.getX(i + 2));
+      indices.setX(i + 2, first);
+    }
+    geometry.computeVertexNormals();
+  };
   const mat = (c: number, r = 0.8) =>
     new THREE.MeshStandardMaterial({
       color: c,
@@ -82,7 +92,7 @@ export function buildStadium() {
   fan.lineTo(14, 10);
   fan.closePath();
   const fg = new THREE.ShapeGeometry(fan);
-  fg.rotateX(Math.PI / 2);
+  upward(fg);
   fg.translate(0, 0.025, 0);
   add(fg, turf);
   // Broad subtle mowing bands within the playable fan.
@@ -100,7 +110,7 @@ export function buildStadium() {
   diamond.lineTo(-18.5, -19.4);
   diamond.closePath();
   const dg = new THREE.ShapeGeometry(diamond);
-  dg.rotateX(Math.PI / 2);
+  upward(dg);
   dg.translate(0, 0.05, 0);
   add(dg, turf);
   disk(0, -18.44, 2.75, clay, 0.12);
@@ -121,7 +131,7 @@ export function buildStadium() {
   plate.lineTo(-0.22, 0.05);
   plate.closePath();
   const pg = new THREE.ShapeGeometry(plate);
-  pg.rotateX(Math.PI / 2);
+  upward(pg);
   pg.translate(0, 0.09, 0);
   add(pg, white);
   for (const side of [-1, 1]) {
@@ -328,7 +338,9 @@ export function buildStadium() {
     gs.forEach((g) => g.dispose());
     if (merged) {
       const mesh = new THREE.Mesh(merged, m);
-      mesh.castShadow = true;
+      // Near-coplanar field layers receive stadium shadows without shadowing
+      // one another, which creates severe striping at human eye height.
+      mesh.castShadow = m !== turf && m !== stripe && m !== clay;
       mesh.receiveShadow = true;
       group.add(mesh);
     }

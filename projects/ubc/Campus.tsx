@@ -64,6 +64,7 @@ export function Campus() {
   const host = useRef<HTMLDivElement>(null),
     api = useRef<CampusAPI | null>(null),
     panelRef = useRef<HTMLElement>(null),
+    dialogueRef = useRef<HTMLDivElement>(null),
     opener = useRef<HTMLElement | null>(null);
   const [started, setStarted] = useState(false),
     [ready, setReady] = useState(false),
@@ -71,6 +72,7 @@ export function Campus() {
     [generation, setGeneration] = useState(0),
     [expanded, setExpanded] = useState(false),
     [photo, setPhoto] = useState(false);
+  const [captured, setCaptured] = useState<string | null>(null);
   const [data, setData] = useState<CampusData | null>(null),
     [anchors, setAnchors] = useState<Anchors>({}),
     [mode, setMode] = useState<Mode>("walk"),
@@ -84,6 +86,9 @@ export function Campus() {
     [route, setRoute] = useState<Point[] | null>(null),
     [histories, setHistories] = useState<Record<string, Message[]>>({}),
     [question, setQuestion] = useState("");
+  useEffect(() => {
+    dialogueRef.current?.lastElementChild?.scrollIntoView({ block: "start" });
+  }, [histories]);
   const openPanel = useCallback(
     (id: string) => {
       opener.current = document.activeElement as HTMLElement;
@@ -270,8 +275,10 @@ export function Campus() {
     })),
     ...(data?.buildings
       .filter(
-        (b) =>
-          b.name && !Object.values(anchors).some((a) => a.buildingId === b.id),
+        (b, index, buildings) =>
+          b.name &&
+          buildings.findIndex((part) => part.id === b.id) === index &&
+          !Object.values(anchors).some((a) => a.buildingId === b.id),
       )
       .map((b) => ({
         id: b.id,
@@ -323,6 +330,7 @@ export function Campus() {
               alt=""
               width={640}
               height={800}
+              loading="eager"
               unoptimized
             />
             <small>49.26° N · 123.25° W</small>
@@ -586,13 +594,45 @@ export function Campus() {
                   <option key={m}>{m}</option>
                 ))}
               </select>
-              <button onClick={() => api.current?.capture()}>
+              <button
+                onClick={() => setCaptured(api.current?.capture() || null)}
+              >
                 Capture PNG
               </button>
-              <button onClick={() => setPhoto(false)}>
+              <button
+                onClick={() => {
+                  setPhoto(false);
+                  setCaptured(null);
+                }}
+              >
                 Return to exploring
               </button>
             </div>
+          )}
+          {photo && captured && (
+            <section
+              className={styles.photoPreview}
+              aria-label="Captured campus photo"
+            >
+              <Image
+                src={captured}
+                alt="Captured view of the virtual campus"
+                width={1440}
+                height={900}
+                unoptimized
+              />
+              <div>
+                <a
+                  href={captured}
+                  download={`ubc-${settings.season}-${settings.weather}.png`}
+                >
+                  Save PNG
+                </a>
+                <button onClick={() => setCaptured(null)}>
+                  Close photo preview
+                </button>
+              </div>
+            </section>
           )}
         </>
       )}
@@ -833,7 +873,11 @@ export function Campus() {
                   Responses are curated educational summaries, not the person’s
                   words.
                 </p>
-                <div className={styles.dialogue} aria-live="polite">
+                <div
+                  className={styles.dialogue}
+                  ref={dialogueRef}
+                  aria-live="polite"
+                >
                   {history.map((m, i) => (
                     <article key={i}>
                       <strong>You · {m.question}</strong>

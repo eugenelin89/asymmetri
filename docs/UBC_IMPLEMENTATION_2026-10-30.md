@@ -4,9 +4,10 @@ Date: October 30, 2026, America/Vancouver. Candidate: V0.1 research preview.
 
 **A substantial application is implemented, but the flagship V2 acceptance
 standard has not been reached.** Automated navigation and source-integrity checks
-pass. Browser walkthroughs, visual comparisons, screenshots and device performance
-are pending because local browser access was disabled. The user is away from the
-computer and will enable it later. No production deployment was performed.
+pass. After the user enabled browser access, desktop and responsive walkthroughs
+found and resolved entrance, Nest-envelope, guide-proximity and field-shadow issues.
+Twenty-five real browser/scene captures are retained. Physical-device testing and
+architectural-fidelity acceptance remain outstanding. No production deployment was performed.
 
 ## A. Project implementation
 
@@ -91,7 +92,7 @@ not mean every building is recognizable at architectural-survey fidelity.
 | Rose | Source building VBL10237 and primary-entrance record; original timber/net training interior and interpreted facade. |
 | Sauder | Source Henry Angus VBL10067; lobby and taller rear academic mass. Powerhouse is described as construction with expected 2027 completion, not shown as finished. |
 | Bookstore | Source VBL10065; interpreted glazed frontage, retail interior and rear mass. |
-| AMS Nest | Source VBL10407; interpreted atrium, timber forms, suspended study lounge and supported galleries. |
+| AMS Nest | Source VBL10407; interpreted central atrium, timber forms, suspended study lounge and supported galleries. The navigable envelope is 76 m wide to avoid overlap with the neighbouring Alumni Centre. The original footprint remains in map/source data. |
 | Main academic campus | Continuous source roads, paths, buildings and trees. Most architecture remains simplified. |
 | Rose Garden | Garden/parkade context information point; the elevated garden and detailed planting are not reconstructed. |
 
@@ -114,15 +115,21 @@ fixture/wall collision and normal exits. **All are Level B; none is claimed as L
 
 Public Bookstore plans are historical; AMS's public amenities map documents more
 levels than this preview models. Furniture, public-space arrangement, roof forms
-and facade details are representative. Minimum-area geographic envelopes are used
+and facade details are representative. Oriented geographic envelopes are used
 for custom models; they do not reproduce every indentation of the source footprint.
+The Nest uses a reduced central envelope rather than its full bounding rectangle,
+which would overlap the Alumni Centre. Ten source trees inside the four model
+envelopes are omitted from rendering to keep reconstructed interiors clear; the
+immutable GIS dataset retains those records. This does not assert that real trees
+should be removed or that the reconstructed envelope is the final architecture.
 The custom doorway is clear but does not necessarily coincide exactly with the
 recorded entrance point. No identical interiors are generated for unknown buildings.
 
 ## D. Interactive characters
 
-Both mandatory guides are implemented and pass automated placement/movement checks.
-Their browser discovery, visible labels and full conversation flow still need UI acceptance.
+Both mandatory guides pass automated placement/movement checks and browser discovery,
+visible-label, E activation and curated-response checks. They stop and face visitors
+within six metres, avoiding the earlier problem of walking away during activation.
 
 | Guide | Source verification and conversation |
 | --- | --- |
@@ -148,7 +155,7 @@ for crowds or realistic all-campus activity density.
 ## E. Information and hyperlinks
 
 The directory contains priority places, both guides and all named imported building
-parts. Major models and information boards support ray selection; near objects
+records (deduplicated by building ID). Major models and information boards support ray selection; near objects
 provide E/tap interactions. Bookstore displays link to course materials, apparel
 and stationery. Nest displays link to food, study rooms and clubs. Sauder, stadium,
 Rose, Beaty, libraries and official map links are included.
@@ -169,7 +176,14 @@ free walking. This is simulation guidance, not real accessibility advice.
 
 The UI includes touch controls, accessible button names, focus handling, a modal
 focus trap, keyboard topics, reduced motion and a server-rendered no-WebGL guide.
-Real mobile tap/layout acceptance and screen-reader testing are still pending.
+Browser checks covered on-screen movement holds, direct 3D Nest selection, Bookstore
+apparel and Nest study displays, search, Escape dismissal and initial modal keyboard
+focus. At 390 × 844, 767 × 1024 and 1440 × 900 CSS-pixel views there was no horizontal
+overflow. A 300-pixel probe exposes the existing site's 320-pixel minimum width.
+Physical touch devices and screen readers remain untested. One external-source click
+kept the campus state, but the in-app browser did not expose a separate destination
+tab; normal-browser new-tab behaviour remains to be checked. HTTPS destinations and
+security attributes are verified separately from that browser limitation.
 
 ## F. Visual and environmental quality
 
@@ -180,26 +194,25 @@ instanced tree canopies and distant building proxies. Stadium floodlights and
 interior lighting respond to the environment. Four seasons, rainy winter and optional
 snow, fog/clouds, wet pavement and Vancouver solar timing are selectable.
 
-**No real screenshots were captured, and no visual benchmark is claimed.** The
-computer-use tool returned “Local browser use is disabled in Work settings.” The
-user will enable access after returning to the computer. The vector welcome map is
-identified as a GIS-derived preview, not a screenshot or photographic campus image.
+Real evidence is in [the browser validation gallery](validation/ubc/README.md), with
+hashes, dimensions and capture provenance in its manifest. PNGs are actual WebGL
+exports read from the visible photo preview, with no UI or developer overlays.
+JPEGs show browser interactions; some retain in-app viewport padding and the Next
+development indicator. They are not generated concept artwork.
 
-Required browser captures remain:
+Captured views include the West 16th spawn, home plate, grandstand, golden hour,
+night lighting, Rose, Bookstore, Nest atrium and upper gallery, Sauder exterior/lobby,
+both guide interactions, route map, all four seasons and rainy/snowy winter.
+The shadow-striping defect visible in the initial stadium walkthrough was corrected
+by fixing field winding/normals and excluding layered turf/clay from casting shadows.
+The final browser log contained no warnings or errors.
 
-1. West 16th spawn and stadium approach.
-2. Home plate, mound, dugout, bullpen and grandstand.
-3. Rose training interior.
-4. Sauder exterior and Werker conversation.
-5. Bacon discovery and conversation.
-6. Bookstore aisles and displays.
-7. Nest atrium, stairs and both supported galleries.
-8. Autumn Main Mall, rainy winter, snowfall and sunset/night stadium.
-
-These must be compared with legitimate public references before calling Phase 1
-production-quality. Current vegetation and character forms remain procedural;
-snow coverage is a material/particle scenario, not physical accumulation. Roofs,
-lighting, exposure, collision-camera sightlines and interiors still need visual tuning.
+**These images do not meet the requested flagship realism benchmark.** Vegetation,
+characters and background facades are visibly procedural, and landmark massing is
+approximate. Snow colours lawns/background roofs and trees but does not yet accumulate
+on all bespoke roofs, stadium turf or furniture. Exact-reference comparison, a
+specific Main Mall composition, and close-up mound/dugout/bullpen evidence remain
+outstanding. No photorealism or full architectural accuracy is claimed.
 
 ## G. Testing and unresolved limits
 
@@ -213,14 +226,25 @@ lighting, exposure, collision-camera sightlines and interiors still need visual 
 | Vinext production build | Passed; existing large-bundle warning remains, including Three.js-related code |
 | `npm audit --omit=dev` | Zero reported production dependency vulnerabilities |
 | Local HTTP | `/labs/ubc` returned HTTP 200; data/anchor availability checked separately |
-| Browser/viewport/screenshot tests | Blocked by disabled local browser access; not claimed as passed |
-| Real rendering performance | Unmeasured. No 60 FPS desktop or 30 FPS mobile claim |
+| Browser walkthrough | Rose entrance/hall/exit, Bookstore entrance/aisle/exit, Nest entrance and both upper gallery ascents, Sauder entrance/lobby, stadium field/home plate/grandstand, both guides, map route and information displays exercised |
+| Responsive and screenshots | 25 captures; desktop, tablet and 390 CSS-pixel mobile-width checks; on-screen movement, keyboard dismissal, quality, reduced motion and marker controls exercised |
+| Browser rendering sample | Final Auto sample at Sauder: 60 FPS, 513 draw calls, 1,740,385 triangles at 1440 × 900 CSS pixels. A Low-setting transition sample read 31 FPS/304 calls/712,531 triangles. These are instantaneous UI observations, with a panel open, not sustained walking benchmarks or hardware certification |
 | Physical iOS/Android hardware | Not tested |
 
 The automated tests use actual generated collision geometry and continuous movement,
 not teleport-only assertions. They found and fixed a Bookstore doorway-column clash
 at the actual geographic orientation. The stadium test walks around its real model
 barriers rather than disabling collision to reach targets.
+
+Browser testing additionally found and fixed exterior arrival direction, duplicate
+directory records, neighbouring geometry intruding into the Nest, indoor tree
+clipping, guides leaving during interaction, out-of-view dialogue answers, duplicate
+facade signs, a removed Three.js shadow mode, the preview-image loading warning and
+field self-shadow striping. Regression assertions now cover the actual Nest approach
+and first stairs against neighbouring GIS buildings, nearby guide pauses and upward
+field normals. Full Nest descent/exit, every cage, mound/dugout/bullpen traversal and
+all displays are automated geometry evidence; they are not all claimed as completed
+manual browser journeys.
 
 The renderer delays startup until requested and uses geographic vegetation groups,
 material batching, architecture proxies and quality-dependent resolution/shadows.
@@ -246,8 +270,8 @@ candidate validation and rollback procedure after browser acceptance.
 
 ## I. Five highest-value next improvements
 
-1. Enable browser access, complete every required desktop/mobile walkthrough and
-   screenshot, compare legitimate references, then establish measured GPU/frame-time baselines.
+1. Complete remaining physical-device and sustained walking benchmarks, external
+   new-tab checks and reference comparisons; use them to set visual/performance budgets.
 2. Add a licensed elevation surface and accurate grade/entrance transitions, with
    one verified vertical datum across paths, buildings, landscaping and interiors.
 3. Replace minimum-rectangle landmark envelopes with surveyed/reference-aligned
@@ -258,6 +282,6 @@ candidate validation and rollback procedure after browser acceptance.
    improve vegetation and animated crowds within measured desktop/mobile budgets.
 
 Phase status: Phase 0 has concrete source/architecture outputs. Phases 1–3 have
-implemented interactive candidates and passing automated movement tests, but remain
-unaccepted without browser/visual validation. Phase 4 currently supplies geographic
+implemented interactive candidates, passing automated movement tests and substantial
+browser validation, but remain below production visual/fidelity acceptance. Phase 4 supplies geographic
 context, not detailed campus-wide architecture. Phases 5–6 remain future work.

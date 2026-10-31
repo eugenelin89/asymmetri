@@ -786,3 +786,10 @@ Vancouver/Surrey/Richmond suites protect shared behavior. Complete the browser
 walkthrough and screenshot checklist in `UBC_IMPLEMENTATION_2026-10-30.md` before
 claiming visual acceptance or production readiness. Viewport emulation and actual
 phone measurements must be reported separately.
+
+The October 30 UBC browser pass and 25 captures are recorded in
+`validation/ubc/README.md`. It found and fixed rotated-door arrival, the Nest/Alumni
+Centre overlap, guide proximity, dialogue scrolling and stadium shadow striping.
+Automated coverage includes the shipped Nest's stairs against neighbouring GIS
+geometry and field-normal regression checks. Desktop samples are observations, not
+sustained frame-time or physical-mobile acceptance.

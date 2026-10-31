@@ -1043,8 +1043,12 @@ phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immut
 - No photographic textures, UBC logos, third-party model downloads, externally
   hosted images or generated bitmap assets were added. Photographs/plans were
   used only for research and remain linked to their copyright owners.
-- No real browser screenshot has been accepted yet: local browser access was
-  disabled. Do not relabel diagrams or procedural model output as screenshots.
+- `docs/validation/ubc/`: 25 real local browser/scene captures. PNGs are unmodified
+  WebGL photo-mode exports; JPEGs document UI interactions and may retain the in-app
+  viewport padding/development indicator. Per-file dimensions, hashes and capture
+  provenance are in `manifest.json`. These are original application reconstructions,
+  not photographs of UBC, official architectural assets or real-person likenesses.
+  They are documentation evidence, not new production page imagery.
 
 - `public/ubc/preview-map.svg`: 288 KiB original vector welcome illustration,
   derived from the same sourced building polygons and road lines. Decorative alt

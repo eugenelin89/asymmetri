@@ -1,0 +1,214 @@
+{
+  "capturedUTC": "2026-10-31",
+  "localDate": "2026-10-30",
+  "route": "/labs/ubc",
+  "environment": "Local Next.js development preview, ChatGPT in-app browser on macOS; no production capture",
+  "rights": "Original application geometry and code MIT; derived UBC GIS PDDL 1.0; existing application font rights unchanged. No third-party photographs or likeness assets.",
+  "notes": [
+    "PNG files are actual rendered scene exports, not generated concept art.",
+    "Browser screenshot JPEGs may include the development indicator and in-app viewport padding.",
+    "Early superseded interior JPEGs were retained outside the repository; final interiors use clean PNG exports."
+  ],
+  "files": [
+    {
+      "file": "01-west-16-spawn.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 520246,
+      "sha256": "651704d1c803f7831ba6bed1475f4364c650bb169552df53969b06b97f53e1b9",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "02-rose-interior.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1785990,
+      "sha256": "c3bb08234cf5b31c50b597d159d426cb5c97d49207a801e04462d6dbcee4e88c",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "03-bookstore-interior.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1111516,
+      "sha256": "c5c8cb24ba953b14a5752158f8de164868191737105d3e5a51f2593bf38dda50",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "04-rendering-observations.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 43269,
+      "sha256": "5bf88a9285711e8e9db7ced72b17c88c41927ed7ab53570c71e829efdf5959d8",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "05-nest-atrium.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 947302,
+      "sha256": "807efe87ea468a8972cb52599fb52affa4036528c3a3feeb36b02bb403f67824",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "06-nest-upper-gallery.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 901789,
+      "sha256": "b8be539f33d9173db05e321309b301361cd77db27ee886b5de3f24f9db1cd418",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "07-werker-conversation.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 49195,
+      "sha256": "b4bcd6540430ef24ff5a7aa643ad02d0662f4cabdf6419057d77c9af8ba82dd3",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "08-werker-unsupported-question.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 51457,
+      "sha256": "78ac2697059a05aa20e9a7eb8847d87964afbd2a733e9cc011273b94a1e76613",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "09-president-conversation.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 54354,
+      "sha256": "4f71fea38f123f1922be0985bf05a12c6c8bcc09d20fbe9d55fff093a5665d08",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "10-president-guide.png",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 818313,
+      "sha256": "71891dda85f9f354ee5147473d842bead889064f832c27e4dfa75ffeba079a91",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "11-campus-map-route.jpg",
+      "width": 1440,
+      "height": 900,
+      "bytes": 95052,
+      "sha256": "c16372adc2e6f729027f315c9a7027731352589b33e7f3f49084eae0d4eb2702",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "12-stadium-home-plate.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 442145,
+      "sha256": "756c8bd3655b8050c8af62835e3335f3258d05c853ae790aa66247c3ada9fb17",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "13-stadium-golden-hour.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 645051,
+      "sha256": "46c15f54d43e685d120c4b9a3013f109909d3196de5769f3eeb42b292254a04e",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "14-stadium-grandstand.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 797268,
+      "sha256": "bbc6473d482ec033d04df478f8627963c8d22baf11e387d457e1ec1390f9d595",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "15-stadium-night.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 412839,
+      "sha256": "302c77420f5e83ab4479b66797415e6c2793c57b51d9abb112cf868375a32bed",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "16-winter-snow-aerial.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1213010,
+      "sha256": "549c68aadbe851e8259e8ab408e3f9771dfec5ab9efa86a7cdf41cc7d0f1ab06",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "17-vancouver-rainy-winter.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1061775,
+      "sha256": "e865d6a927e1dc520a37ace163bd8349f16f0f1a7849a475cede14b15f30d270",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "18-autumn-aerial.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1184510,
+      "sha256": "f0f1aa7a9ac8232431d133c3da146715d3a3d170036396d7dd96ab6364ed135c",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "18-spring-aerial.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1165890,
+      "sha256": "a2f2c34cc24a857d2ed58c0f62df01ca5554396ffb85dfa609d5c02ee2e4d2a8",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "18-summer-aerial.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 1149196,
+      "sha256": "00279f111ac6cb13377e67f5a06f62bf633f1bd50dc1e06f9934787e11d0982c",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "19-sauder-exterior.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 652065,
+      "sha256": "9ef173c3841c0145bfde514825ab720b1b0a3ab5a01c888799d1b48395953327",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "20-sauder-lobby.png",
+      "width": 1385,
+      "height": 865,
+      "bytes": 299108,
+      "sha256": "90c2b2c92f7c8ff70535021dd46d084dc3bd637ca570b07fd0a8c62cafd83da9",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    },
+    {
+      "file": "21-mobile-directory.jpg",
+      "width": 390,
+      "height": 844,
+      "bytes": 27324,
+      "sha256": "f1d585a14abfa30a22e1f3b627158f647134153ef15c324e0c0885f9b3bf27f8",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "22-tablet-study-panel.jpg",
+      "width": 768,
+      "height": 1024,
+      "bytes": 24824,
+      "sha256": "6214fc4309d5eb6df3fcbbccc013e06b90e65d0ff1df1e69f623609ec7221d4b",
+      "capture": "Computer-use browser screenshot, including UI"
+    },
+    {
+      "file": "23-werker-at-sauder.png",
+      "width": 1800,
+      "height": 1125,
+      "bytes": 1222794,
+      "sha256": "36c42a93cb66069cced7d13d1ef1689bae1eda895b3c857ffcc0a675f9c6d662",
+      "capture": "Live WebGL photo-mode PNG, read from the visible capture preview"
+    }
+  ]
+}

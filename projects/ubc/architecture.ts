@@ -4,8 +4,21 @@
 // private offices, or third-party model meshes are incorporated.
 import * as THREE from "three";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
+import type { Anchor } from "./types";
 
 export type ArchitectureKind = "rose" | "bookstore" | "nest" | "sauder";
+export function architectureEnvelope(
+  kind: ArchitectureKind,
+  source: Anchor,
+): Anchor {
+  // The Nest footprint is irregular: its bounding rectangle overlaps the
+  // Alumni Centre. Support a smaller central public-space reconstruction until
+  // a footprint-conforming bespoke exterior replaces this rectangular model.
+  return {
+    ...source,
+    width: kind === "nest" ? Math.min(source.width, 76) : source.width,
+  };
+}
 export type ArchitectureCollider = {
   minX: number;
   maxX: number;

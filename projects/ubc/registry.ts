@@ -424,7 +424,7 @@ export const characters: Character[] = [
       "Walk a short public-approach loop; pause and face visitors during conversation.",
     topics: werkerTopics,
     biography:
-      "His public professional work includes operations research, management science and healthcare planning. The faculty profile is used for the current title; the leadership directory still uses “Senior Associate Dean, Students”.",
+      "His public professional work includes operations research, management science and healthcare planning.",
     sources: [sources.werker, sources.health],
     verified: checked,
     permissions:
@@ -453,7 +453,7 @@ export const characters: Character[] = [
       "Walk a simulated public plaza loop and pause for conversation. Not a real schedule.",
     topics: baconTopics,
     biography:
-      "Benoit-Antoine Bacon began his five-year term as UBC’s 17th President and Vice-Chancellor on November 1, 2023. His official September 2026 welcome corroborates the role; the biography may require browser verification.",
+      "Benoit-Antoine Bacon began his five-year term as UBC’s 17th President and Vice-Chancellor on November 1, 2023.",
     sources: [
       sources.president,
       link(
