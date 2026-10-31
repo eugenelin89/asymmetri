@@ -733,3 +733,13 @@ See the project README and V0.5 release record for bounds and verification.
 ## Vancouver V0.6 research boundary
 
 V0.5 remains public after failed manual candidate acceptance. `projects/vancouver/development/` contains the explicitly selected handling/camera comparison, bounded in-memory evidence and real-data Cambie lab; production conditional imports omit these modules. Stable physics/handling/camera and published data are unchanged. `elevation.ts` extends the isolated proof with curved profiles and explicit connected surfaces. See [the decision and evidence](VANCOUVER_V06_RESEARCH_2026-10-30.md).
+
+## UBC Virtual Campus
+
+`app/labs/ubc` adds an isolated visitor experience under Labs → GIS Apps.
+`projects/ubc` owns the renderer, accessible shell, source registry, educational
+characters, public-interior models, pure collision/routing and solar calculations.
+It directly reuses Surrey's resource-disposal helper. No existing city renderer,
+data snapshot, save format or gameplay system changes. `public/ubc` holds versioned
+UBC GIS assets with source and licensing receipts. See the project README and
+`UBC_IMPLEMENTATION_2026-10-30.md` for the measured acceptance boundary.

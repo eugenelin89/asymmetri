@@ -1469,3 +1469,12 @@ Use the existing exact-source Linux candidate workflow and 192MiB available-memo
 Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
 rollback. No OS, DNS, TLS, database or peer-service changes are authorized by this
 release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
+
+## UBC research preview
+
+The UBC route follows the existing Next/DigitalOcean and Vinext/Sites build paths.
+This implementation does not deploy or alter live services. Keep UBC as a research
+preview until source geometry, browser walking, responsive layout and performance
+have passed the acceptance report. Production release remains a separate explicit
+action under the existing verified-candidate and rollback procedure. Do not use a
+new hosting platform as a shortcut around the website deployment conventions.

@@ -1025,3 +1025,28 @@ Widths/cross-sections are illustrative; no survey or public bridge-driving claim
 Dimensions/alt text are not applicable to structured data. Test screenshots and
 source PDFs remain in private evidence retention; no third-party imagery or owner
 phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immutable.
+
+## UBC Virtual Campus — 2026-10-30
+
+- `public/ubc/v0.1-2026-10-30/`: compact transformed UBC Campus + Community Planning
+  GIS snapshot. Pinned source files, hashes, bounds, processing, units and licences
+  are in its `manifest.json`; original layers use PDDL 1.0. No staff/editor metadata
+  is needed in the visitor payload.
+- `projects/ubc/architecture.ts`: original procedural timber, concrete, glass, nets,
+  shelves, apparel, furniture, stairs and public-space models. Level B research
+  reconstructions; no as-built accuracy or private-space access is asserted.
+- `projects/ubc/stadium.ts`: original field, dugout, bullpen, grandstand, fence,
+  signage and lighting geometry. Markings and architectural measurements remain
+  approximate pending visual acceptance.
+- `projects/ubc/scenery.ts` and `people.ts`: source-position trees, original facades,
+  procedural textures and stylized simulated people. No copied portraits or voices.
+- No photographic textures, UBC logos, third-party model downloads, externally
+  hosted images or generated bitmap assets were added. Photographs/plans were
+  used only for research and remain linked to their copyright owners.
+- No real browser screenshot has been accepted yet: local browser access was
+  disabled. Do not relabel diagrams or procedural model output as screenshots.
+
+- `public/ubc/preview-map.svg`: 288 KiB original vector welcome illustration,
+  derived from the same sourced building polygons and road lines. Decorative alt
+  text is empty because the adjacent text supplies its purpose. GIS PDDL applies;
+  this is explicitly a vector map, not a browser screenshot.

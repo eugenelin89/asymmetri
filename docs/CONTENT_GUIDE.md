@@ -722,3 +722,12 @@ claimed from browser viewport emulation.
 Central Avenue / City Parkway driving area and unavailable train boarding; do not
 imply citywide routing or measured terrain. Four fictional cases and browser-local
 saves are current capabilities. Physical-phone acceptance remains outstanding.
+
+## UBC campus information
+
+Shared project identity and the GIS card live in `content/site.ts`. Reviewed UBC
+places, displays, biographies, official URLs, verification dates and conversation
+topics live in `projects/ubc/registry.ts`. Never duplicate these claims in scene
+geometry. Named figures are educational simulations, not quotes, endorsements or
+real-time positions. Keep Level B reconstruction and exterior-only coverage labels
+visible. Public photographic references are not redistributed assets.

@@ -327,3 +327,11 @@ reload. Keep local preview ports separate from concurrent Vancouver/Richmond wor
 ## Vancouver V0.6 research
 
 The local Vancouver page defaults to V0.5. Expand Local handling comparison to select the unaccepted V0.6 candidate, then restart the same route for manual measurement. Local Cambie research candidate mounts a separate lab; widths and public connections remain unverified. Offline reproduction uses an external venv and `projects/vancouver/tools/requirements-elevation.txt`, with pinned bounded inputs; see [the elevation workflow](VANCOUVER_V06_ELEVATION_2026-10-30.md). No production dependency or public data URL changes.
+
+## UBC Virtual Campus
+
+Use `npm run dev:next -- --port 3026 --hostname 127.0.0.1` and open `/labs/ubc`.
+The separate port avoids other GIS workstreams. `npm run test:ubc` validates
+continuous interior movement, stairs, collision, source registry and environmental
+logic. Browser use was disabled during initial implementation; real visual and
+physical-device acceptance remains pending. No production deployment is implied.

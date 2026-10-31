@@ -776,3 +776,13 @@ an explicit outstanding acceptance item.
 ## Vancouver V0.6 research acceptance
 
 Run `npm run test:vancouver`, peer suites, check, Next webpack and Vinext builds. New tests cover high-speed input pulses with exact retained Relaxed response, optional cues preserving route geometry, spatial camera constraints, immutable Cambie identity, continuous curved profiles, full-car traversals in both directions at 15/60/120 Hz and grade-separated/water rejection. Automated route following is not manual acceptance. V0.6 failed fresh North manual comparison and remains development-only; see [all completed/failed runs, environment limits and outstanding tests](VANCOUVER_V06_RESEARCH_2026-10-30.md). Verify production bundles omit the research lab/data and keep public V0.5.
+
+## UBC acceptance
+
+Run `npm run test:ubc`, `npm run check`, both supported builds and the production
+dependency audit. The UBC suite exercises collision movement through real generated
+interiors and Nest stairs, rather than asserting only mesh existence. Existing
+Vancouver/Surrey/Richmond suites protect shared behavior. Complete the browser
+walkthrough and screenshot checklist in `UBC_IMPLEMENTATION_2026-10-30.md` before
+claiming visual acceptance or production readiness. Viewport emulation and actual
+phone measurements must be reported separately.

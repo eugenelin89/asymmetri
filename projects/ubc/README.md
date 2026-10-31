@@ -1,0 +1,99 @@
+# UBC Virtual Campus — research preview
+
+“Explore the University of British Columbia, virtually.”
+
+Independent Asymmetri Labs → GIS Apps project at `/labs/ubc`. This is a working
+implementation candidate, not a completed UBC digital twin or a certified
+production-quality milestone. It is unofficial and has no UBC or faculty endorsement.
+
+## Run and validate
+
+Use Node 24 from the repository `.nvmrc` and the existing lockfile. No dependency
+was added for UBC.
+
+```sh
+npm ci
+npm run dev:next -- --port 3026 --hostname 127.0.0.1
+npm run test:ubc
+npm run check
+npm run build:next -- --webpack
+npm run build
+```
+
+Open `http://127.0.0.1:3026/labs/ubc` and select Start exploring. The renderer and
+committed GIS snapshot load on demand. Production compilation does not fetch GIS
+services. See [the implementation and acceptance report](../../docs/UBC_IMPLEMENTATION_2026-10-30.md).
+
+## Visitor experience
+
+- Walk: WASD/arrows, drag to look, Shift for faster walking, E for nearby information.
+  Optional mouse lock is in Help; Escape releases it. Natural speed is 1.45 m/s;
+  faster walking is 3 m/s. Touch controls maintain independent pointer ownership.
+- Aerial: orbit, pan and zoom with Three's OrbitControls. Returning to Walk retains
+  the visitor's coordinates. Map is north-up source geometry with selectable destinations.
+- Search: priority destinations, named educational guides and imported building names.
+  Visit entrance is explicit virtual fast travel. Walking route uses the official
+  source route graph, and refuses disconnected results instead of drawing a shortcut.
+- Interiors: physically walk through entrance gaps. Rose, Bookstore, Nest and Sauder
+  have walls and fixture collision. The Nest has ground/5 m/10 m public galleries,
+  two stair flights and a suspended lounge. Only these supported spaces are enterable.
+- Conversations: two stylized named guides, curated questions, follow-ups, session-only
+  history and keyword lookup. Unsupported private opinions, promises and whereabouts
+  produce a source-linked refusal. No external AI service, accounts, voice or persistence.
+- Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
+  approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
+  Winter snow is optional; evergreen and deciduous trees are separate materials.
+- Photo: hides normal UI and exports a fresh canvas PNG. This is not a substitute
+  for the outstanding browser screenshot acceptance work.
+
+## Architecture and reuse
+
+`Campus.tsx` owns the accessible React shell, directory, information dialogs and
+map. `engine.ts` owns Three.js lifecycle, cameras, inputs, selection, scene LOD and
+telemetry. It directly reuses Surrey's `disposeScene`, already covered by its
+resource-disposal regression test. Existing city engines and their immutable
+snapshots are not modified.
+
+`spatial.ts` is a reusable metre-space coordinate, collision, floor/ramp and graph
+routing module. `environment.ts` contains pure season/time calculations.
+`registry.ts` centralizes reviewed places, official links, displays, biographies,
+permissions, source dates and conversation content. `types.ts` defines contracts.
+`architecture.ts`, `stadium.ts`, `scenery.ts` and `people.ts` provide original
+procedural assets. Asset material batching and geographic tree groups reduce draw
+calls. Detailed architecture switches to source-outline proxies at distance;
+quality presets control pixel density, vegetation range and shadows.
+
+This is separate from Surrey/Richmond gameplay: it has no combat, health, missions,
+scores, money, inventory or live tracking. Shared improvements can be extracted
+later after browser acceptance; no broad existing-project refactor was necessary.
+
+## Accuracy and permissions
+
+All four priority interiors are **Level B reference reconstructions**, not verified
+as-built layouts. Public historic Bookstore plans and the AMS amenities map support
+research but do not prove today's fixture arrangement. Other buildings are **Level C
+exterior-only**. No Level A interior is claimed. No private-room reconstruction is included.
+
+The source footprint establishes geography; oriented architectural envelopes,
+facades, roof forms, furnishings and stadium components remain interpretations.
+Ground elevation is flat, so this is not a terrain survey or real-world accessible
+route planner. The Sauder expansion is described as construction expected to finish
+in 2027, not rendered as a completed future building.
+
+Greg Werker's current faculty profile says “Senior Associate Dean, Student Experience”.
+The older leadership-directory wording “Students” is recorded as a source conflict.
+Bacon's official biography and September 2026 welcome support his presidential role.
+Virtual routes do not represent either person's actual movements.
+
+Read [third-party notices](THIRD_PARTY_NOTICES.md), the data manifest and the full
+acceptance report before publishing. Physical-device testing, visual comparisons,
+screenshots and real browser frame-rate measurements remain separate acceptance gates.
+
+## Updating information
+
+Edit the reviewed record in `registry.ts`, re-open its official sources, update the
+verification date, and run the UBC tests. Never infer an academic title from a stale
+directory alone. Do not add an unverified named person. New links must pass the
+HTTPS host allowlist and receive `noopener noreferrer` in the accessible UI.
+Data refreshes must produce a new versioned directory and manifest; do not silently
+replace accepted published snapshots. Raw research downloads belong outside Git.

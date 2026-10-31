@@ -80,6 +80,17 @@ export const richmond = {
   metadata: { title: "Richmond Learns to Drive | Asymmetri Labs", description: "Deliver food and explore Richmond in an experimental browser game based on OpenStreetMap geography, with original mall and airport interiors and local saves." },
 } as const;
 
+export const ubc = {
+  name: "UBC Virtual Campus",
+  path: "/labs/ubc",
+  tagline: "Explore the University of British Columbia, virtually.",
+  status: "V0.1 — Research preview",
+  description: "Walk through a campus built from official UBC geography, explore four reconstructed public interiors and meet source-grounded educational guides. Independent and unofficial.",
+  source: { label: "View UBC source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/ubc" },
+  license: { label: "MIT code · UBC public-domain GIS", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/ubc/THIRD_PARTY_NOTICES.md" },
+  metadata: { title: "UBC Virtual Campus | Asymmetri Labs", description: "Explore the University of British Columbia, virtually. An independent 3D campus research preview with walkable reconstructed interiors and educational guides." },
+} as const;
+
 export const gisApps = {
   name: "GIS Apps",
   path: "/labs/gis",
@@ -92,6 +103,14 @@ export const gisApps = {
   introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
   projectsHeading: "Explore the cities",
   projects: [
+    {
+      name: ubc.name,
+      description: ubc.description,
+      status: ubc.status,
+      detail: { label: "Explore UBC", href: ubc.path },
+      source: ubc.source,
+      license: ubc.license,
+    },
     {
       name: vancouver.navLabel,
       description: vancouver.description,
