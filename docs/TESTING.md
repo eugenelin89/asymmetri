@@ -779,7 +779,7 @@ Run `npm run test:vancouver`, peer suites, check, Next webpack and Vinext builds
 
 ## Surrey V0.6 candidate acceptance
 
-Surrey's 67 tests include all older case paths, schema2/3/4 migration, full-body
+Surrey's 68 tests include all older case paths, schema2/3/4 migration, full-body
 road containment, directed graph reachability, all eight destination routes and
 returns, rejected turns, closure avoidance, GPS rerouting/clear/stopped arrival,
 non-repeating unreachable searches, Case05 walk/drive/exit/handoff/save/reward,
@@ -787,6 +787,8 @@ traffic placement/signals, crossing waits, independent held inputs and GPS GPU
 replacement/cleanup. Walking test drivers navigate around stopped traffic using
 ordinary movement inputs; they never remove actors or bypass collision. Case04
 and Case05 driving tests likewise use throttle/steering/brake inputs.
+The real detour also checks outgoing street names and rejects false turns caused
+by repeated source endpoints, following the October 31 partial browser run.
 
 The offline pipeline checks each edge/accepted turn at 0.15 m, geometric-union
 lengths and reproducible output. These tests do not substitute for ordinary-

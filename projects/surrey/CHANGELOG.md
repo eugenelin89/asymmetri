@@ -1,5 +1,12 @@
 # Surrey release history
 
+## V0.6 acceptance follow-up — 2026-10-31
+
+- Correct GPS street names and remove false turns at repeated road endpoints,
+  preserving the validated path and geometry. Add a real-detour regression.
+- Refresh the isolated candidate through approved UBC/homepage releases. Browser
+  driving acceptance resumed partially; full acceptance and deployment remain pending.
+
 ## V0.6 — Open Roads (candidate)
 
 17.0 km of connected source-supported road paths, eight roadside destinations,

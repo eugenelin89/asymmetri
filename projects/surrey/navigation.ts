@@ -114,11 +114,16 @@ export function createNavigator(network: RoadNetwork, fits: (p: Body) => boolean
     const distances = [0];
     for (let i = 1; i < smooth.length; i++) distances.push(distances[i - 1] + distance(smooth[i - 1], smooth[i]));
     const routeTurns: DriveRoute["turns"] = [];
-    for (let i = 1; i < points.length - 1; i++) {
-      const delta = angle(bearing(points[i], points[i + 1]), bearing(points[i - 1], points[i]));
+    // Adjacent source edges repeat their shared endpoint. A zero-length leg has
+    // no bearing; treating it as north invented turns and named the incoming road.
+    const guidancePoints = points.filter((p, i) => !i || distance(points[i - 1], p) > .03);
+    for (let i = 1; i < guidancePoints.length - 1; i++) {
+      const delta = angle(bearing(guidancePoints[i], guidancePoints[i + 1]), bearing(guidancePoints[i - 1], guidancePoints[i]));
       if (Math.abs(delta) > .5) {
-        const at = projectPath(smooth, points[i]).progress;
-        const street = edges.find(e => projectPath(e.points, points[i + 1]).distance < 2)?.roadName ?? "next street";
+        const at = projectPath(smooth, guidancePoints[i]).progress;
+        const outgoing = guidancePoints[i + 1];
+        const street = edges.reduce<RoadEdge | null>((closest, edge) => !closest ||
+          projectPath(edge.points, outgoing).distance < projectPath(closest.points, outgoing).distance ? edge : closest, null)?.roadName ?? "next street";
         if (!routeTurns.length || at - routeTurns.at(-1)!.at > 8) routeTurns.push({ at, direction: delta > 0 ? "left" : "right", street });
       }
     }

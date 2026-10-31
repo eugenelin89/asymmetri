@@ -1,9 +1,10 @@
 # Surrey V0.6 — Open Roads: candidate acceptance
 
 **Implemented candidate; not deployed.** Work is isolated on
-`codex/surrey-adventure-v06`, based on approved main `ac677c4`. Production remains
-Surrey V0.5, with Vancouver V0.5 and Richmond V0.1 preserved. The release gate is
-ordinary-control rendered-browser acceptance, currently blocked as described below.
+`codex/surrey-adventure-v06`, refreshed through approved main `60574c8` on
+October 31. Production remains Surrey V0.5; the later UBC/homepage releases are
+preserved in the candidate. Required ordinary-control rendered-browser acceptance
+is incomplete. See the October 31 follow-up below for partial resumed evidence.
 
 ## Implemented scope
 
@@ -55,7 +56,7 @@ remains flat. Sedan/SUV are deferred because their distinct full footprints have
 not been accepted. SkyTrain remains moving scenery: a second in-bounds station
 exists, but a complete safe vertical access/boarding trip is unverified.
 
-## Automated and offline verification
+## October 30 automated and offline verification
 
 - 67 Surrey tests pass, including all four earlier case completions and both
   Missing Person endings. Walking drivers detour around stopped traffic with
@@ -81,7 +82,7 @@ exists, but a complete safe vertical access/boarding trip is unverified.
   before final packaging; this is not a phone performance claim. Rendered FPS,
   thermal/battery behaviour and real multitouch are unverified.
 
-## Browser evidence and exact blocker
+## October 30 browser evidence and exact blocker
 
 The local Next preview returned HTTP200. Ordinary keyboard activation started a
 new game, opened Map, selected Central City (0.76 km), saved/reloaded, resumed
@@ -111,7 +112,49 @@ steering/acceleration, physical iPhone performance and live post-release browser
 acceptance are incomplete. Do not treat the unit tests or DOM checks as passing
 those gates.**
 
-## Production preservation and next release step
+## October 31 follow-up
+
+The browser connection recovered temporarily. On the retained local production
+build `Ue-yFwVA0MSu1L2u-TfHH` from `b6eae37`, mouse Continue resumed the saved game;
+held WASD moved the character, Nora's dialogue accepted Case05, and E entered the
+compact. Normal held keyboard controls drove along Central Avenue and City Parkway
+into 102 Avenue. The last verified mission distance was 352.0 m before a reverse
+realignment; Case05 remained accepted. No Recover, injected save, position mutation
+or collision bypass was used. The delivery was **not completed** in this run.
+
+Short steering pulses separated by browser observations understeered at the first
+right turn and at 102 Avenue's median. Boundary collisions stopped the car, and
+ordinary reverse manoeuvres cleared each. Sustained steering/acceleration worked
+but needed correct approach positioning. These incidents are retained as evidence;
+neither a clean drive nor a product handling improvement is claimed. Sampled render
+rates ranged from 39.2 to 60 FPS. Adaptive DPR decreased from 1.5 to 0.75, with
+reduced ambient and traffic budgets. These are desktop snapshots, not sustained
+performance or physical-phone results.
+
+This run exposed a GPS defect: duplicate shared endpoints invented turns and could
+name the incoming street. Guidance now ignores zero-length legs and identifies
+the closest outgoing road. The detour correctly names City Parkway, 102 Avenue,
+King George Boulevard and Old Yale Road. Its geometry and 1,192.607 m length are
+unchanged. A real-network regression covers all four directions/names and rejects
+the false endpoint/arrival turns; the offline snapshot still reproduces exactly.
+
+Browser control disconnected mid-drive, resetting the tool session. The Brave
+extension temporarily disappeared; native capture showed no usable page content.
+The same browser subsequently reconnected. Shared-browser checks are serialized
+with Richmond so focus and viewport overrides do not invalidate either run.
+The combined candidate is being rebuilt before continuing the saved drive.
+Moving reroute, complete delivery/handoff, final save/park/exit/aerial checks,
+phone screenshots, console/lifecycle checks and live post-release acceptance
+remain outstanding. Physical iPhone/multitouch testing remains separately pending.
+
+Main refresh merges preserve the approved UBC and homepage code. The original
+Surrey journal 149 is retained as journal 159 to avoid UBC's independently assigned
+149; the historical observations were preserved. UBC journals 157/158 remain intact.
+Its October 31 handoff reports live source `526213d283cba5e70b192cc295e8ccdd3271467c`,
+build `ujW5iepUV_ni0g_OH7ONo`; read `UBC_ENCOUNTER_RELEASE_2026-10-31.md` before any
+later release. No Surrey main push or production mutation has occurred.
+
+## October 30 production preservation and next release step
 
 Read-only production inspection during this task confirmed source
 `fcd2b900b512652a94af07571b841e823c61d2de`, BUILD_ID

@@ -784,6 +784,14 @@ test('fictional workzone blocks a full body and GPS finds a materially different
   assert.ok(transport.closureOverlaps({x:transport.roadworks.point[0],z:transport.roadworks.point[1],yaw:transport.roadworks.yaw}));
   const path=transport.pathMetrics(alternative.points);for(let d=0;d<path.length;d+=.25)assert.equal(transport.closureOverlaps(transport.onPath(path,d)),false);
 });
+test('detour GPS names the outgoing streets and ignores repeated source endpoints',()=>{
+  const route=transportWorld.navigator.calculate(transport.transportData.spawn,'central',new Set([transport.roadworks.edgeId]));
+  assert.deepEqual(route.turns.map(({direction,street})=>[direction,street]),[
+    ['right','City Parkway'],['left','102 Ave'],['right','King George Blvd'],['right','Old Yale Rd'],
+  ]);
+  assert.ok(Math.abs(route.length-transport.roadReport.detour.alternateM)<.001,'Guidance labels must not change the validated route');
+  assert.ok(route.turns.at(-1).at<route.length-100,'A duplicate roadside endpoint must not invent an arrival turn');
+});
 function driveDetour(sim){
   const path=transport.pathMetrics(sim.state.navigation.route.points);let contacts=0;
   for(let i=0;i<60000&&sim.state.detour.stage==='accepted';i++){

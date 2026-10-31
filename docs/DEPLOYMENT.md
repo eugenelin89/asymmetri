@@ -1489,8 +1489,8 @@ release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
 ## Surrey V0.6 release gate
 
 V0.6 is an isolated candidate; no activation is authorized by passing automated
-checks alone. The requested ordinary-control rendered-browser acceptance is
-currently blocked by frozen browser animation and mouse/screenshot timeouts.
+checks alone. Required ordinary-control rendered-browser acceptance remains
+incomplete after a partial October 31 drive and a browser disconnection.
 Keep V0.5 serving until the gate in `SURREY_V06_ACCEPTANCE_2026-10-30.md` passes.
 Then refresh approved main, coordinate the shared window, build an exact-source
 Linux candidate and preserve the complete immediate runtime rollback. Existing
