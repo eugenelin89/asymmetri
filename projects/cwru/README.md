@@ -20,6 +20,8 @@ These are source-informed reconstructions, not photogrammetry or surveyed digita
 
 `data/people.json` records 13 faculty from public university department pages, eight athletes from public 2026 rosters and 12 students from publicly search-indexed LinkedIn excerpts. Direct LinkedIn profile fetching was blocked; the indexed education statements are not independent enrollment verification. Source URLs, access method and dates accompany records. No private directory, contact details, scraped portraits or actual locations are included.
 
+The sanitized 500-row research import in `data/students.json` enriches five existing records and adds 495 distinct names, giving 528 named people: 13 faculty, eight retained athletes and 507 students. All 500 supplied names were corroborated on university pages, with source status/hashes and fallback attribution in `data/student-source-audit.json`. Study fields found on 434 source pages do not establish individual degrees or current enrollment; 66 retain supplied-research attribution. `tools/import_students.py` excludes contacts and portraits. At most ten university characters and two player characters render at once.
+
 Original generic avatars, dialogue and walks are fictional simulations near relevant academic zones. They do not reproduce likeness, voice, real schedules or current whereabouts. One fictional guide and ambient students complete the scene. Conversations are source-bounded, encounter-only and decline private-location questions. There is no people locator. Players can publish their own profile and current avatar appearance, choose a virtual meeting area, edit or delete their character, recover ownership with a private code, and report another public profile. Public characters refresh every 60 seconds. CWRU uses separate endpoints, storage and cookies from UBC; publishing requires `CWRU_PROFILE_DIR` on the host.
 
 ## Halloween
@@ -36,4 +38,4 @@ The original Web Audio soundscape combines an eerie score, distant wolf howls, a
 
 ## Validation and release
 
-See `docs/CWRU_CAMPUS_2026-10-31.md` for checks and limitations. Source is prepared locally; deployment is a separate explicitly requested action. Preserve the UBC project and all shared protected product routes.
+See `docs/CWRU_CAMPUS_2026-10-31.md` for checks and limitations. V0.1 is live at [asymmetri.co/labs/cwru](https://asymmetri.co/labs/cwru). The [production receipt](../../docs/CWRU_RELEASE_2026-10-31.md) records exact-source CI, public/profile/browser checks and recovery evidence. Preserve the UBC project and all shared protected product routes.

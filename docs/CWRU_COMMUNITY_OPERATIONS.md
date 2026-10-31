@@ -2,15 +2,15 @@
 
 Players can publish their own public character, edit or delete it, recover ownership with a private code, and report other profiles. This is separate from UBC, Motion and BotSquad. Affiliation is self-described; walking routes are simulations.
 
-## Local runtime and future hosting
+## Local runtime and production hosting
 
-Set `CWRU_PROFILE_DIR` to a private absolute directory outside the source checkout and public tree. Unconfigured hosts return 503 with a clear unavailable message. No production directory or service setting was provisioned by this change.
+Set `CWRU_PROFILE_DIR` to a private absolute directory outside the source checkout and public tree. Unconfigured hosts return 503 with a clear unavailable message. Production was provisioned October 31: `/var/lib/asymmetri-cwru-community` (application-owned 0700; `community.json` 0600) and `/etc/systemd/system/asymmetri.service.d/40-cwru-community.conf`. Preserve both across deployment and rollback; see the [release receipt](CWRU_RELEASE_2026-10-31.md).
 
 ```sh
 CWRU_PROFILE_DIR=/private/tmp/cwru-community-validation npm run dev:next -- --webpack --hostname 127.0.0.1 --port 3031
 ```
 
-Endpoints are under `/labs/cwru/community-api/`; the HttpOnly, SameSite=Strict ownership cookie is `cwru_profile_owner`, scoped to that path and Secure outside development. Never share the UBC store directory. A future authorized Node deployment needs persistent filesystem storage and a trusted proxy that overwrites `X-Real-IP`. Cloudflare/Vinext build compatibility alone does not provision filesystem persistence. Mutations require an allowed site origin, bounded JSON requests and rate limits. No account provider, dependency or separate port is introduced.
+Endpoints are under `/labs/cwru/community-api/`; the HttpOnly, SameSite=Strict ownership cookie is `cwru_profile_owner`, scoped to that path and Secure outside development. Never share the UBC store directory. Node deployments need persistent filesystem storage and a trusted proxy that overwrites `X-Real-IP`; the current release uses the existing verified proxy. Cloudflare/Vinext build compatibility alone does not provision filesystem persistence. Mutations require an allowed site origin, bounded JSON requests and rate limits. No account provider, dependency or separate port is introduced.
 
 ## Ownership, moderation and durability
 
@@ -28,4 +28,4 @@ Reports contain participant text and must not be pasted into public logs or jour
 
 Private writes use a directory lock, 0600 temporary file, fsync, atomic rename and directory fsync. Unknown schemas fail closed. If a crash leaves a stale `.write-lock`, stop the relevant application, confirm there is no writer, preserve a private backup, then remove only that stale lock before restarting. Never clear participant data as a repair or rollback shortcut. Backups require the same access protection as live data; this implementation does not establish an off-site backup service.
 
-Local validation created disposable synthetic profiles, exercised publishing, read/edit/recovery, rejected a cross-site mutation, and removed the fixtures. No real person’s profile was submitted during testing. Future deployment and operational storage activation require the separate release workflow.
+Local validation created disposable synthetic profiles, exercised publishing, read/edit/recovery, rejected a cross-site mutation, and removed the fixtures. No real person’s profile was submitted during testing. Private candidate and public acceptance repeated the lifecycle successfully, then removed the synthetic fixtures. Future releases follow the same protected-store release workflow.

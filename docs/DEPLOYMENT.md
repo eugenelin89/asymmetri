@@ -1588,3 +1588,7 @@ unchanged protected content/services/profile storage and complete rollback.
 All six older server archives remain; the selected older bbf runtime has verified
 owner-only archive custody under the documented capacity procedure. Preserve that
 archive and its receipts. The 192 MiB RAM and 6 GiB disk floors remain unchanged.
+
+### CWRU V0.1 release
+
+Verified live October 31 at 22:32:09 UTC: source `28b5521`, Linux build `H6dUdFnitvZI1P5BXdc9O`. The [release receipt](CWRU_RELEASE_2026-10-31.md) records exact-source CI, both-host acceptance, live profile lifecycle, browser evidence and final health. Preserve `/var/lib/asymmetri-cwru-community` and its `40-cwru-community.conf` systemd dropin in every successor baseline. The complete immediate rollback is `/var/www/asymmetri-rollback-before-cwru-v01-20261031`. Two older expanded runtimes now have verified owner-only archive custody; six older server archives remain. Resource floors stay 192 MiB available RAM and 6 GiB free disk. The server release slot was handed to Stanford after these checks; shared reviews/reporting are a separate CWRU follow-up.

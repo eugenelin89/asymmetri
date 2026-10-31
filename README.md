@@ -43,7 +43,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver, Surrey, Richmond, UBC and CWRU cards, with an explanation of street and building reconstruction |
-| `/labs/cwru` | Case Western Reserve Virtual Campus: local V0.1 with sourced University Circle geography, 17 enterable reconstructions, simulated campus people and 16 Halloween creature/costume types |
+| `/labs/cwru` | Case Western Reserve Virtual Campus: live V0.1 with sourced University Circle geography, 17 enterable reconstructions, simulated campus people and 16 Halloween creature/costume types |
 | `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview; live V0.4 includes nine reconstructed walkable interiors, first/third-person exploration, encounter-only educational characters, opt-in public profiles and optional Halloween atmosphere |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
 | `/labs/surrey` | Surrey, City of Adventure: day/night city, fictional cases, driving, compact phone controls and local saves |
@@ -275,4 +275,4 @@ added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
 
 ## Case Western Reserve Virtual Campus
 
-The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records local validation; this addition has not been deployed.
+The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence.
