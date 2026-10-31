@@ -731,3 +731,10 @@ topics live in `projects/ubc/registry.ts`. Never duplicate these claims in scene
 geometry. Named figures are educational simulations, not quotes, endorsements or
 real-time positions. Keep Level B reconstruction and exterior-only coverage labels
 visible. Public photographic references are not redistributed assets.
+
+Orchard Housing facts and fictional student dialogue live in
+`projects/ubc/residence-content.ts`, imported by the registry. Keep sourced facts
+distinct from illustrative rooms. Maya, Leo and Ari are fictional guides, not real
+residents, testimonials or live representatives. Refresh official sources/dates
+together. The courtyard entry is geographically sourced, not the measured main
+front-desk entrance. No live prices, availability, assignments or booking.

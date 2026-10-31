@@ -10,11 +10,18 @@ import {
   createRoutes,
   global,
   local,
+  inPolygon,
   type Interior,
 } from "./spatial";
 import { createPeople } from "./people";
 import { defaults, normalizeSettings, solarPosition } from "./environment";
 import { places, displays, characters } from "./registry";
+import { buildResidence } from "./residence";
+import {
+  buildResidenceExterior,
+  type OrchardGeography,
+} from "./residence-exterior";
+import { orchardAnchor } from "./residence-layout";
 import type {
   Anchor,
   Anchors,
@@ -45,6 +52,7 @@ export type CampusAPI = {
   capture: () => string;
   dispose: () => void;
   position: () => Pose;
+  interact: (id: string) => void;
 };
 export function createCampus(
   host: HTMLElement,
@@ -55,6 +63,7 @@ export function createCampus(
   onMarkers: (m: Marker[]) => void,
   onRoute: (p: Point[] | null) => void,
   onError: (message: string) => void,
+  orchardGeography: OrchardGeography,
 ): CampusAPI {
   let settings = { ...defaults },
     mode: Mode = "walk",
@@ -115,6 +124,8 @@ export function createCampus(
     targets: THREE.Object3D[] = [],
     infoPoints = new Map<string, { x: number; y: number; z: number }>();
   const excluded = new Set<string>();
+  anchors.orchard = { ...orchardAnchor };
+  orchardGeography.footprintParts.forEach((part) => excluded.add(part.id));
   const kinds = ["rose", "bookstore", "nest", "sauder"] as const;
   for (const key of kinds) {
     anchors[key] = architectureEnvelope(key, anchors[key]);
@@ -125,6 +136,10 @@ export function createCampus(
       ...data,
       trees: data.trees.filter(
         (tree) =>
+          !inPolygon(
+            [tree.x, tree.z],
+            orchardGeography.footprintParts[1].rings,
+          ) &&
           !kinds.some((kind) => {
             const a = anchors[kind],
               p = local([tree.x, tree.z], a);
@@ -213,6 +228,56 @@ export function createCampus(
     y: 2,
     z: stadiumEntry[1],
   });
+  const residence = buildResidence(),
+    residenceExterior = buildResidenceExterior(orchardGeography);
+  const residenceGroup = new THREE.Group();
+  residenceGroup.add(residence.group, residenceExterior.group);
+  residenceGroup.position.set(orchardAnchor.x, 0.035, orchardAnchor.z);
+  residenceGroup.rotation.y = orchardAnchor.yaw;
+  residenceGroup.userData.info = "orchard";
+  scene.add(residenceGroup);
+  targets.push(residenceGroup);
+  interiors.push({
+    anchor: anchors.orchard,
+    colliders: residence.colliders,
+    floors: residence.floors,
+    ramps: residence.ramps,
+    entry: residence.entry,
+    dynamicBlocked: residence.dynamicBlocked,
+  });
+  const sourceRings = orchardGeography.footprintParts.map((b) =>
+    b.rings.map((r) => r.map((p) => local(p, orchardAnchor))),
+  );
+  interiors.push({
+    anchor: {
+      ...orchardAnchor,
+      id: "orchard-exterior",
+      width: 220,
+      depth: 180,
+    },
+    colliders: [],
+    floors: [],
+    ramps: [],
+    entry: [0, 12],
+    dynamicBlocked: (p) => {
+      if (Math.abs(p[0]) <= 17.9 && Math.abs(p[1]) <= 8.9) return false;
+      if (Math.abs(p[0]) <= 1.6 && p[1] >= 8.7 && p[1] <= 12.3) return false;
+      return sourceRings.some((rings) => inPolygon(p, rings));
+    },
+  });
+  infoPoints.set("orchard", {
+    x: orchardAnchor.entry![0],
+    y: 1.6,
+    z: orchardAnchor.entry![1],
+  });
+  for (const [id, p, y] of [
+    ["orchard-life", [3.8, 7.8], 1.6],
+    ["orchard-facilities", [5.4, 8.5], 5.75],
+    ["orchard-study", [5.5, -8.5], 5.7],
+  ] as [string, Point, number][]) {
+    const world = global(p, orchardAnchor);
+    infoPoints.set(id, { x: world[0], y, z: world[1] });
+  }
   const collision = createCollision(data, interiors, excluded),
     routes = createRoutes(data, collision.blocked);
   const population = createPeople(data, anchors, collision.blocked);
@@ -391,6 +456,20 @@ export function createCampus(
     }
     return null;
   }
+  function interact(id: string) {
+    const action = residence.interactions().find((a) => a.id === id);
+    if (action) {
+      const p = local([pose.x, pose.z], orchardAnchor);
+      if (
+        mode === "walk" &&
+        Math.hypot(p[0] - action.x, p[1] - action.z) < 2.8 &&
+        Math.abs(pose.y + 1.1 - action.y) < 1.3
+      )
+        residence.interact(id);
+      return;
+    }
+    onSelect(id);
+  }
   const pointerdown = (e: PointerEvent) => {
     if (paused || e.button !== 0) return;
     down = { x: e.clientX, y: e.clientY, id: e.pointerId };
@@ -421,7 +500,7 @@ export function createCampus(
   const pointerup = (e: PointerEvent) => {
     if (down && !dragged) {
       const id = pick(e.clientX, e.clientY);
-      if (id) onSelect(id);
+      if (id) interact(id);
     }
     down = null;
   };
@@ -459,7 +538,7 @@ export function createCampus(
       e.preventDefault();
       inputs.set(`key:${key}`, key);
     }
-    if (key === "e" && nearby) onSelect(nearby);
+    if (key === "e" && nearby && !e.repeat) interact(nearby);
     if (key === "m") {
       setMode(mode === "map" ? "walk" : "map");
     }
@@ -491,6 +570,9 @@ export function createCampus(
     renderer.domElement.removeEventListener("webglcontextlost", contextLost),
   );
   function visit(id: string) {
+    // Finding a fictional indoor guide goes to the residence entrance; climb or use the lift.
+    const guide = characters.find((c) => c.id === id);
+    if (guide?.routeSpace === "interior") id = guide.zone;
     const actor = population.actors.find((a) => a.id === id);
     const a =
       anchors[id] || anchors[data.buildings.find((b) => b.id === id)?.id || ""];
@@ -556,6 +638,8 @@ export function createCampus(
   }
   function route(id: string) {
     clearRoute();
+    const guide = characters.find((c) => c.id === id);
+    if (guide?.routeSpace === "interior") id = guide.zone;
     const actor = population.actors.find((a) => a.id === id),
       a = anchors[id];
     const target: Point | undefined = actor
@@ -583,6 +667,13 @@ export function createCampus(
       dt = Math.min(0.05, elapsed);
     lastTime = now;
     if (document.hidden) return;
+    const residenceLocal = local([pose.x, pose.z], orchardAnchor);
+    pose.y += residence.update(
+      paused || mode !== "walk" ? 0 : dt,
+      residenceLocal,
+      pose.y,
+      settings,
+    );
     const keys = [...inputs.values()],
       held = (...q: string[]) => q.some((k) => keys.includes(k));
     if (!paused && mode === "walk") {
@@ -615,6 +706,11 @@ export function createCampus(
       activeCharacter,
       settings.reducedMotion,
     );
+    const inResidence =
+      (Math.abs(residenceLocal[0]) < 18 && Math.abs(residenceLocal[1]) < 9) ||
+      (Math.abs(residenceLocal[0]) < 1.7 &&
+        residenceLocal[1] >= 9 &&
+        residenceLocal[1] < 12);
     const indoor = landmarks.find((l) => {
       const p = local([pose.x, pose.z], l.anchor);
       return (
@@ -632,7 +728,9 @@ export function createCampus(
     }
     precipitation.position.set(camera.position.x, 0, camera.position.z);
     precipitation.visible =
-      !indoor && (settings.weather === "rain" || settings.weather === "snow");
+      !indoor &&
+      !inResidence &&
+      (settings.weather === "rain" || settings.weather === "snow");
     for (const l of landmarks) {
       const near = camera.position.distanceTo(l.group.position) < 520;
       l.group.visible = near;
@@ -642,20 +740,58 @@ export function createCampus(
       lastTelemetry = now;
       updateEnvironment();
       precipitation.visible =
-        !indoor && (settings.weather === "rain" || settings.weather === "snow");
+        !indoor &&
+        !inResidence &&
+        (settings.weather === "rain" || settings.weather === "snow");
       let distance = Infinity;
       nearby = null;
       const all = new Map(infoPoints);
       for (const a of population.actors.filter((a) => a.named))
-        all.set(a.id, { x: a.group.position.x, y: 2.3, z: a.group.position.z });
+        all.set(a.id, {
+          x: a.group.position.x,
+          y: a.group.position.y + 2.3,
+          z: a.group.position.z,
+        });
+      const residenceActions = residence.interactions();
+      for (const action of residenceActions) {
+        const p = global([action.x, action.z], orchardAnchor);
+        all.set(action.id, { x: p[0], y: action.y, z: p[1] });
+      }
       const markers: Marker[] = [];
       for (const [id, p] of all) {
         const d = Math.hypot(p.x - pose.x, p.z - pose.z);
-        if (d < distance && Math.abs(p.y - (pose.y + 1.6)) < 3) {
-          distance = d;
-          nearby = d < 5 ? id : null;
+        const action = residenceActions.find((a) => a.id === id);
+        if (
+          (action ||
+            characters.some((c) => c.id === id && c.zone === "orchard")) &&
+          !residence.canSee(
+            residenceLocal,
+            local([p.x, p.z], orchardAnchor),
+            pose.y + 1.6,
+          )
+        )
+          continue;
+        const facing =
+          d > 0.01
+            ? (-(p.x - pose.x) * Math.sin(pose.yaw) -
+                (p.z - pose.z) * Math.cos(pose.yaw)) /
+              d
+            : 1;
+        const score = d + (action ? (1 - facing) * 1.2 : 0);
+        if (
+          d < (action ? 2.8 : 5) &&
+          score < distance &&
+          Math.abs(p.y - (pose.y + 1.6)) < (action ? 1.5 : 2.1)
+        ) {
+          distance = score;
+          nearby = id;
         }
-        if (settings.markers && d < 80) {
+        if (
+          !action &&
+          settings.markers &&
+          d < 80 &&
+          Math.abs(p.y - pose.y - 1.6) < 2.1
+        ) {
           const v = new THREE.Vector3(p.x, p.y + 1, p.z).project(camera);
           if (v.z < 1 && v.z > 0 && Math.abs(v.x) < 0.95 && Math.abs(v.y) < 0.9)
             markers.push({
@@ -680,11 +816,13 @@ export function createCampus(
             : Infinity,
         }))
         .sort((a, b) => a.d - b.d)[0];
-      const location = indoor
-        ? `${places.find((p) => p.id === indoor.id)?.name} · Level ${Math.round(pose.y / 5) + 1} · Reconstructed`
-        : closest?.d < 150
-          ? closest.p.name
-          : "UBC Vancouver · outdoor campus";
+      const location = inResidence
+        ? residence.location(residenceLocal, pose.y)
+        : indoor
+          ? `${places.find((p) => p.id === indoor.id)?.name} · Level ${Math.round(pose.y / 5) + 1} · Reconstructed`
+          : closest?.d < 150
+            ? closest.p.name
+            : "UBC Vancouver · outdoor campus";
       const routeDistance =
         routePoints?.reduce(
           (s, p, i) =>
@@ -702,6 +840,7 @@ export function createCampus(
         mode,
         location,
         nearby,
+        nearbyLabel: residenceActions.find((a) => a.id === nearby)?.name,
         fps,
         draws: renderer.info.render.calls,
         triangles: renderer.info.render.triangles,
@@ -748,6 +887,7 @@ export function createCampus(
     route,
     clearRoute,
     position: () => ({ ...pose }),
+    interact,
     lock: () => {
       renderer.domElement.requestPointerLock?.();
     },

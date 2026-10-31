@@ -78,6 +78,8 @@ export type Character = {
   model: string;
   zone: string;
   route: Point[];
+  routeSpace?: "interior";
+  floor?: number;
   behaviour: string;
   topics: Topic[];
   biography: string;
@@ -99,6 +101,7 @@ export type Telemetry = {
   mode: Mode;
   location: string;
   nearby: string | null;
+  nearbyLabel?: string;
   fps: number;
   draws: number;
   triangles: number;

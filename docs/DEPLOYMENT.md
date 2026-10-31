@@ -1470,11 +1470,16 @@ Vancouver/Richmond/GIS/Motion/BotSquad routes, saves and immediate full-runtime
 rollback. No OS, DNS, TLS, database or peer-service changes are authorized by this
 release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
 
-## UBC research preview
+## UBC Orchard Commons V0.2
 
-The UBC route follows the existing Next/DigitalOcean and Vinext/Sites build paths.
-This implementation does not deploy or alter live services. Keep UBC as a research
-preview until source geometry, browser walking, responsive layout and performance
-have passed the acceptance report. Production release remains a separate explicit
-action under the existing verified-candidate and rollback procedure. Do not use a
-new hosting platform as a shortcut around the website deployment conventions.
+The October 31 user instruction explicitly authorizes automatic production release
+after validation. Use the unchanged exact-SHA Linux workflow. Its existing build command now
+includes UBC through `prebuild:next`, alongside Surrey/Richmond; Vancouver remains
+an independent workflow check. Preserve Node 22,
+the retained-host OS exception, continuous 192 MiB available-memory / 6 GiB free-disk
+floors, peer/configuration fingerprints, protected routes and the complete immediate
+predecessor. No new hosting, OS, DNS, TLS or unrelated service change is in scope.
+
+`UBC_ORCHARD_MVR_2026-10-31.md` records local acceptance and release status. Verify
+actual live source/build before staging; documentation or CI success alone is not
+deployment. Preserve all published UBC and city datasets.

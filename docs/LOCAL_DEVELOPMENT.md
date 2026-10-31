@@ -335,3 +335,8 @@ The separate port avoids other GIS workstreams. `npm run test:ubc` validates
 continuous interior movement, stairs, collision, source registry and environmental
 logic. Browser use was disabled during initial implementation; real visual and
 physical-device acceptance remains pending. No production deployment is implied.
+
+Orchard V0.2 uses the same UBC port/start flow. Search Orchard Commons, Visit
+entrance, walk inside and use Residence guide. Doors support E/tap; step clear
+of a moving leaf. Call the lift, board fully and use Ride. No room teleport is
+needed. Stop the task-owned local server when validation finishes.

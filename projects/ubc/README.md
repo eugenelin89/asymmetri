@@ -22,7 +22,7 @@ npm run build
 
 Open `http://127.0.0.1:3026/labs/ubc` and select Start exploring. The renderer and
 committed GIS snapshot load on demand. Production compilation does not fetch GIS
-services. See [the implementation and acceptance report](../../docs/UBC_IMPLEMENTATION_2026-10-30.md).
+services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md) and [original campus report](../../docs/UBC_IMPLEMENTATION_2026-10-30.md).
 
 ## Visitor experience
 
@@ -35,9 +35,12 @@ services. See [the implementation and acceptance report](../../docs/UBC_IMPLEMEN
   Visit entrance is explicit virtual fast travel. Walking route uses the official
   source route graph, and refuses disconnected results instead of drawing a shortcut.
 - Interiors: physically walk through entrance gaps. Rose, Bookstore, Nest and Sauder
-  have walls and fixture collision. The Nest has ground/5 m/10 m public galleries,
+  have walls and fixture collision. Orchard adds a lobby and one representative floor
+  with eight bedrooms, five bathrooms, sixteen working doors, lounge/study, stairs
+  and a continuous platform lift. The Nest has ground/5 m/10 m public galleries,
   two stair flights and a suspended lounge. Only these supported spaces are enterable.
-- Conversations: two stylized named guides, curated questions, follow-ups, session-only
+- Conversations: two named guides and three fictional residence students,
+  curated questions, follow-ups, session-only
   history and keyword lookup. Unsupported private opinions, promises and whereabouts
   produce a source-linked refusal. No external AI service, accounts, voice or persistence.
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
@@ -69,10 +72,10 @@ later after browser acceptance; no broad existing-project refactor was necessary
 
 ## Accuracy and permissions
 
-All four priority interiors are **Level B reference reconstructions**, not verified
+All five supported building interiors are **Level B reference reconstructions**, not verified
 as-built layouts. Public historic Bookstore plans and the AMS amenities map support
 research but do not prove today's fixture arrangement. Other buildings are **Level C
-exterior-only**. No Level A interior is claimed. No private-room reconstruction is included.
+exterior-only**. No Level A interior is claimed. Orchard bedrooms are fictional demonstrations, not current private rooms or assignments.
 
 The source footprint establishes geography; oriented architectural envelopes,
 facades, roof forms, furnishings and stadium components remain interpretations.
@@ -101,3 +104,21 @@ directory alone. Do not add an unverified named person. New links must pass the
 HTTPS host allowlist and receive `noopener noreferrer` in the accessible UI.
 Data refreshes must produce a new versioned directory and manifest; do not silently
 replace accepted published snapshots. Raw research downloads belong outside Git.
+
+## Orchard Commons V0.2
+
+`residence-layout.ts` owns rooms, doors, bathrooms and the source-derived anchor.
+`residence.ts` builds the open-house floor; `residence-mesh.ts` owns original
+furniture/finishes; `residence-exterior.ts` preserves source podium outlines and
+separates historical-height tower interpretations. `doors.ts` shares leaf animation
+and collision. `residence-content.ts` supplies sourced Housing content and three
+fictional students to the registry. `ResidenceGuide.tsx` is a visitor-facing
+schematic with explicit reconstruction limits.
+
+The separate `orchard-v0.2-2026-10-31` snapshot preserves the original campus bytes.
+Run `python3 projects/ubc/tools/verify_orchard.py PATH_TO_PINNED_SUBBUILDINGS`
+to recheck its transformation/digest; the exact source URL is in the manifest.
+Refresh Housing claims in `residence-content.ts`, verify official pages, update
+the date and run UBC tests. Do not replace a published snapshot in place.
+The latest user instruction authorizes guarded production release after validation.
+See the V0.2 report for actual release status and remaining fidelity limits.

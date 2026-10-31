@@ -15,6 +15,7 @@ export type Actor = {
   named: boolean;
 };
 function person(id: string, n: number, named: boolean) {
+  const student = id.startsWith("student-");
   const g = new THREE.Group();
   g.userData.info = id;
   const skin = new THREE.MeshStandardMaterial({
@@ -22,15 +23,21 @@ function person(id: string, n: number, named: boolean) {
     roughness: 0.9,
   });
   const shirt = new THREE.MeshStandardMaterial({
-    color: named
-      ? id === "werker"
-        ? 0x49545f
-        : 0x243e4e
-      : new THREE.Color().setHSL(
-          random(n) * 0.9,
-          0.22,
-          0.24 + random(n + 3) * 0.28,
-        ),
+    color: student
+      ? {
+          "student-science": 0x507d7b,
+          "student-engineering": 0xb18b51,
+          "student-business": 0x985f4d,
+        }[id] || 0x537574
+      : named
+        ? id === "werker"
+          ? 0x49545f
+          : 0x243e4e
+        : new THREE.Color().setHSL(
+            random(n) * 0.9,
+            0.22,
+            0.24 + random(n + 3) * 0.28,
+          ),
     roughness: 0.9,
   });
   const pants = new THREE.MeshStandardMaterial({
@@ -55,7 +62,9 @@ function person(id: string, n: number, named: boolean) {
   mesh(new THREE.SphereGeometry(0.145, 10, 8), skin, g, 0, 1.63, 0);
   mesh(
     new THREE.SphereGeometry(0.149, 10, 7, 0, Math.PI * 2, 0, 1.4),
-    new THREE.MeshStandardMaterial({ color: named ? 0x7d7a70 : 0x3f352f }),
+    new THREE.MeshStandardMaterial({
+      color: named && !student ? 0x7d7a70 : 0x3f352f,
+    }),
     g,
     0,
     1.66,
@@ -77,7 +86,7 @@ function person(id: string, n: number, named: boolean) {
     g.add(arm);
     arms.push(arm);
   }
-  if (!named)
+  if (!named || student)
     mesh(
       new THREE.BoxGeometry(0.3, 0.42, 0.17),
       new THREE.MeshStandardMaterial({ color: 0x897660 }),
@@ -86,7 +95,7 @@ function person(id: string, n: number, named: boolean) {
       1.16,
       -0.23,
     );
-  if (named) {
+  if (named && !student) {
     mesh(
       new THREE.BoxGeometry(0.06, 0.35, 0.025),
       new THREE.MeshStandardMaterial({ color: 0xa87a53 }),
@@ -109,12 +118,25 @@ export function createPeople(
     const a = anchors[c.zone];
     if (!a) continue;
     const entry = a.entry || global([0, a.depth / 2 + 3], a);
+    const floor = c.floor || 0;
     let route = c.route
-      .map((p) => [entry[0] + p[0], entry[1] + p[1]] as Point)
-      .filter((p) => !isBlocked(p, 0));
+      .map((p) =>
+        c.routeSpace === "interior"
+          ? global(p, a)
+          : ([entry[0] + p[0], entry[1] + p[1]] as Point),
+      )
+      .filter((p) => !isBlocked(p, floor));
     if (!route.length) route = [entry];
-    const model = person(c.id, c.id === "werker" ? 22 : 51, true);
-    model.group.position.set(route[0][0], 0, route[0][1]);
+    const model = person(
+      c.id,
+      c.id === "werker"
+        ? 22
+        : c.category === "fictional"
+          ? 80 + characters.indexOf(c) * 17
+          : 51,
+      true,
+    );
+    model.group.position.set(route[0][0], floor, route[0][1]);
     group.add(model.group);
     actors.push({
       id: c.id,
@@ -209,6 +231,10 @@ export function createPeople(
         a.group.rotation.y = Math.atan2(focus[0] - p.x, focus[1] - p.z);
         a.legs.forEach((limb) => (limb.rotation.x = 0));
         a.arms.forEach((limb) => (limb.rotation.x = 0));
+        if (a.id.startsWith("student-")) {
+          a.arms[0].rotation.x = -0.22 + Math.sin(time * 1.2) * 0.1;
+          a.group.children[1].rotation.z = Math.sin(time * 0.7) * 0.025;
+        }
         continue;
       }
       if (a.pause > 0) {
@@ -232,12 +258,13 @@ export function createPeople(
         (b) =>
           b !== a &&
           b.group.visible &&
+          Math.abs(b.group.position.y - p.y) < 1 &&
           Math.hypot(
             b.group.position.x - next[0],
             b.group.position.z - next[1],
           ) < 0.7,
       );
-      if (!isBlocked(next, 0) && !crowd) {
+      if (!isBlocked(next, p.y) && !crowd) {
         p.x = next[0];
         p.z = next[1];
         a.group.rotation.y = Math.atan2(dx, dz);

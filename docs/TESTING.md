@@ -793,3 +793,14 @@ Centre overlap, guide proximity, dialogue scrolling and stadium shadow striping.
 Automated coverage includes the shipped Nest's stairs against neighbouring GIS
 geometry and field-normal regression checks. Desktop samples are observations, not
 sustained frame-time or physical-mobile acceptance.
+
+### Orchard MVR acceptance
+
+The 26-test UBC suite includes both unchanged source polygons, entrance approach,
+continuous stairs/corridor/all eight rooms/five bathrooms, both lift directions,
+occupied-landing boarding through the actual collision loop, swept/reduced-motion
+doors, student routes, wall-occluded prompts and room unload/reload. The existing
+`prebuild:next` hook now also runs `npm run test:ubc` in local and Linux builds. See the V0.2 report and
+`validation/ubc-orchard/README.md` for browser evidence. Reproduce the derivative
+with `python3 projects/ubc/tools/verify_orchard.py PATH_TO_PINNED_SUBBUILDINGS`.
+Physical-phone testing remains separate.

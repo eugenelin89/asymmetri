@@ -1054,3 +1054,20 @@ phone photos were added to public assets. Existing V0.1–V0.4 URLs remain immut
   derived from the same sourced building polygons and road lines. Decorative alt
   text is empty because the adjacent text supplies its purpose. GIS PDDL applies;
   this is explicitly a vector map, not a browser screenshot.
+
+## Orchard Commons MVR — 2026-10-31
+
+- `public/ubc/orchard-v0.2-2026-10-31/`: five transformed UBC subbuilding sections,
+  both unchanged parent footprint rings, entrance/route provenance, historical
+  height evidence and interpretation notes. Raw/output hashes and byte sizes are
+  in its manifest. PDDL 1.0; source author metadata excluded.
+- `projects/ubc/residence*.ts`, `doors.ts`: original MIT facade, furniture, door,
+  bathroom, kitchenette, lift and deterministic 128 × 128 grain/fabric textures.
+  No photographic textures, copied models or UBC logo assets.
+- `ResidenceGuide.tsx`: original SVG schematic of the fictional floor, named
+  “Representative residence floor plan, courtyard at the bottom”.
+- `docs/validation/ubc-orchard/`: actual local scene PNG exports and browser JPEGs.
+  Dimensions, hashes and descriptive labels are in `captures.json`. They show
+  the independent reconstruction, not real students or campus photographs.
+  UI captures retain tool-side scaling/padding. No editing or AI generation.
+  Public drawings and reference photos remain outside Git.

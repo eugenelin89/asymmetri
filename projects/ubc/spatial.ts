@@ -29,6 +29,7 @@ export type Interior = {
   floors: Floor[];
   ramps: Ramp[];
   entry: Point;
+  dynamicBlocked?: (point: Point, y: number) => boolean;
 };
 export function inside(p: Point, ring: Point[]) {
   let hit = false;
@@ -149,6 +150,7 @@ export function createCollision(
       )
         continue;
       const q = local(p, i.anchor);
+      if (i.dynamicBlocked?.(q, y)) return true;
       for (const b of i.colliders)
         if (y + 1.65 > b.minY + 0.04 && y < b.maxY - 0.04 && inBox(q, b, 0.28))
           return true;

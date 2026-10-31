@@ -43,7 +43,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
 | `/labs/gis` | GIS Apps: Vancouver, Surrey and Richmond cards, with an explanation of street and building reconstruction |
-| `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview, four reconstructed walkable interiors and two educational guides |
+| `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview, five reconstructed walkable interiors, eight Orchard bedrooms, two named educational guides and three fictional students |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
 | `/labs/surrey` | Surrey, City of Adventure V0.4: a day/night city, three cases, compact phone controls and migrated local saves |
 | `/labs/vancouver` | Vancouver V0.5: False Creek driving, compact phone controls and sourced landmarks |

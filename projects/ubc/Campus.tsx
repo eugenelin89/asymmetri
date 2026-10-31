@@ -27,6 +27,9 @@ import type {
   Topic,
 } from "./types";
 import type { CampusAPI, Marker } from "./engine";
+import type { OrchardGeography } from "./residence-exterior";
+import { orchardAnchor, residenceVersion } from "./residence-layout";
+import { ResidenceGuide } from "./ResidenceGuide";
 import styles from "./campus.module.css";
 
 const version = "/ubc/v0.1-2026-10-30";
@@ -93,7 +96,9 @@ export function Campus() {
     (id: string) => {
       opener.current = document.activeElement as HTMLElement;
       setPanel(
-        Object.values(anchors).find((a) => a.buildingId === id)?.id || id,
+        id === "VBL10013"
+          ? "orchard"
+          : Object.values(anchors).find((a) => a.buildingId === id)?.id || id,
       );
       setQuestion("");
     },
@@ -116,10 +121,17 @@ export function Campus() {
           return r.json() as Promise<Anchors>;
         },
       ),
+      fetch("/ubc/orchard-v0.2-2026-10-31/geography.json", {
+        signal: controller.signal,
+      }).then((r) => {
+        if (!r.ok) throw new Error("Residence geography did not load.");
+        return r.json() as Promise<OrchardGeography>;
+      }),
     ])
-      .then(([module, world, locations]) => {
+      .then(([module, world, locations, residence]) => {
         if (cancelled || !host.current) return;
         setData(world);
+        locations.orchard = { ...orchardAnchor };
         setAnchors(locations);
         engine = module.createCampus(
           host.current,
@@ -133,6 +145,7 @@ export function Campus() {
           setMarkers,
           setRoute,
           setError,
+          residence,
         );
         api.current = engine;
         setSettings((s) => ({
@@ -248,7 +261,9 @@ export function Campus() {
       : {
           question: q,
           answer:
-            "This curated educational guide does not have a verified answer to that question. It cannot speak for the real person or provide personal opinions, live whereabouts or admissions promises. Try a topic below or open the official sources.",
+            character.category === "fictional"
+              ? "This fictional student guide has no verified answer to that question. It cannot provide real testimonials, live room availability, housing guarantees or individual advice. Try a reviewed topic or open the official Housing sources."
+              : "This curated educational guide does not have a verified answer to that question. It cannot speak for the real person or provide personal opinions, live whereabouts or admissions promises. Try a topic below or open the official sources.",
           sources: character.sources,
         };
     setHistories((h) => ({
@@ -261,7 +276,10 @@ export function Campus() {
     ...characters.map((c) => ({
       id: c.id,
       name: c.name,
-      category: "Interactive professors",
+      category:
+        c.category === "fictional"
+          ? "Fictional students"
+          : "Interactive professors",
       detail: c.title,
     })),
     ...places.map((p) => ({
@@ -277,6 +295,7 @@ export function Campus() {
       .filter(
         (b, index, buildings) =>
           b.name &&
+          b.id !== "VBL10013" &&
           buildings.findIndex((part) => part.id === b.id) === index &&
           !Object.values(anchors).some((a) => a.buildingId === b.id),
       )
@@ -337,7 +356,7 @@ export function Campus() {
           </div>
           <div className={styles.welcomeCopy}>
             <span className={styles.eyebrow}>
-              ASYMMETRI &nbsp; / &nbsp; FIELD NOTES 01
+              ASYMMETRI &nbsp; / &nbsp; FIELD NOTES 02
             </span>
             <h2>
               A place to
@@ -427,6 +446,18 @@ export function Campus() {
                 </div>
               </div>
               <div className={styles.tools}>
+                {telemetry &&
+                  Math.hypot(
+                    telemetry.pose.x - orchardAnchor.x,
+                    telemetry.pose.z - orchardAnchor.z,
+                  ) < 90 && (
+                    <button
+                      aria-label="Open residence floor guide"
+                      onClick={() => openPanel("orchard-floor")}
+                    >
+                      ▤ <span>Residence guide</span>
+                    </button>
+                  )}
                 <button
                   aria-label="Search campus directory"
                   onClick={() => openPanel("directory")}
@@ -509,7 +540,8 @@ export function Campus() {
                       {hold("shift", "Faster")}
                       <button
                         onClick={() =>
-                          telemetry?.nearby && openPanel(telemetry.nearby)
+                          telemetry?.nearby &&
+                          api.current?.interact(telemetry.nearby)
                         }
                       >
                         Interact
@@ -519,13 +551,17 @@ export function Campus() {
                   {telemetry?.nearby && (
                     <button
                       className={styles.interact}
-                      onClick={() => openPanel(telemetry.nearby!)}
+                      onClick={() => api.current?.interact(telemetry.nearby!)}
                     >
                       E &nbsp;{" "}
-                      {characters.some((c) => c.id === telemetry.nearby)
-                        ? "Talk to"
-                        : "Explore"}{" "}
-                      {titleOf(telemetry.nearby)}
+                      {telemetry.nearbyLabel || (
+                        <>
+                          {characters.some((c) => c.id === telemetry.nearby)
+                            ? "Talk to"
+                            : "Explore"}{" "}
+                          {titleOf(telemetry.nearby)}
+                        </>
+                      )}
                     </button>
                   )}
                 </>
@@ -667,7 +703,12 @@ export function Campus() {
                 ×
               </button>
             </div>
-            {panel === "directory" ? (
+            {panel === "orchard-floor" ? (
+              <ResidenceGuide
+                pose={telemetry?.pose}
+                close={() => setPanel(null)}
+              />
+            ) : panel === "directory" ? (
               <>
                 <h2>Find your place.</h2>
                 <p>
@@ -692,6 +733,8 @@ export function Campus() {
                     "All",
                     "Enterable buildings",
                     "Interactive professors",
+                    "Fictional students",
+                    "Residences",
                     "Athletics",
                     "Faculties",
                     "Student life",
@@ -853,7 +896,11 @@ export function Campus() {
               </>
             ) : character ? (
               <>
-                <span className={styles.badge}>EDUCATIONAL SIMULATION</span>
+                <span className={styles.badge}>
+                  {character.category === "fictional"
+                    ? "FICTIONAL STUDENT GUIDE"
+                    : "EDUCATIONAL SIMULATION"}
+                </span>
                 <h2>{character.name}</h2>
                 <p className={styles.lead}>{character.title}</p>
                 <p>{character.biography}</p>
@@ -870,8 +917,9 @@ export function Campus() {
                 </div>
                 <h3>Let’s explore a question.</h3>
                 <p>
-                  Responses are curated educational summaries, not the person’s
-                  words.
+                  {character.category === "fictional"
+                    ? "Curated residence information, not a real student's testimonial."
+                    : "Responses are curated educational summaries, not the person’s words."}
                 </p>
                 <div
                   className={styles.dialogue}
@@ -972,6 +1020,24 @@ export function Campus() {
                     : "Exterior coverage"}
                 </h3>
                 <p>{selectedPlace.reconstruction}</p>
+                {selectedPlace.id === "orchard" && (
+                  <>
+                    <button
+                      className={styles.primary}
+                      disabled={!ready}
+                      onClick={() => visit("orchard")}
+                    >
+                      Explore virtual residence
+                    </button>
+                    <p>
+                      Enter from the courtyard, then follow the lobby signs to
+                      the stairs or lift. Upstairs, open rooms A–H with E or
+                      tap. Every labelled bedroom and bathroom door works. Only
+                      this demonstration floor is supported.
+                    </p>
+                    <small>{residenceVersion}</small>
+                  </>
+                )}
                 {Object.entries(displays)
                   .filter(([, d]) => d.building === selectedPlace.id)
                   .map(([id, d]) => (
@@ -1074,15 +1140,19 @@ export function Campus() {
                   Official campus footprints, landscape surfaces and trees
                   provide the setting. Original procedural reconstructions focus
                   on the baseball precinct, Rose training hall, Sauder lobby,
-                  Bookstore and Nest. Other buildings are simplified exterior
-                  context.
+                  Bookstore, Nest and Orchard Commons. Orchard includes a lobby,
+                  one demonstration floor, eight fictional bedrooms, five shared
+                  bathrooms and three fictional student guides. Other buildings
+                  are simplified exterior context.
                 </p>
                 <h3>What remains approximate</h3>
                 <p>
                   Terrain is flat. Roofs, facades, field markings, interior
                   layouts and furnishings are reconstructed. The upper Nest
                   galleries represent selected public spaces; the entire
-                  five-level building is not reproduced. Virtual walking routes
+                  five-level building is not reproduced. Orchard’s upper storeys
+                  are exterior only; the open-house floor is representative, not
+                  an assigned room or an as-built plan. Virtual walking routes
                   are not real-world accessibility guidance.
                 </p>
                 <h3>Sources and rights</h3>

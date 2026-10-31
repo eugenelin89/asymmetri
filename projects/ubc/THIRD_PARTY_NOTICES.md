@@ -39,3 +39,11 @@ Principal architectural references:
 Professional sources and links are centralized in `registry.ts` with review dates,
 source disagreements, content permissions and disclaimers. They support educational
 summaries; no generated text is presented as the real person's quotation.
+
+Orchard V0.2 adds the pinned repository's `ubcv_subbuildings.geojson` under the
+locations PDDL declaration. Its manifest records raw/output hashes. Architectural
+references include UBC Housing, residence tours, public 2014 DP13034 plans and
+elevations, Perkins&Will and StructureCraft. These are reference-only copyrighted
+sources; no drawings/photos are included. Room layouts are fictional Level B
+reconstructions. All three students are original stylized fictional characters
+with sourced general Housing information in `residence-content.ts`.

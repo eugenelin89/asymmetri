@@ -743,3 +743,14 @@ It directly reuses Surrey's resource-disposal helper. No existing city renderer,
 data snapshot, save format or gameplay system changes. `public/ubc` holds versioned
 UBC GIS assets with source and licensing receipts. See the project README and
 `UBC_IMPLEMENTATION_2026-10-30.md` for the measured acceptance boundary.
+
+### Orchard Commons residence module
+
+V0.2 extends the same engine with `residence-layout`, `residence`,
+`residence-exterior`, `residence-mesh`, `doors` and `residence-content`. Dynamic
+collision callbacks support hinged leaves and a lift with a shared moving floor.
+Students use local interior routes and floor heights; prompts respect wall
+occlusion. Bedroom meshes load near the floor and unload beyond 90 m while
+deterministic collision stays resident. `ResidenceGuide` is a visitor schematic.
+Original GIS bytes remain unchanged; source sections/anchor provenance use a
+separate snapshot. See `UBC_ORCHARD_MVR_2026-10-31.md` for acceptance limits.

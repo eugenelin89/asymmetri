@@ -1,4 +1,9 @@
 import type { Character, Link, Place, Topic } from "./types";
+import {
+  orchardPlace,
+  residenceDisplays,
+  residenceStudents,
+} from "./residence-content";
 
 export const checked = "2026-10-30";
 export const unofficial =
@@ -53,6 +58,7 @@ export const sources = {
 const reconstruction =
   "Level B · reference-based reconstruction. Public descriptions and historical plans inform this original model; dimensions, facade details and furnishings are not an as-built survey.";
 export const places: Place[] = [
+  orchardPlace,
   {
     id: "stadium",
     name: "Tourmaline West Baseball Stadium",
@@ -194,6 +200,7 @@ export const displays: Record<
   string,
   { name: string; description: string; links: Link[]; building: string }
 > = {
+  ...residenceDisplays,
   "rose-info": {
     name: "Train at the Rose",
     description:
@@ -469,6 +476,8 @@ export const characters: Character[] = [
     status: "Available in the virtual academic core",
   },
 ];
+characters.push(...residenceStudents);
+
 export function safeExternalUrl(value: string): string | null {
   try {
     const u = new URL(value);

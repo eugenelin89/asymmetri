@@ -1,12 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {
-  safeExternalUrl,
-  characters,
-  places,
-  displays,
-  answerQuestion,
-} from "./registry.ts";
+import "./test-loader.mjs";
+const { safeExternalUrl, characters, places, displays, answerQuestion } =
+  await import("./registry.ts");
 import { solarPosition, normalizeSettings, defaults } from "./environment.ts";
 import {
   createCollision,
@@ -46,7 +42,7 @@ test("all visitor links use approved HTTPS destinations; hostile and deceptive U
     assert.equal(safeExternalUrl(u), null);
 });
 test("both named simulations have complete sourcing and grounded topic lookup with safe refusal", () => {
-  assert.equal(characters.length, 2);
+  assert.equal(characters.filter((c) => c.category === "named").length, 2);
   for (const c of characters) {
     assert.ok(c.verified && c.disclaimer && c.permissions && c.sources.length);
     assert.ok(c.topics.length >= 5);
