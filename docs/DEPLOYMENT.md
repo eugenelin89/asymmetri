@@ -3,8 +3,13 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Surrey V0.6 release receipt](SURREY_V06_RELEASE_2026-10-31.md) records the
+latest Open Roads runtime, guidance follow-up, complete immediate rollback and
+verified historical archives. Always refresh actual live source/build before
+staging; older receipt identities are historical.
+
 The [homepage division-link receipt](HOME_DIVISION_LINKS_RELEASE_2026-10-31.md)
-records the current October 31 source/build and copy-only rollback. Homepage cards
+records the preceding October 31 source/build and copy-only rollback. Homepage cards
 open Sports and Labs; all city, UBC, BotSquad and Motion routes remain intact.
 The preceding [UBC V0.3 receipt](UBC_CAMPUS_LIFE_RELEASE_2026-10-31.md) records
 campus life and the community-profile routing configuration, which are unchanged.
@@ -13,8 +18,8 @@ The [UBC V0.2 Orchard release receipt](UBC_ORCHARD_RELEASE_2026-10-31.md) record
 an earlier October 31 runtime: five UBC interior reconstructions, including one
 Orchard Commons demonstration floor with eight rooms, while all three city apps
 remain intact. Source `32f7295`, Linux build `uSdetjZWMH8Rh69FKnc5J`, activated at
-08:16:08 UTC. The complete immediately preceding runtime is retained at
-`/var/www/asymmetri-rollback-before-ubc-orchard-v02-20261031`. Private/public/browser,
+08:16:08 UTC. Its then-immediate predecessor has since been retained as a verified
+archive; see the Surrey V0.6 receipt for its current location and checksum. Private/public/browser,
 protected-route and peer checks passed. The initial private memory-guard stop and
 successful bounded-heap repeat are documented; safeguard floors were unchanged.
 Later documentation commits do not change the runtime.
@@ -22,8 +27,9 @@ Later documentation commits do not change the runtime.
 The [Surrey V0.5 release receipt](SURREY_V05_RELEASE_2026-10-30.md) records the
 preceding October 30 runtime: playable driving, a complete delivery, bounded traffic
 and moving train scenery, with Richmond and Vancouver preserved. Runtime source
-`fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. The complete
-immediate predecessor is retained at `/var/www/asymmetri-rollback-before-surrey-v05-20261030`.
+`fcd2b90`, Linux build `VaAKfIoEAK5LbGri4K8V8`, activated at 23:20:24 UTC. Its
+then-immediate predecessor has since been retained as a verified archive;
+see the Surrey V0.6 receipt for current recovery instructions.
 Public HTTP/asset and peer guards passed. The post-release visual browser recheck
 passed by 23:35 UTC after browser reconnection: held driving controls, aerial
 pause/resume, occupied-car reload and compact portrait/landscape layouts. Physical
@@ -1488,9 +1494,11 @@ release. Status and exact release receipts: `SURREY_V05_RELEASE_2026-10-30.md`.
 
 ## Surrey V0.6 release and recovery
 
-V0.6 is live from exact Linux source `f6fb80a5394cbc8deb88af81cb8c584918ea06f9`,
-build `CM8fyU1dZ-i0htGXG2LZB`. The complete previous UBC runtime is retained at
-`/var/www/asymmetri-rollback-before-surrey-v06-20261031`. Read
+V0.6 including the live-guidance correction is deployed from exact Linux source
+`bbf194c3584637868bf92936da946485caca2929`, build `Ds3XoQLPUe8czRrb_7rcW`.
+The complete immediately previous V0.6 runtime is retained at
+`/var/www/asymmetri-rollback-before-surrey-v06-guidance-20261031`; the preceding
+UBC runtime also remains at `/var/www/asymmetri-rollback-before-surrey-v06-20261031`. Read
 `SURREY_V06_RELEASE_2026-10-31.md` for activation, preservation checks and older
 runtime archive recovery; do not assume old expanded rollback paths still exist.
 V0.6 passed the October 31 local ordinary-control detour journey, moving

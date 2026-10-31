@@ -227,7 +227,17 @@ and turned onto City Parkway. At 94.40,-22.55, heading -.009, after six moving
 reroutes, the visible instruction correctly read “Left onto Central Ave”. No
 Recover or hidden state injection was used. The car was paused at zero speed;
 its screenshot, DOM telemetry and console receipt are retained with the correction
-evidence. This is a local rendered check, not yet a follow-up production claim.
+evidence. This was the local gate before the follow-up production release.
+
+The follow-up activated October 31 at 18:11:57 UTC from source `bbf194c`, Linux
+build `Ds3XoQLPUe8czRrb_7rcW`. Both-host protected/public and 70 extra asset/redirect
+checks pass. Fresh live Continue restores car 94.54,-24.20,.012, selects Central
+City and correctly shows “38 m · Left onto Central Ave”. CSS 390×844 and 844×390
+views remain clear without horizontal overflow. Aerial preserves car/destination
+and freezes city time 587.30 and elapsed 387.00; a second reload restores them,
+with one canvas and no application console errors. Exact artifact, guards and
+complete recovery evidence are in the release receipt. Physical iPhone testing
+remains pending.
 
 ## October 30 production preservation and next release step
 
