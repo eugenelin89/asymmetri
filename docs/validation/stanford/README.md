@@ -1,4 +1,4 @@
-# Stanford local browser evidence
+# Stanford browser evidence
 
 Unretouched screenshots from the local Next webpack preview, 2026-10-31. These are procedural reconstructions and generic avatars, not photographs or likeness evidence.
 
@@ -33,3 +33,9 @@ The owner subsequently requested removal of the Play privacy panel everywhere. T
 ## Preview after panel removal
 
 The later owner-requested removal passed fresh 182 focused tests, type/lint, Vinext, Next webpack and the production dependency audit. Browser verification confirmed no Play privacy panel or controls on the landing page or inside Project information, with no overflow at 390, 768 or 1280 px, no sampled broken images and no console errors. Closing the information panel restored canvas focus. The revised desktop landing and mobile information screenshots are retained as private local release evidence rather than replacing the earlier historical captures. This verification covers the Stanford-only removal export; exact combined Linux CI and production acceptance remain separate.
+
+## Community release production acceptance
+
+Exact source `b3601b3` passed live acceptance at 00:36:18 UTC on November 1 (October 31 Vancouver). `community-live-welcome-desktop.jpg` and `community-live-information-desktop.jpg` (1280×720) show the welcome and loaded Halloween information view without the removed privacy panel. `community-live-review-mobile.jpg` (390×844) shows the empty review form and visible keyboard focus. These original, unretouched captures contain no submitted visitor data or private telemetry. Alt descriptions: Stanford Halloween welcome without recording controls; Stanford Project information without the removed panel; empty Stanford visitor review form with focused comment field.
+
+Automatic Halloween, loaded game, canvas/review focus restoration, plain policy access, no overflow, no sampled broken images and no console errors passed. No production review or synthetic play API fixture was submitted. The temporary browser tab was closed and viewport reset; the release owner's reserved tab/preference was preserved. This pass did not repeat held walking or exhaustive interior traversal and does not certify physical-device audio. See the [production receipt](../../STANFORD_COMMUNITY_RELEASE_2026-10-31.md).

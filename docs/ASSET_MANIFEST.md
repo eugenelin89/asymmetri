@@ -1424,3 +1424,7 @@ Stanford shared-feature preview proof: `docs/validation/stanford/followup-privac
 ## UBC privacy-card removal evidence — October 31, 2026
 
 `docs/validation/ubc-privacy-ui/welcome-desktop.jpg` (1280×720), `welcome-mobile.jpg` and `about-mobile.jpg` (390×844), and `plain-privacy-mobile.jpg` (413×598) are original, unretouched local production-preview screenshots. They document the absence of the removed panel and recording checkbox. No private telemetry, visitor identity, credential or external photograph appears. These are documentation evidence, not production proof or physical-device results; descriptions are in the [gallery](validation/ubc-privacy-ui/README.md).
+
+## Stanford community production evidence — October 31, 2026
+
+`docs/validation/stanford/community-live-welcome-desktop.jpg` and `community-live-information-desktop.jpg` (1280×720), plus `community-live-review-mobile.jpg` (390×844), are original, unretouched browser captures of deployed source `b3601b3`. They document the Halloween welcome, loaded Project information without recording controls, and empty review form with visible focus. No submitted review, private telemetry, credential, external photograph or real-person likeness appears. Documentation evidence only; accessible descriptions and physical-device/audio limits are in the [validation gallery](validation/stanford/README.md). The interface and procedural scene are original application work; no third-party media is reproduced.
