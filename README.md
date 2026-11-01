@@ -277,7 +277,7 @@ added. [Coverage, controls, ODbL data and limits](projects/richmond/README.md).
 
 ## Case Western Reserve Virtual Campus
 
-The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence. The [community follow-up](docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md) adds reviews and play-privacy controls with separate local and live acceptance.
+The independent CWRU explorer is implemented at `/labs/cwru`. See the [project guide](projects/cwru/README.md) for controls, geographic provenance, building coverage, people-source limits and the Halloween crowd. The [implementation report](docs/CWRU_CAMPUS_2026-10-31.md) records source coverage and limits; the [production receipt](docs/CWRU_RELEASE_2026-10-31.md) records the verified October 31 V0.1 deployment, private profile persistence and recovery evidence. The [community follow-up](docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md) adds reviews and private play reporting, with the requested privacy-panel removal and larger running instructions [verified live at exact b360](docs/CWRU_COMMUNITY_RELEASE_2026-10-31.md).
 
 ## Campus community services
 

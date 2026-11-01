@@ -26,7 +26,7 @@ Original generic avatars, dialogue and walks are fictional simulations near rele
 
 ## Reviews and play reporting
 
-The prepared follow-up integrates the shared review form above the footer. At the owner's subsequent request, the Play privacy panel and recording checkbox are removed from both the landing page and Project information; a plain policy link remains. Reviews describe this virtual experience and support owner editing/removal and reporting. Play recording requires a started, ready, visible game and recent input, honors existing opt-outs and browser privacy signals, and stays separate from profiles and reviews. The private backend counts browser capabilities, not verified people. See `docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md` for acceptance and pending production rollout, and `/labs/campus-privacy` for collection and retention details.
+The deployed follow-up integrates the shared review form above the footer. At the owner's subsequent request, the Play privacy panel and recording checkbox are removed from both the landing page and Project information; a plain policy link remains. Reviews describe this virtual experience and support owner editing/removal and reporting. Play recording requires a started, ready, visible game and recent input, honors existing opt-outs and browser privacy signals, and stays separate from profiles and reviews. The private backend counts browser capabilities, not verified people. See `docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md` for implementation acceptance, and `docs/CWRU_COMMUNITY_RELEASE_2026-10-31.md` for the verified production rollout. See `/labs/campus-privacy` for collection and retention details.
 
 ## Halloween
 
@@ -42,4 +42,4 @@ The original Web Audio soundscape combines an eerie score, distant wolf howls, a
 
 ## Validation and release
 
-See `docs/CWRU_CAMPUS_2026-10-31.md` for checks and limitations. V0.1 is live at [asymmetri.co/labs/cwru](https://asymmetri.co/labs/cwru). The [production receipt](../../docs/CWRU_RELEASE_2026-10-31.md) records exact-source CI, public/profile/browser checks and recovery evidence. Preserve the UBC project and all shared protected product routes.
+See `docs/CWRU_CAMPUS_2026-10-31.md` for checks and limitations. V0.1 is live at [asymmetri.co/labs/cwru](https://asymmetri.co/labs/cwru). The [production receipt](../../docs/CWRU_RELEASE_2026-10-31.md) records exact-source CI, public/profile/browser checks and recovery evidence. The [community release receipt](../../docs/CWRU_COMMUNITY_RELEASE_2026-10-31.md) records the live larger running instructions, reviews/reporting and panel removal at exact b360. Preserve the UBC project and all shared protected product routes.

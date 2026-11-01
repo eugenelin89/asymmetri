@@ -2,7 +2,7 @@
 
 ## Implementation
 
-CWRU now integrates the shared modules introduced at `704a9b3bfc2a3eafcac0360f490af01aafbf56ff`. This records source preparation and local acceptance; consult the separate production receipt before treating the follow-up as live.
+CWRU now integrates the shared modules introduced at `704a9b3bfc2a3eafcac0360f490af01aafbf56ff`. The follow-up is now verified live in exact b360; the [production receipt](CWRU_COMMUNITY_RELEASE_2026-10-31.md) records activation and independent public/browser acceptance.
 
 The CWRU page places visitor reviews immediately above the footer. The shared interface provides star ratings, comments, distribution, sorting, owner edit/removal and reporting. It labels reviews as feedback about the independent virtual experience. There are no seeded ratings or testimonials.
 
@@ -29,10 +29,10 @@ The development server refreshed the page once when compiling another route; thi
 
 ## Subsequent panel removal
 
-The CWRU-only follow-up removes the two preference-component mounts/imports and replaces the stale “described below” sentence with a policy link. PlaySession, its readiness/region wiring, public reviews, player profiles and the larger running instructions remain unchanged. An isolated Node 24.10.0 export passed TypeScript/ESLint, the Vinext build, and desktop/phone browser checks. Both panels and the recording checkbox are absent; the separate policy link, larger Run instructions and CANVAS focus restoration work, with no overflow or console errors. An initial build write hit local disk exhaustion; removing only idle CWRU-generated temporary output restored capacity, and the rerun passed. The coordinated immutable-source Linux build and live acceptance remain pending. The earlier exact039 artifact remains retained evidence and is not selected for deployment after this request.
+The CWRU-only follow-up removes the two preference-component mounts/imports and replaces the stale “described below” sentence with a policy link. PlaySession, its readiness/region wiring, public reviews, player profiles and the larger running instructions remain unchanged. An isolated Node 24.10.0 export passed TypeScript/ESLint, the Vinext build, and desktop/phone browser checks. Both panels and the recording checkbox are absent; the separate policy link, larger Run instructions and CANVAS focus restoration work, with no overflow or console errors. An initial build write hit local disk exhaustion; removing only idle CWRU-generated temporary output restored capacity, and the rerun passed. The coordinated immutable-source Linux build and live acceptance subsequently passed at exact b360; see the production receipt. The earlier exact039 artifact remains retained evidence and is not selected for deployment after this request.
 
 ## Release and operations
 
-The shared backend owner deploys and verifies the private review/analytics stores and daily retention timer first. A coordinated exact-source Linux artifact then includes each campus owner's reviewed changes. CWRU owns its public page, panel-removal, reviews, play lifecycle and existing profile acceptance. Those live checks remain pending.
+The shared backend owner deploys and verifies the private review/analytics stores and daily retention timer first. A coordinated exact-source Linux artifact then includes each campus owner's reviewed changes. CWRU owns its public page, panel-removal, reviews, play lifecycle and existing profile acceptance. Those CWRU live checks passed on the coordinated exact b360 runtime.
 
 Use the [review operations](CAMPUS_REVIEWS_OPERATIONS.md), [analytics operations](../projects/campus-analytics/README.md) and [CWRU profile operations](CWRU_COMMUNITY_OPERATIONS.md). Preserve all three campuses' profile stores and service dropins, shared data, current rollback and archive custody. Stop/drain shared analytics maintenance during whole-runtime swaps and resume it against a compatible healthy runtime. Never restore an empty store over real submissions. Authorized disk cleanup moved historical server archives to verified owner custody; future gates use those receipts rather than assume retired server paths still exist.

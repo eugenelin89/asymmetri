@@ -17,4 +17,4 @@ Node 24.10.0 matches `.nvmrc`. `npm run check` passed TypeScript and ESLint with
 
 Both the Vinext/Cloudflare build and standard Next webpack build passed with the final CSS. `npm audit --omit=dev` reported zero vulnerabilities; `git diff --check` passed. No new unit tests are needed for this copy/style-only change; held-input logic was not altered. This is local validation, not physical-device performance certification.
 
-Production remains the previously verified core release until the next authorized CWRU runtime rollout. The scoped source change is recorded in journal179 after the shared release owner froze its candidate and released main. The private/shared backend integration is tracked separately.
+The running instructions are verified live in source `b3601b3`, build `xMZDEUQlNPy6b48OwpOC3`, activated November 1 at 00:28:14 UTC (October 31 in Vancouver). Live desktop and phone checks reconfirmed 17px desktop text, 18px RUN text and the 88px touch target. See the [production receipt](CWRU_COMMUNITY_RELEASE_2026-10-31.md). Journal 179 retains the scoped implementation record.
