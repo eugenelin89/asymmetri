@@ -6,6 +6,9 @@ Independent Asymmetri Labs → GIS Apps project at `/labs/ubc`. This is a workin
 implementation candidate, not a completed UBC digital twin or a certified
 production-quality milestone. It is unofficial and has no UBC or faculty endorsement.
 
+See the [flagship development roadmap](../../docs/UBC_ROADMAP.md) for proposed
+V0.5–V1.1 milestones, quality gates, and current fidelity priorities.
+
 ## Run and validate
 
 Use Node 24 from the repository `.nvmrc` and the existing lockfile. No dependency
