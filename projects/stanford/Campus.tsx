@@ -86,8 +86,8 @@ export function Campus() {
     resumeSceneFocus = useRef(false);
   const sound = useRef<CampusSound | null>(null);
   useEffect(() => () => { sound.current?.dispose(); sound.current=null; }, []);
-  const enableSound = () => {
-    try { sound.current ||= createCampusSound(setNotice); api.current?.audio(sound.current); void sound.current.resume(); } catch { setNotice("Audio is unavailable in this browser."); }
+  const enableSound = (choice: Pick<Settings, "halloween" | "sound" | "soundVolume"> = settings) => {
+    try { sound.current ||= createCampusSound(setNotice); api.current?.audio(sound.current); void sound.current.resume(choice); } catch { setNotice("Audio is unavailable in this browser."); }
   };
   const previousAtmosphere = useRef<Atmosphere | null>(null);
   const focusScene = useCallback(() => {
@@ -225,6 +225,7 @@ export function Campus() {
     };
   }, [started, generation]);
   useEffect(() => {
+    sound.current?.configure(settings);
     api.current?.settings(settings);
   }, [settings, ready]);
   useEffect(() => {
@@ -298,6 +299,7 @@ export function Campus() {
   const changeHalloween = (enabled: boolean) => {
     const next = setHalloween(settings, enabled, previousAtmosphere.current);
     previousAtmosphere.current = next.previous;
+    if(started)enableSound(next.settings);
     setSettings(next.settings);
     try {
       const saved = serializeHalloweenPreference(new Date(), enabled);
@@ -310,6 +312,7 @@ export function Campus() {
     try { localStorage.removeItem(halloweenStorageKey); } catch {}
     const next = setHalloween(settings, initialHalloweenPreference(new Date()), previousAtmosphere.current);
     previousAtmosphere.current = next.previous;
+    if(started)enableSound(next.settings);
     setSettings(next.settings);
     setNotice("Seasonal schedule restored. Halloween runs October 24–November 7 in Stanford local time.");
   };
@@ -521,7 +524,7 @@ export function Campus() {
                 </div>
               </div>
               <div className={styles.tools}>
-                {settings.halloween && <button aria-label={settings.sound ? "Mute Halloween sound" : "Enable Halloween sound"} aria-pressed={settings.sound} onClick={()=>{enableSound();update({sound:!settings.sound});}}>{settings.sound ? "♫" : "♩"}<span>{settings.sound ? "Sound on" : "Sound off"}</span></button>}
+                {settings.halloween && <button aria-label={settings.sound ? "Mute Halloween sound" : "Enable Halloween sound"} aria-pressed={settings.sound} onClick={()=>{enableSound({...settings,sound:!settings.sound});update({sound:!settings.sound});}}>{settings.sound ? "♫" : "♩"}<span>{settings.sound ? "Sound on" : "Sound off"}</span></button>}
                 <button
                   aria-label="Search campus directory"
                   onClick={() => openPanel("directory")}
@@ -959,8 +962,8 @@ export function Campus() {
                 <p className={styles.quiet}>An optional fictional character follows on campus paths, stops at a distance, and waits outside buildings. No attacks or damage.</p>
                 <fieldset>
                   <legend>Halloween soundscape</legend>
-                  <label className={styles.check}><input type="checkbox" checked={settings.sound} onChange={e=>{enableSound();update({sound:e.target.checked});}} /> Eerie music, wolf howls and nearby ghost voices</label>
-                  <label className={styles.slider}>Volume <strong>{Math.round(settings.soundVolume*100)}%</strong><input aria-label="Soundscape volume" type="range" min="0" max="1" step=".05" value={settings.soundVolume} onChange={e=>{enableSound();update({soundVolume:Number(e.target.value)});}} /></label>
+                  <label className={styles.check}><input type="checkbox" checked={settings.sound} onChange={e=>{enableSound({...settings,sound:e.target.checked});update({sound:e.target.checked});}} /> Eerie music, wolf howls and nearby ghost voices</label>
+                  <label className={styles.slider}>Volume <strong>{Math.round(settings.soundVolume*100)}%</strong><input aria-label="Soundscape volume" type="range" min="0" max="1" step=".05" value={settings.soundVolume} onChange={e=>{enableSound({...settings,soundVolume:Number(e.target.value)});update({soundVolume:Number(e.target.value)});}} /></label>
                   <small>Original synthesized sound. Ghost cries and screams are spatial and grow with proximity. Sound fades out in the base edition.</small>
                 </fieldset>
                 <fieldset disabled={settings.halloween}>

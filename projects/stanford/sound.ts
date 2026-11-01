@@ -1,5 +1,7 @@
 import type { Point, Pose, Settings } from "./types";
 export type SoundEmitter={id:string;kind:string;point:Point;y?:number};
+type SoundPreferences = Pick<Settings, "halloween" | "sound" | "soundVolume">;
+type PlaybackSession = { type: string };
 export function proximityMix(pose:Pick<Pose,"x"|"y"|"z"|"yaw">,point:Point,y=0) {
   const dx=point[0]-pose.x,dz=point[1]-pose.z,distance=Math.hypot(dx,dz,y-pose.y);
   return {distance,gain:Math.max(0,1-distance/65)**2,pan:Math.max(-1,Math.min(1,(dx*Math.cos(pose.yaw)-dz*Math.sin(pose.yaw))/Math.max(1,distance)))};
@@ -30,6 +32,55 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
   const wind=context.createBufferSource(),windFilter=context.createBiquadFilter(),windGain=context.createGain();
   wind.buffer=noiseBuffer;wind.loop=true;windFilter.type="bandpass";windFilter.frequency.value=380;windFilter.Q.value=.6;windGain.gain.value=.12;wind.connect(windFilter);windFilter.connect(windGain);windGain.connect(bed);wind.start();continuous.push(wind);
   let disposed=false,clock=0,nextWolf=8,nextBell=5,lastGhost=0,eventCount=0;
+  let authorized=false,enabled=false,volume=0,resumeVersion=0,playbackRequested=false;
+  let restoreSession:{session:PlaybackSession;previous:string}|null=null;
+  const audible=()=>authorized&&enabled&&!document.hidden&&!disposed;
+  function releasePlayback() {
+    const previous=restoreSession;restoreSession=null;
+    if(!previous)return;
+    try {
+      // Another feature may have changed this document's audio policy meanwhile.
+      if(previous.session.type==="playback")previous.session.type=previous.previous;
+    } catch { /* Session support is optional; never interfere with mute/disposal. */ }
+  }
+  function claimPlayback() {
+    if(restoreSession)return;
+    try {
+      const session=(navigator as Navigator & {audioSession?:PlaybackSession}).audioSession;
+      if(!session||typeof session.type!=="string"||session.type==="playback")return;
+      const previous=session.type;
+      session.type="playback";
+      if(session.type==="playback")restoreSession={session,previous};
+    } catch { /* Unsupported/restricted browsers retain their normal Web Audio behavior. */ }
+  }
+  function preferences(settings:SoundPreferences) {
+    const next=settings.halloween&&settings.sound&&settings.soundVolume>0;
+    if(enabled&&!next)resumeVersion++;
+    enabled=next;volume=Math.max(0,Math.min(1,settings.soundVolume));
+  }
+  function refreshOutput(retry=false) {
+    const active=audible();
+    master.gain.setTargetAtTime(active?volume*.8:0,context.currentTime,.3);
+    if(!active){playbackRequested=false;releasePlayback();}
+    else if(!playbackRequested||retry){playbackRequested=true;claimPlayback();}
+  }
+  async function resumeContext() {
+    const version=++resumeVersion;
+    refreshOutput(true);
+    try {
+      await context.resume();
+      if(disposed)return;
+      if(!audible()) {
+        refreshOutput();
+        if(document.hidden)void context.suspend().catch(()=>{});
+      }
+      if(version===resumeVersion&&audible())onStatus?.("");
+    } catch {
+      if(disposed||version!==resumeVersion)return;
+      authorized=false;refreshOutput();
+      if(enabled&&!document.hidden)onStatus?.("Sound is paused by your browser. Use the Sound button to enable it.");
+    }
+  }
   const lastVoices=new Map<string,number>();
   function voice(kind:"howl"|"cry"|"scream"|"bell",strength:number,pan:number) {
     if(disposed||voices.size>9||context.state!=="running")return;
@@ -50,13 +101,23 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     }
     window.setTimeout(()=>{amp.disconnect();mix.disconnect();panner.disconnect();},(duration+.3)*1000);eventCount++;
   }
-  async function resume(){if(disposed)return;try{await context.resume();onStatus?.("");}catch{onStatus?.("Sound is paused by your browser. Use the Sound button to enable it.");}}
+  async function resume(settings?:SoundPreferences) {
+    if(disposed)return;
+    // The caller supplies the effective choice during the Enter/Sound gesture,
+    // before the scene has delivered its first frame (including Base or mute).
+    authorized=true;if(settings)preferences(settings);refreshOutput();
+    if(audible())await resumeContext();
+  }
+  function configure(settings:SoundPreferences) {
+    if(disposed)return;
+    preferences(settings);refreshOutput();
+  }
   function update(dt:number,settings:Settings,pose:Pose,emitters:SoundEmitter[]) {
     if(disposed)return;
-    const enabled=settings.halloween&&settings.sound&&!document.hidden;
-    const gain=enabled?Math.max(0,Math.min(1,settings.soundVolume))*.8:0;
-    master.gain.setTargetAtTime(gain,context.currentTime,.3);
-    if(!enabled||context.state!=="running")return;
+    // Preferences come directly from the controls. The asynchronously loaded
+    // scene may still have default/stale settings during its first frames.
+    refreshOutput();
+    if(!audible()||context.state!=="running")return;
     clock+=Math.max(0,Math.min(dt,.25));
     if(clock>=nextWolf){const wolf=emitters.filter(e=>e.kind==="werewolf").sort((a,b)=>proximityMix(pose,a.point).distance-proximityMix(pose,b.point).distance)[0];const mix=wolf?proximityMix(pose,wolf.point):{gain:.2,pan:Math.sin(clock)};voice("howl",Math.max(.22,mix.gain),mix.pan);nextWolf=clock+21+Math.random()*11;}
     if(clock>=nextBell){voice("bell",.45,Math.sin(clock*.3)*.65);nextBell=clock+13+Math.random()*12;}
@@ -65,7 +126,11 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
       if(nearby){voice(nearby.m.distance<13&&eventCount%3===0?"scream":"cry",nearby.m.gain,nearby.m.pan);lastVoices.set(nearby.e.id,clock);lastGhost=clock;}
     }
   }
-  const visibility=()=>{if(document.hidden)void context.suspend();else if(!disposed)void resume();};document.addEventListener("visibilitychange",visibility);
-  return {resume,update,state:()=>({state:context.state,events:eventCount,activeVoices:voices.size}),dispose(){if(disposed)return;disposed=true;document.removeEventListener("visibilitychange",visibility);for(const s of [...continuous,...voices]){try{s.stop();}catch{}}void context.close();}};
+  const visibility=()=>{
+    if(disposed)return;
+    if(document.hidden){resumeVersion++;refreshOutput();void context.suspend().catch(()=>{});}
+    else if(authorized&&enabled)void resumeContext();
+  };document.addEventListener("visibilitychange",visibility);
+  return {resume,configure,update,state:()=>({state:context.state,events:eventCount,activeVoices:voices.size}),dispose(){if(disposed)return;disposed=true;resumeVersion++;releasePlayback();document.removeEventListener("visibilitychange",visibility);for(const s of [...continuous,...voices]){try{s.stop();}catch{}}void context.close().catch(()=>{});}};
 }
 export type CampusSound=ReturnType<typeof createCampusSound>;

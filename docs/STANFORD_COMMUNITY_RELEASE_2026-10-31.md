@@ -18,6 +18,8 @@ Desktop 1280×720 and phone 390×844 browser checks passed. Automatic scheduling
 
 No review was submitted and no synthetic play API fixture was sent. The release owner's temporary browser opt-out was preserved throughout gameplay; its original preference remains that owner's restoration responsibility. Stanford's temporary production tab was closed and viewport override reset. The reserved owner tab was never touched. These checks do not claim physical-device audio, subjective speaker audition or exhaustive building traversal during this follow-up.
 
+The owner subsequently reported that the older control tab was no longer available, so restoration of the QA browser's original recording preference could not be completed. That test browser may retain its temporary opt-out. No hidden-state workaround or further production gameplay was used; production defaults are unchanged. The coordinated audio handoff records this limitation explicitly.
+
 Three original, unretouched screenshots are registered in the [validation gallery](validation/stanford/README.md). Detailed HTTP/browser receipts and original captures are retained privately under `deployment-retention/2026-10-31/stanford-community`, including `combined-live-http.json` and `combined-live-browser.json`.
 
 ## Shared preservation and recovery

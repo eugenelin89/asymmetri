@@ -28,6 +28,8 @@ Halloween includes 22 monster types, 24 original comic/manga/robot costume visit
 
 Original Web Audio synthesis supplies minor-key drones, wind, bells, wolf howls, and nearby ghost cries/screams with stereo positioning and distance attenuation. Enter/Sound gestures unlock playback. Mute/volume are available, base mode fades the soundtrack, and hidden tabs suspend audio. Browser telemetry confirmed a running context and scheduled atmospheric cues; subjective speaker audition was not performed. No external recording or voice imitation is bundled.
 
+A separate [iPhone-audio follow-up](STANFORD_IPHONE_AUDIO_2026-10-31.md) adds optional Audio Session playback-role handling for supported browsers while Halloween sound is enabled. It preserves mute, volume, Base mode and hidden-tab behavior, with ownership-aware restoration and graceful fallback. This change is outside frozen combined release `b3601b3`; implementation and tests do not establish deployment or physical-iPhone audibility.
+
 ## Performance and validation
 
 Collision-checked seasonal layouts, all 1,402 people routes and a 13,788-node/29,420-directed-edge pedestrian graph are compiled ahead of runtime. Their provenance hashes bind them to source geography and collision-model inputs. Runtime scene construction yields between batches and reports progress. Distant building proxies, tree tiles, crowd streaming and adaptive resolution bound rendering work. Auto quality additionally disables shadows and reduces distant detail after four consecutive sub-24-FPS measurement windows; changing quality resets that fallback.

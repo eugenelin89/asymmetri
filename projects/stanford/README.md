@@ -28,6 +28,8 @@ Halloween adds 22 creature types, 24 original procedural comic/manga/robot visit
 
 Original Web Audio generates a detuned minor drone, wind, bells, wolf howls and spatial ghost cries/screams. Audio starts on the visitor's Enter/Sound gesture. Mute and volume controls remain visible; base mode fades the soundtrack and hidden tabs suspend it. No downloaded recording, film score, voice imitation or microphone is used.
 
+The separate iPhone-audio follow-up requests the optional Audio Session API's playback role only after an Enter/Sound gesture with Halloween sound enabled and nonzero volume. It supplies the actual settings before the scene's first update, releases its role on mute, Base mode, zero volume, hiding or disposal, and restores the previous type only while its own playback value remains in place. Unsupported/restricted APIs retain ordinary Web Audio behavior. This is the browser-supported route for Silent Mode playback, not a silent-media-loop workaround; device media volume and browser support still apply. Physical-iPhone audibility is not yet verified. See [implementation and validation](../../docs/STANFORD_IPHONE_AUDIO_2026-10-31.md).
+
 ## Data and asset pipeline
 
 `tools/compile_geography.py` transforms public OpenStreetMap records into the versioned snapshot under `public/stanford/v0.1-2026-10-31/`: 4,581 building parts, 29,635 surfaces, 7,144 trees, 3,291 pedestrian routes, 156 entrances and 3,398 road parts. Source IDs, acquisition hashes, height assumptions and geographic limits are retained. Tree geometry distinguishes mapped Canary Island date palms. Landscape is flat; unmeasured heights and interior/furnishing layouts are interpretations.
