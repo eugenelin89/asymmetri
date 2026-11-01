@@ -1,5 +1,5 @@
 "use client";
-import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
+import { PlaySession } from "../campus-analytics/PlaySession";
 import { applyGatewayAnchors } from "./gateway-layout";
 import { beatyAnchor } from "./beaty-layout";
 import { athleticsAnchors } from "./athletics-layout";
@@ -1446,7 +1446,6 @@ export function Campus() {
                   preferences stay in this browser. No real whereabouts or live
                   occupancy are collected.
                 </p>
-                <CampusPrivacyPreferences compact />
               </>
             )}
           </aside>

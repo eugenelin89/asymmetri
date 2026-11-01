@@ -2,7 +2,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
-import { CampusPrivacyPreferences } from "@/projects/campus-analytics/PlaySession";
 
 export const metadata = pageMetadata({
   title: "Virtual campus privacy | Asymmetri Labs",
@@ -16,10 +15,9 @@ export default function CampusPrivacyPage() {
       <article className="utility-page__body">
         <header className="utility-page__header">
           <h1>Virtual campus privacy</h1>
-          <p>These choices apply to the UBC, Case Western Reserve and Stanford virtual experiences operated by Asymmetri Labs. They are independent simulations, not university services.</p>
+          <p>This information applies to the UBC, Case Western Reserve and Stanford virtual experiences operated by Asymmetri Labs. They are independent simulations, not university services.</p>
           <p><a href="/labs/gis">Return to the campuses</a></p>
         </header>
-        <CampusPrivacyPreferences />
         <section aria-labelledby="campus-measurement">
           <h2 id="campus-measurement">Visit measurement</h2>
           <p>When you begin exploring, the campus can record a random browser identifier, session identifier, campus, first and last activity times, active play time, your connection’s IP address and the browser’s basic user-agent information. These records are private to the site operator and help us understand visits and improve the experience.</p>
@@ -28,8 +26,8 @@ export default function CampusPrivacyPage() {
         </section>
         <section aria-labelledby="campus-choices">
           <h2 id="campus-choices">Your choices</h2>
-          <p>You can turn visit measurement off without affecting exploration. The preference applies to these campuses in this browser on the current website hostname. Global Privacy Control and Do Not Track signals also disable measurement. The control above removes visit records associated with the identifier this browser still holds on this hostname. The www and non-www sites keep separate identifiers and preferences.</p>
-          <p>The identifier is a randomly generated, secure, HttpOnly first-party cookie, not a login or your name. Clearing cookies or using another browser means this browser can no longer identify earlier records for removal. Website hosting may maintain separate operational access and security logs; these controls apply to campus visit measurement.</p>
+          <p>Global Privacy Control and Do Not Track signals disable visit measurement without affecting exploration. If you previously opted out on this website, that saved preference continues to be honoured in this browser. The www and non-www sites keep separate identifiers and saved preferences.</p>
+          <p>The identifier is a randomly generated, secure, HttpOnly first-party cookie, not a login or your name. Clearing cookies or using another browser means this browser can no longer identify earlier records for removal. Website hosting may maintain separate operational access and security logs; those logs are separate from campus visit measurement.</p>
         </section>
         <section aria-labelledby="campus-retention">
           <h2 id="campus-retention">Retention and access</h2>

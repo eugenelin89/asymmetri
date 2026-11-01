@@ -1,12 +1,10 @@
 # Campus play-session client
 
-`PlaySession.tsx` exports a null-rendering session component and re-exports
-`CampusPrivacyPreferences`. The parent campus owns its Start control, playing
-state and game-region element:
+`PlaySession.tsx` exports a null-rendering session component. The parent campus
+owns its Start control, playing state and game-region element:
 
 ```tsx
 <PlaySession campus="ubc" playing={started} regionRef={gameRegionRef} />
-<CampusPrivacyPreferences compact />
 ```
 
 The accepted campuses are `ubc`, `cwru` and `stanford`. `regionRef` must enclose
@@ -37,18 +35,21 @@ rate-limit responses stop requests. Failures remain silent to gameplay. Network
 loss, throttled timers and missing final events mean duration is approximate,
 not an exact measurement of attention or movement.
 
-`CampusPrivacyPreferences` provides a visible notice describing private IP,
-random browser identifier, basic browser information and play-time records. The
-checkbox shares its preference across campuses and tabs at the same website
-origin through localStorage; apex and `www` are separate website addresses.
-Global Privacy Control and Do Not Track take precedence. Privacy details open
-`/labs/campus-privacy` in a new tab, retaining the visitor's game position. The
-compact version keeps the notice, checkbox and link. The full version also
-offers **Delete play history & stop recording**, which first disables future
-recording, then explicitly requests `DELETE {scope:"all"}` for this browser's
-identifier on the current hostname. It does not erase records associated with
-another hostname's cookie. Opt-out by itself
-does not claim to erase earlier records.
+The owner requested removal of the Play privacy card wherever it appears. UBC
+no longer renders it above the explorer or inside its help panel, and the shared
+`/labs/campus-privacy` page is a plain article. A standard Privacy link in UBC's
+notes opens that article in a new tab, retaining the game position. The article
+describes collection, browser privacy signals, existing saved opt-outs, retention
+and contact information for questions or removal requests. It does not advertise
+a checkbox or deletion control that is no longer rendered.
+
+`CampusPrivacyPreferences` remains exported for compatibility while the separate
+CWRU and Stanford workstreams remove their own imports. It is not part of the
+current UBC or privacy-page interface. No replacement banner or button is added.
+Global Privacy Control and Do Not Track still take precedence; previously saved
+localStorage opt-outs still apply across campuses and tabs at the same origin.
+Apex and `www` remain separate website addresses. Removing the card changes no
+collection, cookie, backend deletion or retention behavior.
 
 All POST requests and explicit deletion use the same exclusive Web Lock across
 tabs. Requests re-read the shared privacy choice and their activity state after
@@ -56,10 +57,10 @@ acquiring it. This serializes first-cookie establishment and prevents a pending
 start from restoring a cookie after deletion. End beacons can only terminate an
 already acknowledged session and cannot create a new record. Browsers without
 Web Locks, writable shared storage or secure UUID generation skip this optional
-collection; the privacy control reports that limitation. Explicit deletion
-remains available. Storage probes use unique, immediately removed keys and are
-never sent or used as identifiers. Lock acquisition and network requests each
-have eight-second bounds.
+collection. The browser-owned deletion API remains available, although UBC and
+the shared article no longer render a deletion button. Storage probes use unique,
+immediately removed keys and are never sent or used as identifiers. Lock
+acquisition and network requests each have eight-second bounds.
 
 Thirteen client tests cover activity/idle/visibility gates, GPC/DNT, start
 acknowledgement, heartbeat cadence, pause/resume/end sequencing, bounded retries,

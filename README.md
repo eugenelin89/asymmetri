@@ -117,8 +117,8 @@ Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The
 `asymmetri.co` production site uses the standard Next.js build and server behind
 Nginx and systemd on a DigitalOcean Ubuntu Droplet. The owner-requested campus
-community modules provide public reviews and private play reporting with visible
-privacy controls; their persistent stores are separate from public profiles.
+community modules provide public reviews and private play reporting described
+in the plain campus privacy article; their persistent stores are separate from public profiles.
 Deployment status is documented in the campus release receipts. A separate, default-disabled
 investment archive receiver has its own SQLite/signature boundary. INV-03 adds
 exact artifact/discussion pages behind an explicit loopback read configuration;
@@ -281,7 +281,7 @@ The independent CWRU explorer is implemented at `/labs/cwru`. See the [project g
 
 ## Campus community services
 
-Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. Each campus workstream owns its integration, testing and rollout; its release receipt identifies the live behavior. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [verified UBC release](docs/UBC_COMMUNITY_RELEASE_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
+Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. Each campus workstream owns its integration, testing and rollout; its release receipt identifies the live behavior. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer. The owner-requested privacy-card removal is recorded in the [UI follow-up](docs/UBC_PRIVACY_UI_2026-10-31.md); browser privacy signals and saved opt-outs remain supported. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [verified UBC release](docs/UBC_COMMUNITY_RELEASE_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
 
 ## Stanford Virtual Campus
 

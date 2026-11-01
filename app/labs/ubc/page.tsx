@@ -3,7 +3,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { pageMetadata } from "@/lib/metadata";
 import { ubc } from "@/content/site";
 import { Campus } from "@/projects/ubc/Campus";
-import { CampusPrivacyPreferences } from "@/projects/campus-analytics/PlaySession";
 import { ReviewSection } from "@/projects/campus-reviews/ReviewSection";
 import { places } from "@/projects/ubc/registry";
 import styles from "@/projects/ubc/campus.module.css";
@@ -28,7 +27,6 @@ export default function UbcPage() {
           </div>
           <span className={styles.edition}>{ubc.status}</span>
         </div>
-        <CampusPrivacyPreferences compact />
         <Campus />
         <div className={styles.notes}>
           <section>
@@ -84,6 +82,11 @@ export default function UbcPage() {
                 GIS provenance and licences
               </a>
             </details>
+            <p>
+              <a href="/labs/campus-privacy" target="_blank" rel="noopener noreferrer" aria-label="Privacy (opens in a new tab)">
+                Privacy
+              </a>
+            </p>
           </section>
         </div>
         <noscript>
