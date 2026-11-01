@@ -70,7 +70,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   let playbackIntent = false, settingsSeen = false, resumeAttempt = 0;
   let sessionLease: { session: PlaybackSession; previous: string; active: boolean } | null = null;
   function claimPlaybackSession() {
-    if (!playbackIntent || !context || disposed || visibility?.hidden || (settingsSeen && volume <= 0)) return;
+    if (!playbackIntent || !context || disposed || visibility?.hidden || (settingsSeen && !enabled)) return;
     try {
       const session = (options.audioSession || browserAudioSession)();
       if (!session) return;
@@ -195,7 +195,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     voices.add(voice); tone.onended = () => releaseVoice(voice);
     for (const node of voiceSources) { node.start(now); node.stop(voice.end); }
   }
-  function applyGate(force = false) {
+  function applyGate(force = false, allowResume = true) {
     if (!context || !master || disposed) return;
     const active = enabled && !visibility?.hidden, next = active ? volume * 0.65 : 0;
     if (!force && next === target) return;
@@ -205,9 +205,12 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     if (active) {
       if (wasSilent) schedule = createCueSchedule(context.currentTime, random);
       startBed();
-      if (context.state === "suspended") void context.resume().catch(() => {});
+      if (allowResume && context.state === "suspended") void context.resume().catch(() => {});
     } else {
       stopVoices();
+      // A gesture can precede the scene's first settings. Do not discard that
+      // unlocked context while data loads; explicit mute/hidden still suspends.
+      if (!settingsSeen && playbackIntent && !visibility?.hidden) return;
       suspendTimer = setTimeout(() => {
         suspendTimer = undefined;
         if (!disposed && context && (!enabled || visibility?.hidden)) {
@@ -224,30 +227,41 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     if (!context) return "unsupported";
     return context.state === "running" ? "running" : context.state === "closed" ? "closed" : "suspended";
   }
-  async function resume() {
+  async function resume(settings?: AudioSettings) {
     if (!context || disposed || context.state === "closed" || visibility?.hidden) return false;
     const attempt = ++resumeAttempt;
+    if (settings) readSettings(settings);
     playbackIntent = true;
     if (sessionLease && !sessionLease.active) sessionLease = null;
     claimPlaybackSession(); // Synchronous, before awaiting the user-gesture resume.
+    // Prime the audible graph inside the same gesture, rather than waiting for
+    // asynchronous scene imports, GIS fetches or the first renderer callback.
+    applyGate(true, false);
     try { await context.resume(); applyGate(true); return !disposed && context.state === "running"; }
     catch {
       if (attempt === resumeAttempt) { playbackIntent = false; releasePlaybackSession(); }
       return false;
     }
   }
-  function update(settings: AudioSettings, pose: AudioPose, ghosts: readonly AudioGhost[]) {
+  function readSettings(settings: AudioSettings) {
     if (!context || disposed) return;
     const wasEnabled = enabled;
     volume = Number.isFinite(settings.halloweenVolume) ? clamp(settings.halloweenVolume, 0, 1) : 0.35;
     enabled = settings.halloween && settings.halloweenAudio && volume > 0;
-    if (!enabled && (wasEnabled || !settingsSeen)) {
+    if (!enabled) {
       releasePlaybackSession();
       if (!settings.halloween || !settings.halloweenAudio) playbackIntent = false;
     }
     settingsSeen = true;
     if (enabled && !wasEnabled) claimPlaybackSession();
+  }
+  function configure(settings: AudioSettings) {
+    readSettings(settings);
     applyGate();
+  }
+  function update(settings: AudioSettings, pose: AudioPose, ghosts: readonly AudioGhost[]) {
+    if (!context || disposed) return;
+    configure(settings);
     for (const voice of voices) if (context.currentTime >= voice.end) releaseVoice(voice);
     if (!enabled || visibility?.hidden || context.state !== "running" || voices.size) return;
     const next = planHalloweenCue(context.currentTime, schedule, ghostProximity(pose, ghosts), random);
@@ -271,7 +285,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     voices.clear(); sources.clear(); nodes.clear(); noiseBuffer = null;
     if (context && context.state !== "closed") void context.close().catch(() => {});
   }
-  // Start is a trusted gesture, but its browser may still decline audio.
-  void resume();
-  return { update, resume, status, dispose };
+  // Only resume() in the caller's explicit gesture starts playback. Construction
+  // alone must not claim a session before the user's mute/volume choice is known.
+  return { configure, update, resume, status, dispose };
 }

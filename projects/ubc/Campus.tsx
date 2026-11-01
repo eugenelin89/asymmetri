@@ -115,14 +115,16 @@ export function Campus() {
     [query, setQuery] = useState(""),
     [category, setCategory] = useState("All"),
     [notice, setNotice] = useState("");
+  const settingsRef = useRef(settings);
   const [telemetry, setTelemetry] = useState<Telemetry | null>(null),
     [markers, setMarkers] = useState<Marker[]>([]),
     [route, setRoute] = useState<Point[] | null>(null),
     [histories, setHistories] = useState<Record<string, ConversationState>>({});
-  const enableAudio = () => {
+  const enableAudio = (desired = settingsRef.current) => {
+    settingsRef.current = desired;
     sound.current ||= createHalloweenAudio();
     const current = sound.current;
-    void current.resume().then((playing) => {
+    void current.resume(desired).then((playing) => {
       if (sound.current !== current) return;
       setAudioStatus(current.status());
       if (!playing) setNotice(current.status() === "unsupported"
@@ -138,6 +140,7 @@ export function Campus() {
     const now = new Date();
     const edition = setHalloween(dateDefaults(now), initialHalloweenPreference(now, preference));
     previousAtmosphere.current = edition.previous;
+    settingsRef.current = edition.settings;
     setSettings(edition.settings);
   }, []);
   useEffect(() => {
@@ -243,8 +246,10 @@ export function Campus() {
           setRoute,
           setError,
           residence,
-          (audioSettings, pose, ghosts) => {
-            sound.current?.update(audioSettings, pose, ghosts);
+          (_audioSettings, pose, ghosts) => {
+            // The engine starts with defaults while its assets initialize. The
+            // visitor's current sound choice is authoritative from the gesture.
+            sound.current?.update(settingsRef.current, pose, ghosts);
             setAudioStatus(sound.current?.status() || "suspended");
           },
         );
@@ -273,6 +278,8 @@ export function Campus() {
     };
   }, [started, generation]);
   useEffect(() => {
+    settingsRef.current = settings;
+    sound.current?.configure(settings);
     api.current?.settings(settings);
   }, [settings, ready]);
   useEffect(() => {
@@ -339,12 +346,18 @@ export function Campus() {
     api.current?.setMode(m);
     if (onFoot(m)) focusScene();
   };
-  const update = (patch: Partial<Settings>) =>
-    setSettings((s) => normalizeSettings({ ...s, ...patch }));
+  const update = (patch: Partial<Settings>) => {
+    const next = normalizeSettings({ ...settingsRef.current, ...patch });
+    settingsRef.current = next;
+    sound.current?.configure(next);
+    setSettings(next);
+  };
   const changeHalloween = (enabled: boolean) => {
     editionInitialized.current = true;
-    if (enabled && started && settings.halloweenAudio) enableAudio();
-    const next = setHalloween(settings, enabled, previousAtmosphere.current);
+    const next = setHalloween(settingsRef.current, enabled, previousAtmosphere.current);
+    settingsRef.current = next.settings;
+    if (enabled && started && next.settings.halloweenAudio) enableAudio(next.settings);
+    else sound.current?.configure(next.settings);
     previousAtmosphere.current = next.previous;
     setSettings(next.settings);
     try {
@@ -486,7 +499,7 @@ export function Campus() {
               className={styles.primary}
               onClick={() => {
                 initializeEdition();
-                if (settings.halloween && settings.halloweenAudio) enableAudio();
+                if (settingsRef.current.halloween && settingsRef.current.halloweenAudio) enableAudio();
                 try {
                   setAppearance(
                     normalizeAppearance(
@@ -611,7 +624,7 @@ export function Campus() {
                   aria-pressed={settings.halloweenAudio && audioStatus === "running"}
                   onClick={() => {
                     if (!settings.halloweenAudio || sound.current?.status() !== "running") {
-                      enableAudio();
+                      enableAudio({ ...settingsRef.current, halloweenAudio: true });
                       update({ halloweenAudio: true });
                     } else update({ halloweenAudio: false });
                   }}
@@ -1041,7 +1054,7 @@ export function Campus() {
                   <p>A masked figure follows you outdoors. Hold Shift or Run to get away; turn off the pursuer anytime.</p>
                   <label className={styles.check}>
                     <input type="checkbox" checked={settings.halloweenAudio} disabled={!settings.halloween} onChange={(e) => {
-                      if (e.target.checked) enableAudio();
+                      if (e.target.checked) enableAudio({ ...settingsRef.current, halloweenAudio: true });
                       update({ halloweenAudio: e.target.checked });
                     }} />
                     Scary soundscape

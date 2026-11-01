@@ -18,12 +18,12 @@ requests it only following the existing entry or sound-enable gesture.
 Both sources were checked on October 31, 2026. API availability is detected
 directly; no browser-name or iOS-version sniffing is used.
 
-## Implementation
+## First-release implementation
 
 `halloween-audio.ts` records an explicit playback intent independently of the
-first engine settings update. This prevents the initial `enabled=false` state
-from undoing a valid sound-enable gesture while assets load, and handles the
-old muted settings briefly arriving before React applies an unmute action.
+first engine settings update. This protected the pending playback category and
+handled old muted settings briefly arriving during an unmute. The later phone
+test exposed additional initial-context and engine-default races described below.
 A rapid enable then cancel releases any silent playback category through the
 existing 400 ms fade/suspend callback; a first scene still loading is exempt.
 
@@ -41,7 +41,7 @@ suspension and node cleanup remain in place. The entry gesture now initializes
 Halloween audio only when both the Halloween edition and its audio setting are
 enabled, avoiding playback-category takeover during ordinary campus entry.
 
-## Validation
+## First-release validation
 
 The focused audio suite contains 14 passing tests, including existing audio
 limits and new cases for delayed settings, mute then resume, zero volume,
@@ -109,4 +109,39 @@ play was submitted for this follow-up. The earlier test browser's temporary
 analytics opt-out could not be restored because its preserved old control tab
 closed; restoration is not claimed. This does not change production defaults.
 The owner's physical-device result above is recorded separately from these
-server and browser checks; the initial-start correction remains outstanding.
+server and browser checks. The initial-start correction below requires its own
+deployment and physical retest.
+
+## Initial-entry correction
+
+The follow-up makes the visitor's selected settings authoritative from the
+entry gesture. Campus keeps those settings in a ref that is updated immediately
+by entry, sound, volume and edition controls. Renderer callbacks provide
+position and ghost proximity but no longer override that choice with their
+temporary default settings. Real mute, zero volume and edition-off configure
+the audio controller immediately, including while scene data is loading.
+
+The controller's `resume(settings)` applies the desired settings and starts the
+existing sound graph synchronously before awaiting AudioContext resume. Creating
+the controller alone no longer resumes audio or claims a playback category.
+A pending initial unlock is not suspended merely because the scene has not yet
+provided a callback. Actual hidden, muted and disposed states retain their
+existing cleanup and category restoration.
+
+All 17 focused audio tests and all 154 UBC tests passed, along with scoped lint
+and strict TypeScript. The new regression permits only the initial gesture,
+waits longer than 400 ms without scene callbacks and verifies a running context,
+no suspend calls and a started sound graph. Another test exercises the actual
+Campus callback with engine defaults while the visitor has enabled Halloween;
+that callback preserves the selected sound, and a later real mute still wins.
+Independent review and a separate 17-test run accepted the correction. These
+checks do not replace a new physical iPhone test after deployment.
+
+The exact three runtime/test files also passed an isolated Vinext build with
+existing dependencies and the committed shared-site source. A fresh local
+browser entered once, completed scene loading with Sound on without a second
+activation, then passed mute/re-enable and console checks. The saved initial
+frame precedes those later toggles. This confirms the visible integration;
+the unit regressions cover session category and context state, and physical
+first-entry output remains a separate acceptance step. No production test play
+or review was created.

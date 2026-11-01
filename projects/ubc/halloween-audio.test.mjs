@@ -1,5 +1,8 @@
 import test, { after } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { runInNewContext } from "node:vm";
+import ts from "typescript";
 import "./test-loader.mjs";
 const { createHalloweenAudio, ghostProximity, createCueSchedule, planHalloweenCue } = await import("./halloween-audio.ts");
 
@@ -174,15 +177,72 @@ test("unsupported or unavailable audio leaves the campus API usable without DOM 
   }
 });
 
-test("explicit audio entry claims playback before await and keeps it through delayed first settings", async () => {
+test("first entry starts audible sources in its sole gesture and survives slow scene loading", async () => {
   const session = { type: "auto" };
   const { audio, context } = fixture({ audioSession: () => session });
+  assert.equal(session.type, "auto", "Construction cannot pre-empt mute or volume choices");
+  assert.equal(context.resumeCalls, 0);
+  let gesture = true;
+  const resume = context.resume.bind(context);
+  context.resume = async () => {
+    if (!gesture) throw new Error("A second user gesture is required");
+    return resume();
+  };
+  const started = audio.resume(settings);
   assert.equal(session.type, "playback", "Entry acquires the category synchronously");
+  assert.equal(context.playing().length, 6, "The real audible bed is scheduled before awaiting scene assets");
+  assert.equal(context.nodes[0].gain.value, 0.35 * 0.65);
+  gesture = false;
+  assert.equal(await started, true);
   await new Promise((resolve) => setTimeout(resolve, 450));
-  assert.equal(session.type, "playback", "Initial enabled=false is not a user mute");
-  assert.equal(context.nodes[0].gain.value, 0);
-  audio.update(settings, pose, ghosts);
+  assert.equal(context.suspendCalls, 0, "Slow imports and GIS requests cannot discard the trusted resume");
+  assert.equal(context.state, "running");
   assert.equal(session.type, "playback");
+  audio.update(settings, pose, ghosts);
+  assert.equal(context.resumeCalls, 1, "First scene telemetry needs no additional unlock");
+  assert.equal(session.type, "playback");
+  audio.dispose();
+});
+
+test("engine startup defaults cannot override selected sound, but later real mute remains authoritative", async () => {
+  // Execute the actual Campus callback, without mounting WebGL or copying its
+  // integration logic into the fixture. The engine initially reports defaults.
+  const file = ts.createSourceFile("Campus.tsx", readFileSync(new URL("./Campus.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  let callback;
+  function visit(node) {
+    if (ts.isCallExpression(node) && node.expression.getText(file) === "module.createCampus") callback = node.arguments.at(-1);
+    ts.forEachChild(node, visit);
+  }
+  visit(file); assert.ok(callback && ts.isArrowFunction(callback));
+  const session = { type: "ambient" }, { audio, context } = fixture({ audioSession: () => session });
+  const selected = { current: settings };
+  const onAudio = runInNewContext(`(${callback.getText(file)})`, { sound: { current: audio }, settingsRef: selected, setAudioStatus() {} });
+  await audio.resume(settings);
+  onAudio({ ...settings, halloween: false }, pose, ghosts);
+  assert.equal(session.type, "playback");
+  assert.equal(context.nodes[0].gain.value, 0.35 * 0.65);
+  selected.current = { ...settings, halloweenAudio: false };
+  audio.configure(selected.current);
+  onAudio(settings, pose, ghosts);
+  assert.equal(session.type, "ambient");
+  assert.equal(context.nodes[0].gain.value, 0);
+  audio.dispose();
+});
+
+test("entry with regular edition, mute or zero volume never claims playback or starts an audible bed", async () => {
+  for (const patch of [{ halloween: false }, { halloweenAudio: false }, { halloweenVolume: 0 }]) {
+    const session = { type: "auto" }, { audio, context } = fixture({ audioSession: () => session });
+    await audio.resume({ ...settings, ...patch });
+    assert.equal(session.type, "auto");
+    assert.equal(context.playing().length, 0);
+    assert.equal(context.nodes[0].gain.value, 0);
+    audio.dispose();
+  }
+});
+
+test("known zero volume does not claim playback while raising volume retains the audio choice", async () => {
+  const session = { type: "auto" }, { audio } = fixture({ audioSession: () => session });
+  await audio.resume(settings);
   audio.update({ ...settings, halloweenVolume: 0 }, pose, ghosts);
   assert.equal(session.type, "auto");
   await audio.resume();
@@ -193,33 +253,32 @@ test("explicit audio entry claims playback before await and keeps it through del
   assert.equal(session.type, "auto");
 });
 
-test("mute then explicit resume tolerates the old React settings before the enabled update", async () => {
+test("mute then explicit resume uses desired settings before any later scene telemetry", async () => {
   const session = { type: "ambient" };
   const { audio } = fixture({ audioSession: () => session });
   await audio.resume(); audio.update(settings, pose, ghosts);
   const muted = { ...settings, halloweenAudio: false };
   audio.update(muted, pose, ghosts); assert.equal(session.type, "ambient");
-  const resumed = audio.resume(); assert.equal(session.type, "playback");
-  audio.update(muted, pose, ghosts); await resumed;
-  assert.equal(session.type, "playback", "Repeated old muted telemetry does not cancel the new gesture");
+  const resumed = audio.resume(settings); assert.equal(session.type, "playback");
+  await resumed;
   audio.update(settings, pose, ghosts); assert.equal(session.type, "playback");
   audio.update({ ...settings, halloween: false }, pose, ghosts); assert.equal(session.type, "ambient");
   audio.dispose();
 });
 
-test("rapid enable then cancel releases a silent playback lease after the fade window", async () => {
+test("rapid enable then cancel releases playback immediately and suspends without scene telemetry", async () => {
   const session = { type: "ambient" };
   const { audio, context } = fixture({ audioSession: () => session });
   const regular = { ...settings, halloween: false };
-  await audio.resume(); audio.update(regular, pose, ghosts);
+  await audio.resume(regular);
   assert.equal(session.type, "ambient");
-  await audio.resume(); audio.update(regular, pose, ghosts);
-  assert.equal(session.type, "playback", "Allow time for the new enabled telemetry");
+  await audio.resume(settings); audio.configure(regular);
+  assert.equal(session.type, "ambient", "An actual UI cancel takes effect before another engine frame");
   await new Promise((resolve) => setTimeout(resolve, 450));
   assert.equal(context.state, "suspended");
   assert.equal(session.type, "ambient", "A cancelled enable cannot retain an exclusive silent session");
-  audio.update(settings, pose, ghosts);
-  assert.equal(session.type, "playback", "A delayed valid enabled update retains the prior gesture intent");
+  await audio.resume(settings);
+  assert.equal(session.type, "playback", "A later explicit choice can enable sound again");
   audio.dispose();
 });
 

@@ -73,7 +73,9 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 - Halloween audio: enabling sound requests the browser's optional playback audio
   session, which WebKit documents for Silent Mode playback on iOS 17 and later.
   Mute, zero volume and background pause still apply. Unsupported browsers keep
-  their existing behavior. Physical iPhone confirmation is pending; see the
+  their existing behavior. Entry applies the chosen sound settings and starts
+  the audio graph before campus assets load. Silent Mode playback was confirmed
+  after a manual toggle; the first-entry correction still needs an iPhone retest. See the
   [audio follow-up and primary sources](../../docs/UBC_AUDIO_IOS_2026-10-31.md).
 - Photo: hides normal UI and shows a fresh canvas PNG preview with a Save PNG link.
   The browser validation gallery retains real scene exports and interaction captures.
