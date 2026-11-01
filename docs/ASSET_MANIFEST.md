@@ -1411,7 +1411,7 @@ The CWRU student import retains only names, study fields, expected class years w
 
 Stanford initial-production proof: `docs/validation/stanford/live-{welcome-desktop,church-interior}.jpg` (1280×720) and `live-profile-mobile.jpg` (390×844), unretouched public browser captures of the original application on 2026-10-31. Verification-only; no private profile data or real-world photographs. Descriptions and alt context are in the validation gallery.
 
-Stanford shared-feature preview proof: `docs/validation/stanford/followup-privacy-desktop.jpg` (1280×720), `followup-review-mobile.jpg` and `followup-history-removal-mobile.jpg` (390×844), unretouched local production-preview captures on 2026-10-31. They document the before-entry notice, empty review form with visible keyboard focus, and deletion/opt-out confirmation. No participant identity, private telemetry, or seeded public review is shown; original application UI, verification-only.
+Stanford shared-feature preview proof: `docs/validation/stanford/followup-privacy-desktop.jpg` (1280×720), `followup-review-mobile.jpg` and `followup-history-removal-mobile.jpg` (390×844), unretouched local production-preview captures on 2026-10-31. They document the before-entry notice, empty review form with visible keyboard focus, and deletion/opt-out confirmation. No participant identity, private telemetry, or seeded public review is shown; original application UI, verification-only. The privacy-panel captures are historical following the owner's later request to remove that panel everywhere; the review form remains.
 
 ## CWRU community integration captures — October 31, 2026
 

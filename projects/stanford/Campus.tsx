@@ -1,5 +1,5 @@
 "use client";
-import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
+import { PlaySession } from "../campus-analytics/PlaySession";
 import Image from "next/image";
 import { createCampusSound, type CampusSound } from "./sound";
 import { applyCampusAnchors } from "./layout";
@@ -1278,7 +1278,6 @@ export function Campus() {
                   Data provenance, hashes and reconstruction notes ↗
                 </a>
                 <p>All walking paths, dialogue and appearances are simulated. Public profiles support only the facts cited in each encounter. No real whereabouts are tracked. Optional community profiles publish only the text participants submit about themselves. Create, edit, recover, report or remove a character through the same controls as UBC.</p>
-                <div className={styles.playPrivacy}><CampusPrivacyPreferences /></div>
               </>
             )}
           </aside>

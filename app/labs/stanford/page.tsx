@@ -3,7 +3,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { pageMetadata } from "@/lib/metadata";
 import { stanford } from "@/content/stanford";
 import { Campus } from "@/projects/stanford/Campus";
-import { CampusPrivacyPreferences } from "@/projects/campus-analytics/PlaySession";
 import { ReviewSection } from "@/projects/campus-reviews/ReviewSection";
 import { places } from "@/projects/stanford/registry";
 import coverage from "@/projects/stanford/data/roster-coverage.json";
@@ -13,7 +12,6 @@ export default function StanfordPage(){return <div className={styles.page}>
   <SiteHeader />
   <main id="main-content" tabIndex={-1} className="shell">
     <div className={styles.intro}><div><nav aria-label="Breadcrumb"><a href="/labs">ASYMMETRI LABS</a> / <a href="/labs/gis">GIS APPS</a> / STANFORD</nav><h1>{stanford.name}</h1><p>{stanford.tagline}</p></div><span className={styles.edition}>{stanford.status}</span></div>
-    <CampusPrivacyPreferences compact />
     <Campus />
     <div className={styles.notes}>
       <section><div className={styles.statLine}><span>WALK · THIRD PERSON · AERIAL · MAP</span><span>STANFORD, CALIFORNIA</span></div><h2>Follow the palms.<br />See what opens.</h2><p>Enter the sandstone arcades of the Main Quad. Find the reading rooms in Green Library, climb Hoover Tower, step inside Memorial Church, and explore Stanford’s art, music, engineering and athletics. The campus includes {places.filter(p=>p.interior==="B").length} building reconstructions with walk-through interiors, plus outdoor venues.</p><p>Meet educational avatars of Fei-Fei Li, Andrew Ng, Christopher Manning and other faculty, famous alumni, and athletes from the published varsity rosters. Create your own public character and let other visitors meet it, using the same profile and conversation controls as UBC.</p><p>Student cameos draw on public academic profiles, LinkedIn education excerpts and the supplied research list. Source checks vary by record; current enrollment is unverified. All appearances and walking routes are simulated.</p><p>Halloween brings moonlight, ghosts, jiangshi, yōkai, monsters, comic superheroes, manga characters and robots. Its automatic season is October 24–November 7. The base campus returns afterward, and either edition can be selected at any time. A future Christmas edition is reserved for December.</p></section>

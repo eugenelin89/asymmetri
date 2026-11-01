@@ -57,6 +57,6 @@ Open `http://127.0.0.1:3037/labs/stanford`. Use a private absolute directory for
 
 Keep concurrent campus work in separate validation exports/build directories, not a shared `.next`. Local implementation does not authorize deployment. See `AGENTS.md`, the implementation report and `docs/STANFORD_COMMUNITY_OPERATIONS.md`.
 
-## Shared reviews and play privacy
+## Shared reviews and private play reporting
 
-The follow-up frontend uses committed shared components: a privacy notice before entry, full privacy/deletion controls in Project information, a ready-game session tracker scoped to the explorer, and visitor reviews above the footer. No profile or character identity is sent to the tracker. See [integration and validation](../../docs/STANFORD_COMMUNITY_INTEGRATION_2026-10-31.md); initial campus deployment and this follow-up activation are separate.
+The follow-up frontend uses committed shared components: a ready-game session tracker scoped to the explorer and visitor reviews above the footer. The owner subsequently requested removal of the Play privacy panel everywhere, so neither the landing page nor Project information renders that panel or its controls. Existing stored opt-outs, GPC and DNT remain honored by the shared tracker; the shared privacy policy describes the collection. No profile or character identity is sent to the tracker. See [integration and validation](../../docs/STANFORD_COMMUNITY_INTEGRATION_2026-10-31.md); initial campus deployment and this follow-up activation are separate.
