@@ -11,7 +11,15 @@
       "referenceUrl": "https://vancouver.housing.ubc.ca/residences/orchard-commons/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/residence.ts",
+        "projects/ubc/residence-exterior.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.8",
+      "nextAction": "Profile existing floor; refine distinctive room types without claiming as-built rooms."
     },
     {
       "id": "stadium",
@@ -22,7 +30,14 @@
       "referenceUrl": "https://sportfacilities.ubc.ca/construction-news/completed-projects/baseball-stadium/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/stadium.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.6",
+      "nextAction": "Paired authentic-reference review of field orientation, grandstand, press box, backstop, turf and approach."
     },
     {
       "id": "rose",
@@ -33,7 +48,14 @@
       "referenceUrl": "https://sportfacilities.ubc.ca/baseball-tc/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.6",
+      "nextAction": "Exterior timber/cladding/roof and documented four-cage/two-mound interior comparison."
     },
     {
       "id": "sauder",
@@ -44,7 +66,14 @@
       "referenceUrl": "https://www.sauder.ubc.ca/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.8",
+      "nextAction": "Document public academic spaces; office exhibit remains illustrative unless evidence supports HA 479."
     },
     {
       "id": "bookstore",
@@ -55,7 +84,14 @@
       "referenceUrl": "https://bookstore.ubc.ca/pages/locations/vancouver",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.8",
+      "nextAction": "Refine representative retail layout and source-linked information."
     },
     {
       "id": "nest",
@@ -66,7 +102,14 @@
       "referenceUrl": "https://www.ams.ubc.ca/your-building/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.8",
+      "nextAction": "Profile atrium and upper galleries before multi-level detail refinement."
     },
     {
       "id": "koerner",
@@ -74,10 +117,19 @@
       "status": "gis-context",
       "implementedCoverage": "Source footprint exterior only; bespoke architecture and interior remain future work.",
       "interiorClassification": "C",
-      "referenceUrl": null,
+      "referenceUrl": "https://koerner.library.ubc.ca/locations-maps/layout/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/scenery.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.7",
+      "nextAction": "Research public floors and usable architectural references; bespoke geometry and interior are not implemented.",
+      "researchVerified": "2026-11-01",
+      "referenceRights": "Publicly readable UBC reference; redistribution permission not established; no imagery copied."
     },
     {
       "id": "irving",
@@ -88,7 +140,14 @@
       "referenceUrl": "https://ikblc.ubc.ca/spaces/building-history-and-highlights/",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Source envelope/orientation and public 2019 map; 0/5/10/15 m floor heights, roof profiles, fixtures and west-entry exterior steps are interpreted. Real campus grade is not reproduced.",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/irving.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.7",
+      "nextAction": "Profile existing four levels; compare heritage facade and reading spaces."
     },
     {
       "id": "ladner-clock",
@@ -96,10 +155,16 @@
       "status": "not-implemented",
       "implementedCoverage": "Recognizable tower and working clock are future consolidated-spec work.",
       "interiorClassification": "C",
-      "referenceUrl": null,
+      "referenceUrl": "https://archives.library.ubc.ca/explore-ubc-archives-online/campus-history/campus-buildings/ladnerclocktow/",
       "auditDate": "2026-10-31",
-      "measurementConfidence": "Reference geometry; not survey/as-built verified",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "measurementConfidence": "Unresolved official conflict: building record says 121 ft / 1968; Archives FAQ says 140 ft / 1969. No surveyed dimensions or placement yet.",
+      "assetRights": "No tower asset implemented. Public reference access does not grant image redistribution rights.",
+      "responsibleModules": [],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.7",
+      "nextAction": "Resolve conflicting official height/date claims, establish source anchor, prototype original tower and virtual-time hands.",
+      "researchVerified": "2026-11-01"
     },
     {
       "id": "entrance-letters",
@@ -110,7 +175,15 @@
       "referenceUrl": "https://www.publicarchitecture.ca/projects/ubc-gateway",
       "auditDate": "2026-10-31",
       "measurementConfidence": "Pedestrian island and intersection source-supported; exact sign placement, orientation, 2.5 m letter height and other dimensions are reference estimates, not a survey.",
-      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed"
+      "assetRights": "Original procedural models MIT; source GIS PDDL; no reference imagery redistributed",
+      "responsibleModules": [
+        "projects/ubc/gateway-model.ts",
+        "projects/ubc/gateway-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.7",
+      "nextAction": "Capture fixed view; refine sign/island/Main Mall continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -121,7 +194,14 @@
       "name": "Hennings Building",
       "implementedCoverage": "Exterior and enterable public learning-space interpretation inspired by HENN 200.",
       "interiorClassification": "B",
-      "referenceUrl": "https://learningspaces.ubc.ca/classrooms/henn-200/"
+      "referenceUrl": "https://learningspaces.ubc.ca/classrooms/henn-200/",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -132,7 +212,14 @@
       "name": "War Memorial Gymnasium",
       "implementedCoverage": "Public lobby, hardwood court and blue spectator seating with fictional basketball practice.",
       "interiorClassification": "B",
-      "referenceUrl": "https://sportfacilities.ubc.ca/wmg/"
+      "referenceUrl": "https://sportfacilities.ubc.ca/wmg/",
+      "responsibleModules": [
+        "projects/ubc/architecture.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -143,7 +230,14 @@
       "name": "Beaty Biodiversity Museum",
       "implementedCoverage": "Runtime anchor corrected to VBL10086 Main Mall pavilion; glass exterior with visible original whale skeleton, north entrance, descending ramps, lower atrium and representative public collection gallery.",
       "interiorClassification": "B",
-      "referenceUrl": "https://www.patkau.ca/projects/ubc-beaty-biodiversity-centre"
+      "referenceUrl": "https://www.patkau.ca/projects/ubc-beaty-biodiversity-centre",
+      "responsibleModules": [
+        "projects/ubc/beaty.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -154,7 +248,15 @@
       "id": "ken-woods",
       "name": "Ken Woods Field",
       "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
-      "measurementConfidence": "Published 120 by 75 yard playing dimensions; source landscape LSSOFT_TYPE-4161-0. Seating and fixtures interpreted."
+      "measurementConfidence": "Published 120 by 75 yard playing dimensions; source landscape LSSOFT_TYPE-4161-0. Seating and fixtures interpreted.",
+      "responsibleModules": [
+        "projects/ubc/athletics.ts",
+        "projects/ubc/athletics-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -165,7 +267,15 @@
       "id": "harry-warren",
       "name": "Harry Warren Field",
       "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
-      "measurementConfidence": "Published 110 by 71 yard playing dimensions; source landscape LSSOFT_TYPE-4171-0. Fixtures interpreted."
+      "measurementConfidence": "Published 110 by 71 yard playing dimensions; source landscape LSSOFT_TYPE-4171-0. Fixtures interpreted.",
+      "responsibleModules": [
+        "projects/ubc/athletics.ts",
+        "projects/ubc/athletics-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -176,7 +286,15 @@
       "id": "south-turf",
       "name": "South Turf Soccer Field",
       "implementedCoverage": "Source-aligned outdoor soccer field with markings, goals/nets, benches, fences, lighting and fictional practice players.",
-      "measurementConfidence": "Source landscape LSSOFT_TYPE-4167-0; 105 by 68 m markings and fixture geometry are estimates, not measured field dimensions."
+      "measurementConfidence": "Source landscape LSSOFT_TYPE-4167-0; 105 by 68 m markings and fixture geometry are estimates, not measured field dimensions.",
+      "responsibleModules": [
+        "projects/ubc/athletics.ts",
+        "projects/ubc/athletics-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -187,7 +305,15 @@
       "id": "dhillon-track",
       "name": "Rashpal Dhillon Track and Field Oval",
       "implementedCoverage": "Outdoor eight-lane running track, infield, representative event fixtures, bleachers and fictional joggers.",
-      "measurementConfidence": "Documented eight-lane 400 m track on source LSHARD_TYPE-969-0/infield LSSOFT_TYPE-886-0; 36.5 m inner radius, 1.22 m lane widths and event-fixture locations are interpreted."
+      "measurementConfidence": "Documented eight-lane 400 m track on source LSHARD_TYPE-969-0/infield LSSOFT_TYPE-886-0; 36.5 m inner radius, 1.22 m lane widths and event-fixture locations are interpreted.",
+      "responsibleModules": [
+        "projects/ubc/athletics.ts",
+        "projects/ubc/athletics-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     },
     {
       "status": "reference-reconstruction",
@@ -198,7 +324,29 @@
       "id": "thunderbird-stadium",
       "name": "Thunderbird Stadium",
       "implementedCoverage": "Existing outdoor stadium with football/soccer markings, reconstructed grandstand and traversable grass embankment; future replacement is not modelled.",
-      "measurementConfidence": "Published 150 by 74.5 m surface and source VBL10214 grandstand placement; Canadian-football markings follow 2025 rules. Roof, seating, embankment and fixture geometry are reference interpretations."
+      "measurementConfidence": "Published 150 by 74.5 m surface and source VBL10214 grandstand placement; Canadian-football markings follow 2025 rules. Roof, seating, embankment and fixture geometry are reference interpretations.",
+      "responsibleModules": [
+        "projects/ubc/athletics.ts",
+        "projects/ubc/athletics-layout.ts"
+      ],
+      "implementationReviewed": "2026-11-01",
+      "visualAcceptance": "pending-reference-comparison",
+      "targetMilestone": "V0.9",
+      "nextAction": "Preserve existing reconstruction; validate landscape and pedestrian continuity."
     }
-  ]
+  ],
+  "roadmap": {
+    "adopted": "2026-11-01",
+    "document": "docs/UBC_ROADMAP.md",
+    "scorecard": "docs/UBC_FIDELITY_SCORECARD.md",
+    "releaseAcceptance": "docs/UBC_RELEASE_ACCEPTANCE.md",
+    "queue": "docs/UBC_V05_FOUNDATION.md",
+    "currentMilestone": "V0.5",
+    "milestoneStatus": "in-progress",
+    "lastDocumentedProductionSource": "38d432685765161347cff7b74c2f3dddd14af378",
+    "milestoneNamespace": "flagship-planning",
+    "currentMilestoneName": "Technical Foundation and Performance",
+    "existingPublicReleaseLabel": "V0.5 — Campus community",
+    "releaseVersionPolicy": "Map completed roadmap milestone to a distinct next-unused public release identifier; preserve supplied planning numbers."
+  }
 }

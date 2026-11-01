@@ -1623,3 +1623,13 @@ The [October 31 community receipt](UBC_COMMUNITY_RELEASE_2026-10-31.md) verifies
 ### CWRU community and running-instruction follow-up
 
 Verified November 1 at 00:32:19 UTC (October 31 Vancouver): source `b3601b31fa5bfe296496046a1f6f911e5f16e4df`, build `xMZDEUQlNPy6b48OwpOC3`. The [release receipt](CWRU_COMMUNITY_RELEASE_2026-10-31.md) records exact-source 585-test CI, guarded staging/swap, both-host checks, CWRU browser acceptance, unchanged stores/configuration and maintenance. Immediate complete rollback is `/var/www/asymmetri-rollback-before-cwru-community-20261031` (704/build `sEPpfQJeW_TCHMYdvJXV0`). All 12 owner-held archive custody records and the preceding complete rollback trees remain; use the fresh inventory after the separately authorized disk cleanup instead of relying on historical paths above. No backend configuration was added or removed. Preserve the 192 MiB / 6 GiB floors and drain/resume maintenance around future swaps. iPhone Silent Mode audio is a separate pending source/release follow-up.
+
+## UBC flagship milestones — November 1, 2026
+
+The owner adopted [the flagship roadmap](UBC_ROADMAP.md) and authorized beginning
+V0.5. Completed and validated milestones must deploy immediately using the
+existing exact-source Linux candidate, capacity guards, private stores and complete
+rollback workflow. Follow [UBC release acceptance](UBC_RELEASE_ACCEPTANCE.md).
+The initial local benchmark/roadmap increment is not a completed V0.5 and does not
+advance the production release. No new Sites registration or hosting migration
+is part of this work.

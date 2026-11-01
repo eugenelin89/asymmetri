@@ -25,7 +25,9 @@
     "test:cwru": "node --test projects/cwru/*.test.mjs",
     "test:campus-reviews": "node --test projects/campus-reviews/reviews.test.mjs",
     "test:campus-analytics": "node --test projects/campus-analytics/*.test.mjs",
-    "test:stanford": "node --test --test-concurrency=1 projects/stanford/*.test.mjs"
+    "test:stanford": "node --test --test-concurrency=1 projects/stanford/*.test.mjs",
+    "ubc:benchmark": "node projects/ubc/tools/benchmark.mjs",
+    "ubc:benchmark:build": "node projects/ubc/tools/benchmark.mjs --build"
   },
   "dependencies": {
     "ajv": "8.20.0",

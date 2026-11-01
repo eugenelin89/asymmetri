@@ -961,3 +961,20 @@ The [initial Stanford production receipt](STANFORD_RELEASE_2026-10-31.md) record
 ## UBC community live acceptance — October 31, 2026
 
 [Release acceptance](UBC_COMMUNITY_RELEASE_2026-10-31.md) passed for exact source `704a9b3` after 592 local tests and 585 Linux CI tests. Live desktop/mobile review layout, separate-tab privacy navigation, scene loading and immediate WASD after closing Explore campus passed. HTTP acceptance checked 18 routes and 800 assets per origin, nonpublishing review/analytics probes, actual private modes, pruning, three profile stores, 15 peer hosts and twelve archive-custody records. No synthetic production reviews or play sessions were created. New-process journal counts use current boot plus exact monotonic start; earlier shutdown messages remain recorded separately. The later privacy-card-removal request requires its own source/build/browser acceptance; historical screenshots are labelled by release.
+
+## UBC V0.5 foundation — November 1, 2026
+
+`npm run test:ubc` includes `performance.test.mjs`: percentile arithmetic,
+non-mutating statistics, warmup exclusion, un-clamped slow intervals, bounded
+sampling, and rejection of incomplete, invalid and explicitly invalidated samples. The existing
+collision, doors, conversation, audio and navigation suites remain required.
+
+`npm run ubc:benchmark` launches local fixed-camera engine measurements and PNG
+exports. Use its three-repeat mode on declared physical reference devices before
+acceptance. A resized/hidden/interrupted run is invalid; a desktop phone-sized
+canvas is not mobile-device validation. See the
+[foundation protocol](UBC_V05_FOUNDATION.md),
+[scorecard](UBC_FIDELITY_SCORECARD.md) and
+[release checklist](UBC_RELEASE_ACCEPTANCE.md). Initial local evidence is tracked
+in [the V0.5 gallery](validation/ubc-v05/README.md); it does not establish a deployed
+release or replace ordinary visitor walkthroughs.

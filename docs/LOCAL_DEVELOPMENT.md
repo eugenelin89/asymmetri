@@ -374,3 +374,11 @@ For local persistence, set `CAMPUS_REVIEWS_DATA_DIR` and `CAMPUS_ANALYTICS_DATA_
 ## Stanford local preview
 
 With the repository Node version, run `STANFORD_PROFILE_DIR=/private/tmp/stanford-local-community npm run dev:next -- --webpack --hostname 127.0.0.1 --port 3037`, then open `/labs/stanford`. Use `npm run test:stanford` for the focused suite. Regenerate source-bound simulation data with `node projects/stanford/tools/compile_seasonal.mjs` after changing source geography, collision geometry or people. Keep private participant files outside the repository/public directory. Concurrent campus validation must use separate output directories. See `projects/stanford/README.md`.
+
+## UBC performance tooling
+
+Run `npm run ubc:benchmark` for an isolated, minified engine harness at the printed
+loopback URL, or `npm run ubc:benchmark:build` to build it without a listener.
+Output is ignored under `dist/ubc-benchmark`; stop the server with Ctrl-C.
+No package install is needed beyond the existing lockfile. Do not run CPU-heavy
+builds/tests during samples. [Protocol, source manifest and limits](UBC_V05_FOUNDATION.md).

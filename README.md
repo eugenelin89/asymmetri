@@ -62,6 +62,11 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
 
+The [adopted UBC flagship roadmap](docs/UBC_ROADMAP.md) prioritizes realism and
+performance. [V0.5 foundation work](docs/UBC_V05_FOUNDATION.md) has begun with local
+benchmarking; this planning milestone is separate from the existing public
+“V0.5 — Campus community” label and is not a completed foundation release.
+
 UBC V0.4 is [verified live](docs/UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md).
 The [landmarks and Halloween implementation report](docs/UBC_LANDMARKS_HALLOWEEN_2026-10-31.md)
 records the gateway arrival, Beaty/Irving interiors, athletics detail, seasonal

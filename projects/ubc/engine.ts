@@ -49,6 +49,7 @@ import type {
   Settings,
   Telemetry,
 } from "./types";
+import type { CampusDiagnostics } from "./performance";
 
 export type Marker = {
   id: string;
@@ -90,8 +91,9 @@ export function createCampus(
   onError: (message: string) => void,
   orchardGeography: OrchardGeography,
   onSound: (settings: Settings, pose: Pose, ghosts: readonly { point: Point; y?: number }[]) => void = () => {},
+  diagnostics?: CampusDiagnostics,
 ): CampusAPI {
-  let settings = { ...defaults },
+  let settings = { ...(diagnostics?.settings || defaults) },
     mode: Mode = "walk",
     footMode: "walk" | "third" = "walk",
     paused = false,
@@ -104,6 +106,8 @@ export function createCampus(
       powerPreference: "high-performance",
     });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  // Diagnostics count the complete render, including shadow passes.
+  if (diagnostics) renderer.info.autoReset = false;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true;
@@ -373,7 +377,7 @@ export function createCampus(
     if (a && !infoPoints.has(p.id))
       infoPoints.set(p.id, { x: a.x, y: 2, z: a.z });
   }
-  let pose: Pose = initialGatewayPose();
+  let pose: Pose = diagnostics ? { ...diagnostics.initialPose } : initialGatewayPose();
   const inputs = new Map<string, string>(),
     listeners: (() => void)[] = [];
   let routeLine: THREE.Line | null = null,
@@ -833,6 +837,7 @@ export function createCampus(
       dt = Math.min(0.05, elapsed);
     lastTime = now;
     if (document.hidden) return;
+    const updateStarted = diagnostics ? performance.now() : 0;
     const residenceLocal = local([pose.x, pose.z], orchardAnchor);
     pose.y += residence.update(
       paused || !onFoot(mode) ? 0 : dt,
@@ -953,6 +958,10 @@ export function createCampus(
       for (const [id, p] of all) {
         const d = Math.hypot(p.x - pose.x, p.z - pose.z);
         const action = residenceActions.find((a) => a.id === id);
+        // Residence controls have no distant markers and cannot be selected
+        // outside 2.8 m. Reject them before the 15 cm occlusion walk, which
+        // otherwise marches across the campus to every door each telemetry tick.
+        if (action && d >= 2.8) continue;
         const character = campusCharacters.some((c) => c.id === id);
         if (character && !canMeet(id)) continue;
         if (
@@ -1054,7 +1063,19 @@ export function createCampus(
         : []);
     }
     if (mode !== "map") {
+      if (diagnostics) renderer.info.reset();
+      const renderStarted = diagnostics ? performance.now() : 0;
       renderer.render(scene, camera);
+      if (diagnostics) diagnostics.onFrame({
+        frameMs: elapsed * 1000,
+        updateMs: renderStarted - updateStarted,
+        renderSubmitMs: performance.now() - renderStarted,
+        calls: renderer.info.render.calls,
+        triangles: renderer.info.render.triangles,
+        geometries: renderer.info.memory.geometries,
+        textures: renderer.info.memory.textures,
+        programs: renderer.info.programs?.length || 0,
+      });
       frames++;
       frameSeconds += elapsed;
       if (frameSeconds >= 1) {

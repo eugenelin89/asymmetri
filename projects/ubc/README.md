@@ -6,8 +6,8 @@ Independent Asymmetri Labs → GIS Apps project at `/labs/ubc`. This is a workin
 implementation candidate, not a completed UBC digital twin or a certified
 production-quality milestone. It is unofficial and has no UBC or faculty endorsement.
 
-See the [flagship development roadmap](../../docs/UBC_ROADMAP.md) for proposed
-V0.5–V1.1 milestones, quality gates, and current fidelity priorities.
+See the [flagship development roadmap](../../docs/UBC_ROADMAP.md) for adopted flagship
+V0.5–V1.1 planning milestones, quality gates, and current fidelity priorities.
 
 ## Run and validate
 
@@ -78,7 +78,7 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   Mute, zero volume and background pause still apply. Unsupported browsers keep
   their existing behavior. Entry applies the chosen sound settings and starts
   the audio graph before campus assets load. Silent Mode playback was confirmed
-  after a manual toggle; the first-entry correction still needs an iPhone retest. See the
+  after a manual toggle; the owner reports the deployed first-entry correction working in the November 1 roadmap. See the
   [audio follow-up and primary sources](../../docs/UBC_AUDIO_IOS_2026-10-31.md).
 - Photo: hides normal UI and shows a fresh canvas PNG preview with a Save PNG link.
   The browser validation gallery retains real scene exports and interaction captures.
@@ -303,3 +303,22 @@ canvas click. Search/input fields retain normal typing while the panel is open.
 The [community update](../../docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md) adds 500 supplied student identities without duplicating two existing rowers, department-based walking encounters, public visitor reviews and private active-play reporting. Current source and validation status are recorded there; deployment requires its separate acceptance receipt. Student names remain encounter-only. Detailed import provenance and limitations are in the [student source report](../../docs/UBC_STUDENT_IMPORT_2026-10-31.md).
 
 Public reviews use the shared `projects/campus-reviews` module, independent of the optional character-profile store. Play statistics use `projects/campus-analytics`, with an on-page privacy control and `/labs/campus-privacy`. Operator data must remain outside the checkout and every release directory. Never seed synthetic review or play fixtures into production.
+
+## Flagship roadmap and V0.5 foundation
+
+The owner adopted [the flagship roadmap](../../docs/UBC_ROADMAP.md) on November 1,
+2026 and requested that the flagship V0.5 foundation milestone begin. The current
+public badge is already “V0.5 — Campus community”; the supplied roadmap numbers
+are separate planning identifiers, as explained in its version-alignment note.
+The later audio patch has its own release receipt. See the
+[scorecard](../../docs/UBC_FIDELITY_SCORECARD.md),
+[release acceptance](../../docs/UBC_RELEASE_ACCEPTANCE.md), and
+[implementation queue](../../docs/UBC_V05_FOUNDATION.md).
+
+`npm run ubc:benchmark` builds and serves local-only fixed-camera engine tooling.
+It records raw frame intervals, CPU timing, render/resource counts, loading and
+optional heap observations with source/snapshot hashes. Nine fixtures cover the
+baseball precinct, main interiors, outdoor core and Halloween. No public route,
+visitor analytics, runtime dependency or production deployment is added. Normal
+Campus callers do not enable diagnostics. Full terrain, physical-phone and visitor
+acceptance remain pending; this is the beginning of V0.5, not its completion.

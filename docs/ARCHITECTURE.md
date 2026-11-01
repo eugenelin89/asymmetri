@@ -859,3 +859,19 @@ settings. These outdoor venues are separate from the nine building interiors.
 ## Stanford campus boundary
 
 `app/labs/stanford/`, `projects/stanford/`, `content/stanford.ts` and `public/stanford/v0.1-2026-10-31/` own the independent Stanford route, simulation, public copy and OSM snapshot. Reuse of UBC/CWRU controls does not share participant storage. The Stanford community API uses its own cookie and `STANFORD_PROFILE_DIR`. Precompiled collision-checked people, seasonal and pedestrian-graph assets include source/model fingerprints. `themes.ts` reserves modular calendar overlays; `sound.ts` generates audio locally. See `STANFORD_CAMPUS_2026-10-31.md` for evidence and limitations.
+
+## UBC V0.5 diagnostic boundary
+
+`projects/ubc/performance.ts` owns bounded frame sampling and statistics.
+`createCampus` accepts an optional final diagnostic argument supplying an initial
+pose, explicit settings and per-render observations. Its absent/default path keeps
+the current visitor behavior. Only the local `projects/ubc/benchmark/` harness opts
+in; it uses no-op shell callbacks and does not import analytics, public profile
+fetching or audio. Whole-render counters include shadow passes when diagnostics
+are active; normal renderer counter behavior is unchanged.
+
+`projects/ubc/tools/benchmark.mjs` uses existing Vite to build and preview this
+standalone tool, copying only the three pinned GIS files and a generated source
+hash manifest into ignored `dist/ubc-benchmark`. It does not alter Next routes,
+Sites packaging, public data snapshots or shared services. See
+[V0.5 foundation](UBC_V05_FOUNDATION.md) for measurement limits and remaining work.

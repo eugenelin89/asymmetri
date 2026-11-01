@@ -6,11 +6,55 @@
 **Repository:** [eugenelin89/asymmetri](https://github.com/eugenelin89/asymmetri)  
 **Live experience:** [asymmetri.co/labs/ubc](https://asymmetri.co/labs/ubc)  
 **Baseline reviewed:** main at 287c23ea08b19c3e1d6a4ca4692c6728ae748745  
-**Status:** Proposed living roadmap, not a claim that future releases are built, scheduled, or deployed.
+**Status:** Adopted November 1, 2026; flagship V0.5 foundation in progress, not released. Later milestones remain planned.
 
 > **North star:** Build an exceptionally convincing, independent, browser-accessible virtual visit to UBC Vancouver. Recognizable real geography, beautiful architecture, walkable documented public spaces, and useful student information take priority over feature count.
 
 UBC Virtual Campus is the **flagship experiment** of Asymmetri Labs. Vancouver, Richmond, Surrey, Stanford, and Case Western are complementary experiments and potential consumers of reusable platform improvements. UBC remains separately owned in its project thread; do not rewrite peer-campus code in pursuit of this roadmap.
+
+## Adoption and release alignment — November 1, 2026
+
+The owner adopted this roadmap and authorized beginning V0.5. The numbered
+vision and milestone sections below retain the roadmap already published in
+commit 0a96949; this increment adopts it and adds concrete implementation evidence. Dates are
+planning context, not promised completion dates.
+
+**Version alignment:** the existing public badge in `content/site.ts` is already
+**V0.5 — Campus community**, following V0.4 landmarks/Halloween and the
+[accepted community release](UBC_COMMUNITY_RELEASE_2026-10-31.md). The supplied
+roadmap reuses V0.5 for a different foundation milestone. Preserve the supplied
+V0.5–V1.1+ labels as **flagship planning identifiers**, separate from the existing
+public release sequence; this adoption does not overwrite the current badge or
+retroactively accept foundation work. At release preparation, record a distinct,
+next-unused public release identifier and its mapping to the completed roadmap
+milestone. Always include the milestone name and exact source/build.
+
+The latest documented production source is `38d432685765161347cff7b74c2f3dddd14af378`,
+Next build `4JfgZCh6OpnpuPeTAjb1A`, including the later first-entry audio correction.
+See [historical V0.4 acceptance](UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md) and
+[audio release evidence](UBC_AUDIO_IOS_2026-10-31.md). The owner's new roadmap
+reports first-entry iPhone audio working; that supersedes the prior document's
+pending-owner-test status, but is not a new cross-device test.
+The website package's `0.1.0` and Orchard's `0.2.0` are separate identifiers;
+do not renumber them to imply a campus release.
+
+**Current increment:** local performance instrumentation, fixed-camera reference
+capture, durable acceptance criteria and source research. V0.5 remains incomplete
+until the controlled terrain prototype and regression/performance gates pass.
+The production version is not advanced by committing this roadmap or harness.
+
+Operational companions:
+
+- [Fidelity scorecard](UBC_FIDELITY_SCORECARD.md)
+- [Release acceptance](UBC_RELEASE_ACCEPTANCE.md)
+- [V0.5 implementation queue and research](UBC_V05_FOUNDATION.md)
+- [Machine-readable landmark tracker](../projects/ubc/landmark-fidelity.json)
+
+**Sequence clarification:** begin Clock Tower research/prototyping in the initial
+queue, as requested in section 15; complete its architectural acceptance in V0.7.
+Koerner research and baseball comparisons can proceed during V0.5 without
+claiming V0.6/V0.7 complete. New bulk characters, generic building expansion and
+unrelated mechanics are excluded from this cycle.
 
 ## 1. Purpose and product principles
 
@@ -53,7 +97,7 @@ The [landmark fidelity registry](../projects/ubc/landmark-fidelity.json) is the 
 
 ## 3. Milestones and sequence
 
-Versions V0.5–V1.1 below are **proposed milestones**. Codex must reconcile them with the actual release history before tagging. Dates are indicative sequencing, not deadline promises; do not renumber or overwrite already-published versions.
+Versions V0.5–V1.1 below are **adopted flagship planning identifiers**. The alignment note above distinguishes them from the existing public release sequence. Dates are indicative sequencing, not deadline promises; do not renumber or overwrite already-published versions.
 
 | Milestone | Outcome | Priority | Dependency |
 | --- | --- | --- | --- |
@@ -205,7 +249,7 @@ Maintain these documents as the project evolves:
 - **[Deployment documentation](DEPLOYMENT.md):** exact active process, guarded release and rollback.
 - **UBC implementation/release reports and [validation gallery](validation/ubc/README.md):** dated reproducible evidence.
 
-Potential future files **docs/UBC_FIDELITY_SCORECARD.md** and **docs/UBC_RELEASE_ACCEPTANCE.md** may be added once baselines and the release gates have been measured; do not pretend these documents already exist.
+The [fidelity scorecard](UBC_FIDELITY_SCORECARD.md), [release acceptance gates](UBC_RELEASE_ACCEPTANCE.md), and [foundation implementation queue](UBC_V05_FOUNDATION.md) now record the initial baseline, remaining gaps and required evidence. Their existence does not mean the gates have passed.
 
 ## 15. The next development cycle — five concrete priorities
 

@@ -1428,3 +1428,23 @@ Stanford shared-feature preview proof: `docs/validation/stanford/followup-privac
 ## Stanford community production evidence — October 31, 2026
 
 `docs/validation/stanford/community-live-welcome-desktop.jpg` and `community-live-information-desktop.jpg` (1280×720), plus `community-live-review-mobile.jpg` (390×844), are original, unretouched browser captures of deployed source `b3601b3`. They document the Halloween welcome, loaded Project information without recording controls, and empty review form with visible focus. No submitted review, private telemetry, credential, external photograph or real-person likeness appears. Documentation evidence only; accessible descriptions and physical-device/audio limits are in the [validation gallery](validation/stanford/README.md). The interface and procedural scene are original application work; no third-party media is reproduced.
+
+## UBC V0.5 development evidence — November 1, 2026
+
+`docs/validation/ubc-v05/*-baseline.png` contains nine original, unretouched
+1663 × 935 renderer captures: stadium, Rose, Orchard, Nest, IKB, Main Mall,
+Koerner, gateway and Halloween gateway. They document the fixed-camera engine
+baseline and current reconstruction limits. Post-optimization captures use the
+same renderer and are identified separately in the [gallery](validation/ubc-v05/README.md),
+which supplies descriptive links, source hashes and environment limitations.
+Original procedural geometry retains its MIT terms and source UBC geography
+retains PDDL attribution. No reference photo, copied plan, real-person portrait,
+private participant data or new third-party model is included. These are local
+development evidence, not production imagery, architectural acceptance or
+physical-device results. No public asset was added or replaced.
+
+`docs/validation/ubc-v05/visitor-phone.jpg` is an unretouched 390 × 844 local
+Next production-preview screenshot of the Orchard lobby, residence controls and
+touch navigation. It carries the same original geometry/PDDL provenance and
+contains no real profile or private data. It establishes a desktop-browser phone
+layout check, not performance or audio on a physical phone.

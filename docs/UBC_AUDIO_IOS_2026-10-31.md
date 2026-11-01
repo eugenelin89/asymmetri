@@ -181,3 +181,11 @@ did not enter gameplay. First-entry audible playback on a physical iPhone with
 Silent Mode enabled remains unconfirmed; the earlier successful Sound off/on
 test applies to the preceding implementation. The owner has been asked to
 refresh and enter once without toggling Sound.
+
+## Owner confirmation — November 1, 2026
+
+The owner-supplied flagship roadmap explicitly reports that the first-entry fix
+was deployed and user-confirmed. This accepts the owner's first-entry result and
+supersedes the pending-owner-test statement above. It does not add a new automated
+or independently observed physical-device test, or establish every iOS lifecycle.
+See [the adopted roadmap baseline](UBC_ROADMAP.md).
