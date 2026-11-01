@@ -86,8 +86,9 @@ export function Campus() {
   const previousAtmosphere = useRef<Atmosphere | null>(null);
   const soundscape = useRef<ReturnType<typeof createHalloweenAudio> | null>(null);
   useEffect(()=>()=>{soundscape.current?.dispose();soundscape.current=null;},[]);
-  const unlockSound = () => {
+  const unlockSound = (audioSettings: Settings) => {
     soundscape.current ||= createHalloweenAudio();
+    soundscape.current.configure(audioSettings);
     return soundscape.current.unlock().then(ok=>{if(!ok)setNotice("Audio could not start. Try the sound control again in this browser.");return ok;});
   };
   const focusScene = useCallback(() => {
@@ -318,18 +319,20 @@ export function Campus() {
   const update = (patch: Partial<Settings>) =>
     setSettings((s) => normalizeSettings({ ...s, ...patch }));
   const changeEdition = (choice: EditionChoice) => {
-    if (campusEditions[activeEdition(choice,new Date())].halloween && settings.halloweenSound) unlockSound();
     setEditionChoice(choice);
     const next = setHalloween(settings, campusEditions[activeEdition(choice, new Date())].halloween, previousAtmosphere.current);
     previousAtmosphere.current = next.previous;
+    soundscape.current?.configure(next.settings);
+    if(next.settings.halloween&&next.settings.halloweenSound&&next.settings.halloweenVolume>0)void unlockSound(next.settings);
     setSettings(next.settings);
     try { localStorage.setItem(editionStorageKey, serializeEditionChoice(choice)); }
     catch { setNotice("Edition changed for this visit; device storage is unavailable."); }
   };
   const updateAudio = (patch: Partial<Pick<Settings,"halloweenSound"|"halloweenVolume">>) => {
     const next=normalizeSettings({...settings,...patch});
-    if(next.halloweenSound)unlockSound();
-    soundscape.current?.configure(next);setSettings(next);
+    soundscape.current?.configure(next);
+    if(next.halloween&&next.halloweenSound&&next.halloweenVolume>0)void unlockSound(next);
+    setSettings(next);
     try {localStorage.setItem(audioPreferenceKey,JSON.stringify({halloweenSound:next.halloweenSound,halloweenVolume:next.halloweenVolume}));}catch{}
   };
   const changeHalloween = (enabled: boolean) => changeEdition(enabled ? "halloween" : "regular");
@@ -473,7 +476,7 @@ export function Campus() {
                   );
                 } catch {}
                 soundscape.current ||= createHalloweenAudio();
-                if(settings.halloween && settings.halloweenSound)unlockSound();
+                if(settings.halloween && settings.halloweenSound && settings.halloweenVolume>0)void unlockSound(settings);
                 setStarted(true);
                 setExpanded(true);
               }}
@@ -1010,7 +1013,7 @@ export function Campus() {
                     <input aria-label="Halloween sound volume" type="range" min="0" max="100" step="1" value={Math.round(settings.halloweenVolume*100)} onChange={e=>updateAudio({halloweenVolume:Number(e.target.value)/100})}/>
                   </label>
                   <p className={styles.quiet}>An original eerie score, distant wolf howls, and nearby ghost cries and screams. Direction and loudness follow your position. Sound stops in the regular campus or when this tab is hidden.</p>
-                  <button disabled={!settings.halloween||!settings.halloweenSound} onClick={()=>{void unlockSound().then(ok=>{if(ok){soundscape.current?.configure(settings);soundscape.current?.preview();}});}}>Preview wolf howl</button>
+                  <button disabled={!settings.halloween||!settings.halloweenSound||settings.halloweenVolume<=0} onClick={()=>{void unlockSound(settings).then(ok=>{if(ok){soundscape.current?.configure(settings);soundscape.current?.preview();}});}}>Preview wolf howl</button>
                 </fieldset>
                 <fieldset disabled={settings.halloween}>
                   <legend>Season</legend>

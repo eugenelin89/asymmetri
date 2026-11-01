@@ -38,7 +38,7 @@ The source graph supports 128 generated actors, spread across campus. Visible po
 
 An optional Friday-the-13th-inspired hockey-masked outdoor pursuer carrying a prop knife follows connected paths, waits outside buildings and stops short. It does not attack or cause damage. Failed route searches are throttled. Its toggle is independent of the seasonal atmosphere.
 
-The original Web Audio soundscape combines an eerie score, distant wolf howls, and proximity ghost cries with occasional close-range screams. Stereo direction and volume follow the player. Sound starts after a player gesture, has a persistent mute/volume control and a wolf preview, and stops when Halloween is disabled or the tab is hidden. No recordings, real voices, external audio assets or microphone permissions are used.
+The original Web Audio soundscape combines an eerie score, distant wolf howls, and proximity ghost cries with occasional close-range screams. Stereo direction and volume follow the player. Sound starts after a player gesture, has a persistent mute/volume control and a wolf preview, and stops when Halloween is disabled or the tab is hidden. No recordings, real voices, external audio assets or microphone permissions are used. The separate iPhone audio follow-up feature-detects Audio Session playback support after a sound/start gesture, releasing its setting on mute, zero volume, Regular mode, hiding and disposal. Unsupported browsers retain ordinary Web Audio behavior. See `docs/CWRU_IPHONE_AUDIO_2026-10-31.md` for validation and deployment status.
 
 ## Validation and release
 

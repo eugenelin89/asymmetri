@@ -1,6 +1,8 @@
 import type { Pose, Settings } from "./types";
 export type SoundSource = { id:string; x:number; y:number; z:number; kind:"ghost"|"wolf" };
 export type ScareSound = "howl"|"cry"|"scream";
+type PlaybackSession = { type: string };
+type AudioOptions = { audioSession?: () => PlaybackSession | null };
 export const audioPreferenceKey = "cwru-halloween-audio-v1";
 export function soundPlacement(listener:Pick<Pose,"x"|"y"|"z"|"yaw">,source:Pick<SoundSource,"x"|"y"|"z">,range=30){
  const dx=source.x-listener.x,dz=source.z-listener.z,distance=Math.hypot(dx,dz,(source.y-listener.y)*2);
@@ -35,8 +37,32 @@ export function createSoundDirector(){
 /** Original synthesized film-style score and creatures. No recordings, network
  * requests, microphone permissions or third-party music. Created by user gesture.
  */
-export function createHalloweenAudio(){
- let context:AudioContext|null=null,master:GainNode|null=null,reverb:ConvolverNode|null=null,ready=false,enabled=false,volume=.35,nextPhrase=0,phrase=0,hidden=false;
+export function createHalloweenAudio(options:AudioOptions={}){
+ let context:AudioContext|null=null,master:GainNode|null=null,reverb:ConvolverNode|null=null,ready=false,enabled=false,volume=.35,nextPhrase=0,phrase=0,hidden=typeof document!=='undefined'&&document.hidden;
+ let disposed=false,gestureGranted=false,resumeAttempt=0;
+ let sessionLease:{session:PlaybackSession;previous:string;active:boolean}|null=null;
+ function claimPlaybackSession(){
+  if(!gestureGranted||!context||disposed||!enabled||hidden||volume<=0)return;
+  try{
+   const session=options.audioSession?options.audioSession():typeof navigator==='undefined'?null:(navigator as Navigator & {audioSession?:PlaybackSession}).audioSession;
+   if(!session)return;
+   if(sessionLease){
+    if(sessionLease.session!==session||sessionLease.active||session.type!==sessionLease.previous)return;
+    session.type='playback';sessionLease.active=session.type==='playback';return;
+   }
+   const previous=session.type;
+   if(typeof previous!=='string'||previous==='playback')return;
+   // WebKit documents playback through iPhone Silent Mode on supported browsers.
+   // https://bugs.webkit.org/show_bug.cgi?id=237322#c6
+   session.type='playback';
+   if(session.type==='playback')sessionLease={session,previous,active:true};
+  }catch{/* Optional API; ordinary Web Audio remains available. */}
+ }
+ function releasePlaybackSession(){
+  if(!sessionLease?.active)return;
+  sessionLease.active=false;
+  try{if(sessionLease.session.type==='playback')sessionLease.session.type=sessionLease.previous;}catch{/* Never break mute or disposal. */}
+ }
  const active=new Set<AudioScheduledSourceNode>(),director=createSoundDirector();
  const clamp=(v:number)=>Number.isFinite(v)?Math.max(0,Math.min(1,v)):.35;
  function track(node:AudioScheduledSourceNode,nodes:AudioNode[],end:number){
@@ -90,6 +116,10 @@ export function createHalloweenAudio(){
  const voices:{panner:StereoPannerNode;gain:GainNode;source:SoundSource;expires:number}[]=[];
  function stop(){for(const node of active){try{node.stop();}catch{}}active.clear();voices.length=0;nextPhrase=0;director.reset();}
  async function unlock(){
+  if(disposed||!enabled||hidden||volume<=0)return false;
+  const attempt=++resumeAttempt;
+  gestureGranted=true;
+  if(sessionLease&&!sessionLease.active)sessionLease=null;
   try{
    if(!context){
     context=new AudioContext();master=context.createGain();master.gain.value=0;
@@ -99,12 +129,23 @@ export function createHalloweenAudio(){
     for(let ch=0;ch<2;ch++){const a=impulse.getChannelData(ch);let seed=1729+ch;for(let i=0;i<a.length;i++){seed=(Math.imul(seed,1664525)+1013904223)|0;a[i]=((seed>>>0)/4294967296*2-1)*Math.pow(1-i/a.length,3)*.18;}}
     reverb.buffer=impulse;reverb.connect(master);
    }
-   if(context.state==='suspended')await context.resume();ready=context.state==='running';return ready;
-  }catch{return false;}
+   claimPlaybackSession(); // Before awaiting the explicit user-gesture resume.
+   const current=context;
+   if(current.state!=='running')await current.resume();
+   if(disposed||context!==current)return false;
+   if(attempt===resumeAttempt){
+    ready=current.state==='running';
+    if(!ready){gestureGranted=false;releasePlaybackSession();}
+   }
+   return current.state==='running';
+  }catch{if(attempt===resumeAttempt){ready=false;gestureGranted=false;releasePlaybackSession();}return false;}
  }
  function configure(settings:Pick<Settings,'halloween'|'halloweenSound'|'halloweenVolume'>){
-  const next=settings.halloween&&settings.halloweenSound;volume=clamp(settings.halloweenVolume);
+  if(disposed)return;
+  volume=clamp(settings.halloweenVolume);
+  const next=settings.halloween&&settings.halloweenSound&&volume>0;
   if(enabled&&!next)stop();enabled=next;
+  if(enabled)claimPlaybackSession();else releasePlaybackSession();
   if(master&&context)master.gain.setTargetAtTime(enabled&&!hidden?volume:0,context.currentTime,.08);
  }
  function update(dt:number,pose:Pose,sources:SoundSource[],paused=false){
@@ -118,9 +159,16 @@ export function createHalloweenAudio(){
    v.gain.gain.setTargetAtTime(Math.min(.7,placement.gain*(current.kind==='wolf'?.65:.9)),context.currentTime,.18);
   }
  }
- function visibility(value:boolean){hidden=value;if(master&&context)master.gain.setTargetAtTime(enabled&&!hidden?volume:0,context.currentTime,.05);if(hidden)stop();}
+ function visibility(value:boolean){
+  if(disposed)return;hidden=value;
+  if(hidden){releasePlaybackSession();stop();}else claimPlaybackSession();
+  if(master&&context)master.gain.setTargetAtTime(enabled&&!hidden?volume:0,context.currentTime,.05);
+ }
+ // Own visibility from the gesture onward, including while campus assets load.
+ const onDocumentVisibility=()=>visibility(document.hidden);
+ if(typeof document!=='undefined')document.addEventListener('visibilitychange',onDocumentVisibility);
  return {unlock,configure,update,visibility,stop,preview(){creature('howl',.55,0);},
   status:()=>context?.state||'not-started',
-  dispose(){stop();void context?.close();context=null;master=null;reverb=null;ready=false;enabled=false;}
+  dispose(){if(disposed)return;disposed=true;if(typeof document!=='undefined')document.removeEventListener('visibilitychange',onDocumentVisibility);gestureGranted=false;releasePlaybackSession();stop();void context?.close().catch(()=>{});context=null;master=null;reverb=null;ready=false;enabled=false;}
  };
 }

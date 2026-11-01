@@ -23,8 +23,8 @@ test('muting, scene pause and absent ghosts prevent proximity cues and reset cle
  const audio=createHalloweenAudio();assert.equal(audio.status(),'not-started');audio.dispose();
 });
 
-test('audio lifecycle starts on a gesture and stops scheduled voices on mute, regular mode, hiding and disposal',async()=>{
- const original=globalThis.AudioContext,contexts=[];
+
+function fakeContexts(contexts){
  const param=()=>({value:0,setValueAtTime(v){this.value=v;},exponentialRampToValueAtTime(v){this.value=v;},setTargetAtTime(v){this.value=v;}});
  class FakeContext {
   currentTime=0;sampleRate=80;state='suspended';sources=[];destination={};
@@ -40,6 +40,18 @@ test('audio lifecycle starts on a gesture and stops scheduled voices on mute, re
   createOscillator(){return this.source();} createBufferSource(){return this.source();}
   async resume(){this.state='running';} async close(){this.state='closed';}
  }
+ return {FakeContext};
+}
+async function withAudioSession(session,run){
+ const original=globalThis.AudioContext,contexts=[];
+ const {FakeContext}=fakeContexts(contexts);globalThis.AudioContext=FakeContext;
+ const audio=createHalloweenAudio({audioSession:typeof session==='function'?session:()=>session});
+ try{return await run(audio,contexts,FakeContext);}finally{audio.dispose();globalThis.AudioContext=original;}
+}
+const soundOn={halloween:true,halloweenSound:true,halloweenVolume:.35};
+test('audio lifecycle starts on a gesture and stops scheduled voices on mute, regular mode, hiding and disposal',async()=>{
+ const original=globalThis.AudioContext,contexts=[];
+ const {FakeContext}=fakeContexts(contexts);
  globalThis.AudioContext=FakeContext;
  try {
   const audio=createHalloweenAudio(),on={halloween:true,halloweenSound:true,halloweenVolume:.35};
@@ -54,4 +66,96 @@ test('audio lifecycle starts on a gesture and stops scheduled voices on mute, re
   audio.configure({...on,halloween:false});assert.equal(playing(),0);
   audio.dispose();assert.equal(c.state,'closed');
  } finally {globalThis.AudioContext=original;}
+});
+
+
+test('Silent Mode playback is claimed synchronously only after enabled audio receives a gesture',async()=>{
+ const session={type:'ambient'};
+ await withAudioSession(session,async(audio,contexts)=>{
+  assert.equal(await audio.unlock(),false);assert.equal(contexts.length,0);
+  audio.configure(soundOn);assert.equal(session.type,'ambient');assert.equal(contexts.length,0);
+  const pending=audio.unlock();assert.equal(session.type,'playback');assert.equal(await pending,true);
+  // Asset loading may delay engine configuration; no second gesture is needed.
+  audio.configure({...soundOn,halloween:false});assert.equal(session.type,'ambient');
+  audio.configure(soundOn);assert.equal(session.type,'playback');
+  audio.dispose();assert.equal(session.type,'ambient');
+ });
+});
+test('mute, Regular, zero volume, hiding and disposal release the owned playback category',async()=>{
+ for(const patch of [{halloweenSound:false},{halloween:false},{halloweenVolume:0}]){
+  const session={type:'auto'};
+  await withAudioSession(session,async(audio)=>{
+   audio.configure(soundOn);await audio.unlock();assert.equal(session.type,'playback');
+   audio.configure({...soundOn,...patch});assert.equal(session.type,'auto');
+   audio.configure(soundOn);assert.equal(session.type,'playback');
+   audio.visibility(true);assert.equal(session.type,'auto');
+   audio.configure(soundOn);assert.equal(session.type,'auto');
+   audio.visibility(false);assert.equal(session.type,'playback');
+   audio.dispose();assert.equal(session.type,'auto');assert.equal(await audio.unlock(),false);
+  });
+ }
+});
+test('Regular, mute, zero volume and hidden entry never construct or claim audio',async()=>{
+ for(const patch of [{halloweenSound:false},{halloween:false},{halloweenVolume:0}]){
+  const session={type:'ambient'};
+  await withAudioSession(session,async(audio,contexts)=>{audio.configure({...soundOn,...patch});assert.equal(await audio.unlock(),false);assert.equal(contexts.length,0);assert.equal(session.type,'ambient');});
+ }
+ await withAudioSession({type:'ambient'},async(audio,contexts)=>{audio.configure(soundOn);audio.visibility(true);assert.equal(await audio.unlock(),false);assert.equal(contexts.length,0);});
+});
+test('existing playback and intervening media categories are preserved',async()=>{
+ const existing={type:'playback'};await withAudioSession(existing,async(audio)=>{audio.configure(soundOn);await audio.unlock();audio.configure({...soundOn,halloweenSound:false});audio.dispose();assert.equal(existing.type,'playback');});
+ const changed={type:'ambient'};await withAudioSession(changed,async(audio)=>{
+  audio.configure(soundOn);await audio.unlock();changed.type='play-and-record';
+  audio.visibility(true);audio.visibility(false);audio.configure(soundOn);assert.equal(changed.type,'play-and-record');
+  audio.dispose();assert.equal(changed.type,'play-and-record');
+ });
+});
+test('missing, throwing, readonly or ignored audioSession support keeps ordinary Web Audio available',async()=>{
+ const readonly={get type(){return 'ambient';},set type(_){throw new Error('readonly');}};
+ const ignored={get type(){return 'ambient';},set type(_){}};
+ for(const session of [null,()=>{throw new Error('unsupported');},readonly,ignored]){
+  await withAudioSession(session,async(audio)=>{audio.configure(soundOn);assert.equal(await audio.unlock(),true);assert.equal(audio.status(),'running');audio.configure({...soundOn,halloweenSound:false});});
+ }
+});
+test('resume rejection releases playback without leaking an exception',async()=>{
+ const session={type:'ambient'};
+ await withAudioSession(session,async(audio,contexts,FakeContext)=>{
+  FakeContext.prototype.resume=async function(){throw new Error('blocked');};
+  audio.configure(soundOn);assert.equal(await audio.unlock(),false);assert.equal(session.type,'ambient');
+ });
+});
+test('mute or dispose during pending resume cannot reclaim playback',async()=>{
+ for(const action of ['mute','dispose']){
+  const session={type:'ambient'};let finish;
+  await withAudioSession(session,async(audio,contexts,FakeContext)=>{
+   FakeContext.prototype.resume=function(){return new Promise(resolve=>{finish=()=>{this.state='running';resolve();};});};
+   audio.configure(soundOn);const pending=audio.unlock();assert.equal(session.type,'playback');
+   if(action==='mute')audio.configure({...soundOn,halloweenSound:false});else audio.dispose();
+   assert.equal(session.type,'ambient');finish();await pending;assert.equal(session.type,'ambient');
+  });
+ }
+});
+test('an older failed resume cannot release a newer successful gesture',async()=>{
+ const session={type:'ambient'};let fail;
+ await withAudioSession(session,async(audio,contexts,FakeContext)=>{
+  let count=0;FakeContext.prototype.resume=function(){if(++count===1)return new Promise((_,reject)=>{fail=reject;});this.state='running';return Promise.resolve();};
+  audio.configure(soundOn);const first=audio.unlock();assert.equal(await audio.unlock(),true);
+  fail(new Error('older attempt'));assert.equal(await first,false);assert.equal(session.type,'playback');assert.equal(audio.status(),'running');
+ });
+});
+
+test('visibility is owned before campus assets load and its listener is removed on disposal',async()=>{
+ const previous=Object.getOwnPropertyDescriptor(globalThis,'document'),listeners=new Set();
+ const document={hidden:false,addEventListener(name,callback){assert.equal(name,'visibilitychange');listeners.add(callback);},removeEventListener(name,callback){assert.equal(name,'visibilitychange');listeners.delete(callback);}};
+ Object.defineProperty(globalThis,'document',{configurable:true,value:document});
+ try{
+  const session={type:'ambient'};
+  await withAudioSession(session,async(audio)=>{
+   audio.configure(soundOn);await audio.unlock();assert.equal(listeners.size,1);assert.equal(session.type,'playback');
+   document.hidden=true;for(const callback of listeners)callback();assert.equal(session.type,'ambient');
+   audio.configure(soundOn);assert.equal(session.type,'ambient');
+   document.hidden=false;for(const callback of listeners)callback();assert.equal(session.type,'playback');
+   audio.dispose();assert.equal(listeners.size,0);assert.equal(session.type,'ambient');
+  });
+ }finally{if(previous)Object.defineProperty(globalThis,'document',previous);else delete globalThis.document;}
 });
