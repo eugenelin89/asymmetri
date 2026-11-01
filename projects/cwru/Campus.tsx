@@ -1,5 +1,5 @@
 "use client";
-import { PlaySession, CampusPrivacyPreferences } from "../campus-analytics/PlaySession";
+import { PlaySession } from "../campus-analytics/PlaySession";
 import { applyCampusAnchors } from "./layout";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
@@ -1327,8 +1327,7 @@ export function Campus() {
                 >
                   Data provenance, hashes and reconstruction notes ↗
                 </a>
-                <p>All walking paths, dialogue and appearances are simulated. Research characters support only the facts cited in each encounter. Optional community characters publish the information participants submit about themselves, with owner editing, recovery and removal. LinkedIn student affiliations come from public search excerpts and may be stale. No real whereabouts are tracked; play-data collection is described below.</p>
-                <CampusPrivacyPreferences compact />
+                <p>All walking paths, dialogue and appearances are simulated. Research characters support only the facts cited in each encounter. Optional community characters publish the information participants submit about themselves, with owner editing, recovery and removal. LinkedIn student affiliations come from public search excerpts and may be stale. No real whereabouts are tracked. See the <a href="/labs/campus-privacy" target="_blank" rel="noopener noreferrer">campus privacy policy ↗</a> for play-data collection and retention.</p>
               </>
             )}
           </aside>

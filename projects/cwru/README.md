@@ -24,9 +24,9 @@ The sanitized 500-row research import in `data/students.json` enriches five exis
 
 Original generic avatars, dialogue and walks are fictional simulations near relevant academic zones. They do not reproduce likeness, voice, real schedules or current whereabouts. One fictional guide and ambient students complete the scene. Conversations are source-bounded, encounter-only and decline private-location questions. There is no people locator. Players can publish their own profile and current avatar appearance, choose a virtual meeting area, edit or delete their character, recover ownership with a private code, and report another public profile. Public characters refresh every 60 seconds. CWRU uses separate endpoints, storage and cookies from UBC; publishing requires `CWRU_PROFILE_DIR` on the host.
 
-## Reviews and play privacy
+## Reviews and play reporting
 
-The prepared follow-up integrates the shared review form above the footer and private usage controls before entry and in Project information. Reviews describe this virtual experience; they support owner editing/removal and reporting. Play recording requires a started, ready, visible game and recent input, honors opt-out/browser privacy signals, and stays separate from profiles and reviews. The private backend counts browser capabilities, not verified people. See `docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md` for local acceptance and pending production rollout, and `/labs/campus-privacy` for choices and retention details.
+The prepared follow-up integrates the shared review form above the footer. At the owner's subsequent request, the Play privacy panel and recording checkbox are removed from both the landing page and Project information; a plain policy link remains. Reviews describe this virtual experience and support owner editing/removal and reporting. Play recording requires a started, ready, visible game and recent input, honors existing opt-outs and browser privacy signals, and stays separate from profiles and reviews. The private backend counts browser capabilities, not verified people. See `docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md` for acceptance and pending production rollout, and `/labs/campus-privacy` for collection and retention details.
 
 ## Halloween
 
