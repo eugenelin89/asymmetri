@@ -10,7 +10,8 @@ export type GhostProximity = { distance: number; pan: number; strength: number }
 export type AudioCue = { kind: "howl" | "cry" | "scream"; pan: number; strength: number; duration: number };
 export type CueSchedule = { nextHowl: number; nextGhost: number; nextScream: number; quietUntil: number };
 type VisibilitySource = Pick<Document, "hidden" | "addEventListener" | "removeEventListener">;
-type AudioOptions = { createContext?: () => AudioContext | null; visibility?: VisibilitySource | null; random?: () => number };
+type PlaybackSession = { type: string };
+type AudioOptions = { createContext?: () => AudioContext | null; visibility?: VisibilitySource | null; random?: () => number; audioSession?: () => PlaybackSession | null };
 const clamp = (value: number, low: number, high: number) => Math.max(low, Math.min(high, value));
 const chance = (random: () => number) => { const value = random(); return Number.isFinite(value) ? clamp(value, 0, 1) : 0.5; };
 
@@ -53,6 +54,10 @@ function browserAudioContext() {
   return BrowserContext ? new BrowserContext() : null;
 }
 
+function browserAudioSession(): PlaybackSession | null {
+  return typeof navigator === "undefined" ? null : (navigator as Navigator & { audioSession?: PlaybackSession }).audioSession || null;
+}
+
 /** Construct/resume directly in an entry or Sound-button gesture. Browser audio
  * policy remains authoritative; a rejected resume resolves false, never throws.
  */
@@ -62,6 +67,35 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   let context: AudioContext | null = null;
   try { context = (options.createContext || browserAudioContext)(); } catch { /* Browser audio is unavailable. */ }
   let disposed = false, enabled = false, volume = 0.35, target = -1, bedReady = false;
+  let playbackIntent = false, settingsSeen = false, resumeAttempt = 0;
+  let sessionLease: { session: PlaybackSession; previous: string; active: boolean } | null = null;
+  function claimPlaybackSession() {
+    if (!playbackIntent || !context || disposed || visibility?.hidden || (settingsSeen && volume <= 0)) return;
+    try {
+      const session = (options.audioSession || browserAudioSession)();
+      if (!session) return;
+      if (sessionLease) {
+        // Do not take over an intervening owner's choice on visibility return.
+        if (sessionLease.session !== session || sessionLease.active || session.type !== sessionLease.previous) return;
+        session.type = "playback";
+        sessionLease.active = session.type === "playback";
+        return;
+      }
+      const previous = session.type;
+      if (typeof previous !== "string" || previous === "playback") return;
+      // WebKit supports media playback through Silent Mode via this API on iOS17+.
+      // https://bugs.webkit.org/show_bug.cgi?id=237322#c6
+      session.type = "playback";
+      if (session.type === "playback") sessionLease = { session, previous, active: true };
+    } catch { /* Optional, experimental API: Web Audio remains usable without it. */ }
+  }
+  function releasePlaybackSession() {
+    if (!sessionLease?.active) return;
+    sessionLease.active = false;
+    try {
+      if (sessionLease.session.type === "playback") sessionLease.session.type = sessionLease.previous;
+    } catch { /* Unsupported or readonly session; never break mute/disposal. */ }
+  }
   let schedule = createCueSchedule(0, random), suspendTimer: ReturnType<typeof setTimeout> | undefined;
   const nodes = new Set<AudioNode>(), sources = new Set<AudioScheduledSourceNode>();
   type Voice = { sources: AudioScheduledSourceNode[]; nodes: AudioNode[]; gain: GainNode; end: number; released: boolean };
@@ -176,7 +210,12 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
       stopVoices();
       suspendTimer = setTimeout(() => {
         suspendTimer = undefined;
-        if (!disposed && context && (!enabled || visibility?.hidden)) void context.suspend().catch(() => {});
+        if (!disposed && context && (!enabled || visibility?.hidden)) {
+          // A quick enable/cancel may never produce enabled telemetry. Release
+          // its silent lease after the existing fade; first scene load is exempt.
+          if (settingsSeen && !enabled) releasePlaybackSession();
+          void context.suspend().catch(() => {});
+        }
       }, 400);
     }
   }
@@ -187,12 +226,27 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   }
   async function resume() {
     if (!context || disposed || context.state === "closed" || visibility?.hidden) return false;
-    try { await context.resume(); applyGate(true); return context.state === "running"; } catch { return false; }
+    const attempt = ++resumeAttempt;
+    playbackIntent = true;
+    if (sessionLease && !sessionLease.active) sessionLease = null;
+    claimPlaybackSession(); // Synchronous, before awaiting the user-gesture resume.
+    try { await context.resume(); applyGate(true); return !disposed && context.state === "running"; }
+    catch {
+      if (attempt === resumeAttempt) { playbackIntent = false; releasePlaybackSession(); }
+      return false;
+    }
   }
   function update(settings: AudioSettings, pose: AudioPose, ghosts: readonly AudioGhost[]) {
     if (!context || disposed) return;
+    const wasEnabled = enabled;
     volume = Number.isFinite(settings.halloweenVolume) ? clamp(settings.halloweenVolume, 0, 1) : 0.35;
     enabled = settings.halloween && settings.halloweenAudio && volume > 0;
+    if (!enabled && (wasEnabled || !settingsSeen)) {
+      releasePlaybackSession();
+      if (!settings.halloween || !settings.halloweenAudio) playbackIntent = false;
+    }
+    settingsSeen = true;
+    if (enabled && !wasEnabled) claimPlaybackSession();
     applyGate();
     for (const voice of voices) if (context.currentTime >= voice.end) releaseVoice(voice);
     if (!enabled || visibility?.hidden || context.state !== "running" || voices.size) return;
@@ -200,10 +254,15 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     schedule = next.schedule;
     if (next.cue) play(next.cue);
   }
-  const onVisibility = () => applyGate();
+  const onVisibility = () => {
+    if (visibility?.hidden) releasePlaybackSession();
+    else if (enabled) claimPlaybackSession();
+    applyGate();
+  };
   visibility?.addEventListener("visibilitychange", onVisibility);
   function dispose() {
     if (disposed) return;
+    playbackIntent = false; releasePlaybackSession();
     disposed = true; visibility?.removeEventListener("visibilitychange", onVisibility);
     if (suspendTimer !== undefined) clearTimeout(suspendTimer);
     if (master && context) { master.gain.cancelScheduledValues(context.currentTime); master.gain.setValueAtTime(0, context.currentTime); }

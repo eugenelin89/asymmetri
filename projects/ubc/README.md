@@ -70,6 +70,11 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
 - Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
   approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
   Winter snow is optional; evergreen and deciduous trees are separate materials.
+- Halloween audio: enabling sound requests the browser's optional playback audio
+  session, which WebKit documents for Silent Mode playback on iOS 17 and later.
+  Mute, zero volume and background pause still apply. Unsupported browsers keep
+  their existing behavior. Physical iPhone confirmation is pending; see the
+  [audio follow-up and primary sources](../../docs/UBC_AUDIO_IOS_2026-10-31.md).
 - Photo: hides normal UI and shows a fresh canvas PNG preview with a Save PNG link.
   The browser validation gallery retains real scene exports and interaction captures.
 

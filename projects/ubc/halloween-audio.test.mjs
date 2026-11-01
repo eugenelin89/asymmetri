@@ -51,9 +51,9 @@ class Visibility {
   removeEventListener(name, fn) { assert.equal(name, "visibilitychange"); this.listeners.delete(fn); }
   set(hidden) { this.hidden = hidden; this.listeners.forEach((fn) => fn()); }
 }
-function fixture() {
+function fixture(options = {}) {
   const context = new Context(), visibility = new Visibility();
-  const audio = createHalloweenAudio({ createContext: () => context, visibility, random: () => 0 });
+  const audio = createHalloweenAudio({ createContext: () => context, visibility, random: () => 0, ...options });
   controllers.push(audio); return { audio, context, visibility };
 }
 
@@ -172,4 +172,103 @@ test("unsupported or unavailable audio leaves the campus API usable without DOM 
     assert.doesNotThrow(() => audio.update(settings, pose, ghosts)); audio.dispose();
     assert.equal(audio.status(), "closed");
   }
+});
+
+test("explicit audio entry claims playback before await and keeps it through delayed first settings", async () => {
+  const session = { type: "auto" };
+  const { audio, context } = fixture({ audioSession: () => session });
+  assert.equal(session.type, "playback", "Entry acquires the category synchronously");
+  await new Promise((resolve) => setTimeout(resolve, 450));
+  assert.equal(session.type, "playback", "Initial enabled=false is not a user mute");
+  assert.equal(context.nodes[0].gain.value, 0);
+  audio.update(settings, pose, ghosts);
+  assert.equal(session.type, "playback");
+  audio.update({ ...settings, halloweenVolume: 0 }, pose, ghosts);
+  assert.equal(session.type, "auto");
+  await audio.resume();
+  assert.equal(session.type, "auto", "Known zero volume does not claim media playback");
+  audio.update(settings, pose, ghosts);
+  assert.equal(session.type, "playback", "Raising volume retains the last audio opt-in");
+  audio.dispose();
+  assert.equal(session.type, "auto");
+});
+
+test("mute then explicit resume tolerates the old React settings before the enabled update", async () => {
+  const session = { type: "ambient" };
+  const { audio } = fixture({ audioSession: () => session });
+  await audio.resume(); audio.update(settings, pose, ghosts);
+  const muted = { ...settings, halloweenAudio: false };
+  audio.update(muted, pose, ghosts); assert.equal(session.type, "ambient");
+  const resumed = audio.resume(); assert.equal(session.type, "playback");
+  audio.update(muted, pose, ghosts); await resumed;
+  assert.equal(session.type, "playback", "Repeated old muted telemetry does not cancel the new gesture");
+  audio.update(settings, pose, ghosts); assert.equal(session.type, "playback");
+  audio.update({ ...settings, halloween: false }, pose, ghosts); assert.equal(session.type, "ambient");
+  audio.dispose();
+});
+
+test("rapid enable then cancel releases a silent playback lease after the fade window", async () => {
+  const session = { type: "ambient" };
+  const { audio, context } = fixture({ audioSession: () => session });
+  const regular = { ...settings, halloween: false };
+  await audio.resume(); audio.update(regular, pose, ghosts);
+  assert.equal(session.type, "ambient");
+  await audio.resume(); audio.update(regular, pose, ghosts);
+  assert.equal(session.type, "playback", "Allow time for the new enabled telemetry");
+  await new Promise((resolve) => setTimeout(resolve, 450));
+  assert.equal(context.state, "suspended");
+  assert.equal(session.type, "ambient", "A cancelled enable cannot retain an exclusive silent session");
+  audio.update(settings, pose, ghosts);
+  assert.equal(session.type, "playback", "A delayed valid enabled update retains the prior gesture intent");
+  audio.dispose();
+});
+
+test("hidden sessions release playback and regain it only with retained active choice", async () => {
+  const session = { type: "auto" };
+  const { audio, visibility, context } = fixture({ audioSession: () => session });
+  await audio.resume(); audio.update(settings, pose, ghosts);
+  visibility.set(true); assert.equal(session.type, "auto"); assert.equal(context.nodes[0].gain.value, 0);
+  assert.equal(await audio.resume(), false); assert.equal(session.type, "auto");
+  visibility.set(false); assert.equal(session.type, "playback");
+  visibility.set(true); audio.update({ ...settings, halloweenAudio: false }, pose, ghosts);
+  visibility.set(false); assert.equal(session.type, "auto");
+  audio.dispose();
+});
+
+test("another session owner's category is preserved during hide, return and disposal", async () => {
+  const session = { type: "ambient" };
+  const { audio, visibility } = fixture({ audioSession: () => session });
+  await audio.resume(); audio.update(settings, pose, ghosts);
+  visibility.set(true); assert.equal(session.type, "ambient");
+  session.type = "play-and-record";
+  visibility.set(false); assert.equal(session.type, "play-and-record");
+  audio.dispose(); assert.equal(session.type, "play-and-record");
+  const alreadyPlayback = { type: "playback" };
+  const other = fixture({ audioSession: () => alreadyPlayback }).audio;
+  other.update(settings, pose, ghosts); other.dispose();
+  assert.equal(alreadyPlayback.type, "playback", "A pre-existing playback setting was never owned");
+});
+
+test("missing, throwing and readonly AudioSession APIs preserve normal Web Audio", async () => {
+  const readonly = Object.defineProperty({}, "type", { get: () => "ambient", set: () => { throw new TypeError("Readonly"); } });
+  const throwingType = Object.defineProperty({}, "type", { get: () => { throw new Error("Unavailable"); } });
+  for (const audioSession of [() => null, () => { throw new Error("Unsupported getter"); }, () => readonly, () => throwingType]) {
+    const { audio, context } = fixture({ audioSession });
+    assert.equal(await audio.resume(), true);
+    audio.update(settings, pose, ghosts);
+    assert.equal(context.nodes[0].gain.value, 0.35 * 0.65);
+    assert.doesNotThrow(() => audio.dispose());
+  }
+});
+
+test("failed or pending resume never leaves an owned playback category after disposal", async () => {
+  const session = { type: "ambient" }, context = new Context(); context.rejectResume = true;
+  const { audio } = fixture({ createContext: () => context, audioSession: () => session });
+  assert.equal(await audio.resume(), false); assert.equal(session.type, "ambient");
+  context.rejectResume = false; await audio.resume(); audio.update(settings, pose, ghosts);
+  assert.equal(session.type, "playback");
+  let finish;
+  context.resume = () => new Promise((resolve) => { finish = resolve; });
+  const pending = audio.resume(); audio.dispose(); assert.equal(session.type, "ambient");
+  finish(); assert.equal(await pending, false); assert.equal(session.type, "ambient");
 });

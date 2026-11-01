@@ -486,7 +486,7 @@ export function Campus() {
               className={styles.primary}
               onClick={() => {
                 initializeEdition();
-                if (settings.halloweenAudio) enableAudio();
+                if (settings.halloween && settings.halloweenAudio) enableAudio();
                 try {
                   setAppearance(
                     normalizeAppearance(
