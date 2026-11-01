@@ -281,7 +281,7 @@ The independent CWRU explorer is implemented at `/labs/cwru`. See the [project g
 
 ## Campus community services
 
-Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. Each campus workstream owns its integration, testing and rollout; its release receipt identifies the live behavior. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
+Reusable visitor reviews and private play reporting support UBC, CWRU and Stanford. Each campus workstream owns its integration, testing and rollout; its release receipt identifies the live behavior. Where enabled, reviews appear above the footer and measurement begins only inside a ready explorer with visible privacy controls. The two stores are independent of public character profiles and fail closed until configured outside the checkout. See [community update](docs/UBC_CAMPUS_COMMUNITY_2026-10-31.md), [verified UBC release](docs/UBC_COMMUNITY_RELEASE_2026-10-31.md), [review operations](docs/CAMPUS_REVIEWS_OPERATIONS.md) and [analytics operations](projects/campus-analytics/README.md). Implementation and production activation are separate; consult the release receipt for the active source.
 
 ## Stanford Virtual Campus
 

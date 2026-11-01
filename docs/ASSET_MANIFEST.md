@@ -1416,3 +1416,7 @@ Stanford shared-feature preview proof: `docs/validation/stanford/followup-privac
 ## CWRU community integration captures — October 31, 2026
 
 `docs/validation/cwru-community/reviews-mobile.jpg` (390×844), `privacy-in-game.jpg` (1280×720) and `privacy-mobile.jpg` (390×844) are original, unretouched local browser JPEG captures. They document the empty visitor-review form, in-game private-play disclosure and opt-out controls. They contain no real review, private telemetry or credential. The UI and background are original application reconstructions; no external imagery is used. These documentation assets do not establish production deployment or physical-device performance. Descriptions and limitations are in the [validation gallery](validation/cwru-community/README.md).
+
+## UBC campus community production evidence — October 31, 2026
+
+`docs/validation/ubc-community/live-reviews-desktop.jpg` and `live-walking.jpg` (1280×720), `live-reviews-mobile.jpg` (390×844), plus `live-privacy.jpg` (413×598), are original, unretouched browser captures of deployed source `704a9b3bfc2a3eafcac0360f490af01aafbf56ff`. They document the empty review form, walking focus and private-play disclosure. No test review, raw IP, visitor identity, credential or external photograph appears. Documentation evidence only; descriptive links and environment limits are in the [validation gallery](validation/ubc-community/README.md).

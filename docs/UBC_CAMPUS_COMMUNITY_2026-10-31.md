@@ -1,6 +1,6 @@
 # UBC campus community update
 
-This update adds supplied student encounters, public visitor reviews and private play statistics. Implementation and local validation are complete; production deployment is pending. The previous After Dark release remains separately verified.
+This update adds supplied student encounters, public visitor reviews and private play statistics. Source `704a9b3` was deployed October 31 and accepted at 00:02:50 UTC November 1 (October 31 in Vancouver). See the [production receipt](UBC_COMMUNITY_RELEASE_2026-10-31.md). The later request to remove the privacy cards is a separate UI follow-up, not part of this frozen runtime.
 
 ## Student encounters
 
@@ -22,7 +22,7 @@ The shared tracker and backend support all three campuses. This release integrat
 
 Counts represent browsers and sessions, not verified people. Multiple devices, cleared cookies, separate www/apex identifiers, opted-out browsers and concurrent tabs limit interpretation. The client pauses for hidden/off-screen/idle play; the server validates sequence and elapsed intervals. Operator reporting is private. Players receive a notice, opt-out, browser privacy-signal support and removal controls at the shared [campus privacy page](/labs/campus-privacy).
 
-The intended retention is 30 days for IP/browser detail and 90 days for pseudonymous session identifiers, timestamps and duration records, enforced by request/CLI cleanup and scheduled maintenance. Final deployment must verify the actual schedule before claiming this retention is active.
+Retention is 30 days for IP/browser detail and 90 days for pseudonymous session identifiers, timestamps and duration records. Request/CLI cleanup and the verified daily 03:30 UTC timer enforce it; cleanup can lag by one day or longer during outages. The first scheduled-service execution succeeded.
 
 ## Validation and release status
 
@@ -32,7 +32,7 @@ The intended retention is 30 days for IP/browser detail and 90 days for pseudony
 - Local student conversation verified an unlabelled encounter, natural introduction, study follow-up, safe official links and honest supplied-source metadata.
 - The final combined-source validation passed all 592 tests: UBC 144, reviews 13, analytics 29, CWRU 89, Stanford 140, Surrey 69, Richmond 27, Vancouver 74 and investment 7. Other-campus suites are regression checks, not evidence of new frontend integrations. TypeScript/ESLint passed with the existing tutorial warning; production dependency audit reported zero vulnerabilities.
 - Browser measurement checks verified no record before exploration, one UBC browser/session, accumulating activity, frozen duration after opt-out, browser-owned removal, CWRU inheriting opt-out with zero records, and cross-tab preference changes. Phone 390×844 and tablet 768×1024 privacy controls had no overflow. Localhost correctly stores no IP without the trusted ingress header.
-- Next and Vinext builds passed on the final isolated source, based on the committed Stanford implementation plus the scoped UBC/shared changes. Exact committed-source Linux CI and production release are pending. Physical-device testing has not been performed.
+- Next and Vinext builds passed on the final isolated source, based on the committed Stanford implementation plus the scoped UBC/shared changes. Exact-source Linux CI passed 585 tests; production HTTP/API/storage/timer/custody checks and desktop/mobile browser acceptance passed. Physical-device testing has not been performed.
 
 Stanford and CWRU owners received the student file and the shared reviews/usage requirements. Their campus source, routing and deployment remain separately coordinated; this report is not evidence that either campus is deployed.
 

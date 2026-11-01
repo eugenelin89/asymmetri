@@ -9,8 +9,7 @@ Makhanko-Tang. The same person is not instantiated twice.
 The data, registry, movement and conversation integration are complete and
 locally validated. All 144 UBC tests, whole-application TypeScript/ESLint checks
 and both build systems passed. A real browser encounter verified natural
-introduction, study follow-up and source context. Production activation remains
-separate and pending; the previous live release does not contain this import.
+introduction, study follow-up and source context. The import is deployed in source `704a9b3`; the [production receipt](UBC_COMMUNITY_RELEASE_2026-10-31.md) records exact-source build and live acceptance.
 
 ## Source coverage and limits
 
@@ -158,5 +157,6 @@ node --test projects/ubc/students.test.mjs
 npx eslint projects/ubc/student-import.ts projects/ubc/student-source-audit.ts projects/ubc/student-departments.ts projects/ubc/student-characters.ts projects/ubc/import-students.mjs projects/ubc/students.test.mjs
 ```
 
-No production deployment, physical-device test, browser FPS result, independent
-verification of all 500 people, or real-world occupancy is claimed here.
+Production deployment is recorded separately above. No physical-device test,
+browser FPS result, independent verification of all 500 people, or real-world
+occupancy is claimed here.

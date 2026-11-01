@@ -3,8 +3,19 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [UBC community release](UBC_COMMUNITY_RELEASE_2026-10-31.md) records source
+`704a9b3`, build `sEPpfQJeW_TCHMYdvJXV0`, activated October 31 at 23:44:07 UTC
+and accepted November 1 at 00:02:50 UTC (October 31 Vancouver). Its complete
+immediate rollback is `/var/www/asymmetri-rollback-before-ubc-community-20261031`
+(source `a69cb68`, build `otCTTCCerr51Hh_vOJxBA`). Preserve all three campus
+profile stores, the new external review/analytics stores, four shared service
+configuration files and the active daily prune timer; drain pruning around
+runtime swaps. Twelve historical archives have verified owner-held custody.
+Other-campus UI rollouts and the later privacy-card removal have separate
+receipts. Refresh the actual live identity before subsequent deployment.
+
 The [Campus and City menu receipt](CAMPUS_CITY_MENU_RELEASE_2026-10-31.md)
-records the latest runtime: source `4f57af9`, build `9fGY4CtfRyxjVywNp8Hqf`,
+records an earlier runtime: source `4f57af9`, build `9fGY4CtfRyxjVywNp8Hqf`,
 activated October 31 at 22:07:44 UTC. Only the Labs submenu label changed;
 `/labs/gis`, its page/card/footer name and all existing URLs are preserved.
 The immediate copy-only rollback is the prior `Al8RacnJ4uunt6U1i9VTC` build at
@@ -1604,3 +1615,7 @@ Confirm both production virtual hosts overwrite `X-Real-IP` with their trusted r
 Stanford uses the existing exact-source Linux candidate workflow, independent application-owned runtime and complete immediate rollback. Preserve the committed Campus and City navigation, all city/campus routes, Motion resources and peer services. Provision a separate private persistent `STANFORD_PROFILE_DIR` outside release directories and its scoped systemd environment drop-in; preserve UBC/CWRU stores and do not copy profile data into artifacts. Validate the `/labs/stanford/community-api/` public ingress, ownership/origin/no-store boundaries and both apex/www campus pages, then repeat live browser checks. Keep the 192 MiB available-memory and 6 GiB free-disk floors throughout staging and activation. Source push and CI success do not establish deployment; record exact source/build/artifact/rollback identity only after activation and live verification.
 
 Initial Stanford activated October 31 at 23:03:45 UTC: source `a69cb68`, build `otCTTCCerr51Hh_vOJxBA`; both-host and live browser/profile acceptance passed. See [release receipt](STANFORD_RELEASE_2026-10-31.md). Preserve `/var/lib/asymmetri-stanford-community` and `50-stanford-community.conf` in every successor baseline. Complete immediate rollback: `/var/www/asymmetri-rollback-before-stanford-v01-20261031`. Final disk 6,487,097,344 bytes is close to the 6 GiB floor; budget independent staging before transfer. Stanford retired no retained runtime. Shared reviews/reporting remain a Stanford-owned follow-up.
+
+### UBC community production acceptance
+
+The [October 31 community receipt](UBC_COMMUNITY_RELEASE_2026-10-31.md) verifies the two mode-0700 external stores, mode-0600 analytics data, trusted IP ingress, nonpublishing API checks and daily 03:30 UTC prune timer. No review file is required before the first valid review. Public acceptance checked 18 protected routes and all 800 public assets on loopback, apex and www. Preserve the new configuration as part of every successor baseline; do not rerun first-install setup. Historical same-second shutdown warnings must be separated from the new process using boot identity and exact monotonic start time, without suppressing new runtime errors.
