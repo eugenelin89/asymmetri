@@ -60,12 +60,53 @@ files were verified byte-for-byte against that base; existing dependencies were
 reused without installation. The check reported only the existing tutorial
 ESLint warning. Exact source and log hashes are retained in the private local
 validation manifest. A local preview returned HTTP 200 at
-`http://127.0.0.1:3038/labs/ubc`, using temporary data stores. A Next.js
-production build has not yet been run for this follow-up.
+`http://127.0.0.1:3038/labs/ubc`, using temporary data stores.
 
-Physical-device acceptance remains pending: enable Halloween sound from a user
-gesture with Silent Mode enabled, verify audible output and volume controls,
-then verify mute, background pause, return, edition-off and leaving the campus.
-Unsupported browsers may still require Silent Mode to be disabled. Browser
-validation and production deployment must be recorded separately by the release
-owner; this document does not claim either is complete.
+The local browser check passed explicit Halloween entry, mute/re-enable,
+volume zero then 35%, edition off/on and CANVAS focus restoration after closing
+the panel. Console inspection returned no errors. The temporary browser tab and
+preview listener were closed afterward. These checks verify the interface and
+browser lifecycle; they do not establish audible output on an iPhone.
+
+Exact source `7026bda420dc2c9f877f7fd64033403af3b95f42` passed Linux
+workflow `41257541348`, job `124703801506`: all 592 tests passed, production
+dependency audit reported zero vulnerabilities, and the Next.js production
+build and artifact upload succeeded. The immutable artifact is `13064240261`,
+build `eG9hULP6XuiJ4gThLtuif`. UBC is released independently to satisfy the
+owner's urgent deployment instruction; Stanford and CWRU own their separately
+reviewed audio changes.
+
+The owner tested the deployed fix with iPhone Silent Mode enabled and reported
+that sound worked after turning Sound off and back on. This confirms audible
+Silent Mode playback on that device but does not accept first-entry startup.
+Source review found two startup paths requiring correction: the initial disabled
+audio state can suspend the context before assets finish loading, and an early
+engine-default snapshot can clear playback intent before the chosen UI settings
+arrive. A separate follow-up makes the explicit UI choice authoritative and
+starts the audio graph in the entry gesture. Other physical lifecycle checks
+remain unconfirmed. Unsupported browsers may still require Silent Mode to be
+disabled.
+
+## Production release
+
+Source `7026bda420dc2c9f877f7fd64033403af3b95f42`, build
+`eG9hULP6XuiJ4gThLtuif`, activated at 00:51:08 UTC on November 1
+(October 31 in Vancouver). The deployment owner verified the exact artifact,
+isolated startup checks, guarded activation and loopback pages. The previous
+`b3601b31fa5bfe296496046a1f6f911e5f16e4df` runtime remains available
+whole for rollback. Existing private stores and configuration were preserved.
+
+Final health passed at 00:53:53 UTC: loopback, apex and www each passed 18
+pages, 800 public assets and 40 static assets. All 15 peer hosts, 12 retained
+archives, private stores, configuration and retention timer passed preservation
+checks. The new process logged no errors. Minimum observed available memory
+was 269,880 KiB and free disk was 9,045,274,624 bytes. This accepts the deployed
+runtime's health, not the unresolved initial-entry audio behavior.
+
+The live UBC landing page hydrated successfully with the Halloween soundscape
+control enabled and no console errors. No production test review or synthetic
+play was submitted for this follow-up. The earlier test browser's temporary
+analytics opt-out could not be restored because its preserved old control tab
+closed; restoration is not claimed. This does not change production defaults.
+The owner's physical-device result above is recorded separately from these
+server and browser checks; the initial-start correction remains outstanding.
