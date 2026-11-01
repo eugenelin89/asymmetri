@@ -28,7 +28,7 @@ Halloween includes 22 monster types, 24 original comic/manga/robot costume visit
 
 Original Web Audio synthesis supplies minor-key drones, wind, bells, wolf howls, and nearby ghost cries/screams with stereo positioning and distance attenuation. Enter/Sound gestures unlock playback. Mute/volume are available, base mode fades the soundtrack, and hidden tabs suspend audio. Browser telemetry confirmed a running context and scheduled atmospheric cues; subjective speaker audition was not performed. No external recording or voice imitation is bundled.
 
-A separate [iPhone-audio follow-up](STANFORD_IPHONE_AUDIO_2026-10-31.md) adds optional Audio Session playback-role handling for supported browsers while Halloween sound is enabled. It preserves mute, volume, Base mode and hidden-tab behavior, with ownership-aware restoration and graceful fallback. This change is outside frozen combined release `b3601b3`; implementation and tests do not establish deployment or physical-iPhone audibility.
+The [iPhone-audio follow-up](STANFORD_IPHONE_AUDIO_2026-10-31.md), deployed in source `33e4b65`, adds optional Audio Session playback-role handling for supported browsers while Halloween sound is enabled. It preserves mute, volume, Base mode and hidden-tab behavior, with ownership-aware restoration and graceful fallback. Live page/audio-bundle hashes and landing checks passed; local first-entry playback needs no Sound toggle. The owner confirmed first-entry playback on their iPhone with Silent Mode ON; broader device coverage remains unverified. See the [audio release receipt](STANFORD_AUDIO_RELEASE_2026-10-31.md).
 
 ## Performance and validation
 
@@ -38,7 +38,7 @@ All 140 Stanford tests passed on Node 24.10.0, including all 32 entrances agains
 
 Browser validation used the local Next webpack preview at desktop 1280×720, tablet 768×1024 and mobile 390×844. No horizontal document overflow or broken images appeared at the measured widths. First- and third-person WASD resumed after closing Explore without an extra scene click; Escape returned focus to the canvas and search typing remained functional. The Memorial Church entrance was walked through. Base/automatic Halloween switching, sound settings, map and profile form loaded successfully. See `docs/validation/stanford/` for unretouched captures.
 
-Frame rate on the shared test host was variable and low under contention. After the Auto fallback reduced distant detail and shadows, a Halloween observation reached 56 FPS with 224 draw calls and 1,085,051 triangles; this is not a performance certification. Users can lower quality or population. A later observation with the expanded roster and concurrent host work was 12 FPS; results remain hardware/load-dependent. Physical-device audio, mobile GPU coverage, and exhaustive manual traversal of every furnished room remain unverified.
+Frame rate on the shared test host was variable and low under contention. After the Auto fallback reduced distant detail and shadows, a Halloween observation reached 56 FPS with 224 draw calls and 1,085,051 triangles; this is not a performance certification. Users can lower quality or population. A later observation with the expanded roster and concurrent host work was 12 FPS; results remain hardware/load-dependent. Instrumented physical-device audio, mobile GPU coverage, and exhaustive manual traversal of every furnished room remain unverified. The later owner-reported iPhone audio success is recorded in the audio release receipt.
 
 ## Operational boundary
 
