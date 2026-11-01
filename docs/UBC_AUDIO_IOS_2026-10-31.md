@@ -87,7 +87,7 @@ starts the audio graph in the entry gesture. Other physical lifecycle checks
 remain unconfirmed. Unsupported browsers may still require Silent Mode to be
 disabled.
 
-## Production release
+## First production release
 
 Source `7026bda420dc2c9f877f7fd64033403af3b95f42`, build
 `eG9hULP6XuiJ4gThLtuif`, activated at 00:51:08 UTC on November 1
@@ -109,8 +109,8 @@ play was submitted for this follow-up. The earlier test browser's temporary
 analytics opt-out could not be restored because its preserved old control tab
 closed; restoration is not claimed. This does not change production defaults.
 The owner's physical-device result above is recorded separately from these
-server and browser checks. The initial-start correction below requires its own
-deployment and physical retest.
+server and browser checks. The initial-start correction below has since been
+deployed; its physical first-entry retest remains pending.
 
 ## Initial-entry correction
 
@@ -145,3 +145,39 @@ frame precedes those later toggles. This confirms the visible integration;
 the unit regressions cover session category and context state, and physical
 first-entry output remains a separate acceptance step. No production test play
 or review was created.
+
+The corrected immutable source is
+`38d432685765161347cff7b74c2f3dddd14af378`. Linux workflow
+`41259302295`, job `124709037317`, passed all 619 tests, the production
+dependency audit with zero vulnerabilities, and the Next.js production build.
+Artifact `13064662276` has ZIP SHA-256
+`cec84a467a3623fb84ddc0eefa396b62528a7346e33c520a0289a7ea1074645f`.
+This candidate includes the separately reviewed Stanford and CWRU audio fixes;
+those fixes were already activated in the preceding 33e4 release and the owner
+reported both campuses working well.
+
+## Corrected production release
+
+Corrected source `38d432685765161347cff7b74c2f3dddd14af378`, build
+`4JfgZCh6OpnpuPeTAjb1A`, activated at 01:17:48.648575 UTC on November 1,
+2026 (October 31 in Vancouver). Final health passed on its first attempt at
+01:20:48.780416 UTC. The exact tested artifact passed staged startup checks
+before guarded activation; the preceding complete 33e4 runtime was preserved
+for rollback. Stanford and CWRU runtime code was unchanged by this correction.
+
+Loopback, apex and www each passed 18 pages, 800 public assets and 40 static
+assets. All 15 peer hosts, 12 retained archives, three profile stores, shared
+review and analytics stores, configuration and retention timer passed their
+checks. There were no new application errors. Minimum observed available
+memory was 312,176 KiB and free disk was 6,487,830,528 bytes. No cleanup or
+synthetic production play/review was performed. The private final-health
+receipt has SHA-256
+`b76d68b15d0cf3e567ab1273408c52cc70d21357c3e2fa44e2c9641651af209b`.
+
+A fresh production browser loaded the Halloween welcome with Scary soundscape
+enabled, reviews loaded, no removed privacy control, no horizontal overflow and
+no console errors. A real welcome screenshot was saved. The live browser check
+did not enter gameplay. First-entry audible playback on a physical iPhone with
+Silent Mode enabled remains unconfirmed; the earlier successful Sound off/on
+test applies to the preceding implementation. The owner has been asked to
+refresh and enter once without toggling Sound.
