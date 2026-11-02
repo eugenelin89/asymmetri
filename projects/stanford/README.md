@@ -2,6 +2,8 @@
 
 Independent Stanford explorer at `/labs/stanford`, adapted from the UBC and CWRU campus controls. Original Three.js architecture and sound; source-linked educational avatars; no affiliation with Stanford University. The reference reconstruction is stylized, not photogrammetry or a surveyed digital twin.
 
+The breadcrumb, in-game return link and Project information badge use the shared `gisApps.name` and `gisApps.path` from `content/site.ts`. The category is Virtual Worlds; its existing `/labs/gis` destination and the Stanford campus URL remain unchanged.
+
 ## Explore
 
 - WASD/arrows to walk, Shift to run, drag or left/right arrows to turn, V for first/third person, E to interact, M for map. Touch movement/turn/run/interact controls, aerial orbit, full view, photo mode and adjustable quality remain available.
