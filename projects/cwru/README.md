@@ -2,6 +2,8 @@
 
 Independent browser campus at `/labs/cwru`, adapted from the MIT-licensed UBC explorer. Run `npm run dev:next -- --webpack --port 3031` and open the route; run `npm run test:cwru` for campus and Halloween movement checks. No new dependencies. The optional public-profile API uses its own private CWRU store; see `docs/CWRU_COMMUNITY_OPERATIONS.md`.
 
+The breadcrumb, in-game return link and Project information badge use the central `gisApps` name/path: Virtual Worlds at the unchanged `/labs/gis` destination.
+
 ## Exploration
 
 WASD walks, Shift runs, arrows/drag turn, V switches first/third person, E interacts and M opens the map. Touch controls provide walking, turning, running and interaction. Closing a panel with its close button or Escape restores keyboard movement; text fields remain editable while panels are open. The welcome screen includes a prominent running instruction card. In walking views, the bottom hint emphasizes “Hold Shift to run” with larger type and a keycap; touch controls use a contrasting “Hold to RUN” button. Help gives Run its own entry. See `docs/CWRU_RUN_CONTROLS_2026-10-31.md` for validation and release status. The directory offers entrance travel and source-graph guidance. Appearance, photo mode, weather, Cleveland seasonal daylight, aerial view, reduced motion and optional population use the existing explorer conventions.
