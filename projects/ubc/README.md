@@ -2,7 +2,7 @@
 
 “Explore the University of British Columbia, virtually.”
 
-Independent Asymmetri Labs → GIS Apps project at `/labs/ubc`. This is a working
+Independent Asymmetri Labs → Virtual Worlds project at `/labs/ubc`. This is a working
 implementation candidate, not a completed UBC digital twin or a certified
 production-quality milestone. It is unofficial and has no UBC or faculty endorsement.
 

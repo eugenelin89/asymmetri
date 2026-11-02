@@ -1,7 +1,7 @@
 # Richmond Learns to Drive
 
 An independent, experimental browser delivery game at `/labs/richmond`, under
-Asymmetri Labs → GIS Apps. **V0.1 playable preview**: a geographically grounded,
+Asymmetri Labs → Virtual Worlds. **V0.1 playable preview**: a geographically grounded,
 stylized world with original fictional people, businesses and interiors.
 The title refers to the fictional courier learning city driving.
 
