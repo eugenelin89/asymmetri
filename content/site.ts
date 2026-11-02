@@ -108,16 +108,16 @@ export const cwru = {
 } as const;
 
 export const gisApps = {
-  name: "GIS Apps",
+  name: "Virtual Worlds",
   path: "/labs/gis",
-  description: `Explore real places through open-source maps, city models and playable experiments. Start with ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}.`,
-  status: "Experimental city projects",
+  description: "Explore campuses and cities through open-source maps, 3D reconstructions and playable experiments.",
+  status: "Experimental campus and city projects",
   metadata: {
-    title: "GIS Apps | Asymmetri Labs",
-    description: `Explore ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}, and learn how open geographic data becomes streets and buildings in our experimental 3D cities.`,
+    title: "Virtual Worlds | Asymmetri Labs",
+    description: "Explore virtual campuses and cities, from UBC, Stanford and Case Western Reserve to Vancouver, Surrey and Richmond. Discover how public geographic data becomes interactive 3D places.",
   },
-  introduction: "Real places, rebuilt for exploration. Our geographic information system (GIS) experiments turn public map data into small, interactive city worlds.",
-  projectsHeading: "Explore the cities",
+  introduction: "Real places, rebuilt for exploration. Walk through university campuses, discover cities and explore interactive worlds built from public map data.",
+  projectsHeading: "Choose a world to explore",
   projects: [
     { name: stanford.name, description: stanford.description, status: stanford.status,
       detail: { label: "Explore Stanford", href: stanford.path }, source: stanford.source, license: stanford.license },
@@ -228,7 +228,7 @@ export const site = {
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
         { label: divisions.labs.product.name, href: divisions.labs.product.path },
-        { label: "Campus and City", href: gisApps.path },
+        { label: gisApps.name, href: gisApps.path },
       ],
     },
     { label: "About", href: "/about" },
@@ -1233,7 +1233,7 @@ const labsProjects: readonly LabsProject[] = [
     name: gisApps.name,
     description: gisApps.description,
     status: gisApps.status,
-    detail: { label: "Explore GIS Apps", href: gisApps.path },
+    detail: { label: `Explore ${gisApps.name}`, href: gisApps.path },
   },
   {
     name: botsquad.name,
@@ -1250,7 +1250,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and GIS Apps, including ${vancouver.navLabel}, ${surrey.name} and ${richmond.name}.`,
+      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and ${gisApps.name}, including interactive university campuses and cities.`,
   },
   headline: "A playground for ideas.",
   introduction:

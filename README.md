@@ -12,7 +12,7 @@ Asymmetri.co
     │   ├── BotSquad Research
     │   │   └── BotSquad Trade
     │   └── Ask BotSquad
-    └── GIS Apps
+    └── Virtual Worlds
         ├── Vancouver, City in Progress
         ├── Surrey, City of Adventure
         ├── Richmond Learns to Drive
@@ -42,7 +42,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/` | Concise umbrella gateway to the Sports and Labs divisions |
 | `/sports` | Sports division, authentic baseball origin, Motion and product family |
 | `/labs` | Open-source playground and current experiments |
-| `/labs/gis` | GIS Apps: Vancouver, Surrey, Richmond, UBC and CWRU cards, with an explanation of street and building reconstruction |
+| `/labs/gis` | Virtual Worlds: Vancouver, Surrey, Richmond, UBC and CWRU cards, with an explanation of street and building reconstruction |
 | `/labs/cwru` | Case Western Reserve Virtual Campus: live V0.1 with sourced University Circle geography, 17 enterable reconstructions, simulated campus people and 16 Halloween creature/costume types |
 | `/labs/ubc` | UBC Virtual Campus: unofficial GIS campus preview; live V0.4 includes nine reconstructed walkable interiors, first/third-person exploration, encounter-only educational characters, opt-in public profiles and optional Halloween atmosphere |
 | `/labs/richmond` | Richmond Learns to Drive V0.1: connected GIS delivery world, walkable mall and YVR, fictional Open Airfield |
@@ -81,11 +81,11 @@ The root homepage introduces Asymmetri and routes visitors directly to Sports an
 Labs without repeating division or product content. Contact opens the shared mailbox;
 legacy contact URLs still reach the footer email.
 
-GIS Apps groups the city projects without moving them: `/labs/vancouver`,
+Virtual Worlds groups the city projects without moving them: `/labs/vancouver`,
 `/labs/surrey` and all existing data, asset and deep links remain unchanged.
-The Labs menu opens GIS Apps; the category cards open the original city routes.
+The Labs menu opens Virtual Worlds; the category cards open the original city routes.
 
-The main canonical pages, including GIS Apps, UBC and all three cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
+The main canonical pages, including Virtual Worlds, UBC and all three cities, are indexable. Trade and Ask retain their existing noindex policy. Tutorial retains exactly
 `https://www.asymmetri.co/tutorial`; other pages use the apex canonical.
 Protected Motion routes serve actual content on both hosts. Legacy fragments
 and route mappings are documented in [Architecture](docs/ARCHITECTURE.md).
@@ -272,7 +272,7 @@ five implemented cases, 17.0 km of connected driving paths, eight GPS destinatio
 
 ## Richmond Learns to Drive
 
-An independent delivery adventure under GIS Apps at `/labs/richmond`. Drive,
+An independent delivery adventure under Virtual Worlds at `/labs/richmond`. Drive,
 park, walk, collect and deliver food; explore original Richmond Centre and YVR
 interiors; shop and use the fictional Open Airfield. Progress and fictional CAD
 remain in this browser. On phones, controls sit outside the playing view and a

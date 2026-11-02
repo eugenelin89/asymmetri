@@ -1,6 +1,6 @@
 # UBC Virtual Campus — Flagship Development Roadmap
 
-**Project:** Asymmetri Labs / Campus and City / UBC Virtual Campus  
+**Project:** Asymmetri Labs / Virtual Worlds / UBC Virtual Campus
 **Planning horizon:** 2026–2027 and beyond  
 **Roadmap created:** November 1, 2026 (America/Vancouver)  
 **Repository:** [eugenelin89/asymmetri](https://github.com/eugenelin89/asymmetri)  

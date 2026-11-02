@@ -1,4 +1,5 @@
 "use client";
+import { gisApps } from "@/content/site";
 import { PlaySession } from "../campus-analytics/PlaySession";
 import { applyGatewayAnchors } from "./gateway-layout";
 import { beatyAnchor } from "./beaty-layout";
@@ -564,7 +565,7 @@ export function Campus() {
           {!photo && (
             <>
               <div className={styles.topbar}>
-                <a href="/labs/gis" aria-label="Return to Asymmetri GIS Apps">
+                <a href={gisApps.path} aria-label={`Return to Asymmetri ${gisApps.name}`}>
                   a<span>·</span>
                 </a>
                 <div>
@@ -1385,7 +1386,7 @@ export function Campus() {
               </>
             ) : (
               <>
-                <span className={styles.badge}>ASYMMETRI LABS · GIS APPS</span>
+                <span className={styles.badge}>ASYMMETRI LABS · {gisApps.name.toUpperCase()}</span>
                 <h2>A campus, in progress.</h2>
                 <p className={styles.lead}>{unofficial}</p>
                 <p>

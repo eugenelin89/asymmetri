@@ -1,7 +1,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { pageMetadata } from "@/lib/metadata";
-import { ubc } from "@/content/site";
+import { gisApps, ubc } from "@/content/site";
 import { Campus } from "@/projects/ubc/Campus";
 import { ReviewSection } from "@/projects/campus-reviews/ReviewSection";
 import { places } from "@/projects/ubc/registry";
@@ -20,7 +20,7 @@ export default function UbcPage() {
           <div>
             <nav aria-label="Breadcrumb">
               <a href="/labs">ASYMMETRI LABS</a> /{" "}
-              <a href="/labs/gis">GIS APPS</a> / UBC
+              <a href={gisApps.path}>{gisApps.name.toUpperCase()}</a> / UBC
             </nav>
             <h1>{ubc.name}</h1>
             <p>{ubc.tagline}</p>

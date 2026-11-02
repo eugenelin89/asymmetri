@@ -571,7 +571,7 @@ or contextual questions. `botsquadStructure` centralizes area labels and URLs;
 areas only when the owner defines them; do not invent placeholder projects.
 
 The Labs card and global Labs menu open BotSquad. The menu contains Asymmetri Labs,
-BotSquad and Campus and City; Research, Trade and Ask are reached within BotSquad.
+BotSquad and Virtual Worlds; Research, Trade and Ask are reached within BotSquad.
 Its area directory opens Research and Ask; Research opens Trade. Shared BotSquad
 breadcrumbs and area links allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified
@@ -616,15 +616,15 @@ recorded; they remain valid through redirects. API namespaces, image URLs and
 technical investment identifiers are unchanged. See the [migration contract and
 rollback plan](BOTSQUAD_TRADE_URL_MIGRATION_2026-10-15.md).
 
-## GIS Apps
+## Virtual Worlds
 
-Asymmetri Labs groups Vancouver, City in Progress; Surrey, City of Adventure; and Richmond Learns to Drive under **GIS Apps**.
-`gisApps` in `content/site.ts` owns `/labs/gis`, its metadata, city cards and
-reconstruction explanation. The Labs submenu uses **Campus and City** for the
-unchanged `/labs/gis` destination. The hub title, Labs category card and footer
-retain **GIS Apps**. The Labs menu and Labs category card open this hub;
-city cards reuse the existing project names, statuses, descriptions, source and
-licence links. Footer city shortcuts remain available alongside GIS Apps.
+Asymmetri Labs groups its university-campus and city experiences under **Virtual Worlds**.
+`gisApps` in `content/site.ts` remains the technical identifier and owns the
+unchanged `/labs/gis` destination, metadata, project cards and reconstruction
+explanation. The Labs submenu, hub title, category card, footer and campus
+breadcrumbs use the same public name. The Labs menu and category card open this
+hub; project cards reuse existing names, statuses, descriptions, source and
+licence links. Footer city shortcuts remain available alongside Virtual Worlds.
 City display names, GIS descriptions and limitation headings derive from the
 shared identity fields. Surrey metadata and game accessibility labels reuse its
 shared name; the shorter Play Surrey action avoids repeating the full title.
@@ -645,8 +645,8 @@ changes with the Greater Vancouver GTA project's Vancouver and Surrey work.
 ## Vancouver
 
 `content/site.ts` owns Vancouver identity, metadata, Labs card and navigation links.
-The GIS Apps card uses `vancouver.navLabel` ("Vancouver, City in Progress"); the project
-name and existing `/labs/vancouver` URL remain Vancouver. The Labs submenu opens GIS Apps.
+The Virtual Worlds card uses `vancouver.navLabel` ("Vancouver, City in Progress"); the project
+name and existing `/labs/vancouver` URL remain Vancouver. The Labs submenu opens Virtual Worlds.
 `projects/vancouver/places.ts` owns the six original, source-backed place summaries
 and review labels. The route owns experimental notices, dataset attribution and
 no-JavaScript descriptions. Never present illustrative heights, flat terrain, old
@@ -660,7 +660,7 @@ Vancouver's current status is V0.5 — Experimental. UI controls and help live i
 identify illustrative street widths, clearance trims and the decorative
 promenade as well as estimated heights. Expand city view means a full-window
 dialog, without a promise of native browser fullscreen. Preserve the project
-name, source links and “Vancouver, City in Progress” GIS Apps card wording.
+name, source links and “Vancouver, City in Progress” Virtual Worlds card wording.
 
 V0.4 distinguishes 18 NRCan February 2013 LiDAR maximum roof heights, 102 City
 2009 heights and 316 illustrative heights. None is described as current survey
@@ -702,13 +702,13 @@ published V0.1 bytes. Architectural detail is original artistic reconstruction.
 
 ## Surrey V0.4 — Living Surrey
 
-Surrey is V0.4 — Living Surrey, with three complete fictional cases, a day/night city and explicitly unresolved terrain datum. Keep its renamed public name and GIS Apps route. Do not describe desktop viewport tests as physical iPhone acceptance. Centralized content remains in `content/site.ts`.
+Surrey is V0.4 — Living Surrey, with three complete fictional cases, a day/night city and explicitly unresolved terrain datum. Keep its renamed public name and Virtual Worlds route. Do not describe desktop viewport tests as physical iPhone acceptance. Centralized content remains in `content/site.ts`.
 
 ## Richmond Learns to Drive
 
 Use the `richmond` identity in `content/site.ts` for names, tagline, status, route,
 source, coverage guide and provenance links. The approved route is `/labs/richmond`,
-listed through `gisApps.projects` on Labs and GIS Apps, with the existing category
+listed through `gisApps.projects` on Labs and Virtual Worlds, with the existing category
 menu and footer shortcut. Preserve the approved Vancouver and Surrey names/URLs.
 V0.1 is a **playable preview**, not a surveyed digital twin or real driving course.
 
@@ -734,7 +734,7 @@ saves are current capabilities. Physical-phone acceptance remains outstanding.
 
 Open Roads is candidate copy on the isolated feature branch. V0.5 remains public
 until acceptance/deployment. Keep **Surrey, City of Adventure**, `/labs/surrey`
-and the GIS Apps grouping. The candidate implements 17.0 km of unique connected
+and the Virtual Worlds grouping. The candidate implements 17.0 km of unique connected
 road paths, eight roadside destinations and five fictional cases. Describe
 roadside stops accurately, with no promise of legal parking or direct landmark
 entrance access. Workzones and signal timing are fictional; terrain stays flat,
