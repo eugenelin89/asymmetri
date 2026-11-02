@@ -27,8 +27,9 @@ activation. Do not replace that badge with an incomplete foundation claim.
 | V1.1+ | Further accuracy, partnership/research and presentation options | Future opportunities, not release commitments |
 
 A tooling increment or roadmap commit does not satisfy V0.5. Record development
-progress without advancing the live version. The most recent documented live
-source remains `38d432685765161347cff7b74c2f3dddd14af378`; re-read actual
+progress without advancing the live version. The [Virtual Worlds release](VIRTUAL_WORLDS_RELEASE_2026-11-02.md)
+deployed source `a73eec24f2c81f5fe514c4ff2872a7d46bc12cf4`, including the initial
+foundation tooling and category rename; it does not complete V0.5. Re-read actual
 production identity before a deployment because other applications share it.
 
 ## Required evidence for each release

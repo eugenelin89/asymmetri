@@ -3,6 +3,16 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Virtual Worlds release](VIRTUAL_WORLDS_RELEASE_2026-11-02.md) records source
+`a73eec2`, build `dmqK2Psv92J2yUeGDoMK2`, activated November 2 at 18:28:50 UTC.
+The category rename preserves `/labs/gis` and all existing project URLs. The
+complete immediate rollback is the preceding `38d4326` runtime at
+`/var/www/asymmetri-rollback-before-virtual-worlds-20261102`. The previous `33e4b65`
+runtime and all 12 historical owner-held archives are also retained. The receipt
+distinguishes a separate authorized disk cleanup from this deployment; older
+rollback paths in historical receipts may have been retired. Refresh actual
+live identity and retention before the next release.
+
 The [UBC community release](UBC_COMMUNITY_RELEASE_2026-10-31.md) records source
 `704a9b3`, build `sEPpfQJeW_TCHMYdvJXV0`, activated October 31 at 23:44:07 UTC
 and accepted November 1 at 00:02:50 UTC (October 31 Vancouver). Its complete
