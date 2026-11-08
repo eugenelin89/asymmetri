@@ -15,4 +15,11 @@ scheduled holiday, the visitor explores the Regular edition.
 **Seasonal replay**
 
 A visitor's deliberate choice to explore a holiday edition outside its scheduled
-dates. Returning to Automatic selects the edition for the current campus date.
+dates for one visit. When the replay ends, the visitor's saved Regular or
+Automatic choice applies again, subject to its expiry on the campus calendar.
+
+**Live atmosphere**
+
+The light and sky at the campus's actual local time, with weather drawn from a
+recent observation at a named nearby station. Local time and sunlight continue
+when weather is unavailable.
