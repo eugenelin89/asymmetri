@@ -326,6 +326,42 @@ deployment, deletion of protected data, server-wide cleanup, or changes to
 retention on its own; those actions retain the existing owner-approval and
 production safeguards in `docs/DEPLOYMENT.md` and `docs/CLI_ACCESS.md`.
 
+## Codex Prompt-and-Response Log
+
+**Every direct user prompt to Codex must receive a dated, timestamped log
+entry**, including read-only questions, follow-up answers during a skill
+interview, implementation requests, failures and blocked sessions. This logs
+user/Codex turns, not internal tool calls, subagent messages or progress chatter.
+It is separate from the numbered Engineering Journal and mandatory GitHub skill
+session summaries.
+
+- Append one entry per user-facing turn to
+  `docs/prompts/codex-interactions/YYYY-MM.md`, using the **UTC month of the
+  prompt**. Preserve chronological order and do not overwrite earlier entries.
+- Include **prompt received** and **response prepared** timestamps as actual
+  ISO 8601 UTC date-times (for example `2026-11-08T22:30:00Z`). Do not invent
+  an exact send time if unavailable. Record the associated Issue, skill or
+  repository scope when known.
+- Record the **user's prompt** and the **complete final user-visible Codex
+  response** as text. Prepare the response before committing its entry and then
+  send that response. A subsequent clarification is a new entry. If the
+  interaction ends without a final answer, record the blocked/partial status.
+- **This repository is public.** Before logging either side, redact credentials,
+  tokens, personal/private information, sensitive paths and other nonpublic
+  content. Note redactions explicitly. For very large attachments, record the
+  user-visible instruction and a safe descriptive summary, not the attachment
+  contents. Never copy raw tool output, hidden reasoning, logs, diffs or build
+  artifacts into this transcript.
+- Commit and push each completed turn's log entry to `main` using the approved
+  Git workflow. For a file-changing task, include the log with the separate
+  engineering-journal commit when practical. For an otherwise read-only task,
+  a **log-only commit needs no new numbered Engineering Journal**; logging
+  itself must not cause an infinite journal cycle.
+- Follow the template in `docs/prompts/README.md`. If GitHub publication is
+  blocked, preserve the safe entry if possible, report the exact blocker and
+  never claim the log was published. Do not create a new branch/worktree or
+  discard unrelated changes to force logging.
+
 ## Default Git and Release Workflow
 
 This is a personal repository. Unless the user explicitly requests another

@@ -103,3 +103,36 @@ Optional, explicitly non-committed future work.
 
 The current record does not include its own diff or SHA. Historical records are
 not rewritten just because later changes alter the repository.
+
+## Codex prompt/response interaction log
+
+In addition to the numbered Engineering Journal, **every direct user-to-Codex
+prompt and its final user-visible Codex response** must be recorded in the
+append-only monthly file `codex-interactions/YYYY-MM.md` (UTC month). This also
+applies to questions, clarification turns, read-only tasks and blocked/failed
+sessions. It excludes internal tool calls and subagent steps.
+
+Use actual ISO 8601 UTC date/time values for **both** the prompt's receipt and
+the response's preparation. One entry per turn, with this format:
+
+```markdown
+## Turn — YYYY-MM-DDTHH:MM:SSZ
+- Prompt received (UTC): YYYY-MM-DDTHH:MM:SSZ
+- Response prepared (UTC): YYYY-MM-DDTHH:MM:SSZ
+- Context: Issue #N / skill / scope (if applicable)
+- Outcome: completed | partial | blocked | failed
+
+### User prompt
+> User-visible prompt text, with explicit safety redactions if needed.
+
+### Codex final response
+> Final user-visible answer text, with explicit safety redactions if needed.
+```
+
+The repository is public: redact secrets, private personal information and
+sensitive paths before committing, and identify redactions. Do not archive large
+attachments, raw logs, hidden reasoning or generated artifacts; summarize
+nontext attachments safely. Commit and push the entry even when the underlying
+task was read-only. A **log-only update does not require its own numbered
+Engineering Journal**; a substantive file-changing request still does.
+
