@@ -253,6 +253,79 @@ When triaging an issue, use the [triage label mapping](docs/agents/triage-labels
 
 When exploring a domain or proposing an architecture decision, follow the [domain documentation guide](docs/agents/domain.md).
 
+## Disk Space, Build Artifacts, and Mandatory Cleanup
+
+The development Mac and production host are resource-constrained. **Keep only
+what is needed to develop, operate, verify, or recover the website.** The
+default is to discard reproducible outputs and redundant copies, not accumulate
+them. GitHub is authoritative for **pushed source**, but is not a backup for
+private configuration, persistent data, uniquely valuable evidence, or a
+ready-to-run production rollback.
+
+### Development and worktree hygiene
+
+- Prefer one canonical local checkout. Existing policy prohibits new branches,
+  worktrees and PRs without owner approval. Do not create duplicate clones,
+  package directories, or full runtime copies just for convenience.
+- Keep generated `.next/`, `dist/`, `coverage/`, test scratch, download
+  caches, disposable archives and rebuildable `node_modules/` only while
+  actively needed. After work, remove safely reproducible **inactive** outputs;
+  retain an active development environment if removing it would disrupt work.
+- Audit any pre-existing worktrees or duplicate checkouts. Remove one only
+  after checking its exact path, cleanliness, pushed commit reachability,
+  untracked/ignored unique content, and whether any process or other Codex
+  session is using it. Never discard unique changes because a branch appears
+  merged. Do not delete the canonical checkout.
+- Favor targeted, verified deletion. Never blindly run `git clean -fdx`,
+  recursive wildcards, global cache wipes, or cleanup against an unknown path.
+  Preserve unrelated user work and other repositories.
+
+### Cleanup inventory and evidence
+
+At the beginning and end of substantial file-changing work, and **before and
+after every authorized deployment attempt**, Codex must:
+
+1. Measure filesystem free space and identify major project-local storage
+   consumers. Distinguish `du` estimates from actual `df` free-space gains;
+   hard links, shared caches and snapshots can make totals misleading.
+2. Track cleanup candidates with exact paths/categories, approximate sizes,
+   rebuild or remote-source proof, usage/ownership, deletion eligibility and
+   blockers. Record unresolved candidates in the relevant GitHub Issue; include
+   action and verification in the engineering journal or release receipt.
+3. Remove only reviewed, unnecessary, reproducible, **inactive** files within
+   the authorized scope; confirm free space afterward. If nothing is safe to
+   delete, report that outcome rather than forcing cleanup.
+4. Report the before/after free space, **measured** recovered bytes, removed
+   categories, retained large items, blockers and any required owner decision.
+
+### Deployment cleanup is a required release step
+
+Every explicitly authorized deployment (including an unsuccessful attempt or
+rollback) must conclude with a **safe cleanup audit**. For a successful release,
+perform cleanup **after** activation, public/loopback health checks, and
+verification of the immediately preceding release's independent rollback:
+
+- Retire disposable candidate workspaces, temporary transfers, duplicate
+  staging outputs and build caches after verifying they are inactive and no
+  longer required for diagnosis, rollback or a running service.
+- Preserve the serving runtime, its required `node_modules/` and `.next/`,
+  a complete verified immediate rollback, persistent stores, configuration,
+  secrets, critical evidence, and necessary recovery material. Do not infer
+  that committed source alone can recreate an immediately usable rollback.
+- Review older rollbacks and archives against the **owner-approved retention
+  policy** and `docs/DEPLOYMENT.md`; do not silently delete retained backups
+  or unrelated services merely to gain space. Older duplicate copies may be
+  retired only with the required identity, integrity and recovery checks and
+  authorization.
+- Recheck website and peer-service health, available disk and rollback
+  identity following deletion. Record any remaining storage pressure.
+
+A release is not operationally complete until this audit and its results are
+documented, even if no deletion is safe. This policy does **not** authorize
+deployment, deletion of protected data, server-wide cleanup, or changes to
+retention on its own; those actions retain the existing owner-approval and
+production safeguards in `docs/DEPLOYMENT.md` and `docs/CLI_ACCESS.md`.
+
 ## Default Git and Release Workflow
 
 This is a personal repository. Unless the user explicitly requests another
