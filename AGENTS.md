@@ -239,6 +239,20 @@ See `docs/CLI_ACCESS.md` for verified identities, commands, and boundaries.
 - Keep private keys in the Mac's `.ssh` directory, outside the repository and all
   prompt records. Never print or copy their contents into tools, logs, or documents.
 
+## Agent skills
+
+### Issue tracker
+
+When a skill reads or publishes a ticket, use [the website issue tracker](docs/agents/issue-tracker.md).
+
+### Triage labels
+
+When triaging an issue, use the [triage label mapping](docs/agents/triage-labels.md).
+
+### Domain docs
+
+When exploring a domain or proposing an architecture decision, follow the [domain documentation guide](docs/agents/domain.md).
+
 ## Default Git and Release Workflow
 
 This is a personal repository. Unless the user explicitly requests another
