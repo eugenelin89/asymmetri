@@ -64,7 +64,7 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
 
-The three campus explorers share a [2026 Christmas edition](docs/CAMPUS_CHRISTMAS_2026.md). Walk from the UBC Gateway to the AMS Nest atrium, from the Stanford Oval through Main Quad to Green Library, or from Kelvin Smith Library to the Tinkham Veale commons. Each visit starts with campus-local daylight and shows nearby weather when a fresh station report is available. With Campus sound on, you hear an instrumental “Winter Wonderland” with quiet, steady sleigh bells as you walk. [Christmas edition release](docs/CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md) · [Sleigh-bell release](docs/CAMPUS_SLEIGH_BELLS_RELEASE_2026-11-08.md)
+The three campus explorers share a [2026 Christmas edition](docs/CAMPUS_CHRISTMAS_2026.md). Walk from the UBC Gateway to the AMS Nest atrium, from the Stanford Oval through Main Quad to Green Library, or from Kelvin Smith Library to the Tinkham Veale commons. Each visit starts with campus-local daylight and shows nearby weather when a fresh station report is available. With Campus sound on, you hear an instrumental “Winter Wonderland” with quiet, steady sleigh bells as you walk. [Christmas edition release](docs/CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md) · [Instrumental music release](docs/CAMPUS_WINTER_MUSIC_RELEASE_2026-11-08.md)
 
 The [adopted UBC flagship roadmap](docs/UBC_ROADMAP.md) prioritizes realism and
 performance. [V0.5 foundation work](docs/UBC_V05_FOUNDATION.md) has begun with local
