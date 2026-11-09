@@ -879,6 +879,9 @@ Sites packaging, public data snapshots or shared services. See
 
 ## Shared campus visits and station observations
 
+Christmas audio uses a same-origin release asset. Each unlocked audio context decodes it once; a looping source shares the existing campus volume control and stops on edition changes or disposal. Async completion checks the active visit before starting playback.
+
+
 `projects/campus-atmosphere/` owns campus-local dates, solar calculations, visit choices, weather effects, the localized sound mix and the three decorated routes. Each campus passes its effective settings into its existing engine before the first frame. The client waits for the edition and device preferences before presenting the entry button. A history departure tears down the explorer; tab visibility and phone lock preserve the walk.
 
 `app/labs/campus-weather-api/[campus]/route.ts` serves anonymous read-only station observations through the ordinary website backend. An allowlist selects fixed ECCC or NWS stations. One in-flight refresh and a timed observation cache per campus serve concurrent requests within the website process. The clock and solar calculation run in the visitor’s browser using the campus coordinates. [Weather sources, cache limits and attribution](CAMPUS_WEATHER.md).

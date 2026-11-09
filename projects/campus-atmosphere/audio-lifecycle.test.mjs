@@ -28,7 +28,14 @@ const regular = {
 // Inspect the graph at the Web Audio boundary. A running source must reach the
 // destination over a nonzero gain path to count as audible. Reverb can ring out
 // independently of the voices that fed it.
+const flushAudio = () => new Promise(resolve => setImmediate(resolve));
+
 function audioDevice(t) {
+  const downloads = [];
+  const fetch = async url => {
+    downloads.push(url);
+    return { ok: true, arrayBuffer: async () => new ArrayBuffer(32) };
+  };
   const session = { type: "ambient" }, document = new EventTarget();
   document.hidden = false;
   const parameter = () => ({
@@ -55,6 +62,7 @@ function audioDevice(t) {
     async resume() { this.state = "running"; }
     async suspend() { this.state = "suspended"; }
     async close() { this.state = "closed"; }
+    async decodeAudioData() { return { recordedMusic: true }; }
     createGain() { return Object.assign(new Node(), { gain: parameter() }); }
     createDynamicsCompressor() { return Object.assign(new Node(), Object.fromEntries(["threshold","knee","ratio","attack","release"].map(key => [key, parameter()]))); }
     createBuffer(channels, length) { const samples = Array.from({ length: channels }, () => new Float32Array(length)); return { getChannelData: index => samples[index] }; }
@@ -70,12 +78,12 @@ function audioDevice(t) {
     }
     audible() { return this.sources.filter(source => source.running && this.connected(source)); }
   }
-  for (const [key, value] of Object.entries({ document, AudioContext: Context, window: { AudioContext: Context }, navigator: { audioSession: session } })) {
+  for (const [key, value] of Object.entries({ document, fetch, AudioContext: Context, window: { AudioContext: Context }, navigator: { audioSession: session } })) {
     const original = Object.getOwnPropertyDescriptor(globalThis, key);
     Object.defineProperty(globalThis, key, { configurable: true, value });
     t.after(() => original ? Object.defineProperty(globalThis, key, original) : delete globalThis[key]);
   }
-  return { session, visibility(hidden) { document.hidden = hidden; document.dispatchEvent(new Event("visibilitychange")); }, get context() { return devices[0]; } };
+  return { session, downloads, visibility(hidden) { document.hidden = hidden; document.dispatchEvent(new Event("visibilitychange")); }, get context() { return devices[0]; } };
 }
 
 for (const [campus, create] of Object.entries(campuses)) {
@@ -102,60 +110,25 @@ for (const [campus, create] of Object.entries(campuses)) {
 }
 
 for (const [campus, create] of Object.entries(campuses)) {
-  test(`${campus} plays a brief sleigh-bell shake with quiet gaps, including away from displays`, async t => {
+  test(`${campus} plays the same licensed loop indoors and outdoors and releases it on exit`, async t => {
     const device = audioDevice(t), sound = create();
-    const christmas = { ...regular, christmas: true, weather: "rain" };
-    const away = { indoor: false, proximity: 0, pan: 0 };
+    const christmas = { ...regular, christmas: true, weather: "rain", windKph: 28 };
     try {
       await sound.enter(christmas);
+      await flushAudio();
       const context = device.context;
-      function checkShake(notes, start) {
-        const impacts = [...new Set(notes.map(note => note.startAt))];
-        assert.ok(impacts.length >= 2 && impacts.at(-1) - start < .2);
-        const modes = at => notes.filter(note => note.startAt === at).map(note => note.frequency.value);
-        assert.ok(modes(start).length >= 3);
-        for (const at of impacts) assert.deepEqual(modes(at), modes(start), "each impact excites the same shell");
-        assert.ok(notes.every(note => !note.isBuffer && note.frequency.value > 1000 && note.stopAt < start + .4));
-      }
-      checkShake(context.sources, 0);
-      const count = context.sources.length;
-      for (const time of [1, 3, 5.04, 7.99]) {
-        context.currentTime = time;
-        sound.frame(christmas, away);
-        assert.equal(context.sources.length, count, "the gaps stay quiet");
-      }
-      context.currentTime = 12;
-      sound.frame(christmas, away);
-      checkShake(context.sources.slice(count), 12);
-      const afterShake = context.sources.length;
-      sound.frame(christmas, { ...away, indoor: true });
-      assert.equal(context.sources.length, afterShake, "crossing a doorway does not retrigger the shake");
-    } finally { sound.dispose(); }
-  });
-
-  test(`${campus} plays a first-gesture jingle, positions the next indoors and retains reported wind on exit`, async t => {
-    const device = audioDevice(t), sound = create();
-    const christmas = { ...regular, christmas: true, weather: "rain", intensity: .7, windKph: 28 };
-    try {
-      const entered = sound.enter(christmas), context = device.context;
-      const bell = context.audible().find(source => source.frequency.value === 1367);
-      assert.ok(bell, "entry schedules the first bell before loading finishes");
-      const wind = context.audible().find(source => source.isBuffer);
-      assert.ok(wind);
+      const music = context.audible().find(source => source.buffer?.recordedMusic);
+      const wind = context.audible().find(source => source !== music);
+      assert.ok(music?.loop && wind);
       const [filter] = wind.outputs, [weatherBus] = filter.outputs;
       const outsideLevel = weatherBus.gain.value;
-      await entered;
       context.currentTime = 30;
-      const firstIndoor = context.sources.length;
       sound.frame(christmas, { indoor: true, proximity: .5, pan: -.75 });
-      const nextBell = context.sources.slice(firstIndoor).find(source => source.frequency.value === 1367);
-      assert.ok(nextBell, "another jingle plays beside the indoor display");
-      const [envelope] = nextBell.outputs, [panner] = envelope.outputs;
-      assert.equal(panner.pan.value, -.75);
-      assert.ok(weatherBus.gain.value > 0 && weatherBus.gain.value < outsideLevel);
+      assert.deepEqual(context.audible(), [wind, music], "doorways keep the same recording");
+      assert.ok(weatherBus.gain.value < outsideLevel);
+      assert.deepEqual(device.downloads, ["/campus-audio/winter-wonderland-fb595967.m4a"]);
       sound.configure({ ...christmas, christmas: false });
-      assert.deepEqual(context.audible(), [wind], "the same wind continues without a festive tail");
-      assert.equal(device.session.type, "playback");
+      assert.deepEqual(context.audible(), [wind]);
     } finally { sound.dispose(); }
   });
   test(`${campus} stops Halloween transport and reverb on entering Christmas`, async t => {
@@ -168,6 +141,7 @@ for (const [campus, create] of Object.entries(campuses)) {
       sound.configure({ ...regular, christmas: true });
       assert.equal(context.reverbs.some(node => context.connected(node)), false, "a Halloween reverb tail cannot reach the new edition");
       assert.equal(oldSources.some(source => source.running), false, "the Halloween transport stops");
+      await flushAudio();
       assert.ok(context.audible().length > 0, "Christmas starts without an additional gesture");
     } finally { sound.dispose(); }
   });
@@ -195,6 +169,7 @@ for (const [campus, create] of Object.entries(campuses)) {
     const device = audioDevice(t), sound = create();
     try {
       await sound.enter({ ...regular, christmas: true });
+      await flushAudio();
       assert.ok(device.context.audible().length > 0);
       const halloween = { ...regular, halloween: true };
       sound.configure(halloween);
@@ -207,33 +182,30 @@ for (const [campus, create] of Object.entries(campuses)) {
 
 
 for (const [campus, create] of Object.entries(campuses)) {
-  test(`${campus} fades ringing Christmas notes, cancels future notes and can replay during the fade`, async t => {
-    const device = audioDevice(t), sound = create();
+  test(`${campus} cancels a pending Christmas start and can immediately re-enter during a fade`, async t => {
+    const device = audioDevice(t), sound = create(), christmas = { ...regular, christmas: true };
     try {
-      const christmas = { ...regular, christmas: true };
-      await sound.enter(christmas);
-      const context = device.context, initial = context.sources.slice();
-      context.currentTime = .05;
-      const ringing = initial.filter(source => source.startAt <= context.currentTime);
-      const scheduled = initial.filter(source => source.startAt > context.currentTime);
-      assert.ok(ringing.length && scheduled.length);
-      sound.configure(regular);
-      assert.equal(device.session.type, "ambient");
-      for (const source of ringing) {
-        assert.ok(source.stopAt > .05 && source.stopAt <= .25, "a ringing note has a short audible tail");
-        const [envelope] = source.outputs, [stereo] = envelope.outputs, [bus] = stereo.outputs;
-        assert.deepEqual(bus.gain.ramp, { value: 0, at: source.stopAt });
-      }
-      assert.ok(scheduled.every(source => source.outputs.size === 0));
-      context.currentTime = .08;
+      await sound.enter(regular);
       sound.configure(christmas);
-      assert.ok(context.audible().some(source => !initial.includes(source)), "new bells have an independent audible bus");
-      for (const source of ringing) {
-        const [envelope] = source.outputs, [stereo] = envelope.outputs, [outgoing] = stereo.outputs;
-        assert.equal(outgoing.gain.value, 0, "the old fade keeps its silent endpoint");
-      }
+      sound.configure(regular);
+      await flushAudio();
+      const context = device.context;
+      assert.equal(context.audible().length, 0, "a late download cannot restart Christmas");
+      sound.configure(christmas);
+      await flushAudio();
+      const [first] = context.audible();
+      assert.ok(first.buffer.recordedMusic);
+      context.currentTime = 1;
+      sound.configure(regular);
+      assert.equal(first.stopAt, 1.12);
+      assert.deepEqual([...first.outputs][0].gain.ramp, {value: 0, at: 1.12});
+      sound.configure(christmas);
+      await flushAudio();
+      const [next] = context.audible();
+      assert.ok(next && next !== first);
+      assert.equal(device.downloads.length, 1);
       sound.dispose();
-      assert.ok(context.sources.every(source => !source.running), "disposal cancels the remaining fade immediately");
+      assert.ok(context.sources.every(source => !source.running));
     } finally { sound.dispose(); }
   });
 }
@@ -250,8 +222,9 @@ for (const [campus, create] of Object.entries(campuses)) {
       assert.equal(context.sources.length, 0);
       sound.configure({ ...rain, christmas: true });
       assert.equal(device.session.type, "playback");
-      assert.ok(context.audible().some(source => source.frequency.value === 1367));
-      assert.equal(context.sources.some(source => source.isBuffer), false, "rain adds no sound beside the chimes");
+      await flushAudio();
+      assert.ok(context.audible()[0]?.buffer?.recordedMusic);
+      assert.equal(context.audible().length, 1, "rain adds no second sound");
       sound.configure(rain);
       assert.equal(device.session.type, "ambient", "rain alone releases the playback role on leaving Christmas");
     } finally { sound.dispose(); }

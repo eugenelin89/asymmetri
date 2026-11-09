@@ -6,18 +6,23 @@ const arrival: ListenerMix = { indoor: false, proximity: 0.8, pan: 0 };
 
 type WeatherSound = "snow" | "wind";
 
-// Inharmonic shell resonances ring together on each clapper impact.
-const sleighBellModes = [
-  { hz: 1367, gain: 0.036, decay: 0.19 },
-  { hz: 2153, gain: 0.027, decay: 0.14 },
-  { hz: 3029, gain: 0.018, decay: 0.10 },
-  { hz: 3967, gain: 0.009, decay: 0.075 },
-];
-const clapperImpacts = [
-  { delay: 0, strength: 0.85 },
-  { delay: 0.031, strength: 0.43 },
-  { delay: 0.14, strength: 0.68 },
-];
+const musicUrl = "/campus-audio/winter-wonderland-fb595967.m4a";
+const recordings = new WeakMap<AudioContext, Promise<AudioBuffer>>();
+
+function loadChristmasMusic(context: AudioContext) {
+  let recording = recordings.get(context);
+  if (!recording) {
+    recording = fetch(musicUrl).then(async response => {
+      if (!response.ok) throw new Error("Christmas music unavailable");
+      return context.decodeAudioData(await response.arrayBuffer());
+    }).catch(error => {
+      recordings.delete(context);
+      throw error;
+    });
+    recordings.set(context, recording);
+  }
+  return recording;
+}
 
 function windLevel(scene: SoundScene) {
   const speed = scene.windKph ?? 0;
@@ -118,84 +123,75 @@ export function displayMix(sources: readonly { x: number; z: number; indoor: boo
   return { indoor, proximity: (1 - nearest / 62) ** 1.2, pan };
 }
 
-/** Weather and sleigh bells share the campus's gesture-unlocked master. */
+/** The recording shares the same gesture-unlocked master as the weather. */
 export function createAmbience(context: AudioContext, master: AudioNode) {
   const snow = weatherTrack(context, master, "snow");
   const wind = weatherTrack(context, master, "wind");
-  let nextJingle = 0;
-  type BellBus = { gain: GainNode; notes: Map<OscillatorNode, { start: number; nodes: AudioNode[] }> };
-  let festive: BellBus | undefined;
-  const buses = new Set<BellBus>();
-  function releaseBus(bus: BellBus) {
-    if (bus !== festive && !bus.notes.size && buses.delete(bus)) bus.gain.disconnect();
+  type Voice = { source: AudioBufferSourceNode; gain: GainNode };
+  const voices = new Set<Voice>();
+  let voice: Voice | undefined;
+  let christmas = false;
+  let generation = 0;
+  let retryAfter = 0;
+  let pending = false;
+
+  function release(v: Voice) {
+    if (!voices.delete(v)) return;
+    v.source.onended = null;
+    v.source.disconnect();
+    v.gain.disconnect();
   }
-  function releaseNote(bus: BellBus, tone: OscillatorNode) {
-    const note = bus.notes.get(tone);
-    if (!note) return;
-    tone.onended = null;
-    tone.disconnect();
-    for (const node of note.nodes) node.disconnect();
-    bus.notes.delete(tone);
-    releaseBus(bus);
+
+  function play() {
+    const requested = generation;
+    pending = true;
+    void loadChristmasMusic(context).then(buffer => {
+      if (requested !== generation) return;
+      const source = context.createBufferSource(), gain = context.createGain();
+      const v = { source, gain };
+      source.buffer = buffer;
+      source.loop = true;
+      source.connect(gain);
+      gain.connect(master);
+      voices.add(v);
+      voice = v;
+      source.onended = () => release(v);
+      source.start();
+    }).catch(() => {
+      if (requested === generation) retryAfter = context.currentTime + 30;
+    }).finally(() => {
+      if (requested === generation) pending = false;
+    });
   }
-  function stopBells(bus: BellBus, fade: boolean) {
-    const now = context.currentTime, end = now + 0.12;
-    if (fade) {
-      bus.gain.gain.setValueAtTime(1, now);
-      bus.gain.gain.linearRampToValueAtTime(0, end);
-    }
-    for (const [tone, note] of bus.notes) {
-      if (fade && note.start <= now) tone.stop(end);
-      else {
-        tone.stop();
-        releaseNote(bus, tone);
-      }
-    }
-    releaseBus(bus);
-  }
-  function ringMode(bus: BellBus, hz: number, start: number, strength: number, pan: number, decay: number) {
-    const tone = context.createOscillator(), gain = context.createGain();
-    const stereo = context.createStereoPanner();
-    stereo.pan.value = pan;
-    tone.frequency.value = hz;
-    gain.gain.setValueAtTime(0.0001, start);
-    gain.gain.exponentialRampToValueAtTime(Math.max(0.001, strength), start + 0.005);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + decay);
-    tone.connect(gain); gain.connect(stereo); stereo.connect(bus.gain);
-    bus.notes.set(tone, { start, nodes: [gain, stereo] });
-    tone.onended = () => releaseNote(bus, tone);
-    tone.start(start); tone.stop(start + decay + 0.01);
-  }
+
   function update(scene: SoundScene, mix: ListenerMix = arrival) {
-    const now = context.currentTime;
     snow.update(snowLevel(scene), mix.indoor);
     wind.update(windLevel(scene), mix.indoor);
-    if (!scene.christmas) {
-      if (festive) {
-        const outgoing = festive;
-        festive = undefined;
-        stopBells(outgoing, true);
-      }
-      return;
-    }
-    if (!festive) {
-      festive = { gain: context.createGain(), notes: new Map() };
-      festive.gain.connect(master);
-      buses.add(festive);
-      nextJingle = now;
-    }
-    if (now < nextJingle) return;
-    const level = 0.6 + 0.4 * mix.proximity;
-    for (const { delay, strength } of clapperImpacts) {
-      for (const { hz, gain, decay } of sleighBellModes) {
-        ringMode(festive, hz, now + delay, strength * gain * level, mix.pan, decay);
+    if (!!scene.christmas !== christmas) {
+      christmas = !!scene.christmas;
+      generation++;
+      pending = false;
+      retryAfter = 0;
+      if (voice) {
+        const outgoing = voice;
+        voice = undefined;
+        const now = context.currentTime, end = now + .12;
+        outgoing.gain.gain.setValueAtTime(1, now);
+        outgoing.gain.gain.linearRampToValueAtTime(0, end);
+        outgoing.source.stop(end);
       }
     }
-    nextJingle = now + (scene.reducedMotion ? 14 : 8) + Math.random() * 4;
+    if (christmas && !voice && !pending && context.currentTime >= retryAfter) play();
   }
+
   function dispose() {
-    festive = undefined;
-    for (const bus of buses) stopBells(bus, false);
+    generation++;
+    christmas = false;
+    voice = undefined;
+    for (const v of voices) {
+      v.source.stop();
+      release(v);
+    }
     snow.stop(); wind.stop();
   }
   return { update, dispose };

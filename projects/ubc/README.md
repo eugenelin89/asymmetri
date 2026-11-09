@@ -76,7 +76,7 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   shows “Weather unavailable.” Changing hour, season or weather in Atmosphere or
   Photo stages a Simulated scene until the visitor selects Live or leaves.
 - Campus sound uses the entering visitor's mute and volume settings before the
-  scene loads. Christmas adds occasional soft sleigh bells, Halloween
+  scene loads. Christmas adds a soft bell melody with steady sleigh bells, Halloween
   has its own score and voices, and reported weather can be heard in Regular.
   The browser's optional playback audio session supports iPhone Silent Mode.
   The owner reported the earlier Halloween first-entry correction working in the

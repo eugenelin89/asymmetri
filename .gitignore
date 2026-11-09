@@ -14,3 +14,6 @@ coverage
 .wrangler
 
 projects/vancouver/**/__pycache__/
+
+# Licensed for playback in the campus walks; provision separately at release.
+/public/campus-audio/winter-wonderland-fb595967.m4a

@@ -3,6 +3,8 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+For releases serving the licensed Christmas recording, install the owner-held audio into the candidate’s `public/campus-audio/winter-wonderland-fb595967.m4a` before its first startup. For subsequent releases copy the file from the verified current runtime or the private release archive. Verify its SHA-256 against the [asset manifest](ASSET_MANIFEST.md) before activation and over HTTP afterwards. The source repository and CI artifact exclude the licensed audio. For a smaller independent runtime, verify the exact Linux CI artifact and extract its build and production dependency files. Derive omissions from the matched package lock, preserve the original bytes of all retained files and validate them in the candidate smoke test. Keep all published assets and the immediately previous independent runtime.
+
 The [sleigh-bell release](CAMPUS_SLEIGH_BELLS_RELEASE_2026-11-08.md) deployed
 source `c64f99a`, build `pqCDGF7c0ilyWrtCRVrdN`, at 03:46 UTC on November 9
 (November 8 in Vancouver). The immediate rollback is
