@@ -22,6 +22,8 @@ Original synthesized chimes and short musical phrases mark trees near the walker
 
 ## Acceptance
 
+The three campuses went live on November 8 in Vancouver. Both public hostnames served the automatic Christmas welcomes and returned fresh nearby station observations. [Production build, browser checks and rollback](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md)
+
 The final local Next.js 16.4.3 production build is `vVptuSIL-xqgMyRAbl_mu`. Gallery captures identify their individual build in the desktop record. The owner used ordinary Safari with Silent Mode on to enter all three campuses on listening build `pk8nW65AUxxEwM0mjrQy9` and confirmed hearing sound. The final build keeps the same Christmas chimes and removes the rain sound at the owner’s request. The walks exposed two readability issues. The UBC letters gained a warm night wash and the long Nest location label now clears its toolbar at tablet widths.
 
 | Check | Evidence |
