@@ -102,44 +102,43 @@ for (const [campus, create] of Object.entries(campuses)) {
 }
 
 for (const [campus, create] of Object.entries(campuses)) {
-  test(`${campus} plays the Christmas carol between displays, indoors and outdoors`, async t => {
+  test(`${campus} plays a brief sleigh-bell shake with quiet gaps, including away from displays`, async t => {
     const device = audioDevice(t), sound = create();
     const christmas = { ...regular, christmas: true, weather: "rain" };
-    const away = { indoor: false, proximity: 0, pan: -0.8 };
+    const away = { indoor: false, proximity: 0, pan: 0 };
     try {
       await sound.enter(christmas);
       const context = device.context;
-      const arrivalNotes = context.sources.length;
-      context.currentTime = 2;
-      sound.frame(christmas, away);
-      assert.equal(context.sources.length, arrivalNotes, "the arrival chime has space before the music");
-      context.currentTime = 2.95;
-      sound.frame(christmas, away);
-      const firstBar = context.sources.slice(arrivalNotes);
-      assert.deepEqual([...new Set(firstBar.map(note => note.startAt))], [3, 3.68, 4.02]);
-      assert.ok(firstBar.every(note => !note.isBuffer && context.connected(note)));
+      function checkShake(notes, start) {
+        const impacts = [...new Set(notes.map(note => note.startAt))];
+        assert.ok(impacts.length >= 2 && impacts.at(-1) - start < .2);
+        const modes = at => notes.filter(note => note.startAt === at).map(note => note.frequency.value);
+        assert.ok(modes(start).length >= 3);
+        for (const at of impacts) assert.deepEqual(modes(at), modes(start), "each impact excites the same shell");
+        assert.ok(notes.every(note => !note.isBuffer && note.frequency.value > 1000 && note.stopAt < start + .4));
+      }
+      checkShake(context.sources, 0);
       const count = context.sources.length;
-      context.currentTime = 3.9;
+      for (const time of [1, 3, 5.04, 7.99]) {
+        context.currentTime = time;
+        sound.frame(christmas, away);
+        assert.equal(context.sources.length, count, "the gaps stay quiet");
+      }
+      context.currentTime = 12;
+      sound.frame(christmas, away);
+      checkShake(context.sources.slice(count), 12);
+      const afterShake = context.sources.length;
       sound.frame(christmas, { ...away, indoor: true });
-      assert.equal(context.sources.length, count, "crossing a doorway does not restart the bar");
-      context.currentTime = 5.01;
-      sound.frame(christmas, { ...away, indoor: true });
-      const secondBar = context.sources.slice(count);
-      assert.ok(secondBar.length > 0);
-      assert.ok(secondBar.every(note => note.startAt >= 5.04 && context.connected(note)));
-      context.currentTime = 5.1;
-      sound.configure(regular);
-      assert.equal(context.audible().length, 0);
-      assert.ok(secondBar.filter(note => note.startAt > 5.1).every(note => !note.running));
+      assert.equal(context.sources.length, afterShake, "crossing a doorway does not retrigger the shake");
     } finally { sound.dispose(); }
   });
 
-  test(`${campus} plays a first-gesture Christmas phrase, positions the next indoors and retains reported wind on exit`, async t => {
+  test(`${campus} plays a first-gesture jingle, positions the next indoors and retains reported wind on exit`, async t => {
     const device = audioDevice(t), sound = create();
     const christmas = { ...regular, christmas: true, weather: "rain", intensity: .7, windKph: 28 };
     try {
       const entered = sound.enter(christmas), context = device.context;
-      const bell = context.audible().find(source => source.frequency.value === 523.25);
+      const bell = context.audible().find(source => source.frequency.value === 1367);
       assert.ok(bell, "entry schedules the first bell before loading finishes");
       const wind = context.audible().find(source => source.isBuffer);
       assert.ok(wind);
@@ -149,8 +148,8 @@ for (const [campus, create] of Object.entries(campuses)) {
       context.currentTime = 30;
       const firstIndoor = context.sources.length;
       sound.frame(christmas, { indoor: true, proximity: .5, pan: -.75 });
-      const nextBell = context.sources.slice(firstIndoor).find(source => source.frequency.value === 587.33);
-      assert.ok(nextBell, "another phrase plays beside the indoor display");
+      const nextBell = context.sources.slice(firstIndoor).find(source => source.frequency.value === 1367);
+      assert.ok(nextBell, "another jingle plays beside the indoor display");
       const [envelope] = nextBell.outputs, [panner] = envelope.outputs;
       assert.equal(panner.pan.value, -.75);
       assert.ok(weatherBus.gain.value > 0 && weatherBus.gain.value < outsideLevel);
@@ -214,10 +213,10 @@ for (const [campus, create] of Object.entries(campuses)) {
       const christmas = { ...regular, christmas: true };
       await sound.enter(christmas);
       const context = device.context, initial = context.sources.slice();
-      const ringing = initial.filter(source => source.startAt === 0);
-      const scheduled = initial.filter(source => source.startAt > 0);
-      assert.ok(ringing.length && scheduled.length);
       context.currentTime = .05;
+      const ringing = initial.filter(source => source.startAt <= context.currentTime);
+      const scheduled = initial.filter(source => source.startAt > context.currentTime);
+      assert.ok(ringing.length && scheduled.length);
       sound.configure(regular);
       assert.equal(device.session.type, "ambient");
       for (const source of ringing) {
@@ -251,7 +250,7 @@ for (const [campus, create] of Object.entries(campuses)) {
       assert.equal(context.sources.length, 0);
       sound.configure({ ...rain, christmas: true });
       assert.equal(device.session.type, "playback");
-      assert.ok(context.audible().some(source => source.frequency.value === 523.25));
+      assert.ok(context.audible().some(source => source.frequency.value === 1367));
       assert.equal(context.sources.some(source => source.isBuffer), false, "rain adds no sound beside the chimes");
       sound.configure(rain);
       assert.equal(device.session.type, "ambient", "rain alone releases the playback role on leaving Christmas");

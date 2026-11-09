@@ -8,7 +8,7 @@ The Christmas edition adds three original seasonal installations to the existing
 | Stanford · 639 m | Two trees frame the Oval approach. Walk into Main Quad between the arcades, turn east in the courtyard, then follow the lanterns around the north side of Green Library to the east entry. Two runs of garland follow the mapped sandstone arcades. | A 3.3 m tree sits beside the reading aisle. Wreaths and strings of lights frame the reading room below the first floor slab. |
 | CWRU · 96 m | Turn away from the evergreen arch at Kelvin Smith Library. Follow the lanterns north past the approach trees, then turn east into Tinkham Veale. | Warm and cool stars hang over the commons seating. A 3.35 m decorated tree stands beside the central aisle. |
 
-Distances follow the virtual walking line to a point six metres inside each furnished core. They do not describe real-campus wayfinding or installations. The metre coordinates in [christmas-walks.ts](../projects/campus-atmosphere/christmas-walks.ts) include every turn, the outer doorway and the interior viewpoint. Display chimes use the trees’ world positions and their indoor/outdoor classification. The Christmas background carol plays along the full walk, including between displays and inside buildings.
+Distances follow the virtual walking line to a point six metres inside each furnished core. They do not describe real-campus wayfinding or installations. The metre coordinates in [christmas-walks.ts](../projects/campus-atmosphere/christmas-walks.ts) include every turn, the outer doorway and the interior viewpoint. Occasional sleigh-bell jingles follow the walk, including inside buildings. Their level and stereo position respond to the nearest display on the same side of the doorway.
 
 ## Rendering and sources
 
