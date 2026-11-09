@@ -3,9 +3,16 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [Christmas bell carol release](CAMPUS_BELL_CAROL_RELEASE_2026-11-08.md)
+deployed source `ba6528b`, build `cgSIggsF1IJPAlAAHHgXb`, on November 9
+at 03:22 UTC (November 8 in Vancouver). The current immediate rollback is
+`/var/www/asymmetri-rollback-before-bell-carol-20261109`, source `8cb6504`,
+build `vl3iIFSCGyHNX0l6fZ5xk`. Its independent startup passed. Three
+earlier complete rollback trees remain on the host.
+
 The [three-campus Christmas release](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md)
 deployed source `8cb6504`, build `vl3iIFSCGyHNX0l6fZ5xk`, on November 9
-at 02:00 UTC (November 8 in Vancouver). The verified immediate rollback is
+at 02:00 UTC (November 8 in Vancouver). Its verified rollback at activation was
 `/var/www/asymmetri-rollback-before-campus-christmas-20261109`, source
 `a73eec2`, build `dmqK2Psv92J2yUeGDoMK2`. Its independent startup passed.
 The November 2 and October 31 rollback directories also remain on the server.

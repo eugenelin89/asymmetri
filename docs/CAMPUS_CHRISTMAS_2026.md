@@ -22,7 +22,7 @@ The entry chime rings first. Three seconds later a quiet, original music-box car
 
 ## Acceptance
 
-The three campuses went live on November 8 in Vancouver with spatial display chimes. The background carol was added after that release. Both public hostnames served the automatic Christmas welcomes and returned fresh nearby station observations at deployment. [Production build, browser checks and rollback](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md)
+The three campuses went live on November 8 in Vancouver with spatial display chimes. A second release that evening added the background carol. Public playback checks on both hostnames detected its first bar 3.00–3.27 seconds after the entry chime on UBC, Stanford and CWRU. [Christmas edition release](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md) · [Bell music release and rollback](CAMPUS_BELL_CAROL_RELEASE_2026-11-08.md)
 
 The final local Next.js 16.4.3 production build is `vVptuSIL-xqgMyRAbl_mu`. Gallery captures identify their individual build in the desktop record. The owner used ordinary Safari with Silent Mode on to enter all three campuses on listening build `pk8nW65AUxxEwM0mjrQy9` and confirmed hearing sound. The final build keeps the same Christmas chimes and removes the rain sound at the owner’s request. The walks exposed two readability issues. The UBC letters gained a warm night wash and the long Nest location label now clears its toolbar at tablet widths.
 
