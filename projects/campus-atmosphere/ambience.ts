@@ -6,6 +6,21 @@ const arrival: ListenerMix = { indoor: false, proximity: 0.8, pan: 0 };
 
 type WeatherSound = "snow" | "wind";
 
+// Original music-box carol in 6/8. Each bar has a low bell and six eighth-note
+// positions in MIDI pitch. Zero leaves room for the preceding bell to ring.
+const carol = [
+  { bass: 60, melody: [67, 0, 69, 72, 0, 0] },
+  { bass: 57, melody: [76, 0, 74, 72, 0, 0] },
+  { bass: 53, melody: [69, 0, 72, 67, 0, 65] },
+  { bass: 55, melody: [67, 0, 0, 0, 0, 0] },
+  { bass: 60, melody: [67, 0, 69, 72, 0, 76] },
+  { bass: 53, melody: [77, 0, 76, 72, 0, 69] },
+  { bass: 55, melody: [71, 0, 74, 67, 0, 71] },
+  { bass: 60, melody: [72, 0, 0, 0, 0, 0] },
+];
+const eighthNote = 0.34;
+const pitchHz = (midi: number) => 440 * 2 ** ((midi - 69) / 12);
+
 function windLevel(scene: SoundScene) {
   const speed = scene.windKph ?? 0;
   return speed < 8 ? 0 : 0.12 * Math.min(1, (speed - 5) / 40);
@@ -105,11 +120,12 @@ export function displayMix(sources: readonly { x: number; z: number; indoor: boo
   return { indoor, proximity: (1 - nearest / 62) ** 1.2, pan };
 }
 
-/** Both buses use the campus's gesture-unlocked context, master gain and iOS session. */
+/** Weather, music and display chimes share the campus's gesture-unlocked master. */
 export function createAmbience(context: AudioContext, master: AudioNode) {
   const snow = weatherTrack(context, master, "snow");
   const wind = weatherTrack(context, master, "wind");
   let nextPhrase = 0, phrase = 0;
+  let nextBar = 0, barIndex = 0;
   type BellBus = { gain: GainNode; notes: Map<OscillatorNode, { start: number; nodes: AudioNode[] }> };
   let festive: BellBus | undefined;
   const buses = new Set<BellBus>();
@@ -140,18 +156,32 @@ export function createAmbience(context: AudioContext, master: AudioNode) {
     }
     releaseBus(bus);
   }
-  function bell(bus: BellBus, hz: number, start: number, strength: number, pan: number) {
+  function bell(bus: BellBus, hz: number, start: number, strength: number, pan: number, decay = 1.9) {
     const tone = context.createOscillator(), gain = context.createGain();
     const stereo = context.createStereoPanner();
     stereo.pan.value = pan;
     tone.frequency.value = hz;
     gain.gain.setValueAtTime(0.0001, start);
     gain.gain.exponentialRampToValueAtTime(Math.max(0.001, strength), start + 0.024);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + 1.9);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + decay);
     tone.connect(gain); gain.connect(stereo); stereo.connect(bus.gain);
     bus.notes.set(tone, { start, nodes: [gain, stereo] });
     tone.onended = () => releaseNote(bus, tone);
-    tone.start(start); tone.stop(start + 2);
+    tone.start(start); tone.stop(start + decay + 0.1);
+  }
+  function playCarolBar(bus: BellBus, start: number) {
+    const { bass, melody } = carol[barIndex];
+    bell(bus, pitchHz(bass), start, 0.027, -0.12, 2.1);
+    for (const [beat, pitch] of melody.entries()) {
+      if (!pitch) continue;
+      const at = start + beat * eighthNote;
+      const hz = pitchHz(pitch);
+      bell(bus, hz, at, beat % 3 === 0 ? 0.057 : 0.044, 0.08, 1.55);
+      bell(bus, hz * 2.76, at, 0.011, 0.08, 0.32);
+    }
+    barIndex = (barIndex + 1) % carol.length;
+    // Leave two quiet bars after the final cadence.
+    nextBar = start + eighthNote * (barIndex === 0 ? 18 : 6);
   }
   function update(scene: SoundScene, mix: ListenerMix = arrival) {
     const now = context.currentTime;
@@ -170,7 +200,10 @@ export function createAmbience(context: AudioContext, master: AudioNode) {
       festive.gain.connect(master);
       buses.add(festive);
       nextPhrase = now;
+      barIndex = 0;
+      nextBar = now + 3; // Let the spatial arrival chime ring first.
     }
+    if (now + 0.12 >= nextBar) playCarolBar(festive, Math.max(now, nextBar));
     if (mix.proximity < 0.015 || now < nextPhrase) return;
     // Original short major-pentatonic replies, with quieter activity in the distance.
     const melody = [[523.25, 659.25, 783.99], [587.33, 783.99, 659.25], [783.99, 880, 659.25]][phrase++ % 3];

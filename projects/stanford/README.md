@@ -39,8 +39,8 @@ leads from the Oval through Main Quad to the Green Library interior.
 
 Halloween adds 22 creature types, 24 original procedural comic/manga/robot visitors, interior decorations, moonlight, bats, and an optional hockey-mask pursuer with a prop knife. Pursuit uses outdoor source paths, waits outside interiors, stops short of the player and causes no attacks or damage. Population and reduced-motion controls apply to seasonal movement.
 
-Campus sound generates the Halloween score and spatial ghost voices, festive
-Christmas displays and nearby weather through Web Audio. Sound starts on the
+Campus sound uses Web Audio for the Halloween score and ghost voices, a quiet
+Christmas bell carol, chimes near holiday displays and nearby weather. Sound starts on the
 visitor's Enter or Sound gesture, honors mute and volume, and suspends in a
 hidden tab. The optional Audio Session playback role supports iPhone Silent
 Mode. [Earlier iPhone audio implementation and validation](../../docs/STANFORD_IPHONE_AUDIO_2026-10-31.md).

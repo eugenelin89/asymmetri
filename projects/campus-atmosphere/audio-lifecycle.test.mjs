@@ -102,6 +102,38 @@ for (const [campus, create] of Object.entries(campuses)) {
 }
 
 for (const [campus, create] of Object.entries(campuses)) {
+  test(`${campus} plays the Christmas carol between displays, indoors and outdoors`, async t => {
+    const device = audioDevice(t), sound = create();
+    const christmas = { ...regular, christmas: true, weather: "rain" };
+    const away = { indoor: false, proximity: 0, pan: -0.8 };
+    try {
+      await sound.enter(christmas);
+      const context = device.context;
+      const arrivalNotes = context.sources.length;
+      context.currentTime = 2;
+      sound.frame(christmas, away);
+      assert.equal(context.sources.length, arrivalNotes, "the arrival chime has space before the music");
+      context.currentTime = 2.95;
+      sound.frame(christmas, away);
+      const firstBar = context.sources.slice(arrivalNotes);
+      assert.deepEqual([...new Set(firstBar.map(note => note.startAt))], [3, 3.68, 4.02]);
+      assert.ok(firstBar.every(note => !note.isBuffer && context.connected(note)));
+      const count = context.sources.length;
+      context.currentTime = 3.9;
+      sound.frame(christmas, { ...away, indoor: true });
+      assert.equal(context.sources.length, count, "crossing a doorway does not restart the bar");
+      context.currentTime = 5.01;
+      sound.frame(christmas, { ...away, indoor: true });
+      const secondBar = context.sources.slice(count);
+      assert.ok(secondBar.length > 0);
+      assert.ok(secondBar.every(note => note.startAt >= 5.04 && context.connected(note)));
+      context.currentTime = 5.1;
+      sound.configure(regular);
+      assert.equal(context.audible().length, 0);
+      assert.ok(secondBar.filter(note => note.startAt > 5.1).every(note => !note.running));
+    } finally { sound.dispose(); }
+  });
+
   test(`${campus} plays a first-gesture Christmas phrase, positions the next indoors and retains reported wind on exit`, async t => {
     const device = audioDevice(t), sound = create();
     const christmas = { ...regular, christmas: true, weather: "rain", intensity: .7, windKph: 28 };

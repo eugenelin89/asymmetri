@@ -57,7 +57,7 @@ An optional Friday-the-13th-inspired hockey-masked outdoor pursuer carrying a pr
 
 The original Halloween score, wolf howls, nearby ghost cries and howl preview use
 Web Audio. Campus sound starts with an entry or sound gesture. Weather can be
-heard in Regular, and spatial festive cues follow the Christmas walk. Mute and
+heard in Regular. A soft bell carol follows the Christmas walk, with extra chimes near displays. Mute and
 volume apply across editions and survive a return visit, including migration of
 the existing CWRU sound preference. Hidden tabs suspend playback. The optional
 Audio Session playback role supports iPhone Silent Mode. [Earlier iPhone audio
