@@ -22,7 +22,7 @@ Christmas entry plays a light sleigh-bell shake lasting under half a second. The
 
 ## Acceptance
 
-The three campuses went live on November 8 in Vancouver with spatial display chimes. A second release that evening added the background carol. Public playback checks on both hostnames detected its first bar 3.00–3.27 seconds after the entry chime on UBC, Stanford and CWRU. [Christmas edition release](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md) · [Bell music release and rollback](CAMPUS_BELL_CAROL_RELEASE_2026-11-08.md)
+The three campuses went live on November 8 in Vancouver with spatial display chimes. A second release added a carol that the owner evaluated on the live site. At 20:46 Vancouver time, the sleigh-bell release replaced both the carol and the earlier pitched chimes. [Current sleigh-bell release](CAMPUS_SLEIGH_BELLS_RELEASE_2026-11-08.md) · [Original Christmas release](CAMPUS_CHRISTMAS_RELEASE_2026-11-08.md) · [Earlier carol release](CAMPUS_BELL_CAROL_RELEASE_2026-11-08.md)
 
 The final local Next.js 16.4.3 production build is `vVptuSIL-xqgMyRAbl_mu`. Gallery captures identify their individual build in the desktop record. The owner used ordinary Safari with Silent Mode on to enter all three campuses on listening build `pk8nW65AUxxEwM0mjrQy9` and confirmed hearing sound. The final build keeps the same Christmas chimes and removes the rain sound at the owner’s request. The walks exposed two readability issues. The UBC letters gained a warm night wash and the long Nest location label now clears its toolbar at tablet widths.
 
