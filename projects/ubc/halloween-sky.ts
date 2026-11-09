@@ -59,8 +59,8 @@ export function createHalloweenSky() {
   group.add(light, light.target);
   let elapsed = 0;
   function update(dt: number, settings: Settings, camera: THREE.Vector3) {
-    group.visible = settings.halloween;
-    if (!settings.halloween) return;
+    group.visible = settings.halloween && !settings.live && settings.weather === "overcast" && settings.hour === 19.5;
+    if (!group.visible) return;
     group.position.copy(camera);
     if (!settings.reducedMotion) elapsed += Math.max(0, Math.min(0.1, dt));
     material.uniforms.time.value = elapsed;

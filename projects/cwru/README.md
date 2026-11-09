@@ -30,9 +30,24 @@ Original generic avatars, dialogue and walks are fictional simulations near rele
 
 The deployed follow-up integrates the shared review form above the footer. At the owner's subsequent request, the Play privacy panel and recording checkbox are removed from both the landing page and Project information; a plain policy link remains. Reviews describe this virtual experience and support owner editing/removal and reporting. Play recording requires a started, ready, visible game and recent input, honors existing opt-outs and browser privacy signals, and stays separate from profiles and reviews. The private backend counts browser capabilities, not verified people. See `docs/CWRU_COMMUNITY_INTEGRATION_2026-10-31.md` for implementation acceptance, and `docs/CWRU_COMMUNITY_RELEASE_2026-10-31.md` for the verified production rollout. See `/labs/campus-privacy` for collection and retention details.
 
-## Halloween
+## Campus editions and atmosphere
 
-Atmosphere offers Automatic, Regular and Halloween. Automatic selects Halloween October 24–November 7 inclusive using Cleveland calendar dates, every year. December 1–31 is reserved for Christmas; it falls back to Regular until that edition is implemented. Manual choices persist until changed. Turning Halloween off restores prior weather, season and time.
+Automatic follows the Cleveland calendar. Halloween runs October 24–November 7
+each year. Christmas runs November 8–December 31, 2026. The 2026 Regular override
+expires at local midnight January 1. Choose either holiday replay at the welcome
+or in Atmosphere to explore it for the current visit.
+
+Live uses current Cleveland daylight and a recent nearby National Weather
+Service station report. Atmosphere displays the station, observation time and
+age. Changing the weather, hour or season in Photo or Atmosphere stages a
+Simulated scene. It stays in place when walking resumes. Select Live to return
+to current conditions. The historical 19:30 overcast sky is a Halloween preset.
+
+The Christmas route begins at Kelvin Smith Library and reaches the Tinkham Veale
+commons. Decorations continue inside, with brighter exterior lights through
+twilight. [Three-campus implementation and acceptance](../../docs/CAMPUS_CHRISTMAS_2026.md).
+
+### Halloween
 
 Sixteen original types roam clear mapped outdoor paths: werewolf, lizard creature, jiangshi, zombie, vampire, ghost, skeleton, witch, mummy, pumpkin knight, comic hero, masked vigilante, manga ninja, manga swordsman, robot and mecha. Their silhouettes, colors, speeds, gait and bob differ. Jiangshi extend their arms and hop; robots have box bodies and face panels; mecha wear angular armor. No external character art is used.
 
@@ -40,7 +55,13 @@ The source graph supports 128 generated actors, spread across campus. Visible po
 
 An optional Friday-the-13th-inspired hockey-masked outdoor pursuer carrying a prop knife follows connected paths, waits outside buildings and stops short. It does not attack or cause damage. Failed route searches are throttled. Its toggle is independent of the seasonal atmosphere.
 
-The original Web Audio soundscape combines an eerie score, distant wolf howls, and proximity ghost cries with occasional close-range screams. Stereo direction and volume follow the player. Sound starts after a player gesture, has a persistent mute/volume control and a wolf preview, and stops when Halloween is disabled or the tab is hidden. No recordings, real voices, external audio assets or microphone permissions are used. The separate iPhone audio follow-up feature-detects Audio Session playback support after a sound/start gesture, releasing its setting on mute, zero volume, Regular mode, hiding and disposal. Unsupported browsers retain ordinary Web Audio behavior. See `docs/CWRU_IPHONE_AUDIO_2026-10-31.md` for validation and deployment status.
+The original Halloween score, wolf howls, nearby ghost cries and howl preview use
+Web Audio. Campus sound starts with an entry or sound gesture. Weather can be
+heard in Regular, and spatial festive cues follow the Christmas walk. Mute and
+volume apply across editions and survive a return visit, including migration of
+the existing CWRU sound preference. Hidden tabs suspend playback. The optional
+Audio Session playback role supports iPhone Silent Mode. [Earlier iPhone audio
+validation](../../docs/CWRU_IPHONE_AUDIO_2026-10-31.md).
 
 ## Validation and release
 

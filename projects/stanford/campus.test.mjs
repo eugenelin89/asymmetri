@@ -11,8 +11,8 @@ const {landmarkIds,applyCampusAnchors,initialCampusPose}=await import('./layout.
 const {characters,places,safeExternalUrl}=await import('./registry.ts');
 const {createPeople}=await import('./people.ts');
 const {createHalloween,halloweenMonsterKinds}=await import('./halloween.ts');
-const {defaults,initialHalloweenPreference,serializeHalloweenPreference,setHalloween,solarPosition}=await import('./environment.ts');
-const {campusThemes,scheduledTheme}=await import('./themes.ts');
+const {defaults,solarPosition}=await import('./environment.ts');
+const {campusDate,scheduledEdition}=await import('../campus-atmosphere/calendar.ts');
 const {sampleWalkingRoute}=await import('./population-schedule.ts');
 const {proximityMix}=await import('./sound.ts');
 const root=new URL('../../public/stanford/v0.1-2026-10-31/',import.meta.url);
@@ -27,7 +27,17 @@ test('arrival and Redwood City waterfront support walking at their true coordina
 test('all imported varsity memberships and public characters retain source identity and safe links',()=>{const coverage=JSON.parse(readFileSync(new URL('./data/roster-coverage.json',import.meta.url))),people=JSON.parse(readFileSync(new URL('./data/people.json',import.meta.url)));assert.equal(coverage.uniqueAthletes,people.filter(p=>p.kind==='athlete').length);assert.equal(coverage.teams.length,32);assert.equal(coverage.teams.reduce((n,t)=>n+t.count,0),855);for(const c of characters){assert(anchors[c.zone],c.id+' zone');assert(c.sources.every(s=>safeExternalUrl(s.url)),c.id+' link');}for(const id of ['fei-fei-li','andrew-ng','chris-manning'])assert(characters.find(c=>c.id===id),id);assert.equal(people.filter(p=>p.kind==='student').length,515);assert.equal(people.filter(p=>p.kind==='student'&&p.sourceAccess==='public-search-excerpt').length,17);const provenance=JSON.parse(readFileSync(new URL('./data/people-sources.json',import.meta.url)));assert.equal(provenance.suppliedStudentImport.suppliedRows,500);assert.equal(provenance.suppliedStudentImport.rows.length,500);assert.equal(new Set(provenance.suppliedStudentImport.rows.map(r=>r.personId)).size,500);assert.equal(provenance.suppliedStudentImport.contactColumnsImported,false);assert(!JSON.stringify(people).match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i));assert.equal(safeExternalUrl('https://stanford.edu.attacker.example'),null);assert.equal(safeExternalUrl('javascript:alert(1)'),null);});
 test('every source-linked person has a collision-clear walking route, including all varsity venues',()=>{const people=createPeople(data,anchors,collision.blocked),coverage=people.coverage();assert.deepEqual(coverage.unrouted,[]);assert.equal(coverage.routed,characters.length);});
 test('the complete roster moves virtually independent of nearby model limits',()=>{const route=[[0,0],[20,0],[20,20]],a=sampleWalkingRoute(route,0,183),b=sampleWalkingRoute(route,30,183);assert.notDeepEqual(a.point,b.point);assert(a.point.every(Number.isFinite));assert.deepEqual(sampleWalkingRoute([],1,0),{point:[0,0],target:0});});
-test('holiday defaults honor Oct24–Nov7 in Stanford time, with December reserved until Christmas ships',()=>{assert.equal(initialHalloweenPreference(new Date('2026-10-24T06:59:00Z')),false);assert.equal(initialHalloweenPreference(new Date('2026-10-24T07:00:00Z')),true);assert.equal(initialHalloweenPreference(new Date('2026-11-08T07:59:00Z')),true);assert.equal(initialHalloweenPreference(new Date('2026-11-08T08:00:00Z')),false);const pref=serializeHalloweenPreference(new Date('2026-10-31T20:00:00Z'),true);assert.equal(initialHalloweenPreference(new Date('2026-11-08T08:00:00Z'),pref),false);assert.equal(scheduledTheme(new Date('2026-12-25T20:00:00Z')).id,'base');const christmas=campusThemes.find(t=>t.id==='christmas');assert.equal(christmas.available,false);assert.deepEqual(christmas.automatic,{start:[12,1],end:[12,31]});const base={...defaults,hour:12,season:'summer'},on=setHalloween(base,true),off=setHalloween(on.settings,false,on.previous);assert.equal(off.settings.hour,12);assert.equal(off.settings.season,'summer');const sun=solarPosition('summer',12);assert(sun.sunrise>5&&sun.sunrise<7);assert(sun.sunset>19&&sun.sunset<21);});
+test('Stanford Halloween, Christmas and sunlight use the campus calendar', () => {
+ const edition = instant => scheduledEdition(campusDate('stanford',new Date(instant)).date);
+ assert.equal(edition('2026-10-24T06:59:59Z'),'regular');
+ assert.equal(edition('2026-10-24T07:00:00Z'),'halloween');
+ assert.equal(edition('2026-11-08T07:59:59Z'),'halloween');
+ assert.equal(edition('2026-11-08T08:00:00Z'),'christmas');
+ assert.equal(edition('2027-01-01T07:59:59Z'),'christmas');
+ assert.equal(edition('2027-01-01T08:00:00Z'),'regular');
+ const sun=solarPosition('summer',12);
+ assert(sun.sunrise>5 && sun.sunrise<7 && sun.sunset>19 && sun.sunset<21);
+});
 test('positional sound fades with distance and changes stereo direction with camera yaw',()=>{const p={x:0,z:0,y:0,yaw:0};assert.equal(proximityMix(p,[100,0]).gain,0);assert(proximityMix(p,[4,0]).gain>proximityMix(p,[25,0]).gain);assert(proximityMix(p,[8,0]).pan>0);assert(proximityMix({...p,yaw:Math.PI},[8,0]).pan<0);});
 const halloween=createHalloween(data,anchors,interiors,collision.blocked);
 test('expanded Halloween includes every folklore kind and comic/manga/robot visitor on clear routes',()=>{assert.equal(halloweenMonsterKinds.length,22);assert(halloween.monsters.length>=150);assert.equal(new Set(halloween.monsters.map(m=>m.kind)).size,22);assert.equal(halloween.heroes.actors.length,24);for(const m of halloween.monsters){assert(!collision.blocked(m.point,0));assert(!data.buildings.some(b=>inPolygon(m.point,b.rings)));}for(const name of ['Spider-Man','Superman','Batman','Naruto','Goku'])assert(halloween.heroes.actors.some(a=>a.name===name));});

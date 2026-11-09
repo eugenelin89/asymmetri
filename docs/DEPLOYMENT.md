@@ -1643,3 +1643,8 @@ rollback workflow. Follow [UBC release acceptance](UBC_RELEASE_ACCEPTANCE.md).
 The initial local benchmark/roadmap increment is not a completed V0.5 and does not
 advance the production release. No new Sites registration or hosting migration
 is part of this work.
+
+
+### Campus station observation check
+
+After a separately authorized release, exercise `GET /labs/campus-weather-api/ubc`, `/labs/campus-weather-api/stanford` and `/labs/campus-weather-api/cwru` through the public website ingress. Verify a successful JSON response and inspect the station timestamp or explicit unavailable state. Production uses a single shared website process. Moving to multiple processes requires coordination of upstream refreshes across those processes. The route uses the existing website backend and needs no private configuration. [Station and browser behavior](CAMPUS_WEATHER.md).

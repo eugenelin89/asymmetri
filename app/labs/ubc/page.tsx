@@ -1,3 +1,4 @@
+import { CampusVisitBoundary } from "@/projects/campus-atmosphere/CampusVisitBoundary";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { pageMetadata } from "@/lib/metadata";
@@ -27,7 +28,7 @@ export default function UbcPage() {
           </div>
           <span className={styles.edition}>{ubc.status}</span>
         </div>
-        <Campus />
+        <CampusVisitBoundary><Campus /></CampusVisitBoundary>
         <div className={styles.notes}>
           <section>
             <div className={styles.statLine}>

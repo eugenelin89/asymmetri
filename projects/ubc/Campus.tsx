@@ -15,18 +15,11 @@ import {
   unofficial,
   sources,
 } from "./registry";
-import {
-  clock,
-  defaults,
-  dateDefaults,
-  normalizeSettings,
-  solarPosition,
-  halloweenStorageKey,
-  initialHalloweenPreference,
-  serializeHalloweenPreference,
-  setHalloween,
-  type Atmosphere,
-} from "./environment";
+import { defaults } from "./environment";
+import { useCampusVisit } from "../campus-atmosphere/use-campus-visit";
+import { useCampusPreferences } from "../campus-atmosphere/use-campus-preferences";
+import { AtmospherePanel, CampusConditions, EditionControl, PhotoAtmosphere, SoundControl, SoundVolume } from "../campus-atmosphere/VisitControls";
+import visitStyles from "../campus-atmosphere/visit.module.css";
 import type {
   Anchors,
   CampusData,
@@ -93,8 +86,6 @@ export function Campus() {
     opener = useRef<HTMLElement | null>(null),
     previousPanel = useRef<string | null>(null),
     resumeSceneFocus = useRef(false);
-  const previousAtmosphere = useRef<Atmosphere | null>(null);
-  const editionInitialized = useRef(false);
   const sound = useRef<ReturnType<typeof createHalloweenAudio> | null>(null);
   const [audioStatus, setAudioStatus] = useState<HalloweenAudioStatus>("suspended");
   useEffect(() => () => { sound.current?.dispose(); sound.current = null; }, []);
@@ -111,11 +102,25 @@ export function Campus() {
   const [data, setData] = useState<CampusData | null>(null),
     [anchors, setAnchors] = useState<Anchors>({}),
     [mode, setMode] = useState<Mode>("walk"),
-    [settings, setSettings] = useState<Settings>(defaults),
     [panel, setPanel] = useState<string | null>(null),
     [query, setQuery] = useState(""),
     [category, setCategory] = useState("All"),
     [notice, setNotice] = useState("");
+  const campusVisit = useCampusVisit("ubc");
+  const { ready: preferencesReady, preferences, update } = useCampusPreferences("ubc", defaults.halloweenVolume);
+  const settings = useMemo<Settings>(() => ({
+    ...defaults,
+    ...campusVisit.atmosphere,
+    halloween: campusVisit.edition === "halloween",
+    christmas: campusVisit.edition === "christmas",
+    quality: preferences.quality,
+    markers: preferences.markers,
+    population: preferences.population,
+    reducedMotion: preferences.reducedMotion,
+    halloweenChase: preferences.halloweenChase,
+    halloweenAudio: preferences.sound,
+    halloweenVolume: preferences.volume,
+  }), [campusVisit.atmosphere, campusVisit.edition, preferences]);
   const settingsRef = useRef(settings);
   const [telemetry, setTelemetry] = useState<Telemetry | null>(null),
     [markers, setMarkers] = useState<Marker[]>([]),
@@ -133,20 +138,6 @@ export function Campus() {
         : "Your browser has paused sound. Tap the sound control to enable it.");
     });
   };
-  const initializeEdition = useCallback(() => {
-    if (editionInitialized.current) return;
-    editionInitialized.current = true;
-    let preference: string | null = null;
-    try { preference = localStorage.getItem(halloweenStorageKey); } catch {}
-    const now = new Date();
-    const edition = setHalloween(dateDefaults(now), initialHalloweenPreference(now, preference));
-    previousAtmosphere.current = edition.previous;
-    settingsRef.current = edition.settings;
-    setSettings(edition.settings);
-  }, []);
-  useEffect(() => {
-    initializeEdition();
-  }, [initializeEdition]);
   const [appearance, setAppearance] = useState<Appearance>(defaultAppearance);
   useEffect(() => {
     if (ready) api.current?.appearance(appearance);
@@ -247,20 +238,14 @@ export function Campus() {
           setRoute,
           setError,
           residence,
-          (_audioSettings, pose, ghosts) => {
-            // The engine starts with defaults while its assets initialize. The
-            // visitor's current sound choice is authoritative from the gesture.
-            sound.current?.update(settingsRef.current, pose, ghosts);
+          (_audioSettings, pose, ghosts, ambience) => {
+            sound.current?.update(settingsRef.current, pose, ghosts, ambience);
             setAudioStatus(sound.current?.status() || "suspended");
           },
+          undefined,
+          settingsRef.current,
         );
         api.current = engine;
-        setSettings((s) => ({
-          ...s,
-          reducedMotion:
-            matchMedia("(prefers-reduced-motion: reduce)").matches ||
-            s.reducedMotion,
-        }));
         setReady(true);
       })
       .catch((e) => {
@@ -282,7 +267,7 @@ export function Campus() {
     settingsRef.current = settings;
     sound.current?.configure(settings);
     api.current?.settings(settings);
-  }, [settings, ready]);
+  }, [settings]);
   useEffect(() => {
     const closedPanel = previousPanel.current !== null && panel === null;
     previousPanel.current = panel;
@@ -347,26 +332,13 @@ export function Campus() {
     api.current?.setMode(m);
     if (onFoot(m)) focusScene();
   };
-  const update = (patch: Partial<Settings>) => {
-    const next = normalizeSettings({ ...settingsRef.current, ...patch });
-    settingsRef.current = next;
-    sound.current?.configure(next);
-    setSettings(next);
+  const changeSound = (enabled: boolean) => {
+    if (started && enabled && preferences.volume > 0) enableAudio({ ...settings, halloweenAudio: true });
+    update({ sound: enabled });
   };
-  const changeHalloween = (enabled: boolean) => {
-    editionInitialized.current = true;
-    const next = setHalloween(settingsRef.current, enabled, previousAtmosphere.current);
-    settingsRef.current = next.settings;
-    if (enabled && started && next.settings.halloweenAudio) enableAudio(next.settings);
-    else sound.current?.configure(next.settings);
-    previousAtmosphere.current = next.previous;
-    setSettings(next.settings);
-    try {
-      const saved = serializeHalloweenPreference(new Date(), enabled);
-      if (saved) localStorage.setItem(halloweenStorageKey, saved);
-    } catch {
-      setNotice("Halloween changed for this visit; device storage is unavailable.");
-    }
+  const changeVolume = (volume: number) => {
+    if (started && preferences.sound && preferences.volume === 0 && volume > 0) enableAudio({ ...settings, halloweenVolume: volume });
+    update({ volume });
   };
   const visit = (id: string) => {
     api.current?.visit(id);
@@ -395,7 +367,6 @@ export function Campus() {
       g.parts.some((b) => b.id === panel),
     ),
     building = buildingGroup?.building;
-  const sp = solarPosition(settings.season, settings.hour);
   const directory = [
     ...places.map((p) => ({
       id: p.id,
@@ -462,14 +433,15 @@ export function Campus() {
   );
   return (
     <section
-      className={`${styles.experience} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
+      className={`${styles.experience} ${!started ? visitStyles.welcomeHost : ""} ${!started && settings.halloween ? styles.halloweenWelcomeHost : ""} ${expanded ? styles.expanded : ""} ${photo ? styles.photo : ""} ${character ? styles.conversing : ""}`}
       ref={playRegion}
       aria-label="UBC Virtual Campus explorer"
     >
       <PlaySession campus="ubc" playing={started && ready && !error} regionRef={playRegion} />
       <div className={styles.canvas} ref={host} />
-      {!started && (
-        <div className={`${styles.welcome} ${settings.halloween ? styles.halloweenWelcome : ""}`} data-edition={settings.halloween ? "halloween" : "regular"}>
+      {!started && (!campusVisit.ready || !preferencesReady) && <p className={styles.loading} role="status">Preparing campus…</p>}
+      {!started && campusVisit.ready && preferencesReady && (
+        <div className={`${styles.welcome} ${visitStyles.welcomeSurface} ${settings.halloween ? styles.halloweenWelcome : ""}`} data-edition={campusVisit.edition}>
           {settings.halloween ? <HalloweenWelcome /> : <div className={styles.welcomeMap} aria-hidden="true">
             <span>POINT GREY</span>
             <Image
@@ -488,10 +460,10 @@ export function Campus() {
             </span>
             {settings.halloween && <div className={styles.halloweenBadge}><span aria-hidden="true">☾</span> Halloween edition</div>}
             <h2>
-              {settings.halloween ? <>A campus<br /><em>after dark.</em></> : <>A place to<br />find your future.</>}
+              {settings.christmas ? <>Christmas at<br /><em>Point Grey.</em></> : settings.halloween ? <>A campus<br /><em>after dark.</em></> : <>A place to<br />find your future.</>}
             </h2>
             <p>
-              {settings.halloween
+              {settings.christmas ? "Begin at the UBC letters and follow the Christmas lights to the AMS Nest atrium." : settings.halloween
                 ? "The paths are moonlit. The halls are haunted. And tonight, you’re not exploring alone."
                 : "Begin at the UBC entrance letters. Step inside, meet a virtual guide, and take your time."}
             </p>
@@ -499,8 +471,7 @@ export function Campus() {
             <button
               className={styles.primary}
               onClick={() => {
-                initializeEdition();
-                if (settingsRef.current.halloween && settingsRef.current.halloweenAudio) enableAudio();
+                if (settings.halloweenAudio && settings.halloweenVolume > 0) enableAudio(settings);
                 try {
                   setAppearance(
                     normalizeAppearance(
@@ -516,16 +487,12 @@ export function Campus() {
             >
               {settings.halloween ? "Enter if you dare" : "Start exploring"} <span aria-hidden="true">↗</span>
             </button>
-            <button className={styles.editionSwitch} onClick={() => changeHalloween(!settings.halloween)}>
-              {settings.halloween ? "Prefer daylight? Explore the regular campus" : "Explore the Halloween edition"}
-            </button>
+            <EditionControl visit={campusVisit} />
+            <SoundControl enabled={preferences.sound} onChange={changeSound} />
+            <p className={styles.quiet}><CampusConditions visit={campusVisit} campus="ubc" /></p>
             {settings.halloween && <label className={styles.welcomeChase}>
               <input type="checkbox" checked={settings.halloweenChase} onChange={(e) => update({ halloweenChase: e.target.checked })} />
               Masked pursuer <span>Shift to run · switch off anytime</span>
-            </label>}
-            {settings.halloween && <label className={styles.welcomeChase}>
-              <input type="checkbox" checked={settings.halloweenAudio} onChange={(e) => update({ halloweenAudio: e.target.checked })} />
-              Scary soundscape <span>Music, wolf howls & nearby ghosts</span>
             </label>}
             <p className={styles.quiet}>
               Desktop & touch · No account required
@@ -587,11 +554,8 @@ export function Campus() {
                 <div>
                   <strong>{telemetry?.location || "UBC Entrance Letters"}</strong>
                   <span>
-                    {clock(settings.hour)} · {settings.season} ·{" "}
-                    {settings.weather === "cloudy"
-                      ? "Partly cloudy"
-                      : settings.weather}
-                    {settings.halloween && " · Halloween"}
+                    <CampusConditions visit={campusVisit} campus="ubc" />
+                    {campusVisit.replay ? ` · ${campusVisit.replay} replay` : campusVisit.edition !== "regular" && ` · ${campusVisit.edition}`}
                   </span>
                 </div>
               </div>
@@ -615,23 +579,16 @@ export function Campus() {
                   ⌕ <span>Explore campus</span>
                 </button>
                 <button
-                  aria-label="Change atmosphere and Halloween edition"
+                  aria-label="Change atmosphere and campus edition"
                   onClick={() => openPanel("settings")}
                 >
                   {settings.halloween ? "☾" : "☼"} <span>Atmosphere</span>
                 </button>
-                {settings.halloween && <button
-                  aria-label={settings.halloweenAudio && audioStatus === "running" ? "Mute Halloween sound" : "Enable Halloween sound"}
-                  aria-pressed={settings.halloweenAudio && audioStatus === "running"}
-                  onClick={() => {
-                    if (!settings.halloweenAudio || sound.current?.status() !== "running") {
-                      enableAudio({ ...settingsRef.current, halloweenAudio: true });
-                      update({ halloweenAudio: true });
-                    } else update({ halloweenAudio: false });
-                  }}
-                >
-                  <span aria-hidden="true">{settings.halloweenAudio && audioStatus === "running" ? "♫" : "♪"}</span> {settings.halloweenAudio && audioStatus === "running" ? "Sound on" : "Sound off"}
-                </button>}
+                <button
+                  aria-label={preferences.sound ? "Mute campus sound" : "Enable campus sound"}
+                  aria-pressed={preferences.sound}
+                  onClick={() => changeSound(!preferences.sound)}
+                >♫ <span>{preferences.sound ? "Sound on" : "Sound off"}</span></button>
                 <button
                   onClick={() => {
                     if (mode === "map") changeMode("aerial");
@@ -805,55 +762,8 @@ export function Campus() {
             />
           )}
           {photo && (
-            <div className={styles.photoTools}>
-              <span>PHOTO MODE</span>
-              <label>
-                Time{" "}
-                <input
-                  aria-label="Photo time"
-                  type="range"
-                  min="0"
-                  max="23.75"
-                  step=".25"
-                  value={settings.hour}
-                  disabled={settings.halloween}
-                  onChange={(e) => update({ hour: Number(e.target.value) })}
-                />
-              </label>
-              <select
-                aria-label="Photo season"
-                value={settings.season}
-                disabled={settings.halloween}
-                onChange={(e) =>
-                  update({ season: e.target.value as Settings["season"] })
-                }
-              >
-                {["spring", "summer", "autumn", "winter"].map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-              <select
-                aria-label="Photo weather"
-                value={settings.weather}
-                disabled={settings.halloween}
-                onChange={(e) =>
-                  update({ weather: e.target.value as Settings["weather"] })
-                }
-              >
-                {[
-                  "clear",
-                  "cloudy",
-                  "overcast",
-                  "rain",
-                  "fog",
-                  ...(settings.season === "winter" ? ["snow"] : []),
-                ].map((w) => (
-                  <option key={w}>{w}</option>
-                ))}
-              </select>
-              {settings.halloween && (
-                <button onClick={() => changeHalloween(false)}>Turn off Halloween</button>
-              )}
+            <div className={`${styles.photoTools} ${visitStyles.photoBar}`}>
+              <PhotoAtmosphere visit={campusVisit} />
               <select
                 aria-label="Photo camera"
                 value={mode}
@@ -1032,121 +942,16 @@ export function Campus() {
               </>
             ) : panel === "settings" ? (
               <>
-                <h2>A different light.</h2>
-                <p>
-                  Choose a season and a Vancouver day. These are simulated
-                  conditions.
-                </p>
+                <AtmospherePanel visit={campusVisit} campus="ubc" />
+                {settings.halloween && <label className={styles.check}>
+                  <input type="checkbox" checked={settings.halloweenChase} onChange={event => update({ halloweenChase: event.target.checked })} /> Masked pursuer
+                </label>}
                 <fieldset>
-                  <legend>Halloween edition</legend>
-                  <label className={styles.check}>
-                    <input
-                      type="checkbox"
-                      checked={settings.halloween}
-                      aria-describedby="ubc-halloween-description"
-                      onChange={(e) => changeHalloween(e.target.checked)}
-                    />
-                    Halloween campus
-                  </label>
-                  <label className={styles.check}>
-                    <input type="checkbox" checked={settings.halloweenChase} disabled={!settings.halloween} onChange={(e) => update({ halloweenChase: e.target.checked })} />
-                    Masked pursuer
-                  </label>
-                  <p>A masked figure follows you outdoors. Hold Shift or Run to get away; turn off the pursuer anytime.</p>
-                  <label className={styles.check}>
-                    <input type="checkbox" checked={settings.halloweenAudio} disabled={!settings.halloween} onChange={(e) => {
-                      if (e.target.checked) enableAudio({ ...settingsRef.current, halloweenAudio: true });
-                      update({ halloweenAudio: e.target.checked });
-                    }} />
-                    Scary soundscape
-                  </label>
-                  <label>
-                    Sound volume <strong>{Math.round(settings.halloweenVolume * 100)}%</strong>
-                    <input aria-label="Halloween sound volume" type="range" min="0" max="100" step="1" value={Math.round(settings.halloweenVolume * 100)} disabled={!settings.halloween || !settings.halloweenAudio} onChange={(e) => update({ halloweenVolume: Number(e.target.value) / 100 })} />
-                  </label>
-                  <p>Eerie music, distant wolf howls and ghost cries that follow your position. Sound begins after you enter.</p>
-                  <p id="ubc-halloween-description">
-                    {settings.halloween
-                      ? "An autumn evening with a full moon, dark clouds and haunted campus decorations. Turn it off to restore your season, weather and time."
-                      : "Explore an autumn evening with a full moon, dark clouds and haunted campus decorations."}
-                  </p>
-                  <small>Available all year. Your choice is remembered on this device for the current year.</small>
+                  <legend>Sound</legend>
+                  <SoundControl enabled={preferences.sound} onChange={changeSound} />
+                  {preferences.sound && audioStatus !== "running" && preferences.volume > 0 && <button onClick={() => enableAudio(settings)}>Resume sound</button>}
+                  <SoundVolume volume={preferences.volume} onChange={changeVolume} />
                 </fieldset>
-                <fieldset disabled={settings.halloween}>
-                  <legend>Season</legend>
-                  <div className={styles.options}>
-                    {(["spring", "summer", "autumn", "winter"] as const).map(
-                      (s) => (
-                        <button
-                          key={s}
-                          aria-pressed={settings.season === s}
-                          onClick={() => update({ season: s })}
-                        >
-                          {s}
-                        </button>
-                      ),
-                    )}
-                  </div>
-                </fieldset>
-                <label className={styles.slider}>
-                  Time of day <strong>{clock(settings.hour)}</strong>
-                  <input
-                    type="range"
-                    min="0"
-                    max="23.75"
-                    step=".25"
-                    value={settings.hour}
-                    disabled={settings.halloween}
-                    onChange={(e) => update({ hour: Number(e.target.value) })}
-                  />
-                </label>
-                <small>
-                  {settings.halloween ? "Halloween evening · Moonlit seasonal scene" : <>
-                    {sp.date} · Vancouver local time<br />
-                    Approximate sunrise {clock(sp.sunrise)} · sunset {clock(sp.sunset)}
-                  </>}
-                </small>
-                <div className={styles.presets}>
-                  {[
-                    ["Sunrise", sp.sunrise + 0.3],
-                    ["Noon", 12],
-                    ["Golden hour", sp.sunset - 0.7],
-                    ["Night", 22],
-                  ].map(([s, h]) => (
-                    <button key={s} disabled={settings.halloween} onClick={() => update({ hour: Number(h) })}>
-                      {s}
-                    </button>
-                  ))}
-                </div>
-                <label>
-                  Weather
-                  <select
-                    value={settings.weather}
-                    disabled={settings.halloween}
-                    onChange={(e) =>
-                      update({ weather: e.target.value as Settings["weather"] })
-                    }
-                  >
-                    {[
-                      "clear",
-                      "cloudy",
-                      "overcast",
-                      "rain",
-                      "fog",
-                      ...(settings.season === "winter" ? ["snow"] : []),
-                    ].map((w) => (
-                      <option key={w} value={w}>
-                        {w === "cloudy"
-                          ? "Partly cloudy"
-                          : w === "snow"
-                            ? "Snowfall winter"
-                            : w === "rain" && settings.season === "winter"
-                              ? "Typical rainy winter"
-                              : w}
-                      </option>
-                    ))}
-                  </select>
-                </label>
                 <label>
                   Quality
                   <select

@@ -1,0 +1,19 @@
+campus,edition,run,utc,seconds,frames,p50_ms,p95_ms,p99_ms,max_ms,over50_frames,mean_fps,median_fps,welcome_touches,activation,audio_context,audio_session,location
+ubc,regular,1,2026-11-09T01:07:32.672Z,73.144,2816,23,50,56,109,124,38.50,43.48,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+ubc,christmas,1,2026-11-09T01:08:58.904Z,73.516,2363,27,52,58,109,170,32.14,37.04,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+ubc,regular,2,2026-11-09T01:10:38.778Z,73.346,3204,23,31,35,107,2,43.68,43.48,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+ubc,christmas,2,2026-11-09T01:12:04.980Z,73.483,2504,25,51,57,117,158,34.08,40.00,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+ubc,regular,3,2026-11-09T01:13:31.160Z,73.402,2511,25,51,56,108,143,34.21,40.00,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+ubc,christmas,3,2026-11-09T01:14:57.565Z,73.380,2746,24,51,57,102,145,37.42,41.67,3,Enter / click,running,playback,AMS Student Nest · Blue Chip & Great Hall · Level 1 · Reconstructed
+stanford,regular,1,2026-11-09T01:17:27.042Z,135.342,6867,17,60,82,129,394,50.74,58.82,3,Enter / click,running,playback,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+stanford,christmas,1,2026-11-09T01:19:57.491Z,135.679,6351,17,69,93,154,488,46.81,58.82,3,Enter / click,running,playback,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+stanford,regular,2,2026-11-09T01:22:49.333Z,136.643,6117,17,84,107,138,498,44.77,58.82,3,Enter / click,running,playback,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+stanford,christmas,2,2026-11-09T01:25:20.738Z,136.172,5942,17,83,103,134,524,43.64,58.82,3,Enter / click,running,playback,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+stanford,regular,3,2026-11-09T01:29:39.842Z,138.142,5841,17,89,114,147,535,42.28,58.82,3,Enter / click,running,auto,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+stanford,christmas,3,2026-11-09T01:32:11.189Z,136.413,5860,17,86,107,148,528,42.96,58.82,3,Enter / click,running,playback,Cecil H. Green Library · East Wing · Level 1 · Reconstructed
+cwru,regular,1,2026-11-09T01:32:58.175Z,31.783,1327,21,48,76,139,46,41.75,47.62,3,Enter / click,running,auto,Tinkham Veale University Center · Level 1 · Reconstructed
+cwru,christmas,1,2026-11-09T01:33:44.298Z,31.855,1241,23,49,60,98,50,38.96,43.48,3,Enter / click,running,playback,Tinkham Veale University Center · Level 1 · Reconstructed
+cwru,regular,2,2026-11-09T01:34:48.633Z,31.816,1413,20,47,55,89,34,44.41,50.00,3,Enter / click,running,auto,Tinkham Veale University Center · Level 1 · Reconstructed
+cwru,christmas,2,2026-11-09T01:35:34.988Z,31.693,1340,21,50,62,120,63,42.28,47.62,3,Enter / click,running,playback,Tinkham Veale University Center · Level 1 · Reconstructed
+cwru,regular,3,2026-11-09T01:36:23.019Z,31.787,1396,20,47,56,103,42,43.92,50.00,3,Enter / click,running,auto,Tinkham Veale University Center · Level 1 · Reconstructed
+cwru,christmas,3,2026-11-09T01:37:09.741Z,31.564,1310,21,49,62,104,54,41.50,47.62,3,Enter / click,running,playback,Tinkham Veale University Center · Level 1 · Reconstructed

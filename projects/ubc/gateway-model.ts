@@ -93,7 +93,7 @@ function brushedRoughness() {
 }
 
 /** Local front is +Z. Site placement, orientation and pedestrian arrival are separate. */
-export function buildGatewayLetters(): { group: THREE.Group; colliders: Box[] } {
+export function buildGatewayLetters() {
   const group = new THREE.Group();
   group.name = "ubc-entrance-letters";
   const roughnessMap = brushedRoughness();
@@ -165,5 +165,8 @@ export function buildGatewayLetters(): { group: THREE.Group; colliders: Box[] } 
     minZ: -0.475, maxZ: 0.475,
     minY: 0, maxY: baseline + letterHeight + 0.018,
   }];
-  return { group, colliders };
+  // The lanterns cast a warm wash on the satin faces at dusk.
+  face.emissive.setHex(0xffe0ae);
+  face.emissiveIntensity = 0;
+  return { group, colliders, setFestiveLight(level: number) { face.emissiveIntensity = level * 0.32; } };
 }

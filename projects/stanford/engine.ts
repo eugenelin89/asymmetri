@@ -1,3 +1,8 @@
+import { updateClouds } from "../campus-atmosphere/sky";
+import { createChristmasWalk } from "../campus-atmosphere/christmas-scenery";
+import { christmasWalks } from "../campus-atmosphere/christmas-walks";
+import { displayMix } from "../campus-atmosphere/ambience";
+import { createWeatherParticles } from "../campus-atmosphere/particles";
 import compiledNavigation from "./data/navigation-graph.json" with { type: "json" };
 import type { NavigationGraph } from "./spatial";
 import { createResidenceControls } from "./residence-controls";
@@ -84,8 +89,9 @@ export async function createCampus(
   onError: (message: string) => void,
   sound: CampusSound | null = null,
   progress: (message:string)=>void = () => {},
+  initialSettings: Settings = defaults,
 ): Promise<CampusAPI> {
-  let settings = { ...defaults },
+  let settings = { ...initialSettings },
     mode: Mode = "walk",
     footMode: "walk" | "third" = "walk",
     paused = false,
@@ -240,6 +246,8 @@ export async function createCampus(
   progress("Preparing seasonal visitors and campus walks…");await new Promise<void>(resolve=>setTimeout(resolve,0));
   const halloween = createHalloween(data, anchors, interiors, collision.blocked);
   scene.add(halloween.group);
+  const christmasWalk = createChristmasWalk("stanford", anchors, collision.blocked);
+  scene.add(christmasWalk.group);
   const halloweenChase = createHalloweenChase(data, interiors, collision, routes);
   scene.add(halloweenChase.group);
   let campusCharacters = characters;
@@ -284,26 +292,8 @@ export async function createCampus(
       id: number;
     } | null = null,
     dragged = false;
-  const rainGeo = new THREE.BufferGeometry(),
-    rainPositions = new Float32Array(900 * 3);
-  for (let i = 0; i < 900; i++) {
-    rainPositions[i * 3] = (Math.random() - 0.5) * 70;
-    rainPositions[i * 3 + 1] = Math.random() * 28;
-    rainPositions[i * 3 + 2] = (Math.random() - 0.5) * 70;
-  }
-  rainGeo.setAttribute("position", new THREE.BufferAttribute(rainPositions, 3));
-  const precipitation = new THREE.Points(
-    rainGeo,
-    new THREE.PointsMaterial({
-      color: 0xe4eeee,
-      size: 0.07,
-      transparent: true,
-      opacity: 0.65,
-      depthWrite: false,
-    }),
-  );
-  precipitation.frustumCulled = false;
-  scene.add(precipitation);
+  const particles = createWeatherParticles();
+  scene.add(particles.group);
   function listen<K extends keyof WindowEventMap>(
     target: Window,
     type: K,
@@ -356,15 +346,18 @@ export async function createCampus(
     updateEnvironment();
   }
   function updateEnvironment() {
-    const sp = solarPosition(settings.season, settings.hour),
+    const hauntedSky = settings.halloween && !settings.live && settings.weather === "overcast" && settings.hour === 19.5;
+    const sp = settings.solar ?? solarPosition(settings.season, settings.hour),
       alt = sp.altitude,
       day = Math.max(0, Math.min(1, (alt + 0.12) / 0.35)),
       cloud =
-        settings.weather === "clear"
+        settings.weather === "clear" || settings.weather === "neutral"
           ? 1
           : settings.weather === "cloudy"
             ? 0.75
             : 0.35;
+    const lowChristmasDetail = settings.quality === "low" || (settings.quality === "auto" && (autoLowDetail || host.clientWidth < 720 || host.clientHeight < 540));
+    christmasWalk.update(settings.christmas, alt, lowChristmasDetail, settings.reducedMotion);
     const dir = new THREE.Vector3(
       Math.sin(sp.azimuth) * Math.cos(alt),
       Math.sin(alt),
@@ -376,31 +369,26 @@ export async function createCampus(
     sun.target.position.set(pose.x, 0, pose.z);
     sun.intensity = day * 3.2 * cloud;
     sun.color.set(alt < 0.3 ? 0xffcf94 : 0xffedda);
-    hemi.intensity = settings.halloween ? 0.9 : 0.32 + day * 1.8;
-    hemi.color.setHex(settings.halloween ? 0xa0abc6 : 0xd9e8ed);
-    renderer.toneMappingExposure = settings.halloween ? 1 : 0.8 + day * 0.25;
+    hemi.intensity = hauntedSky ? 0.9 : 0.32 + day * 1.8;
+    hemi.color.setHex(hauntedSky ? 0xa0abc6 : 0xd9e8ed);
+    renderer.toneMappingExposure = hauntedSky ? 1 : 0.8 + day * 0.25;
     sky.material.uniforms.sunPosition.value.copy(dir);
-    sky.material.uniforms.turbidity.value =
-      settings.weather === "clear" ? 3 : 8;
-    sky.visible = !settings.halloween && day > 0.05 && settings.weather !== "fog";
-    const fogColor = settings.halloween
+    updateClouds(sky, settings);
+    sky.visible = !hauntedSky && day > 0.05 && !settings.fog && settings.weather !== "fog";
+    const fogColor = hauntedSky
       ? new THREE.Color(0x141b2b)
       : new THREE.Color().setHSL(0.55, 0.12, 0.08 + day * 0.65);
     scene.background = fogColor;
     scene.fog = new THREE.FogExp2(
       fogColor,
-      settings.halloween
+      hauntedSky
         ? 0.0009
-        : settings.weather === "fog"
+        : (settings.fog || settings.weather === "fog")
         ? 0.009
         : settings.weather === "rain"
           ? 0.0018
           : 0.00035,
     );
-    precipitation.visible =
-      settings.weather === "rain" || settings.weather === "snow";
-    const pm = precipitation.material;
-    pm.size = settings.weather === "snow" ? 0.13 : 0.045;
     landscape.update(autoLowDetail && settings.quality === "auto" ? {...settings,quality:"low"} : settings, [pose.x, pose.z]);
   }
   function resize() {
@@ -736,10 +724,6 @@ export async function createCampus(
     const visualSettings: Settings = autoLowDetail && settings.quality === "auto" ? {...settings,quality:"low"} : settings;
     halloweenSky.update(dt, visualSettings, camera.position);
     halloween.update(dt, visualSettings, pose);
-    sound?.update(dt, settings, pose, [
-      ...halloween.monsters.map(m=>({id:m.id,kind:m.kind,point:m.point})),
-      ...halloween.decorations.map((d,i)=>({id:`decor-ghost-${i}`,kind:"ghost",point:d.point,y:d.y+1.1})),
-    ]);
     outdoor.update(dt, settings, pose);
     traffic.update(paused?0:dt,[pose.x,pose.z],settings.hour,settings.population,settings.reducedMotion);
     population.update(
@@ -760,19 +744,15 @@ export async function createCampus(
         Math.abs(p[1]) < l.anchor.depth / 2
       );
     });
-    halloweenChase.update(dt, settings, pose, { paused, mode, indoor: !!indoor, cameraPosition: camera.position, peers: [...halloween.monsters,...halloween.heroes.actors] });
-    if (precipitation.visible && !settings.reducedMotion) {
-      for (let i = 0; i < 900; i++) {
-        rainPositions[i * 3 + 1] -=
-          dt * (settings.weather === "snow" ? 1.6 : 18);
-        if (rainPositions[i * 3 + 1] < 0) rainPositions[i * 3 + 1] = 28;
-      }
-      rainGeo.attributes.position.needsUpdate = true;
+    if (sound) {
+      const emitters = settings.halloween ? [
+        ...halloween.monsters.map(m => ({ id: m.id, kind: m.kind, point: m.point })),
+        ...halloween.decorations.map((d,i) => ({ id: `decor-ghost-${i}`, kind: "ghost", point: d.point, y: d.y + 1.1 })),
+      ] : [];
+      sound.update(dt, settings, pose, emitters, displayMix(christmasWalks.stanford.soundLocations, pose, !!indoor));
     }
-    precipitation.position.set(camera.position.x, 0, camera.position.z);
-    precipitation.visible =
-      !indoor &&
-      (settings.weather === "rain" || settings.weather === "snow");
+    halloweenChase.update(dt, settings, pose, { paused, mode, indoor: !!indoor, cameraPosition: camera.position, peers: [...halloween.monsters,...halloween.heroes.actors] });
+    particles.update(dt, settings, camera.position, !!indoor);
     for (const l of landmarks) {
       const near = camera.position.distanceTo(l.group.position) < (visualSettings.quality === "ultra" ? 650 : visualSettings.quality === "high" ? 520 : visualSettings.quality === "low" ? 200 : 320);
       l.group.visible = near;
@@ -782,9 +762,6 @@ export async function createCampus(
     if (now - lastTelemetry > 250) {
       lastTelemetry = now;
       updateEnvironment();
-      precipitation.visible =
-        !indoor &&
-          (settings.weather === "rain" || settings.weather === "snow");
       let distance = Infinity;
       nearby = null;
       const all = new Map(infoPoints);
@@ -970,9 +947,9 @@ export async function createCampus(
       resizeObserver.disconnect();
       listeners.forEach((fn) => fn());
       document.exitPointerLock?.();
-      rainGeo.dispose();
-      precipitation.material.dispose();
+      particles.dispose();
       halloween.dispose();
+      christmasWalk.dispose();
       disposeScene(scene, renderer, sun.shadow.map, renderer.domElement);
     },
   };

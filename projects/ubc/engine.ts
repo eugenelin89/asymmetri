@@ -1,3 +1,8 @@
+import { updateClouds } from "../campus-atmosphere/sky";
+import { createChristmasWalk } from "../campus-atmosphere/christmas-scenery";
+import { christmasWalks } from "../campus-atmosphere/christmas-walks";
+import { displayMix, type ListenerMix } from "../campus-atmosphere/ambience";
+import { createWeatherParticles } from "../campus-atmosphere/particles";
 import { createHalloweenSky } from "./halloween-sky";
 import { createHalloween } from "./halloween";
 import { createHalloweenChase } from "./halloween-chase";
@@ -90,10 +95,11 @@ export function createCampus(
   onRoute: (p: Point[] | null) => void,
   onError: (message: string) => void,
   orchardGeography: OrchardGeography,
-  onSound: (settings: Settings, pose: Pose, ghosts: readonly { point: Point; y?: number }[]) => void = () => {},
+  onSound: (settings: Settings, pose: Pose, ghosts: readonly { point: Point; y?: number }[], mix: ListenerMix) => void = () => {},
   diagnostics?: CampusDiagnostics,
+  initialSettings: Settings = diagnostics?.settings ?? defaults,
 ): CampusAPI {
-  let settings = { ...(diagnostics?.settings || defaults) },
+  let settings = { ...initialSettings },
     mode: Mode = "walk",
     footMode: "walk" | "third" = "walk",
     paused = false,
@@ -348,6 +354,8 @@ export function createCampus(
     routes = createRoutes(data, collision.blocked);
   const halloween = createHalloween(data, anchors, interiors, collision.blocked);
   scene.add(halloween.group);
+  const christmasWalk = createChristmasWalk("ubc", anchors, collision.blocked);
+  scene.add(christmasWalk.group);
   const halloweenHeroes = createHalloweenHeroes(halloween.monsters, interiors, collision.blocked);
   scene.add(halloweenHeroes.group);
   const halloweenChase = createHalloweenChase(data, interiors, collision, routes);
@@ -399,26 +407,8 @@ export function createCampus(
       id: number;
     } | null = null,
     dragged = false;
-  const rainGeo = new THREE.BufferGeometry(),
-    rainPositions = new Float32Array(900 * 3);
-  for (let i = 0; i < 900; i++) {
-    rainPositions[i * 3] = (Math.random() - 0.5) * 70;
-    rainPositions[i * 3 + 1] = Math.random() * 28;
-    rainPositions[i * 3 + 2] = (Math.random() - 0.5) * 70;
-  }
-  rainGeo.setAttribute("position", new THREE.BufferAttribute(rainPositions, 3));
-  const precipitation = new THREE.Points(
-    rainGeo,
-    new THREE.PointsMaterial({
-      color: 0xe4eeee,
-      size: 0.07,
-      transparent: true,
-      opacity: 0.65,
-      depthWrite: false,
-    }),
-  );
-  precipitation.frustumCulled = false;
-  scene.add(precipitation);
+  const particles = createWeatherParticles();
+  scene.add(particles.group);
   function listen<K extends keyof WindowEventMap>(
     target: Window,
     type: K,
@@ -470,15 +460,19 @@ export function createCampus(
     updateEnvironment();
   }
   function updateEnvironment() {
-    const sp = solarPosition(settings.season, settings.hour),
+    const hauntedSky = settings.halloween && !settings.live && settings.weather === "overcast" && settings.hour === 19.5;
+    const sp = settings.solar ?? solarPosition(settings.season, settings.hour),
       alt = sp.altitude,
       day = Math.max(0, Math.min(1, (alt + 0.12) / 0.35)),
       cloud =
-        settings.weather === "clear"
+        settings.weather === "clear" || settings.weather === "neutral"
           ? 1
           : settings.weather === "cloudy"
             ? 0.75
             : 0.35;
+    const lowChristmasDetail = settings.quality === "low" || (settings.quality === "auto" && (host.clientWidth < 720 || host.clientHeight < 540));
+    gateway.setFestiveLight(settings.christmas ? 1 - THREE.MathUtils.smoothstep(alt, -.105, .14) : 0);
+    christmasWalk.update(settings.christmas, alt, lowChristmasDetail, settings.reducedMotion);
     const dir = new THREE.Vector3(
       Math.sin(sp.azimuth) * Math.cos(alt),
       Math.sin(alt),
@@ -490,32 +484,27 @@ export function createCampus(
     sun.target.position.set(pose.x, 0, pose.z);
     sun.intensity = day * 3.2 * cloud;
     sun.color.set(alt < 0.3 ? 0xffcf94 : 0xffedda);
-    hemi.intensity = settings.halloween ? 0.9 : 0.32 + day * 1.8;
-    hemi.color.setHex(settings.halloween ? 0xa0abc6 : 0xd9e8ed);
-    renderer.toneMappingExposure = settings.halloween ? 1 : 0.8 + day * 0.25;
+    hemi.intensity = hauntedSky ? 0.9 : 0.32 + day * 1.8;
+    hemi.color.setHex(hauntedSky ? 0xa0abc6 : 0xd9e8ed);
+    renderer.toneMappingExposure = hauntedSky ? 1 : 0.8 + day * 0.25;
     sky.material.uniforms.sunPosition.value.copy(dir);
-    sky.material.uniforms.turbidity.value =
-      settings.weather === "clear" ? 3 : 8;
-    sky.visible = !settings.halloween && day > 0.05 && settings.weather !== "fog";
-    const fogColor = settings.halloween
+    updateClouds(sky, settings);
+    sky.visible = !hauntedSky && day > 0.05 && !settings.fog && settings.weather !== "fog";
+    const fogColor = hauntedSky
       ? new THREE.Color(0x141b2b)
       : new THREE.Color().setHSL(0.55, 0.12, 0.08 + day * 0.65);
     scene.background = fogColor;
     scene.fog = new THREE.FogExp2(
       fogColor,
-      settings.halloween
+      hauntedSky
         ? 0.0009
-        : settings.weather === "fog"
+        : (settings.fog || settings.weather === "fog")
         ? 0.009
         : settings.weather === "rain"
           ? 0.0018
           : 0.00035,
     );
     stadium.floodlights.forEach((l) => (l.intensity = day < 0.35 ? 500 : 0));
-    precipitation.visible =
-      settings.weather === "rain" || settings.weather === "snow";
-    const pm = precipitation.material;
-    pm.size = settings.weather === "snow" ? 0.13 : 0.045;
     landscape.update(settings, [pose.x, pose.z]);
   }
   function resize() {
@@ -915,19 +904,7 @@ export function createCampus(
       );
     });
     halloweenChase.update(dt, settings, pose, { paused, mode, indoor: !!indoor || inResidence, cameraPosition: camera.position, peers: seasonalPeers });
-    if (precipitation.visible && !settings.reducedMotion) {
-      for (let i = 0; i < 900; i++) {
-        rainPositions[i * 3 + 1] -=
-          dt * (settings.weather === "snow" ? 1.6 : 18);
-        if (rainPositions[i * 3 + 1] < 0) rainPositions[i * 3 + 1] = 28;
-      }
-      rainGeo.attributes.position.needsUpdate = true;
-    }
-    precipitation.position.set(camera.position.x, 0, camera.position.z);
-    precipitation.visible =
-      !indoor &&
-      !inResidence &&
-      (settings.weather === "rain" || settings.weather === "snow");
+    particles.update(dt, settings, camera.position, !!indoor || inResidence);
     for (const l of landmarks) {
       const near = camera.position.distanceTo(l.group.position) < 520;
       l.group.visible = near;
@@ -936,10 +913,6 @@ export function createCampus(
     if (now - lastTelemetry > 250) {
       lastTelemetry = now;
       updateEnvironment();
-      precipitation.visible =
-        !indoor &&
-        !inResidence &&
-        (settings.weather === "rain" || settings.weather === "snow");
       let distance = Infinity;
       nearby = null;
       const all = new Map(infoPoints);
@@ -1060,7 +1033,7 @@ export function createCampus(
       });
       onSound(settings, pose, onFoot(mode) && !paused
         ? settings.population ? [...indoorGhosts, ...outdoorGhosts] : indoorGhosts
-        : []);
+        : [], displayMix(christmasWalks.ubc.soundLocations, pose, !!indoor || inResidence));
     }
     if (mode !== "map") {
       if (diagnostics) renderer.info.reset();
@@ -1156,9 +1129,9 @@ export function createCampus(
       resizeObserver.disconnect();
       listeners.forEach((fn) => fn());
       document.exitPointerLock?.();
-      rainGeo.dispose();
-      precipitation.material.dispose();
+      particles.dispose();
       halloweenHeroes.dispose();
+      christmasWalk.dispose();
       disposeScene(scene, renderer, sun.shadow.map, renderer.domElement);
     },
   };

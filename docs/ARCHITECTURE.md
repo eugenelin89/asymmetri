@@ -848,7 +848,7 @@ settings. These outdoor venues are separate from the nine building interiors.
 
 ## CWRU campus
 
-`app/labs/cwru` loads the independent `projects/cwru` explorer, adapted from UBC without changing its runtime. Versioned OSM geography lives in `public/cwru`; original models preserve source outlines around furnished interior cores. Static source-linked people use simulated district walks and bounded dialogue. Seasonal meshes, path actors, pursuit and original Web Audio are additive client layers. `editions.ts` selects the Cleveland calendar default and preserves manual choices. The explicitly requested public-profile lifecycle adapts the UBC store with separate `/labs/cwru/community-api` endpoints, `cwru_profile_owner` cookie and `CWRU_PROFILE_DIR`. Profiles include sanitized text and normalized avatar appearance; rendering updates from a 60-second public feed. The store is unavailable until a host configures a private persistent directory. No dependency is added. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). See [project guide](../projects/cwru/README.md).
+`app/labs/cwru` loads the independent `projects/cwru` explorer, adapted from UBC without changing its runtime. Versioned OSM geography lives in `public/cwru`; original models preserve source outlines around furnished interior cores. Static source-linked people use simulated district walks and bounded dialogue. Seasonal meshes, path actors, pursuit and original Web Audio are additive client layers. The shared campus visit module resolves the Cleveland calendar and the visitor’s saved choice. The explicitly requested public-profile lifecycle adapts the UBC store with separate `/labs/cwru/community-api` endpoints, `cwru_profile_owner` cookie and `CWRU_PROFILE_DIR`. Profiles include sanitized text and normalized avatar appearance; rendering updates from a 60-second public feed. The store is unavailable until a host configures a private persistent directory. No dependency is added. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). See [project guide](../projects/cwru/README.md).
 
 ## Shared campus community layers
 
@@ -858,7 +858,7 @@ settings. These outdoor venues are separate from the nine building interiors.
 
 ## Stanford campus boundary
 
-`app/labs/stanford/`, `projects/stanford/`, `content/stanford.ts` and `public/stanford/v0.1-2026-10-31/` own the independent Stanford route, simulation, public copy and OSM snapshot. Reuse of UBC/CWRU controls does not share participant storage. The Stanford community API uses its own cookie and `STANFORD_PROFILE_DIR`. Precompiled collision-checked people, seasonal and pedestrian-graph assets include source/model fingerprints. `themes.ts` reserves modular calendar overlays; `sound.ts` generates audio locally. See `STANFORD_CAMPUS_2026-10-31.md` for evidence and limitations.
+`app/labs/stanford/`, `projects/stanford/`, `content/stanford.ts` and `public/stanford/v0.1-2026-10-31/` own the independent Stanford route, simulation, public copy and OSM snapshot. Reuse of UBC/CWRU controls does not share participant storage. The Stanford community API uses its own cookie and `STANFORD_PROFILE_DIR`. Precompiled collision-checked people, seasonal and pedestrian-graph assets include source/model fingerprints. The shared campus visit controls the seasonal overlays. `sound.ts` generates audio locally. See `STANFORD_CAMPUS_2026-10-31.md` for evidence and limitations.
 
 ## UBC V0.5 diagnostic boundary
 
@@ -875,3 +875,10 @@ standalone tool, copying only the three pinned GIS files and a generated source
 hash manifest into ignored `dist/ubc-benchmark`. It does not alter Next routes,
 Sites packaging, public data snapshots or shared services. See
 [V0.5 foundation](UBC_V05_FOUNDATION.md) for measurement limits and remaining work.
+
+
+## Shared campus visits and station observations
+
+`projects/campus-atmosphere/` owns campus-local dates, solar calculations, visit choices, weather effects, the localized sound mix and the three decorated routes. Each campus passes its effective settings into its existing engine before the first frame. The client waits for the edition and device preferences before presenting the entry button. A history departure tears down the explorer; tab visibility and phone lock preserve the walk.
+
+`app/labs/campus-weather-api/[campus]/route.ts` serves anonymous read-only station observations through the ordinary website backend. An allowlist selects fixed ECCC or NWS stations. One in-flight refresh and a timed observation cache per campus serve concurrent requests within the website process. The clock and solar calculation run in the visitor’s browser using the campus coordinates. [Weather sources, cache limits and attribution](CAMPUS_WEATHER.md).

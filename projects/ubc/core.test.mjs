@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import "./test-loader.mjs";
 const { safeExternalUrl, characters, places, displays, answerQuestion } =
   await import("./registry.ts");
-import { solarPosition, normalizeSettings, defaults } from "./environment.ts";
+const { solarPosition, normalizeSettings, defaults } = await import("./environment.ts");
 import {
   createCollision,
   createRoutes,
@@ -78,7 +78,7 @@ test("Vancouver sun calculation reflects seasons and civil-time daylight", () =>
   assert.equal(
     normalizeSettings({ ...defaults, season: "summer", weather: "snow" })
       .weather,
-    "clear",
+    "snow",
   );
   assert.equal(
     normalizeSettings({ ...defaults, season: "winter", weather: "snow" })

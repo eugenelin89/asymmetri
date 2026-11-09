@@ -1448,3 +1448,22 @@ Next production-preview screenshot of the Orchard lobby, residence controls and
 touch navigation. It carries the same original geometry/PDDL provenance and
 contains no real profile or private data. It establishes a desktop-browser phone
 layout check, not performance or audio on a physical phone.
+
+## Three-campus Christmas walks
+
+The virtual Gateway–AMS Nest, Oval–Green Library and Kelvin Smith–Tinkham Veale walks use original procedural 3D decorations. The trees range from 3.3 to 6.8 metres high in the campus reconstructions. Shape meshes are instanced with per-instance colours and transforms. Their public role is wayfinding and seasonal landmark detail in the interactive explorer. The welcome and edition controls identify the Christmas experience in text. No separate raster image or image alt text is involved. Source, spatial placement, daylight treatment, rights and verification are documented in [Christmas walks](CAMPUS_CHRISTMAS_WALKS.md).
+
+
+The Christmas bells, short instrumental phrases and distant tones are original Web Audio synthesis in `projects/campus-atmosphere/ambience.ts`. Runtime oscillators play them beside seasonal displays, with stereo position determined by the walker’s heading. Weather sound uses two original, procedurally generated 8 kHz mono buffers. The 12-second snow loop spaces soft, low taps at irregular intervals. The former 10-second procedural rain loop was removed after phone listening. Rain is rendered visually. The 14-second wind loop shapes smooth low-frequency pressure changes into gusts with quiet intervals. Wind starts at a reported 8 km/h. Snow and wind levels vary independently and soften indoors. The explorer creates each buffer on demand and reuses it across weather updates while sound is enabled and the page is visible. Asymmetri authored the synthesis under the campus projects’ MIT terms. The visible conditions, Campus sound and Sound volume controls describe the audio.
+
+The three documentation galleries in [Christmas walk acceptance](validation/campus-christmas/README.md) are original local production-build renders from the in-game Photo control. Each 1,536 × 1,172 JPEG places nine whole frames in a labelled grid. Frames were proportionally reduced and JPEG-encoded. They show first-person virtual architecture, procedural decorations and simulated weather. UBC GIS placement uses PDDL. Stanford and CWRU placement uses © OpenStreetMap contributors under ODbL 1.0. The galleries contain no real visitor profiles or external photos.
+
+| Documentation image | Accessible description |
+| --- | --- |
+| [UBC walk](validation/campus-christmas/ubc-walk.jpg) | Gateway letters, decorated University Boulevard and the AMS Nest atrium at midday, rainy twilight and snowy night. |
+| [Stanford walk](validation/campus-christmas/stanford-walk.jpg) | Two trees flank the Oval path, lanterns lead into Main Quad and wreaths line the Green Library reading room at three staged hours. |
+| [CWRU walk](validation/campus-christmas/cwru-walk.jpg) | A garland at Kelvin Smith Library, spruces along the approach and hanging stars in the Tinkham Veale commons under three staged conditions. |
+
+[Outdoor lighting review](validation/campus-christmas/lighting-review.jpg), 1,040 × 1,156 JPEG, pairs six Photo frames made on the two production builds identified in the acceptance record. Alt: “The revised UBC sign is illuminated gold; lanterns cast light on the Oval path and along the Tinkham Veale approach.” The source, rights and processing match the campus galleries above.
+
+[Touch entry at the destinations](validation/campus-christmas/touch-destinations.jpg), 1,740 × 600 JPEG, combines six whole in-browser screenshots at the end of actual emulated phone and tablet touch walks. The UBC tablet frame was recaptured on the local development server after the tablet label adjustment. The other five frames came from the local production visual build. Each image is proportionally reduced and labelled with campus, interior and CSS viewport. Alt: “Phone and tablet explorers show Level 1 inside the AMS Nest, Green Library and Tinkham Veale, with their walking controls visible.” The source and rights match the other Christmas documentation captures.

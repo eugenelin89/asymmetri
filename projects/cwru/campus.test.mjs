@@ -7,7 +7,7 @@ const {buildFootprintContext} = await import('./footprint-context.ts');
 const {createCollision,global,local,floorAt,createRoutes,segmentDistance,inPolygon} = await import('./spatial.ts');
 const {landmarkIds,initialCampusPose} = await import('./layout.ts');
 const {characters,places,safeExternalUrl,answerQuestion} = await import('./registry.ts');
-const {defaults,initialHalloweenPreference,setHalloween,solarPosition} = await import('./environment.ts');
+const {defaults,solarPosition} = await import('./environment.ts');
 const {createHalloween,halloweenMonsterKinds,halloweenPopulationLimits} = await import('./halloween.ts');
 const root=new URL('../../public/cwru/v0.1-2026-10-31/',import.meta.url);
 const data=JSON.parse(readFileSync(new URL('data.json',root)));
@@ -74,11 +74,7 @@ test('public character sources, faculty zones and privacy boundaries',()=>{
  for(const c of characters){assert(anchors[c.zone]);assert(c.sources.every(s=>safeExternalUrl(s.url)));assert.equal(answerQuestion(c,'Where are you living?'),null);assert.equal(answerQuestion(c,'What is your private schedule?'),null);}
  assert.equal(safeExternalUrl('https://case.edu.attacker.example/x'),null);assert.equal(safeExternalUrl('javascript:alert(1)'),null);
 });
-test('Halloween uses Cleveland dates and restores previous atmosphere',()=>{
- assert.equal(initialHalloweenPreference(new Date('2026-10-24T03:59:00Z')),false);
- assert.equal(initialHalloweenPreference(new Date('2026-10-24T04:01:00Z')),true);
- assert.equal(initialHalloweenPreference(new Date('2026-11-08T05:01:00Z')),false);
- const before={...defaults,season:'summer',hour:12,weather:'clear'};const on=setHalloween(before,true);const off=setHalloween(on.settings,false,on.previous);assert.equal(off.settings.hour,12);assert.equal(off.settings.season,'summer');
+test('Cleveland summer sunlight uses local civil hours',()=>{
  const sun=solarPosition('summer',12);assert(sun.sunrise>4&&sun.sunrise<7);assert(sun.sunset>19&&sun.sunset<22);
 });
 test('Halloween decor reaches supported building floors without collision',()=>{

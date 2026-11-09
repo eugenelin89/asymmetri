@@ -70,16 +70,17 @@ services. See [the Orchard V0.2 report](../../docs/UBC_ORCHARD_MVR_2026-10-31.md
   Thunderbird Stadium has Canadian-football/soccer markings, spectator structures
   and a traversable grandstand/grass embankment. These are simulated activities,
   not real matches, training schedules or occupancy.
-- Atmosphere: four seasons, representative Vancouver dates with a NOAA solar
-  approximation, daylight/night, rain/fog/cloud/snow scenarios, wet pavement and lights.
-  Winter snow is optional; evergreen and deciduous trees are separate materials.
-- Halloween audio: enabling sound requests the browser's optional playback audio
-  session, which WebKit documents for Silent Mode playback on iOS 17 and later.
-  Mute, zero volume and background pause still apply. Unsupported browsers keep
-  their existing behavior. Entry applies the chosen sound settings and starts
-  the audio graph before campus assets load. Silent Mode playback was confirmed
-  after a manual toggle; the owner reports the deployed first-entry correction working in the November 1 roadmap. See the
-  [audio follow-up and primary sources](../../docs/UBC_AUDIO_IOS_2026-10-31.md).
+- Live atmosphere uses Vancouver's current date, local time and solar position.
+  The Atmosphere panel shows recent weather from a nearby Environment and Climate
+  Change Canada station. With no usable report, daylight continues and the panel
+  shows “Weather unavailable.” Changing hour, season or weather in Atmosphere or
+  Photo stages a Simulated scene until the visitor selects Live or leaves.
+- Campus sound uses the entering visitor's mute and volume settings before the
+  scene loads. Christmas adds spatial festive cues along the walk, Halloween
+  has its own score and voices, and reported weather can be heard in Regular.
+  The browser's optional playback audio session supports iPhone Silent Mode.
+  The owner reported the earlier Halloween first-entry correction working in the
+  November 1 roadmap. [Halloween audio history](../../docs/UBC_AUDIO_IOS_2026-10-31.md).
 - Photo: hides normal UI and shows a fresh canvas PNG preview with a Save PNG link.
   The browser validation gallery retains real scene exports and interaction captures.
 
@@ -237,21 +238,17 @@ The report records 99 passing UBC tests and the observed development-rendering
 performance limitation. Its [production receipt](../../docs/UBC_LANDMARKS_HALLOWEEN_RELEASE_2026-10-31.md)
 records the deployed source and build; later follow-ups require their own validation.
 
-**Halloween campus** is available in Atmosphere throughout the year. With no
-current-year manual choice, the automatic default is October 24–November 7
-inclusive every year in `America/Vancouver`, returning to normal on November 8. An explicit device-local
-on/off choice overrides the date for that calendar year; it expires for the next
-year. The current welcome resolves this preference after hydration, before entry,
-with a guarded initialization fallback on Start exploring. The initial server and
-client renders remain deterministic.
+The welcome and Atmosphere offer Automatic, Regular and a one-visit replay of
+either holiday. Automatic follows the Vancouver date. Halloween runs October
+24–November 7 each year. Christmas runs November 8–December 31, 2026, and the
+2026 Regular override expires when January 1 begins. Reloading or leaving ends
+a replay. The historical 19:30 overcast sky is available as the **Halloween
+evening** Simulated preset. Its full moon is an artistic reconstruction.
 
-The edition uses autumn, overcast weather and 19:30, with an original full moon,
-cloud canopy and seasonal decoration. Turn it off to restore the previous season,
-weather and time from the same visit. Quality, population, markers and reduced
-motion remain independent. The normal season/weather/time controls are temporarily
-disabled while Halloween is on, and photo mode also has an off action. The moon is
-artistic, not an assertion of the real lunar phase. No account or live weather
-service is involved; only the edition choice is saved on this device.
+On the Christmas walk, follow the decorated route from the Gateway to the AMS
+Nest atrium. Twilight brightens the lights, and snow follows a usable station
+report or an explicit Simulated choice. [Three-campus implementation and
+acceptance](../../docs/CAMPUS_CHRISTMAS_2026.md).
 
 `halloween.ts` supplies dispersed pumpkin/ghost/cobweb sets across nine interiors,
 including supported upper and lower levels, plus gateway pumpkins and creatures
@@ -264,8 +261,8 @@ disposal owns its original shared geometry and materials.
 ## After Dark follow-up — local checks passed
 
 The [After Dark notes](../../docs/UBC_HALLOWEEN_AFTER_DARK_2026-10-31.md) describe
-the current seasonal welcome, with original SVG campus artwork, a regular-campus
-switch and an independent **Masked pursuer** checkbox. The same edition preference
+the October Halloween welcome and its original SVG campus artwork. The current
+welcome retains an independent **Masked pursuer** checkbox. The same edition preference
 drives the welcome and the world. CSS honors the operating system's reduced-motion
 setting; the illustration requires no Three.js scene or external image download.
 
@@ -289,11 +286,6 @@ yielding and nearby fictional labels, without directory listings. These are
 decorative visitors; existing educational-guide conversations remain separate.
 Nearest-first quality limits allow every costume to be encountered at every
 quality level. Batched costume resources have their own explicit disposal.
-
-Calendar initialization selects the matching Vancouver meteorological season
-for the regular campus; winter starts overcast without automatic snow. December
-1–31 is reserved for a future Christmas edition in the seasonal registry, which
-is explicitly unavailable until its visuals and behavior are implemented.
 
 Closing an in-scene panel returns keyboard control to walking without another
 canvas click. Search/input fields retain normal typing while the panel is open.

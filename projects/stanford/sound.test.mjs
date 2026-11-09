@@ -45,9 +45,9 @@ test('playback starts on the explicit enabled gesture before the first scene upd
   await promise;assert.equal(f.context.state,'running');assert.equal(f.context.resumeCalls,1);
 });
 
-test('Base, mute and zero-volume entry never claim playback or resume the context',async t=>{
+test('Muted and zero-volume entry never claim playback or resume the context',async t=>{
   const f=fixture(t);
-  for(const settings of [{...playing,halloween:false},{...playing,sound:false},{...playing,soundVolume:0}]) {
+  for(const settings of [{...playing,sound:false},{...playing,soundVolume:0}]) {
     await f.sound.resume(settings);f.update(settings);
     assert.equal(f.session.type,'ambient');assert.equal(f.context.resumeCalls,0);
   }
@@ -66,9 +66,9 @@ test('enable then mute before the first frame cannot leave a silent playback rol
   await pending;assert.equal(f.session.type,'ambient');
 });
 
-test('mute, Base and zero volume release the prior session type and allow a new gesture',async t=>{
+test('mute and zero volume release the prior session type and allow a new gesture',async t=>{
   const f=fixture(t,{audioSession:{type:'auto'}});
-  for(const settings of [{...playing,sound:false},{...playing,halloween:false},{...playing,soundVolume:0}]) {
+  for(const settings of [{...playing,sound:false},{...playing,soundVolume:0}]) {
     await f.sound.resume(playing);assert.equal(f.session.type,'playback');
     f.update(settings);assert.equal(f.session.type,'auto');
   }

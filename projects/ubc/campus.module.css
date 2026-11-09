@@ -1301,6 +1301,16 @@
   top: 285px;
   bottom: auto;
 }
+@media (min-width: 701px) and (max-width: 1000px) {
+  .location {
+    max-width: calc(45% - 33px);
+  }
+  .tools {
+    left: 45%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+}
 @media (max-height: 520px) {
   .mapLegend {
     display: none;

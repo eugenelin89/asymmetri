@@ -24,13 +24,26 @@ Visitors can create, edit, recover, report and remove their own public character
 
 ## Themes and sound
 
-`themes.ts` defines independent overlays and Pacific-time calendar windows. Halloween defaults October 24 through November 7 inclusive. Seasonal saved selections expire November 8. Manual base/Halloween selection and “Use automatic holiday schedule” are available. Christmas reserves December 1–31 but remains unavailable; December currently opens the base edition.
+Automatic follows Stanford's local calendar. Halloween runs October 24–November 7
+each year. Christmas runs November 8–December 31, 2026. Visitors can select
+Regular or replay either holiday from the welcome or Atmosphere. A replay ends
+on departure or reload. The 2026 Regular preference expires at local midnight on
+January 1.
+
+Live uses Stanford daylight and recent weather from a nearby National Weather
+Service station. Atmosphere shows the station, local observation time and age.
+Changing hour, season or weather in Photo or Atmosphere stages a Simulated scene
+for this visit. Select Live to return to current conditions. The Christmas walk
+leads from the Oval through Main Quad to the Green Library interior.
+[Three-campus implementation and acceptance](../../docs/CAMPUS_CHRISTMAS_2026.md).
 
 Halloween adds 22 creature types, 24 original procedural comic/manga/robot visitors, interior decorations, moonlight, bats, and an optional hockey-mask pursuer with a prop knife. Pursuit uses outdoor source paths, waits outside interiors, stops short of the player and causes no attacks or damage. Population and reduced-motion controls apply to seasonal movement.
 
-Original Web Audio generates a detuned minor drone, wind, bells, wolf howls and spatial ghost cries/screams. Audio starts on the visitor's Enter/Sound gesture. Mute and volume controls remain visible; base mode fades the soundtrack and hidden tabs suspend it. No downloaded recording, film score, voice imitation or microphone is used.
-
-The separate iPhone-audio follow-up requests the optional Audio Session API's playback role only after an Enter/Sound gesture with Halloween sound enabled and nonzero volume. It supplies the actual settings before the scene's first update, releases its role on mute, Base mode, zero volume, hiding or disposal, and restores the previous type only while its own playback value remains in place. Unsupported/restricted APIs retain ordinary Web Audio behavior. This is the browser-supported route for Silent Mode playback, not a silent-media-loop workaround; device media volume and browser support still apply. Physical-iPhone audibility is not yet verified. See [implementation and validation](../../docs/STANFORD_IPHONE_AUDIO_2026-10-31.md).
+Campus sound generates the Halloween score and spatial ghost voices, festive
+Christmas displays and nearby weather through Web Audio. Sound starts on the
+visitor's Enter or Sound gesture, honors mute and volume, and suspends in a
+hidden tab. The optional Audio Session playback role supports iPhone Silent
+Mode. [Earlier iPhone audio implementation and validation](../../docs/STANFORD_IPHONE_AUDIO_2026-10-31.md).
 
 ## Data and asset pipeline
 

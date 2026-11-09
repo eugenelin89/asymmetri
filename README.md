@@ -16,7 +16,9 @@ Asymmetri.co
         ├── Vancouver, City in Progress
         ├── Surrey, City of Adventure
         ├── Richmond Learns to Drive
-        └── UBC Virtual Campus
+        ├── UBC Virtual Campus
+        ├── Stanford Virtual Campus
+        └── Case Western Reserve Virtual Campus
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
@@ -61,6 +63,8 @@ current evidence, engineering limits and the illustrative Motion workflow.
 | `/tutorial` | Protected Motion guide: why and how to build history, with stable hashes and original-image links |
 | `/privacy`, `/support` | Protected Motion policy and support articles |
 | `/sport`, `/work` | Permanent compatibility redirects to `/sports`, `/labs` |
+
+The three campus explorers share a [2026 Christmas edition](docs/CAMPUS_CHRISTMAS_2026.md). Walk from the UBC Gateway to the AMS Nest atrium, from the Stanford Oval through Main Quad to Green Library, or from Kelvin Smith Library to the Tinkham Veale commons. Each visit starts with local daylight and a named nearby station report. The implementation and acceptance record identifies the tested build.
 
 The [adopted UBC flagship roadmap](docs/UBC_ROADMAP.md) prioritizes realism and
 performance. [V0.5 foundation work](docs/UBC_V05_FOUNDATION.md) has begun with local

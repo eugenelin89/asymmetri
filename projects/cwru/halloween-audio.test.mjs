@@ -95,8 +95,8 @@ test('mute, Regular, zero volume, hiding and disposal release the owned playback
   });
  }
 });
-test('Regular, mute, zero volume and hidden entry never construct or claim audio',async()=>{
- for(const patch of [{halloweenSound:false},{halloween:false},{halloweenVolume:0}]){
+test('mute, zero volume and hidden entry never construct or claim audio',async()=>{
+ for(const patch of [{halloweenSound:false},{halloweenVolume:0}]){
   const session={type:'ambient'};
   await withAudioSession(session,async(audio,contexts)=>{audio.configure({...soundOn,...patch});assert.equal(await audio.unlock(),false);assert.equal(contexts.length,0);assert.equal(session.type,'ambient');});
  }

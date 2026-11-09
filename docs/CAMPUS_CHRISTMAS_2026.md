@@ -1,0 +1,36 @@
+# Christmas in the three virtual campuses
+
+A visitor can walk from the UBC Gateway into the AMS Student Nest atrium, from Stanford’s Oval through Main Quad into Green Library, and from Kelvin Smith Library into the Tinkham Veale commons at CWRU. Each campus has its own Christmas arrival, lights along the walk and furnished indoor display. These are installations in Asymmetri’s virtual reconstructions. [Walks, scenery and source rights](CAMPUS_CHRISTMAS_WALKS.md) · [First-person galleries](validation/campus-christmas/README.md)
+
+## Calendar and visitor choices
+
+A new visit starts in Live atmosphere. The welcome and Atmosphere panel identify the active edition and provide the same edition choices. Automatic keeps the existing October 24–November 7 Halloween window. Christmas starts on November 8, 2026 and ends when January 1, 2027 begins at the campus. The two Christmas boundaries occur at 05:00 UTC in Cleveland, 07:00 UTC in Vancouver and 08:00 UTC at Stanford. The schedule includes one Christmas season.
+
+An explicit Regular selection made during the season lasts on that device for that campus through December 31. An older CWRU Regular record, a saved holiday or a previous Halloween toggle leaves the new choice at Automatic. Existing sound, volume and accessibility settings carry forward. Changes to preferences synchronize between open tabs. After the January expiry a visitor can still choose Regular for a visit.
+
+A Halloween or Christmas replay lasts through a visit, including Photo, interior entry, hiding the tab and midnight. Ending it resolves the saved choice against the current campus date. Leaving or reloading ends both replay and staged atmosphere. Back after leaving returns to the welcome. At page departure the explorer releases its renderer and audio so a browser history snapshot can restore a fresh visit.
+
+## Light, weather and sound
+
+The campus latitude, longitude, civil hour and actual date determine solar altitude, azimuth, sunrise, sunset and civil twilight. The implementation uses the NOAA fractional-year approximation. Vancouver uses the historical IANA rules up to its last clock change on March 8, 2026 and UTC−7 thereafter. This preserves the published change on browsers with older time-zone data. [NOAA solar equations](https://gml.noaa.gov/grad/solcalc/solareqns.PDF) · [British Columbia’s clock change](https://news.gov.bc.ca/releases/2026AG0013-000209)
+
+Live weather comes from a named nearby station. Wind, cloud, fog and precipitation affect the scene when the station reports them. With snowfall the base ground and lawn materials take on a snow-covered appearance. The current weather selects this cover immediately. There is no stored snow depth or melting history. Reports expire after 90 minutes. With no eligible report, the clock and sun continue, weather-specific effects stop and the visitor sees “Weather unavailable.” The three-campus endpoint shares refreshes in the website process. [Verified ECCC and NWS stations, fallback, caching and data rights](CAMPUS_WEATHER.md)
+
+Opening Photo keeps the active conditions. Changing hour, season or weather selects Simulated. The staged conditions persist after closing Photo and through edition changes. A visitor can return to Live in the panel. The historical Halloween evening is available as an explicit 19:30 overcast preset. Scenery and audio follow the chosen edition while the Automatic schedule continues to use the actual campus date.
+
+Original synthesized chimes and short musical phrases mark trees near the walker, with a quieter answering note. Stereo position follows the listener’s heading. Rain is a silent visual effect in both Live and Simulated atmosphere. Snow makes soft, infrequent taps. Reported wind from 8 km/h adds low, intermittent gusts in any weather. Weather sound softens indoors. A visitor’s entry or sound-control gesture unlocks the audio context. Muting, zero volume, hiding the page and leaving release playback as applicable. The displays use instanced geometry with fewer ornaments and lanterns at Low quality. Reduced motion suppresses light modulation and reduces moving effects. [Asset manifest](ASSET_MANIFEST.md)
+
+## Acceptance
+
+The final local Next.js 16.4.3 production build is `vVptuSIL-xqgMyRAbl_mu`. Gallery captures identify their individual build in the desktop record. The owner used ordinary Safari with Silent Mode on to enter all three campuses on listening build `pk8nW65AUxxEwM0mjrQy9` and confirmed hearing sound. The final build keeps the same Christmas chimes and removes the rain sound at the owner’s request. The walks exposed two readability issues. The UBC letters gained a warm night wash and the long Nest location label now clears its toolbar at tablet widths.
+
+| Check | Evidence |
+| --- | --- |
+| Clock, edition and migration | Browser visits in Tokyo at 390 × 844, 820 × 1180 and 1440 × 900. Each campus crossed both local midnight boundaries, including a separate open-page timer check. Browsers in Paris retained a cached report through exactly 90 minutes and dropped it one millisecond later. During a sustained station outage the outdoor view darkened across sunset at all three campuses, with date-specific sunrise, sunset and civil twilight shown in the panel. |
+| Preferences, replay and Photo | Controlled cross-tab and revisit checks covered legacy preferences, January expiry, new visit-only Regular, staging and return to Live, keyboard/touch entry, muted entry, OS reduced-motion changes, Back and a persisted history snapshot. |
+| Station delivery | Normal endpoint GETs returned observations for all three campuses. Stanford used its actual alternate station. Controlled endpoint and explorer requests exercised shared concurrent refreshes, cache age, service gaps, recovery and unsupported campus inputs. At a fixed November viewpoint on each campus, controlled Live observations produced different rendered frames for clear, overcast, windy rain, snow and fog. A late report during Simulated snow became visible on return to Live. |
+| Walks and graphics | Route fixtures walked the same collision geometry through each outer doorway. The browser galleries follow ordinary movement to the interior and distinguish staged clear, rain and snow captures. [Desktop, tablet and mobile record](validation/campus-christmas/README.md) |
+| Audio | All three controllers unlock on entry without claiming the playback role for rain alone in Regular. Christmas chimes play beside displays in rain. Tests verify indoor attenuation of reported wind, continuity when leaving Christmas, switching holidays, mute, page visibility and departure. Physical first-tap observations are recorded separately below. |
+| Device | [Matched physical Safari runs, frame times and listening status](validation/campus-christmas/iphone.md) |
+
+Use the [testing guide](TESTING.md#three-campus-christmas-acceptance) to repeat the local checks. The [engineering journal](prompts/204-design.md) identifies the Git revision, build, checks and workspace cleanup. [Parent issue](https://github.com/eugenelin89/asymmetri/issues/5) · [Acceptance ticket](https://github.com/eugenelin89/asymmetri/issues/16)

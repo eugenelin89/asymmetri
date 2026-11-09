@@ -1,3 +1,4 @@
+import { createAmbience, hasAmbience, type ListenerMix, type SoundScene } from "../campus-atmosphere/ambience";
 import type { Pose, Settings } from "./types";
 export type SoundSource = { id:string; x:number; y:number; z:number; kind:"ghost"|"wolf" };
 export type ScareSound = "howl"|"cry"|"scream";
@@ -38,7 +39,15 @@ export function createSoundDirector(){
  * requests, microphone permissions or third-party music. Created by user gesture.
  */
 export function createHalloweenAudio(options:AudioOptions={}){
- let context:AudioContext|null=null,master:GainNode|null=null,reverb:ConvolverNode|null=null,ready=false,enabled=false,volume=.35,nextPhrase=0,phrase=0,hidden=typeof document!=='undefined'&&document.hidden;
+ let context:AudioContext|null=null,master:GainNode|null=null,horror:GainNode|null=null,reverb:ConvolverNode|null=null,ready=false,enabled=false,volume=.35,nextPhrase=0,phrase=0,hidden=typeof document!=='undefined'&&document.hidden;
+ type AudioSettings=Pick<Settings,'halloween'|'halloweenSound'|'halloweenVolume'> & SoundScene;
+ let scene: AudioSettings|undefined, mix: ListenerMix|undefined, ambience:ReturnType<typeof createAmbience>|undefined;
+ function updateAmbience(){
+  if(scene?.halloweenSound&&volume>0&&!hidden&&gestureGranted&&context&&master){
+   if(hasAmbience(scene))ambience ??= createAmbience(context,master);
+   ambience?.update(scene,mix);
+  }else if(ambience){ambience.dispose();ambience=undefined;}
+ }
  let disposed=false,gestureGranted=false,resumeAttempt=0;
  let sessionLease:{session:PlaybackSession;previous:string;active:boolean}|null=null;
  function claimPlaybackSession(){
@@ -72,7 +81,7 @@ export function createHalloweenAudio(options:AudioOptions={}){
   const c=context!,gain=c.createGain(),panner=c.createStereoPanner();
   gain.gain.setValueAtTime(.00001,start);gain.gain.exponentialRampToValueAtTime(Math.max(.00002,level),start+Math.min(attack,duration*.3));
   gain.gain.setTargetAtTime(.00001,start+duration*.6,Math.max(.03,duration*.12));
-  panner.pan.value=pan;gain.connect(panner);panner.connect(master!);panner.connect(reverb!);
+  panner.pan.value=pan;gain.connect(panner);panner.connect(horror!);panner.connect(reverb!);
   return {gain,panner};
  }
  function note(frequency:number,start:number,duration:number,level:number,pan=0,type:OscillatorType='sine',detune=0){
@@ -92,7 +101,7 @@ export function createHalloweenAudio(options:AudioOptions={}){
   nextPhrase=now+14.4;phrase++;
  }
  function creature(kind:ScareSound,gain:number,pan:number,source?:SoundSource){
-  if(!context||!enabled||!ready)return;
+  if(!context||!ready||!enabled||hidden||!scene?.halloween)return;
   const c=context,now=c.currentTime,duration=kind==='howl'?5.2:kind==='cry'?4.4:2.5;
   const base=kind==='howl'?155:kind==='cry'?340:670;
   const pitches=kind==='howl'?[.75,1.1,1.8,1.9,1.7,1.2,.8]:kind==='cry'?[.7,1.2,.75,1.35,.8,1.1,.6]:[.7,1.5,1.35,1.6,.9,.65];
@@ -115,40 +124,53 @@ export function createHalloweenAudio(options:AudioOptions={}){
  }
  const voices:{panner:StereoPannerNode;gain:GainNode;source:SoundSource;expires:number}[]=[];
  function stop(){for(const node of active){try{node.stop();}catch{}}active.clear();voices.length=0;nextPhrase=0;director.reset();}
- async function unlock(){
-  if(disposed||!enabled||hidden||volume<=0)return false;
+ async function resume(explicit:boolean){
+  if(disposed||!scene?.halloweenSound||hidden||volume<=0)return false;
   const attempt=++resumeAttempt;
   gestureGranted=true;
-  if(sessionLease&&!sessionLease.active)sessionLease=null;
+  if(explicit&&sessionLease&&!sessionLease.active)sessionLease=null;
   try{
    if(!context){
     context=new AudioContext();master=context.createGain();master.gain.value=0;
     const compressor=context.createDynamicsCompressor();compressor.threshold.value=-16;compressor.knee.value=14;compressor.ratio.value=5;compressor.attack.value=.01;compressor.release.value=.25;
     master.connect(compressor);compressor.connect(context.destination);
+    horror=context.createGain();horror.gain.value=scene.halloween?1:0;horror.connect(master);
     reverb=context.createConvolver();const impulse=context.createBuffer(2,Math.floor(context.sampleRate*2.2),context.sampleRate);
     for(let ch=0;ch<2;ch++){const a=impulse.getChannelData(ch);let seed=1729+ch;for(let i=0;i<a.length;i++){seed=(Math.imul(seed,1664525)+1013904223)|0;a[i]=((seed>>>0)/4294967296*2-1)*Math.pow(1-i/a.length,3)*.18;}}
-    reverb.buffer=impulse;reverb.connect(master);
+    reverb.buffer=impulse;reverb.connect(horror);
    }
    claimPlaybackSession(); // Before awaiting the explicit user-gesture resume.
+   master!.gain.setTargetAtTime(enabled?volume:0,context.currentTime,.08);
+   updateAmbience();
    const current=context;
    if(current.state!=='running')await current.resume();
    if(disposed||context!==current)return false;
+   if(hidden){void current.suspend().catch(()=>{});return false;}
    if(attempt===resumeAttempt){
     ready=current.state==='running';
-    if(!ready){gestureGranted=false;releasePlaybackSession();}
+    if(!ready){gestureGranted=false;releasePlaybackSession();updateAmbience();}
    }
    return current.state==='running';
-  }catch{if(attempt===resumeAttempt){ready=false;gestureGranted=false;releasePlaybackSession();}return false;}
+  }catch{if(attempt===resumeAttempt){ready=false;gestureGranted=false;releasePlaybackSession();updateAmbience();}return false;}
  }
- function configure(settings:Pick<Settings,'halloween'|'halloweenSound'|'halloweenVolume'>){
+ function configure(settings:AudioSettings){
   if(disposed)return;
+  const wasAllowed=!!scene?.halloweenSound&&volume>0;
   volume=clamp(settings.halloweenVolume);
-  const next=settings.halloween&&settings.halloweenSound&&volume>0;
+  const next=(settings.halloween||hasAmbience(settings))&&settings.halloweenSound&&volume>0;
+  if(horror)horror.gain.value=settings.halloween?1:0;
+  if(scene?.halloween&&!settings.halloween)stop();
+  scene=settings;
   if(enabled&&!next)stop();enabled=next;
   if(enabled)claimPlaybackSession();else releasePlaybackSession();
+  if(!wasAllowed&&gestureGranted&&!hidden&&settings.halloweenSound&&volume>0&&context?.state==="suspended")void resume(false);
+  updateAmbience();
   if(master&&context)master.gain.setTargetAtTime(enabled&&!hidden?volume:0,context.currentTime,.08);
  }
- function update(dt:number,pose:Pose,sources:SoundSource[],paused=false){
+ function update(dt:number,pose:Pose,sources:SoundSource[],paused=false,listener?:ListenerMix){
+  mix=listener;
+  updateAmbience();
+  if(!scene?.halloween)return;
   if(!context||!ready||!enabled||hidden||context.state!=='running')return;
   if(context.currentTime>=nextPhrase)score();
   for(const cue of director.update(dt,true,paused,pose,sources))creature(cue.kind,cue.gain,cue.pan,cue.source);
@@ -161,14 +183,16 @@ export function createHalloweenAudio(options:AudioOptions={}){
  }
  function visibility(value:boolean){
   if(disposed)return;hidden=value;
-  if(hidden){releasePlaybackSession();stop();}else claimPlaybackSession();
+  if(hidden){releasePlaybackSession();stop();void context?.suspend?.().catch(()=>{});}
+  else if(gestureGranted&&scene?.halloweenSound&&volume>0){void resume(false);}
+  updateAmbience();
   if(master&&context)master.gain.setTargetAtTime(enabled&&!hidden?volume:0,context.currentTime,.05);
  }
  // Own visibility from the gesture onward, including while campus assets load.
  const onDocumentVisibility=()=>visibility(document.hidden);
  if(typeof document!=='undefined')document.addEventListener('visibilitychange',onDocumentVisibility);
- return {unlock,configure,update,visibility,stop,preview(){creature('howl',.55,0);},
+ return {unlock:()=>resume(true),configure,update,visibility,stop,preview(){creature('howl',.55,0);},
   status:()=>context?.state||'not-started',
-  dispose(){if(disposed)return;disposed=true;if(typeof document!=='undefined')document.removeEventListener('visibilitychange',onDocumentVisibility);gestureGranted=false;releasePlaybackSession();stop();void context?.close().catch(()=>{});context=null;master=null;reverb=null;ready=false;enabled=false;}
+  dispose(){if(disposed)return;disposed=true;if(typeof document!=='undefined')document.removeEventListener('visibilitychange',onDocumentVisibility);gestureGranted=false;releasePlaybackSession();stop();ambience?.dispose();void context?.close().catch(()=>{});context=null;master=null;horror=null;reverb=null;ready=false;enabled=false;}
  };
 }

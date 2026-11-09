@@ -365,7 +365,7 @@ an application dependency installation. See the [V0.3 report](UBC_CAMPUS_LIFE_V0
 
 ## Case Western Reserve campus
 
-Use Node24 and `npm run dev:next -- --webpack --port 3031`, then open `/labs/cwru`. Run `npm run test:cwru`, `npm run check`, `npm run build` and the production dependency audit. In a concurrently edited checkout, use an isolated exported validation directory with its own build output; do not share `.next` with another running server. Stop the task-owned server after validation. To exercise public profiles, set `CWRU_PROFILE_DIR` to a disposable absolute directory outside the checkout, for example `/private/tmp/cwru-community-validation`. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). Atmosphere selects Halloween automatically October 24–November 7 in Cleveland, with manual overrides. Audio starts after entry or an explicit sound gesture; the preview button tests a howl. Muting, regular mode and hidden-tab behavior must stop playback. December remains Regular until Christmas assets are available.
+Use Node24 and `npm run dev:next -- --webpack --port 3031`, then open `/labs/cwru`. Run `npm run test:cwru`, `npm run check`, `npm run build` and the production dependency audit. In a concurrently edited checkout, use an isolated exported validation directory with its own build output; do not share `.next` with another running server. Stop the task-owned server after validation. To exercise public profiles, set `CWRU_PROFILE_DIR` to a disposable absolute directory outside the checkout, for example `/private/tmp/cwru-community-validation`. See [profile operations](CWRU_COMMUNITY_OPERATIONS.md). In Cleveland, Automatic runs Halloween October 24–November 7 and Christmas November 8–December 31, 2026. A visitor can replay either edition. Test audio from an entry or sound gesture, including festive fade-out, weather continuing in Regular, mute and hidden-tab suspension.
 
 ## Shared campus reviews and play reporting
 
@@ -382,3 +382,8 @@ loopback URL, or `npm run ubc:benchmark:build` to build it without a listener.
 Output is ignored under `dist/ubc-benchmark`; stop the server with Ctrl-C.
 No package install is needed beyond the existing lockfile. Do not run CPU-heavy
 builds/tests during samples. [Protocol, source manifest and limits](UBC_V05_FOUNDATION.md).
+
+
+## Local Christmas walks
+
+On the repository Node version, run `npm run dev:next -- --hostname localhost --port 3065` and open `/labs/ubc`, `/labs/stanford` or `/labs/cwru` on that origin. Each explorer can run with its community stores unconfigured. The weather handler reads public ECCC or NWS observations and needs no API key. A run without upstream network access still provides the campus clock, sunlight, scenery and controls. Use Atmosphere to select a replay or Photo to stage a lighting and weather comparison. [Browser fixtures and tests](TESTING.md).

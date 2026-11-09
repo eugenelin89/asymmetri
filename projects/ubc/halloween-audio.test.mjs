@@ -133,12 +133,12 @@ test("procedural bed and timed cues have bounded sources, stereo panning and smo
 test("mute, holiday-off and hidden tabs fade out and suspend; returning never queues a scream", async () => {
   const { audio, context, visibility } = fixture(); await audio.resume();
   audio.update(settings, pose, ghosts); context.advance(9); audio.update(settings, pose, ghosts);
-  const originalSources = context.nodes.filter((node) => node instanceof Source).length;
   for (const patch of [{ halloweenAudio: false }, { halloween: false }, { halloweenVolume: 0 }]) {
     audio.update({ ...settings, ...patch }, pose, ghosts);
     assert.equal(context.nodes[0].gain.value, 0);
     context.advance(context.currentTime + 0.3); audio.update(settings, pose, ghosts);
   }
+  const originalSources = context.nodes.filter((node) => node instanceof Source).length;
   visibility.set(true);
   assert.equal(context.nodes[0].gain.value, 0);
   await new Promise((resolve) => setTimeout(resolve, 450));
@@ -210,7 +210,7 @@ test("engine startup defaults cannot override selected sound, but later real mut
   const file = ts.createSourceFile("Campus.tsx", readFileSync(new URL("./Campus.tsx", import.meta.url), "utf8"), ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
   let callback;
   function visit(node) {
-    if (ts.isCallExpression(node) && node.expression.getText(file) === "module.createCampus") callback = node.arguments.at(-1);
+    if (ts.isCallExpression(node) && node.expression.getText(file) === "module.createCampus") callback = node.arguments[9];
     ts.forEachChild(node, visit);
   }
   visit(file); assert.ok(callback && ts.isArrowFunction(callback));
@@ -272,7 +272,7 @@ test("rapid enable then cancel releases playback immediately and suspends withou
   const regular = { ...settings, halloween: false };
   await audio.resume(regular);
   assert.equal(session.type, "ambient");
-  await audio.resume(settings); audio.configure(regular);
+  await audio.resume(settings); audio.configure({ ...regular, halloweenAudio: false });
   assert.equal(session.type, "ambient", "An actual UI cancel takes effect before another engine frame");
   await new Promise((resolve) => setTimeout(resolve, 450));
   assert.equal(context.state, "suspended");

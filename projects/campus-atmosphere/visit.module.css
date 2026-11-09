@@ -1,0 +1,81 @@
+.welcomeHost.welcomeHost {
+  height: auto;
+  min-height: min(640px, 85dvh);
+}
+.welcomeSurface.welcomeSurface {
+  min-height: min(780px, 90dvh);
+  height: auto;
+  padding-bottom: 100px;
+}
+.welcomeSurface[data-edition="christmas"] {
+  background: radial-gradient(ellipse at 78% 25%, #425b4c, #133f37 47%, #132e2b 84%);
+  color: #faf3de;
+  border-top: 4px solid #b99954;
+}
+.welcomeSurface[data-edition="christmas"] h2 em {
+  color: #e1c48a;
+  font-weight: 400;
+}
+.edition {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .45rem .75rem;
+  margin-block: .9rem .4rem;
+  font-size: .84rem;
+}
+.edition label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+}
+.edition select,
+.edition button {
+  min-height: 44px;
+  border: 1px solid #a9bcb1;
+  border-radius: 4px;
+  padding: .35rem .6rem;
+  background-color: #1a302e;
+  color: #f3f3e8;
+}
+.edition [role="status"] {
+  color: inherit;
+}
+.sound {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+.sound input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #d4ba80;
+}
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.photoBar.photoBar {
+  flex-wrap: wrap;
+  max-height: 44dvh;
+  overflow-y: auto;
+}
+.photoBar label {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.photoBar input[type="range"] {
+  max-width: 105px;
+}
+@media (max-width: 700px) {
+  .welcomeSurface.welcomeSurface {
+    min-height: 640px;
+  }
+  .welcomeSurface[data-edition="halloween"] {
+    padding-bottom: 200px;
+  }
+}

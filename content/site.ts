@@ -87,10 +87,11 @@ export const richmond = {
 
 export const ubc = {
   name: "UBC Virtual Campus",
+  weatherLicence: { label: "Environment and Climate Change Canada data licence", href: "https://eccc-msc.github.io/open-data/licence/readme_en/" },
   path: "/labs/ubc",
   tagline: "Explore the University of British Columbia, virtually.",
   status: "V0.5 — Campus community",
-  description: "Explore a campus built from official UBC geography, nine reconstructed interiors and educational guides. Visit Beaty’s whale display, Irving’s study spaces and an optional Halloween edition. Independent and unofficial.",
+  description: "Explore a campus built from official UBC geography, nine reconstructed interiors and educational guides. Visit Beaty’s whale display, Irving’s study spaces and the Christmas walk to the AMS Nest. Independent and unofficial.",
   source: { label: "View UBC source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/ubc" },
   license: { label: "MIT code · UBC public-domain GIS", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/ubc/THIRD_PARTY_NOTICES.md" },
   metadata: { title: "UBC Virtual Campus | Asymmetri Labs", description: "Explore the University of British Columbia, virtually. An independent 3D campus research preview with walkable reconstructed interiors and educational guides." },
@@ -100,11 +101,11 @@ export const cwru = {
   name: "Case Western Reserve Virtual Campus",
   path: "/labs/cwru",
   tagline: "Explore Case Western Reserve University, virtually.",
-  status: "V0.1 — Campus & Halloween",
-  description: "Walk through University Circle, explore reconstructed landmark interiors, and meet source-linked academic characters. Includes an optional Halloween edition. Independent and unofficial.",
+  status: "University Circle · Campus explorer",
+  description: "Walk through University Circle, explore reconstructed landmark interiors, and meet source-linked academic characters. Follow the Christmas lights from Kelvin Smith Library into the Tinkham Veale commons. Independent and unofficial.",
   source: { label: "View CWRU source", href: "https://github.com/eugenelin89/asymmetri/tree/main/projects/cwru" },
   license: { label: "MIT code · ODbL geography", href: "https://github.com/eugenelin89/asymmetri/blob/main/projects/cwru/THIRD_PARTY_NOTICES.md" },
-  metadata: { title: "Case Western Reserve Virtual Campus | Asymmetri Labs", description: "Explore an independent 3D reconstruction of Case Western Reserve University, with walk-through landmarks, academic encounters and a Halloween edition." },
+  metadata: { title: "Case Western Reserve Virtual Campus | Asymmetri Labs", description: "Explore an independent 3D reconstruction of Case Western Reserve University, with walk-through landmarks, academic encounters and seasonal walks." },
 } as const;
 
 export const gisApps = {

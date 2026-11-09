@@ -1,3 +1,4 @@
+import { createAmbience, hasAmbience, type ListenerMix, type SoundScene } from "../campus-atmosphere/ambience";
 // Original procedural ambience. No recordings, external assets or voice likenesses.
 import type { Point, Pose, Settings } from "./types";
 
@@ -5,7 +6,7 @@ export type HalloweenAudioStatus = "running" | "suspended" | "unsupported" | "cl
 /** y is the supporting floor elevation, rather than the floating model centre. */
 export type AudioGhost = { point: Point; y?: number };
 export type AudioPose = Pick<Pose, "x" | "y" | "z" | "yaw">;
-export type AudioSettings = Pick<Settings, "halloween" | "halloweenAudio" | "halloweenVolume">;
+export type AudioSettings = Pick<Settings, "halloween" | "halloweenAudio" | "halloweenVolume"> & SoundScene;
 export type GhostProximity = { distance: number; pan: number; strength: number };
 export type AudioCue = { kind: "howl" | "cry" | "scream"; pan: number; strength: number; duration: number };
 export type CueSchedule = { nextHowl: number; nextGhost: number; nextScream: number; quietUntil: number };
@@ -66,11 +67,11 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   const random = options.random || Math.random;
   let context: AudioContext | null = null;
   try { context = (options.createContext || browserAudioContext)(); } catch { /* Browser audio is unavailable. */ }
-  let disposed = false, enabled = false, volume = 0.35, target = -1, bedReady = false;
-  let playbackIntent = false, settingsSeen = false, resumeAttempt = 0;
+  let disposed = false, enabled = false, volume = 0.35, target = -1;
+  let playbackIntent = false, settingsSeen = false, keptAwake = false, resumeAttempt = 0;
   let sessionLease: { session: PlaybackSession; previous: string; active: boolean } | null = null;
   function claimPlaybackSession() {
-    if (!playbackIntent || !context || disposed || visibility?.hidden || (settingsSeen && !enabled)) return;
+    if (!playbackIntent || !context || disposed || visibility?.hidden || !enabled) return;
     try {
       const session = (options.audioSession || browserAudioSession)();
       if (!session) return;
@@ -101,8 +102,13 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   type Voice = { sources: AudioScheduledSourceNode[]; nodes: AudioNode[]; gain: GainNode; end: number; released: boolean };
   const voices = new Set<Voice>();
   const keep = <T extends AudioNode>(node: T): T => { nodes.add(node); return node; };
-  const source = <T extends AudioScheduledSourceNode>(node: T): T => { keep(node); sources.add(node); return node; };
+  const bedNodes = new Set<AudioNode>(), bedSources = new Set<AudioScheduledSourceNode>();
   const master = context ? keep(context.createGain()) : null;
+  const horror = context && master ? keep(context.createGain()) : null;
+  horror?.connect(master!);
+  let scene: AudioSettings | undefined;
+  let mix: ListenerMix | undefined;
+  let ambience: ReturnType<typeof createAmbience> | undefined;
   const limiter = context ? keep(context.createDynamicsCompressor()) : null;
   if (context && master && limiter) {
     master.gain.value = 0;
@@ -126,10 +132,11 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     return noiseBuffer;
   }
   function startBed() {
-    if (!context || !master || bedReady || disposed) return;
-    bedReady = true;
+    if (!context || !master || bedSources.size || disposed) return;
+    const keep = <T extends AudioNode>(node: T): T => { bedNodes.add(node); return node; };
+    const source = <T extends AudioScheduledSourceNode>(node: T): T => { bedSources.add(node); return keep(node); };
     const now = context.currentTime;
-    const drone = keep(context.createGain()); drone.gain.value = 0.027; drone.connect(master);
+    const drone = keep(context.createGain()); drone.gain.value = 0.027; drone.connect(horror!);
     for (const [frequency, type] of [[49, "sine"], [65.4, "sine"], [98.1, "triangle"]] as const) {
       const oscillator = source(context.createOscillator()); oscillator.type = type; oscillator.frequency.value = frequency;
       oscillator.connect(drone); oscillator.start(now);
@@ -138,9 +145,15 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     pulse.frequency.value = 0.16; pulseDepth.gain.value = 0.008; pulse.connect(pulseDepth); pulseDepth.connect(drone.gain); pulse.start(now);
     const wind = source(context.createBufferSource()), filter = keep(context.createBiquadFilter()), windGain = keep(context.createGain());
     wind.buffer = noise(); wind.loop = true; filter.type = "lowpass"; filter.frequency.value = 780; filter.Q.value = 0.35;
-    windGain.gain.value = 0.045; wind.connect(filter); filter.connect(windGain); windGain.connect(master); wind.start(now);
+    windGain.gain.value = 0.045; wind.connect(filter); filter.connect(windGain); windGain.connect(horror!); wind.start(now);
     const breeze = source(context.createOscillator()), breezeDepth = keep(context.createGain());
     breeze.frequency.value = 0.055; breezeDepth.gain.value = 0.012; breeze.connect(breezeDepth); breezeDepth.connect(windGain.gain); breeze.start(now);
+  }
+  function stopBed() {
+    for (const node of bedSources) node.stop();
+    for (const node of bedNodes) node.disconnect();
+    bedSources.clear();
+    bedNodes.clear();
   }
   function releaseVoice(voice: Voice) {
     if (voice.released) return;
@@ -174,7 +187,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     const panner = typeof context.createStereoPanner === "function" ? own(context.createStereoPanner()) : own(context.createGain());
     if ("pan" in panner) panner.pan.value = cue.pan;
     filter.type = "bandpass"; filter.frequency.value = cue.kind === "howl" ? 720 : cue.kind === "cry" ? 1100 : 1800; filter.Q.value = cue.kind === "scream" ? 2 : 0.7;
-    filter.connect(gain); gain.connect(panner); panner.connect(master);
+    filter.connect(gain); gain.connect(panner); panner.connect(horror!);
     const base = cue.kind === "howl" ? 210 : cue.kind === "cry" ? 340 : 620;
     const tone = oscillator(base, cue.kind === "scream" ? "triangle" : "sine"); tone.connect(filter);
     tone.frequency.setValueAtTime(base, now);
@@ -197,26 +210,21 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   }
   function applyGate(force = false, allowResume = true) {
     if (!context || !master || disposed) return;
-    const active = enabled && !visibility?.hidden, next = active ? volume * 0.65 : 0;
-    if (!force && next === target) return;
+    const awake = playbackIntent && !visibility?.hidden && (!settingsSeen || (!!scene?.halloweenAudio && volume > 0));
+    const active = awake && enabled, next = active ? volume * 0.65 : 0;
+    if (!force && next === target && awake === keptAwake) return;
+    keptAwake = awake;
     const wasSilent = target <= 0; target = next;
     if (suspendTimer !== undefined) { clearTimeout(suspendTimer); suspendTimer = undefined; }
     fade(master.gain, next, active ? 0.6 : 0.3);
-    if (active) {
-      if (wasSilent) schedule = createCueSchedule(context.currentTime, random);
-      startBed();
-      if (allowResume && context.state === "suspended") void context.resume().catch(() => {});
+    if (awake) {
+      if (active && wasSilent) schedule = createCueSchedule(context.currentTime, random);
+      if (allowResume && context.state === "suspended") void resumeContext();
     } else {
       stopVoices();
-      // A gesture can precede the scene's first settings. Do not discard that
-      // unlocked context while data loads; explicit mute/hidden still suspends.
-      if (!settingsSeen && playbackIntent && !visibility?.hidden) return;
       suspendTimer = setTimeout(() => {
         suspendTimer = undefined;
-        if (!disposed && context && (!enabled || visibility?.hidden)) {
-          // A quick enable/cancel may never produce enabled telemetry. Release
-          // its silent lease after the existing fade; first scene load is exempt.
-          if (settingsSeen && !enabled) releasePlaybackSession();
+        if (!disposed && context && !keptAwake) {
           void context.suspend().catch(() => {});
         }
       }, 400);
@@ -229,41 +237,70 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   }
   async function resume(settings?: AudioSettings) {
     if (!context || disposed || context.state === "closed" || visibility?.hidden) return false;
-    const attempt = ++resumeAttempt;
     if (settings) readSettings(settings);
+    if (settingsSeen && (!scene?.halloweenAudio || volume <= 0)) return false;
     playbackIntent = true;
+    syncAmbience();
     if (sessionLease && !sessionLease.active) sessionLease = null;
     claimPlaybackSession(); // Synchronous, before awaiting the user-gesture resume.
     // Prime the audible graph inside the same gesture, rather than waiting for
     // asynchronous scene imports, GIS fetches or the first renderer callback.
     applyGate(true, false);
-    try { await context.resume(); applyGate(true); return !disposed && context.state === "running"; }
+    return resumeContext();
+  }
+  async function resumeContext() {
+    if (!context) return false;
+    const attempt = ++resumeAttempt;
+    try {
+      await context.resume();
+      if (disposed || attempt !== resumeAttempt) return false;
+      if (!keptAwake) {
+        await context.suspend();
+        return false;
+      }
+      return context.state === "running";
+    }
     catch {
-      if (attempt === resumeAttempt) { playbackIntent = false; releasePlaybackSession(); }
+      if (attempt === resumeAttempt) { playbackIntent = false; releasePlaybackSession(); syncAmbience(); applyGate(true); }
       return false;
     }
   }
   function readSettings(settings: AudioSettings) {
     if (!context || disposed) return;
     const wasEnabled = enabled;
-    volume = Number.isFinite(settings.halloweenVolume) ? clamp(settings.halloweenVolume, 0, 1) : 0.35;
-    enabled = settings.halloween && settings.halloweenAudio && volume > 0;
-    if (!enabled) {
-      releasePlaybackSession();
-      if (!settings.halloween || !settings.halloweenAudio) playbackIntent = false;
+    if (scene?.halloween && !settings.halloween) {
+      stopBed();
+      stopVoices();
     }
+    scene = settings;
+    if (horror) horror.gain.value = settings.halloween ? 1 : 0;
+    volume = Number.isFinite(settings.halloweenVolume) ? clamp(settings.halloweenVolume, 0, 1) : 0.35;
+    enabled = (settings.halloween || hasAmbience(settings)) && settings.halloweenAudio && volume > 0;
+    syncAmbience();
+    if (!enabled) releasePlaybackSession();
     settingsSeen = true;
     if (enabled && !wasEnabled) claimPlaybackSession();
+  }
+  function syncAmbience() {
+    if (scene?.halloween && enabled && playbackIntent && !visibility?.hidden) startBed();
+    if (scene?.halloweenAudio && volume > 0 && playbackIntent && !visibility?.hidden && context && master) {
+      if (hasAmbience(scene)) ambience ??= createAmbience(context, master);
+      ambience?.update(scene, mix);
+    } else if (ambience) {
+      ambience.dispose();
+      ambience = undefined;
+    }
   }
   function configure(settings: AudioSettings) {
     readSettings(settings);
     applyGate();
   }
-  function update(settings: AudioSettings, pose: AudioPose, ghosts: readonly AudioGhost[]) {
+  function update(settings: AudioSettings, pose: AudioPose, ghosts: readonly AudioGhost[], listener?: ListenerMix) {
+    mix = listener;
     if (!context || disposed) return;
     configure(settings);
     for (const voice of voices) if (context.currentTime >= voice.end) releaseVoice(voice);
-    if (!enabled || visibility?.hidden || context.state !== "running" || voices.size) return;
+    if (!settings.halloween || !playbackIntent || !enabled || visibility?.hidden || context.state !== "running" || voices.size) return;
     const next = planHalloweenCue(context.currentTime, schedule, ghostProximity(pose, ghosts), random);
     schedule = next.schedule;
     if (next.cue) play(next.cue);
@@ -271,6 +308,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   const onVisibility = () => {
     if (visibility?.hidden) releasePlaybackSession();
     else if (enabled) claimPlaybackSession();
+    syncAmbience();
     applyGate();
   };
   visibility?.addEventListener("visibilitychange", onVisibility);
@@ -280,8 +318,10 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
     disposed = true; visibility?.removeEventListener("visibilitychange", onVisibility);
     if (suspendTimer !== undefined) clearTimeout(suspendTimer);
     if (master && context) { master.gain.cancelScheduledValues(context.currentTime); master.gain.setValueAtTime(0, context.currentTime); }
+    stopBed();
     for (const node of sources) { node.onended = null; try { node.stop(); } catch { /* Ended source. */ } }
     for (const node of nodes) node.disconnect();
+    ambience?.dispose();
     voices.clear(); sources.clear(); nodes.clear(); noiseBuffer = null;
     if (context && context.state !== "closed") void context.close().catch(() => {});
   }

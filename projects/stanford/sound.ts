@@ -1,6 +1,7 @@
+import { createAmbience, hasAmbience, type ListenerMix, type SoundScene } from "../campus-atmosphere/ambience";
 import type { Point, Pose, Settings } from "./types";
 export type SoundEmitter={id:string;kind:string;point:Point;y?:number};
-type SoundPreferences = Pick<Settings, "halloween" | "sound" | "soundVolume">;
+type SoundPreferences = Pick<Settings, "halloween" | "sound" | "soundVolume"> & SoundScene;
 type PlaybackSession = { type: string };
 export function proximityMix(pose:Pick<Pose,"x"|"y"|"z"|"yaw">,point:Point,y=0) {
   const dx=point[0]-pose.x,dz=point[1]-pose.z,distance=Math.hypot(dx,dz,y-pose.y);
@@ -12,29 +13,40 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
   const context=new AudioContext(),master=context.createGain(),compressor=context.createDynamicsCompressor();
   master.gain.value=0;compressor.threshold.value=-20;compressor.knee.value=16;compressor.ratio.value=7;compressor.attack.value=.02;compressor.release.value=.3;
   master.connect(compressor);compressor.connect(context.destination);
+  const horror=context.createGain();horror.gain.value=0;horror.connect(master);
+  let scene:SoundPreferences|undefined, mix: ListenerMix|undefined;
+  let ambience:ReturnType<typeof createAmbience>|undefined;
   const reverb=context.createConvolver(),wet=context.createGain();wet.gain.value=.22;
   const impulse=context.createBuffer(2,context.sampleRate*2.8,context.sampleRate);
   for(let c=0;c<2;c++){const data=impulse.getChannelData(c);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/data.length,2.6)*.5;}
-  reverb.buffer=impulse;reverb.connect(wet);wet.connect(master);
-  const bed=context.createGain();bed.gain.value=.095;bed.connect(master);bed.connect(reverb);
+  reverb.buffer=impulse;reverb.connect(wet);wet.connect(horror);
+  const bed=context.createGain();bed.gain.value=.095;bed.connect(horror);bed.connect(reverb);
   const continuous:AudioScheduledSourceNode[]=[],voices=new Set<AudioScheduledSourceNode>();
-  const connectVoice=(node:AudioNode,gain:GainNode,pan:number)=>{const p=context.createStereoPanner();p.pan.value=pan;node.connect(gain);gain.connect(p);p.connect(master);p.connect(reverb);return p;};
+  const connectVoice=(node:AudioNode,gain:GainNode,pan:number)=>{const p=context.createStereoPanner();p.pan.value=pan;node.connect(gain);gain.connect(p);p.connect(horror);p.connect(reverb);return p;};
   const startOsc=(frequency:number,type:OscillatorType,gain:number,detune=0)=>{
     const osc=context.createOscillator(),amp=context.createGain(),filter=context.createBiquadFilter();
     osc.type=type;osc.frequency.value=frequency;osc.detune.value=detune;amp.gain.value=gain;filter.type="lowpass";filter.frequency.value=900;
     osc.connect(filter);filter.connect(amp);amp.connect(bed);osc.start();continuous.push(osc);
     const lfo=context.createOscillator(),depth=context.createGain();lfo.frequency.value=.06+frequency/1400;depth.gain.value=gain*.42;lfo.connect(depth);depth.connect(amp.gain);lfo.start();continuous.push(lfo);
   };
-  // Detuned minor cluster, fifth and occasional tritone: slowly breathing strings.
-  [55,65.406,82.407,110,155.563].forEach((f,i)=>{startOsc(f,"triangle",i<2?.3:.13,i%2?5:-5);});
-  const noiseBuffer=context.createBuffer(1,context.sampleRate*5,context.sampleRate),noiseData=noiseBuffer.getChannelData(0);
-  let brown=0;for(let i=0;i<noiseData.length;i++){brown=(brown+(Math.random()*2-1)*.025)/1.025;noiseData[i]=brown*3;}
-  const wind=context.createBufferSource(),windFilter=context.createBiquadFilter(),windGain=context.createGain();
-  wind.buffer=noiseBuffer;wind.loop=true;windFilter.type="bandpass";windFilter.frequency.value=380;windFilter.Q.value=.6;windGain.gain.value=.12;wind.connect(windFilter);windFilter.connect(windGain);windGain.connect(bed);wind.start();continuous.push(wind);
+  function startBed() {
+    if(continuous.length)return;
+    // Detuned minor cluster, fifth and occasional tritone: slowly breathing strings.
+    [55,65.406,82.407,110,155.563].forEach((f,i)=>{startOsc(f,"triangle",i<2?.3:.13,i%2?5:-5);});
+    const noiseBuffer=context.createBuffer(1,context.sampleRate*5,context.sampleRate),noiseData=noiseBuffer.getChannelData(0);
+    let brown=0;for(let i=0;i<noiseData.length;i++){brown=(brown+(Math.random()*2-1)*.025)/1.025;noiseData[i]=brown*3;}
+    const wind=context.createBufferSource(),windFilter=context.createBiquadFilter(),windGain=context.createGain();
+    wind.buffer=noiseBuffer;wind.loop=true;windFilter.type="bandpass";windFilter.frequency.value=380;windFilter.Q.value=.6;windGain.gain.value=.12;wind.connect(windFilter);windFilter.connect(windGain);windGain.connect(bed);wind.start();continuous.push(wind);
+  }
+  function stopBed() {
+    for(const source of continuous){source.stop();source.disconnect();}
+    continuous.length=0;
+  }
   let disposed=false,clock=0,nextWolf=8,nextBell=5,lastGhost=0,eventCount=0;
   let authorized=false,enabled=false,volume=0,resumeVersion=0,playbackRequested=false;
   let restoreSession:{session:PlaybackSession;previous:string}|null=null;
-  const audible=()=>authorized&&enabled&&!document.hidden&&!disposed;
+  const awake=()=>authorized&&enabled&&!document.hidden&&!disposed;
+  const audible=()=>awake()&&!!scene&&(scene.halloween||hasAmbience(scene));
   function releasePlayback() {
     const previous=restoreSession;restoreSession=null;
     if(!previous)return;
@@ -54,12 +66,23 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     } catch { /* Unsupported/restricted browsers retain their normal Web Audio behavior. */ }
   }
   function preferences(settings:SoundPreferences) {
-    const next=settings.halloween&&settings.sound&&settings.soundVolume>0;
-    if(enabled&&!next)resumeVersion++;
-    enabled=next;volume=Math.max(0,Math.min(1,settings.soundVolume));
+    if(scene?.halloween&&!settings.halloween){
+      stopBed();
+      for(const source of voices)source.stop();
+      voices.clear();
+      clock=0;nextWolf=8;nextBell=5;lastGhost=0;lastVoices.clear();
+    }
+    scene=settings;
+    horror.gain.value=settings.halloween ? 1 : 0;
+    enabled=settings.sound&&settings.soundVolume>0;volume=Math.max(0,Math.min(1,settings.soundVolume));
   }
   function refreshOutput(retry=false) {
     const active=audible();
+    if(active && scene?.halloween)startBed();
+    if(awake() && scene){
+      if(hasAmbience(scene))ambience ??= createAmbience(context,master);
+      ambience?.update(scene,mix);
+    } else if(ambience){ambience.dispose();ambience=undefined;}
     master.gain.setTargetAtTime(active?volume*.8:0,context.currentTime,.3);
     if(!active){playbackRequested=false;releasePlayback();}
     else if(!playbackRequested||retry){playbackRequested=true;claimPlayback();}
@@ -70,11 +93,11 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     try {
       await context.resume();
       if(disposed)return;
-      if(!audible()) {
+      if(!awake()) {
         refreshOutput();
         if(document.hidden)void context.suspend().catch(()=>{});
       }
-      if(version===resumeVersion&&audible())onStatus?.("");
+      if(version===resumeVersion&&awake())onStatus?.("");
     } catch {
       if(disposed||version!==resumeVersion)return;
       authorized=false;refreshOutput();
@@ -105,19 +128,24 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     if(disposed)return;
     // The caller supplies the effective choice during the Enter/Sound gesture,
     // before the scene has delivered its first frame (including Base or mute).
-    authorized=true;if(settings)preferences(settings);refreshOutput();
-    if(audible())await resumeContext();
+    if(settings)preferences(settings);
+    if(enabled)authorized=true;
+    refreshOutput();
+    if(awake())await resumeContext();
   }
   function configure(settings:SoundPreferences) {
     if(disposed)return;
+    const wasEnabled=enabled;
     preferences(settings);refreshOutput();
+    if(!wasEnabled&&awake()&&context.state==="suspended")void resumeContext();
   }
-  function update(dt:number,settings:Settings,pose:Pose,emitters:SoundEmitter[]) {
+  function update(dt:number,settings:Settings,pose:Pose,emitters:SoundEmitter[],listener?: ListenerMix) {
+    mix=listener;
     if(disposed)return;
     // Preferences come directly from the controls. The asynchronously loaded
     // scene may still have default/stale settings during its first frames.
     refreshOutput();
-    if(!audible()||context.state!=="running")return;
+    if(!scene?.halloween||!audible()||context.state!=="running")return;
     clock+=Math.max(0,Math.min(dt,.25));
     if(clock>=nextWolf){const wolf=emitters.filter(e=>e.kind==="werewolf").sort((a,b)=>proximityMix(pose,a.point).distance-proximityMix(pose,b.point).distance)[0];const mix=wolf?proximityMix(pose,wolf.point):{gain:.2,pan:Math.sin(clock)};voice("howl",Math.max(.22,mix.gain),mix.pan);nextWolf=clock+21+Math.random()*11;}
     if(clock>=nextBell){voice("bell",.45,Math.sin(clock*.3)*.65);nextBell=clock+13+Math.random()*12;}
@@ -131,6 +159,6 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     if(document.hidden){resumeVersion++;refreshOutput();void context.suspend().catch(()=>{});}
     else if(authorized&&enabled)void resumeContext();
   };document.addEventListener("visibilitychange",visibility);
-  return {resume,configure,update,state:()=>({state:context.state,events:eventCount,activeVoices:voices.size}),dispose(){if(disposed)return;disposed=true;resumeVersion++;releasePlayback();document.removeEventListener("visibilitychange",visibility);for(const s of [...continuous,...voices]){try{s.stop();}catch{}}void context.close().catch(()=>{});}};
+  return {resume,configure,update,state:()=>({state:context.state,events:eventCount,activeVoices:voices.size}),dispose(){if(disposed)return;disposed=true;ambience?.dispose();horror.disconnect();resumeVersion++;releasePlayback();document.removeEventListener("visibilitychange",visibility);for(const s of [...continuous,...voices]){try{s.stop();}catch{}}void context.close().catch(()=>{});}};
 }
 export type CampusSound=ReturnType<typeof createCampusSound>;

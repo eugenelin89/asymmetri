@@ -20,14 +20,15 @@
     "showcase:preview": "npm run receiver:build && node receiver/dist/test/showcase-preview.js",
     "test:richmond": "node --test projects/richmond/*.test.mjs",
     "test:surrey": "node --test projects/surrey/surrey.test.mjs",
-    "prebuild:next": "npm run test:surrey && npm run test:richmond && npm run test:ubc && npm run test:cwru && npm run test:campus-reviews && npm run test:campus-analytics && npm run test:stanford",
+    "prebuild:next": "npm run test:surrey && npm run test:richmond && npm run test:ubc && npm run test:cwru && npm run test:campus-reviews && npm run test:campus-analytics && npm run test:stanford && npm run test:campus-atmosphere",
     "test:ubc": "node --test projects/ubc/*.test.mjs",
     "test:cwru": "node --test projects/cwru/*.test.mjs",
     "test:campus-reviews": "node --test projects/campus-reviews/reviews.test.mjs",
     "test:campus-analytics": "node --test projects/campus-analytics/*.test.mjs",
     "test:stanford": "node --test --test-concurrency=1 projects/stanford/*.test.mjs",
     "ubc:benchmark": "node projects/ubc/tools/benchmark.mjs",
-    "ubc:benchmark:build": "node projects/ubc/tools/benchmark.mjs --build"
+    "ubc:benchmark:build": "node projects/ubc/tools/benchmark.mjs --build",
+    "test:campus-atmosphere": "node --test projects/campus-atmosphere/*.test.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",

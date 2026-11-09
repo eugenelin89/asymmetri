@@ -1,9 +1,16 @@
+import type { Solar, Weather } from "../campus-atmosphere/calendar";
 export type Point = [number, number];
 export type Mode = "walk" | "third" | "aerial" | "map";
 export type Season = "spring" | "summer" | "autumn" | "winter";
-export type Weather = "clear" | "cloudy" | "overcast" | "rain" | "fog" | "snow";
+export type { Weather } from "../campus-atmosphere/calendar";
 export type Quality = "auto" | "ultra" | "high" | "medium" | "low";
 export type Settings = {
+  christmas: boolean;
+  solar?: Solar;
+  windKph?: number;
+  intensity?: number;
+  fog?: boolean;
+  live?: boolean;
   season: Season;
   weather: Weather;
   hour: number;

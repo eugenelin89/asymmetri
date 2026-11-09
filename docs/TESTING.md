@@ -902,12 +902,7 @@ suites exercise actual movement and source geometry:
   fictional activity spacing/animation/yielding, population/reduced-motion
   controls and finite batched geometry with distant athlete LOD.
 
-`halloween-settings.test.mjs` exercises the October 31/November 7 Vancouver
-midnight boundaries, inclusive November 6 end, current-year manual override,
-malformed/stale storage, reusable future-year schedule and reversible atmosphere
-changes, including the daylight-saving boundary and deterministic server defaults.
-It checks season/time/weather restoration while retaining changed quality, markers,
-population and reduced-motion choices.
+`halloween-settings.test.mjs` covers the Vancouver 2026 clock change, local November 8 and January 1 cutoffs, actual-date sunlight and the independence of edition, volume and staged weather. The explorer tests cover the complete visit lifecycle.
 
 `halloween.test.mjs` exercises all nine generated interior placements and both
 gateway pumpkins against actual collision/standing surfaces, dispersed source-path
@@ -942,7 +937,7 @@ checks remain limitations; these release checks do not certify the 60 FPS target
 
 ## CWRU campus acceptance
 
-`npm run test:cwru` covers profile creation/edit/recovery/deletion/reporting, CWRU cookie isolation, profile-to-walking-character propagation, sound attenuation/cooldowns, calendar boundaries, Clarke doors and lift, source footprints, all 17 entrances and their source-outline passages, supported stairs in both directions, spawn clearance, safe source links, private-question boundaries, Cleveland Halloween dates and restoration, floor decorations, disconnected routing,16 roaming costume types, path clearance, movement/yielding, reduced motion, population toggles, instanced geometry budgets and pursuit behavior. Check `/labs/cwru` at phone, tablet and desktop widths with ordinary controls; include interior entry, directory navigation, map/third person, public profile controls, Halloween, audible preview/mute/theme-off behavior and console errors. Responsive browser emulation does not establish physical-device acceptance. See [implementation report](CWRU_CAMPUS_2026-10-31.md).
+`npm run test:cwru` covers profile creation/edit/recovery/deletion/reporting, CWRU cookie isolation, profile-to-walking-character propagation, sound attenuation/cooldowns, calendar boundaries, Clarke doors and lift, source footprints, all 17 entrances and their source-outline passages, supported stairs in both directions, spawn clearance, safe source links, private-question boundaries, Cleveland Halloween and Christmas cutoffs, floor decorations, disconnected routing,16 roaming costume types, path clearance, movement/yielding, reduced motion, population toggles, instanced geometry budgets and pursuit behavior. Check `/labs/cwru` at phone, tablet and desktop widths with ordinary controls; include interior entry, directory navigation, map/third person, public profile controls, Halloween, audible preview/mute/theme-off behavior and console errors. Responsive browser emulation does not establish physical-device acceptance. See [implementation report](CWRU_CAMPUS_2026-10-31.md).
 
 CWRU expanded roster validation adds 500-record coverage, five existing-record deduplications, contact-column exclusion in the Python importer, roster-source fallback attribution, source-linked study replies, fictional appearance variation and bounded multi-district crowds. The CWRU suite has 89 tests. `prebuild:next` includes `test:cwru`, so the Linux candidate validates the campus before packaging.
 
@@ -978,3 +973,13 @@ canvas is not mobile-device validation. See the
 [release checklist](UBC_RELEASE_ACCEPTANCE.md). Initial local evidence is tracked
 in [the V0.5 gallery](validation/ubc-v05/README.md); it does not establish a deployed
 release or replace ordinary visitor walkthroughs.
+
+## Three-campus Christmas acceptance
+
+`npm run test:campus-atmosphere` runs the station endpoint and the collision-checked decorated walks. It runs during `npm run build:next`. The endpoint fixtures control the upstream HTTP responses and observation clock; the spatial fixtures exercise ordinary motion into the furnished landmark and check visible clearance.
+
+Run `node projects/campus-atmosphere/tools/check-explorers.mjs` against the local Next server on port 3065. Use `CAMPUS_TEST_ORIGIN` for another local port. The runner accepts the module location of an already installed Playwright via `PLAYWRIGHT_MODULE` and an installed Chromium-compatible browser via `CAMPUS_BROWSER`. It drives the regular visitor UI at three viewport sizes in a Tokyo browser time zone. A nearby report can expire while a replay or Photo is open. Test that state through resume and repeat from a new visit. [Acceptance record, captures and physical Safari measurements](CAMPUS_CHRISTMAS_2026.md).
+
+Run `node projects/campus-atmosphere/tools/check-visit-preferences.mjs` with the same origin, Playwright module and browser to exercise independent tabs, post-season Regular, OS reduced motion, mute and volume. The shared unit suite also exercises the audio controllers from their first allowed gesture through disposal.
+
+Run `node projects/campus-atmosphere/tools/check-live-weather.mjs` with the same browser configuration for controlled November daylight. In each explorer it compares first-person Live renders for clear, overcast, windy rain, snow and fog, then checks outage and a delayed observation arriving during a staged scene. An open visit with no observation advances eight hours through sunset. The run checks the displayed sunrise, sunset and civil twilight and samples the daytime and nighttime frames from the same viewpoint.

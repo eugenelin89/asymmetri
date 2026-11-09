@@ -4,8 +4,8 @@ import * as THREE from "three";
 import "./test-loader.mjs";
 
 const { createHalloweenSky } = await import("./halloween-sky.ts");
-const { defaults, setHalloween } = await import("./environment.ts");
-const enabled = setHalloween({ ...defaults }, true).settings;
+const { defaults } = await import("./environment.ts");
+const enabled = { ...defaults, halloween: true, weather: "overcast", hour: 19.5 };
 function fixture() {
   const sky = createHalloweenSky(), scene = new THREE.Scene();
   scene.add(sky.group);

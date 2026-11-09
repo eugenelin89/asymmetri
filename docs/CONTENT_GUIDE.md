@@ -832,4 +832,9 @@ UBC's supplied research adds 498 student characters and enriches two existing ro
 
 ## Stanford public facts and boundaries
 
-Edit Stanford identity in `content/stanford.ts`, landmark research in `projects/stanford/architecture-sources.json`, and public character facts/provenance in the Stanford `data/` directory. Keep inferred interiors, generic avatars, simulated paths and dated source affiliations explicit. Published roster seasons are not live eligibility. Student research is not registrar verification; exclude contact details and portraits. Public visitors control their own submitted profiles. Halloween defaults Oct24–Nov7 in Stanford time; Christmas is reserved for December and remains unavailable. Do not imply university endorsement or deployment.
+Edit Stanford identity in `content/stanford.ts`, landmark research in `projects/stanford/architecture-sources.json`, and public character facts/provenance in the Stanford `data/` directory. Keep inferred interiors, generic avatars, simulated paths and dated source affiliations explicit. Published roster seasons are not live eligibility. Student research is not registrar verification; exclude contact details and portraits. Public visitors control their own submitted profiles. Automatic runs Halloween October 24 through November 7. Christmas runs November 8 through December 31, 2026, on each campus’s own calendar. Do not imply university endorsement or deployment.
+
+
+## Christmas walks and observed weather
+
+Describe the seasonal displays as installations in the virtual reconstructions. The welcome and Atmosphere controls identify the edition, any deliberate replay, and whether the conditions are Live or Simulated. “Nearby station observation” carries the provider, reporting station, observation time and age. Retain the exact outage label “Weather unavailable.” Keep an explicit Regular selection distinct from the historical Halloween switches. See the [edition and atmosphere guide](CAMPUS_CHRISTMAS_2026.md) and [station credits](CAMPUS_WEATHER.md).
