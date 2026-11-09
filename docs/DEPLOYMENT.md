@@ -3,7 +3,9 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
-The [instrumental Winter Wonderland release](CAMPUS_WINTER_MUSIC_RELEASE_2026-11-08.md) went live November 9 at 04:30 UTC, source `84cf1ba`, build `FuLi6Rs2sXV_6kjbwUtgw`. The immediate rollback is `/var/www/asymmetri-rollback-before-winter-music-20261109`, source `c64f99a`, build `pqCDGF7c0ilyWrtCRVrdN`.
+The [school-specific campus music release](CAMPUS_CAROLS_RELEASE_2026-11-09.md) went live November 9 at 04:55 UTC, source `2207425`, build `NuLNmWjI8mCQC6syMWWyY`. Stanford plays Jingle Bells, CWRU plays Rudolph the Red-Nosed Reindeer, and UBC keeps Winter Wonderland. The complete rollback is `/var/www/asymmetri-rollback-before-campus-carols-20261109`, source `84cf1ba`, build `FuLi6Rs2sXV_6kjbwUtgw`.
+
+The earlier [instrumental Winter Wonderland release](CAMPUS_WINTER_MUSIC_RELEASE_2026-11-08.md) went live November 9 at 04:30 UTC, source `84cf1ba`, build `FuLi6Rs2sXV_6kjbwUtgw`. Its immediate rollback was `/var/www/asymmetri-rollback-before-winter-music-20261109`, source `c64f99a`, build `pqCDGF7c0ilyWrtCRVrdN`.
 
 Before starting a candidate for the three-track Christmas edition, put both owner-held recordings in `public/campus-audio/`: UBC’s `winter-wonderland-fb595967.m4a` and CWRU’s `cwru-rudolph-dc9be1f2.m4a`. Restore them from a verified runtime already serving those versions or the private owner-held masters. Stanford’s `stanford-jingle-bells-89a074ea.m4a` ships in the source checkout. Verify all three hashes against the [asset manifest](ASSET_MANIFEST.md), then check the track selected on each public campus. For a smaller independent runtime, verify the exact Linux CI artifact and extract its build and production dependency files. Derive omissions from the matched package lock, preserve the original bytes of all retained files and validate them in the candidate smoke test. Keep all published assets and the immediately previous independent runtime.
 
