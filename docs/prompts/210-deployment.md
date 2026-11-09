@@ -24,15 +24,19 @@ Thirteen tracked files. They cover the audio controller and lifecycle tests, lic
 
 ## Verification and repository state
 
-The complete local ambience suite passed 33 tests, along with TypeScript, lint (one existing tutorial warning), the Vinext build, production dependency audit and whitespace checks. Main was clean after the implementation commit, ahead of origin by one. Record the actual server release and verified recovery separately after activation.
+The complete local ambience suite passed 33 tests, along with TypeScript, lint (one existing tutorial warning), the Vinext build, production dependency audit and whitespace checks. Main was clean after the implementation commit, ahead of origin by one. The [release receipt](../CAMPUS_WINTER_MUSIC_RELEASE_2026-11-08.md) records public playback, asset hashes, independent rollback and the measured cleanup audit.
 
 ## Implementation commits
 
 - `ea8c111b1247543b81cd7635a7d1e7ce08e1311d` — Play the approved instrumental Winter Wonderland during Christmas campus walks
 
+- `2f2067dd93559c73151267a06f2f7fbbd1f2493e` — Record the verified Winter Wonderland production release and cleanup
+
 ## Archive commit
 
 Journal 210 — record the approved campus soundtrack
+
+Complete Journal 210 with live playback and verification
 
 ## Lessons learned
 
