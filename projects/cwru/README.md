@@ -57,7 +57,7 @@ An optional Friday-the-13th-inspired hockey-masked outdoor pursuer carrying a pr
 
 The original Halloween score, wolf howls, nearby ghost cries and howl preview use
 Web Audio. Campus sound starts with an entry or sound gesture. Weather can be
-heard in Regular. The Christmas walk loops an instrumental “Winter Wonderland” with quiet sleigh bells. Mute and
+heard in Regular. The Christmas walk loops an instrumental “Rudolph the Red-Nosed Reindeer” with quiet sleigh bells. Mute and
 volume apply across editions and survive a return visit, including migration of
 the existing CWRU sound preference. Hidden tabs suspend playback. The optional
 Audio Session playback role supports iPhone Silent Mode. [Earlier iPhone audio

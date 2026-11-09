@@ -879,7 +879,7 @@ Sites packaging, public data snapshots or shared services. See
 
 ## Shared campus visits and station observations
 
-Christmas audio uses a same-origin release asset. Each unlocked audio context decodes it once; a looping source shares the existing campus volume control and stops on edition changes or disposal. Async completion checks the active visit before starting playback.
+Each campus passes its campus ID to the shared Christmas audio controller. It downloads just that campus’s same-origin recording and caches the decoded buffer per campus and audio context; a looping source shares the existing campus volume control and stops on edition changes or disposal. Async completion checks the active visit before starting playback.
 
 
 `projects/campus-atmosphere/` owns campus-local dates, solar calculations, visit choices, weather effects, the localized sound mix and the three decorated routes. Each campus passes its effective settings into its existing engine before the first frame. The client waits for the edition and device preferences before presenting the entry button. A history departure tears down the explorer; tab visibility and phone lock preserve the walk.

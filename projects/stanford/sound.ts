@@ -80,7 +80,7 @@ export function createCampusSound(onStatus?:(message:string)=>void) {
     const active=audible();
     if(active && scene?.halloween)startBed();
     if(awake() && scene){
-      if(hasAmbience(scene))ambience ??= createAmbience(context,master);
+      if(hasAmbience(scene))ambience ??= createAmbience(context, master, "stanford");
       ambience?.update(scene,mix);
     } else if(ambience){ambience.dispose();ambience=undefined;}
     master.gain.setTargetAtTime(active?volume*.8:0,context.currentTime,.3);

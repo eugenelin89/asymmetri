@@ -20,6 +20,11 @@ const campuses = {
     return { enter: settings => { sound.configure(settings); return sound.unlock(); }, configure: sound.configure, frame: (_s, mix) => sound.update(.1, pose, [], false, mix), dispose: sound.dispose };
   },
 };
+const expectedMusic = {
+  ubc: "/campus-audio/winter-wonderland-fb595967.m4a",
+  stanford: "/campus-audio/stanford-jingle-bells-89a074ea.m4a",
+  cwru: "/campus-audio/cwru-rudolph-dc9be1f2.m4a",
+};
 const regular = {
   halloween: false, christmas: false, weather: "clear", windKph: 0, intensity: 0,
   sound: true, soundVolume: .4, halloweenAudio: true, halloweenSound: true, halloweenVolume: .4,
@@ -110,7 +115,7 @@ for (const [campus, create] of Object.entries(campuses)) {
 }
 
 for (const [campus, create] of Object.entries(campuses)) {
-  test(`${campus} plays the same licensed loop indoors and outdoors and releases it on exit`, async t => {
+  test(`${campus} plays its own Christmas track indoors and outdoors and releases it on exit`, async t => {
     const device = audioDevice(t), sound = create();
     const christmas = { ...regular, christmas: true, weather: "rain", windKph: 28 };
     try {
@@ -126,7 +131,7 @@ for (const [campus, create] of Object.entries(campuses)) {
       sound.frame(christmas, { indoor: true, proximity: .5, pan: -.75 });
       assert.deepEqual(context.audible(), [wind, music], "doorways keep the same recording");
       assert.ok(weatherBus.gain.value < outsideLevel);
-      assert.deepEqual(device.downloads, ["/campus-audio/winter-wonderland-fb595967.m4a"]);
+      assert.deepEqual(device.downloads, [expectedMusic[campus]]);
       sound.configure({ ...christmas, christmas: false });
       assert.deepEqual(context.audible(), [wind]);
     } finally { sound.dispose(); }

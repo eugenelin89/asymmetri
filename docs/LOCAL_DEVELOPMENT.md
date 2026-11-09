@@ -386,4 +386,6 @@ builds/tests during samples. [Protocol, source manifest and limits](UBC_V05_FOUN
 
 ## Local Christmas walks
 
+Stanford’s “Jingle Bells” recording ships in the checkout. For UBC and CWRU sound, place the two owner-held recordings at the [exact paths and hashes in the asset manifest](ASSET_MANIFEST.md). Each campus fetches only its own recording after sound is enabled.
+
 On the repository Node version, run `npm run dev:next -- --hostname localhost --port 3065` and open `/labs/ubc`, `/labs/stanford` or `/labs/cwru` on that origin. Each explorer can run with its community stores unconfigured. The weather handler reads public ECCC or NWS observations and needs no API key. A run without upstream network access still provides the campus clock, sunlight, scenery and controls. Use Atmosphere to select a replay or Photo to stage a lighting and weather comparison. [Browser fixtures and tests](TESTING.md).

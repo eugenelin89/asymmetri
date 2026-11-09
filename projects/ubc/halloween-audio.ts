@@ -284,7 +284,7 @@ export function createHalloweenAudio(options: AudioOptions = {}) {
   function syncAmbience() {
     if (scene?.halloween && enabled && playbackIntent && !visibility?.hidden) startBed();
     if (scene?.halloweenAudio && volume > 0 && playbackIntent && !visibility?.hidden && context && master) {
-      if (hasAmbience(scene)) ambience ??= createAmbience(context, master);
+      if (hasAmbience(scene)) ambience ??= createAmbience(context, master, "ubc");
       ambience?.update(scene, mix);
     } else if (ambience) {
       ambience.dispose();

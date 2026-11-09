@@ -1,4 +1,4 @@
-import type { Weather } from "./calendar";
+import type { Campus, Weather } from "./calendar";
 
 export type SoundScene = { christmas?: boolean; weather?: Weather; windKph?: number; intensity?: number; reducedMotion?: boolean };
 export type ListenerMix = { indoor: boolean; proximity: number; pan: number };
@@ -6,21 +6,30 @@ const arrival: ListenerMix = { indoor: false, proximity: 0.8, pan: 0 };
 
 type WeatherSound = "snow" | "wind";
 
-const musicUrl = "/campus-audio/winter-wonderland-fb595967.m4a";
-const recordings = new WeakMap<AudioContext, Promise<AudioBuffer>>();
+const christmasMusic: Record<Campus, string> = {
+  ubc: "/campus-audio/winter-wonderland-fb595967.m4a",
+  stanford: "/campus-audio/stanford-jingle-bells-89a074ea.m4a",
+  cwru: "/campus-audio/cwru-rudolph-dc9be1f2.m4a",
+};
 
-function loadChristmasMusic(context: AudioContext) {
-  let recording = recordings.get(context);
-  if (!recording) {
-    recording = fetch(musicUrl).then(async response => {
-      if (!response.ok) throw new Error("Christmas music unavailable");
-      return context.decodeAudioData(await response.arrayBuffer());
-    }).catch(error => {
-      recordings.delete(context);
-      throw error;
-    });
-    recordings.set(context, recording);
+const recordings = new WeakMap<AudioContext, Map<Campus, Promise<AudioBuffer>>>();
+
+function loadChristmasMusic(context: AudioContext, campus: Campus) {
+  let cache = recordings.get(context);
+  if (!cache) {
+    cache = new Map();
+    recordings.set(context, cache);
   }
+  const existing = cache.get(campus);
+  if (existing) return existing;
+  const recording = fetch(christmasMusic[campus]).then(async response => {
+    if (!response.ok) throw new Error("Christmas music unavailable");
+    return context.decodeAudioData(await response.arrayBuffer());
+  }).catch(error => {
+    cache.delete(campus);
+    throw error;
+  });
+  cache.set(campus, recording);
   return recording;
 }
 
@@ -124,7 +133,7 @@ export function displayMix(sources: readonly { x: number; z: number; indoor: boo
 }
 
 /** The recording shares the same gesture-unlocked master as the weather. */
-export function createAmbience(context: AudioContext, master: AudioNode) {
+export function createAmbience(context: AudioContext, master: AudioNode, campus: Campus) {
   const snow = weatherTrack(context, master, "snow");
   const wind = weatherTrack(context, master, "wind");
   type Voice = { source: AudioBufferSourceNode; gain: GainNode };
@@ -145,7 +154,7 @@ export function createAmbience(context: AudioContext, master: AudioNode) {
   function play() {
     const requested = generation;
     pending = true;
-    void loadChristmasMusic(context).then(buffer => {
+    void loadChristmasMusic(context, campus).then(buffer => {
       if (requested !== generation) return;
       const source = context.createBufferSource(), gain = context.createGain();
       const v = { source, gain };

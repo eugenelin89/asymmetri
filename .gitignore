@@ -15,5 +15,6 @@ coverage
 
 projects/vancouver/**/__pycache__/
 
-# Licensed for playback in the campus walks; provision separately at release.
+# Licensed recordings for the campus walks; provision separately at release.
 /public/campus-audio/winter-wonderland-fb595967.m4a
+/public/campus-audio/cwru-rudolph-dc9be1f2.m4a

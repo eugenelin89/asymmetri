@@ -44,7 +44,7 @@ export function createHalloweenAudio(options:AudioOptions={}){
  let scene: AudioSettings|undefined, mix: ListenerMix|undefined, ambience:ReturnType<typeof createAmbience>|undefined;
  function updateAmbience(){
   if(scene?.halloweenSound&&volume>0&&!hidden&&gestureGranted&&context&&master){
-   if(hasAmbience(scene))ambience ??= createAmbience(context,master);
+   if(hasAmbience(scene))ambience ??= createAmbience(context, master, "cwru");
    ambience?.update(scene,mix);
   }else if(ambience){ambience.dispose();ambience=undefined;}
  }
