@@ -1,5 +1,9 @@
 # Server storage maintenance
 
+## November 9, 2026 website storage audit
+
+The [Mac and production audit](WEBSITE_STORAGE_AUDIT_2026-11-09.md) records measured capacity, staging cleanup, current rollback custody, and website and peer checks. It supersedes older location records for the five expanded website runtimes archived in this maintenance window.
+
 ## October 9, 2026 private receiver installation — current
 
 [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the isolated receiver while preserving the original website/source/build, Nginx, Django/socket, dormant PG, rollback and swap. Its empty migration-001 archive has no publisher or investment run, and its unit finishes static/inactive with disabled configuration. Temporary synthetic instances/credentials/storage are removed after reconciliation. No global packages, OS upgrade, firewall/DNS edits or unrelated restarts occur. See [measured capacity and final preservation](INFRA-02-VALIDATION.md); receiver backups/retention and public activation remain separately reviewed future work.

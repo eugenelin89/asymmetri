@@ -3,6 +3,8 @@
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
+The [November 9 storage audit](WEBSITE_STORAGE_AUDIT_2026-11-09.md) records current recovery locations. Production and the immediate pre-campus-carols rollback remain complete directories. Five earlier website runtimes are now individually checksummed archives on the server. Use the audit's inventory and the [older rollback restoration procedure](#compressing-an-older-retained-rollback-when-capacity-is-limited) when recovering one of those releases.
+
 The [school-specific campus music release](CAMPUS_CAROLS_RELEASE_2026-11-09.md) went live November 9 at 04:55 UTC, source `2207425`, build `NuLNmWjI8mCQC6syMWWyY`. Stanford plays Jingle Bells, CWRU plays Rudolph the Red-Nosed Reindeer, and UBC keeps Winter Wonderland. The complete rollback is `/var/www/asymmetri-rollback-before-campus-carols-20261109`, source `84cf1ba`, build `FuLi6Rs2sXV_6kjbwUtgw`.
 
 The earlier [instrumental Winter Wonderland release](CAMPUS_WINTER_MUSIC_RELEASE_2026-11-08.md) went live November 9 at 04:30 UTC, source `84cf1ba`, build `FuLi6Rs2sXV_6kjbwUtgw`. Its immediate rollback was `/var/www/asymmetri-rollback-before-winter-music-20261109`, source `c64f99a`, build `pqCDGF7c0ilyWrtCRVrdN`.
