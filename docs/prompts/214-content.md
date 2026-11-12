@@ -36,11 +36,11 @@ Shared copy, the reusable access component and redirect configuration; README an
 
 ## Documentation updated
 
-Current guides state public availability; dated prior evidence remains historical. Deployment evidence will be added after public acceptance and cleanup.
+Current guides state public availability; dated prior evidence remains historical. [Verified deployment and cleanup](../MOTION_APP_STORE_RELEASE_2026-11-11.md) records activation, exact build, independent rollback, protected routes, assets, peer/configuration preservation and measured storage results. The deployment guide identifies the current runtime and immediate rollback.
 
 ## Git diff summary
 
-10 files changed, 62 insertions and 61 deletions: bounded availability/link edits and matching documentation.
+Runtime implementation: 10 files changed, 62 insertions and 61 deletions. Release receipt and deployment guide: 2 files changed, 50 insertions. These totals exclude this journal and interaction log.
 
 ## Verification
 
@@ -55,17 +55,27 @@ Current guides state public availability; dated prior evidence remains historica
 
 Opening Mac free space: 65,659,752,448 bytes (`df`, not `du`). Only the canonical checkout is registered. Initially no `.next`, `dist` or `node_modules` directories existed. Installed dependencies and generated builds are temporary candidates for cleanup after validation. Production preflight free space: 11,558,912,000 bytes; serving runtime about 700,048 KiB and previous rollback about 690,428 KiB (`du`). The current runtime, complete rollback, retained archives, private stores and configuration are protected. Historical archive custody and unproven October scratch remain documented in the November 9 audit and Issue #5; no broad cleanup is authorized.
 
+The local cleanup windows recovered **1,743,892,480 bytes**; final free space was **65,204,457,472 bytes**. Server staging cleanup recovered **256,942,080 bytes**; final free space was **10,251,710,464 bytes**. Full before/after readings, exact removed paths, retained runtime sizes and recovery limitations are in the release receipt. No new cleanup blockers remain. Historical custody remains the already-recorded Issue #5 follow-up.
+
+## Deployment acceptance
+
+Activated November 12 at 01:48 UTC (November 11 Vancouver). Linux validation passed 646 tests and zero production vulnerabilities. Exact tar checksum/source/runtime matched before unpacking. Candidate and public acceptance preserved 22 route contracts, 803 public assets, 38 build files, 15 peer host baselines, 62 configuration files and five private stores/settings. The old runtime independently booted on loopback. Fresh live browser visits and 14 off-host checks passed. Post-cleanup service logs had no current-process errors or warnings. The 192 MiB/6 GiB floors held throughout sampled guarded operations.
+
 ## Repository state after implementation commit
 
-Clean main after the implementation commit; the journal is committed separately before pushing. Deployment remains pending at this preparation point.
+Runtime source and its preparation archive were pushed on main; deployed source is `17dc03f957723ac95de6d42405dab1f9a24b2de2`, build `GJigN8VBK-fezdQvZSZsm`. Receipt commit `fb63c8a` contains documentation only. This journal finalization and the complete final-response log are committed separately and pushed to main. The production checkout remains clean at its verified runtime source.
 
 ## Implementation commits
 
 768702fc7effad450b49a5f4feeaeae918b2b473 — Publish Asymmetri Motion App Store availability.
 
+fb63c8abffd4b37714130063d3fa7c8c00f653ec — Record verified Motion App Store website deployment.
+
 ## Archive commit
 
-Journal 214 — record Motion App Store release preparation
+Initial archive: Journal 214 — record Motion App Store release preparation
+
+Finalization: Journal 214 — finalize live release and interaction log
 
 ## Lessons learned
 
