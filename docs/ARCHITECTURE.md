@@ -8,7 +8,7 @@ to Labs. BotSquad contains BotSquad Research, which contains BotSquad Trade;
 Ask BotSquad is a shared sibling of Research. Next.js App Router, strict TypeScript and shared CSS render the site.
 DigitalOcean serves the standard Next.js build; Vinext/Cloudflare packaging remains
 separate. Existing pages have no CMS, embedded signup forms, accounts or analytics.
-Motion access requests use an external Google Form, reached through `/motion/try`. The independent,
+Motion download actions link directly to the Apple App Store; `/motion/try` preserves older links with a temporary redirect. The independent,
 default-disabled INV-02 receiver owns a public archive/signature boundary described
 in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Strict production API routing
 is live with the exact finite investment publisher and initial configured portfolio.
@@ -24,7 +24,7 @@ Ask intake remains disabled and no Ask service authority is active.
 | `/labs/gis` | `app/labs/gis/page.tsx`: Virtual Worlds category, city cards and reconstruction explanation |
 | `/labs/vancouver`, `/labs/surrey`, `/labs/richmond` | Existing independent city applications; unchanged URLs under the Virtual Worlds category |
 | `/motion` | Current pitching workflow and family roadmap |
-| `/motion/try` | HTTP 307 to the external Google Form in `motion.access.formUrl` |
+| `/motion/try` | HTTP 307 to the Apple App Store in `motion.access.appStoreUrl` |
 | `/botsquad` | Umbrella project overview, software story and area directory |
 | `/botsquad/research` | Research hub linking to BotSquad Trade |
 | `/botsquad/trade` | Trade research project and retained evidence routes |

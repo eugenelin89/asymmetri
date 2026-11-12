@@ -45,7 +45,7 @@ When routes or shared layout code change, verify:
   code blocks and numbered task/investigation steps)
 - `/about` (real company page, no redirect)
 - `/motion` (real product page, truthful release status)
-- `/motion/try` (307 to the exact public Google Form in `motion.access.formUrl`;
+- `/motion/try` (307 to the exact App Store listing in `motion.access.appStoreUrl`;
   temporary, not 308; no extra landing page or sitemap entry)
 - `/tutorial` (actual guide, exact www canonical, no redirect)
 - `/privacy` and `/support` (actual articles, not homepage redirects)
@@ -71,18 +71,17 @@ When changing Worker or Vite binding configuration, request at least one
 `/_vinext/image` URL from the local Vinext server and confirm that it returns an
 image response without a Worker exception.
 
-## Motion access requests
+## Motion App Store access
 
-Verify both Motion access buttons and the Sports product-section button point to
-`/motion/try`, expose their eligibility/provider text through `aria-describedby`,
-and remain reachable with visible keyboard focus at mobile, tablet and desktop
-widths. Retain the how-it-works, Motion family, tutorial, privacy/support and
-product-detail links. Follow an access link to the public form, verify its title
-and required fields, and do not submit a synthetic response to the live sheet.
-Before navigation, the website must not load Google Forms resources or introduce
-form inputs, tracking, cookies or browser storage for the form. Check the current
-policy date and `#testflight-access` disclosure. A request must not imply a confirmed
-invitation, download, App Store launch or external TestFlight build availability.
+Verify both Motion buttons and the Sports product button link directly to
+`motion.access.appStoreUrl`, say **Download on the App Store**, expose the
+eligibility/provider text through `aria-describedby`, and have visible keyboard
+focus at phone, tablet and desktop widths. Verify `/motion/try` returns HTTP 307
+to the same exact listing on both hosts. Do not purchase the app during acceptance.
+Retain learning/family links, all protected routes, tutorial hashes and original
+images. Marketing and tutorial text must not imply beta-only availability.
+Check the policy date and retained previous-request disclosure at
+`/privacy#testflight-access`. No signup or tracking is added.
 
 ## Visual and interaction checks
 
@@ -144,7 +143,7 @@ Check:
   product showcases, common-thread or contact section;
 - explicit equal division/product links, one “Why Asymmetri” action, comfortable
   responsive height and no clipped content or excessive empty space;
-- Pitching v1.2 private TestFlight versus pending public release, Hitting in
+- Pitching available on the App Store, Hitting in
   development with experimental measurements, planned Team/Dual View, exactly
   one professional app and its three nested entitlements, finite Cloud and later
   Mechanics Lab/Enterprise;

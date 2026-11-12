@@ -330,19 +330,19 @@ export type MotionFamilyProduct = {
   link?: NavItem;
 };
 
-// Display names and release states live here; these are not final Store names.
+// Product-family names and release states live here; the released Store app is Asymmetri Motion.
 export const motionFamily = {
   name: divisions.sports.product.name,
   headline: "One Motion family. Individual and team perspectives.",
-  introduction: "Pitching v1.2 is preparing for public release, Hitting is in development, and one professional Team app is planned. The family shares review technology while keeping pitching and hitting distinct.",
+  introduction: "Asymmetri Motion for pitching is available on the App Store, Hitting is in development, and one professional Team app is planned. The family shares review technology while keeping pitching and hitting distinct.",
   individual: {
     label: "Individual",
     description: "Separate, focused apps for one athlete.",
     products: [
       {
-        id: "pitching", name: "Pitching", status: "preparing",
+        id: "pitching", name: "Pitching", status: "current",
         description: "The Motion experience for iPhone: capture, projected 2D measurements, pitching history, Reference Study, event-aligned comparison and review sharing.",
-        detail: "Motion v1.2 is in private TestFlight testing. Public App Store availability is still pending.",
+        detail: "Asymmetri Motion is available now on the Apple App Store for iPhone.",
         link: { label: "Explore the pitching experience", href: "/motion#how-it-works" },
       },
       {
@@ -372,7 +372,7 @@ export const motionFamily = {
     title: "Further ahead",
     body: "Planned Dual View capture pairs two iPhones for reviewing two views of a pitch, with one phone controlling the Companion Camera. It is outside v1.2 and does not promise 3D reconstruction. Team productionization, Enterprise expansion and deeper Mechanics Lab work remain later directions.",
   },
-  note: "Pitching, Hitting and Team describe the product direction. Final names may change. No launch dates are announced.",
+  note: "Pitching is available as Asymmetri Motion. Hitting and Team describe the product direction; their final names and launch dates are not yet announced.",
 } as const;
 
 // Owner-approved vocabulary now verified in accepted Motion 1.2 (4), October 21, 2026.
@@ -414,15 +414,15 @@ export const motion = {
   releaseStatement: motionFamily.individual.products[0].detail,
   access: {
     path: "/motion/try",
-    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSfYhAdtjq_M_HN80uo7sz7E0lB8sg1mSminpt43enY5fxf35w/viewform",
-    label: "Request TestFlight access",
-    eligibility: "iPhone · iOS 17+ · Invitation required",
-    note: "Opens Google Forms. Invitations depend on beta availability.",
+    appStoreUrl: "https://apps.apple.com/us/app/asymmetri-motion/id6825059131",
+    label: "Download on the App Store",
+    eligibility: "iPhone · iOS 17 or later",
+    note: "Available now. Opens the Apple App Store.",
   },
   metadata: {
     title: "Asymmetri Motion | Track Pitching Mechanics Over Time",
     description:
-      "Motion v1.2 for iPhone: track pitching mechanics, study reference video, compare the same event and share selected evidence. Preparing for public release.",
+      "Motion v1.2 for iPhone: track pitching mechanics, study reference video, compare the same event and share selected evidence. Available now on the Apple App Store.",
   },
   icon: {
     src: "/brand/motion-pitcher.png",
@@ -600,7 +600,7 @@ export const motionPages = {
     title: "Asymmetri Motion Privacy Policy",
     description:
       "How Asymmetri Motion handles local pitching videos and analysis, Apple services and sharing, website visits, TestFlight access requests, and support email.",
-    effectiveDate: { label: "October 22, 2026", value: "2026-10-22" },
+    effectiveDate: { label: "November 11, 2026", value: "2026-11-11" },
     introduction: [
       "Asymmetri operates Asymmetri Motion, a pitching video and motion-analysis app for iPhone. This policy distinguishes information in the app from website visits, TestFlight access requests, support email, and Apple or other services you choose to use.",
       "Asymmetri does not sell personal information.",
@@ -672,7 +672,7 @@ export const motionPages = {
         id: "website",
         heading: "The asymmetri.co website",
         paragraphs: [
-          "The website provides public information, email links and a link to an external TestFlight access form. It has no site-owned analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no embedded signup or support form, visitor accounts, or website database. Site fonts and images are served locally. The Motion page loads an embedded YouTube player and its media from Google-controlled services. Google Forms connects only when you follow its external link, as explained below.",
+          "The website provides public information, email links and a link to the Apple App Store. It has no site-owned analytics, advertising, marketing trackers, tracking pixels, or browser storage for tracking or profiling. It has no embedded signup or support form, visitor accounts, or website database. Site fonts and images are served locally. The Motion page loads an embedded YouTube player and its media from Google-controlled services. Following the App Store link connects you to Apple, whose terms and privacy practices apply.",
           "The website is hosted on a DigitalOcean server. Website hosting and server infrastructure may process standard technical request information, such as IP address, browser/request information, requested URLs and request times, as needed to deliver, operate and protect the website. This infrastructure processing is separate from the app's on-device records.",
           "We use website information only to operate and support the informational site, not for advertising, profiling, sale or sharing for unrelated purposes. Our DigitalOcean server has access/error logging and system/service logs. Exact total retention across the host, server and other infrastructure copies is not currently established. We do not promise a fixed deletion period for those logs.",
         ],
@@ -689,9 +689,9 @@ export const motionPages = {
       },
       {
         id: "testflight-access",
-        heading: "TestFlight access requests",
+        heading: "Previous TestFlight access requests",
         paragraphs: [
-          "Request TestFlight access opens a Google Form. The form asks for your first and last name, email address, iPhone model and iOS version, and permission to contact you about beta access. Your role in baseball is optional. Google processes your interaction with the form under its own privacy practices.",
+          "Before the App Store release, the website linked to a Google Form for TestFlight requests. The website now links to the App Store. The earlier form requested your first and last name, email address, iPhone model and iOS version, and permission to contact you about beta access; your role in baseball was optional. Google processes form interactions under its own privacy practices.",
           "Responses are stored in Google Forms and a private Google Sheet. We use them to review device compatibility, manage invitations and follow up about installation or beta participation. This is not a marketing mailing-list signup. When inviting you through TestFlight, we provide your name and email address to Apple; Apple handles TestFlight under its own terms and privacy practices.",
           "Provide your own contact details. Parents or guardians requesting access for a young athlete should use their own details. Do not submit athlete footage, health information or a child's personal information through this form.",
           `You can withdraw your request or ask us to delete the access-request information we hold by emailing ${site.company.contactEmail}. Google and Apple control their own service records and copies.`,
@@ -723,6 +723,7 @@ export const motionPages = {
         heading: "Policy updates",
         paragraphs: [
           "We may update this policy as the app or our practices change. Updates will appear on this page with a revised effective date.",
+          "November 11, 2026: Motion is available on the Apple App Store. Website download links replace the TestFlight request link. The previous-request disclosure and deletion contact remain available; app and support-email handling are unchanged.",
           "October 22, 2026: the Motion introduction player now loads when you visit the product page, before you press Play. Playback remains under your control. App, TestFlight and support-email handling are unchanged.",
           "October 21, 2026: added coverage for the external Google Form, private response sheet and TestFlight invitation follow-up. The app's local data handling and existing support-email policy are unchanged.",
           "October 6, 2026: added Motion 1.2 coverage for Notes, Pitch Context, References, Files import, Saved Comparisons and PDF/original-video sharing. Website, Apple-service and support-email handling remains unchanged.",
@@ -922,7 +923,7 @@ export const tutorial = {
     description: "Learn to measure pitching mechanics, build history, compare changes with recorded performance context, and return to the video and evidence in Asymmetri Motion.",
   },
   introduction: "Measure. Track. Compare. Learn. Build a pitching history, investigate changes alongside recorded context, and return to the evidence with your coach. Follow the steps or jump to what you need.",
-  disclosure: "For the Motion v1.2 pitching workflow, currently in private TestFlight testing and preparing for public release. App screenshots are retained examples from earlier builds, used with the owner's permission. Physical setup images are instructional illustrations. Follow the written steps for current behavior; screen details and measurement labels may differ.",
+  disclosure: "For the Motion pitching workflow, available now on the Apple App Store. App screenshots are retained examples from earlier builds, used with the owner's permission. Physical setup images are instructional illustrations. Follow the written steps for current behavior; screen details and measurement labels may differ.",
   link: { label: "Follow the Motion tutorial", href: "/tutorial" },
   modules: [
     {
@@ -1368,7 +1369,7 @@ export const introductions = {
     source: "https://youtu.be/nEv9nJO83NM",
     headline: "A quick look at Motion",
     description:
-      "This short introduction gives a feel for Motion. It’s preparing for release; the workflow and measurement limits are explained below.",
+      "This short introduction gives a feel for Motion, now available on the App Store. The workflow and measurement limits are explained below.",
     tone: "motion",
   },
 } as const;

@@ -5,7 +5,7 @@ export function MotionAccess({ id }: { id: string }) {
     <div className="motion-access">
       <a
         className="button button--primary"
-        href={motion.access.path}
+        href={motion.access.appStoreUrl}
         aria-describedby={id}
       >
         {motion.access.label}

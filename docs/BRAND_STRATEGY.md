@@ -47,8 +47,8 @@ Avoid vague AI-powered claims, generic SaaS language, militaristic framing, inve
 en dashes in public copy. Preserve limits near the claims they qualify.
 
 Implemented capability, release preparation, active development and roadmap are
-separate. Motion v1.2 is privately tested through TestFlight and preparing for its
-first public release. Hitting is in development with experimental measurements;
+separate. Asymmetri Motion is available on the Apple App Store for iPhone,
+confirmed November 11, 2026. Hitting is in development with experimental measurements;
 Team and Dual View are planned, and Mechanics Lab/Enterprise are later directions. No dates,
 Store names, pricing or availability are inferred. BotSquad is experimental,
 open source, self-hosted and MIT licensed; private SSH-tunnel browser access is

@@ -1,5 +1,9 @@
 # Website and support privacy audit
 
+## App Store link update — November 11, 2026
+
+Motion download links now open Apple’s public App Store listing, and `/motion/try` redirects there. The policy explains the Apple destination and retains the stable `#testflight-access` section for previous Google Form requests and deletion contact. The external form, response sheet and support-retention practices were not changed. Effective date: November 11, 2026.
+
 Current dependency status is recorded in the [October 7 security review](DEPENDENCY_SECURITY_2026-10-07.md).
 The dependency findings in the dated publication records below describe their
 original lockfiles; they are not the current security baseline.

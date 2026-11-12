@@ -47,7 +47,8 @@ iPhone/iOS 17, conditional HFR capture, Photos import, Back/Side guides, optiona
 Recording Setups, human-confirmed exact-frame marking, supported projected 2D
 results, saved evidence, local history and descriptive comparison. Capability
 being implemented does not establish App Store availability or scientific
-validation. Current release wording is “Preparing for release.”
+validation. Current release wording is “Available now,” supported by the owner’s
+November 11 confirmation and the public Apple App Store listing.
 
 ### Research and experimental interpretation
 
@@ -58,12 +59,9 @@ Sensor experiments belong to the founder/company history, not current Motion V1.
 
 ### Release preparation, development and roadmap
 
-The October 21 review verifies Motion 1.2 (4) in owner-only TestFlight testing,
-with public App Store release still pending. Keep Pitching **Preparing for release**;
-private testing does not authorize an App Store link or establish external beta
-availability. The owner separately authorized an access-request form on October
-21. Use **Request TestFlight access**, not a download or immediate-access promise.
-Actual invitations still depend on a suitable available beta build.
+As of November 11, Asymmetri Motion is publicly available on the Apple App Store.
+Pitching is **Available now**. This supersedes the October 21 private-TestFlight
+release state without changing the reviewed measurement claims.
 Hitting is **In development**, with implemented review workflows but experimental
 measurements and remaining real-media/scientific/release gates. Team is **Planned**.
 `productStatusLabels` supports all four states; future changes require new evidence.
@@ -157,20 +155,15 @@ and revise the effective date when the policy changes.
 
 ## Motion access link
 
-Keep the public signup destination and all CTA wording in `motion.access`. Share
-`https://asymmetri.co/motion/try`, which temporarily redirects to Google Forms;
-the browser address changes after navigation. Keep the provider notice visible
-and the iPhone/iOS requirement beside all three access buttons. Preserve product
-learning links and the existing release statement. Do not add the redirect to the
-sitemap or silently turn it into a permanent redirect.
+Keep the App Store URL and all CTA wording in `motion.access`. All three buttons
+link directly to `motion.access.appStoreUrl` and say **Download on the App Store**.
+Retain the iPhone/iOS requirement and Apple destination notice. Existing
+`/motion/try` links issue HTTP 307 to the same listing; keep this compatibility
+route out of the sitemap. Product learning links remain available.
 
-The form requires first/last name, email, iPhone model/iOS and contact consent;
-baseball role is optional. It is for invitations and beta follow-up, not marketing.
-Responses stay in Google Forms and a private Google Sheet; names/email go to
-Apple when an invitation is issued. Keep `/privacy#testflight-access` aligned with
-that handling. Do not publish sheet/editor URLs, submit test personal data, or
-activate outreach as part of a website link change. The October 21 policy update
-adds this boundary without changing local app or support-retention practices.
+Preserve `/privacy#testflight-access` for previous requests and deletion contact.
+This update does not delete form responses, close the external form or authorize
+outreach. App-local data and support-retention practices remain unchanged.
 
 ## Voice
 

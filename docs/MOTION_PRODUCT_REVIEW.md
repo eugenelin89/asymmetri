@@ -1,5 +1,9 @@
 # Motion product marketing source review
 
+## App Store release — November 11, 2026
+
+The owner confirmed public release, corroborated by the [Apple listing](https://apps.apple.com/us/app/asymmetri-motion/id6825059131). Motion is **Available now** for iPhone, iOS 17 or later. This supersedes the dated private-TestFlight availability statements below. Hitting stays in development; Team remains planned. Website CTAs open the Store directly, and `/motion/try` retains HTTP 307 compatibility. No binary, pricing, measurement or distribution setting is changed.
+
 Historical baseline reviewed September 16, 2026 for the website's homepage evolution and `/motion`.
 This is an internal claims/provenance record, not a public paper or scientific
 validation. No reference repository was modified, built, configured or released.
