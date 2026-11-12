@@ -1,5 +1,7 @@
 # DigitalOcean production deployment
 
+The [Motion App Store website release](MOTION_APP_STORE_RELEASE_2026-11-11.md) went live November 12 at 01:48 UTC (November 11 Vancouver), source `17dc03f`, build `GJigN8VBK-fezdQvZSZsm`. Motion is Available now and its CTAs open Apple; `/motion/try` remains HTTP 307 to the Store. The complete immediate rollback is `/var/www/asymmetri-rollback-before-motion-appstore-20261112`, source `2207425`, build `NuLNmWjI8mCQC6syMWWyY`. Its independent startup and post-release cleanup passed; the receipt records exact identities and storage measurements.
+
 This guide covers routine redeployment of `https://asymmetri.co` on the current
 DigitalOcean Ubuntu Droplet.
 
