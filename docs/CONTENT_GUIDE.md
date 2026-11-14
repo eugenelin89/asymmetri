@@ -23,8 +23,9 @@ Exports `home`, `sports`, `labs`, `about`, `divisions`, `motionFamily` and
 `labs.projects` uses the small `LabsProject` type: name, short description, status,
 optional source/detail links and optional established license link. Actual projects
 retain source links; a category uses its detail link without a fictitious source.
-BotSquad reuses its existing name/status/source/license URL; never assume MIT for
-future entries. Concept captions, videos and URLs stay centralized.
+The Labs index currently features Virtual Worlds. BotSquad's existing
+name/status/source/license data remains for its directly accessible pages;
+never assume MIT for future entries. Concept captions, videos and URLs stay centralized.
 
 Labs is a playground for open-source experiments. “Everything we build in Labs is
 open source” is an owner decision covering current and future Labs projects, not
@@ -233,15 +234,17 @@ identity, unrelated Photos, system UI or screenshots from the private source app
 
 Asymmetri `/` is a concise umbrella gateway: positioning, equal Sports/Labs division
 cards and “Why Asymmetri” to About. Each card's heading and action open its division
-page; the cards do not single out Motion or BotSquad. Product access remains in the
-shared navigation/footer and division pages. `home` owns the hero and
+page; the cards do not single out Motion or BotSquad. Motion and Virtual Worlds
+remain in shared navigation and division pages. BotSquad retains direct URLs
+but is omitted from global navigation and the Labs index. `home` owns the hero and
 division heading; the shared About origin label remains in use. Do not restore
 product previews, philosophy, common-thread or contact sections here. Contact uses
 the centralized mailbox; legacy `/#contact` reaches the footer email. Link to `/`
 instead of the removed product-showcase fragment.
 Sports `/sports` preserves story/approach/product/contact hashes and Motion access.
 Labs `/labs` hosts open-source experiments; `botsquad` owns current implementation,
-MIT/self-hosting/access facts. Sports/Labs disclosures expose direct product links.
+MIT/self-hosting/access facts on its retained pages. Sports exposes Motion;
+Labs exposes the Labs index and Virtual Worlds, without BotSquad links.
 About is the company page. Footer Motion labels remain explicit. `/sport` and
 `/work` permanently redirect to `/sports` and `/labs`; old root fragments migrate
 to Sports. Complete mappings live in `ARCHITECTURE.md`.
@@ -563,8 +566,12 @@ or contextual questions. `botsquadStructure` centralizes area labels and URLs;
 `botsquadResearch` and `botsquadDirectory` own hub and overview copy. Add future
 areas only when the owner defines them; do not invent placeholder projects.
 
-The Labs card and global Labs menu open BotSquad. The menu contains Asymmetri Labs,
-BotSquad and Virtual Worlds; Research, Trade and Ask are reached within BotSquad.
+The November 14 owner decision removes BotSquad from the global Labs menu,
+company footer, Labs project cards and Labs metadata. The Labs menu contains
+Asymmetri Labs and Virtual Worlds. Preserve every BotSquad page and existing URL;
+Research, Trade and Ask remain reachable within the retained BotSquad pages.
+Labs uses text-only social previews; its former shared image contains BotSquad
+and remains available for the retained BotSquad pages.
 Its area directory opens Research and Ask; Research opens Trade. Shared BotSquad
 breadcrumbs and area links allow direct movement between them. Retain investment record URLs, exact-run links
 and Ask context parameters. The hub describes research organization, not verified

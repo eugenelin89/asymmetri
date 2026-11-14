@@ -1476,3 +1476,13 @@ The three documentation galleries in [Christmas walk acceptance](validation/camp
 [Outdoor lighting review](validation/campus-christmas/lighting-review.jpg), 1,040 × 1,156 JPEG, pairs six Photo frames made on the two production builds identified in the acceptance record. Alt: “The revised UBC sign is illuminated gold; lanterns cast light on the Oval path and along the Tinkham Veale approach.” The source, rights and processing match the campus galleries above.
 
 [Touch entry at the destinations](validation/campus-christmas/touch-destinations.jpg), 1,740 × 600 JPEG, combines six whole in-browser screenshots at the end of actual emulated phone and tablet touch walks. The UBC tablet frame was recaptured on the local development server after the tablet label adjustment. The other five frames came from the local production visual build. Each image is proportionally reduced and labelled with campus, interior and CSS viewport. Alt: “Phone and tablet explorers show Level 1 inside the AMS Nest, Green Library and Tinkham Veale, with their walking controls visible.” The source and rights match the other Christmas documentation captures.
+
+
+## November 14, 2026: Labs navigation and social-preview scope
+
+The Labs index no longer references the existing 1200×630 `labs-social.png`,
+whose lettering includes BotSquad. `/labs` now emits text-only Open Graph and
+Twitter metadata. The original SVG/PNG remain byte-identical, at their stable
+URLs, for retained BotSquad pages. No asset was added, replaced, generated or
+deleted; existing provenance, processing and rights assessments are unchanged.
+No image alt text is emitted by the Labs social preview.

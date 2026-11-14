@@ -22,9 +22,13 @@ Asymmetri.co
 ```
 
 Sports builds products for athletes, coaches and teams. Labs is a playground for
-open-source experiments, starting with BotSquad. Everything built in Labs is open
+open-source experiments, featuring Virtual Worlds. Everything built in Labs is open
 source; this rule does not apply to every Sports product. The two remain peers
 under Asymmetri, without claiming a common codebase.
+
+As of November 14, BotSquad is omitted from the global header/footer navigation
+and the Labs project index and metadata. Its pages, internal navigation, assets
+and compatibility redirects remain available at their existing URLs.
 
 Asymmetri Motion is available on the [Apple App Store](https://apps.apple.com/us/app/asymmetri-motion/id6825059131)
 for iPhone with iOS 17 or later. `/motion/try` preserves existing links with

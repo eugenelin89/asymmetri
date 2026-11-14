@@ -228,7 +228,6 @@ export const site = {
       label: "Labs", href: divisions.labs.path,
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
-        { label: divisions.labs.product.name, href: divisions.labs.product.path },
         { label: gisApps.name, href: gisApps.path },
       ],
     },
@@ -240,7 +239,6 @@ export const site = {
     { label: divisions.sports.name, href: divisions.sports.path },
     { label: divisions.labs.name, href: divisions.labs.path },
     { label: divisions.sports.product.name, href: divisions.sports.product.path },
-    { label: divisions.labs.product.name, href: divisions.labs.product.path },
     { label: gisApps.name, href: gisApps.path },
     { label: vancouver.name, href: vancouver.path },
     { label: surrey.name, href: surrey.path },
@@ -1237,14 +1235,6 @@ const labsProjects: readonly LabsProject[] = [
     status: gisApps.status,
     detail: { label: `Explore ${gisApps.name}`, href: gisApps.path },
   },
-  {
-    name: botsquad.name,
-    description: "An open-source project for persistent AI teams, and home to BotSquad Research.",
-    status: botsquad.status,
-    detail: { label: "Explore BotSquad", href: botsquad.path },
-    source: botsquad.source,
-    license: { label: "MIT licensed", href: botsquad.licenseUrl },
-  },
 ];
 
 export const labs = {
@@ -1252,7 +1242,7 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      `Asymmetri Labs is our playground for open-source experiments. Explore BotSquad and ${gisApps.name}, including interactive university campuses and cities.`,
+      `Asymmetri Labs is our playground for open-source experiments. Explore ${gisApps.name}, including interactive university campuses and cities.`,
   },
   headline: "A playground for ideas.",
   introduction:

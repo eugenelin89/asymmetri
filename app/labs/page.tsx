@@ -4,7 +4,13 @@ import { LabsProjectCards } from "@/components/labs-project-cards";
 import { labs } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata = pageMetadata(labs.metadata, labs.path, "/images/labs-social.png");
+const labsMetadata = pageMetadata(labs.metadata, labs.path);
+
+export const metadata = {
+  ...labsMetadata,
+  openGraph: { ...labsMetadata.openGraph, images: [] },
+  twitter: { ...labs.metadata, card: "summary" as const, images: [] },
+};
 
 export default function LabsPage() {
   return (

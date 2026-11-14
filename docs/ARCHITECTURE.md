@@ -86,6 +86,9 @@ approved-video records. Sports owns its narrative instead of company-level `site
 Labs owns a typed `LabsProject` list with name, description, status and optional
 source/detail/license links. Project entries retain source links; the Virtual Worlds
 category links to its hub without inventing a separate repository or licence.
+The November 14 navigation update removes BotSquad from the global header/footer
+and Labs project list and metadata. Its route tree, internal navigation, assets,
+sitemap entries and compatibility redirects are unchanged.
 `LabsProjectCards` renders the same server-only cards on Labs and Virtual Worlds.
 `gisApps` owns category metadata, reconstruction copy and city cards, which reuse
 `vancouver` and `surrey` facts. No city engine/data is imported by the hub.
@@ -111,7 +114,8 @@ there are no placeholder pages for unimplemented products.
 `app/layout.tsx` supplies umbrella metadata/Organization schema. Product schemas
 retain bounded facts and no offers, ratings or invented downloads. Route metadata
 uses `lib/metadata.ts`; homepage/About/default previews use `home-social.png`,
-Labs/BotSquad use `labs-social.png`, Sports uses `sport-social.png`, and Motion
+BotSquad uses `labs-social.png`; Labs uses text-only social metadata because the
+existing shared social artwork contains BotSquad. Sports uses `sport-social.png`, and Motion
 retains its icon. Updated social artwork uses local SVG typography and existing
 Sharp rasterization; authentic photos/screenshots/icons retain URLs and bytes.
 See `ASSET_MANIFEST.md` for provenance.

@@ -126,7 +126,8 @@ Check:
   labelled region rather than widening the page; keyboard focus, print styles
   and readable article measures at narrow and wide widths;
 
-- Sports/Labs disclosures expose overview and direct BotSquad/Motion links;
+- Sports exposes its overview and Motion links; Labs exposes its overview and
+  Virtual Worlds. No global header/footer link targets the BotSquad route family;
 - Enter/Space opens disclosures, Tab reaches links, Escape closes and restores
   focus, outside-pointer interaction closes, and opening one closes the other;
 - disclosures and their links remain usable without JavaScript;
@@ -154,8 +155,10 @@ Check:
 - Labs introduction/open-source statement, “Currently playing with,” GitHub/detail/
   established-license links and short closing; no Labs approach/principles section
   or stale `/labs#approach` links;
-- Labs menu contains Virtual Worlds in place of the individual city entries, while
-  BotSquad and its nested links stay intact. Follow Labs → Virtual Worlds → each original
+- Labs menu and project index contain Virtual Worlds without BotSquad. Labs rendered
+  copy and metadata must contain no BotSquad reference. Direct BotSquad pages,
+  internal area links and legacy same-suffix redirects stay intact.
+  Follow Labs → Virtual Worlds → each original
   city URL and verify source/licence links, metadata and sitemap entries. Footer
   city shortcuts and Motion resources remain reachable. The GIS hub must render
   its cards and reconstruction discussion without JavaScript and must not load

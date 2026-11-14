@@ -18,6 +18,11 @@ and Labs remain peer divisions and Motion remains under Sports.
 
 ## Navigation and routes
 
+**November 14 update:** The owner removed BotSquad from global header/footer
+navigation and the Labs project index and metadata. All BotSquad pages, internal
+area navigation and compatibility URLs remain available. This supersedes the
+global discovery links described in the original October decisions below.
+
 Labs primarily links to the BotSquad overview. Its early area directory introduces
 Research and Ask, with a direct Trade link nested in the Research card.
 The new Research hub introduces the current Trade project. A shared server
