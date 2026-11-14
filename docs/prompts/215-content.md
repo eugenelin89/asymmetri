@@ -32,11 +32,11 @@ Central content and Labs metadata composition; README, architecture, content, as
 
 ## Documentation updated
 
-Current guides describe the new discovery policy while retaining the historical hierarchy and compatibility contract. The asset manifest records removal of the Labs preview reference without deleting the shared artwork. A deployment receipt will record the observed production result and cleanup.
+Current guides describe the new discovery policy while retaining the historical hierarchy and compatibility contract. The asset manifest records removal of the Labs preview reference without deleting the shared artwork. The [release receipt](../LABS_NAVIGATION_RELEASE_2026-11-14.md) records the verified production result, independent rollback, guarded capacity recovery and measured cleanup.
 
 ## Git diff summary
 
-Implementation: 8 files changed, 53 insertions and 24 deletions. This excludes the journal and interaction log.
+Implementation: 8 files changed, 53 insertions and 24 deletions. Release receipt and deployment guide: 2 files changed, 50 insertions. These totals exclude the journal and interaction log.
 
 ## Verification
 
@@ -44,17 +44,24 @@ Node 24.10.0 matches .nvmrc; nvm is unavailable. Locked install, TypeScript/ESLi
 
 Browser checks covered exact CSS widths 320, 390, 768, 1024, 1440 and 1920 with no horizontal overflow. Labs has no BotSquad text or global links; menus support Tab, visible focus and Escape focus restoration. No site-origin console errors were observed; browser-extension warnings were excluded. Existing reduced-motion CSS remains unchanged; OS-level reduced-motion and physical-device checks were not performed. Local direct BotSquad pages and protected Motion resources returned HTTP 200, and the tutorial retains its exact www canonical. Added content passed the bounded secret/private-reference scan.
 
+## Production acceptance and cleanup
+
+Exact-source Linux CI passed for deployed source 4ee0a2651e9b6dafc34d9fe5cd460ebef9d71927. Activated November 14 at 23:22:20 UTC, build E2OJu4pokkUqFe7kdJQ7W. All 29 route/redirect/metadata checks, 803 asset hashes, 62 configuration hashes, 15 peer-host baselines, five persistent stores and independent immediate-rollback startup passed. Both public hosts and 24 off-host route/menu/compatibility checks passed. The first memory guard halted safely; a bounded website-only cgroup reclaim restored headroom with the original process and configuration unchanged. A verification-parser correction preserved internal BotSquad article links while excluding them from global-navigation assertions. No guard threshold was lowered.
+
+Cleanup removed only verified inactive generated outputs, downloaded runtime transport and empty fixtures. Measured reclamation was 1,730,224,128 bytes locally and 256,856,064 bytes on the server. Free-space windows, exact paths/categories, rebuild proof, retained large runtime/rollback sizes, older recovery limitations and post-cleanup health are in the release receipt. Existing unrelated log-only commits from a concurrent chat were preserved.
+
 ## Repository state after implementation commit
 
-Clean main at 87b273d before this journal. Deployment and exact-source Linux CI remain pending at this preparation checkpoint; no live success is claimed here.
+Clean main at 87b273d before this journal. That initial preparation checkpoint preceded deployment; the completed production acceptance is recorded above. The serving source remains the exact 4ee0a26 Linux artifact; subsequent documentation commits do not change the runtime.
 
 ## Implementation commits
 
 - 87b273d — Remove BotSquad from global navigation and Labs index.
+- 81a5dc0 — Record verified Labs navigation deployment and cleanup.
 
 ## Archive commit
 
-`docs: archive BotSquad navigation update`
+`docs: finalize Labs navigation release journal`
 
 ## Lessons learned
 
@@ -62,4 +69,4 @@ A shared social-preview image can still advertise a removed project even after i
 
 ## Follow-up ideas
 
-None added to scope. Production acceptance and measured cleanup will be recorded after the authorized release.
+None added to scope. The existing historical archive-custody follow-up remains in Issue #5; no new cleanup blocker or retention decision arose.
