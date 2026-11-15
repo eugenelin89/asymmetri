@@ -42,11 +42,13 @@ cases and README/architecture/content/testing documentation.
 ## Documentation updated
 
 The guides document shuffle ordering, repeat cycling and failed-track behavior.
-The release receipt will capture activation, retained recovery and measured cleanup.
+The [release receipt](../MYMUSIC_PLAYBACK_MODES_RELEASE_2026-11-15.md) captures
+activation, retained recovery and measured cleanup.
 
 ## Git diff summary
 
-Implementation: 9 files changed, 109 insertions and 14 deletions. Journal/log changes
+Implementation: 9 files changed, 109 insertions and 14 deletions. Release
+documentation: 2 files changed, 120 insertions and 2 deletions. Journal/log changes
 are excluded.
 
 ## Verification
@@ -61,26 +63,39 @@ Its URL and all filenames remain excluded from public records.
 
 ## Storage and release preparation
 
-One canonical checkout; local dependencies/builds were absent and recreated for this
-task. Production still serves source `b0b40d6`, build `K5uU0ihPv4IdxvodDcxwn`.
-The documented lossless archive procedure is being used for one older inactive
-rollback to provide candidate capacity while preserving the serving runtime and
-complete immediate rollback. Exact checksums, sizes and before/after measurements
-will be captured in the completed release receipt. Reproducible local outputs and
-the CI transfer are cleanup candidates after their active use ends.
+One canonical checkout; local dependencies/builds were recreated for this task,
+then removed after preview shutdown and tracked/open-handle checks. Opening Mac
+free space was 63,884,795,904 bytes. Local cleanup recovered 1,753,493,504 bytes
+across validation-output and verified-transfer cleanup windows. Exact before/after
+and du estimates are in the release receipt.
+
+Production opening free space was 7,518,990,336 bytes. A verified lossless archive
+preserves one older inactive runtime; the serving runtime and immediate rollback
+remained complete throughout. Gzip integrity, full tar comparison and checksum
+preceded content retirement; root removed the verified empty parent after its
+root-owned parent prevented application-owner rmdir. No recovery data was lost.
+Post-activation cleanup recovered 256,987,136 bytes; final production free space
+was 7,049,035,776 bytes. Retained archive identities and restoration instructions
+are recorded in the release receipt. No new cleanup blocker arose.
 
 ## Repository state after implementation commit
 
-Main at `a122f41`; clean before this preparation journal. Implementation and archive
-are pushed together; deployment waits for the exact-source Linux artifact.
+Main implementation `a122f41` and preparation journal `e476ee0` were pushed
+together. That exact source passed Linux CI and was activated at
+2026-11-15T01:44:48.758993Z, build `Z1m4fuMWS4SYDNJKPZb6U`. Release
+documentation is committed at `28f2d5b`; the tree was clean before this final
+journal/interaction update.
 
 ## Implementation commits
 
 - `a122f41` — Add shuffle and repeat modes to My Music.
+- `28f2d5b` — Record My Music playback mode deployment and retention.
 
 ## Archive commit
 
-`docs: archive My Music playback mode implementation`
+Preparation: `docs: archive My Music playback mode implementation` (`e476ee0`).
+
+Final: `docs: finalize My Music playback mode journal`
 
 ## Lessons learned
 
@@ -91,3 +106,11 @@ control behavior simple while failed-track exclusion prevents repeat error loops
 ## Follow-up ideas
 
 None beyond the requested release.
+
+## Final release outcome
+
+Shuffle, Repeat 1 and Repeat All are live on both hosts. The public browser loaded
+the 27-track acceptance queue and verified mode-state cycling. The independent
+immediate rollback passed its startup/route/bundle check. Protected pages, original
+assets, configuration, persistent stores and peer services were preserved. Current
+process logs showed zero errors/warnings after cleanup.
