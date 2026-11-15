@@ -95,7 +95,7 @@ sitemap entries and compatibility redirects are unchanged.
 The new indexable route adds a sitemap entry without moving any existing page,
 canonical, asset or data URL. The server page renders a brief hero, generic project articles and a closing
 line; it has no approach/principles section or BotSquad-specific access fields.
-All Labs projects are open source; Sports has no blanket open-source requirement.
+Labs includes open-source projects and the owner-approved private-source Taipei experiment; Sports has no blanket open-source requirement.
 No old `work` content export.
 
 `botsquadStructure` owns the stable area names and URLs. `botsquadResearch` owns

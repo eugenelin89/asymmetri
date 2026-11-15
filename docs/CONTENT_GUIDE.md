@@ -27,9 +27,9 @@ The Labs index currently features Virtual Worlds. BotSquad's existing
 name/status/source/license data remains for its directly accessible pages;
 never assume MIT for future entries. Concept captions, videos and URLs stay centralized.
 
-Labs is a playground for open-source experiments. “Everything we build in Labs is
-open source” is an owner decision covering current and future Labs projects, not
-all Sports products. Keep Labs to its introduction, current projects and one short
+Labs is a playground for experiments. Taipei is an owner-approved private-source
+exception to the earlier blanket open-source promise. Describe source availability
+per project; this does not change other projects’ licensing. Keep Labs to its introduction, current projects and one short
 closing. Use curious, informal copy; detailed project explanations belong on their
 own pages, not in replacement approach or principles sections.
 

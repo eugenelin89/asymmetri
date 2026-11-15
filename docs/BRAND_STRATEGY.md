@@ -10,7 +10,7 @@ Asymmetri / Asymmetri.co is the umbrella brand. Two peer divisions sit beneath i
 - **Asymmetri Sports:** technology for athletes, coaches and teams, starting with
   Asymmetri Motion and its individual/professional baseball product family.
 - **Asymmetri Labs:** a playground for open-source experiments, starting with
-  BotSquad. Everything built in Labs is open source, including future projects.
+  BotSquad. Taipei civic strategy is an owner-approved private-source exception; describe source availability per project.
   This is a Labs rule, not a company-wide licensing commitment for Sports.
 
 Use plural Sports. Labs is not the parent company; Work is no longer a division.

@@ -109,7 +109,7 @@ export const cwru = {
 } as const;
 
 export const taipei = {
-  format: "Desktop browser · English · No account · About 8–12 minutes",
+  format: "Desktop browser · English · No account · About 8 to 12 minutes",
   playLabel: "Play Taipei →",
   premise: "The clinic is filling up. Shuttles are stalled. A shelter video is going viral, and the president is calling.",
   paragraphs: [
@@ -118,12 +118,12 @@ export const taipei = {
     "There is no reflex timer. Core decisions work with a keyboard.",
   ],
   boundaries: "The experiment explores judgment under uncertainty and civic tradeoffs. Its numerical effects are authored for play, not estimates of real harm or predictions about public institutions. The game’s source repository is private.",
-  name: "Taipei — First 10 Minutes",
+  name: "Taipei: First 10 Minutes",
   path: "/labs/taipei",
   play: "/taipei/v1/index.html",
   description: "Two teams, six decisions, one city. Lead a fictional municipal response in a compact 3D Taipei strategy experiment.",
   status: "Experimental · Single-player civic strategy",
-  metadata: { title: "Taipei — First 10 Minutes | Asymmetri Labs", description: "Protect residents, weigh uncertain evidence and coordinate civic aid as Taipei’s fictional Mayor. A six-turn browser strategy experiment." },
+  metadata: { title: "Taipei: First 10 Minutes | Asymmetri Labs", description: "Protect residents, weigh uncertain evidence and coordinate civic aid as Taipei’s fictional Mayor. A six-turn browser strategy experiment." },
   notice: "All characters, incidents and outcomes are fictional. This scenario begins during a fictional Chinese invasion of Taiwan; it is not a forecast or military simulation. District names are real; the city schematic and incident locations are invented.",
   analytics: "We count play starts and completions, including endings, with coarse country, referring-site hostname and device-type breakdowns. Country is derived on the server without retaining IP addresses. No cookies, persistent visitor IDs or third-party ad trackers. Temporary run records are deleted after 24 hours; daily totals after 90 days. Counts describe observed runs, not unique people. Collection failures never block play.",
 } as const;
