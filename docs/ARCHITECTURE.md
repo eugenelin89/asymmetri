@@ -909,3 +909,10 @@ Drive API. Markup changes, Google download quotas, restricted child folders and
 browser codec support can prevent listing/playback. The UI reports these failures
 and skips unavailable tracks without looping. Tests use synthetic fixtures;
 owner-provided folder IDs and filenames must not be committed.
+
+My Music playback modes are tab-local. Shuffle randomizes the visible queue once,
+keeps the current track playing, and restores folder/name order when disabled.
+Repeat 1 uses the native audio loop; Repeat All wraps the current queue, including
+a shuffled queue. Previous/Next follow that queue and bypass Repeat 1. Failed tracks
+are skipped for automatic playback until manually retried or a new folder is loaded;
+an entirely unavailable queue stops even with Repeat All enabled.

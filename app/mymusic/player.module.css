@@ -15,6 +15,7 @@
 .player audio { display: block; width: 100%; }
 .player audio[hidden] { display: none; }
 .controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+.controls button[aria-pressed="true"] { color: var(--brand-bright); border-color: var(--brand-bright); background: var(--surface-muted); }
 .queue { list-style: none; padding: 0; margin: 1.5rem 0; }
 .queue li { border-bottom: 1px solid var(--line); }
 .queue button { display: flex; align-items: center; gap: .8rem; width: 100%; text-align: left; border: 0; background: transparent; padding: .9rem .5rem; }

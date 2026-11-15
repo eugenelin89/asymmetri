@@ -995,3 +995,8 @@ public folder with nested children, actual audio progress, seeking, next/previou
 automatic advance, empty/invalid/private folders and cancelling/reloading. Check
 mobile/tablet/desktop overflow, keyboard focus, noindex and absence from navigation
 and sitemap. Do not commit owner folder URLs, filenames or recordings as fixtures.
+
+Playback-mode regressions in the same test file cover shuffle membership/current
+track preservation, queue navigation/wrapping and all-failed termination. Focused
+browser checks verify Repeat 1 at a track boundary, Repeat All at the queue boundary,
+and shuffle toggling without interrupting the current track.

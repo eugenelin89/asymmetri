@@ -1727,6 +1727,6 @@ export const myMusic = {
   path: "/mymusic",
   title: "My Music",
   description: "Paste a Google Drive folder link to play its audio, including subfolders.",
-  help: 'The folder and its contents must be shared as “Anyone with the link”. Files play in folder/name order; format support depends on your browser.',
+  help: 'The folder and its contents must be shared as “Anyone with the link”. Use Shuffle for a random order. Repeat cycles through Off, 1 track, and All tracks. Format support depends on your browser.',
   privacy: "Your queue stays in this tab. Asymmetri reads public folder listings and streams audio from Google without saving the music or connecting to your Google account. Standard server request logs may include file identifiers.",
 } as const;

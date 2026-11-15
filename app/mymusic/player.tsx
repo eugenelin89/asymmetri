@@ -3,17 +3,22 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { myMusic } from "@/content/site";
 import { collectMusic, parseFolderUrl, type DriveEntry, type MusicTrack } from "@/lib/mymusic";
+import { adjacentTrack, playOrder, type RepeatMode } from "@/lib/mymusic-playback";
 import styles from "./player.module.css";
 
 export function MusicPlayer() {
   const [url, setUrl] = useState("");
   const [tracks, setTracks] = useState<MusicTrack[]>([]);
   const [current, setCurrent] = useState<number | null>(null);
+  const [order, setOrder] = useState<number[]>([]);
+  const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState<RepeatMode>("off");
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const audio = useRef<HTMLAudioElement>(null);
   const scan = useRef<AbortController | null>(null);
+  const unavailable = useRef(new Set<number>());
   useEffect(() => () => { scan.current?.abort(); }, []);
 
   async function load(event: FormEvent) {
@@ -25,7 +30,8 @@ export function MusicPlayer() {
     audio.current?.pause();
     audio.current?.removeAttribute("src");
     audio.current?.load();
-    setTracks([]); setCurrent(null); setError(""); setLoading(true); setStatus("Reading folders…");
+    unavailable.current.clear();
+    setTracks([]); setOrder([]); setCurrent(null); setError(""); setLoading(true); setStatus("Reading folders…");
     try {
       const result = await collectMusic(url, async (folderUrl) => {
         const response = await fetch("/mymusic/folder", {
@@ -37,6 +43,7 @@ export function MusicPlayer() {
         return data.entries;
       }, (folders, count) => setStatus(`Reading folders… ${folders} checked, ${count} tracks found.`), controller.signal);
       setTracks(result.tracks);
+      setOrder(playOrder(result.tracks.length, shuffle));
       setStatus(result.tracks.length ? `${result.tracks.length} tracks ready. Press Play to start.` : "No audio files found in this folder or its subfolders.");
       if (result.skipped || result.limited) setError([
         result.skipped ? `${result.skipped} subfolder(s) could not be read. Check their sharing settings and reload to retry.` : "",
@@ -47,12 +54,13 @@ export function MusicPlayer() {
     } finally { if (scan.current === controller) setLoading(false); }
   }
 
-  function play(index: number) {
+  function play(index: number, automatic = false) {
     const player = audio.current;
     const track = tracks[index];
     if (!player || !track) return;
+    if (!automatic) unavailable.current.delete(index);
     setCurrent(index);
-    setStatus(`Track ${index + 1} of ${tracks.length}`);
+    setStatus(`Track ${order.indexOf(index) + 1} of ${tracks.length}`);
     const params = new URLSearchParams({ id: track.id });
     if (track.resourceKey) params.set("resourcekey", track.resourceKey);
     player.src = `/mymusic/audio?${params}`;
@@ -62,9 +70,21 @@ export function MusicPlayer() {
   }
 
   function advance() {
-    if (current !== null && current + 1 < tracks.length) play(current + 1);
+    const next = adjacentTrack(order, current, 1, repeat === "all", unavailable.current);
+    if (next !== null) play(next, true);
     else setStatus("Finished playing this folder.");
   }
+
+  function toggleShuffle() {
+    const enabled = !shuffle;
+    const nextOrder = playOrder(tracks.length, enabled, current);
+    setShuffle(enabled);
+    setOrder(nextOrder);
+    if (current !== null) setStatus(`Track ${nextOrder.indexOf(current) + 1} of ${tracks.length}`);
+  }
+
+  const previous = adjacentTrack(order, current, -1, repeat === "all");
+  const next = adjacentTrack(order, current, 1, repeat === "all");
 
   return (
     <main className={styles.main}>
@@ -83,25 +103,31 @@ export function MusicPlayer() {
       {error && <p role="alert" className={styles.notice}>{error}</p>}
       <section aria-label="Audio player" className={styles.player} hidden={!tracks.length}>
         <p className={styles.now}>{current === null ? "Ready when you are." : tracks[current]?.name}</p>
-        <audio ref={audio} controls hidden={current === null} preload="none" onEnded={advance} onError={() => {
+        <audio ref={audio} controls hidden={current === null} preload="none" loop={repeat === "one"} onEnded={advance} onError={() => {
           if (current === null) return;
-          setError(`Could not play “${tracks[current].name}”. Google may limit downloads, or this format may not play in your browser. ${current + 1 < tracks.length ? "Skipping to the next track." : "Try another track or reload the folder."}`);
+          unavailable.current.add(current);
+          const hasNext = adjacentTrack(order, current, 1, repeat === "all", unavailable.current) !== null;
+          setError(`Could not play “${tracks[current].name}”. Google may limit downloads, or this format may not play in your browser. ${hasNext ? "Skipping to the next track." : "Try another track or reload the folder."}`);
           advance();
         }} />
         <div className={styles.controls}>
-          <button type="button" disabled={current === null || current === 0} onClick={() => play((current ?? 1) - 1)}>Previous</button>
-          {current === null && <button type="button" onClick={() => play(0)}>Play</button>}
-          <button type="button" disabled={current === null || current >= tracks.length - 1} onClick={() => play((current ?? 0) + 1)}>Next</button>
+          <button type="button" disabled={previous === null} onClick={() => { if (previous !== null) play(previous); }}>Previous</button>
+          {current === null && <button type="button" onClick={() => play(order[0])}>Play</button>}
+          <button type="button" disabled={next === null} onClick={() => { if (next !== null) play(next); }}>Next</button>
+          <button type="button" aria-pressed={shuffle} onClick={toggleShuffle}>Shuffle: {shuffle ? "On" : "Off"}</button>
+          <button type="button" aria-label={`Repeat: ${repeat === "off" ? "Off. Turn on Repeat 1" : repeat === "one" ? "1. Turn on Repeat All" : "All. Turn repeat off"}`} aria-pressed={repeat !== "off"} onClick={() => setRepeat(repeat === "off" ? "one" : repeat === "one" ? "all" : "off")}>
+            Repeat: {repeat === "off" ? "Off" : repeat === "one" ? "1" : "All"}
+          </button>
         </div>
       </section>
       {!!tracks.length && <ol className={styles.queue} aria-label="Play queue">
-        {tracks.map((track, index) => <li key={track.id}>
+        {order.map((index, position) => { const track = tracks[index]; return <li key={track.id}>
           <button type="button" aria-current={current === index ? "true" : undefined} onClick={() => play(index)}>
-            <span className={styles.number}>{index + 1}</span>
+            <span className={styles.number}>{position + 1}</span>
             <span><span className={styles.trackName}>{track.name}</span>{track.path && <small>{track.path}</small>}</span>
             {current === index && <span className={styles.selected}>Selected</span>}
           </button>
-        </li>)}
+        </li>; })}
       </ol>}
       <p className={styles.help}>{myMusic.privacy}</p>
     </main>

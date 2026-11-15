@@ -59,3 +59,29 @@ test('Google transport rejects unsafe hosts and redirects, and bounds listing me
   await assert.rejects(limitedText(new Response('12345'), 4), /too large/);
   assert.equal(await limitedText(new Response('1234'), 4), '1234');
 });
+
+import { playOrder, adjacentTrack } from '../lib/mymusic-playback.ts';
+
+test('shuffle keeps the current track, includes every track once, and can restore normal order', () => {
+  const shuffled = playOrder(5, true, 2, () => 0);
+  assert.equal(shuffled[0], 2);
+  assert.deepEqual([...shuffled].sort(), [0, 1, 2, 3, 4]);
+  assert.deepEqual(playOrder(5, false, 2), [0, 1, 2, 3, 4]);
+  assert.deepEqual(playOrder(0, true), []);
+  assert.deepEqual(playOrder(1, true, 0), [0]);
+});
+
+test('queue navigation follows shuffled order and wraps only with repeat all', () => {
+  const queue = [2, 0, 1];
+  assert.equal(adjacentTrack(queue, 2, 1, false), 0);
+  assert.equal(adjacentTrack(queue, 1, 1, false), null);
+  assert.equal(adjacentTrack(queue, 1, 1, true), 2);
+  assert.equal(adjacentTrack(queue, 2, -1, true), 1);
+  assert.equal(adjacentTrack([0], 0, 1, true), 0);
+});
+
+test('repeat all skips unavailable tracks and stops if all tracks fail', () => {
+  assert.equal(adjacentTrack([2, 0, 1], 1, 1, true, new Set([2, 1])), 0);
+  assert.equal(adjacentTrack([2, 0, 1], 1, 1, true, new Set([2, 0, 1])), null);
+  assert.equal(adjacentTrack([0], 0, 1, true, new Set([0])), null);
+});

@@ -846,3 +846,7 @@ notice. Keep the utility unlinked from menus, other pages and the sitemap. Its
 folder input starts empty; never embed an owner's music URL or playlist in source.
 Only folders and files shared as “Anyone with the link” are supported. The route
 is publicly accessible despite being unlisted and marked noindex.
+
+The My Music help explains the Shuffle toggle and repeat cycle (Off → 1 → All →
+Off). Playback mode labels display their current state, including for assistive
+technology. The modes do not add saved preferences or account state.
