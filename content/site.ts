@@ -109,6 +109,15 @@ export const cwru = {
 } as const;
 
 export const taipei = {
+  format: "Desktop browser · English · No account · About 8–12 minutes",
+  playLabel: "Play Taipei →",
+  premise: "The clinic is filling up. Shuttles are stalled. A shelter video is going viral, and the president is calling.",
+  paragraphs: [
+    "You are the fictional Mayor of Taipei. Protect residents and keep essential services running with two municipal teams. You can request national assistance; you do not command the military.",
+    "Inspect three districts in a stylized 3D city. Weigh the evidence and known team commitments, make one choice per turn, then see its consequences. Follow Mei, Hsin and Yu-ting through six decisions and a city-level debrief. Restart to try another strategy.",
+    "There is no reflex timer. Core decisions work with a keyboard.",
+  ],
+  boundaries: "The experiment explores judgment under uncertainty and civic tradeoffs. Its numerical effects are authored for play, not estimates of real harm or predictions about public institutions. The game’s source repository is private.",
   name: "Taipei — First 10 Minutes",
   path: "/labs/taipei",
   play: "/taipei/v1/index.html",
