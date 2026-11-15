@@ -838,3 +838,11 @@ Edit Stanford identity in `content/stanford.ts`, landmark research in `projects/
 ## Christmas walks and observed weather
 
 Describe the seasonal displays as installations in the virtual reconstructions. The welcome and Atmosphere controls identify the edition, any deliberate replay, and whether the conditions are Live or Simulated. “Nearby station observation” carries the provider, reporting station, observation time and age. Retain the exact outage label “Weather unavailable.” Keep an explicit Regular selection distinct from the historical Halloween switches. See the [edition and atmosphere guide](CAMPUS_CHRISTMAS_2026.md) and [station credits](CAMPUS_WEATHER.md).
+
+## My Music
+
+`myMusic` in `content/site.ts` owns the `/mymusic` title, instructions and privacy
+notice. Keep the utility unlinked from menus, other pages and the sitemap. Its
+folder input starts empty; never embed an owner's music URL or playlist in source.
+Only folders and files shared as “Anyone with the link” are supported. The route
+is publicly accessible despite being unlisted and marked noindex.

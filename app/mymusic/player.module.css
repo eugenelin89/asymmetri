@@ -1,0 +1,26 @@
+.main { width: min(48rem, calc(100% - 2rem)); margin: 0 auto; padding: clamp(2rem, 7vw, 5rem) 0; }
+.main h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 .75rem; }
+.intro { color: var(--ink-secondary); line-height: 1.6; margin-bottom: 2rem; }
+.form label { display: block; margin-bottom: .6rem; font-weight: 600; }
+.inputRow { display: flex; flex-wrap: wrap; gap: .6rem; }
+.inputRow input { flex: 1 1 18rem; min-width: 0; width: 100%; background: var(--surface-raised); color: var(--ink); border: 1px solid var(--line); border-radius: .4rem; padding: .8rem; font: inherit; }
+.main button { min-height: 44px; border: 1px solid var(--line); border-radius: .4rem; padding: .6rem 1rem; color: var(--ink); background: var(--surface-raised); cursor: pointer; }
+.main button[type="submit"] { background: var(--action-bg); color: var(--action-ink); border-color: var(--action-bg); font-weight: 600; }
+.main button:disabled { opacity: .5; cursor: default; }
+.main :is(button, input):focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.help { font-size: .85rem; line-height: 1.6; color: var(--ink-secondary); margin-top: .75rem; }
+.notice { border-left: 3px solid var(--brand-bright); padding: .8rem 1rem; background: var(--surface-raised); overflow-wrap: anywhere; line-height: 1.6; }
+.player { padding: 1.25rem; margin: 1.5rem 0; border: 1px solid var(--line); border-radius: .6rem; }
+.now { font-weight: 600; overflow-wrap: anywhere; margin: 0 0 1rem; }
+.player audio { display: block; width: 100%; }
+.player audio[hidden] { display: none; }
+.controls { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1rem; }
+.queue { list-style: none; padding: 0; margin: 1.5rem 0; }
+.queue li { border-bottom: 1px solid var(--line); }
+.queue button { display: flex; align-items: center; gap: .8rem; width: 100%; text-align: left; border: 0; background: transparent; padding: .9rem .5rem; }
+.queue button[aria-current] { background: var(--surface-muted); box-shadow: inset 3px 0 var(--brand-bright); }
+.queue small { display: block; color: var(--ink-secondary); margin-top: .25rem; overflow-wrap: anywhere; }
+.number { color: var(--ink-secondary); min-width: 1.7rem; font-size: .85rem; }
+.trackName { overflow-wrap: anywhere; }
+.selected { margin-left: auto; color: var(--brand-bright); font-size: .75rem; }
+@media (max-width: 480px) { .selected { display: none; } }

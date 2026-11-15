@@ -889,3 +889,23 @@ Each campus passes its campus ID to the shared Christmas audio controller. It do
 `projects/campus-atmosphere/` owns campus-local dates, solar calculations, visit choices, weather effects, the localized sound mix and the three decorated routes. Each campus passes its effective settings into its existing engine before the first frame. The client waits for the edition and device preferences before presenting the entry button. A history departure tears down the explorer; tab visibility and phone lock preserve the walk.
 
 `app/labs/campus-weather-api/[campus]/route.ts` serves anonymous read-only station observations through the ordinary website backend. An allowlist selects fixed ECCC or NWS stations. One in-flight refresh and a timed observation cache per campus serve concurrent requests within the website process. The clock and solar calculation run in the visitor’s browser using the campus coordinates. [Weather sources, cache limits and attribution](CAMPUS_WEATHER.md).
+
+## Unlisted music player
+
+`/mymusic` is a minimal client player, intentionally absent from navigation and
+sitemap, with noindex/nofollow metadata. `content/site.ts` owns its public copy.
+`lib/mymusic.ts` validates Drive folder links, parses Google's anonymous public
+folder embed and walks nested folders with cycle/file deduplication. The browser
+requests one folder at a time from `POST /mymusic/folder`; `GET /mymusic/audio`
+streams public Google download responses with byte-range support. Both return
+no-store/noindex headers. User URLs are parsed, never fetched directly; upstream
+hosts and redirect destinations are restricted to Google Drive/content hosts.
+Listings are capped at 4 MiB per folder, scans at 500 folders/10,000 tracks (with
+an explicit incomplete-queue notice). No account, API key, database or music
+storage is introduced. Standard access logs may contain streamed file IDs.
+
+This keyless adapter relies on Google's public embed HTML, not the authenticated
+Drive API. Markup changes, Google download quotas, restricted child folders and
+browser codec support can prevent listing/playback. The UI reports these failures
+and skips unavailable tracks without looping. Tests use synthetic fixtures;
+owner-provided folder IDs and filenames must not be committed.
