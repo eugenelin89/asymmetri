@@ -1486,3 +1486,7 @@ Twitter metadata. The original SVG/PNG remain byte-identical, at their stable
 URLs, for retained BotSquad pages. No asset was added, replaced, generated or
 deleted; existing provenance, processing and rights assessments are unchanged.
 No image alt text is emitted by the Labs social preview.
+
+## Taipei civic strategy browser build
+
+`public/taipei/v1/` contains the compiled, versioned Taipei game from the private game repository, reviewed source b2ebcda. Its HTML, CSS and JavaScript include original procedural schematic geometry and fictional scenario prose; no raster/map dataset is redistributed. Three.js runtime code is MIT licensed (license notice retained beside the build). The source repository remains private, while executable browser assets are necessarily public. No source maps, secrets or private analytics data are included. Verify digests and the game source identity in the release receipt; subsequent game builds must update this entry.
