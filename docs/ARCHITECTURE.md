@@ -889,3 +889,5 @@ Each campus passes its campus ID to the shared Christmas audio controller. It do
 `projects/campus-atmosphere/` owns campus-local dates, solar calculations, visit choices, weather effects, the localized sound mix and the three decorated routes. Each campus passes its effective settings into its existing engine before the first frame. The client waits for the edition and device preferences before presenting the entry button. A history departure tears down the explorer; tab visibility and phone lock preserve the walk.
 
 `app/labs/campus-weather-api/[campus]/route.ts` serves anonymous read-only station observations through the ordinary website backend. An allowlist selects fixed ECCC or NWS stations. One in-flight refresh and a timed observation cache per campus serve concurrent requests within the website process. The clock and solar calculation run in the visitor’s browser using the campus coordinates. [Weather sources, cache limits and attribution](CAMPUS_WEATHER.md).
+
+The Taipei Labs explainer links a versioned static game built in its private repository. See [Taipei](TAIPEI.md).

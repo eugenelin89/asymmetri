@@ -108,6 +108,17 @@ export const cwru = {
   metadata: { title: "Case Western Reserve Virtual Campus | Asymmetri Labs", description: "Explore an independent 3D reconstruction of Case Western Reserve University, with walk-through landmarks, academic encounters and seasonal walks." },
 } as const;
 
+export const taipei = {
+  name: "Taipei — First 10 Minutes",
+  path: "/labs/taipei",
+  play: "/taipei/v1/index.html",
+  description: "Two teams, six decisions, one city. Lead a fictional municipal response in a compact 3D Taipei strategy experiment.",
+  status: "Experimental · Single-player civic strategy",
+  metadata: { title: "Taipei — First 10 Minutes | Asymmetri Labs", description: "Protect residents, weigh uncertain evidence and coordinate civic aid as Taipei’s fictional Mayor. A six-turn browser strategy experiment." },
+  notice: "All characters, incidents and outcomes are fictional. This scenario begins during a fictional Chinese invasion of Taiwan; it is not a forecast or military simulation. District names are real; the city schematic and incident locations are invented.",
+  analytics: "We count play starts and completions, including endings, with coarse country, referring-site hostname and device-type breakdowns. Country is derived on the server without retaining IP addresses. No cookies, persistent visitor IDs or third-party ad trackers. Temporary run records are deleted after 24 hours; daily totals after 90 days. Counts describe observed runs, not unique people. Collection failures never block play.",
+} as const;
+
 export const gisApps = {
   name: "Virtual Worlds",
   path: "/labs/gis",
@@ -229,6 +240,7 @@ export const site = {
       children: [
         { label: divisions.labs.name, href: divisions.labs.path },
         { label: gisApps.name, href: gisApps.path },
+        { label: taipei.name, href: taipei.path },
       ],
     },
     { label: "About", href: "/about" },
@@ -1229,6 +1241,7 @@ export const botsquad = {
 } as const;
 
 const labsProjects: readonly LabsProject[] = [
+  { name: taipei.name, description: taipei.description, status: taipei.status, detail: { label: "Explore Taipei", href: taipei.path } },
   {
     name: gisApps.name,
     description: gisApps.description,
@@ -1242,12 +1255,12 @@ export const labs = {
   metadata: {
     title: "Asymmetri Labs | A Playground for Ideas",
     description:
-      `Asymmetri Labs is our playground for open-source experiments. Explore ${gisApps.name}, including interactive university campuses and cities.`,
+      `Asymmetri Labs is our playground for experiments. Explore ${gisApps.name} and Taipei civic strategy.`,
   },
   headline: "A playground for ideas.",
   introduction:
     "This is where we experiment, prototype, and build things we're curious about.",
-  openSource: "Everything we build in Labs is open source.",
+  openSource: "Explore open-source worlds and playable experiments. Source availability varies by project.",
   projectsHeading: "Currently playing with",
   projects: labsProjects,
   closing: "More experiments will show up here when they're worth sharing.",
