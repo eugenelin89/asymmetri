@@ -985,3 +985,18 @@ Run `node projects/campus-atmosphere/tools/check-explorers.mjs` against the loca
 Run `node projects/campus-atmosphere/tools/check-visit-preferences.mjs` with the same origin, Playwright module and browser to exercise independent tabs, post-season Regular, OS reduced motion, mute and volume. The shared unit suite also exercises the audio controllers from their first allowed gesture through disposal. For each campus it checks that only its assigned recording is requested, starts after entry, loops continuously across a doorway, reuses its decoded audio, and cannot start late after leaving Christmas. Verify the recording hash on both public origins and exercise audible playback, mute and edition changes.
 
 Run `node projects/campus-atmosphere/tools/check-live-weather.mjs` with the same browser configuration for controlled November daylight. In each explorer it compares first-person Live renders for clear, overcast, windy rain, snow and fog, then checks outage and a delayed observation arriving during a staged scene. An open visit with no observation advances eight hours through sunset. The run checks the displayed sunrise, sunset and civil twilight and samples the daytime and nighttime frames from the same viewpoint.
+
+## My Music
+
+Run `node --test tests/mymusic.test.mjs` for URL/host validation, resource keys,
+public listing parsing, recursive traversal, duplicate/cycle protection, partial
+failure, cancellation and bounded responses. Browser acceptance covers an entered
+public folder with nested children, actual audio progress, seeking, next/previous,
+automatic advance, empty/invalid/private folders and cancelling/reloading. Check
+mobile/tablet/desktop overflow, keyboard focus, noindex and absence from navigation
+and sitemap. Do not commit owner folder URLs, filenames or recordings as fixtures.
+
+Playback-mode regressions in the same test file cover shuffle membership/current
+track preservation, queue navigation/wrapping and all-failed termination. Focused
+browser checks verify Repeat 1 at a track boundary, Repeat All at the queue boundary,
+and shuffle toggling without interrupting the current track.

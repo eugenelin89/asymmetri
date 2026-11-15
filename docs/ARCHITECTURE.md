@@ -891,3 +891,30 @@ Each campus passes its campus ID to the shared Christmas audio controller. It do
 `app/labs/campus-weather-api/[campus]/route.ts` serves anonymous read-only station observations through the ordinary website backend. An allowlist selects fixed ECCC or NWS stations. One in-flight refresh and a timed observation cache per campus serve concurrent requests within the website process. The clock and solar calculation run in the visitor’s browser using the campus coordinates. [Weather sources, cache limits and attribution](CAMPUS_WEATHER.md).
 
 The Taipei Labs explainer links a versioned static game built in its private repository. See [Taipei](TAIPEI.md).
+
+## Unlisted music player
+
+`/mymusic` is a minimal client player, intentionally absent from navigation and
+sitemap, with noindex/nofollow metadata. `content/site.ts` owns its public copy.
+`lib/mymusic.ts` validates Drive folder links, parses Google's anonymous public
+folder embed and walks nested folders with cycle/file deduplication. The browser
+requests one folder at a time from `POST /mymusic/folder`; `GET /mymusic/audio`
+streams public Google download responses with byte-range support. Both return
+no-store/noindex headers. User URLs are parsed, never fetched directly; upstream
+hosts and redirect destinations are restricted to Google Drive/content hosts.
+Listings are capped at 4 MiB per folder, scans at 500 folders/10,000 tracks (with
+an explicit incomplete-queue notice). No account, API key, database or music
+storage is introduced. Standard access logs may contain streamed file IDs.
+
+This keyless adapter relies on Google's public embed HTML, not the authenticated
+Drive API. Markup changes, Google download quotas, restricted child folders and
+browser codec support can prevent listing/playback. The UI reports these failures
+and skips unavailable tracks without looping. Tests use synthetic fixtures;
+owner-provided folder IDs and filenames must not be committed.
+
+My Music playback modes are tab-local. Shuffle randomizes the visible queue once,
+keeps the current track playing, and restores folder/name order when disabled.
+Repeat 1 uses the native audio loop; Repeat All wraps the current queue, including
+a shuffled queue. Previous/Next follow that queue and bypass Repeat 1. Failed tracks
+are skipped for automatic playback until manually retried or a new folder is loaded;
+an entirely unavailable queue stops even with Repeat All enabled.

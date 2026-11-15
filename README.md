@@ -301,3 +301,12 @@ Reusable visitor reviews and private play reporting support UBC, CWRU and Stanfo
 `/labs/stanford` adds an independent Stanford explorer with 32 enterable landmark reconstructions, 12 outdoor venue groups, source-linked faculty/students/athletes, personal public characters, and calendar-based base/Halloween editions with original spatial sound. See [implementation and evidence](docs/STANFORD_CAMPUS_2026-10-31.md), [project guide](projects/stanford/README.md), and [local screenshots](docs/validation/stanford/README.md). Run `npm run test:stanford` for the campus suite. The initial campus release is [live and verified](docs/STANFORD_RELEASE_2026-10-31.md); shared reviews and private usage reporting remain a separate follow-up.
 
 Taipei civic strategy integration: see [Taipei](docs/TAIPEI.md).
+
+## My Music
+
+`/mymusic` is an unlisted public-folder audio player. Paste a Google Drive folder
+link shared as “Anyone with the link”; it discovers audio in nested folders and
+plays a queue with native audio controls, shuffle, Repeat 1 and Repeat All.
+No Google sign-in or setup is required.
+See [architecture](docs/ARCHITECTURE.md#unlisted-music-player) for the keyless Drive
+adapter and its limits.
