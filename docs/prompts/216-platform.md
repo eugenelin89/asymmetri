@@ -57,8 +57,9 @@ no public asset is created, copied, generated or replaced.
 
 ## Git diff summary
 
-Implementation: 14 files changed, 465 insertions. This excludes this journal and
-the eventual interaction log/release receipt.
+Implementation: 14 files changed, 465 insertions. The release receipt/deployment
+guide commit adds 2 files changed and 101 insertions. These totals exclude the
+journal and interaction log.
 
 ## Verification
 
@@ -91,21 +92,31 @@ active validation. Opening production free space: 8,838,152,192 bytes (df).
 The serving runtime and three retained complete rollbacks remain protected.
 Generated local outputs, the future CI transfer and empty candidate fixtures are
 cleanup candidates once validation/deployment finish; no unique data is eligible.
-Final release/cleanup measurements will be recorded after activation.
+Final measured release/cleanup results are recorded in the
+[release receipt](../MYMUSIC_RELEASE_2026-11-15.md). Local cleanup recovered
+1,782,095,872 bytes across two windows; production cleanup recovered 256,983,040
+bytes. The serving runtime, independently verified immediate rollback, older
+retained recovery trees and private evidence remain. No new cleanup blocker arose.
 
 ## Repository state after implementation commit
 
-Main at `b8020f3`; clean before this journal. The preparation archive and source
-will be pushed together. Deployment is pending the exact-source Linux CI artifact
-and guarded candidate acceptance; local builds are not production activation.
+The initial implementation was committed at `b8020f3`, followed by preparation
+archive `b0b40d6`; both were pushed to main. That exact source passed Linux CI and
+was deployed at 2026-11-15T01:24:28.836752Z, build `K5uU0ihPv4IdxvodDcxwn`.
+Release documentation was committed at `a400615`; the tree was clean before this
+final journal/interaction update. No branch, worktree or PR was created.
 
 ## Implementation commits
 
 - `b8020f3` — Add unlisted recursive Google Drive music player.
+- `a400615` — Record verified My Music deployment and cleanup.
 
 ## Archive commit
 
-`docs: archive My Music implementation and release preparation`
+Preparation: `docs: archive My Music implementation and release preparation`
+(`b0b40d6`).
+
+Final: `docs: finalize My Music release journal and interactions`
 
 ## Lessons learned
 
@@ -116,3 +127,13 @@ public fixtures and preserve the existing independent rollback workflow.
 ## Follow-up ideas
 
 None committed beyond the requested player and release.
+
+## Final release outcome
+
+The owner subsequently emphasized personal use, immediate deployment and no
+additional rigorous testing. Feature checks had finished; the remaining work used
+the already-running Linux CI build and existing guarded activation/health/rollback
+procedure. Production browser acceptance loaded the supplied 27-track nested queue
+and observed actual playback. The page is live, unlisted and noindex on both hosts.
+The release receipt includes preserved-route/assets/configuration/store evidence,
+independent rollback, storage before/after and recovery limits.
