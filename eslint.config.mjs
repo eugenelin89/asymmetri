@@ -9,6 +9,7 @@ export default defineConfig([
     ".next/**",
     "out/**",
     "dist/**",
+    "public/taipei/v1/assets/**",
     ".wrangler/**",
     "next-env.d.ts",
     "receiver/dist/**",
