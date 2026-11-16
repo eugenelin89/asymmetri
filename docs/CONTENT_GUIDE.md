@@ -858,3 +858,6 @@ technology. The modes do not add saved preferences or account state.
 ## OpenMP3 resources
 
 Shared product facts and contact are in `openMP3` in `content/site.ts`. The product, support and privacy pages live under `/mymusic/openmp3`. Existing `/mymusic` is their sole existing-page entry; no global navigation, sitemap, Motion policy or Motion support edits. These public review resources use noindex metadata. Keep native direct-to-Google streaming distinct from the separate browser player’s server requests. Do not claim App Store availability before verified publication.
+
+The overview's existing availability line reads “App Store review pending”,
+reflecting the submitted iPhone app while Apple approval remains outstanding.

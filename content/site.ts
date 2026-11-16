@@ -1738,7 +1738,7 @@ export const openMP3 = {
   privacyPath: "/mymusic/openmp3/privacy",
   headline: "Your folders. Your music.",
   description: "A free iPhone player for MP3s in public Google Drive folders. Save your folders, choose a track, and keep listening.",
-  availability: "App Store release in preparation",
+  availability: "App Store review pending",
   price: "Free. No ads. No subscriptions.",
   icon: "/images/openmp3/app-icon.png",
   supportEmail: site.company.contactEmail,
