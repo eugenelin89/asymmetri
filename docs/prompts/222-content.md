@@ -79,3 +79,11 @@ The serving website remains the successful earlier sharing/autoplay release.
 
 Final archive commit message: `Record final copy status and coordinated submission outcome`.
 Main was clean after the readiness commit before this archive update.
+
+## Approved deployment completion
+
+The owner subsequently approved the specific older-copy archival. The verified
+procedure, final activation, live browser acceptance, independent immediate rollback
+and post-release cleanup all passed. See prompt 223 and the updated completion
+receipt. Exact operational measurements/recovery identities remain private. The
+requested copy changes are now live; the previously recorded blocker is resolved.
