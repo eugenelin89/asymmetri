@@ -400,6 +400,6 @@ regressions with `node --test tests/mymusic.test.mjs`.
 To open a folder automatically, build the link with
 `"/mymusic?" + new URLSearchParams({ folder: driveFolderUrl })`. Encode the complete
 Drive URL, including any `resourcekey` parameter. The queue loads on arrival;
-press Play to start audio. No parameter (or an empty one) keeps manual entry.
+playback is attempted automatically, with a Play prompt when the browser blocks it. No parameter (or an empty one) keeps manual entry.
 Loading a pasted folder successfully updates the address automatically; copy it
 to share the folder. Failed/cancelled scans leave the address unchanged.

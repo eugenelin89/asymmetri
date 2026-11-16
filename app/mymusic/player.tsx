@@ -20,7 +20,18 @@ export function MusicPlayer() {
   const audio = useRef<HTMLAudioElement>(null);
   const scan = useRef<AbortController | null>(null);
   const unavailable = useRef(new Set<number>());
-  const loadFolder = useCallback(async (folderUrl: string, shuffled = false) => {
+  const startAudio = useCallback((track: MusicTrack) => {
+    const player = audio.current;
+    if (!player) return;
+    const params = new URLSearchParams({ id: track.id });
+    if (track.resourceKey) params.set("resourcekey", track.resourceKey);
+    player.src = `/mymusic/audio?${params}`;
+    void player.play().catch((cause: unknown) => {
+      if (cause instanceof DOMException && cause.name === "NotAllowedError") setStatus("Press Play on the audio controls to continue.");
+    });
+  }, []);
+
+  const loadFolder = useCallback(async (folderUrl: string, shuffled = false, autoplay = false) => {
     try { parseFolderUrl(folderUrl); } catch (cause) { setError((cause as Error).message); return; }
     scan.current?.abort();
     const controller = new AbortController();
@@ -45,16 +56,23 @@ export function MusicPlayer() {
       pageUrl.searchParams.set("folder", folderUrl.trim());
       window.history.replaceState(window.history.state, "", pageUrl);
       setTracks(result.tracks);
-      setOrder(playOrder(result.tracks.length, shuffled));
+      const nextOrder = playOrder(result.tracks.length, shuffled);
+      setOrder(nextOrder);
       setStatus(result.tracks.length ? `${result.tracks.length} tracks ready. Press Play to start.` : "No audio files found in this folder or its subfolders.");
       if (result.skipped || result.limited) setError([
         result.skipped ? `${result.skipped} subfolder(s) could not be read. Check their sharing settings and reload to retry.` : "",
         result.limited ? "Folder limit reached. This queue is incomplete; load a smaller subfolder for the rest." : "",
       ].filter(Boolean).join(" "));
+      if (autoplay && result.tracks.length) {
+        const first = nextOrder[0];
+        setCurrent(first);
+        setStatus(`Track 1 of ${result.tracks.length}`);
+        startAudio(result.tracks[first]);
+      }
     } catch (cause) {
       if (!controller.signal.aborted) { setError(cause instanceof Error ? cause.message : "Could not load this folder."); setStatus(""); }
     } finally { if (scan.current === controller) setLoading(false); }
-  }, []);
+  }, [startAudio]);
 
   useEffect(() => {
     const folderUrl = new URLSearchParams(window.location.search).get("folder");
@@ -62,7 +80,7 @@ export function MusicPlayer() {
     const start = window.setTimeout(() => {
       if (folderUrl?.trim()) {
         setUrl(folderUrl);
-        void loadFolder(folderUrl);
+        void loadFolder(folderUrl, false, true);
       }
     }, 0);
     return () => { window.clearTimeout(start); scan.current?.abort(); };
@@ -80,12 +98,7 @@ export function MusicPlayer() {
     if (!automatic) unavailable.current.delete(index);
     setCurrent(index);
     setStatus(`Track ${order.indexOf(index) + 1} of ${tracks.length}`);
-    const params = new URLSearchParams({ id: track.id });
-    if (track.resourceKey) params.set("resourcekey", track.resourceKey);
-    player.src = `/mymusic/audio?${params}`;
-    void player.play().catch((cause: unknown) => {
-      if (cause instanceof DOMException && cause.name === "NotAllowedError") setStatus("Press Play on the audio controls to continue.");
-    });
+    startAudio(track);
   }
 
   function advance() {

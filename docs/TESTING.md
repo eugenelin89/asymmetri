@@ -1002,7 +1002,7 @@ browser checks verify Repeat 1 at a track boundary, Repeat All at the queue boun
 and shuffle toggling without interrupting the current track.
 
 For folder deep links, check an encoded `?folder=` URL (including a nested
-resource key), automatic queue loading without audio autoplay, invalid links,
+resource key), automatic queue loading and first-track playback (or a Play prompt if blocked), invalid links,
 empty/missing parameters, cancellation and subsequent manual submission.
 Check that successful manual loads update the shareable address without reloading,
 preserve unrelated parameters/fragments, and survive a refresh; failed/cancelled

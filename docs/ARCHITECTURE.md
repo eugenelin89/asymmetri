@@ -898,7 +898,9 @@ On mount, the client reads the optional `folder` query parameter and uses the
 same validated, cancellable scan as manual submission. Encode the entire nested
 Drive URL so its resource key and other query parameters stay intact. Missing or
 blank values leave the form empty; invalid links show the existing validation
-error without a folder request. Loading never starts audio automatically.
+error without a folder request. A folder supplied on arrival also starts the first track after scanning. If the
+browser rejects autoplay, native audio controls remain visible with a Play prompt.
+Manual form submissions still wait for Play.
 After a successful scan, `history.replaceState` sets `folder` to the loaded URL,
 preserving other parameters and the fragment without a reload or history entry.
 Failed or cancelled scans do not replace the last shareable URL.

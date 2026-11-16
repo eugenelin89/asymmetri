@@ -305,6 +305,9 @@ Reusable visitor reviews and private play reporting support UBC, CWRU and Stanfo
 `/mymusic` is an unlisted public-folder audio player. Paste a Google Drive folder
 link shared as “Anyone with the link”; it discovers audio in nested folders and
 plays a queue with native audio controls, shuffle, Repeat 1 and Repeat All.
+After loading, copy the page address to share the folder. Opening a link with
+`?folder=` and the URL-encoded Drive folder URL loads that queue and attempts playback automatically. If the browser blocks
+autoplay, press Play on the audio controls.
 No Google sign-in or setup is required.
 See [architecture](docs/ARCHITECTURE.md#unlisted-music-player) for the keyless Drive
 adapter and its limits.

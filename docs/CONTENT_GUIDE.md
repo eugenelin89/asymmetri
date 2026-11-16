@@ -844,8 +844,8 @@ Describe the seasonal displays as installations in the virtual reconstructions. 
 `myMusic` in `content/site.ts` owns the `/mymusic` title, instructions and privacy
 notice. Keep the utility unlinked from menus, other pages and the sitemap. Its
 folder input starts empty unless `?folder=` supplies a URL-encoded Drive folder
-link, which prefills the input and automatically loads the queue. Playback still
-requires Play. Successful manual loads also update the address for sharing.
+link, which prefills the input and automatically loads the queue. Playback starts automatically when the browser permits it, with a Play prompt
+otherwise. Manual loads still wait for Play. Successful manual loads also update the address for sharing.
 Never embed an owner's music URL or playlist in source. The privacy
 notice explains that address parameters can appear in browser history/server logs.
 Only folders and files shared as “Anyone with the link” are supported. The route
