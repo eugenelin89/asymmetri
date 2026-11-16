@@ -396,3 +396,10 @@ Open `/mymusic` and enter a public Google Drive folder URL. No environment value
 or Google account setup are needed. Outbound HTTPS to Google's public Drive and
 content hosts is required for folder reads and streaming. Run its synthetic
 regressions with `node --test tests/mymusic.test.mjs`.
+
+To open a folder automatically, build the link with
+`"/mymusic?" + new URLSearchParams({ folder: driveFolderUrl })`. Encode the complete
+Drive URL, including any `resourcekey` parameter. The queue loads on arrival;
+press Play to start audio. No parameter (or an empty one) keeps manual entry.
+Loading a pasted folder successfully updates the address automatically; copy it
+to share the folder. Failed/cancelled scans leave the address unchanged.

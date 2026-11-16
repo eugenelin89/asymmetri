@@ -1000,3 +1000,10 @@ Playback-mode regressions in the same test file cover shuffle membership/current
 track preservation, queue navigation/wrapping and all-failed termination. Focused
 browser checks verify Repeat 1 at a track boundary, Repeat All at the queue boundary,
 and shuffle toggling without interrupting the current track.
+
+For folder deep links, check an encoded `?folder=` URL (including a nested
+resource key), automatic queue loading without audio autoplay, invalid links,
+empty/missing parameters, cancellation and subsequent manual submission.
+Check that successful manual loads update the shareable address without reloading,
+preserve unrelated parameters/fragments, and survive a refresh; failed/cancelled
+loads must leave the previous address intact.

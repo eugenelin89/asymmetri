@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { myMusic, openMP3 } from "@/content/site";
 import { collectMusic, parseFolderUrl, type DriveEntry, type MusicTrack } from "@/lib/mymusic";
@@ -20,11 +20,8 @@ export function MusicPlayer() {
   const audio = useRef<HTMLAudioElement>(null);
   const scan = useRef<AbortController | null>(null);
   const unavailable = useRef(new Set<number>());
-  useEffect(() => () => { scan.current?.abort(); }, []);
-
-  async function load(event: FormEvent) {
-    event.preventDefault();
-    try { parseFolderUrl(url); } catch (cause) { setError((cause as Error).message); return; }
+  const loadFolder = useCallback(async (folderUrl: string, shuffled = false) => {
+    try { parseFolderUrl(folderUrl); } catch (cause) { setError((cause as Error).message); return; }
     scan.current?.abort();
     const controller = new AbortController();
     scan.current = controller;
@@ -34,7 +31,7 @@ export function MusicPlayer() {
     unavailable.current.clear();
     setTracks([]); setOrder([]); setCurrent(null); setError(""); setLoading(true); setStatus("Reading folders…");
     try {
-      const result = await collectMusic(url, async (folderUrl) => {
+      const result = await collectMusic(folderUrl, async (folderUrl) => {
         const response = await fetch("/mymusic/folder", {
           method: "POST", headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url: folderUrl }), signal: controller.signal, cache: "no-store",
@@ -43,8 +40,12 @@ export function MusicPlayer() {
         if (!response.ok || !data.entries) throw new Error(data.error || "Could not read this folder.");
         return data.entries;
       }, (folders, count) => setStatus(`Reading folders… ${folders} checked, ${count} tracks found.`), controller.signal);
+      controller.signal.throwIfAborted();
+      const pageUrl = new URL(window.location.href);
+      pageUrl.searchParams.set("folder", folderUrl.trim());
+      window.history.replaceState(window.history.state, "", pageUrl);
       setTracks(result.tracks);
-      setOrder(playOrder(result.tracks.length, shuffle));
+      setOrder(playOrder(result.tracks.length, shuffled));
       setStatus(result.tracks.length ? `${result.tracks.length} tracks ready. Press Play to start.` : "No audio files found in this folder or its subfolders.");
       if (result.skipped || result.limited) setError([
         result.skipped ? `${result.skipped} subfolder(s) could not be read. Check their sharing settings and reload to retry.` : "",
@@ -53,6 +54,23 @@ export function MusicPlayer() {
     } catch (cause) {
       if (!controller.signal.aborted) { setError(cause instanceof Error ? cause.message : "Could not load this folder."); setStatus(""); }
     } finally { if (scan.current === controller) setLoading(false); }
+  }, []);
+
+  useEffect(() => {
+    const folderUrl = new URLSearchParams(window.location.search).get("folder");
+    // Defer until hydration finishes; cleanup also cancels Strict Mode's first setup.
+    const start = window.setTimeout(() => {
+      if (folderUrl?.trim()) {
+        setUrl(folderUrl);
+        void loadFolder(folderUrl);
+      }
+    }, 0);
+    return () => { window.clearTimeout(start); scan.current?.abort(); };
+  }, [loadFolder]);
+
+  function load(event: FormEvent) {
+    event.preventDefault();
+    void loadFolder(url, shuffle);
   }
 
   function play(index: number, automatic = false) {

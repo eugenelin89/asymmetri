@@ -894,6 +894,14 @@ Each campus passes its campus ID to the shared Christmas audio controller. It do
 
 `/mymusic` is a minimal client player, intentionally absent from navigation and
 sitemap, with noindex/nofollow metadata. `content/site.ts` owns its public copy.
+On mount, the client reads the optional `folder` query parameter and uses the
+same validated, cancellable scan as manual submission. Encode the entire nested
+Drive URL so its resource key and other query parameters stay intact. Missing or
+blank values leave the form empty; invalid links show the existing validation
+error without a folder request. Loading never starts audio automatically.
+After a successful scan, `history.replaceState` sets `folder` to the loaded URL,
+preserving other parameters and the fragment without a reload or history entry.
+Failed or cancelled scans do not replace the last shareable URL.
 `lib/mymusic.ts` validates Drive folder links, parses Google's anonymous public
 folder embed and walks nested folders with cycle/file deduplication. The browser
 requests one folder at a time from `POST /mymusic/folder`; `GET /mymusic/audio`
