@@ -60,3 +60,22 @@ Use the existing availability field for truthful release status without adding a
 ## Follow-up ideas
 
 Replace pending status only after verified Apple publication.
+
+## Final readiness and approval blocker
+
+The exact-source Linux workflow for preparation `bf1b35e` passed. The requested
+copy changes are not live: automatic review rejected archival/duplicate retirement
+of older recovery directories pending explicit owner approval. No retention script
+ran and no recovery files were changed. A post-attempt read-only audit verified
+live/rollback/peer health; zero bytes were reclaimed during this follow-up. Exact
+storage inventory remains private because public issue publication of those details
+was separately rejected; a sanitized issue status was accepted.
+
+Additional documentation commit `2d09940` — Record copy release readiness and
+pending storage approval (2 files changed, 52 insertions). See the
+[readiness note](../MYMUSIC_COPY_RELEASE_READINESS_2026-11-16.md) for validation,
+public/private evidence boundaries and the remaining authorized release sequence.
+The serving website remains the successful earlier sharing/autoplay release.
+
+Final archive commit message: `Record final copy status and coordinated submission outcome`.
+Main was clean after the readiness commit before this archive update.
