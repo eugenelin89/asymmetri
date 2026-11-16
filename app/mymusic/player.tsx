@@ -161,7 +161,6 @@ export function MusicPlayer() {
           </button>
         </li>; })}
       </ol>}
-      <p className={styles.help}>{myMusic.privacy}</p>
       <p className={styles.help}>Prefer a native iPhone player? <Link href={openMP3.path}>Meet OpenMP3 — free, with background playback.</Link></p>
     </main>
   );

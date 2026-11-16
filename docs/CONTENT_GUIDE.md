@@ -841,18 +841,18 @@ Describe the seasonal displays as installations in the virtual reconstructions. 
 
 ## My Music
 
-`myMusic` in `content/site.ts` owns the `/mymusic` title, instructions and privacy
-notice. Keep the utility unlinked from menus, other pages and the sitemap. Its
+`myMusic` in `content/site.ts` owns the `/mymusic` title, introduction and brief
+public-folder sharing requirement. Keep the utility unlinked from menus, other pages and the sitemap. Its
 folder input starts empty unless `?folder=` supplies a URL-encoded Drive folder
 link, which prefills the input and automatically loads the queue. Playback starts automatically when the browser permits it, with a Play prompt
 otherwise. Manual loads still wait for Play. Successful manual loads also update the address for sharing.
-Never embed an owner's music URL or playlist in source. The privacy
-notice explains that address parameters can appear in browser history/server logs.
+Never embed an owner's music URL or playlist in source. At the owner's request,
+the extended instructions and separate data-handling paragraph are omitted from
+the player. Folder addresses can still appear in browser history/server logs.
 Only folders and files shared as “Anyone with the link” are supported. The route
 is publicly accessible despite being unlisted and marked noindex.
 
-The My Music help explains the Shuffle toggle and repeat cycle (Off → 1 → All →
-Off). Playback mode labels display their current state, including for assistive
+Playback mode labels display their current state, including for assistive
 technology. The modes do not add saved preferences or account state.
 
 ## OpenMP3 resources
