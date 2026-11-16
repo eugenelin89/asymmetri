@@ -1,8 +1,9 @@
-# My Music copy and OpenMP3 review status — release readiness
+# My Music copy and OpenMP3 review status — release completion
 
-As of November 16 UTC, the follow-up is committed and build-verified but **not
-deployed**. The earlier [sharing/autoplay and OpenMP3 release](MYMUSIC_SHARING_RELEASE_2026-11-16.md)
-continues serving normally.
+The follow-up is **live**, activated on November 16 UTC (November 15 Vancouver)
+after the owner explicitly approved archival of the two older rollback copies.
+It preserves the behavior delivered by the earlier
+[sharing/autoplay and OpenMP3 release](MYMUSIC_SHARING_RELEASE_2026-11-16.md).
 
 ## Prepared changes
 
@@ -19,20 +20,21 @@ and `bf1b35e`. The final [Linux workflow](https://github.com/eugenelin89/asymmet
 passed type checks, lint, its existing regression gates, production audit and the
 Next production build. Source/text and whitespace checks also passed. No local
 dependency install or additional broad tests were needed for these copy edits.
-A superseded workflow was cancelled. Public rendered-copy acceptance remains
-pending activation.
+A superseded workflow was cancelled. Public rendered-copy acceptance passed: the
+requested My Music passages are absent and the overview displays the pending-review
+label. Support/privacy pages and the sole existing-page entry remain available.
 
-## Pending approval and attempt audit
+## Initial pause and approval
 
 Automatic approval review rejected lossless archival followed by removal of the
 verified duplicate directories for two older recovery copies. Its stated reason
 was that the deployment request did not explicitly authorize removing historical
-recovery directories. The owner has a pending approval question covering that
-specific operation. The proposed procedure keeps complete archives and preserves
+recovery directories. The owner subsequently answered “Yes, archive the older copies” to the explicit
+question covering that operation. The proposed procedure keeps complete archives and preserves
 the serving runtime and immediate rollback as independent complete directories.
 
-No retention script ran, no candidate was installed and no recovery files were
-removed. The post-attempt read-only audit reverified the serving site, immediate
+Before that approval, no retention script ran, no candidate was installed and no
+recovery files were removed. The post-attempt read-only audit reverified the serving site, immediate
 rollback, protected routes, peer baselines and private configuration. Measured
 cleanup recovery for this follow-up is zero; exact before/after capacity, paths,
 sizes, source/build identities and eligibility blockers remain in private evidence.
@@ -44,7 +46,26 @@ was published instead, omitting server paths, capacity figures and runtime detai
 This is the documented exception to public exact-path cleanup inventory for this
 attempt; no alternate public channel was used to disclose the rejected payload.
 
-After explicit approval, rerun current identity/inactivity checks, complete the
-verified archive procedure, stage the exact successful build, validate privately,
-activate, verify both public hosts and independent rollback, and finish the required
-cleanup audit. Source push and CI success do not establish deployment.
+## Approved completion
+
+After the explicit approval, fresh identity and process/open-handle checks preceded
+archival. Each complete archive passed gzip integrity, full tar comparison and
+checksum verification before its duplicate directory was removed. The serving
+runtime and immediately preceding rollback remained complete independent copies.
+No retention period or resource guard was weakened.
+
+The successful exact-source Linux artifact was transferred directly to isolated
+server staging, with checksum/source/runtime checks before extraction. Private
+candidate checks passed before activation. Both public hosts, protected Motion
+routes, existing assets, peer health and private configuration/data passed checks.
+The immediately preceding release independently started and passed its route and
+bundle checks. A browser confirmed both requested copy changes on the live pages.
+
+After activation and rollback acceptance, the verified transfer and empty staging
+fixtures were removed. Final health, capacity and rollback identity were rechecked.
+No new local dependency/build output was created during this resumed deployment.
+Exact archive identities, checksums, paths, du estimates, before/after free space,
+measured recovery and guard evidence remain in a private receipt supplied to the
+owner; they are not published through an alternate channel. No cleanup blockers
+remain. The [sanitized issue update](https://github.com/eugenelin89/asymmetri/issues/5#issuecomment-6908266307)
+records the resolved approval and live feature status.
