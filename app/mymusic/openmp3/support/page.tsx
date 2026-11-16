@@ -1,0 +1,15 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { openMP3 } from "@/content/site";
+import styles from "../openmp3.module.css";
+export const metadata: Metadata = { title: "OpenMP3 Support", description: "Set up folders, control playback and get help with OpenMP3 for iPhone.", alternates: { canonical: openMP3.supportPath } };
+export default function SupportPage() {
+  return <main id="main-content" className={styles.article}><p className={styles.eyebrow}>OpenMP3 for iPhone</p><h1>Support</h1><p className={styles.lead}>A folder link is all you need to get started.</p>
+    <h2>Start listening</h2><ol><li>Choose a Google Drive folder containing MP3 files you own or have permission to stream. The folder and files must allow access to anyone with the link. Public sharing makes those files accessible to others with the link; do not use private or sensitive recordings.</li><li>Copy its folder link. Open OpenMP3, optionally enter a folder name, paste the link and tap <strong>Load folder</strong>.</li><li>Wait for the scan, then press <strong>Play</strong> or select a track. Scanning does not start playback.</li></ol>
+    <h2>Your player controls</h2><p>Use the top controls to play, pause, seek, or skip. Shuffle changes playback order; Repeat offers Off, One and All. The folder button opens saved folders and the list button opens the active queue. Saved links remain on your device; the playback queue and position reset when the app starts a new session.</p><p>Loading a different nonempty folder during playback prepares Up Next. The current song continues until it ends or you press Next. Selecting an individual track starts it immediately. Choosing Next while paused keeps playback paused.</p>
+    <h2>Missing tracks or an interrupted scan</h2><p>Keep the app open while scanning. Verify that the files are MP3s, that each relevant folder/file allows public access and downloads, and that you have a working connection. Folder shortcuts are skipped. Try Rescan or load a smaller subfolder. “Scan finished” means the supported scan ended; it does not guarantee every file was found.</p>
+    <h2>A track will not play</h2><p>Check the connection, device volume and selected audio output. Google can limit streaming or downloads. Try another track or retry later. OpenMP3 does not bypass sharing or download restrictions and does not provide offline downloads.</p>
+    <h2>Remove a saved folder</h2><p>Open Saved folders and use the delete control for the saved entry. This removes the link from OpenMP3; it does not delete any files from Google Drive.</p>
+    <h2>Contact support</h2><p>Email <a href={`mailto:${openMP3.supportEmail}?subject=OpenMP3%20support`}>{openMP3.supportEmail}</a> with your iPhone model, iOS version, OpenMP3 version and a description of the problem. Remove personal details from screenshots. Do not send passwords, private recordings, or private folder links. Response times may vary.</p><p><Link href={openMP3.privacyPath}>Read the OpenMP3 privacy policy</Link></p>
+  </main>;
+}

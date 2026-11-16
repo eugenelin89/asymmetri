@@ -1,0 +1,27 @@
+.shell { max-width: 72rem; margin: auto; padding: 0 clamp(1.25rem, 5vw, 4rem); color: var(--ink); }
+.header, .footer { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.75rem 0; font-size: .9rem; }
+.header { border-bottom: 1px solid var(--line); }
+.header > a:first-child { font-family: monospace; font-weight: 700; letter-spacing: .12em; }
+.shell a { color: var(--brand-bright); text-underline-offset: .25em; }
+.shell a:focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
+.hero { display: grid; grid-template-columns: 1fr minmax(180px, 320px); gap: clamp(2rem, 6vw, 6rem); align-items: center; padding: clamp(3rem, 8vw, 7rem) 0; }
+.eyebrow { color: var(--ink-secondary); font-size: .85rem; letter-spacing: .06em; }
+.hero h1 { font-size: clamp(2.8rem, 6.5vw, 5.3rem); letter-spacing: -.055em; line-height: 1.04; margin: 1rem 0 1.5rem; }
+.lead { font-size: clamp(1.1rem, 2vw, 1.35rem); line-height: 1.6; max-width: 43rem; color: var(--ink-secondary); }
+.price { margin: 1.5rem 0 .5rem; font-weight: 600; }
+.status { color: var(--ink-secondary); font-size: .85rem; }
+.action { display: inline-block; padding: .9rem 0; margin-top: 1rem; min-height: 44px; }
+.icon { width: 100%; height: auto; border-radius: 22%; }
+.features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 4rem; padding: 2.5rem 0 4rem; border-top: 1px solid var(--line); }
+.features h2, .note h2 { font-size: 1.45rem; margin-bottom: .8rem; }
+.features p, .note p { color: var(--ink-secondary); line-height: 1.7; }
+.note { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+.footer { border-top: 1px solid var(--line); color: var(--ink-secondary); margin-top: 2rem; flex-wrap: wrap; }
+.footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.footer a { display: inline-flex; align-items: center; min-height: 44px; }
+.article { max-width: 47rem; margin: 0 auto; padding: 4rem 0; line-height: 1.8; overflow-wrap: anywhere; }
+.article h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin: 1rem 0 2rem; letter-spacing: -.04em; }
+.article h2 { font-size: 1.5rem; line-height: 1.3; margin: 2.5rem 0 .8rem; }
+.article p, .article li { color: var(--ink-secondary); margin-bottom: 1rem; }
+.article ol { padding-left: 1.5rem; }
+@media (max-width: 650px) { .hero { grid-template-columns: 1fr; } .icon { width: 150px; grid-row: 1; } .features { grid-template-columns: 1fr; gap: 1.5rem; } .header { flex-wrap: wrap; } }

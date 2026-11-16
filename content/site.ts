@@ -1730,3 +1730,25 @@ export const myMusic = {
   help: 'The folder and its contents must be shared as “Anyone with the link”. Use Shuffle for a random order. Repeat cycles through Off, 1 track, and All tracks. Format support depends on your browser.',
   privacy: "Your queue stays in this tab. Asymmetri reads public folder listings and streams audio from Google without saving the music or connecting to your Google account. Standard server request logs may include file identifiers.",
 } as const;
+
+
+export const openMP3 = {
+  name: "OpenMP3",
+  path: "/mymusic/openmp3",
+  supportPath: "/mymusic/openmp3/support",
+  privacyPath: "/mymusic/openmp3/privacy",
+  headline: "Your folders. Your music.",
+  description: "A free iPhone player for MP3s in public Google Drive folders. Save your folders, choose a track, and keep listening.",
+  availability: "App Store release in preparation",
+  price: "Free. No ads. No subscriptions.",
+  icon: "/images/openmp3/app-icon.png",
+  supportEmail: site.company.contactEmail,
+  minimumOS: "iOS 15 or later",
+  features: [
+    { title: "Start with a folder", text: "Paste a public Google Drive folder link. OpenMP3 looks for MP3s in the folder and its subfolders, then lets you decide when playback starts." },
+    { title: "Keep your music moving", text: "Play, pause, seek, skip, shuffle, or repeat one track or the whole queue. Background audio lets your music continue when you leave the app." },
+    { title: "Pick what comes next", text: "Load another folder while a song plays. Its tracks wait in Up Next until the current track ends or you press Next." },
+    { title: "Keep your folders close", text: "Save folder links on your iPhone. There is no OpenMP3 account, Google sign-in, or subscription to manage." },
+  ],
+  limitation: "An internet connection is required. Only public, downloadable MP3 files are supported. Google may limit access, and some files or subfolders may not be discovered. Shortcuts are skipped. Streaming uses cellular data when available. Use recordings you own or have permission to stream.",
+} as const;

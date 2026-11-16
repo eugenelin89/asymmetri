@@ -308,3 +308,7 @@ plays a queue with native audio controls, shuffle, Repeat 1 and Repeat All.
 No Google sign-in or setup is required.
 See [architecture](docs/ARCHITECTURE.md#unlisted-music-player) for the keyless Drive
 adapter and its limits.
+
+## OpenMP3 iPhone review resources
+
+`/mymusic/openmp3` introduces the free iPhone player; nested `/support` and `/privacy` pages provide app-specific help and data handling. Only `/mymusic` links into this product family from existing pages. All three routes are noindex and omitted from global navigation and sitemap. App Store availability stays explicitly in preparation until Apple publishes it.

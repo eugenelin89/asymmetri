@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { myMusic } from "@/content/site";
+import Link from "next/link";
+import { myMusic, openMP3 } from "@/content/site";
 import { collectMusic, parseFolderUrl, type DriveEntry, type MusicTrack } from "@/lib/mymusic";
 import { adjacentTrack, playOrder, type RepeatMode } from "@/lib/mymusic-playback";
 import styles from "./player.module.css";
@@ -130,6 +131,7 @@ export function MusicPlayer() {
         </li>; })}
       </ol>}
       <p className={styles.help}>{myMusic.privacy}</p>
+      <p className={styles.help}>Prefer a native iPhone player? <Link href={openMP3.path}>Meet OpenMP3 — free, with background playback.</Link></p>
     </main>
   );
 }

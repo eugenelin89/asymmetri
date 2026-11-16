@@ -1486,3 +1486,7 @@ Twitter metadata. The original SVG/PNG remain byte-identical, at their stable
 URLs, for retained BotSquad pages. No asset was added, replaced, generated or
 deleted; existing provenance, processing and rights assessments are unchanged.
 No image alt text is emitted by the Labs social preview.
+
+## OpenMP3 icon — November 15, 2026
+
+`public/images/openmp3/app-icon.png`: 1024 × 1024 PNG, original AI-generated open-circle/play mark created for OpenMP3 using the imagegen skill, resized to the App Store icon size. No source photo, person, third-party logo or licensed music. Public role: app identity on the unlisted OpenMP3 product family. Alt: “OpenMP3: a lime open circle and play symbol on graphite”. Original generated source is retained in the OpenMP3 repository.

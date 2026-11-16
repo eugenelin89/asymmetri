@@ -850,3 +850,7 @@ is publicly accessible despite being unlisted and marked noindex.
 The My Music help explains the Shuffle toggle and repeat cycle (Off → 1 → All →
 Off). Playback mode labels display their current state, including for assistive
 technology. The modes do not add saved preferences or account state.
+
+## OpenMP3 resources
+
+Shared product facts and contact are in `openMP3` in `content/site.ts`. The product, support and privacy pages live under `/mymusic/openmp3`. Existing `/mymusic` is their sole existing-page entry; no global navigation, sitemap, Motion policy or Motion support edits. These public review resources use noindex metadata. Keep native direct-to-Google streaming distinct from the separate browser player’s server requests. Do not claim App Store availability before verified publication.
