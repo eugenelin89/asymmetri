@@ -59,3 +59,28 @@ An automatic play attempt must expose a useful manual recovery path when the bro
 ## Follow-up ideas
 
 Complete the authorized combined deployment and record activation/rollback/cleanup evidence.
+
+## Completed combined release
+
+The owner explicitly authorized coordinating both website chats. Final source
+`a2080a4d99cae617fe3dab3cdea5d5c67bdf19d1`, build `sJUaqd9JvJTL_VHz-vUbr`, was
+activated at 2026-11-16T04:50:52Z. The final Linux workflow passed. Private and
+apex/www checks preserved existing protected routes, 803 prior assets, 62 config
+fingerprints, 15 peers and five stores. The complete `e476ee0` predecessor passed
+independent startup. OpenMP3's three pages and sole existing-page entry were
+preserved. Live browser checks verified query handling and the OpenMP3 page at
+390px with no overflow and its icon loaded.
+
+[Release and cleanup receipt](../MYMUSIC_SHARING_RELEASE_2026-11-16.md) documents
+exact identities, retained older archives, guard floors, before/after free space,
+du estimates, cleanup eligibility and final health. Measured cleanup recovered
+1,533,739,008 bytes locally and 386,486,272 bytes on the server. No new blockers;
+source, public assets, private configuration/data, evidence and complete immediate
+rollback remain. No deployment or retention safeguard was weakened.
+
+Additional implementation/documentation commit: `4a24984` — Record combined My
+Music and OpenMP3 release (2 files changed, 150 insertions and 1 deletion).
+Main was clean after that receipt commit and before the final journal/log update.
+Final archive commit message: `Finalize music sharing journals and interaction log`.
+The initial sharing behavior's Play requirement was superseded by the explicitly
+requested autoplay follow-up documented in prompt 220.
