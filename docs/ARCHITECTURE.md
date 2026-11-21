@@ -224,15 +224,17 @@ explicitly retires one path.
 
 ## Production infrastructure architecture
 
-The October 9 [INFRA-01 cancellation](INFRA-01-CANCELLATION.md) retains the original
-Ubuntu 22.10 Droplet/IP and independently pinned website release. All 15 hosts retain
-their baseline behavior. The migration snapshot was deleted after backup verification;
-independent encrypted recovery sets remain. The OS carries an explicit time-limited
-unsupported-OS exception with review before future deployment/public exposure.
-Django retirement and the static 410 proposal were evaluated, not executed; Django,
-Gunicorn/socket, SQLite, dormant PG data, shared accounts and all runtimes remain.
+The [November 20 LTS migration](UBUNTU_LTS_MIGRATION_2026-11-20.md) retains the
+original Droplet, IP addresses and independently pinned website release on
+Ubuntu 24.04.5 LTS with patched Ubuntu NGINX. All 15 configured hosts retain their
+accepted public behavior. Verified encrypted owner-held recovery sets remain;
+temporary cloud migration resources were deleted after acceptance. Django,
+Gunicorn/socket, SQLite, dormant PostgreSQL data and retained runtimes remain.
+Service identities for ingress/investment/Ask were remapped to avoid new OS
+system-account collisions, with corresponding ownership restored. Their existing
+activation and authority boundaries remain unchanged.
 `ops/infra/` contains reusable operator HTTP comparison and recovery tools with no
-website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the receiver under a dedicated identity with an empty private archive, masked unrelated filesystem trees and no public ingress. Actual Linux/native SQLite, isolated transparent Nginx, confinement and bounded-load evidence is recorded in [validation](INFRA-02-VALIDATION.md). The [October 13 release](INGRESS_RELEASE_2026-10-13.md) starts the empty receiver and disabled-intake Ask listener behind verified strict HTTPS. Both units remain static; publisher/Ask authority is absent. The rejected nginx 1.22 HTTP profile did not preserve duplicate Connection headers.
+website/runtime integration. [INFRA-02](INFRA-02-RECEIVER-DEPLOYMENT.md) installs the receiver under a dedicated identity with an empty private archive, masked unrelated filesystem trees and no public ingress. Actual Linux/native SQLite, isolated transparent Nginx, confinement and bounded-load evidence is recorded in [validation](INFRA-02-VALIDATION.md). The [October 13 release](INGRESS_RELEASE_2026-10-13.md) starts the empty receiver and disabled-intake Ask listener behind verified strict HTTPS. Both units remain static. Publisher/Ask authority was absent at that milestone; subsequent investment activation is recorded in [INV-REAL-01](INV-REAL-01-WEBSITE.md), while Ask intake remains closed. The rejected nginx 1.22 HTTP profile did not preserve duplicate Connection headers.
 
 ### Request path
 

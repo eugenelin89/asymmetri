@@ -117,14 +117,18 @@ baseball-first public names and their unchanged scientific measurement mappings.
 
 ## Technology
 
-The owner [cancelled/deferred INFRA-01](docs/INFRA-01-CANCELLATION.md) and retained
-Ubuntu 22.10 on the original Droplet/IP. The temporary migration snapshot was deleted
-after verified off-server recovery checks. A later owner-approved Mac cleanup deleted
-those backup copies and keys; independent recovery custody is currently unverified. Django and all other
-sites/services remain unchanged. The unsupported-OS exception requires review before
-future deployment/public exposure; migration is no automatic prerequisite to local
-investment development. [INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md) records the initial stopped receiver installation. The [October 13 ingress release](docs/INGRESS_RELEASE_2026-10-13.md) started the empty investment and disabled-intake Ask listeners with verified shared HTTPS. The subsequent [investment activation](docs/INV-REAL-01-WEBSITE.md) installs a finite real publisher and connects the initial records. Historical preparation and test
-records remain available through the cancellation record.
+The [November 20 LTS migration](docs/UBUNTU_LTS_MIGRATION_2026-11-20.md)
+upgraded the existing DigitalOcean server to Ubuntu 24.04.5 LTS and Ubuntu's
+patched NGINX package `1.24.0-2ubuntu7.21`. The original IPs, server plan,
+website release, peer sites and persistent data were preserved. Encrypted
+owner-held backups and actual restoration checks passed; the temporary rehearsal
+server and both migration snapshots were deleted after acceptance. The October
+[INFRA-01 cancellation](docs/INFRA-01-CANCELLATION.md) remains a historical decision.
+The Next.js application security update was explicitly deferred by the owner.
+[INFRA-02](docs/INFRA-02-RECEIVER-DEPLOYMENT.md), the
+[shared ingress release](docs/INGRESS_RELEASE_2026-10-13.md), and the subsequent
+[investment activation](docs/INV-REAL-01-WEBSITE.md) retain their separate scope
+and authority boundaries.
 
 Next.js App Router, React, TypeScript, Tailwind CSS, Next.js image and metadata
 APIs, and Vinext/Cloudflare Workers packaging for OpenAI Sites. The

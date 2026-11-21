@@ -45,10 +45,18 @@ do not hide a failure by automatically replacing baseline hashes. The helper doe
 not check browser interactions, database integrity, certificates' renewal ability,
 source identity, firewall rules, authenticated journeys or service readiness.
 The [migration runbook](../../docs/INFRA-01-UBUNTU-MIGRATION.md) preserves those
-historical acceptance checks. Migration is cancelled; the [closure decision](../../docs/INFRA-01-CANCELLATION.md)
-owns current scope and readiness requirements for separately authorized future work.
+historical acceptance checks. The separately authorized
+[November 20 LTS migration](../../docs/UBUNTU_LTS_MIGRATION_2026-11-20.md) is complete;
+its receipt owns current infrastructure acceptance. The October
+[closure decision](../../docs/INFRA-01-CANCELLATION.md) remains historical.
 
 ## Private archive restoration
+
+The helper below reads the historical CBC format only. November's new backups
+use authenticated age encryption and separate private verification/restoration
+scripts retained with the owner-held recovery set. Do not pass an age archive to
+this CBC helper. A new restoration must use the matching archive format and
+trusted receipts in an isolated destination.
 
 `restore_archive.py` restores a verified encrypted tar/gzip export into a **new**
 private directory on a case-sensitive filesystem. It never contacts a network,

@@ -1,5 +1,7 @@
 # DigitalOcean production deployment
 
+The [November 20 LTS migration](UBUNTU_LTS_MIGRATION_2026-11-20.md) is complete: Ubuntu 24.04.5 LTS, Ubuntu NGINX `1.24.0-2ubuntu7.21`, unchanged production application build and IPs. Verified recovery archives remain with the owner; the rehearsal Droplet and both migration snapshots are deleted. The Next.js security update remains explicitly deferred.
+
 The [My Music copy / OpenMP3 pending-review follow-up](MYMUSIC_COPY_RELEASE_READINESS_2026-11-16.md) is live. The requested help/data-handling passages are removed, and the overview displays “App Store review pending”. Explicitly approved older-runtime archival, public checks, independent immediate rollback and post-release cleanup are complete. The receipt records the resolved approval and private-inventory/public-status boundary; exact recovery evidence was supplied privately to the owner.
 
 The preceding [My Music sharing/autoplay and OpenMP3 release](MYMUSIC_SHARING_RELEASE_2026-11-16.md) deployed source `a2080a4`, build `sJUaqd9JvJTL_VHz-vUbr`. Shared folder URLs load and attempt playback automatically; successful manual loads update the address for sharing. OpenMP3 overview/support/privacy resources are published with only the My Music entry. Complete immediate rollback: `/var/www/asymmetri-rollback-before-mymusic-links-20261116`, source `e476ee0`, build `Z1m4fuMWS4SYDNJKPZb6U`. Public health, independent rollback and cleanup passed. The receipt records the coordinated older-runtime archival, exact artifact and measured storage results.
@@ -145,17 +147,16 @@ records the v1.2 website refresh, exact production build, protected-route checks
 retained rollback and verified archival used to restore deployment headroom.
 The website release does not imply public App Store availability.
 
-For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website and investment receiver release receipt](INVESTMENT_CLOSE_RELEASE_2026-10-14.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution and ongoing independent backup custody remain unverified. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
+For the BotSquad investment experiment, consult the [cross-repository integration map](BOTSQUAD_INTEGRATION.md), the [investment release handoff](INV-REAL-01-WEBSITE.md) and [current website and investment receiver release receipt](INVESTMENT_CLOSE_RELEASE_2026-10-14.md) and BotSquad's [authoritative milestone roadmap](https://github.com/eugenelin89/bot_messenger/blob/main/docs/experiments/investment/ROADMAP.md). The investment UI was publicly released October 13 at `97b4087`, with truthful unconfigured archive and disabled Ask states. Its strict visibility-witness reads require compatible receiver and website source. The [shared HTTPS release](INGRESS_RELEASE_2026-10-13.md) records active empty/disabled-intake receivers, confinement and renewal. The subsequent [investment activation](INV-REAL-01-WEBSITE.md) verifies finite HQ authority, five signed initial events, official selection and runtime read enablement on the unchanged d0c4543 build. Market/employee execution remains unverified. November migration backups verify point-in-time recovery custody; they do not establish a recurring backup service. The owner authorized this work and deployment; website publication alone does not activate producer or receiver authority.
 
-The owner [cancelled/deferred INFRA-01](INFRA-01-CANCELLATION.md) on October 9.
-Production stays on Ubuntu 22.10 under a time-limited unsupported-OS exception;
-review it before the next deployment or new public exposure. The migration snapshot
-was deleted after backup verification and cleanup is complete. Django retirement
-was evaluated but not executed. Preserve all existing runtimes, shared identities,
-data, domains and recovery material. Do not reactivate historical rebuild instructions.
-Future deployments require explicit scope and actual Linux/runtime, proxy/signature,
-capacity, least-privilege and recovery acceptance. An Ubuntu upgrade is no longer an
-automatic prerequisite. Routine commands below do not authorize receiver activation.
+The October 9 [INFRA-01 cancellation](INFRA-01-CANCELLATION.md) is historical.
+The owner separately authorized and completed the November LTS migration.
+Preserve all existing runtimes, shared identities, data, domains and recovery
+material; Django retirement was not performed. Future deployments still require
+explicit scope and actual Linux/runtime, proxy/signature, capacity,
+least-privilege and recovery acceptance. Routine commands below do not authorize
+receiver activation. Investment and Ask retain their existing static-unit policy;
+a planned reboot requires explicit startup and health checks for those units.
 
 For the configured Mac SSH login and restricted deployment commands, see
 [CLI access](CLI_ACCESS.md). Connect with `ssh asymmetri` as `webdeploy`, then
@@ -954,7 +955,7 @@ service switch, but that is not the default routine workflow.
 
 ## Security and maintenance notes
 
-- Ubuntu 22.10 is end-of-life. Apply the [owner exception and review triggers](INFRA-01-CANCELLATION.md#time-limited-unsupported-os-exception). A future upgrade needs a separately requested project; do not silently restart INFRA-01.
+- Production now runs Ubuntu 24.04 LTS. Preserve the [migration acceptance and recovery boundaries](UBUNTU_LTS_MIGRATION_2026-11-20.md), maintain distribution security updates, and inspect the full package revision when checking backported NGINX fixes.
 - The Droplet is small and resource-constrained. Check disk and memory before
   large installs or builds.
 - Review direct root SSH exposure as a separate infrastructure task.
@@ -1304,7 +1305,7 @@ and both existing hostnames in the before/after release checks.
 
 Shared HTTPS/TLS ingress, the rejected Nginx HTTP profile, sustained real public
 capacity, actual key/receipt reconciliation, retention/backup custody, source and
-redistribution rights, and the unsupported Ubuntu 22.10 risk remain separate gates.
+redistribution rights remain separate gates. The historical unsupported Ubuntu risk was resolved by the November LTS migration.
 Later investment and Ask milestones plus explicit INV-12 activation still apply.
 
 
