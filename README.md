@@ -319,3 +319,7 @@ adapter and its limits.
 ## OpenMP3 iPhone review resources
 
 `/mymusic/openmp3` introduces the free iPhone player; nested `/support` and `/privacy` pages provide app-specific help and data handling. Only `/mymusic` links into this product family from existing pages. All three routes are noindex and omitted from global navigation and sitemap. The availability label is “App Store review pending”; publication is not yet claimed.
+
+## Court Damage iPhone resources
+
+The [support page](https://asymmetri.co/court-damage/support) and [privacy policy](https://asymmetri.co/court-damage/privacy) are live and link to each other. Players reach them by direct URL. The homepage and sitemap omit them. [Release and rollback verification](docs/COURT_DAMAGE_RESOURCES_RELEASE_2026-11-22.md)

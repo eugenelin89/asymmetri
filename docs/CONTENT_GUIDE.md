@@ -1,5 +1,9 @@
 # Content guide
 
+## Court Damage iPhone resources
+
+Edit game help at `app/court-damage/support/page.tsx` and app-specific data handling at `app/court-damage/privacy/page.tsx`. Both pages use the shared company mailbox. The family layout provides local links and `noindex` metadata. Keep the routes accessible by direct URL and outside the homepage, global navigation and sitemap. Check privacy copy against the corresponding iPhone release when data handling changes.
+
 ## Source of truth
 
 Shared public content is centralized in `content/`. `site.ts` owns shared identity,

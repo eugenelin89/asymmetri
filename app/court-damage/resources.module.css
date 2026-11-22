@@ -1,0 +1,9 @@
+.resources { max-width: 48rem; margin: auto; padding: 2rem clamp(1.2rem, 5vw, 4rem); color: var(--ink); }
+.resources header, .resources footer { display: flex; gap: 2rem; align-items: baseline; padding: 1.25rem 0; border-block-end: 1px solid var(--line); }
+.resources header { font-size: 1.15rem; font-weight: 700; }
+.resources header span { font-size: .9rem; font-weight: 400; }
+.resources main { padding: 2rem 0; }
+.resources h1 { font-size: clamp(2.5rem, 7vw, 4rem); line-height: 1.05; letter-spacing: -.04em; margin-bottom: 1.5rem; }
+.resources h2 { font-size: 1.4rem; margin: 2rem 0 .5rem; }
+.resources p { line-height: 1.65; margin: .6rem 0; }
+.resources a { color: var(--brand-bright); text-decoration: underline; text-underline-offset: .2em; }
