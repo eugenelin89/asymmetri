@@ -151,7 +151,7 @@ export default function CourtLauncher() {
   const isIdle = phase === "marquee";
   return <section ref={frame} className={styles.arcade} aria-label="Court Damage arcade" id="court" tabIndex={-1}>
     <div className={styles.stage} data-marquee={isIdle} ref={stage}>
-      <canvas ref={canvas} className={styles.canvas} tabIndex={phase === "ready" ? 0 : -1}
+      <canvas id="unity-canvas" ref={canvas} className={styles.canvas} tabIndex={phase === "ready" ? 0 : -1}
         aria-label="Court Damage game. Move with WASD or arrow keys. Game controls are listed below."
         onBlur={pause} onPointerCancel={pause}
         onKeyDown={event => { if (gameplayKeys.has(event.code) && !event.altKey && !event.ctrlKey && !event.metaKey) event.preventDefault(); }} />
