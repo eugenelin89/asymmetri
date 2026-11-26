@@ -320,6 +320,6 @@ adapter and its limits.
 
 `/mymusic/openmp3` introduces the free iPhone player; nested `/support` and `/privacy` pages provide app-specific help and data handling. Only `/mymusic` links into this product family from existing pages. All three routes are noindex and omitted from global navigation and sitemap. The availability label is “App Store review pending”; publication is not yet claimed.
 
-## Court Damage iPhone resources
+## Court Damage
 
-The [support page](https://asymmetri.co/court-damage/support) and [privacy policy](https://asymmetri.co/court-damage/privacy) are live and link to each other. Players reach them by direct URL. The homepage and sitemap omit them. [Release and rollback verification](docs/COURT_DAMAGE_RESOURCES_RELEASE_2026-11-22.md)
+The [waterfront arcade page](https://asymmetri.co/court-damage/play) loads the versioned Unity player after Play now. The game’s own Let’s Play button starts the match. The [support page](https://asymmetri.co/court-damage/support) and [privacy policy](https://asymmetri.co/court-damage/privacy) cover iPhone and browser play. Their direct URLs stay outside the homepage and sitemap. [iPhone resource release](docs/COURT_DAMAGE_RESOURCES_RELEASE_2026-11-22.md) · [Web player deployment](docs/DEPLOYMENT.md#court-damage-web-player)

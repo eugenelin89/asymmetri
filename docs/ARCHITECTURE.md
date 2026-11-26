@@ -14,6 +14,10 @@ in [INVESTMENT_RECEIVER.md](INVESTMENT_RECEIVER.md). Strict production API routi
 is live with the exact finite investment publisher and initial configured portfolio.
 Ask intake remains disabled and no Ask service authority is active.
 
+## Court Damage browser player
+
+The `app/court-damage/play` route owns the server-rendered page, its scoped styling and the interactive Unity canvas. Loading begins on Play now. The launcher reads the pinned manifest, reports loader progress and sends pause, resume and sound messages to the game’s Match object. Browser suspension clears input and freezes match time. The shared Unity project owns gameplay, the touch HUD, voice preferences and Rematch. The standalone Court Damage resource articles keep their existing URLs and noindex metadata.
+
 ## Routes and compatibility
 
 | URL | Source / result |

@@ -2,6 +2,25 @@ import type { NextConfig } from "next";
 import { motion } from "./content/site";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    const version = "/court-damage/builds/:revision([0-9a-f]{40})";
+    const cache = { key: "Cache-Control", value: "public, max-age=31536000, immutable" };
+    const encodings = [
+      { extension: "wasm.gz", contentType: "application/wasm" },
+      { extension: "js.gz", contentType: "application/javascript" },
+      { extension: "data.gz", contentType: "application/gzip" },
+    ];
+    return [
+      { source: `${version}/:asset*`, headers: [cache] },
+      ...encodings.map(({ extension, contentType }) => ({
+        source: `${version}/Build/:name.${extension}`,
+        headers: [
+          { key: "Content-Type", value: contentType },
+          { key: "Content-Encoding", value: "gzip" },
+        ],
+      })),
+    ];
+  },
   async redirects() {
     return [
       // Preserve previously shared access links after the App Store launch.

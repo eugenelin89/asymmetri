@@ -1,8 +1,8 @@
 # Content guide
 
-## Court Damage iPhone resources
+## Court Damage
 
-Edit game help at `app/court-damage/support/page.tsx` and app-specific data handling at `app/court-damage/privacy/page.tsx`. Both pages use the shared company mailbox. The family layout provides local links and `noindex` metadata. Keep the routes accessible by direct URL and outside the homepage, global navigation and sitemap. Check privacy copy against the corresponding iPhone release when data handling changes.
+The standalone `/court-damage/play` page owns the arcade launcher and illustrated marquee. Its product artwork is listed in the asset manifest. Keep the first action visible on phones and desktop. Edit game help at `app/court-damage/support/page.tsx` and app-specific data handling at `app/court-damage/privacy/page.tsx`. Both pages use the shared company mailbox. The article wrapper provides local links. The resource pages inherit `noindex` metadata. Keep the routes accessible by direct URL and outside the homepage, global navigation and sitemap. Check privacy copy against the iPhone and browser releases when data handling changes.
 
 ## Source of truth
 
