@@ -15,6 +15,7 @@ type PlayerConfig = PlayerFiles & {
   productName: string;
   productVersion: string;
   devicePixelRatio: number;
+  cacheControl: (url: string) => "immutable" | "must-revalidate";
   showBanner: (message: string, type: string) => void;
   errorHandler: (message: string) => boolean;
 };
@@ -67,6 +68,10 @@ export async function loadCourt(
     dataUrl: manifest.dataUrl, frameworkUrl: manifest.frameworkUrl, codeUrl: manifest.codeUrl,
     streamingAssetsUrl: manifest.streamingAssetsUrl,
     companyName: "Asymmetri", productName: "Court Damage", productVersion: manifest.sourceRevision,
+    cacheControl(url) {
+      const asset = new URL(url, location.origin);
+      return asset.origin === location.origin && asset.pathname.startsWith(folder) ? "immutable" : "must-revalidate";
+    },
     devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
     errorHandler(message) {
       console.error(message);
