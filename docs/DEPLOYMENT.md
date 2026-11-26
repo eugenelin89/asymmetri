@@ -1687,3 +1687,9 @@ is part of this work.
 ### Campus station observation check
 
 After a separately authorized release, exercise `GET /labs/campus-weather-api/ubc`, `/labs/campus-weather-api/stanford` and `/labs/campus-weather-api/cwru` through the public website ingress. Verify a successful JSON response and inspect the station timestamp or explicit unavailable state. Production uses a single shared website process. Moving to multiple processes requires coordination of upstream refreshes across those processes. The route uses the existing website backend and needs no private configuration. [Station and browser behavior](CAMPUS_WEATHER.md).
+
+## Court Damage Web player
+
+The play page pins one compiled game release in `app/court-damage/play/game-release.ts`. Before starting a clean Linux candidate, provision that release under `public/court-damage/builds/<revision>/` from the retained game package. Preserve its directory names. It includes a manifest, loader, gzip-compressed JavaScript, data and WebAssembly, and the court audio credits. These files are provisioned independently of the website source checkout.
+
+Compare the manifest’s SHA-256 with the release receipt. Verify its source revision against the page pin, and verify the byte length and SHA-256 of each file on disk and over HTTP using the encoded response bytes. Check the gzip header, JavaScript and WebAssembly MIME types and immutable cache on those versioned URLs. Retain previously served versions needed by open tabs when creating a successor. Never overwrite a published revision. Start the exact-source Linux candidate and exercise the page, both resource routes and the existing protected routes before activation. Run the existing capacity and peer guards, keep the complete preceding runtime bootable, and complete a public Brave match and Rematch after activation.

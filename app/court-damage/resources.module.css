@@ -7,3 +7,6 @@
 .resources h2 { font-size: 1.4rem; margin: 2rem 0 .5rem; }
 .resources p { line-height: 1.65; margin: .6rem 0; }
 .resources a { color: var(--brand-bright); text-decoration: underline; text-underline-offset: .2em; }
+
+.resources footer { flex-wrap: wrap; gap: .5rem 1.5rem; }
+.resources footer a { display: inline-flex; align-items: center; min-height: 44px; }

@@ -1490,3 +1490,7 @@ No image alt text is emitted by the Labs social preview.
 ## OpenMP3 icon — November 15, 2026
 
 `public/images/openmp3/app-icon.png`: 1024 × 1024 PNG, original AI-generated open-circle/play mark created for OpenMP3 using the imagegen skill, resized to the App Store icon size. No source photo, person, third-party logo or licensed music. Public role: app identity on the unlisted OpenMP3 product family. Alt: “OpenMP3: a lime open circle and play symbol on graphite”. Original generated source is retained in the OpenMP3 repository.
+
+## Court Damage waterfront marquee
+
+`/images/court-damage/waterfront-poster.jpg` is the 1200 × 800 original illustrated poster shipped in Court Damage v0.4, copied without pixel edits from the game’s `Assets/CourtDamage/Art/WaterfrontPoster.jpg`. The game’s v0.3 production record identifies it as original generated artwork. The owner authorized reuse for this product. Alt text names the four fictional adult players and the False Creek waterfront. The play page crops the illustration responsively. Actual game captures remain separate verification material.

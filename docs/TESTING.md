@@ -1007,3 +1007,7 @@ empty/missing parameters, cancellation and subsequent manual submission.
 Check that successful manual loads update the shareable address without reloading,
 preserve unrelated parameters/fragments, and survive a refresh; failed/cancelled
 loads must leave the previous address intact.
+
+## Court Damage Web
+
+On `/court-damage/play`, check desktop and phone-width views, keyboard focus, reduced motion, landscape rotation, the real asset download, failure and retry. In the running game, move while taking a shot, switch tabs while moving, resume with one gesture and check that score and inputs were preserved or cleared as appropriate. Test court sound, voice off with captions, fullscreen when supported, first to five, Rematch and the new serve. Compare the release manifest and compiled bytes to the tested player on the actual public URL. Confirm the existing support/privacy and protected Motion pages on apex and www. Record each browser, version and input method.
