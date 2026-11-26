@@ -36,6 +36,15 @@ export default function CourtLauncher() {
   const resumeButton = useRef<HTMLButtonElement>(null);
 
   const restoreGameFocus = useRef(false);
+  function fitLandscapeFrame() {
+    if (!window.matchMedia("(orientation: landscape) and (max-height: 720px)").matches) return;
+    requestAnimationFrame(() => {
+      const bounds = frame.current?.getBoundingClientRect();
+      if (bounds && (bounds.top < 0 || bounds.bottom > window.innerHeight)) {
+        window.scrollBy({ top: bounds.top, behavior: "instant" });
+      }
+    });
+  }
   function focusResumeWhenVisible() {
     requestAnimationFrame(() => {
       if (restoreGameFocus.current && !document.hidden && document.hasFocus() && resumeButton.current) {
@@ -62,7 +71,10 @@ export default function CourtLauncher() {
     const orientationChanged = () => {
       setRotate(orientation.matches);
       if (orientation.matches) interruptWindow();
-      else focusResumeWhenVisible();
+      else if (request.current) {
+        fitLandscapeFrame();
+        focusResumeWhenVisible();
+      }
     };
     const visibilityChanged = () => { if (document.hidden) interruptWindow(); else focusResumeWhenVisible(); };
     const updateScreen = () => setFullscreen(document.fullscreenElement === frame.current);
@@ -105,6 +117,7 @@ export default function CourtLauncher() {
     request.current = abort;
     interrupted.current = window.matchMedia(portraitPhone).matches || document.hidden;
     setPhase("loading");
+    fitLandscapeFrame();
     setPercentage(0);
     try {
       const instance = await loadCourt(COURT_GAME_MANIFEST, canvas.current, abort.signal,
@@ -139,6 +152,7 @@ export default function CourtLauncher() {
     // Finish the button gesture before refocusing the canvas so it cannot act on the court.
     canvas.current?.focus({ preventScroll: true });
     player.current.SendMessage("Match", "WebResume");
+    fitLandscapeFrame();
     interrupted.current = false;
     setPhase("ready");
   }
