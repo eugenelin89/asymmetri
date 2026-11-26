@@ -1,5 +1,7 @@
 # DigitalOcean production deployment
 
+The [November 26 Court Damage Web release](COURT_DAMAGE_WEB_RELEASE_2026-11-26.md) shipped the playable doubles match. The receipt identifies the exact Linux candidate, verified game files, live Brave match and independently tested rollback.
+
 The [November 22 Court Damage release](COURT_DAMAGE_RESOURCES_RELEASE_2026-11-22.md) published standalone iPhone support and privacy pages and upgraded Next.js to 16.4.6. Both public hosts and the independent immediate rollback passed verification.
 
 The [November 20 LTS migration](UBUNTU_LTS_MIGRATION_2026-11-20.md) is complete: Ubuntu 24.04.5 LTS, Ubuntu NGINX `1.24.0-2ubuntu7.21`, unchanged production application build and IPs. Verified recovery archives remain with the owner; the rehearsal Droplet and both migration snapshots are deleted. The Next.js security update was deferred during that migration and shipped in the November 22 website release.
