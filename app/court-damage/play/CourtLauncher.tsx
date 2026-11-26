@@ -35,6 +35,15 @@ export default function CourtLauncher() {
   const retry = useRef<HTMLButtonElement>(null);
   const resumeButton = useRef<HTMLButtonElement>(null);
 
+  const restoreGameFocus = useRef(false);
+  function focusResumeWhenVisible() {
+    requestAnimationFrame(() => {
+      if (restoreGameFocus.current && !document.hidden && document.hasFocus() && resumeButton.current) {
+        restoreGameFocus.current = false;
+        resumeButton.current.focus({ preventScroll: true });
+      }
+    });
+  }
   function pause() {
     if (!request.current || request.current.signal.aborted) return;
     interrupted.current = true;
@@ -46,11 +55,16 @@ export default function CourtLauncher() {
 
   useEffect(() => {
     const orientation = window.matchMedia(portraitPhone);
+    const interruptWindow = () => {
+      restoreGameFocus.current = true;
+      pause();
+    };
     const orientationChanged = () => {
       setRotate(orientation.matches);
-      if (orientation.matches) pause();
+      if (orientation.matches) interruptWindow();
+      else focusResumeWhenVisible();
     };
-    const visibilityChanged = () => { if (document.hidden) pause(); };
+    const visibilityChanged = () => { if (document.hidden) interruptWindow(); else focusResumeWhenVisible(); };
     const updateScreen = () => setFullscreen(document.fullscreenElement === frame.current);
     const focusedElsewhere = (event: FocusEvent) => {
       if (request.current && !stage.current?.contains(event.target as Node)) pause();
@@ -58,7 +72,8 @@ export default function CourtLauncher() {
     orientationChanged();
     setCanFullscreen(Boolean(document.fullscreenEnabled && frame.current?.requestFullscreen));
     orientation.addEventListener("change", orientationChanged);
-    window.addEventListener("blur", pause);
+    window.addEventListener("blur", interruptWindow);
+    window.addEventListener("focus", focusResumeWhenVisible);
     window.addEventListener("pagehide", pause);
     document.addEventListener("visibilitychange", visibilityChanged);
     document.addEventListener("fullscreenchange", updateScreen);
@@ -69,7 +84,8 @@ export default function CourtLauncher() {
       request.current = null;
       player.current = null;
       orientation.removeEventListener("change", orientationChanged);
-      window.removeEventListener("blur", pause);
+      window.removeEventListener("blur", interruptWindow);
+      window.removeEventListener("focus", focusResumeWhenVisible);
       window.removeEventListener("pagehide", pause);
       document.removeEventListener("visibilitychange", visibilityChanged);
       document.removeEventListener("fullscreenchange", updateScreen);
@@ -79,10 +95,7 @@ export default function CourtLauncher() {
 
   useEffect(() => {
     if (phase === "error") retry.current?.focus({ preventScroll: true });
-    if (phase === "paused" && !rotate && document.hasFocus() &&
-        (document.activeElement === document.body || stage.current?.contains(document.activeElement))) {
-      resumeButton.current?.focus({ preventScroll: true });
-    }
+    if (phase === "paused" && !rotate) focusResumeWhenVisible();
   }, [phase, rotate]);
 
   const start = useCallback(async () => {
@@ -153,7 +166,10 @@ export default function CourtLauncher() {
     <div className={styles.stage} data-marquee={isIdle} ref={stage}>
       <canvas id="unity-canvas" ref={canvas} className={styles.canvas} tabIndex={phase === "ready" ? 0 : -1}
         aria-label="Court Damage game. Move with WASD or arrow keys. Game controls are listed below."
-        onBlur={pause} onPointerCancel={pause}
+        onBlur={event => {
+          if (event.relatedTarget) restoreGameFocus.current = false;
+          pause();
+        }} onPointerCancel={pause}
         onKeyDown={event => { if (gameplayKeys.has(event.code) && !event.altKey && !event.ctrlKey && !event.metaKey) event.preventDefault(); }} />
       {isIdle && <div className={styles.marquee}>
         <div className={styles.art}><Image src="/images/court-damage/waterfront-poster.jpg"
@@ -178,8 +194,9 @@ export default function CourtLauncher() {
     <div className={styles.toolbar}><span className={styles.venue}><i aria-hidden="true" />Waterfront doubles</span>
       <div className={styles.tools}>
         {isMatch && <button type="button" onClick={() => {
+          restoreGameFocus.current = true;
           pause();
-          requestAnimationFrame(() => resumeButton.current?.focus({ preventScroll: true }));
+          focusResumeWhenVisible();
         }}>Pause</button>}
         <button type="button" aria-pressed={muted} aria-label="Mute game audio" onClick={toggleSound}><span aria-hidden="true">{muted ? "◌" : "◖"}</span> Sound {muted ? "off" : "on"}</button>
         {canFullscreen && <button type="button" onClick={toggleFullscreen}><span aria-hidden="true">⛶</span> {fullscreen ? "Exit fullscreen" : "Fullscreen"}</button>}
